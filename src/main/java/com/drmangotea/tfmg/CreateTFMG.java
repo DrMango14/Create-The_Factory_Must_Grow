@@ -38,6 +38,7 @@ public class CreateTFMG
         TFMGItems.register();
         TFMGEntityTypes.register();
         TFMGCreativeModeTabs.init();
+        TFMGFluids.register();
 
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> CreateTFMGClient::new);
         TFMGColoredFires.register(modEventBus);
