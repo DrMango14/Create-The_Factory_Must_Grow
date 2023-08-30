@@ -1,0 +1,20 @@
+{
+  "block.tfmg.cast_iron_block": "Block of Cast Iron",
+  "block.tfmg.heavy_machinery_casing": "Heavy Machinery Casing",
+  "block.tfmg.napalm_bomb": "Napalm Bomb",
+  "block.tfmg.steel_block": "Block of Steel",
+  "block.tfmg.steel_casing": "Steel Casing",
+  "entity.tfmg.blue_spark": "Blue Spark",
+  "entity.tfmg.copper_grenade": "Copper Grenade",
+  "entity.tfmg.green_spark": "Green Spark",
+  "entity.tfmg.napalm_bomb_entity": "Napalm Bomb Entity",
+  "entity.tfmg.spark": "Spark",
+  "entity.tfmg.thermite_grenade": "Thermite Grenade",
+  "entity.tfmg.zin_grenade": "Zin Grenade",
+  "item.tfmg.copper_grenade": "Copper Grenade",
+  "item.tfmg.thermite_grenade": "Thermite Grenade",
+  "item.tfmg.zinc_grenade": "Zinc Grenade",
+
+  "itemGroup.tfmg.base": "Create: The Factory Must Grow",
+  "itemGroup.tfmg.concrete": "Create: TFMG: Concrete"
+}

@@ -1,0 +1,17 @@
+{
+  "block.tfmg.cast_iron_block": "uoɹI ʇsɐƆ ɟo ʞɔoןᗺ",
+  "block.tfmg.heavy_machinery_casing": "buısɐƆ ʎɹǝuıɥɔɐW ʎʌɐǝH",
+  "block.tfmg.napalm_bomb": "qɯoᗺ ɯןɐdɐN",
+  "block.tfmg.steel_block": "ןǝǝʇS ɟo ʞɔoןᗺ",
+  "block.tfmg.steel_casing": "buısɐƆ ןǝǝʇS",
+  "entity.tfmg.blue_spark": "ʞɹɐdS ǝnןᗺ",
+  "entity.tfmg.copper_grenade": "ǝpɐuǝɹ⅁ ɹǝddoƆ",
+  "entity.tfmg.green_spark": "ʞɹɐdS uǝǝɹ⅁",
+  "entity.tfmg.napalm_bomb_entity": "ʎʇıʇuƎ qɯoᗺ ɯןɐdɐN",
+  "entity.tfmg.spark": "ʞɹɐdS",
+  "entity.tfmg.thermite_grenade": "ǝpɐuǝɹ⅁ ǝʇıɯɹǝɥ⟘",
+  "entity.tfmg.zin_grenade": "ǝpɐuǝɹ⅁ uıZ",
+  "item.tfmg.copper_grenade": "ǝpɐuǝɹ⅁ ɹǝddoƆ",
+  "item.tfmg.thermite_grenade": "ǝpɐuǝɹ⅁ ǝʇıɯɹǝɥ⟘",
+  "item.tfmg.zinc_grenade": "ǝpɐuǝɹ⅁ ɔuıZ"
+}

@@ -1,0 +1,9 @@
+{
+  "values": [
+    "tfmg:napalm_bomb",
+    "tfmg:steel_casing",
+    "tfmg:heavy_machinery_casing",
+    "tfmg:steel_block",
+    "tfmg:cast_iron_block"
+  ]
+}
