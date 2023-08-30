@@ -1,5 +1,7 @@
-// 1.19.2	2023-08-30T15:11:12.5771746	Registrate Provider for tfmg [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-08-30T23:23:40.7821017	Registrate Provider for tfmg [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9ca537517fb8baeff3d4e4137c93aebd6b874c81 assets/tfmg/blockstates/cast_iron_block.json
+c67b91a7fd9f16cd2d7eaa92dd9b945042d58130 assets/tfmg/blockstates/concrete.json
+dca4728ef33ca9d54fb55d707761c2eeb77c32b1 assets/tfmg/blockstates/cooling_fluid.json
 fa1fa0509cd94e57da7624b5d094c228d6b92593 assets/tfmg/blockstates/creosote.json
 a9b81338133077138f447a0d159f094edb61242a assets/tfmg/blockstates/crude_oil_fluid.json
 03983ce3de10310cd75b98f17c9161653b7034cd assets/tfmg/blockstates/diesel.json
@@ -15,9 +17,11 @@ ebd6804b999acea36abbf07c2381ee6dee0d7a16 assets/tfmg/blockstates/napalm.json
 89f2902010903aad686571ef37c781b111147456 assets/tfmg/blockstates/naphtha.json
 e6983072149d1a9a2f4d39e4e1feac599ff7413e assets/tfmg/blockstates/steel_block.json
 df44115876045e6f863de2f8be6a9166b336a2f1 assets/tfmg/blockstates/steel_casing.json
-9b6e45ec197d4be5d93c630ddb0fa693cc0dd731 assets/tfmg/lang/en_ud.json
-0e424b3aa9a7543e31f6e5567518fe9453ce75b1 assets/tfmg/lang/en_us.json
+b68d0d30eb993662524158c536547497dc507204 assets/tfmg/lang/en_ud.json
+841085ce8022c36f4e4a65b8f0133e6f815d9668 assets/tfmg/lang/en_us.json
 37789d06ec6cfc0312be7b1b66ac1ec6403d4516 assets/tfmg/models/block/cast_iron_block.json
+75c31d328fc5d6d46c8b43e8bde7504f4e51dadc assets/tfmg/models/block/concrete.json
+80fb4a90f861992322bfd63f1232593e8cce708e assets/tfmg/models/block/cooling_fluid.json
 80fb4a90f861992322bfd63f1232593e8cce708e assets/tfmg/models/block/creosote.json
 391762cca00f54de8a43d076b028eb3e3b5cb5cf assets/tfmg/models/block/crude_oil_fluid.json
 997750c71f9ead915c393c5821146a57dcd01bfa assets/tfmg/models/block/diesel.json
@@ -34,6 +38,8 @@ e8e7bb74d46f9cec768a5443c10870fe1dd2105b assets/tfmg/models/block/naphtha.json
 0ceb30eaff16a495c9a165ca16c925cbff836755 assets/tfmg/models/block/steel_block.json
 465b1fed10d06090e5e8d19457f9fa48fe890bb4 assets/tfmg/models/block/steel_casing.json
 ec38882fb9010884823d6d6afa604f8a6512d279 assets/tfmg/models/item/cast_iron_block.json
+4a843d55647a606fa97bc2daf745a7603406767d assets/tfmg/models/item/concrete.json
+e8c4e68647a6ced815cfca649c679e709fcc7751 assets/tfmg/models/item/cooling_fluid_bucket.json
 df4e7fa8f3f60908f58794528a8db60dce7d0135 assets/tfmg/models/item/copper_grenade.json
 0abf2b2d61995c4fd3e3c88656e740ffe0a2f083 assets/tfmg/models/item/creosote_bucket.json
 e857cfbd6dfd0fe4b38e48f432f7a92e82dc5e22 assets/tfmg/models/item/crude_oil_fluid_bucket.json
@@ -54,6 +60,7 @@ d34ca92f5288cbb5cecee06f046a072763b2926c assets/tfmg/models/item/steel_casing.js
 f189171410564631c6074593da126b8d13fe9f8b assets/tfmg/models/item/zinc_grenade.json
 2b45163d462fba0e86bb1ac8fc299509fbe1e58d data/create/tags/blocks/casing.json
 2b45163d462fba0e86bb1ac8fc299509fbe1e58d data/create/tags/items/casing.json
+f0989952061266a02499103c1dcd9f2d7da131f5 data/forge/tags/blocks/concrete.json
 c98956ac34e02a8c1c801122486771ef89fb640b data/forge/tags/blocks/storage_blocks.json
 7c5615c56bb169570a061f052ebb1f5115760c16 data/forge/tags/blocks/storage_blocks/cast_iron.json
 37b1c9c3ae722d8110db48015993ede3e194c0a0 data/forge/tags/blocks/storage_blocks/steel.json
@@ -63,14 +70,16 @@ fe799186308cfd70f041f1dcf56129a0ccbaf219 data/forge/tags/items/buckets/kerosene.
 a779b7e09e7de79b73efb212644edff6739da610 data/forge/tags/items/buckets/napalm.json
 fdf3b8fdf1975b0eee671f428803caa4e17dc5bd data/forge/tags/items/buckets/naphtha.json
 5f98116af6d1d5e0324ff11449e719e7e2593c0c data/forge/tags/items/buckets/plastic.json
+f0989952061266a02499103c1dcd9f2d7da131f5 data/forge/tags/items/concrete.json
 c98956ac34e02a8c1c801122486771ef89fb640b data/forge/tags/items/storage_blocks.json
 7c5615c56bb169570a061f052ebb1f5115760c16 data/forge/tags/items/storage_blocks/cast_iron.json
 37b1c9c3ae722d8110db48015993ede3e194c0a0 data/forge/tags/items/storage_blocks/steel.json
 c98956ac34e02a8c1c801122486771ef89fb640b data/minecraft/tags/blocks/beacon_base_blocks.json
 2b45163d462fba0e86bb1ac8fc299509fbe1e58d data/minecraft/tags/blocks/mineable/axe.json
-cd26fa5d063cde156d1b1b165bccc033f784c23c data/minecraft/tags/blocks/mineable/pickaxe.json
-c98956ac34e02a8c1c801122486771ef89fb640b data/minecraft/tags/blocks/needs_iron_tool.json
+b64e309f3dfd304a74fc9c4e1a97b2ea3c2c02e8 data/minecraft/tags/blocks/mineable/pickaxe.json
+7f922e1459e98ee497c359655ee2b408bf84e4f4 data/minecraft/tags/blocks/needs_iron_tool.json
 60857d034446187e758de87644a80a7bc4d6b150 data/tfmg/loot_tables/blocks/cast_iron_block.json
+d32a75f20ca3f2da6ba69b0a91e295c63f65de92 data/tfmg/loot_tables/blocks/concrete.json
 661cc61f9c13ddf8c6bf06470defa93170e8ee7f data/tfmg/loot_tables/blocks/heavy_machinery_casing.json
 7da9b20012e584104331da961756d6c1d02682b5 data/tfmg/loot_tables/blocks/napalm_bomb.json
 01298989d0fe79936cdfa1e6cc07fd05f143ae09 data/tfmg/loot_tables/blocks/steel_block.json

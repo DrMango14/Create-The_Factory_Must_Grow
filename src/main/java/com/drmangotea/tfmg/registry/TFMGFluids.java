@@ -9,6 +9,9 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 import com.drmangotea.tfmg.CreateTFMG;
+import com.drmangotea.tfmg.content.concrete.ConcreteFluid;
+import com.drmangotea.tfmg.content.concrete.ConcreteFluidType;
+import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllTags;
 import org.jetbrains.annotations.NotNull;
 
@@ -298,20 +301,27 @@ public class TFMGFluids {
 
 
     public static final FluidEntry<ForgeFlowingFluid.Flowing> LIQUID_CONCRETE =
-            REGISTRATE.fluid("liquid_concrete",CONCRETE_RL,CONCRETE_RL)
+            REGISTRATE.fluid("liquid_concrete",CONCRETE_RL,CONCRETE_RL,
+                            ConcreteFluidType.create(0x333333,
+                                    () -> 1f / 24f ))
                     .lang("Liquid Concrete")
                     .properties(b -> b.viscosity(9999)
                             .density(9999))
                     .fluidProperties(p -> p.levelDecreasePerBlock(0)
-                            .tickRate(9999)
+                            .tickRate(99999)
                             .slopeFindDistance(0)
-                            .explosionResistance(100f))
-
-                    .source(ForgeFlowingFluid.Source::new)
+                            .explosionResistance(4f)
+                            )
+                    .source(ConcreteFluid.Source::new)
                     .bucket()
                     //.tag(AllTags.forgeItemTag("buckets/napalm"))
                     .build()
                     .register();
+
+
+    ////
+
+
 
 
     // Load this class

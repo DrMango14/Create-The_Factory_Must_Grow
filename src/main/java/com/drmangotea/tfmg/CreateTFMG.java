@@ -25,7 +25,7 @@ public class CreateTFMG
 
     public static final String MOD_ID = "tfmg";
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public CreateTFMG()
     {

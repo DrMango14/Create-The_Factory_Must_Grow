@@ -107,6 +107,17 @@ public class TFMGBlocks {
     static {
         REGISTRATE.creativeModeTab(() -> TFMGCreativeModeTabs.TFMG_CONCRETE);
     }
+    public static final BlockEntry<Block> CONCRETE = REGISTRATE.block("concrete", Block::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .blockstate(simpleCubeAll("concrete"))
+            .tag(BlockTags.NEEDS_IRON_TOOL)
+            .transform(tagBlockAndItem("concrete"))
+            .build()
+            .lang("Concrete")
+            .register();
 
     public static void register() {}
 }
