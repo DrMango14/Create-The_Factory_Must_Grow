@@ -36,6 +36,7 @@ public class CreateTFMG
 
         TFMGBlocks.register();
         TFMGItems.register();
+        TFMGBlockEntities.register();
         TFMGEntityTypes.register();
         TFMGCreativeModeTabs.init();
         TFMGFluids.register();

@@ -1,20 +1,21 @@
 package com.drmangotea.tfmg.registry;
 
+import com.drmangotea.tfmg.base.TFMGBuilderTransformers;
 import com.drmangotea.tfmg.base.TFMGSpriteShifts;
+import com.drmangotea.tfmg.content.concrete.formwork.FormWorkBlock;
+import com.drmangotea.tfmg.content.concrete.formwork.FormWorkGenerator;
 import com.drmangotea.tfmg.content.gadgets.explosives.napalm.NapalmBombBlock;
-import com.drmangotea.tfmg.content.gadgets.explosives.thermite_grenades.fire.BlueFireBlock;
-import com.drmangotea.tfmg.content.gadgets.explosives.thermite_grenades.fire.GreenFireBlock;
-import com.simibubi.create.AllCreativeModeTabs;
-import com.simibubi.create.AllSpriteShifts;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
+import com.simibubi.create.content.logistics.chute.ChuteGenerator;
 import com.simibubi.create.foundation.data.BuilderTransformers;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.common.Tags;
 
@@ -23,8 +24,7 @@ import static com.drmangotea.tfmg.CreateTFMG.REGISTRATE;
 import static com.simibubi.create.foundation.data.BlockStateGen.simpleCubeAll;
 import static com.simibubi.create.foundation.data.CreateRegistrate.casingConnectivity;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
-import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
-import static com.simibubi.create.foundation.data.TagGen.tagBlockAndItem;
+import static com.simibubi.create.foundation.data.TagGen.*;
 
 
 public class TFMGBlocks {
@@ -60,7 +60,17 @@ public class TFMGBlocks {
 
 
     //-----------------------MACHINES---------------------------//
-
+    public static final BlockEntry<FormWorkBlock> FORMWORK_BLOCK =
+            REGISTRATE.block("formwork_block", FormWorkBlock::new)
+                    .initialProperties(Material.WOOD)
+                    .properties(p -> p.color(MaterialColor.WOOD))
+                    .properties(p -> p.requiresCorrectToolForDrops())
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .blockstate(new FormWorkGenerator()::generate)
+                    .transform(axeOnly())
+                    .item()
+                    .build()
+                    .register();
 
 
 

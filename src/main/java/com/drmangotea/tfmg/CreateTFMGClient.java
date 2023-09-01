@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg;
 
 
+import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -10,7 +11,7 @@ public class CreateTFMGClient {
 
     public CreateTFMGClient() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        //CIPartialModels.init();
+        TFMGPartialModels.init();
         modEventBus.register(this);
 
     }

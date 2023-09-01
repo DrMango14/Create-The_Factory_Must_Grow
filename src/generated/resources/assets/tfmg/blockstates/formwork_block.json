@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tfmg:block/formwork_block/block_base"
+    }
+  }
+}
