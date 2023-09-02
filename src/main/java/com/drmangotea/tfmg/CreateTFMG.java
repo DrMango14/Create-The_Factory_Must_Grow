@@ -3,24 +3,17 @@ package com.drmangotea.tfmg;
 import com.drmangotea.tfmg.base.TFMGLangPartials;
 import com.drmangotea.tfmg.content.gadgets.explosives.thermite_grenades.fire.TFMGColoredFires;
 import com.drmangotea.tfmg.registry.*;
+import com.drmangotea.tfmg.worldgen.TFMGConfiguredFeatures;
+import com.drmangotea.tfmg.worldgen.TFMGFeatures;
 import com.mojang.logging.LogUtils;
-import com.simibubi.create.AllSoundEvents;
-import com.simibubi.create.Create;
-import com.simibubi.create.foundation.advancement.AllAdvancements;
-import com.simibubi.create.foundation.data.AllLangPartials;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.LangMerger;
-import com.simibubi.create.foundation.data.TagGen;
-import com.simibubi.create.foundation.data.recipe.MechanicalCraftingRecipeGen;
-import com.simibubi.create.foundation.data.recipe.ProcessingRecipeGen;
-import com.simibubi.create.foundation.data.recipe.SequencedAssemblyRecipeGen;
-import com.simibubi.create.foundation.data.recipe.StandardRecipeGen;
-import com.simibubi.create.foundation.ponder.PonderLocalization;
-import com.tterrag.registrate.providers.ProviderType;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.Holder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -31,6 +24,7 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
@@ -49,6 +43,8 @@ public class CreateTFMG
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         REGISTRATE.registerEventListeners(FMLJavaModLoadingContext.get().getModEventBus());
+
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
         //
 
         TFMGBlocks.register();
@@ -57,7 +53,10 @@ public class CreateTFMG
         TFMGEntityTypes.register();
         TFMGCreativeModeTabs.init();
         TFMGFluids.register();
+        TFMGPaletteBlocks.register();
         TFMGColoredFires.register(modEventBus);
+        TFMGFeatures.register(modEventBus);
+
         //
         modEventBus.addListener(EventPriority.LOWEST, CreateTFMG::gatherData);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> CreateTFMGClient::new);
@@ -71,6 +70,13 @@ public class CreateTFMG
     private void clientSetup(final FMLClientSetupEvent event) {
             ItemBlockRenderTypes.setRenderLayer(TFMGColoredFires.GREEN_FIRE.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(TFMGColoredFires.BLUE_FIRE.get(), RenderType.cutout());
+    }
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            final Holder<PlacedFeature> initializeOil = TFMGConfiguredFeatures.OIL_PLACED;
+            final Holder<PlacedFeature> initializeSimulatedOil = TFMGConfiguredFeatures.SIMULATED_OIL_PLACED;
+
+        });
     }
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)

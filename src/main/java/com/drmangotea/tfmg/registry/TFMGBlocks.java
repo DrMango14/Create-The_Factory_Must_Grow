@@ -4,7 +4,10 @@ import com.drmangotea.tfmg.base.TFMGBuilderTransformers;
 import com.drmangotea.tfmg.base.TFMGSpriteShifts;
 import com.drmangotea.tfmg.content.concrete.formwork.FormWorkBlock;
 import com.drmangotea.tfmg.content.concrete.formwork.FormWorkGenerator;
+import com.drmangotea.tfmg.content.deposits.FluidDepositBlock;
 import com.drmangotea.tfmg.content.gadgets.explosives.napalm.NapalmBombBlock;
+import com.drmangotea.tfmg.content.gadgets.explosives.thermite_grenades.ThermiteGrenadeItem;
+import com.drmangotea.tfmg.content.items.TFMGFuelItem;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.logistics.chute.ChuteGenerator;
@@ -24,6 +27,7 @@ import static com.drmangotea.tfmg.CreateTFMG.REGISTRATE;
 import static com.simibubi.create.foundation.data.BlockStateGen.simpleCubeAll;
 import static com.simibubi.create.foundation.data.CreateRegistrate.casingConnectivity;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
+import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.*;
 
 
@@ -44,6 +48,30 @@ public class TFMGBlocks {
             .build()
             .lang("Napalm Bomb")
             .register();
+    public static final BlockEntry<Block> FOSSILSTONE = REGISTRATE.block("fossilstone", Block::new)
+            .initialProperties(() -> Blocks.OBSIDIAN)
+            .properties(p -> p.strength(100f,1200f))
+            .properties(p -> p.color(MaterialColor.COLOR_BLACK))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .blockstate(simpleCubeAll("fossilstone"))
+            .item(TFMGFuelItem::fossilstone)
+            .build()
+            .lang("Fossilstone")
+            .register();
+
+    public static final BlockEntry<FluidDepositBlock> OIL_DEPOSIT = REGISTRATE.block("oil_deposit", FluidDepositBlock::new)
+            .initialProperties(() -> Blocks.BEDROCK)
+            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.strength(69696969))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .blockstate(simpleCubeAll("oil_deposit"))
+            .item()
+            .build()
+            .lang("Oil Deposit")
+            .register();
+
     public static final BlockEntry<CasingBlock> STEEL_CASING = REGISTRATE.block("steel_casing", CasingBlock::new)
             .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
             .transform(BuilderTransformers.casing(() -> TFMGSpriteShifts.STEEL_CASING))
@@ -123,7 +151,7 @@ public class TFMGBlocks {
             .properties(p -> p.requiresCorrectToolForDrops())
             .transform(pickaxeOnly())
             .blockstate(simpleCubeAll("concrete"))
-            .tag(BlockTags.NEEDS_IRON_TOOL)
+            .tag(BlockTags.NEEDS_STONE_TOOL)
             .transform(tagBlockAndItem("concrete"))
             .build()
             .lang("Concrete")

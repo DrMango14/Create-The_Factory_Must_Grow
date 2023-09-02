@@ -1,0 +1,16 @@
+Version 0.6.0
+
+
+-liquid concrete changed from a block to actuall fluid
+-liquid concrete bucket works with smart pipes
+-changed strength of oil deposits from 696969 to 69696969
+-added formwork
+-added cooling liquid
+-added creosote
+-added connected texture to cast iron block
+-added blue and green fire
+-added copper and zinc grenades
+-sparks from thermite grenades now set mobs on fire on impact
+-changed id of the mod from "createindustry" to "tfmg"
+-increased burning time of fossilstone and coal coke
+-oil deposits spawn in larger but rarer groups

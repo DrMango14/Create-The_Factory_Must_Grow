@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.registry;
 import com.drmangotea.tfmg.CreateTFMG;
 import com.drmangotea.tfmg.content.concrete.formwork.FormWorkBlockEntity;
 import com.drmangotea.tfmg.content.concrete.formwork.FormWorkRenderer;
+import com.drmangotea.tfmg.content.deposits.FluidDepositTileEntity;
 import com.simibubi.create.content.fluids.pipes.FluidPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.StraightPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.TransparentStraightPipeRenderer;
@@ -27,6 +28,10 @@ public class TFMGBlockEntities {
             .blockEntity("formwork", FormWorkBlockEntity::new)
             .renderer(() -> FormWorkRenderer::new)
             .validBlocks(TFMGBlocks.FORMWORK_BLOCK)
+            .register();
+    public static final BlockEntityEntry<FluidDepositTileEntity> OIL_DEPOSIT = REGISTRATE
+            .blockEntity("oil_deposit", FluidDepositTileEntity::new)
+           // .validBlocks(TFMGBlocks.OIL_DEPOSIT)
             .register();
 
 

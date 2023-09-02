@@ -1,7 +1,6 @@
 {
   "values": [
     "tfmg:steel_block",
-    "tfmg:cast_iron_block",
-    "tfmg:concrete"
+    "tfmg:cast_iron_block"
   ]
 }

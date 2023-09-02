@@ -3,47 +3,16 @@ package com.drmangotea.tfmg.registry;
 
 
 
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
-
 import com.drmangotea.tfmg.CreateTFMG;
 import com.drmangotea.tfmg.content.concrete.ConcreteFluid;
 import com.drmangotea.tfmg.content.concrete.ConcreteFluidType;
-import com.simibubi.create.AllFluids;
+import com.drmangotea.tfmg.content.fluids.BurnableFluid;
 import com.simibubi.create.AllTags;
-import org.jetbrains.annotations.NotNull;
 
-import com.mojang.blaze3d.shaders.FogShape;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.math.Vector3f;
-import com.simibubi.create.AllTags.AllFluidTags;
-import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.content.fluids.VirtualFluid;
-import com.simibubi.create.content.fluids.potion.PotionFluid;
-import com.simibubi.create.content.fluids.potion.PotionFluid.PotionFluidType;
-import com.simibubi.create.foundation.utility.Color;
-import com.simibubi.create.infrastructure.config.AllConfigs;
-import com.tterrag.registrate.builders.FluidBuilder.FluidTypeFactory;
 import com.tterrag.registrate.util.entry.FluidEntry;
 
-import net.minecraft.client.Camera;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.FogRenderer.FogMode;
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.fluids.FluidInteractionRegistry;
-import net.minecraftforge.fluids.FluidInteractionRegistry.InteractionInformation;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
 import static com.drmangotea.tfmg.CreateTFMG.REGISTRATE;
@@ -121,7 +90,7 @@ public class TFMGFluids {
 
 
 
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> CRUDE_OIL_FLUID =
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> CRUDE_OIL =
             REGISTRATE.fluid("crude_oil_fluid",CRUDE_OIL_STILL_RL,CRUDE_OIL_FLOW_RL)
                     .lang("Crude Oil")
                     .properties(b -> b.viscosity(1000)
@@ -131,7 +100,7 @@ public class TFMGFluids {
                             .slopeFindDistance(5)
                             .explosionResistance(100f))
 
-                    .source(ForgeFlowingFluid.Source::new)
+                    .source(BurnableFluid.Source::new)
                     .bucket()
                     .tag(AllTags.forgeItemTag("buckets/gasoline"))
                     .build()
@@ -167,7 +136,7 @@ public class TFMGFluids {
                             .slopeFindDistance(5)
                             .explosionResistance(100f))
 
-                    .source(ForgeFlowingFluid.Source::new)
+                    .source(BurnableFluid.Source::new)
                     .bucket()
                     .tag(AllTags.forgeItemTag("buckets/gasoline"))
                     .build()
@@ -185,7 +154,7 @@ public class TFMGFluids {
                             .slopeFindDistance(5)
                             .explosionResistance(100f))
 
-                    .source(ForgeFlowingFluid.Source::new)
+                    .source(BurnableFluid.Source::new)
                     .bucket()
                     .tag(AllTags.forgeItemTag("buckets/diesel"))
                     .build()
@@ -201,7 +170,7 @@ public class TFMGFluids {
                             .slopeFindDistance(5)
                             .explosionResistance(100f))
 
-                    .source(ForgeFlowingFluid.Source::new)
+                    .source(BurnableFluid.Source::new)
                     .bucket()
                     .tag(AllTags.forgeItemTag("buckets/kerosene"))
                     .build()
@@ -217,7 +186,7 @@ public class TFMGFluids {
                             .slopeFindDistance(5)
                             .explosionResistance(100f))
 
-                    .source(ForgeFlowingFluid.Source::new)
+                    .source(BurnableFluid.Source::new)
                     .bucket()
                     .tag(AllTags.forgeItemTag("buckets/naphtha"))
                     .build()
@@ -233,7 +202,7 @@ public class TFMGFluids {
                             .slopeFindDistance(5)
                             .explosionResistance(100f))
 
-                    .source(ForgeFlowingFluid.Source::new)
+                    .source(BurnableFluid.Source::new)
                     .bucket()
                     .build()
                     .register();
@@ -248,7 +217,7 @@ public class TFMGFluids {
                             .slopeFindDistance(5)
                             .explosionResistance(100f))
 
-                    .source(ForgeFlowingFluid.Source::new)
+                    .source(BurnableFluid.Source::new)
                     .bucket()
                     .build()
                     .register();
@@ -262,7 +231,7 @@ public class TFMGFluids {
                             .slopeFindDistance(5)
                             .explosionResistance(100f))
 
-                    .source(ForgeFlowingFluid.Source::new)
+                    .source(BurnableFluid.Source::new)
                     .bucket()
                     .tag(AllTags.forgeItemTag("buckets/napalm"))
                     .build()
@@ -292,7 +261,7 @@ public class TFMGFluids {
                             .slopeFindDistance(5)
                             .explosionResistance(100f))
 
-                    .source(ForgeFlowingFluid.Source::new)
+                    .source(BurnableFluid.Source::new)
                     .bucket()
                     //.tag(AllTags.forgeItemTag("buckets/napalm"))
                     .build()
