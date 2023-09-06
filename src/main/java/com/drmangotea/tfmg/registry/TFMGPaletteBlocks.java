@@ -26,7 +26,7 @@ import static com.simibubi.create.foundation.data.WindowGen.*;
 public class TFMGPaletteBlocks {
 
     static {
-        REGISTRATE.creativeModeTab(() -> TFMGCreativeModeTabs.TFMG_BASE);
+        REGISTRATE.creativeModeTab(() -> TFMGCreativeModeTabs.TFMG_BUILDING_BLOCKS);
     }
 
 

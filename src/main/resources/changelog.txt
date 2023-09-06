@@ -14,3 +14,8 @@ Version 0.6.0
 -changed id of the mod from "createindustry" to "tfmg"
 -increased burning time of fossilstone and coal coke
 -oil deposits spawn in larger but rarer groups
+-removed creative mode tab for concrete
+-created a building block creative mode tab
+-added lead
+-added steel valves and smart pipes
+-added brass, lead, plastic, aluminum and cast iron pipes, smart pipes, pumps and valves

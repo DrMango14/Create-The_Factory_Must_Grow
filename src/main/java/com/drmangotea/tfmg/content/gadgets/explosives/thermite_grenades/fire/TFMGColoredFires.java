@@ -9,6 +9,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+/**
+ * making blockstate for fire in registrate is pain/idk how to do it
+ * so no registrate for those :skull:
+ */
 public class TFMGColoredFires {
 
     public static final DeferredRegister<Block> BLOCKS =

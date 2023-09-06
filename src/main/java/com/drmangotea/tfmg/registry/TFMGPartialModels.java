@@ -18,6 +18,7 @@ import java.util.Map;
 public class TFMGPartialModels {
 
         public static final PartialModel
+                STEEL_FLUID_PIPE_CASING = block("steel_pipe/casing"),
                 FORMWORK_BOTTOM = block("formwork_block/block_bottom"),
                 FORMWORK_SIDE = block("formwork_block/block_side");
 
@@ -28,11 +29,19 @@ public class TFMGPartialModels {
 
 
     static {
+    //   for (FluidTransportBehaviour.AttachmentTypes.ComponentPartials type : FluidTransportBehaviour.AttachmentTypes.ComponentPartials.values()) {
+    //       Map<Direction, PartialModel> map = new HashMap<>();
+    //       for (Direction d : Iterate.directions) {
+    //           String asId = Lang.asId(type.name());
+    //           map.put(d, block("steel_pipe/" + asId + "/" + Lang.asId(d.getSerializedName())));
+    //       }
+    //       STEEL_PIPE_ATTACHMENTS.put(type, map);
+    //   }
         for (FluidTransportBehaviour.AttachmentTypes.ComponentPartials type : FluidTransportBehaviour.AttachmentTypes.ComponentPartials.values()) {
             Map<Direction, PartialModel> map = new HashMap<>();
             for (Direction d : Iterate.directions) {
                 String asId = Lang.asId(type.name());
-                map.put(d, block("steel_fluid_pipe/" + asId + "/" + Lang.asId(d.getSerializedName())));
+                map.put(d, block("steel_pipe/" + asId + "/" + Lang.asId(d.getSerializedName())));
             }
             STEEL_PIPE_ATTACHMENTS.put(type, map);
         }

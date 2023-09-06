@@ -6,8 +6,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "tfmg.refmap.json",
   "mixins": [
-    "AllOreFeatureConfigEntriesMixin"
-   // "FluidPropagatorMixin"
+    "AllOreFeatureConfigEntriesMixin",
+    "FluidPropagatorMixin"
   ],
 
   "injectors": {

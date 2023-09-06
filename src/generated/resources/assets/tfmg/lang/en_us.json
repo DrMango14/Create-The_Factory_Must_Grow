@@ -2,11 +2,14 @@
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
+	"block.tfmg.aluminum_block": "Block of Aluminum",
 	"block.tfmg.bauxite": "Bauxite",
 	"block.tfmg.bauxite_pillar": "Bauxite Pillar",
 	"block.tfmg.cast_iron_block": "Block of Cast Iron",
+	"block.tfmg.coal_coke_block": "Block of Coal Coke",
 	"block.tfmg.concrete": "Concrete",
 	"block.tfmg.cooling_fluid": "Cooling Fluid",
+	"block.tfmg.copper_encased_steel_pipe": "Copper Encased Steel Pipe",
 	"block.tfmg.creosote": "Creosote",
 	"block.tfmg.crude_oil_fluid": "Crude Oil Fluid",
 	"block.tfmg.cut_bauxite": "Cut Bauxite",
@@ -21,10 +24,12 @@
 	"block.tfmg.formwork_block": "Formwork Block",
 	"block.tfmg.fossilstone": "Fossilstone",
 	"block.tfmg.gasoline": "Gasoline",
+	"block.tfmg.glass_steel_pipe": "Glass Steel Pipe",
 	"block.tfmg.heavy_machinery_casing": "Heavy Machinery Casing",
 	"block.tfmg.heavy_oil": "Heavy Oil",
 	"block.tfmg.kerosene": "Kerosene",
 	"block.tfmg.layered_bauxite": "Layered Bauxite",
+	"block.tfmg.lead_block": "Block of Lead",
 	"block.tfmg.liquid_concrete": "Liquid Concrete",
 	"block.tfmg.liquid_plastic": "Liquid Plastic",
 	"block.tfmg.lubrication_oil": "Lubrication Oil",
@@ -42,6 +47,8 @@
 	"block.tfmg.small_bauxite_bricks": "Small Bauxite Bricks",
 	"block.tfmg.steel_block": "Block of Steel",
 	"block.tfmg.steel_casing": "Steel Casing",
+	"block.tfmg.steel_fluid_tank": "Steel Fluid Tank",
+	"block.tfmg.steel_pipe": "Steel Pipe",
 
 	"entity.tfmg.blue_spark": "Blue Spark",
 	"entity.tfmg.copper_grenade": "Copper Grenade",
@@ -70,6 +77,9 @@
 	"fluid.tfmg.propane": "Propane",
 	"fluid.tfmg.propylene": "Propylene",
 
+	"item.tfmg.aluminum_ingot": "Aluminum Ingot",
+	"item.tfmg.cast_iron_ingot": "Cast Iron Ingot",
+	"item.tfmg.coal_coke": "Coal Coke",
 	"item.tfmg.cooling_fluid_bucket": "Cooling Fluid Bucket",
 	"item.tfmg.copper_grenade": "Copper Grenade",
 	"item.tfmg.creosote_bucket": "Creosote Bucket",
@@ -78,11 +88,14 @@
 	"item.tfmg.gasoline_bucket": "Gasoline Bucket",
 	"item.tfmg.heavy_oil_bucket": "Heavy Oil Bucket",
 	"item.tfmg.kerosene_bucket": "Kerosene Bucket",
+	"item.tfmg.lead_ingot": "Lead Ingot",
 	"item.tfmg.liquid_concrete_bucket": "Liquid Concrete Bucket",
 	"item.tfmg.liquid_plastic_bucket": "Liquid Plastic Bucket",
 	"item.tfmg.lubrication_oil_bucket": "Lubrication Oil Bucket",
 	"item.tfmg.napalm_bucket": "Napalm Bucket",
 	"item.tfmg.naphtha_bucket": "Naphtha Bucket",
+	"item.tfmg.screwdriver": "Screwdriver",
+	"item.tfmg.steel_ingot": "Steel Ingot",
 	"item.tfmg.thermite_grenade": "Thermite Grenade",
 	"item.tfmg.zinc_grenade": "Zinc Grenade",
 
@@ -90,7 +103,7 @@
 	"_": "->------------------------]  UI & Messages  [------------------------<-",
 
 	"itemGroup.tfmg.base": "Create: The Factory Must Grow",
-	"itemGroup.tfmg.concrete": "Create: TFMG's Concrete",
+	"itemGroup.tfmg.building": "Create: TFMG's Building Blocks",
 
 	"_": "Thank you for translating Create: The Factory Must Grow!"
 

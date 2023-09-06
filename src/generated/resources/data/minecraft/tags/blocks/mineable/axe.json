@@ -2,6 +2,7 @@
   "values": [
     "tfmg:steel_casing",
     "tfmg:heavy_machinery_casing",
-    "tfmg:formwork_block"
+    "tfmg:formwork_block",
+    "tfmg:copper_encased_steel_pipe"
   ]
 }

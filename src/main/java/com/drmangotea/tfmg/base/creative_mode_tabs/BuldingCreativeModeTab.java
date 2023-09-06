@@ -1,15 +1,14 @@
 package com.drmangotea.tfmg.base.creative_mode_tabs;
 
+import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGItems;
-import com.simibubi.create.content.decoration.palettes.AllPaletteBlocks;
-import com.simibubi.create.infrastructure.item.CreateCreativeModeTab;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 
-public class ConcreteCreativeModeTab extends TFMGCreativeModeTab {
-    public ConcreteCreativeModeTab() {
-        super("concrete");
+public class BuldingCreativeModeTab extends TFMGCreativeModeTab {
+    public BuldingCreativeModeTab() {
+        super("building");
     }
 
     @Override
@@ -18,6 +17,6 @@ public class ConcreteCreativeModeTab extends TFMGCreativeModeTab {
 
     @Override
     public ItemStack makeIcon() {
-        return TFMGItems.COPPER_GRENADE.asStack();
+        return TFMGBlocks.CONCRETE.asStack();
     }
 }

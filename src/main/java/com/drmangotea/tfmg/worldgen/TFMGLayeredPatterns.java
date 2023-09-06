@@ -2,6 +2,8 @@ package com.drmangotea.tfmg.worldgen;
 
 
 import com.drmangotea.tfmg.registry.TFMGBlocks;
+import com.drmangotea.tfmg.registry.TFMGPaletteBlocks;
+import com.drmangotea.tfmg.registry.TFMGPaletteStoneTypes;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.infrastructure.worldgen.LayerPattern;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
@@ -15,7 +17,7 @@ public class TFMGLayeredPatterns {
 			.layer(l -> l.weight(1)
 					.passiveBlock())
 			.layer(l -> l.weight(2)
-					.block(TFMGBlocks.CONCRETE.get())
+					.block(TFMGPaletteStoneTypes.BAUXITE.getBaseBlock())
 					.size(1, 3))
 			.layer(l -> l.weight(1)
 					.block(Blocks.SMOOTH_BASALT)

@@ -24,6 +24,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import java.util.HashMap;
 import java.util.Map;
 
+ /**
+ * really goofy way to do worldgen but it works
+ */
 @Mixin(AllOreFeatureConfigEntries.class)
 public class AllOreFeatureConfigEntriesMixin {
 
