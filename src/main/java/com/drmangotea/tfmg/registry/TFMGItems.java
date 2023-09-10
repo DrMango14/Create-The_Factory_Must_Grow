@@ -2,8 +2,12 @@ package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.content.gadgets.explosives.thermite_grenades.ChemicalColor;
 import com.drmangotea.tfmg.content.gadgets.explosives.thermite_grenades.ThermiteGrenadeItem;
+import com.drmangotea.tfmg.content.gadgets.quad_potato_cannon.QuadPotatoCannonItem;
 import com.drmangotea.tfmg.content.items.CoalCokeItem;
 import com.drmangotea.tfmg.content.items.ScrewdriverItem;
+import com.simibubi.create.Create;
+import com.simibubi.create.content.equipment.potatoCannon.PotatoCannonItem;
+import com.simibubi.create.foundation.data.AssetLookup;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -19,12 +23,7 @@ public class TFMGItems {
         REGISTRATE.creativeModeTab(() -> TFMGCreativeModeTabs.TFMG_BASE);
     }
 
-    public static final ItemEntry<ThermiteGrenadeItem>
-            THERMITE_GRENADE = thermiteGrenade("thermite_grenade",BASE);
-    public static final ItemEntry<ThermiteGrenadeItem>
-            ZINC_GRENADE = thermiteGrenade("zinc_grenade",GREEN);
-    public static final ItemEntry<ThermiteGrenadeItem>
-            COPPER_GRENADE = thermiteGrenade("copper_grenade",BLUE);
+
 
     public static final ItemEntry<Item>
             STEEL_INGOT = taggedIngredient("steel_ingot", forgeItemTag("ingots/steel"), CREATE_INGOTS.tag),
@@ -33,6 +32,12 @@ public class TFMGItems {
             LEAD_INGOT = taggedIngredient("lead_ingot", forgeItemTag("ingots/lead"), CREATE_INGOTS.tag);
 
 
+
+    public static final ItemEntry<QuadPotatoCannonItem> QUAD_POTATO_CANNON =
+            REGISTRATE.item("quad_potato_cannon", QuadPotatoCannonItem::new)
+                    .model(AssetLookup.itemModelWithPartials())
+                    .register();
+
     public static final ItemEntry<CoalCokeItem> COAL_COKE = REGISTRATE.item("coal_coke", CoalCokeItem::new)
             .register();
 
@@ -40,7 +45,12 @@ public class TFMGItems {
             .properties(p -> p.stacksTo(1)
                     .durability(256))
             .register();
-
+    public static final ItemEntry<ThermiteGrenadeItem>
+            THERMITE_GRENADE = thermiteGrenade("thermite_grenade",BASE);
+    public static final ItemEntry<ThermiteGrenadeItem>
+            ZINC_GRENADE = thermiteGrenade("zinc_grenade",GREEN);
+    public static final ItemEntry<ThermiteGrenadeItem>
+            COPPER_GRENADE = thermiteGrenade("copper_grenade",BLUE);
 //////////////////////////
 
     @SafeVarargs

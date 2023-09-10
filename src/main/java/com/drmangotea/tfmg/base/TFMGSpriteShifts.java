@@ -25,6 +25,9 @@ public class TFMGSpriteShifts {
             STEEL_FLUID_TANK_TOP = getCT(AllCTTypes.RECTANGLE, "steel_fluid_tank_top"),
             STEEL_FLUID_TANK_INNER = getCT(AllCTTypes.RECTANGLE, "steel_fluid_tank_inner");
 
+    public static final CTSpriteShiftEntry
+            STEEL_SHEETMETAL = getCT(AllCTTypes.RECTANGLE, "steel_sheetmetal");
+
     public static final CTSpriteShiftEntry STEEL_SCAFFOLD_INSIDE = horizontal("scaffold/steel_scaffold_inside"),
             ALUMINUM_SCAFFOLD_INSIDE = horizontal("scaffold/aluminum_scaffold_inside");
 

@@ -2,13 +2,25 @@ package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.content.concrete.formwork.FormWorkBlockEntity;
 import com.drmangotea.tfmg.content.concrete.formwork.FormWorkRenderer;
-import com.drmangotea.tfmg.content.deposits.FluidDepositTileEntity;
+import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorBlockEntity;
+import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorRenderer;
+import com.drmangotea.tfmg.content.deposits.FluidDepositBlockEntity;
+import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerRenderer;
+import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerTileEntity;
 import com.drmangotea.tfmg.content.machines.pipes.normal.LockablePipeBlockEntity;
 import com.drmangotea.tfmg.content.machines.tanks.SteelFluidTankRenderer;
 import com.drmangotea.tfmg.content.machines.tanks.SteelTankBlockEntity;
-import com.simibubi.create.Create;
+import com.simibubi.create.content.fluids.pipes.SmartFluidPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.StraightPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.TransparentStraightPipeRenderer;
+import com.simibubi.create.content.fluids.pipes.valve.FluidValveBlockEntity;
+import com.simibubi.create.content.fluids.pipes.valve.FluidValveInstance;
+import com.simibubi.create.content.fluids.pipes.valve.FluidValveRenderer;
+import com.simibubi.create.content.fluids.pump.PumpBlockEntity;
+import com.simibubi.create.content.fluids.pump.PumpCogInstance;
+import com.simibubi.create.content.fluids.pump.PumpRenderer;
+import com.simibubi.create.content.kinetics.base.HorizontalHalfShaftInstance;
+import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
 import static com.drmangotea.tfmg.CreateTFMG.REGISTRATE;
@@ -23,8 +35,8 @@ public class TFMGBlockEntities {
             .renderer(() -> FormWorkRenderer::new)
             .validBlocks(TFMGBlocks.FORMWORK_BLOCK)
             .register();
-    public static final BlockEntityEntry<FluidDepositTileEntity> OIL_DEPOSIT = REGISTRATE
-            .blockEntity("oil_deposit", FluidDepositTileEntity::new)
+    public static final BlockEntityEntry<FluidDepositBlockEntity> OIL_DEPOSIT = REGISTRATE
+            .blockEntity("oil_deposit", FluidDepositBlockEntity::new)
            // .validBlocks(TFMGBlocks.OIL_DEPOSIT)
             .register();
 
@@ -53,7 +65,39 @@ public class TFMGBlockEntities {
             .register();
 
 
+    public static final BlockEntityEntry<TFMGSlidingDoorBlockEntity> TFMG_SLIDING_DOOR =
+            REGISTRATE.blockEntity("tfmg_sliding_door", TFMGSlidingDoorBlockEntity::new)
+                    .renderer(() -> TFMGSlidingDoorRenderer::new)
+                    .validBlocks(TFMGBlocks.HEAVY_CASING_DOOR,TFMGBlocks.STEEL_CASING_DOOR)
+                    .register();
 
+
+    public static final BlockEntityEntry<PumpBlockEntity> TFMG_MECHANICAL_PUMP = REGISTRATE
+            .blockEntity("mechanical_pump", PumpBlockEntity::new)
+            .instance(() -> PumpCogInstance::new)
+            .validBlocks(TFMGBlocks.STEEL_MECHANICAL_PUMP)
+            .renderer(() -> PumpRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<SmartFluidPipeBlockEntity> TFMG_SMART_FLUID_PIPE = REGISTRATE
+            .blockEntity("smart_fluid_pipe", SmartFluidPipeBlockEntity::new)
+            .validBlocks(TFMGBlocks.STEEL_SMART_FLUID_PIPE)
+            .renderer(() -> SmartBlockEntityRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<FluidValveBlockEntity> TFMG_FLUID_VALVE = REGISTRATE
+            .blockEntity("fluid_valve", FluidValveBlockEntity::new)
+            .instance(() -> FluidValveInstance::new)
+            .validBlocks(TFMGBlocks.STEEL_FLUID_VALVE)
+            .renderer(() -> FluidValveRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<SurfaceScannerTileEntity> SURFACE_SCANNER = REGISTRATE
+            .blockEntity("deposit_scanner", SurfaceScannerTileEntity::new)
+            .instance(() -> HorizontalHalfShaftInstance::new)
+            .validBlocks(TFMGBlocks.SURFACE_SCANNER)
+            .renderer(() -> SurfaceScannerRenderer::new)
+            .register();
 
 
     public static void register() {}
