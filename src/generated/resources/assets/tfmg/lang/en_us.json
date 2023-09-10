@@ -25,6 +25,7 @@
 	"block.tfmg.fossilstone": "Fossilstone",
 	"block.tfmg.gasoline": "Gasoline",
 	"block.tfmg.glass_steel_pipe": "Glass Steel Pipe",
+	"block.tfmg.heavy_casing_door": "Heavy Casing Door",
 	"block.tfmg.heavy_machinery_casing": "Heavy Machinery Casing",
 	"block.tfmg.heavy_oil": "Heavy Oil",
 	"block.tfmg.kerosene": "Kerosene",
@@ -47,8 +48,14 @@
 	"block.tfmg.small_bauxite_bricks": "Small Bauxite Bricks",
 	"block.tfmg.steel_block": "Block of Steel",
 	"block.tfmg.steel_casing": "Steel Casing",
+	"block.tfmg.steel_door": "Steel Door",
 	"block.tfmg.steel_fluid_tank": "Steel Fluid Tank",
+	"block.tfmg.steel_fluid_valve": "Steel Fluid Valve",
+	"block.tfmg.steel_mechanical_pump": "Steel Mechanical Pump",
 	"block.tfmg.steel_pipe": "Steel Pipe",
+	"block.tfmg.steel_sheetmetal": "Steel Sheetmetal",
+	"block.tfmg.steel_smart_fluid_pipe": "Steel Smart Fluid Pipe",
+	"block.tfmg.surface_scanner": "Surface Scanner",
 
 	"entity.tfmg.blue_spark": "Blue Spark",
 	"entity.tfmg.copper_grenade": "Copper Grenade",
@@ -94,16 +101,32 @@
 	"item.tfmg.lubrication_oil_bucket": "Lubrication Oil Bucket",
 	"item.tfmg.napalm_bucket": "Napalm Bucket",
 	"item.tfmg.naphtha_bucket": "Naphtha Bucket",
+	"item.tfmg.quad_potato_cannon": "Quad Potato Cannon",
 	"item.tfmg.screwdriver": "Screwdriver",
 	"item.tfmg.steel_ingot": "Steel Ingot",
 	"item.tfmg.thermite_grenade": "Thermite Grenade",
 	"item.tfmg.zinc_grenade": "Zinc Grenade",
+
+	"itemGroup.tfmg.base": "Create: The Factory Must Grow",
+	"itemGroup.tfmg.building": "Create: TFMG's Building Blocks",
+
+	"create.goggles.misc.number": "%1$s",
 
 
 	"_": "->------------------------]  UI & Messages  [------------------------<-",
 
 	"itemGroup.tfmg.base": "Create: The Factory Must Grow",
 	"itemGroup.tfmg.building": "Create: TFMG's Building Blocks",
+
+	"create.goggles.misc.number": "%1$s",
+	"create.goggles.misc.dot_one": ".",
+	"create.goggles.misc.dot_two": "..",
+	"create.goggles.misc.dot_three": "...",
+	"create.goggles.surface_scanner.no_rotation": "No Rotation Provided",
+	"create.goggles.surface_scanner.no_deposit": "No Deposit Found",
+	"create.goggles.surface_scanner.deposit_found": "Found Deposit",
+	"create.goggles.surface_scanner.distance": "Distance: %1$s Blocks",
+	"create.goggles.surface_scanner.scanning_surface": "Scanning Surface",
 
 	"_": "Thank you for translating Create: The Factory Must Grow!"
 

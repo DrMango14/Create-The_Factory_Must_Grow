@@ -86,7 +86,7 @@ public class FluidPropagatorMixin {
                 BlockState targetState = world.getBlockState(target);
                 if (tileEntity instanceof PumpBlockEntity) {
                     if (
-                            //!TFMGBlocks.STEEL_PUMP.has(targetState)&&
+                            !TFMGBlocks.STEEL_MECHANICAL_PUMP.has(targetState)&&
                                     !AllBlocks.MECHANICAL_PUMP.has(targetState) || targetState.getValue(PumpBlock.FACING)
                             .getAxis() != direction.getAxis())
                         continue;

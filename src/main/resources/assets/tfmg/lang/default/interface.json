@@ -1,4 +1,13 @@
 {
   "itemGroup.tfmg.base": "Create: The Factory Must Grow",
-  "itemGroup.tfmg.building": "Create: TFMG's Building Blocks"
+  "itemGroup.tfmg.building": "Create: TFMG's Building Blocks",
+  "create.goggles.misc.number": "%1$s",
+  "create.goggles.misc.dot_one": ".",
+  "create.goggles.misc.dot_two": "..",
+  "create.goggles.misc.dot_three": "...",
+  "create.goggles.surface_scanner.no_rotation": "No Rotation Provided",
+  "create.goggles.surface_scanner.no_deposit": "No Deposit Found",
+  "create.goggles.surface_scanner.deposit_found": "Found Deposit",
+  "create.goggles.surface_scanner.distance": "Distance: %1$s Blocks",
+  "create.goggles.surface_scanner.scanning_surface": "Scanning Surface"
 }

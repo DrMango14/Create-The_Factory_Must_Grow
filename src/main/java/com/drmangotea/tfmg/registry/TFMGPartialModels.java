@@ -19,6 +19,8 @@ public class TFMGPartialModels {
 
         public static final PartialModel
                 STEEL_FLUID_PIPE_CASING = block("steel_pipe/casing"),
+                SURFACE_SCANNER_DIAL = block("surface_scanner/dial"),
+                SURFACE_SCANNER_FLAG = block("surface_scanner/flag"),
                 FORMWORK_BOTTOM = block("formwork_block/block_bottom"),
                 FORMWORK_SIDE = block("formwork_block/block_side");
 

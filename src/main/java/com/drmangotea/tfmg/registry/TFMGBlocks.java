@@ -1,17 +1,22 @@
 package com.drmangotea.tfmg.registry;
 
-import com.drmangotea.tfmg.base.TFMGBlockStateGen;
+import com.drmangotea.tfmg.base.TFMGBuilderTransformers;
 import com.drmangotea.tfmg.base.TFMGSpriteShifts;
 import com.drmangotea.tfmg.content.concrete.formwork.FormWorkBlock;
 import com.drmangotea.tfmg.content.concrete.formwork.FormWorkGenerator;
+import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorBlock;
 import com.drmangotea.tfmg.content.deposits.FluidDepositBlock;
 import com.drmangotea.tfmg.content.gadgets.explosives.napalm.NapalmBombBlock;
 import com.drmangotea.tfmg.content.items.CoalCokeBlockItem;
 import com.drmangotea.tfmg.content.items.FossilstoneItem;
+import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerBlock;
 import com.drmangotea.tfmg.content.machines.pipes.normal.steel.EncasedSteelPipeBlock;
 import com.drmangotea.tfmg.content.machines.pipes.normal.steel.GlassSteelPipeBlock;
 import com.drmangotea.tfmg.content.machines.pipes.normal.steel.SteelPipeAttachmentModel;
 import com.drmangotea.tfmg.content.machines.pipes.normal.steel.SteelPipeBlock;
+import com.drmangotea.tfmg.content.machines.pipes.pumps.TFMGPumpBlock;
+import com.drmangotea.tfmg.content.machines.pipes.smart_pipes.TFMGSmartFluidPipeBlock;
+import com.drmangotea.tfmg.content.machines.pipes.valves.TFMGFluidValveBlock;
 import com.drmangotea.tfmg.content.machines.tanks.SteelFluidTankModel;
 import com.drmangotea.tfmg.content.machines.tanks.SteelTankBlock;
 import com.drmangotea.tfmg.content.machines.tanks.SteelTankGenerator;
@@ -22,6 +27,9 @@ import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
 
+import com.simibubi.create.content.fluids.pipes.SmartFluidPipeGenerator;
+import com.simibubi.create.content.fluids.pipes.valve.FluidValveBlock;
+import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
@@ -115,8 +123,19 @@ public class TFMGBlocks {
                     .build()
                     .register();
 
+    public static final BlockEntry<SurfaceScannerBlock> SURFACE_SCANNER =
+            REGISTRATE.block("surface_scanner", SurfaceScannerBlock::new)
+                 //  .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                 //  .properties(p -> p
+                 //          .strength(4.5F))
+                    //  .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(TFMGBuilderTransformers.surfaceScanner())
+                    //  .transform(axeOrPickaxe())
+                  //  .transform(BlockStressDefaults.setImpact(10.0))
+                    .register();
 
-    //pipes
+
+    //fluid stuff
     public static final BlockEntry<SteelPipeBlock> STEEL_PIPE = REGISTRATE.block("steel_pipe", SteelPipeBlock::new)
             .initialProperties(Material.HEAVY_METAL)
             .transform(pickaxeOnly())
@@ -164,9 +183,42 @@ public class TFMGBlocks {
                     .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
                     .loot((p, b) -> p.dropOther(b, STEEL_PIPE.get()))
                     .register();
-    //
 
 
+    public static final BlockEntry<TFMGPumpBlock> STEEL_MECHANICAL_PUMP = REGISTRATE.block("steel_mechanical_pump", TFMGPumpBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .properties(p -> p.color(MaterialColor.STONE))
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.directionalBlockProviderIgnoresWaterlogged(true))
+            .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
+            .transform(BlockStressDefaults.setImpact(4.0))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<TFMGSmartFluidPipeBlock> STEEL_SMART_FLUID_PIPE =
+            REGISTRATE.block("steel_smart_fluid_pipe", TFMGSmartFluidPipeBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.color(MaterialColor.STONE))
+                    .transform(pickaxeOnly())
+                    .blockstate(new SmartFluidPipeGenerator()::generate)
+                    .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<TFMGFluidValveBlock> STEEL_FLUID_VALVE = REGISTRATE.block("steel_fluid_valve", TFMGFluidValveBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> BlockStateGen.directionalAxisBlock(c, p,
+                    (state, vertical) -> AssetLookup.partialBaseModel(c, p, vertical ? "vertical" : "horizontal",
+                            state.getValue(FluidValveBlock.ENABLED) ? "open" : "closed")))
+            .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    @SuppressWarnings("'addLayer(java.util.function.Supplier<java.util.function.Supplier<net.minecraft.client.renderer.RenderType>>)' is deprecated and marked for removal ")
     public static final BlockEntry<SteelTankBlock> STEEL_FLUID_TANK = REGISTRATE.block("steel_fluid_tank", SteelTankBlock::regular)
             .initialProperties(SharedProperties::copperMetal)
             .properties(BlockBehaviour.Properties::noOcclusion)
@@ -180,6 +232,10 @@ public class TFMGBlocks {
             .build()
             .register();
     /////
+
+
+
+
 
 
 
@@ -267,6 +323,36 @@ public class TFMGBlocks {
             .lang("Block of Coal Coke")
             .register();
 
+    //sheetmetals
+    public static final BlockEntry<Block> STEEL_SHEETMETAL = REGISTRATE.block("steel_sheetmetal", Block::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .onRegister(connectedTextures(() -> new EncasedCTBehaviour(TFMGSpriteShifts.STEEL_SHEETMETAL)))
+            .onRegister(casingConnectivity((block, cc) -> cc.makeCasing(block, TFMGSpriteShifts.STEEL_SHEETMETAL)))
+            .transform(pickaxeOnly())
+            .blockstate(simpleCubeAll("steel_sheetmetal"))
+            .tag(BlockTags.NEEDS_IRON_TOOL)
+            .item()
+            .build()
+            .lang("Steel Sheetmetal")
+            .register();
+
+    //
+    public static final BlockEntry<TFMGSlidingDoorBlock> HEAVY_CASING_DOOR =
+            REGISTRATE.block("heavy_casing_door", p -> new TFMGSlidingDoorBlock(p, false))
+                    .transform(TFMGBuilderTransformers.slidingDoor("heavy_casing"))
+                    .properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN)
+                            .sound(SoundType.COPPER)
+                            .noOcclusion())
+                    .register();
+    public static final BlockEntry<TFMGSlidingDoorBlock> STEEL_CASING_DOOR =
+            REGISTRATE.block("steel_door", p -> new TFMGSlidingDoorBlock(p, true))
+                    .transform(TFMGBuilderTransformers.slidingDoor("steel"))
+                    .properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN)
+                            .sound(SoundType.COPPER)
+                            .noOcclusion())
+                    .register();
 
 
 
