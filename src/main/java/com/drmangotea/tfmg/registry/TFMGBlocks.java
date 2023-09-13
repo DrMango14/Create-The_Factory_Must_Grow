@@ -10,6 +10,8 @@ import com.drmangotea.tfmg.content.gadgets.explosives.napalm.NapalmBombBlock;
 import com.drmangotea.tfmg.content.items.CoalCokeBlockItem;
 import com.drmangotea.tfmg.content.items.FossilstoneItem;
 import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerBlock;
+import com.drmangotea.tfmg.content.machines.oil_processing.distillation.DistillationControllerBlock;
+import com.drmangotea.tfmg.content.machines.oil_processing.distillation.DistillationOutputBlock;
 import com.drmangotea.tfmg.content.machines.pipes.normal.steel.EncasedSteelPipeBlock;
 import com.drmangotea.tfmg.content.machines.pipes.normal.steel.GlassSteelPipeBlock;
 import com.drmangotea.tfmg.content.machines.pipes.normal.steel.SteelPipeAttachmentModel;
@@ -30,6 +32,7 @@ import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
 import com.simibubi.create.content.fluids.pipes.SmartFluidPipeGenerator;
 import com.simibubi.create.content.fluids.pipes.valve.FluidValveBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
@@ -233,7 +236,26 @@ public class TFMGBlocks {
             .register();
     /////
 
+    //Distillation
 
+
+    public static final BlockEntry<DistillationOutputBlock> CAST_IRON_DISTILLATION_OUTPUT =
+            REGISTRATE.block("cast_iron_distillation_output", DistillationOutputBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.color(MaterialColor.STONE))
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(axeOrPickaxe())
+                    .item(AssemblyOperatorBlockItem::new)
+                    .build()
+                    .register();
+    public static final BlockEntry<DistillationControllerBlock> CAST_IRON_DISTILLATION_CONTROLLER =
+            REGISTRATE.block("cast_iron_distillation_controller", DistillationControllerBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .item()
+                    .build()
+                    .register();
+
+    //////
 
 
 

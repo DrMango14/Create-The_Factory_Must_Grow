@@ -1,0 +1,35 @@
+{
+  "type": "tfmg:distillation",
+  "ingredients": [
+
+    {
+      "fluid": "tfmg:heavy_oil",
+      "nbt": {},
+      "amount": 90
+    }
+  ],
+  "results": [
+    {
+      "fluid": "tfmg:diesel",
+      "amount": 30
+    },
+    {
+      "fluid": "tfmg:lubrication_oil",
+      "amount": 30
+    },
+    {
+      "fluid": "tfmg:lubrication_oil",
+      "amount": 30
+    },
+    {
+      "item": "tfmg:steel_ingot"
+
+    },
+    {
+      "item": "minecraft:air"
+
+    }
+  ]
+
+
+}

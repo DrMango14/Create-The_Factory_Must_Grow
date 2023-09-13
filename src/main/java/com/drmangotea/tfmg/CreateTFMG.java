@@ -54,8 +54,10 @@ public class CreateTFMG
         TFMGCreativeModeTabs.init();
         TFMGFluids.register();
         TFMGPaletteBlocks.register();
+
         TFMGColoredFires.register(modEventBus);
         TFMGFeatures.register(modEventBus);
+        TFMGRecipeTypes.register(modEventBus);
 
         //
         modEventBus.addListener(EventPriority.LOWEST, CreateTFMG::gatherData);

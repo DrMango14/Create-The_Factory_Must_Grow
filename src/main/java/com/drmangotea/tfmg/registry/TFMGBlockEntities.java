@@ -7,6 +7,8 @@ import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorRenderer;
 import com.drmangotea.tfmg.content.deposits.FluidDepositBlockEntity;
 import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerRenderer;
 import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerTileEntity;
+import com.drmangotea.tfmg.content.machines.oil_processing.distillation.DistillationControllerBlockEntity;
+import com.drmangotea.tfmg.content.machines.oil_processing.distillation.DistillationOutputBlockEntity;
 import com.drmangotea.tfmg.content.machines.pipes.normal.LockablePipeBlockEntity;
 import com.drmangotea.tfmg.content.machines.tanks.SteelFluidTankRenderer;
 import com.drmangotea.tfmg.content.machines.tanks.SteelTankBlockEntity;
@@ -97,6 +99,17 @@ public class TFMGBlockEntities {
             .instance(() -> HorizontalHalfShaftInstance::new)
             .validBlocks(TFMGBlocks.SURFACE_SCANNER)
             .renderer(() -> SurfaceScannerRenderer::new)
+            .register();
+
+
+    public static final BlockEntityEntry<DistillationOutputBlockEntity> CAST_IRON_DISTILLATION_OUTPUT = REGISTRATE
+            .blockEntity("distiller", DistillationOutputBlockEntity::new)
+            .validBlocks(TFMGBlocks.CAST_IRON_DISTILLATION_OUTPUT)
+            .register();
+
+    public static final BlockEntityEntry<DistillationControllerBlockEntity> CAST_IRON_DISTILLATION_CONTROLLER = REGISTRATE
+            .blockEntity("distiller_controller", DistillationControllerBlockEntity::new)
+            .validBlocks(TFMGBlocks.CAST_IRON_DISTILLATION_CONTROLLER)
             .register();
 
 

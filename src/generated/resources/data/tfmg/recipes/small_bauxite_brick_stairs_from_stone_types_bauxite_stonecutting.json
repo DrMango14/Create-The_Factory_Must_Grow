@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "tag": "tfmg:stone_types/bauxite"
-  },
-  "result": "tfmg:small_bauxite_brick_stairs"
-}

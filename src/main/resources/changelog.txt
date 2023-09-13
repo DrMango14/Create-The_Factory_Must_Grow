@@ -19,3 +19,7 @@ Version 0.6.0
 -added lead
 -added steel valves and smart pipes
 -added brass, lead, plastic, aluminum and cast iron pipes, smart pipes, pumps and valves
+-added compass to the surface scanner that shows directions to found deposit
+-added flag to the surface scanner that gets raised when oil is under 10 block away
+-doubled the range of surface scanners
+-added sheetmetals

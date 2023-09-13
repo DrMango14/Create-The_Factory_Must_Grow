@@ -1,0 +1,35 @@
+{
+  "type": "tfmg:distillation",
+  "ingredients": [
+
+    {
+      "fluid": "tfmg:naphtha",
+      "nbt": {},
+      "amount": 9
+    }
+  ],
+  "results": [
+    {
+      "fluid": "tfmg:propylene",
+      "amount": 3
+    },
+    {
+      "fluid": "tfmg:ethylene",
+      "amount": 3
+    },
+    {
+      "fluid": "tfmg:ethylene",
+      "amount": 3
+    },
+    {
+      "item": "minecraft:air"
+
+    },
+    {
+      "item": "minecraft:air"
+
+    }
+  ]
+
+
+}
