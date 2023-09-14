@@ -1,9 +1,8 @@
 package com.drmangotea.tfmg.content.machines.oil_processing.distillation;
 
 
-import com.drmangotea.tfmg.recipes.distillation.DistillationRecipe;
+import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryControllerBlockEntity;
 import com.drmangotea.tfmg.recipes.distillation.ItemlessRecipe;
-import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -15,7 +14,6 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,14 +36,6 @@ public abstract class FluidProcessingBlockEntity extends KineticBlockEntity {
         behaviours.add(basinChecker);
     }
 
-    @Override
-    public void onSpeedChanged(float prevSpeed) {
-        super.onSpeedChanged(prevSpeed);
-        if (getSpeed() == 0)
-            basinRemoved = true;
-        basinRemoved = false;
-        basinChecker.scheduleUpdate();
-    }
 
     @Override
     public void tick() {
@@ -66,6 +56,7 @@ public abstract class FluidProcessingBlockEntity extends KineticBlockEntity {
             return true;
         if (level == null || level.isClientSide)
             return true;
+
 
         List<Recipe<?>> recipes = getMatchingRecipes();
         if (recipes.isEmpty())
@@ -92,29 +83,12 @@ public abstract class FluidProcessingBlockEntity extends KineticBlockEntity {
     protected <C extends Container> boolean matchItemlessRecipe(Recipe<C> recipe) {
         if (recipe == null)
             return false;
-        Optional<DistillationControllerBlockEntity> basin = getController();
+        Optional<DistilleryControllerBlockEntity> basin = getController();
         if (!basin.isPresent())
             return false;
         return ItemlessRecipe.match(basin.get(), recipe);
     }
 
-    protected void applyItemlessRecipe() {
-        if (currentRecipe == null)
-            return;
-
-        Optional<DistillationControllerBlockEntity> optionalBasin = getController();
-        if (!optionalBasin.isPresent())
-            return;
-        DistillationControllerBlockEntity basin = optionalBasin.get();
-        if (!ItemlessRecipe.apply(basin, currentRecipe))
-            return;
-        getProcessedRecipeTrigger().ifPresent(this::award);
-        basin.inputTank.sendDataImmediately();
-
-
-
-        basin.notifyChangeOfContents();
-    }
 
     protected List<Recipe<?>> getMatchingRecipes() {
 
@@ -131,13 +105,13 @@ public abstract class FluidProcessingBlockEntity extends KineticBlockEntity {
 
     protected abstract void onBasinRemoved();
 
-    protected Optional<DistillationControllerBlockEntity> getController() {
+    protected Optional<DistilleryControllerBlockEntity> getController() {
         if (level == null)
             return Optional.empty();
         BlockEntity basinTE = level.getBlockEntity(worldPosition.below(1));
-        if (!(basinTE instanceof DistillationControllerBlockEntity))
+        if (!(basinTE instanceof DistilleryControllerBlockEntity))
             return Optional.empty();
-        return Optional.of((DistillationControllerBlockEntity) basinTE);
+        return Optional.of((DistilleryControllerBlockEntity) basinTE);
     }
 
     protected Optional<CreateAdvancement> getProcessedRecipeTrigger() {
