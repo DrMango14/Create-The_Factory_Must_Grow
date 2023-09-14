@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.CreateTFMG;
 import com.drmangotea.tfmg.recipes.distillation.DistillationRecipe;
+import com.drmangotea.tfmg.recipes.distillation.advanced.AdvancedDistillationRecipe;
 import com.google.common.collect.ImmutableSet;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeFactory;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
@@ -28,7 +29,8 @@ import java.util.function.Supplier;
 
 public enum TFMGRecipeTypes implements IRecipeTypeInfo {
 
-DISTILLATION(DistillationRecipe::new);
+DISTILLATION(DistillationRecipe::new),
+ADVANCED_DISTILLATION(AdvancedDistillationRecipe::new);
 
     private final ResourceLocation id;
     private final RegistryObject<RecipeSerializer<?>> serializerObject;

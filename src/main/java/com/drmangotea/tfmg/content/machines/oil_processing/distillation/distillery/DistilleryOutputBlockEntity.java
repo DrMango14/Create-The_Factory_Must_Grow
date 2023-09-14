@@ -1,7 +1,8 @@
-package com.drmangotea.tfmg.content.machines.oil_processing.distillation.backup;
+package com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery;
 
 
 import com.drmangotea.tfmg.CreateTFMG;
+import com.drmangotea.tfmg.content.machines.oil_processing.distillation.FluidProcessingBlockEntity;
 import com.drmangotea.tfmg.recipes.distillation.DistillationRecipe;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.simibubi.create.AllRecipeTypes;
@@ -41,7 +42,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class DistillationOutputBlockEntity extends FluidProcessingBlockEntity implements IHaveGoggleInformation {
+public class DistilleryOutputBlockEntity extends FluidProcessingBlockEntity implements IHaveGoggleInformation {
 
     protected LazyOptional<IFluidHandler> fluidCapability;
     public FluidTank tankInventory;
@@ -56,7 +57,7 @@ public class DistillationOutputBlockEntity extends FluidProcessingBlockEntity im
 
     public boolean running;
 
-    public DistillationOutputBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public DistilleryOutputBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         tankInventory = createInventory();
         fluidCapability = LazyOptional.of(() -> tankInventory);
@@ -66,7 +67,7 @@ public class DistillationOutputBlockEntity extends FluidProcessingBlockEntity im
     protected <C extends Container> boolean matchItemlessRecipe(Recipe<C> recipe) {
         if (recipe == null)
             return false;
-        Optional<DistillationControllerBlockEntity> controller = getController();
+        Optional<DistilleryControllerBlockEntity> controller = getController();
         if (!controller.isPresent())
             return false;
         return DistillationRecipe.match(controller.get(), recipe);
@@ -76,11 +77,8 @@ public class DistillationOutputBlockEntity extends FluidProcessingBlockEntity im
     protected boolean updateController() {
 
 
-
         if (level == null || level.isClientSide)
             return true;
-        Optional<DistillationControllerBlockEntity> basin = getController();
-
 
         List<Recipe<?>> recipes = getMatchingRecipes();
         if (recipes.isEmpty())
@@ -94,7 +92,7 @@ public class DistillationOutputBlockEntity extends FluidProcessingBlockEntity im
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
-        // registerAwardables(behaviours, AllAdvancements.MIXER);
+
     }
 
     @Override
@@ -118,9 +116,7 @@ public class DistillationOutputBlockEntity extends FluidProcessingBlockEntity im
         if (tankInventory.getSpace() < 0)
             tankInventory.drain(-tankInventory.getSpace(), IFluidHandler.FluidAction.EXECUTE);
 
-
     }
-
     @Override
     public void write(CompoundTag compound, boolean clientPacket) {
         compound.putBoolean("Running", running);
@@ -158,8 +154,6 @@ public class DistillationOutputBlockEntity extends FluidProcessingBlockEntity im
         if (currentRecipe == null)
             return;
 
-
-
      //   if((currentRecipe instanceof ShapelessRecipe))
      //       return;
 
@@ -184,16 +178,20 @@ if(above1 !=null&& above2 !=null
      //      ((DistillationOutputBlockEntity) above1).tankInventory.getFluidAmount()+((DistillationRecipe)currentRecipe).getFluidResults().get(1).getAmount()<((DistillationOutputBlockEntity) above2).tankInventory.getCapacity()&&
    //     ((DistillationOutputBlockEntity) above2).tankInventory.getFluidAmount()+((DistillationRecipe)currentRecipe).getFluidResults().get(2).getAmount()<((DistillationOutputBlockEntity) above2).tankInventory.getCapacity()
 ){
-    Optional<DistillationControllerBlockEntity> optionalController = getController();
+    Optional<DistilleryControllerBlockEntity> optionalController = getController();
     if (!optionalController.isPresent())
         return;
 
-    if(!(above1 instanceof DistillationOutputBlockEntity)&&
-           !( above2 instanceof DistillationOutputBlockEntity)) {
+    if(!(above1 instanceof DistilleryOutputBlockEntity)&&
+           !( above2 instanceof DistilleryOutputBlockEntity)) {
         return;
     }
 
-    CreateTFMG.LOGGER.debug("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEe");
+    if(!(above1 instanceof DistilleryOutputBlockEntity))
+        return;
+    if(!(above2 instanceof DistilleryOutputBlockEntity))
+        return;
+
 
     FluidStack fluidInRecipe1 = ((DistillationRecipe) currentRecipe).getFirstFluidResult();
     FluidStack fluidInRecipe2 = ((DistillationRecipe) currentRecipe).getSecondFluidResult();
@@ -207,12 +205,12 @@ if(above1 !=null&& above2 !=null
     )
         return;
 
-  if (fluidInRecipe3.getFluid() != (((DistillationOutputBlockEntity) above1).tankInventory.getFluid().getFluid())
-          &&((DistillationOutputBlockEntity) above1).tankInventory.getFluidAmount()!=0
+  if (fluidInRecipe2.getFluid() != (((DistilleryOutputBlockEntity) above1).tankInventory.getFluid().getFluid())
+          &&((DistilleryOutputBlockEntity) above1).tankInventory.getFluidAmount()!=0
   )
       return;
-  if (fluidInRecipe3.getFluid() != (((DistillationOutputBlockEntity) above2).tankInventory.getFluid().getFluid())
-          &&((DistillationOutputBlockEntity) above2).tankInventory.getFluidAmount()!=0
+  if (fluidInRecipe3.getFluid() != (((DistilleryOutputBlockEntity) above2).tankInventory.getFluid().getFluid())
+          &&((DistilleryOutputBlockEntity) above2).tankInventory.getFluidAmount()!=0
   )
       return;
 
@@ -222,7 +220,7 @@ if(above1 !=null&& above2 !=null
     if(getController().get().getTanks().get(true).getPrimaryHandler().getFluid().getFluid() != ((DistillationRecipe) currentRecipe).getInputFluid().getMatchingFluidStacks().get(0).getFluid())
             return;
 
-    DistillationControllerBlockEntity controller = optionalController.get();
+    DistilleryControllerBlockEntity controller = optionalController.get();
     IFluidHandler availableFluids = controller.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
     .orElse(null);
 
@@ -241,9 +239,9 @@ if(above1 !=null&& above2 !=null
     if (!(((DistillationRecipe) currentRecipe).getFluidResults().get(0).isEmpty()))
         tankInventory.setFluid(new FluidStack(((DistillationRecipe) currentRecipe).getFluidResults().get(0).getFluid(), ((DistillationRecipe) currentRecipe).getFluidResults().get(0).getAmount() + this.tankInventory.getFluidAmount()));
     if (!(((DistillationRecipe) currentRecipe).getFluidResults().get(1).isEmpty()))
-        ((DistillationOutputBlockEntity) above1).tankInventory.setFluid(new FluidStack(((DistillationRecipe) currentRecipe).getFluidResults().get(1).getFluid(), ((DistillationRecipe) currentRecipe).getFluidResults().get(1).getAmount() + ((DistillationOutputBlockEntity) above1).tankInventory.getFluidAmount()));
+        ((DistilleryOutputBlockEntity) above1).tankInventory.setFluid(new FluidStack(((DistillationRecipe) currentRecipe).getFluidResults().get(1).getFluid(), ((DistillationRecipe) currentRecipe).getFluidResults().get(1).getAmount() + ((DistilleryOutputBlockEntity) above1).tankInventory.getFluidAmount()));
     if (!(((DistillationRecipe) currentRecipe).getFluidResults().get(2).isEmpty()))
-        ((DistillationOutputBlockEntity) above2).tankInventory.setFluid(new FluidStack(((DistillationRecipe) currentRecipe).getFluidResults().get(2).getFluid(), ((DistillationRecipe) currentRecipe).getFluidResults().get(2).getAmount() + ((DistillationOutputBlockEntity) above2).tankInventory.getFluidAmount()));
+        ((DistilleryOutputBlockEntity) above2).tankInventory.setFluid(new FluidStack(((DistillationRecipe) currentRecipe).getFluidResults().get(2).getFluid(), ((DistillationRecipe) currentRecipe).getFluidResults().get(2).getAmount() + ((DistilleryOutputBlockEntity) above2).tankInventory.getFluidAmount()));
 
 
     if (!(((DistillationRecipe) currentRecipe).getFirstItemResult().isEmpty()))
@@ -258,10 +256,6 @@ if(!(((DistillationRecipe) currentRecipe).getThirdItemResult().isEmpty()))
 
 
  */
-
-
-
-
 
     controller.notifyChangeOfContents();
     }
@@ -330,16 +324,7 @@ if(!(((DistillationRecipe) currentRecipe).getThirdItemResult().isEmpty()))
         return Optional.of(AllAdvancements.MIXER);
     }
  */
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void tickAudio() {
-        super.tickAudio();
 
-        // SoundEvents.BLOCK_STONE_BREAK
-
-
-
-    }
 
 
     protected SmartFluidTank createInventory() {
@@ -355,11 +340,6 @@ if(!(((DistillationRecipe) currentRecipe).getThirdItemResult().isEmpty()))
         }
 
 
-    public void sendDataImmediately() {
-        syncCooldown = 0;
-        queuedSync = false;
-        sendData();
-    }
 
     @Override
     public void sendData() {

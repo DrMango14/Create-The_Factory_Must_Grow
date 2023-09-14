@@ -10,8 +10,8 @@ import com.drmangotea.tfmg.content.gadgets.explosives.napalm.NapalmBombBlock;
 import com.drmangotea.tfmg.content.items.CoalCokeBlockItem;
 import com.drmangotea.tfmg.content.items.FossilstoneItem;
 import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerBlock;
-import com.drmangotea.tfmg.content.machines.oil_processing.distillation.DistillationControllerBlock;
-import com.drmangotea.tfmg.content.machines.oil_processing.distillation.DistillationOutputBlock;
+import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryControllerBlock;
+import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryOutputBlock;
 import com.drmangotea.tfmg.content.machines.pipes.normal.steel.EncasedSteelPipeBlock;
 import com.drmangotea.tfmg.content.machines.pipes.normal.steel.GlassSteelPipeBlock;
 import com.drmangotea.tfmg.content.machines.pipes.normal.steel.SteelPipeAttachmentModel;
@@ -239,8 +239,8 @@ public class TFMGBlocks {
     //Distillation
 
 
-    public static final BlockEntry<DistillationOutputBlock> CAST_IRON_DISTILLATION_OUTPUT =
-            REGISTRATE.block("cast_iron_distillation_output", DistillationOutputBlock::new)
+    public static final BlockEntry<DistilleryOutputBlock> CAST_IRON_DISTILLATION_OUTPUT =
+            REGISTRATE.block("cast_iron_distillation_output", DistilleryOutputBlock::new)
                     .initialProperties(SharedProperties::copperMetal)
                     .properties(p -> p.color(MaterialColor.STONE))
                     .properties(BlockBehaviour.Properties::noOcclusion)
@@ -248,12 +248,15 @@ public class TFMGBlocks {
                     .item(AssemblyOperatorBlockItem::new)
                     .build()
                     .register();
-    public static final BlockEntry<DistillationControllerBlock> CAST_IRON_DISTILLATION_CONTROLLER =
-            REGISTRATE.block("cast_iron_distillation_controller", DistillationControllerBlock::new)
+    public static final BlockEntry<DistilleryControllerBlock> CAST_IRON_DISTILLATION_CONTROLLER =
+            REGISTRATE.block("cast_iron_distillation_controller", DistilleryControllerBlock::new)
                     .initialProperties(SharedProperties::copperMetal)
                     .item()
                     .build()
                     .register();
+//
+
+
 
     //////
 
