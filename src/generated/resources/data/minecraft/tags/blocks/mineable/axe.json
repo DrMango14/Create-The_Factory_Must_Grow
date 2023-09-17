@@ -3,6 +3,8 @@
     "tfmg:steel_casing",
     "tfmg:heavy_machinery_casing",
     "tfmg:formwork_block",
-    "tfmg:copper_encased_steel_pipe"
+    "tfmg:copper_encased_steel_pipe",
+    "tfmg:cast_iron_distillation_output",
+    "tfmg:steel_distillation_output"
   ]
 }

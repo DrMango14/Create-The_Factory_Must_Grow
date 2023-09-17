@@ -3,7 +3,7 @@ package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.CreateTFMG;
 import com.drmangotea.tfmg.recipes.distillation.DistillationRecipe;
-import com.drmangotea.tfmg.recipes.distillation.advanced.AdvancedDistillationRecipe;
+import com.drmangotea.tfmg.recipes.distillation.AdvancedDistillationRecipe;
 import com.google.common.collect.ImmutableSet;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeFactory;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;

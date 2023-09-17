@@ -18,6 +18,7 @@ import java.util.Map;
 public class TFMGPartialModels {
 
         public static final PartialModel
+                TOWER_GAUGE = block("distillation_tower/gauge"),
                 STEEL_FLUID_PIPE_CASING = block("steel_pipe/casing"),
                 SURFACE_SCANNER_DIAL = block("surface_scanner/dial"),
                 SURFACE_SCANNER_FLAG = block("surface_scanner/flag"),

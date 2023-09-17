@@ -10,6 +10,8 @@ import com.drmangotea.tfmg.content.gadgets.explosives.napalm.NapalmBombBlock;
 import com.drmangotea.tfmg.content.items.CoalCokeBlockItem;
 import com.drmangotea.tfmg.content.items.FossilstoneItem;
 import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerBlock;
+import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationControllerBlock;
+import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationOutputBlock;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryControllerBlock;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryOutputBlock;
 import com.drmangotea.tfmg.content.machines.pipes.normal.steel.EncasedSteelPipeBlock;
@@ -255,7 +257,21 @@ public class TFMGBlocks {
                     .build()
                     .register();
 //
-
+public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPUT =
+        REGISTRATE.block("steel_distillation_output", DistillationOutputBlock::new)
+                .initialProperties(SharedProperties::copperMetal)
+                .properties(p -> p.color(MaterialColor.STONE))
+                .properties(BlockBehaviour.Properties::noOcclusion)
+                .transform(axeOrPickaxe())
+                .item(AssemblyOperatorBlockItem::new)
+                .build()
+                .register();
+    public static final BlockEntry<DistillationControllerBlock> STEEL_DISTILLATION_CONTROLLER =
+            REGISTRATE.block("steel_distillation_controller", DistillationControllerBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .item()
+                    .build()
+                    .register();
 
 
     //////

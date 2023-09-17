@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.recipes.distillation;
 
+import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationControllerBlockEntity;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryControllerBlockEntity;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
@@ -10,7 +11,6 @@ import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
@@ -22,7 +22,6 @@ import net.minecraftforge.items.IItemHandler;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 public class ItemlessRecipe extends ProcessingRecipe<SmartInventory> {
@@ -33,9 +32,6 @@ public class ItemlessRecipe extends ProcessingRecipe<SmartInventory> {
 
 
         if(recipe instanceof ItemlessRecipe) {
-
-
-
             return apply(controller, recipe, true);
         }
 
@@ -44,8 +40,8 @@ public class ItemlessRecipe extends ProcessingRecipe<SmartInventory> {
 
     }
 
-    public static boolean apply(DistilleryControllerBlockEntity basin, Recipe<?> recipe) {
-        return apply(basin, recipe, false);
+    public static boolean apply(DistilleryControllerBlockEntity controller, Recipe<?> recipe) {
+        return apply(controller, recipe, false);
     }
 
     private static boolean apply(DistilleryControllerBlockEntity controller, Recipe<?> recipe, boolean test) {
@@ -133,8 +129,102 @@ public class ItemlessRecipe extends ProcessingRecipe<SmartInventory> {
 
         return true;
     }
+    public static boolean match2(DistillationControllerBlockEntity controller, Recipe<?> recipe) {
 
 
+        if(recipe instanceof ItemlessRecipe) {
+            return apply(controller, recipe, true);
+        }
+
+
+        return false;
+
+    }
+    private static boolean apply2(DistillationControllerBlockEntity controller, Recipe<?> recipe, boolean test) {
+        boolean isItemlessRecipe = recipe instanceof ItemlessRecipe;
+        IItemHandler availableItems = controller.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+                .orElse(null);
+        IFluidHandler availableFluids = controller.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+                .orElse(null);
+
+        if (availableItems == null || availableFluids == null)
+            return false;
+
+        BlazeBurnerBlock.HeatLevel heat = DistilleryControllerBlockEntity.getHeatLevelOf(controller.getLevel()
+                .getBlockState(controller.getBlockPos()
+                        .below(1)));
+        if (isItemlessRecipe && !((ItemlessRecipe) recipe).getRequiredHeat()
+                .testBlazeBurner(heat))
+            return false;
+
+        List<ItemStack> recipeOutputItems = new ArrayList<>();
+        List<FluidStack> recipeOutputFluids = new ArrayList<>();
+
+
+        List<FluidIngredient> fluidIngredients =
+                isItemlessRecipe ? ((ItemlessRecipe) recipe).getFluidIngredients() : Collections.emptyList();
+        if(!fluidIngredients.isEmpty())
+
+
+
+
+            for (boolean simulate : Iterate.trueAndFalse) {
+
+                if (!simulate && test)
+                    return true;
+
+                int[] extractedFluidsFromTank = new int[availableFluids.getTanks()];
+
+
+                boolean fluidsAffected = false;
+                FluidIngredients: for (int i = 0; i < fluidIngredients.size(); i++) {
+                    FluidIngredient fluidIngredient = fluidIngredients.get(i);
+                    int amountRequired = fluidIngredient.getRequiredAmount();
+
+
+                    for (int tank = 0; tank < availableFluids.getTanks(); tank++) {
+                        FluidStack fluidStack = availableFluids.getFluidInTank(tank);
+                        if (simulate && fluidStack.getAmount() <= extractedFluidsFromTank[tank])
+                            continue;
+                        if (!fluidIngredient.test(fluidStack))
+                            continue;
+                        int drainedAmount = Math.min(amountRequired, fluidStack.getAmount());
+                        if (!simulate) {
+                            fluidStack.shrink(drainedAmount);
+                            fluidsAffected = true;
+                        }
+                        amountRequired -= drainedAmount;
+                        if (amountRequired != 0)
+                            continue;
+                        extractedFluidsFromTank[tank] += drainedAmount;
+                        continue FluidIngredients;
+                    }
+
+                    // something wasn't found
+                    return false;
+                }
+
+                if (fluidsAffected) {
+                    controller.getBehaviour(SmartFluidTankBehaviour.INPUT)
+                            .forEach(SmartFluidTankBehaviour.TankSegment::onFluidStackChanged);
+                    controller.getBehaviour(SmartFluidTankBehaviour.OUTPUT)
+                            .forEach(SmartFluidTankBehaviour.TankSegment::onFluidStackChanged);
+                }
+
+                if (simulate) {
+                    if (recipe instanceof ItemlessRecipe ItemlessRecipe) {
+                        recipeOutputItems.addAll(ItemlessRecipe.rollResults());
+                        recipeOutputFluids.addAll(ItemlessRecipe.getFluidResults());
+
+                    } else {
+                        recipeOutputItems.add(recipe.getResultItem());
+                    }
+                }
+
+            }
+
+        return true;
+    }
 
     protected ItemlessRecipe(IRecipeTypeInfo type, ProcessingRecipeBuilder.ProcessingRecipeParams params) {
         super(type, params);
@@ -158,7 +248,7 @@ public class ItemlessRecipe extends ProcessingRecipe<SmartInventory> {
 
     @Override
     protected int getMaxFluidOutputCount() {
-        return 6;
+        return 3;
     }
 
     @Override

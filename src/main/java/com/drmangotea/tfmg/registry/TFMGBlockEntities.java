@@ -7,6 +7,8 @@ import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorRenderer;
 import com.drmangotea.tfmg.content.deposits.FluidDepositBlockEntity;
 import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerRenderer;
 import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerTileEntity;
+import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationControllerBlockEntity;
+import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationOutputBlockEntity;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryControllerBlockEntity;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryOutputBlockEntity;
 import com.drmangotea.tfmg.content.machines.pipes.normal.LockablePipeBlockEntity;
@@ -103,13 +105,23 @@ public class TFMGBlockEntities {
 
 
     public static final BlockEntityEntry<DistilleryOutputBlockEntity> CAST_IRON_DISTILLATION_OUTPUT = REGISTRATE
-            .blockEntity("distiller", DistilleryOutputBlockEntity::new)
+            .blockEntity("distillery", DistilleryOutputBlockEntity::new)
             .validBlocks(TFMGBlocks.CAST_IRON_DISTILLATION_OUTPUT)
             .register();
 
     public static final BlockEntityEntry<DistilleryControllerBlockEntity> CAST_IRON_DISTILLATION_CONTROLLER = REGISTRATE
-            .blockEntity("distiller_controller", DistilleryControllerBlockEntity::new)
+            .blockEntity("distillery_controller", DistilleryControllerBlockEntity::new)
             .validBlocks(TFMGBlocks.CAST_IRON_DISTILLATION_CONTROLLER)
+            .register();
+
+    public static final BlockEntityEntry<DistillationOutputBlockEntity> STEEL_DISTILLATION_OUTPUT = REGISTRATE
+            .blockEntity("distillation_tower_output", DistillationOutputBlockEntity::new)
+            .validBlocks(TFMGBlocks.STEEL_DISTILLATION_OUTPUT)
+            .register();
+
+    public static final BlockEntityEntry<DistillationControllerBlockEntity> STEEL_DISTILLATION_CONTROLLER = REGISTRATE
+            .blockEntity("distillation_tower_controller", DistillationControllerBlockEntity::new)
+            .validBlocks(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER)
             .register();
 
 

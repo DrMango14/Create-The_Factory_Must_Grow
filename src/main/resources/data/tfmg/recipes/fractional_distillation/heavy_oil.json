@@ -1,0 +1,39 @@
+{
+  "type": "tfmg:advanced_distillation",
+  "ingredients": [
+
+    {
+      "fluid": "tfmg:heavy_oil",
+      "nbt": {},
+      "amount": 90
+    }
+  ],
+  "results": [
+    {
+      "fluid": "tfmg:diesel",
+      "amount": 30
+    },
+    {
+      "fluid": "tfmg:lubrication_oil",
+      "amount": 30
+    },
+    {
+      "fluid": "tfmg:lubrication_oil",
+      "amount": 30
+    },
+    {
+      "fluid": "tfmg:lubrication_oil",
+      "amount": 30
+    },
+    {
+      "fluid": "tfmg:lubrication_oil",
+      "amount": 30
+    },
+    {
+      "fluid": "tfmg:lubrication_oil",
+      "amount": 30
+    }
+  ]
+
+
+}

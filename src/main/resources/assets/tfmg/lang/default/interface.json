@@ -5,9 +5,16 @@
   "create.goggles.misc.dot_one": ".",
   "create.goggles.misc.dot_two": "..",
   "create.goggles.misc.dot_three": "...",
+  "create.goggles.fluid_in_tank": "Fluid In Tank:",
   "create.goggles.surface_scanner.no_rotation": "No Rotation Provided",
   "create.goggles.surface_scanner.no_deposit": "No Deposit Found",
   "create.goggles.surface_scanner.deposit_found": "Found Deposit",
   "create.goggles.surface_scanner.distance": "Distance: %1$s Blocks",
-  "create.goggles.surface_scanner.scanning_surface": "Scanning Surface"
+  "create.goggles.surface_scanner.scanning_surface": "Scanning Surface",
+  "create.goggles.distillation_tower.status": "Distillation Tower Info:",
+  "create.goggles.distillation_tower.tank_not_found": "Steel Fluid Tank Not Found",
+  "create.goggles.distillation_tower.not_tall_enough": "Distillation Tower is Not Tall Enough",
+  "create.goggles.distillation_tower.level": "Distillation Tower Level: %1$s",
+  "create.goggles.distillation_tower.found_outputs": "Found Outputs: %1$s",
+  "create.goggles.distillation_tower.no_outputs": "No Output Blocks Found"
 }

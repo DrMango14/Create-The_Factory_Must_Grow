@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "cut_bauxite_slab",
+  "key": {
+    "X": {
+      "item": "tfmg:cut_bauxite"
+    }
+  },
+  "pattern": [
+    "XXX"
+  ],
+  "result": {
+    "count": 6,
+    "item": "tfmg:cut_bauxite_slab"
+  }
+}

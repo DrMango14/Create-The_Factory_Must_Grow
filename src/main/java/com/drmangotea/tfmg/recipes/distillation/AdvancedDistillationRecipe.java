@@ -1,11 +1,11 @@
-package com.drmangotea.tfmg.recipes.distillation.advanced;
+package com.drmangotea.tfmg.recipes.distillation;
 
 
 
-import com.drmangotea.tfmg.recipes.distillation.ItemlessRecipe;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -38,13 +38,22 @@ public class AdvancedDistillationRecipe extends ItemlessRecipe {
         return fluidResults.get(5);
     }
 
-    public ItemStack getFirstItemResult(){
-        return results.get(0).getStack();
+
+    public int getOutputCount(AdvancedDistillationRecipe recipe){
+        return recipe.fluidResults.toArray().length;
     }
-    public ItemStack getSecondItemResult(){
-        return results.get(1).getStack();
+    public NonNullList<FluidStack> getResults(){
+        return fluidResults;
     }
-    public ItemStack getThirdItemResult(){
-        return results.get(2).getStack();
+
+
+    @Override
+    protected int getMaxFluidOutputCount() {
+        return 6;
+    }
+
+    @Override
+    protected int getMaxOutputCount() {
+        return 0;
     }
 }

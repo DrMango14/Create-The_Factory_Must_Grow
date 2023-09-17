@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.content.machines.oil_processing.distillation.distill
 
 import com.drmangotea.tfmg.CreateTFMG;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.FluidProcessingBlockEntity;
+import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationOutputBlockEntity;
 import com.drmangotea.tfmg.recipes.distillation.DistillationRecipe;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.simibubi.create.AllRecipeTypes;
@@ -132,7 +133,8 @@ public class DistilleryOutputBlockEntity extends FluidProcessingBlockEntity impl
     @Override
     public void tick() {
         super.tick();
-
+        if(this instanceof DistillationOutputBlockEntity)
+            return;
 
 
         if (level != null) {
@@ -214,15 +216,19 @@ if(above1 !=null&& above2 !=null
   )
       return;
 
-
+    if(
+            tankInventory.getFluidAmount()+((DistillationRecipe) currentRecipe).getFirstFluidResult().getAmount()>8000||
+                    ((DistilleryOutputBlockEntity)above1).tankInventory.getFluidAmount()+((DistillationRecipe) currentRecipe).getFirstFluidResult().getAmount()>8000||
+                    ((DistilleryOutputBlockEntity)above2).tankInventory.getFluidAmount()+((DistillationRecipe) currentRecipe).getFirstFluidResult().getAmount()>8000
+    )
+        return;
 
 
     if(getController().get().getTanks().get(true).getPrimaryHandler().getFluid().getFluid() != ((DistillationRecipe) currentRecipe).getInputFluid().getMatchingFluidStacks().get(0).getFluid())
             return;
 
     DistilleryControllerBlockEntity controller = optionalController.get();
-    IFluidHandler availableFluids = controller.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
-    .orElse(null);
+
 
     if(controller.outputInventory.getStackInSlot(0).getCount()>=1||
     controller.outputInventory.getStackInSlot(1).getCount()>=1||
@@ -318,12 +324,6 @@ if(!(((DistillationRecipe) currentRecipe).getThirdItemResult().isEmpty()))
     protected boolean isRunning() {
         return running;
     }
-/*
-    @Override
-    protected Optional<CreateAdvancement> getProcessedRecipeTrigger() {
-        return Optional.of(AllAdvancements.MIXER);
-    }
- */
 
 
 
@@ -338,7 +338,6 @@ if(!(((DistillationRecipe) currentRecipe).getThirdItemResult().isEmpty()))
 
 
         }
-
 
 
     @Override

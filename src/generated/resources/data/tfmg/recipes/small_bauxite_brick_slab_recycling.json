@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfmg:small_bauxite_brick_slab"
+    },
+    {
+      "item": "tfmg:small_bauxite_brick_slab"
+    }
+  ],
+  "result": {
+    "item": "tfmg:small_bauxite_bricks"
+  }
+}

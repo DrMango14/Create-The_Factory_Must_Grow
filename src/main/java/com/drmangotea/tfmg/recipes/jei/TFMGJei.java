@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.recipes.jei;
 
 
 import com.drmangotea.tfmg.recipes.distillation.DistillationRecipe;
+import com.drmangotea.tfmg.recipes.distillation.AdvancedDistillationRecipe;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
@@ -60,7 +61,18 @@ public class TFMGJei implements IModPlugin {
                 .catalyst(TFMGBlocks.CAST_IRON_DISTILLATION_CONTROLLER::get)
                 .itemIcon(TFMGFluids.CRUDE_OIL.getBucket().get())
                 .emptyBackground(177, 123)
-                .build("distillation", DistillationCategory::new);
+                .build("distillation", DistillationCategory::new)
+                ,
+
+                advancedDistillation = builder(AdvancedDistillationRecipe.class)
+                .addTypedRecipes(TFMGRecipeTypes.ADVANCED_DISTILLATION)
+                .catalyst(TFMGBlocks.CAST_IRON_DISTILLATION_CONTROLLER::get)
+                .itemIcon(TFMGFluids.KEROSENE.getBucket().get())
+                .emptyBackground(177, 123)
+                .build("advanced_distillation", AdvancedDistillationCategory::new)
+
+
+                ;
 
     }
 

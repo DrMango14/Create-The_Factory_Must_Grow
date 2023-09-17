@@ -40,17 +40,17 @@ import java.util.*;
 public class DistilleryControllerBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
     public SmartFluidTankBehaviour inputTank;
-    protected SmartInventory outputInventory;
-    protected SmartFluidTankBehaviour outputTank;
+    public SmartInventory outputInventory;
+    public SmartFluidTankBehaviour outputTank;
 
-    private boolean contentsChanged;
+    public boolean contentsChanged;
 
-    private Couple<SmartFluidTankBehaviour> tanks;
+    public Couple<SmartFluidTankBehaviour> tanks;
 
     public LazyOptional<IItemHandlerModifiable> itemCapability;
     protected LazyOptional<IFluidHandler> fluidCapability;
 
-    int recipeBackupCheck;
+    public int recipeBackupCheck;
 
     public DistilleryControllerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -182,7 +182,7 @@ public class DistilleryControllerBlockEntity extends SmartBlockEntity implements
 
 
 
-    private Optional<FluidProcessingBlockEntity> getOperator() {
+    protected Optional<FluidProcessingBlockEntity> getOperator() {
         if (level == null)
             return Optional.empty();
         BlockEntity te = level.getBlockEntity(worldPosition.above());

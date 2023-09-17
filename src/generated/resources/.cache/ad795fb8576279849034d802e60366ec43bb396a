@@ -1,8 +1,10 @@
-// 1.19.2	2023-09-09T11:58:31.6412487	Registrate Provider for tfmg [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-09-17T11:15:14.4329646	Registrate Provider for tfmg [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 b7f5146505c40c08cdea7ad01fa99048b7ac5451 assets/tfmg/blockstates/aluminum_block.json
 933485fa587fccc649b4cbe8f76f15e590cc8bb1 assets/tfmg/blockstates/bauxite.json
 2b53ff8e880d35a42388584cb3ca896c55bfaf95 assets/tfmg/blockstates/bauxite_pillar.json
 9ca537517fb8baeff3d4e4137c93aebd6b874c81 assets/tfmg/blockstates/cast_iron_block.json
+e13ba2fa789c784e4b7cfec3dd4603e29152387e assets/tfmg/blockstates/cast_iron_distillation_controller.json
+61bcb8f09523c05fe8ee07a4b8b71a59e98393fe assets/tfmg/blockstates/cast_iron_distillation_output.json
 ec94bedd045ade74274ffe009569d65083b9fff5 assets/tfmg/blockstates/coal_coke_block.json
 c67b91a7fd9f16cd2d7eaa92dd9b945042d58130 assets/tfmg/blockstates/concrete.json
 dca4728ef33ca9d54fb55d707761c2eeb77c32b1 assets/tfmg/blockstates/cooling_fluid.json
@@ -45,6 +47,8 @@ e80f4610e3272a4edfb47572aff71f1db3d283d7 assets/tfmg/blockstates/small_bauxite_b
 a2eed7173d7f528d0f068c5fa9ea358f61ef1436 assets/tfmg/blockstates/small_bauxite_brick_wall.json
 e6983072149d1a9a2f4d39e4e1feac599ff7413e assets/tfmg/blockstates/steel_block.json
 df44115876045e6f863de2f8be6a9166b336a2f1 assets/tfmg/blockstates/steel_casing.json
+d5dfa13540bc12cb5b1d0eb29702242ad757a5da assets/tfmg/blockstates/steel_distillation_controller.json
+f1763cd1ea42da0645e17ecc9e0c1a1b02502be1 assets/tfmg/blockstates/steel_distillation_output.json
 7334c94b5fe23df91f43048b19c2b22121405603 assets/tfmg/blockstates/steel_door.json
 72bfce2a2795dfe461beed7c3a074e328de14d96 assets/tfmg/blockstates/steel_fluid_tank.json
 e29906d296994a13fefc2beb22f7693e1027dd1b assets/tfmg/blockstates/steel_fluid_valve.json
@@ -53,8 +57,8 @@ e29906d296994a13fefc2beb22f7693e1027dd1b assets/tfmg/blockstates/steel_fluid_val
 71b4c68d8a02062252c4dfde41650b7667d8c0ca assets/tfmg/blockstates/steel_sheetmetal.json
 47b56dad1f2715aae7430b5f9acb1d51a26cf562 assets/tfmg/blockstates/steel_smart_fluid_pipe.json
 942bb86fa92b3c40fc535dccdd2e9f3b79a36d92 assets/tfmg/blockstates/surface_scanner.json
-a82f4a5b9cd04dbd195934b459e4c04b2110718d assets/tfmg/lang/en_ud.json
-555b7657893b06e861781e9ad7b8d4d557ef6869 assets/tfmg/lang/en_us.json
+587858610506ca0b063af552a67b96dd3a85e232 assets/tfmg/lang/en_ud.json
+595fc774dfdc75f633a922ef452984d0c5d4df1d assets/tfmg/lang/en_us.json
 9e6a6b62f5e7528c4e4d4f72f3510edcd8f0c078 assets/tfmg/models/block/aluminum_block.json
 5a4c785e8d8394ccd125732c0017459648574c4e assets/tfmg/models/block/bauxite_natural_0.json
 4ace0da00498fcbb9ddfdf321767b40b095c8778 assets/tfmg/models/block/bauxite_natural_1.json
@@ -63,6 +67,8 @@ b43711f35915b71b15db638538a83a4ea46480dc assets/tfmg/models/block/bauxite_natura
 920f96d4b648414ce8331e5a81e6b7ddbce7e225 assets/tfmg/models/block/bauxite_pillar.json
 cd5ade5f9a0b3b5e28b5d11a685408dd922dbe2d assets/tfmg/models/block/bauxite_pillar_horizontal.json
 37789d06ec6cfc0312be7b1b66ac1ec6403d4516 assets/tfmg/models/block/cast_iron_block.json
+925d61d0f1379e02c1f8892e3b86be5aa623b9ae assets/tfmg/models/block/cast_iron_distillation_controller.json
+73cb08b1b298a3e02731e61326b65f94ef39e9bb assets/tfmg/models/block/cast_iron_distillation_output.json
 50c47672a7e9f7180af78c4bef42d5db1822b08b assets/tfmg/models/block/coal_coke_block.json
 75c31d328fc5d6d46c8b43e8bde7504f4e51dadc assets/tfmg/models/block/concrete.json
 80fb4a90f861992322bfd63f1232593e8cce708e assets/tfmg/models/block/cooling_fluid.json
@@ -122,6 +128,8 @@ d29800a63ca2717e056798cf8bb29bf55d29a07c assets/tfmg/models/block/small_bauxite_
 a07354a238bd4d5aadee6e60e1d61fcffde43f5b assets/tfmg/models/block/small_bauxite_brick_stairs_outer.json
 0ceb30eaff16a495c9a165ca16c925cbff836755 assets/tfmg/models/block/steel_block.json
 465b1fed10d06090e5e8d19457f9fa48fe890bb4 assets/tfmg/models/block/steel_casing.json
+8ec65bf20fa41bb1b246b4a60feed65c48befb2f assets/tfmg/models/block/steel_distillation_controller.json
+2a5a4724f942aab7296062cdaa5259c4a7904e1a assets/tfmg/models/block/steel_distillation_output.json
 0c4fcf6e901d8eba56ba67999fcf0801534779d6 assets/tfmg/models/block/steel_pipe/d_x.json
 6060082caaef1e6e6fc72606d6a74e64aaeb27ac assets/tfmg/models/block/steel_pipe/d_y.json
 dc62a6a3de9e73e7341481df09951a7ec3caf944 assets/tfmg/models/block/steel_pipe/d_z.json
@@ -158,6 +166,8 @@ f685ca653c8e197986b1ac8f43297989816d39d2 assets/tfmg/models/item/aluminum_ingot.
 4ace0da00498fcbb9ddfdf321767b40b095c8778 assets/tfmg/models/item/bauxite.json
 41091873d85bac787e4752d0ff81189432f1e28e assets/tfmg/models/item/bauxite_pillar.json
 ec38882fb9010884823d6d6afa604f8a6512d279 assets/tfmg/models/item/cast_iron_block.json
+25acd7ba8827401619c5faf7bdbe60228b411864 assets/tfmg/models/item/cast_iron_distillation_controller.json
+fc48286f0e70651f3d5a915558c3c91ae3ad0da6 assets/tfmg/models/item/cast_iron_distillation_output.json
 da2c28e98d0ddf7166bdf7214c06e81ad8581b90 assets/tfmg/models/item/cast_iron_ingot.json
 d45fc5511b4c4027889afd3088cd91ba1d8b0501 assets/tfmg/models/item/coal_coke.json
 3789a9d72a7ba5daf8c39cccaa665057e63302c6 assets/tfmg/models/item/coal_coke_block.json
@@ -204,6 +214,8 @@ a1149d3ee5596f2c1038b225b0086ae1601da82c assets/tfmg/models/item/small_bauxite_b
 0f3f7918e41afa95cc14bc6641a7beaf36c27621 assets/tfmg/models/item/small_bauxite_brick_wall.json
 57bf86df814741f846feb8be4a10afe633f51721 assets/tfmg/models/item/steel_block.json
 d34ca92f5288cbb5cecee06f046a072763b2926c assets/tfmg/models/item/steel_casing.json
+ec731aefdbbbaca3a4dac8ac2d6bd2d0aa6ebef5 assets/tfmg/models/item/steel_distillation_controller.json
+77fe5209bfb0a78b94e67b807401cde95975d402 assets/tfmg/models/item/steel_distillation_output.json
 7f012e3d947b08beb69d28a6d47730878f2b85cf assets/tfmg/models/item/steel_door.json
 19dcd68a6658fd8fa8466180e26cb3f6a2b2c4f1 assets/tfmg/models/item/steel_fluid_tank.json
 57bc28274df7d54eaa3fa1991481c6339f9e2247 assets/tfmg/models/item/steel_fluid_valve.json
@@ -246,8 +258,8 @@ d26621b9617890011a68780cf7ab40fbb4658edc data/forge/tags/items/storage_blocks/le
 1fdd0efd4d4b48c3d5989a7c43e53a6d1c2adc2b data/minecraft/tags/blocks/doors.json
 63c4a8d8e713db70730e766f1a10f8dd9072f98f data/minecraft/tags/blocks/dripstone_replaceable_blocks.json
 63c4a8d8e713db70730e766f1a10f8dd9072f98f data/minecraft/tags/blocks/lush_ground_replaceable.json
-2acceda2af7fd542e47641315a13d98c74f9b8f0 data/minecraft/tags/blocks/mineable/axe.json
-2acf4cf271b27f01f5581199338af9054b239529 data/minecraft/tags/blocks/mineable/pickaxe.json
+9b558f29e672499a30354b9113c1d494e858b208 data/minecraft/tags/blocks/mineable/axe.json
+cd64e606ab00398ec320c641e554951e7f30aedd data/minecraft/tags/blocks/mineable/pickaxe.json
 63c4a8d8e713db70730e766f1a10f8dd9072f98f data/minecraft/tags/blocks/moss_replaceable.json
 f67e51a16b6d140324ca0201f1b05e672eb63774 data/minecraft/tags/blocks/needs_iron_tool.json
 755548d9019c1bb26a568488912ebfdf399e02d2 data/minecraft/tags/blocks/needs_stone_tool.json
@@ -299,6 +311,8 @@ a4b393a2526bd10fa38095ac80769f913f139889 data/tfmg/loot_tables/blocks/aluminum_b
 56d114d40ea3160b5c06cf9cfaa2e5107543c460 data/tfmg/loot_tables/blocks/bauxite.json
 473b0effd9a768189aa232855cd09e7b380c3adc data/tfmg/loot_tables/blocks/bauxite_pillar.json
 60857d034446187e758de87644a80a7bc4d6b150 data/tfmg/loot_tables/blocks/cast_iron_block.json
+300a96dcae25ba9bc085ee75f066b4ad2590b6e0 data/tfmg/loot_tables/blocks/cast_iron_distillation_controller.json
+24517e07383f7a7eb8651f58721cf9f6f49393c0 data/tfmg/loot_tables/blocks/cast_iron_distillation_output.json
 5158b18945a39616eef93de8de61dd948fc96f0a data/tfmg/loot_tables/blocks/coal_coke_block.json
 d32a75f20ca3f2da6ba69b0a91e295c63f65de92 data/tfmg/loot_tables/blocks/concrete.json
 1622328d319fc3c71269b0f9f1aef43a77132f3a data/tfmg/loot_tables/blocks/copper_encased_steel_pipe.json
@@ -329,6 +343,8 @@ b43d1fa7a2ac0534ab2867dec787d97f205f4a8d data/tfmg/loot_tables/blocks/small_baux
 47af1defc5e03a0806d8afd5f119fab420aa1da8 data/tfmg/loot_tables/blocks/small_bauxite_brick_wall.json
 01298989d0fe79936cdfa1e6cc07fd05f143ae09 data/tfmg/loot_tables/blocks/steel_block.json
 62cd229b00eb2c95187d1b7b8e968aa26e54c412 data/tfmg/loot_tables/blocks/steel_casing.json
+d0dfd69e4ebbcd28a2f0666bb3f3713a0bfa9863 data/tfmg/loot_tables/blocks/steel_distillation_controller.json
+9a6f972c9424afccebf48048ce1efacacd7da2a7 data/tfmg/loot_tables/blocks/steel_distillation_output.json
 b0adec80b5b6c3226bd6d7044556351244474cd4 data/tfmg/loot_tables/blocks/steel_door.json
 da3aa200dc67d6a7bfbb0bb9e988a325fed4c670 data/tfmg/loot_tables/blocks/steel_fluid_tank.json
 7b78ebb7567c8b6b88a334761fbb702d17e5b337 data/tfmg/loot_tables/blocks/steel_fluid_valve.json

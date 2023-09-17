@@ -83,10 +83,11 @@ public abstract class FluidProcessingBlockEntity extends KineticBlockEntity {
     protected <C extends Container> boolean matchItemlessRecipe(Recipe<C> recipe) {
         if (recipe == null)
             return false;
-        Optional<DistilleryControllerBlockEntity> basin = getController();
-        if (!basin.isPresent())
+        Optional<DistilleryControllerBlockEntity> controller = getController();
+
+        if (!controller.isPresent())
             return false;
-        return ItemlessRecipe.match(basin.get(), recipe);
+        return ItemlessRecipe.match(controller.get(), recipe);
     }
 
 
@@ -105,7 +106,7 @@ public abstract class FluidProcessingBlockEntity extends KineticBlockEntity {
 
     protected abstract void onBasinRemoved();
 
-    protected Optional<DistilleryControllerBlockEntity> getController() {
+    public Optional<DistilleryControllerBlockEntity> getController() {
         if (level == null)
             return Optional.empty();
         BlockEntity basinTE = level.getBlockEntity(worldPosition.below(1));

@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.machines.tanks;
 
 
+import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -29,8 +30,8 @@ public class SteelFluidTankRenderer extends SafeBlockEntityRenderer<SteelTankBlo
         if (!te.isController())
             return;
         if (!te.window) {
-            ////  if (te.tower.isActive())
-            ////    renderAsBoiler(te, partialTicks, ms, buffer, light, overlay);
+              if (te.tower.isActive())
+                  renderAsBoiler(te, partialTicks, ms, buffer, light, overlay);
             return;
         }
 
@@ -86,16 +87,16 @@ public class SteelFluidTankRenderer extends SafeBlockEntityRenderer<SteelTankBlo
         msr.translate(te.width / 2f, 0.5, te.width / 2f);
 
         float dialPivot = 5.75f / 16;
-        //// float progress = te.tower.gauge.getValue(partialTicks);
+         float progress = te.tower.gauge.getValue(partialTicks);
 
         for (Direction d : Iterate.horizontalDirections) {
             ms.pushPose();
-         ////   CachedBufferer.partial(CIPartialModels.TOWER_GAUGE, blockState)
-         ////           .rotateY(d.toYRot())
-         ////           .unCentre()
-         ////           .translate(te.width / 2f - 6 / 16f, 0, 0)
-         ////           .light(light)
-         ////           .renderInto(ms, vb);
+            CachedBufferer.partial(TFMGPartialModels.TOWER_GAUGE, blockState)
+                    .rotateY(d.toYRot())
+                    .unCentre()
+                    .translate(te.width / 2f - 6 / 16f, 0, 0)
+                    .light(light)
+                    .renderInto(ms, vb);
             CachedBufferer.partial(AllPartialModels.BOILER_GAUGE_DIAL, blockState)
                     .rotateY(d.toYRot())
                     .unCentre()

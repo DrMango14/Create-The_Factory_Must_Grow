@@ -12,6 +12,8 @@
     "tfmg:steel_smart_fluid_pipe",
     "tfmg:steel_fluid_valve",
     "tfmg:steel_fluid_tank",
+    "tfmg:cast_iron_distillation_output",
+    "tfmg:steel_distillation_output",
     "tfmg:steel_block",
     "tfmg:cast_iron_block",
     "tfmg:aluminum_block",

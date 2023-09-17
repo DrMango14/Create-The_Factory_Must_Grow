@@ -1,0 +1,19 @@
+{
+  "type": "tfmg:advanced_distillation",
+  "ingredients": [
+
+    {
+      "fluid": "tfmg:diesel",
+      "nbt": {},
+      "amount": 5
+    }
+  ],
+  "results": [
+    {
+      "fluid": "tfmg:propylene",
+      "amount": 3
+    }
+  ]
+
+
+}
