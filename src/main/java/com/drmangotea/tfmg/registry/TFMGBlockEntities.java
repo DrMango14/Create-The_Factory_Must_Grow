@@ -11,6 +11,16 @@ import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distilla
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationOutputBlockEntity;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryControllerBlockEntity;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryOutputBlockEntity;
+import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.base.PumpjackBaseRenderer;
+import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.base.PumpjackBaseBlockEntity;
+import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.crank.PumpjackCrankInstance;
+import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.crank.PumpjackCrankRenderer;
+import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.crank.PumpjackCrankBlockEntity;
+import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderInstance;
+import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderRenderer;
+import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderBlockEntity;
+import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.machine_input.MachineInputRenderer;
+import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.machine_input.MachineInputBlockEntity;
 import com.drmangotea.tfmg.content.machines.pipes.normal.LockablePipeBlockEntity;
 import com.drmangotea.tfmg.content.machines.tanks.SteelFluidTankRenderer;
 import com.drmangotea.tfmg.content.machines.tanks.SteelTankBlockEntity;
@@ -23,6 +33,7 @@ import com.simibubi.create.content.fluids.pipes.valve.FluidValveRenderer;
 import com.simibubi.create.content.fluids.pump.PumpBlockEntity;
 import com.simibubi.create.content.fluids.pump.PumpCogInstance;
 import com.simibubi.create.content.fluids.pump.PumpRenderer;
+import com.simibubi.create.content.kinetics.base.HalfShaftInstance;
 import com.simibubi.create.content.kinetics.base.HorizontalHalfShaftInstance;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
@@ -122,6 +133,33 @@ public class TFMGBlockEntities {
     public static final BlockEntityEntry<DistillationControllerBlockEntity> STEEL_DISTILLATION_CONTROLLER = REGISTRATE
             .blockEntity("distillation_tower_controller", DistillationControllerBlockEntity::new)
             .validBlocks(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER)
+            .register();
+
+    public static final BlockEntityEntry<PumpjackHammerHolderBlockEntity> PUMPJACK_HAMMER_HOLDER = REGISTRATE
+            .blockEntity("pumpjack_hammer_holder", PumpjackHammerHolderBlockEntity::new)
+            .instance(() -> PumpjackHammerHolderInstance::new, false)
+            .validBlocks(TFMGBlocks.PUMPJACK_HAMMER_HOLDER)
+            .renderer(() -> PumpjackHammerHolderRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<PumpjackCrankBlockEntity> PUMPJACK_CRANK = REGISTRATE
+            .blockEntity("pumpjack_crank", PumpjackCrankBlockEntity::new)
+            .instance(() -> PumpjackCrankInstance::new, true)
+            .validBlocks(TFMGBlocks.PUMPJACK_CRANK)
+            .renderer(() -> PumpjackCrankRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<MachineInputBlockEntity> MACHINE_INPUT = REGISTRATE
+            .blockEntity("machine_input", MachineInputBlockEntity::new)
+            .instance(() -> HalfShaftInstance::new,true)
+            .validBlocks(TFMGBlocks.MACHINE_INPUT)
+            .renderer(() -> MachineInputRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<PumpjackBaseBlockEntity> PUMPJACK_BASE = REGISTRATE
+            .blockEntity("pumpjack_base", PumpjackBaseBlockEntity::new)
+            .validBlocks(TFMGBlocks.PUMPJACK_BASE)
+            .renderer(() -> PumpjackBaseRenderer::new)
             .register();
 
 

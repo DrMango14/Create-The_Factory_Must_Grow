@@ -4,6 +4,8 @@ package com.drmangotea.tfmg.recipes.jei;
 
 
 import com.drmangotea.tfmg.recipes.distillation.AdvancedDistillationRecipe;
+import com.drmangotea.tfmg.recipes.jei.machines.Distillery;
+import com.drmangotea.tfmg.registry.TFMGGuiTextures;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
@@ -13,14 +15,13 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class AdvancedDistillationCategory extends CreateRecipeCategory<AdvancedDistillationRecipe> {
 
-	private final AnimatedDistiller distiller = new AnimatedDistiller();
+
 
 	public AdvancedDistillationCategory(Info<AdvancedDistillationRecipe> info) {
 		super(info);
@@ -33,46 +34,54 @@ public class AdvancedDistillationCategory extends CreateRecipeCategory<AdvancedD
 	public void setRecipe(IRecipeLayoutBuilder builder, AdvancedDistillationRecipe recipe, IFocusGroup focuses) {
 		FluidIngredient fluidIngredient=recipe.getInputFluid();
 
+		int outputCount = recipe.getOutputCount(recipe);
+		int yModifier = 60 -(outputCount*10);
+		int y = 147-yModifier;
+
 
 		builder
-				.addSlot(RecipeIngredientRole.INPUT, 2, 75)
+				.addSlot(RecipeIngredientRole.INPUT, 18, 130-yModifier)
 				.setBackground(getRenderedSlot(), -1, -1)
 				.addIngredients(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getInputFluid().getMatchingFluidStacks()))
 				.addTooltipCallback(addFluidTooltip(recipe.getInputFluid().getRequiredAmount()));
 
 
-
-		builder
-				.addSlot(RecipeIngredientRole.OUTPUT,150, 55)
-				.setBackground(getRenderedSlot(), -1, -1)
-				.addIngredient(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getFirstFluidResult()))
-				.addTooltipCallback(addFluidTooltip(recipe.getFirstFluidResult().getAmount()));
-		builder
-				.addSlot(RecipeIngredientRole.OUTPUT,150, 33)
-				.setBackground(getRenderedSlot(), -1, -1)
-				.addIngredient(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getSecondFluidResult()))
-				.addTooltipCallback(addFluidTooltip(recipe.getSecondFluidResult().getAmount()));
-
-		builder
-				.addSlot(RecipeIngredientRole.OUTPUT,150, 12)
-				.setBackground(getRenderedSlot(), -1, -1)
-				.addIngredient(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getThirdFluidResult()))
-				.addTooltipCallback(addFluidTooltip(recipe.getThirdFluidResult().getAmount()));
-
-
-
+		for(int i = 0; i<outputCount;i++) {
+			y -= 24;
+			builder
+					.addSlot(RecipeIngredientRole.OUTPUT, 105, y)
+					.setBackground(getRenderedSlot(), -1, -1)
+					.addIngredient(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getFluidResults().get(i)))
+					.addTooltipCallback(addFluidTooltip(recipe.getFirstFluidResult().getAmount()));
+		}
 
 	}
 
 	@Override
 	public void draw(AdvancedDistillationRecipe recipe, IRecipeSlotsView iRecipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
-		distiller
-				.draw(matrixStack, 65, 27);
-		AllGuiTextures.JEI_ARROW.render(matrixStack, 20, 80);
-		AllGuiTextures.JEI_ARROW.render(matrixStack, 100, 14);
-		AllGuiTextures.JEI_ARROW.render(matrixStack, 100, 35);
-		AllGuiTextures.JEI_ARROW.render(matrixStack, 100, 57);
-		AllGuiTextures.JEI_DOWN_ARROW.render(matrixStack, 100, 79);
+		int outputCount = recipe.getOutputCount(recipe);
+		int yModifier = 60 -(outputCount*10);
+		int y = 126-yModifier;
+
+
+		TFMGGuiTextures.DISTILLATION_TOWER_BOTTOM.render(matrixStack,10,y);
+	//	TFMGGuiTextures.DISTILLATION_TOWER_FIRE.render(matrixStack,10,y+24);
+		AllGuiTextures.JEI_ARROW.render(matrixStack, 56, y);
+
+		for(int i = 0; i<(outputCount-1);i++){
+			y -= 24;
+			TFMGGuiTextures.DISTILLATION_TOWER_MIDDLE.render(matrixStack,10,y);
+			AllGuiTextures.JEI_ARROW.render(matrixStack, 56, y);
+		}
+		y -= 12;
+		TFMGGuiTextures.DISTILLATION_TOWER_TOP.render(matrixStack,10,y);
+
+
+
+
+
+
+
 	}
 
 }

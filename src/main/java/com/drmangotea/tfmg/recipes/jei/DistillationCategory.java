@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.recipes.jei;
 
 
 import com.drmangotea.tfmg.recipes.distillation.DistillationRecipe;
+import com.drmangotea.tfmg.recipes.jei.machines.Distillery;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
@@ -19,7 +20,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class DistillationCategory extends CreateRecipeCategory<DistillationRecipe> {
 
-	private final AnimatedDistiller distiller = new AnimatedDistiller();
+	private final Distillery distiller = new Distillery();
 
 	public DistillationCategory(Info<DistillationRecipe> info) {
 		super(info);

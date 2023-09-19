@@ -201,7 +201,7 @@ public class TFMGPaletteBlockPattern {
 
     // Utility
 
-    protected String createName(String variant) {
+    public String createName(String variant) {
         if (nameType == WRAP) {
             String[] split = id.split("_");
             if (split.length == 2) {

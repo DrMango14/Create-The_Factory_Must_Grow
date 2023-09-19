@@ -380,7 +380,7 @@ if(!(((AdvancedDistillationRecipe) currentRecipe).getThirdItemResult().isEmpty()
 
         for(int i = 0;i<(outputAmount-1);i++){
             checkedBlock = level.getBlockState(checkedPos).getBlock();
-            if(checkedBlock == TFMGBlocks.ALUMINUM_BLOCK.get()){
+            if(checkedBlock == TFMGBlocks.INDUSTRIAL_PIPE.get()){
                 checkedPos=checkedPos.above(2);
                 continue;
             }

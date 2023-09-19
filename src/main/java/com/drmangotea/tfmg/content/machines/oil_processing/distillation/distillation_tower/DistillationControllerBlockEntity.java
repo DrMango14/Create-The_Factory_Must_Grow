@@ -192,7 +192,7 @@ public class DistillationControllerBlockEntity extends DistilleryControllerBlock
         for(int i = 0; i <5;i++){
             if(
                     level.getBlockState(checkedPos).is(TFMGBlocks.STEEL_DISTILLATION_OUTPUT.get())&&
-                    level.getBlockState(checkedPos.below()).is(TFMGBlocks.ALUMINUM_BLOCK.get())
+                    level.getBlockState(checkedPos.below()).is(TFMGBlocks.INDUSTRIAL_PIPE.get())
             ){
                 outputCount++;
                 checkedPos = checkedPos.above(2);

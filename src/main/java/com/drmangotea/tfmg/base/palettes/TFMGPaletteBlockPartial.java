@@ -47,7 +47,7 @@ public abstract class TFMGPaletteBlockPartial<B extends Block> {
 
     private String name;
 
-    private TFMGPaletteBlockPartial(String name) {
+    protected TFMGPaletteBlockPartial(String name) {
         this.name = name;
     }
 
@@ -216,7 +216,7 @@ public abstract class TFMGPaletteBlockPartial<B extends Block> {
 
     }
 
-    private static class Wall extends TFMGPaletteBlockPartial<WallBlock> {
+    public static class Wall extends TFMGPaletteBlockPartial<WallBlock> {
 
         public Wall() {
             super("wall");

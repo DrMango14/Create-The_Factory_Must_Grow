@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.base.TFMGBuilderTransformers;
 import com.drmangotea.tfmg.base.TFMGSpriteShifts;
+import com.drmangotea.tfmg.base.TFMGVanillaBlockStates;
 import com.drmangotea.tfmg.content.concrete.formwork.FormWorkBlock;
 import com.drmangotea.tfmg.content.concrete.formwork.FormWorkGenerator;
 import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorBlock;
@@ -14,6 +15,10 @@ import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distilla
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationOutputBlock;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryControllerBlock;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryOutputBlock;
+import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.base.PumpjackBaseBlock;
+import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.crank.PumpjackCrankBlock;
+import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderBlock;
+import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.machine_input.MachineInputBlock;
 import com.drmangotea.tfmg.content.machines.pipes.normal.steel.EncasedSteelPipeBlock;
 import com.drmangotea.tfmg.content.machines.pipes.normal.steel.GlassSteelPipeBlock;
 import com.drmangotea.tfmg.content.machines.pipes.normal.steel.SteelPipeAttachmentModel;
@@ -43,6 +48,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
@@ -272,9 +278,91 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .item()
                     .build()
                     .register();
+    public static final BlockEntry<Block> INDUSTRIAL_PIPE = REGISTRATE.block("industrial_pipe", Block::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .item()
+            .build()
+            .lang("Industrial Pipe")
+            .register();
+////////////////
 
 
+    //Pumpjack
+    public static final BlockEntry<MachineInputBlock> MACHINE_INPUT =
+            REGISTRATE.block("machine_input", MachineInputBlock::new)
+                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .properties(p -> p
+                            .strength(4.5F))
+                    .transform(axeOrPickaxe())
+                    .transform(BlockStressDefaults.setImpact(4.0))
+                    .item()
+                    .build()
+                    .register();
+
+    public static final BlockEntry<PumpjackCrankBlock> PUMPJACK_CRANK =
+            REGISTRATE.block("pumpjack_crank", PumpjackCrankBlock::new)
+                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .properties(p -> p
+                            .strength(4.5F))
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(axeOrPickaxe())
+                    .item()
+                    .build()
+                    .register();
+    public static final BlockEntry<PumpjackBaseBlock> PUMPJACK_BASE =
+            REGISTRATE.block("pumpjack_base", PumpjackBaseBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .item()
+                    .build()
+                    .register();
+
+    public static final BlockEntry<PumpjackHammerHolderBlock> PUMPJACK_HAMMER_HOLDER =
+            REGISTRATE.block("pumpjack_hammer_holder", PumpjackHammerHolderBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .item()
+                    .build()
+                    .register();
     //////
+
+    //Blast Furnace
+
+    public static final BlockEntry<Block> FIREPROOF_BRICKS = REGISTRATE.block("fireproof_bricks", Block::new)
+            .initialProperties(() -> Blocks.BRICKS)
+            .properties(p -> p.color(MaterialColor.COLOR_RED))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .item()
+            .build()
+            .lang("Fireproof Bricks")
+            .register();
+    public static final BlockEntry<WallBlock> FIREPROOF_BRICK_REINFORCEMENT = REGISTRATE.block("fireproof_brick_reinforcement", WallBlock::new)
+            .initialProperties(() -> Blocks.BRICKS)
+            .properties(p -> p.color(MaterialColor.COLOR_RED))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .tag(BlockTags.WALLS)
+            .blockstate((c, p) -> TFMGVanillaBlockStates.generateWallBlockState(c, p, "fireproof_brick_reinforcement"))
+            .item()
+            .build()
+            .lang("Fireproof Brick Reinforcement")
+            .register();
+    public static final BlockEntry<Block> BLAST_FURNACE_OUTPUT = REGISTRATE.block("blast_furnace_output", Block::new)
+            .initialProperties(() -> Blocks.BRICKS)
+            .properties(p -> p.color(MaterialColor.COLOR_RED))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .item()
+            .build()
+            .lang("Blast Furnace Output")
+            .register();
+
+    //////////
 
 
 

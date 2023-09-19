@@ -66,9 +66,10 @@ public class TFMGJei implements IModPlugin {
 
                 advancedDistillation = builder(AdvancedDistillationRecipe.class)
                 .addTypedRecipes(TFMGRecipeTypes.ADVANCED_DISTILLATION)
-                .catalyst(TFMGBlocks.CAST_IRON_DISTILLATION_CONTROLLER::get)
-                .itemIcon(TFMGFluids.KEROSENE.getBucket().get())
-                .emptyBackground(177, 123)
+                .catalyst(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER::get)
+                .catalyst(TFMGBlocks.STEEL_DISTILLATION_OUTPUT::get)
+                .itemIcon(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER.get())
+                .emptyBackground(177, 150)
                 .build("advanced_distillation", AdvancedDistillationCategory::new)
 
 

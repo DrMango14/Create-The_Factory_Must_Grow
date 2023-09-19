@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.recipes.jei;
+package com.drmangotea.tfmg.recipes.jei.machines;
 
 
 import com.drmangotea.tfmg.registry.TFMGBlocks;
@@ -21,11 +21,11 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.Blocks;
 
-public class AnimatedDistiller extends AnimatedKinetics {
+public class Distillery extends AnimatedKinetics {
 
 
 
-    public AnimatedDistiller() {
+    public Distillery() {
 
     }
 
