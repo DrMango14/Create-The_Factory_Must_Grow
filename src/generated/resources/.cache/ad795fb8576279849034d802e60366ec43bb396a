@@ -1,4 +1,4 @@
-// 1.19.2	2023-09-19T14:23:32.3567546	Registrate Provider for tfmg [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-09-22T16:49:10.0141303	Registrate Provider for tfmg [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 b7f5146505c40c08cdea7ad01fa99048b7ac5451 assets/tfmg/blockstates/aluminum_block.json
 933485fa587fccc649b4cbe8f76f15e590cc8bb1 assets/tfmg/blockstates/bauxite.json
 2b53ff8e880d35a42388584cb3ca896c55bfaf95 assets/tfmg/blockstates/bauxite_pillar.json
@@ -65,8 +65,8 @@ e29906d296994a13fefc2beb22f7693e1027dd1b assets/tfmg/blockstates/steel_fluid_val
 71b4c68d8a02062252c4dfde41650b7667d8c0ca assets/tfmg/blockstates/steel_sheetmetal.json
 47b56dad1f2715aae7430b5f9acb1d51a26cf562 assets/tfmg/blockstates/steel_smart_fluid_pipe.json
 942bb86fa92b3c40fc535dccdd2e9f3b79a36d92 assets/tfmg/blockstates/surface_scanner.json
-67b8a6fd76d364c98275a66fb3f4cc9bbb043359 assets/tfmg/lang/en_ud.json
-4bb8653cbdb013bc36e507bc2408c5b4279a4864 assets/tfmg/lang/en_us.json
+fd454201619789195f2c164c19e2f61ab727bfe5 assets/tfmg/lang/en_ud.json
+e80d79d10c0e092c3a2b7b8a97d08fb38a6f7e76 assets/tfmg/lang/en_us.json
 9e6a6b62f5e7528c4e4d4f72f3510edcd8f0c078 assets/tfmg/models/block/aluminum_block.json
 5a4c785e8d8394ccd125732c0017459648574c4e assets/tfmg/models/block/bauxite_natural_0.json
 4ace0da00498fcbb9ddfdf321767b40b095c8778 assets/tfmg/models/block/bauxite_natural_1.json
@@ -190,6 +190,7 @@ fc48286f0e70651f3d5a915558c3c91ae3ad0da6 assets/tfmg/models/item/cast_iron_disti
 da2c28e98d0ddf7166bdf7214c06e81ad8581b90 assets/tfmg/models/item/cast_iron_ingot.json
 d45fc5511b4c4027889afd3088cd91ba1d8b0501 assets/tfmg/models/item/coal_coke.json
 3789a9d72a7ba5daf8c39cccaa665057e63302c6 assets/tfmg/models/item/coal_coke_block.json
+cf3c486158a27cbd3a4ef9fdd79dc93f3cc12b45 assets/tfmg/models/item/coal_coke_dust.json
 4a843d55647a606fa97bc2daf745a7603406767d assets/tfmg/models/item/concrete.json
 e8c4e68647a6ced815cfca649c679e709fcc7751 assets/tfmg/models/item/cooling_fluid_bucket.json
 df4e7fa8f3f60908f58794528a8db60dce7d0135 assets/tfmg/models/item/copper_grenade.json
@@ -270,6 +271,7 @@ a779b7e09e7de79b73efb212644edff6739da610 data/forge/tags/items/buckets/napalm.js
 fdf3b8fdf1975b0eee671f428803caa4e17dc5bd data/forge/tags/items/buckets/naphtha.json
 5f98116af6d1d5e0324ff11449e719e7e2593c0c data/forge/tags/items/buckets/plastic.json
 f0989952061266a02499103c1dcd9f2d7da131f5 data/forge/tags/items/concrete.json
+f1cc6d710a5e49ab33dbaceea796f0c0b589c82b data/forge/tags/items/dusts/coal_coke.json
 70e609465aa949ff4acc873fb19d4afc07f79aa1 data/forge/tags/items/ingots/aluminum.json
 2da28c9441f79389929080f6f31da841bbee19e7 data/forge/tags/items/ingots/cast_iron.json
 6746e7b0c2ed4053e7b438c3e99e86889fa9d454 data/forge/tags/items/ingots/lead.json

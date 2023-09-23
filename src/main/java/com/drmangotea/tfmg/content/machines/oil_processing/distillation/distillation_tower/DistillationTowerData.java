@@ -1,8 +1,8 @@
 package com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower;
 
 
-import com.drmangotea.tfmg.content.machines.tanks.SteelTankBlock;
-import com.drmangotea.tfmg.content.machines.tanks.SteelTankBlockEntity;
+import com.drmangotea.tfmg.content.tanks.SteelTankBlock;
+import com.drmangotea.tfmg.content.tanks.SteelTankBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.simibubi.create.Create;

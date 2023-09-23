@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.machines.pipes.normal.steel;
+package com.drmangotea.tfmg.content.pipes.normal.steel;
 
 
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;

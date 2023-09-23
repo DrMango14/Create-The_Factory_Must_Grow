@@ -1,8 +1,7 @@
-package com.drmangotea.tfmg.content.machines.pipes.normal.steel;
+package com.drmangotea.tfmg.content.pipes.normal.steel;
 
 
-import com.drmangotea.tfmg.CreateTFMG;
-import com.drmangotea.tfmg.content.machines.pipes.normal.LockablePipeBlockEntity;
+import com.drmangotea.tfmg.content.pipes.normal.LockablePipeBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.AllBlocks;
@@ -28,20 +27,15 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
-import java.util.concurrent.locks.Lock;
 
 public class SteelPipeBlock extends FluidPipeBlock {
 //    public static final BooleanProperty LOCKEDDDD = BlockStateProperties.LOCKED;

@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower;
 
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryControllerBlockEntity;
-import com.drmangotea.tfmg.content.machines.tanks.SteelTankBlockEntity;
+import com.drmangotea.tfmg.content.tanks.SteelTankBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.utility.Lang;

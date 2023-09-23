@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.machines.tanks;
+package com.drmangotea.tfmg.content.tanks;
 
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SpecialBlockStateGen;

@@ -1,8 +1,7 @@
 package com.drmangotea.tfmg.mixins;
 
 import com.drmangotea.tfmg.CreateTFMG;
-import com.drmangotea.tfmg.content.machines.pipes.normal.LockablePipeBlockEntity;
-import com.drmangotea.tfmg.registry.TFMGBlocks;
+import com.drmangotea.tfmg.content.pipes.normal.LockablePipeBlockEntity;
 import com.simibubi.create.AllBlockEntityTypes;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.contraptions.ITransformableBlock;

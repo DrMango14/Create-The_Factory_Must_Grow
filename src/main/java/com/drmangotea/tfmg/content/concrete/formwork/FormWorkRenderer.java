@@ -92,17 +92,7 @@ public class FormWorkRenderer extends SafeBlockEntityRenderer<FormWorkBlockEntit
           if (fluidLevel == null) {
               return;
           }
-        float level = fluidLevel.getValue(partialTicks);
 
-        float capHeight = 1 / 4f;
-        float tankHullWidth = 1 / 16f + 1 / 128f;
-        float minPuddleHeight = 1 / 16f;
-
-
-        //   float level = fluidLevel.getValue(partialTicks);
-        //    if (level < 1 / (512f * 1))
-        //        return;
-        //   float clampedLevel = Mth.clamp(level * 1, 0, 1);
 
         FluidTank tank = be.tankInventory;
         FluidStack fluidStack = tank.getFluid();

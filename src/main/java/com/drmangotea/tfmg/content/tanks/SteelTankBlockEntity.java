@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.machines.tanks;
+package com.drmangotea.tfmg.content.tanks;
 
 
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationTowerData;
@@ -14,7 +14,6 @@ import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import com.drmangotea.tfmg.content.machines.tanks.SteelTankBlock.Shape;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -285,18 +284,18 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
                     if (!SteelTankBlock.isTank(blockState))
                         continue;
 
-                    Shape shape = Shape.PLAIN;
+                    SteelTankBlock.Shape shape = SteelTankBlock.Shape.PLAIN;
                     if (window) {
                         // SIZE 1: Every tank has a window
                         if (width == 1)
-                            shape = Shape.WINDOW;
+                            shape = SteelTankBlock.Shape.WINDOW;
                         // SIZE 2: Every tank has a corner window
                         if (width == 2)
-                            shape = xOffset == 0 ? zOffset == 0 ? Shape.WINDOW_NW : Shape.WINDOW_SW
-                                    : zOffset == 0 ? Shape.WINDOW_NE : Shape.WINDOW_SE;
+                            shape = xOffset == 0 ? zOffset == 0 ? SteelTankBlock.Shape.WINDOW_NW : SteelTankBlock.Shape.WINDOW_SW
+                                    : zOffset == 0 ? SteelTankBlock.Shape.WINDOW_NE : SteelTankBlock.Shape.WINDOW_SE;
                         // SIZE 3: Tanks in the center have a window
                         if (width == 3 && abs(abs(xOffset) - abs(zOffset)) == 1)
-                            shape = Shape.WINDOW;
+                            shape = SteelTankBlock.Shape.WINDOW;
                     }
 
                     level.setBlock(pos, blockState.setValue(SteelTankBlock.SHAPE, shape), 22);

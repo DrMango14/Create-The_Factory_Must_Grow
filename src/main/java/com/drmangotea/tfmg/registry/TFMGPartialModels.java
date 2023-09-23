@@ -18,6 +18,7 @@ import java.util.Map;
 public class TFMGPartialModels {
 
         public static final PartialModel
+                COAL_COKE_DUST_LAYER = block("coal_coke_dust_layer"),
                 PUMPJACK_HAMMER = block("pumpjack/hammer_holder"),
                 PUMPJACK_FRONT_ROPE = block("pumpjack/pumpjack_front_rope"),
                 PUMPJACK_CONNECTOR = block("pumpjack/pumpjack_connector"),

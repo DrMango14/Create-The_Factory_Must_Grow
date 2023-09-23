@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.machines.tanks;
+package com.drmangotea.tfmg.content.tanks;
 
 
 import com.drmangotea.tfmg.registry.TFMGPartialModels;

@@ -16,5 +16,16 @@
   "create.goggles.distillation_tower.not_tall_enough": "Distillation Tower is Not Tall Enough",
   "create.goggles.distillation_tower.level": "Distillation Tower Level: %1$s",
   "create.goggles.distillation_tower.found_outputs": "Found Outputs: %1$s",
-  "create.goggles.distillation_tower.no_outputs": "No Output Blocks Found"
+  "create.goggles.distillation_tower.no_outputs": "No Output Blocks Found",
+  "create.goggles.blast_furnace.stats": "Blast Furnace Stats:",
+  "create.goggles.blast_furnace.size_stats": "Size Stats:",
+  "create.goggles.blast_furnace.fuel_amount": "Fuel Amount: %1$s",
+  "create.goggles.blast_furnace.item_count": "Item Count: %1$s",
+  "create.goggles.blast_furnace.height": "Height: %1$s",
+  "create.goggles.blast_furnace.reinforcement_height": "Reinforcement Height: %1$s",
+  "create.goggles.blast_furnace.status.off": "Status: Off",
+  "create.goggles.blast_furnace.status.running": "Status: Running",
+  "create.goggles.blast_furnace.status.finished": "Status: Process Finished",
+  "create.goggles.blast_furnace.diameter.one": "Diameter: 1",
+  "create.goggles.blast_furnace.diameter.two": "Diameter: 2"
 }

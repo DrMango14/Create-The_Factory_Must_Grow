@@ -1,10 +1,8 @@
 package com.drmangotea.tfmg.content.items;
 
-import com.drmangotea.tfmg.content.machines.pipes.normal.LockablePipeBlockEntity;
-import com.drmangotea.tfmg.content.machines.pipes.normal.steel.SteelPipeBlock;
+import com.drmangotea.tfmg.content.pipes.normal.LockablePipeBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;

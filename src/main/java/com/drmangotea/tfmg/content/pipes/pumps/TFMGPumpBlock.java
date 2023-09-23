@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.machines.pipes.pumps;
+package com.drmangotea.tfmg.content.pipes.pumps;
 
 
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;

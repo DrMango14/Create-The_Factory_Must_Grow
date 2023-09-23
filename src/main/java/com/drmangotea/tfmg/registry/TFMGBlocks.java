@@ -11,6 +11,7 @@ import com.drmangotea.tfmg.content.gadgets.explosives.napalm.NapalmBombBlock;
 import com.drmangotea.tfmg.content.items.CoalCokeBlockItem;
 import com.drmangotea.tfmg.content.items.FossilstoneItem;
 import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerBlock;
+import com.drmangotea.tfmg.content.machines.metal_processing.blast_furnace.blast_furnace_output.BlastFurnaceOutputBlock;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationControllerBlock;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationOutputBlock;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryControllerBlock;
@@ -19,17 +20,17 @@ import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.base.Pumpjac
 import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.crank.PumpjackCrankBlock;
 import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderBlock;
 import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.machine_input.MachineInputBlock;
-import com.drmangotea.tfmg.content.machines.pipes.normal.steel.EncasedSteelPipeBlock;
-import com.drmangotea.tfmg.content.machines.pipes.normal.steel.GlassSteelPipeBlock;
-import com.drmangotea.tfmg.content.machines.pipes.normal.steel.SteelPipeAttachmentModel;
-import com.drmangotea.tfmg.content.machines.pipes.normal.steel.SteelPipeBlock;
-import com.drmangotea.tfmg.content.machines.pipes.pumps.TFMGPumpBlock;
-import com.drmangotea.tfmg.content.machines.pipes.smart_pipes.TFMGSmartFluidPipeBlock;
-import com.drmangotea.tfmg.content.machines.pipes.valves.TFMGFluidValveBlock;
-import com.drmangotea.tfmg.content.machines.tanks.SteelFluidTankModel;
-import com.drmangotea.tfmg.content.machines.tanks.SteelTankBlock;
-import com.drmangotea.tfmg.content.machines.tanks.SteelTankGenerator;
-import com.drmangotea.tfmg.content.machines.tanks.SteelTankItem;
+import com.drmangotea.tfmg.content.pipes.normal.steel.EncasedSteelPipeBlock;
+import com.drmangotea.tfmg.content.pipes.normal.steel.GlassSteelPipeBlock;
+import com.drmangotea.tfmg.content.pipes.normal.steel.SteelPipeAttachmentModel;
+import com.drmangotea.tfmg.content.pipes.normal.steel.SteelPipeBlock;
+import com.drmangotea.tfmg.content.pipes.pumps.TFMGPumpBlock;
+import com.drmangotea.tfmg.content.pipes.smart_pipes.TFMGSmartFluidPipeBlock;
+import com.drmangotea.tfmg.content.pipes.valves.TFMGFluidValveBlock;
+import com.drmangotea.tfmg.content.tanks.SteelFluidTankModel;
+import com.drmangotea.tfmg.content.tanks.SteelTankBlock;
+import com.drmangotea.tfmg.content.tanks.SteelTankGenerator;
+import com.drmangotea.tfmg.content.tanks.SteelTankItem;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
@@ -352,7 +353,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .build()
             .lang("Fireproof Brick Reinforcement")
             .register();
-    public static final BlockEntry<Block> BLAST_FURNACE_OUTPUT = REGISTRATE.block("blast_furnace_output", Block::new)
+    public static final BlockEntry<BlastFurnaceOutputBlock> BLAST_FURNACE_OUTPUT = REGISTRATE.block("blast_furnace_output", BlastFurnaceOutputBlock::new)
             .initialProperties(() -> Blocks.BRICKS)
             .properties(p -> p.color(MaterialColor.COLOR_RED))
             .properties(p -> p.requiresCorrectToolForDrops())

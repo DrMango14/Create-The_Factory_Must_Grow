@@ -99,6 +99,7 @@
 	"item.tfmg.aluminum_ingot": "Aluminum Ingot",
 	"item.tfmg.cast_iron_ingot": "Cast Iron Ingot",
 	"item.tfmg.coal_coke": "Coal Coke",
+	"item.tfmg.coal_coke_dust": "Coal Coke Dust",
 	"item.tfmg.cooling_fluid_bucket": "Cooling Fluid Bucket",
 	"item.tfmg.copper_grenade": "Copper Grenade",
 	"item.tfmg.creosote_bucket": "Creosote Bucket",
@@ -118,26 +119,6 @@
 	"item.tfmg.steel_ingot": "Steel Ingot",
 	"item.tfmg.thermite_grenade": "Thermite Grenade",
 	"item.tfmg.zinc_grenade": "Zinc Grenade",
-
-	"itemGroup.tfmg.base": "Create: The Factory Must Grow",
-	"itemGroup.tfmg.building": "Create: TFMG's Building Blocks",
-
-	"create.goggles.misc.number": "%1$s",
-	"create.goggles.misc.dot_one": ".",
-	"create.goggles.misc.dot_two": "..",
-	"create.goggles.misc.dot_three": "...",
-	"create.goggles.fluid_in_tank": "Fluid In Tank:",
-	"create.goggles.surface_scanner.no_rotation": "No Rotation Provided",
-	"create.goggles.surface_scanner.no_deposit": "No Deposit Found",
-	"create.goggles.surface_scanner.deposit_found": "Found Deposit",
-	"create.goggles.surface_scanner.distance": "Distance: %1$s Blocks",
-	"create.goggles.surface_scanner.scanning_surface": "Scanning Surface",
-	"create.goggles.distillation_tower.status": "Distillation Tower Info:",
-	"create.goggles.distillation_tower.tank_not_found": "Steel Fluid Tank Not Found",
-	"create.goggles.distillation_tower.not_tall_enough": "Distillation Tower is Not Tall Enough",
-	"create.goggles.distillation_tower.level": "Distillation Tower Level: %1$s",
-	"create.goggles.distillation_tower.found_outputs": "Found Outputs: %1$s",
-	"create.goggles.distillation_tower.no_outputs": "No Output Blocks Found",
 
 
 	"_": "->------------------------]  UI & Messages  [------------------------<-",
@@ -161,6 +142,17 @@
 	"create.goggles.distillation_tower.level": "Distillation Tower Level: %1$s",
 	"create.goggles.distillation_tower.found_outputs": "Found Outputs: %1$s",
 	"create.goggles.distillation_tower.no_outputs": "No Output Blocks Found",
+	"create.goggles.blast_furnace.stats": "Blast Furnace Stats:",
+	"create.goggles.blast_furnace.size_stats": "Size Stats:",
+	"create.goggles.blast_furnace.fuel_amount": "Fuel Amount: %1$s",
+	"create.goggles.blast_furnace.item_count": "Item Count: %1$s",
+	"create.goggles.blast_furnace.height": "Height: %1$s",
+	"create.goggles.blast_furnace.reinforcement_height": "Reinforcement Height: %1$s",
+	"create.goggles.blast_furnace.status.off": "Status: Off",
+	"create.goggles.blast_furnace.status.running": "Status: Running",
+	"create.goggles.blast_furnace.status.finished": "Status: Process Finished",
+	"create.goggles.blast_furnace.diameter.one": "Diameter: 1",
+	"create.goggles.blast_furnace.diameter.two": "Diameter: 2",
 
 	"_": "Thank you for translating Create: The Factory Must Grow!"
 

@@ -7,6 +7,8 @@ import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorRenderer;
 import com.drmangotea.tfmg.content.deposits.FluidDepositBlockEntity;
 import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerRenderer;
 import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerTileEntity;
+import com.drmangotea.tfmg.content.machines.metal_processing.blast_furnace.blast_furnace_output.BlastFurnaceOutputBlockEntity;
+import com.drmangotea.tfmg.content.machines.metal_processing.blast_furnace.blast_furnace_output.BlastFurnaceRenderer;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationControllerBlockEntity;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationOutputBlockEntity;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryControllerBlockEntity;
@@ -21,9 +23,9 @@ import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.hammer_holde
 import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderBlockEntity;
 import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.machine_input.MachineInputRenderer;
 import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.machine_input.MachineInputBlockEntity;
-import com.drmangotea.tfmg.content.machines.pipes.normal.LockablePipeBlockEntity;
-import com.drmangotea.tfmg.content.machines.tanks.SteelFluidTankRenderer;
-import com.drmangotea.tfmg.content.machines.tanks.SteelTankBlockEntity;
+import com.drmangotea.tfmg.content.pipes.normal.LockablePipeBlockEntity;
+import com.drmangotea.tfmg.content.tanks.SteelFluidTankRenderer;
+import com.drmangotea.tfmg.content.tanks.SteelTankBlockEntity;
 import com.simibubi.create.content.fluids.pipes.SmartFluidPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.StraightPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.TransparentStraightPipeRenderer;
@@ -160,6 +162,12 @@ public class TFMGBlockEntities {
             .blockEntity("pumpjack_base", PumpjackBaseBlockEntity::new)
             .validBlocks(TFMGBlocks.PUMPJACK_BASE)
             .renderer(() -> PumpjackBaseRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<BlastFurnaceOutputBlockEntity> BLAST_FURNACE_OUTPUT = REGISTRATE
+            .blockEntity("blast_furnace_output", BlastFurnaceOutputBlockEntity::new)
+            .renderer(() -> BlastFurnaceRenderer::new)
+            .validBlocks(TFMGBlocks.BLAST_FURNACE_OUTPUT)
             .register();
 
 

@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.machines.pipes.normal;
+package com.drmangotea.tfmg.content.pipes.normal;
 
 
 import com.simibubi.create.content.fluids.pipes.FluidPipeBlockEntity;
