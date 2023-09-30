@@ -12,6 +12,8 @@ import com.drmangotea.tfmg.content.items.CoalCokeBlockItem;
 import com.drmangotea.tfmg.content.items.FossilstoneItem;
 import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerBlock;
 import com.drmangotea.tfmg.content.machines.metal_processing.blast_furnace.blast_furnace_output.BlastFurnaceOutputBlock;
+import com.drmangotea.tfmg.content.machines.metal_processing.coke_oven.CokeOvenBlock;
+import com.drmangotea.tfmg.content.machines.metal_processing.coke_oven.CokeOvenGenerator;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationControllerBlock;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationOutputBlock;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryControllerBlock;
@@ -41,6 +43,7 @@ import com.simibubi.create.content.fluids.pipes.SmartFluidPipeGenerator;
 import com.simibubi.create.content.fluids.pipes.valve.FluidValveBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
+import com.simibubi.create.content.redstone.smartObserver.SmartObserverGenerator;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
@@ -364,7 +367,16 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .register();
 
     //////////
-
+    public static final BlockEntry<CokeOvenBlock> COKE_OVEN = REGISTRATE.block("coke_oven", CokeOvenBlock::new)
+            .initialProperties(() -> Blocks.BRICKS)
+            .properties(p -> p.color(MaterialColor.COLOR_RED))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .blockstate(new CokeOvenGenerator()::generate)
+            .transform(pickaxeOnly())
+            .item()
+            .transform(customItemModel())
+            .lang("Coke Oven")
+            .register();
 
 
 

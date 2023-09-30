@@ -18,6 +18,11 @@ import java.util.Map;
 public class TFMGPartialModels {
 
         public static final PartialModel
+
+                COKE_OVEN_DOOR_LEFT = block("coke_oven/door_left"),
+                COKE_OVEN_DOOR_RIGHT = block("coke_oven/door_right"),
+                COKE_OVEN_DOOR_LEFT_TOP = block("coke_oven/door_left_top"),
+                COKE_OVEN_DOOR_RIGHT_TOP = block("coke_oven/door_right_top"),
                 COAL_COKE_DUST_LAYER = block("coal_coke_dust_layer"),
                 PUMPJACK_HAMMER = block("pumpjack/hammer_holder"),
                 PUMPJACK_FRONT_ROPE = block("pumpjack/pumpjack_front_rope"),

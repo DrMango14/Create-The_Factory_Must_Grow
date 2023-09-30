@@ -25,9 +25,7 @@ public class Distillery extends AnimatedKinetics {
 
 
 
-    public Distillery() {
-
-    }
+    public Distillery() {}
 
     @Override
     public void draw(PoseStack matrixStack, int xOffset, int yOffset) {

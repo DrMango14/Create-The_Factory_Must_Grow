@@ -1,0 +1,22 @@
+{
+  "type": "tfmg:coking",
+  "ingredients": [
+    {
+      "count": 20,
+      "item": "minecraft:coal"
+    }
+  ],
+  "processingTime": 200,
+  "results": [
+    {
+      "count": 20,
+      "item": "tfmg:coal_coke"
+    }
+  ,
+    {
+      "fluid": "tfmg:heavy_oil",
+      "amount": 4
+    }
+
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "tfmg:block/coke_oven",
+    "down": "tfmg:block/coke_oven",
+    "up": "tfmg:block/coke_oven",
+    "north": "tfmg:block/coke_oven",
+    "east": "tfmg:block/coke_oven",
+    "south": "#front",
+    "west": "tfmg:block/coke_oven"
+  }
+}

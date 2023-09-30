@@ -2,8 +2,10 @@ package com.drmangotea.tfmg.registry;
 
 
 import com.drmangotea.tfmg.CreateTFMG;
+import com.drmangotea.tfmg.recipes.coking.CokingRecipe;
 import com.drmangotea.tfmg.recipes.distillation.DistillationRecipe;
 import com.drmangotea.tfmg.recipes.distillation.AdvancedDistillationRecipe;
+import com.drmangotea.tfmg.recipes.industrial_blasting.IndustrialBlastingRecipe;
 import com.google.common.collect.ImmutableSet;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeFactory;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
@@ -29,8 +31,11 @@ import java.util.function.Supplier;
 
 public enum TFMGRecipeTypes implements IRecipeTypeInfo {
 
+INDUSTRIAL_BLASTING(IndustrialBlastingRecipe::new),
+COKING(CokingRecipe::new),
 DISTILLATION(DistillationRecipe::new),
-ADVANCED_DISTILLATION(AdvancedDistillationRecipe::new);
+ADVANCED_DISTILLATION(AdvancedDistillationRecipe::new)
+;
 
     private final ResourceLocation id;
     private final RegistryObject<RecipeSerializer<?>> serializerObject;

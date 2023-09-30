@@ -14,7 +14,6 @@ public class CreateTFMGClient {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         TFMGPartialModels.init();
         modEventBus.register(this);
-
     }
 
 

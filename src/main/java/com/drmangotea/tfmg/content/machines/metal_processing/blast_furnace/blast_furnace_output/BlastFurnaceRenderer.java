@@ -8,10 +8,13 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import com.simibubi.create.foundation.render.CachedBufferer;
+import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.state.BlockState;
+
+import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 
 public class BlastFurnaceRenderer extends SafeBlockEntityRenderer<BlastFurnaceOutputBlockEntity> {
 
@@ -27,7 +30,9 @@ public class BlastFurnaceRenderer extends SafeBlockEntityRenderer<BlastFurnaceOu
 
             float coalCokeLevel = be.coalCokeHeight.getValue()/32;
 
-            this.renderNorth(be,partialTicks,ms,buffer,light,overlay,coalCokeLevel);
+        int lightInside = LevelRenderer.getLightColor(be.getLevel(), be.getBlockPos().above().relative(be.getBlockState().getValue(FACING).getOpposite()));
+
+            this.renderNorth(be,partialTicks,ms,buffer,lightInside,overlay,coalCokeLevel);
 
 
 

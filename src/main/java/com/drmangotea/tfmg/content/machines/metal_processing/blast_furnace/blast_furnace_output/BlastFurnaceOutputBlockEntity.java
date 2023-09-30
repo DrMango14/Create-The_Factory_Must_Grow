@@ -123,7 +123,6 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
     @Override
     protected void read(CompoundTag compound, boolean clientPacket) {
         super.read(compound, clientPacket);
-
         inputInventory.deserializeNBT(compound.getCompound("InputItems"));
         fuelInventory.deserializeNBT(compound.getCompound("Fuel"));
     }

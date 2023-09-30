@@ -1,0 +1,20 @@
+{
+  "type": "tfmg:industrial_blasting",
+  "ingredients": [
+    {
+      "item": "minecraft:sand"
+    }
+  ],
+  "processingTime": 200,
+  "results": [
+    {
+      "fluid": "tfmg:creosote",
+      "amount": 30
+    },
+    {
+      "fluid": "tfmg:creosote",
+      "amount": 30
+    }
+
+  ]
+}

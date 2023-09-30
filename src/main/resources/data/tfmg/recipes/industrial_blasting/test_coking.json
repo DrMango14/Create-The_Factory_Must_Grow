@@ -1,0 +1,21 @@
+{
+  "type": "tfmg:industrial_blasting",
+  "ingredients": [
+    {
+      "count": 20,
+      "item": "minecraft:coal"
+    }
+  ],
+  "processingTime": 200,
+  "results": [
+    {
+      "fluid": "tfmg:creosote",
+      "amount": 30
+    },
+    {
+      "fluid": "tfmg:heavy_oil",
+      "amount": 4
+    }
+
+  ]
+}

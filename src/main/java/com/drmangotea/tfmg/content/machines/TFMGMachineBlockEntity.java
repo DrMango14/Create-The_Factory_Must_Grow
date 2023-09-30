@@ -11,6 +11,7 @@ import com.simibubi.create.foundation.utility.LangBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,8 +35,7 @@ public class TFMGMachineBlockEntity extends SmartBlockEntity  implements IHaveGo
 
     public TFMGMachineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        tank1.forbidExtraction();
-        tank2.forbidInsertion();
+
 
         contentsChanged = true;
 
@@ -49,10 +49,9 @@ public class TFMGMachineBlockEntity extends SmartBlockEntity  implements IHaveGo
                 .whenFluidUpdates(() -> contentsChanged = true);
 
         tank2 = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.OUTPUT, this, 1, 1000, true)
-                .whenFluidUpdates(() -> contentsChanged = true)
-                .forbidInsertion();
+                .whenFluidUpdates(() -> contentsChanged = true);
         behaviours.add(tank1);
-        behaviours.add(tank1);
+        behaviours.add(tank2);
 
         fluidCapability = LazyOptional.of(() -> {
             LazyOptional<? extends IFluidHandler> inputCap = tank1.getCapability();
@@ -143,4 +142,6 @@ public class TFMGMachineBlockEntity extends SmartBlockEntity  implements IHaveGo
 
         return true;
     }
+
+
 }

@@ -1,8 +1,10 @@
 package com.drmangotea.tfmg.recipes.jei;
 
 
+import com.drmangotea.tfmg.recipes.coking.CokingRecipe;
 import com.drmangotea.tfmg.recipes.distillation.DistillationRecipe;
 import com.drmangotea.tfmg.recipes.distillation.AdvancedDistillationRecipe;
+import com.drmangotea.tfmg.recipes.industrial_blasting.IndustrialBlastingRecipe;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
@@ -70,7 +72,21 @@ public class TFMGJei implements IModPlugin {
                 .catalyst(TFMGBlocks.STEEL_DISTILLATION_OUTPUT::get)
                 .itemIcon(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER.get())
                 .emptyBackground(177, 150)
-                .build("advanced_distillation", AdvancedDistillationCategory::new)
+                .build("advanced_distillation", AdvancedDistillationCategory::new),
+
+                 coking = builder(CokingRecipe.class)
+                 .addTypedRecipes(TFMGRecipeTypes.COKING)
+                 .catalyst(TFMGBlocks.COKE_OVEN::get)
+                 .emptyBackground(177, 123)
+                 .build("coking", CokingCategory::new),
+
+                 industrial_blasting = builder(IndustrialBlastingRecipe.class)
+                 .addTypedRecipes(TFMGRecipeTypes.INDUSTRIAL_BLASTING)
+                 .catalyst(TFMGBlocks.BLAST_FURNACE_OUTPUT::get)
+                 .catalyst(TFMGBlocks.FIREPROOF_BRICKS::get)
+                 .itemIcon(TFMGBlocks.BLAST_FURNACE_OUTPUT.get())
+                 .emptyBackground(177, 150)
+                 .build("industrial_blasting", IndustrialBlastingCategory::new)
 
 
                 ;

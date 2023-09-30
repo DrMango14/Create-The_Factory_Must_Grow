@@ -9,6 +9,8 @@ import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerRender
 import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerTileEntity;
 import com.drmangotea.tfmg.content.machines.metal_processing.blast_furnace.blast_furnace_output.BlastFurnaceOutputBlockEntity;
 import com.drmangotea.tfmg.content.machines.metal_processing.blast_furnace.blast_furnace_output.BlastFurnaceRenderer;
+import com.drmangotea.tfmg.content.machines.metal_processing.coke_oven.CokeOvenBlockEntity;
+import com.drmangotea.tfmg.content.machines.metal_processing.coke_oven.CokeOvenRenderer;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationControllerBlockEntity;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationOutputBlockEntity;
 import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryControllerBlockEntity;
@@ -168,6 +170,12 @@ public class TFMGBlockEntities {
             .blockEntity("blast_furnace_output", BlastFurnaceOutputBlockEntity::new)
             .renderer(() -> BlastFurnaceRenderer::new)
             .validBlocks(TFMGBlocks.BLAST_FURNACE_OUTPUT)
+            .register();
+
+    public static final BlockEntityEntry<CokeOvenBlockEntity> COKE_OVEN = REGISTRATE
+            .blockEntity("coke_oven", CokeOvenBlockEntity::new)
+            .renderer(() -> CokeOvenRenderer::new)
+            .validBlocks(TFMGBlocks.COKE_OVEN)
             .register();
 
 
