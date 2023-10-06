@@ -76,12 +76,6 @@ public class AdvancedDistillationCategory extends CreateRecipeCategory<AdvancedD
 		y -= 12;
 		TFMGGuiTextures.DISTILLATION_TOWER_TOP.render(matrixStack,10,y);
 
-
-
-
-
-
-
 	}
 
 }

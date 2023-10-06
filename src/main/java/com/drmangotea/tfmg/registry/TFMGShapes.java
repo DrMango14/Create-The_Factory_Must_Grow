@@ -31,8 +31,7 @@ public class TFMGShapes {
     public static final VoxelShape
 
 
-
-
+    EMPTY = shape(0, 0, 0, 0, 0, 0).build(),
     PUMPJACK_CRANK = shape(0, 0, 0, 16, 8, 16).build(),
     INDUSTRIAL_PIPE = shape(4, 0, 4, 12, 16, 12).build(),
     FLARESTACK = shape(3, 0, 3, 13, 14, 14).build(),

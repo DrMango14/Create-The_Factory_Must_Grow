@@ -1,10 +1,9 @@
 package com.drmangotea.tfmg.base;
 
-import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorBlock;
+import com.drmangotea.tfmg.blocks.decoration.doors.TFMGSlidingDoorBlock;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.contraptions.behaviour.DoorMovingInteraction;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorMovementBehaviour;
-import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.ModelGen;
 import com.simibubi.create.foundation.data.SharedProperties;

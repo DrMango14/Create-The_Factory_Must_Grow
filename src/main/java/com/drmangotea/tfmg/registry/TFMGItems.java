@@ -1,19 +1,17 @@
 package com.drmangotea.tfmg.registry;
 
-import com.drmangotea.tfmg.content.gadgets.explosives.thermite_grenades.ChemicalColor;
-import com.drmangotea.tfmg.content.gadgets.explosives.thermite_grenades.ThermiteGrenadeItem;
-import com.drmangotea.tfmg.content.gadgets.quad_potato_cannon.QuadPotatoCannonItem;
-import com.drmangotea.tfmg.content.items.CoalCokeItem;
-import com.drmangotea.tfmg.content.items.ScrewdriverItem;
-import com.simibubi.create.Create;
-import com.simibubi.create.content.equipment.potatoCannon.PotatoCannonItem;
+import com.drmangotea.tfmg.blocks.gadgets.explosives.thermite_grenades.ChemicalColor;
+import com.drmangotea.tfmg.blocks.gadgets.explosives.thermite_grenades.ThermiteGrenadeItem;
+import com.drmangotea.tfmg.blocks.gadgets.quad_potato_cannon.QuadPotatoCannonItem;
+import com.drmangotea.tfmg.items.CoalCokeItem;
+import com.drmangotea.tfmg.items.ScrewdriverItem;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 import static com.drmangotea.tfmg.CreateTFMG.REGISTRATE;
-import static com.drmangotea.tfmg.content.gadgets.explosives.thermite_grenades.ChemicalColor.*;
+import static com.drmangotea.tfmg.blocks.gadgets.explosives.thermite_grenades.ChemicalColor.*;
 import static com.simibubi.create.AllTags.AllItemTags.CREATE_INGOTS;
 import static com.simibubi.create.AllTags.forgeItemTag;
 

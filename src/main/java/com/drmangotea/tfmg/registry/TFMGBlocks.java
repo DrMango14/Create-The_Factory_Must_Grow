@@ -3,36 +3,37 @@ package com.drmangotea.tfmg.registry;
 import com.drmangotea.tfmg.base.TFMGBuilderTransformers;
 import com.drmangotea.tfmg.base.TFMGSpriteShifts;
 import com.drmangotea.tfmg.base.TFMGVanillaBlockStates;
-import com.drmangotea.tfmg.content.concrete.formwork.FormWorkBlock;
-import com.drmangotea.tfmg.content.concrete.formwork.FormWorkGenerator;
-import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorBlock;
-import com.drmangotea.tfmg.content.deposits.FluidDepositBlock;
-import com.drmangotea.tfmg.content.gadgets.explosives.napalm.NapalmBombBlock;
-import com.drmangotea.tfmg.content.items.CoalCokeBlockItem;
-import com.drmangotea.tfmg.content.items.FossilstoneItem;
-import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerBlock;
-import com.drmangotea.tfmg.content.machines.metal_processing.blast_furnace.blast_furnace_output.BlastFurnaceOutputBlock;
-import com.drmangotea.tfmg.content.machines.metal_processing.coke_oven.CokeOvenBlock;
-import com.drmangotea.tfmg.content.machines.metal_processing.coke_oven.CokeOvenGenerator;
-import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationControllerBlock;
-import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationOutputBlock;
-import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryControllerBlock;
-import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryOutputBlock;
-import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.base.PumpjackBaseBlock;
-import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.crank.PumpjackCrankBlock;
-import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderBlock;
-import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.machine_input.MachineInputBlock;
-import com.drmangotea.tfmg.content.pipes.normal.steel.EncasedSteelPipeBlock;
-import com.drmangotea.tfmg.content.pipes.normal.steel.GlassSteelPipeBlock;
-import com.drmangotea.tfmg.content.pipes.normal.steel.SteelPipeAttachmentModel;
-import com.drmangotea.tfmg.content.pipes.normal.steel.SteelPipeBlock;
-import com.drmangotea.tfmg.content.pipes.pumps.TFMGPumpBlock;
-import com.drmangotea.tfmg.content.pipes.smart_pipes.TFMGSmartFluidPipeBlock;
-import com.drmangotea.tfmg.content.pipes.valves.TFMGFluidValveBlock;
-import com.drmangotea.tfmg.content.tanks.SteelFluidTankModel;
-import com.drmangotea.tfmg.content.tanks.SteelTankBlock;
-import com.drmangotea.tfmg.content.tanks.SteelTankGenerator;
-import com.drmangotea.tfmg.content.tanks.SteelTankItem;
+import com.drmangotea.tfmg.blocks.concrete.formwork.FormWorkBlock;
+import com.drmangotea.tfmg.blocks.concrete.formwork.FormWorkGenerator;
+import com.drmangotea.tfmg.blocks.decoration.doors.TFMGSlidingDoorBlock;
+import com.drmangotea.tfmg.blocks.deposits.FluidDepositBlock;
+import com.drmangotea.tfmg.blocks.gadgets.explosives.napalm.NapalmBombBlock;
+import com.drmangotea.tfmg.items.CoalCokeBlockItem;
+import com.drmangotea.tfmg.items.FossilstoneItem;
+import com.drmangotea.tfmg.blocks.deposits.surface_scanner.SurfaceScannerBlock;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.BlastFurnaceOutputBlock;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.MoltenMetalBlock;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.coke_oven.CokeOvenBlock;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.coke_oven.CokeOvenGenerator;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distillation_tower.DistillationControllerBlock;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distillation_tower.DistillationOutputBlock;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distillery.DistilleryControllerBlock;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distillery.DistilleryOutputBlock;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.base.PumpjackBaseBlock;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.crank.PumpjackCrankBlock;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderBlock;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.machine_input.MachineInputBlock;
+import com.drmangotea.tfmg.blocks.pipes.normal.steel.EncasedSteelPipeBlock;
+import com.drmangotea.tfmg.blocks.pipes.normal.steel.GlassSteelPipeBlock;
+import com.drmangotea.tfmg.blocks.pipes.normal.steel.SteelPipeAttachmentModel;
+import com.drmangotea.tfmg.blocks.pipes.normal.steel.SteelPipeBlock;
+import com.drmangotea.tfmg.blocks.pipes.pumps.TFMGPumpBlock;
+import com.drmangotea.tfmg.blocks.pipes.smart_pipes.TFMGSmartFluidPipeBlock;
+import com.drmangotea.tfmg.blocks.pipes.valves.TFMGFluidValveBlock;
+import com.drmangotea.tfmg.blocks.tanks.SteelFluidTankModel;
+import com.drmangotea.tfmg.blocks.tanks.SteelTankBlock;
+import com.drmangotea.tfmg.blocks.tanks.SteelTankGenerator;
+import com.drmangotea.tfmg.blocks.tanks.SteelTankItem;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
@@ -43,7 +44,6 @@ import com.simibubi.create.content.fluids.pipes.SmartFluidPipeGenerator;
 import com.simibubi.create.content.fluids.pipes.valve.FluidValveBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
-import com.simibubi.create.content.redstone.smartObserver.SmartObserverGenerator;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
@@ -365,6 +365,16 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .build()
             .lang("Blast Furnace Output")
             .register();
+    public static final BlockEntry<MoltenMetalBlock> MOLTEN_METAL =
+            REGISTRATE.block("molten_metal", MoltenMetalBlock::new)
+                    .initialProperties(SharedProperties.CRUSHING_WHEEL_CONTROLLER_MATERIAL)
+                    .properties(p -> p.color(MaterialColor.COLOR_ORANGE))
+                    .properties(p -> p.noOcclusion()
+                            .noLootTable()
+                            .air())
+                    .blockstate((c, p) -> p.getVariantBuilder(c.get())
+                            .forAllStatesExcept(BlockStateGen.mapToAir(p)))
+                    .register();
 
     //////////
     public static final BlockEntry<CokeOvenBlock> COKE_OVEN = REGISTRATE.block("coke_oven", CokeOvenBlock::new)

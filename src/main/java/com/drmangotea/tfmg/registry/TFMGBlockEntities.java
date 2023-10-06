@@ -1,33 +1,34 @@
 package com.drmangotea.tfmg.registry;
 
-import com.drmangotea.tfmg.content.concrete.formwork.FormWorkBlockEntity;
-import com.drmangotea.tfmg.content.concrete.formwork.FormWorkRenderer;
-import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorBlockEntity;
-import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorRenderer;
-import com.drmangotea.tfmg.content.deposits.FluidDepositBlockEntity;
-import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerRenderer;
-import com.drmangotea.tfmg.content.deposits.surface_scanner.SurfaceScannerTileEntity;
-import com.drmangotea.tfmg.content.machines.metal_processing.blast_furnace.blast_furnace_output.BlastFurnaceOutputBlockEntity;
-import com.drmangotea.tfmg.content.machines.metal_processing.blast_furnace.blast_furnace_output.BlastFurnaceRenderer;
-import com.drmangotea.tfmg.content.machines.metal_processing.coke_oven.CokeOvenBlockEntity;
-import com.drmangotea.tfmg.content.machines.metal_processing.coke_oven.CokeOvenRenderer;
-import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationControllerBlockEntity;
-import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillation_tower.DistillationOutputBlockEntity;
-import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryControllerBlockEntity;
-import com.drmangotea.tfmg.content.machines.oil_processing.distillation.distillery.DistilleryOutputBlockEntity;
-import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.base.PumpjackBaseRenderer;
-import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.base.PumpjackBaseBlockEntity;
-import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.crank.PumpjackCrankInstance;
-import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.crank.PumpjackCrankRenderer;
-import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.crank.PumpjackCrankBlockEntity;
-import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderInstance;
-import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderRenderer;
-import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderBlockEntity;
-import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.machine_input.MachineInputRenderer;
-import com.drmangotea.tfmg.content.machines.oil_processing.pumpjack.machine_input.MachineInputBlockEntity;
-import com.drmangotea.tfmg.content.pipes.normal.LockablePipeBlockEntity;
-import com.drmangotea.tfmg.content.tanks.SteelFluidTankRenderer;
-import com.drmangotea.tfmg.content.tanks.SteelTankBlockEntity;
+import com.drmangotea.tfmg.blocks.concrete.formwork.FormWorkBlockEntity;
+import com.drmangotea.tfmg.blocks.concrete.formwork.FormWorkRenderer;
+import com.drmangotea.tfmg.blocks.decoration.doors.TFMGSlidingDoorBlockEntity;
+import com.drmangotea.tfmg.blocks.decoration.doors.TFMGSlidingDoorRenderer;
+import com.drmangotea.tfmg.blocks.deposits.FluidDepositBlockEntity;
+import com.drmangotea.tfmg.blocks.deposits.surface_scanner.SurfaceScannerBlockEntity;
+import com.drmangotea.tfmg.blocks.deposits.surface_scanner.SurfaceScannerRenderer;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.BlastFurnaceOutputBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.BlastFurnaceRenderer;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.MoltenMetalBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.coke_oven.CokeOvenBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.coke_oven.CokeOvenRenderer;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distillation_tower.DistillationControllerBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distillation_tower.DistillationOutputBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distillery.DistilleryControllerBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distillery.DistilleryOutputBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.base.PumpjackBaseRenderer;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.base.PumpjackBaseBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.crank.PumpjackCrankInstance;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.crank.PumpjackCrankRenderer;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.crank.PumpjackCrankBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderInstance;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderRenderer;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.machine_input.MachineInputRenderer;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.machine_input.MachineInputBlockEntity;
+import com.drmangotea.tfmg.blocks.pipes.normal.LockablePipeBlockEntity;
+import com.drmangotea.tfmg.blocks.tanks.SteelFluidTankRenderer;
+import com.drmangotea.tfmg.blocks.tanks.SteelTankBlockEntity;
 import com.simibubi.create.content.fluids.pipes.SmartFluidPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.StraightPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.TransparentStraightPipeRenderer;
@@ -111,8 +112,8 @@ public class TFMGBlockEntities {
             .renderer(() -> FluidValveRenderer::new)
             .register();
 
-    public static final BlockEntityEntry<SurfaceScannerTileEntity> SURFACE_SCANNER = REGISTRATE
-            .blockEntity("deposit_scanner", SurfaceScannerTileEntity::new)
+    public static final BlockEntityEntry<SurfaceScannerBlockEntity> SURFACE_SCANNER = REGISTRATE
+            .blockEntity("deposit_scanner", SurfaceScannerBlockEntity::new)
             .instance(() -> HorizontalHalfShaftInstance::new)
             .validBlocks(TFMGBlocks.SURFACE_SCANNER)
             .renderer(() -> SurfaceScannerRenderer::new)
@@ -176,6 +177,11 @@ public class TFMGBlockEntities {
             .blockEntity("coke_oven", CokeOvenBlockEntity::new)
             .renderer(() -> CokeOvenRenderer::new)
             .validBlocks(TFMGBlocks.COKE_OVEN)
+            .register();
+
+    public static final BlockEntityEntry<MoltenMetalBlockEntity> MOLTEN_METAL = REGISTRATE
+            .blockEntity("molten_metal", MoltenMetalBlockEntity::new)
+            .validBlocks(TFMGBlocks.MOLTEN_METAL)
             .register();
 
 

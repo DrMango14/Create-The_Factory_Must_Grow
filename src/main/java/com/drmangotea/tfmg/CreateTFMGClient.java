@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg;
 
 
-import com.drmangotea.tfmg.content.gadgets.quad_potato_cannon.QuadPotatoCannonRenderHandler;
+import com.drmangotea.tfmg.blocks.gadgets.quad_potato_cannon.QuadPotatoCannonRenderHandler;
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg;
 
 import com.drmangotea.tfmg.base.TFMGLangPartials;
-import com.drmangotea.tfmg.content.gadgets.explosives.thermite_grenades.fire.TFMGColoredFires;
+import com.drmangotea.tfmg.blocks.gadgets.explosives.thermite_grenades.fire.TFMGColoredFires;
 import com.drmangotea.tfmg.registry.*;
 import com.drmangotea.tfmg.worldgen.TFMGConfiguredFeatures;
 import com.drmangotea.tfmg.worldgen.TFMGFeatures;

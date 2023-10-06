@@ -4,9 +4,9 @@ package com.drmangotea.tfmg.registry;
 
 
 import com.drmangotea.tfmg.CreateTFMG;
-import com.drmangotea.tfmg.content.concrete.ConcreteFluid;
-import com.drmangotea.tfmg.content.concrete.ConcreteFluidType;
-import com.drmangotea.tfmg.content.fluids.BurnableFluid;
+import com.drmangotea.tfmg.blocks.concrete.ConcreteFluid;
+import com.drmangotea.tfmg.blocks.concrete.ConcreteFluidType;
+import com.drmangotea.tfmg.blocks.fluids.BurnableFluid;
 import com.simibubi.create.AllTags;
 
 import com.simibubi.create.content.fluids.VirtualFluid;
