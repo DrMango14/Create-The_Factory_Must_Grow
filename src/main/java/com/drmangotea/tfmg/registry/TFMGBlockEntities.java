@@ -10,6 +10,9 @@ import com.drmangotea.tfmg.blocks.deposits.surface_scanner.SurfaceScannerRendere
 import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.BlastFurnaceOutputBlockEntity;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.BlastFurnaceRenderer;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.MoltenMetalBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin.CastingBasinBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_spout.CastingSpoutBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_spout.CastingSpoutRenderer;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.coke_oven.CokeOvenBlockEntity;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.coke_oven.CokeOvenRenderer;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distillation_tower.DistillationControllerBlockEntity;
@@ -182,6 +185,17 @@ public class TFMGBlockEntities {
     public static final BlockEntityEntry<MoltenMetalBlockEntity> MOLTEN_METAL = REGISTRATE
             .blockEntity("molten_metal", MoltenMetalBlockEntity::new)
             .validBlocks(TFMGBlocks.MOLTEN_METAL)
+            .register();
+
+    public static final BlockEntityEntry<CastingBasinBlockEntity> CASTING_BASIN = REGISTRATE
+            .blockEntity("casting_basin", CastingBasinBlockEntity::new)
+            .validBlocks(TFMGBlocks.CASTING_BASIN)
+            .register();
+
+    public static final BlockEntityEntry<CastingSpoutBlockEntity> CASTING_SPOUT = REGISTRATE
+            .blockEntity("casting_spout", CastingSpoutBlockEntity::new)
+            .renderer(()->CastingSpoutRenderer::new)
+            .validBlocks(TFMGBlocks.CASTING_SPOUT)
             .register();
 
 

@@ -19,6 +19,8 @@ public class TFMGPartialModels {
 
         public static final PartialModel
 
+                CASTING_SPOUT_CONNECTOR = block("casting_spout/connector"),
+                CASTING_SPOUT_BOTTOM = block("casting_spout/bottom"),
                 COKE_OVEN_DOOR_LEFT = block("coke_oven/door_left"),
                 COKE_OVEN_DOOR_RIGHT = block("coke_oven/door_right"),
                 COKE_OVEN_DOOR_LEFT_TOP = block("coke_oven/door_left_top"),

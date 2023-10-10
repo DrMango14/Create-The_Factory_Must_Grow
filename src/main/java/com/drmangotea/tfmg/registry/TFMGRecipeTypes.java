@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.registry;
 
 
 import com.drmangotea.tfmg.CreateTFMG;
+import com.drmangotea.tfmg.recipes.casting.CastingRecipe;
 import com.drmangotea.tfmg.recipes.coking.CokingRecipe;
 import com.drmangotea.tfmg.recipes.distillation.DistillationRecipe;
 import com.drmangotea.tfmg.recipes.distillation.AdvancedDistillationRecipe;
@@ -31,6 +32,7 @@ import java.util.function.Supplier;
 
 public enum TFMGRecipeTypes implements IRecipeTypeInfo {
 
+CASTING(CastingRecipe::new),
 INDUSTRIAL_BLASTING(IndustrialBlastingRecipe::new),
 COKING(CokingRecipe::new),
 DISTILLATION(DistillationRecipe::new),

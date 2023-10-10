@@ -1,7 +1,9 @@
 package com.drmangotea.tfmg.blocks.concrete.formwork;
 
 import com.drmangotea.tfmg.blocks.machines.TFMGMachineBlockEntity;
+import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGFluids;
+import com.simibubi.create.Create;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
@@ -21,6 +23,8 @@ public class FormWorkBlockEntity extends TFMGMachineBlockEntity {
     public boolean north = true;
     public boolean south = true;
     public boolean bottom = true;
+
+    public int timer = -1;
 
     protected FluidTank tankInventory;
 
@@ -49,6 +53,26 @@ public class FormWorkBlockEntity extends TFMGMachineBlockEntity {
 
     @Override
     public void tick() {
+
+
+
+        if(tankInventory.getFluidAmount()==tankInventory.getCapacity()){
+            if(timer==-1) {
+                timer = 180 * 24;
+            }else {
+
+                timer--;
+
+                if(timer==0){
+                    level.setBlock(getBlockPos(), TFMGBlocks.CONCRETE.getDefaultState(),1);
+                }
+            }
+
+
+        } else
+            timer = -1;
+
+
         super.tick();
         fluidLevel.chase(tankInventory.getFluidAmount(), 0.3f, LerpedFloat.Chaser.EXP);
         fluidLevel.tickChaser();
@@ -171,6 +195,8 @@ public class FormWorkBlockEntity extends TFMGMachineBlockEntity {
     protected void read(CompoundTag compound, boolean clientPacket) {
         super.read(compound, clientPacket);
 
+        timer = compound.getInt("Timer");
+
         bottom = compound.getBoolean("Bottom");
 
         east = compound.getBoolean("East");
@@ -187,6 +213,8 @@ public class FormWorkBlockEntity extends TFMGMachineBlockEntity {
     public void write(CompoundTag compound, boolean clientPacket) {
         super.write(compound, clientPacket);
 
+
+        compound.putInt("Timer", timer);
 
         compound.putBoolean("Bottom", bottom);
 

@@ -8,6 +8,8 @@ import com.drmangotea.tfmg.blocks.concrete.formwork.FormWorkGenerator;
 import com.drmangotea.tfmg.blocks.decoration.doors.TFMGSlidingDoorBlock;
 import com.drmangotea.tfmg.blocks.deposits.FluidDepositBlock;
 import com.drmangotea.tfmg.blocks.gadgets.explosives.napalm.NapalmBombBlock;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin.CastingBasinBlock;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_spout.CastingSpoutBlock;
 import com.drmangotea.tfmg.items.CoalCokeBlockItem;
 import com.drmangotea.tfmg.items.FossilstoneItem;
 import com.drmangotea.tfmg.blocks.deposits.surface_scanner.SurfaceScannerBlock;
@@ -68,7 +70,7 @@ import static com.simibubi.create.foundation.data.CreateRegistrate.connectedText
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.*;
 
-
+@SuppressWarnings("removal")
 public class TFMGBlocks {
 
 
@@ -376,6 +378,32 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                             .forAllStatesExcept(BlockStateGen.mapToAir(p)))
                     .register();
 
+    //--Casting Basin
+    public static final BlockEntry<CastingBasinBlock> CASTING_BASIN = REGISTRATE.block("casting_basin", CastingBasinBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.TERRACOTTA_BLACK))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .item()
+            .build()
+            .lang("Casting Basin")
+            .register();
+
+    public static final BlockEntry<CastingSpoutBlock> CASTING_SPOUT = REGISTRATE.block("casting_spout", CastingSpoutBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.TERRACOTTA_BLACK))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .item()
+            .build()
+            .lang("Casting Spout")
+            .register();
+
+
     //////////
     public static final BlockEntry<CokeOvenBlock> COKE_OVEN = REGISTRATE.block("coke_oven", CokeOvenBlock::new)
             .initialProperties(() -> Blocks.BRICKS)
@@ -387,6 +415,8 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .transform(customItemModel())
             .lang("Coke Oven")
             .register();
+    ///////
+
 
 
 

@@ -491,6 +491,7 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
         super.read(compound, clientPacket);
         inputInventory.deserializeNBT(compound.getCompound("InputItems"));
         fuelInventory.deserializeNBT(compound.getCompound("Fuel"));
+        timer = compound.getInt("Timer");
     }
 
     @Override
@@ -499,6 +500,7 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
 
         compound.put("InputItems", inputInventory.serializeNBT());
         compound.put("Fuel", fuelInventory.serializeNBT());
+        compound.putInt("Timer", timer);
 
     }
     @Override

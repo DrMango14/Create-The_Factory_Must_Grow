@@ -3,6 +3,8 @@ package com.drmangotea.tfmg.registry;
 import com.drmangotea.tfmg.blocks.gadgets.explosives.thermite_grenades.ChemicalColor;
 import com.drmangotea.tfmg.blocks.gadgets.explosives.thermite_grenades.ThermiteGrenadeItem;
 import com.drmangotea.tfmg.blocks.gadgets.quad_potato_cannon.QuadPotatoCannonItem;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin.CastingBasinBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin.CastingMoldItem;
 import com.drmangotea.tfmg.items.CoalCokeItem;
 import com.drmangotea.tfmg.items.ScrewdriverItem;
 import com.simibubi.create.foundation.data.AssetLookup;
@@ -38,7 +40,9 @@ public class TFMGItems {
             REGISTRATE.item("quad_potato_cannon", QuadPotatoCannonItem::new)
                     .model(AssetLookup.itemModelWithPartials())
                     .register();
-
+    public static final ItemEntry<CastingMoldItem>
+            BLOCK_MOLD = REGISTRATE.item("block_mold", p -> new CastingMoldItem(p, CastingBasinBlockEntity.MoldType.BLOCK)).properties(p -> p.stacksTo(1)).register(),
+            INGOT_MOLD = REGISTRATE.item("ingot_mold", p -> new CastingMoldItem(p, CastingBasinBlockEntity.MoldType.INGOT)).properties(p -> p.stacksTo(1)).register();
     public static final ItemEntry<CoalCokeItem> COAL_COKE = REGISTRATE.item("coal_coke", CoalCokeItem::new)
             .register();
 

@@ -1,8 +1,10 @@
-// 1.19.2	2023-09-28T15:00:28.8610672	Registrate Provider for tfmg [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-10-08T21:01:08.324319	Registrate Provider for tfmg [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 b7f5146505c40c08cdea7ad01fa99048b7ac5451 assets/tfmg/blockstates/aluminum_block.json
 933485fa587fccc649b4cbe8f76f15e590cc8bb1 assets/tfmg/blockstates/bauxite.json
 2b53ff8e880d35a42388584cb3ca896c55bfaf95 assets/tfmg/blockstates/bauxite_pillar.json
 83154b3fd031e4e10e1103d4befc800a82da4bbe assets/tfmg/blockstates/blast_furnace_output.json
+06919cd6d4a6a91ca37c30aebbb68c51feab4f74 assets/tfmg/blockstates/casting_basin.json
+5771fe31474df0e15c3a2756bac1b31a7d898868 assets/tfmg/blockstates/casting_spout.json
 9ca537517fb8baeff3d4e4137c93aebd6b874c81 assets/tfmg/blockstates/cast_iron_block.json
 e13ba2fa789c784e4b7cfec3dd4603e29152387e assets/tfmg/blockstates/cast_iron_distillation_controller.json
 61bcb8f09523c05fe8ee07a4b8b71a59e98393fe assets/tfmg/blockstates/cast_iron_distillation_output.json
@@ -39,6 +41,7 @@ a8f81ce72c3f074ffef304b238ae805f3b4ea763 assets/tfmg/blockstates/layered_bauxite
 d3ba2682652fd44337d1f82ec382df17611fabe1 assets/tfmg/blockstates/liquid_plastic.json
 2dc4b1da2bee0275cbb13ef89003d56f62d4443d assets/tfmg/blockstates/lubrication_oil.json
 6c819d5f63ca53146d069ba0d00b3e1b10391a68 assets/tfmg/blockstates/machine_input.json
+3dff9e1ec59415779195d2abfa9f07bc17b428a1 assets/tfmg/blockstates/molten_metal.json
 ebd6804b999acea36abbf07c2381ee6dee0d7a16 assets/tfmg/blockstates/napalm.json
 0f33dc6b2a736164b17f416ce7d127c87bfb6441 assets/tfmg/blockstates/napalm_bomb.json
 89f2902010903aad686571ef37c781b111147456 assets/tfmg/blockstates/naphtha.json
@@ -66,8 +69,8 @@ e29906d296994a13fefc2beb22f7693e1027dd1b assets/tfmg/blockstates/steel_fluid_val
 71b4c68d8a02062252c4dfde41650b7667d8c0ca assets/tfmg/blockstates/steel_sheetmetal.json
 47b56dad1f2715aae7430b5f9acb1d51a26cf562 assets/tfmg/blockstates/steel_smart_fluid_pipe.json
 942bb86fa92b3c40fc535dccdd2e9f3b79a36d92 assets/tfmg/blockstates/surface_scanner.json
-2c438721675e87e549f147887e3d0604acae4e20 assets/tfmg/lang/en_ud.json
-eda6d43bb8bd4174ddbfa181989dce755756e941 assets/tfmg/lang/en_us.json
+4ac8f2584be9abd987a4cd0516a5dc6cf08b5f58 assets/tfmg/lang/en_ud.json
+5280ab5d23d323e2d440c1baf054e5d7f33f94ab assets/tfmg/lang/en_us.json
 9e6a6b62f5e7528c4e4d4f72f3510edcd8f0c078 assets/tfmg/models/block/aluminum_block.json
 5a4c785e8d8394ccd125732c0017459648574c4e assets/tfmg/models/block/bauxite_natural_0.json
 4ace0da00498fcbb9ddfdf321767b40b095c8778 assets/tfmg/models/block/bauxite_natural_1.json
@@ -185,6 +188,9 @@ f685ca653c8e197986b1ac8f43297989816d39d2 assets/tfmg/models/item/aluminum_ingot.
 4ace0da00498fcbb9ddfdf321767b40b095c8778 assets/tfmg/models/item/bauxite.json
 41091873d85bac787e4752d0ff81189432f1e28e assets/tfmg/models/item/bauxite_pillar.json
 8ef0374ff08be7e1501c64fce1e075144e0c070f assets/tfmg/models/item/blast_furnace_output.json
+a846fbfd51826403a8695e89fccaa9d54a7e3ea6 assets/tfmg/models/item/block_mold.json
+1e73706492a2cc569bb603443d56b2e9773b9c6b assets/tfmg/models/item/casting_basin.json
+94fd821fec37d1f451c1094d19ead45ed8c98f45 assets/tfmg/models/item/casting_spout.json
 ec38882fb9010884823d6d6afa604f8a6512d279 assets/tfmg/models/item/cast_iron_block.json
 25acd7ba8827401619c5faf7bdbe60228b411864 assets/tfmg/models/item/cast_iron_distillation_controller.json
 fc48286f0e70651f3d5a915558c3c91ae3ad0da6 assets/tfmg/models/item/cast_iron_distillation_output.json
@@ -216,6 +222,7 @@ ed2830b2988403aebaca633b2e315878b41f7503 assets/tfmg/models/item/gasoline_bucket
 3fdff9e88db39939ee31968358eb51c060006766 assets/tfmg/models/item/heavy_machinery_casing.json
 f3bea42a905b7df9395bda18f751e2ee0c023e65 assets/tfmg/models/item/heavy_oil_bucket.json
 81bf095f356d9dc74a83af78b860ef8d3aed9b72 assets/tfmg/models/item/industrial_pipe.json
+858a4fb7e2e1874fc4e5f018453ccc8d272dbc03 assets/tfmg/models/item/ingot_mold.json
 8996fe57623ded9433d6766e80a39e41a2aba1ca assets/tfmg/models/item/kerosene_bucket.json
 c0f668fca568bc4c35aba97d9ac93986720e501f assets/tfmg/models/item/layered_bauxite.json
 ee1682c21054b9a9ffde5983141d49e8177f9a2a assets/tfmg/models/item/lead_block.json
@@ -289,7 +296,7 @@ d26621b9617890011a68780cf7ab40fbb4658edc data/forge/tags/items/storage_blocks/le
 63c4a8d8e713db70730e766f1a10f8dd9072f98f data/minecraft/tags/blocks/dripstone_replaceable_blocks.json
 63c4a8d8e713db70730e766f1a10f8dd9072f98f data/minecraft/tags/blocks/lush_ground_replaceable.json
 694d1673a052cf6c604fd75f5f0b8954a04a05e3 data/minecraft/tags/blocks/mineable/axe.json
-02cc402fd90edb75d6a0e43851d4eca2912bd0bc data/minecraft/tags/blocks/mineable/pickaxe.json
+4f5ce2d2b247c3271434a846a5172de74ac10b39 data/minecraft/tags/blocks/mineable/pickaxe.json
 63c4a8d8e713db70730e766f1a10f8dd9072f98f data/minecraft/tags/blocks/moss_replaceable.json
 f67e51a16b6d140324ca0201f1b05e672eb63774 data/minecraft/tags/blocks/needs_iron_tool.json
 755548d9019c1bb26a568488912ebfdf399e02d2 data/minecraft/tags/blocks/needs_stone_tool.json
@@ -341,6 +348,8 @@ a4b393a2526bd10fa38095ac80769f913f139889 data/tfmg/loot_tables/blocks/aluminum_b
 56d114d40ea3160b5c06cf9cfaa2e5107543c460 data/tfmg/loot_tables/blocks/bauxite.json
 473b0effd9a768189aa232855cd09e7b380c3adc data/tfmg/loot_tables/blocks/bauxite_pillar.json
 42f0a002820ca15e79fbc28e45e0f34638e9aeab data/tfmg/loot_tables/blocks/blast_furnace_output.json
+b856690500dccf0e5407bcb45e057710259f48e3 data/tfmg/loot_tables/blocks/casting_basin.json
+5627226e6bd089259395af9338db044278133033 data/tfmg/loot_tables/blocks/casting_spout.json
 60857d034446187e758de87644a80a7bc4d6b150 data/tfmg/loot_tables/blocks/cast_iron_block.json
 300a96dcae25ba9bc085ee75f066b4ad2590b6e0 data/tfmg/loot_tables/blocks/cast_iron_distillation_controller.json
 24517e07383f7a7eb8651f58721cf9f6f49393c0 data/tfmg/loot_tables/blocks/cast_iron_distillation_output.json
