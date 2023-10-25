@@ -1,7 +1,8 @@
 package com.drmangotea.tfmg.blocks.engines.small;
 
 
-import com.drmangotea.createindustry.registry.CIShapes;
+
+import com.drmangotea.tfmg.registry.TFMGShapes;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -34,9 +35,9 @@ abstract public class EngineBlock extends DirectionalKineticBlock {
 public VoxelShape getShape(BlockState pState, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 
      if(pState.getValue(FACING).getAxis()==Axis.Y) {
-         return CIShapes.ENGINE_VERTICAL.get(pState.getValue(FACING));
+         return TFMGShapes.ENGINE_VERTICAL.get(pState.getValue(FACING));
      }else
-         return CIShapes.ENGINE.get(pState.getValue(FACING));
+         return TFMGShapes.ENGINE.get(pState.getValue(FACING));
 }
 
 

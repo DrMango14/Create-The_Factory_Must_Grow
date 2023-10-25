@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg.blocks.engines.small;
 
-import com.drmangotea.createindustry.content.oil.exhaust.ExhaustBlock;
-import com.drmangotea.createindustry.registry.CIFluids;
+
+import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -13,6 +13,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -133,7 +134,7 @@ import java.util.Optional;
         return new SmartFluidTank(1000, this::onFluidStackChanged){
             @Override
             public boolean isFluidValid(FluidStack stack) {
-                return stack.getFluid().isSame(CIFluids.CARBON_DIOXIDE.getSource());
+                return stack.getFluid().isSame(TFMGFluids.CARBON_DIOXIDE.getSource());
             }
         };
     }
@@ -142,7 +143,7 @@ import java.util.Optional;
         sendData();
     }
     public BlockEntity getFrontPart(){
-        Direction direction = this.getBlockState().getValue(ExhaustBlock.FACING);
+        Direction direction = this.getBlockState().getValue(DirectionalBlock.FACING);
 
         if(direction == Direction.UP)
             return level.getBlockEntity(this.getBlockPos().above());

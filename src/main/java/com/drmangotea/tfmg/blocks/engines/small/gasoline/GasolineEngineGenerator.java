@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.blocks.engines.small.gasoline;
 
-import com.drmangotea.createindustry.content.blocks.engines.EngineBlock;
+
+import com.drmangotea.tfmg.blocks.engines.small.EngineBlock;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SpecialBlockStateGen;
 import com.tterrag.registrate.providers.DataGenContext;
