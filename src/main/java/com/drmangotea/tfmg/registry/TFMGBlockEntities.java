@@ -7,6 +7,18 @@ import com.drmangotea.tfmg.blocks.decoration.doors.TFMGSlidingDoorRenderer;
 import com.drmangotea.tfmg.blocks.deposits.FluidDepositBlockEntity;
 import com.drmangotea.tfmg.blocks.deposits.surface_scanner.SurfaceScannerBlockEntity;
 import com.drmangotea.tfmg.blocks.deposits.surface_scanner.SurfaceScannerRenderer;
+import com.drmangotea.tfmg.blocks.engines.diesel.DieselEngineBlockEntity;
+import com.drmangotea.tfmg.blocks.engines.diesel.DieselEngineInstance;
+import com.drmangotea.tfmg.blocks.engines.diesel.DieselEngineRenderer;
+import com.drmangotea.tfmg.blocks.engines.intake.AirIntakeBlockEntity;
+import com.drmangotea.tfmg.blocks.engines.intake.AirIntakeInstance;
+import com.drmangotea.tfmg.blocks.engines.intake.AirIntakeRenderer;
+import com.drmangotea.tfmg.blocks.engines.small.gasoline.GasolineEngineBackTileEntity;
+import com.drmangotea.tfmg.blocks.engines.small.gasoline.GasolineEngineTileEntity;
+import com.drmangotea.tfmg.blocks.engines.small.lpg.LPGEngineBackTileEntity;
+import com.drmangotea.tfmg.blocks.engines.small.lpg.LPGEngineTileEntity;
+import com.drmangotea.tfmg.blocks.engines.small.turbine.TurbineEngineBackTileEntity;
+import com.drmangotea.tfmg.blocks.engines.small.turbine.TurbineEngineTileEntity;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.BlastFurnaceOutputBlockEntity;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.BlastFurnaceRenderer;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.MoltenMetalBlockEntity;
@@ -32,6 +44,7 @@ import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.machine_input
 import com.drmangotea.tfmg.blocks.pipes.normal.LockablePipeBlockEntity;
 import com.drmangotea.tfmg.blocks.tanks.SteelFluidTankRenderer;
 import com.drmangotea.tfmg.blocks.tanks.SteelTankBlockEntity;
+import com.drmangotea.tfmg.blocks.engines.small.UniversalEngineRenderer;
 import com.simibubi.create.content.fluids.pipes.SmartFluidPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.StraightPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.TransparentStraightPipeRenderer;
@@ -197,6 +210,55 @@ public class TFMGBlockEntities {
             .renderer(()->CastingSpoutRenderer::new)
             .validBlocks(TFMGBlocks.CASTING_SPOUT)
             .register();
+
+    public static final BlockEntityEntry<AirIntakeBlockEntity> AIR_INTAKE = REGISTRATE
+            .blockEntity("air_intake", AirIntakeBlockEntity::new)
+            .instance(() -> AirIntakeInstance::new, true)
+            .renderer(()-> AirIntakeRenderer::new)
+            .validBlocks(TFMGBlocks.AIR_INTAKE)
+            .register();
+    public static final BlockEntityEntry<DieselEngineBlockEntity> DIESEL_ENGINE = REGISTRATE
+            .blockEntity("diesel_engine", DieselEngineBlockEntity::new)
+            .instance(() -> DieselEngineInstance::new, false)
+            .validBlocks(TFMGBlocks.DIESEL_ENGINE)
+            .renderer(() -> DieselEngineRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<GasolineEngineTileEntity> GASOLINE_ENGINE = REGISTRATE
+            .blockEntity("gasoline_engine", GasolineEngineTileEntity::new)
+            .instance(() -> HalfShaftInstance::new, false)
+            .validBlocks(TFMGBlocks.GASOLINE_ENGINE)
+            .renderer(() -> UniversalEngineRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<GasolineEngineBackTileEntity> GASOLINE_ENGINE_BACK = REGISTRATE
+            .blockEntity("gasoline_engine_back", GasolineEngineBackTileEntity::new)
+            .validBlocks(TFMGBlocks.GASOLINE_ENGINE_BACK)
+            .register();
+
+    public static final BlockEntityEntry<LPGEngineTileEntity> LPG_ENGINE = REGISTRATE
+            .blockEntity("lpg_engine", LPGEngineTileEntity::new)
+            .instance(() -> HalfShaftInstance::new, false)
+            .validBlocks(TFMGBlocks.LPG_ENGINE)
+            .renderer(() -> UniversalEngineRenderer::new)
+            .register();
+    public static final BlockEntityEntry<LPGEngineBackTileEntity> LPG_ENGINE_BACK = REGISTRATE
+            .blockEntity("lpg_engine_back", LPGEngineBackTileEntity::new)
+            .validBlocks(TFMGBlocks.LPG_ENGINE_BACK)
+            .register();
+
+    public static final BlockEntityEntry<TurbineEngineTileEntity> TURBINE_ENGINE = REGISTRATE
+            .blockEntity("turbine_engine", TurbineEngineTileEntity::new)
+            .instance(() -> HalfShaftInstance::new, false)
+            .validBlocks(TFMGBlocks.TURBINE_ENGINE)
+            .renderer(() -> UniversalEngineRenderer::new)
+            .register();
+    public static final BlockEntityEntry<TurbineEngineBackTileEntity> TURBINE_ENGINE_BACK = REGISTRATE
+            .blockEntity("turbine_engine_back", TurbineEngineBackTileEntity::new)
+            .validBlocks(TFMGBlocks.TURBINE_ENGINE_BACK)
+            .register();
+
+
 
 
     public static void register() {}

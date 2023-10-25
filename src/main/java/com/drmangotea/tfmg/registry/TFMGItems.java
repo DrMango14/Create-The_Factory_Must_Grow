@@ -1,8 +1,8 @@
 package com.drmangotea.tfmg.registry;
 
-import com.drmangotea.tfmg.blocks.gadgets.explosives.thermite_grenades.ChemicalColor;
-import com.drmangotea.tfmg.blocks.gadgets.explosives.thermite_grenades.ThermiteGrenadeItem;
-import com.drmangotea.tfmg.blocks.gadgets.quad_potato_cannon.QuadPotatoCannonItem;
+import com.drmangotea.tfmg.items.gadgets.explosives.thermite_grenades.ChemicalColor;
+import com.drmangotea.tfmg.items.gadgets.explosives.thermite_grenades.ThermiteGrenadeItem;
+import com.drmangotea.tfmg.items.gadgets.quad_potato_cannon.QuadPotatoCannonItem;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin.CastingBasinBlockEntity;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin.CastingMoldItem;
 import com.drmangotea.tfmg.items.CoalCokeItem;
@@ -13,7 +13,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 import static com.drmangotea.tfmg.CreateTFMG.REGISTRATE;
-import static com.drmangotea.tfmg.blocks.gadgets.explosives.thermite_grenades.ChemicalColor.*;
+import static com.drmangotea.tfmg.items.gadgets.explosives.thermite_grenades.ChemicalColor.*;
 import static com.simibubi.create.AllTags.AllItemTags.CREATE_INGOTS;
 import static com.simibubi.create.AllTags.forgeItemTag;
 

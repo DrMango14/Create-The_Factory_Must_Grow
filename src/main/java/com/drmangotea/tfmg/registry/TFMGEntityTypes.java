@@ -2,10 +2,10 @@ package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.CreateTFMG;
 import com.drmangotea.tfmg.base.spark.*;
-import com.drmangotea.tfmg.blocks.gadgets.explosives.napalm.NapalmBombEntity;
-import com.drmangotea.tfmg.blocks.gadgets.explosives.napalm.NapalmBombRenderer;
-import com.drmangotea.tfmg.blocks.gadgets.explosives.thermite_grenades.ThermiteGrenade;
-import com.drmangotea.tfmg.blocks.gadgets.explosives.thermite_grenades.ThermiteGrenadeRenderer;
+import com.drmangotea.tfmg.items.gadgets.explosives.napalm.NapalmBombEntity;
+import com.drmangotea.tfmg.items.gadgets.explosives.napalm.NapalmBombRenderer;
+import com.drmangotea.tfmg.items.gadgets.explosives.thermite_grenades.ThermiteGrenade;
+import com.drmangotea.tfmg.items.gadgets.explosives.thermite_grenades.ThermiteGrenadeRenderer;
 import com.simibubi.create.foundation.data.CreateEntityBuilder;
 import com.simibubi.create.foundation.utility.Lang;
 import com.tterrag.registrate.util.entry.EntityEntry;

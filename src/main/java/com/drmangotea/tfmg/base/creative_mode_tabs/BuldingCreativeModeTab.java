@@ -17,6 +17,6 @@ public class BuldingCreativeModeTab extends TFMGCreativeModeTab {
 
     @Override
     public ItemStack makeIcon() {
-        return TFMGBlocks.CONCRETE.asStack();
+        return TFMGBlocks.CONCRETE_TEST.asStack();
     }
 }

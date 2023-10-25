@@ -64,7 +64,7 @@ public class FormWorkBlockEntity extends TFMGMachineBlockEntity {
                 timer--;
 
                 if(timer==0){
-                    level.setBlock(getBlockPos(), TFMGBlocks.CONCRETE.getDefaultState(),1);
+                    level.setBlock(getBlockPos(), TFMGBlocks.CONCRETE_TEST.getDefaultState(),1);
                 }
             }
 

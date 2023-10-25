@@ -7,7 +7,17 @@ import com.drmangotea.tfmg.blocks.concrete.formwork.FormWorkBlock;
 import com.drmangotea.tfmg.blocks.concrete.formwork.FormWorkGenerator;
 import com.drmangotea.tfmg.blocks.decoration.doors.TFMGSlidingDoorBlock;
 import com.drmangotea.tfmg.blocks.deposits.FluidDepositBlock;
-import com.drmangotea.tfmg.blocks.gadgets.explosives.napalm.NapalmBombBlock;
+import com.drmangotea.tfmg.blocks.engines.diesel.DieselEngineBlock;
+import com.drmangotea.tfmg.blocks.engines.intake.AirIntakeBlock;
+import com.drmangotea.tfmg.blocks.engines.intake.AirIntakeGenerator;
+import com.drmangotea.tfmg.blocks.engines.small.gasoline.GasolineEngineBackBlock;
+import com.drmangotea.tfmg.blocks.engines.small.gasoline.GasolineEngineBlock;
+import com.drmangotea.tfmg.blocks.engines.small.gasoline.GasolineEngineGenerator;
+import com.drmangotea.tfmg.blocks.engines.small.lpg.LPGEngineBackBlock;
+import com.drmangotea.tfmg.blocks.engines.small.lpg.LPGEngineBlock;
+import com.drmangotea.tfmg.blocks.engines.small.turbine.TurbineEngineBackBlock;
+import com.drmangotea.tfmg.blocks.engines.small.turbine.TurbineEngineBlock;
+import com.drmangotea.tfmg.items.gadgets.explosives.napalm.NapalmBombBlock;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin.CastingBasinBlock;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_spout.CastingSpoutBlock;
 import com.drmangotea.tfmg.items.CoalCokeBlockItem;
@@ -37,7 +47,9 @@ import com.drmangotea.tfmg.blocks.tanks.SteelTankBlock;
 import com.drmangotea.tfmg.blocks.tanks.SteelTankGenerator;
 import com.drmangotea.tfmg.blocks.tanks.SteelTankItem;
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.AllSpriteShifts;
+import com.simibubi.create.AllTags;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
@@ -47,14 +59,13 @@ import com.simibubi.create.content.fluids.pipes.valve.FluidValveBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.data.*;
+import com.simibubi.create.foundation.utility.Couple;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
@@ -418,7 +429,16 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     ///////
 
 
-
+    public static final BlockEntry<AirIntakeBlock> AIR_INTAKE = REGISTRATE.block("air_intake", AirIntakeBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .properties(BlockBehaviour.Properties::noOcclusion)
+            .transform(pickaxeOnly())
+            .addLayer(() -> RenderType::cutoutMipped)
+            .blockstate(new AirIntakeGenerator()::generate)
+            .item()
+            .transform(customItemModel())
+            .lang("Air Intake")
+            .register();
 
 
 
@@ -536,6 +556,110 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                             .noOcclusion())
                     .register();
 
+    //-----------------------ENGINES---------------------------//
+    public static final BlockEntry<GasolineEngineBlock> GASOLINE_ENGINE =
+            REGISTRATE.block("gasoline_engine", GasolineEngineBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(pickaxeOnly())
+                    .blockstate(new GasolineEngineGenerator()::generate)
+                    .transform(BlockStressDefaults.setCapacity(60.0))
+                    .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
+                    .item()
+                    .properties(p -> p.rarity(Rarity.UNCOMMON))
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<GasolineEngineBackBlock> GASOLINE_ENGINE_BACK =
+            REGISTRATE.block("gasoline_engine_back", GasolineEngineBackBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(pickaxeOnly())
+                    .blockstate(new GasolineEngineGenerator()::generate)
+                    .transform(BlockStressDefaults.setCapacity(60.0))
+                    .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
+                    .item()
+                    .properties(p -> p.rarity(Rarity.UNCOMMON))
+                    .transform(customItemModel())
+                    .register();
+
+
+    public static final BlockEntry<LPGEngineBlock> LPG_ENGINE =
+            REGISTRATE.block("lpg_engine", LPGEngineBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(pickaxeOnly())
+                    .blockstate(new GasolineEngineGenerator()::generate)
+                    .transform(BlockStressDefaults.setCapacity(60.0))
+                    .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
+                    .item()
+                    .properties(p -> p.rarity(Rarity.UNCOMMON))
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<LPGEngineBackBlock> LPG_ENGINE_BACK =
+            REGISTRATE.block("lpg_engine_back", LPGEngineBackBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(pickaxeOnly())
+                    .blockstate(new GasolineEngineGenerator()::generate)
+                    .transform(BlockStressDefaults.setCapacity(60.0))
+                    .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
+                    .item()
+                    .properties(p -> p.rarity(Rarity.UNCOMMON))
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<TurbineEngineBlock> TURBINE_ENGINE =
+            REGISTRATE.block("turbine_engine", TurbineEngineBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(pickaxeOnly())
+                    .blockstate(new GasolineEngineGenerator()::generate)
+                    .transform(BlockStressDefaults.setCapacity(60.0))
+                    .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
+                    .item()
+                    .properties(p -> p.rarity(Rarity.UNCOMMON))
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<TurbineEngineBackBlock> TURBINE_ENGINE_BACK =
+            REGISTRATE.block("turbine_engine_back", TurbineEngineBackBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(pickaxeOnly())
+                    .blockstate(new GasolineEngineGenerator()::generate)
+                    .transform(BlockStressDefaults.setCapacity(60.0))
+                    .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
+                    .item()
+                    .properties(p -> p.rarity(Rarity.UNCOMMON))
+                    .transform(customItemModel())
+                    .register();
+
+
+
+    public static final BlockEntry<DieselEngineBlock> DIESEL_ENGINE =
+            REGISTRATE.block("diesel_engine", DieselEngineBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .transform(pickaxeOnly())
+                    .blockstate((c, p) -> p.horizontalFaceBlock(c.get(), AssetLookup.partialBaseModel(c, p)))
+                    .transform(BlockStressDefaults.setCapacity(14.0))
+                    .transform(BlockStressDefaults.setGeneratorSpeed(DieselEngineBlock::getSpeedRange))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
 
 
 
@@ -543,17 +667,121 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     static {
         REGISTRATE.creativeModeTab(() -> TFMGCreativeModeTabs.TFMG_BUILDING_BLOCKS);
     }
-    public static final BlockEntry<Block> CONCRETE = REGISTRATE.block("concrete", Block::new)
-            .initialProperties(() -> Blocks.STONE)
-            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
-            .properties(p -> p.requiresCorrectToolForDrops())
-            .transform(pickaxeOnly())
-            .blockstate(simpleCubeAll("concrete"))
-            .tag(BlockTags.NEEDS_STONE_TOOL)
-            .transform(tagBlockAndItem("concrete"))
-            .build()
-            .lang("Concrete")
-            .register();
+    //public static final BlockEntry<Block> CONCRETE = REGISTRATE.block("concrete", Block::new)
+    //        .initialProperties(() -> Blocks.STONE)
+    //        .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+    //        .properties(p -> p.requiresCorrectToolForDrops())
+    //        .transform(pickaxeOnly())
+    //        .blockstate(simpleCubeAll("concrete"))
+    //        .tag(BlockTags.NEEDS_STONE_TOOL)
+    //        .transform(tagBlockAndItem("concrete"))
+    //        .build()
+    //        .lang("Concrete")
+    //        .register();
+
+
+    public static final BlockEntry<Block> CONCRETE_TEST = generateConcrete();
+
+
+    public static BlockEntry<Block> generateConcrete(){
+
+
+        generateColoredConcrete();
+
+
+
+        return REGISTRATE.block("concrete", Block::new)
+                .initialProperties(() -> Blocks.STONE)
+                .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+                .properties(p -> p.requiresCorrectToolForDrops())
+                .transform(pickaxeOnly())
+                .blockstate(simpleCubeAll("concrete"))
+                .tag(BlockTags.NEEDS_STONE_TOOL)
+                .transform(tagBlockAndItem("concrete"))
+                .build()
+                .lang("Concrete")
+                .register();
+    }
+    //this saved so much time
+    public static void generateColoredConcrete() {
+        String[] colours = {"black", "white", "blue", "light_blue", "red", "green", "lime", "pink", "magenta", "yellow", "gray", "light_gray", "brown", "cyan", "purple", "orange"};
+
+
+        for (String color : colours) {
+            String firstLetter = color.substring(0, 1).toUpperCase();
+            String colorWithoutC = color.substring(1);
+
+            String upperCaseColor = firstLetter + colorWithoutC;
+            String light = "Light";
+            if(upperCaseColor.contains(light)){
+                String nameWithoutLight = upperCaseColor.substring(6);
+
+                String firstLetter2 = nameWithoutLight.substring(0, 1).toUpperCase();
+                String colorWithoutC2 = nameWithoutLight.substring(1);
+
+                upperCaseColor = light+" "+firstLetter2+colorWithoutC2;
+
+
+            }
+            REGISTRATE.block(color + "_concrete", Block::new)
+                    .initialProperties(() -> Blocks.STONE)
+                    .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+                    .properties(p -> p.requiresCorrectToolForDrops())
+                    .transform(pickaxeOnly())
+                    .blockstate(simpleCubeAll(color + "_concrete"))
+                    .tag(BlockTags.NEEDS_STONE_TOOL)
+                    .item()
+                    .build()
+                    .lang(upperCaseColor + " Concrete")
+                    .register();
+
+
+            REGISTRATE.block(color + "_concrete_wall", WallBlock::new)
+                    .initialProperties(() -> Blocks.STONE)
+                    .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+                    .properties(p -> p.requiresCorrectToolForDrops())
+                    .transform(pickaxeOnly())
+                    .blockstate((c, p) -> TFMGVanillaBlockStates.generateWallBlockState(c, p, color + "_concrete"))
+                    .tag(BlockTags.NEEDS_STONE_TOOL)
+                    .tag(BlockTags.WALLS)
+                    .item()
+                    .transform(b -> TFMGVanillaBlockStates.transformWallItem(b, color + "_concrete"))
+                    .build()
+                    .lang(upperCaseColor + " Concrete Wall")
+                    .register();
+
+            REGISTRATE.block(color + "_concrete_stairs", p -> new StairBlock(()-> TFMGBlocks.CONCRETE_TEST.get().defaultBlockState(),p))
+                    .initialProperties(() -> Blocks.STONE)
+                    .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+                    .properties(p -> p.requiresCorrectToolForDrops())
+                    .transform(pickaxeOnly())
+                    .blockstate((c, p) -> TFMGVanillaBlockStates.generateStairBlockState(c, p, color + "_concrete"))
+                    .tag(BlockTags.NEEDS_STONE_TOOL)
+                    .tag(BlockTags.STAIRS)
+                    .item()
+                    .transform(b -> TFMGVanillaBlockStates.transformStairItem(b, color + "_concrete"))
+                    .build()
+                    .lang(upperCaseColor + " Concrete Stairs")
+                    .register();
+
+
+
+            REGISTRATE.block(color + "_concrete_slab", SlabBlock::new)
+                    .initialProperties(() -> Blocks.STONE)
+                    .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+                    .properties(p -> p.requiresCorrectToolForDrops())
+                    .transform(pickaxeOnly())
+                    .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, color + "_concrete"))
+                    .tag(BlockTags.NEEDS_STONE_TOOL)
+                    .tag(BlockTags.WALLS)
+                    .item()
+                    .transform(customItemModel(color+"_concrete_bottom"))
+                    .lang(upperCaseColor + " Concrete Slab")
+                    .register();
+
+
+        }
+    }
 
     public static void register() {}
 }

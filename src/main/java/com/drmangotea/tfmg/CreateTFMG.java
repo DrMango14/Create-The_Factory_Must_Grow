@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg;
 
 import com.drmangotea.tfmg.base.TFMGLangPartials;
-import com.drmangotea.tfmg.blocks.gadgets.explosives.thermite_grenades.fire.TFMGColoredFires;
+import com.drmangotea.tfmg.items.gadgets.explosives.thermite_grenades.fire.TFMGColoredFires;
 import com.drmangotea.tfmg.registry.*;
 import com.drmangotea.tfmg.worldgen.TFMGConfiguredFeatures;
 import com.drmangotea.tfmg.worldgen.TFMGFeatures;
@@ -69,6 +69,7 @@ public class CreateTFMG
         DataGenerator gen = event.getGenerator();
         gen.addProvider(true, new LangMerger(gen, MOD_ID, NAME, TFMGLangPartials.values()));
     }
+    @SuppressWarnings("removal")
     private void clientSetup(final FMLClientSetupEvent event) {
             ItemBlockRenderTypes.setRenderLayer(TFMGColoredFires.GREEN_FIRE.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(TFMGColoredFires.BLUE_FIRE.get(), RenderType.cutout());

@@ -260,41 +260,7 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
             level.setBlock(posToSpawn3.above(), TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
 
         }
-      //  if (timer<=0) {
-         //   posToSpawn = this.getBlockPos().relative(outputFacing.getOpposite()).above();
-         //   posToSpawn1 = this.getBlockPos().relative(outputFacing.getOpposite(),2).above();
-         //   posToSpawn2 = this.getBlockPos().relative(outputFacing.getOpposite()).above().relative(outputFacing.getClockWise());
-         //   posToSpawn3 = this.getBlockPos().relative(outputFacing.getOpposite(),2).above().relative(outputFacing.getClockWise());
-         //   posToSpawn4 = this.getBlockPos().relative(outputFacing.getOpposite()).above().relative(outputFacing.getCounterClockWise());
-         //   posToSpawn5 = this.getBlockPos().relative(outputFacing.getOpposite(),2).above().relative(outputFacing.getCounterClockWise());
-         //   if(level.getBlockState(posToSpawn).is(TFMGBlocks.MOLTEN_METAL.get()))
-         //       level.setBlock(posToSpawn, Blocks.AIR.defaultBlockState(),3);
-         //   if(level.getBlockState(posToSpawn1).is(TFMGBlocks.MOLTEN_METAL.get()))
-         //       level.setBlock(posToSpawn1, Blocks.AIR.defaultBlockState(),3);
-         //   if(level.getBlockState(posToSpawn2).is(TFMGBlocks.MOLTEN_METAL.get()))
-         //       level.setBlock(posToSpawn2, Blocks.AIR.defaultBlockState(),3);
-         //   if(level.getBlockState(posToSpawn3).is(TFMGBlocks.MOLTEN_METAL.get()))
-         //       level.setBlock(posToSpawn3, Blocks.AIR.defaultBlockState(),3);
-         //   if(level.getBlockState(posToSpawn4).is(TFMGBlocks.MOLTEN_METAL.get()))
-         //       level.setBlock(posToSpawn4, Blocks.AIR.defaultBlockState(),3);
-         //   if(level.getBlockState(posToSpawn5).is(TFMGBlocks.MOLTEN_METAL.get()))
-         //       level.setBlock(posToSpawn5, Blocks.AIR.defaultBlockState(),3);
-//
-         //   if(level.getBlockState(posToSpawn.above()).is(TFMGBlocks.MOLTEN_METAL.get()))
-         //       level.setBlock(posToSpawn.above(), Blocks.AIR.defaultBlockState(),3);
-         //   if(level.getBlockState(posToSpawn1.above()).is(TFMGBlocks.MOLTEN_METAL.get()))
-         //       level.setBlock(posToSpawn1.above(), Blocks.AIR.defaultBlockState(),3);
-         //   if(level.getBlockState(posToSpawn2.above()).is(TFMGBlocks.MOLTEN_METAL.get()))
-         //       level.setBlock(posToSpawn2.above(), Blocks.AIR.defaultBlockState(),3);
-         //   if(level.getBlockState(posToSpawn3.above()).is(TFMGBlocks.MOLTEN_METAL.get()))
-         //       level.setBlock(posToSpawn3.above(), Blocks.AIR.defaultBlockState(),3);
-         //   if(level.getBlockState(posToSpawn4.above()).is(TFMGBlocks.MOLTEN_METAL.get()))
-         //       level.setBlock(posToSpawn4.above(), Blocks.AIR.defaultBlockState(),3);
-         //   if(level.getBlockState(posToSpawn5.above()).is(TFMGBlocks.MOLTEN_METAL.get()))
-         //       level.setBlock(posToSpawn5.above(), Blocks.AIR.defaultBlockState(),3);
 
-
-       // }
     }
     @Override
     protected AABB createRenderBoundingBox() {
@@ -310,13 +276,6 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
 
         if (level.isClientSide)
             return;
-       // RecipeWrapper inventoryIn = new RecipeWrapper(inputInventory);
-       // if (recipe == null || !recipe.matches(inventoryIn, level)) {
-       //     Optional<IndustrialBlastingRecipe> recipe = TFMGRecipeTypes.INDUSTRIAL_BLASTING.find(inventoryIn, level);
-       //     if (!recipe.isPresent())
-       //         return;
-       //     this.recipe = recipe.get();
-       // }
 
         tank1.getPrimaryHandler().setFluid(new FluidStack(recipe.getFluidResults().get(0).getFluid(), tank1.getPrimaryHandler().getFluidAmount()+recipe.getFluidResults().get(0).getAmount()));
         tank2.getPrimaryHandler().setFluid(new FluidStack(recipe.getFluidResults().get(1).getFluid(), tank2.getPrimaryHandler().getFluidAmount()+recipe.getFluidResults().get(1).getAmount()));

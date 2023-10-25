@@ -18,7 +18,13 @@ import java.util.Map;
 public class TFMGPartialModels {
 
         public static final PartialModel
-
+                AIR_INTAKE_FAN = block("air_intake/fan"),
+                AIR_INTAKE_FAN_MEDIUM = block("air_intake/fan_medium"),
+                AIR_INTAKE_FAN_LARGE = block("air_intake/fan_large"),
+                AIR_INTAKE_FRAME = block("air_intake/frame"),
+                AIR_INTAKE_FRAME_CLOSED = block("air_intake/frame_closed"),
+                AIR_INTAKE_MEDIUM = block("air_intake/block_medium"),
+                AIR_INTAKE_LARGE = block("air_intake/block_large"),
                 CASTING_SPOUT_CONNECTOR = block("casting_spout/connector"),
                 CASTING_SPOUT_BOTTOM = block("casting_spout/bottom"),
                 COKE_OVEN_DOOR_LEFT = block("coke_oven/door_left"),

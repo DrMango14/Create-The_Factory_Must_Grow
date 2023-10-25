@@ -68,6 +68,11 @@ public class TFMGFluids {
                     .lang("LPG")
                     .register();
 
+    public static final FluidEntry<VirtualFluid> AIR =
+            REGISTRATE.virtualFluid("air",LPG_RL,LPG_RL)
+                    .lang("Air")
+                    .register();
+
     public static final FluidEntry<VirtualFluid> PROPANE =
             REGISTRATE.virtualFluid("propane",PROPANE_RL,PROPANE_RL)
                     .lang("Propane")
