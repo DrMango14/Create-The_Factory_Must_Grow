@@ -18,6 +18,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 
+import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
+
 public class PumpjackCrankRenderer extends KineticBlockEntityRenderer {
 
     public PumpjackCrankRenderer(BlockEntityRendererProvider.Context context) {
@@ -33,8 +35,8 @@ public class PumpjackCrankRenderer extends KineticBlockEntityRenderer {
 
 
 
-        if (Backend.canUseInstancing(te.getLevel()))
-            return;
+       // if (Backend.canUseInstancing(te.getLevel()))
+       //     return;
 
         BlockState blockState = te.getBlockState();
         PumpjackCrankBlockEntity wte = (PumpjackCrankBlockEntity) te;
@@ -59,10 +61,10 @@ public class PumpjackCrankRenderer extends KineticBlockEntityRenderer {
         //kineticRotationTransform(hammer, te, getRotationAxisOf(te), AngleHelper.rad(angle), light);
         hammer.renderInto(ms, vb);
     }
-    private void renderBlock(PumpjackCrankBlockEntity te, PoseStack ms, int light,
+    private void renderBlock(PumpjackCrankBlockEntity be, PoseStack ms, int light,
                              MultiBufferSource buffer) {
 
-        BlockState blockState = te.getBlockState();
+        BlockState blockState = be.getBlockState();
         VertexConsumer vb = buffer.getBuffer(RenderType.solid());
         ms.pushPose();
         TransformStack msr = TransformStack.cast(ms);
@@ -70,95 +72,111 @@ public class PumpjackCrankRenderer extends KineticBlockEntityRenderer {
 
         float dialPivot = 5.75f / 16;
 
+        SuperByteBuffer crank = CachedBufferer.partialFacing(TFMGPartialModels.PUMPJACK_CRANK, blockState,blockState.getValue(FACING));
 
-        if (te.direction == Direction.NORTH){
+
+
+        crank
+                .translate(-0.5, -0.75, -0.5)
+                .centre()
+                .rotate(be.direction.getCounterClockWise(), -AngleHelper.rad(be.angle))
+                .unCentre()
+
+                .light(light)
+                .translateY(0.5);
+
+        crank.renderInto(ms,vb);
+
+
+
+        if (be.direction == Direction.NORTH){
             CachedBufferer.partial(TFMGPartialModels.PUMPJACK_CRANK_BLOCK, blockState)
                     //  .rotateY(d.toYRot())
                     .unCentre()
                     .light(light)
                     .renderInto(ms, vb);
 
-            if(te.isValid()) {
+            if(be.isValid()) {
 
                 CachedBufferer.partial(TFMGPartialModels.PUMPJACK_CONNECTOR, blockState)
 
                         .translate(-0.5, -0.75, -0.5)
                         .centre()
-                        .rotate(Direction.WEST, -AngleHelper.rad(te.angle))
+                        .rotate(Direction.WEST, -AngleHelper.rad(be.angle))
                         .unCentre()
                         .translateY(0.4)
                         .centre()
-                        .rotate(Direction.WEST, AngleHelper.rad(te.angle))
+                        .rotate(Direction.WEST, AngleHelper.rad(be.angle))
                         .unCentre()
                         .light(light)
                         .translateY(0.4)
                         .renderInto(ms, vb);
             }
     }
-        if(te.direction == Direction.EAST) {
+        if(be.direction == Direction.EAST) {
             CachedBufferer.partial(TFMGPartialModels.PUMPJACK_CRANK_BLOCK, blockState)
                     .rotateY(270)
                     .unCentre()
                     .light(light)
                     .renderInto(ms, vb);
-            if(te.isValid()) {
+            if(be.isValid()) {
 
                 CachedBufferer.partial(TFMGPartialModels.PUMPJACK_CONNECTOR, blockState)
                         .rotateY(270)
                         .translate(-0.5, -0.75, -0.5)
                         .centre()
-                        .rotate(Direction.WEST, -AngleHelper.rad(te.angle))
+                        .rotate(Direction.WEST, -AngleHelper.rad(be.angle))
                         .unCentre()
                         .translateY(0.4)
                         .centre()
-                        .rotate(Direction.WEST, AngleHelper.rad(te.angle))
+                        .rotate(Direction.WEST, AngleHelper.rad(be.angle))
                         .unCentre()
                         .light(light)
                         .translateY(0.4)
                         .renderInto(ms, vb);
             }
         }
-        if(te.direction == Direction.SOUTH) {
+        if(be.direction == Direction.SOUTH) {
             CachedBufferer.partial(TFMGPartialModels.PUMPJACK_CRANK_BLOCK, blockState)
                     .rotateY(180)
                     .unCentre()
                     .light(light)
                     .renderInto(ms, vb);
 
-            if(te.isValid()) {
+            if(be.isValid()) {
 
                 CachedBufferer.partial(TFMGPartialModels.PUMPJACK_CONNECTOR, blockState)
                         .rotateY(180)
                         .translate(-0.5, -0.75, -0.5)
                         .centre()
-                        .rotate(Direction.WEST, -AngleHelper.rad(te.angle))
+                        .rotate(Direction.WEST, -AngleHelper.rad(be.angle))
                         .unCentre()
                         .translateY(0.4)
                         .centre()
-                        .rotate(Direction.WEST, AngleHelper.rad(te.angle))
+                        .rotate(Direction.WEST, AngleHelper.rad(be.angle))
                         .unCentre()
                         .light(light)
                         .translateY(0.4)
                         .renderInto(ms, vb);
             }
         }
-        if(te.direction == Direction.WEST) {
+        if(be.direction == Direction.WEST) {
             CachedBufferer.partial(TFMGPartialModels.PUMPJACK_CRANK_BLOCK, blockState)
                     .rotateY(90)
                     .unCentre()
                     .light(light)
                     .renderInto(ms, vb);
-            if(te.isValid()) {
+            if(be.isValid()) {
 
                 CachedBufferer.partial(TFMGPartialModels.PUMPJACK_CONNECTOR, blockState)
                         .rotateY(90)
                         .translate(-0.5, -0.75, -0.5)
                         .centre()
-                        .rotate(Direction.WEST, -AngleHelper.rad(te.angle))
+                        .rotate(Direction.WEST, -AngleHelper.rad(be.angle))
                         .unCentre()
                         .translateY(0.4)
                         .centre()
-                        .rotate(Direction.WEST, AngleHelper.rad(te.angle))
+                        .rotate(Direction.WEST, AngleHelper.rad(be.angle))
                         .unCentre()
                         .light(light)
                         .translateY(0.4)

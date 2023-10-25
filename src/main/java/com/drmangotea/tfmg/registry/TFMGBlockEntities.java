@@ -19,6 +19,8 @@ import com.drmangotea.tfmg.blocks.engines.small.lpg.LPGEngineBackTileEntity;
 import com.drmangotea.tfmg.blocks.engines.small.lpg.LPGEngineTileEntity;
 import com.drmangotea.tfmg.blocks.engines.small.turbine.TurbineEngineBackTileEntity;
 import com.drmangotea.tfmg.blocks.engines.small.turbine.TurbineEngineTileEntity;
+import com.drmangotea.tfmg.blocks.machines.exhaust.ExhaustTileEntity;
+import com.drmangotea.tfmg.blocks.machines.flarestack.FlarestackBlockEntity;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.BlastFurnaceOutputBlockEntity;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.BlastFurnaceRenderer;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.MoltenMetalBlockEntity;
@@ -165,7 +167,7 @@ public class TFMGBlockEntities {
 
     public static final BlockEntityEntry<PumpjackCrankBlockEntity> PUMPJACK_CRANK = REGISTRATE
             .blockEntity("pumpjack_crank", PumpjackCrankBlockEntity::new)
-            .instance(() -> PumpjackCrankInstance::new, true)
+            //.instance(() -> PumpjackCrankInstance::new, true)
             .validBlocks(TFMGBlocks.PUMPJACK_CRANK)
             .renderer(() -> PumpjackCrankRenderer::new)
             .register();
@@ -256,6 +258,16 @@ public class TFMGBlockEntities {
     public static final BlockEntityEntry<TurbineEngineBackTileEntity> TURBINE_ENGINE_BACK = REGISTRATE
             .blockEntity("turbine_engine_back", TurbineEngineBackTileEntity::new)
             .validBlocks(TFMGBlocks.TURBINE_ENGINE_BACK)
+            .register();
+
+    public static final BlockEntityEntry<ExhaustTileEntity> EXHAUST = REGISTRATE
+            .blockEntity("exhaust", ExhaustTileEntity::new)
+            .validBlocks(TFMGBlocks.EXHAUST)
+            .register();
+
+    public static final BlockEntityEntry<FlarestackBlockEntity> FLARESTACK = REGISTRATE
+            .blockEntity("flarestack", FlarestackBlockEntity::new)
+            .validBlocks(TFMGBlocks.FLARESTACK)
             .register();
 
 

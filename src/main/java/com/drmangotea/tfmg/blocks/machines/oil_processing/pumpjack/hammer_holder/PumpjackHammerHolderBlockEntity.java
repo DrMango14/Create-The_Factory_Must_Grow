@@ -13,6 +13,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 
@@ -34,6 +35,11 @@ public class PumpjackHammerHolderBlockEntity extends KineticBlockEntity implemen
 		super(type, pos, state);
 		angle.setValue(14);
 
+	}
+
+	@Override
+	protected AABB createRenderBoundingBox() {
+		return new AABB(this.getBlockPos()).inflate(2);
 	}
 
 	@Override

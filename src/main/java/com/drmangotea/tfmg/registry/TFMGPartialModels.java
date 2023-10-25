@@ -36,6 +36,7 @@ public class TFMGPartialModels {
                 PUMPJACK_FRONT_ROPE = block("pumpjack/pumpjack_front_rope"),
                 PUMPJACK_CONNECTOR = block("pumpjack/pumpjack_connector"),
                 PUMPJACK_CRANK_BLOCK = block("pumpjack/pumpjack_crank_block"),
+                PUMPJACK_CRANK = block("pumpjack/pumpjack_crank"),
                 TOWER_GAUGE = block("distillation_tower/gauge"),
                 STEEL_FLUID_PIPE_CASING = block("steel_pipe/casing"),
                 SURFACE_SCANNER_DIAL = block("surface_scanner/dial"),

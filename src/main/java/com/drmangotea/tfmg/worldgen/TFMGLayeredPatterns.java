@@ -2,7 +2,6 @@ package com.drmangotea.tfmg.worldgen;
 
 
 import com.drmangotea.tfmg.registry.TFMGBlocks;
-import com.drmangotea.tfmg.registry.TFMGPaletteBlocks;
 import com.drmangotea.tfmg.registry.TFMGPaletteStoneTypes;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.infrastructure.worldgen.LayerPattern;
@@ -35,7 +34,7 @@ public class TFMGLayeredPatterns {
 			.layer(l -> l.weight(1)
 					.passiveBlock())
 			.layer(l -> l.weight(2)
-					.block(TFMGBlocks.CONCRETE_TEST.get())
+					.block(TFMGBlocks.CONCRETE.get())
 					.size(1, 3))
 			.layer(l -> l.weight(1)
 					.block(Blocks.SMOOTH_BASALT)
@@ -53,7 +52,7 @@ public class TFMGLayeredPatterns {
 			.layer(l -> l.weight(1)
 					.passiveBlock())
 			.layer(l -> l.weight(2)
-					.block(TFMGBlocks.CONCRETE_TEST.get())
+					.block(TFMGBlocks.CONCRETE.get())
 					.size(1, 3))
 			.layer(l -> l.weight(1)
 					.block(Blocks.TUFF)
@@ -73,7 +72,7 @@ public class TFMGLayeredPatterns {
 			.layer(l -> l.weight(2)
 					.passiveBlock())
 			.layer(l -> l.weight(2)
-					.block(TFMGBlocks.CONCRETE_TEST.get())
+					.block(TFMGBlocks.CONCRETE.get())
 					.size(1, 2))
 			.layer(l -> l.weight(3)
 					.block(AllPaletteStoneTypes.SCORCHIA.getBaseBlock())

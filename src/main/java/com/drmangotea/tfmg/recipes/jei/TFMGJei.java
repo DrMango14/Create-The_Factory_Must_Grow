@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.recipes.jei;
 
 
+import com.drmangotea.tfmg.recipes.casting.CastingRecipe;
 import com.drmangotea.tfmg.recipes.coking.CokingRecipe;
 import com.drmangotea.tfmg.recipes.distillation.DistillationRecipe;
 import com.drmangotea.tfmg.recipes.distillation.AdvancedDistillationRecipe;
@@ -86,7 +87,16 @@ public class TFMGJei implements IModPlugin {
                  .catalyst(TFMGBlocks.FIREPROOF_BRICKS::get)
                  .itemIcon(TFMGBlocks.BLAST_FURNACE_OUTPUT.get())
                  .emptyBackground(177, 150)
-                 .build("industrial_blasting", IndustrialBlastingCategory::new)
+                 .build("industrial_blasting", IndustrialBlastingCategory::new),
+
+
+                 casting = builder(CastingRecipe.class)
+                 .addTypedRecipes(TFMGRecipeTypes.CASTING)
+                 .catalyst(TFMGBlocks.CASTING_SPOUT::get)
+                 .catalyst(TFMGBlocks.CASTING_BASIN::get)
+                 .itemIcon(TFMGBlocks.STEEL_BLOCK.get())
+                 .emptyBackground(177, 140)
+                 .build("casting", CastingCategory::new)
 
 
                 ;

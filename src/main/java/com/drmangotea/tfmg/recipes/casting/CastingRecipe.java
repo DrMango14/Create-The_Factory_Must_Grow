@@ -48,6 +48,11 @@ public class CastingRecipe extends ProcessingRecipe<RecipeWrapper> {
 	}
 
 
+	public static int getOutputCount(CastingRecipe recipe){
+		return recipe.results.toArray().length;
+	}
+
+
 	@Override
 	public boolean matches(RecipeWrapper pContainer, Level pLevel) {
 		return false;

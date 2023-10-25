@@ -12,7 +12,10 @@ import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
+
+import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 
 public class PumpjackHammerHolderRenderer extends KineticBlockEntityRenderer<PumpjackHammerHolderBlockEntity> {
 
@@ -38,8 +41,8 @@ public class PumpjackHammerHolderRenderer extends KineticBlockEntityRenderer<Pum
 		float speed = be.visualSpeed.getValue(partialTicks) * 3 / 10f;
 		float angle = be.angle.getValue() + speed * partialTicks;
 
-		if (Math.abs(angle - lastAngle) < 0.001)
-			return;
+		//if (Math.abs(angle - lastAngle) < 0.001)
+		//	return;
 		VertexConsumer vb = buffer.getBuffer(RenderType.solid());
 		renderHammer(be, ms, light, blockState, angle, vb);
 
@@ -52,8 +55,19 @@ public class PumpjackHammerHolderRenderer extends KineticBlockEntityRenderer<Pum
 
 		SuperByteBuffer hammer =
 				CachedBufferer.partialFacing(TFMGPartialModels.PUMPJACK_HAMMER, be.getBlockState(), be.direction);
-		int lightInFront = LevelRenderer.getLightColor(be.getLevel(), be.getBlockPos().relative(be.direction));
-		kineticRotationTransform(hammer, be, be.direction2.getAxis(), angle, lightInFront).renderInto(ms, vb);
+		int lightInFront = LevelRenderer.getLightColor(be.getLevel(), be.getBlockPos());
+
+		Direction.Axis axis = blockState.getValue(FACING).getAxis();
+
+		hammer.centre();
+
+		hammer.rotate(be.direction.getClockWise(), (float) Math.toRadians(angle));
+
+		hammer.unCentre();
+
+
+		hammer.renderInto(ms, vb);
+		//kineticRotationTransform(hammer, be, be.direction2.getAxis(), angle, lightInFront).renderInto(ms, vb);
 
 
 

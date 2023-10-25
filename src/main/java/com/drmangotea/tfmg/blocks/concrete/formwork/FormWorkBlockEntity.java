@@ -3,7 +3,6 @@ package com.drmangotea.tfmg.blocks.concrete.formwork;
 import com.drmangotea.tfmg.blocks.machines.TFMGMachineBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGFluids;
-import com.simibubi.create.Create;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
@@ -64,7 +63,7 @@ public class FormWorkBlockEntity extends TFMGMachineBlockEntity {
                 timer--;
 
                 if(timer==0){
-                    level.setBlock(getBlockPos(), TFMGBlocks.CONCRETE_TEST.getDefaultState(),1);
+                    level.setBlock(getBlockPos(), TFMGBlocks.CONCRETE.getDefaultState(),3);
                 }
             }
 

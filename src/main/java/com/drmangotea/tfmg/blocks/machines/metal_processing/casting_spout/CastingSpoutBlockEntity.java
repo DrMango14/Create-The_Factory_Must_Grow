@@ -12,6 +12,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -147,6 +148,10 @@ public class CastingSpoutBlockEntity extends TFMGMachineBlockEntity {
 
 
         return true;
+    }
+    @Override
+    protected AABB createRenderBoundingBox() {
+        return new AABB(this.getBlockPos()).inflate(1);
     }
 
 }

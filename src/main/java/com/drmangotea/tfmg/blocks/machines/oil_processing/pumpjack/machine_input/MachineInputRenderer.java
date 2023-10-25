@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.state.BlockState;
         @Override
         protected SuperByteBuffer getRotatedModel(MachineInputBlockEntity be, BlockState state) {
             return CachedBufferer.partialFacing(AllPartialModels.SHAFT_HALF, state, state
-                    .getValue(MachineInputBlock.FACING)
-                    .getOpposite());
+                    .getValue(MachineInputBlock.FACING));
         }
     }

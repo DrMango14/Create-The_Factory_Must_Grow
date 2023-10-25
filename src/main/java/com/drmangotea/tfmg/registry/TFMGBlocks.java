@@ -17,6 +17,8 @@ import com.drmangotea.tfmg.blocks.engines.small.lpg.LPGEngineBackBlock;
 import com.drmangotea.tfmg.blocks.engines.small.lpg.LPGEngineBlock;
 import com.drmangotea.tfmg.blocks.engines.small.turbine.TurbineEngineBackBlock;
 import com.drmangotea.tfmg.blocks.engines.small.turbine.TurbineEngineBlock;
+import com.drmangotea.tfmg.blocks.machines.exhaust.ExhaustBlock;
+import com.drmangotea.tfmg.blocks.machines.flarestack.FlarestackBlock;
 import com.drmangotea.tfmg.items.gadgets.explosives.napalm.NapalmBombBlock;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin.CastingBasinBlock;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_spout.CastingSpoutBlock;
@@ -47,7 +49,6 @@ import com.drmangotea.tfmg.blocks.tanks.SteelTankBlock;
 import com.drmangotea.tfmg.blocks.tanks.SteelTankGenerator;
 import com.drmangotea.tfmg.blocks.tanks.SteelTankItem;
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllItems;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
@@ -150,6 +151,28 @@ public class TFMGBlocks {
                     .item()
                     .build()
                     .register();
+
+
+    public static final BlockEntry<ExhaustBlock> EXHAUST =
+            REGISTRATE.block("exhaust", ExhaustBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .blockstate((c, p) -> p.horizontalFaceBlock(c.get(), AssetLookup.partialBaseModel(c, p)))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+
+    public static final BlockEntry<FlarestackBlock> FLARESTACK =
+            REGISTRATE.block("flarestack", FlarestackBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN)
+                            .lightLevel(s -> s.getValue(FlarestackBlock.LIT) ? 15 : 0)
+                            .noOcclusion())
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+
 
     public static final BlockEntry<SurfaceScannerBlock> SURFACE_SCANNER =
             REGISTRATE.block("surface_scanner", SurfaceScannerBlock::new)
@@ -680,7 +703,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     //        .register();
 
 
-    public static final BlockEntry<Block> CONCRETE_TEST = generateConcrete();
+    public static final BlockEntry<Block> CONCRETE = generateConcrete();
 
 
     public static BlockEntry<Block> generateConcrete(){
@@ -750,7 +773,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .lang(upperCaseColor + " Concrete Wall")
                     .register();
 
-            REGISTRATE.block(color + "_concrete_stairs", p -> new StairBlock(()-> TFMGBlocks.CONCRETE_TEST.get().defaultBlockState(),p))
+            REGISTRATE.block(color + "_concrete_stairs", p -> new StairBlock(()-> TFMGBlocks.CONCRETE.get().defaultBlockState(),p))
                     .initialProperties(() -> Blocks.STONE)
                     .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
                     .properties(p -> p.requiresCorrectToolForDrops())

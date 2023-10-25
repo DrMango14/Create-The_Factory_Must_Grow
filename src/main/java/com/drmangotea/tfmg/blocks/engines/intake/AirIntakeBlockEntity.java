@@ -131,6 +131,7 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
             controller = this.getBlockPos();
 
         } else {
+
             if(!(((AirIntakeBlockEntity) level.getBlockEntity(controller)).isController))
                 isUsedByController = false;
         }
@@ -139,17 +140,19 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
         //        controller = this.getBlockPos();
 
         if(controller!=null) {
-            if(((AirIntakeBlockEntity)level.getBlockEntity(controller)).diameter==2) {
-                int x = Math.abs(this.getBlockPos().getX() - controller.getX());
-                int y = Math.abs(this.getBlockPos().getY() - controller.getY());
-                int z = Math.abs(this.getBlockPos().getZ() - controller.getZ());
+            if(level.getBlockEntity(controller)!=null)
+                if(((AirIntakeBlockEntity)level.getBlockEntity(controller)).diameter==2) {
+                    int x = Math.abs(this.getBlockPos().getX() - controller.getX());
+                    int y = Math.abs(this.getBlockPos().getY() - controller.getY());
+                    int z = Math.abs(this.getBlockPos().getZ() - controller.getZ());
 
-                int distanceFromController = x + y + z;
-                if (x > 1 || y > 1 || z > 1) {
-                    isUsedByController = false;
-                    controller = this.getBlockPos();
+                    int distanceFromController = x + y + z;
+                    if (x > 1 || y > 1 || z > 1) {
+                        isUsedByController = false;
+                        controller = this.getBlockPos();
+                    }
                 }
-            }
+            if(level.getBlockEntity(controller)!=null)
             if(((AirIntakeBlockEntity)level.getBlockEntity(controller)).diameter==1) {
                 isUsedByController = false;
                 controller = this.getBlockPos();

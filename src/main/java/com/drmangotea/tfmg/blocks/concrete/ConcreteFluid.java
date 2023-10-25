@@ -31,7 +31,7 @@ public class ConcreteFluid extends ForgeFlowingFluid {
         int random = randomSource.nextInt(7) ;
 
         if(random==2) {
-            level.setBlock(pos, TFMGBlocks.CONCRETE_TEST.get().defaultBlockState(), 3);
+            level.setBlock(pos, TFMGBlocks.CONCRETE.get().defaultBlockState(), 3);
         }
     }
 
