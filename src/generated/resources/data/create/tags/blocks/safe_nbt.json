@@ -1,0 +1,10 @@
+{
+  "values": [
+    "tfmg:gasoline_engine",
+    "tfmg:gasoline_engine_back",
+    "tfmg:lpg_engine",
+    "tfmg:lpg_engine_back",
+    "tfmg:turbine_engine",
+    "tfmg:turbine_engine_back"
+  ]
+}

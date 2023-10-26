@@ -33,7 +33,11 @@ public class ScrewdriverItem extends Item {
 
 
 
-        if(level.getBlockState(positionClicked).is(TFMGBlocks.STEEL_PIPE.get())) {
+        if(
+                level.getBlockState(positionClicked).is(TFMGBlocks.STEEL_PIPE.get())||
+                        level.getBlockState(positionClicked).is(TFMGBlocks.ALUMINUM_PIPE.get())||
+                                level.getBlockState(positionClicked).is(TFMGBlocks.PLASTIC_PIPE.get())
+        ) {
             level.playSound(player, positionClicked, SoundEvents.ANVIL_PLACE, SoundSource.BLOCKS, 0.3f,0.5f);
             ((LockablePipeBlockEntity)level.getBlockEntity(positionClicked)).toggleLock(player);
 

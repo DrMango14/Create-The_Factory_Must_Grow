@@ -5,11 +5,14 @@ import com.drmangotea.tfmg.base.TFMGSpriteShifts;
 import com.drmangotea.tfmg.base.TFMGVanillaBlockStates;
 import com.drmangotea.tfmg.blocks.concrete.formwork.FormWorkBlock;
 import com.drmangotea.tfmg.blocks.concrete.formwork.FormWorkGenerator;
+import com.drmangotea.tfmg.blocks.decoration.TrussBlock;
 import com.drmangotea.tfmg.blocks.decoration.doors.TFMGSlidingDoorBlock;
+import com.drmangotea.tfmg.blocks.decoration.flywheels.TFMGFlywheelBlock;
 import com.drmangotea.tfmg.blocks.deposits.FluidDepositBlock;
 import com.drmangotea.tfmg.blocks.engines.diesel.DieselEngineBlock;
 import com.drmangotea.tfmg.blocks.engines.intake.AirIntakeBlock;
 import com.drmangotea.tfmg.blocks.engines.intake.AirIntakeGenerator;
+import com.drmangotea.tfmg.blocks.engines.small.EngineGenerator;
 import com.drmangotea.tfmg.blocks.engines.small.gasoline.GasolineEngineBackBlock;
 import com.drmangotea.tfmg.blocks.engines.small.gasoline.GasolineEngineBlock;
 import com.drmangotea.tfmg.blocks.engines.small.gasoline.GasolineEngineGenerator;
@@ -19,6 +22,23 @@ import com.drmangotea.tfmg.blocks.engines.small.turbine.TurbineEngineBackBlock;
 import com.drmangotea.tfmg.blocks.engines.small.turbine.TurbineEngineBlock;
 import com.drmangotea.tfmg.blocks.machines.exhaust.ExhaustBlock;
 import com.drmangotea.tfmg.blocks.machines.flarestack.FlarestackBlock;
+import com.drmangotea.tfmg.blocks.machines.flarestack.FlarestackGenerator;
+import com.drmangotea.tfmg.blocks.pipes.normal.aluminum.AluminumPipeAttachmentModel;
+import com.drmangotea.tfmg.blocks.pipes.normal.aluminum.AluminumPipeBlock;
+import com.drmangotea.tfmg.blocks.pipes.normal.aluminum.EncasedAluminumPipeBlock;
+import com.drmangotea.tfmg.blocks.pipes.normal.aluminum.GlassAluminumPipeBlock;
+import com.drmangotea.tfmg.blocks.pipes.normal.brass.BrassPipeAttachmentModel;
+import com.drmangotea.tfmg.blocks.pipes.normal.brass.BrassPipeBlock;
+import com.drmangotea.tfmg.blocks.pipes.normal.brass.EncasedBrassPipeBlock;
+import com.drmangotea.tfmg.blocks.pipes.normal.brass.GlassBrassPipeBlock;
+import com.drmangotea.tfmg.blocks.pipes.normal.cast_iron.CastIronPipeAttachmentModel;
+import com.drmangotea.tfmg.blocks.pipes.normal.cast_iron.CastIronPipeBlock;
+import com.drmangotea.tfmg.blocks.pipes.normal.cast_iron.EncasedCastIronPipeBlock;
+import com.drmangotea.tfmg.blocks.pipes.normal.cast_iron.GlassCastIronPipeBlock;
+import com.drmangotea.tfmg.blocks.pipes.normal.plastic.EncasedPlasticPipeBlock;
+import com.drmangotea.tfmg.blocks.pipes.normal.plastic.GlassPlasticPipeBlock;
+import com.drmangotea.tfmg.blocks.pipes.normal.plastic.PlasticPipeAttachmentModel;
+import com.drmangotea.tfmg.blocks.pipes.normal.plastic.PlasticPipeBlock;
 import com.drmangotea.tfmg.items.gadgets.explosives.napalm.NapalmBombBlock;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin.CastingBasinBlock;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_spout.CastingSpoutBlock;
@@ -51,6 +71,7 @@ import com.drmangotea.tfmg.blocks.tanks.SteelTankItem;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.content.decoration.MetalScaffoldingBlock;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
@@ -61,10 +82,12 @@ import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.data.*;
 import com.simibubi.create.foundation.utility.Couple;
+import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -134,10 +157,104 @@ public class TFMGBlocks {
             .properties(p -> p.sound(SoundType.COPPER))
             .register();
 
+    public static final BlockEntry<TrussBlock> STEEL_TRUSS = REGISTRATE.block("steel_truss", TrussBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.noOcclusion())
+            .transform(pickaxeOnly())
+            .addLayer(() -> RenderType::cutoutMipped)
+            .blockstate(BlockStateGen.axisBlockProvider(false))
+            .item()
+            .build()
+            .lang("Steel Truss")
+            .register();
+    public static final BlockEntry<TrussBlock> ALUMINUM_TRUSS = REGISTRATE.block("aluminum_truss", TrussBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.noOcclusion())
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.axisBlockProvider(false))
+            .item()
+            .build()
+            .lang("Aluminum Truss")
+            .register();
+
+    public static final BlockEntry<Block> CAUTION_BLOCK = REGISTRATE.block("caution_block", Block::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.COLOR_YELLOW))
+            .transform(pickaxeOnly())
+            .item()
+            .build()
+            .lang("Caution Block")
+            .register();
+
+    public static final BlockEntry<Block> RED_CAUTION_BLOCK = REGISTRATE.block("red_caution_block", Block::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.COLOR_RED))
+            .transform(pickaxeOnly())
+            .item()
+            .build()
+            .lang("Red Caution Block")
+            .register();
+
+
+    public static final BlockEntry<MetalScaffoldingBlock> STEEL_SCAFFOLD =
+            REGISTRATE.block("steel_scaffolding", MetalScaffoldingBlock::new)
+                    .properties(p -> p
+                            .strength(4.0F)
+                            .requiresCorrectToolForDrops())
+                    .transform(BuilderTransformers.scaffold("steel",
+                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), MaterialColor.TERRACOTTA_CYAN,
+                            TFMGSpriteShifts.STEEL_SCAFFOLD, TFMGSpriteShifts.STEEL_SCAFFOLD_INSIDE, TFMGSpriteShifts.STEEL_CASING))
+                    .register();
+
+    public static final BlockEntry<MetalScaffoldingBlock> ALUMINUM_SCAFFOLD =
+            REGISTRATE.block("aluminum_scaffolding", MetalScaffoldingBlock::new)
+                    .properties(p -> p
+                            .strength(3.0F)
+                            .requiresCorrectToolForDrops())
+                    .transform(BuilderTransformers.scaffold("aluminum",
+                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), MaterialColor.TERRACOTTA_CYAN,
+                            TFMGSpriteShifts.ALUMINUM_SCAFFOLD, TFMGSpriteShifts.ALUMINUM_SCAFFOLD_INSIDE, TFMGSpriteShifts.ALUMINUM_SCAFFOLD_TOP))
+                    .register();
 
 
 
+    public static final BlockEntry<TFMGFlywheelBlock> STEEL_FLYWHEEL = REGISTRATE.block("steel_flywheel", TFMGFlywheelBlock::new)
+            .initialProperties(SharedProperties::softMetal)
+            .properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN))
+            .properties(BlockBehaviour.Properties::noOcclusion)
+            .transform(axeOrPickaxe())
+            .transform(BlockStressDefaults.setNoImpact())
+            .blockstate(BlockStateGen.axisBlockProvider(true))
+            .item()
+            .transform(customItemModel())
+            .register();
+    public static final BlockEntry<TFMGFlywheelBlock> ALUMINUM_FLYWHEEL = REGISTRATE.block("aluminum_flywheel", TFMGFlywheelBlock::new)
+            .initialProperties(SharedProperties::softMetal)
+            .properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE))
+            .properties(BlockBehaviour.Properties::noOcclusion)
+            .transform(axeOrPickaxe())
+            .transform(BlockStressDefaults.setNoImpact())
+            .blockstate(BlockStateGen.axisBlockProvider(true))
+            .item()
+            .transform(customItemModel())
+            .register();
+    public static final BlockEntry<TFMGFlywheelBlock> CAST_IRON_FLYWHEEL = REGISTRATE.block("cast_iron_flywheel", TFMGFlywheelBlock::new)
+            .initialProperties(SharedProperties::softMetal)
+            .properties(p -> p.color(MaterialColor.TERRACOTTA_BLACK))
+            .properties(BlockBehaviour.Properties::noOcclusion)
+            .transform(axeOrPickaxe())
+            .transform(BlockStressDefaults.setNoImpact())
+            .blockstate(BlockStateGen.axisBlockProvider(true))
+            .item()
+            .transform(customItemModel())
+            .register();
 
+
+    public static final BlockEntry<SlabBlock> FACTORY_FLOOR = withVariants("factory_floor",Blocks.STONE,
+            MaterialColor.COLOR_GRAY,"Factory Floor",BlockTags.NEEDS_STONE_TOOL,SoundType.NETHERITE_BLOCK,false);
 
     //-----------------------MACHINES---------------------------//
     public static final BlockEntry<FormWorkBlock> FORMWORK_BLOCK =
@@ -156,7 +273,8 @@ public class TFMGBlocks {
     public static final BlockEntry<ExhaustBlock> EXHAUST =
             REGISTRATE.block("exhaust", ExhaustBlock::new)
                     .initialProperties(SharedProperties::copperMetal)
-                    .blockstate((c, p) -> p.horizontalFaceBlock(c.get(), AssetLookup.partialBaseModel(c, p)))
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .blockstate(BlockStateGen.directionalBlockProvider(false))
                     .item()
                     .transform(customItemModel())
                     .register();
@@ -165,9 +283,11 @@ public class TFMGBlocks {
     public static final BlockEntry<FlarestackBlock> FLARESTACK =
             REGISTRATE.block("flarestack", FlarestackBlock::new)
                     .initialProperties(SharedProperties::copperMetal)
+                    .addLayer(() -> RenderType::cutoutMipped)
                     .properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN)
                             .lightLevel(s -> s.getValue(FlarestackBlock.LIT) ? 15 : 0)
                             .noOcclusion())
+                    .blockstate(new FlarestackGenerator()::generate)
                     .item()
                     .transform(customItemModel())
                     .register();
@@ -186,88 +306,11 @@ public class TFMGBlocks {
                     .register();
 
 
+
+
+
     //fluid stuff
-    public static final BlockEntry<SteelPipeBlock> STEEL_PIPE = REGISTRATE.block("steel_pipe", SteelPipeBlock::new)
-            .initialProperties(Material.HEAVY_METAL)
-            .transform(pickaxeOnly())
-            .blockstate(BlockStateGen.pipe())
-            .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
-            .item()
-            .transform(customItemModel())
-            .register();
 
-    public static final BlockEntry<EncasedSteelPipeBlock> COPPER_ENCASED_STEEL_PIPE =
-            REGISTRATE.block("copper_encased_steel_pipe", p -> new EncasedSteelPipeBlock(p, AllBlocks.COPPER_CASING::get))
-                    .initialProperties(SharedProperties::copperMetal)
-                    .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .transform(axeOrPickaxe())
-                    .blockstate(BlockStateGen.encasedPipe())
-                    .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(AllSpriteShifts.COPPER_CASING)))
-                    .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, AllSpriteShifts.COPPER_CASING,
-                            (s, f) -> !s.getValue(EncasedSteelPipeBlock.FACING_TO_PROPERTY_MAP.get(f)))))
-                    .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
-                    .loot((p, b) -> p.dropOther(b, STEEL_PIPE.get()))
-                    .transform(EncasingRegistry.addVariantTo(TFMGBlocks.STEEL_PIPE))
-                    .register();
-
-
-    @SuppressWarnings("removal")
-    public static final BlockEntry<GlassSteelPipeBlock> GLASS_STEEL_PIPE =
-            REGISTRATE.block("glass_steel_pipe", GlassSteelPipeBlock::new)
-                    .initialProperties(SharedProperties::copperMetal)
-                    .addLayer(() -> RenderType::cutoutMipped)
-                    .transform(pickaxeOnly())
-                    .blockstate((c, p) -> {
-                        p.getVariantBuilder(c.getEntry())
-                                .forAllStatesExcept(state -> {
-                                    Direction.Axis axis = state.getValue(BlockStateProperties.AXIS);
-                                    return ConfiguredModel.builder()
-                                            .modelFile(p.models()
-                                                    .getExistingFile(p.modLoc("block/steel_pipe/window")))
-                                            .uvLock(false)
-                                            .rotationX(axis == Direction.Axis.Y ? 0 : 90)
-                                            .rotationY(axis == Direction.Axis.X ? 90 : 0)
-                                            .build();
-                                }, BlockStateProperties.WATERLOGGED);
-                    })
-                    .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
-                    .loot((p, b) -> p.dropOther(b, STEEL_PIPE.get()))
-                    .register();
-
-
-    public static final BlockEntry<TFMGPumpBlock> STEEL_MECHANICAL_PUMP = REGISTRATE.block("steel_mechanical_pump", TFMGPumpBlock::new)
-            .initialProperties(SharedProperties::copperMetal)
-            .properties(p -> p.color(MaterialColor.STONE))
-            .transform(pickaxeOnly())
-            .blockstate(BlockStateGen.directionalBlockProviderIgnoresWaterlogged(true))
-            .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
-            .transform(BlockStressDefaults.setImpact(4.0))
-            .item()
-            .transform(customItemModel())
-            .register();
-
-    public static final BlockEntry<TFMGSmartFluidPipeBlock> STEEL_SMART_FLUID_PIPE =
-            REGISTRATE.block("steel_smart_fluid_pipe", TFMGSmartFluidPipeBlock::new)
-                    .initialProperties(SharedProperties::copperMetal)
-                    .properties(p -> p.color(MaterialColor.STONE))
-                    .transform(pickaxeOnly())
-                    .blockstate(new SmartFluidPipeGenerator()::generate)
-                    .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-
-    public static final BlockEntry<TFMGFluidValveBlock> STEEL_FLUID_VALVE = REGISTRATE.block("steel_fluid_valve", TFMGFluidValveBlock::new)
-            .initialProperties(SharedProperties::copperMetal)
-            .transform(pickaxeOnly())
-            .blockstate((c, p) -> BlockStateGen.directionalAxisBlock(c, p,
-                    (state, vertical) -> AssetLookup.partialBaseModel(c, p, vertical ? "vertical" : "horizontal",
-                            state.getValue(FluidValveBlock.ENABLED) ? "open" : "closed")))
-            .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
-            .item()
-            .transform(customItemModel())
-            .register();
 
     @SuppressWarnings("'addLayer(java.util.function.Supplier<java.util.function.Supplier<net.minecraft.client.renderer.RenderType>>)' is deprecated and marked for removal ")
     public static final BlockEntry<SteelTankBlock> STEEL_FLUID_TANK = REGISTRATE.block("steel_fluid_tank", SteelTankBlock::regular)
@@ -516,22 +559,25 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .lang("Block of Aluminum")
             .register();
 
-    public static final BlockEntry<Block> LEAD_BLOCK = REGISTRATE.block("lead_block", Block::new)
-            .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
-            .properties(p -> p.requiresCorrectToolForDrops())
-            .onRegister(connectedTextures(() -> new EncasedCTBehaviour(TFMGSpriteShifts.CAST_IRON_BLOCK)))
-            .onRegister(casingConnectivity((block, cc) -> cc.makeCasing(block, TFMGSpriteShifts.CAST_IRON_BLOCK)))
-            .transform(pickaxeOnly())
-            .blockstate(simpleCubeAll("lead_block"))
-            .tag(BlockTags.NEEDS_IRON_TOOL)
-            .tag(Tags.Blocks.STORAGE_BLOCKS)
-            .tag(BlockTags.BEACON_BASE_BLOCKS)
-            .transform(tagBlockAndItem("storage_blocks/lead"))
-            .tag(Tags.Items.STORAGE_BLOCKS)
-            .build()
-            .lang("Block of Lead")
-            .register();
+    //public static final BlockEntry<Block> LEAD_BLOCK = REGISTRATE.block("lead_block", Block::new)
+    //        .initialProperties(() -> Blocks.IRON_BLOCK)
+    //        .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+    //        .properties(p -> p.requiresCorrectToolForDrops())
+    //        .onRegister(connectedTextures(() -> new EncasedCTBehaviour(TFMGSpriteShifts.CAST_IRON_BLOCK)))
+    //        .onRegister(casingConnectivity((block, cc) -> cc.makeCasing(block, TFMGSpriteShifts.CAST_IRON_BLOCK)))
+    //        .transform(pickaxeOnly())
+    //        .blockstate(simpleCubeAll("lead_block"))
+    //        .tag(BlockTags.NEEDS_IRON_TOOL)
+    //        .tag(Tags.Blocks.STORAGE_BLOCKS)
+    //        .tag(BlockTags.BEACON_BASE_BLOCKS)
+    //        .transform(tagBlockAndItem("storage_blocks/lead"))
+    //        .tag(Tags.Items.STORAGE_BLOCKS)
+    //        .build()
+    //        .lang("Block of Lead")
+    //        .register();
+
+
+
 
 
     public static final BlockEntry<Block> COAL_COKE_BLOCK = REGISTRATE.block("coal_coke_block", Block::new)
@@ -587,7 +633,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(pickaxeOnly())
-                    .blockstate(new GasolineEngineGenerator()::generate)
+                    .blockstate(new EngineGenerator()::generate)
                     .transform(BlockStressDefaults.setCapacity(60.0))
                     .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
                     .item()
@@ -602,7 +648,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(pickaxeOnly())
-                    .blockstate(new GasolineEngineGenerator()::generate)
+                    .blockstate(new EngineGenerator()::generate)
                     .transform(BlockStressDefaults.setCapacity(60.0))
                     .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
                     .item()
@@ -618,7 +664,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(pickaxeOnly())
-                    .blockstate(new GasolineEngineGenerator()::generate)
+                    .blockstate(new EngineGenerator()::generate)
                     .transform(BlockStressDefaults.setCapacity(60.0))
                     .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
                     .item()
@@ -633,7 +679,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(pickaxeOnly())
-                    .blockstate(new GasolineEngineGenerator()::generate)
+                    .blockstate(new EngineGenerator()::generate)
                     .transform(BlockStressDefaults.setCapacity(60.0))
                     .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
                     .item()
@@ -648,7 +694,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(pickaxeOnly())
-                    .blockstate(new GasolineEngineGenerator()::generate)
+                    .blockstate(new EngineGenerator()::generate)
                     .transform(BlockStressDefaults.setCapacity(60.0))
                     .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
                     .item()
@@ -663,7 +709,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(pickaxeOnly())
-                    .blockstate(new GasolineEngineGenerator()::generate)
+                    .blockstate(new EngineGenerator()::generate)
                     .transform(BlockStressDefaults.setCapacity(60.0))
                     .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
                     .item()
@@ -683,6 +729,422 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .item()
                     .transform(customItemModel())
                     .register();
+
+    //----------------------PIPES-------------------------------//
+
+    //STEEL
+    public static final BlockEntry<SteelPipeBlock> STEEL_PIPE = REGISTRATE.block("steel_pipe", SteelPipeBlock::new)
+            .initialProperties(Material.HEAVY_METAL)
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.pipe())
+            .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<EncasedSteelPipeBlock> COPPER_ENCASED_STEEL_PIPE =
+            REGISTRATE.block("copper_encased_steel_pipe", p -> new EncasedSteelPipeBlock(p, AllBlocks.COPPER_CASING::get))
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(axeOrPickaxe())
+                    .blockstate(BlockStateGen.encasedPipe())
+                    .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(AllSpriteShifts.COPPER_CASING)))
+                    .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, AllSpriteShifts.COPPER_CASING,
+                            (s, f) -> !s.getValue(EncasedSteelPipeBlock.FACING_TO_PROPERTY_MAP.get(f)))))
+                    .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
+                    .loot((p, b) -> p.dropOther(b, STEEL_PIPE.get()))
+                    .transform(EncasingRegistry.addVariantTo(TFMGBlocks.STEEL_PIPE))
+                    .register();
+
+
+    @SuppressWarnings("removal")
+    public static final BlockEntry<GlassSteelPipeBlock> GLASS_STEEL_PIPE =
+            REGISTRATE.block("glass_steel_pipe", GlassSteelPipeBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .transform(pickaxeOnly())
+                    .blockstate((c, p) -> {
+                        p.getVariantBuilder(c.getEntry())
+                                .forAllStatesExcept(state -> {
+                                    Direction.Axis axis = state.getValue(BlockStateProperties.AXIS);
+                                    return ConfiguredModel.builder()
+                                            .modelFile(p.models()
+                                                    .getExistingFile(p.modLoc("block/steel_pipe/window")))
+                                            .uvLock(false)
+                                            .rotationX(axis == Direction.Axis.Y ? 0 : 90)
+                                            .rotationY(axis == Direction.Axis.X ? 90 : 0)
+                                            .build();
+                                }, BlockStateProperties.WATERLOGGED);
+                    })
+                    .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
+                    .loot((p, b) -> p.dropOther(b, STEEL_PIPE.get()))
+                    .register();
+
+
+    public static final BlockEntry<TFMGPumpBlock> STEEL_MECHANICAL_PUMP = REGISTRATE.block("steel_mechanical_pump", TFMGPumpBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .properties(p -> p.color(MaterialColor.STONE))
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.directionalBlockProviderIgnoresWaterlogged(true))
+            .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
+            .transform(BlockStressDefaults.setImpact(4.0))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<TFMGSmartFluidPipeBlock> STEEL_SMART_FLUID_PIPE =
+            REGISTRATE.block("steel_smart_fluid_pipe", TFMGSmartFluidPipeBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.color(MaterialColor.STONE))
+                    .transform(pickaxeOnly())
+                    .blockstate(new SmartFluidPipeGenerator()::generate)
+                    .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<TFMGFluidValveBlock> STEEL_FLUID_VALVE = REGISTRATE.block("steel_fluid_valve", TFMGFluidValveBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> BlockStateGen.directionalAxisBlock(c, p,
+                    (state, vertical) -> AssetLookup.partialBaseModel(c, p, vertical ? "vertical" : "horizontal",
+                            state.getValue(FluidValveBlock.ENABLED) ? "open" : "closed")))
+            .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
+            .item()
+            .transform(customItemModel())
+            .register();
+    //CAST_IRON
+    public static final BlockEntry<CastIronPipeBlock> CAST_IRON_PIPE = REGISTRATE.block("cast_iron_pipe", CastIronPipeBlock::new)
+            .initialProperties(Material.HEAVY_METAL)
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.pipe())
+            .onRegister(CreateRegistrate.blockModel(() -> CastIronPipeAttachmentModel::new))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<EncasedCastIronPipeBlock> COPPER_ENCASED_CAST_IRON_PIPE =
+            REGISTRATE.block("copper_encased_cast_iron_pipe", p -> new EncasedCastIronPipeBlock(p, AllBlocks.COPPER_CASING::get))
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(axeOrPickaxe())
+                    .blockstate(BlockStateGen.encasedPipe())
+                    .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(AllSpriteShifts.COPPER_CASING)))
+                    .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, AllSpriteShifts.COPPER_CASING,
+                            (s, f) -> !s.getValue(EncasedCastIronPipeBlock.FACING_TO_PROPERTY_MAP.get(f)))))
+                    .onRegister(CreateRegistrate.blockModel(() -> CastIronPipeAttachmentModel::new))
+                    .loot((p, b) -> p.dropOther(b, CAST_IRON_PIPE.get()))
+                    .transform(EncasingRegistry.addVariantTo(TFMGBlocks.CAST_IRON_PIPE))
+                    .register();
+
+
+    @SuppressWarnings("removal")
+    public static final BlockEntry<GlassCastIronPipeBlock> GLASS_CAST_IRON_PIPE =
+            REGISTRATE.block("glass_cast_iron_pipe", GlassCastIronPipeBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .transform(pickaxeOnly())
+                    .blockstate((c, p) -> {
+                        p.getVariantBuilder(c.getEntry())
+                                .forAllStatesExcept(state -> {
+                                    Direction.Axis axis = state.getValue(BlockStateProperties.AXIS);
+                                    return ConfiguredModel.builder()
+                                            .modelFile(p.models()
+                                                    .getExistingFile(p.modLoc("block/cast_iron_pipe/window")))
+                                            .uvLock(false)
+                                            .rotationX(axis == Direction.Axis.Y ? 0 : 90)
+                                            .rotationY(axis == Direction.Axis.X ? 90 : 0)
+                                            .build();
+                                }, BlockStateProperties.WATERLOGGED);
+                    })
+                    .onRegister(CreateRegistrate.blockModel(() -> CastIronPipeAttachmentModel::new))
+                    .loot((p, b) -> p.dropOther(b, CAST_IRON_PIPE.get()))
+                    .register();
+
+
+    public static final BlockEntry<TFMGPumpBlock> CAST_IRON_MECHANICAL_PUMP = REGISTRATE.block("cast_iron_mechanical_pump", TFMGPumpBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .properties(p -> p.color(MaterialColor.STONE))
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.directionalBlockProviderIgnoresWaterlogged(true))
+            .onRegister(CreateRegistrate.blockModel(() -> CastIronPipeAttachmentModel::new))
+            .transform(BlockStressDefaults.setImpact(4.0))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<TFMGSmartFluidPipeBlock> CAST_IRON_SMART_FLUID_PIPE =
+            REGISTRATE.block("cast_iron_smart_fluid_pipe", TFMGSmartFluidPipeBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.color(MaterialColor.STONE))
+                    .transform(pickaxeOnly())
+                    .blockstate(new SmartFluidPipeGenerator()::generate)
+                    .onRegister(CreateRegistrate.blockModel(() -> CastIronPipeAttachmentModel::new))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<TFMGFluidValveBlock> CAST_IRON_FLUID_VALVE = REGISTRATE.block("cast_iron_fluid_valve", TFMGFluidValveBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> BlockStateGen.directionalAxisBlock(c, p,
+                    (state, vertical) -> AssetLookup.partialBaseModel(c, p, vertical ? "vertical" : "horizontal",
+                            state.getValue(FluidValveBlock.ENABLED) ? "open" : "closed")))
+            .onRegister(CreateRegistrate.blockModel(() -> CastIronPipeAttachmentModel::new))
+            .item()
+            .transform(customItemModel())
+            .register();
+    //BRASS
+    public static final BlockEntry<BrassPipeBlock> BRASS_PIPE = REGISTRATE.block("brass_pipe", BrassPipeBlock::new)
+            .initialProperties(Material.HEAVY_METAL)
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.pipe())
+            .onRegister(CreateRegistrate.blockModel(() -> BrassPipeAttachmentModel::new))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<EncasedBrassPipeBlock> COPPER_ENCASED_BRASS_PIPE =
+            REGISTRATE.block("copper_encased_brass_pipe", p -> new EncasedBrassPipeBlock(p, AllBlocks.COPPER_CASING::get))
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(axeOrPickaxe())
+                    .blockstate(BlockStateGen.encasedPipe())
+                    .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(AllSpriteShifts.COPPER_CASING)))
+                    .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, AllSpriteShifts.COPPER_CASING,
+                            (s, f) -> !s.getValue(EncasedBrassPipeBlock.FACING_TO_PROPERTY_MAP.get(f)))))
+                    .onRegister(CreateRegistrate.blockModel(() -> BrassPipeAttachmentModel::new))
+                    .loot((p, b) -> p.dropOther(b, BRASS_PIPE.get()))
+                    .transform(EncasingRegistry.addVariantTo(TFMGBlocks.BRASS_PIPE))
+                    .register();
+
+
+    @SuppressWarnings("removal")
+    public static final BlockEntry<GlassBrassPipeBlock> GLASS_BRASS_PIPE =
+            REGISTRATE.block("glass_brass_pipe", GlassBrassPipeBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .transform(pickaxeOnly())
+                    .blockstate((c, p) -> {
+                        p.getVariantBuilder(c.getEntry())
+                                .forAllStatesExcept(state -> {
+                                    Direction.Axis axis = state.getValue(BlockStateProperties.AXIS);
+                                    return ConfiguredModel.builder()
+                                            .modelFile(p.models()
+                                                    .getExistingFile(p.modLoc("block/brass_pipe/window")))
+                                            .uvLock(false)
+                                            .rotationX(axis == Direction.Axis.Y ? 0 : 90)
+                                            .rotationY(axis == Direction.Axis.X ? 90 : 0)
+                                            .build();
+                                }, BlockStateProperties.WATERLOGGED);
+                    })
+                    .onRegister(CreateRegistrate.blockModel(() -> BrassPipeAttachmentModel::new))
+                    .loot((p, b) -> p.dropOther(b, STEEL_PIPE.get()))
+                    .register();
+
+
+    public static final BlockEntry<TFMGPumpBlock> BRASS_MECHANICAL_PUMP = REGISTRATE.block("brass_mechanical_pump", TFMGPumpBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .properties(p -> p.color(MaterialColor.STONE))
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.directionalBlockProviderIgnoresWaterlogged(true))
+            .onRegister(CreateRegistrate.blockModel(() -> BrassPipeAttachmentModel::new))
+            .transform(BlockStressDefaults.setImpact(4.0))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<TFMGSmartFluidPipeBlock> BRASS_SMART_FLUID_PIPE =
+            REGISTRATE.block("brass_smart_fluid_pipe", TFMGSmartFluidPipeBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.color(MaterialColor.STONE))
+                    .transform(pickaxeOnly())
+                    .blockstate(new SmartFluidPipeGenerator()::generate)
+                    .onRegister(CreateRegistrate.blockModel(() -> BrassPipeAttachmentModel::new))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<TFMGFluidValveBlock> BRASS_FLUID_VALVE = REGISTRATE.block("brass_fluid_valve", TFMGFluidValveBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> BlockStateGen.directionalAxisBlock(c, p,
+                    (state, vertical) -> AssetLookup.partialBaseModel(c, p, vertical ? "vertical" : "horizontal",
+                            state.getValue(FluidValveBlock.ENABLED) ? "open" : "closed")))
+            .onRegister(CreateRegistrate.blockModel(() -> BrassPipeAttachmentModel::new))
+            .item()
+            .transform(customItemModel())
+            .register();
+    //PLASTIC
+    public static final BlockEntry<PlasticPipeBlock> PLASTIC_PIPE = REGISTRATE.block("plastic_pipe", PlasticPipeBlock::new)
+            .initialProperties(Material.HEAVY_METAL)
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.pipe())
+            .onRegister(CreateRegistrate.blockModel(() -> PlasticPipeAttachmentModel::new))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<EncasedPlasticPipeBlock> COPPER_ENCASED_PLASTIC_PIPE =
+            REGISTRATE.block("copper_encased_plastic_pipe", p -> new EncasedPlasticPipeBlock(p, AllBlocks.COPPER_CASING::get))
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(axeOrPickaxe())
+                    .blockstate(BlockStateGen.encasedPipe())
+                    .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(AllSpriteShifts.COPPER_CASING)))
+                    .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, AllSpriteShifts.COPPER_CASING,
+                            (s, f) -> !s.getValue(EncasedPlasticPipeBlock.FACING_TO_PROPERTY_MAP.get(f)))))
+                    .onRegister(CreateRegistrate.blockModel(() -> PlasticPipeAttachmentModel::new))
+                    .loot((p, b) -> p.dropOther(b, PLASTIC_PIPE.get()))
+                    .transform(EncasingRegistry.addVariantTo(TFMGBlocks.PLASTIC_PIPE))
+                    .register();
+
+
+    @SuppressWarnings("removal")
+    public static final BlockEntry<GlassPlasticPipeBlock> GLASS_PLASTIC_PIPE =
+            REGISTRATE.block("glass_plastic_pipe", GlassPlasticPipeBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .transform(pickaxeOnly())
+                    .blockstate((c, p) -> {
+                        p.getVariantBuilder(c.getEntry())
+                                .forAllStatesExcept(state -> {
+                                    Direction.Axis axis = state.getValue(BlockStateProperties.AXIS);
+                                    return ConfiguredModel.builder()
+                                            .modelFile(p.models()
+                                                    .getExistingFile(p.modLoc("block/plastic_pipe/window")))
+                                            .uvLock(false)
+                                            .rotationX(axis == Direction.Axis.Y ? 0 : 90)
+                                            .rotationY(axis == Direction.Axis.X ? 90 : 0)
+                                            .build();
+                                }, BlockStateProperties.WATERLOGGED);
+                    })
+                    .onRegister(CreateRegistrate.blockModel(() -> PlasticPipeAttachmentModel::new))
+                    .loot((p, b) -> p.dropOther(b, PLASTIC_PIPE.get()))
+                    .register();
+
+
+    public static final BlockEntry<TFMGPumpBlock> PLASTIC_MECHANICAL_PUMP = REGISTRATE.block("plastic_mechanical_pump", TFMGPumpBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .properties(p -> p.color(MaterialColor.STONE))
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.directionalBlockProviderIgnoresWaterlogged(true))
+            .onRegister(CreateRegistrate.blockModel(() -> PlasticPipeAttachmentModel::new))
+            .transform(BlockStressDefaults.setImpact(4.0))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<TFMGSmartFluidPipeBlock> PLASTIC_SMART_FLUID_PIPE =
+            REGISTRATE.block("plastic_smart_fluid_pipe", TFMGSmartFluidPipeBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.color(MaterialColor.STONE))
+                    .transform(pickaxeOnly())
+                    .blockstate(new SmartFluidPipeGenerator()::generate)
+                    .onRegister(CreateRegistrate.blockModel(() -> PlasticPipeAttachmentModel::new))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<TFMGFluidValveBlock> PLASTIC_FLUID_VALVE = REGISTRATE.block("plastic_fluid_valve", TFMGFluidValveBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> BlockStateGen.directionalAxisBlock(c, p,
+                    (state, vertical) -> AssetLookup.partialBaseModel(c, p, vertical ? "vertical" : "horizontal",
+                            state.getValue(FluidValveBlock.ENABLED) ? "open" : "closed")))
+            .onRegister(CreateRegistrate.blockModel(() -> PlasticPipeAttachmentModel::new))
+            .item()
+            .transform(customItemModel())
+            .register();
+    //ALUMINUM
+    public static final BlockEntry<AluminumPipeBlock> ALUMINUM_PIPE = REGISTRATE.block("aluminum_pipe", AluminumPipeBlock::new)
+            .initialProperties(Material.HEAVY_METAL)
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.pipe())
+            .onRegister(CreateRegistrate.blockModel(() -> AluminumPipeAttachmentModel::new))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<EncasedAluminumPipeBlock> COPPER_ENCASED_ALUMINUM_PIPE =
+            REGISTRATE.block("copper_encased_aluminum_pipe", p -> new EncasedAluminumPipeBlock(p, AllBlocks.COPPER_CASING::get))
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(axeOrPickaxe())
+                    .blockstate(BlockStateGen.encasedPipe())
+                    .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(AllSpriteShifts.COPPER_CASING)))
+                    .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, AllSpriteShifts.COPPER_CASING,
+                            (s, f) -> !s.getValue(EncasedAluminumPipeBlock.FACING_TO_PROPERTY_MAP.get(f)))))
+                    .onRegister(CreateRegistrate.blockModel(() -> AluminumPipeAttachmentModel::new))
+                    .loot((p, b) -> p.dropOther(b, ALUMINUM_PIPE.get()))
+                    .transform(EncasingRegistry.addVariantTo(TFMGBlocks.ALUMINUM_PIPE))
+                    .register();
+
+
+    @SuppressWarnings("removal")
+    public static final BlockEntry<GlassAluminumPipeBlock> GLASS_ALUMINUM_PIPE =
+            REGISTRATE.block("glass_aluminum_pipe", GlassAluminumPipeBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .transform(pickaxeOnly())
+                    .blockstate((c, p) -> {
+                        p.getVariantBuilder(c.getEntry())
+                                .forAllStatesExcept(state -> {
+                                    Direction.Axis axis = state.getValue(BlockStateProperties.AXIS);
+                                    return ConfiguredModel.builder()
+                                            .modelFile(p.models()
+                                                    .getExistingFile(p.modLoc("block/aluminum_pipe/window")))
+                                            .uvLock(false)
+                                            .rotationX(axis == Direction.Axis.Y ? 0 : 90)
+                                            .rotationY(axis == Direction.Axis.X ? 90 : 0)
+                                            .build();
+                                }, BlockStateProperties.WATERLOGGED);
+                    })
+                    .onRegister(CreateRegistrate.blockModel(() -> AluminumPipeAttachmentModel::new))
+                    .loot((p, b) -> p.dropOther(b, ALUMINUM_PIPE.get()))
+                    .register();
+
+
+    public static final BlockEntry<TFMGPumpBlock> ALUMINUM_MECHANICAL_PUMP = REGISTRATE.block("aluminum_mechanical_pump", TFMGPumpBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .properties(p -> p.color(MaterialColor.STONE))
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.directionalBlockProviderIgnoresWaterlogged(true))
+            .onRegister(CreateRegistrate.blockModel(() -> AluminumPipeAttachmentModel::new))
+            .transform(BlockStressDefaults.setImpact(4.0))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<TFMGSmartFluidPipeBlock> ALUMINUM_SMART_FLUID_PIPE =
+            REGISTRATE.block("aluminum_smart_fluid_pipe", TFMGSmartFluidPipeBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.color(MaterialColor.STONE))
+                    .transform(pickaxeOnly())
+                    .blockstate(new SmartFluidPipeGenerator()::generate)
+                    .onRegister(CreateRegistrate.blockModel(() -> AluminumPipeAttachmentModel::new))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<TFMGFluidValveBlock> ALUMINUM_FLUID_VALVE = REGISTRATE.block("aluminum_fluid_valve", TFMGFluidValveBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> BlockStateGen.directionalAxisBlock(c, p,
+                    (state, vertical) -> AssetLookup.partialBaseModel(c, p, vertical ? "vertical" : "horizontal",
+                            state.getValue(FluidValveBlock.ENABLED) ? "open" : "closed")))
+            .onRegister(CreateRegistrate.blockModel(() -> AluminumPipeAttachmentModel::new))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+
+    ////////////////////////////////////
 
 
 
@@ -706,10 +1168,56 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<Block> CONCRETE = generateConcrete();
 
 
+    public static final BlockEntry<SlabBlock> CONCRETE_SLAB =  REGISTRATE.block("concrete_slab", SlabBlock::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, "concrete"))
+            .tag(BlockTags.NEEDS_STONE_TOOL)
+                .tag(BlockTags.WALLS)
+                .item()
+                .transform(customItemModel("concrete_bottom"))
+            .lang("Concrete Slab")
+                .register();
+
+
     public static BlockEntry<Block> generateConcrete(){
 
 
         generateColoredConcrete();
+
+
+
+        REGISTRATE.block("concrete_wall", WallBlock::new)
+                .initialProperties(() -> Blocks.STONE)
+                .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+                .properties(p -> p.requiresCorrectToolForDrops())
+                .transform(pickaxeOnly())
+                .blockstate((c, p) -> TFMGVanillaBlockStates.generateWallBlockState(c, p, "concrete"))
+                .tag(BlockTags.NEEDS_STONE_TOOL)
+                .tag(BlockTags.WALLS)
+                .item()
+                .transform(b -> TFMGVanillaBlockStates.transformWallItem(b, "concrete"))
+                .build()
+                .lang("Concrete Wall")
+                .register();
+
+        REGISTRATE.block("concrete_stairs", p -> new StairBlock(()-> TFMGBlocks.CONCRETE.get().defaultBlockState(),p))
+                .initialProperties(() -> Blocks.STONE)
+                .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+                .properties(p -> p.requiresCorrectToolForDrops())
+                .transform(pickaxeOnly())
+                .blockstate((c, p) -> TFMGVanillaBlockStates.generateStairBlockState(c, p, "concrete"))
+                .tag(BlockTags.NEEDS_STONE_TOOL)
+                .tag(BlockTags.STAIRS)
+                .item()
+                .transform(b -> TFMGVanillaBlockStates.transformStairItem(b, "concrete"))
+                .build()
+                .lang("Concrete Stairs")
+                .register();
+
+
 
 
 
@@ -725,6 +1233,9 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                 .lang("Concrete")
                 .register();
     }
+
+
+
     //this saved so much time
     public static void generateColoredConcrete() {
         String[] colours = {"black", "white", "blue", "light_blue", "red", "green", "lime", "pink", "magenta", "yellow", "gray", "light_gray", "brown", "cyan", "purple", "orange"};
@@ -804,6 +1315,75 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
 
         }
+    }
+    public static BlockEntry<SlabBlock> withVariants(String name, Block properties, MaterialColor color,
+                                                 String displayName, TagKey<Block> toolRequired,SoundType sound, boolean wall){
+
+        if(wall)
+            REGISTRATE.block(name+"_wall", WallBlock::new)
+                    .initialProperties(() -> properties)
+                    .properties(p -> p.color(color))
+                    .properties(p -> p.sound(sound))
+                    .properties(p -> p.requiresCorrectToolForDrops())
+                    .transform(pickaxeOnly())
+                    .blockstate((c, p) -> TFMGVanillaBlockStates.generateWallBlockState(c, p, name))
+                    .tag(toolRequired)
+                    .tag(BlockTags.WALLS)
+                    .item()
+                    .transform(b -> TFMGVanillaBlockStates.transformWallItem(b, name))
+                    .build()
+                    .lang(displayName+" Wall")
+                    .register();
+//
+        REGISTRATE.block(name+"_stairs", p -> new StairBlock(()-> TFMGBlocks.CONCRETE.get().defaultBlockState(),p))
+                .initialProperties(() -> properties)
+                .properties(p -> p.color(color))
+                .properties(p -> p.sound(sound))
+                .properties(p -> p.requiresCorrectToolForDrops())
+                .transform(pickaxeOnly())
+                .blockstate((c, p) -> TFMGVanillaBlockStates.generateStairBlockState(c, p, name))
+                .tag(toolRequired)
+                .tag(BlockTags.STAIRS)
+                .item()
+                .transform(b -> TFMGVanillaBlockStates.transformStairItem(b, name))
+                .build()
+                .lang(displayName+" Stairs")
+                .register();
+
+
+
+
+//
+
+
+         REGISTRATE.block(name, Block::new)
+                .initialProperties(() -> properties)
+                .properties(p -> p.color(color))
+                .properties(p -> p.sound(sound))
+                .properties(p -> p.requiresCorrectToolForDrops())
+                .transform(pickaxeOnly())
+                .blockstate(simpleCubeAll(name))
+                .tag(toolRequired)
+                .transform(tagBlockAndItem(name))
+                .build()
+                .lang(displayName)
+                .register();
+
+        return  REGISTRATE.block(name+"_slab", SlabBlock::new)
+                .initialProperties(() -> properties)
+                .properties(p -> p.color(color))
+                .properties(p -> p.sound(sound))
+                .properties(p -> p.requiresCorrectToolForDrops())
+                .transform(pickaxeOnly())
+                .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, name))
+                .tag(toolRequired)
+                .tag(BlockTags.WALLS)
+                .item()
+                .transform(customItemModel(name+"_bottom"))
+                .lang(displayName+" Slab")
+                .register();
+
+
     }
 
     public static void register() {}

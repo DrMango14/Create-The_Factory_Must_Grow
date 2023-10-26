@@ -29,6 +29,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
+@SuppressWarnings("removal")
 public class ExhaustTileEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
 

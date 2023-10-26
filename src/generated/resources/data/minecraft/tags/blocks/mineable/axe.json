@@ -2,11 +2,18 @@
   "values": [
     "tfmg:steel_casing",
     "tfmg:heavy_machinery_casing",
+    "tfmg:steel_flywheel",
+    "tfmg:aluminum_flywheel",
+    "tfmg:cast_iron_flywheel",
     "tfmg:formwork_block",
-    "tfmg:copper_encased_steel_pipe",
     "tfmg:cast_iron_distillation_output",
     "tfmg:steel_distillation_output",
     "tfmg:machine_input",
-    "tfmg:pumpjack_crank"
+    "tfmg:pumpjack_crank",
+    "tfmg:copper_encased_steel_pipe",
+    "tfmg:copper_encased_cast_iron_pipe",
+    "tfmg:copper_encased_brass_pipe",
+    "tfmg:copper_encased_plastic_pipe",
+    "tfmg:copper_encased_aluminum_pipe"
   ]
 }

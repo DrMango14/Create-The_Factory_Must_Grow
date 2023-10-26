@@ -65,6 +65,6 @@ public class EncasedSteelPipeBlock extends EncasedPipeBlock {
 
     @Override
     public BlockEntityType<? extends FluidPipeBlockEntity> getBlockEntityType() {
-        return TFMGBlockEntities.ENCASED_STEEL_PIPE.get();
+        return TFMGBlockEntities.ENCASED_LOCKABLE_PIPE.get();
     }
 }

@@ -1,5 +1,8 @@
 {
   "values": [
+    "tfmg:factory_floor_stairs",
+    "tfmg:factory_floor",
+    "tfmg:factory_floor_slab",
     "tfmg:coal_coke_block",
     "tfmg:black_concrete",
     "tfmg:black_concrete_wall",
@@ -65,6 +68,9 @@
     "tfmg:orange_concrete_wall",
     "tfmg:orange_concrete_stairs",
     "tfmg:orange_concrete_slab",
-    "tfmg:concrete"
+    "tfmg:concrete_wall",
+    "tfmg:concrete_stairs",
+    "tfmg:concrete",
+    "tfmg:concrete_slab"
   ]
 }

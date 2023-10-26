@@ -14,8 +14,11 @@ public class TFMGSpriteShifts {
     public static final CTSpriteShiftEntry
             STEEL_CASING = omni("steel_casing");
 
+
+    public static final CTSpriteShiftEntry STEEL_SCAFFOLD = horizontal("scaffold/steel_scaffold"),
+            ALUMINUM_SCAFFOLD = horizontal("scaffold/aluminum_scaffold");
     public static final CTSpriteShiftEntry
-            ALUMINUM_SCAFFOLD_TOP = omni("scaffold/aluminum_scaffold_top");
+            ALUMINUM_SCAFFOLD_TOP = omni("aluminum_casing");
 
     public static final CTSpriteShiftEntry
             HEAVY_MACHINERY_CASING = omni("heavy_machinery_casing");
@@ -32,9 +35,6 @@ public class TFMGSpriteShifts {
             ALUMINUM_SCAFFOLD_INSIDE = horizontal("scaffold/aluminum_scaffold_inside");
 
 
-
-    public static final CTSpriteShiftEntry STEEL_SCAFFOLD = horizontal("scaffold/steel_scaffold"),
-            ALUMINUM_SCAFFOLD = horizontal("scaffold/aluminum_scaffold");
 
     public static final CTSpriteShiftEntry
             STEEL_ENCASED_COGWHEEL_SIDE = vertical("steel_encased_cogwheel_side"),

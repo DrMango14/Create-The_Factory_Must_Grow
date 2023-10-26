@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "alt=false,axis=x": {
+      "model": "tfmg:block/plastic_pipe/window",
+      "x": 90,
+      "y": 90
+    },
+    "alt=false,axis=y": {
+      "model": "tfmg:block/plastic_pipe/window"
+    },
+    "alt=false,axis=z": {
+      "model": "tfmg:block/plastic_pipe/window",
+      "x": 90
+    },
+    "alt=true,axis=x": {
+      "model": "tfmg:block/plastic_pipe/window",
+      "x": 90,
+      "y": 90
+    },
+    "alt=true,axis=y": {
+      "model": "tfmg:block/plastic_pipe/window"
+    },
+    "alt=true,axis=z": {
+      "model": "tfmg:block/plastic_pipe/window",
+      "x": 90
+    }
+  }
+}

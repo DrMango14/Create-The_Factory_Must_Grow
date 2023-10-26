@@ -38,27 +38,42 @@ public class TFMGPartialModels {
                 PUMPJACK_CRANK_BLOCK = block("pumpjack/pumpjack_crank_block"),
                 PUMPJACK_CRANK = block("pumpjack/pumpjack_crank"),
                 TOWER_GAUGE = block("distillation_tower/gauge"),
-                STEEL_FLUID_PIPE_CASING = block("steel_pipe/casing"),
                 SURFACE_SCANNER_DIAL = block("surface_scanner/dial"),
                 SURFACE_SCANNER_FLAG = block("surface_scanner/flag"),
                 FORMWORK_BOTTOM = block("formwork_block/block_bottom"),
-                FORMWORK_SIDE = block("formwork_block/block_side");
+                FORMWORK_SIDE = block("formwork_block/block_side"),
+
+
+                STEEL_FLUID_PIPE_CASING = block("steel_pipe/casing"),
+
+                CAST_IRON_FLUID_PIPE_CASING = block("cast_iron_pipe/casing"),
+                BRASS_FLUID_PIPE_CASING = block("brass_pipe/casing"),
+                PLASTIC_FLUID_PIPE_CASING = block("plastic_pipe/casing"),
+                ALUMINUM_FLUID_PIPE_CASING = block("aluminum_pipe/casing")
+
+
+                        ;
 
     public static final Map<ResourceLocation, Couple<PartialModel>> FOLDING_DOORS = new HashMap<>();
 
     public static final Map<FluidTransportBehaviour.AttachmentTypes.ComponentPartials, Map<Direction, PartialModel>> STEEL_PIPE_ATTACHMENTS =
             new EnumMap<>(FluidTransportBehaviour.AttachmentTypes.ComponentPartials.class);
 
+    public static final Map<FluidTransportBehaviour.AttachmentTypes.ComponentPartials, Map<Direction, PartialModel>> CAST_IRON_PIPE_ATTACHMENTS =
+            new EnumMap<>(FluidTransportBehaviour.AttachmentTypes.ComponentPartials.class);
+
+    public static final Map<FluidTransportBehaviour.AttachmentTypes.ComponentPartials, Map<Direction, PartialModel>> BRASS_PIPE_ATTACHMENTS =
+            new EnumMap<>(FluidTransportBehaviour.AttachmentTypes.ComponentPartials.class);
+
+    public static final Map<FluidTransportBehaviour.AttachmentTypes.ComponentPartials, Map<Direction, PartialModel>> PLASTIC_PIPE_ATTACHMENTS =
+            new EnumMap<>(FluidTransportBehaviour.AttachmentTypes.ComponentPartials.class);
+
+    public static final Map<FluidTransportBehaviour.AttachmentTypes.ComponentPartials, Map<Direction, PartialModel>> ALUMINUM_PIPE_ATTACHMENTS =
+            new EnumMap<>(FluidTransportBehaviour.AttachmentTypes.ComponentPartials.class);
+
 
     static {
-    //   for (FluidTransportBehaviour.AttachmentTypes.ComponentPartials type : FluidTransportBehaviour.AttachmentTypes.ComponentPartials.values()) {
-    //       Map<Direction, PartialModel> map = new HashMap<>();
-    //       for (Direction d : Iterate.directions) {
-    //           String asId = Lang.asId(type.name());
-    //           map.put(d, block("steel_pipe/" + asId + "/" + Lang.asId(d.getSerializedName())));
-    //       }
-    //       STEEL_PIPE_ATTACHMENTS.put(type, map);
-    //   }
+
         for (FluidTransportBehaviour.AttachmentTypes.ComponentPartials type : FluidTransportBehaviour.AttachmentTypes.ComponentPartials.values()) {
             Map<Direction, PartialModel> map = new HashMap<>();
             for (Direction d : Iterate.directions) {
@@ -69,6 +84,52 @@ public class TFMGPartialModels {
         }
 
         putFoldingDoor("steel_door");
+
+        for (FluidTransportBehaviour.AttachmentTypes.ComponentPartials type : FluidTransportBehaviour.AttachmentTypes.ComponentPartials.values()) {
+            Map<Direction, PartialModel> map = new HashMap<>();
+            for (Direction d : Iterate.directions) {
+                String asId = Lang.asId(type.name());
+                map.put(d, block("plastic_pipe/" + asId + "/" + Lang.asId(d.getSerializedName())));
+            }
+            PLASTIC_PIPE_ATTACHMENTS.put(type, map);
+        }
+        ////
+        for (FluidTransportBehaviour.AttachmentTypes.ComponentPartials type : FluidTransportBehaviour.AttachmentTypes.ComponentPartials.values()) {
+            Map<Direction, PartialModel> map = new HashMap<>();
+            for (Direction d : Iterate.directions) {
+                String asId = Lang.asId(type.name());
+                map.put(d, block("cast_iron_pipe/" + asId + "/" + Lang.asId(d.getSerializedName())));
+            }
+            CAST_IRON_PIPE_ATTACHMENTS.put(type, map);
+        }
+        ////
+        for (FluidTransportBehaviour.AttachmentTypes.ComponentPartials type : FluidTransportBehaviour.AttachmentTypes.ComponentPartials.values()) {
+            Map<Direction, PartialModel> map = new HashMap<>();
+            for (Direction d : Iterate.directions) {
+                String asId = Lang.asId(type.name());
+                map.put(d, block("brass_pipe/" + asId + "/" + Lang.asId(d.getSerializedName())));
+            }
+            BRASS_PIPE_ATTACHMENTS.put(type, map);
+        }
+        ////
+        for (FluidTransportBehaviour.AttachmentTypes.ComponentPartials type : FluidTransportBehaviour.AttachmentTypes.ComponentPartials.values()) {
+            Map<Direction, PartialModel> map = new HashMap<>();
+            for (Direction d : Iterate.directions) {
+                String asId = Lang.asId(type.name());
+                map.put(d, block("aluminum_pipe/" + asId + "/" + Lang.asId(d.getSerializedName())));
+            }
+            ALUMINUM_PIPE_ATTACHMENTS.put(type, map);
+        }
+        ////
+
+
+
+
+
+        ////////////////
+        putFoldingDoor("steel_door");
+
+
 
 
     }

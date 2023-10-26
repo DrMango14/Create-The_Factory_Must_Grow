@@ -75,6 +75,6 @@ public class GlassSteelPipeBlock extends GlassFluidPipeBlock {
 
     @Override
     public BlockEntityType<? extends StraightPipeBlockEntity> getBlockEntityType() {
-        return TFMGBlockEntities.GLASS_STEEL_PIPE.get();
+        return TFMGBlockEntities.GLASS_TFMG_PIPE.get();
     }
 }

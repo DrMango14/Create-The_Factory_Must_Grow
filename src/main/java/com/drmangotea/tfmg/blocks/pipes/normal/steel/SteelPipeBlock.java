@@ -195,7 +195,7 @@ public class SteelPipeBlock extends FluidPipeBlock {
 
     @Override
     public BlockEntityType<? extends FluidPipeBlockEntity> getBlockEntityType() {
-        return TFMGBlockEntities.STEEL_PIPE.get();
+        return TFMGBlockEntities.LOCKABLE_PIPE.get();
     }
 
 }

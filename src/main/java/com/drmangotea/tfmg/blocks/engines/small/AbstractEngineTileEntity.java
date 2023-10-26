@@ -121,7 +121,7 @@ boolean signalChanged;
                 fuelConsumption=0;
         if(!tankInventory.isEmpty()) {
 
-            if(consumptionTimer>=5) {
+            if(consumptionTimer>=10) {
                 if(signal!=0)
                     tankInventory.drain(fuelConsumption, IFluidHandler.FluidAction.EXECUTE);
                 consumptionTimer=0;
@@ -140,7 +140,7 @@ boolean signalChanged;
 
     public boolean isExhaustTankFull(){
         if(!hasBackPart())
-        return false;
+            return false;
         EngineBackBlockEntity back = (EngineBackBlockEntity) level.getBlockEntity(this.getBlockPos().relative(this.getBlockState().getValue(FACING).getOpposite()));
         return back.tankInventory.getFluidAmount()+7>=500;
 

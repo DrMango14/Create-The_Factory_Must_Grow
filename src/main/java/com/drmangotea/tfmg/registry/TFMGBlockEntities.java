@@ -4,6 +4,9 @@ import com.drmangotea.tfmg.blocks.concrete.formwork.FormWorkBlockEntity;
 import com.drmangotea.tfmg.blocks.concrete.formwork.FormWorkRenderer;
 import com.drmangotea.tfmg.blocks.decoration.doors.TFMGSlidingDoorBlockEntity;
 import com.drmangotea.tfmg.blocks.decoration.doors.TFMGSlidingDoorRenderer;
+import com.drmangotea.tfmg.blocks.decoration.flywheels.TFMGFlywheelBlockEntity;
+import com.drmangotea.tfmg.blocks.decoration.flywheels.TFMGFlywheelInstance;
+import com.drmangotea.tfmg.blocks.decoration.flywheels.TFMGFlywheelRenderer;
 import com.drmangotea.tfmg.blocks.deposits.FluidDepositBlockEntity;
 import com.drmangotea.tfmg.blocks.deposits.surface_scanner.SurfaceScannerBlockEntity;
 import com.drmangotea.tfmg.blocks.deposits.surface_scanner.SurfaceScannerRenderer;
@@ -35,7 +38,6 @@ import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distiller
 import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distillery.DistilleryOutputBlockEntity;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.base.PumpjackBaseRenderer;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.base.PumpjackBaseBlockEntity;
-import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.crank.PumpjackCrankInstance;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.crank.PumpjackCrankRenderer;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.crank.PumpjackCrankBlockEntity;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderInstance;
@@ -47,6 +49,8 @@ import com.drmangotea.tfmg.blocks.pipes.normal.LockablePipeBlockEntity;
 import com.drmangotea.tfmg.blocks.tanks.SteelFluidTankRenderer;
 import com.drmangotea.tfmg.blocks.tanks.SteelTankBlockEntity;
 import com.drmangotea.tfmg.blocks.engines.small.UniversalEngineRenderer;
+import com.simibubi.create.Create;
+import com.simibubi.create.content.fluids.pipes.FluidPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.SmartFluidPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.StraightPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.TransparentStraightPipeRenderer;
@@ -79,23 +83,6 @@ public class TFMGBlockEntities {
             .register();
 
 
-    public static final BlockEntityEntry<LockablePipeBlockEntity> STEEL_PIPE = REGISTRATE
-            .blockEntity("steel_pipe", LockablePipeBlockEntity::new)
-            .validBlocks(TFMGBlocks.STEEL_PIPE)
-            .register();
-
-    public static final BlockEntityEntry<LockablePipeBlockEntity> ENCASED_STEEL_PIPE = REGISTRATE
-            .blockEntity("encased_steel_pipe", LockablePipeBlockEntity::new)
-            .validBlocks(TFMGBlocks.COPPER_ENCASED_STEEL_PIPE)
-            .register();
-
-
-    public static final BlockEntityEntry<StraightPipeBlockEntity> GLASS_STEEL_PIPE = REGISTRATE
-            .blockEntity("glass_steel_pipe", StraightPipeBlockEntity::new)
-            .validBlocks(TFMGBlocks.GLASS_STEEL_PIPE)
-            .renderer(() -> TransparentStraightPipeRenderer::new)
-            .register();
-
     public static final BlockEntityEntry<SteelTankBlockEntity> STEEL_FLUID_TANK = REGISTRATE
             .blockEntity("steel_fluid_tank", SteelTankBlockEntity::new)
             .validBlocks(TFMGBlocks.STEEL_FLUID_TANK)
@@ -110,25 +97,7 @@ public class TFMGBlockEntities {
                     .register();
 
 
-    public static final BlockEntityEntry<PumpBlockEntity> TFMG_MECHANICAL_PUMP = REGISTRATE
-            .blockEntity("mechanical_pump", PumpBlockEntity::new)
-            .instance(() -> PumpCogInstance::new)
-            .validBlocks(TFMGBlocks.STEEL_MECHANICAL_PUMP)
-            .renderer(() -> PumpRenderer::new)
-            .register();
 
-    public static final BlockEntityEntry<SmartFluidPipeBlockEntity> TFMG_SMART_FLUID_PIPE = REGISTRATE
-            .blockEntity("smart_fluid_pipe", SmartFluidPipeBlockEntity::new)
-            .validBlocks(TFMGBlocks.STEEL_SMART_FLUID_PIPE)
-            .renderer(() -> SmartBlockEntityRenderer::new)
-            .register();
-
-    public static final BlockEntityEntry<FluidValveBlockEntity> TFMG_FLUID_VALVE = REGISTRATE
-            .blockEntity("fluid_valve", FluidValveBlockEntity::new)
-            .instance(() -> FluidValveInstance::new)
-            .validBlocks(TFMGBlocks.STEEL_FLUID_VALVE)
-            .renderer(() -> FluidValveRenderer::new)
-            .register();
 
     public static final BlockEntityEntry<SurfaceScannerBlockEntity> SURFACE_SCANNER = REGISTRATE
             .blockEntity("deposit_scanner", SurfaceScannerBlockEntity::new)
@@ -269,6 +238,92 @@ public class TFMGBlockEntities {
             .blockEntity("flarestack", FlarestackBlockEntity::new)
             .validBlocks(TFMGBlocks.FLARESTACK)
             .register();
+
+
+
+    public static final BlockEntityEntry<LockablePipeBlockEntity> LOCKABLE_PIPE = REGISTRATE
+            .blockEntity("lockable_pipe", LockablePipeBlockEntity::new)
+            .validBlocks(TFMGBlocks.STEEL_PIPE,TFMGBlocks.ALUMINUM_PIPE,TFMGBlocks.PLASTIC_PIPE)
+            .register();
+
+    public static final BlockEntityEntry<FluidPipeBlockEntity> TFMG_PIPE = REGISTRATE
+            .blockEntity("tfmg_pipe", FluidPipeBlockEntity::new)
+            .validBlocks(TFMGBlocks.CAST_IRON_PIPE,TFMGBlocks.BRASS_PIPE)
+            .register();
+
+    public static final BlockEntityEntry<LockablePipeBlockEntity> ENCASED_LOCKABLE_PIPE = REGISTRATE
+            .blockEntity("encased_lockable_pipe", LockablePipeBlockEntity::new)
+            .validBlocks(TFMGBlocks.COPPER_ENCASED_STEEL_PIPE,
+                         TFMGBlocks.COPPER_ENCASED_ALUMINUM_PIPE,
+                         TFMGBlocks.COPPER_ENCASED_PLASTIC_PIPE
+            )
+            .register();
+
+    public static final BlockEntityEntry<FluidPipeBlockEntity> ENCASED_TFMG_PIPE = REGISTRATE
+            .blockEntity("encased_tfmg_pipe", FluidPipeBlockEntity::new)
+            .validBlocks(TFMGBlocks.COPPER_ENCASED_CAST_IRON_PIPE,TFMGBlocks.COPPER_ENCASED_BRASS_PIPE)
+            .register();
+
+    public static final BlockEntityEntry<PumpBlockEntity> TFMG_MECHANICAL_PUMP = REGISTRATE
+            .blockEntity("mechanical_pump", PumpBlockEntity::new)
+            .instance(() -> PumpCogInstance::new)
+            .validBlocks(
+                    TFMGBlocks.STEEL_MECHANICAL_PUMP,
+                    TFMGBlocks.CAST_IRON_MECHANICAL_PUMP,
+                    TFMGBlocks.BRASS_MECHANICAL_PUMP,
+                    TFMGBlocks.PLASTIC_MECHANICAL_PUMP,
+                    TFMGBlocks.ALUMINUM_MECHANICAL_PUMP
+            )
+            .renderer(() -> PumpRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<SmartFluidPipeBlockEntity> TFMG_SMART_FLUID_PIPE = REGISTRATE
+            .blockEntity("smart_fluid_pipe", SmartFluidPipeBlockEntity::new)
+            .validBlocks(
+                    TFMGBlocks.STEEL_SMART_FLUID_PIPE,
+                    TFMGBlocks.CAST_IRON_SMART_FLUID_PIPE,
+                    TFMGBlocks.BRASS_SMART_FLUID_PIPE,
+                    TFMGBlocks.PLASTIC_SMART_FLUID_PIPE,
+                    TFMGBlocks.ALUMINUM_SMART_FLUID_PIPE
+            )
+            .renderer(() -> SmartBlockEntityRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<FluidValveBlockEntity> TFMG_FLUID_VALVE = REGISTRATE
+            .blockEntity("fluid_valve", FluidValveBlockEntity::new)
+            .instance(() -> FluidValveInstance::new)
+            .validBlocks(
+                    TFMGBlocks.STEEL_FLUID_VALVE,
+                    TFMGBlocks.CAST_IRON_FLUID_VALVE,
+                    TFMGBlocks.BRASS_FLUID_VALVE,
+                    TFMGBlocks.PLASTIC_FLUID_VALVE,
+                    TFMGBlocks.ALUMINUM_FLUID_VALVE
+            )
+            .renderer(() -> FluidValveRenderer::new)
+            .register();
+
+
+    public static final BlockEntityEntry<StraightPipeBlockEntity> GLASS_TFMG_PIPE = REGISTRATE
+            .blockEntity("glass_tfmg_pipe", StraightPipeBlockEntity::new)
+            .validBlocks(
+                    TFMGBlocks.GLASS_STEEL_PIPE,
+                    TFMGBlocks.GLASS_CAST_IRON_PIPE,
+                    TFMGBlocks.GLASS_ALUMINUM_PIPE,
+                    TFMGBlocks.GLASS_PLASTIC_PIPE,
+                    TFMGBlocks.GLASS_BRASS_PIPE
+
+            )
+            .renderer(() -> TransparentStraightPipeRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<TFMGFlywheelBlockEntity> STEEL_FLYWHEEL = REGISTRATE
+            .blockEntity("steel_flywheel", TFMGFlywheelBlockEntity::new)
+            .instance(() -> TFMGFlywheelInstance::new, false)
+            .validBlocks(TFMGBlocks.STEEL_FLYWHEEL,TFMGBlocks.ALUMINUM_FLYWHEEL,TFMGBlocks.CAST_IRON_FLYWHEEL)
+            .renderer(() -> TFMGFlywheelRenderer::new)
+            .register();
+
+
 
 
 
