@@ -36,6 +36,8 @@
     "tfmg:orange_concrete_slab",
     "tfmg:concrete_wall",
     "tfmg:concrete_slab",
+    "tfmg:rebar_concrete_wall",
+    "tfmg:rebar_concrete_slab",
     "tfmg:cut_bauxite_wall",
     "tfmg:polished_cut_bauxite_wall",
     "tfmg:cut_bauxite_brick_wall",

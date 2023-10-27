@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.blocks.concrete.formwork.FormWorkBlockEntity;
 import com.drmangotea.tfmg.blocks.concrete.formwork.FormWorkRenderer;
+import com.drmangotea.tfmg.blocks.concrete.formwork.rebar.RebarFormWorkBlockEntity;
 import com.drmangotea.tfmg.blocks.decoration.doors.TFMGSlidingDoorBlockEntity;
 import com.drmangotea.tfmg.blocks.decoration.doors.TFMGSlidingDoorRenderer;
 import com.drmangotea.tfmg.blocks.decoration.flywheels.TFMGFlywheelBlockEntity;
@@ -76,6 +77,12 @@ public class TFMGBlockEntities {
             .blockEntity("formwork", FormWorkBlockEntity::new)
             .renderer(() -> FormWorkRenderer::new)
             .validBlocks(TFMGBlocks.FORMWORK_BLOCK)
+            .register();
+
+    public static final BlockEntityEntry<RebarFormWorkBlockEntity> REBAR_FORMWORK = REGISTRATE
+            .blockEntity("rebar_formwork", RebarFormWorkBlockEntity::new)
+            .renderer(() -> FormWorkRenderer::new)
+            .validBlocks(TFMGBlocks.REBAR_FORMWORK_BLOCK)
             .register();
     public static final BlockEntityEntry<FluidDepositBlockEntity> OIL_DEPOSIT = REGISTRATE
             .blockEntity("oil_deposit", FluidDepositBlockEntity::new)

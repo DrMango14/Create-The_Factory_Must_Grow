@@ -84,7 +84,12 @@ public class FluidPropagatorMixin {
                 if (tileEntity instanceof PumpBlockEntity) {
                     if (
                             !TFMGBlocks.STEEL_MECHANICAL_PUMP.has(targetState)&&
-                                    !AllBlocks.MECHANICAL_PUMP.has(targetState) || targetState.getValue(PumpBlock.FACING)
+                                    !AllBlocks.MECHANICAL_PUMP.has(targetState)&&
+                    !TFMGBlocks.BRASS_MECHANICAL_PUMP.has(targetState)&&
+                    !TFMGBlocks.CAST_IRON_MECHANICAL_PUMP.has(targetState)&&
+                    !TFMGBlocks.ALUMINUM_MECHANICAL_PUMP.has(targetState)&&
+                    !TFMGBlocks.PLASTIC_MECHANICAL_PUMP.has(targetState)
+                                    || targetState.getValue(PumpBlock.FACING)
                             .getAxis() != direction.getAxis())
                         continue;
                     discoveredPumps.add(Pair.of((PumpBlockEntity) tileEntity, direction.getOpposite()));

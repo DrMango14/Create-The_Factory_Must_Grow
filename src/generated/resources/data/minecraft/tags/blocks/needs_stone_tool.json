@@ -71,6 +71,7 @@
     "tfmg:concrete_wall",
     "tfmg:concrete_stairs",
     "tfmg:concrete",
-    "tfmg:concrete_slab"
+    "tfmg:concrete_slab",
+    "tfmg:rebar_concrete_slab"
   ]
 }

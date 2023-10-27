@@ -1,10 +1,12 @@
 package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.base.TFMGBuilderTransformers;
+import com.drmangotea.tfmg.base.TFMGMetalBarsGen;
 import com.drmangotea.tfmg.base.TFMGSpriteShifts;
 import com.drmangotea.tfmg.base.TFMGVanillaBlockStates;
 import com.drmangotea.tfmg.blocks.concrete.formwork.FormWorkBlock;
 import com.drmangotea.tfmg.blocks.concrete.formwork.FormWorkGenerator;
+import com.drmangotea.tfmg.blocks.concrete.formwork.rebar.RebarFormWorkBlock;
 import com.drmangotea.tfmg.blocks.decoration.TrussBlock;
 import com.drmangotea.tfmg.blocks.decoration.doors.TFMGSlidingDoorBlock;
 import com.drmangotea.tfmg.blocks.decoration.flywheels.TFMGFlywheelBlock;
@@ -71,6 +73,8 @@ import com.drmangotea.tfmg.blocks.tanks.SteelTankItem;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.Create;
+import com.simibubi.create.content.decoration.MetalLadderBlock;
 import com.simibubi.create.content.decoration.MetalScaffoldingBlock;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
@@ -96,6 +100,7 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.RegistryObject;
 
 
 import static com.drmangotea.tfmg.CreateTFMG.REGISTRATE;
@@ -220,6 +225,23 @@ public class TFMGBlocks {
                     .register();
 
 
+    public static final BlockEntry<IronBarsBlock> BRASS_BARS = TFMGMetalBarsGen.createBars("steel", true,
+            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), MaterialColor.TERRACOTTA_CYAN);
+    public static final BlockEntry<IronBarsBlock> COPPER_BARS = TFMGMetalBarsGen.createBars("aluminum", true,
+            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/aluminum")), MaterialColor.TERRACOTTA_WHITE);
+
+
+    public static final BlockEntry<MetalLadderBlock> STEEL_LADDER =
+            REGISTRATE.block("steel_ladder", MetalLadderBlock::new)
+                    .transform(BuilderTransformers.ladder("steel",
+                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), MaterialColor.TERRACOTTA_CYAN))
+                    .register();
+    public static final BlockEntry<MetalLadderBlock> ALUMINUM_LADDER =
+            REGISTRATE.block("aluminum_ladder", MetalLadderBlock::new)
+                    .transform(BuilderTransformers.ladder("aluminum",
+                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/aluminum")), MaterialColor.TERRACOTTA_WHITE))
+                    .register();
+
 
     public static final BlockEntry<TFMGFlywheelBlock> STEEL_FLYWHEEL = REGISTRATE.block("steel_flywheel", TFMGFlywheelBlock::new)
             .initialProperties(SharedProperties::softMetal)
@@ -253,12 +275,38 @@ public class TFMGBlocks {
             .register();
 
 
-    public static final BlockEntry<SlabBlock> FACTORY_FLOOR = withVariants("factory_floor",Blocks.STONE,
-            MaterialColor.COLOR_GRAY,"Factory Floor",BlockTags.NEEDS_STONE_TOOL,SoundType.NETHERITE_BLOCK,false);
+    public static final BlockEntry<Block> FACTORY_FLOOR = withVariants("factory_floor",Blocks.STONE,
+            MaterialColor.COLOR_GRAY,"Factory Floor",BlockTags.NEEDS_STONE_TOOL,SoundType.NETHERITE_BLOCK,5,false);
+
+    public static final BlockEntry<SlabBlock> FACTORY_FLOOR_SLAB =  REGISTRATE.block("factory_floor_slab", SlabBlock::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .properties(p -> p.strength(5,5))
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, "factory_floor"))
+            .tag(BlockTags.NEEDS_STONE_TOOL)
+            .tag(BlockTags.WALLS)
+            .item()
+            .transform(customItemModel("factory_floor_bottom"))
+            .lang("Factory Floor Slab")
+            .register();
 
     //-----------------------MACHINES---------------------------//
     public static final BlockEntry<FormWorkBlock> FORMWORK_BLOCK =
             REGISTRATE.block("formwork_block", FormWorkBlock::new)
+                    .initialProperties(Material.WOOD)
+                    .properties(p -> p.color(MaterialColor.WOOD))
+                    .properties(p -> p.requiresCorrectToolForDrops())
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .blockstate(new FormWorkGenerator()::generate)
+                    .transform(axeOnly())
+                    .item()
+                    .build()
+                    .register();
+
+    public static final BlockEntry<RebarFormWorkBlock> REBAR_FORMWORK_BLOCK =
+            REGISTRATE.block("rebar_formwork_block", RebarFormWorkBlock::new)
                     .initialProperties(Material.WOOD)
                     .properties(p -> p.color(MaterialColor.WOOD))
                     .properties(p -> p.requiresCorrectToolForDrops())
@@ -1182,6 +1230,26 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                 .register();
 
 
+
+    public static final BlockEntry<Block> REBAR_CONCRETE = withVariants("rebar_concrete",Blocks.STONE,
+            MaterialColor.COLOR_GRAY,"Rebar Concrete",BlockTags.NEEDS_DIAMOND_TOOL,SoundType.STONE,40,true);
+
+    public static final BlockEntry<SlabBlock> REBAR_CONCRETE_SLAB =  REGISTRATE.block("rebar_concrete_slab", SlabBlock::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .properties(p -> p.strength(40,40))
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, "rebar_concrete"))
+            .tag(BlockTags.NEEDS_STONE_TOOL)
+            .tag(BlockTags.WALLS)
+            .item()
+            .transform(customItemModel("rebar_concrete_bottom"))
+            .lang("Rebar Concrete Slab")
+            .register();
+
+
+
     public static BlockEntry<Block> generateConcrete(){
 
 
@@ -1316,14 +1384,19 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
         }
     }
-    public static BlockEntry<SlabBlock> withVariants(String name, Block properties, MaterialColor color,
-                                                 String displayName, TagKey<Block> toolRequired,SoundType sound, boolean wall){
+    public static BlockEntry<Block> withVariants(String name, Block properties, MaterialColor color,
+                                                 String displayName, TagKey<Block> toolRequired,SoundType sound,int strenght, boolean wall){
+
+
+
+
 
         if(wall)
             REGISTRATE.block(name+"_wall", WallBlock::new)
                     .initialProperties(() -> properties)
                     .properties(p -> p.color(color))
                     .properties(p -> p.sound(sound))
+                    .properties(p -> p.strength(strenght,strenght))
                     .properties(p -> p.requiresCorrectToolForDrops())
                     .transform(pickaxeOnly())
                     .blockstate((c, p) -> TFMGVanillaBlockStates.generateWallBlockState(c, p, name))
@@ -1339,6 +1412,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                 .initialProperties(() -> properties)
                 .properties(p -> p.color(color))
                 .properties(p -> p.sound(sound))
+                .properties(p -> p.strength(strenght,strenght))
                 .properties(p -> p.requiresCorrectToolForDrops())
                 .transform(pickaxeOnly())
                 .blockstate((c, p) -> TFMGVanillaBlockStates.generateStairBlockState(c, p, name))
@@ -1356,10 +1430,11 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 //
 
 
-         REGISTRATE.block(name, Block::new)
+         return REGISTRATE.block(name, Block::new)
                 .initialProperties(() -> properties)
                 .properties(p -> p.color(color))
                 .properties(p -> p.sound(sound))
+                 .properties(p -> p.strength(strenght,strenght))
                 .properties(p -> p.requiresCorrectToolForDrops())
                 .transform(pickaxeOnly())
                 .blockstate(simpleCubeAll(name))
@@ -1369,19 +1444,20 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                 .lang(displayName)
                 .register();
 
-        return  REGISTRATE.block(name+"_slab", SlabBlock::new)
-                .initialProperties(() -> properties)
-                .properties(p -> p.color(color))
-                .properties(p -> p.sound(sound))
-                .properties(p -> p.requiresCorrectToolForDrops())
-                .transform(pickaxeOnly())
-                .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, name))
-                .tag(toolRequired)
-                .tag(BlockTags.WALLS)
-                .item()
-                .transform(customItemModel(name+"_bottom"))
-                .lang(displayName+" Slab")
-                .register();
+        //return  REGISTRATE.block(name+"_slab", SlabBlock::new)
+        //        .initialProperties(() -> properties)
+        //        .properties(p -> p.color(color))
+        //        .properties(p -> p.sound(sound))
+        //        .properties(p -> p.strength(strenght,strenght))
+        //        .properties(p -> p.requiresCorrectToolForDrops())
+        //        .transform(pickaxeOnly())
+        //        .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, name))
+        //        .tag(toolRequired)
+        //        .tag(BlockTags.WALLS)
+        //        .item()
+        //        .transform(customItemModel(name+"_bottom"))
+        //        .lang(displayName+" Slab")
+        //        .register();
 
 
     }

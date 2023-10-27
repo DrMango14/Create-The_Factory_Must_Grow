@@ -16,6 +16,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public enum TFMGGuiTextures implements ScreenElement {
 
 
+
+
     // JEI
     DISTILLATION_TOWER_TOP("distillation_tower", 0, 0, 44, 12),
     DISTILLATION_TOWER_MIDDLE("distillation_tower", 0, 12, 44, 24),
