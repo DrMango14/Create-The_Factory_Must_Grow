@@ -1,4 +1,4 @@
-// 1.19.2	2023-10-26T22:51:36.2574132	Registrate Provider for tfmg [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-10-27T21:47:47.0823966	Registrate Provider for tfmg [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 e982a263b6af75821042107fdeff7bd809436d08 assets/tfmg/blockstates/air_intake.json
 e7f63aadfc892e337d9f87b5e50af8b1c7e4103f assets/tfmg/blockstates/aluminum_bars.json
 b7f5146505c40c08cdea7ad01fa99048b7ac5451 assets/tfmg/blockstates/aluminum_block.json
@@ -68,6 +68,7 @@ e11a6159da224e69f12e11a594c20bb2bd8c0e68 assets/tfmg/blockstates/cut_bauxite_bri
 085577a70a50fcde799996e8b153a65735d778bc assets/tfmg/blockstates/cyan_concrete_wall.json
 03983ce3de10310cd75b98f17c9161653b7034cd assets/tfmg/blockstates/diesel.json
 7c567b9feab72955e4f0860a6fe829733ad0b2ab assets/tfmg/blockstates/diesel_engine.json
+4afb3cba60d265071b13a90ee95023e8600d24c7 assets/tfmg/blockstates/diesel_engine_expansion.json
 08007e8e0e57b4ad322e9125fd05b010aa9a5a0b assets/tfmg/blockstates/exhaust.json
 41ad3bce75918278f4f48ca3ecf23b1980f9963d assets/tfmg/blockstates/factory_floor.json
 10f47e08c249406dd1f2122d1e209998c45d848d assets/tfmg/blockstates/factory_floor_slab.json
@@ -190,8 +191,8 @@ a91a739eb2fe9a2d24c409d2be93501503f87090 assets/tfmg/blockstates/white_concrete_
 98c9aa212e82100d7fc47354760940cc946594d4 assets/tfmg/blockstates/yellow_concrete_slab.json
 a1988ec6a98f23cad8321b46345fbf1c5fd20489 assets/tfmg/blockstates/yellow_concrete_stairs.json
 c58fa20c091e5ecddfb7164cba45538a8f911431 assets/tfmg/blockstates/yellow_concrete_wall.json
-8910f7cd1b74825adfce5279357f33706b67601c assets/tfmg/lang/en_ud.json
-a084c6512874b3c3f2de726a1d98dcdadcf455a9 assets/tfmg/lang/en_us.json
+09facbb04f3ca3e7802cd90934687c5d96d249c0 assets/tfmg/lang/en_ud.json
+7e16c9c1a702b75e4bfacf9bf74660c88026b268 assets/tfmg/lang/en_us.json
 9e6a6b62f5e7528c4e4d4f72f3510edcd8f0c078 assets/tfmg/models/block/aluminum_block.json
 da469bf3233944085f07d4ef437827061e408838 assets/tfmg/models/block/aluminum_cap.json
 4344f14c42bb7a9f90120b5f75927015c0edc3bc assets/tfmg/models/block/aluminum_cap_alt.json
@@ -654,6 +655,7 @@ da2c28e98d0ddf7166bdf7214c06e81ad8581b90 assets/tfmg/models/item/cast_iron_ingot
 55e71185e7ba0cb136bc332d5c95efc18425f975 assets/tfmg/models/item/cast_iron_pipe.json
 84da535b10e09a52d2bb7cdc29a4b4ccb0b484d7 assets/tfmg/models/item/cast_iron_smart_fluid_pipe.json
 fc135ddd710b7a867de7d8952896350274960d23 assets/tfmg/models/item/caution_block.json
+a4b6caad4a55c2f9758a58d566ffcd45d601e9aa assets/tfmg/models/item/charcoal_dust.json
 d45fc5511b4c4027889afd3088cd91ba1d8b0501 assets/tfmg/models/item/coal_coke.json
 3789a9d72a7ba5daf8c39cccaa665057e63302c6 assets/tfmg/models/item/coal_coke_block.json
 cf3c486158a27cbd3a4ef9fdd79dc93f3cc12b45 assets/tfmg/models/item/coal_coke_dust.json
@@ -680,6 +682,7 @@ e6bf52c7a969b26d65cc36353a6a3e2a91752e42 assets/tfmg/models/item/cut_bauxite_sta
 36ddfc344417e445c751af930d937cab41e81d6c assets/tfmg/models/item/cyan_concrete_wall.json
 3497bcbaee50b2f766de659043bf3c36823b570d assets/tfmg/models/item/diesel_bucket.json
 5f6af846bfb652587c5cf2b7431a6025335e4f9d assets/tfmg/models/item/diesel_engine.json
+b0223d07e15448b6e8a5a4565b379d1a91f159b3 assets/tfmg/models/item/diesel_engine_expansion.json
 941e9eac84bd6bfce1f801ea6a9c98d79d8a7c9d assets/tfmg/models/item/exhaust.json
 05059dfd2577f195a3c401b3e2a4c247371f5f67 assets/tfmg/models/item/factory_floor.json
 1ad0fcaf5dedf28d9bf9e57b1e4a5e3171128b50 assets/tfmg/models/item/factory_floor_slab.json
@@ -732,6 +735,7 @@ b380ae21f3274a48806976f58647150028a8df63 assets/tfmg/models/item/magenta_concret
 afac1fce0904a0df4e68d731b897ff1be6c68766 assets/tfmg/models/item/napalm_bomb.json
 b41853a4ae8b890f924058e57d274e956e6f4e37 assets/tfmg/models/item/napalm_bucket.json
 aa94f1afebb7c458e85849d8ddff76c27efefb80 assets/tfmg/models/item/naphtha_bucket.json
+266bb5df7f514458dc90bf32f46efa31475ff7cc assets/tfmg/models/item/nitrate_dust.json
 9907695c674afea00d3affefdc2ede9e68aa5667 assets/tfmg/models/item/oil_deposit.json
 3670762634f4e4b1366b6a19253453ad3667655f assets/tfmg/models/item/orange_concrete.json
 c4d486b71f966ee9019ed124e1b84914386386dd assets/tfmg/models/item/orange_concrete_slab.json
@@ -757,6 +761,7 @@ a6da50f604abf3b381b447c494a217cdac2a9b65 assets/tfmg/models/item/pumpjack_base.j
 fcc22d0322de977957e8353c7b9108e79fdca094 assets/tfmg/models/item/purple_concrete_stairs.json
 3e797f9092ecfb4472a44c35e31c22528548930e assets/tfmg/models/item/purple_concrete_wall.json
 3cfdbac1c06b4e75416fcd24a93616d98f59d6e3 assets/tfmg/models/item/quad_potato_cannon.json
+78bf4984da7f4d6bbd51e8654a0d9185c30f22c9 assets/tfmg/models/item/rebar.json
 94dd27526967032c1ab4f94d19ad24a60a03c278 assets/tfmg/models/item/rebar_concrete.json
 e3b67501716b8e2dd5b4043c95a55e08e10c3322 assets/tfmg/models/item/rebar_concrete_slab.json
 f34c9b5f7396d6250df8956178a83f0a55c7c119 assets/tfmg/models/item/rebar_concrete_stairs.json
@@ -784,15 +789,21 @@ fa25fce00275dd2abdfe47ccf041c590bf558b8c assets/tfmg/models/item/steel_flywheel.
 61e64ad93db0bd29dec2221633c4552f37026784 assets/tfmg/models/item/steel_ingot.json
 c986ff3f4535131aa6cb406a4db89eab5cb9ba8e assets/tfmg/models/item/steel_ladder.json
 4cea5b158cc0789fcdc8808250b993160bc62268 assets/tfmg/models/item/steel_mechanical_pump.json
+b4915579bbf366920e542f6c8014707771dd334f assets/tfmg/models/item/steel_mechanism.json
 4fb5ba811196a402c750a379145aa0a14471ddc3 assets/tfmg/models/item/steel_pipe.json
 ee8c3438bbd74eaaa5d0423695365d2a5b1c4bb1 assets/tfmg/models/item/steel_scaffolding.json
 76289628b3e2bc6373737731cfb7b41a7c01119b assets/tfmg/models/item/steel_sheetmetal.json
 2badc90d08a4fd5f54c5e836ae2613b2e233f702 assets/tfmg/models/item/steel_smart_fluid_pipe.json
 0bb5e8ab7b0162883ee43fee2b8869275f26adb1 assets/tfmg/models/item/steel_truss.json
+bfc09955fa8b4b02ba2145ccf4b68dcb4d72e775 assets/tfmg/models/item/sulfur_dust.json
 e2fb504cbb8808de330d4ea87030f0d089921e23 assets/tfmg/models/item/surface_scanner.json
 72da5f91f1992b502e90c8fc84d654e075163eb7 assets/tfmg/models/item/thermite_grenade.json
 513398ed9f251ca092e818a3f9279641096687e7 assets/tfmg/models/item/turbine_engine.json
 480c6573a04c2e3bf756ea8ab5801b1875e31df1 assets/tfmg/models/item/turbine_engine_back.json
+b878e027796260734bb9cb3d799b58d9e26fd8eb assets/tfmg/models/item/unfinished_gasoline_engine.json
+b878e027796260734bb9cb3d799b58d9e26fd8eb assets/tfmg/models/item/unfinished_lpg_engine.json
+108b74837387c74cbcfe24bdd4dc0cb5c0ee2b93 assets/tfmg/models/item/unfinished_steel_mechanism.json
+b878e027796260734bb9cb3d799b58d9e26fd8eb assets/tfmg/models/item/unfinished_turbine_engine.json
 3364d43896991c64fd99480fdb7f5f9af1ab17a2 assets/tfmg/models/item/white_concrete.json
 eed7ac8dbb27b6af5ca4037db1e2b4949ea7c16a assets/tfmg/models/item/white_concrete_slab.json
 4e02717d5f18da45095a831b81e55335f686ab31 assets/tfmg/models/item/white_concrete_stairs.json
@@ -840,10 +851,10 @@ ec0bfe5dc43ffc30aeec49a1171fab05e6344514 data/forge/tags/items/rebar_concrete.js
 63c4a8d8e713db70730e766f1a10f8dd9072f98f data/minecraft/tags/blocks/dripstone_replaceable_blocks.json
 63c4a8d8e713db70730e766f1a10f8dd9072f98f data/minecraft/tags/blocks/lush_ground_replaceable.json
 78dd479c02a4d74f7f2e94a49b5f69c7c44e0a22 data/minecraft/tags/blocks/mineable/axe.json
-d5635a0e318b09e2f5d9c5b7fe70f250e9ed5b23 data/minecraft/tags/blocks/mineable/pickaxe.json
+fc602664307417957284d3fdead179ea1ccd36fd data/minecraft/tags/blocks/mineable/pickaxe.json
 63c4a8d8e713db70730e766f1a10f8dd9072f98f data/minecraft/tags/blocks/moss_replaceable.json
 308629590ea6d2511f33b1f6f145273d6d8512a1 data/minecraft/tags/blocks/needs_diamond_tool.json
-4faa86094bcb398aac8f593c4f344c7dfe91b179 data/minecraft/tags/blocks/needs_iron_tool.json
+d9b7c5a1ade3877bde041b493a182a2f892f61cf data/minecraft/tags/blocks/needs_iron_tool.json
 50009287611dd20dd887f9b0ce926773267658d6 data/minecraft/tags/blocks/needs_stone_tool.json
 193c8b45d804216ca5fe2035fa8dfc4567303500 data/minecraft/tags/blocks/slabs.json
 64778c41570f87475b2f624f752895b50e5e2338 data/minecraft/tags/blocks/stairs.json
@@ -960,6 +971,7 @@ bca6aaf5cb5543625303de1f9c959b8abb758d62 data/tfmg/loot_tables/blocks/cyan_concr
 53065cde698eebebf76700cabd3cb509ee7b1f1a data/tfmg/loot_tables/blocks/cyan_concrete_stairs.json
 46482c07a16b5926ee907dc9a8b709108e507cab data/tfmg/loot_tables/blocks/cyan_concrete_wall.json
 0eae2cf277b9e7c8c90df8c922b7aa28b69a552b data/tfmg/loot_tables/blocks/diesel_engine.json
+548c48147eb2d0bb1b19a718a12489fba719f947 data/tfmg/loot_tables/blocks/diesel_engine_expansion.json
 57e1ddc8ea284f25cb4c2b91e09e1212c9d9dcd2 data/tfmg/loot_tables/blocks/exhaust.json
 a011f9ced3ba9a599e363e07ff7fe277a4deeab1 data/tfmg/loot_tables/blocks/factory_floor.json
 7a7a54755d6ee6ed1cb44e01843151220ca5407a data/tfmg/loot_tables/blocks/factory_floor_slab.json

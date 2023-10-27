@@ -5,6 +5,7 @@ import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
+import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.Couple;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
@@ -50,14 +51,26 @@ public class TFMGMachineBlockEntity extends SmartBlockEntity  implements IHaveGo
 
         tank2 = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.OUTPUT, this, 1, 1000, true)
                 .whenFluidUpdates(() -> contentsChanged = true);
+
+
+
+
         behaviours.add(tank1);
         behaviours.add(tank2);
+
+
+
 
         fluidCapability = LazyOptional.of(() -> {
             LazyOptional<? extends IFluidHandler> inputCap = tank1.getCapability();
             LazyOptional<? extends IFluidHandler> outputCap = tank2.getCapability();
             return new CombinedTankWrapper(outputCap.orElse(null), inputCap.orElse(null));
         });
+
+
+    }
+    protected void onFluidStackChanged(FluidStack newFluidStack) {
+        sendData();
     }
 
     @Override
@@ -69,6 +82,8 @@ public class TFMGMachineBlockEntity extends SmartBlockEntity  implements IHaveGo
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
+
+
 
         if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
             return fluidCapability.cast();

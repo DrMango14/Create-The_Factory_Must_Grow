@@ -11,6 +11,7 @@ import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.steamEngine.PoweredShaftBlockEntity;
 import com.simibubi.create.foundation.utility.AngleHelper;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.util.Mth;
@@ -131,7 +132,9 @@ public class DieselEngineInstance extends BlockEntityInstance<DieselEngineBlockE
 
 	@Override
 	public void updateLight() {
-		relight(pos, piston, linkage, connector);
+
+		BlockPos inFront = pos.above(10);
+		relight(inFront, piston, linkage, connector);
 	}
 
 	@Override

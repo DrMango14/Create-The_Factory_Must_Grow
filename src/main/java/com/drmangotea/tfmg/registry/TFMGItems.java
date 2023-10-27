@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.registry;
 
+import com.drmangotea.tfmg.CreateTFMG;
 import com.drmangotea.tfmg.items.gadgets.explosives.thermite_grenades.ChemicalColor;
 import com.drmangotea.tfmg.items.gadgets.explosives.thermite_grenades.ThermiteGrenadeItem;
 import com.drmangotea.tfmg.items.gadgets.quad_potato_cannon.QuadPotatoCannonItem;
@@ -7,6 +8,8 @@ import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin.Castin
 import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin.CastingMoldItem;
 import com.drmangotea.tfmg.items.CoalCokeItem;
 import com.drmangotea.tfmg.items.ScrewdriverItem;
+import com.simibubi.create.Create;
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.tags.TagKey;
@@ -31,6 +34,33 @@ public class TFMGItems {
             ALUMINUM_INGOT = taggedIngredient("aluminum_ingot", forgeItemTag("ingots/aluminum"), CREATE_INGOTS.tag)
           //  LEAD_INGOT = taggedIngredient("lead_ingot", forgeItemTag("ingots/lead"), CREATE_INGOTS.tag)
       ;
+
+    public static final ItemEntry<Item>
+            REBAR = REGISTRATE.item("rebar", Item::new).register();
+
+
+    public static final ItemEntry<Item>
+
+            STEEL_MECHANISM = REGISTRATE.item("steel_mechanism", Item::new).register(),
+            CHARCOAL_DUST = REGISTRATE.item("charcoal_dust", Item::new).register(),
+            NITRATE_DUST = REGISTRATE.item("nitrate_dust", Item::new).register(),
+            SULFUR_DUST = REGISTRATE.item("sulfur_dust", Item::new).register();
+
+
+    public static final ItemEntry<SequencedAssemblyItem>
+
+            UNFINISHED_STEEL_MECHANISM = sequencedIngredient("unfinished_steel_mechanism");
+
+    public static final ItemEntry<SequencedAssemblyItem>
+    UNFINISHED_GASOLINE_ENGINE = REGISTRATE.item("unfinished_gasoline_engine", SequencedAssemblyItem::new)
+            .model((c, p) -> p.withExistingParent(c.getName(), CreateTFMG.asResource("item/unfinished_engine")))
+            .register(),
+    UNFINISHED_LPG_ENGINE = REGISTRATE.item("unfinished_lpg_engine", SequencedAssemblyItem::new)
+            .model((c, p) -> p.withExistingParent(c.getName(), CreateTFMG.asResource("item/unfinished_engine")))
+            .register(),
+    UNFINISHED_TURBINE_ENGINE = REGISTRATE.item("unfinished_turbine_engine", SequencedAssemblyItem::new)
+            .model((c, p) -> p.withExistingParent(c.getName(), CreateTFMG.asResource("item/unfinished_engine")))
+            .register();
 
     public static final ItemEntry<Item>
             COAL_COKE_DUST = taggedIngredient("coal_coke_dust", forgeItemTag("dusts/coal_coke"));
@@ -63,6 +93,10 @@ public class TFMGItems {
     private static ItemEntry<Item> taggedIngredient(String name, TagKey<Item>... tags) {
         return REGISTRATE.item(name, Item::new)
                 .tag(tags)
+                .register();
+    }
+    private static ItemEntry<SequencedAssemblyItem> sequencedIngredient(String name) {
+        return REGISTRATE.item(name, SequencedAssemblyItem::new)
                 .register();
     }
 

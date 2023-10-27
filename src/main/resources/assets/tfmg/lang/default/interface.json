@@ -35,5 +35,14 @@
   "create.goggles.coke_oven.item_count": "Item Count In Internal Storage: %1$s",
   "create.goggles.coke_oven.invalid": "Coke Oven Invalid",
   "create.goggles.coke_oven.tank_full": "One of Internal Tanks Is Full",
-  "create.goggles.coke_oven.progress": "Progress: %1$s"
+  "create.goggles.coke_oven.progress": "Progress: %1$s",
+  "create.goggles.engine_stats": "Engine Stats:",
+  "create.goggles.engine_exhaust_stats": "Engine Exhaust Stats:",
+  "create.goggles.fuel_container": "Fluid Storage",
+  "create.goggles.engine.backpartmissing": "Back Part Missing:",
+  "create.goggles.engine_redstone_input" : "Speed:",
+  "create.goggles.engine.efficiency" : "Efficiency:",
+  "create.tooltip.engine_analog_strength": "%1$s/15",
+  "create.goggles.get_engine_efficiency": "%1$s",
+  "create.goggles.engine.stress": "%1$ssu"
 }

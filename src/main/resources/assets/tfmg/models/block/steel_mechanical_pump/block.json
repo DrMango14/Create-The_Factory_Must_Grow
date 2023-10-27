@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"parent": "create:block/block",
 	"textures": {
-		"2": "create:block/pipes",
-		"4": "create:block/pump",
-		"particle": "create:block/pump"
+		"2": "tfmg:block/steel_pipes",
+		"4": "tfmg:block/steel_pump",
+		"particle": "tfmg:block/steel_pump"
 	},
 	"elements": [
 		{

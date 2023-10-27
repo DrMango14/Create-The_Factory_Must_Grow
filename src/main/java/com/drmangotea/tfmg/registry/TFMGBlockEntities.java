@@ -14,6 +14,7 @@ import com.drmangotea.tfmg.blocks.deposits.surface_scanner.SurfaceScannerRendere
 import com.drmangotea.tfmg.blocks.engines.diesel.DieselEngineBlockEntity;
 import com.drmangotea.tfmg.blocks.engines.diesel.DieselEngineInstance;
 import com.drmangotea.tfmg.blocks.engines.diesel.DieselEngineRenderer;
+import com.drmangotea.tfmg.blocks.engines.diesel.engine_expansion.DieselEngineExpansionBlockEntity;
 import com.drmangotea.tfmg.blocks.engines.intake.AirIntakeBlockEntity;
 import com.drmangotea.tfmg.blocks.engines.intake.AirIntakeInstance;
 import com.drmangotea.tfmg.blocks.engines.intake.AirIntakeRenderer;
@@ -200,6 +201,11 @@ public class TFMGBlockEntities {
             .instance(() -> DieselEngineInstance::new, false)
             .validBlocks(TFMGBlocks.DIESEL_ENGINE)
             .renderer(() -> DieselEngineRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<DieselEngineExpansionBlockEntity> DIESEL_ENGINE_EXPANSION = REGISTRATE
+            .blockEntity("diesel_engine_expansion", DieselEngineExpansionBlockEntity::new)
+            .validBlocks(TFMGBlocks.DIESEL_ENGINE_EXPANSION)
             .register();
 
     public static final BlockEntityEntry<GasolineEngineTileEntity> GASOLINE_ENGINE = REGISTRATE

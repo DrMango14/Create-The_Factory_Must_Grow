@@ -5,10 +5,13 @@ import com.drmangotea.tfmg.blocks.engines.small.turbine.TurbineEngineTileEntity;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.simibubi.create.AllSoundEvents;
+import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
+import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
@@ -41,11 +44,15 @@ import java.util.Optional;
 
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
 
+@SuppressWarnings("removal")
 public abstract class AbstractEngineTileEntity extends GeneratingKineticBlockEntity implements IHaveGoggleInformation, IWrenchable {
 
     protected LazyOptional<IFluidHandler> fluidCapability;
     protected FluidTank tankInventory;
 
+    protected FluidTank lubricationOilTank;
+
+    protected FluidTank coolantTank;
 
     protected int soundTimer=0;
 
@@ -69,6 +76,12 @@ public abstract class AbstractEngineTileEntity extends GeneratingKineticBlockEnt
     protected int syncCooldown;
     protected boolean queuedSync;
 
+    public Fluid lubricationOil = TFMGFluids.LUBRICATION_OIL.get();
+    public Fluid coolant = TFMGFluids.COOLING_FLUID.get();
+
+    public float powerModifier=1;
+    public float efficiencyModifier = 1.4f;
+
 //
 int signal;
 boolean signalChanged;
@@ -80,15 +93,25 @@ boolean signalChanged;
         super(type, pos, state);
          tankInventory = createInventory();
 
-        fluidCapability = LazyOptional.of(() -> tankInventory);
+         lubricationOilTank = createUpgradeTankInventory(lubricationOil);
+         coolantTank = createUpgradeTankInventory(coolant);
+
+
+        //fluidCapability = LazyOptional.of(() -> tankInventory);
+        fluidCapability = LazyOptional.of(() -> {
+            return new CombinedTankWrapper(tankInventory,lubricationOilTank,coolantTank );
+        });
 
         signal = 0;
         setLazyTickRate(40);
-        refreshCapability();
+
     }
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+
+
+
     }
 
     @Override
@@ -121,7 +144,7 @@ boolean signalChanged;
                 fuelConsumption=0;
         if(!tankInventory.isEmpty()) {
 
-            if(consumptionTimer>=10) {
+            if(consumptionTimer>=17) {
                 if(signal!=0)
                     tankInventory.drain(fuelConsumption, IFluidHandler.FluidAction.EXECUTE);
                 consumptionTimer=0;
@@ -131,7 +154,7 @@ boolean signalChanged;
 
 
 
-            return convertToDirection(signal * signal, getBlockState().getValue(FACING));
+            return convertToDirection((signal * signal)*powerModifier, getBlockState().getValue(FACING));
         }}
         return 0;
 
@@ -156,12 +179,12 @@ boolean signalChanged;
         }
         efficiency=100;
 
-        if(signal>idealSpeed){
-            efficiency=(100-(signal-idealSpeed)*5);
+        if(signal>=idealSpeed){
+            efficiency= (int) ((100-(signal-idealSpeed)*5)/efficiencyModifier);
         }
 
         if(signal<idealSpeed){
-            efficiency=(100-(idealSpeed-signal)*3);
+            efficiency= (int) ((100-(idealSpeed-signal)*3)/efficiencyModifier);
         }
 
 
@@ -258,7 +281,7 @@ boolean signalChanged;
                 .forGoggles(tooltip);
         Lang.translate("goggles.get_engine_efficiency", this.efficiency)
                 .style(ChatFormatting.DARK_AQUA)
-                .add(Lang.translate("goggles.units.percent"))
+                .add(Lang.translate("goggles.misc.percent_symbol"))
                 .forGoggles(tooltip,1);
 
 
@@ -342,6 +365,8 @@ public void write(CompoundTag compound, boolean clientPacket) {
 
 
     compound.put("TankContent", tankInventory.writeToNBT(new CompoundTag()));
+    compound.put("Coolant", coolantTank.writeToNBT(new CompoundTag()));
+    compound.put("LubricationOil", lubricationOilTank.writeToNBT(new CompoundTag()));
 
 
     super.write(compound, clientPacket);
@@ -361,8 +386,10 @@ public void write(CompoundTag compound, boolean clientPacket) {
 
 
             tankInventory.readFromNBT(compound.getCompound("TankContent"));
-            if (tankInventory.getSpace() < 0)
-                tankInventory.drain(-tankInventory.getSpace(), IFluidHandler.FluidAction.EXECUTE);
+            coolantTank.readFromNBT(compound.getCompound("Coolant"));
+            lubricationOilTank.readFromNBT(compound.getCompound("LubricationOil"));
+
+
 
 
 
@@ -393,6 +420,22 @@ public void write(CompoundTag compound, boolean clientPacket) {
     @Override
     public void tick() {
         super.tick();
+
+        calculateUpgradeModifier();
+
+        //
+        int random1 = Create.RANDOM.nextInt(125);
+        int random2 = Create.RANDOM.nextInt(200);
+
+        if(random1 == 69)
+            coolantTank.drain(1, IFluidHandler.FluidAction.EXECUTE);
+        if(random2 == 69)
+            lubricationOilTank.drain(1, IFluidHandler.FluidAction.EXECUTE);
+
+
+        //
+
+
 
         ///
        // if(signal!=0&&hasBackPart()&&tankInventory.getFluidAmount()!=0&&!overStressed&&isExhaustTankFull()) {
@@ -468,6 +511,34 @@ public void write(CompoundTag compound, boolean clientPacket) {
 
     }
 
+
+    public void calculateUpgradeModifier(){
+
+
+        float newPowerModifier=1;
+        float newEfficiencyModifier = 1.4f;
+
+        if(lubricationOilTank.getFluidAmount()>0) {
+            newPowerModifier+=.3f;
+            newEfficiencyModifier-=.1f;
+        }
+        if(coolantTank.getFluidAmount()>0) {
+            newPowerModifier+=.1f;
+            newEfficiencyModifier-=.3f;
+        }
+
+        ////////
+
+
+        ////
+
+        powerModifier=newPowerModifier;
+        efficiencyModifier = newEfficiencyModifier;
+    }
+
+
+
+
     @OnlyIn(Dist.CLIENT)
     private void makeSound(){
         soundTimer=0;
@@ -498,6 +569,14 @@ public void write(CompoundTag compound, boolean clientPacket) {
             @Override
             public boolean isFluidValid(FluidStack stack) {
                 return stack.getFluid().isSame(validFuel());
+            }
+        };
+    }
+    protected SmartFluidTank createUpgradeTankInventory(Fluid validFluid) {
+        return new SmartFluidTank(1000, this::onFluidStackChanged){
+            @Override
+            public boolean isFluidValid(FluidStack stack) {
+                return stack.getFluid().isSame(validFluid);
             }
         };
     }
@@ -534,27 +613,6 @@ public void write(CompoundTag compound, boolean clientPacket) {
 
 
 
-
-
-    private void refreshCapability() {
-        LazyOptional<IFluidHandler> oldCap = fluidCapability;
-        fluidCapability = LazyOptional.of(() -> handlerForCapability());
-        oldCap.invalidate();
-    }
-
-    private IFluidHandler handlerForCapability() {
-        return tankInventory;
-    }
-
-
-
-
-
-
-
-
-
-
     public float getFillState() {
         return (float) tankInventory.getFluidAmount() / tankInventory.getCapacity();
     }
@@ -564,8 +622,7 @@ public void write(CompoundTag compound, boolean clientPacket) {
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (!fluidCapability.isPresent())
-            refreshCapability();
+
         if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
             return fluidCapability.cast();
         return super.getCapability(cap, side);
@@ -574,6 +631,7 @@ public void write(CompoundTag compound, boolean clientPacket) {
     @Override
     public void invalidate() {
         super.invalidate();
+        fluidCapability.invalidate();
     }
 
 

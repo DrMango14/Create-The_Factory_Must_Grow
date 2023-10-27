@@ -16,6 +16,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
+import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -23,10 +24,12 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Direction.AxisDirection;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -35,6 +38,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.fml.DistExecutor;
 
 import javax.annotation.Nonnull;
@@ -50,30 +54,18 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 	public WeakReference<PoweredShaftBlockEntity> target;
 ///////////
 
-	public SmartFluidTankBehaviour inputTank;
-	protected SmartFluidTankBehaviour exhaustTank;
+	public FluidTank fuelTank;
+	protected FluidTank exhaustTank;
+
+	protected FluidTank airTank;
 	private boolean contentsChanged;
 	private int consumptionTimer=0;
 	public float engineStrength = 0;
-	private Couple<SmartFluidTankBehaviour> tanks;
-
-	public boolean connectionVerticalX=false;
-	public boolean connectionVerticalZ=false;
-
-	public boolean connectionX=false;
-	public boolean connectionX2=false;
-
-	public boolean connectionZ=false;
-	public boolean connectionZ2=false;
-
-	protected LazyOptional<IFluidHandler> fluidCapability;
+	private Couple<FluidTank> tanks;
 
 
 
-
-
-
-	List<IntAttached<FluidStack>> visualizedOutputFluids;
+	protected LazyOptional<CombinedTankWrapper> fluidCapability;
 
 	public DieselEngineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -84,13 +76,17 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 
 
 		contentsChanged = true;
+		fuelTank = createInventory(TFMGFluids.DIESEL.getSource(),false);
 
 
 
-		tanks = Couple.create(inputTank, exhaustTank);
-		tanks.get(true).forbidExtraction();
-		tanks.get(false).forbidInsertion();
+		exhaustTank = createInventory(TFMGFluids.CARBON_DIOXIDE.getSource(),true);
+		airTank = createInventory(TFMGFluids.AIR.getSource(),false);
 
+
+		tanks = Couple.create(fuelTank, exhaustTank);
+
+		fluidCapability = LazyOptional.of(() -> new CombinedTankWrapper(fuelTank,airTank, exhaustTank));
 
 
 	}
@@ -111,21 +107,6 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 		behaviours.add(new DirectBeltInputBehaviour(this));
 
 
-
-		inputTank = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this, 1, 1000, true)
-				.whenFluidUpdates(() -> contentsChanged = true);
-
-		exhaustTank = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.OUTPUT, this, 1, 1000, true)
-				.whenFluidUpdates(() -> contentsChanged = true)
-				.forbidInsertion();
-		behaviours.add(inputTank);
-		behaviours.add(exhaustTank);
-
-		fluidCapability = LazyOptional.of(() -> {
-			LazyOptional<? extends IFluidHandler> inputCap = inputTank.getCapability();
-			LazyOptional<? extends IFluidHandler> outputCap = exhaustTank.getCapability();
-			return new CombinedTankWrapper(outputCap.orElse(null), inputCap.orElse(null));
-		});
 	}
 
 	private void onDirectionChanged() {}
@@ -133,17 +114,6 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 	@Override
 	public void tick() {
 		super.tick();
-
-
-	spawnConnections();
-
-
-
-	if(!level.isClientSide()){
-
-
-
-	}
 
 
 
@@ -165,7 +135,8 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 				shaft.update(worldPosition, 0, 0);
 			return;
 		}
-		engineProcess();
+		if(!level.isClientSide)
+			engineProcess();
 		boolean verticalTarget = false;
 		BlockState shaftState = shaft.getBlockState();
 		Axis targetAxis = Axis.X;
@@ -181,9 +152,6 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 			facing = blockState.getValue(DieselEngineBlock.FACING);
 
 
-		//if (engineStrength > 0)
-
-		//	award(AllAdvancements.STEAM_ENGINE);
 
 		int conveyedSpeedLevel =
 			engineStrength == 0 ? 1 : verticalTarget ? 1 : (int) GeneratingKineticBlockEntity.convertToDirection(1, facing)*2;
@@ -237,86 +205,37 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 		prevAngle = angle;
 	}
 
-	private void spawnConnections(){
-		if(((DieselEngineBlock)this.getBlockState().getBlock()).getConnectedDirection(this.getBlockState()) == Direction.UP||
-				((DieselEngineBlock)this.getBlockState().getBlock()).getConnectedDirection(this.getBlockState()) == Direction.DOWN){
-
-			if(
-					level.getBlockState(this.getBlockPos().north()).is(TFMGBlocks.DIESEL_ENGINE.get())||
-							level.getBlockState(this.getBlockPos().south()).is(TFMGBlocks.DIESEL_ENGINE.get())
-			){
-				connectionVerticalZ=true;
-			} else connectionVerticalZ=false;
-			if(
-					level.getBlockState(this.getBlockPos().west()).is(TFMGBlocks.DIESEL_ENGINE.get())||
-							level.getBlockState(this.getBlockPos().east()).is(TFMGBlocks.DIESEL_ENGINE.get())
-			){
-				connectionVerticalX=true;
-			} else connectionVerticalX=false;
-
-
-
-		}
-		if(((DieselEngineBlock)this.getBlockState().getBlock()).getConnectedDirection(this.getBlockState()) == Direction.WEST||
-				((DieselEngineBlock)this.getBlockState().getBlock()).getConnectedDirection(this.getBlockState()) == Direction.EAST){
-
-			if(
-					level.getBlockState(this.getBlockPos().north()).is(TFMGBlocks.DIESEL_ENGINE.get())||
-							level.getBlockState(this.getBlockPos().south()).is(TFMGBlocks.DIESEL_ENGINE.get())
-			){
-				connectionZ=true;
-			} else connectionZ=false;
-			if(
-					level.getBlockState(this.getBlockPos().above()).is(TFMGBlocks.DIESEL_ENGINE.get())||
-							level.getBlockState(this.getBlockPos().below()).is(TFMGBlocks.DIESEL_ENGINE.get())
-			){
-				connectionZ2=true;
-			} else connectionZ2=false;
-
-
-
-		}
-		if(((DieselEngineBlock)this.getBlockState().getBlock()).getConnectedDirection(this.getBlockState()) == Direction.NORTH||
-				((DieselEngineBlock)this.getBlockState().getBlock()).getConnectedDirection(this.getBlockState()) == Direction.SOUTH){
-
-			if(
-					level.getBlockState(this.getBlockPos().west()).is(TFMGBlocks.DIESEL_ENGINE.get())||
-							level.getBlockState(this.getBlockPos().east()).is(TFMGBlocks.DIESEL_ENGINE.get())
-			){
-				connectionX=true;
-			} else connectionX=false;
-			if(
-					level.getBlockState(this.getBlockPos().above()).is(TFMGBlocks.DIESEL_ENGINE.get())||
-							level.getBlockState(this.getBlockPos().below()).is(TFMGBlocks.DIESEL_ENGINE.get())
-			){
-				connectionX2=true;
-			} else connectionX2=false;
-
-
-
-		}
-	}
 
 
 	private void engineProcess() {
-		if(tanks.get(true).getPrimaryHandler().isEmpty()||tanks.get(true).getPrimaryHandler().isEmpty()) {
+		if(tanks.get(true).isEmpty()||tanks.get(true).isEmpty()) {
 			engineStrength=0;
 			return;
 		}
-		if(tanks.get(false).getPrimaryHandler().getFluidAmount()+5>1000) {
+		if(airTank.isEmpty()){
 			engineStrength = 0;
 			return;
 		}
-		if(tanks.get(true).getPrimaryHandler().getFluid().getFluid().isSame(TFMGFluids.DIESEL.getSource())) {
 
-
-
-		if(consumptionTimer>=3) {
-			//if(signal!=0)
-				tanks.get(true).getPrimaryHandler().drain(3, IFluidHandler.FluidAction.EXECUTE);
-				tanks.get(false) .getPrimaryHandler().setFluid(new FluidStack(TFMGFluids.CARBON_DIOXIDE.getSource(), tanks.get(false).getPrimaryHandler().getFluidAmount()+1));
-		consumptionTimer=0;
+		if(tanks.get(false).getFluidAmount()+5>1000) {
+			engineStrength = 0;
+			return;
 		}
+		if(tanks.get(true).getFluid().getFluid().isSame(TFMGFluids.DIESEL.getSource())) {
+
+
+
+		if(consumptionTimer>=10) {
+			//if(signal!=0)
+				fuelTank.setFluid(new FluidStack(TFMGFluids.DIESEL.getSource(),airTank.getFluidAmount()-1));
+			consumptionTimer=0;
+		}
+				//airTank.drain(1, IFluidHandler.FluidAction.EXECUTE);
+
+				airTank.setFluid(new FluidStack(TFMGFluids.AIR.getSource(),airTank.getFluidAmount()-5));
+				exhaustTank.fill(new FluidStack(TFMGFluids.CARBON_DIOXIDE.getSource(),3), IFluidHandler.FluidAction.EXECUTE);
+				//tanks.get(false).setFluid(new FluidStack(TFMGFluids.CARBON_DIOXIDE.getSource(), tanks.get(false).getFluidAmount()+1));
+
 		consumptionTimer++;
 
 		engineStrength=40;
@@ -396,28 +315,28 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 ////////////////////////////////////
 
 	@Override
-	protected void read(CompoundTag compound, boolean clientPacket) {
-		super.read(compound, clientPacket);
+	public void write(CompoundTag compound, boolean clientPacket) {
+
+		compound.put("Fuel", fuelTank.writeToNBT(new CompoundTag()));
+		compound.put("Air", airTank.writeToNBT(new CompoundTag()));
+
+		compound.put("Exhaust", exhaustTank.writeToNBT(new CompoundTag()));
 
 
-		if (!clientPacket)
-			return;
-	//	tanks.get(true).getPrimaryHandler().readFromNBT(compound.getCompound("Fuel"));
-	//	tanks.get(true).getPrimaryHandler().readFromNBT(compound.getCompound("Exhaust"));
-
+		super.write(compound, clientPacket);
 	}
 
 	@Override
-	public void write(CompoundTag compound, boolean clientPacket) {
-		super.write(compound, clientPacket);
+	protected void read(CompoundTag compound, boolean clientPacket) {
+		fuelTank.readFromNBT(compound.getCompound("Fuel"));
+
+		airTank.readFromNBT(compound.getCompound("Air"));
+
+		exhaustTank.readFromNBT(compound.getCompound("Exhaust"));
 
 
 
-		if (!clientPacket)
-			return;
-	//	compound.put("Fuel", tanks.get(true).getPrimaryHandler().writeToNBT(new CompoundTag()));
-	//	compound.put("Exhaust", tanks.get(false).getPrimaryHandler().writeToNBT(new CompoundTag()));
-
+		super.read(compound, clientPacket);
 	}
 
 
@@ -430,6 +349,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 
 	@Nonnull
 	@Override
+	@SuppressWarnings("removal")
 	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
 
 		if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
@@ -447,7 +367,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 
 
 
-	public Couple<SmartFluidTankBehaviour> getTanks() {
+	public Couple<FluidTank> getTanks() {
 		return tanks;
 	}
 
@@ -460,6 +380,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 
 
 	@Override
+	@SuppressWarnings("removal")
 	public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 
 
@@ -523,23 +444,34 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 	}
 
 
-
-/*
-	class BasinValueBox extends ValueBoxTransform.Sided {
-
-		@Override
-		protected Vec3 getSouthLocation() {
-			return VecHelper.voxelSpace(8, 12, 15.75);
-		}
-
-		@Override
-		protected boolean isSideActive(BlockState state, Direction direction) {
-			return direction.getAxis()
-					.isHorizontal();
-		}
-
+	protected void onFluidStackChanged(FluidStack newFluidStack) {
+		sendData();
 	}
+	protected SmartFluidTank createInventory(Fluid validFluid,boolean extractionAllowed) {
+		return new SmartFluidTank(1000, this::onFluidStackChanged) {
+			@Override
+			public boolean isFluidValid(FluidStack stack) {
+				return stack.getFluid().isSame(validFluid);
+			}
 
- */
+
+
+			@Override
+			public FluidStack drain(FluidStack resource, FluidAction action) {
+				if (!extractionAllowed)
+					return FluidStack.EMPTY;
+				return super.drain(resource, action);
+			}
+
+			@Override
+			public FluidStack drain(int maxDrain, FluidAction action) {
+				if (!extractionAllowed)
+					return FluidStack.EMPTY;
+				return super.drain(maxDrain, action);
+			}
+
+
+		};
+	}
 
 }

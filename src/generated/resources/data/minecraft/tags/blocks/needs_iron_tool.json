@@ -3,6 +3,7 @@
     "tfmg:steel_block",
     "tfmg:cast_iron_block",
     "tfmg:aluminum_block",
-    "tfmg:steel_sheetmetal"
+    "tfmg:steel_sheetmetal",
+    "tfmg:diesel_engine_expansion"
   ]
 }

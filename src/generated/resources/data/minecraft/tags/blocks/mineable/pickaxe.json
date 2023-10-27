@@ -48,6 +48,7 @@
     "tfmg:turbine_engine",
     "tfmg:turbine_engine_back",
     "tfmg:diesel_engine",
+    "tfmg:diesel_engine_expansion",
     "tfmg:steel_pipe",
     "tfmg:copper_encased_steel_pipe",
     "tfmg:glass_steel_pipe",

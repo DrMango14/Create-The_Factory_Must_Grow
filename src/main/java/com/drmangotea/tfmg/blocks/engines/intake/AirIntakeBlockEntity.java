@@ -75,11 +75,18 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
     public void tick(){
         super.tick();
 
-
-        int production = ((int)maxShaftSpeed*((diameter*diameter)))/60;
-        if(tankInventory.getFluidAmount()+production <= tankInventory.getCapacity())
-            tankInventory.fill(new FluidStack(TFMGFluids.AIR.getSource(),production), IFluidHandler.FluidAction.EXECUTE);
-////////////////
+    //if(!level.isClientSide) {
+        int production = ((int) maxShaftSpeed * ((diameter * diameter))) / 60;
+        if (tankInventory.getFluidAmount() + production <= tankInventory.getCapacity()) {
+            //tankInventory.fill(new FluidStack(TFMGFluids.AIR.getSource(), production), IFluidHandler.FluidAction.EXECUTE);
+            tankInventory.setFluid(new FluidStack(TFMGFluids.AIR.getSource(), production + tankInventory.getFluidAmount()));
+            if(controller!=null) {
+                ((AirIntakeBlockEntity) level.getBlockEntity(controller)).setChanged();
+                ((AirIntakeBlockEntity) level.getBlockEntity(controller)).sendData();
+            }
+        }
+   // }
+        ////////////////
 
 
         if(diameter == 3){
@@ -232,8 +239,8 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
 
 
 
-        if(controller!=null)
-            refreshCapability();
+        //if(controller!=null)
+        //    refreshCapability();
 
 
 
@@ -249,6 +256,7 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
 
             return;
         }
+
 
 
         LazyOptional<IFluidHandler> oldFluidCapability = fluidCapability;
@@ -344,13 +352,13 @@ if(diameter==1&&!isUsedByController){
             //if(checkedBE.diameter<3)
             //    ((AirIntakeBlockEntity) level.getBlockEntity(pos)).isController = false;
 
-            if(pos!=this.getBlockPos())
-                if(checkedBE.isController) {
-
-
-                    canBeLarge = false;
-                    break;
-                }
+           // if(pos!=this.getBlockPos())
+           //     if(checkedBE.isController) {
+//
+//
+           //         canBeLarge = false;
+           //         break;
+           //     }
 
 
 
@@ -518,24 +526,20 @@ if(diameter==1&&!isUsedByController){
             public boolean isFluidValid(FluidStack stack) {
                 return stack.getFluid().isSame(TFMGFluids.AIR.getSource());
             }
-            @Override
-            public FluidStack drain(FluidStack resource, FluidAction action) {
-                return FluidStack.EMPTY;
-            }
+        //    @Override
+        //    public FluidStack drain(FluidStack resource, FluidAction action) {
+        //        return FluidStack.EMPTY;
+        //    }
         };
     }
 
     protected void onFluidStackChanged(FluidStack newFluidStack) {
-        if (!hasLevel())
-            return;
-
-
-
-        if (!level.isClientSide) {
             setChanged();
             sendData();
-        }
-
+            if(controller!=null) {
+                ((AirIntakeBlockEntity) level.getBlockEntity(controller)).setChanged();
+                ((AirIntakeBlockEntity) level.getBlockEntity(controller)).sendData();
+            }
 
     }
 

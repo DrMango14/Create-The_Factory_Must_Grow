@@ -12,6 +12,7 @@ import com.drmangotea.tfmg.blocks.decoration.doors.TFMGSlidingDoorBlock;
 import com.drmangotea.tfmg.blocks.decoration.flywheels.TFMGFlywheelBlock;
 import com.drmangotea.tfmg.blocks.deposits.FluidDepositBlock;
 import com.drmangotea.tfmg.blocks.engines.diesel.DieselEngineBlock;
+import com.drmangotea.tfmg.blocks.engines.diesel.engine_expansion.DieselEngineExpansionBlock;
 import com.drmangotea.tfmg.blocks.engines.intake.AirIntakeBlock;
 import com.drmangotea.tfmg.blocks.engines.intake.AirIntakeGenerator;
 import com.drmangotea.tfmg.blocks.engines.small.EngineGenerator;
@@ -682,7 +683,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(pickaxeOnly())
                     .blockstate(new EngineGenerator()::generate)
-                    .transform(BlockStressDefaults.setCapacity(60.0))
+                    .transform(BlockStressDefaults.setCapacity(66.0))
                     .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
                     .item()
                     .properties(p -> p.rarity(Rarity.UNCOMMON))
@@ -697,7 +698,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(pickaxeOnly())
                     .blockstate(new EngineGenerator()::generate)
-                    .transform(BlockStressDefaults.setCapacity(60.0))
+                    .transform(BlockStressDefaults.setCapacity(66.0))
                     .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
                     .item()
                     .properties(p -> p.rarity(Rarity.UNCOMMON))
@@ -713,7 +714,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(pickaxeOnly())
                     .blockstate(new EngineGenerator()::generate)
-                    .transform(BlockStressDefaults.setCapacity(60.0))
+                    .transform(BlockStressDefaults.setCapacity(66.0))
                     .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
                     .item()
                     .properties(p -> p.rarity(Rarity.UNCOMMON))
@@ -743,7 +744,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(pickaxeOnly())
                     .blockstate(new EngineGenerator()::generate)
-                    .transform(BlockStressDefaults.setCapacity(60.0))
+                    .transform(BlockStressDefaults.setCapacity(66.0))
                     .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
                     .item()
                     .properties(p -> p.rarity(Rarity.UNCOMMON))
@@ -758,7 +759,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(pickaxeOnly())
                     .blockstate(new EngineGenerator()::generate)
-                    .transform(BlockStressDefaults.setCapacity(60.0))
+                    .transform(BlockStressDefaults.setCapacity(66.0))
                     .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
                     .item()
                     .properties(p -> p.rarity(Rarity.UNCOMMON))
@@ -772,11 +773,23 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .initialProperties(SharedProperties::copperMetal)
                     .transform(pickaxeOnly())
                     .blockstate((c, p) -> p.horizontalFaceBlock(c.get(), AssetLookup.partialBaseModel(c, p)))
-                    .transform(BlockStressDefaults.setCapacity(14.0))
+                    .transform(BlockStressDefaults.setCapacity(15.0))
                     .transform(BlockStressDefaults.setGeneratorSpeed(DieselEngineBlock::getSpeedRange))
                     .item()
                     .transform(customItemModel())
                     .register();
+
+    public static final BlockEntry<DieselEngineExpansionBlock> DIESEL_ENGINE_EXPANSION = REGISTRATE.block("diesel_engine_expansion", DieselEngineExpansionBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.directionalBlockProvider(false))
+            .tag(BlockTags.NEEDS_IRON_TOOL)
+            .item()
+            .build()
+            .lang("Diesel Engine Expansion")
+            .register();
 
     //----------------------PIPES-------------------------------//
 

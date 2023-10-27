@@ -71,6 +71,7 @@
 	"block.tfmg.cyan_concrete_wall": "Cyan Concrete Wall",
 	"block.tfmg.diesel": "Diesel",
 	"block.tfmg.diesel_engine": "Diesel Engine",
+	"block.tfmg.diesel_engine_expansion": "Diesel Engine Expansion",
 	"block.tfmg.exhaust": "Exhaust",
 	"block.tfmg.factory_floor": "Factory Floor",
 	"block.tfmg.factory_floor_slab": "Factory Floor Slab",
@@ -225,6 +226,7 @@
 	"item.tfmg.aluminum_ingot": "Aluminum Ingot",
 	"item.tfmg.block_mold": "Block Mold",
 	"item.tfmg.cast_iron_ingot": "Cast Iron Ingot",
+	"item.tfmg.charcoal_dust": "Charcoal Dust",
 	"item.tfmg.coal_coke": "Coal Coke",
 	"item.tfmg.coal_coke_dust": "Coal Coke Dust",
 	"item.tfmg.cooling_fluid_bucket": "Cooling Fluid Bucket",
@@ -241,10 +243,18 @@
 	"item.tfmg.lubrication_oil_bucket": "Lubrication Oil Bucket",
 	"item.tfmg.napalm_bucket": "Napalm Bucket",
 	"item.tfmg.naphtha_bucket": "Naphtha Bucket",
+	"item.tfmg.nitrate_dust": "Nitrate Dust",
 	"item.tfmg.quad_potato_cannon": "Quad Potato Cannon",
+	"item.tfmg.rebar": "Rebar",
 	"item.tfmg.screwdriver": "Screwdriver",
 	"item.tfmg.steel_ingot": "Steel Ingot",
+	"item.tfmg.steel_mechanism": "Steel Mechanism",
+	"item.tfmg.sulfur_dust": "Sulfur Dust",
 	"item.tfmg.thermite_grenade": "Thermite Grenade",
+	"item.tfmg.unfinished_gasoline_engine": "Unfinished Gasoline Engine",
+	"item.tfmg.unfinished_lpg_engine": "Unfinished Lpg Engine",
+	"item.tfmg.unfinished_steel_mechanism": "Unfinished Steel Mechanism",
+	"item.tfmg.unfinished_turbine_engine": "Unfinished Turbine Engine",
 	"item.tfmg.zinc_grenade": "Zinc Grenade",
 
 
@@ -288,6 +298,17 @@
 	"create.goggles.coke_oven.invalid": "Coke Oven Invalid",
 	"create.goggles.coke_oven.tank_full": "One of Internal Tanks Is Full",
 	"create.goggles.coke_oven.progress": "Progress: %1$s",
+	"create.goggles.engine_stats": "Engine Stats:",
+	"create.goggles.engine_exhaust_stats": "Engine Exhaust Stats:",
+	"create.goggles.fuel_container": "Fluid Storage",
+	"create.goggles.engine.backpartmissing": "Back Part Missing:",
+	"create.goggles.engine_redstone_input": "Speed:",
+	"create.goggles.engine.efficiency": "Efficiency:",
+
+	"create.tooltip.engine_analog_strength": "%1$s/15",
+
+	"create.goggles.get_engine_efficiency": "%1$s",
+	"create.goggles.engine.stress": "%1$ssu",
 
 	"_": "Thank you for translating Create: The Factory Must Grow!"
 
