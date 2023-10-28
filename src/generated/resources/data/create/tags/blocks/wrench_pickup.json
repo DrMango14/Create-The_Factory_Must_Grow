@@ -1,6 +1,6 @@
 {
   "values": [
-    "tfmg:steel_bars",
-    "tfmg:aluminum_bars"
+    "createindustry:steel_bars",
+    "createindustry:aluminum_bars"
   ]
 }

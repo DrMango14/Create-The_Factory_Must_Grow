@@ -1,0 +1,21 @@
+{
+  "type": "createindustry:industrial_blasting",
+  "ingredients": [
+    {
+      "count": 20,
+      "item": "minecraft:coal"
+    }
+  ],
+  "processingTime": 200,
+  "results": [
+    {
+      "fluid": "createindustry:creosote",
+      "amount": 30
+    },
+    {
+      "fluid": "createindustry:heavy_oil",
+      "amount": 4
+    }
+
+  ]
+}

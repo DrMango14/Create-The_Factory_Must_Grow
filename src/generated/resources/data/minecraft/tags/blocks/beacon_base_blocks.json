@@ -1,7 +1,7 @@
 {
   "values": [
-    "tfmg:steel_block",
-    "tfmg:cast_iron_block",
-    "tfmg:aluminum_block"
+    "createindustry:steel_block",
+    "createindustry:cast_iron_block",
+    "createindustry:aluminum_block"
   ]
 }

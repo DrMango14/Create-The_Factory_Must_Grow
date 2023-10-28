@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "tfmg:block/lime_concrete",
-    "side": "tfmg:block/lime_concrete",
-    "top": "tfmg:block/lime_concrete"
-  }
-}

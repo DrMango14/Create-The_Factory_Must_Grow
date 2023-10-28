@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "tfmg:block/blue_concrete",
-    "side": "tfmg:block/blue_concrete",
-    "top": "tfmg:block/blue_concrete"
-  }
-}

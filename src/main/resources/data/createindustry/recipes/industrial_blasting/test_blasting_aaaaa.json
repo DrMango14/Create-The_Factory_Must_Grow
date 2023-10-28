@@ -1,0 +1,20 @@
+{
+  "type": "createindustry:industrial_blasting",
+  "ingredients": [
+    {
+      "item": "minecraft:sand"
+    }
+  ],
+  "processingTime": 200,
+  "results": [
+    {
+      "fluid": "createindustry:creosote",
+      "amount": 30
+    },
+    {
+      "fluid": "createindustry:creosote",
+      "amount": 30
+    }
+
+  ]
+}

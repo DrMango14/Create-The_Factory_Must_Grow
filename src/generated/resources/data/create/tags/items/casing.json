@@ -1,6 +1,6 @@
 {
   "values": [
-    "tfmg:steel_casing",
-    "tfmg:heavy_machinery_casing"
+    "createindustry:steel_casing",
+    "createindustry:heavy_machinery_casing"
   ]
 }
