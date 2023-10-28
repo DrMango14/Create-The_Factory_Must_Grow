@@ -227,7 +227,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 
 		if(consumptionTimer>=10) {
 			//if(signal!=0)
-				fuelTank.setFluid(new FluidStack(TFMGFluids.DIESEL.getSource(),airTank.getFluidAmount()-1));
+				fuelTank.setFluid(new FluidStack(TFMGFluids.DIESEL.getSource(),fuelTank.getFluidAmount()-1));
 			consumptionTimer=0;
 		}
 				//airTank.drain(1, IFluidHandler.FluidAction.EXECUTE);

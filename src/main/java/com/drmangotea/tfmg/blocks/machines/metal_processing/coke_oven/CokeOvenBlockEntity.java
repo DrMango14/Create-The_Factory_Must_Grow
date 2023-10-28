@@ -269,8 +269,8 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
         itemCapability = LazyOptional.of(() -> new CombinedInvWrapper(controller.inputInventory));
     }}}
 
-        oldFluidCapability.invalidate();
-        oldItemCapability.invalidate();
+        //oldFluidCapability.invalidate();
+        //oldItemCapability.invalidate();
     }
     public void setControllers(){
         if(!isValid())

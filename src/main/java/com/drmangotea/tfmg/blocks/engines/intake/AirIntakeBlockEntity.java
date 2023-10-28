@@ -80,13 +80,19 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
         if (tankInventory.getFluidAmount() + production <= tankInventory.getCapacity()) {
             //tankInventory.fill(new FluidStack(TFMGFluids.AIR.getSource(), production), IFluidHandler.FluidAction.EXECUTE);
             tankInventory.setFluid(new FluidStack(TFMGFluids.AIR.getSource(), production + tankInventory.getFluidAmount()));
-            if(controller!=null) {
-                ((AirIntakeBlockEntity) level.getBlockEntity(controller)).setChanged();
-                ((AirIntakeBlockEntity) level.getBlockEntity(controller)).sendData();
-            }
+           // if(controller!=null) {
+           //     ((AirIntakeBlockEntity) level.getBlockEntity(controller)).setChanged();
+           //     ((AirIntakeBlockEntity) level.getBlockEntity(controller)).sendData();
+           // }
         }
    // }
         ////////////////
+
+        if(isUsedByController) {
+            refreshCapability();
+            sendData();
+            setChanged();
+        }
 
 
         if(diameter == 3){
@@ -239,8 +245,11 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
 
 
 
-        //if(controller!=null)
-        //    refreshCapability();
+        if (!fluidCapability.isPresent()) {
+            refreshCapability();
+            sendData();
+            setChanged();
+        }
 
 
 
@@ -251,36 +260,22 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
 
     private void refreshCapability() {
 
-        if (this.controller == null) {
+        IFluidHandler handlerForCapability;
+
+        if (controller == null || controller == this.getBlockPos()
+
+        ) {
+            handlerForCapability = tankInventory;
+        } else
+        if(((AirIntakeBlockEntity) level.getBlockEntity(controller))!=null) {
+            handlerForCapability = ((AirIntakeBlockEntity) level.getBlockEntity(controller)).tankInventory;
+        }else             handlerForCapability = tankInventory;
 
 
-            return;
-        }
-
-
-
-        LazyOptional<IFluidHandler> oldFluidCapability = fluidCapability;
-
-if(diameter==1&&!isUsedByController){
-
-    fluidCapability = LazyOptional.of(() -> new CombinedTankWrapper(tankInventory));
-
-    oldFluidCapability.invalidate();
-
-    return;
-}
-
-
-    if(!isController) {
-        if (controller != getBlockPos()) {
-            if (level.getBlockEntity(controller) instanceof AirIntakeBlockEntity)
-                fluidCapability = LazyOptional.of(() -> new CombinedTankWrapper(((AirIntakeBlockEntity) level.getBlockEntity(controller)).tankInventory));
-
-        }
-    }else  fluidCapability = LazyOptional.of(() -> new CombinedTankWrapper(tankInventory));
-
-    oldFluidCapability.invalidate();
-
+        LazyOptional<IFluidHandler> oldCap = fluidCapability;
+        IFluidHandler finalHandlerForCapability = handlerForCapability;
+        fluidCapability = LazyOptional.of(() -> finalHandlerForCapability);
+        //oldCap.invalidate();
     }
 
 
@@ -536,10 +531,10 @@ if(diameter==1&&!isUsedByController){
     protected void onFluidStackChanged(FluidStack newFluidStack) {
             setChanged();
             sendData();
-            if(controller!=null) {
-                ((AirIntakeBlockEntity) level.getBlockEntity(controller)).setChanged();
-                ((AirIntakeBlockEntity) level.getBlockEntity(controller)).sendData();
-            }
+           //if(((AirIntakeBlockEntity) level.getBlockEntity(controller))!=null) {
+           //    ((AirIntakeBlockEntity) level.getBlockEntity(controller)).setChanged();
+           //    ((AirIntakeBlockEntity) level.getBlockEntity(controller)).sendData();
+           //}
 
     }
 

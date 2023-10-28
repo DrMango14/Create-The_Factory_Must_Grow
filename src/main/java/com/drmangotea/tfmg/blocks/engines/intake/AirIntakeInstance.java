@@ -149,6 +149,8 @@ public class AirIntakeInstance extends KineticBlockEntityInstance<AirIntakeBlock
     public void beginFrame() {
 
 
+
+
         PoseStack msFan = new PoseStack();
         TransformStack msrFan = TransformStack.cast(msFan);
         msrFan.translate(getInstancePosition());
@@ -193,6 +195,8 @@ public class AirIntakeInstance extends KineticBlockEntityInstance<AirIntakeBlock
 
 
 
+
+
         if(!blockEntity.isUsedByController) {
             if(blockEntity.diameter ==1) {
                   updateRotation(fan, getFanSpeed());
@@ -202,6 +206,13 @@ public class AirIntakeInstance extends KineticBlockEntityInstance<AirIntakeBlock
             if(blockEntity.diameter ==2) {
                 //updateRotation(fan_medium, getFanSpeed());
                 fan_medium.setTransform(msFanMedium);
+                fan.delete();
+                fan_large.setEmptyTransform();
+
+            }
+            if(blockEntity.isUsedByController) {
+                //updateRotation(fan_medium, getFanSpeed());
+                fan_medium.setEmptyTransform();
                 fan.delete();
                 fan_large.setEmptyTransform();
 
