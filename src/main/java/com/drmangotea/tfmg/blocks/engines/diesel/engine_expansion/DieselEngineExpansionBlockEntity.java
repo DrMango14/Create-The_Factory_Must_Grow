@@ -6,9 +6,13 @@ import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
+import com.simibubi.create.foundation.utility.Lang;
+import com.simibubi.create.foundation.utility.LangBuilder;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -22,13 +26,14 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 public class DieselEngineExpansionBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
     protected LazyOptional<IFluidHandler> fluidCapability;
-    protected FluidTank coolantTank;
-    protected FluidTank lubricationOilTank;
-    protected FluidTank airTank;
+    public FluidTank coolantTank;
+    public FluidTank lubricationOilTank;
+    public FluidTank airTank;
 
 
 
@@ -97,5 +102,70 @@ public class DieselEngineExpansionBlockEntity extends SmartBlockEntity implement
                 return stack.getFluid().isSame(validFluid);
             }
         };
+    }
+
+
+    @Override
+    @SuppressWarnings("removal")
+    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+
+
+
+        //--Fluid Info--//
+        LazyOptional<IFluidHandler> handler = this.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY);
+        Optional<IFluidHandler> resolve = handler.resolve();
+        if (!resolve.isPresent())
+            return false;
+
+        IFluidHandler tank = resolve.get();
+        if (tank.getTanks() == 0)
+            return false;
+
+        LangBuilder mb = Lang.translate("generic.unit.millibuckets");
+        Lang.translate("goggles.diesel_engine_info")
+                .style(ChatFormatting.GRAY)
+                .forGoggles(tooltip);
+
+        boolean isEmpty = true;
+        for (int i = 0; i < tank.getTanks(); i++) {
+            FluidStack fluidStack = tank.getFluidInTank(i);
+            if (fluidStack.isEmpty())
+                continue;
+
+            Lang.fluidName(fluidStack)
+                    .style(ChatFormatting.GRAY)
+                    .forGoggles(tooltip, 1);
+
+            Lang.builder()
+                    .add(Lang.number(fluidStack.getAmount())
+                            .add(mb)
+                            .style(ChatFormatting.DARK_GREEN))
+                    .text(ChatFormatting.GRAY, " / ")
+                    .add(Lang.number(tank.getTankCapacity(i))
+                            .add(mb)
+                            .style(ChatFormatting.DARK_GRAY))
+                    .forGoggles(tooltip, 1);
+
+            isEmpty = false;
+        }
+
+        if (tank.getTanks() > 1) {
+            if (isEmpty)
+                tooltip.remove(tooltip.size() - 1);
+            return true;
+        }
+
+        if (!isEmpty)
+            return true;
+
+        Lang.translate("gui.goggles.fluid_container.capacity")
+                .add(Lang.number(tank.getTankCapacity(0))
+                        .add(mb)
+                        .style(ChatFormatting.DARK_GREEN))
+                .style(ChatFormatting.DARK_GRAY)
+                .forGoggles(tooltip, 1);
+
+
+        return true;
     }
 }

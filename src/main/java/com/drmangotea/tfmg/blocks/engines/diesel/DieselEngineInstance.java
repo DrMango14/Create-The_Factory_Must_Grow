@@ -134,7 +134,7 @@ public class DieselEngineInstance extends BlockEntityInstance<DieselEngineBlockE
 	public void updateLight() {
 
 		BlockPos inFront = pos.above(10);
-		relight(inFront, piston, linkage, connector);
+		relight(pos, piston, linkage, connector);
 	}
 
 	@Override

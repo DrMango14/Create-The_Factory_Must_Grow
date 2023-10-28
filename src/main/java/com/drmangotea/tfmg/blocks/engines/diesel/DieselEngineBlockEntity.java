@@ -1,6 +1,9 @@
 package com.drmangotea.tfmg.blocks.engines.diesel;
 
 
+import com.drmangotea.tfmg.CreateTFMG;
+import com.drmangotea.tfmg.blocks.engines.diesel.engine_expansion.DieselEngineExpansionBlockEntity;
+import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
@@ -10,6 +13,7 @@ import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.content.kinetics.steamEngine.PoweredShaftBlockEntity;
+import com.simibubi.create.content.kinetics.steamEngine.SteamEngineBlock;
 import com.simibubi.create.content.kinetics.steamEngine.SteamEngineValueBox;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -26,9 +30,12 @@ import net.minecraft.core.Direction.AxisDirection;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
@@ -47,6 +54,9 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Optional;
 
+import static com.drmangotea.tfmg.blocks.engines.diesel.DieselEngineBlock.FACE;
+import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
+
 public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
 	protected ScrollOptionBehaviour<WindmillBearingBlockEntity.RotationDirection> movementDirection;
@@ -58,11 +68,14 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 	protected FluidTank exhaustTank;
 
 	protected FluidTank airTank;
-	private boolean contentsChanged;
+
 	private int consumptionTimer=0;
 	public float engineStrength = 0;
 	private Couple<FluidTank> tanks;
 
+	public BlockPos expansionPos;
+
+	public DieselEngineExpansionBlockEntity expansionBE;
 
 
 	protected LazyOptional<CombinedTankWrapper> fluidCapability;
@@ -75,7 +88,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 
 
 
-		contentsChanged = true;
+
 		fuelTank = createInventory(TFMGFluids.DIESEL.getSource(),false);
 
 
@@ -114,8 +127,31 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 	@Override
 	public void tick() {
 		super.tick();
+		Direction direction;
 
 
+
+			if(getBlockState().getValue(FACE)==AttachFace.WALL)
+				expansionPos = this.getBlockPos().relative(getBlockState().getValue(FACING).getOpposite());
+		if(getBlockState().getValue(FACE)==AttachFace.CEILING)
+			expansionPos = this.getBlockPos().above();
+		if(getBlockState().getValue(FACE)==AttachFace.FLOOR)
+			expansionPos = this.getBlockPos().below();
+
+
+
+
+		if(expansionBE == null){
+			if(level.getBlockEntity(expansionPos) instanceof DieselEngineExpansionBlockEntity
+			){
+				//if(direction==level.getBlockEntity(expansionPos).getBlockState().getValue(DirectionalBlock.FACING)) {
+					expansionBE = (DieselEngineExpansionBlockEntity) level.getBlockEntity(expansionPos);
+				//}else expansionBE = null;
+			}else expansionBE = null;
+		}
+		if(expansionBE!=null)
+			if(!(expansionBE instanceof DieselEngineExpansionBlockEntity))
+				expansionBE = null;
 
 		PoweredShaftBlockEntity shaft = getShaft();
 
@@ -135,8 +171,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 				shaft.update(worldPosition, 0, 0);
 			return;
 		}
-		if(!level.isClientSide)
-			engineProcess();
+
 		boolean verticalTarget = false;
 		BlockState shaftState = shaft.getBlockState();
 		Axis targetAxis = Axis.X;
@@ -151,7 +186,9 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 		if (facing.getAxis() == Axis.Y)
 			facing = blockState.getValue(DieselEngineBlock.FACING);
 
-
+		if(!level.isClientSide)
+			if(getShaft() != null)
+				engineProcess(targetAxis,verticalTarget);
 
 		int conveyedSpeedLevel =
 			engineStrength == 0 ? 1 : verticalTarget ? 1 : (int) GeneratingKineticBlockEntity.convertToDirection(1, facing)*2;
@@ -168,7 +205,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 			conveyedSpeedLevel *= -1;
 		}
 
-		shaft.update(worldPosition, conveyedSpeedLevel, engineStrength);
+		shaft.update(worldPosition,  conveyedSpeedLevel, engineStrength);
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> this::makeSound);
 	}
 	@OnlyIn(Dist.CLIENT)
@@ -205,42 +242,112 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 		prevAngle = angle;
 	}
 
+	public int getConveyedSpeedLevel(float strength,Axis targetAxis, boolean verticalTarget){
+		Direction facing = SteamEngineBlock.getFacing(getBlockState());
+		PoweredShaftBlockEntity shaft = getShaft();
+		int conveyedSpeedLevel =
+				engineStrength == 0 ? 1 : verticalTarget ? 1 : (int) GeneratingKineticBlockEntity.convertToDirection(1, facing)*2;
+		if (targetAxis == Axis.Z)
+			conveyedSpeedLevel *= -1;
+		if (movementDirection.get() == WindmillBearingBlockEntity.RotationDirection.COUNTER_CLOCKWISE)
+			conveyedSpeedLevel *= -1;
 
 
-	private void engineProcess() {
+		float shaftSpeed = shaft.getTheoreticalSpeed();
+		if (shaft.hasSource() && shaftSpeed != 0 && conveyedSpeedLevel != 0
+				&& (shaftSpeed > 0) != (conveyedSpeedLevel > 0)) {
+			movementDirection.setValue(1 - movementDirection.get()
+					.ordinal());
+			conveyedSpeedLevel *= -1;
+		}
+
+		return conveyedSpeedLevel;
+	}
+
+	private void engineProcess(Axis targetAxis, boolean verticalTarget) {
+		PoweredShaftBlockEntity shaft = getShaft();
 		if(tanks.get(true).isEmpty()||tanks.get(true).isEmpty()) {
 			engineStrength=0;
+
+			shaft.update(worldPosition, getConveyedSpeedLevel(engineStrength,targetAxis,verticalTarget), engineStrength);
 			return;
 		}
+
+		if(expansionBE != null){
+			if(airTank.isEmpty()&&expansionBE.airTank.isEmpty()){
+				engineStrength = 0;
+				shaft.update(worldPosition, getConveyedSpeedLevel(engineStrength,targetAxis,verticalTarget), engineStrength);
+				return;
+			}
+		}else
 		if(airTank.isEmpty()){
 			engineStrength = 0;
+			shaft.update(worldPosition, getConveyedSpeedLevel(engineStrength,targetAxis,verticalTarget), engineStrength);
 			return;
 		}
 
 		if(tanks.get(false).getFluidAmount()+5>1000) {
 			engineStrength = 0;
+			shaft.update(worldPosition, getConveyedSpeedLevel(engineStrength,targetAxis,verticalTarget), engineStrength);
 			return;
 		}
-		if(tanks.get(true).getFluid().getFluid().isSame(TFMGFluids.DIESEL.getSource())) {
 
 
 
-		if(consumptionTimer>=10) {
+
+		if(consumptionTimer>=5) {
 			//if(signal!=0)
-				fuelTank.setFluid(new FluidStack(TFMGFluids.DIESEL.getSource(),fuelTank.getFluidAmount()-1));
-			consumptionTimer=0;
+			int fuelModifier = 0;
+				if(expansionBE!=null)
+					if(!expansionBE.coolantTank.isEmpty())
+						fuelModifier = 1;
+
+
+				fuelTank.setFluid(new FluidStack(TFMGFluids.DIESEL.getSource(),fuelTank.getFluidAmount()-(2-fuelModifier)));
+
+
 		}
 				//airTank.drain(1, IFluidHandler.FluidAction.EXECUTE);
-
-				airTank.setFluid(new FluidStack(TFMGFluids.AIR.getSource(),airTank.getFluidAmount()-5));
-				exhaustTank.fill(new FluidStack(TFMGFluids.CARBON_DIOXIDE.getSource(),3), IFluidHandler.FluidAction.EXECUTE);
+			if(!airTank.isEmpty()) {
+				airTank.setFluid(new FluidStack(TFMGFluids.AIR.getSource(), airTank.getFluidAmount() - 5));
+			}else expansionBE.airTank.setFluid(new FluidStack(TFMGFluids.AIR.getSource(), expansionBE.airTank.getFluidAmount() - 5));
+			exhaustTank.fill(new FluidStack(TFMGFluids.CARBON_DIOXIDE.getSource(),3), IFluidHandler.FluidAction.EXECUTE);
 				//tanks.get(false).setFluid(new FluidStack(TFMGFluids.CARBON_DIOXIDE.getSource(), tanks.get(false).getFluidAmount()+1));
+
+
+
+		int strengthModifier = 0;
+
+		if(expansionBE !=null) {
+			if (!expansionBE.coolantTank.isEmpty()){
+				strengthModifier +=3;
+				if(consumptionTimer>5)
+					expansionBE.coolantTank.setFluid(new FluidStack(TFMGFluids.COOLING_FLUID.getSource(), expansionBE.coolantTank.getFluidAmount() - 1));
+			}
+			if (!expansionBE.lubricationOilTank.isEmpty()){
+				strengthModifier +=5;
+				if(consumptionTimer>5)
+					expansionBE.lubricationOilTank.setFluid(new FluidStack(TFMGFluids.LUBRICATION_OIL.getSource(), expansionBE.lubricationOilTank.getFluidAmount() - 1));
+
+			}
+		}
+
+		if(!(level.getBlockState(expansionPos).is(TFMGBlocks.DIESEL_ENGINE_EXPANSION.get()))){
+			strengthModifier =0;
+		}
+
+
+		if(consumptionTimer>5)
+			consumptionTimer=0;
 
 		consumptionTimer++;
 
-		engineStrength=40;
+		engineStrength=40+strengthModifier;
+			shaft.update(worldPosition, getConveyedSpeedLevel(engineStrength,targetAxis,verticalTarget), engineStrength);
+			sendData();
+			setChanged();
 
-	}
+
 
 	}
 
@@ -382,6 +489,12 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 	@Override
 	@SuppressWarnings("removal")
 	public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+
+
+
+		Lang.translate("goggles.blast_furnace.height", engineStrength)
+				.style(ChatFormatting.DARK_PURPLE)
+				.forGoggles(tooltip, 1);
 
 
 

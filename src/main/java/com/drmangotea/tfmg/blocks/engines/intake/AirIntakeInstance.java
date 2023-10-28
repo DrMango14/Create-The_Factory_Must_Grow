@@ -12,6 +12,7 @@ import com.simibubi.create.content.kinetics.base.KineticBlockEntityInstance;
 import com.simibubi.create.content.kinetics.base.flwdata.RotatingData;
 import com.simibubi.create.foundation.render.AllMaterialSpecs;
 import com.simibubi.create.foundation.utility.AngleHelper;
+import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -150,7 +151,6 @@ public class AirIntakeInstance extends KineticBlockEntityInstance<AirIntakeBlock
 
 
 
-
         PoseStack msFan = new PoseStack();
         TransformStack msrFan = TransformStack.cast(msFan);
         msrFan.translate(getInstancePosition());
@@ -182,21 +182,33 @@ public class AirIntakeInstance extends KineticBlockEntityInstance<AirIntakeBlock
             msrFanMedium.translate(0.5,0,0.5);
             msrFan.translate(1,0,1);
         }
+        //
+        float time = AnimationTickHolder.getRenderTime(world);
+        float speed = blockEntity.maxShaftSpeed * 2;
+        if (speed > 0)
+            speed = Mth.clamp(speed, 80, 64 * 20);
+        if (speed < 0)
+            speed = Mth.clamp(speed, -64 * 20, -80);
+        float angle = (time * speed * 3 / 10f) % 360;
+        //
+        angle = angle / 180f * (float) Math.PI;
         msrFan.centre();
         msrFanMedium.centre();
-        // msrFan.translateY(3);
-        //msrFan.translateY(5);
-        msrFan.rotate((double) blockEntity.angle,direction.getAxis());
-        msrFanMedium.rotate((double) blockEntity.angle,direction.getAxis());
-        //msrFan.translateY(-5);
-        //  msrFan.translateX(-1);
+        msrFan.rotate(direction,angle);
+        msrFanMedium.rotate(direction,angle);
         msrFan.unCentre();
         msrFanMedium.unCentre();
 
 
 
 
+        if(blockEntity.isUsedByController) {
+            //updateRotation(fan_medium, getFanSpeed());
+            fan_medium.setEmptyTransform();
+            fan.delete();
+            fan_large.setEmptyTransform();
 
+        }
         if(!blockEntity.isUsedByController) {
             if(blockEntity.diameter ==1) {
                   updateRotation(fan, getFanSpeed());
@@ -210,13 +222,7 @@ public class AirIntakeInstance extends KineticBlockEntityInstance<AirIntakeBlock
                 fan_large.setEmptyTransform();
 
             }
-            if(blockEntity.isUsedByController) {
-                //updateRotation(fan_medium, getFanSpeed());
-                fan_medium.setEmptyTransform();
-                fan.delete();
-                fan_large.setEmptyTransform();
 
-            }
             if(blockEntity.diameter ==3) {
 
                 fan_large.setTransform(msFan);
