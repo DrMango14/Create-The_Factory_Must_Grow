@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "tag": "tfmg:stone_types/bauxite"
-  },
-  "result": "tfmg:cut_bauxite_wall"
-}

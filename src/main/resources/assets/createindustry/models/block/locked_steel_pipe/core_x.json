@@ -1,0 +1,17 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "createindustry:block/steel_pipes_connected",
+		"particle": "createindustry:block/steel_pipes_connected"
+	},
+	"elements": [
+		{
+			"from": [4, 4, 4],
+			"to": [12, 12, 12],
+			"faces": {
+				"east": {"uv": [16, 8, 12, 12], "rotation": 180, "texture": "#0"},
+				"west": {"uv": [16, 8, 12, 12], "rotation": 180, "texture": "#0"}
+			}
+		}
+	]
+}

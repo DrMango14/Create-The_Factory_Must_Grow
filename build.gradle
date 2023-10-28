@@ -20,12 +20,12 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 //mixin {
-//  add sourceSets.main, "tfmg.refmap.json"
+//  add sourceSets.main, "createindustry.refmap.json"
 //}
 
 version = '0.6.0-1.19.2'
-group = 'com.drmangotea.tfmg' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'tfmg'
+group = 'com.drmangotea.createindustry' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'createindustry'
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -39,14 +39,14 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
-            arg '-mixin.config=tfmg.mixins.json'
+            arg '-mixin.config=createindustry.mixins.json'
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'tfmg'
+            property 'forge.enabledGameTestNamespaces', 'createindustry'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
             mods {
-                tfmg {
+                createindustry {
                     source sourceSets.main
                 }
             }
@@ -54,14 +54,14 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-            arg '-mixin.config=tfmg.mixins.json'
+            arg '-mixin.config=createindustry.mixins.json'
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'tfmg'
+            property 'forge.enabledGameTestNamespaces', 'createindustry'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
             mods {
-                tfmg {
+                createindustry {
                     source sourceSets.main
                 }
             }
@@ -71,11 +71,11 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'tfmg'
+            property 'forge.enabledGameTestNamespaces', 'createindustry'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
             mods {
-                tfmg {
+                createindustry {
                     source sourceSets.main
                 }
             }
@@ -85,9 +85,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            args '--mod', 'tfmg', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'createindustry', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             mods {
-                tfmg {
+                createindustry {
                     source sourceSets.main
                 }
             }
@@ -141,14 +141,14 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "tfmg",
+                "Specification-Title"     : "createindustry",
                 "Specification-Vendor"    : "tfmgsareus",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "tfmgsareus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs": "tfmg.mixins.json"
+                "MixinConfigs": "createindustry.mixins.json"
         ])
     }
 }

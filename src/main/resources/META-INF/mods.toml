@@ -6,7 +6,7 @@ license="MIT"
 
 [[mods]]
 
-modId="tfmg"
+modId="createindustry"
 
 version="${file.jarVersion}"
 
@@ -20,7 +20,7 @@ description='''
 description soon
 '''
 
-[[dependencies.tfmg]]
+[[dependencies.createindustry]]
 
     modId="forge"
 
@@ -32,7 +32,7 @@ description soon
 
     side="BOTH"
 
-[[dependencies.tfmg]]
+[[dependencies.createindustry]]
     modId="minecraft"
     mandatory=true
 

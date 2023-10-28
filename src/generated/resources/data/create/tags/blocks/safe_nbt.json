@@ -1,10 +1,10 @@
 {
   "values": [
-    "tfmg:gasoline_engine",
-    "tfmg:gasoline_engine_back",
-    "tfmg:lpg_engine",
-    "tfmg:lpg_engine_back",
-    "tfmg:turbine_engine",
-    "tfmg:turbine_engine_back"
+    "createindustry:gasoline_engine",
+    "createindustry:gasoline_engine_back",
+    "createindustry:lpg_engine",
+    "createindustry:lpg_engine_back",
+    "createindustry:turbine_engine",
+    "createindustry:turbine_engine_back"
   ]
 }

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "createindustry:block/coke_oven",
+    "down": "createindustry:block/coke_oven",
+    "up": "createindustry:block/coke_oven",
+    "north": "createindustry:block/coke_oven",
+    "east": "createindustry:block/coke_oven",
+    "south": "#front",
+    "west": "createindustry:block/coke_oven"
+  }
+}

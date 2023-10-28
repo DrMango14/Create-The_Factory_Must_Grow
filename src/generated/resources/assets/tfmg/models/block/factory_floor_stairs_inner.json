@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "tfmg:block/factory_floor",
-    "side": "tfmg:block/factory_floor",
-    "top": "tfmg:block/factory_floor"
-  }
-}

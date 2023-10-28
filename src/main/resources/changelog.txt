@@ -11,7 +11,7 @@ Version 0.6.0
 -added blue and green fire
 -added copper and zinc grenades
 -sparks from thermite grenades now set mobs on fire on impact
--changed id of the mod from "createindustry" to "tfmg"
+-changed id of the mod from "createindustry" to "createindustry"
 -increased burning time of fossilstone and coal coke
 -oil deposits spawn in larger but rarer groups
 -removed creative mode tab for concrete

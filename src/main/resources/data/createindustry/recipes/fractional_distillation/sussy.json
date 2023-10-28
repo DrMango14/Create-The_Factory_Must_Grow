@@ -1,0 +1,19 @@
+{
+  "type": "createindustry:advanced_distillation",
+  "ingredients": [
+
+    {
+      "fluid": "createindustry:diesel",
+      "nbt": {},
+      "amount": 5
+    }
+  ],
+  "results": [
+    {
+      "fluid": "createindustry:propylene",
+      "amount": 3
+    }
+  ]
+
+
+}

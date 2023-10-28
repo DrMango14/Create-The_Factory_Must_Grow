@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "tfmg:block/palettes/stone_types/brick/bauxite_cut_brick",
-    "side": "tfmg:block/palettes/stone_types/brick/bauxite_cut_brick",
-    "top": "tfmg:block/palettes/stone_types/brick/bauxite_cut_brick"
-  }
-}

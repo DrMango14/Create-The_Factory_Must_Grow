@@ -1,20 +1,20 @@
 {
   "values": [
-    "tfmg:steel_casing",
-    "tfmg:heavy_machinery_casing",
-    "tfmg:steel_flywheel",
-    "tfmg:aluminum_flywheel",
-    "tfmg:cast_iron_flywheel",
-    "tfmg:formwork_block",
-    "tfmg:rebar_formwork_block",
-    "tfmg:cast_iron_distillation_output",
-    "tfmg:steel_distillation_output",
-    "tfmg:machine_input",
-    "tfmg:pumpjack_crank",
-    "tfmg:copper_encased_steel_pipe",
-    "tfmg:copper_encased_cast_iron_pipe",
-    "tfmg:copper_encased_brass_pipe",
-    "tfmg:copper_encased_plastic_pipe",
-    "tfmg:copper_encased_aluminum_pipe"
+    "createindustry:steel_casing",
+    "createindustry:heavy_machinery_casing",
+    "createindustry:steel_flywheel",
+    "createindustry:aluminum_flywheel",
+    "createindustry:cast_iron_flywheel",
+    "createindustry:formwork_block",
+    "createindustry:rebar_formwork_block",
+    "createindustry:cast_iron_distillation_output",
+    "createindustry:steel_distillation_output",
+    "createindustry:machine_input",
+    "createindustry:pumpjack_crank",
+    "createindustry:copper_encased_steel_pipe",
+    "createindustry:copper_encased_cast_iron_pipe",
+    "createindustry:copper_encased_brass_pipe",
+    "createindustry:copper_encased_plastic_pipe",
+    "createindustry:copper_encased_aluminum_pipe"
   ]
 }

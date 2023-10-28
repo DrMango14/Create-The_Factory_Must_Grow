@@ -1,0 +1,22 @@
+{
+  "type": "createindustry:casting",
+  "ingredients": [
+    {
+      "fluid": "createindustry:heavy_oil",
+      "amount": 1
+    }
+  ],
+  "processingTime": 300,
+  "results": [
+    {
+      "count": 1,
+      "item": "createindustry:steel_ingot"
+    }
+  ,
+    {
+      "count": 1,
+      "item": "createindustry:steel_block"
+    }
+
+  ]
+}

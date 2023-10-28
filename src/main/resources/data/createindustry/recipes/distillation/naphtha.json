@@ -1,0 +1,35 @@
+{
+  "type": "createindustry:distillation",
+  "ingredients": [
+
+    {
+      "fluid": "createindustry:naphtha",
+      "nbt": {},
+      "amount": 9
+    }
+  ],
+  "results": [
+    {
+      "fluid": "createindustry:propylene",
+      "amount": 3
+    },
+    {
+      "fluid": "createindustry:ethylene",
+      "amount": 3
+    },
+    {
+      "fluid": "createindustry:ethylene",
+      "amount": 3
+    },
+    {
+      "item": "minecraft:air"
+
+    },
+    {
+      "item": "minecraft:air"
+
+    }
+  ]
+
+
+}

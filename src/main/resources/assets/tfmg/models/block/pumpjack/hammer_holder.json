@@ -1,6 +1,0 @@
-{
-	"parent": "tfmg:block/pumpjack/hammer",
-	"loader": "forge:obj",
-	"flip-v": true,
-	"model": "tfmg:models/block/pumpjack/pumpjack_hammer.obj"
-}

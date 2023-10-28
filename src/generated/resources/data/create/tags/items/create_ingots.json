@@ -1,7 +1,7 @@
 {
   "values": [
-    "tfmg:steel_ingot",
-    "tfmg:cast_iron_ingot",
-    "tfmg:aluminum_ingot"
+    "createindustry:steel_ingot",
+    "createindustry:cast_iron_ingot",
+    "createindustry:aluminum_ingot"
   ]
 }
