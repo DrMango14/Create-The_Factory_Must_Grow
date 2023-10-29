@@ -1,0 +1,18 @@
+
+{
+  "type": "create:compacting",
+  "ingredients": [
+
+    {
+      "fluid": "createindustry:liquid_plastic",
+      "amount": 200
+      }
+
+
+  ],
+  "results": [
+    {
+      "item": "createindustry:plastic_sheet"
+    }
+  ]
+}

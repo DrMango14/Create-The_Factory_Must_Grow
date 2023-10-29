@@ -1,0 +1,27 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "createindustry:cement"
+    },
+    {
+      "item": "minecraft:sand"
+    },
+    {
+      "item": "minecraft:gravel"
+    },
+    {
+      "fluid": "minecraft:water",
+      "nbt": {},
+      "amount": 500
+    }
+  ],
+  "results": [
+    {
+      "fluid": "createindustry:liquid_concrete_fluid",
+      "nbt": {},
+      "amount": 1000
+    }
+  ]
+}

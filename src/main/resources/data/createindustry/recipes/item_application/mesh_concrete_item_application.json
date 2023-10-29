@@ -1,0 +1,17 @@
+
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "createindustry:concrete"
+    },
+    {
+      "item": "createindustry:mesh"
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:mesh_concrete"
+    }
+  ]
+}

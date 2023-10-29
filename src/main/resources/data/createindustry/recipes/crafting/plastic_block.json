@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SSS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "createindustry:plastic_sheet"
+    }
+  },
+  "result": {
+    "item": "createindustry:plastic_block",
+    "count": 1
+
+
+  }
+}

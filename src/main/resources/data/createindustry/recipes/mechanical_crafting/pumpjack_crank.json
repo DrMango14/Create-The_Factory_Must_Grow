@@ -1,0 +1,26 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "   ",
+    "SSS",
+    " CA"
+  ],
+  "key": {
+
+    "A": {
+      "item": "create:shaft"
+    },
+    "S": {
+      "tag": "forge:ingots/steel"
+    },
+  "C": {
+    "item": "createindustry:heavy_machinery_casing"
+  }
+
+
+  },
+  "result": {
+    "item": "createindustry:pumpjack_crank"
+  },
+  "acceptMirrored": true
+}

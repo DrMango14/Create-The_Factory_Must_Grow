@@ -1,0 +1,17 @@
+
+{
+  "type": "create:compacting",
+  "ingredients": [
+
+    {
+      "tag": "minecraft:planks"
+      }
+
+
+  ],
+  "results": [
+    {
+      "item": "createindustry:hardened_planks"
+    }
+  ]
+}

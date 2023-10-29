@@ -1,0 +1,17 @@
+
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "tag": "minecraft:planks"
+    },
+    {
+      "item": "createindustry:water_insulation"
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:waterproof_planks"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "create:limestone"
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:limesand"
+
+    }
+  ],
+  "processingTime": 100
+}

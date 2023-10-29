@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SIS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:plates/iron"
+    },
+    "I": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "createindustry:turbine_blade",
+    "count": 2
+
+
+  }
+}

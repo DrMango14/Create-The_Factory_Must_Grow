@@ -1,0 +1,17 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:coal"
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:coal_coke"
+
+    }
+  ],
+  "heatRequirement": "heated",
+  "processingTime": 4500
+}

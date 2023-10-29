@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "createindustry:factory_floor"
+  },
+  "result": "createindustry:factory_floor_slab",
+  "count": 2
+}

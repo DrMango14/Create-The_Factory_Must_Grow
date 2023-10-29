@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "createindustry:rebar_concrete"
+  },
+  "result": "createindustry:rebar_concrete_stairs",
+  "count": 1
+}

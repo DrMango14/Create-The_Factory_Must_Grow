@@ -1,0 +1,35 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "IHI",
+    "PSP",
+    "ECE"
+  ],
+  "key": {
+    "P": {
+      "item": "create:precision_mechanism"
+    },
+    "I": {
+      "item": "minecraft:copper_ingot"
+    },
+
+  "C": {
+    "item": "createindustry:heavy_machinery_casing"
+  },
+    "H": {
+      "item": "create:sturdy_sheet"
+    },
+    "S": {
+      "item": "create:shaft"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    }
+
+
+  },
+  "result": {
+    "item": "createindustry:deposit_scanner"
+  },
+  "acceptMirrored": true
+}

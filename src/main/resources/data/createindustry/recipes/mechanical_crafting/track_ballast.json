@@ -1,0 +1,18 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "G"
+
+
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gravel"
+    }
+  },
+  "result": {
+    "item": "createindustry:track_ballast",
+    "count": 4
+  },
+  "acceptMirrored": true
+}

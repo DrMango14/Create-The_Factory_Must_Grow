@@ -1,0 +1,30 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "HIH",
+    "PDP",
+    "HCH"
+  ],
+  "key": {
+    "P": {
+      "item": "createindustry:steel_mechanism"
+    },
+    "I": {
+      "item": "createindustry:industrial_pipe"
+    },
+    "H": {
+      "tag": "forge:ingots/steel"
+    },
+  "C": {
+    "item": "createindustry:heavy_machinery_casing"
+  },
+    "D": {
+      "item": "create:display_board"
+    }
+
+  },
+  "result": {
+    "item": "createindustry:distillation_tower_controller"
+  },
+  "acceptMirrored": true
+}

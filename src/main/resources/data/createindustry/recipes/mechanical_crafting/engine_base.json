@@ -1,0 +1,36 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    " XBX ",
+    "PICIP",
+    "PSASP"
+  ],
+  "key": {
+
+    "S": {
+      "tag": "forge:ingots/steel"
+    },
+    "X": {
+      "tag": "forge:ingots/aluminum"
+    },
+  "C": {
+    "item": "createindustry:heavy_machinery_casing"
+  },
+    "I": {
+      "item": "createindustry:industrial_pipe"
+    },
+    "A": {
+      "item": "create:shaft"
+    },
+    "P": {
+      "item": "createindustry:heavy_plate"
+    },
+    "B": {
+      "item": "createindustry:turbine_blade"
+    }
+  },
+  "result": {
+    "item": "createindustry:engine_base"
+  },
+  "acceptMirrored": true
+}

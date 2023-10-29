@@ -1,0 +1,19 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "fluid": "createindustry:kerosene",
+      "amount": 500
+    }
+  ],
+  "results": [
+    {
+      "fluid": "createindustry:naphtha",
+      "amount": 500
+
+    }
+  ],
+  "heatRequirement": "heated"
+
+}

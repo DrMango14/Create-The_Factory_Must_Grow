@@ -1,0 +1,124 @@
+
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "createindustry:engine_base"
+  },
+  "transitionalItem": {
+    "item": "createindustry:unprocessed_gasoline_engine"
+  },
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createindustry:unprocessed_gasoline_engine"
+        },
+        {
+            "item": "minecraft:white_dye"
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unprocessed_gasoline_engine"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createindustry:unprocessed_gasoline_engine"
+        },
+        {
+          "item": "createindustry:engine_chamber"
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unprocessed_gasoline_engine"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createindustry:unprocessed_gasoline_engine"
+        },
+        {
+          "item": "createindustry:screw"
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unprocessed_gasoline_engine"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createindustry:unprocessed_gasoline_engine"
+        },
+        {
+          "item": "createindustry:screwdriver"
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unprocessed_gasoline_engine"
+        }
+      ]
+    },
+
+
+
+
+
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "createindustry:unprocessed_gasoline_engine"
+        },
+        {
+          "fluid": "createindustry:lubrication_oil",
+          "nbt": {},
+          "amount": 1000
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unprocessed_gasoline_engine"
+        }
+      ]
+    },
+
+
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createindustry:unprocessed_gasoline_engine"
+        },
+        {
+          "item": "create:cogwheel"
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unprocessed_gasoline_engine"
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:gasoline_engine",
+      "count": 2
+    }
+  ],
+  "loops": 8
+}

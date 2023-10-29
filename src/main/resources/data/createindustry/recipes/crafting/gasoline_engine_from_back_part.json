@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "createindustry:gasoline_engine_back"
+    }
+  ],
+  "result": {
+    "item": "createindustry:gasoline_engine"
+  }
+}

@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    " S ",
+    "   "
+  ],
+  "key": {
+    "S": {
+      "item": "createindustry:steel_block"
+    }
+  },
+  "result": {
+    "item": "createindustry:steel_ingot",
+    "count": 9
+
+
+  }
+}

@@ -1,0 +1,32 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "BSB",
+    "ICI"
+  ],
+  "key": {
+    "B": {
+      "item": "create:brass_nugget"
+    },
+    "S": {
+      "item": "create:andesite_alloy"
+    },
+    "C": {
+      "item": "minecraft:copper_block"
+    },
+    "I": {
+      "tag": "forge:plates/copper"
+    },
+    "P": {
+      "tag": "forge:plates/iron"
+    }
+  },
+  "result": {
+    "item": "create:steam_engine",
+    "count": 1
+
+
+  }
+}

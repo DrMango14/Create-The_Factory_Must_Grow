@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " M ",
+    "MAM",
+    " M "
+  ],
+  "key": {
+    "M": {
+      "item": "createindustry:thermite_powder"
+    },
+    "A": {
+      "tag": "forge:ingots/aluminum"
+    }
+  },
+  "result": {
+    "item": "createindustry:thermite_grenade"
+
+
+
+  }
+}

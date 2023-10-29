@@ -1,0 +1,19 @@
+
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "fluid": "createindustry:liquid_concrete_fluid",
+      "nbt": {},
+      "amount": 200
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:liquid_concrete_bucket"
+    }
+  ]
+}

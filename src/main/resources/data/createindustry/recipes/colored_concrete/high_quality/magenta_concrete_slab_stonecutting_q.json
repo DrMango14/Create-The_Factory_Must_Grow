@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "createindustry:magenta_high_quality_concrete"
+  },
+  "result": "createindustry:magenta_high_quality_concrete_slab",
+  "count": 2
+}

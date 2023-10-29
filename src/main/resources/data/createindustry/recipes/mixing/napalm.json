@@ -1,0 +1,22 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "createindustry:aluminum_ingot"
+    },
+    {
+      "fluid": "createindustry:gasoline",
+      "amount": 1000
+    }
+  ],
+  "results": [
+    {
+      "fluid": "createindustry:napalm",
+      "amount": 1000
+
+    }
+  ],
+
+  "processingTime": 1000
+}

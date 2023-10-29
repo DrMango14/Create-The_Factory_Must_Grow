@@ -1,0 +1,19 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "createindustry:sulfur"
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:sulfur_powder"
+    },
+    {
+      "item": "createindustry:sulfur_powder",
+      "chance": 0.7
+    }
+  ],
+  "processingTime": 250
+
+}

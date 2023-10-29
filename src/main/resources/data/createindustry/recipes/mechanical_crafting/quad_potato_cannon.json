@@ -1,0 +1,26 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "SPIIS",
+    "SPIIS",
+    "   A "
+  ],
+  "key": {
+    "P": {
+      "item": "createindustry:steel_mechanism"
+    },
+    "A": {
+      "item": "create:andesite_alloy"
+    },
+    "S": {
+      "item": "create:sturdy_sheet"
+    },
+    "I": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "createindustry:quad_potato_cannon"
+  },
+  "acceptMirrored": true
+}

@@ -1,0 +1,26 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "SSSSB",
+    " AT B"
+  ],
+  "key": {
+    "A": {
+      "item": "createindustry:aluminum_post"
+    },
+    "T": {
+      "item": "createindustry:steel_truss"
+    },
+
+  "B": {
+    "tag": "forge:blocks/steel"
+  },
+    "S": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "createindustry:pumpjack_hammer_holder"
+  },
+  "acceptMirrored": true
+}

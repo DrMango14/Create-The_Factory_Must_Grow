@@ -1,0 +1,20 @@
+w
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SSS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "createindustry:aluminum_ingot"
+    }
+  },
+  "result": {
+    "item": "createindustry:aluminum_block",
+    "count": 1
+
+
+  }
+}

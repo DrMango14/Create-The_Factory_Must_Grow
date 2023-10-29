@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CHC",
+    "C C",
+    "CHC"
+  ],
+  "key": {
+    "H": {
+      "item": "createindustry:heavy_plate"
+    },
+    "C": {
+      "item": "createindustry:cast_iron_ingot"
+    }
+  },
+  "result": {
+    "item": "createindustry:distiller",
+    "count": 1
+
+
+  }
+}

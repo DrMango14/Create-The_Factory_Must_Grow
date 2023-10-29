@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SSS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "createindustry:duraluminium_ingot"
+    }
+  },
+  "result": {
+    "item": "createindustry:duraluminium_block",
+    "count": 1
+
+
+  }
+}

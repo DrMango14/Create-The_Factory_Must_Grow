@@ -1,0 +1,26 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " Q ",
+    " C ",
+    " P "
+  ],
+  "key": {
+    "Q": {
+      "item": "create:polished_rose_quartz"
+    },
+    "C": {
+      "tag": "forge:nuggets/copper"
+    },
+    "P": {
+      "item": "createindustry:plastic_sheet"
+    }
+  },
+  "result": {
+    "item": "create:electron_tube",
+    "count": 1
+
+
+  }
+}

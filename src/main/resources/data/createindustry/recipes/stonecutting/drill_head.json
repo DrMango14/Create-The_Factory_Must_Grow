@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "createindustry:steel_block"
+  },
+  "result": "createindustry:drill_head",
+  "count": 1
+}

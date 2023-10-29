@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    " C ",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "create:railway_casing"
+    }
+  },
+  "result": {
+    "item": "create:train_door",
+    "count": 2
+
+
+  }
+}

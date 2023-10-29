@@ -1,0 +1,25 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    " S ",
+    " A ",
+    " I "
+  ],
+  "key": {
+
+
+    "S": {
+      "item": "createindustry:spark_plug"
+    },
+    "A": {
+      "tag": "forge:ingots/aluminum"
+    },
+    "I": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "createindustry:engine_chamber"
+  },
+  "acceptMirrored": true
+}

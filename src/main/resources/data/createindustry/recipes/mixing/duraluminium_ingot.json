@@ -1,0 +1,26 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "tag": "forge:ingots/aluminum"
+    },
+    {
+      "tag": "forge:ingots/aluminum"
+    }
+
+  ],
+  "results": [
+    {
+      "count": 3,
+      "item": "createindustry:duraluminium_ingot"
+
+
+    }
+  ],
+  "heatRequirement": "heated",
+  "processingTime": 250
+}

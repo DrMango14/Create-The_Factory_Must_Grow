@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "createindustry:bauxite"
+  },
+  "result": "createindustry:polished_cut_bauxite_wall",
+  "count": 1
+}

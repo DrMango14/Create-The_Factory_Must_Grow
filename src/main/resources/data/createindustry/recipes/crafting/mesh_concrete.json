@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    " C ",
+    " M "
+  ],
+  "key": {
+    "M": {
+      "item": "createindustry:mesh"
+    },
+    "C": {
+      "item": "createindustry:concrete"
+    }
+  },
+  "result": {
+    "item": "createindustry:mesh_concrete",
+    "count": 1
+
+
+  }
+}

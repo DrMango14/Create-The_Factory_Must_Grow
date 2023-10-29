@@ -1,0 +1,26 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MIM",
+    "MIM",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "createindustry:heavy_plate"
+    },
+    "M": {
+      "item": "create:andesite_bars"
+    },
+    "I": {
+      "item": "createindustry:industrial_pipe"
+    }
+  },
+  "result": {
+    "item": "createindustry:exhaust",
+    "count": 1
+
+
+  }
+}

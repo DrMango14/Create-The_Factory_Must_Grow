@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "tag": "minecraft:planks"
+  },
+  "result": "createindustry:sawdust",
+  "count": 4
+}

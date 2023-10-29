@@ -1,0 +1,28 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "HIH",
+    "P P",
+    "HCH"
+  ],
+  "key": {
+    "P": {
+      "item": "createindustry:steel_mechanism"
+    },
+    "I": {
+      "item": "createindustry:industrial_pipe"
+    },
+    "H": {
+      "tag": "forge:ingots/cast_iron"
+    },
+  "C": {
+    "item": "createindustry:heavy_machinery_casing"
+  }
+
+
+  },
+  "result": {
+    "item": "createindustry:cast_iron_distillation_controller"
+  },
+  "acceptMirrored": true
+}

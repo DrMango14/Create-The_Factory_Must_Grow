@@ -1,0 +1,26 @@
+
+{
+  "type": "create:compacting",
+  "ingredients": [
+
+    {
+      "item": "createindustry:sawdust"
+      },
+    {
+      "item": "createindustry:sawdust"
+      },
+    {
+      "item": "createindustry:sawdust"
+      },
+    {
+      "item": "createindustry:sawdust"
+      }
+
+
+  ],
+  "results": [
+    {
+      "item": "createindustry:sawdust_block"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "HHH",
+    "PCP",
+    "SIS"
+  ],
+  "key": {
+    "P": {
+      "item": "create:precision_mechanism"
+    },
+    "I": {
+      "item": "createindustry:industrial_pipe"
+    },
+    "H": {
+      "item": "createindustry:heavy_plate"
+    },
+  "C": {
+    "item": "createindustry:heavy_machinery_casing"
+  },
+    "S": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "createindustry:pumpjack_base"
+  },
+  "acceptMirrored": true
+}

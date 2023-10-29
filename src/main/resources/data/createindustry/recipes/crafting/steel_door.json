@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "minecraft:wooden_doors"
+    },
+    {
+      "item": "createindustry:steel_casing"
+    }
+  ],
+  "result": {
+    "item": "createindustry:steel_door"
+  }
+}

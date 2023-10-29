@@ -1,0 +1,16 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "minecraft:dirt"
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:saltpeter",
+      "chance": 0.2
+    }
+  ],
+  "processingTime": 350
+
+}

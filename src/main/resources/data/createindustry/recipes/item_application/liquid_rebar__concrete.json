@@ -1,0 +1,17 @@
+
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "createindustry:rebar_cage"
+    },
+    {
+      "item": "createindustry:liquid_concrete_bucket"
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:liquid_rebar_concrete"
+    }
+  ]
+}

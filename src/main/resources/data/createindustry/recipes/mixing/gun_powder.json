@@ -1,0 +1,35 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "createindustry:saltpeter"
+    },
+    {
+      "item": "createindustry:saltpeter"
+    },
+    {
+      "item": "createindustry:saltpeter"
+    },
+    {
+      "tag": "forge:dusts/charcoal"
+
+    },
+
+    {
+      "tag": "forge:dusts/charcoal"
+
+    },
+    {
+      "item": "createindustry:sulfur_powder"
+
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:gunpowder",
+      "count": 6
+
+    }
+  ]
+}

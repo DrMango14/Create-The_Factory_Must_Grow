@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C  ",
+    "CC ",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "createindustry:chipwood"
+    }
+  },
+  "result": {
+    "item": "createindustry:chipwood_stairs",
+    "count": 4
+
+
+  }
+}

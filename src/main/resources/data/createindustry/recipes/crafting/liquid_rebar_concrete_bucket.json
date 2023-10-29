@@ -1,0 +1,21 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "XYX",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "createindustry:rebar"
+    },
+    "Y": {
+      "item": "createindustry:liquid_concrete_bucket"
+    }
+  },
+  "result": {
+    "item": "createindustry:liquid_rebar_concrete_bucket"
+
+  }
+}
