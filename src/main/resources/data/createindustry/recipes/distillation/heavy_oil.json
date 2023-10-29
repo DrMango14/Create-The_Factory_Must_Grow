@@ -1,0 +1,35 @@
+{
+  "type": "createindustry:distillation",
+  "ingredients": [
+
+    {
+      "fluid": "createindustry:heavy_oil",
+      "nbt": {},
+      "amount": 90
+    }
+  ],
+  "results": [
+    {
+      "fluid": "createindustry:diesel",
+      "amount": 30
+    },
+    {
+      "fluid": "createindustry:lubrication_oil",
+      "amount": 30
+    },
+    {
+      "fluid": "createindustry:lubrication_oil",
+      "amount": 30
+    },
+    {
+      "item": "createindustry:steel_ingot"
+
+    },
+    {
+      "item": "minecraft:air"
+
+    }
+  ]
+
+
+}

@@ -1,0 +1,22 @@
+{
+  "type": "createindustry:casting",
+  "ingredients": [
+    {
+      "fluid": "createindustry:gasoline",
+      "amount": 1
+    }
+  ],
+  "processingTime": 200,
+  "results": [
+    {
+      "count": 1,
+      "item": "createindustry:aluminum_ingot"
+    }
+  ,
+    {
+      "count": 1,
+      "item": "createindustry:aluminum_block"
+    }
+
+  ]
+}
