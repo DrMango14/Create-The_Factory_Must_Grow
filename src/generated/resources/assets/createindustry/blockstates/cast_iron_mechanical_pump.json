@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "createindustry:block/cast_iron_mechanical_pump/block",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "createindustry:block/cast_iron_mechanical_pump/block",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "createindustry:block/cast_iron_mechanical_pump/block",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "createindustry:block/cast_iron_mechanical_pump/block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "createindustry:block/cast_iron_mechanical_pump/block"
+    },
+    "facing=west": {
+      "model": "createindustry:block/cast_iron_mechanical_pump/block",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

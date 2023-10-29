@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "createindustry:block/diesel_engine_expansion",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "createindustry:block/diesel_engine_expansion",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "createindustry:block/diesel_engine_expansion",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "createindustry:block/diesel_engine_expansion",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "createindustry:block/diesel_engine_expansion"
+    },
+    "facing=west": {
+      "model": "createindustry:block/diesel_engine_expansion",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

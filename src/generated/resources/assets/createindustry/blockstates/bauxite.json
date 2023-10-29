@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "createindustry:block/bauxite_natural_0"
+      },
+      {
+        "model": "createindustry:block/bauxite_natural_1"
+      },
+      {
+        "model": "createindustry:block/bauxite_natural_2"
+      },
+      {
+        "model": "createindustry:block/bauxite_natural_3"
+      }
+    ]
+  }
+}

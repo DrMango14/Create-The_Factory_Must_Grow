@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "createindustry:block/small_bauxite_brick_slab"
+    },
+    "type=double": {
+      "model": "createindustry:block/small_bauxite_bricks"
+    },
+    "type=top": {
+      "model": "createindustry:block/small_bauxite_brick_slab_top"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "createindustry:block/light_gray_concrete_bottom"
+    },
+    "type=double": {
+      "model": "createindustry:block/light_gray_concrete"
+    },
+    "type=top": {
+      "model": "createindustry:block/light_gray_concrete_top"
+    }
+  }
+}

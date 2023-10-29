@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "bottom=false": {
+      "model": "createindustry:block/aluminum_scaffolding"
+    },
+    "bottom=true": {
+      "model": "createindustry:block/aluminum_scaffolding_horizontal"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "createindustry:block/formwork_block/block_base"
+    }
+  }
+}

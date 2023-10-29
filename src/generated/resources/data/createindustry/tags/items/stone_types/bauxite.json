@@ -1,0 +1,19 @@
+{
+  "values": [
+    "createindustry:cut_bauxite",
+    "createindustry:cut_bauxite_stairs",
+    "createindustry:cut_bauxite_wall",
+    "createindustry:polished_cut_bauxite",
+    "createindustry:polished_cut_bauxite_stairs",
+    "createindustry:polished_cut_bauxite_wall",
+    "createindustry:cut_bauxite_bricks",
+    "createindustry:cut_bauxite_brick_stairs",
+    "createindustry:cut_bauxite_brick_wall",
+    "createindustry:small_bauxite_bricks",
+    "createindustry:small_bauxite_brick_stairs",
+    "createindustry:small_bauxite_brick_wall",
+    "createindustry:layered_bauxite",
+    "createindustry:bauxite_pillar",
+    "createindustry:bauxite"
+  ]
+}
