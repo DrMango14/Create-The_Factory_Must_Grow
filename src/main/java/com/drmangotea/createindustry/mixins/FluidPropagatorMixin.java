@@ -47,10 +47,7 @@ public class FluidPropagatorMixin {
                 AllAdvancements.HONEY_DRAIN };
     }
 
-    /**
-     * @author DrMangoTea
-     * @reason Custom Pipes
-     */
+
     @Overwrite( remap = false)
     public static void propagateChangedPipe(LevelAccessor world, BlockPos pipePos, BlockState pipeState) {
         List<Pair<Integer, BlockPos>> frontier = new ArrayList<>();
