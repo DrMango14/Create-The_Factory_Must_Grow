@@ -1,33 +1,24 @@
 {
   "type": "create:mechanical_crafting",
   "pattern": [
-    " XBX ",
-    "PICIP",
-    "PSASP"
+    "HAH",
+    "HCH",
+    "   "
   ],
   "key": {
 
-    "S": {
-      "tag": "forge:ingots/steel"
-    },
-    "X": {
-      "tag": "forge:ingots/aluminum"
-    },
-  "C": {
-    "item": "createindustry:heavy_machinery_casing"
-  },
-    "I": {
-      "item": "createindustry:industrial_pipe"
-    },
     "A": {
       "item": "create:shaft"
     },
-    "P": {
+    "H": {
       "item": "createindustry:heavy_plate"
     },
-    "B": {
-      "item": "createindustry:turbine_blade"
-    }
+
+  "C": {
+    "item": "createindustry:heavy_machinery_casing"
+  }
+
+
   },
   "result": {
     "item": "createindustry:engine_base"

@@ -262,7 +262,6 @@ public class FluidPipeBlockMixin extends PipeBlock implements SimpleWaterloggedB
 	@Overwrite( remap = false)
 	public BlockState updateBlockState(BlockState state, Direction preferredDirection, @Nullable Direction ignore,
 		BlockAndTintGetter world, BlockPos pos) {
-		CreateTFMG.LOGGER.debug("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		BracketedBlockEntityBehaviour bracket = BlockEntityBehaviour.get(world, pos, BracketedBlockEntityBehaviour.TYPE);
 		if (bracket != null && bracket.isBracketPresent())
 			return state;
@@ -273,16 +272,24 @@ public class FluidPipeBlockMixin extends PipeBlock implements SimpleWaterloggedB
 			.filter(prevState::getValue)
 			.count();
 
+
 		// Update sides that are not ignored
 		for (Direction d : Iterate.directions)
 			if (d != ignore) {
 				boolean shouldConnect = canConnectTo(world, pos.relative(d), world.getBlockState(pos.relative(d)), d);
-				if(world.getBlockEntity(pos.relative(d)) instanceof LockablePipeBlockEntity)
-					if(((LockablePipeBlockEntity)world.getBlockEntity(pos.relative(d))).locked) {
+
+				if(world.getBlockEntity(pos.relative(d)) instanceof LockablePipeBlockEntity) {
+					if (((LockablePipeBlockEntity) world.getBlockEntity(pos.relative(d))).locked) {
 						shouldConnect = false;
-						CreateTFMG.LOGGER.debug("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+
+						if(world.getBlockState(pos.relative(d)).getValue(PROPERTY_BY_DIRECTION.get(d.getOpposite()))){
+							shouldConnect =true;
+						}
 					}
 
+
+				}
 				state = state.setValue(PROPERTY_BY_DIRECTION.get(d), shouldConnect);
 			}
 

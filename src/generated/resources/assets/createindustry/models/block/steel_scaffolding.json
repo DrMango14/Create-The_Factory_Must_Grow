@@ -1,0 +1,10 @@
+{
+  "parent": "createindustry:block/scaffold/block",
+  "textures": {
+    "casing": "createindustry:block/steel_casing",
+    "inside": "createindustry:block/scaffold/steel_scaffold_inside",
+    "particle": "createindustry:block/scaffold/steel_scaffold",
+    "side": "createindustry:block/scaffold/steel_scaffold",
+    "top": "createindustry:block/funnel/steel_funnel_frame"
+  }
+}

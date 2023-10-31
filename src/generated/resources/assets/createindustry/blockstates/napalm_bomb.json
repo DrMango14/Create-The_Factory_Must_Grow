@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "createindustry:block/napalm_bomb"
+      "model": "createindustry:block/napalm_bomb/block"
     }
   }
 }

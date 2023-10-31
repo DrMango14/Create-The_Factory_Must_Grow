@@ -6,7 +6,7 @@
       "item": "minecraft:bucket"
     },
     {
-      "fluid": "createindustry:liquid_concrete_fluid",
+      "fluid": "createindustry:liquid_concrete",
       "nbt": {},
       "amount": 200
     }

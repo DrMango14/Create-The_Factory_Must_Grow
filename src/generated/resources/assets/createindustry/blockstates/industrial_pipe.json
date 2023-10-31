@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "createindustry:block/industrial_pipe"
+      "model": "createindustry:block/industrial_pipe/block"
     }
   }
 }

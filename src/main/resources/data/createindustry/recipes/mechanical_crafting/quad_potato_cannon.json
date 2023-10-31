@@ -1,8 +1,8 @@
 {
   "type": "create:mechanical_crafting",
   "pattern": [
-    "SPIIS",
-    "SPIIS",
+    "HIIIS",
+    "HPPIS",
     "   A "
   ],
   "key": {
@@ -10,13 +10,16 @@
       "item": "createindustry:steel_mechanism"
     },
     "A": {
-      "item": "create:andesite_alloy"
+      "item": "createindustry:rebar"
     },
     "S": {
-      "item": "create:sturdy_sheet"
+      "item": "createindustry:industrial_pipe"
     },
     "I": {
-      "tag": "forge:ingots/steel"
+      "item": "createindustry:steel_pipe"
+    },
+    "H": {
+      "item": "createindustry:heavy_plate"
     }
   },
   "result": {

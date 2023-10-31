@@ -3,20 +3,21 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     " S ",
-    "GSG",
+    " B ",
     " S "
   ],
   "key": {
     "S": {
-      "tag": "forge:ingots/steel"
+        "tag": "forge:ingots/steel"
+
     },
-    "G": {
-      "item": "create:framed_glass_trapdoor"
+    "B": {
+      "item": "minecraft:barrel"
     }
   },
   "result": {
     "item": "createindustry:steel_fluid_tank",
-    "count": 2
+    "count": 1
 
 
   }

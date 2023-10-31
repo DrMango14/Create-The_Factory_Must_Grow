@@ -7,10 +7,10 @@
   ],
   "results": [
     {
-      "item": "createindustry:sulfur_powder"
+      "item": "createindustry:sulfur_dust"
     },
     {
-      "item": "createindustry:sulfur_powder",
+      "item": "createindustry:sulfur_dust",
       "chance": 0.7
     }
   ],

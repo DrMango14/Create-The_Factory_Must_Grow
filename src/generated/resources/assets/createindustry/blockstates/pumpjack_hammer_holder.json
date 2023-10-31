@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
-      "model": "createindustry:block/pumpjack_hammer_holder"
+    "facing=east": {
+      "model": "createindustry:block/pumpjack_hammer_holder/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "createindustry:block/pumpjack_hammer_holder/block"
+    },
+    "facing=south": {
+      "model": "createindustry:block/pumpjack_hammer_holder/block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "createindustry:block/pumpjack_hammer_holder/block",
+      "y": 270
     }
   }
 }

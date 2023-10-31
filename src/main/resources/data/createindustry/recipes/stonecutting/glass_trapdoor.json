@@ -1,9 +1,0 @@
-
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "create:framed_glass"
-  },
-  "result": "create:framed_glass_trapdoor",
-  "count": 1
-}

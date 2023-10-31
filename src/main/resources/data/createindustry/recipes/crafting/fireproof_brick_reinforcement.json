@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FFF",
+    "FFF",
+    "   "
+  ],
+  "key": {
+    "F": {
+      "item": "createindustry:fireproof_bricks"
+    }
+  },
+  "result": {
+    "item": "createindustry:fireproof_brick_reinforcement",
+    "count": 6
+
+
+  }
+}

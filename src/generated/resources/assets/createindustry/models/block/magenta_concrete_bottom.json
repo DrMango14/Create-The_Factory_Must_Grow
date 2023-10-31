@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "createindustry:block/magenta_concrete",
+    "side": "createindustry:block/magenta_concrete",
+    "top": "createindustry:block/magenta_concrete"
+  }
+}

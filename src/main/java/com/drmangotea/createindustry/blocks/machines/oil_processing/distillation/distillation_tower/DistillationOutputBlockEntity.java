@@ -2,6 +2,7 @@ package com.drmangotea.createindustry.blocks.machines.oil_processing.distillatio
 
 
 
+import com.drmangotea.createindustry.CreateTFMG;
 import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.distillery.DistilleryOutputBlockEntity;
 import com.drmangotea.createindustry.recipes.distillation.ItemlessRecipe;
 import com.drmangotea.createindustry.recipes.distillation.AdvancedDistillationRecipe;
@@ -246,8 +247,8 @@ if(fluidInRecipe2!=null)
                 return;
 
             if(controller.towerLevel>=12) {
-                speed = 1;
-            } else speed=3;
+                speed = 3;
+            } else speed=6;
 
             if(processTimer<speed){
                 processTimer++;

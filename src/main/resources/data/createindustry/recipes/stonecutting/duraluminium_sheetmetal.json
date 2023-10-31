@@ -1,9 +1,0 @@
-
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "createindustry:duraluminium_ingot"
-  },
-  "result": "createindustry:duraluminium_sheetmetal",
-  "count": 2
-}

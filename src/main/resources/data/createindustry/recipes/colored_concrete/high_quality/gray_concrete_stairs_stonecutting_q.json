@@ -1,9 +1,0 @@
-
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "createindustry:gray_high_quality_concrete"
-  },
-  "result": "createindustry:gray_high_quality_concrete_stairs",
-  "count": 1
-}

@@ -1,5 +1,6 @@
 package com.drmangotea.createindustry.blocks.pipes.normal.steel;
 
+import com.drmangotea.createindustry.blocks.pipes.normal.LockablePipeBlockEntity;
 import com.drmangotea.createindustry.registry.TFMGPartialModels;
 import com.simibubi.create.content.decoration.bracket.BracketedBlockEntityBehaviour;
 import com.simibubi.create.content.fluids.FluidTransportBehaviour;
@@ -25,6 +26,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+
+import static net.minecraft.world.level.block.PipeBlock.PROPERTY_BY_DIRECTION;
 
 public class SteelPipeAttachmentModel extends BakedModelWrapperWithData {
 
@@ -42,8 +46,25 @@ public class SteelPipeAttachmentModel extends BakedModelWrapperWithData {
         BracketedBlockEntityBehaviour bracket = BlockEntityBehaviour.get(world, pos, BracketedBlockEntityBehaviour.TYPE);
 
         if (transport != null)
-            for (Direction d : Iterate.directions)
+            for (Direction d : Iterate.directions) {
+                boolean shouldConnect = true;
+                if(world.getBlockState(pos.relative(d)).getBlock() instanceof FluidPipeBlock) {
+
+                    if(d.getAxis().isHorizontal())
+                        shouldConnect = world.getBlockState(pos.relative(d)).getValue(PROPERTY_BY_DIRECTION.get(d.getOpposite()));
+
+
+
+                }
+
                 data.putAttachment(d, transport.getRenderedRimAttachment(world, pos, state, d));
+
+                if(!shouldConnect)
+                    if(state.getBlock() instanceof FluidPipeBlock)
+                        if(state.getValue(PROPERTY_BY_DIRECTION.get(d)))
+                            data.putAttachment(d, FluidTransportBehaviour.AttachmentTypes.RIM);
+
+            }
         if (bracket != null)
             data.putBracket(bracket.getBracket());
 
@@ -92,7 +113,7 @@ public class SteelPipeAttachmentModel extends BakedModelWrapperWithData {
                     .getQuads(state, side, rand, data, renderType));
     }
 
-    private static class PipeModelData {
+    public class PipeModelData {
         private FluidTransportBehaviour.AttachmentTypes[] attachments;
         private boolean encased;
         private BakedModel bracket;

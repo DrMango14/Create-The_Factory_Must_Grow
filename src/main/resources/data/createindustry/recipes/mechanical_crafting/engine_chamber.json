@@ -2,8 +2,9 @@
   "type": "create:mechanical_crafting",
   "pattern": [
     " S ",
+    " I ",
     " A ",
-    " I "
+    " P "
   ],
   "key": {
 
@@ -16,6 +17,9 @@
     },
     "I": {
       "tag": "forge:ingots/steel"
+    },
+    "P": {
+      "item": "createindustry:steel_mechanism"
     }
   },
   "result": {

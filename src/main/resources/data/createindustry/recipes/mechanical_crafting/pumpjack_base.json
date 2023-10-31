@@ -1,26 +1,29 @@
 {
   "type": "create:mechanical_crafting",
   "pattern": [
-    "HHH",
-    "PCP",
-    "SIS"
+    "HAH",
+    "SCS",
+    "HIH"
   ],
   "key": {
-    "P": {
-      "item": "create:precision_mechanism"
-    },
-    "I": {
-      "item": "createindustry:industrial_pipe"
+
+    "A": {
+      "item": "minecraft:string"
     },
     "H": {
       "item": "createindustry:heavy_plate"
     },
+    "S": {
+      "item": "createindustry:steel_mechanism"
+    },
   "C": {
     "item": "createindustry:heavy_machinery_casing"
   },
-    "S": {
-      "tag": "forge:ingots/steel"
+    "I": {
+      "item": "createindustry:industrial_pipe"
     }
+
+
   },
   "result": {
     "item": "createindustry:pumpjack_base"

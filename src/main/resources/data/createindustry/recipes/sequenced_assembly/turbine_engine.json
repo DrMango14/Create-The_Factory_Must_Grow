@@ -5,30 +5,15 @@
     "item": "createindustry:engine_base"
   },
   "transitionalItem": {
-    "item": "createindustry:unprocessed_turbine_engine"
+    "item": "createindustry:unfinished_turbine_engine"
   },
   "sequence": [
+
     {
       "type": "create:deploying",
       "ingredients": [
         {
-          "item": "createindustry:unprocessed_turbine_engine"
-        },
-        {
-            "item": "minecraft:blue_dye"
-        }
-      ],
-      "results": [
-        {
-          "item": "createindustry:unprocessed_turbine_engine"
-        }
-      ]
-    },
-    {
-      "type": "create:deploying",
-      "ingredients": [
-        {
-          "item": "createindustry:unprocessed_turbine_engine"
+          "item": "createindustry:unfinished_turbine_engine"
         },
         {
           "item": "createindustry:turbine_blade"
@@ -36,7 +21,7 @@
       ],
       "results": [
         {
-          "item": "createindustry:unprocessed_turbine_engine"
+          "item": "createindustry:unfinished_turbine_engine"
         }
       ]
     },
@@ -44,7 +29,7 @@
       "type": "create:deploying",
       "ingredients": [
         {
-          "item": "createindustry:unprocessed_turbine_engine"
+          "item": "createindustry:unfinished_turbine_engine"
         },
         {
           "item": "createindustry:screw"
@@ -52,7 +37,7 @@
       ],
       "results": [
         {
-          "item": "createindustry:unprocessed_turbine_engine"
+          "item": "createindustry:unfinished_turbine_engine"
         }
       ]
     },
@@ -60,7 +45,7 @@
       "type": "create:deploying",
       "ingredients": [
         {
-          "item": "createindustry:unprocessed_turbine_engine"
+          "item": "createindustry:unfinished_turbine_engine"
         },
         {
           "item": "createindustry:screwdriver"
@@ -68,20 +53,16 @@
       ],
       "results": [
         {
-          "item": "createindustry:unprocessed_turbine_engine"
+          "item": "createindustry:unfinished_turbine_engine"
         }
       ]
     },
-
-
-
-
 
     {
       "type": "create:filling",
       "ingredients": [
         {
-          "item": "createindustry:unprocessed_turbine_engine"
+          "item": "createindustry:unfinished_turbine_engine"
         },
         {
           "fluid": "createindustry:lubrication_oil",
@@ -91,7 +72,7 @@
       ],
       "results": [
         {
-          "item": "createindustry:unprocessed_turbine_engine"
+          "item": "createindustry:unfinished_turbine_engine"
         }
       ]
     },
@@ -101,15 +82,15 @@
       "type": "create:deploying",
       "ingredients": [
         {
-          "item": "createindustry:unprocessed_turbine_engine"
+          "item": "createindustry:unfinished_turbine_engine"
         },
         {
-          "item": "create:cogwheel"
+          "item": "createindustry:steel_mechanism"
         }
       ],
       "results": [
         {
-          "item": "createindustry:unprocessed_turbine_engine"
+          "item": "createindustry:unfinished_turbine_engine"
         }
       ]
     }

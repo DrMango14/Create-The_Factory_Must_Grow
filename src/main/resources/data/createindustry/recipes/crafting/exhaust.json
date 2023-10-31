@@ -8,13 +8,13 @@
   ],
   "key": {
     "S": {
-      "item": "createindustry:heavy_plate"
+      "tag": "forge:ingots/cast_iron"
     },
     "M": {
       "item": "create:andesite_bars"
     },
     "I": {
-      "item": "createindustry:industrial_pipe"
+      "item": "createindustry:cast_iron_pipe"
     }
   },
   "result": {

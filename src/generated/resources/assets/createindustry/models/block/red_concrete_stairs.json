@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "createindustry:block/red_concrete",
+    "side": "createindustry:block/red_concrete",
+    "top": "createindustry:block/red_concrete"
+  }
+}

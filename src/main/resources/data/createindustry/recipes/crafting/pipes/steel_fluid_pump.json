@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create:cogwheel"
+    },
+    {
+      "item": "createindustry:steel_pipe"
+    }
+  ],
+  "result": {
+    "item": "createindustry:steel_mechanical_pump"
+  }
+}

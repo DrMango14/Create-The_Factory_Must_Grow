@@ -3,8 +3,8 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     " P ",
-    "ECS",
-    " P "
+    " C ",
+    " S "
   ],
   "key": {
     "S": {
@@ -15,9 +15,6 @@
     },
     "C": {
       "item": "createindustry:heavy_machinery_casing"
-    },
-    "E": {
-      "item": "create:electron_tube"
     }
   },
   "result": {

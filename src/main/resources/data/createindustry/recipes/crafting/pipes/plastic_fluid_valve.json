@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:plates/iron"
+    },
+    {
+      "item": "createindustry:plastic_pipe"
+    }
+  ],
+  "result": {
+    "item": "createindustry:plastic_fluid_valve"
+  }
+}

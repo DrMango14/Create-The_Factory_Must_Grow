@@ -89,6 +89,10 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
                 .withMaxStackSize(64);
 
         itemCapability = LazyOptional.of(() -> new CombinedInvWrapper(inputInventory,fuelInventory));
+
+
+        tank1.getPrimaryHandler().setCapacity(8000);
+        tank2.getPrimaryHandler().setCapacity(8000);
     }
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
@@ -114,10 +118,10 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
 
 
         if(speedModifier!=0) {
-            fuelEfficiency = 1000 * speedModifier;
+            fuelEfficiency = 400 * speedModifier;
             speedModifier = (blastFurnaceLevel/2);
         }else {
-            fuelEfficiency = 1000;
+            fuelEfficiency = 400;
             speedModifier = 1;
 
         }
@@ -157,7 +161,8 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
             if(timer == -1&&
                     (tank1.getPrimaryHandler().getFluidAmount()+recipe.getFluidResults().get(0).getAmount())<=tank1.getPrimaryHandler().getCapacity()&&
                     (tank2.getPrimaryHandler().getFluidAmount()+recipe.getFluidResults().get(1).getAmount())<=tank2.getPrimaryHandler().getCapacity()&&
-                     type != BlastFurnaceType.INVALID
+                     type != BlastFurnaceType.INVALID&&
+                    !fuelInventory.isEmpty()
             ) {
 
                 timer= (int) (recipe.getProcessingDuration()/speedModifier);
@@ -179,10 +184,10 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
 
         acceptInsertedItems();
 
-        if(recipe!=null)
-            if(fuelInventory.isEmpty()){
-                timer= (int) (recipe.getProcessingDuration()/speedModifier);
-            }
+       // if(recipe!=null)
+       //     if(!fuelInventory.isEmpty()){
+       //         timer= (int) (recipe.getProcessingDuration()/speedModifier);
+       //     }
 
 
         if(type != BlastFurnaceType.INVALID&&timer>0&&
@@ -331,6 +336,9 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
     @Override
     @SuppressWarnings("removal")
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+       // Lang.translate("goggles.blast_furnace.height", timer)
+       //         .style(ChatFormatting.LIGHT_PURPLE)
+       //         .forGoggles(tooltip, 1);
         if(type == BlastFurnaceType.INVALID){
             Lang.translate("goggles.blast_furnace.invalid")
                     .style(ChatFormatting.RED)
@@ -378,10 +386,6 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
                     .forGoggles(tooltip, 1);
             Lang.translate("goggles.blast_furnace.fuel_amount", fuelInventory.getStackInSlot(0).getCount())
                     .style(ChatFormatting.AQUA)
-                    .forGoggles(tooltip, 1);
-
-            Lang.translate("goggles.blast_furnace.height", timer)
-                    .style(ChatFormatting.LIGHT_PURPLE)
                     .forGoggles(tooltip, 1);
 
 

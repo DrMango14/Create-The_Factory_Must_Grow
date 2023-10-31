@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "createindustry:block/light_gray_concrete",
+    "side": "createindustry:block/light_gray_concrete",
+    "top": "createindustry:block/light_gray_concrete"
+  }
+}

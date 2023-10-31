@@ -1,0 +1,10 @@
+{
+  "values": [
+    "createindustry:gasoline_engine",
+    "createindustry:gasoline_engine_back",
+    "createindustry:lpg_engine",
+    "createindustry:lpg_engine_back",
+    "createindustry:turbine_engine",
+    "createindustry:turbine_engine_back"
+  ]
+}

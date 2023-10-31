@@ -36,7 +36,7 @@ public class PumpjackCrankBlock extends HorizontalDirectionalBlock implements IB
     }
     @Override
     public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
+        return RenderShape.MODEL;
     }
     @Override
     public BlockEntityType<? extends PumpjackCrankBlockEntity> getBlockEntityType() {

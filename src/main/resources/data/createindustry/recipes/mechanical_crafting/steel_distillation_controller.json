@@ -3,7 +3,7 @@
   "pattern": [
     "HIH",
     "PDP",
-    "HCH"
+    "ECE"
   ],
   "key": {
     "P": {
@@ -13,18 +13,21 @@
       "item": "createindustry:industrial_pipe"
     },
     "H": {
-      "tag": "forge:ingots/steel"
+      "item": "createindustry:heavy_plate"
     },
   "C": {
     "item": "createindustry:heavy_machinery_casing"
   },
     "D": {
       "item": "create:display_board"
+    },
+    "E": {
+      "item": "create:electron_tube"
     }
 
   },
   "result": {
-    "item": "createindustry:distillation_tower_controller"
+    "item": "createindustry:steel_distillation_controller"
   },
   "acceptMirrored": true
 }

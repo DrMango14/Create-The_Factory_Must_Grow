@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "createindustry:rebar"
+    },
+    {
+      "item": "createindustry:formwork_block"
+    }
+  ],
+  "result": {
+    "item": "createindustry:rebar_formwork_block"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "createindustry:block/blue_concrete",
+    "side": "createindustry:block/blue_concrete",
+    "top": "createindustry:block/blue_concrete"
+  }
+}

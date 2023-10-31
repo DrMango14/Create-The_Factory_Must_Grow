@@ -209,6 +209,7 @@ public class AirIntakeInstance extends KineticBlockEntityInstance<com.drmangotea
 
         }
         if(!blockEntity.isController) {
+            chassisMedium.setEmptyTransform();
             fan_medium.setEmptyTransform();
             fan_large.setEmptyTransform();
 

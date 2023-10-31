@@ -3,7 +3,7 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "createindustry:aluminum_ingot"
+      "tag": "forge:ingots/aluminum"
     },
     {
       "fluid": "createindustry:gasoline",

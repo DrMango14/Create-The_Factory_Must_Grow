@@ -2,34 +2,35 @@
   "type": "create:mechanical_crafting",
   "pattern": [
     "IHI",
-    "PSP",
-    "ECE"
+    "SCK",
+    "EEK"
   ],
   "key": {
-    "P": {
-      "item": "create:precision_mechanism"
-    },
+
     "I": {
-      "item": "minecraft:copper_ingot"
+      "item": "createindustry:heavy_plate"
     },
 
   "C": {
     "item": "createindustry:heavy_machinery_casing"
   },
     "H": {
-      "item": "create:sturdy_sheet"
+      "item": "minecraft:compass"
     },
     "S": {
       "item": "create:shaft"
     },
     "E": {
-      "item": "create:electron_tube"
+      "item": "createindustry:steel_mechanism"
+    },
+    "K": {
+      "tag": "forge:plates/copper"
     }
 
 
   },
   "result": {
-    "item": "createindustry:deposit_scanner"
+    "item": "createindustry:surface_scanner"
   },
   "acceptMirrored": true
 }

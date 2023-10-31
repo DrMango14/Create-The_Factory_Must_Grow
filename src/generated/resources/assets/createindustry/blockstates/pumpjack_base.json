@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
-      "model": "createindustry:block/pumpjack_base"
+    "facing=east": {
+      "model": "createindustry:block/pumpjack_base/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "createindustry:block/pumpjack_base/block"
+    },
+    "facing=south": {
+      "model": "createindustry:block/pumpjack_base/block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "createindustry:block/pumpjack_base/block",
+      "y": 270
     }
   }
 }

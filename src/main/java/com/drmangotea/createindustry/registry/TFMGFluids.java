@@ -6,6 +6,7 @@ package com.drmangotea.createindustry.registry;
 import com.drmangotea.createindustry.CreateTFMG;
 import com.drmangotea.createindustry.blocks.concrete.ConcreteFluid;
 import com.drmangotea.createindustry.blocks.concrete.ConcreteFluidType;
+import com.drmangotea.createindustry.blocks.concrete.asphalt.AsphaltFluid;
 import com.drmangotea.createindustry.blocks.fluids.BurnableFluid;
 import com.simibubi.create.AllTags;
 
@@ -124,6 +125,38 @@ public class TFMGFluids {
                     .source(ForgeFlowingFluid.Source::new)
                     .bucket()
                     .tag(AllTags.forgeItemTag("buckets/plastic"))
+                    .build()
+                    .register();
+
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_STEEL =
+            REGISTRATE.fluid("molten_steel",PLASTIC_STILL_RL,PLASTIC_FLOW_RL)
+                    .lang("Molten Steel")
+                    .properties(b -> b.viscosity(1500)
+                            .density(1000))
+                    .fluidProperties(p -> p.levelDecreasePerBlock(1)
+                            .tickRate(10)
+                            .slopeFindDistance(2)
+                            .explosionResistance(100f))
+
+                    .source(ForgeFlowingFluid.Source::new)
+                    .bucket()
+                    .tag(AllTags.forgeItemTag("buckets/steel"))
+                    .build()
+                    .register();
+
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_SLAG =
+            REGISTRATE.fluid("molten_slag",PLASTIC_STILL_RL,PLASTIC_FLOW_RL)
+                    .lang("Molten Slag")
+                    .properties(b -> b.viscosity(1500)
+                            .density(1000))
+                    .fluidProperties(p -> p.levelDecreasePerBlock(1)
+                            .tickRate(10)
+                            .slopeFindDistance(2)
+                            .explosionResistance(100f))
+
+                    .source(ForgeFlowingFluid.Source::new)
+                    .bucket()
+                    .tag(AllTags.forgeItemTag("buckets/slag"))
                     .build()
                     .register();
 
@@ -287,6 +320,24 @@ public class TFMGFluids {
                             .explosionResistance(4f)
                             )
                     .source(ConcreteFluid.Source::new)
+                    .bucket()
+                    //.tag(AllTags.forgeItemTag("buckets/napalm"))
+                    .build()
+                    .register();
+
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> LIQUID_ASPHALT =
+            REGISTRATE.fluid("liquid_asphalt",CONCRETE_RL,CONCRETE_RL,
+                            ConcreteFluidType.create(0x333333,
+                                    () -> 1f / 24f ))
+                    .lang("Liquid Asphalt")
+                    .properties(b -> b.viscosity(9999)
+                            .density(9999))
+                    .fluidProperties(p -> p.levelDecreasePerBlock(0)
+                            .tickRate(99999)
+                            .slopeFindDistance(0)
+                            .explosionResistance(4f)
+                    )
+                    .source(AsphaltFluid.Source::new)
                     .bucket()
                     //.tag(AllTags.forgeItemTag("buckets/napalm"))
                     .build()

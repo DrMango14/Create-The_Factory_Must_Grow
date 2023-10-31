@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "createindustry:block/green_concrete",
+    "side": "createindustry:block/green_concrete",
+    "top": "createindustry:block/green_concrete"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "type": "createindustry:advanced_distillation",
+  "ingredients": [
+
+    {
+      "fluid": "createindustry:crude_oil_fluid",
+      "nbt": {},
+      "amount": 12
+    }
+  ],
+  "results": [
+    {
+      "fluid": "createindustry:heavy_oil",
+      "amount": 3
+    },
+    {
+      "fluid": "createindustry:diesel",
+      "amount": 2
+    },
+    {
+      "fluid": "createindustry:kerosene",
+      "amount": 1
+    },
+    {
+      "fluid": "createindustry:naphtha",
+      "amount": 1
+    },
+    {
+      "fluid": "createindustry:gasoline",
+      "amount": 3
+    },
+    {
+      "fluid": "createindustry:lpg",
+      "amount": 2
+    }
+  ]
+
+
+}

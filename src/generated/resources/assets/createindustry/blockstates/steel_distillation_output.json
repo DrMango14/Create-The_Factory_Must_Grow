@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "createindustry:block/steel_distillation_output"
+      "model": "createindustry:block/steel_distillation_output/block"
     }
   }
 }

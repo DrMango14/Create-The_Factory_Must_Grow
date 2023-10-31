@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static net.minecraft.world.level.block.PipeBlock.PROPERTY_BY_DIRECTION;
+
 public class CastIronPipeAttachmentModel extends BakedModelWrapperWithData {
 
     private static final ModelProperty<PipeModelData> PIPE_PROPERTY = new ModelProperty<>();
@@ -42,8 +44,24 @@ public class CastIronPipeAttachmentModel extends BakedModelWrapperWithData {
         BracketedBlockEntityBehaviour bracket = BlockEntityBehaviour.get(world, pos, BracketedBlockEntityBehaviour.TYPE);
 
         if (transport != null)
-            for (Direction d : Iterate.directions)
+            for (Direction d : Iterate.directions) {
+                boolean shouldConnect = true;
+                if(world.getBlockState(pos.relative(d)).getBlock() instanceof FluidPipeBlock) {
+
+                    if(d.getAxis().isHorizontal())
+                        shouldConnect = world.getBlockState(pos.relative(d)).getValue(PROPERTY_BY_DIRECTION.get(d.getOpposite()));
+
+
+
+                }
+                
                 data.putAttachment(d, transport.getRenderedRimAttachment(world, pos, state, d));
+
+                if(!shouldConnect)
+                    if(state.getValue(PROPERTY_BY_DIRECTION.get(d)))
+                        data.putAttachment(d, FluidTransportBehaviour.AttachmentTypes.RIM);
+
+            }
         if (bracket != null)
             data.putBracket(bracket.getBracket());
 

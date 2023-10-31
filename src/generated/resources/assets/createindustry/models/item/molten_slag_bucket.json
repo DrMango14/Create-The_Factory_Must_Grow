@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "createindustry:item/molten_slag_bucket"
+  }
+}

@@ -53,9 +53,6 @@ public class PumpjackCrankRenderer extends KineticBlockEntityRenderer {
     private void renderCrank(KineticBlockEntity te, PoseStack ms, int light, BlockState blockState, float angle,
                              VertexConsumer vb) {
 
-        /**
-         * check
-         */
 
         SuperByteBuffer hammer = CachedBufferer.block(blockState);
         //kineticRotationTransform(hammer, te, getRotationAxisOf(te), AngleHelper.rad(angle), light);
@@ -73,28 +70,28 @@ public class PumpjackCrankRenderer extends KineticBlockEntityRenderer {
         float dialPivot = 5.75f / 16;
 
         SuperByteBuffer crank = CachedBufferer.partialFacing(TFMGPartialModels.PUMPJACK_CRANK, blockState,blockState.getValue(FACING));
-
+        CachedBufferer.partialFacing(TFMGPartialModels.PUMPJACK_CRANK_BLOCK, blockState,blockState.getValue(FACING))
+                .translate(-0.5, -0.5, -0.5)
+                .light(light)
+                .renderInto(ms,vb);
 
 
         crank
-                .translate(-0.5, -0.75, -0.5)
+                .translate(-0.5, -0.5, -0.5)
                 .centre()
-                .rotate(be.direction.getCounterClockWise(), -AngleHelper.rad(be.angle))
+                .translate(0, -.25, 0)
+                .rotate(be.getBlockState().getValue(FACING).getCounterClockWise(), -AngleHelper.rad(be.angle))
+                .translate(0, .25, 0)
                 .unCentre()
 
-                .light(light)
-                .translateY(0.5);
+                .light(light);
 
         crank.renderInto(ms,vb);
 
 
 
         if (be.direction == Direction.NORTH){
-            CachedBufferer.partial(TFMGPartialModels.PUMPJACK_CRANK_BLOCK, blockState)
-                    //  .rotateY(d.toYRot())
-                    .unCentre()
-                    .light(light)
-                    .renderInto(ms, vb);
+
 
             if(be.isValid()) {
 
@@ -114,11 +111,7 @@ public class PumpjackCrankRenderer extends KineticBlockEntityRenderer {
             }
     }
         if(be.direction == Direction.EAST) {
-            CachedBufferer.partial(TFMGPartialModels.PUMPJACK_CRANK_BLOCK, blockState)
-                    .rotateY(270)
-                    .unCentre()
-                    .light(light)
-                    .renderInto(ms, vb);
+
             if(be.isValid()) {
 
                 CachedBufferer.partial(TFMGPartialModels.PUMPJACK_CONNECTOR, blockState)
@@ -137,11 +130,7 @@ public class PumpjackCrankRenderer extends KineticBlockEntityRenderer {
             }
         }
         if(be.direction == Direction.SOUTH) {
-            CachedBufferer.partial(TFMGPartialModels.PUMPJACK_CRANK_BLOCK, blockState)
-                    .rotateY(180)
-                    .unCentre()
-                    .light(light)
-                    .renderInto(ms, vb);
+
 
             if(be.isValid()) {
 
@@ -161,11 +150,7 @@ public class PumpjackCrankRenderer extends KineticBlockEntityRenderer {
             }
         }
         if(be.direction == Direction.WEST) {
-            CachedBufferer.partial(TFMGPartialModels.PUMPJACK_CRANK_BLOCK, blockState)
-                    .rotateY(90)
-                    .unCentre()
-                    .light(light)
-                    .renderInto(ms, vb);
+
             if(be.isValid()) {
 
                 CachedBufferer.partial(TFMGPartialModels.PUMPJACK_CONNECTOR, blockState)

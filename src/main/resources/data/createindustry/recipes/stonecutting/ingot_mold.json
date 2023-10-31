@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:clay"
+  },
+  "result": "createindustry:ingot_mold",
+  "count": 1
+}

@@ -22,11 +22,11 @@
       "amount": 30
     },
     {
-      "item": "createindustry:steel_ingot"
+      "item": "createindustry:sulfur_dust"
 
     },
     {
-      "item": "minecraft:air"
+      "item": "createindustry:bitumen"
 
     }
   ]

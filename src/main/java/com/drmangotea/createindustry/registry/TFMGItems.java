@@ -31,7 +31,8 @@ public class TFMGItems {
     public static final ItemEntry<Item>
             STEEL_INGOT = taggedIngredient("steel_ingot", forgeItemTag("ingots/steel"), CREATE_INGOTS.tag),
             CAST_IRON_INGOT = taggedIngredient("cast_iron_ingot", forgeItemTag("ingots/cast_iron"), CREATE_INGOTS.tag),
-            ALUMINUM_INGOT = taggedIngredient("aluminum_ingot", forgeItemTag("ingots/aluminum"), CREATE_INGOTS.tag)
+            ALUMINUM_INGOT = taggedIngredient("aluminum_ingot", forgeItemTag("ingots/aluminum"), CREATE_INGOTS.tag),
+            PLASTIC_SHEET = taggedIngredient("plastic_sheet", forgeItemTag("ingots/plastic"), CREATE_INGOTS.tag)
           //  LEAD_INGOT = taggedIngredient("lead_ingot", forgeItemTag("ingots/lead"), CREATE_INGOTS.tag)
       ;
 
@@ -40,7 +41,20 @@ public class TFMGItems {
 
 
     public static final ItemEntry<Item>
-
+            SPARK_PLUG = REGISTRATE.item("spark_plug", Item::new).register(),
+            SLAG = REGISTRATE.item("slag", Item::new).register(),
+            BITUMEN = REGISTRATE.item("bitumen", Item::new).register(),
+            BLASTING_MIXTURE = REGISTRATE.item("blasting_mixture", Item::new).register(),
+            FIREPROOF_BRICK = REGISTRATE.item("fireproof_brick", Item::new).register(),
+            FIRECLAY_BALL = REGISTRATE.item("fireclay_ball", Item::new).register(),
+            SCREW = REGISTRATE.item("screw", Item::new).register(),
+            HEAVY_PLATE = REGISTRATE.item("heavy_plate", Item::new).register(),
+            ENGINE_CHAMBER = REGISTRATE.item("engine_chamber", Item::new).register(),
+            ENGINE_BASE = REGISTRATE.item("engine_base", Item::new)
+                    .model((c, p) -> p.withExistingParent(c.getName(), CreateTFMG.asResource("item/engine_base")))
+                    .register(),
+            TURBINE_BLADE = REGISTRATE.item("turbine_blade", Item::new).register(),
+            THERMITE_POWDER = REGISTRATE.item("thermite_powder", Item::new).register(),
             STEEL_MECHANISM = REGISTRATE.item("steel_mechanism", Item::new).register(),
             CHARCOAL_DUST = REGISTRATE.item("charcoal_dust", Item::new).register(),
             NITRATE_DUST = REGISTRATE.item("nitrate_dust", Item::new).register(),
@@ -49,7 +63,8 @@ public class TFMGItems {
 
     public static final ItemEntry<SequencedAssemblyItem>
 
-            UNFINISHED_STEEL_MECHANISM = sequencedIngredient("unfinished_steel_mechanism");
+            UNFINISHED_STEEL_MECHANISM = sequencedIngredient("unfinished_steel_mechanism"),
+            UNPROCESSED_HEAVY_PLATE = sequencedIngredient("unprocessed_heavy_plate");
 
     public static final ItemEntry<SequencedAssemblyItem>
     UNFINISHED_GASOLINE_ENGINE = REGISTRATE.item("unfinished_gasoline_engine", SequencedAssemblyItem::new)

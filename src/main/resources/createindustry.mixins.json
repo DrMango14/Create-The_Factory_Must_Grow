@@ -8,7 +8,10 @@
   "mixins": [
     "AllOreFeatureConfigEntriesMixin",
     "FluidPropagatorMixin",
-    "ScreenEffectRendererMixin"
+    "FluidPipeBlockMixin",
+    "PipeAttachmentModelMixin"
+    //,
+   // "ScreenEffectRendererMixin"
   ],
 
   "injectors": {

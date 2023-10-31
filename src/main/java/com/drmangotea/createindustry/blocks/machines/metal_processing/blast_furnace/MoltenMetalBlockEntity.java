@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MoltenMetalBlockEntity extends SmartBlockEntity {
 
-    public int discardTimer =0;
+    public int discardTimer;
 
     public MoltenMetalBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -25,7 +25,7 @@ public class MoltenMetalBlockEntity extends SmartBlockEntity {
         super.tick();
         discardTimer--  ;
         if(discardTimer == 0)
-            if(Create.RANDOM.nextInt(25)==5)
+          //  if(Create.RANDOM.nextInt(25)==5)
                 level.setBlock(getBlockPos(), Blocks.AIR.defaultBlockState(),3);
     }
 

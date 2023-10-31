@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "createindustry:block/factory_floor",
+    "side": "createindustry:block/factory_floor",
+    "top": "createindustry:block/factory_floor"
+  }
+}
