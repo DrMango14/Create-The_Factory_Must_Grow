@@ -387,6 +387,9 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
             Lang.translate("goggles.blast_furnace.fuel_amount", fuelInventory.getStackInSlot(0).getCount())
                     .style(ChatFormatting.AQUA)
                     .forGoggles(tooltip, 1);
+            Lang.translate("goggles.blast_furnace.nothing_lol")
+                    .style(ChatFormatting.AQUA)
+                    .forGoggles(tooltip, 1);
 
 
         }

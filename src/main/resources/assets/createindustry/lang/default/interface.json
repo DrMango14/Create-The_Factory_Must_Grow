@@ -24,6 +24,7 @@
   "create.goggles.blast_furnace.fuel_amount": "Fuel Amount: %1$s",
   "create.goggles.blast_furnace.item_count": "Item Count: %1$s",
   "create.goggles.blast_furnace.height": "Height: %1$s",
+  "create.goggles.blast_furnace.nothing_lol": "",
   "create.goggles.blast_furnace.status.off": "Status: Idle",
   "create.goggles.blast_furnace.status.running": "Status: Running",
   "create.goggles.blast_furnace.diameter.one": "Diameter: 1",
@@ -44,5 +45,18 @@
   "create.goggles.engine.efficiency" : "Efficiency:",
   "create.tooltip.engine_analog_strength": "%1$s/15",
   "create.goggles.get_engine_efficiency": "%1$s",
-  "create.goggles.engine.stress": "%1$ssu"
+  "create.goggles.engine.stress": "%1$ssu",
+  "create.goggles.diesel_engine.info": "Diesel Engine:",
+  "create.goggles.pumpjack_info": "Pumpjack Info:",
+  "create.goggles.pumpjack.part_missing": "Hammer or Crank Missing",
+  "create.goggles.pumpjack.wrong_rotation1": "The Pumpjack Base is oriented incorrectly, the red marker must",
+  "create.goggles.pumpjack.wrong_rotation2": "face away from the Pumpjack Hammer Holder",
+  "create.goggles.pumpjack_fluid_storage": "Fluid Tank Info:",
+  "create.pumpjack_deposit_amount": "%1$s Buckets",
+  "create.goggles.pumpjack.deposit_info": "Deposit Info:",
+  "create.goggles.zero": "No Deposit Found",
+  "create.goggles.pumpjack.fluid_amount": "Fluid Amount:",
+  "create.goggles.machine_input.info": "Machine Input Info",
+  "create.goggles.machine_input.no_rot": "No Rotation Provided!",
+  "create.goggles.machine_input.power_level": "Power Level: "
 }

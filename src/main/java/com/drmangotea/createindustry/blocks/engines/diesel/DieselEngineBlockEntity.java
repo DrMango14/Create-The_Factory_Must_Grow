@@ -492,9 +492,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 
 
 
-		Lang.translate("goggles.blast_furnace.height", engineStrength)
-				.style(ChatFormatting.DARK_PURPLE)
-				.forGoggles(tooltip, 1);
+
 
 
 
@@ -509,7 +507,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 			return false;
 
 		LangBuilder mb = Lang.translate("generic.unit.millibuckets");
-		Lang.translate("goggles.diesel_engine_info")
+		Lang.translate("goggles.diesel_engine.info")
 				.style(ChatFormatting.GRAY)
 				.forGoggles(tooltip);
 

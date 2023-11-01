@@ -58,8 +58,9 @@ public class CastIronPipeAttachmentModel extends BakedModelWrapperWithData {
                 data.putAttachment(d, transport.getRenderedRimAttachment(world, pos, state, d));
 
                 if(!shouldConnect)
-                    if(state.getValue(PROPERTY_BY_DIRECTION.get(d)))
-                        data.putAttachment(d, FluidTransportBehaviour.AttachmentTypes.RIM);
+                    if(state.getBlock() instanceof FluidPipeBlock)
+                        if(state.getValue(PROPERTY_BY_DIRECTION.get(d)))
+                            data.putAttachment(d, FluidTransportBehaviour.AttachmentTypes.RIM);
 
             }
         if (bracket != null)

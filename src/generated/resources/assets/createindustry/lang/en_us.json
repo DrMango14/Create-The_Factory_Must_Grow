@@ -366,6 +366,7 @@
 	"create.goggles.blast_furnace.fuel_amount": "Fuel Amount: %1$s",
 	"create.goggles.blast_furnace.item_count": "Item Count: %1$s",
 	"create.goggles.blast_furnace.height": "Height: %1$s",
+	"create.goggles.blast_furnace.nothing_lol": "",
 	"create.goggles.blast_furnace.status.off": "Status: Idle",
 	"create.goggles.blast_furnace.status.running": "Status: Running",
 	"create.goggles.blast_furnace.diameter.one": "Diameter: 1",
@@ -389,6 +390,7 @@
 
 	"create.goggles.get_engine_efficiency": "%1$s",
 	"create.goggles.engine.stress": "%1$ssu",
+	"create.goggles.diesel_engine.info": "Diesel Engine:",
 
 	"_": "Thank you for translating Create: The Factory Must Grow!"
 

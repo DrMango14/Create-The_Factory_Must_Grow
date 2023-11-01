@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "createindustry:cut_bauxite_brick_slab"
+    },
+    {
+      "item": "createindustry:cut_bauxite_brick_slab"
+    }
+  ],
+  "result": {
+    "item": "createindustry:cut_bauxite_bricks"
+  }
+}

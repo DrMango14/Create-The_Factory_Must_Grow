@@ -489,10 +489,10 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
         REGISTRATE.block("steel_distillation_output", DistillationOutputBlock::new)
                 .initialProperties(SharedProperties::copperMetal)
                 .properties(p -> p.color(MaterialColor.STONE))
-                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+                .blockstate(BlockStateGen.horizontalBlockProvider(true))
                 .properties(BlockBehaviour.Properties::noOcclusion)
                 .transform(pickaxeOnly())
-                .item(AssemblyOperatorBlockItem::new)
+                .item()
                 .build()
                 .register();
     public static final BlockEntry<DistillationControllerBlock> STEEL_DISTILLATION_CONTROLLER =
