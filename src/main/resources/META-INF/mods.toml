@@ -8,13 +8,13 @@ license="MIT"
 
 modId="createindustry"
 
-version="${file.jarVersion}"
+version="0.6.0"
 
 displayName="Create: The Factory Must Grow"
 
 logoFile="logo.png"
 
-authors="DrMangoTea, Pepa, Milky"
+authors="DrMangoTea, Pepa, Milky, Luna"
 
 description='''
 description soon

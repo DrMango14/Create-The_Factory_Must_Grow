@@ -1,5 +1,6 @@
 package com.drmangotea.createindustry.base.creative_mode_tabs;
 
+import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.drmangotea.createindustry.registry.TFMGCreativeModeTabs;
 import com.drmangotea.createindustry.registry.TFMGItems;
 import com.simibubi.create.AllBlocks;
@@ -13,6 +14,6 @@ public class BaseTFMGCreativeModeTab extends TFMGCreativeModeTab {
 
     @Override
     public ItemStack makeIcon() {
-        return TFMGItems.ZINC_GRENADE.asStack();
+        return TFMGBlocks.GASOLINE_ENGINE.asStack();
     }
 }

@@ -3,7 +3,7 @@
 	"parent": "minecraft:block/block",
 	"textures": {
 		"0": "createindustry:block/flarestack",
-		"particle": "minecraft:block/anvil"
+		"particle": "block/anvil"
 	},
 	"elements": [
 		{
@@ -15,7 +15,6 @@
 				"east": {"uv": [7, 0, 12, 6], "texture": "#0"},
 				"south": {"uv": [7, 0, 12, 6], "texture": "#0"},
 				"west": {"uv": [7, 0, 12, 6], "texture": "#0"},
-				"up": {"uv": [5, 2.5, 5, 2.5], "texture": "#0"},
 				"down": {"uv": [10.5, 9, 10.5, 15], "texture": "#0"}
 			}
 		},

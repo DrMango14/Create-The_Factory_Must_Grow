@@ -1,4 +1,4 @@
-// 1.19.2	2023-10-31T19:58:49.6604913	Registrate Provider for createindustry [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-11-01T14:33:21.8836334	Registrate Provider for createindustry [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 50db526af77cf0ead08cadfd3f7daa8b84a40312 assets/createindustry/blockstates/air_intake.json
 429437419b2ec98bd716e7ba15583b84da7488d5 assets/createindustry/blockstates/aluminum_bars.json
 9e2417e479011e42ebf00685068e6b6f515f0b11 assets/createindustry/blockstates/aluminum_block.json
@@ -1158,8 +1158,8 @@ c93e03d746cae5143427d5605bebd2b2a4006219 data/minecraft/tags/blocks/azalea_root_
 23cf02cfaf4f4efd7feb2a328e623fc63523216b data/minecraft/tags/blocks/doors.json
 c93e03d746cae5143427d5605bebd2b2a4006219 data/minecraft/tags/blocks/dripstone_replaceable_blocks.json
 c93e03d746cae5143427d5605bebd2b2a4006219 data/minecraft/tags/blocks/lush_ground_replaceable.json
-ef4a9e560676e734df25608bbb640012bc1bf4a8 data/minecraft/tags/blocks/mineable/axe.json
-eff1ac88a5d4bad1b7bb979d6f76190d73db4efe data/minecraft/tags/blocks/mineable/pickaxe.json
+97796d300c6a1759abe459ae9175556a17a7e568 data/minecraft/tags/blocks/mineable/axe.json
+320d34c446d48da3b1c279110605bfbdefac98db data/minecraft/tags/blocks/mineable/pickaxe.json
 c93e03d746cae5143427d5605bebd2b2a4006219 data/minecraft/tags/blocks/moss_replaceable.json
 8a3dfd27452a21f14ee2a9936ddc357c3dbb9ae4 data/minecraft/tags/blocks/needs_diamond_tool.json
 c0d6e4e469f0314abef1f5221459942b0ea29558 data/minecraft/tags/blocks/needs_iron_tool.json

@@ -201,6 +201,7 @@ public class TFMGBlocks {
     public static final BlockEntry<Block> CAUTION_BLOCK = REGISTRATE.block("caution_block", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p.color(MaterialColor.COLOR_YELLOW))
+            .properties(p -> p.strength(3))
             .transform(pickaxeOnly())
             .item()
             .build()
@@ -211,6 +212,7 @@ public class TFMGBlocks {
     public static final BlockEntry<Block> RED_CAUTION_BLOCK = REGISTRATE.block("red_caution_block", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p.color(MaterialColor.COLOR_RED))
+            .properties(p -> p.strength(3))
             .transform(pickaxeOnly())
             .item()
             .build()
@@ -316,13 +318,13 @@ public class TFMGBlocks {
 
 
     public static final BlockEntry<Block> FACTORY_FLOOR = withVariants("factory_floor",Blocks.STONE,
-            MaterialColor.COLOR_GRAY,"Factory Floor",BlockTags.NEEDS_STONE_TOOL,SoundType.NETHERITE_BLOCK,5,false);
+            MaterialColor.COLOR_GRAY,"Factory Floor",BlockTags.NEEDS_STONE_TOOL,SoundType.NETHERITE_BLOCK,3,false);
 
     public static final BlockEntry<SlabBlock> FACTORY_FLOOR_SLAB =  REGISTRATE.block("factory_floor_slab", SlabBlock::new)
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
             .properties(p -> p.requiresCorrectToolForDrops())
-            .properties(p -> p.strength(5,5))
+            .properties(p -> p.strength(3))
             .transform(pickaxeOnly())
             .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, "factory_floor"))
             .tag(BlockTags.NEEDS_STONE_TOOL)
@@ -377,23 +379,24 @@ public class TFMGBlocks {
     //-----------------------MACHINES---------------------------//
     public static final BlockEntry<FormWorkBlock> FORMWORK_BLOCK =
             REGISTRATE.block("formwork_block", FormWorkBlock::new)
-                    .initialProperties(Material.WOOD)
+                    .initialProperties(() -> Blocks.OAK_PLANKS)
                     .properties(p -> p.color(MaterialColor.WOOD))
                     .properties(p -> p.requiresCorrectToolForDrops())
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .blockstate(new FormWorkGenerator()::generate)
-                    .transform(axeOnly())
+                     .transform(axeOnly())
                     .item()
                     .transform(customItemModel())
                     .register();
 
     public static final BlockEntry<RebarFormWorkBlock> REBAR_FORMWORK_BLOCK =
             REGISTRATE.block("rebar_formwork_block", RebarFormWorkBlock::new)
-                    .initialProperties(Material.WOOD)
+                    .initialProperties(() -> Blocks.OAK_PLANKS)
                     .properties(p -> p.color(MaterialColor.WOOD))
                     .properties(p -> p.requiresCorrectToolForDrops())
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .blockstate(new FormWorkGenerator()::generate)
+                    .addLayer(() -> RenderType::cutoutMipped)
                     .transform(axeOnly())
                     .item()
                     .transform(customItemModel())
@@ -405,6 +408,7 @@ public class TFMGBlocks {
                     .initialProperties(SharedProperties::copperMetal)
                     .addLayer(() -> RenderType::cutoutMipped)
                     .blockstate(BlockStateGen.directionalBlockProvider(false))
+                    .transform(pickaxeOnly())
                     .item()
                     .transform(customItemModel())
                     .register();
@@ -418,6 +422,7 @@ public class TFMGBlocks {
                             .lightLevel(s -> s.getValue(FlarestackBlock.LIT) ? 15 : 0)
                             .noOcclusion())
                     .blockstate(new FlarestackGenerator()::generate)
+                    .transform(pickaxeOnly())
                     .item()
                     .transform(customItemModel())
                     .register();
@@ -431,6 +436,7 @@ public class TFMGBlocks {
                  //          .strength(4.5F))
                     //  .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(TFMGBuilderTransformers.surfaceScanner())
+                    .transform(pickaxeOnly())
                     //  .transform(axeOrPickaxe())
                   //  .transform(BlockStressDefaults.setImpact(10.0))
                     .register();
@@ -466,7 +472,7 @@ public class TFMGBlocks {
                     .properties(p -> p.color(MaterialColor.STONE))
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
-                    .transform(axeOrPickaxe())
+                    .transform(pickaxeOnly())
                     .item(AssemblyOperatorBlockItem::new)
                     .build()
                     .register();
@@ -474,6 +480,7 @@ public class TFMGBlocks {
             REGISTRATE.block("cast_iron_distillation_controller", DistilleryControllerBlock::new)
                     .initialProperties(SharedProperties::copperMetal)
                     .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+                    .transform(pickaxeOnly())
                     .item()
                     .build()
                     .register();
@@ -484,7 +491,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                 .properties(p -> p.color(MaterialColor.STONE))
                 .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
                 .properties(BlockBehaviour.Properties::noOcclusion)
-                .transform(axeOrPickaxe())
+                .transform(pickaxeOnly())
                 .item(AssemblyOperatorBlockItem::new)
                 .build()
                 .register();
@@ -492,6 +499,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             REGISTRATE.block("steel_distillation_controller", DistillationControllerBlock::new)
                     .initialProperties(SharedProperties::copperMetal)
                     .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+                    .transform(pickaxeOnly())
                     .item()
                     .build()
                     .register();
@@ -537,6 +545,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             REGISTRATE.block("pumpjack_base", PumpjackBaseBlock::new)
                     .initialProperties(SharedProperties::copperMetal)
                     .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(pickaxeOnly())
                     .blockstate(BlockStateGen.horizontalBlockProvider(true))
                     .item()
                     .build()
@@ -547,6 +556,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .initialProperties(SharedProperties::copperMetal)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                    .transform(pickaxeOnly())
                     .item()
                     .build()
                     .register();
@@ -901,7 +911,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
     //STEEL
     public static final BlockEntry<SteelPipeBlock> STEEL_PIPE = REGISTRATE.block("steel_pipe", SteelPipeBlock::new)
-            .initialProperties(Material.HEAVY_METAL)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.pipe())
             .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
@@ -983,7 +993,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .register();
     //CAST_IRON
     public static final BlockEntry<CastIronPipeBlock> CAST_IRON_PIPE = REGISTRATE.block("cast_iron_pipe", CastIronPipeBlock::new)
-            .initialProperties(Material.HEAVY_METAL)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.pipe())
             .onRegister(CreateRegistrate.blockModel(() -> CastIronPipeAttachmentModel::new))
@@ -1065,7 +1075,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .register();
     //BRASS
     public static final BlockEntry<BrassPipeBlock> BRASS_PIPE = REGISTRATE.block("brass_pipe", BrassPipeBlock::new)
-            .initialProperties(Material.HEAVY_METAL)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.pipe())
             .onRegister(CreateRegistrate.blockModel(() -> BrassPipeAttachmentModel::new))
@@ -1147,7 +1157,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .register();
     //PLASTIC
     public static final BlockEntry<PlasticPipeBlock> PLASTIC_PIPE = REGISTRATE.block("plastic_pipe", PlasticPipeBlock::new)
-            .initialProperties(Material.HEAVY_METAL)
+            .initialProperties(() -> Blocks.QUARTZ_BLOCK)
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.pipe())
             .onRegister(CreateRegistrate.blockModel(() -> PlasticPipeAttachmentModel::new))
@@ -1229,7 +1239,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .register();
     //ALUMINUM
     public static final BlockEntry<AluminumPipeBlock> ALUMINUM_PIPE = REGISTRATE.block("aluminum_pipe", AluminumPipeBlock::new)
-            .initialProperties(Material.HEAVY_METAL)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.pipe())
             .onRegister(CreateRegistrate.blockModel(() -> AluminumPipeAttachmentModel::new))

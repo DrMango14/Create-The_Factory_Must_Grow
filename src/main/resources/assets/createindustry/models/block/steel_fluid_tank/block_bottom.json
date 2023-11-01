@@ -5,7 +5,7 @@
 		"0": "createindustry:block/steel_fluid_tank_top",
 		"1": "createindustry:block/steel_fluid_tank",
 		"4": "createindustry:block/steel_fluid_tank_inner",
-		"particle": "createindustry:block/fluid_tank"
+		"particle": "createindustry:block/steel_fluid_tank"
 	},
 	"elements": [
 		{
