@@ -23,7 +23,7 @@ import net.minecraft.world.level.material.Fluids;
 
 import java.util.Random;
 
-public class ExhaustBlock extends RodBlock implements IBE<ExhaustTileEntity>, IWrenchable {
+public class ExhaustBlock extends RodBlock implements IBE<ExhaustBlockEntity>, IWrenchable {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     //Direction facing = this.defaultBlockState().getValue(FACING);
     public ExhaustBlock(Properties p_55926_) {
@@ -80,12 +80,12 @@ public class ExhaustBlock extends RodBlock implements IBE<ExhaustTileEntity>, IW
         p_153746_.add(FACING, WATERLOGGED);
     }
     @Override
-    public Class<ExhaustTileEntity> getBlockEntityClass() {
-        return ExhaustTileEntity.class;
+    public Class<ExhaustBlockEntity> getBlockEntityClass() {
+        return ExhaustBlockEntity.class;
     }
 
     @Override
-    public BlockEntityType<? extends ExhaustTileEntity> getBlockEntityType() {
+    public BlockEntityType<? extends ExhaustBlockEntity> getBlockEntityType() {
         return TFMGBlockEntities.EXHAUST.get();
     }
 }

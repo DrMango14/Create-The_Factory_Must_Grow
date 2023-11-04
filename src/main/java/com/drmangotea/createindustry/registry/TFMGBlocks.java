@@ -27,6 +27,7 @@ import com.drmangotea.createindustry.blocks.engines.small.turbine.TurbineEngineB
 import com.drmangotea.createindustry.blocks.machines.exhaust.ExhaustBlock;
 import com.drmangotea.createindustry.blocks.machines.flarestack.FlarestackBlock;
 import com.drmangotea.createindustry.blocks.machines.flarestack.FlarestackGenerator;
+import com.drmangotea.createindustry.blocks.machines.metal_processing.coke_oven.CokeOvenCTBehavior;
 import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.distillation_tower.IndustrialPipeBlock;
 import com.drmangotea.createindustry.blocks.pipes.normal.aluminum.AluminumPipeAttachmentModel;
 import com.drmangotea.createindustry.blocks.pipes.normal.aluminum.AluminumPipeBlock;
@@ -83,6 +84,7 @@ import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
 import com.simibubi.create.content.fluids.pipes.SmartFluidPipeGenerator;
 import com.simibubi.create.content.fluids.pipes.valve.FluidValveBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.content.logistics.vault.ItemVaultCTBehaviour;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.data.*;
 import com.simibubi.create.foundation.utility.Couple;
@@ -489,7 +491,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
         REGISTRATE.block("steel_distillation_output", DistillationOutputBlock::new)
                 .initialProperties(SharedProperties::copperMetal)
                 .properties(p -> p.color(MaterialColor.STONE))
-                .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
                 .properties(BlockBehaviour.Properties::noOcclusion)
                 .transform(pickaxeOnly())
                 .item()
@@ -639,6 +641,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .properties(p -> p.requiresCorrectToolForDrops())
             .blockstate(new CokeOvenGenerator()::generate)
             .transform(pickaxeOnly())
+            .onRegister(connectedTextures(CokeOvenCTBehavior::new))
             .item()
             .transform(customItemModel())
             .lang("Coke Oven")

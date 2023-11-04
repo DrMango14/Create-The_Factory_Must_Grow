@@ -22,6 +22,10 @@
       "amount": 1
     },
     {
+      "fluid": "createindustry:naphtha",
+      "amount": 1
+    },
+    {
       "fluid": "createindustry:gasoline",
       "amount": 3
     },

@@ -12,7 +12,8 @@ import com.simibubi.create.foundation.utility.FilesHelper;
 import com.simibubi.create.foundation.utility.Lang;
 
 public enum TFMGLangPartials implements LangPartial {
-    INTERFACE("UI & Messages");
+    INTERFACE("UI & Messages"),
+    PONDERS("Ponders");
 
     ;
 

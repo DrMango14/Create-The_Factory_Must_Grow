@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Optional;
 
 @SuppressWarnings("removal")
-public class ExhaustTileEntity extends SmartBlockEntity implements IHaveGoggleInformation {
+public class ExhaustBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
 
 
@@ -46,7 +46,7 @@ public class ExhaustTileEntity extends SmartBlockEntity implements IHaveGoggleIn
 
 
 
-    public ExhaustTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public ExhaustBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         tankInventory = createInventory();
         fluidCapability = LazyOptional.of(() -> tankInventory);
@@ -171,7 +171,7 @@ public class ExhaustTileEntity extends SmartBlockEntity implements IHaveGoggleIn
 
             int random = Create.RANDOM.nextInt(5);
             if(random==0)
-            tankInventory.drain(20, IFluidHandler.FluidAction.EXECUTE);
+            tankInventory.drain(35, IFluidHandler.FluidAction.EXECUTE);
 
 
 

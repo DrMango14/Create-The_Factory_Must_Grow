@@ -24,7 +24,7 @@ import com.drmangotea.createindustry.blocks.engines.small.lpg.LPGEngineBackTileE
 import com.drmangotea.createindustry.blocks.engines.small.lpg.LPGEngineTileEntity;
 import com.drmangotea.createindustry.blocks.engines.small.turbine.TurbineEngineBackTileEntity;
 import com.drmangotea.createindustry.blocks.engines.small.turbine.TurbineEngineTileEntity;
-import com.drmangotea.createindustry.blocks.machines.exhaust.ExhaustTileEntity;
+import com.drmangotea.createindustry.blocks.machines.exhaust.ExhaustBlockEntity;
 import com.drmangotea.createindustry.blocks.machines.flarestack.FlarestackBlockEntity;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.blast_furnace.BlastFurnaceOutputBlockEntity;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.blast_furnace.BlastFurnaceRenderer;
@@ -51,7 +51,6 @@ import com.drmangotea.createindustry.blocks.pipes.normal.LockablePipeBlockEntity
 import com.drmangotea.createindustry.blocks.tanks.SteelFluidTankRenderer;
 import com.drmangotea.createindustry.blocks.tanks.SteelTankBlockEntity;
 import com.drmangotea.createindustry.blocks.engines.small.UniversalEngineRenderer;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.fluids.pipes.FluidPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.SmartFluidPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.StraightPipeBlockEntity;
@@ -242,8 +241,8 @@ public class TFMGBlockEntities {
             .validBlocks(TFMGBlocks.TURBINE_ENGINE_BACK)
             .register();
 
-    public static final BlockEntityEntry<ExhaustTileEntity> EXHAUST = REGISTRATE
-            .blockEntity("exhaust", ExhaustTileEntity::new)
+    public static final BlockEntityEntry<ExhaustBlockEntity> EXHAUST = REGISTRATE
+            .blockEntity("exhaust", ExhaustBlockEntity::new)
             .validBlocks(TFMGBlocks.EXHAUST)
             .register();
 

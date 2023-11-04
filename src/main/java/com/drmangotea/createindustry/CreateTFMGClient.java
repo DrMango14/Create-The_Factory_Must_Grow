@@ -2,6 +2,7 @@ package com.drmangotea.createindustry;
 
 
 import com.drmangotea.createindustry.items.gadgets.quad_potato_cannon.QuadPotatoCannonRenderHandler;
+import com.drmangotea.createindustry.ponder.TFMGPonderIndex;
 import com.drmangotea.createindustry.registry.TFMGPartialModels;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,8 +20,8 @@ public class CreateTFMGClient {
 
     @SubscribeEvent
     public void setup(final FMLClientSetupEvent event) {
-      //  CIPonderIndex.register();
-        //CIPonderIndex.registerTags();
+        TFMGPonderIndex.register();
+        TFMGPonderIndex.registerTags();
     }
 
 

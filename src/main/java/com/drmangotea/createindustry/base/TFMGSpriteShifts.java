@@ -35,6 +35,12 @@ public class TFMGSpriteShifts {
             ALUMINUM_SCAFFOLD_INSIDE = horizontal("scaffold/aluminum_scaffold_inside");
 
 
+    public static final CTSpriteShiftEntry
+            COKE_OVEN_TOP = getCT(AllCTTypes.RECTANGLE, "coke_oven_top"),
+            COKE_OVEN_BOTTOM = getCT(AllCTTypes.RECTANGLE, "coke_oven_bottom"),
+            COKE_OVEN_BACK = getCT(AllCTTypes.RECTANGLE, "coke_oven_back"),
+            COKE_OVEN_SIDE = getCT(AllCTTypes.RECTANGLE, "coke_oven_side");
+
 
     public static final CTSpriteShiftEntry
             STEEL_ENCASED_COGWHEEL_SIDE = vertical("steel_encased_cogwheel_side"),

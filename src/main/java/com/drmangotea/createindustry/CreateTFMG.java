@@ -65,6 +65,7 @@ public class CreateTFMG
         modEventBus.addListener(this::clientSetup);
         MinecraftForge.EVENT_BUS.register(this);
     }
+    @SuppressWarnings("removal")
     public static void gatherData(GatherDataEvent event) {
         DataGenerator gen = event.getGenerator();
         gen.addProvider(true, new LangMerger(gen, MOD_ID, NAME, TFMGLangPartials.values()));

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "small_bauxite_brick_slab",
+  "key": {
+    "X": {
+      "item": "createindustry:small_bauxite_bricks"
+    }
+  },
+  "pattern": [
+    "XXX"
+  ],
+  "result": {
+    "count": 6,
+    "item": "createindustry:small_bauxite_brick_slab"
+  }
+}
