@@ -2,15 +2,16 @@ package com.drmangotea.createindustry.blocks.machines.oil_processing.distillatio
 
 
 
-import com.drmangotea.createindustry.CreateTFMG;
 import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.distillery.DistilleryOutputBlockEntity;
-import com.drmangotea.createindustry.recipes.distillation.ItemlessRecipe;
+import com.drmangotea.createindustry.recipes.distillation.DistillationRecipe;
+import com.drmangotea.createindustry.recipes.distillation.AbstractDistillationRecipe;
 import com.drmangotea.createindustry.recipes.distillation.AdvancedDistillationRecipe;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.drmangotea.createindustry.registry.TFMGRecipeTypes;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
+import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
@@ -26,7 +27,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class DistillationOutputBlockEntity extends DistilleryOutputBlockEntity implements IHaveGoggleInformation {
 
@@ -48,7 +48,7 @@ public class DistillationOutputBlockEntity extends DistilleryOutputBlockEntity i
         Optional<DistillationControllerBlockEntity> controller = getDistillationController();
         if (!controller.isPresent())
             return false;
-        return ItemlessRecipe.match2(controller.get(), recipe);
+        return AbstractDistillationRecipe.match2(controller.get(), recipe);
     }
 
     @Override
@@ -58,10 +58,23 @@ public class DistillationOutputBlockEntity extends DistilleryOutputBlockEntity i
         if (level == null || level.isClientSide)
             return true;
 
-        List<Recipe<?>> recipes = getMatchingRecipes();
-        if (recipes.isEmpty())
+        DistillationControllerBlockEntity be=null;
+
+        if(level.getBlockEntity(getBlockPos().below())instanceof DistillationControllerBlockEntity)
+            be = (DistillationControllerBlockEntity) level.getBlockEntity(getBlockPos().below());
+
+        if(be==null)
             return true;
-        currentRecipe = recipes.get(0);
+
+        recipe = getMatchingRecipes(be);
+
+        //List<Recipe<?>> recipes = getMatchingRecipes();
+        //if (recipes.isEmpty())
+        //    return true;
+        //currentRecipe = recipes.get(0);
+
+
+
         startProcessing();
         sendData();
         return true;
@@ -89,8 +102,7 @@ public class DistillationOutputBlockEntity extends DistilleryOutputBlockEntity i
     protected void process() {
         updateController();
 
-        if (currentRecipe == null)
-            return;
+
 
 
 
@@ -140,10 +152,11 @@ public class DistillationOutputBlockEntity extends DistilleryOutputBlockEntity i
             }else foundOutputs = 4;
         }
 
+        if (recipe == null)
+            return;
 
 
-
-    if(((AdvancedDistillationRecipe) currentRecipe).getOutputCount((AdvancedDistillationRecipe)currentRecipe)>foundOutputs)
+    if(((AdvancedDistillationRecipe) recipe).getOutputCount((AdvancedDistillationRecipe) recipe)>foundOutputs)
         return;
         FluidStack fluidInRecipe1=null;
         FluidStack fluidInRecipe2=null;
@@ -152,17 +165,17 @@ public class DistillationOutputBlockEntity extends DistilleryOutputBlockEntity i
         FluidStack fluidInRecipe5=null;
         FluidStack fluidInRecipe6=null;
 
-         fluidInRecipe1 = ((AdvancedDistillationRecipe) currentRecipe).getFirstFluidResult();
-        if(((AdvancedDistillationRecipe) currentRecipe).getOutputCount((AdvancedDistillationRecipe) currentRecipe)>=2)
-         fluidInRecipe2 = ((AdvancedDistillationRecipe) currentRecipe).getSecondFluidResult();
-        if(((AdvancedDistillationRecipe) currentRecipe).getOutputCount((AdvancedDistillationRecipe) currentRecipe)>=3)
-         fluidInRecipe3 = ((AdvancedDistillationRecipe) currentRecipe).getThirdFluidResult();
-        if(((AdvancedDistillationRecipe) currentRecipe).getOutputCount((AdvancedDistillationRecipe) currentRecipe)>=4)
-         fluidInRecipe4 = ((AdvancedDistillationRecipe) currentRecipe).getFourthFluidResult();
-        if(((AdvancedDistillationRecipe) currentRecipe).getOutputCount((AdvancedDistillationRecipe) currentRecipe)>=5)
-         fluidInRecipe5 = ((AdvancedDistillationRecipe) currentRecipe).getFifthFluidResult();
-        if(((AdvancedDistillationRecipe) currentRecipe).getOutputCount((AdvancedDistillationRecipe) currentRecipe)>=6)
-         fluidInRecipe6 = ((AdvancedDistillationRecipe) currentRecipe).getSixthFluidResult();
+         fluidInRecipe1 = ((AdvancedDistillationRecipe) recipe).getFirstFluidResult();
+        if(((AdvancedDistillationRecipe) recipe).getOutputCount((AdvancedDistillationRecipe) recipe)>=2)
+         fluidInRecipe2 = ((AdvancedDistillationRecipe) recipe).getSecondFluidResult();
+        if(((AdvancedDistillationRecipe) recipe).getOutputCount((AdvancedDistillationRecipe) recipe)>=3)
+         fluidInRecipe3 = ((AdvancedDistillationRecipe) recipe).getThirdFluidResult();
+        if(((AdvancedDistillationRecipe) recipe).getOutputCount((AdvancedDistillationRecipe) recipe)>=4)
+         fluidInRecipe4 = ((AdvancedDistillationRecipe) recipe).getFourthFluidResult();
+        if(((AdvancedDistillationRecipe) recipe).getOutputCount((AdvancedDistillationRecipe) recipe)>=5)
+         fluidInRecipe5 = ((AdvancedDistillationRecipe) recipe).getFifthFluidResult();
+        if(((AdvancedDistillationRecipe) recipe).getOutputCount((AdvancedDistillationRecipe) recipe)>=6)
+         fluidInRecipe6 = ((AdvancedDistillationRecipe) recipe).getSixthFluidResult();
 
 
 
@@ -211,26 +224,26 @@ if(fluidInRecipe2!=null)
     )
         return;
 //
-        if(((AdvancedDistillationRecipe) currentRecipe).getOutputCount((AdvancedDistillationRecipe) currentRecipe)>=1)
-            if(tankInventory.getFluidAmount()+((AdvancedDistillationRecipe) currentRecipe).getFirstFluidResult().getAmount()>8000)
+        if(((AdvancedDistillationRecipe) recipe).getOutputCount((AdvancedDistillationRecipe) recipe)>=1)
+            if(tankInventory.getFluidAmount()+((AdvancedDistillationRecipe) recipe).getFirstFluidResult().getAmount()>8000)
                 return;
-        if(((AdvancedDistillationRecipe) currentRecipe).getOutputCount((AdvancedDistillationRecipe) currentRecipe)>=2)
-            if(((DistillationOutputBlockEntity)above1).tankInventory.getFluidAmount()+((AdvancedDistillationRecipe) currentRecipe).getSecondFluidResult().getAmount()>8000)
+        if(((AdvancedDistillationRecipe) recipe).getOutputCount((AdvancedDistillationRecipe) recipe)>=2)
+            if(((DistillationOutputBlockEntity)above1).tankInventory.getFluidAmount()+((AdvancedDistillationRecipe) recipe).getSecondFluidResult().getAmount()>8000)
                 return;
-        if(((AdvancedDistillationRecipe) currentRecipe).getOutputCount((AdvancedDistillationRecipe) currentRecipe)>=3)
-            if(((DistillationOutputBlockEntity)above2).tankInventory.getFluidAmount()+((AdvancedDistillationRecipe) currentRecipe).getThirdFluidResult().getAmount()>8000)
+        if(((AdvancedDistillationRecipe) recipe).getOutputCount((AdvancedDistillationRecipe) recipe)>=3)
+            if(((DistillationOutputBlockEntity)above2).tankInventory.getFluidAmount()+((AdvancedDistillationRecipe) recipe).getThirdFluidResult().getAmount()>8000)
                 return;
-        if(((AdvancedDistillationRecipe) currentRecipe).getOutputCount((AdvancedDistillationRecipe) currentRecipe)>=4)
-            if(((DistillationOutputBlockEntity)above3).tankInventory.getFluidAmount()+((AdvancedDistillationRecipe) currentRecipe).getFourthFluidResult().getAmount()>8000)
+        if(((AdvancedDistillationRecipe) recipe).getOutputCount((AdvancedDistillationRecipe) recipe)>=4)
+            if(((DistillationOutputBlockEntity)above3).tankInventory.getFluidAmount()+((AdvancedDistillationRecipe) recipe).getFourthFluidResult().getAmount()>8000)
                 return;
-        if(((AdvancedDistillationRecipe) currentRecipe).getOutputCount((AdvancedDistillationRecipe) currentRecipe)>=5)
-            if(((DistillationOutputBlockEntity)above4).tankInventory.getFluidAmount()+((AdvancedDistillationRecipe) currentRecipe).getFifthFluidResult().getAmount()>8000)
+        if(((AdvancedDistillationRecipe) recipe).getOutputCount((AdvancedDistillationRecipe) recipe)>=5)
+            if(((DistillationOutputBlockEntity)above4).tankInventory.getFluidAmount()+((AdvancedDistillationRecipe) recipe).getFifthFluidResult().getAmount()>8000)
                 return;
-        if(((AdvancedDistillationRecipe) currentRecipe).getOutputCount((AdvancedDistillationRecipe) currentRecipe)>=6)
-            if(((DistillationOutputBlockEntity)above5).tankInventory.getFluidAmount()+((AdvancedDistillationRecipe) currentRecipe).getSixthFluidResult().getAmount()>8000)
+        if(((AdvancedDistillationRecipe) recipe).getOutputCount((AdvancedDistillationRecipe) recipe)>=6)
+            if(((DistillationOutputBlockEntity)above5).tankInventory.getFluidAmount()+((AdvancedDistillationRecipe) recipe).getSixthFluidResult().getAmount()>8000)
                 return;
 
-    if(getDistillationController().get().getTanks().get(true).getPrimaryHandler().getFluid().getFluid() != ((AdvancedDistillationRecipe) currentRecipe).getInputFluid().getMatchingFluidStacks().get(0).getFluid())
+    if(getDistillationController().get().getTanks().get(true).getPrimaryHandler().getFluid().getFluid() != ((AdvancedDistillationRecipe) recipe).getInputFluid().getMatchingFluidStacks().get(0).getFluid())
             return;
 
     DistillationControllerBlockEntity controller = optionalController.get();
@@ -262,30 +275,30 @@ if(fluidInRecipe2!=null)
                 return;
 
 
-            controller.getTanks().get(true).getPrimaryHandler().drain(((AdvancedDistillationRecipe) currentRecipe).getFluidIngredients().get(0).getRequiredAmount(), IFluidHandler.FluidAction.EXECUTE);
+            controller.getTanks().get(true).getPrimaryHandler().drain(((AdvancedDistillationRecipe) recipe).getFluidIngredients().get(0).getRequiredAmount(), IFluidHandler.FluidAction.EXECUTE);
 
 
-        tankInventory.setFluid(new FluidStack(((AdvancedDistillationRecipe) currentRecipe).getFirstFluidResult().getFluid(), ((AdvancedDistillationRecipe) currentRecipe).getFirstFluidResult().getAmount() + this.tankInventory.getFluidAmount()));
+        tankInventory.setFluid(new FluidStack(((AdvancedDistillationRecipe) recipe).getFirstFluidResult().getFluid(), ((AdvancedDistillationRecipe) recipe).getFirstFluidResult().getAmount() + this.tankInventory.getFluidAmount()));
             if(above1 instanceof DistillationOutputBlockEntity)
             if(foundOutputs>=2)
-                if (((AdvancedDistillationRecipe) currentRecipe).getResults().toArray().length>1)
-        ((DistillationOutputBlockEntity) above1).tankInventory.setFluid(new FluidStack(((AdvancedDistillationRecipe) currentRecipe).getSecondFluidResult().getFluid(), ((AdvancedDistillationRecipe) currentRecipe).getSecondFluidResult().getAmount() + ((DistillationOutputBlockEntity) above1).tankInventory.getFluidAmount()));
+                if (((AdvancedDistillationRecipe) recipe).getResults().toArray().length>1)
+        ((DistillationOutputBlockEntity) above1).tankInventory.setFluid(new FluidStack(((AdvancedDistillationRecipe) recipe).getSecondFluidResult().getFluid(), ((AdvancedDistillationRecipe) recipe).getSecondFluidResult().getAmount() + ((DistillationOutputBlockEntity) above1).tankInventory.getFluidAmount()));
             if(above2 instanceof DistillationOutputBlockEntity)
             if(foundOutputs>=3)
-                if (((AdvancedDistillationRecipe) currentRecipe).getResults().toArray().length>2)
-        ((DistillationOutputBlockEntity) above2).tankInventory.setFluid(new FluidStack(((AdvancedDistillationRecipe) currentRecipe).getThirdFluidResult().getFluid(), ((AdvancedDistillationRecipe) currentRecipe).getThirdFluidResult().getAmount() + ((DistillationOutputBlockEntity) above2).tankInventory.getFluidAmount()));
+                if (((AdvancedDistillationRecipe) recipe).getResults().toArray().length>2)
+        ((DistillationOutputBlockEntity) above2).tankInventory.setFluid(new FluidStack(((AdvancedDistillationRecipe) recipe).getThirdFluidResult().getFluid(), ((AdvancedDistillationRecipe) recipe).getThirdFluidResult().getAmount() + ((DistillationOutputBlockEntity) above2).tankInventory.getFluidAmount()));
             if(above3 instanceof DistillationOutputBlockEntity)
             if(foundOutputs>=4)
-                if (((AdvancedDistillationRecipe) currentRecipe).getResults().toArray().length>3)
-        ((DistillationOutputBlockEntity) above3).tankInventory.setFluid(new FluidStack(((AdvancedDistillationRecipe) currentRecipe).getFourthFluidResult().getFluid(), ((AdvancedDistillationRecipe) currentRecipe).getFourthFluidResult().getAmount() + ((DistillationOutputBlockEntity) above3).tankInventory.getFluidAmount()));
+                if (((AdvancedDistillationRecipe) recipe).getResults().toArray().length>3)
+        ((DistillationOutputBlockEntity) above3).tankInventory.setFluid(new FluidStack(((AdvancedDistillationRecipe) recipe).getFourthFluidResult().getFluid(), ((AdvancedDistillationRecipe) recipe).getFourthFluidResult().getAmount() + ((DistillationOutputBlockEntity) above3).tankInventory.getFluidAmount()));
             if(above4 instanceof DistillationOutputBlockEntity)
             if(foundOutputs>=5)
-                if (((AdvancedDistillationRecipe) currentRecipe).getResults().toArray().length>4)
-        ((DistillationOutputBlockEntity) above4).tankInventory.setFluid(new FluidStack(((AdvancedDistillationRecipe) currentRecipe).getFifthFluidResult().getFluid(), ((AdvancedDistillationRecipe) currentRecipe).getFifthFluidResult().getAmount() + ((DistillationOutputBlockEntity) above4).tankInventory.getFluidAmount()));
+                if (((AdvancedDistillationRecipe) recipe).getResults().toArray().length>4)
+        ((DistillationOutputBlockEntity) above4).tankInventory.setFluid(new FluidStack(((AdvancedDistillationRecipe) recipe).getFifthFluidResult().getFluid(), ((AdvancedDistillationRecipe) recipe).getFifthFluidResult().getAmount() + ((DistillationOutputBlockEntity) above4).tankInventory.getFluidAmount()));
             if(above5 instanceof DistillationOutputBlockEntity)
             if(foundOutputs>=6)
-                if (((AdvancedDistillationRecipe) currentRecipe).getResults().toArray().length>5)
-        ((DistillationOutputBlockEntity) above5).tankInventory.setFluid(new FluidStack(((AdvancedDistillationRecipe) currentRecipe).getSixthFluidResult().getFluid(), ((AdvancedDistillationRecipe) currentRecipe).getSixthFluidResult().getAmount() + ((DistillationOutputBlockEntity) above5).tankInventory.getFluidAmount()));
+                if (((AdvancedDistillationRecipe) recipe).getResults().toArray().length>5)
+        ((DistillationOutputBlockEntity) above5).tankInventory.setFluid(new FluidStack(((AdvancedDistillationRecipe) recipe).getSixthFluidResult().getFluid(), ((AdvancedDistillationRecipe) recipe).getSixthFluidResult().getAmount() + ((DistillationOutputBlockEntity) above5).tankInventory.getFluidAmount()));
 
 }
 /*
@@ -302,27 +315,43 @@ if(!(((AdvancedDistillationRecipe) currentRecipe).getThirdItemResult().isEmpty()
 
 }
 
-    @Override
-    protected List<Recipe<?>> getMatchingRecipes() {
+   // @Override
+   // protected List<Recipe<?>> getMatchingRecipes() {
+//
+//
+   //     List<Recipe<?>> list = RecipeFinder.get(getRecipeCacheKey(), level, this::matchStaticFilters);
+   //     return list.stream()
+   //             .filter(this::matchItemlessRecipe)
+   //             .sorted((r1, r2) -> r2.getIngredients()
+   //                     .size()
+   //                     - r1.getIngredients()
+   //                     .size())
+   //             .collect(Collectors.toList());
+   // }
+
+    protected AdvancedDistillationRecipe getMatchingRecipes(DistillationControllerBlockEntity be) {
 
 
         List<Recipe<?>> list = RecipeFinder.get(getRecipeCacheKey(), level, this::matchStaticFilters);
-        return list.stream()
-                .filter(this::matchItemlessRecipe)
-                .sorted((r1, r2) -> r2.getIngredients()
-                        .size()
-                        - r1.getIngredients()
-                        .size())
-                .collect(Collectors.toList());
+
+
+        for(int i = 0; i < list.toArray().length;i++){
+            AdvancedDistillationRecipe recipe = (AdvancedDistillationRecipe) list.get(i);
+
+            if(recipe.getOutputCount(recipe)!=foundOutputs)
+                continue;
+
+            for(int y = 0; y < recipe.getFluidIngredients().get(0).getMatchingFluidStacks().toArray().length;y++)
+                if(be.inputTank.getPrimaryHandler().getFluid().getFluid()==recipe.getFluidIngredients().get(0).getMatchingFluidStacks().get(y).getFluid())
+                    if(be.inputTank.getPrimaryHandler().getFluidAmount()>=recipe.getFluidIngredients().get(0).getRequiredAmount())
+                        return recipe;
+        }
+
+        return null;
     }
 
-    @Override
     protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {
-        return ((r instanceof CraftingRecipe && !(r instanceof IShapedRecipe<?>)
-                && r.getIngredients()
-                .size() > 1
-                && !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r)
-                || r.getType() == TFMGRecipeTypes.ADVANCED_DISTILLATION.getType());
+        return r instanceof AdvancedDistillationRecipe;
     }
 
     @Override
@@ -340,7 +369,7 @@ if(!(((AdvancedDistillationRecipe) currentRecipe).getThirdItemResult().isEmpty()
     }
 
     @Override
-    protected void onBasinRemoved() {
+    protected void onControllerRemoved() {
         if (!running)
             return;
 

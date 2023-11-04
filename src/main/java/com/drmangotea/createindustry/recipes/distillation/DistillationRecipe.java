@@ -5,11 +5,10 @@ package com.drmangotea.createindustry.recipes.distillation;
 import com.drmangotea.createindustry.registry.TFMGRecipeTypes;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
-import mezz.jei.api.constants.RecipeTypes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class DistillationRecipe extends ItemlessRecipe {
+public class DistillationRecipe extends AbstractDistillationRecipe {
 
     public DistillationRecipe(ProcessingRecipeBuilder.ProcessingRecipeParams params) {
         super(TFMGRecipeTypes.DISTILLATION, params);

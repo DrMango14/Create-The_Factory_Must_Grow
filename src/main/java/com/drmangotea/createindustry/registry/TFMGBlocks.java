@@ -500,7 +500,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<DistillationControllerBlock> STEEL_DISTILLATION_CONTROLLER =
             REGISTRATE.block("steel_distillation_controller", DistillationControllerBlock::new)
                     .initialProperties(SharedProperties::copperMetal)
-                    .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+                    .blockstate((c, p) -> p.horizontalFaceBlock(c.get(), AssetLookup.partialBaseModel(c, p)))
                     .transform(pickaxeOnly())
                     .item()
                     .build()

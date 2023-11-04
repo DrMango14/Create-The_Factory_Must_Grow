@@ -4,12 +4,12 @@ package com.drmangotea.createindustry.recipes.distillation;
 
 import com.drmangotea.createindustry.registry.TFMGRecipeTypes;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
+import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.core.NonNullList;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class AdvancedDistillationRecipe extends ItemlessRecipe {
+public class AdvancedDistillationRecipe extends AbstractDistillationRecipe {
 
     public AdvancedDistillationRecipe(ProcessingRecipeBuilder.ProcessingRecipeParams params) {
         super(TFMGRecipeTypes.ADVANCED_DISTILLATION, params);
@@ -55,5 +55,12 @@ public class AdvancedDistillationRecipe extends ItemlessRecipe {
     @Override
     protected int getMaxOutputCount() {
         return 0;
+    }
+
+    public boolean matches(CombinedTankWrapper inv) {
+        if (inv.getFluidInTank(0).getAmount()==0)
+            return false;
+        return fluidIngredients.get(0)
+                .test(inv.getFluidInTank(0));
     }
 }

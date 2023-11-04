@@ -1,4 +1,4 @@
-// 1.19.2	2023-11-02T15:43:25.647238	Registrate Provider for createindustry [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-11-04T19:54:14.366805	Registrate Provider for createindustry [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 50db526af77cf0ead08cadfd3f7daa8b84a40312 assets/createindustry/blockstates/air_intake.json
 429437419b2ec98bd716e7ba15583b84da7488d5 assets/createindustry/blockstates/aluminum_bars.json
 9e2417e479011e42ebf00685068e6b6f515f0b11 assets/createindustry/blockstates/aluminum_block.json
@@ -177,7 +177,7 @@ cfeffb79459e870bcbc689066a5dc5796a6740c3 assets/createindustry/blockstates/small
 b920367311493b09d04aece60b7bb31ef8dbe725 assets/createindustry/blockstates/steel_bars.json
 971aaeeb9224b9530cc94e60004c7d662e2ee33a assets/createindustry/blockstates/steel_block.json
 f6758defb35319cd27e9ebef307f23d58d79505a assets/createindustry/blockstates/steel_casing.json
-563a92e24896c24260745f9f6693538418ca4bce assets/createindustry/blockstates/steel_distillation_controller.json
+f1fcbc33836ee794684dc715131e184f588515e9 assets/createindustry/blockstates/steel_distillation_controller.json
 0d9f0847a584e7aaa111a50aa44ca471ec58f524 assets/createindustry/blockstates/steel_distillation_output.json
 e67bfac13d06829552862e60ddc8ba8bfc129228 assets/createindustry/blockstates/steel_door.json
 5886babd046ad3259f77a7a3a4e641e702ffcd6b assets/createindustry/blockstates/steel_fluid_tank.json
@@ -811,7 +811,7 @@ c956bf54de0bb6510991596af1370831bbbbbd5a assets/createindustry/models/item/spark
 f1ccc71e7bec0435a40c062f9fd2b5decdf46d2f assets/createindustry/models/item/steel_bars.json
 67bdc15214f58b2dab1cf71fbb1db48e917881ce assets/createindustry/models/item/steel_block.json
 0bc0db3c9e33b0fabdbbf36af1bb06eff1a97022 assets/createindustry/models/item/steel_casing.json
-17c49574c61baf3b122ae018d3aefc4c204c7824 assets/createindustry/models/item/steel_distillation_controller.json
+5f831c7585810fe28aeb8939ee01a725bfbac7c6 assets/createindustry/models/item/steel_distillation_controller.json
 b2e00aeba06f4dc6ef642668a71558c809a05216 assets/createindustry/models/item/steel_distillation_output.json
 3ced9a065e2c9c21ed7dfbfc8ca5d2feabcc43d9 assets/createindustry/models/item/steel_door.json
 75e956841c1ae5d1e7787f2921f625d44693635c assets/createindustry/models/item/steel_fluid_tank.json

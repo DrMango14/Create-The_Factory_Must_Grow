@@ -23,15 +23,15 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-public class ItemlessRecipe extends ProcessingRecipe<SmartInventory> {
+@SuppressWarnings("removal")
+public class AbstractDistillationRecipe extends ProcessingRecipe<SmartInventory> {
 
     public static boolean match(DistilleryControllerBlockEntity controller, Recipe<?> recipe) {
 
 
 
 
-        if(recipe instanceof ItemlessRecipe) {
+        if(recipe instanceof AbstractDistillationRecipe) {
             return apply(controller, recipe, true);
         }
 
@@ -45,7 +45,7 @@ public class ItemlessRecipe extends ProcessingRecipe<SmartInventory> {
     }
 
     private static boolean apply(DistilleryControllerBlockEntity controller, Recipe<?> recipe, boolean test) {
-        boolean isItemlessRecipe = recipe instanceof ItemlessRecipe;
+        boolean isItemlessRecipe = recipe instanceof AbstractDistillationRecipe;
         IItemHandler availableItems = controller.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
                 .orElse(null);
         IFluidHandler availableFluids = controller.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
@@ -57,7 +57,7 @@ public class ItemlessRecipe extends ProcessingRecipe<SmartInventory> {
         BlazeBurnerBlock.HeatLevel heat = DistilleryControllerBlockEntity.getHeatLevelOf(controller.getLevel()
                 .getBlockState(controller.getBlockPos()
                         .below(1)));
-        if (isItemlessRecipe && !((ItemlessRecipe) recipe).getRequiredHeat()
+        if (isItemlessRecipe && !((AbstractDistillationRecipe) recipe).getRequiredHeat()
                 .testBlazeBurner(heat))
             return false;
 
@@ -66,7 +66,7 @@ public class ItemlessRecipe extends ProcessingRecipe<SmartInventory> {
 
 
         List<FluidIngredient> fluidIngredients =
-                isItemlessRecipe ? ((ItemlessRecipe) recipe).getFluidIngredients() : Collections.emptyList();
+                isItemlessRecipe ? ((AbstractDistillationRecipe) recipe).getFluidIngredients() : Collections.emptyList();
         if(!fluidIngredients.isEmpty())
 
 
@@ -116,7 +116,7 @@ public class ItemlessRecipe extends ProcessingRecipe<SmartInventory> {
             }
 
             if (simulate) {
-                if (recipe instanceof ItemlessRecipe ItemlessRecipe) {
+                if (recipe instanceof AbstractDistillationRecipe ItemlessRecipe) {
                     recipeOutputItems.addAll(ItemlessRecipe.rollResults());
                     recipeOutputFluids.addAll(ItemlessRecipe.getFluidResults());
 
@@ -132,7 +132,7 @@ public class ItemlessRecipe extends ProcessingRecipe<SmartInventory> {
     public static boolean match2(DistillationControllerBlockEntity controller, Recipe<?> recipe) {
 
 
-        if(recipe instanceof ItemlessRecipe) {
+        if(recipe instanceof AbstractDistillationRecipe) {
             return apply(controller, recipe, true);
         }
 
@@ -141,7 +141,7 @@ public class ItemlessRecipe extends ProcessingRecipe<SmartInventory> {
 
     }
     private static boolean apply2(DistillationControllerBlockEntity controller, Recipe<?> recipe, boolean test) {
-        boolean isItemlessRecipe = recipe instanceof ItemlessRecipe;
+        boolean isItemlessRecipe = recipe instanceof AbstractDistillationRecipe;
         IItemHandler availableItems = controller.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
                 .orElse(null);
         IFluidHandler availableFluids = controller.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
@@ -153,7 +153,7 @@ public class ItemlessRecipe extends ProcessingRecipe<SmartInventory> {
         BlazeBurnerBlock.HeatLevel heat = DistilleryControllerBlockEntity.getHeatLevelOf(controller.getLevel()
                 .getBlockState(controller.getBlockPos()
                         .below(1)));
-        if (isItemlessRecipe && !((ItemlessRecipe) recipe).getRequiredHeat()
+        if (isItemlessRecipe && !((AbstractDistillationRecipe) recipe).getRequiredHeat()
                 .testBlazeBurner(heat))
             return false;
 
@@ -162,7 +162,7 @@ public class ItemlessRecipe extends ProcessingRecipe<SmartInventory> {
 
 
         List<FluidIngredient> fluidIngredients =
-                isItemlessRecipe ? ((ItemlessRecipe) recipe).getFluidIngredients() : Collections.emptyList();
+                isItemlessRecipe ? ((AbstractDistillationRecipe) recipe).getFluidIngredients() : Collections.emptyList();
         if(!fluidIngredients.isEmpty())
 
 
@@ -212,7 +212,7 @@ public class ItemlessRecipe extends ProcessingRecipe<SmartInventory> {
                 }
 
                 if (simulate) {
-                    if (recipe instanceof ItemlessRecipe ItemlessRecipe) {
+                    if (recipe instanceof AbstractDistillationRecipe ItemlessRecipe) {
                         recipeOutputItems.addAll(ItemlessRecipe.rollResults());
                         recipeOutputFluids.addAll(ItemlessRecipe.getFluidResults());
 
@@ -226,7 +226,7 @@ public class ItemlessRecipe extends ProcessingRecipe<SmartInventory> {
         return true;
     }
 
-    protected ItemlessRecipe(IRecipeTypeInfo type, ProcessingRecipeBuilder.ProcessingRecipeParams params) {
+    protected AbstractDistillationRecipe(IRecipeTypeInfo type, ProcessingRecipeBuilder.ProcessingRecipeParams params) {
         super(type, params);
     }
 

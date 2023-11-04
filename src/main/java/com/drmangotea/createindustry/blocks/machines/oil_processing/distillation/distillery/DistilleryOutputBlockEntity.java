@@ -2,7 +2,9 @@ package com.drmangotea.createindustry.blocks.machines.oil_processing.distillatio
 
 
 import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.FluidProcessingBlockEntity;
+import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.distillation_tower.DistillationControllerBlockEntity;
 import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.distillation_tower.DistillationOutputBlockEntity;
+import com.drmangotea.createindustry.recipes.distillation.AbstractDistillationRecipe;
 import com.drmangotea.createindustry.recipes.distillation.DistillationRecipe;
 import com.drmangotea.createindustry.registry.TFMGRecipeTypes;
 import com.simibubi.create.AllRecipeTypes;
@@ -78,10 +80,8 @@ public class DistilleryOutputBlockEntity extends FluidProcessingBlockEntity impl
         if (level == null || level.isClientSide)
             return true;
 
-        List<Recipe<?>> recipes = getMatchingRecipes();
-        if (recipes.isEmpty())
-            return true;
-        currentRecipe = recipes.get(0);
+
+        recipe = getMatchingRecipes();
         startProcessing();
         sendData();
         return true;
@@ -150,7 +150,7 @@ public class DistilleryOutputBlockEntity extends FluidProcessingBlockEntity impl
     protected void process() {
         updateController();
 
-        if (currentRecipe == null)
+        if (recipe == null)
             return;
 
      //   if((currentRecipe instanceof ShapelessRecipe))
@@ -192,9 +192,9 @@ if(above1 !=null&& above2 !=null
         return;
 
 
-    FluidStack fluidInRecipe1 = ((DistillationRecipe) currentRecipe).getFirstFluidResult();
-    FluidStack fluidInRecipe2 = ((DistillationRecipe) currentRecipe).getSecondFluidResult();
-    FluidStack fluidInRecipe3 = ((DistillationRecipe) currentRecipe).getThirdFluidResult();
+    FluidStack fluidInRecipe1 = ((DistillationRecipe) recipe).getFirstFluidResult();
+    FluidStack fluidInRecipe2 = ((DistillationRecipe) recipe).getSecondFluidResult();
+    FluidStack fluidInRecipe3 = ((DistillationRecipe) recipe).getThirdFluidResult();
 
 
 
@@ -214,14 +214,14 @@ if(above1 !=null&& above2 !=null
       return;
 
     if(
-            tankInventory.getFluidAmount()+((DistillationRecipe) currentRecipe).getFirstFluidResult().getAmount()>8000||
-                    ((DistilleryOutputBlockEntity)above1).tankInventory.getFluidAmount()+((DistillationRecipe) currentRecipe).getFirstFluidResult().getAmount()>8000||
-                    ((DistilleryOutputBlockEntity)above2).tankInventory.getFluidAmount()+((DistillationRecipe) currentRecipe).getFirstFluidResult().getAmount()>8000
+            tankInventory.getFluidAmount()+((DistillationRecipe) recipe).getFirstFluidResult().getAmount()>8000||
+                    ((DistilleryOutputBlockEntity)above1).tankInventory.getFluidAmount()+((DistillationRecipe) recipe).getFirstFluidResult().getAmount()>8000||
+                    ((DistilleryOutputBlockEntity)above2).tankInventory.getFluidAmount()+((DistillationRecipe) recipe).getFirstFluidResult().getAmount()>8000
     )
         return;
 
 
-    if(getController().get().getTanks().get(true).getPrimaryHandler().getFluid().getFluid() != ((DistillationRecipe) currentRecipe).getInputFluid().getMatchingFluidStacks().get(0).getFluid())
+    if(getController().get().getTanks().get(true).getPrimaryHandler().getFluid().getFluid() != ((DistillationRecipe) recipe).getInputFluid().getMatchingFluidStacks().get(0).getFluid())
             return;
 
     DistilleryControllerBlockEntity controller = optionalController.get();
@@ -237,21 +237,21 @@ if(above1 !=null&& above2 !=null
            // if(((DistillationRecipe)currentRecipe).getInputFluid().getMatchingFluidStacks().get(0).getFluid() != TFMGFluids.HEAVY_OIL.get())
            //   return;
 
-        controller.getTanks().get(true).getPrimaryHandler().drain(((DistillationRecipe) currentRecipe).getFluidIngredients().get(0).getRequiredAmount(), IFluidHandler.FluidAction.EXECUTE);
+        controller.getTanks().get(true).getPrimaryHandler().drain(((DistillationRecipe) recipe).getFluidIngredients().get(0).getRequiredAmount(), IFluidHandler.FluidAction.EXECUTE);
 
-    if (!(((DistillationRecipe) currentRecipe).getFluidResults().get(0).isEmpty()))
-        tankInventory.setFluid(new FluidStack(((DistillationRecipe) currentRecipe).getFluidResults().get(0).getFluid(), ((DistillationRecipe) currentRecipe).getFluidResults().get(0).getAmount() + this.tankInventory.getFluidAmount()));
-    if (!(((DistillationRecipe) currentRecipe).getFluidResults().get(1).isEmpty()))
-        ((DistilleryOutputBlockEntity) above1).tankInventory.setFluid(new FluidStack(((DistillationRecipe) currentRecipe).getFluidResults().get(1).getFluid(), ((DistillationRecipe) currentRecipe).getFluidResults().get(1).getAmount() + ((DistilleryOutputBlockEntity) above1).tankInventory.getFluidAmount()));
-    if (!(((DistillationRecipe) currentRecipe).getFluidResults().get(2).isEmpty()))
-        ((DistilleryOutputBlockEntity) above2).tankInventory.setFluid(new FluidStack(((DistillationRecipe) currentRecipe).getFluidResults().get(2).getFluid(), ((DistillationRecipe) currentRecipe).getFluidResults().get(2).getAmount() + ((DistilleryOutputBlockEntity) above2).tankInventory.getFluidAmount()));
+    if (!(((DistillationRecipe) recipe).getFluidResults().get(0).isEmpty()))
+        tankInventory.setFluid(new FluidStack(((DistillationRecipe) recipe).getFluidResults().get(0).getFluid(), ((DistillationRecipe) recipe).getFluidResults().get(0).getAmount() + this.tankInventory.getFluidAmount()));
+    if (!(((DistillationRecipe) recipe).getFluidResults().get(1).isEmpty()))
+        ((DistilleryOutputBlockEntity) above1).tankInventory.setFluid(new FluidStack(((DistillationRecipe) recipe).getFluidResults().get(1).getFluid(), ((DistillationRecipe) recipe).getFluidResults().get(1).getAmount() + ((DistilleryOutputBlockEntity) above1).tankInventory.getFluidAmount()));
+    if (!(((DistillationRecipe) recipe).getFluidResults().get(2).isEmpty()))
+        ((DistilleryOutputBlockEntity) above2).tankInventory.setFluid(new FluidStack(((DistillationRecipe) recipe).getFluidResults().get(2).getFluid(), ((DistillationRecipe) recipe).getFluidResults().get(2).getAmount() + ((DistilleryOutputBlockEntity) above2).tankInventory.getFluidAmount()));
 
 
-    if (!(((DistillationRecipe) currentRecipe).getFirstItemResult().isEmpty()))
-        controller.outputInventory.setItem(0, ((DistillationRecipe) currentRecipe).getFirstItemResult());
+    if (!(((DistillationRecipe) recipe).getFirstItemResult().isEmpty()))
+        controller.outputInventory.setItem(0, ((DistillationRecipe) recipe).getFirstItemResult());
 
-    if (!(((DistillationRecipe) currentRecipe).getSecondItemResult().isEmpty()))
-        controller.outputInventory.setItem(1, ((DistillationRecipe) currentRecipe).getSecondItemResult());
+    if (!(((DistillationRecipe) recipe).getSecondItemResult().isEmpty()))
+        controller.outputInventory.setItem(1, ((DistillationRecipe) recipe).getSecondItemResult());
 }
 /*
 if(!(((DistillationRecipe) currentRecipe).getThirdItemResult().isEmpty()))
@@ -267,27 +267,33 @@ if(!(((DistillationRecipe) currentRecipe).getThirdItemResult().isEmpty()))
 
 }
 
-    @Override
-    protected List<Recipe<?>> getMatchingRecipes() {
 
+    protected DistillationRecipe getMatchingRecipes() {
+
+        DistilleryControllerBlockEntity be=null;
+
+        if(level.getBlockEntity(getBlockPos().below())instanceof DistilleryControllerBlockEntity)
+            be = (DistilleryControllerBlockEntity) level.getBlockEntity(getBlockPos().below());
+
+        if(be==null)
+            return null;
 
         List<Recipe<?>> list = RecipeFinder.get(getRecipeCacheKey(), level, this::matchStaticFilters);
-        return list.stream()
-                .filter(this::matchItemlessRecipe)
-                .sorted((r1, r2) -> r2.getIngredients()
-                        .size()
-                        - r1.getIngredients()
-                        .size())
-                .collect(Collectors.toList());
+
+
+        for(int i = 0; i < list.toArray().length;i++){
+            DistillationRecipe recipe = (DistillationRecipe) list.get(i);
+            for(int y = 0; y < recipe.getFluidIngredients().get(0).getMatchingFluidStacks().toArray().length;y++)
+                if(be.inputTank.getPrimaryHandler().getFluid().getFluid()==recipe.getFluidIngredients().get(0).getMatchingFluidStacks().get(y).getFluid())
+                    if(be.inputTank.getPrimaryHandler().getFluidAmount()>=recipe.getFluidIngredients().get(0).getRequiredAmount())
+                        return recipe;
+        }
+
+        return null;
     }
 
-    @Override
     protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {
-        return ((r instanceof CraftingRecipe && !(r instanceof IShapedRecipe<?>)
-                && r.getIngredients()
-                .size() > 1
-                && !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r)
-                || r.getType() == TFMGRecipeTypes.DISTILLATION.getType());
+        return r instanceof DistillationRecipe;
     }
 
     @Override
@@ -305,7 +311,7 @@ if(!(((DistillationRecipe) currentRecipe).getThirdItemResult().isEmpty()))
     }
 
     @Override
-    protected void onBasinRemoved() {
+    protected void onControllerRemoved() {
         if (!running)
             return;
 
@@ -367,7 +373,7 @@ if(!(((DistillationRecipe) currentRecipe).getThirdItemResult().isEmpty()))
 
 
 
-
+    @SuppressWarnings("removal")
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 
         return containedFluidTooltip(tooltip, isPlayerSneaking,
@@ -375,6 +381,7 @@ if(!(((DistillationRecipe) currentRecipe).getThirdItemResult().isEmpty()))
     }
 
     @Nonnull
+    @SuppressWarnings("removal")
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
         if (!fluidCapability.isPresent())
