@@ -28,6 +28,8 @@ public class TFMGFluids {
 
     public static final ResourceLocation PROPANE_RL = CreateTFMG.asResource("fluid/propane");
 
+    public static final ResourceLocation AIR_RL = CreateTFMG.asResource("fluid/air");
+
     public static final ResourceLocation CARBON_DIOXIDE_RL = CreateTFMG.asResource("fluid/carbon_dioxide");
 
     public static final ResourceLocation NAPHTHA_STILL_RL = CreateTFMG.asResource("fluid/naphtha_still");
@@ -57,6 +59,20 @@ public class TFMGFluids {
     public static final ResourceLocation CRUDE_OIL_STILL_RL = CreateTFMG.asResource("fluid/crude_oil_still");
     public static final ResourceLocation CRUDE_OIL_FLOW_RL = CreateTFMG.asResource("fluid/crude_oil_flow");
 
+    public static final ResourceLocation ASPHALT_RL = CreateTFMG.asResource("fluid/liquid_asphalt");
+
+    public static final ResourceLocation COOLING_FLUID_STILL_RL = CreateTFMG.asResource("fluid/cooling_fluid_still");
+    public static final ResourceLocation COOLING_FLUID_FLOW_RL = CreateTFMG.asResource("fluid/cooling_fluid_flow");
+
+    public static final ResourceLocation CREOSOTE_STILL_RL = CreateTFMG.asResource("fluid/creosote_still");
+    public static final ResourceLocation CREOSOTE_FLOW_RL = CreateTFMG.asResource("fluid/creosote_flow");
+
+    public static final ResourceLocation MOLTEN_STEEL_STILL_RL = CreateTFMG.asResource("fluid/molten_steel_still");
+    public static final ResourceLocation MOLTEN_STEEL_FLOW_RL = CreateTFMG.asResource("fluid/molten_steel_flow");
+
+    public static final ResourceLocation MOLTEN_SLAG_STILL_RL = CreateTFMG.asResource("fluid/molten_slag_still");
+    public static final ResourceLocation MOLTEN_SLAG_FLOW_RL = CreateTFMG.asResource("fluid/molten_slag_flow");
+
 
     public static final FluidEntry<VirtualFluid> CARBON_DIOXIDE
             = REGISTRATE.virtualFluid("carbon_dioxide",CARBON_DIOXIDE_RL,CARBON_DIOXIDE_RL)
@@ -70,7 +86,7 @@ public class TFMGFluids {
                     .register();
 
     public static final FluidEntry<VirtualFluid> AIR =
-            REGISTRATE.virtualFluid("air",LPG_RL,LPG_RL)
+            REGISTRATE.virtualFluid("air",AIR_RL,AIR_RL)
                     .lang("Air")
                     .register();
 
@@ -129,7 +145,7 @@ public class TFMGFluids {
                     .register();
 
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_STEEL =
-            REGISTRATE.fluid("molten_steel",PLASTIC_STILL_RL,PLASTIC_FLOW_RL)
+            REGISTRATE.fluid("molten_steel",MOLTEN_STEEL_STILL_RL,MOLTEN_STEEL_FLOW_RL)
                     .lang("Molten Steel")
                     .properties(b -> b.viscosity(1500)
                             .density(1000))
@@ -145,7 +161,7 @@ public class TFMGFluids {
                     .register();
 
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_SLAG =
-            REGISTRATE.fluid("molten_slag",PLASTIC_STILL_RL,PLASTIC_FLOW_RL)
+            REGISTRATE.fluid("molten_slag",MOLTEN_SLAG_STILL_RL,MOLTEN_SLAG_FLOW_RL)
                     .lang("Molten Slag")
                     .properties(b -> b.viscosity(1500)
                             .density(1000))
@@ -275,7 +291,7 @@ public class TFMGFluids {
                     .build()
                     .register();
     public static final FluidEntry<ForgeFlowingFluid.Flowing> COOLING_FLUID =
-            REGISTRATE.fluid("cooling_fluid",NAPALM_STILL_RL,NAPALM_FLOW_RL)
+            REGISTRATE.fluid("cooling_fluid",COOLING_FLUID_STILL_RL,COOLING_FLUID_FLOW_RL)
                     .lang("Cooling Fluid")
                     .properties(b -> b.viscosity(1000)
                             .density(1000))
@@ -290,7 +306,7 @@ public class TFMGFluids {
                     .build()
                     .register();
     public static final FluidEntry<ForgeFlowingFluid.Flowing> CREOSOTE =
-            REGISTRATE.fluid("creosote",NAPALM_STILL_RL,NAPALM_FLOW_RL)
+            REGISTRATE.fluid("creosote",CREOSOTE_STILL_RL,CREOSOTE_FLOW_RL)
                     .lang("Creosote")
                     .properties(b -> b.viscosity(1000)
                             .density(1000))
@@ -326,7 +342,7 @@ public class TFMGFluids {
                     .register();
 
     public static final FluidEntry<ForgeFlowingFluid.Flowing> LIQUID_ASPHALT =
-            REGISTRATE.fluid("liquid_asphalt",CONCRETE_RL,CONCRETE_RL,
+            REGISTRATE.fluid("liquid_asphalt", ASPHALT_RL, ASPHALT_RL,
                             ConcreteFluidType.create(0x333333,
                                     () -> 1f / 24f ))
                     .lang("Liquid Asphalt")

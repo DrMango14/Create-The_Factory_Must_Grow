@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
-    "particle": "createindustry:block/coke_oven",
-    "down": "createindustry:block/coke_oven",
-    "up": "createindustry:block/coke_oven",
-    "north": "createindustry:block/coke_oven",
-    "east": "createindustry:block/coke_oven",
+    "particle": "createindustry:block/coke_oven/side",
+    "down": "createindustry:block/coke_oven/bottom",
+    "up": "createindustry:block/coke_oven/top",
+    "north": "createindustry:block/coke_oven/side",
+    "east": "createindustry:block/coke_oven/side",
     "south": "#front",
-    "west": "createindustry:block/coke_oven"
+    "west": "createindustry:block/coke_oven/side"
   }
 }

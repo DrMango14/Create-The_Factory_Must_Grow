@@ -291,6 +291,9 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
                 CokeOvenBlockEntity checkedBE = (CokeOvenBlockEntity) level.getBlockEntity(checkedPos);
                     checkedBE.controller = this;
 
+                    if(checkedBE.getBlockState().getValue(FACING)!=getBlockState().getValue(FACING))
+                        level.setBlock(checkedPos,checkedBE.getBlockState().setValue(FACING,getBlockState().getValue(FACING)),2);
+
                 checkedPos = checkedPos.below();
             }
 
@@ -378,15 +381,15 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
 
        //     return true;
        // }
+        if(controller!=null)
+            if(controller.getBlockPos() == getBlockPos()&&!isValid()){
+                Lang.translate("goggles.coke_oven.invalid")
+                        .style(ChatFormatting.DARK_RED)
+                        .forGoggles(tooltip,1);
 
-        if(controller.getBlockPos() == getBlockPos()&&!isValid()){
-            Lang.translate("goggles.coke_oven.invalid")
-                    .style(ChatFormatting.DARK_RED)
-                    .forGoggles(tooltip,1);
 
-
-            return true;
-        }
+                return true;
+            }
 
 
 

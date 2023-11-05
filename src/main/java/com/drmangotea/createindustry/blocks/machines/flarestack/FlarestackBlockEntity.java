@@ -138,6 +138,7 @@ public class FlarestackBlockEntity extends SmartBlockEntity implements IHaveGogg
                         stack.getFluid().isSame(TFMGFluids.DIESEL.getSource())||
                         stack.getFluid().isSame(TFMGFluids.LUBRICATION_OIL.getSource())||
                         stack.getFluid().isSame(TFMGFluids.HEAVY_OIL.getSource())||
+                        stack.getFluid().isSame(TFMGFluids.CREOSOTE.getSource())||
                         stack.getFluid().isSame(TFMGFluids.GASOLINE.getSource());
             }
         };
