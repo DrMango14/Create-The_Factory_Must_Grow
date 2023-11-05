@@ -1,32 +1,32 @@
 {
 
   "createindustry.ponder.small_engines.text_1": "To create a small engine, place the front and back parts adjacent to eachother",
-  "createindustry.ponder.small_engines.text_2": "Fuel is inputted into the front part, and exhaust gas must be removed from the back part using pipes and an exhaust block",
+  "createindustry.ponder.small_engines.text_2": "Fuel is inputted into the front part, and exhaust must be removed from the back part using pipes and an exhaust block",
   "createindustry.ponder.small_engines.text_3": "Applying a redstone signal to the front part starts the engine",
   "createindustry.ponder.small_engines.text_4": "Small engines include LPG, kerosene and gasoline engines",
 
   "createindustry.ponder.diesel_engine.text_1": "Diesel Engines are assembled by placing a shaft infront of a Diesel Engine block",
   "createindustry.ponder.diesel_engine.text_2": "The engine produces exhaust gas which has to be removed with pipes and an exhaust block",
-  "createindustry.ponder.diesel_engine.text_3": "The Diesel Engine requires an Air Intake, as air is required for the engine to run",
+  "createindustry.ponder.diesel_engine.text_3": "Air is needed for the engine to run, so an Air Intake is required",
 
-  "createindustry.ponder.diesel_engine_expansion.text_1": "Diesel Engine Expansions give the engine two new input slots, for lubrication and radiator fluids",
+  "createindustry.ponder.diesel_engine_expansion.text_1": "Diesel Engine Expansions can give a Diesel Engine two new input slots, for lubrication and radiator fluids",
 
 
   "createindustry.ponder.surface_scanner.text_1": "The Surface Scanner is used to locate crude oil deposits",
-  "createindustry.ponder.surface_scanner.text_2": "Providing the machine with rotational power makes it scan for the nearest deposit.",
+  "createindustry.ponder.surface_scanner.text_2": "Providing the machine with rotational power makes it scan for the nearest deposit",
   "createindustry.ponder.surface_scanner.text_3": "If a deposit is found, the compass will point towards its location",
 
 
-  "createindustry.ponder.pumpjack.text_1": "To start extracting Oil, you must first build a pipeline on top of a deposit with Industrial Pipes",
+  "createindustry.ponder.pumpjack.text_1": "To start extracting Oil, you must first build a pipeline on top of a deposit using Industrial Pipes",
   "createindustry.ponder.pumpjack.text_2": "Then, construct a Pumpjack on top of the pipeline by first placing down a Pumpjack Base...",
   "createindustry.ponder.pumpjack.text_3": "Placing the Pumpjack Hammer behind it...",
   "createindustry.ponder.pumpjack.text_4": "And finally, placing the Machine Input with a Pumpjack Crank above it, as shown in the scene",
 
-  "createindustry.ponder.distillation_tower.text_1": "A sufficiently large steel tank can be turned into a Distillation Tower",
+  "createindustry.ponder.distillation_tower.text_1": "A sufficiently large Steel Fluid Tank can be turned into a Distillation Tower",
   "createindustry.ponder.distillation_tower.text_2": "The tower is assembled by first placing a Steel Distillation Tower Controller next to the tank...",
-  "createindustry.ponder.distillation_tower.text_3": "And placing up to 6 Distillation Tower Outputs, connected with Industrial Pipes",
-  "createindustry.ponder.distillation_tower.text_4": "Blaze Burners are required to run Distillation Tower, the power of which is displayed on the dial",
-  "createindustry.ponder.distillation_tower.text_5": "Oil is inputted into the tower by pumping it into the controller block",
+  "createindustry.ponder.distillation_tower.text_3": "And placing up to 6 Distillation Tower Outputs, all connected with Industrial Pipes",
+  "createindustry.ponder.distillation_tower.text_4": "Blaze Burners are required to run the Distillation Tower. The dial displays current power levels",
+  "createindustry.ponder.distillation_tower.text_5": "To input Crude Oil, it must be pumped into the controller block",
   "createindustry.ponder.distillation_tower.text_6": "Each output block provides one of the Oil byproducts",
   "createindustry.ponder.distillation_tower.text_7": "LPG",
   "createindustry.ponder.distillation_tower.text_8": "Gasoline",
@@ -37,17 +37,17 @@
 
 
   "createindustry.ponder.blast_furnace.text_1": "The base of the Blast Furnace is a Blast Furnace Output block",
-  "createindustry.ponder.blast_furnace.text_2": "To assemble a Blast Furnace, construct a chimney using Fireproof Bricks, as shown in the scene",
+  "createindustry.ponder.blast_furnace.text_2": "To assemble a Blast Furnace, construct a chimney using Fireproof Bricks as shown in the scene",
   "createindustry.ponder.blast_furnace.text_3": "The bottom half of the chimney requires to be reinforced",
   "createindustry.ponder.blast_furnace.text_4": "Fuel and other items are inserted through the opening at the top",
 
-  "createindustry.ponder.coke_oven.text_1": "The Coke Oven is built by placing Coke Oven blocks as shown in the scene, and clicking a side with a wrench",
-  "createindustry.ponder.coke_oven.text_2": "The process of coking coal is slow, so it's more efficient to have long arrays of ovens running at the same time",
+  "createindustry.ponder.coke_oven.text_1": "The Coke Oven is built by placing Coke Oven blocks as shown in the scene, and clicking its side with a wrench",
+  "createindustry.ponder.coke_oven.text_2": "The process of coking is slow, so it is more efficient to have long arrays of ovens working simultaneously",
   "createindustry.ponder.coke_oven.text_3": "Coal can be inputted from any side",
-  "createindustry.ponder.coke_oven.text_4": "While running, the oven produces Creosote and CO2 which have to be pumped out of the machine",
+  "createindustry.ponder.coke_oven.text_4": "While running, the oven produces Creosote and CO2 which have to be pumped out for it to function",
   "createindustry.ponder.coke_oven.text_5": "Once done, Coal Coke will drop out of the opening",
 
-  "createindustry.ponder.casting.text_1": "Pouring liquid metal into a Casting basin using the Casting spout is what's called Casting",
+  "createindustry.ponder.casting.text_1": "Casting is the process of pouring liquid metal into a Casting Basin using a Casting Spout",
   "createindustry.ponder.casting.text_2": "The Casting Basin, obviously, requires a mold to function",
 
   "createindustry.ponder.distillation_tower.header": "Distillation Tower Setup",
