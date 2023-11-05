@@ -22,12 +22,6 @@ import static com.simibubi.create.AllTags.forgeItemTag;
 
 public class TFMGItems {
 
-    static {
-        REGISTRATE.creativeModeTab(() -> TFMGCreativeModeTabs.TFMG_BASE);
-    }
-
-
-
     public static final ItemEntry<Item>
             STEEL_INGOT = taggedIngredient("steel_ingot", forgeItemTag("ingots/steel"), CREATE_INGOTS.tag),
             CAST_IRON_INGOT = taggedIngredient("cast_iron_ingot", forgeItemTag("ingots/cast_iron"), CREATE_INGOTS.tag),

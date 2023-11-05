@@ -3,7 +3,7 @@ package com.drmangotea.createindustry.items.gadgets.explosives.thermite_grenades
 
 import com.drmangotea.createindustry.registry.TFMGItems;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -12,8 +12,10 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Vector3f;
 
 @OnlyIn(Dist.CLIENT)
 public class ThermiteGrenadeRenderer extends EntityRenderer<ThermiteGrenade> {
@@ -38,16 +40,16 @@ public class ThermiteGrenadeRenderer extends EntityRenderer<ThermiteGrenade> {
     public void render(ThermiteGrenade grenade, float p_114657_, float p_114658_, PoseStack p_114659_, MultiBufferSource p_114660_, int p_114661_) {
         p_114659_.pushPose();
         p_114659_.mulPose(this.entityRenderDispatcher.cameraOrientation());
-        p_114659_.mulPose(Vector3f.YP.rotationDegrees(180.0F));
+        p_114659_.mulPose(Axis.YP.rotationDegrees(180.0F));
 
 
 
             if (chemicalColor == ChemicalColor.GREEN) {
-                this.itemRenderer.renderStatic(TFMGItems.ZINC_GRENADE.get().getDefaultInstance(), ItemTransforms.TransformType.GROUND, p_114661_, OverlayTexture.NO_OVERLAY, p_114659_, p_114660_, grenade.getId());
+                this.itemRenderer.renderStatic(TFMGItems.ZINC_GRENADE.get().getDefaultInstance(), ItemDisplayContext.GROUND, p_114661_, OverlayTexture.NO_OVERLAY, p_114659_, p_114660_,grenade.level(), grenade.getId());
             } else if (chemicalColor == ChemicalColor.BLUE) {
-                this.itemRenderer.renderStatic(TFMGItems.COPPER_GRENADE.get().getDefaultInstance(), ItemTransforms.TransformType.GROUND, p_114661_, OverlayTexture.NO_OVERLAY, p_114659_, p_114660_, grenade.getId());
+                this.itemRenderer.renderStatic(TFMGItems.COPPER_GRENADE.get().getDefaultInstance(), ItemDisplayContext.GROUND, p_114661_, OverlayTexture.NO_OVERLAY, p_114659_, p_114660_,grenade.level(), grenade.getId());
             } else {
-                this.itemRenderer.renderStatic(TFMGItems.THERMITE_GRENADE.get().getDefaultInstance(), ItemTransforms.TransformType.GROUND, p_114661_, OverlayTexture.NO_OVERLAY, p_114659_, p_114660_, grenade.getId());
+                this.itemRenderer.renderStatic(TFMGItems.THERMITE_GRENADE.get().getDefaultInstance(), ItemDisplayContext.GROUND, p_114661_, OverlayTexture.NO_OVERLAY, p_114659_, p_114660_,grenade.level(), grenade.getId());
             }
 
         p_114659_.popPose();

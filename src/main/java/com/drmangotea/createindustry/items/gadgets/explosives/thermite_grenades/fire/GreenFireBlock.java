@@ -10,6 +10,7 @@ import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -161,7 +162,7 @@ public class GreenFireBlock extends BaseFireBlock {
                     }
                 }
 
-                boolean flag1 = p_221161_.isHumidAt(p_221162_);
+                boolean flag1 = p_221161_.getBiome(p_221162_).is(BiomeTags.INCREASED_FIRE_BURNOUT);
                 int k = flag1 ? -50 : 0;
                 this.tryCatchFire(p_221161_, p_221162_.east(), 300 + k, p_221163_, i, Direction.WEST);
                 this.tryCatchFire(p_221161_, p_221162_.west(), 300 + k, p_221163_, i, Direction.EAST);

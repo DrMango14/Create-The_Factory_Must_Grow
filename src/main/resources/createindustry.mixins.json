@@ -6,7 +6,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "createindustry.refmap.json",
   "mixins": [
-    "AllOreFeatureConfigEntriesMixin",
+   // "AllOreFeatureConfigEntriesMixin",
     "FluidPropagatorMixin",
     "FluidPipeBlockMixin",
     "PipeAttachmentModelMixin"

@@ -14,6 +14,9 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -36,10 +39,11 @@ public class CastingCategory extends CreateRecipeCategory<CastingRecipe> {
 
 		int y = 77;
 		for(int i = 0;i<CastingRecipe.getOutputCount(recipe);i++) {
+			RegistryAccess registryAccess = Minecraft.getInstance().level.registryAccess();
 			builder
 					.addSlot(RecipeIngredientRole.OUTPUT, 130, y)
 					.setBackground(getRenderedSlot(), -1, -1)
-					.addItemStack(recipe.getResultItem());
+					.addItemStack(recipe.getResultItem(registryAccess));
 
 
 			ItemStack mold= TFMGItems.INGOT_MOLD.asStack();
@@ -69,13 +73,13 @@ public class CastingCategory extends CreateRecipeCategory<CastingRecipe> {
 	}
 
 	@Override
-	public void draw(CastingRecipe recipe, IRecipeSlotsView iRecipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
+	public void draw(CastingRecipe recipe, IRecipeSlotsView iRecipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
 		castingSetup
-				.draw(matrixStack, 65, 50);
+				.draw(graphics, 65, 50);
 
 
 
-		AllGuiTextures.JEI_ARROW.render(matrixStack, 20, 36);
+		AllGuiTextures.JEI_ARROW.render(graphics, 20, 36);
 
 
 

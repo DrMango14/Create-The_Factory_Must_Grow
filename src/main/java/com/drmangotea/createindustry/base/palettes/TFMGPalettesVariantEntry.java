@@ -2,6 +2,7 @@ package com.drmangotea.createindustry.base.palettes;
 
 import com.drmangotea.createindustry.registry.TFMGPaletteStoneTypes;
 import com.google.common.collect.ImmutableList;
+import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
@@ -10,6 +11,7 @@ import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -25,7 +27,7 @@ public class TFMGPalettesVariantEntry {
 
     public final ImmutableList<BlockEntry<? extends Block>> registeredBlocks;
     public final ImmutableList<BlockEntry<? extends Block>> registeredPartials;
-
+    @SuppressWarnings("'onRegister(com.tterrag.registrate.util.nullness.NonNullConsumer<? super capture<? extends net.minecraft.world.level.block.Block>>)' in 'com.tterrag.registrate.builders.Builder' cannot be applied to '(com.tterrag.registrate.util.nullness.NonNullConsumer<capture<? super capture<? extends net.minecraft.world.level.block.Block>>>)'")
     public TFMGPalettesVariantEntry(String name, TFMGPaletteStoneTypes paletteStoneVariants) {
         ImmutableList.Builder<BlockEntry<? extends Block>> registeredBlocks = ImmutableList.builder();
         ImmutableList.Builder<BlockEntry<? extends Block>> registeredPartials = ImmutableList.builder();
@@ -58,7 +60,7 @@ public class TFMGPalettesVariantEntry {
                     .ifPresent(b -> builder.onRegister(connectedTextures(b)));
 
             builder.recipe((c, p) -> {
-                p.stonecutting(DataIngredient.tag(paletteStoneVariants.materialTag), c);
+                p.stonecutting(DataIngredient.tag(paletteStoneVariants.materialTag), RecipeCategory.BUILDING_BLOCKS, c);
                 pattern.addRecipes(baseBlock, c, p);
             });
 
@@ -72,8 +74,9 @@ public class TFMGPalettesVariantEntry {
         }
 
         REGISTRATE.addDataGenerator(ProviderType.RECIPE,
-                p -> p.stonecutting(DataIngredient.tag(paletteStoneVariants.materialTag), baseBlock));
-        REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, p -> p.tag(paletteStoneVariants.materialTag)
+         p -> p.stonecutting(DataIngredient.tag(paletteStoneVariants.materialTag), RecipeCategory.BUILDING_BLOCKS,
+                 baseBlock));
+        REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, p -> p.addTag(paletteStoneVariants.materialTag)
                 .add(baseBlock.get()
                         .asItem()));
 

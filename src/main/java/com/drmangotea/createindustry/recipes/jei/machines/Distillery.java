@@ -5,7 +5,7 @@ import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.jozufozu.flywheel.core.PartialModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.AllSpriteShifts;
@@ -15,6 +15,7 @@ import com.simibubi.create.foundation.block.render.SpriteShiftEntry;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -27,38 +28,38 @@ public class Distillery extends AnimatedKinetics {
 
     public Distillery() {}
 
-    @Override
-    public void draw(PoseStack matrixStack, int xOffset, int yOffset) {
+    public void draw(GuiGraphics graphics, int xOffset, int yOffset) {
+        PoseStack matrixStack = graphics.pose();
         matrixStack.pushPose();
         matrixStack.translate(xOffset, yOffset, 200);
-        matrixStack.mulPose(Vector3f.XP.rotationDegrees(-15.5f));
-        matrixStack.mulPose(Vector3f.YP.rotationDegrees(22.5f));
+        matrixStack.mulPose(Axis.XP.rotationDegrees(-15.5f));
+        matrixStack.mulPose(Axis.YP.rotationDegrees(22.5f));
         int scale =  23;
         BlazeBurnerBlock.HeatLevel heatLevel = BlazeBurnerBlock.HeatLevel.SMOULDERING;
 
 
         blockElement(TFMGBlocks.CAST_IRON_DISTILLATION_OUTPUT.getDefaultState())
                 .scale(scale)
-                .render(matrixStack);
+                .render(graphics);
         blockElement(TFMGBlocks.CAST_IRON_DISTILLATION_OUTPUT.getDefaultState())
                 .atLocal(0,1,0)
                 .scale(scale)
-                .render(matrixStack);
+                .render(graphics);
         blockElement(TFMGBlocks.CAST_IRON_DISTILLATION_OUTPUT.getDefaultState())
                 .atLocal(0,2,0)
                 .scale(scale)
-                .render(matrixStack);
+                .render(graphics);
         blockElement(TFMGBlocks.CAST_IRON_DISTILLATION_CONTROLLER.getDefaultState())
                 .atLocal(0,3,0)
                 .scale(scale)
-                .render(matrixStack);
+                .render(graphics);
 
         float offset = (Mth.sin(AnimationTickHolder.getRenderTime() / 16f) + 0.5f) / 16f;
 
         blockElement(AllBlocks.BLAZE_BURNER.getDefaultState())
                 .atLocal(0, 4.1, 0)
                 .scale(scale)
-                .render(matrixStack);
+                .render(graphics);
 
         PartialModel blaze =
                 AllPartialModels.BLAZE_ACTIVE;
@@ -69,11 +70,11 @@ public class Distillery extends AnimatedKinetics {
         blockElement(blaze).atLocal(1, 4.1, 1)
                 .rotate(0, 180, 0)
                 .scale(scale)
-                .render(matrixStack);
+                .render(graphics);
         blockElement(rods2).atLocal(1, 4.1 + offset, 1)
                 .rotate(0, 180, 0)
                 .scale(scale)
-                .render(matrixStack);
+                .render(graphics);
 
 
 

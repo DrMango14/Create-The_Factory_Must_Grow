@@ -66,7 +66,7 @@ public class NapalmBombBlock extends Block {
 
     public void wasExploded(Level p_57441_, BlockPos p_57442_, Explosion p_57443_) {
         if (!p_57441_.isClientSide) {
-            NapalmBombEntity napalmBomb = new NapalmBombEntity(p_57441_, (double)p_57442_.getX() + 0.5D, (double)p_57442_.getY(), (double)p_57442_.getZ() + 0.5D, p_57443_.getSourceMob());
+            NapalmBombEntity napalmBomb = new NapalmBombEntity(p_57441_, (double)p_57442_.getX() + 0.5D, (double)p_57442_.getY(), (double)p_57442_.getZ() + 0.5D, p_57443_.getIndirectSourceEntity());
             int i = napalmBomb.getFuse();
             napalmBomb.setFuse((short)(p_57441_.random.nextInt(i / 4) + i / 8));
             p_57441_.addFreshEntity(napalmBomb);

@@ -203,7 +203,7 @@ public BlockState getStateForPlacement(BlockPlaceContext p_53184_) {
             }
 
             BlockState newState = world.getBlockState(shaftPos);
-            if (!newState.getMaterial().isReplaceable())
+            if (!newState.canBeReplaced())
                 return PlacementOffset.fail();
 
             Axis axis = shaft.getValue(ShaftBlock.AXIS);

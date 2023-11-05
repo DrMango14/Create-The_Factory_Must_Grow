@@ -6,12 +6,14 @@ import com.drmangotea.createindustry.registry.*;
 import com.drmangotea.createindustry.worldgen.TFMGConfiguredFeatures;
 import com.drmangotea.createindustry.worldgen.TFMGFeatures;
 import com.mojang.logging.LogUtils;
+import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.LangMerger;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Holder;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.api.distmarker.Dist;
@@ -44,14 +46,14 @@ public class CreateTFMG
 
         REGISTRATE.registerEventListeners(FMLJavaModLoadingContext.get().getModEventBus());
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
+
         //
 
         TFMGBlocks.register();
         TFMGItems.register();
         TFMGBlockEntities.register();
         TFMGEntityTypes.register();
-        TFMGCreativeModeTabs.init();
+        TFMGCreativeModeTabs.register(modEventBus);
         TFMGFluids.register();
         TFMGPaletteBlocks.register();
 
@@ -68,20 +70,19 @@ public class CreateTFMG
     @SuppressWarnings("removal")
     public static void gatherData(GatherDataEvent event) {
         DataGenerator gen = event.getGenerator();
-        gen.addProvider(true, new LangMerger(gen, MOD_ID, NAME, TFMGLangPartials.values()));
+        //gen.addProvider(true, new LangMerger(gen, MOD_ID, NAME, TFMGLangPartials.values()));
+        PackOutput output = gen.getPackOutput();
+        if (event.includeClient()) {
+
+            LangMerger.attachToRegistrateProvider(gen, output);
+        }
     }
     @SuppressWarnings("removal")
     private void clientSetup(final FMLClientSetupEvent event) {
             ItemBlockRenderTypes.setRenderLayer(TFMGColoredFires.GREEN_FIRE.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(TFMGColoredFires.BLUE_FIRE.get(), RenderType.cutout());
     }
-    private void commonSetup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            final Holder<PlacedFeature> initializeOil = TFMGConfiguredFeatures.OIL_PLACED;
-            final Holder<PlacedFeature> initializeSimulatedOil = TFMGConfiguredFeatures.SIMULATED_OIL_PLACED;
 
-        });
-    }
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
     {

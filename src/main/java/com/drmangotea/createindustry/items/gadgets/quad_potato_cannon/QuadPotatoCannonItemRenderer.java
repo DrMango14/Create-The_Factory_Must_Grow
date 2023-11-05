@@ -1,10 +1,9 @@
-package com.drmangotea.createindustry.items.gadgets.quad_potato_cannon;
+/*package com.drmangotea.createindustry.items.gadgets.quad_potato_cannon;
 
 
 import com.drmangotea.createindustry.CreateTFMGClient;
 import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
 import com.simibubi.create.content.equipment.potatoCannon.PotatoCannonItem;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
@@ -66,3 +65,5 @@ public class QuadPotatoCannonItemRenderer extends CustomRenderedItemModelRendere
 
     
 }
+
+ */

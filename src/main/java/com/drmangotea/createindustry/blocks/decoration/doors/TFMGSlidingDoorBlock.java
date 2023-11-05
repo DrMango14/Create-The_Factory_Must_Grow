@@ -3,6 +3,7 @@ package com.drmangotea.createindustry.blocks.decoration.doors;
 
 import com.drmangotea.createindustry.registry.TFMGBlockEntities;
 import com.simibubi.create.content.contraptions.ContraptionWorld;
+import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlock;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorShapes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -35,13 +37,19 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
+import static com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlock.TRAIN_SET_TYPE;
+
 public class TFMGSlidingDoorBlock extends DoorBlock implements IWrenchable, IBE<TFMGSlidingDoorBlockEntity> {
 
 	public static final BooleanProperty VISIBLE = BooleanProperty.create("visible");
 	private boolean folds;
 
-	public TFMGSlidingDoorBlock(Properties p_52737_, boolean folds) {
-		super(p_52737_);
+	public static TFMGSlidingDoorBlock metal(Properties p_52737_, boolean folds) {
+		return new TFMGSlidingDoorBlock(p_52737_, TRAIN_SET_TYPE.get(), folds);
+	}
+
+	public TFMGSlidingDoorBlock(Properties p_52737_, BlockSetType type, boolean folds) {
+		super(p_52737_, type);
 		this.folds = folds;
 	}
 

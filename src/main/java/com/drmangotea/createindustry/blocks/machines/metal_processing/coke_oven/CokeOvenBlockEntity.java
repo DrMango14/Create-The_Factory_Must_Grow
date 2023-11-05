@@ -10,8 +10,10 @@ import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -20,11 +22,10 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
@@ -234,7 +235,8 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
         }
         BlockPos toSpawn = getBlockPos().below().relative(this.getBlockState().getValue(FACING));
         //
-        ItemEntity itemToSpawn = new ItemEntity(level,toSpawn.getX()+0.5f,toSpawn.getY()+0.5f,toSpawn.getZ()+0.5f, lastRecipe.getResultItem().copy());
+        RegistryAccess registryAccess = Minecraft.getInstance().level.registryAccess();
+        ItemEntity itemToSpawn = new ItemEntity(level,toSpawn.getX()+0.5f,toSpawn.getY()+0.5f,toSpawn.getZ()+0.5f, lastRecipe.getResultItem(registryAccess).copy());
         level.addFreshEntity(itemToSpawn);
 
 
@@ -290,6 +292,9 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
 
                 CokeOvenBlockEntity checkedBE = (CokeOvenBlockEntity) level.getBlockEntity(checkedPos);
                     checkedBE.controller = this;
+
+                    if(checkedBE.getBlockState().getValue(FACING)!=getBlockState().getValue(FACING))
+                        level.setBlock(checkedPos,checkedBE.getBlockState().setValue(FACING,getBlockState().getValue(FACING)),2);
 
                 checkedPos = checkedPos.below();
             }
@@ -378,15 +383,15 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
 
        //     return true;
        // }
+        if(controller!=null)
+            if(controller.getBlockPos() == getBlockPos()&&!isValid()){
+                Lang.translate("goggles.coke_oven.invalid")
+                        .style(ChatFormatting.DARK_RED)
+                        .forGoggles(tooltip,1);
 
-        if(controller.getBlockPos() == getBlockPos()&&!isValid()){
-            Lang.translate("goggles.coke_oven.invalid")
-                    .style(ChatFormatting.DARK_RED)
-                    .forGoggles(tooltip,1);
 
-
-            return true;
-        }
+                return true;
+            }
 
 
 
@@ -479,9 +484,9 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
         if(controller!=null)
             refreshCapability();
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (cap == ForgeCapabilities.ITEM_HANDLER)
             return itemCapability.cast();
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+        if (cap == ForgeCapabilities.FLUID_HANDLER)
             return fluidCapability.cast();
         return super.getCapability(cap, side);
     }

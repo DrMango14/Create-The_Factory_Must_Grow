@@ -7,6 +7,7 @@ import com.simibubi.create.Create;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -62,7 +63,7 @@ public class NapalmBombEntity extends Entity {
 
         this.move(MoverType.SELF, this.getDeltaMovement());
         this.setDeltaMovement(this.getDeltaMovement().scale(0.98D));
-        if (this.onGround) {
+        if (this.onGround()) {
             this.setDeltaMovement(this.getDeltaMovement().multiply(0.7D, -0.5D, 0.7D));
         }
 
@@ -70,13 +71,13 @@ public class NapalmBombEntity extends Entity {
         this.setFuse(i);
         if (i <= 0) {
             this.discard();
-            if (!this.level.isClientSide) {
+            if (!this.level().isClientSide) {
                 this.explode();
             }
         } else {
             this.updateInWaterStateAndDoFluidPushing();
-            if (this.level.isClientSide) {
-                this.level.addParticle(ParticleTypes.FLAME, this.getX(), this.getY() + 0.5D, this.getZ(), 0.0D, 0.0D, 0.0D);
+            if (this.level().isClientSide) {
+                this.level().addParticle(ParticleTypes.FLAME, this.getX(), this.getY() + 0.5D, this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
 
@@ -89,12 +90,12 @@ public class NapalmBombEntity extends Entity {
             float x= Create.RANDOM.nextFloat(360);
             float y= Create.RANDOM.nextFloat(360);
             float z= Create.RANDOM.nextFloat(360);
-            Spark spark = TFMGEntityTypes.SPARK.create(level);
+            Spark spark = TFMGEntityTypes.SPARK.create(level());
             spark.moveTo(this.getX(), this.getY()+1, this.getZ());
             spark.shootFromRotation( this,x,y,z,0.3f,1);
-            this.level.addFreshEntity(spark);
+            this.level().addFreshEntity(spark);
         }
-        this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 2.5F, Explosion.BlockInteraction.BREAK);
+        this.level().explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 2.5F, Level.ExplosionInteraction.TNT);
 
     }
 
@@ -123,7 +124,7 @@ public class NapalmBombEntity extends Entity {
         return this.entityData.get(DATA_FUSE_ID);
     }
 
-    public Packet<?> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return new ClientboundAddEntityPacket(this);
     }
     @SuppressWarnings("unchecked")

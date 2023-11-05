@@ -99,8 +99,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -120,13 +119,11 @@ import static com.simibubi.create.foundation.data.TagGen.*;
 public class TFMGBlocks {
 
 
-    static {
-        REGISTRATE.creativeModeTab(() -> TFMGCreativeModeTabs.TFMG_BASE);
-    }
+
     //-----------------------MISC---------------------------//
     public static final BlockEntry<NapalmBombBlock> NAPALM_BOMB = REGISTRATE.block("napalm_bomb", NapalmBombBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_GREEN))
+            .properties(p -> p.mapColor(MapColor.TERRACOTTA_GREEN))
             .properties(p -> p.requiresCorrectToolForDrops())
             .transform(pickaxeOnly())
             .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
@@ -137,7 +134,7 @@ public class TFMGBlocks {
     public static final BlockEntry<Block> FOSSILSTONE = REGISTRATE.block("fossilstone", Block::new)
             .initialProperties(() -> Blocks.OBSIDIAN)
             .properties(p -> p.strength(100f,1200f))
-            .properties(p -> p.color(MaterialColor.COLOR_BLACK))
+            .properties(p -> p.mapColor(MapColor.COLOR_BLACK))
             .properties(p -> p.requiresCorrectToolForDrops())
             .transform(pickaxeOnly())
             .blockstate(simpleCubeAll("fossilstone"))
@@ -148,7 +145,7 @@ public class TFMGBlocks {
 
     public static final BlockEntry<FluidDepositBlock> OIL_DEPOSIT = REGISTRATE.block("oil_deposit", FluidDepositBlock::new)
             .initialProperties(() -> Blocks.BEDROCK)
-            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
             .properties(p -> p.strength(69696969))
             .properties(p -> p.requiresCorrectToolForDrops())
             .transform(pickaxeOnly())
@@ -159,18 +156,18 @@ public class TFMGBlocks {
             .register();
 
     public static final BlockEntry<CasingBlock> STEEL_CASING = REGISTRATE.block("steel_casing", CasingBlock::new)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
+            .properties(p -> p.mapColor(MapColor.TERRACOTTA_LIGHT_GRAY))
             .transform(BuilderTransformers.casing(() -> TFMGSpriteShifts.STEEL_CASING))
             .register();
     public static final BlockEntry<CasingBlock> HEAVY_MACHINERY_CASING = REGISTRATE.block("heavy_machinery_casing", CasingBlock::new)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
+            .properties(p -> p.mapColor(MapColor.TERRACOTTA_LIGHT_GRAY))
             .transform(BuilderTransformers.casing(() -> TFMGSpriteShifts.HEAVY_MACHINERY_CASING))
             .properties(p -> p.sound(SoundType.COPPER))
             .register();
 
     public static final BlockEntry<TrussBlock> STEEL_TRUSS = REGISTRATE.block("steel_truss", TrussBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
             .properties(p -> p.noOcclusion())
             .transform(pickaxeOnly())
             .addLayer(() -> RenderType::cutoutMipped)
@@ -181,7 +178,7 @@ public class TFMGBlocks {
             .register();
     public static final BlockEntry<TrussBlock> ALUMINUM_TRUSS = REGISTRATE.block("aluminum_truss", TrussBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
             .properties(p -> p.noOcclusion())
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(pickaxeOnly())
@@ -193,7 +190,7 @@ public class TFMGBlocks {
 
     public static final BlockEntry<Block> HARDENED_PLANKS = REGISTRATE.block("hardened_planks", Block::new)
             .initialProperties(() -> Blocks.OAK_PLANKS)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN))
+            .properties(p -> p.mapColor(MapColor.COLOR_BROWN))
             .transform(axeOnly())
             .item()
             .build()
@@ -202,7 +199,7 @@ public class TFMGBlocks {
 
     public static final BlockEntry<Block> CAUTION_BLOCK = REGISTRATE.block("caution_block", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.color(MaterialColor.COLOR_YELLOW))
+            .properties(p -> p.mapColor(MapColor.COLOR_YELLOW))
             .properties(p -> p.strength(3))
             .transform(pickaxeOnly())
             .item()
@@ -213,7 +210,7 @@ public class TFMGBlocks {
 
     public static final BlockEntry<Block> RED_CAUTION_BLOCK = REGISTRATE.block("red_caution_block", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.color(MaterialColor.COLOR_RED))
+            .properties(p -> p.mapColor(MapColor.COLOR_RED))
             .properties(p -> p.strength(3))
             .transform(pickaxeOnly())
             .item()
@@ -224,7 +221,7 @@ public class TFMGBlocks {
 
     public static final BlockEntry<Block> ASPHALT = REGISTRATE.block("asphalt", Block::new)
             .initialProperties(() -> Blocks.STONE)
-            .properties(p -> p.color(MaterialColor.COLOR_BLACK))
+            .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
             .transform(pickaxeOnly())
             .item()
             .build()
@@ -232,7 +229,7 @@ public class TFMGBlocks {
             .register();
     public static final BlockEntry<Block> SULFUR = REGISTRATE.block("sulfur", Block::new)
             .initialProperties(() -> Blocks.CALCITE)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_YELLOW))
+            .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
             .transform(pickaxeOnly())
             .item()
             .build()
@@ -240,7 +237,7 @@ public class TFMGBlocks {
             .register();
     public static final BlockEntry<Block> LIGNITE = REGISTRATE.block("lignite", Block::new)
             .initialProperties(() -> Blocks.CALCITE)
-            .properties(p -> p.color(MaterialColor.COLOR_BROWN))
+            .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
             .transform(pickaxeOnly())
             .item()
             .build()
@@ -254,7 +251,7 @@ public class TFMGBlocks {
                             .strength(4.0F)
                             .requiresCorrectToolForDrops())
                     .transform(BuilderTransformers.scaffold("steel",
-                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), MaterialColor.TERRACOTTA_CYAN,
+                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), MapColor.TERRACOTTA_CYAN,
                             TFMGSpriteShifts.STEEL_SCAFFOLD, TFMGSpriteShifts.STEEL_SCAFFOLD_INSIDE, TFMGSpriteShifts.STEEL_CASING))
                     .register();
 
@@ -264,32 +261,32 @@ public class TFMGBlocks {
                             .strength(3.0F)
                             .requiresCorrectToolForDrops())
                     .transform(BuilderTransformers.scaffold("aluminum",
-                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), MaterialColor.TERRACOTTA_CYAN,
+                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), MapColor.TERRACOTTA_CYAN,
                             TFMGSpriteShifts.ALUMINUM_SCAFFOLD, TFMGSpriteShifts.ALUMINUM_SCAFFOLD_INSIDE, TFMGSpriteShifts.ALUMINUM_SCAFFOLD_TOP))
                     .register();
 
 
     public static final BlockEntry<IronBarsBlock> BRASS_BARS = TFMGMetalBarsGen.createBars("steel", true,
-            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), MaterialColor.TERRACOTTA_CYAN);
+            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), MapColor.TERRACOTTA_CYAN);
     public static final BlockEntry<IronBarsBlock> COPPER_BARS = TFMGMetalBarsGen.createBars("aluminum", true,
-            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/aluminum")), MaterialColor.TERRACOTTA_WHITE);
+            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/aluminum")), MapColor.TERRACOTTA_WHITE);
 
 
     public static final BlockEntry<MetalLadderBlock> STEEL_LADDER =
             REGISTRATE.block("steel_ladder", MetalLadderBlock::new)
                     .transform(BuilderTransformers.ladder("steel",
-                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), MaterialColor.TERRACOTTA_CYAN))
+                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), MapColor.TERRACOTTA_CYAN))
                     .register();
     public static final BlockEntry<MetalLadderBlock> ALUMINUM_LADDER =
             REGISTRATE.block("aluminum_ladder", MetalLadderBlock::new)
                     .transform(BuilderTransformers.ladder("aluminum",
-                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/aluminum")), MaterialColor.TERRACOTTA_WHITE))
+                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/aluminum")), MapColor.TERRACOTTA_WHITE))
                     .register();
 
 
     public static final BlockEntry<TFMGFlywheelBlock> STEEL_FLYWHEEL = REGISTRATE.block("steel_flywheel", TFMGFlywheelBlock::new)
             .initialProperties(SharedProperties::softMetal)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN))
+            .properties(p -> p.mapColor(MapColor.TERRACOTTA_CYAN))
             .properties(BlockBehaviour.Properties::noOcclusion)
             .transform(axeOrPickaxe())
             .transform(BlockStressDefaults.setNoImpact())
@@ -299,7 +296,7 @@ public class TFMGBlocks {
             .register();
     public static final BlockEntry<TFMGFlywheelBlock> ALUMINUM_FLYWHEEL = REGISTRATE.block("aluminum_flywheel", TFMGFlywheelBlock::new)
             .initialProperties(SharedProperties::softMetal)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE))
+            .properties(p -> p.mapColor(MapColor.TERRACOTTA_WHITE))
             .properties(BlockBehaviour.Properties::noOcclusion)
             .transform(axeOrPickaxe())
             .transform(BlockStressDefaults.setNoImpact())
@@ -309,7 +306,7 @@ public class TFMGBlocks {
             .register();
     public static final BlockEntry<TFMGFlywheelBlock> CAST_IRON_FLYWHEEL = REGISTRATE.block("cast_iron_flywheel", TFMGFlywheelBlock::new)
             .initialProperties(SharedProperties::softMetal)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_BLACK))
+            .properties(p -> p.mapColor(MapColor.TERRACOTTA_BLACK))
             .properties(BlockBehaviour.Properties::noOcclusion)
             .transform(axeOrPickaxe())
             .transform(BlockStressDefaults.setNoImpact())
@@ -320,11 +317,11 @@ public class TFMGBlocks {
 
 
     public static final BlockEntry<Block> FACTORY_FLOOR = withVariants("factory_floor",Blocks.STONE,
-            MaterialColor.COLOR_GRAY,"Factory Floor",BlockTags.NEEDS_STONE_TOOL,SoundType.NETHERITE_BLOCK,3,false);
+            MapColor.COLOR_GRAY,"Factory Floor",BlockTags.NEEDS_STONE_TOOL,SoundType.NETHERITE_BLOCK,3,false);
 
     public static final BlockEntry<SlabBlock> FACTORY_FLOOR_SLAB =  REGISTRATE.block("factory_floor_slab", SlabBlock::new)
             .initialProperties(() -> Blocks.STONE)
-            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
             .properties(p -> p.requiresCorrectToolForDrops())
             .properties(p -> p.strength(3))
             .transform(pickaxeOnly())
@@ -338,7 +335,7 @@ public class TFMGBlocks {
 
     public static final BlockEntry<TFMGGravityBlock> LIMESAND = REGISTRATE.block("limesand", TFMGGravityBlock::new)
             .initialProperties(() -> Blocks.SAND)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_YELLOW))
+            .properties(p -> p.mapColor(MapColor.TERRACOTTA_YELLOW))
             //.transform(pickaxeOnly())
             .blockstate(simpleCubeAll("limesand"))
            // .tag(Tags.Blocks)
@@ -349,7 +346,7 @@ public class TFMGBlocks {
 
     public static final BlockEntry<TFMGGravityBlock> CEMENT = REGISTRATE.block("cement", TFMGGravityBlock::new)
             .initialProperties(() -> Blocks.SAND)
-            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
             //.transform(pickaxeOnly())
             .blockstate(simpleCubeAll("cement"))
             // .tag(Tags.Blocks)
@@ -360,18 +357,21 @@ public class TFMGBlocks {
 
     public static final BlockEntry<Block> FIRECLAY = REGISTRATE.block("fireclay", Block::new)
             .initialProperties(() -> Blocks.CLAY)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_RED))
+            .properties(p -> p.mapColor(MapColor.TERRACOTTA_RED))
             //.transform(pickaxeOnly())
             .blockstate(simpleCubeAll("fireclay"))
-            .loot((p, b) -> p.add(b, RegistrateBlockLootTables.createSingleItemTable(TFMGItems.FIRECLAY_BALL.get())
-                    .withPool(RegistrateBlockLootTables.applyExplosionCondition(TFMGItems.FIRECLAY_BALL.get(), LootPool.lootPool()
+            .loot((p, b) -> p.add(b, p.createSingleItemTable(TFMGItems.FIRECLAY_BALL.get())
+                    .withPool(p.applyExplosionCondition(TFMGItems.FIRECLAY_BALL.get(), LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F))
                             .add(LootItem.lootTableItem(TFMGItems.FIRECLAY_BALL.get()))))
-                    .withPool(RegistrateBlockLootTables.applyExplosionCondition(TFMGItems.FIRECLAY_BALL.get(), LootPool.lootPool()
+                    .withPool(p.applyExplosionCondition(TFMGItems.FIRECLAY_BALL.get(), LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F))
                             .add(LootItem.lootTableItem(TFMGItems.FIRECLAY_BALL.get()))))
-                    .withPool(RegistrateBlockLootTables.applyExplosionCondition(TFMGItems.FIRECLAY_BALL.get(), LootPool.lootPool()
-                            .add(LootItem.lootTableItem(TFMGItems.FIRECLAY_BALL.get()))))))
+                    .withPool(p.applyExplosionCondition(TFMGItems.FIRECLAY_BALL.get(), LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F))
+                            .add(LootItem.lootTableItem(TFMGItems.FIRECLAY_BALL.get()))))
 
-
+            ))
             // .tag(Tags.Blocks)
             .item()
             .build()
@@ -382,7 +382,7 @@ public class TFMGBlocks {
     public static final BlockEntry<FormWorkBlock> FORMWORK_BLOCK =
             REGISTRATE.block("formwork_block", FormWorkBlock::new)
                     .initialProperties(() -> Blocks.OAK_PLANKS)
-                    .properties(p -> p.color(MaterialColor.WOOD))
+                    .properties(p -> p.mapColor(MapColor.WOOD))
                     .properties(p -> p.requiresCorrectToolForDrops())
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .blockstate(new FormWorkGenerator()::generate)
@@ -394,7 +394,7 @@ public class TFMGBlocks {
     public static final BlockEntry<RebarFormWorkBlock> REBAR_FORMWORK_BLOCK =
             REGISTRATE.block("rebar_formwork_block", RebarFormWorkBlock::new)
                     .initialProperties(() -> Blocks.OAK_PLANKS)
-                    .properties(p -> p.color(MaterialColor.WOOD))
+                    .properties(p -> p.mapColor(MapColor.WOOD))
                     .properties(p -> p.requiresCorrectToolForDrops())
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .blockstate(new FormWorkGenerator()::generate)
@@ -420,7 +420,7 @@ public class TFMGBlocks {
             REGISTRATE.block("flarestack", FlarestackBlock::new)
                     .initialProperties(SharedProperties::copperMetal)
                     .addLayer(() -> RenderType::cutoutMipped)
-                    .properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN)
+                    .properties(p -> p.mapColor(MapColor.TERRACOTTA_CYAN)
                             .lightLevel(s -> s.getValue(FlarestackBlock.LIT) ? 15 : 0)
                             .noOcclusion())
                     .blockstate(new FlarestackGenerator()::generate)
@@ -433,7 +433,7 @@ public class TFMGBlocks {
 
     public static final BlockEntry<SurfaceScannerBlock> SURFACE_SCANNER =
             REGISTRATE.block("surface_scanner", SurfaceScannerBlock::new)
-                 //  .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                 //  .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
                  //  .properties(p -> p
                  //          .strength(4.5F))
                     //  .properties(BlockBehaviour.Properties::noOcclusion)
@@ -471,7 +471,7 @@ public class TFMGBlocks {
     public static final BlockEntry<DistilleryOutputBlock> CAST_IRON_DISTILLATION_OUTPUT =
             REGISTRATE.block("cast_iron_distillation_output", DistilleryOutputBlock::new)
                     .initialProperties(SharedProperties::copperMetal)
-                    .properties(p -> p.color(MaterialColor.STONE))
+                    .properties(p -> p.mapColor(MapColor.STONE))
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
                     .transform(pickaxeOnly())
@@ -490,7 +490,7 @@ public class TFMGBlocks {
 public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPUT =
         REGISTRATE.block("steel_distillation_output", DistillationOutputBlock::new)
                 .initialProperties(SharedProperties::copperMetal)
-                .properties(p -> p.color(MaterialColor.STONE))
+                .properties(p -> p.mapColor(MapColor.STONE))
                 .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
                 .properties(BlockBehaviour.Properties::noOcclusion)
                 .transform(pickaxeOnly())
@@ -507,7 +507,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .register();
     public static final BlockEntry<IndustrialPipeBlock> INDUSTRIAL_PIPE = REGISTRATE.block("industrial_pipe", IndustrialPipeBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
             .properties(p -> p.requiresCorrectToolForDrops())
             .transform(pickaxeOnly())
             .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
@@ -521,7 +521,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     //Pumpjack
     public static final BlockEntry<MachineInputBlock> MACHINE_INPUT =
             REGISTRATE.block("machine_input", MachineInputBlock::new)
-                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .properties(p -> p
                             .strength(4.5F))
@@ -534,7 +534,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
     public static final BlockEntry<PumpjackCrankBlock> PUMPJACK_CRANK =
             REGISTRATE.block("pumpjack_crank", PumpjackCrankBlock::new)
-                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
                     .properties(p -> p
                             .strength(4.5F))
                     .properties(BlockBehaviour.Properties::noOcclusion)
@@ -568,7 +568,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
     public static final BlockEntry<Block> FIREPROOF_BRICKS = REGISTRATE.block("fireproof_bricks", Block::new)
             .initialProperties(() -> Blocks.BRICKS)
-            .properties(p -> p.color(MaterialColor.COLOR_RED))
+            .properties(p -> p.mapColor(MapColor.COLOR_RED))
             .properties(p -> p.requiresCorrectToolForDrops())
             .transform(pickaxeOnly())
             .item()
@@ -577,7 +577,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .register();
     public static final BlockEntry<WallBlock> FIREPROOF_BRICK_REINFORCEMENT = REGISTRATE.block("fireproof_brick_reinforcement", WallBlock::new)
             .initialProperties(() -> Blocks.BRICKS)
-            .properties(p -> p.color(MaterialColor.COLOR_RED))
+            .properties(p -> p.mapColor(MapColor.COLOR_RED))
             .properties(p -> p.requiresCorrectToolForDrops())
             .transform(pickaxeOnly())
             .tag(BlockTags.WALLS)
@@ -588,7 +588,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .register();
     public static final BlockEntry<BlastFurnaceOutputBlock> BLAST_FURNACE_OUTPUT = REGISTRATE.block("blast_furnace_output", BlastFurnaceOutputBlock::new)
             .initialProperties(() -> Blocks.BRICKS)
-            .properties(p -> p.color(MaterialColor.COLOR_RED))
+            .properties(p -> p.mapColor(MapColor.COLOR_RED))
             .properties(p -> p.requiresCorrectToolForDrops())
             .transform(pickaxeOnly())
             .item()
@@ -597,8 +597,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .register();
     public static final BlockEntry<MoltenMetalBlock> MOLTEN_METAL =
             REGISTRATE.block("molten_metal", MoltenMetalBlock::new)
-                    .initialProperties(SharedProperties.CRUSHING_WHEEL_CONTROLLER_MATERIAL)
-                    .properties(p -> p.color(MaterialColor.COLOR_ORANGE))
+                    .properties(p -> p.mapColor(MapColor.COLOR_ORANGE))
                     .properties(p -> p.noOcclusion()
                             .noLootTable()
                             .air())
@@ -609,7 +608,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     //--Casting Basin
     public static final BlockEntry<CastingBasinBlock> CASTING_BASIN = REGISTRATE.block("casting_basin", CastingBasinBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_BLACK))
+            .properties(p -> p.mapColor(MapColor.TERRACOTTA_BLACK))
             .properties(BlockBehaviour.Properties::noOcclusion)
             .properties(p -> p.requiresCorrectToolForDrops())
             .transform(pickaxeOnly())
@@ -622,7 +621,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
     public static final BlockEntry<CastingSpoutBlock> CASTING_SPOUT = REGISTRATE.block("casting_spout", CastingSpoutBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_BLACK))
+            .properties(p -> p.mapColor(MapColor.TERRACOTTA_BLACK))
             .properties(BlockBehaviour.Properties::noOcclusion)
             .properties(p -> p.requiresCorrectToolForDrops())
             .transform(pickaxeOnly())
@@ -637,7 +636,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     //////////
     public static final BlockEntry<CokeOvenBlock> COKE_OVEN = REGISTRATE.block("coke_oven", CokeOvenBlock::new)
             .initialProperties(() -> Blocks.BRICKS)
-            .properties(p -> p.color(MaterialColor.COLOR_RED))
+            .properties(p -> p.mapColor(MapColor.COLOR_RED))
             .properties(p -> p.requiresCorrectToolForDrops())
             .blockstate(new CokeOvenGenerator()::generate)
             .transform(pickaxeOnly())
@@ -665,7 +664,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     //-----------------------BUILDING BLOCKS---------------------------//
     public static final BlockEntry<Block> STEEL_BLOCK = REGISTRATE.block("steel_block", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
             .properties(p -> p.requiresCorrectToolForDrops())
             .onRegister(connectedTextures(() -> new EncasedCTBehaviour(TFMGSpriteShifts.STEEL_BLOCK)))
             .onRegister(casingConnectivity((block, cc) -> cc.makeCasing(block, TFMGSpriteShifts.STEEL_BLOCK)))
@@ -681,7 +680,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .register();
     public static final BlockEntry<Block> CAST_IRON_BLOCK = REGISTRATE.block("cast_iron_block", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
             .properties(p -> p.requiresCorrectToolForDrops())
             .onRegister(connectedTextures(() -> new EncasedCTBehaviour(TFMGSpriteShifts.CAST_IRON_BLOCK)))
             .onRegister(casingConnectivity((block, cc) -> cc.makeCasing(block, TFMGSpriteShifts.CAST_IRON_BLOCK)))
@@ -698,7 +697,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
     public static final BlockEntry<Block> ALUMINUM_BLOCK = REGISTRATE.block("aluminum_block", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
             .properties(p -> p.requiresCorrectToolForDrops())
             .onRegister(connectedTextures(() -> new EncasedCTBehaviour(TFMGSpriteShifts.CAST_IRON_BLOCK)))
             .onRegister(casingConnectivity((block, cc) -> cc.makeCasing(block, TFMGSpriteShifts.CAST_IRON_BLOCK)))
@@ -714,7 +713,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .register();
     public static final BlockEntry<Block> PLASTIC_BLOCK = REGISTRATE.block("plastic_block", Block::new)
             .initialProperties(() -> Blocks.QUARTZ_BLOCK)
-            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
             .properties(p -> p.requiresCorrectToolForDrops())
             .transform(pickaxeOnly())
             .blockstate(simpleCubeAll("plastic_block"))
@@ -728,7 +727,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
     //public static final BlockEntry<Block> LEAD_BLOCK = REGISTRATE.block("lead_block", Block::new)
     //        .initialProperties(() -> Blocks.IRON_BLOCK)
-    //        .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+    //        .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
     //        .properties(p -> p.requiresCorrectToolForDrops())
     //        .onRegister(connectedTextures(() -> new EncasedCTBehaviour(TFMGSpriteShifts.CAST_IRON_BLOCK)))
     //        .onRegister(casingConnectivity((block, cc) -> cc.makeCasing(block, TFMGSpriteShifts.CAST_IRON_BLOCK)))
@@ -749,7 +748,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
     public static final BlockEntry<Block> COAL_COKE_BLOCK = REGISTRATE.block("coal_coke_block", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
             .properties(p -> p.requiresCorrectToolForDrops())
             .transform(pickaxeOnly())
             .blockstate(simpleCubeAll("coal_coke_block"))
@@ -764,7 +763,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
    // //sheetmetals
    // public static final BlockEntry<Block> STEEL_SHEETMETAL = REGISTRATE.block("steel_sheetmetal", Block::new)
    //         .initialProperties(() -> Blocks.IRON_BLOCK)
-   //         .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+   //         .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
    //         .properties(p -> p.requiresCorrectToolForDrops())
    //         .onRegister(connectedTextures(() -> new EncasedCTBehaviour(TFMGSpriteShifts.STEEL_SHEETMETAL)))
    //         .onRegister(casingConnectivity((block, cc) -> cc.makeCasing(block, TFMGSpriteShifts.STEEL_SHEETMETAL)))
@@ -778,16 +777,16 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
     //
     public static final BlockEntry<TFMGSlidingDoorBlock> HEAVY_CASING_DOOR =
-            REGISTRATE.block("heavy_casing_door", p -> new TFMGSlidingDoorBlock(p, false))
+            REGISTRATE.block("heavy_casing_door", p -> TFMGSlidingDoorBlock.metal(p, false))
                     .transform(TFMGBuilderTransformers.slidingDoor("heavy_casing"))
-                    .properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN)
+                    .properties(p -> p.mapColor(MapColor.TERRACOTTA_CYAN)
                             .sound(SoundType.COPPER)
                             .noOcclusion())
                     .register();
     public static final BlockEntry<TFMGSlidingDoorBlock> STEEL_CASING_DOOR =
-            REGISTRATE.block("steel_door", p -> new TFMGSlidingDoorBlock(p, true))
+            REGISTRATE.block("steel_door",  p -> TFMGSlidingDoorBlock.metal(p, true))
                     .transform(TFMGBuilderTransformers.slidingDoor("steel"))
-                    .properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN)
+                    .properties(p -> p.mapColor(MapColor.TERRACOTTA_CYAN)
                             .sound(SoundType.COPPER)
                             .noOcclusion())
                     .register();
@@ -796,7 +795,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<GasolineEngineBlock> GASOLINE_ENGINE =
             REGISTRATE.block("gasoline_engine", GasolineEngineBlock::new)
                     .initialProperties(SharedProperties::stone)
-                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(pickaxeOnly())
@@ -811,7 +810,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<GasolineEngineBackBlock> GASOLINE_ENGINE_BACK =
             REGISTRATE.block("gasoline_engine_back", GasolineEngineBackBlock::new)
                     .initialProperties(SharedProperties::stone)
-                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(pickaxeOnly())
@@ -827,7 +826,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<LPGEngineBlock> LPG_ENGINE =
             REGISTRATE.block("lpg_engine", LPGEngineBlock::new)
                     .initialProperties(SharedProperties::stone)
-                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(pickaxeOnly())
@@ -842,7 +841,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<LPGEngineBackBlock> LPG_ENGINE_BACK =
             REGISTRATE.block("lpg_engine_back", LPGEngineBackBlock::new)
                     .initialProperties(SharedProperties::stone)
-                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(pickaxeOnly())
@@ -857,7 +856,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<TurbineEngineBlock> TURBINE_ENGINE =
             REGISTRATE.block("turbine_engine", TurbineEngineBlock::new)
                     .initialProperties(SharedProperties::stone)
-                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .addLayer(() -> RenderType::cutoutMipped)
@@ -873,7 +872,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<TurbineEngineBackBlock> TURBINE_ENGINE_BACK =
             REGISTRATE.block("turbine_engine_back", TurbineEngineBackBlock::new)
                     .initialProperties(SharedProperties::stone)
-                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(pickaxeOnly())
@@ -900,7 +899,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
     public static final BlockEntry<DieselEngineExpansionBlock> DIESEL_ENGINE_EXPANSION = REGISTRATE.block("diesel_engine_expansion", DieselEngineExpansionBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN))
+            .properties(p -> p.mapColor(MapColor.TERRACOTTA_CYAN))
             .properties(p -> p.requiresCorrectToolForDrops())
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.directionalBlockProvider(false))
@@ -925,7 +924,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<EncasedSteelPipeBlock> COPPER_ENCASED_STEEL_PIPE =
             REGISTRATE.block("copper_encased_steel_pipe", p -> new EncasedSteelPipeBlock(p, AllBlocks.COPPER_CASING::get))
                     .initialProperties(SharedProperties::copperMetal)
-                    .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
+                    .properties(p -> p.mapColor(MapColor.TERRACOTTA_LIGHT_GRAY))
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(axeOrPickaxe())
                     .blockstate(BlockStateGen.encasedPipe())
@@ -964,7 +963,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
     public static final BlockEntry<TFMGPumpBlock> STEEL_MECHANICAL_PUMP = REGISTRATE.block("steel_mechanical_pump", TFMGPumpBlock::new)
             .initialProperties(SharedProperties::copperMetal)
-            .properties(p -> p.color(MaterialColor.STONE))
+            .properties(p -> p.mapColor(MapColor.STONE))
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.directionalBlockProviderIgnoresWaterlogged(true))
             .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
@@ -976,7 +975,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<TFMGSmartFluidPipeBlock> STEEL_SMART_FLUID_PIPE =
             REGISTRATE.block("steel_smart_fluid_pipe", TFMGSmartFluidPipeBlock::new)
                     .initialProperties(SharedProperties::copperMetal)
-                    .properties(p -> p.color(MaterialColor.STONE))
+                    .properties(p -> p.mapColor(MapColor.STONE))
                     .transform(pickaxeOnly())
                     .blockstate(new SmartFluidPipeGenerator()::generate)
                     .onRegister(CreateRegistrate.blockModel(() -> SteelPipeAttachmentModel::new))
@@ -1007,7 +1006,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<EncasedCastIronPipeBlock> COPPER_ENCASED_CAST_IRON_PIPE =
             REGISTRATE.block("copper_encased_cast_iron_pipe", p -> new EncasedCastIronPipeBlock(p, AllBlocks.COPPER_CASING::get))
                     .initialProperties(SharedProperties::copperMetal)
-                    .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
+                    .properties(p -> p.mapColor(MapColor.TERRACOTTA_LIGHT_GRAY))
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(axeOrPickaxe())
                     .blockstate(BlockStateGen.encasedPipe())
@@ -1046,7 +1045,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
     public static final BlockEntry<TFMGPumpBlock> CAST_IRON_MECHANICAL_PUMP = REGISTRATE.block("cast_iron_mechanical_pump", TFMGPumpBlock::new)
             .initialProperties(SharedProperties::copperMetal)
-            .properties(p -> p.color(MaterialColor.STONE))
+            .properties(p -> p.mapColor(MapColor.STONE))
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.directionalBlockProviderIgnoresWaterlogged(true))
             .onRegister(CreateRegistrate.blockModel(() -> CastIronPipeAttachmentModel::new))
@@ -1058,7 +1057,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<TFMGSmartFluidPipeBlock> CAST_IRON_SMART_FLUID_PIPE =
             REGISTRATE.block("cast_iron_smart_fluid_pipe", TFMGSmartFluidPipeBlock::new)
                     .initialProperties(SharedProperties::copperMetal)
-                    .properties(p -> p.color(MaterialColor.STONE))
+                    .properties(p -> p.mapColor(MapColor.STONE))
                     .transform(pickaxeOnly())
                     .blockstate(new SmartFluidPipeGenerator()::generate)
                     .onRegister(CreateRegistrate.blockModel(() -> CastIronPipeAttachmentModel::new))
@@ -1089,7 +1088,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<EncasedBrassPipeBlock> COPPER_ENCASED_BRASS_PIPE =
             REGISTRATE.block("copper_encased_brass_pipe", p -> new EncasedBrassPipeBlock(p, AllBlocks.COPPER_CASING::get))
                     .initialProperties(SharedProperties::copperMetal)
-                    .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
+                    .properties(p -> p.mapColor(MapColor.TERRACOTTA_LIGHT_GRAY))
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(axeOrPickaxe())
                     .blockstate(BlockStateGen.encasedPipe())
@@ -1128,7 +1127,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
     public static final BlockEntry<TFMGPumpBlock> BRASS_MECHANICAL_PUMP = REGISTRATE.block("brass_mechanical_pump", TFMGPumpBlock::new)
             .initialProperties(SharedProperties::copperMetal)
-            .properties(p -> p.color(MaterialColor.STONE))
+            .properties(p -> p.mapColor(MapColor.STONE))
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.directionalBlockProviderIgnoresWaterlogged(true))
             .onRegister(CreateRegistrate.blockModel(() -> BrassPipeAttachmentModel::new))
@@ -1140,7 +1139,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<TFMGSmartFluidPipeBlock> BRASS_SMART_FLUID_PIPE =
             REGISTRATE.block("brass_smart_fluid_pipe", TFMGSmartFluidPipeBlock::new)
                     .initialProperties(SharedProperties::copperMetal)
-                    .properties(p -> p.color(MaterialColor.STONE))
+                    .properties(p -> p.mapColor(MapColor.STONE))
                     .transform(pickaxeOnly())
                     .blockstate(new SmartFluidPipeGenerator()::generate)
                     .onRegister(CreateRegistrate.blockModel(() -> BrassPipeAttachmentModel::new))
@@ -1171,7 +1170,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<EncasedPlasticPipeBlock> COPPER_ENCASED_PLASTIC_PIPE =
             REGISTRATE.block("copper_encased_plastic_pipe", p -> new EncasedPlasticPipeBlock(p, AllBlocks.COPPER_CASING::get))
                     .initialProperties(SharedProperties::copperMetal)
-                    .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
+                    .properties(p -> p.mapColor(MapColor.TERRACOTTA_LIGHT_GRAY))
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(axeOrPickaxe())
                     .blockstate(BlockStateGen.encasedPipe())
@@ -1210,7 +1209,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
     public static final BlockEntry<TFMGPumpBlock> PLASTIC_MECHANICAL_PUMP = REGISTRATE.block("plastic_mechanical_pump", TFMGPumpBlock::new)
             .initialProperties(SharedProperties::copperMetal)
-            .properties(p -> p.color(MaterialColor.STONE))
+            .properties(p -> p.mapColor(MapColor.STONE))
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.directionalBlockProviderIgnoresWaterlogged(true))
             .onRegister(CreateRegistrate.blockModel(() -> PlasticPipeAttachmentModel::new))
@@ -1222,7 +1221,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<TFMGSmartFluidPipeBlock> PLASTIC_SMART_FLUID_PIPE =
             REGISTRATE.block("plastic_smart_fluid_pipe", TFMGSmartFluidPipeBlock::new)
                     .initialProperties(SharedProperties::copperMetal)
-                    .properties(p -> p.color(MaterialColor.STONE))
+                    .properties(p -> p.mapColor(MapColor.STONE))
                     .transform(pickaxeOnly())
                     .blockstate(new SmartFluidPipeGenerator()::generate)
                     .onRegister(CreateRegistrate.blockModel(() -> PlasticPipeAttachmentModel::new))
@@ -1253,7 +1252,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<EncasedAluminumPipeBlock> COPPER_ENCASED_ALUMINUM_PIPE =
             REGISTRATE.block("copper_encased_aluminum_pipe", p -> new EncasedAluminumPipeBlock(p, AllBlocks.COPPER_CASING::get))
                     .initialProperties(SharedProperties::copperMetal)
-                    .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
+                    .properties(p -> p.mapColor(MapColor.TERRACOTTA_LIGHT_GRAY))
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(axeOrPickaxe())
                     .blockstate(BlockStateGen.encasedPipe())
@@ -1292,7 +1291,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
     public static final BlockEntry<TFMGPumpBlock> ALUMINUM_MECHANICAL_PUMP = REGISTRATE.block("aluminum_mechanical_pump", TFMGPumpBlock::new)
             .initialProperties(SharedProperties::copperMetal)
-            .properties(p -> p.color(MaterialColor.STONE))
+            .properties(p -> p.mapColor(MapColor.STONE))
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.directionalBlockProviderIgnoresWaterlogged(true))
             .onRegister(CreateRegistrate.blockModel(() -> AluminumPipeAttachmentModel::new))
@@ -1304,7 +1303,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
     public static final BlockEntry<TFMGSmartFluidPipeBlock> ALUMINUM_SMART_FLUID_PIPE =
             REGISTRATE.block("aluminum_smart_fluid_pipe", TFMGSmartFluidPipeBlock::new)
                     .initialProperties(SharedProperties::copperMetal)
-                    .properties(p -> p.color(MaterialColor.STONE))
+                    .properties(p -> p.mapColor(MapColor.STONE))
                     .transform(pickaxeOnly())
                     .blockstate(new SmartFluidPipeGenerator()::generate)
                     .onRegister(CreateRegistrate.blockModel(() -> AluminumPipeAttachmentModel::new))
@@ -1329,12 +1328,10 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
 
     //-----------------------CONCRETE---------------------------//
-    static {
-        REGISTRATE.creativeModeTab(() -> TFMGCreativeModeTabs.TFMG_BUILDING_BLOCKS);
-    }
+
     //public static final BlockEntry<Block> CONCRETE = REGISTRATE.block("concrete", Block::new)
     //        .initialProperties(() -> Blocks.STONE)
-    //        .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+    //        .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
     //        .properties(p -> p.requiresCorrectToolForDrops())
     //        .transform(pickaxeOnly())
     //        .blockstate(simpleCubeAll("concrete"))
@@ -1350,7 +1347,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
     public static final BlockEntry<SlabBlock> CONCRETE_SLAB =  REGISTRATE.block("concrete_slab", SlabBlock::new)
             .initialProperties(() -> Blocks.STONE)
-            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
             .properties(p -> p.requiresCorrectToolForDrops())
             .transform(pickaxeOnly())
             .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, "concrete"))
@@ -1364,11 +1361,11 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
 
     public static final BlockEntry<Block> REBAR_CONCRETE = withVariants("rebar_concrete",Blocks.STONE,
-            MaterialColor.COLOR_GRAY,"Rebar Concrete",BlockTags.NEEDS_DIAMOND_TOOL,SoundType.STONE,40,true);
+            MapColor.COLOR_GRAY,"Rebar Concrete",BlockTags.NEEDS_DIAMOND_TOOL,SoundType.STONE,40,true);
 
     public static final BlockEntry<SlabBlock> REBAR_CONCRETE_SLAB =  REGISTRATE.block("rebar_concrete_slab", SlabBlock::new)
             .initialProperties(() -> Blocks.STONE)
-            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
             .properties(p -> p.requiresCorrectToolForDrops())
             .properties(p -> p.strength(40,40))
             .transform(pickaxeOnly())
@@ -1391,7 +1388,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
         REGISTRATE.block("concrete_wall", WallBlock::new)
                 .initialProperties(() -> Blocks.STONE)
-                .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+                .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
                 .properties(p -> p.requiresCorrectToolForDrops())
                 .transform(pickaxeOnly())
                 .blockstate((c, p) -> TFMGVanillaBlockStates.generateWallBlockState(c, p, "concrete"))
@@ -1405,7 +1402,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
         REGISTRATE.block("concrete_stairs", p -> new StairBlock(()-> TFMGBlocks.CONCRETE.get().defaultBlockState(),p))
                 .initialProperties(() -> Blocks.STONE)
-                .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+                .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
                 .properties(p -> p.requiresCorrectToolForDrops())
                 .transform(pickaxeOnly())
                 .blockstate((c, p) -> TFMGVanillaBlockStates.generateStairBlockState(c, p, "concrete"))
@@ -1423,7 +1420,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
         return REGISTRATE.block("concrete", Block::new)
                 .initialProperties(() -> Blocks.STONE)
-                .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+                .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
                 .properties(p -> p.requiresCorrectToolForDrops())
                 .transform(pickaxeOnly())
                 .blockstate(simpleCubeAll("concrete"))
@@ -1459,7 +1456,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             }
             REGISTRATE.block(color + "_concrete", Block::new)
                     .initialProperties(() -> Blocks.STONE)
-                    .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+                    .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
                     .properties(p -> p.requiresCorrectToolForDrops())
                     .transform(pickaxeOnly())
                     .blockstate(simpleCubeAll(color + "_concrete"))
@@ -1472,7 +1469,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
             REGISTRATE.block(color + "_concrete_wall", WallBlock::new)
                     .initialProperties(() -> Blocks.STONE)
-                    .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+                    .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
                     .properties(p -> p.requiresCorrectToolForDrops())
                     .transform(pickaxeOnly())
                     .blockstate((c, p) -> TFMGVanillaBlockStates.generateWallBlockState(c, p, color + "_concrete"))
@@ -1486,7 +1483,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
             REGISTRATE.block(color + "_concrete_stairs", p -> new StairBlock(()-> TFMGBlocks.CONCRETE.get().defaultBlockState(),p))
                     .initialProperties(() -> Blocks.STONE)
-                    .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+                    .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
                     .properties(p -> p.requiresCorrectToolForDrops())
                     .transform(pickaxeOnly())
                     .blockstate((c, p) -> TFMGVanillaBlockStates.generateStairBlockState(c, p, color + "_concrete"))
@@ -1502,7 +1499,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
             REGISTRATE.block(color + "_concrete_slab", SlabBlock::new)
                     .initialProperties(() -> Blocks.STONE)
-                    .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+                    .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
                     .properties(p -> p.requiresCorrectToolForDrops())
                     .transform(pickaxeOnly())
                     .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, color + "_concrete"))
@@ -1516,7 +1513,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
         }
     }
-    public static BlockEntry<Block> withVariants(String name, Block properties, MaterialColor color,
+    public static BlockEntry<Block> withVariants(String name, Block properties, MapColor color,
                                                  String displayName, TagKey<Block> toolRequired,SoundType sound,int strenght, boolean wall){
 
 
@@ -1526,7 +1523,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
         if(wall)
             REGISTRATE.block(name+"_wall", WallBlock::new)
                     .initialProperties(() -> properties)
-                    .properties(p -> p.color(color))
+                    .properties(p -> p.mapColor(color))
                     .properties(p -> p.sound(sound))
                     .properties(p -> p.strength(strenght,strenght))
                     .properties(p -> p.requiresCorrectToolForDrops())
@@ -1542,7 +1539,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 //
         REGISTRATE.block(name+"_stairs", p -> new StairBlock(()-> TFMGBlocks.CONCRETE.get().defaultBlockState(),p))
                 .initialProperties(() -> properties)
-                .properties(p -> p.color(color))
+                .properties(p -> p.mapColor(color))
                 .properties(p -> p.sound(sound))
                 .properties(p -> p.strength(strenght,strenght))
                 .properties(p -> p.requiresCorrectToolForDrops())
@@ -1564,7 +1561,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
          return REGISTRATE.block(name, Block::new)
                 .initialProperties(() -> properties)
-                .properties(p -> p.color(color))
+                .properties(p -> p.mapColor(color))
                 .properties(p -> p.sound(sound))
                  .properties(p -> p.strength(strenght,strenght))
                 .properties(p -> p.requiresCorrectToolForDrops())
@@ -1578,7 +1575,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
         //return  REGISTRATE.block(name+"_slab", SlabBlock::new)
         //        .initialProperties(() -> properties)
-        //        .properties(p -> p.color(color))
+        //        .properties(p -> p.mapColor(color))
         //        .properties(p -> p.sound(sound))
         //        .properties(p -> p.strength(strenght,strenght))
         //        .properties(p -> p.requiresCorrectToolForDrops())

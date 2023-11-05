@@ -14,6 +14,9 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -39,11 +42,11 @@ public class CokingCategory extends CreateRecipeCategory<CokingRecipe> {
 				.addSlot(RecipeIngredientRole.INPUT, 1, 13)
 				.setBackground(getRenderedSlot(), -1, -1)
 				.addIngredients(recipe.getIngredients().get(0));
-
+		RegistryAccess registryAccess = Minecraft.getInstance().level.registryAccess();
 		builder
 				.addSlot(RecipeIngredientRole.OUTPUT, 121, 90)
 				.setBackground(getRenderedSlot(), -1, -1)
-				.addItemStack(recipe.getResultItem());
+				.addItemStack(recipe.getResultItem(registryAccess));
 
 		//fluid
 
@@ -62,16 +65,16 @@ public class CokingCategory extends CreateRecipeCategory<CokingRecipe> {
 	}
 
 	@Override
-	public void draw(CokingRecipe recipe, IRecipeSlotsView iRecipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
+	public void draw(CokingRecipe recipe, IRecipeSlotsView iRecipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
 		cokeOven
-				.draw(matrixStack, 65, 50);
-		AllGuiTextures.JEI_ARROW.render(matrixStack, 20, 15);
+				.draw(graphics, 65, 50);
+		AllGuiTextures.JEI_ARROW.render(graphics, 20, 15);
 
 
-		AllGuiTextures.JEI_ARROW.render(matrixStack, 115, 25);
-		AllGuiTextures.JEI_ARROW.render(matrixStack, 115, 50);
+		AllGuiTextures.JEI_ARROW.render(graphics, 115, 25);
+		AllGuiTextures.JEI_ARROW.render(graphics, 115, 50);
 
-		AllGuiTextures.JEI_DOWN_ARROW.render(matrixStack, 115, 73);
+		AllGuiTextures.JEI_DOWN_ARROW.render(graphics, 115, 73);
 
 	}
 

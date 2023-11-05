@@ -14,6 +14,7 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -62,14 +63,14 @@ public class IndustrialBlastingCategory extends CreateRecipeCategory<IndustrialB
 	}
 
 	@Override
-	public void draw(IndustrialBlastingRecipe recipe, IRecipeSlotsView iRecipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
+	public void draw(IndustrialBlastingRecipe recipe, IRecipeSlotsView iRecipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
 		blastFurnace
-				.draw(matrixStack, 50, 135);
+				.draw(graphics, 50, 135);
 
 
-		AllGuiTextures.JEI_ARROW.render(matrixStack, 96, 121);
+		AllGuiTextures.JEI_ARROW.render(graphics, 96, 121);
 
-		AllGuiTextures.JEI_DOWN_ARROW.render(matrixStack, 45, 15);
+		AllGuiTextures.JEI_DOWN_ARROW.render(graphics, 45, 15);
 
 	}
 

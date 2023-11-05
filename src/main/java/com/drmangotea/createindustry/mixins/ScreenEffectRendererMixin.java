@@ -28,7 +28,7 @@ public class ScreenEffectRendererMixin {
 
 
         if (!p_110719_.player.isSpectator()) {
-            if (p_110719_.player.getLevel().getBlockState(p_110719_.player.getOnPos().above(2)).is(TFMGBlocks.MOLTEN_METAL.get())) {
+            if (p_110719_.player.level().getBlockState(p_110719_.player.getOnPos().above(2)).is(TFMGBlocks.MOLTEN_METAL.get())) {
                     renderMoltenMetal(p_110719_, p_110720_);
             }
         }

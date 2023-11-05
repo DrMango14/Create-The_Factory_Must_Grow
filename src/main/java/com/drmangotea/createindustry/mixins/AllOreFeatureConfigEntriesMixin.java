@@ -1,4 +1,23 @@
-package com.drmangotea.createindustry.mixins;
+import com.drmangotea.createindustry.worldgen.TFMGLayeredPatterns;
+import com.simibubi.create.Create;
+import com.simibubi.create.infrastructure.worldgen.AllLayerPatterns;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.world.BiomeModifier;
+import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/*package com.drmangotea.createindustry.mixins;
 
 
 import com.drmangotea.createindustry.worldgen.TFMGLayeredPatterns;
@@ -26,7 +45,7 @@ import java.util.Map;
 
  /**
  * really goofy way to do worldgen but it works
- */
+
 @Mixin(AllOreFeatureConfigEntries.class)
 public class AllOreFeatureConfigEntriesMixin {
 
@@ -129,3 +148,4 @@ public class AllOreFeatureConfigEntriesMixin {
 	}
 }
 
+ */

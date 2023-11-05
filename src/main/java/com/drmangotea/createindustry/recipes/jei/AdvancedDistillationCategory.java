@@ -15,6 +15,7 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.minecraft.client.gui.GuiGraphics;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -58,23 +59,23 @@ public class AdvancedDistillationCategory extends CreateRecipeCategory<AdvancedD
 	}
 
 	@Override
-	public void draw(AdvancedDistillationRecipe recipe, IRecipeSlotsView iRecipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
+	public void draw(AdvancedDistillationRecipe recipe, IRecipeSlotsView iRecipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
 		int outputCount = recipe.getOutputCount(recipe);
 		int yModifier = 60 -(outputCount*10);
 		int y = 126-yModifier;
 
 
-		TFMGGuiTextures.DISTILLATION_TOWER_BOTTOM.render(matrixStack,10,y);
-	//	TFMGGuiTextures.DISTILLATION_TOWER_FIRE.render(matrixStack,10,y+24);
-		AllGuiTextures.JEI_ARROW.render(matrixStack, 56, y);
+		TFMGGuiTextures.DISTILLATION_TOWER_BOTTOM.render(graphics,10,y);
+	//	TFMGGuiTextures.DISTILLATION_TOWER_FIRE.render(graphics,10,y+24);
+		AllGuiTextures.JEI_ARROW.render(graphics, 56, y);
 
 		for(int i = 0; i<(outputCount-1);i++){
 			y -= 24;
-			TFMGGuiTextures.DISTILLATION_TOWER_MIDDLE.render(matrixStack,10,y);
-			AllGuiTextures.JEI_ARROW.render(matrixStack, 56, y);
+			TFMGGuiTextures.DISTILLATION_TOWER_MIDDLE.render(graphics,10,y);
+			AllGuiTextures.JEI_ARROW.render(graphics, 56, y);
 		}
 		y -= 12;
-		TFMGGuiTextures.DISTILLATION_TOWER_TOP.render(matrixStack,10,y);
+		TFMGGuiTextures.DISTILLATION_TOWER_TOP.render(graphics,10,y);
 
 	}
 

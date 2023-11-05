@@ -10,12 +10,13 @@ import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.client.model.generators.ModelFile;
 
 import java.util.function.Supplier;
@@ -120,12 +121,12 @@ public class TFMGMetalBarsGen {
 	}
 	 @SuppressWarnings("removal")
 	public static BlockEntry<IronBarsBlock> createBars(String name, boolean specialEdge,
-		Supplier<DataIngredient> ingredient, MaterialColor color) {
+		Supplier<DataIngredient> ingredient, MapColor color) {
 		return CreateTFMG.REGISTRATE.block(name + "_bars", IronBarsBlock::new)
 			.addLayer(() -> RenderType::cutoutMipped)
 			.initialProperties(() -> Blocks.IRON_BARS)
 			.properties(p -> p.sound(SoundType.COPPER)
-				.color(color))
+				.mapColor(color))
 			.tag(AllBlockTags.WRENCH_PICKUP.tag)
 			.tag(AllBlockTags.FAN_TRANSPARENT.tag)
 			.transform(TagGen.pickaxeOnly())
@@ -137,7 +138,7 @@ public class TFMGMetalBarsGen {
 					.texture("bars", barsTexture)
 					.texture("edge", specialEdge ? p.modLoc("block/bars/" + name + "_bars_edge") : barsTexture);
 			})
-			.recipe((c, p) -> p.stonecutting(ingredient.get(), c::get, 4))
+				.recipe((c, p) -> p.stonecutting(ingredient.get(), RecipeCategory.DECORATIONS, c::get, 4))
 			.build()
 			.register();
 	}

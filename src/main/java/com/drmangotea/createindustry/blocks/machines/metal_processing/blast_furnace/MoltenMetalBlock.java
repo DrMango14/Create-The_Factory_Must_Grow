@@ -9,6 +9,7 @@ import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import com.simibubi.create.AllDamageTypes;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.client.Minecraft;
@@ -22,6 +23,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -63,7 +66,7 @@ public class MoltenMetalBlock extends Block implements IBE<MoltenMetalBlockEntit
         int random = Create.RANDOM.nextInt(24);
 
         if(random==7)
-            entity.hurt(DamageSource.IN_FIRE,4);
+            entity.hurt(level.damageSources().inFire(),4);
 
     }
 

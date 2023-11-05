@@ -104,8 +104,7 @@ public class SteelTankItem extends BlockItem {
                 BlockState blockState = world.getBlockState(offsetPos);
                 if (SteelTankBlock.isTank(blockState))
                     continue;
-                if (!blockState.getMaterial()
-                        .isReplaceable())
+                if (!blockState.canBeReplaced())
                     return;
                 tanksToPlace++;
             }

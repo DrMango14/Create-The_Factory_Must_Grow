@@ -2,7 +2,7 @@ package com.drmangotea.createindustry.items.gadgets.explosives.napalm;
 
 import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Vector3f;
 
 @OnlyIn(Dist.CLIENT)
 public class NapalmBombRenderer extends EntityRenderer<NapalmBombEntity> {
@@ -36,9 +37,9 @@ public class NapalmBombRenderer extends EntityRenderer<NapalmBombEntity> {
                 p_116180_.scale(f1, f1, f1);
             }
 
-            p_116180_.mulPose(Vector3f.YP.rotationDegrees(-90.0F));
-            p_116180_.translate(-0.5D, -0.5D, 0.5D);
-            p_116180_.mulPose(Vector3f.YP.rotationDegrees(90.0F));
+            p_116180_.mulPose(Axis.YP.rotationDegrees(-90.0F));
+            p_116180_.translate(-0.5F, -0.5F, 0.5F);
+            p_116180_.mulPose(Axis.YP.rotationDegrees(90.0F));
             TntMinecartRenderer.renderWhiteSolidBlock(this.blockRenderer, TFMGBlocks.NAPALM_BOMB.get().defaultBlockState(), p_116180_, p_116181_, p_116182_, i / 5 % 2 == 0);
             p_116180_.popPose();
             super.render(p_116177_, p_116178_, p_116179_, p_116180_, p_116181_, p_116182_);

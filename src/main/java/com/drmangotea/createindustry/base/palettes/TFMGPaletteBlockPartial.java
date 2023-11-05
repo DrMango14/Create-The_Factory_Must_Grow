@@ -8,6 +8,8 @@ import java.util.function.Supplier;
 
 import com.drmangotea.createindustry.CreateTFMG;
 import com.drmangotea.createindustry.registry.TFMGPaletteStoneTypes;
+import com.simibubi.create.Create;
+import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.utility.Lang;
 import com.tterrag.registrate.builders.BlockBuilder;
@@ -20,6 +22,7 @@ import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonnullType;
 
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -135,8 +138,9 @@ public abstract class TFMGPaletteBlockPartial<B extends Block> {
         @Override
         protected void createRecipes(TFMGPaletteStoneTypes type, BlockEntry<? extends Block> patternBlock,
                                      DataGenContext<Block, ? extends Block> c, RegistrateRecipeProvider p) {
-            p.stairs(DataIngredient.items(patternBlock), c::get, c.getName(), false);
-            p.stonecutting(DataIngredient.tag(type.materialTag), c::get, 1);
+            RecipeCategory category = RecipeCategory.BUILDING_BLOCKS;
+            p.stairs(DataIngredient.items(patternBlock.get()), category, c::get, c.getName(), false);
+            p.stonecutting(DataIngredient.tag(type.materialTag), category, c::get, 1);
         }
 
     }
@@ -197,20 +201,21 @@ public abstract class TFMGPaletteBlockPartial<B extends Block> {
         @Override
         protected void createRecipes(TFMGPaletteStoneTypes type, BlockEntry<? extends Block> patternBlock,
                                      DataGenContext<Block, ? extends Block> c, RegistrateRecipeProvider p) {
-            p.slab(DataIngredient.items(patternBlock), c::get, c.getName(), false);
-            p.stonecutting(DataIngredient.tag(type.materialTag), c::get, 2);
+            RecipeCategory category = RecipeCategory.BUILDING_BLOCKS;
+            p.slab(DataIngredient.items(patternBlock.get()), category, c::get, c.getName(), false);
+            p.stonecutting(DataIngredient.tag(type.materialTag), category, c::get, 2);
             DataIngredient ingredient = DataIngredient.items(c.get());
-            ShapelessRecipeBuilder.shapeless(patternBlock.get())
+            ShapelessRecipeBuilder.shapeless(category, patternBlock.get())
                     .requires(ingredient)
                     .requires(ingredient)
                     .unlockedBy("has_" + c.getName(), ingredient.getCritereon(p))
-                    .save(p, CreateTFMG.MOD_ID + ":" + c.getName() + "_recycling");
+                    .save(p, Create.ID + ":" + c.getName() + "_recycling");
         }
 
         @Override
         protected BlockBuilder<SlabBlock, CreateRegistrate> transformBlock(
                 BlockBuilder<SlabBlock, CreateRegistrate> builder, String variantName, TFMGPaletteBlockPattern pattern) {
-            builder.loot((lt, block) -> lt.add(block, RegistrateBlockLootTables.createSlabItemTable(block)));
+            builder.loot((lt, block) -> lt.add(block, lt.createSlabItemTable(block)));
             return super.transformBlock(builder, variantName, pattern);
         }
 
@@ -254,9 +259,10 @@ public abstract class TFMGPaletteBlockPartial<B extends Block> {
         @Override
         protected void createRecipes(TFMGPaletteStoneTypes type, BlockEntry<? extends Block> patternBlock,
                                      DataGenContext<Block, ? extends Block> c, RegistrateRecipeProvider p) {
-            p.stonecutting(DataIngredient.tag(type.materialTag), c::get, 1);
-            DataIngredient ingredient = DataIngredient.items(patternBlock);
-            ShapedRecipeBuilder.shaped(c.get(), 6)
+            RecipeCategory category = RecipeCategory.BUILDING_BLOCKS;
+            p.stonecutting(DataIngredient.tag(type.materialTag), category, c::get, 1);
+            DataIngredient ingredient = DataIngredient.items(patternBlock.get());
+            ShapedRecipeBuilder.shaped(category, c.get(), 6)
                     .pattern("XXX")
                     .pattern("XXX")
                     .define('X', ingredient)

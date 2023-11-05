@@ -13,6 +13,7 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -74,14 +75,14 @@ public class DistillationCategory extends CreateRecipeCategory<DistillationRecip
 	}
 
 	@Override
-	public void draw(DistillationRecipe recipe, IRecipeSlotsView iRecipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
+	public void draw(DistillationRecipe recipe, IRecipeSlotsView iRecipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
 		distiller
-				.draw(matrixStack, 65, 27);
-		AllGuiTextures.JEI_ARROW.render(matrixStack, 20, 80);
-		AllGuiTextures.JEI_ARROW.render(matrixStack, 100, 14);
-		AllGuiTextures.JEI_ARROW.render(matrixStack, 100, 35);
-		AllGuiTextures.JEI_ARROW.render(matrixStack, 100, 57);
-		AllGuiTextures.JEI_DOWN_ARROW.render(matrixStack, 100, 79);
+				.draw(graphics, 65, 27);
+		AllGuiTextures.JEI_ARROW.render(graphics, 20, 80);
+		AllGuiTextures.JEI_ARROW.render(graphics, 100, 14);
+		AllGuiTextures.JEI_ARROW.render(graphics, 100, 35);
+		AllGuiTextures.JEI_ARROW.render(graphics, 100, 57);
+		AllGuiTextures.JEI_DOWN_ARROW.render(graphics, 100, 79);
 	}
 
 }

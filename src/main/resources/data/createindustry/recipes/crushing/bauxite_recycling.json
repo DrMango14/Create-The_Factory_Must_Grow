@@ -18,14 +18,6 @@
       "chance": 0.15
     }
   ],
-  "processingTime": 250,
-  "conditions": [
-    {
-      "value": {
-        "tag": "forge:ores/aluminum",
-        "type": "forge:tag_empty"
-      },
-      "type": "forge:not"
-    }
-  ]
+  "processingTime": 250
+
 }

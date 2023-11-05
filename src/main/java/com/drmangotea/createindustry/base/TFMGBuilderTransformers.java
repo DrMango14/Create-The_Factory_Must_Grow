@@ -3,6 +3,7 @@ package com.drmangotea.createindustry.base;
 import com.drmangotea.createindustry.blocks.decoration.doors.TFMGSlidingDoorBlock;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.contraptions.behaviour.DoorMovingInteraction;
+import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlock;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorMovementBehaviour;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.ModelGen;
@@ -10,11 +11,10 @@ import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.client.model.generators.ModelFile;
 
 import static com.simibubi.create.AllInteractionBehaviours.interactionBehaviour;
@@ -22,11 +22,11 @@ import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 
-
+@SuppressWarnings("removal")
 public class TFMGBuilderTransformers {
 
     public static <B extends TFMGSlidingDoorBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> slidingDoor(String type) {
-        return b -> b.initialProperties(Material.METAL) // for villager AI..
+        return b -> b.initialProperties(() -> Blocks.IRON_DOOR)
                 .properties(p -> p.requiresCorrectToolForDrops()
                         .strength(3.0F, 6.0F))
                 .blockstate((c, p) -> {
@@ -41,7 +41,7 @@ public class TFMGBuilderTransformers {
                 .tag(BlockTags.DOORS)
                 .tag(BlockTags.WOODEN_DOORS) // for villager AI
                 .tag(AllTags.AllBlockTags.NON_DOUBLE_DOOR.tag)
-                .loot((lr, block) -> lr.add(block, BlockLoot.createDoorTable(block)))
+                .loot((lr, block) -> lr.add(block, lr.createDoorTable(block)))
                 .item()
                 .tag(ItemTags.DOORS)
                 .tag(AllTags.AllItemTags.CONTRAPTION_CONTROLLED.tag)

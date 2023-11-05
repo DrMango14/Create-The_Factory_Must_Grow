@@ -10,13 +10,15 @@ import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.foundation.utility.Iterate;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.CapabilityItemHandler;
+
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
@@ -46,9 +48,9 @@ public class AbstractDistillationRecipe extends ProcessingRecipe<SmartInventory>
 
     private static boolean apply(DistilleryControllerBlockEntity controller, Recipe<?> recipe, boolean test) {
         boolean isItemlessRecipe = recipe instanceof AbstractDistillationRecipe;
-        IItemHandler availableItems = controller.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        IItemHandler availableItems = controller.getCapability(ForgeCapabilities.ITEM_HANDLER)
                 .orElse(null);
-        IFluidHandler availableFluids = controller.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+        IFluidHandler availableFluids = controller.getCapability(ForgeCapabilities.FLUID_HANDLER)
                 .orElse(null);
 
         if (availableItems == null || availableFluids == null)
@@ -121,7 +123,8 @@ public class AbstractDistillationRecipe extends ProcessingRecipe<SmartInventory>
                     recipeOutputFluids.addAll(ItemlessRecipe.getFluidResults());
 
                 } else {
-                    recipeOutputItems.add(recipe.getResultItem());
+                    RegistryAccess registryAccess = Minecraft.getInstance().level.registryAccess();
+                    recipeOutputItems.add(recipe.getResultItem(registryAccess));
                 }
             }
 
@@ -142,9 +145,9 @@ public class AbstractDistillationRecipe extends ProcessingRecipe<SmartInventory>
     }
     private static boolean apply2(DistillationControllerBlockEntity controller, Recipe<?> recipe, boolean test) {
         boolean isItemlessRecipe = recipe instanceof AbstractDistillationRecipe;
-        IItemHandler availableItems = controller.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        IItemHandler availableItems = controller.getCapability(ForgeCapabilities.ITEM_HANDLER)
                 .orElse(null);
-        IFluidHandler availableFluids = controller.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+        IFluidHandler availableFluids = controller.getCapability(ForgeCapabilities.FLUID_HANDLER)
                 .orElse(null);
 
         if (availableItems == null || availableFluids == null)
@@ -217,7 +220,8 @@ public class AbstractDistillationRecipe extends ProcessingRecipe<SmartInventory>
                         recipeOutputFluids.addAll(ItemlessRecipe.getFluidResults());
 
                     } else {
-                        recipeOutputItems.add(recipe.getResultItem());
+                        RegistryAccess registryAccess = Minecraft.getInstance().level.registryAccess();
+                        recipeOutputItems.add(recipe.getResultItem(registryAccess));
                     }
                 }
 

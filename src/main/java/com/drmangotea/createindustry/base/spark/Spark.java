@@ -46,9 +46,9 @@ public class Spark extends ThrowableProjectile {
         if (this.isInWaterOrRain()) {
             this.discard();
         }
-        if(this.level.isClientSide) {
+        if(this.level().isClientSide) {
 
-            this.level.addParticle(ParticleTypes.FLAME, this.getX(), this.getY(), this.getZ(), this.random.nextGaussian() * 0.05D, -this.getDeltaMovement().y * 0.5D, this.random.nextGaussian() * 0.05D);
+            this.level().addParticle(ParticleTypes.FLAME, this.getX(), this.getY(), this.getZ(), this.random.nextGaussian() * 0.05D, -this.getDeltaMovement().y * 0.5D, this.random.nextGaussian() * 0.05D);
         }
 }
 
@@ -66,19 +66,19 @@ public class Spark extends ThrowableProjectile {
             ParticleOptions particleoptions = this.getParticle();
 
             for(int i = 0; i < 8; ++i) {
-                this.level.addParticle(particleoptions, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+                this.level().addParticle(particleoptions, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
 
     }
     protected void onHitBlock(BlockHitResult p_37384_) {
         super.onHitBlock(p_37384_);
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             Entity entity = this.getOwner();
-            if (!(entity instanceof Mob) || net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this)) {
+            if (!(entity instanceof Mob) || net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level(), this)) {
                 BlockPos blockpos = p_37384_.getBlockPos().relative(p_37384_.getDirection());
-                if (this.level.isEmptyBlock(blockpos)) {
-                    this.level.setBlockAndUpdate(blockpos, BaseFireBlock.getState(this.level, blockpos));
+                if (this.level().isEmptyBlock(blockpos)) {
+                    this.level().setBlockAndUpdate(blockpos, BaseFireBlock.getState(this.level(), blockpos));
                 }
             }
 
@@ -87,7 +87,7 @@ public class Spark extends ThrowableProjectile {
 
     protected void onHitEntity(EntityHitResult p_37386_) {
         super.onHitEntity(p_37386_);
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             Entity entity = p_37386_.getEntity();
             Entity entity1 = this.getOwner();
             int i = entity.getRemainingFireTicks();
@@ -100,11 +100,11 @@ public class Spark extends ThrowableProjectile {
     protected void onHit(HitResult p_37406_) {
         super.onHit(p_37406_);
 
-        if (!this.level.isClientSide) {
-            this.level.broadcastEntityEvent(this, (byte)3);
+        if (!this.level().isClientSide) {
+            this.level().broadcastEntityEvent(this, (byte)3);
 
 
-            //this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 2.0F, Explosion.BlockInteraction.NONE);
+            //this.level().explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 2.0F, Explosion.BlockInteraction.NONE);
             this.discard();
         }
 
