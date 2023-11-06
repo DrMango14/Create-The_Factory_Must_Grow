@@ -8,7 +8,7 @@
   "create.goggles.misc.dot_three": "...",
   "create.goggles.misc.storage_info": "Storage Info:",
   "create.goggles.fluid_in_tank": "Tank Contents:",
-  "create.goggles.surface_scanner.no_rotation": "Machine Not Powered",
+  "create.goggles.surface_scanner.no_rotation": "Machine Unpowered",
   "create.goggles.surface_scanner.no_deposit": "No Deposit Found",
   "create.goggles.surface_scanner.deposit_found": "Deposit Located!",
   "create.goggles.surface_scanner.distance": "Distance: %1$s Blocks",
