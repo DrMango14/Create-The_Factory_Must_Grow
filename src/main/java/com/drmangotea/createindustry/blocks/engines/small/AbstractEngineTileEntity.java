@@ -4,13 +4,12 @@ package com.drmangotea.createindustry.blocks.engines.small;
 import com.drmangotea.createindustry.blocks.engines.small.turbine.TurbineEngineTileEntity;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.drmangotea.createindustry.registry.TFMGFluids;
-import com.simibubi.create.AllSoundEvents;
+import com.drmangotea.createindustry.registry.TFMGSoundEvents;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.Lang;
@@ -444,7 +443,7 @@ public void write(CompoundTag compound, boolean clientPacket) {
             soundTimer++;
 
          //   if(!isExhaustTankFull()) {
-           if (soundTimer >= ((16-signal)/2)+1) {
+           if (soundTimer >= ((16-signal)/0.8)+1) {
                if(signal!=0&&
                        hasBackPart()&&
                        tankInventory.getFluidAmount()!=0 &&
@@ -543,11 +542,11 @@ public void write(CompoundTag compound, boolean clientPacket) {
     private void makeSound(){
         soundTimer=0;
         if(this instanceof TurbineEngineTileEntity){
-            AllSoundEvents.WHISTLE_CHIFF.playAt(level, worldPosition, 0.03f, .2f, false);
+            TFMGSoundEvents.ENGINE.playAt(level, worldPosition, 0.4f, 1.5f, false);
         }
-        //else
+        else
 
-       // CISoundEvents.DIESEL_ENGINE_SOUNDS.playAt(level, worldPosition, 0.9f, .1f, false);
+            TFMGSoundEvents.ENGINE.playAt(level, worldPosition, 0.6f, 1f, false);
 
 
     }

@@ -54,16 +54,19 @@ public class CreateTFMG
         TFMGCreativeModeTabs.init();
         TFMGFluids.register();
         TFMGPaletteBlocks.register();
+        TFMGSoundEvents.prepare();
 
         TFMGColoredFires.register(modEventBus);
         TFMGFeatures.register(modEventBus);
         TFMGRecipeTypes.register(modEventBus);
 
         //
+        MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(EventPriority.LOWEST, CreateTFMG::gatherData);
+        modEventBus.addListener(TFMGSoundEvents::register);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> CreateTFMGClient::new);
         modEventBus.addListener(this::clientSetup);
-        MinecraftForge.EVENT_BUS.register(this);
+
     }
     @SuppressWarnings("removal")
     public static void gatherData(GatherDataEvent event) {

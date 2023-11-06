@@ -2,14 +2,14 @@
   "type": "createindustry:coking",
   "ingredients": [
     {
-      "count": 20,
+      "count": 10,
       "item": "minecraft:coal"
     }
   ],
-  "processingTime": 2000,
+  "processingTime": 1000,
   "results": [
     {
-      "count": 20,
+      "count": 10,
       "item": "createindustry:coal_coke"
     }
   ,

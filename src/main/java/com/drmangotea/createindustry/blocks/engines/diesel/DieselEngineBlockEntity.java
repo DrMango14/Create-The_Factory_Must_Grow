@@ -1,11 +1,10 @@
 package com.drmangotea.createindustry.blocks.engines.diesel;
 
 
-import com.drmangotea.createindustry.CreateTFMG;
 import com.drmangotea.createindustry.blocks.engines.diesel.engine_expansion.DieselEngineExpansionBlockEntity;
-import com.drmangotea.createindustry.registry.TFMGBlockEntities;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.drmangotea.createindustry.registry.TFMGFluids;
+import com.drmangotea.createindustry.registry.TFMGSoundEvents;
 import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
@@ -17,7 +16,6 @@ import com.simibubi.create.content.kinetics.steamEngine.SteamEngineBlock;
 import com.simibubi.create.content.kinetics.steamEngine.SteamEngineValueBox;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
@@ -28,10 +26,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Direction.AxisDirection;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -129,7 +124,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 		super.tick();
 		Direction direction;
 
-
+		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> this::makeSound);
 
 			if(getBlockState().getValue(FACE)==AttachFace.WALL)
 				expansionPos = this.getBlockPos().relative(getBlockState().getValue(FACING).getOpposite());
@@ -206,7 +201,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 		}
 
 		shaft.update(worldPosition,  conveyedSpeedLevel, engineStrength);
-		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> this::makeSound);
+
 	}
 	@OnlyIn(Dist.CLIENT)
 	private void makeSound(){
@@ -214,8 +209,8 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 		PoweredShaftBlockEntity ste = target.get();
 		if (ste == null)
 			return;
-		if (!ste.isPoweredBy(worldPosition) || ste.engineEfficiency == 0)
-			return;
+		//if (engineStrength == 0)
+		//	return;
 		if (targetAngle == null)
 			return;
 
@@ -231,13 +226,13 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 			prevAngle = angle;
 			return;
 		}
+
 		if (angle < 0 && !(prevAngle < -180 && angle > -180)) {
 			prevAngle = angle;
 			return;
 		}
 
-				float pitch = 1.18f - level.random.nextFloat() * .25f;
-		//CISoundEvents.DIESEL_ENGINE_SOUNDS.playAt(level, worldPosition, 0.3f, .2f, false);
+		TFMGSoundEvents.ENGINE.playAt(level, worldPosition, 1.0f, 1f, false);
 
 		prevAngle = angle;
 	}
@@ -392,7 +387,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 		if (!TFMGBlocks.DIESEL_ENGINE.has(blockState))
 			return null;
 
-		Direction facing = DieselEngineBlock.getFacing(blockState);
+		Direction facing = SteamEngineBlock.getFacing(blockState);
 		PoweredShaftBlockEntity shaft = getShaft();
 		Axis facingAxis = facing.getAxis();
 		Axis axis = Axis.Y;

@@ -187,14 +187,14 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
         if(lastRecipe!=null
                 &&isController
                 &&timer==-1
-                &&inputInventory.getItem(0).getCount()>=20&&
+                &&inputInventory.getItem(0).getCount()>=10&&
                 (tank2.getPrimaryHandler().getFluidAmount()+CARBON_DIOXIDE_PRODUCTION)<=tank2.getPrimaryHandler().getCapacity()&&
                 (tank1.getPrimaryHandler().getFluidAmount()+lastRecipe.getFluidResults().get(0).getAmount())<=tank1.getPrimaryHandler().getCapacity(
 
 
         )){
             timer = lastRecipe.getProcessingDuration();
-            inputInventory.setItem(0,new ItemStack(inputInventory.getItem(0).getItem(),inputInventory.getItem(0).getCount()-20));
+            inputInventory.setItem(0,new ItemStack(inputInventory.getItem(0).getItem(),inputInventory.getItem(0).getCount()-10));
 
         }
       //  if(lastRecipe != null)
