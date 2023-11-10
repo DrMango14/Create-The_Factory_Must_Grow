@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "createindustry:fluid/napalm_still"
+    "particle": "createindustry:fluid/cooling_fluid_still"
   }
 }

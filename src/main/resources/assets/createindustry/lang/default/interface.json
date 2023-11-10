@@ -58,5 +58,11 @@
   "create.goggles.pumpjack.fluid_amount": "Fluid Amount:",
   "create.goggles.machine_input.info": "Machine Input Info",
   "create.goggles.machine_input.no_rot": "No Rotation Provided!",
-  "create.goggles.machine_input.power_level": "Power Level: "
+  "create.goggles.machine_input.power_level": "Power Level: ",
+
+  "create.recipe.distillation": "Distillation",
+  "create.recipe.advanced_distillation": "Advanced Distillation",
+  "create.recipe.industrial_blasting": "Industrial Blasting",
+  "create.recipe.casting": "Casting",
+  "create.recipe.coking": "Coking"
 }

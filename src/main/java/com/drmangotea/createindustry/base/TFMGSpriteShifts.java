@@ -45,8 +45,8 @@ public class TFMGSpriteShifts {
     public static final CTSpriteShiftEntry
             STEEL_ENCASED_COGWHEEL_SIDE = vertical("steel_encased_cogwheel_side"),
             STEEL_ENCASED_COGWHEEL_OTHERSIDE = horizontal("steel_encased_cogwheel_side"),
-            HEAVY_CASING_ENCASED_COGWHEEL_SIDE = vertical("heavy_casing_encased_cogwheel_side"),
-            HEAVY_CASING_ENCASED_COGWHEEL_OTHERSIDE = horizontal("heavy_casing_encased_cogwheel_side");
+            HEAVY_CASING_ENCASED_COGWHEEL_SIDE = vertical("heavy_machinery_encased_cogwheel_side"),
+            HEAVY_CASING_ENCASED_COGWHEEL_OTHERSIDE = horizontal("heavy_machinery_encased_cogwheel_side");
 
     //////////////////////
     public static CTSpriteShiftEntry omni(String name) {

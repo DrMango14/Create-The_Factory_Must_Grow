@@ -64,6 +64,8 @@ public class TFMGPonderIndex {
                     .add(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER)
                     .add(TFMGBlocks.PUMPJACK_BASE)
                     .add(TFMGBlocks.PUMPJACK_HAMMER_HOLDER)
+                    .add(TFMGBlocks.DIESEL_ENGINE)
+                    .add(TFMGBlocks.DIESEL_ENGINE_EXPANSION)
                     .add(TFMGBlocks.PUMPJACK_CRANK);
 
             PonderRegistry.TAGS.forTag(TFMGPonderTag.METALLURGY)

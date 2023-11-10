@@ -518,11 +518,11 @@ public void write(CompoundTag compound, boolean clientPacket) {
         float newEfficiencyModifier = 1.4f;
 
         if(lubricationOilTank.getFluidAmount()>0) {
-            newPowerModifier+=.3f;
+            //newPowerModifier+=.3f;
             newEfficiencyModifier-=.1f;
         }
         if(coolantTank.getFluidAmount()>0) {
-            newPowerModifier+=.1f;
+            newPowerModifier+=.2f;
             newEfficiencyModifier-=.3f;
         }
 
@@ -579,14 +579,6 @@ public void write(CompoundTag compound, boolean clientPacket) {
             }
         };
     }
-
-
-
-
-
-
-
-
 
 
     private void onPositionChanged() {

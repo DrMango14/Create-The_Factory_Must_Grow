@@ -8,12 +8,14 @@ import com.drmangotea.createindustry.blocks.concrete.ConcreteFluid;
 import com.drmangotea.createindustry.blocks.concrete.ConcreteFluidType;
 import com.drmangotea.createindustry.blocks.concrete.asphalt.AsphaltFluid;
 import com.drmangotea.createindustry.blocks.fluids.BurnableFluid;
+import com.drmangotea.createindustry.items.CreosoteBucketItem;
 import com.simibubi.create.AllTags;
 
 import com.simibubi.create.content.fluids.VirtualFluid;
 import com.tterrag.registrate.util.entry.FluidEntry;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BucketItem;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
 import static com.drmangotea.createindustry.CreateTFMG.REGISTRATE;
@@ -316,7 +318,7 @@ public class TFMGFluids {
                             .explosionResistance(100f))
 
                     .source(BurnableFluid.Source::new)
-                    .bucket()
+                    .bucket(CreosoteBucketItem::new)
                     //.tag(AllTags.forgeItemTag("buckets/napalm"))
                     .build()
                     .register();

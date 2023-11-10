@@ -51,6 +51,8 @@ import com.drmangotea.createindustry.blocks.pipes.normal.LockablePipeBlockEntity
 import com.drmangotea.createindustry.blocks.tanks.SteelFluidTankRenderer;
 import com.drmangotea.createindustry.blocks.tanks.SteelTankBlockEntity;
 import com.drmangotea.createindustry.blocks.engines.small.UniversalEngineRenderer;
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.Create;
 import com.simibubi.create.content.fluids.pipes.FluidPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.SmartFluidPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.StraightPipeBlockEntity;
@@ -61,8 +63,10 @@ import com.simibubi.create.content.fluids.pipes.valve.FluidValveRenderer;
 import com.simibubi.create.content.fluids.pump.PumpBlockEntity;
 import com.simibubi.create.content.fluids.pump.PumpCogInstance;
 import com.simibubi.create.content.fluids.pump.PumpRenderer;
-import com.simibubi.create.content.kinetics.base.HalfShaftInstance;
-import com.simibubi.create.content.kinetics.base.HorizontalHalfShaftInstance;
+import com.simibubi.create.content.kinetics.base.*;
+import com.simibubi.create.content.kinetics.simpleRelays.SimpleKineticBlockEntity;
+import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogInstance;
+import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogRenderer;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
@@ -333,6 +337,28 @@ public class TFMGBlockEntities {
             .instance(() -> TFMGFlywheelInstance::new, false)
             .validBlocks(TFMGBlocks.STEEL_FLYWHEEL,TFMGBlocks.ALUMINUM_FLYWHEEL,TFMGBlocks.CAST_IRON_FLYWHEEL)
             .renderer(() -> TFMGFlywheelRenderer::new)
+            .register();
+
+
+    public static final BlockEntityEntry<SimpleKineticBlockEntity> TFMG_ENCASED_COGWHEEL = REGISTRATE
+            .blockEntity("tfmg_encased_cogwheel", SimpleKineticBlockEntity::new)
+            .instance(() -> EncasedCogInstance::small, false)
+            .validBlocks(TFMGBlocks.STEEL_ENCASED_COGWHEEL, TFMGBlocks.HEAVY_CASING_ENCASED_COGWHEEL)
+            .renderer(() -> EncasedCogRenderer::small)
+            .register();
+
+    public static final BlockEntityEntry<SimpleKineticBlockEntity> TFMG_ENCASED_LARGE_COGWHEEL = REGISTRATE
+            .blockEntity("tfmg_encased_large_cogwheel", SimpleKineticBlockEntity::new)
+            .instance(() -> EncasedCogInstance::large, false)
+            .validBlocks(TFMGBlocks.STEEL_ENCASED_LARGE_COGWHEEL, TFMGBlocks.HEAVY_CASING_ENCASED_LARGE_COGWHEEL)
+            .renderer(() -> EncasedCogRenderer::large)
+            .register();
+
+    public static final BlockEntityEntry<KineticBlockEntity> TFMG_ENCASED_SHAFT = REGISTRATE
+            .blockEntity("tfmg_encased_shaft", KineticBlockEntity::new)
+            .instance(() -> ShaftInstance::new, false)
+            .validBlocks(TFMGBlocks.STEEL_ENCASED_SHAFT, TFMGBlocks.HEAVY_CASING_ENCASED_SHAFT)
+            .renderer(() -> ShaftRenderer::new)
             .register();
 
 
