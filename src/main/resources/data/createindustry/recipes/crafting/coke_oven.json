@@ -10,7 +10,7 @@
     "I": {
       "item": "create:industrial_iron_block"
     },
-    "I": {
+    "C": {
       "tag": "forge:ingots/cast_iron"
     }
   },
