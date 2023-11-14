@@ -128,7 +128,7 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
 
         /////
         RecipeWrapper inventoryIn = new RecipeWrapper(inputInventory);
-        if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level)) {
+        if ((lastRecipe == null || !lastRecipe.matches(inventoryIn, level))&&timer==-1) {
             Optional<CokingRecipe> recipe = TFMGRecipeTypes.COKING.find(inventoryIn, level);
             if (!recipe.isPresent()) {
                 timer = -1;
@@ -194,7 +194,7 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
 
         )){
             timer = lastRecipe.getProcessingDuration();
-            inputInventory.setItem(0,new ItemStack(inputInventory.getItem(0).getItem(),inputInventory.getItem(0).getCount()-10));
+            inputInventory.setItem(0,new ItemStack(inputInventory.getItem(0).getItem(),inputInventory.getItem(0).getCount()-5));
 
         }
       //  if(lastRecipe != null)
@@ -213,7 +213,7 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
         ) {
             timer--;
             tank1.getPrimaryHandler().setFluid(new FluidStack(lastRecipe.getFluidResults().get(0), tank1.getPrimaryHandler().getFluidAmount()+lastRecipe.getFluidResults().get(0).getAmount()));
-            tank2.getPrimaryHandler().setFluid(new FluidStack(TFMGFluids.CARBON_DIOXIDE.getSource(),tank2.getPrimaryHandler().getFluidAmount()+CARBON_DIOXIDE_PRODUCTION));
+            //tank2.getPrimaryHandler().setFluid(new FluidStack(TFMGFluids.CARBON_DIOXIDE.getSource(),tank2.getPrimaryHandler().getFluidAmount()+CARBON_DIOXIDE_PRODUCTION));
         }
 
     }
@@ -225,13 +225,13 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
             return;
         if(!isController)
             return;
-        RecipeWrapper inventoryIn = new RecipeWrapper(inputInventory);
-        if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level)) {
-            Optional<CokingRecipe> recipe = TFMGRecipeTypes.COKING.find(inventoryIn, level);
-            if (!recipe.isPresent())
-                return;
-            lastRecipe = recipe.get();
-        }
+        //RecipeWrapper inventoryIn = new RecipeWrapper(inputInventory);
+        //if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level)) {
+        //    Optional<CokingRecipe> recipe = TFMGRecipeTypes.COKING.find(inventoryIn, level);
+        //    if (!recipe.isPresent())
+        //        return;
+        //    lastRecipe = recipe.get();
+        //}
         BlockPos toSpawn = getBlockPos().below().relative(this.getBlockState().getValue(FACING));
         //
         ItemEntity itemToSpawn = new ItemEntity(level,toSpawn.getX()+0.5f,toSpawn.getY()+0.5f,toSpawn.getZ()+0.5f, lastRecipe.getResultItem().copy());
@@ -368,10 +368,10 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
         //    Lang.translate("goggles.surface_scanner.distance",controller.getBlockPos().getY())
         //            .style(ChatFormatting.DARK_BLUE)
         //            .forGoggles(tooltip,1);
-        //if(controller !=null)
-        //    Lang.translate("goggles.surface_scanner.distance",controller.getBlockPos().getZ())
-        //            .style(ChatFormatting.DARK_BLUE)
-        //            .forGoggles(tooltip,1);
+       // if(controller !=null)
+       //     Lang.translate("goggles.surface_scanner.distance",controller.timer)
+       //             .style(ChatFormatting.DARK_BLUE)
+       //             .forGoggles(tooltip,1);
 //
         //if(controller==null){
         //    Lang.translate("aaaaaaaaaaaaaaaaaaaaaaaaaaa")

@@ -343,21 +343,21 @@ public class TFMGBlockEntities {
     public static final BlockEntityEntry<SimpleKineticBlockEntity> TFMG_ENCASED_COGWHEEL = REGISTRATE
             .blockEntity("tfmg_encased_cogwheel", SimpleKineticBlockEntity::new)
             .instance(() -> EncasedCogInstance::small, false)
-            .validBlocks(TFMGBlocks.STEEL_ENCASED_COGWHEEL, TFMGBlocks.HEAVY_CASING_ENCASED_COGWHEEL)
+      //      .validBlocks(TFMGBlocks.STEEL_ENCASED_COGWHEEL, TFMGBlocks.HEAVY_CASING_ENCASED_COGWHEEL)
             .renderer(() -> EncasedCogRenderer::small)
             .register();
 
     public static final BlockEntityEntry<SimpleKineticBlockEntity> TFMG_ENCASED_LARGE_COGWHEEL = REGISTRATE
             .blockEntity("tfmg_encased_large_cogwheel", SimpleKineticBlockEntity::new)
             .instance(() -> EncasedCogInstance::large, false)
-            .validBlocks(TFMGBlocks.STEEL_ENCASED_LARGE_COGWHEEL, TFMGBlocks.HEAVY_CASING_ENCASED_LARGE_COGWHEEL)
+            //    .validBlocks(TFMGBlocks.STEEL_ENCASED_LARGE_COGWHEEL, TFMGBlocks.HEAVY_CASING_ENCASED_LARGE_COGWHEEL)
             .renderer(() -> EncasedCogRenderer::large)
             .register();
 
     public static final BlockEntityEntry<KineticBlockEntity> TFMG_ENCASED_SHAFT = REGISTRATE
             .blockEntity("tfmg_encased_shaft", KineticBlockEntity::new)
             .instance(() -> ShaftInstance::new, false)
-            .validBlocks(TFMGBlocks.STEEL_ENCASED_SHAFT, TFMGBlocks.HEAVY_CASING_ENCASED_SHAFT)
+            //   .validBlocks(TFMGBlocks.STEEL_ENCASED_SHAFT, TFMGBlocks.HEAVY_CASING_ENCASED_SHAFT)
             .renderer(() -> ShaftRenderer::new)
             .register();
 

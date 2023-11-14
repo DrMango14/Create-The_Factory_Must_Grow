@@ -1333,66 +1333,66 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
 
     //------------------------ENCASED BLOCKS-----------------//
 
-    public static final BlockEntry<TFMGEncasedShaftBlock> STEEL_ENCASED_SHAFT =
-            REGISTRATE.block("steel_encased_shaft", p -> new TFMGEncasedShaftBlock(p, TFMGBlocks.STEEL_CASING::get))
-                    .properties(p -> p.color(MaterialColor.PODZOL))
-                    .transform(TFMGBuilderTransformers.encasedShaft("steel", () -> TFMGSpriteShifts.STEEL_CASING))
-                    .transform(EncasingRegistry.addVariantTo(AllBlocks.SHAFT))
-                    .transform(axeOrPickaxe())
-                    .register();
-
-    public static final BlockEntry<TFMGEncasedShaftBlock> HEAVY_CASING_ENCASED_SHAFT =
-            REGISTRATE.block("heavy_casing_encased_shaft", p -> new TFMGEncasedShaftBlock(p, TFMGBlocks.HEAVY_MACHINERY_CASING::get))
-                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
-                    .transform(TFMGBuilderTransformers.encasedShaft("heavy_casing", () -> TFMGSpriteShifts.HEAVY_MACHINERY_CASING))
-                    .transform(EncasingRegistry.addVariantTo(AllBlocks.SHAFT))
-                    .transform(axeOrPickaxe())
-                    .register();
-
-    /////////
-
-    public static final BlockEntry<TFMGEncasedCogwheelBlock> STEEL_ENCASED_COGWHEEL =
-            REGISTRATE.block("steel_encased_cogwheel", p -> new TFMGEncasedCogwheelBlock(p, false, TFMGBlocks.STEEL_CASING::get))
-            .properties(p -> p.color(MaterialColor.PODZOL))
-            .transform(TFMGBuilderTransformers.encasedCogwheel("steel", () -> TFMGSpriteShifts.STEEL_CASING))
-            .transform(EncasingRegistry.addVariantTo(AllBlocks.COGWHEEL))
-            .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCogCTBehaviour(TFMGSpriteShifts.STEEL_CASING,
-                    Couple.create(TFMGSpriteShifts.STEEL_ENCASED_COGWHEEL_SIDE,
-                            TFMGSpriteShifts.STEEL_ENCASED_COGWHEEL_OTHERSIDE))))
-            .transform(axeOrPickaxe())
-            .register();
-
-    public static final BlockEntry<TFMGEncasedCogwheelBlock> HEAVY_CASING_ENCASED_COGWHEEL =
-            REGISTRATE.block("heavy_casing_encased_cogwheel", p -> new TFMGEncasedCogwheelBlock(p, false, TFMGBlocks.HEAVY_MACHINERY_CASING::get))
-                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
-                    .transform(TFMGBuilderTransformers.encasedCogwheel("heavy_casing", () -> TFMGSpriteShifts.HEAVY_MACHINERY_CASING))
-                    .transform(EncasingRegistry.addVariantTo(AllBlocks.COGWHEEL))
-                    .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCogCTBehaviour(TFMGSpriteShifts.HEAVY_MACHINERY_CASING,
-                            Couple.create(TFMGSpriteShifts.HEAVY_CASING_ENCASED_COGWHEEL_SIDE,
-                                    TFMGSpriteShifts.HEAVY_CASING_ENCASED_COGWHEEL_OTHERSIDE))))
-                    .transform(axeOrPickaxe())
-                    .register();
-
-    //////
-    public static final BlockEntry<TFMGEncasedCogwheelBlock> STEEL_ENCASED_LARGE_COGWHEEL = REGISTRATE
-            .block("steel_encased_large_cogwheel",
-                    p -> new TFMGEncasedCogwheelBlock(p, true, TFMGBlocks.STEEL_CASING::get))
-            .properties(p -> p.color(MaterialColor.PODZOL))
-            .transform(TFMGBuilderTransformers.encasedLargeCogwheel("steel", () -> TFMGSpriteShifts.STEEL_CASING))
-            .transform(EncasingRegistry.addVariantTo(AllBlocks.LARGE_COGWHEEL))
-            .transform(axeOrPickaxe())
-            .register();
-
-    public static final BlockEntry<TFMGEncasedCogwheelBlock> HEAVY_CASING_ENCASED_LARGE_COGWHEEL = REGISTRATE
-            .block("heavy_casing_encased_large_cogwheel", p -> new TFMGEncasedCogwheelBlock(p, true, TFMGBlocks.HEAVY_MACHINERY_CASING::get))
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN))
-            .transform(TFMGBuilderTransformers.encasedLargeCogwheel("heavy_casing", () -> TFMGSpriteShifts.HEAVY_MACHINERY_CASING))
-            .transform(EncasingRegistry.addVariantTo(AllBlocks.LARGE_COGWHEEL))
-            .transform(axeOrPickaxe())
-            .register();
-
-
-
+    //public static final BlockEntry<TFMGEncasedShaftBlock> STEEL_ENCASED_SHAFT =
+    //        REGISTRATE.block("steel_encased_shaft", p -> new TFMGEncasedShaftBlock(p, TFMGBlocks.STEEL_CASING::get))
+    //                .properties(p -> p.color(MaterialColor.PODZOL))
+    //                .transform(TFMGBuilderTransformers.encasedShaft("steel", () -> TFMGSpriteShifts.STEEL_CASING))
+    //                .transform(EncasingRegistry.addVariantTo(AllBlocks.SHAFT))
+    //                .transform(axeOrPickaxe())
+    //                .register();
+//
+    //public static final BlockEntry<TFMGEncasedShaftBlock> HEAVY_CASING_ENCASED_SHAFT =
+    //        REGISTRATE.block("heavy_casing_encased_shaft", p -> new TFMGEncasedShaftBlock(p, TFMGBlocks.HEAVY_MACHINERY_CASING::get))
+    //                .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+    //                .transform(TFMGBuilderTransformers.encasedShaft("heavy_casing", () -> TFMGSpriteShifts.HEAVY_MACHINERY_CASING))
+    //                .transform(EncasingRegistry.addVariantTo(AllBlocks.SHAFT))
+    //                .transform(axeOrPickaxe())
+    //                .register();
+//
+    ///////////
+//
+    //public static final BlockEntry<TFMGEncasedCogwheelBlock> STEEL_ENCASED_COGWHEEL =
+    //        REGISTRATE.block("steel_encased_cogwheel", p -> new TFMGEncasedCogwheelBlock(p, false, TFMGBlocks.STEEL_CASING::get))
+    //        .properties(p -> p.color(MaterialColor.PODZOL))
+    //        .transform(TFMGBuilderTransformers.encasedCogwheel("steel", () -> TFMGSpriteShifts.STEEL_CASING))
+    //        .transform(EncasingRegistry.addVariantTo(AllBlocks.COGWHEEL))
+    //        .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCogCTBehaviour(TFMGSpriteShifts.STEEL_CASING,
+    //                Couple.create(TFMGSpriteShifts.STEEL_ENCASED_COGWHEEL_SIDE,
+    //                        TFMGSpriteShifts.STEEL_ENCASED_COGWHEEL_OTHERSIDE))))
+    //        .transform(axeOrPickaxe())
+    //        .register();
+//
+    //public static final BlockEntry<TFMGEncasedCogwheelBlock> HEAVY_CASING_ENCASED_COGWHEEL =
+    //        REGISTRATE.block("heavy_casing_encased_cogwheel", p -> new TFMGEncasedCogwheelBlock(p, false, TFMGBlocks.HEAVY_MACHINERY_CASING::get))
+    //                .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+    //                .transform(TFMGBuilderTransformers.encasedCogwheel("heavy_casing", () -> TFMGSpriteShifts.HEAVY_MACHINERY_CASING))
+    //                .transform(EncasingRegistry.addVariantTo(AllBlocks.COGWHEEL))
+    //                .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCogCTBehaviour(TFMGSpriteShifts.HEAVY_MACHINERY_CASING,
+    //                        Couple.create(TFMGSpriteShifts.HEAVY_CASING_ENCASED_COGWHEEL_SIDE,
+    //                                TFMGSpriteShifts.HEAVY_CASING_ENCASED_COGWHEEL_OTHERSIDE))))
+    //                .transform(axeOrPickaxe())
+    //                .register();
+//
+    ////////
+    //public static final BlockEntry<TFMGEncasedCogwheelBlock> STEEL_ENCASED_LARGE_COGWHEEL = REGISTRATE
+    //        .block("steel_encased_large_cogwheel",
+    //                p -> new TFMGEncasedCogwheelBlock(p, true, TFMGBlocks.STEEL_CASING::get))
+    //        .properties(p -> p.color(MaterialColor.PODZOL))
+    //        .transform(TFMGBuilderTransformers.encasedLargeCogwheel("steel", () -> TFMGSpriteShifts.STEEL_CASING))
+    //        .transform(EncasingRegistry.addVariantTo(AllBlocks.LARGE_COGWHEEL))
+    //        .transform(axeOrPickaxe())
+    //        .register();
+//
+    //public static final BlockEntry<TFMGEncasedCogwheelBlock> HEAVY_CASING_ENCASED_LARGE_COGWHEEL = REGISTRATE
+    //        .block("heavy_casing_encased_large_cogwheel", p -> new TFMGEncasedCogwheelBlock(p, true, TFMGBlocks.HEAVY_MACHINERY_CASING::get))
+    //        .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN))
+    //        .transform(TFMGBuilderTransformers.encasedLargeCogwheel("heavy_casing", () -> TFMGSpriteShifts.HEAVY_MACHINERY_CASING))
+    //        .transform(EncasingRegistry.addVariantTo(AllBlocks.LARGE_COGWHEEL))
+    //        .transform(axeOrPickaxe())
+    //        .register();
+//
+//
+//
     //-----------------------CONCRETE---------------------------//
     static {
         REGISTRATE.creativeModeTab(() -> TFMGCreativeModeTabs.TFMG_BUILDING_BLOCKS);
