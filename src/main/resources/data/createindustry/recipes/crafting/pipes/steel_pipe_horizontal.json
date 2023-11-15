@@ -3,18 +3,18 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "   ",
-    "SSS",
+    "EE ",
     "   "
   ],
   "key": {
 
-    "S": {
+    "E": {
       "tag": "forge:ingots/steel"
     }
   },
   "result": {
     "item": "createindustry:steel_pipe",
-    "count": 4
+    "count": 6
 
 
   }

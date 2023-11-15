@@ -5,14 +5,14 @@
     "item": "createindustry:heavy_plate"
   },
   "transitionalItem": {
-    "item": "createindustry:unprocessed_steel_mechanism"
+    "item": "createindustry:unfinished_steel_mechanism"
   },
   "sequence": [
     {
       "type": "create:deploying",
       "ingredients": [
         {
-          "item": "createindustry:unprocessed_steel_mechanism"
+          "item": "createindustry:unfinished_steel_mechanism"
         },
         {
             "tag": "forge:ingots/steel"
@@ -20,7 +20,7 @@
       ],
       "results": [
         {
-          "item": "createindustry:unprocessed_steel_mechanism"
+          "item": "createindustry:unfinished_steel_mechanism"
         }
       ]
     },
@@ -28,7 +28,7 @@
       "type": "create:deploying",
       "ingredients": [
         {
-          "item": "createindustry:unprocessed_steel_mechanism"
+          "item": "createindustry:unfinished_steel_mechanism"
         },
         {
           "tag": "forge:ingots/aluminum"
@@ -36,7 +36,7 @@
       ],
       "results": [
         {
-          "item": "createindustry:unprocessed_steel_mechanism"
+          "item": "createindustry:unfinished_steel_mechanism"
         }
       ]
     },
@@ -44,7 +44,7 @@
       "type": "create:deploying",
       "ingredients": [
         {
-          "item": "createindustry:unprocessed_steel_mechanism"
+          "item": "createindustry:unfinished_steel_mechanism"
         },
         {
           "item": "createindustry:screw"
@@ -52,7 +52,7 @@
       ],
       "results": [
         {
-          "item": "createindustry:unprocessed_steel_mechanism"
+          "item": "createindustry:unfinished_steel_mechanism"
         }
       ]
     },
@@ -60,7 +60,7 @@
       "type": "create:deploying",
       "ingredients": [
         {
-          "item": "createindustry:unprocessed_steel_mechanism"
+          "item": "createindustry:unfinished_steel_mechanism"
         },
         {
           "item": "createindustry:screwdriver"
@@ -68,7 +68,7 @@
       ],
       "results": [
         {
-          "item": "createindustry:unprocessed_steel_mechanism"
+          "item": "createindustry:unfinished_steel_mechanism"
         }
       ]
     }

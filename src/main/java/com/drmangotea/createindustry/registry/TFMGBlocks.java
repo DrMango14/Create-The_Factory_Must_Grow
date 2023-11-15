@@ -269,7 +269,7 @@ public class TFMGBlocks {
                             .strength(3.0F)
                             .requiresCorrectToolForDrops())
                     .transform(BuilderTransformers.scaffold("aluminum",
-                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), MaterialColor.TERRACOTTA_CYAN,
+                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/aluminum")), MaterialColor.TERRACOTTA_CYAN,
                             TFMGSpriteShifts.ALUMINUM_SCAFFOLD, TFMGSpriteShifts.ALUMINUM_SCAFFOLD_INSIDE, TFMGSpriteShifts.ALUMINUM_SCAFFOLD_TOP))
                     .register();
 
