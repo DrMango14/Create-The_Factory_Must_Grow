@@ -11,7 +11,7 @@
     },
     {
       "item": "createindustry:sulfur_dust",
-      "chance": 0.7
+      "chance": 0.1
     }
   ],
   "processingTime": 250

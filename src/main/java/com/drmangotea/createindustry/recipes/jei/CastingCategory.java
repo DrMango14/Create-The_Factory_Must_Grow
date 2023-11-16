@@ -36,10 +36,18 @@ public class CastingCategory extends CreateRecipeCategory<CastingRecipe> {
 
 		int y = 77;
 		for(int i = 0;i<CastingRecipe.getOutputCount(recipe);i++) {
-			builder
+
+			ItemStack stack;
+            if (i == 1) {
+                stack = recipe.getBlockResult();
+            } else
+            	stack = recipe.getIngotResult();
+
+
+            builder
 					.addSlot(RecipeIngredientRole.OUTPUT, 130, y)
 					.setBackground(getRenderedSlot(), -1, -1)
-					.addItemStack(recipe.getResultItem());
+					.addItemStack(stack);
 
 
 			ItemStack mold= TFMGItems.INGOT_MOLD.asStack();
@@ -63,7 +71,7 @@ public class CastingCategory extends CreateRecipeCategory<CastingRecipe> {
 				.addSlot(RecipeIngredientRole.INPUT, 2, 33)
 				.setBackground(getRenderedSlot(), -1, -1)
 				.addIngredients(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getInputFluid().getMatchingFluidStacks()))
-				.addTooltipCallback(addFluidTooltip(recipe.getInputFluid().getRequiredAmount()));
+				.addTooltipCallback(addFluidTooltip(111));
 
 
 	}

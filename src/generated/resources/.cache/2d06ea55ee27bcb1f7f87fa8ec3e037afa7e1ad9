@@ -1,4 +1,4 @@
-// 1.19.2	2023-11-12T13:28:07.3334941	Registrate Provider for createindustry [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-11-16T14:05:17.9404943	Registrate Provider for createindustry [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 50db526af77cf0ead08cadfd3f7daa8b84a40312 assets/createindustry/blockstates/air_intake.json
 429437419b2ec98bd716e7ba15583b84da7488d5 assets/createindustry/blockstates/aluminum_bars.json
 9e2417e479011e42ebf00685068e6b6f515f0b11 assets/createindustry/blockstates/aluminum_block.json
@@ -849,7 +849,7 @@ ce4f2860cdc0feff4778dcca1fba56469a798d17 assets/createindustry/models/item/yello
 22b37c38ee863195fba09737e007422e0af66916 assets/createindustry/models/item/zinc_grenade.json
 d2674ab227f0eeb92258f423f03ef3286de168e3 data/createindustry/advancements/recipes/createindustry.base/aluminum_bars_from_ingots_aluminum_stonecutting.json
 53b9aceb5cb31019574d63e722df0813affdcb40 data/createindustry/advancements/recipes/createindustry.base/aluminum_ladder_from_ingots_aluminum_stonecutting.json
-f50de0b789099460649a63217be0dc7408315c0f data/createindustry/advancements/recipes/createindustry.base/aluminum_scaffolding_from_ingots_steel_stonecutting.json
+009fd5fbd1380a356ff56b1789789c91cd4a50d7 data/createindustry/advancements/recipes/createindustry.base/aluminum_scaffolding_from_ingots_aluminum_stonecutting.json
 676ffb2246d0d0077aaccc5f6f2de4481b09bdf9 data/createindustry/advancements/recipes/createindustry.base/steel_bars_from_ingots_steel_stonecutting.json
 7f0a202e2cdf6c9d07aabbccb2de107f732da92d data/createindustry/advancements/recipes/createindustry.base/steel_ladder_from_ingots_steel_stonecutting.json
 341d7345e8c6384c0a1b051f4e4d69b98c4e0089 data/createindustry/advancements/recipes/createindustry.base/steel_scaffolding_from_ingots_steel_stonecutting.json
@@ -1076,7 +1076,7 @@ a2696e4085c0b77fc25e5c760087a5c0740ccaeb data/createindustry/loot_tables/blocks/
 a3522de85d35503a732771a67c7421e67ce9967f data/createindustry/loot_tables/blocks/yellow_concrete_wall.json
 ba930ee89155dc321e546aef3df7e6275e7c8f3b data/createindustry/recipes/aluminum_bars_from_ingots_aluminum_stonecutting.json
 9135989a22644e8676ab7dc6602b1a6aaf55badd data/createindustry/recipes/aluminum_ladder_from_ingots_aluminum_stonecutting.json
-1bcf4805e427e68118785fc2a0f9debb953b3286 data/createindustry/recipes/aluminum_scaffolding_from_ingots_steel_stonecutting.json
+73173b977371d01cc437cf583ce233b7a439c58a data/createindustry/recipes/aluminum_scaffolding_from_ingots_aluminum_stonecutting.json
 50fedca289c3aae4c5a2aa5e4a9facb84c847da7 data/createindustry/recipes/bauxite_from_stone_types_bauxite_stonecutting.json
 abee45903bfc415321b86d794bd4ddcd91532660 data/createindustry/recipes/bauxite_pillar_from_stone_types_bauxite_stonecutting.json
 74f16377515e1dbbf6619bdf43ae3ea8e26dd651 data/createindustry/recipes/cut_bauxite_bricks_from_stone_types_bauxite_stonecutting.json

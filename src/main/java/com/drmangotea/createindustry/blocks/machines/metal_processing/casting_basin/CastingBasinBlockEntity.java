@@ -83,9 +83,9 @@ public class CastingBasinBlockEntity extends TFMGMachineBlockEntity implements I
 
         setMold();
 
-        if(tank1.isEmpty()){
+        //if(tank1.isEmpty()){
             setCapacity();
-        }
+        //}
 
         if(type==MoldType.NONE)
             return;
