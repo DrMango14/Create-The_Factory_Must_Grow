@@ -1,4 +1,4 @@
-// 1.19.2	2023-11-16T14:05:17.9404943	Registrate Provider for createindustry [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-11-20T19:08:09.5245416	Registrate Provider for createindustry [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 50db526af77cf0ead08cadfd3f7daa8b84a40312 assets/createindustry/blockstates/air_intake.json
 429437419b2ec98bd716e7ba15583b84da7488d5 assets/createindustry/blockstates/aluminum_bars.json
 9e2417e479011e42ebf00685068e6b6f515f0b11 assets/createindustry/blockstates/aluminum_block.json
@@ -129,7 +129,7 @@ a04aa3b50ecd99ff544eec3545839c366842c1b7 assets/createindustry/blockstates/machi
 8453d4ffb2826b584ae6ef773bb113bffa26b1ea assets/createindustry/blockstates/magenta_concrete_slab.json
 4f1d369aa9c02f0c277885b3909682a95c664c78 assets/createindustry/blockstates/magenta_concrete_stairs.json
 3bc7a4d0af2794756d182fc52e661942d878b7e5 assets/createindustry/blockstates/magenta_concrete_wall.json
-3dff9e1ec59415779195d2abfa9f07bc17b428a1 assets/createindustry/blockstates/molten_metal.json
+ce7a208542270254883a475968f523a870003f14 assets/createindustry/blockstates/molten_metal.json
 30f034e7a1ffe0e36446a0b884ab4f242d61f827 assets/createindustry/blockstates/molten_slag.json
 e55a75698478f584341b6aaecfb0db76792ac694 assets/createindustry/blockstates/molten_steel.json
 c4a26bc7214af60c64265bee05f5da0cbe8f38ac assets/createindustry/blockstates/napalm.json
@@ -460,6 +460,7 @@ be225406ccfe1e027fadff7d0d00c0f77fc9f43f assets/createindustry/models/block/liqu
 6937de3a01866ccf1becffb9d0edbe22fecc5d49 assets/createindustry/models/block/magenta_concrete_wall_post.json
 16876518edec74e2ca18d638df3dbdf61302cf3f assets/createindustry/models/block/magenta_concrete_wall_side.json
 6064a0289d3b3a6c1e6cdd7fb061450877baed81 assets/createindustry/models/block/magenta_concrete_wall_side_tall.json
+92d069ac97d6691292e025af5ac73de00655666a assets/createindustry/models/block/molten_metal.json
 b1ad411dce4232640e5affc15296f184aab9e600 assets/createindustry/models/block/molten_slag.json
 c89f3bea30b47f666fc2f95d7fe6df21c9bb8fb4 assets/createindustry/models/block/molten_steel.json
 3b339d809be62ca8790afeb2cad9ace793840d27 assets/createindustry/models/block/napalm.json
@@ -657,7 +658,7 @@ c2f7be5a86f2e90c2d4df99b977e20f2d69b1560 assets/createindustry/models/item/brown
 80078af280956744a32d80f3483558659f15ed15 assets/createindustry/models/item/brown_concrete_stairs.json
 e4cd211a7f3dc7dbe2b5fc2934a4ce93a65d4c47 assets/createindustry/models/item/brown_concrete_wall.json
 bd1274aa4df047befd8aa63d073ae6a2e382432a assets/createindustry/models/item/casting_basin.json
-6b6680d10eca9b055ca4c904557258a63b4987a4 assets/createindustry/models/item/casting_spout.json
+c16644574407f152b635b950f5c15a0eb3cb1bdf assets/createindustry/models/item/casting_spout.json
 bcc628930b459ed69c16e0cc33f2e04d5c367045 assets/createindustry/models/item/cast_iron_block.json
 7dfdd11724f4ba63589d32f8418eaf78d448b14e assets/createindustry/models/item/cast_iron_distillation_controller.json
 a9894a4751c14ceddcf13cfee01305ffa950aa17 assets/createindustry/models/item/cast_iron_distillation_output.json

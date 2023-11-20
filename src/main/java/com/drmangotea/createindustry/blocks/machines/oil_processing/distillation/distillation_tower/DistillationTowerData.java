@@ -1,6 +1,7 @@
 package com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.distillation_tower;
 
 
+import com.drmangotea.createindustry.CreateTFMG;
 import com.drmangotea.createindustry.blocks.tanks.SteelTankBlock;
 import com.drmangotea.createindustry.blocks.tanks.SteelTankBlockEntity;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
@@ -68,7 +69,9 @@ public class DistillationTowerData {
     public LerpedFloat gauge = LerpedFloat.linear();
 
     public void tick(SteelTankBlockEntity controller) {
-        towerLevel = Math.min(activeHeat,  maxHeatForSize);
+
+
+        towerLevel = activeHeat;
         tank=controller;
        // tank.tankInventory.drain(2, IFluidHandler.FluidAction.EXECUTE);
 
@@ -77,7 +80,7 @@ public class DistillationTowerData {
             float current = gauge.getValue(1);
             if (current > 1 && Create.RANDOM.nextFloat() < 1 / 2f)
                 gauge.setValueNoUpdate(current + Math.min(-(current - 1) * Create.RANDOM.nextFloat(), 0));
-            return;
+           // return;
         }
 
         if (needsHeatLevelUpdate && updateTemperature(controller))

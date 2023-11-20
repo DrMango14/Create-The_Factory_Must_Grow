@@ -49,7 +49,10 @@ public class TFMGPartialModels {
                 CAST_IRON_FLUID_PIPE_CASING = block("cast_iron_pipe/casing"),
                 BRASS_FLUID_PIPE_CASING = block("brass_pipe/casing"),
                 PLASTIC_FLUID_PIPE_CASING = block("plastic_pipe/casing"),
-                ALUMINUM_FLUID_PIPE_CASING = block("aluminum_pipe/casing")
+                ALUMINUM_FLUID_PIPE_CASING = block("aluminum_pipe/casing"),
+
+                INGOT_MOLD = block("casting_basin/mold_base"),
+                BlOCK_MOLD = block("casting_basin/block_mold")
 
 
                         ;

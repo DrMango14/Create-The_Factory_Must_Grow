@@ -30,6 +30,7 @@ import com.drmangotea.createindustry.blocks.machines.metal_processing.blast_furn
 import com.drmangotea.createindustry.blocks.machines.metal_processing.blast_furnace.BlastFurnaceRenderer;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.blast_furnace.MoltenMetalBlockEntity;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.casting_basin.CastingBasinBlockEntity;
+import com.drmangotea.createindustry.blocks.machines.metal_processing.casting_basin.CastingBasinRenderer;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.casting_spout.CastingSpoutBlockEntity;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.casting_spout.CastingSpoutRenderer;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.coke_oven.CokeOvenBlockEntity;
@@ -184,6 +185,7 @@ public class TFMGBlockEntities {
 
     public static final BlockEntityEntry<CastingBasinBlockEntity> CASTING_BASIN = REGISTRATE
             .blockEntity("casting_basin", CastingBasinBlockEntity::new)
+            .renderer(()-> CastingBasinRenderer::new)
             .validBlocks(TFMGBlocks.CASTING_BASIN)
             .register();
 

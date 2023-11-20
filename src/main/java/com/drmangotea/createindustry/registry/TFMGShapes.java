@@ -27,6 +27,9 @@ public class TFMGShapes {
 
 
 
+
+
+
     ;
     public static final VoxelShape
 
@@ -36,6 +39,9 @@ public class TFMGShapes {
     INDUSTRIAL_PIPE = shape(4, 0, 4, 12, 16, 12).build(),
     FLARESTACK = shape(3, 0, 3, 13, 14, 14).build(),
     PUMPJACK_BASE = shape(3, 0, 3, 13, 16, 13).build(),
+
+    CASTING_SPOUT = shape(1, 2, 1, 15, 14, 15)
+            .build(),
     SURFACE_SCANNER = shape(2, 0, 2, 14, 14, 14).build();
 ;
 

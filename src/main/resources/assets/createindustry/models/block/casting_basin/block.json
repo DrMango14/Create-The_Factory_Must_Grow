@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"12": "create:block/basin",
-		"particle": "create:block/industrial_iron_block"
+		"12": "createindustry:block/casting_basin",
+		"particle": "createindustry:block/industrial_iron_block"
 	},
 	"elements": [
 		{

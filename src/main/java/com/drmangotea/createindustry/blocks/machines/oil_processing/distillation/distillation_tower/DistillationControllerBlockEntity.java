@@ -63,10 +63,11 @@ public class DistillationControllerBlockEntity extends DistilleryControllerBlock
             towerLevel = 0;
             return;
         }
-        hasTank = true;
+            hasTank = true;
+
+            towerLevel = tank.tower.towerLevel;
 
 
-        towerLevel = tank.tower.towerLevel;
 
 
 

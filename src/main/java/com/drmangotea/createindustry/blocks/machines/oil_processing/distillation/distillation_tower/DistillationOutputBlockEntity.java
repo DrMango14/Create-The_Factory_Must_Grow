@@ -2,6 +2,7 @@ package com.drmangotea.createindustry.blocks.machines.oil_processing.distillatio
 
 
 
+import com.drmangotea.createindustry.CreateTFMG;
 import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.distillery.DistilleryOutputBlockEntity;
 import com.drmangotea.createindustry.recipes.distillation.DistillationRecipe;
 import com.drmangotea.createindustry.recipes.distillation.AbstractDistillationRecipe;
@@ -179,7 +180,6 @@ public class DistillationOutputBlockEntity extends DistilleryOutputBlockEntity i
 
 
 
-
     if(!hasIndustrialPipes(foundOutputs))
         return;
 
@@ -251,11 +251,16 @@ if(fluidInRecipe2!=null)
 
 
     if (!controller.getTanks().get(true).isEmpty()) {
-        if(!level.isClientSide) {
+
+
            // if(((AdvancedDistillationRecipe)currentRecipe).getInputFluid().getMatchingFluidStacks().get(0).getFluid() != TFMGFluids.HEAVY_OIL.get())
            //   return;
+
+
             if(!controller.hasTank)
                 return;
+
+
             if(controller.towerLevel<4)
                 return;
 
@@ -274,10 +279,10 @@ if(fluidInRecipe2!=null)
             if(controller.getTank().height<desiredHeight)
                 return;
 
-
+        if(!level.isClientSide) {
             controller.getTanks().get(true).getPrimaryHandler().drain(((AdvancedDistillationRecipe) recipe).getFluidIngredients().get(0).getRequiredAmount(), IFluidHandler.FluidAction.EXECUTE);
 
-
+       
         tankInventory.setFluid(new FluidStack(((AdvancedDistillationRecipe) recipe).getFirstFluidResult().getFluid(), ((AdvancedDistillationRecipe) recipe).getFirstFluidResult().getAmount() + this.tankInventory.getFluidAmount()));
             if(above1 instanceof DistillationOutputBlockEntity)
             if(foundOutputs>=2)

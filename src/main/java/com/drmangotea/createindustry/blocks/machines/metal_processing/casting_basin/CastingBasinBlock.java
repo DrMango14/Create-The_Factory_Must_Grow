@@ -4,6 +4,8 @@ package com.drmangotea.createindustry.blocks.machines.metal_processing.casting_b
 import com.drmangotea.createindustry.blocks.machines.metal_processing.coke_oven.CokeOvenBlock;
 import com.drmangotea.createindustry.registry.TFMGBlockEntities;
 import com.drmangotea.createindustry.registry.TFMGItems;
+import com.drmangotea.createindustry.registry.TFMGShapes;
+import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -12,6 +14,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -19,6 +22,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class CastingBasinBlock extends Block implements IBE<CastingBasinBlockEntity>, IWrenchable {
 
@@ -28,7 +33,11 @@ public class CastingBasinBlock extends Block implements IBE<CastingBasinBlockEnt
         super(p_49795_);
         registerDefaultState(defaultBlockState().setValue(MOLD_TYPE, CastingBasinBlockEntity.MoldType.NONE));
     }
+    @Override
+    public VoxelShape getShape(BlockState pState, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 
+        return AllShapes.BASIN_BLOCK_SHAPE;
+    }
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         CastingBasinBlockEntity be;
@@ -50,7 +59,7 @@ public class CastingBasinBlock extends Block implements IBE<CastingBasinBlockEnt
             player.setItemInHand(interactionHand,new ItemStack(be.moldInventory.getStackInSlot(0).getItem(),1));
             ((CastingBasinBlockEntity) level.getBlockEntity(pos)).moldInventory.getStackInSlot(0).shrink(1);
 
-
+            level.setBlock(pos,state.setValue(MOLD_TYPE, CastingBasinBlockEntity.MoldType.NONE),2);
             return InteractionResult.SUCCESS;
         }
 

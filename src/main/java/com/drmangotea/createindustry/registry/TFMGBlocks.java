@@ -607,8 +607,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .properties(p -> p.noOcclusion()
                             .noLootTable()
                             .air())
-                    .blockstate((c, p) -> p.getVariantBuilder(c.get())
-                            .forAllStatesExcept(BlockStateGen.mapToAir(p)))
+
                     .register();
 
     //--Casting Basin
@@ -634,7 +633,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
             .addLayer(() -> RenderType::cutoutMipped)
             .item()
-            .build()
+            .transform(customItemModel())
             .lang("Casting Spout")
             .register();
 
