@@ -1,3 +1,6 @@
 {
-  "parent": "createindustry:block/fireproof_brick_reinforcement"
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "createindustry:block/fireproof_brick_reinforcement"
+  }
 }

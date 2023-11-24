@@ -1,12 +1,12 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"2": "create:block/fluid_valve",
-		"3": "create:block/pipes",
+		"2": "createindustry:block/cast_iron_fluid_valve",
+		"3": "createindustry:block/cast_iron_pipes",
 		"4": "create:block/pump",
 		"1_1": "create:block/axis_top",
 		"1_0": "create:block/axis",
-		"particle": "create:block/copper_plating"
+		"particle": "createindustry:block/cast_iron_block"
 	},
 	"elements": [
 		{

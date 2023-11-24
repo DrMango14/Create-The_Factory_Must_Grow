@@ -222,10 +222,17 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
         if (timer>0&&type == BlastFurnaceType.SMALL) {
             posToSpawn = this.getBlockPos().relative(outputFacing.getOpposite()).above();
 
-            level.setBlock(posToSpawn, TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
-            level.setBlock(posToSpawn.above(), TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
 
+                if(!level.getBlockState(posToSpawn).is(TFMGBlocks.MOLTEN_METAL.get())) {
+                    level.setBlock(posToSpawn, TFMGBlocks.MOLTEN_METAL.getDefaultState(), 3);
+                    level.setBlock(posToSpawn.above(), TFMGBlocks.MOLTEN_METAL.getDefaultState(), 3);
 
+                }else {
+
+                    ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn)).discardTimer = 40;
+                    ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn.above())).discardTimer = 40;
+
+                }
         }
 
         //////
@@ -235,15 +242,33 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
             posToSpawn2 = this.getBlockPos().relative(outputFacing.getOpposite()).above().relative(outputFacing.getCounterClockWise());
             posToSpawn3 = this.getBlockPos().relative(outputFacing.getOpposite(),2).above().relative(outputFacing.getCounterClockWise());
 
-            level.setBlock(posToSpawn, TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
-            level.setBlock(posToSpawn1, TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
-            level.setBlock(posToSpawn2, TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
-            level.setBlock(posToSpawn3, TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
 
-            level.setBlock(posToSpawn.above(), TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
-            level.setBlock(posToSpawn1.above(), TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
-            level.setBlock(posToSpawn2.above(), TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
-            level.setBlock(posToSpawn3.above(), TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
+
+            if(!level.getBlockState(posToSpawn).is(TFMGBlocks.MOLTEN_METAL.get())) {
+                level.setBlock(posToSpawn, TFMGBlocks.MOLTEN_METAL.getDefaultState(), 3);
+                level.setBlock(posToSpawn1, TFMGBlocks.MOLTEN_METAL.getDefaultState(), 3);
+                level.setBlock(posToSpawn2, TFMGBlocks.MOLTEN_METAL.getDefaultState(), 3);
+                level.setBlock(posToSpawn3, TFMGBlocks.MOLTEN_METAL.getDefaultState(), 3);
+
+                level.setBlock(posToSpawn.above(), TFMGBlocks.MOLTEN_METAL.getDefaultState(), 3);
+                level.setBlock(posToSpawn1.above(), TFMGBlocks.MOLTEN_METAL.getDefaultState(), 3);
+                level.setBlock(posToSpawn2.above(), TFMGBlocks.MOLTEN_METAL.getDefaultState(), 3);
+                level.setBlock(posToSpawn3.above(), TFMGBlocks.MOLTEN_METAL.getDefaultState(), 3);
+
+            }else {
+                ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn)).discardTimer = 40;
+                ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn.above())).discardTimer = 40;
+
+                ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn1)).discardTimer = 40;
+                ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn1.above())).discardTimer = 40;
+
+                ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn2)).discardTimer = 40;
+                ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn2.above())).discardTimer = 40;
+
+                ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn3)).discardTimer = 40;
+                ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn3.above())).discardTimer = 40;
+
+            }
 
         }
 
@@ -254,6 +279,9 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
             posToSpawn2 = this.getBlockPos().relative(outputFacing.getOpposite()).above().relative(outputFacing.getClockWise());
             posToSpawn3 = this.getBlockPos().relative(outputFacing.getOpposite(),2).above().relative(outputFacing.getClockWise());
 
+
+
+            if(!level.getBlockState(posToSpawn).is(TFMGBlocks.MOLTEN_METAL.get())) {
             level.setBlock(posToSpawn, TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
             level.setBlock(posToSpawn1, TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
             level.setBlock(posToSpawn2, TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
@@ -263,7 +291,20 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
             level.setBlock(posToSpawn1.above(), TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
             level.setBlock(posToSpawn2.above(), TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
             level.setBlock(posToSpawn3.above(), TFMGBlocks.MOLTEN_METAL.getDefaultState(),3);
+        }else {
+            ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn)).discardTimer = 40;
+            ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn.above())).discardTimer = 40;
 
+            ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn1)).discardTimer = 40;
+            ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn1.above())).discardTimer = 40;
+
+            ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn2)).discardTimer = 40;
+            ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn2.above())).discardTimer = 40;
+
+            ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn3)).discardTimer = 40;
+            ((MoltenMetalBlockEntity) level.getBlockEntity(posToSpawn3.above())).discardTimer = 40;
+
+        }
         }
 
     }

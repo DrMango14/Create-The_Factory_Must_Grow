@@ -5,7 +5,7 @@
 		"1": "create:block/axis",
 		"2": "createindustry:block/engines/gasoline",
 		"3": "create:block/axis_top",
-		"particle": "createindustry:block/engines/gasoline"
+		"particle": "block/anvil"
 	},
 	"elements": [
 		{

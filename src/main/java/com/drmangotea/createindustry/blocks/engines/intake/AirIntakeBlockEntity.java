@@ -76,7 +76,7 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
         super.tick();
 
     //if(!level.isClientSide) {
-        int production = ((int) maxShaftSpeed * ((diameter * diameter))) / 40;
+        int production = ((int) maxShaftSpeed * ((diameter * diameter))) / 10;
         if (tankInventory.getFluidAmount() + production <= tankInventory.getCapacity()) {
             //tankInventory.fill(new FluidStack(TFMGFluids.AIR.getSource(), production), IFluidHandler.FluidAction.EXECUTE);
             tankInventory.setFluid(new FluidStack(TFMGFluids.AIR.getSource(), production + tankInventory.getFluidAmount()));

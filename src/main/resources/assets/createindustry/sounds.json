@@ -1,5 +1,15 @@
 {
 
+  "engine": {
+    "sounds": [
+      {
+        "name": "createindustry:engine",
+        "type": "file",
+        "attenuation_distance": 16
+      }
+    ],
+    "subtitle": "createindustry.subtitle.engine_sounds"
+  },
   "diesel_engine": {
     "sounds": [
       {
@@ -8,6 +18,6 @@
         "attenuation_distance": 16
       }
     ],
-    "subtitle": "createindustry.subtitle.engine_sounds"
+    "subtitle": "createindustry.subtitle.diesel_engine_sounds"
   }
 }

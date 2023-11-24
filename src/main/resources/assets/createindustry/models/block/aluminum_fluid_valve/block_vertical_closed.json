@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"2": "create:block/fluid_valve",
-		"3": "create:block/pipes",
-		"particle": "create:block/copper_plating"
+		"2": "createindustry:block/aluminum_fluid_valve",
+		"3": "createindustry:block/aluminum_pipes",
+		"particle": "createindustry:block/aluminum_block"
 	},
 	"elements": [
 		{

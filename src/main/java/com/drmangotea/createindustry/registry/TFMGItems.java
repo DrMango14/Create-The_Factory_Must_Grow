@@ -52,7 +52,7 @@ public class TFMGItems {
             HEAVY_PLATE = REGISTRATE.item("heavy_plate", Item::new).register(),
             ENGINE_CHAMBER = REGISTRATE.item("engine_chamber", Item::new).register(),
             ENGINE_BASE = REGISTRATE.item("engine_base", Item::new)
-                    .model((c, p) -> p.withExistingParent(c.getName(), CreateTFMG.asResource("item/engine_base")))
+                    .model((c, p) -> p.withExistingParent(c.getName(), CreateTFMG.asResource("item/unfinished_engine")))
                     .register(),
             TURBINE_BLADE = REGISTRATE.item("turbine_blade", Item::new).register(),
             THERMITE_POWDER = REGISTRATE.item("thermite_powder", Item::new).register(),

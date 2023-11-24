@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"parent": "create:block/block",
 	"textures": {
-		"2": "create:block/pipes",
-		"4": "create:block/pump",
-		"particle": "create:block/pump"
+		"2": "createindustry:block/cast_iron_pipes",
+		"4": "createindustry:block/cast_iron_pump",
+		"particle": "createindustry:block/cast_iron_pump"
 	},
 	"elements": [
 		{

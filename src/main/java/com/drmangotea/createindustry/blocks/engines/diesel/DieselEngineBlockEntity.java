@@ -54,7 +54,7 @@ import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 
 public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
-	protected ScrollOptionBehaviour<WindmillBearingBlockEntity.RotationDirection> movementDirection;
+	//protected ScrollOptionBehaviour<WindmillBearingBlockEntity.RotationDirection> movementDirection;
 
 	public WeakReference<PoweredShaftBlockEntity> target;
 ///////////
@@ -66,6 +66,8 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 
 	private int consumptionTimer=0;
 	public float engineStrength = 0;
+
+
 	private Couple<FluidTank> tanks;
 
 	public BlockPos expansionPos;
@@ -103,14 +105,14 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
 		//movementDirection = new ScrollOptionBehaviour<>(WindmillBearingBlockEntity.RotationDirection.class,
 		//	Lang.translateDirect("contraptions.windmill.rotation_direction"), this, new DieselEngineValueBox());
-		movementDirection = new ScrollOptionBehaviour<>(WindmillBearingBlockEntity.RotationDirection.class,
-				Lang.translateDirect("contraptions.windmill.rotation_direction"), this, new SteamEngineValueBox());
-		movementDirection.onlyActiveWhen(() -> {
-			PoweredShaftBlockEntity shaft = getShaft();
-			return shaft == null || !shaft.hasSource();
-		});
-		movementDirection.withCallback($ -> onDirectionChanged());
-		behaviours.add(movementDirection);
+		//movementDirection = new ScrollOptionBehaviour<>(WindmillBearingBlockEntity.RotationDirection.class,
+		//		Lang.translateDirect("contraptions.windmill.rotation_direction"), this, new SteamEngineValueBox());
+		//movementDirection.onlyActiveWhen(() -> {
+		//	PoweredShaftBlockEntity shaft = getShaft();
+		//	return shaft == null || !shaft.hasSource();
+		//});
+		//movementDirection.withCallback($ -> onDirectionChanged());
+		//behaviours.add(movementDirection);
 ////////////////////////////////////////////
 		behaviours.add(new DirectBeltInputBehaviour(this));
 
@@ -124,7 +126,13 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 		super.tick();
 		Direction direction;
 
-		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> this::makeSound);
+
+
+
+
+
+
+
 
 			if(getBlockState().getValue(FACE)==AttachFace.WALL)
 				expansionPos = this.getBlockPos().relative(getBlockState().getValue(FACING).getOpposite());
@@ -184,33 +192,68 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 		if(!level.isClientSide)
 			if(getShaft() != null)
 				engineProcess(targetAxis,verticalTarget);
+		//DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> this::makeSound);
+		makeSound(targetAxis,verticalTarget);
 
 		int conveyedSpeedLevel =
 			engineStrength == 0 ? 1 : verticalTarget ? 1 : (int) GeneratingKineticBlockEntity.convertToDirection(1, facing)*2;
 		if (targetAxis == Axis.Z)
 			conveyedSpeedLevel *= -1;
-		if (movementDirection.get() == WindmillBearingBlockEntity.RotationDirection.COUNTER_CLOCKWISE)
-			conveyedSpeedLevel *= -1;
+		//if (movementDirection.get() == WindmillBearingBlockEntity.RotationDirection.COUNTER_CLOCKWISE)
+		//	conveyedSpeedLevel *= -1;
 
 		float shaftSpeed = shaft.getTheoreticalSpeed();
 		if (shaft.hasSource() && shaftSpeed != 0 && conveyedSpeedLevel != 0
 			&& (shaftSpeed > 0) != (conveyedSpeedLevel > 0)) {
-			movementDirection.setValue(1 - movementDirection.get()
-				.ordinal());
+			//movementDirection.setValue(1 - movementDirection.get()
+			//	.ordinal());
 			conveyedSpeedLevel *= -1;
 		}
 
-		shaft.update(worldPosition,  conveyedSpeedLevel, engineStrength);
+		//shaft.update(worldPosition,  conveyedSpeedLevel, engineStrength);
+
+		//shaft.update(worldPosition,  conveyedSpeedLevel, 40);
 
 	}
+
+
+
 	@OnlyIn(Dist.CLIENT)
-	private void makeSound(){
+	private void makeSound(Axis targetAxis, boolean verticalTarget){
 		Float targetAngle = getTargetAngle();
 		PoweredShaftBlockEntity ste = target.get();
 		if (ste == null)
 			return;
 		//if (engineStrength == 0)
 		//	return;
+		PoweredShaftBlockEntity shaft = getShaft();
+
+		if(tanks.get(true).isEmpty()||tanks.get(true).isEmpty()) {
+			engineStrength=0;
+
+			shaft.update(worldPosition, getConveyedSpeedLevel(engineStrength,targetAxis,verticalTarget), engineStrength);
+			return;
+		}
+
+		if(expansionBE != null){
+			if(airTank.isEmpty()&&expansionBE.airTank.isEmpty()){
+				engineStrength = 0;
+				shaft.update(worldPosition, getConveyedSpeedLevel(engineStrength,targetAxis,verticalTarget), engineStrength);
+				return;
+			}
+		}else
+		if(airTank.isEmpty()){
+			engineStrength = 0;
+			shaft.update(worldPosition, getConveyedSpeedLevel(engineStrength,targetAxis,verticalTarget), engineStrength);
+			return;
+		}
+
+		if(tanks.get(false).getFluidAmount()+5>1000) {
+			engineStrength = 0;
+			shaft.update(worldPosition, getConveyedSpeedLevel(engineStrength,targetAxis,verticalTarget), engineStrength);
+			return;
+		}
+
 		if (targetAngle == null)
 			return;
 
@@ -218,7 +261,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 		angle += (angle < 0) ? -180 + 75 : 360 - 75;
 		angle %= 360;
 
-		PoweredShaftBlockEntity shaft = getShaft();
+
 		if (shaft == null || shaft.getSpeed() == 0)
 			return;
 
@@ -232,7 +275,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 			return;
 		}
 
-		TFMGSoundEvents.ENGINE.playAt(level, worldPosition, 1.0f, 1f, false);
+		TFMGSoundEvents.DIESEL_ENGINE.playAt(level, worldPosition, 0.4f, 1f, false);
 
 		prevAngle = angle;
 	}
@@ -244,15 +287,15 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 				engineStrength == 0 ? 1 : verticalTarget ? 1 : (int) GeneratingKineticBlockEntity.convertToDirection(1, facing)*2;
 		if (targetAxis == Axis.Z)
 			conveyedSpeedLevel *= -1;
-		if (movementDirection.get() == WindmillBearingBlockEntity.RotationDirection.COUNTER_CLOCKWISE)
-			conveyedSpeedLevel *= -1;
+		//if (movementDirection.get() == WindmillBearingBlockEntity.RotationDirection.COUNTER_CLOCKWISE)
+		//	conveyedSpeedLevel *= -1;
 
 
 		float shaftSpeed = shaft.getTheoreticalSpeed();
 		if (shaft.hasSource() && shaftSpeed != 0 && conveyedSpeedLevel != 0
 				&& (shaftSpeed > 0) != (conveyedSpeedLevel > 0)) {
-			movementDirection.setValue(1 - movementDirection.get()
-					.ordinal());
+			//movementDirection.setValue(1 - movementDirection.get()
+			//		.ordinal());
 			conveyedSpeedLevel *= -1;
 		}
 

@@ -41,11 +41,17 @@ public class TFMGSoundEvents {
     public static final TFMGSoundEvents.SoundEntry
 
 
-            ENGINE = create("diesel_engine")
-            .subtitle("idk how to call this :3")
+            ENGINE = create("engine")
+            .subtitle("Engine Sounds")
             .category(SoundSource.BLOCKS)
             .attenuationDistance(10)
-            .build();
+            .build(),
+
+            DIESEL_ENGINE = create("diesel_engine")
+                    .subtitle("Diese Engine Sounds")
+                    .category(SoundSource.BLOCKS)
+                    .attenuationDistance(10)
+                    .build();
 
     
 

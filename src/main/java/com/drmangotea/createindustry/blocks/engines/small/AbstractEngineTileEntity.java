@@ -542,11 +542,11 @@ public void write(CompoundTag compound, boolean clientPacket) {
     private void makeSound(){
         soundTimer=0;
         if(this instanceof TurbineEngineTileEntity){
-            TFMGSoundEvents.ENGINE.playAt(level, worldPosition, 0.4f, 1.5f, false);
+            TFMGSoundEvents.ENGINE.playAt(level, worldPosition, 0.2f, 1.5f, false);
         }
         else
 
-            TFMGSoundEvents.ENGINE.playAt(level, worldPosition, 0.6f, 1f, false);
+            TFMGSoundEvents.ENGINE.playAt(level, worldPosition, 0.3f, 1f, false);
 
 
     }

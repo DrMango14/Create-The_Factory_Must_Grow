@@ -64,5 +64,8 @@
   "create.recipe.advanced_distillation": "Advanced Distillation",
   "create.recipe.industrial_blasting": "Industrial Blasting",
   "create.recipe.casting": "Casting",
-  "create.recipe.coking": "Coking"
+  "create.recipe.coking": "Coking",
+
+  "createindustry.subtitle.engine_sounds": "Engine Sounds",
+  "createindustry.subtitle.diesel_engine_sounds": "Diesel Engine Sounds"
 }

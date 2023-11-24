@@ -588,6 +588,7 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .tag(BlockTags.WALLS)
             .blockstate((c, p) -> TFMGVanillaBlockStates.generateWallBlockState(c, p, "fireproof_brick_reinforcement"))
             .item()
+            .transform(b -> TFMGVanillaBlockStates.transformWallItem(b, "fireproof_brick_reinforcement"))
             .build()
             .lang("Fireproof Brick Reinforcement")
             .register();
@@ -595,9 +596,11 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .initialProperties(() -> Blocks.BRICKS)
             .properties(p -> p.color(MaterialColor.COLOR_RED))
             .properties(p -> p.requiresCorrectToolForDrops())
+            .blockstate((c, p) -> p.horizontalBlock(c.get(), p.models()
+                    .getExistingFile(p.modLoc("block/blast_furnace_output/block"))))
             .transform(pickaxeOnly())
             .item()
-            .build()
+            .transform(customItemModel())
             .lang("Blast Furnace Output")
             .register();
     public static final BlockEntry<MoltenMetalBlock> MOLTEN_METAL =

@@ -3,7 +3,7 @@
 	"parent": "minecraft:block/block",
 	"textures": {
 		"2": "createindustry:block/engines/gasoline",
-		"particle": "createindustry:block/engines/gasoline"
+		"particle": "block/anvil"
 	},
 	"elements": [
 		{

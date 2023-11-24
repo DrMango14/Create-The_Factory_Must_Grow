@@ -17,7 +17,7 @@ public class MoltenMetalBlockEntity extends SmartBlockEntity {
 
     public MoltenMetalBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        discardTimer=20;
+        discardTimer=40;
 
     }
 

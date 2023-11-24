@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"2": "create:block/smart_pipe_1",
-		"3": "create:block/smart_pipe_2",
-		"particle": "create:block/smart_pipe_2"
+		"2": "createindustry:block/cast_iron_smart_pipe_1",
+		"3": "createindustry:block/cast_iron_smart_pipe_2",
+		"particle": "createindustry:block/cast_iron_smart_pipe_2"
 	},
 	"elements": [
 		{

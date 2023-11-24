@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "createindustry:block/copper_encased_steel_pipe",
-		"particle": "createindustry:block/copper_encased_steel_pipe"
+		"0": "createindustry:block/copper_encased_plastic_pipe",
+		"particle": "createindustry:block/copper_encased_plastic_pipe"
 	},
 	"elements": [
 		{

@@ -419,6 +419,9 @@
 	"createindustry.ponder.tag.oil.description": "Machines that extract, process or use Crude Oil and its byproducts",
 	"createindustry.ponder.tag.metallurgy.description": "Machines that produce, process or use Metal and raw materials as such",
 
+	"createindustry.subtitle.engine_sounds": "Engine Sounds",
+	"createindustry.subtitle.diesel_engine_sounds": "Diesel Engine Sounds",
+
 
 	"_": "->------------------------]  UI & Messages  [------------------------<-",
 
@@ -493,6 +496,9 @@
 	"create.recipe.industrial_blasting": "Industrial Blasting",
 	"create.recipe.casting": "Casting",
 	"create.recipe.coking": "Coking",
+
+	"createindustry.subtitle.engine_sounds": "Engine Sounds",
+	"createindustry.subtitle.diesel_engine_sounds": "Diesel Engine Sounds",
 
 
 	"_": "->------------------------]  Ponders  [------------------------<-",
