@@ -2,6 +2,7 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "createindustry:block/surface_scanner",
+		"1": "createindustry:block/surface_scanner_flags/flag1",
 		"particle": "createindustry:block/surface_scanner"
 	},
 	"elements": [
@@ -30,13 +31,13 @@
 			}
 		},
 		{
-			"from": [15.5, 4.5, 12.5],
+			"from": [15.5, 3.5, 11.5],
 			"to": [15.5, 7.5, 14.5],
 			"faces": {
 				"north": {"uv": [0, 0, 0, 3], "rotation": 180, "texture": "#0"},
-				"east": {"uv": [12.5, 5.5, 12.5, 5], "rotation": 90, "texture": "#0"},
+				"east": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#1"},
 				"south": {"uv": [0, 0, 0, 3], "texture": "#0"},
-				"west": {"uv": [12.5, 5, 13.25, 5.5], "rotation": 90, "texture": "#0"},
+				"west": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#1"},
 				"up": {"uv": [0, 0, 0, 6], "rotation": 180, "texture": "#0"},
 				"down": {"uv": [0, 0, 0, 6], "texture": "#0"}
 			}

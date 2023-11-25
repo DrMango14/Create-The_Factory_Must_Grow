@@ -17,13 +17,12 @@ import java.util.List;
 
 public class FluidDepositBlockEntity extends SmartBlockEntity {
 
-    public final int baseFluidAmount= Create.RANDOM.nextInt(300000000);
+    public final int baseFluidAmount= Create.RANDOM.nextInt(3000000);
     public final int fluidAmountToBuckets =baseFluidAmount/1000;
     public int fluidAmount= fluidAmountToBuckets;
 
     public FluidDepositBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        CreateTFMG.LOGGER.debug("Created Oil Deposit with "+baseFluidAmount+" buckets of Crude Oil");
     }
 
     @Override
