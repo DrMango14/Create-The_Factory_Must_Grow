@@ -1,8 +1,8 @@
 {
   "values": [
-    "createindustry:cut_bauxite_stairs",
-    "createindustry:polished_cut_bauxite_stairs",
-    "createindustry:cut_bauxite_brick_stairs",
-    "createindustry:small_bauxite_brick_stairs"
+    "tfmg:cut_bauxite_stairs",
+    "tfmg:polished_cut_bauxite_stairs",
+    "tfmg:cut_bauxite_brick_stairs",
+    "tfmg:small_bauxite_brick_stairs"
   ]
 }

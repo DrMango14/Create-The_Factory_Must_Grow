@@ -1,0 +1,29 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "BCB",
+    " F "
+  ],
+  "key": {
+    "C": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "B": {
+      "item": "create:andesite_bars"
+    },
+    "F": {
+      "item": "create:propeller"
+    },
+    "S": {
+      "item": "create:shaft"
+    }
+  },
+  "result": {
+    "item": "tfmg:air_intake",
+    "count": 2
+
+
+  }
+}

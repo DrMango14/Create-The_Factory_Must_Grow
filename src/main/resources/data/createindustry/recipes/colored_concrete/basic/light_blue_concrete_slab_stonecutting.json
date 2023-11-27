@@ -1,9 +1,0 @@
-
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "createindustry:light_blue_concrete"
-  },
-  "result": "createindustry:light_blue_concrete_slab",
-  "count": 2
-}

@@ -1,0 +1,26 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MIM",
+    "MIM",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:ingots/cast_iron"
+    },
+    "M": {
+      "item": "create:andesite_bars"
+    },
+    "I": {
+      "item": "tfmg:cast_iron_pipe"
+    }
+  },
+  "result": {
+    "item": "tfmg:exhaust",
+    "count": 1
+
+
+  }
+}

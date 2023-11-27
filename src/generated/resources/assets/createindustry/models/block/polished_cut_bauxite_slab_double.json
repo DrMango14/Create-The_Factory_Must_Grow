@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "createindustry:block/palettes/stone_types/polished/bauxite_cut_polished",
-    "side": "createindustry:block/palettes/stone_types/slab/bauxite_cut_slab"
-  }
-}

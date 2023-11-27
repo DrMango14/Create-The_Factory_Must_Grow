@@ -1,0 +1,17 @@
+
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "create:industrial_iron_block"
+    },
+    {
+      "tag": "forge:ingots/cast_iron"
+    }
+  ],
+  "results": [
+    {
+      "item": "tfmg:coke_oven"
+    }
+  ]
+}

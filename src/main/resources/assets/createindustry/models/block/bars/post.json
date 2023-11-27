@@ -1,8 +1,0 @@
-{
-  "parent": "create:block/bars/post",
-  "textures": {
-    "bars": "createindustry:block/bars/steel_bars",
-    "edge": "createindustry:block/bars/steel_bars_edge",
-    "particle": "createindustry:block/bars/steel_bars"
-  }
-}

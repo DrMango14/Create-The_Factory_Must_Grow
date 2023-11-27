@@ -1,0 +1,29 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    " S ",
+    " I ",
+    " A ",
+    " P "
+  ],
+  "key": {
+
+
+    "S": {
+      "item": "tfmg:spark_plug"
+    },
+    "A": {
+      "tag": "forge:ingots/aluminum"
+    },
+    "I": {
+      "tag": "forge:ingots/steel"
+    },
+    "P": {
+      "item": "tfmg:steel_mechanism"
+    }
+  },
+  "result": {
+    "item": "tfmg:engine_chamber"
+  },
+  "acceptMirrored": true
+}

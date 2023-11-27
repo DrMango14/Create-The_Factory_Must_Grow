@@ -1,0 +1,27 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:bitumen"
+    },
+    {
+      "item": "minecraft:sand"
+    },
+    {
+      "item": "minecraft:gravel"
+    },
+    {
+      "fluid": "minecraft:water",
+      "nbt": {},
+      "amount": 500
+    }
+  ],
+  "results": [
+    {
+      "fluid": "tfmg:liquid_asphalt",
+      "nbt": {},
+      "amount": 1200
+    }
+  ]
+}

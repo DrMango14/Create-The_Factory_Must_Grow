@@ -1,0 +1,19 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "tfmg:lignite"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "minecraft:coal",
+      "chance": 0.5
+    }
+  ],
+  "processingTime": 250
+
+}

@@ -1,0 +1,40 @@
+
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "tfmg:steel_ingot"
+      },
+    {
+      "item": "tfmg:steel_ingot"
+      },
+    {
+      "item": "tfmg:steel_ingot"
+      },
+    {
+      "item": "tfmg:steel_ingot"
+      },
+    {
+      "item": "tfmg:steel_ingot"
+      },
+    {
+      "item": "tfmg:steel_ingot"
+      },
+    {
+      "item": "tfmg:steel_ingot"
+      },
+    {
+      "item": "tfmg:steel_ingot"
+      },
+    {
+      "item": "tfmg:steel_ingot"
+      }
+
+
+  ],
+  "results": [
+    {
+      "item": "tfmg:steel_block"
+    }
+  ]
+}

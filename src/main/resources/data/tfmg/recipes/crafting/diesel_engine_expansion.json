@@ -1,0 +1,29 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PMP",
+    "TCT",
+    "PTP"
+  ],
+  "key": {
+    "C": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "M": {
+      "item": "create:andesite_bars"
+    },
+    "T": {
+      "item": "tfmg:steel_fluid_tank"
+    },
+    "P": {
+      "item": "tfmg:industrial_pipe"
+    }
+  },
+  "result": {
+    "item": "tfmg:diesel_engine_expansion",
+    "count": 1
+
+
+  }
+}

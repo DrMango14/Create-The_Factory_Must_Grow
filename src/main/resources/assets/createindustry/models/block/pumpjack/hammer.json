@@ -1,8 +1,0 @@
-{
-	"parent": "block/block",
-	"ambientocclusion": false,
-	"textures": {
-		"0": "createindustry:block/pumpjack_hammer",
-		"particle": "createindustry:block/steel_block"
-	}
-}

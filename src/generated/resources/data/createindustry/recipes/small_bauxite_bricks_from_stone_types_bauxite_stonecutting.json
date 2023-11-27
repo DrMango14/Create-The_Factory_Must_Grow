@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "tag": "createindustry:stone_types/bauxite"
-  },
-  "result": "createindustry:small_bauxite_bricks"
-}

@@ -1,0 +1,17 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "fluid": "tfmg:molten_slag",
+      "amount": 1000
+    }
+  ],
+  "results": [
+    {
+      "item": "tfmg:slag",
+      "count": 9
+
+    }
+  ]
+}

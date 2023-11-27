@@ -1,0 +1,17 @@
+
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "tfmg:concrete"
+    },
+    {
+      "item": "minecraft:light_gray_dye"
+    }
+  ],
+  "results": [
+    {
+      "item": "tfmg:light_gray_concrete"
+    }
+  ]
+}

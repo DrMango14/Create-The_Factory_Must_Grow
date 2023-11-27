@@ -1,8 +1,8 @@
 {
   "values": [
-    "createindustry:steel_block",
-    "createindustry:cast_iron_block",
-    "createindustry:aluminum_block",
-    "createindustry:diesel_engine_expansion"
+    "tfmg:steel_block",
+    "tfmg:cast_iron_block",
+    "tfmg:aluminum_block",
+    "tfmg:diesel_engine_expansion"
   ]
 }

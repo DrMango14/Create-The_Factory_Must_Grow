@@ -1,6 +1,0 @@
-{
-	"parent": "createindustry:block/pumpjack/hammer",
-	"loader": "forge:obj",
-	"flip-v": true,
-	"model": "createindustry:models/block/pumpjack/pumpjack_hammer.obj"
-}

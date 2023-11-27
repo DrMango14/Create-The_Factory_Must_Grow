@@ -1,0 +1,35 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:nitrate_dust"
+    },
+    {
+      "item": "tfmg:nitrate_dust"
+    },
+    {
+      "item": "tfmg:nitrate_dust"
+    },
+    {
+      "tag": "forge:dusts/charcoal"
+
+    },
+
+    {
+      "tag": "forge:dusts/charcoal"
+
+    },
+    {
+      "item": "tfmg:sulfur_dust"
+
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:gunpowder",
+      "count": 6
+
+    }
+  ]
+}

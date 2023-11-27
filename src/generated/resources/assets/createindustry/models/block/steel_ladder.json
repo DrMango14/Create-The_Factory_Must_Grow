@@ -1,8 +1,0 @@
-{
-  "parent": "createindustry:block/ladder",
-  "textures": {
-    "0": "createindustry:block/ladder_steel_hoop",
-    "1": "createindustry:block/ladder_steel",
-    "particle": "createindustry:block/ladder_steel"
-  }
-}

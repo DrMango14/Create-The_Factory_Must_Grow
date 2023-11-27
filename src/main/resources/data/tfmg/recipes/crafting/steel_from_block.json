@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    " S ",
+    "   "
+  ],
+  "key": {
+    "S": {
+      "item": "tfmg:steel_block"
+    }
+  },
+  "result": {
+    "item": "tfmg:steel_ingot",
+    "count": 9
+
+
+  }
+}

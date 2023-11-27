@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    " R ",
+    "A  "
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:ingots/aluminum"
+    },
+    "R": {
+      "item": "tfmg:rebar"
+    }
+  },
+  "result": {
+    "item": "tfmg:screwdriver",
+    "count": 1
+
+
+  }
+}

@@ -1,0 +1,20 @@
+
+{
+  "required": true,
+  "minVersion": 0.8,
+  "package": "com.drmangotea.tfmg.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "tfmg.refmap.json",
+  "mixins": [
+   // "AllOreFeatureConfigEntriesMixin",
+    "FluidPropagatorMixin",
+    "FluidPipeBlockMixin",
+    "PipeAttachmentModelMixin"
+    //,
+   // "ScreenEffectRendererMixin"
+  ],
+
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

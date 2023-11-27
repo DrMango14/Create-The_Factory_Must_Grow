@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SSS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "tfmg:aluminum_ingot"
+    }
+  },
+  "result": {
+    "item": "tfmg:aluminum_block",
+    "count": 1
+
+
+  }
+}

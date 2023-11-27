@@ -1,0 +1,29 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "HAH",
+    "SCS",
+    "   "
+  ],
+  "key": {
+
+    "A": {
+      "item": "minecraft:string"
+    },
+    "H": {
+      "item": "tfmg:heavy_plate"
+    },
+    "S": {
+      "item": "tfmg:rebar"
+    },
+  "C": {
+    "item": "tfmg:heavy_machinery_casing"
+  }
+
+
+  },
+  "result": {
+    "item": "tfmg:pumpjack_crank"
+  },
+  "acceptMirrored": true
+}

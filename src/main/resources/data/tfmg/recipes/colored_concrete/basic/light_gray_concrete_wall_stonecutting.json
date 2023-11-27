@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "tfmg:light_gray_concrete"
+  },
+  "result": "tfmg:light_gray_concrete_wall",
+  "count": 1
+}

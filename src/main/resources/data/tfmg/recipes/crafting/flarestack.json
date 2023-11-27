@@ -1,0 +1,29 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SIS",
+    "MIM",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "create:andesite_alloy"
+    },
+    "M": {
+      "item": "create:andesite_bars"
+    },
+    "I": {
+      "item": "tfmg:industrial_pipe"
+    },
+    "S": {
+      "item": "tfmg:spark_plug"
+    }
+  },
+  "result": {
+    "item": "tfmg:flarestack",
+    "count": 1
+
+
+  }
+}

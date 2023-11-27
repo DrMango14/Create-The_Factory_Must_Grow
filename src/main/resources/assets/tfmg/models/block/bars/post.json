@@ -1,0 +1,8 @@
+{
+  "parent": "create:block/bars/post",
+  "textures": {
+    "bars": "tfmg:block/bars/steel_bars",
+    "edge": "tfmg:block/bars/steel_bars_edge",
+    "particle": "tfmg:block/bars/steel_bars"
+  }
+}

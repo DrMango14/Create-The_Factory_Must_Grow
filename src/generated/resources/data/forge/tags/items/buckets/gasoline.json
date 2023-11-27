@@ -1,6 +1,6 @@
 {
   "values": [
-    "createindustry:crude_oil_fluid_bucket",
-    "createindustry:gasoline_bucket"
+    "tfmg:crude_oil_fluid_bucket",
+    "tfmg:gasoline_bucket"
   ]
 }

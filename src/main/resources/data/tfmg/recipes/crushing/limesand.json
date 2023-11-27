@@ -1,0 +1,16 @@
+
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "create:limestone"
+    }
+  ],
+  "results": [
+    {
+      "item": "tfmg:limesand"
+
+    }
+  ],
+  "processingTime": 100
+}

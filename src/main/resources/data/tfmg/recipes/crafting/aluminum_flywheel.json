@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "create:shaft"
+    },
+    "C": {
+      "tag": "forge:ingots/aluminum"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CAC",
+    "CCC"
+  ],
+  "result": {
+    "item": "tfmg:aluminum_flywheel"
+  }
+}

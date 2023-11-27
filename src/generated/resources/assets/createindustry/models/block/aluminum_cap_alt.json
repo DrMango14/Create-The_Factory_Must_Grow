@@ -1,8 +1,0 @@
-{
-  "parent": "createindustry:block/bars/cap_alt",
-  "textures": {
-    "bars": "createindustry:block/bars/aluminum_bars",
-    "edge": "createindustry:block/bars/aluminum_bars_edge",
-    "particle": "createindustry:block/bars/aluminum_bars"
-  }
-}

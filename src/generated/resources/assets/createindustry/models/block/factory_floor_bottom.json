@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "createindustry:block/factory_floor",
-    "side": "createindustry:block/factory_floor",
-    "top": "createindustry:block/factory_floor"
-  }
-}

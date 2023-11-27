@@ -1,0 +1,18 @@
+
+{
+  "type": "create:compacting",
+  "ingredients": [
+
+    {
+      "fluid": "tfmg:liquid_plastic",
+      "amount": 200
+      }
+
+
+  ],
+  "results": [
+    {
+      "item": "tfmg:plastic_sheet"
+    }
+  ]
+}

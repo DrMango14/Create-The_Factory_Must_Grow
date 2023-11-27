@@ -1,6 +1,6 @@
 {
   "values": [
-    "createindustry:heavy_casing_door",
-    "createindustry:steel_door"
+    "tfmg:heavy_casing_door",
+    "tfmg:steel_door"
   ]
 }

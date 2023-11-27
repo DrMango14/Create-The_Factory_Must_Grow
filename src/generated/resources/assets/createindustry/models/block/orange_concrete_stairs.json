@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "createindustry:block/orange_concrete",
-    "side": "createindustry:block/orange_concrete",
-    "top": "createindustry:block/orange_concrete"
-  }
-}

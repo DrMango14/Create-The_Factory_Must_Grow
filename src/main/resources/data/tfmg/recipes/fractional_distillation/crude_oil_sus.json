@@ -1,0 +1,35 @@
+{
+  "type": "tfmg:advanced_distillation",
+  "ingredients": [
+
+    {
+      "fluid": "tfmg:crude_oil_fluid",
+      "nbt": {},
+      "amount": 12
+    }
+  ],
+  "results": [
+    {
+      "fluid": "tfmg:heavy_oil",
+      "amount": 3
+    },
+    {
+      "fluid": "tfmg:diesel",
+      "amount": 2
+    },
+    {
+      "fluid": "tfmg:kerosene",
+      "amount": 1
+    },
+    {
+      "fluid": "tfmg:gasoline",
+      "amount": 3
+    },
+    {
+      "fluid": "tfmg:lpg",
+      "amount": 2
+    }
+  ]
+
+
+}

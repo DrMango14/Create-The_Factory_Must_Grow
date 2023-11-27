@@ -1,8 +1,8 @@
 {
   "values": [
-    "createindustry:steel_scaffolding",
-    "createindustry:aluminum_scaffolding",
-    "createindustry:steel_ladder",
-    "createindustry:aluminum_ladder"
+    "tfmg:steel_scaffolding",
+    "tfmg:aluminum_scaffolding",
+    "tfmg:steel_ladder",
+    "tfmg:aluminum_ladder"
   ]
 }

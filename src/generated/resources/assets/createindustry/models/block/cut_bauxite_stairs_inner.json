@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "createindustry:block/palettes/stone_types/cut/bauxite_cut",
-    "side": "createindustry:block/palettes/stone_types/cut/bauxite_cut",
-    "top": "createindustry:block/palettes/stone_types/cut/bauxite_cut"
-  }
-}

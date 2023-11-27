@@ -1,0 +1,6 @@
+{
+  "parent": "tfmg:block/coke_oven/controller",
+  "textures": {
+    "front": "tfmg:block/coke_oven/coke_oven_front_top_off"
+  }
+}

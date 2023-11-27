@@ -1,6 +1,0 @@
-{
-  "parent": "createindustry:block/coke_oven/controller",
-  "textures": {
-    "front": "createindustry:block/coke_oven_front_top_on"
-  }
-}

@@ -1,0 +1,21 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    " S ",
+    " S "
+  ],
+  "key": {
+
+    "S": {
+      "tag": "forge:ingots/cast_iron"
+    }
+  },
+  "result": {
+    "item": "tfmg:cast_iron_pipe",
+    "count": 4
+
+
+  }
+}
