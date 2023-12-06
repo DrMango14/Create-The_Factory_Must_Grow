@@ -5,7 +5,7 @@
 	"textures": {
 		"0": "tfmg:block/aluminum_post",
 		"1": "tfmg:block/steel_truss",
-		"particle": "tfmg:block/aluminum_post"
+		"particle": "tfmg:block/steel_truss"
 	},
 	"elements": [
 		{

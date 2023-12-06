@@ -89,6 +89,8 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
 
         itemCapability = LazyOptional.of(() -> new CombinedInvWrapper(inputInventory,fuelInventory));
 
+        inputInventory.forbidExtraction();
+        fuelInventory.forbidExtraction();
 
         tank1.getPrimaryHandler().setCapacity(8000);
         tank2.getPrimaryHandler().setCapacity(8000);

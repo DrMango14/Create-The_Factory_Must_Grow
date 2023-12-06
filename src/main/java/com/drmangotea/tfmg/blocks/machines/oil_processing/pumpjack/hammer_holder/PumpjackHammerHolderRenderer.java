@@ -28,14 +28,13 @@ public class PumpjackHammerHolderRenderer extends KineticBlockEntityRenderer<Pum
 	protected void renderSafe(PumpjackHammerHolderBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
 							  int light, int overlay) {
 
-	//	super.renderSafe(te, partialTicks, ms, buffer, light, overlay);
-
+		//super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
 
 		if (Backend.canUseInstancing(be.getLevel()))
 			return;
 
 		BlockState blockState = be.getBlockState();
-		PumpjackHammerHolderBlockEntity wte = (PumpjackHammerHolderBlockEntity) be;
+
 
 
 		float speed = be.visualSpeed.getValue(partialTicks) * 3 / 10f;
@@ -64,6 +63,11 @@ public class PumpjackHammerHolderRenderer extends KineticBlockEntityRenderer<Pum
 		hammer.rotate(be.direction.getClockWise(), (float) Math.toRadians(angle));
 
 		hammer.unCentre();
+
+		//CachedBufferer.partialFacing(TFMGPartialModels., blockState,blockState.getValue(FACING))
+		//		.translate(-0.5, -0.5, -0.5)
+		//		.light(light)
+		//		.renderInto(ms,vb);
 
 
 		hammer.renderInto(ms, vb);

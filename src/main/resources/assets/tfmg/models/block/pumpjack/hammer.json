@@ -2,7 +2,7 @@
 	"parent": "block/block",
 	"ambientocclusion": false,
 	"textures": {
-		"0": "tfmg:block/pumpjack_hammer",
+		"0": "tfmg:block/pumpjack_hammer_pog",
 		"particle": "tfmg:block/steel_block"
 	}
 }
