@@ -192,6 +192,10 @@ boolean signalChanged;
 
     }
 
+    public EngineBackPartBlock backPartBlock(){
+        return TFMGBlocks.GASOLINE_ENGINE_BACK.get();
+    }
+
     public boolean hasBackPart(){
         BlockPos wantedLocation=this.getBlockPos();
         Direction direction = this.getBlockState().getValue(DirectionalBlock.FACING);
@@ -211,14 +215,9 @@ boolean signalChanged;
             wantedLocation=this.getBlockPos().west();
 
 
-
-        if(!level.getBlockState(wantedLocation).is(TFMGBlocks.GASOLINE_ENGINE_BACK.get())) {
-            return false;
-        }else {
-            if ( level.getBlockState(wantedLocation).getValue(DirectionalBlock.FACING) != direction)
-                return false;
-        }
-            return true;
+        BlockState wantedLocationBlockState = level.getBlockState(wantedLocation);
+        return wantedLocationBlockState.is(backPartBlock())
+                && wantedLocationBlockState.getValue(DirectionalBlock.FACING) == direction;
     }
 
     @Override
