@@ -6,6 +6,7 @@ import com.drmangotea.tfmg.items.gadgets.explosives.thermite_grenades.fire.TFMGC
 import com.drmangotea.tfmg.registry.*;
 import com.drmangotea.tfmg.worldgen.TFMGConfiguredFeatures;
 import com.drmangotea.tfmg.worldgen.TFMGFeatures;
+import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.google.common.collect.ImmutableList;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.AllSoundEvents;
@@ -28,6 +29,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -66,6 +68,7 @@ public class CreateTFMG
         TFMGFeatures.register(modEventBus);
         TFMGRecipeTypes.register(modEventBus);
 
+        TFMGConfigs.register(ModLoadingContext.get());
 
         modEventBus.addListener(EventPriority.LOWEST, TFMGDatagen::gatherData);
         modEventBus.addListener(TFMGSoundEvents::register);
