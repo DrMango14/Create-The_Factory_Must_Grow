@@ -1,6 +1,7 @@
 package com.drmangotea.createindustry;
 
 import com.drmangotea.createindustry.base.TFMGLangPartials;
+import com.drmangotea.createindustry.config.TFMGConfigs;
 import com.drmangotea.createindustry.items.gadgets.explosives.thermite_grenades.fire.TFMGColoredFires;
 import com.drmangotea.createindustry.registry.*;
 import com.drmangotea.createindustry.worldgen.TFMGConfiguredFeatures;
@@ -21,6 +22,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -59,6 +61,8 @@ public class CreateTFMG
         TFMGColoredFires.register(modEventBus);
         TFMGFeatures.register(modEventBus);
         TFMGRecipeTypes.register(modEventBus);
+
+        TFMGConfigs.register(ModLoadingContext.get());
 
         //
         MinecraftForge.EVENT_BUS.register(this);
