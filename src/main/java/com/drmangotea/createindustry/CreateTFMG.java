@@ -6,6 +6,7 @@ import com.drmangotea.createindustry.items.gadgets.explosives.thermite_grenades.
 import com.drmangotea.createindustry.registry.*;
 import com.drmangotea.createindustry.worldgen.TFMGConfiguredFeatures;
 import com.drmangotea.createindustry.worldgen.TFMGFeatures;
+import com.drmangotea.createindustry.worldgen.TFMGLayeredPatterns;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.LangMerger;
@@ -57,6 +58,7 @@ public class CreateTFMG
         TFMGFluids.register();
         TFMGPaletteBlocks.register();
         TFMGSoundEvents.prepare();
+        TFMGLayeredPatterns.register();
 
         TFMGColoredFires.register(modEventBus);
         TFMGFeatures.register(modEventBus);

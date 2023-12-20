@@ -4,6 +4,7 @@ package com.drmangotea.createindustry.worldgen;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.drmangotea.createindustry.registry.TFMGPaletteStoneTypes;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
+import com.simibubi.create.infrastructure.worldgen.AllOreFeatureConfigEntries;
 import com.simibubi.create.infrastructure.worldgen.LayerPattern;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.world.level.block.Blocks;
@@ -121,10 +122,15 @@ public class TFMGLayeredPatterns {
 					.block(Blocks.SOUL_SAND))
 			.build();
 
+	public static void register() {
+		AllOreFeatureConfigEntries.STRIATED_ORES_OVERWORLD
+				.layeredDatagenExt()
+				.withLayerPattern(BAUXITE)
+				.withLayerPattern(LIGNITE)
+				.withLayerPattern(FIRECLAY);
 
-
-
-
-
-
+		AllOreFeatureConfigEntries.STRIATED_ORES_NETHER
+				.layeredDatagenExt()
+				.withLayerPattern(SULFUR);
+	}
 }
