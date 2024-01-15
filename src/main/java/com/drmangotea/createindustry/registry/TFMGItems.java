@@ -32,8 +32,7 @@ public class TFMGItems {
             STEEL_INGOT = taggedIngredient("steel_ingot", forgeItemTag("ingots/steel"), CREATE_INGOTS.tag),
             CAST_IRON_INGOT = taggedIngredient("cast_iron_ingot", forgeItemTag("ingots/cast_iron"), CREATE_INGOTS.tag),
             ALUMINUM_INGOT = taggedIngredient("aluminum_ingot", forgeItemTag("ingots/aluminum"), CREATE_INGOTS.tag),
-            PLASTIC_SHEET = taggedIngredient("plastic_sheet", forgeItemTag("ingots/plastic"), CREATE_INGOTS.tag),
-            CHARCOAL_DUST = taggedIngredient("charcoal_dust", forgeItemTag("dusts/charcoal"))
+            PLASTIC_SHEET = taggedIngredient("plastic_sheet", forgeItemTag("ingots/plastic"), CREATE_INGOTS.tag)
           //  LEAD_INGOT = taggedIngredient("lead_ingot", forgeItemTag("ingots/lead"), CREATE_INGOTS.tag)
       ;
 
@@ -59,7 +58,13 @@ public class TFMGItems {
             STEEL_MECHANISM = REGISTRATE.item("steel_mechanism", Item::new).register(),
 
             NITRATE_DUST = REGISTRATE.item("nitrate_dust", Item::new).register(),
-            SULFUR_DUST = REGISTRATE.item("sulfur_dust", Item::new).register();
+            SULFUR_DUST = REGISTRATE.item("sulfur_dust", Item::new).register(),
+
+            LIMESAND = REGISTRATE.item("limesand", Item::new).register(),
+
+            CONCRETE_MIXTURE = REGISTRATE.item("concrete_mixture", Item::new).register()
+
+                    ;
 
 
     public static final ItemEntry<SequencedAssemblyItem>

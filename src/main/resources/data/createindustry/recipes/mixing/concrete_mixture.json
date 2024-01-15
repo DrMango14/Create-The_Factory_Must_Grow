@@ -1,0 +1,23 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:sand"
+    },
+    {
+      "item": "minecraft:gravel"
+    },
+    {
+      "item": "createindustry:cement"
+    }
+
+  ],
+  "results": [
+    {
+      "count": 8,
+      "item": "createindustry:concrete_mixture"
+
+    }
+  ]
+}

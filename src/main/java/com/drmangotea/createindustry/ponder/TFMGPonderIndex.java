@@ -19,6 +19,10 @@ public class TFMGPonderIndex {
 
                 .addStoryBoard("small_engines", OilScenes::small_engines, TFMGPonderTag.OIL);
 
+        HELPER.forComponents(TFMGBlocks.RADIAL_ENGINE, TFMGBlocks.LARGE_RADIAL_ENGINE)
+
+                .addStoryBoard("radial_engines", OilScenes::radial_engines, TFMGPonderTag.OIL);
+
 
         HELPER.forComponents(TFMGBlocks.DIESEL_ENGINE)
 
@@ -29,8 +33,18 @@ public class TFMGPonderIndex {
 
                 .addStoryBoard("surface_scanner", OilScenes::surface_scanner, TFMGPonderTag.OIL);
 
-        HELPER.forComponents(TFMGBlocks.PUMPJACK_BASE,TFMGBlocks.PUMPJACK_CRANK,TFMGBlocks.PUMPJACK_HAMMER_HOLDER)
-                .addStoryBoard("pumpjack", OilScenes::pumpjack, TFMGPonderTag.OIL);
+        HELPER.forComponents(
+                TFMGBlocks.PUMPJACK_BASE,
+                TFMGBlocks.PUMPJACK_CRANK,
+                TFMGBlocks.PUMPJACK_HAMMER,
+                TFMGBlocks.PUMPJACK_HAMMER_CONNECTOR,
+                TFMGBlocks.PUMPJACK_HAMMER_PART,
+                TFMGBlocks.PUMPJACK_HAMMER_HEAD,
+                TFMGBlocks.LARGE_PUMPJACK_HAMMER_CONNECTOR,
+                TFMGBlocks.LARGE_PUMPJACK_HAMMER_PART,
+                TFMGBlocks.LARGE_PUMPJACK_HAMMER_HEAD
+
+                ).addStoryBoard("pumpjack", OilScenes::pumpjack, TFMGPonderTag.OIL);
         HELPER.forComponents(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER,TFMGBlocks.STEEL_DISTILLATION_OUTPUT)
 
                 .addStoryBoard("distillation_tower", OilScenes::distillation_tower, TFMGPonderTag.OIL);
@@ -63,8 +77,12 @@ public class TFMGPonderIndex {
                     .add(TFMGBlocks.STEEL_DISTILLATION_OUTPUT)
                     .add(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER)
                     .add(TFMGBlocks.PUMPJACK_BASE)
-                    .add(TFMGBlocks.PUMPJACK_HAMMER_HOLDER)
+                    .add(TFMGBlocks.PUMPJACK_HAMMER)
                     .add(TFMGBlocks.DIESEL_ENGINE)
+                    .add(TFMGBlocks.DIESEL_ENGINE_EXPANSION)
+                    .add(TFMGBlocks.RADIAL_ENGINE)
+                    .add(TFMGBlocks.LARGE_RADIAL_ENGINE)
+                    .add(TFMGBlocks.COMPACT_ENGINE)
                     .add(TFMGBlocks.DIESEL_ENGINE_EXPANSION)
                     .add(TFMGBlocks.PUMPJACK_CRANK);
 

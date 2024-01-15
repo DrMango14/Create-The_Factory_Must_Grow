@@ -1,3 +1,6 @@
 {
-  "parent": "createindustry:block/limesand"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "createindustry:item/limesand"
+  }
 }

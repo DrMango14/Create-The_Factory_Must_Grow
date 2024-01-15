@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "createindustry:pumpjack_hammer_head"
+  },
+  "result": "createindustry:large_pumpjack_hammer_head",
+  "count": 1
+}

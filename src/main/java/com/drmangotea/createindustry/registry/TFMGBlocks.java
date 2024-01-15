@@ -1,9 +1,6 @@
 package com.drmangotea.createindustry.registry;
 
-import com.drmangotea.createindustry.base.TFMGBuilderTransformers;
-import com.drmangotea.createindustry.base.TFMGMetalBarsGen;
-import com.drmangotea.createindustry.base.TFMGSpriteShifts;
-import com.drmangotea.createindustry.base.TFMGVanillaBlockStates;
+import com.drmangotea.createindustry.base.*;
 import com.drmangotea.createindustry.blocks.concrete.formwork.FormWorkBlock;
 import com.drmangotea.createindustry.blocks.concrete.formwork.FormWorkGenerator;
 import com.drmangotea.createindustry.blocks.concrete.formwork.rebar.RebarFormWorkBlock;
@@ -12,16 +9,17 @@ import com.drmangotea.createindustry.blocks.decoration.TrussBlock;
 import com.drmangotea.createindustry.blocks.decoration.doors.TFMGSlidingDoorBlock;
 import com.drmangotea.createindustry.blocks.decoration.flywheels.TFMGFlywheelBlock;
 import com.drmangotea.createindustry.blocks.deposits.FluidDepositBlock;
-import com.drmangotea.createindustry.blocks.encased.TFMGEncasedCogwheelBlock;
-import com.drmangotea.createindustry.blocks.encased.TFMGEncasedShaftBlock;
+import com.drmangotea.createindustry.blocks.engines.compact.CompactEngineBlock;
 import com.drmangotea.createindustry.blocks.engines.diesel.DieselEngineBlock;
 import com.drmangotea.createindustry.blocks.engines.diesel.engine_expansion.DieselEngineExpansionBlock;
 import com.drmangotea.createindustry.blocks.engines.intake.AirIntakeBlock;
 import com.drmangotea.createindustry.blocks.engines.intake.AirIntakeGenerator;
+import com.drmangotea.createindustry.blocks.engines.radial.RadialEngineBlock;
+import com.drmangotea.createindustry.blocks.engines.radial.input.RadialEngineInputBlock;
+import com.drmangotea.createindustry.blocks.engines.radial.large.LargeRadialEngineBlock;
 import com.drmangotea.createindustry.blocks.engines.small.EngineGenerator;
 import com.drmangotea.createindustry.blocks.engines.small.gasoline.GasolineEngineBackBlock;
 import com.drmangotea.createindustry.blocks.engines.small.gasoline.GasolineEngineBlock;
-import com.drmangotea.createindustry.blocks.engines.small.gasoline.GasolineEngineGenerator;
 import com.drmangotea.createindustry.blocks.engines.small.lpg.LPGEngineBackBlock;
 import com.drmangotea.createindustry.blocks.engines.small.lpg.LPGEngineBlock;
 import com.drmangotea.createindustry.blocks.engines.small.turbine.TurbineEngineBackBlock;
@@ -31,6 +29,16 @@ import com.drmangotea.createindustry.blocks.machines.flarestack.FlarestackBlock;
 import com.drmangotea.createindustry.blocks.machines.flarestack.FlarestackGenerator;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.coke_oven.CokeOvenCTBehavior;
 import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.distillation_tower.IndustrialPipeBlock;
+import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.base.PumpjackBaseBlock;
+import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.crank.PumpjackCrankBlock;
+import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.hammer.PumpjackBlock;
+import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.hammer.PumpjackGenerator;
+import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.hammer.parts.PumpjackHammerConnectorBlock;
+import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.hammer.parts.PumpjackHammerHeadBlock;
+import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.hammer.parts.PumpjackHammerPartBlock;
+import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.hammer.parts.large.LargePumpjackHammerConnectorBlock;
+import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.hammer.parts.large.LargePumpjackHammerHeadBlock;
+import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.hammer.parts.large.LargePumpjackHammerPartBlock;
 import com.drmangotea.createindustry.blocks.pipes.normal.aluminum.AluminumPipeAttachmentModel;
 import com.drmangotea.createindustry.blocks.pipes.normal.aluminum.AluminumPipeBlock;
 import com.drmangotea.createindustry.blocks.pipes.normal.aluminum.EncasedAluminumPipeBlock;
@@ -61,9 +69,6 @@ import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation
 import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.distillation_tower.DistillationOutputBlock;
 import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.distillery.DistilleryControllerBlock;
 import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.distillery.DistilleryOutputBlock;
-import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.base.PumpjackBaseBlock;
-import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.crank.PumpjackCrankBlock;
-import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderBlock;
 import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.machine_input.MachineInputBlock;
 import com.drmangotea.createindustry.blocks.pipes.normal.steel.EncasedSteelPipeBlock;
 import com.drmangotea.createindustry.blocks.pipes.normal.steel.GlassSteelPipeBlock;
@@ -77,6 +82,7 @@ import com.drmangotea.createindustry.blocks.tanks.SteelTankBlock;
 import com.drmangotea.createindustry.blocks.tanks.SteelTankGenerator;
 import com.drmangotea.createindustry.blocks.tanks.SteelTankItem;
 import com.simibubi.create.*;
+import com.simibubi.create.content.contraptions.bearing.StabilizedBearingMovementBehaviour;
 import com.simibubi.create.content.decoration.MetalLadderBlock;
 import com.simibubi.create.content.decoration.MetalScaffoldingBlock;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
@@ -86,10 +92,6 @@ import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
 import com.simibubi.create.content.fluids.pipes.SmartFluidPipeGenerator;
 import com.simibubi.create.content.fluids.pipes.valve.FluidValveBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
-import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogCTBehaviour;
-import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogwheelBlock;
-import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedShaftBlock;
-import com.simibubi.create.content.logistics.vault.ItemVaultCTBehaviour;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.data.*;
 import com.simibubi.create.foundation.utility.Couple;
@@ -104,17 +106,15 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.RegistryObject;
 
 
 import static com.drmangotea.createindustry.CreateTFMG.REGISTRATE;
+import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
 import static com.simibubi.create.foundation.data.BlockStateGen.simpleCubeAll;
 import static com.simibubi.create.foundation.data.CreateRegistrate.casingConnectivity;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
@@ -139,6 +139,21 @@ public class TFMGBlocks {
             .build()
             .lang("Napalm Bomb")
             .register();
+
+    public static final BlockEntry<Block> STEEL_FRAME = REGISTRATE.block("steel_frame", Block::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.COLOR_YELLOW))
+            .properties(p -> p.strength(3))
+            .transform(pickaxeOnly())
+            .addLayer(() -> RenderType::cutoutMipped)
+            .properties(BlockBehaviour.Properties::noOcclusion)
+            .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+            .item()
+            .build()
+            .lang("Steel Frame")
+            .register();
+
+
     public static final BlockEntry<Block> FOSSILSTONE = REGISTRATE.block("fossilstone", Block::new)
             .initialProperties(() -> Blocks.OBSIDIAN)
             .properties(p -> p.strength(100f,1200f))
@@ -341,16 +356,7 @@ public class TFMGBlocks {
             .lang("Factory Floor Slab")
             .register();
 
-    public static final BlockEntry<TFMGGravityBlock> LIMESAND = REGISTRATE.block("limesand", TFMGGravityBlock::new)
-            .initialProperties(() -> Blocks.SAND)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_YELLOW))
-            //.transform(pickaxeOnly())
-            .blockstate(simpleCubeAll("limesand"))
-           // .tag(Tags.Blocks)
-            .item()
-            .build()
-            .lang("Limesand")
-            .register();
+
 
     public static final BlockEntry<TFMGGravityBlock> CEMENT = REGISTRATE.block("cement", TFMGGravityBlock::new)
             .initialProperties(() -> Blocks.SAND)
@@ -537,37 +543,146 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
                     .build()
                     .register();
 
-    public static final BlockEntry<PumpjackCrankBlock> PUMPJACK_CRANK =
-            REGISTRATE.block("pumpjack_crank", PumpjackCrankBlock::new)
-                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
-                    .properties(p -> p
-                            .strength(4.5F))
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
-                    .transform(axeOrPickaxe())
-                    .item()
-                    .build()
-                    .register();
-    public static final BlockEntry<PumpjackBaseBlock> PUMPJACK_BASE =
-            REGISTRATE.block("pumpjack_base", PumpjackBaseBlock::new)
-                    .initialProperties(SharedProperties::copperMetal)
-                    .properties(BlockBehaviour.Properties::noOcclusion)
+ //   public static final BlockEntry<PumpjackCrankBlock> PUMPJACK_CRANK =
+ //           REGISTRATE.block("pumpjack_crank", PumpjackCrankBlock::new)
+ //                   .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+ //                   .properties(p -> p
+ //                           .strength(4.5F))
+ //                   .properties(BlockBehaviour.Properties::noOcclusion)
+ //                   .blockstate(BlockStateGen.horizontalBlockProvider(true))
+ //                   .transform(axeOrPickaxe())
+ //                   .item()
+ //                   .build()
+ //                   .register();
+ //   public static final BlockEntry<PumpjackBaseBlock> PUMPJACK_BASE =
+ //           REGISTRATE.block("pumpjack_base", PumpjackBaseBlock::new)
+ //                   .initialProperties(SharedProperties::copperMetal)
+ //                   .properties(BlockBehaviour.Properties::noOcclusion)
+ //                   .transform(pickaxeOnly())
+ //                   .blockstate(BlockStateGen.horizontalBlockProvider(true))
+ //                   .item()
+ //                   .build()
+ //                   .register();
+//
+ //   public static final BlockEntry<PumpjackHammerHolderBlock> PUMPJACK_HAMMER_HOLDER =
+ //           REGISTRATE.block("pumpjack_hammer_holder", PumpjackHammerHolderBlock::new)
+ //                   .initialProperties(SharedProperties::copperMetal)
+ //                   .properties(BlockBehaviour.Properties::noOcclusion)
+ //                   .blockstate(BlockStateGen.horizontalBlockProvider(true))
+ //                   .transform(pickaxeOnly())
+ //                   .item()
+ //                   .build()
+ //                   .register();
+ //   //////
+
+
+    public static final BlockEntry<PumpjackBlock> PUMPJACK_HAMMER =
+            REGISTRATE.block("pumpjack_hammer", PumpjackBlock::new)
+                    .properties(p -> p.color(MaterialColor.PODZOL))
                     .transform(pickaxeOnly())
-                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .blockstate(new PumpjackGenerator()::generate)
+                    .onRegister(movementBehaviour(new StabilizedBearingMovementBehaviour()))
                     .item()
-                    .build()
+                    .transform(customItemModel())
+                    .lang("Pumpjack Hammer Holder")
                     .register();
 
-    public static final BlockEntry<PumpjackHammerHolderBlock> PUMPJACK_HAMMER_HOLDER =
-            REGISTRATE.block("pumpjack_hammer_holder", PumpjackHammerHolderBlock::new)
-                    .initialProperties(SharedProperties::copperMetal)
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
+
+
+    public static final BlockEntry<PumpjackCrankBlock> PUMPJACK_CRANK =
+            REGISTRATE.block("pumpjack_crank", PumpjackCrankBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .properties(p -> p.color(MaterialColor.PODZOL))
                     .transform(pickaxeOnly())
+                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                    .properties(BlockBehaviour.Properties::noOcclusion)
                     .item()
                     .build()
+                    .lang("Pumpjack Crank")
                     .register();
-    //////
+
+    public static final BlockEntry<PumpjackHammerPartBlock> PUMPJACK_HAMMER_PART = REGISTRATE.block("pumpjack_hammer_part", PumpjackHammerPartBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN))
+            .transform(pickaxeOnly())
+            .properties(BlockBehaviour.Properties::noOcclusion)
+            .blockstate(BlockStateGen.horizontalBlockProvider(false))
+            .item()
+            .build()
+            .lang("Pumpjack Hammer Part")
+            .register();
+
+    public static final BlockEntry<PumpjackHammerHeadBlock> PUMPJACK_HAMMER_HEAD = REGISTRATE.block("pumpjack_hammer_head", PumpjackHammerHeadBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN))
+            .transform(pickaxeOnly())
+            .properties(BlockBehaviour.Properties::noOcclusion)
+            .blockstate(BlockStateGen.horizontalBlockProvider(false))
+            .item()
+            .build()
+            .lang("Pumpjack Hammer Head")
+            .register();
+
+
+
+    public static final BlockEntry<PumpjackHammerConnectorBlock> PUMPJACK_HAMMER_CONNECTOR = REGISTRATE.block("pumpjack_hammer_connector", PumpjackHammerConnectorBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN))
+            .transform(pickaxeOnly())
+            .properties(BlockBehaviour.Properties::noOcclusion)
+            .blockstate(BlockStateGen.horizontalBlockProvider(false))
+            .item()
+            .build()
+            .lang("Pumpjack Hammer Connector")
+            .register();
+    ////////
+    public static final BlockEntry<LargePumpjackHammerPartBlock> LARGE_PUMPJACK_HAMMER_PART = REGISTRATE.block("large_pumpjack_hammer_part", LargePumpjackHammerPartBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN))
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.horizontalBlockProvider(false))
+            .item()
+            .build()
+            .lang("Large Pumpjack Hammer Part")
+            .register();
+
+    public static final BlockEntry<LargePumpjackHammerHeadBlock> LARGE_PUMPJACK_HAMMER_HEAD = REGISTRATE.block("large_pumpjack_hammer_head", LargePumpjackHammerHeadBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN))
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.horizontalBlockProvider(false))
+            .item()
+            .build()
+            .lang("Large Pumpjack Hammer Head")
+            .register();
+
+
+
+    public static final BlockEntry<LargePumpjackHammerConnectorBlock> LARGE_PUMPJACK_HAMMER_CONNECTOR = REGISTRATE.block("large_pumpjack_hammer_connector", LargePumpjackHammerConnectorBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN))
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.horizontalBlockProvider(false))
+            .item()
+            .build()
+            .lang("Large Pumpjack Hammer Connector")
+            .register();
+    ////////
+    public static final BlockEntry<PumpjackBaseBlock> PUMPJACK_BASE = REGISTRATE.block("pumpjack_base", PumpjackBaseBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN))
+            .transform(pickaxeOnly())
+            .properties(BlockBehaviour.Properties::noOcclusion)
+            .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+            .item()
+            .build()
+            .lang("Pumpjack Base")
+            .register();
+
+    ///////////
 
     //Blast Furnace
 
@@ -916,6 +1031,80 @@ public static final BlockEntry<DistillationOutputBlock> STEEL_DISTILLATION_OUTPU
             .build()
             .lang("Diesel Engine Expansion")
             .register();
+
+    public static final BlockEntry<RadialEngineBlock> RADIAL_ENGINE =
+            REGISTRATE.block("radial_engine", RadialEngineBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(pickaxeOnly())
+                    .blockstate(new EngineGenerator()::generate)
+                    .transform(BlockStressDefaults.setCapacity(70.0))
+                    .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
+                    .item()
+                    .properties(p -> p.rarity(Rarity.UNCOMMON))
+                  //  .lang("Radial Engine")
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<LargeRadialEngineBlock> LARGE_RADIAL_ENGINE =
+            REGISTRATE.block("large_radial_engine", LargeRadialEngineBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(pickaxeOnly())
+                    .blockstate(new EngineGenerator()::generate)
+                    .transform(BlockStressDefaults.setCapacity(93.0))
+                    .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
+                    .item()
+                    .properties(p -> p.rarity(Rarity.UNCOMMON))
+                   // .lang("Large Radial Engine")
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<RadialEngineInputBlock> RADIAL_ENGINE_INPUT =
+            REGISTRATE.block("radial_engine_input", RadialEngineInputBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .blockstate(BlockStateGen.directionalBlockProvider(false))
+                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(pickaxeOnly())
+                    .register();
+    public static final BlockEntry<DebugBlock> RADIAL_ENGINE_INPUT_PONDER =
+            REGISTRATE.block("radial_engine_input_ponder", DebugBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(pickaxeOnly())
+                    .item()
+                    .build()
+                    .register();
+
+
+    public static final BlockEntry<CompactEngineBlock> COMPACT_ENGINE =
+            REGISTRATE.block("compact_engine", CompactEngineBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(pickaxeOnly())
+                    .blockstate(new EngineGenerator()::generate)
+                    .transform(BlockStressDefaults.setCapacity(20.0))
+                    .transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 256)))
+                    .item()
+                    .properties(p -> p.rarity(Rarity.UNCOMMON))
+                   // .lang("Small Engine")
+                    .transform(customItemModel())
+                    .register();
+
+
 
     //----------------------PIPES-------------------------------//
 

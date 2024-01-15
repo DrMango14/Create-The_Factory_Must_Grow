@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "APA",
+    "   "
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:ingots/aluminum"
+    },
+    "P": {
+      "item": "createindustry:pumpjack_hammer_part"
+    }
+  },
+  "result": {
+    "item": "createindustry:pumpjack_hammer_connector",
+    "count": 1
+
+
+  }
+}

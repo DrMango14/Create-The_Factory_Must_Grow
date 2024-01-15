@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    " B ",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "createindustry:steel_block"
+    },
+    "P": {
+      "item": "createindustry:heavy_plate"
+    }
+  },
+  "result": {
+    "item": "createindustry:pumpjack_hammer_head",
+    "count": 1
+
+
+  }
+}

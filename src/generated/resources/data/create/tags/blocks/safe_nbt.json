@@ -1,10 +1,16 @@
 {
   "values": [
+    "createindustry:pumpjack_hammer",
     "createindustry:gasoline_engine",
     "createindustry:gasoline_engine_back",
     "createindustry:lpg_engine",
     "createindustry:lpg_engine_back",
     "createindustry:turbine_engine",
-    "createindustry:turbine_engine_back"
+    "createindustry:turbine_engine_back",
+    "createindustry:radial_engine",
+    "createindustry:large_radial_engine",
+    "createindustry:radial_engine_input",
+    "createindustry:radial_engine_input_ponder",
+    "createindustry:compact_engine"
   ]
 }

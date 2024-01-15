@@ -1,0 +1,50 @@
+{
+  "variants": {
+    "facing=down,wide=false": {
+      "model": "createindustry:block/pumpjack_hammer/block",
+      "y": 180
+    },
+    "facing=down,wide=true": {
+      "model": "createindustry:block/pumpjack_hammer/block_wide",
+      "y": 180
+    },
+    "facing=east,wide=false": {
+      "model": "createindustry:block/pumpjack_hammer/block"
+    },
+    "facing=east,wide=true": {
+      "model": "createindustry:block/pumpjack_hammer/block_wide"
+    },
+    "facing=north,wide=false": {
+      "model": "createindustry:block/pumpjack_hammer/block",
+      "y": 270
+    },
+    "facing=north,wide=true": {
+      "model": "createindustry:block/pumpjack_hammer/block_wide",
+      "y": 270
+    },
+    "facing=south,wide=false": {
+      "model": "createindustry:block/pumpjack_hammer/block",
+      "y": 90
+    },
+    "facing=south,wide=true": {
+      "model": "createindustry:block/pumpjack_hammer/block_wide",
+      "y": 90
+    },
+    "facing=up,wide=false": {
+      "model": "createindustry:block/pumpjack_hammer/block",
+      "y": 180
+    },
+    "facing=up,wide=true": {
+      "model": "createindustry:block/pumpjack_hammer/block_wide",
+      "y": 180
+    },
+    "facing=west,wide=false": {
+      "model": "createindustry:block/pumpjack_hammer/block",
+      "y": 180
+    },
+    "facing=west,wide=true": {
+      "model": "createindustry:block/pumpjack_hammer/block_wide",
+      "y": 180
+    }
+  }
+}

@@ -193,7 +193,8 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 			if(getShaft() != null)
 				engineProcess(targetAxis,verticalTarget);
 		//DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> this::makeSound);
-		makeSound(targetAxis,verticalTarget);
+		if(level.isClientSide)
+			makeSound(targetAxis,verticalTarget);
 
 		int conveyedSpeedLevel =
 			engineStrength == 0 ? 1 : verticalTarget ? 1 : (int) GeneratingKineticBlockEntity.convertToDirection(1, facing)*2;
@@ -218,7 +219,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 
 
 
-	@OnlyIn(Dist.CLIENT)
+	//@OnlyIn(Dist.CLIENT)
 	private void makeSound(Axis targetAxis, boolean verticalTarget){
 		Float targetAngle = getTargetAngle();
 		PoweredShaftBlockEntity ste = target.get();

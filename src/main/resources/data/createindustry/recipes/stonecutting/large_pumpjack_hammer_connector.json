@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "createindustry:pumpjack_hammer_connector"
+  },
+  "result": "createindustry:large_pumpjack_hammer_connector",
+  "count": 1
+}

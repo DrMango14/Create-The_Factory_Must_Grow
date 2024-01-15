@@ -1,5 +1,6 @@
 package com.drmangotea.createindustry;
 
+import com.drmangotea.createindustry.base.TFMGContraptions;
 import com.drmangotea.createindustry.base.TFMGLangPartials;
 import com.drmangotea.createindustry.items.gadgets.explosives.thermite_grenades.fire.TFMGColoredFires;
 import com.drmangotea.createindustry.registry.*;
@@ -55,6 +56,7 @@ public class CreateTFMG
         TFMGFluids.register();
         TFMGPaletteBlocks.register();
         TFMGSoundEvents.prepare();
+        TFMGContraptions.prepare();
 
         TFMGColoredFires.register(modEventBus);
         TFMGFeatures.register(modEventBus);

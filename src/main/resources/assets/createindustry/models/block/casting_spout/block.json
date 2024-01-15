@@ -4,7 +4,7 @@
 	"texture_size": [32, 32],
 	"textures": {
 		"1": "createindustry:block/casting_spout",
-		"particle": "createindustry:block/industrial_iron_block"
+		"particle": "create:block/industrial_iron_block"
 	},
 	"elements": [
 		{

@@ -1,0 +1,32 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MEM",
+    "MIM",
+    "SUS"
+  ],
+  "key": {
+    "S": {
+      "item": "createindustry:rebar"
+    },
+    "M": {
+      "item": "createindustry:engine_chamber"
+    },
+    "U": {
+      "item": "createindustry:steel_pipe"
+    },
+    "I": {
+      "item": "createindustry:engine_base"
+    },
+    "E": {
+      "item": "createindustry:exhaust"
+    }
+  },
+  "result": {
+    "item": "createindustry:compact_engine",
+    "count": 1
+
+
+  }
+}
