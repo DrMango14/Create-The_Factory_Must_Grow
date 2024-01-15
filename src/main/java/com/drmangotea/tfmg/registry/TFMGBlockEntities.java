@@ -11,6 +11,8 @@ import com.drmangotea.tfmg.blocks.decoration.flywheels.TFMGFlywheelRenderer;
 import com.drmangotea.tfmg.blocks.deposits.FluidDepositBlockEntity;
 import com.drmangotea.tfmg.blocks.deposits.surface_scanner.SurfaceScannerBlockEntity;
 import com.drmangotea.tfmg.blocks.deposits.surface_scanner.SurfaceScannerRenderer;
+import com.drmangotea.tfmg.blocks.engines.compact.CompactEngineBlockEntity;
+import com.drmangotea.tfmg.blocks.engines.compact.CompactEngineRenderer;
 import com.drmangotea.tfmg.blocks.engines.diesel.DieselEngineBlockEntity;
 import com.drmangotea.tfmg.blocks.engines.diesel.DieselEngineInstance;
 import com.drmangotea.tfmg.blocks.engines.diesel.DieselEngineRenderer;
@@ -18,6 +20,10 @@ import com.drmangotea.tfmg.blocks.engines.diesel.engine_expansion.DieselEngineEx
 import com.drmangotea.tfmg.blocks.engines.intake.AirIntakeBlockEntity;
 import com.drmangotea.tfmg.blocks.engines.intake.AirIntakeInstance;
 import com.drmangotea.tfmg.blocks.engines.intake.AirIntakeRenderer;
+import com.drmangotea.tfmg.blocks.engines.radial.RadialEngineBlockEntity;
+import com.drmangotea.tfmg.blocks.engines.radial.RadialEngineRenderer;
+import com.drmangotea.tfmg.blocks.engines.radial.input.RadialEngineInputBlockEntity;
+import com.drmangotea.tfmg.blocks.engines.radial.large.LargeRadialEngineBlockEntity;
 import com.drmangotea.tfmg.blocks.engines.small.gasoline.GasolineEngineBackTileEntity;
 import com.drmangotea.tfmg.blocks.engines.small.gasoline.GasolineEngineTileEntity;
 import com.drmangotea.tfmg.blocks.engines.small.lpg.LPGEngineBackTileEntity;
@@ -30,6 +36,7 @@ import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.BlastF
 import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.BlastFurnaceRenderer;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.blast_furnace.MoltenMetalBlockEntity;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin.CastingBasinBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin.CastingBasinRenderer;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_spout.CastingSpoutBlockEntity;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_spout.CastingSpoutRenderer;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.coke_oven.CokeOvenBlockEntity;
@@ -38,13 +45,11 @@ import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distillat
 import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distillation_tower.DistillationOutputBlockEntity;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distillery.DistilleryControllerBlockEntity;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distillery.DistilleryOutputBlockEntity;
-import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.base.PumpjackBaseRenderer;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.base.PumpjackBaseBlockEntity;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.crank.PumpjackCrankRenderer;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.crank.PumpjackCrankBlockEntity;
-import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderInstance;
-import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderRenderer;
-import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.hammer_holder.PumpjackHammerHolderBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.hammer.PumpjackBlockEntity;
+import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.hammer.PumpjackRenderer;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.machine_input.MachineInputRenderer;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.machine_input.MachineInputBlockEntity;
 import com.drmangotea.tfmg.blocks.pipes.normal.LockablePipeBlockEntity;
@@ -63,6 +68,7 @@ import com.simibubi.create.content.fluids.pump.PumpCogInstance;
 import com.simibubi.create.content.fluids.pump.PumpRenderer;
 import com.simibubi.create.content.kinetics.base.HalfShaftInstance;
 import com.simibubi.create.content.kinetics.base.HorizontalHalfShaftInstance;
+import com.simibubi.create.content.kinetics.base.ShaftInstance;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
@@ -134,19 +140,19 @@ public class TFMGBlockEntities {
             .validBlocks(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER)
             .register();
 
-    public static final BlockEntityEntry<PumpjackHammerHolderBlockEntity> PUMPJACK_HAMMER_HOLDER = REGISTRATE
-            .blockEntity("pumpjack_hammer_holder", PumpjackHammerHolderBlockEntity::new)
-            .instance(() -> PumpjackHammerHolderInstance::new, false)
-            .validBlocks(TFMGBlocks.PUMPJACK_HAMMER_HOLDER)
-            .renderer(() -> PumpjackHammerHolderRenderer::new)
-            .register();
-
-    public static final BlockEntityEntry<PumpjackCrankBlockEntity> PUMPJACK_CRANK = REGISTRATE
-            .blockEntity("pumpjack_crank", PumpjackCrankBlockEntity::new)
-            //.instance(() -> PumpjackCrankInstance::new, true)
-            .validBlocks(TFMGBlocks.PUMPJACK_CRANK)
-            .renderer(() -> PumpjackCrankRenderer::new)
-            .register();
+    //public static final BlockEntityEntry<PumpjackHammerHolderBlockEntity> PUMPJACK_HAMMER_HOLDER = REGISTRATE
+    //        .blockEntity("pumpjack_hammer_holder", PumpjackHammerHolderBlockEntity::new)
+    //        .instance(() -> PumpjackHammerHolderInstance::new, false)
+    //        .validBlocks(TFMGBlocks.PUMPJACK_HAMMER_HOLDER)
+    //        .renderer(() -> PumpjackHammerHolderRenderer::new)
+    //        .register();
+//
+    //public static final BlockEntityEntry<PumpjackCrankBlockEntity> PUMPJACK_CRANK = REGISTRATE
+    //        .blockEntity("pumpjack_crank", PumpjackCrankBlockEntity::new)
+    //        //.instance(() -> PumpjackCrankInstance::new, true)
+    //        .validBlocks(TFMGBlocks.PUMPJACK_CRANK)
+    //        .renderer(() -> PumpjackCrankRenderer::new)
+    //        .register();
 
     public static final BlockEntityEntry<MachineInputBlockEntity> MACHINE_INPUT = REGISTRATE
             .blockEntity("machine_input", MachineInputBlockEntity::new)
@@ -155,11 +161,11 @@ public class TFMGBlockEntities {
             .renderer(() -> MachineInputRenderer::new)
             .register();
 
-    public static final BlockEntityEntry<PumpjackBaseBlockEntity> PUMPJACK_BASE = REGISTRATE
-            .blockEntity("pumpjack_base", PumpjackBaseBlockEntity::new)
-            .validBlocks(TFMGBlocks.PUMPJACK_BASE)
-            .renderer(() -> PumpjackBaseRenderer::new)
-            .register();
+    //public static final BlockEntityEntry<PumpjackBaseBlockEntity> PUMPJACK_BASE = REGISTRATE
+    //        .blockEntity("pumpjack_base", PumpjackBaseBlockEntity::new)
+    //        .validBlocks(TFMGBlocks.PUMPJACK_BASE)
+    //        .renderer(() -> PumpjackBaseRenderer::new)
+    //        .register();
 
     public static final BlockEntityEntry<BlastFurnaceOutputBlockEntity> BLAST_FURNACE_OUTPUT = REGISTRATE
             .blockEntity("blast_furnace_output", BlastFurnaceOutputBlockEntity::new)
@@ -180,6 +186,7 @@ public class TFMGBlockEntities {
 
     public static final BlockEntityEntry<CastingBasinBlockEntity> CASTING_BASIN = REGISTRATE
             .blockEntity("casting_basin", CastingBasinBlockEntity::new)
+            .renderer(()-> CastingBasinRenderer::new)
             .validBlocks(TFMGBlocks.CASTING_BASIN)
             .register();
 
@@ -337,7 +344,49 @@ public class TFMGBlockEntities {
 
 
 
+    public static final BlockEntityEntry<RadialEngineBlockEntity> RADIAL_ENGINE = REGISTRATE
+            .blockEntity("radial_engine", RadialEngineBlockEntity::new)
+            .instance(() -> ShaftInstance::new, false)
+            .validBlocks(TFMGBlocks.RADIAL_ENGINE)
+            .renderer(() -> RadialEngineRenderer::new)
+            .register();
 
+    public static final BlockEntityEntry<LargeRadialEngineBlockEntity> LARGE_RADIAL_ENGINE = REGISTRATE
+            .blockEntity("large_radial_engine", LargeRadialEngineBlockEntity::new)
+            .instance(() -> ShaftInstance::new, false)
+            .validBlocks(TFMGBlocks.LARGE_RADIAL_ENGINE)
+            .renderer(() -> RadialEngineRenderer::new)
+            .register();
+
+
+    public static final BlockEntityEntry<RadialEngineInputBlockEntity> RADIAL_ENGINE_INPUT = REGISTRATE
+            .blockEntity("radial_engine_input", RadialEngineInputBlockEntity::new)
+            .validBlocks(TFMGBlocks.RADIAL_ENGINE_INPUT)
+            .register();
+    public static final BlockEntityEntry<CompactEngineBlockEntity> COMPACT_ENGINE = REGISTRATE
+            .blockEntity("compact_engine", CompactEngineBlockEntity::new)
+            .instance(() -> HalfShaftInstance::new, false)
+            .validBlocks(TFMGBlocks.COMPACT_ENGINE)
+            .renderer(() -> CompactEngineRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<PumpjackBlockEntity> PUMPJACK_HAMMER = REGISTRATE
+            .blockEntity("pumpjack_hammer", PumpjackBlockEntity::new)
+            .validBlocks(TFMGBlocks.PUMPJACK_HAMMER)
+            .renderer(() -> PumpjackRenderer::new)
+            .register();
+
+
+    public static final BlockEntityEntry<PumpjackCrankBlockEntity> PUMPJACK_CRANK = REGISTRATE
+            .blockEntity("pumpjack_crank", PumpjackCrankBlockEntity::new)
+            .validBlocks(TFMGBlocks.PUMPJACK_CRANK)
+            .renderer(() -> PumpjackCrankRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<PumpjackBaseBlockEntity> PUMPJACK_BASE = REGISTRATE
+            .blockEntity("pumpjack_base", PumpjackBaseBlockEntity::new)
+            .validBlocks(TFMGBlocks.PUMPJACK_BASE)
+            .register();
 
 
     public static void register() {}

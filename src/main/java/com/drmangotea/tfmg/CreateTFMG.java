@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg;
 
+import com.drmangotea.tfmg.base.TFMGContraptions;
 import com.drmangotea.tfmg.base.TFMGDatagen;
 import com.drmangotea.tfmg.base.TFMGLangPartials;
 import com.drmangotea.tfmg.items.gadgets.explosives.thermite_grenades.fire.TFMGColoredFires;
@@ -11,7 +12,7 @@ import com.mojang.logging.LogUtils;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.data.LangMerger;
+
 import com.simibubi.create.foundation.utility.IntAttached;
 import com.simibubi.create.foundation.utility.NBTHelper;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -65,6 +66,7 @@ public class CreateTFMG
         TFMGColoredFires.register(modEventBus);
         TFMGFeatures.register(modEventBus);
         TFMGRecipeTypes.register(modEventBus);
+        TFMGContraptions.prepare();
 
 
         modEventBus.addListener(EventPriority.LOWEST, TFMGDatagen::gatherData);

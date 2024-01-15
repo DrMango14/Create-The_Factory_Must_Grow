@@ -9,7 +9,6 @@
     "tfmg:formwork_block",
     "tfmg:rebar_formwork_block",
     "tfmg:machine_input",
-    "tfmg:pumpjack_crank",
     "tfmg:copper_encased_steel_pipe",
     "tfmg:copper_encased_cast_iron_pipe",
     "tfmg:copper_encased_brass_pipe",

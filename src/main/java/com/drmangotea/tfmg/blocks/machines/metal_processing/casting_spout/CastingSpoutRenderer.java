@@ -76,8 +76,9 @@ public class CastingSpoutRenderer extends SafeBlockEntityRenderer<CastingSpoutBl
         if (be.isRunning) {
             radius = (float) (Math.pow(((0.3) - 1), 2) - 1);
             AABB bb = new AABB(0.5, .5, 0.5, 0.5, -1.2, 0.5).inflate(radius / 32f);
-            FluidRenderer.renderFluidBox(fluidStack, (float) bb.minX, (float) bb.minY, (float) bb.minZ,
-                    (float) bb.maxX, (float) bb.maxY, (float) bb.maxZ, buffer, ms, light, true);
+            if(!fluidStack.isEmpty())
+                FluidRenderer.renderFluidBox(fluidStack, (float) bb.minX, (float) bb.minY, (float) bb.minZ,
+                        (float) bb.maxX, (float) bb.maxY, (float) bb.maxZ, buffer, ms, light, true);
         }
 
 

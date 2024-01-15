@@ -68,7 +68,7 @@ public class MachineInputBlockEntity extends KineticBlockEntity {
          */
         Lang.translate("goggles.machine_input.power_level")
                 .style(ChatFormatting.AQUA)
-                .add(Lang.translate("goggles.number", this.getPowerLevel()))
+                .add(Lang.translate("goggles.misc.number", this.getPowerLevel()))
                 .forGoggles(tooltip,1);
 
 

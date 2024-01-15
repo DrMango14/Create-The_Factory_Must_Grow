@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distilla
 
 
 
+import com.drmangotea.tfmg.CreateTFMG;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distillery.DistilleryOutputBlockEntity;
 import com.drmangotea.tfmg.recipes.distillation.DistillationRecipe;
 import com.drmangotea.tfmg.recipes.distillation.AbstractDistillationRecipe;
@@ -183,6 +184,7 @@ public class DistillationOutputBlockEntity extends DistilleryOutputBlockEntity i
     if(!hasIndustrialPipes(foundOutputs))
         return;
 
+
 //
     if (fluidInRecipe1.getFluid() != this.tankInventory.getFluid().getFluid()
          && tankInventory.getFluidAmount()!=0
@@ -224,6 +226,7 @@ if(fluidInRecipe2!=null)
     )
         return;
 //
+
         if(((AdvancedDistillationRecipe) recipe).getOutputCount((AdvancedDistillationRecipe) recipe)>=1)
             if(tankInventory.getFluidAmount()+((AdvancedDistillationRecipe) recipe).getFirstFluidResult().getAmount()>8000)
                 return;
@@ -254,8 +257,10 @@ if(fluidInRecipe2!=null)
         if(!level.isClientSide) {
            // if(((AdvancedDistillationRecipe)currentRecipe).getInputFluid().getMatchingFluidStacks().get(0).getFluid() != TFMGFluids.HEAVY_OIL.get())
            //   return;
+
             if(!controller.hasTank)
                 return;
+
             if(controller.towerLevel<4)
                 return;
 
@@ -301,12 +306,6 @@ if(fluidInRecipe2!=null)
         ((DistillationOutputBlockEntity) above5).tankInventory.setFluid(new FluidStack(((AdvancedDistillationRecipe) recipe).getSixthFluidResult().getFluid(), ((AdvancedDistillationRecipe) recipe).getSixthFluidResult().getAmount() + ((DistillationOutputBlockEntity) above5).tankInventory.getFluidAmount()));
 
 }
-/*
-if(!(((AdvancedDistillationRecipe) currentRecipe).getThirdItemResult().isEmpty()))
-    controller.outputInventory.setItem(2,((AdvancedDistillationRecipe) currentRecipe).getFirstItemResult());
-
-
- */
 
     controller.notifyChangeOfContents();
     }
@@ -315,19 +314,7 @@ if(!(((AdvancedDistillationRecipe) currentRecipe).getThirdItemResult().isEmpty()
 
 }
 
-   // @Override
-   // protected List<Recipe<?>> getMatchingRecipes() {
-//
-//
-   //     List<Recipe<?>> list = RecipeFinder.get(getRecipeCacheKey(), level, this::matchStaticFilters);
-   //     return list.stream()
-   //             .filter(this::matchItemlessRecipe)
-   //             .sorted((r1, r2) -> r2.getIngredients()
-   //                     .size()
-   //                     - r1.getIngredients()
-   //                     .size())
-   //             .collect(Collectors.toList());
-   // }
+
 
     protected AdvancedDistillationRecipe getMatchingRecipes(DistillationControllerBlockEntity be) {
 

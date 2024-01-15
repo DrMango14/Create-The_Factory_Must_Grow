@@ -1,8 +1,13 @@
 package com.drmangotea.tfmg.ponder.scenes;
 
+import com.simibubi.create.AllItems;
 import com.simibubi.create.foundation.ponder.*;
+import com.simibubi.create.foundation.ponder.element.InputWindowElement;
 import com.simibubi.create.foundation.ponder.element.WorldSectionElement;
+import com.simibubi.create.foundation.utility.Pointing;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
 public class OilScenes {
@@ -103,16 +108,22 @@ public class OilScenes {
     public static void pumpjack(SceneBuilder scene, SceneBuildingUtil util) {
         scene.title("pumpjack", "");
         scene.configureBasePlate(0, 0, 7);
+
+
         ////
         Selection pipez = util.select.fromTo(0, 2, 0, 0, 4, 0);
-        Selection hammer = util.select.fromTo(3, 1, 2, 3, 3, 2);
-        Selection base = util.select.fromTo(1, 1, 2, 1, 1, 2);
-        Selection crank = util.select.fromTo(5, 2, 2, 5, 2, 2);
-        Selection input = util.select.fromTo(5, 1, 1, 5, 1, 2);
+        Selection hammer = util.select.fromTo(3, 1, 2, 3, 4, 2);
+        Selection base = util.select.fromTo(0, 1, 2, 0, 1, 2);
+        Selection crank = util.select.fromTo(6, 2, 2, 6, 2, 2);
+        Selection input = util.select.fromTo(5, 1, 1, 6, 1, 2);
         Selection base1 = util.select.fromTo(2, 0, 0, 6, 0, 4);
         Selection base2 = util.select.fromTo(0, 0, 0, 1, 0, 4);
         Selection deposit = util.select.fromTo(0, 1, 0, 0, 1, 0);
         Selection tank = util.select.fromTo(0, 0, 3, 1, 0, 4);
+
+        Selection hammer_part = util.select.fromTo(1, 5, 2, 5, 5, 2);
+        Selection hammer_head = util.select.fromTo(6, 5 ,2, 6, 5, 2);
+        Selection hammer_connector = util.select.fromTo(0, 5, 2, 0, 5, 2);
 
 
         ////
@@ -147,15 +158,34 @@ public class OilScenes {
         scene.overlay.showText(50)
                 .attachKeyFrame()
                 .text("Pumpjack base has to be placed on the top of the pipe")
-                .pointAt(util.vector.blockSurface(util.grid.at(1, 1, 2), Direction.WEST))
+                .pointAt(util.vector.blockSurface(util.grid.at(0, 1, 2), Direction.WEST))
                 .placeNearTarget();
         scene.idle(40);
         ElementLink<WorldSectionElement> hammerElement1 = scene.world.showIndependentSection(hammer,Direction.UP);
         scene.overlay.showText(50)
                 .attachKeyFrame()
-                .text("Pumpjack hammer needs to be placed behind it")
+                .text("Pumpjack Hammer Holder needs to be placed behind it")
                 .pointAt(util.vector.blockSurface(util.grid.at(3, 3, 2), Direction.WEST))
                 .placeNearTarget();
+        scene.idle(70);
+
+
+        ElementLink<WorldSectionElement> connectorElement = scene.world.showIndependentSection(hammer_connector,Direction.UP);
+        ElementLink<WorldSectionElement> headElement = scene.world.showIndependentSection(hammer_head,Direction.UP);
+        scene.overlay.showText(50)
+                .attachKeyFrame()
+                .text("Next step is building the Connector And the Head of the Pumpjack above the crank and the base")
+                .pointAt(util.vector.blockSurface(util.grid.at(3, 3, 2), Direction.WEST))
+                .placeNearTarget();
+        scene.idle(70);
+        ElementLink<WorldSectionElement> partElement = scene.world.showIndependentSection(hammer_part,Direction.UP);
+        scene.overlay.showText(50)
+                .attachKeyFrame()
+                .text("Now they need to be connected with Pumpjack Pammer Parts")
+                .pointAt(util.vector.blockSurface(util.grid.at(3, 3, 2), Direction.WEST))
+                .placeNearTarget();
+
+
         scene.idle(40);
         scene.world.setKineticSpeed(input,70);
         scene.world.setKineticSpeed(base1,-140);
@@ -426,7 +456,107 @@ public class OilScenes {
 
     }
 
+    public static void radial_engines(SceneBuilder scene, SceneBuildingUtil util){
+        scene.title("radial_engines", "");
+        scene.configureBasePlate(0, 0, 5);
+        scene.idle(10);
 
+        scene.showBasePlate();
+
+
+        Selection engine_small = util.select.fromTo(2, 1, 1, 2, 1, 1);
+
+        Selection engine_large = util.select.fromTo(1, 1, 1, 1, 1, 1);
+
+
+        Selection engine_lever = util.select.fromTo(3, 1, 0, 3, 1, 0);
+
+
+        Selection input_pump = util.select.fromTo(3, 1, 2, 3, 1, 2);
+
+        Selection input = util.select.fromTo(3, 1, 1, 3, 1, 1);
+
+        Selection tank_1 = util.select.fromTo(3, 1, 3, 3, 2, 3);
+
+        Selection tank_2 = util.select.fromTo(2, 1, 3, 2, 2, 3);
+
+
+        scene.world.setKineticSpeed(engine_small,0);
+
+
+
+
+        ElementLink<WorldSectionElement> engineElement = scene.world.showIndependentSectionImmediately(engine_small);
+        scene.overlay.showText(50)
+                .attachKeyFrame()
+                .text("Radial Engines are a special Type of Engine that doesn't require an exhaust block and has a shaft from both sides")
+                .pointAt(util.vector.blockSurface(util.grid.at(4, 0, 4), Direction.WEST))
+                .placeNearTarget();
+        scene.idle(100);
+
+
+
+        scene.world.setKineticSpeed(input_pump,80);
+        ElementLink<WorldSectionElement> inputElement = scene.world.showIndependentSection(input,Direction.DOWN);
+        scene.idle(50);
+
+        BlockPos inputPos = util.grid.at(2, 1, 1);
+        Vec3 topOf = util.vector.topOf(inputPos);
+        scene.overlay.showControls(new InputWindowElement(topOf, Pointing.DOWN).rightClick()
+                .withItem(new ItemStack(AllItems.WRENCH.get())), 20);
+
+        scene.overlay.showText(70)
+                .attachKeyFrame()
+                .text("Clicking the Engine from one of its sides will spawn an input slot that can accept fuel and redstone signals")
+                .pointAt(util.vector.blockSurface(util.grid.at(2, 1, 1), Direction.WEST))
+                .placeNearTarget();
+        scene.idle(100);
+        scene.overlay.showText(40)
+                .attachKeyFrame()
+                .text("Regular Radial Engines uses gasoline as fuel")
+                .pointAt(util.vector.blockSurface(util.grid.at(2, 1, 1), Direction.WEST))
+                .placeNearTarget();
+
+
+        scene.idle(80);
+
+
+        ElementLink<WorldSectionElement> inputPumpElement = scene.world.showIndependentSection(input_pump,Direction.DOWN);
+        ElementLink<WorldSectionElement> tankElement1 = scene.world.showIndependentSection(tank_1,Direction.DOWN);
+
+
+        ElementLink<WorldSectionElement> leverElement = scene.world.showIndependentSection(engine_lever,Direction.DOWN);
+        scene.world.setKineticSpeed(engine_small,180);
+        scene.world.setKineticSpeed(engine_large,180);
+
+        scene.overlay.showText(50)
+                .attachKeyFrame()
+                .text("Engine will start when redstone signal is applied to the input slot or the block itself")
+                .pointAt(util.vector.blockSurface(util.grid.at(3, 1, 0), Direction.WEST))
+                .placeNearTarget();
+
+        scene.idle(100);
+
+
+
+        scene.world.hideIndependentSection(engineElement,Direction.SOUTH);
+        scene.world.hideIndependentSection(tankElement1,Direction.SOUTH);
+
+        scene.idle(50);
+
+        ElementLink<WorldSectionElement> largeEngineElement = scene.world.showIndependentSection(engine_large,Direction.DOWN);
+        ElementLink<WorldSectionElement> tankElement2 = scene.world.showIndependentSection(tank_2,Direction.DOWN);
+        scene.world.moveSection(largeEngineElement,new Vec3(1d,0d,0d),0);
+        scene.world.moveSection(tankElement2,new Vec3(1d,0d,0d),0);
+
+        scene.overlay.showText(50)
+                .attachKeyFrame()
+                .text("The second variant of a radial is The Large Radial Engine which uses kerosene as fuel");
+        scene.idle(50);
+
+
+
+    }
 
 
 

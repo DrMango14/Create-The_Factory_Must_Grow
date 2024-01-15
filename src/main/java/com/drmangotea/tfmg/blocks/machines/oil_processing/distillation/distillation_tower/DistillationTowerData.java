@@ -63,12 +63,12 @@ public class DistillationTowerData {
     private int minValue = 0;
     private int maxValue = 0;
 
-    public int towerLevel = Math.min(activeHeat,  maxHeatForSize);
+    public int towerLevel = activeHeat;
 
     public LerpedFloat gauge = LerpedFloat.linear();
 
     public void tick(SteelTankBlockEntity controller) {
-        towerLevel = Math.min(activeHeat,  maxHeatForSize);
+        towerLevel = activeHeat;
         tank=controller;
        // tank.tankInventory.drain(2, IFluidHandler.FluidAction.EXECUTE);
 

@@ -56,8 +56,12 @@ public class TFMGItems {
             STEEL_MECHANISM = REGISTRATE.item("steel_mechanism", Item::new).register(),
 
             NITRATE_DUST = REGISTRATE.item("nitrate_dust", Item::new).register(),
-            SULFUR_DUST = REGISTRATE.item("sulfur_dust", Item::new).register();
+            SULFUR_DUST = REGISTRATE.item("sulfur_dust", Item::new).register(),
 
+    LIMESAND = REGISTRATE.item("limesand", Item::new).register(),
+
+    CONCRETE_MIXTURE = REGISTRATE.item("concrete_mixture", Item::new).register()
+;
 
     public static final ItemEntry<SequencedAssemblyItem>
 

@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.registry;
 import com.drmangotea.tfmg.CreateTFMG;
 
 
+import com.drmangotea.tfmg.base.DebugBlock;
 import com.simibubi.create.AllCreativeModeTabs;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -67,6 +68,8 @@ public class TFMGCreativeModeTabs {
                                         .asItem();
                                 if (item == Items.AIR)
                                         continue;
+
+
                                 items.add(item);
                         }
                         items = new ReferenceArrayList<>(new ReferenceLinkedOpenHashSet<>(items));
@@ -100,8 +103,12 @@ public class TFMGCreativeModeTabs {
                         TFMGItems.UNFINISHED_GASOLINE_ENGINE.get(),
                         TFMGItems.UNFINISHED_TURBINE_ENGINE.get(),
                         TFMGItems.UNFINISHED_LPG_ENGINE.get(),
-                        TFMGItems.UNFINISHED_STEEL_MECHANISM.get()
+                        TFMGItems.UNFINISHED_STEEL_MECHANISM.get(),
+                        TFMGBlocks.RADIAL_ENGINE_INPUT_PONDER.get().asItem()
+
+
                 );
+
 
                 @Override
                 public void accept(CreativeModeTab.ItemDisplayParameters params, CreativeModeTab.Output output) {

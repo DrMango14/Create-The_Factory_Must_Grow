@@ -5,29 +5,29 @@
     {
       "fluid": "tfmg:crude_oil_fluid",
       "nbt": {},
-      "amount": 12
+      "amount": 170
     }
   ],
   "results": [
     {
       "fluid": "tfmg:heavy_oil",
-      "amount": 3
+      "amount": 40
     },
     {
       "fluid": "tfmg:diesel",
-      "amount": 2
+      "amount": 30
     },
     {
       "fluid": "tfmg:kerosene",
-      "amount": 1
+      "amount": 20
     },
     {
       "fluid": "tfmg:gasoline",
-      "amount": 3
+      "amount": 40
     },
     {
       "fluid": "tfmg:lpg",
-      "amount": 2
+      "amount": 30
     }
   ]
 

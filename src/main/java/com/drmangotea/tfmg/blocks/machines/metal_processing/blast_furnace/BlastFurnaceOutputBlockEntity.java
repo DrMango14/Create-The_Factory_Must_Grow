@@ -117,10 +117,10 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
         blastFurnaceLevel = Math.min(blastFurnaceLevel,15);
     }
 
-
         if(speedModifier!=0) {
-            fuelEfficiency = 400 * speedModifier;
             speedModifier = (blastFurnaceLevel/2);
+            fuelEfficiency = 400 * (speedModifier);
+
         }else {
             fuelEfficiency = 400;
             speedModifier = 1;
@@ -195,7 +195,7 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
                 (tank1.getPrimaryHandler().getFluidAmount()+recipe.getFluidResults().get(0).getAmount())<=tank1.getPrimaryHandler().getCapacity()&&
                 (tank2.getPrimaryHandler().getFluidAmount()+recipe.getFluidResults().get(1).getAmount())<=tank2.getPrimaryHandler().getCapacity()) {
             timer--;
-            int random = Create.RANDOM.nextInt((int) fuelEfficiency);
+            int random = Create.RANDOM.nextInt((int) Math.abs(fuelEfficiency)+1);
             if(random == 69)
                 fuelInventory.getStackInSlot(0).shrink(1);
 

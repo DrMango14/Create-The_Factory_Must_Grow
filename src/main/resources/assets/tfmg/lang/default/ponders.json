@@ -20,7 +20,9 @@
   "tfmg.ponder.pumpjack.text_1": "To start extracting Oil, you must first build a pipeline on top of a deposit using Industrial Pipes",
   "tfmg.ponder.pumpjack.text_2": "Then, construct a Pumpjack on top of the pipeline by first placing down a Pumpjack Base...",
   "tfmg.ponder.pumpjack.text_3": "Placing the Pumpjack Hammer behind it...",
-  "tfmg.ponder.pumpjack.text_4": "And finally, placing the Machine Input with a Pumpjack Crank above it, as shown in the scene",
+  "tfmg.ponder.pumpjack.text_4": "Next step is building the Connector And the Head of the Pumpjack above the crank and the base",
+  "tfmg.ponder.pumpjack.text_5": "Now they need to be connected with Pumpjack Pammer Parts, keep in mind that superglue is needed to finish the structure",
+  "tfmg.ponder.pumpjack.text_6": "And finally, placing the Machine Input with a Pumpjack Crank above it, as shown in the scene",
 
   "tfmg.ponder.distillation_tower.text_1": "A sufficiently large Steel Fluid Tank can be turned into a Distillation Tower",
   "tfmg.ponder.distillation_tower.text_2": "The tower is assembled by first placing a Steel Distillation Tower Controller next to the tank...",
@@ -50,15 +52,25 @@
   "tfmg.ponder.casting.text_1": "Casting is the process of pouring liquid metal into a Casting Basin using a Casting Spout",
   "tfmg.ponder.casting.text_2": "The Casting Basin, obviously, requires a mold to function",
 
+
+  "tfmg.ponder.radial_engines.text_1": "Radial Engines are a special Type of Engine that doesn't require an exhaust block and has a shaft from both sides",
+  "tfmg.ponder.radial_engines.text_2": "Clicking the Engine from one of its sides will spawn an input slot that can accept fuel and redstone signals",
+  "tfmg.ponder.radial_engines.text_3": "Regular Radial Engines uses gasoline as fuel",
+  "tfmg.ponder.radial_engines.text_4": "Engine will start when redstone signal is applied to the input slot or the block itself",
+  "tfmg.ponder.radial_engines.text_5": "The second variant of a radial is The Large Radial Engine which uses kerosene as fuel",
+
+
+
   "tfmg.ponder.distillation_tower.header": "Distillation Tower Setup",
   "tfmg.ponder.pumpjack.header": "Building Pumpjacks",
   "tfmg.ponder.surface_scanner.header": "Locating Oil",
   "tfmg.ponder.diesel_engine.header": "Building a Diesel Engine",
   "tfmg.ponder.diesel_engine_expansion.header": "Expanding Diesel Engines",
   "tfmg.ponder.small_engines.header": "Building Small Engines",
+  "tfmg.ponder.radial_engines.header": "Using Radial Engines",
 
   "tfmg.ponder.coke_oven.header": "Building a Coke Oven",
-  "tfmg.ponder.blast_furnace": "Building a Blast Furnace",
+  "tfmg.ponder.blast_furnace.header": "Building a Blast Furnace",
   "tfmg.ponder.casting.header": "Casting Metal",
 
   "tfmg.ponder.tag.oil": "Oil Related Machines",

@@ -17,16 +17,31 @@ public class TFMGShapes {
 
     public static final VoxelShaper
             ENGINE_BACK = shape(3, 0, 3, 13, 16, 16)
-            .forDirectional(),
-            ENGINE_BACK_VERTICAL = shape(3, 0, 0, 13, 16, 13)
+                .forDirectional(),
+            ENGINE_BACK_VERTICAL = shape(3, 0, 3, 16, 16, 13)
                     .forDirectional(),
-            ENGINE_VERTICAL = shape(3, 0, 0, 13, 14, 13)
-            .forDirectional(),
+            ENGINE_VERTICAL = shape(3, 0, 3, 13, 14, 16)
+                .forDirectional(),
             ENGINE = shape(3, 0, 3, 13, 14, 16)
-            .forDirectional()
+                .forDirectional(),
+
+            PUMPJACK_HAMMER_PART = shape(0, 2, 0, 16, 14, 16)
+                .forDirectional(),
+
+            RADIAL_ENGINE = shape(1, 4, 1, 15, 12, 15)
+                .forDirectional(),
+            LARGE_RADIAL_ENGINE = shape(-3, 4, -3, 19, 12, 19)
+                    .forDirectional(),
+
+            PUMPJACK_HEAD = shape(1, 0, -4, 15, 14, 24)
+                .forDirectional(),
 
 
 
+            COMPACT_ENGINE_VERTICAL = shape(3, 0, 3, 13, 14, 14)
+                .forDirectional(),
+            COMPACT_ENGINE = shape(3, 0, 3, 13, 14, 14)
+                .forDirectional()
 
 
 
@@ -42,7 +57,9 @@ public class TFMGShapes {
 
     CASTING_SPOUT = shape(1, 2, 1, 15, 14, 15)
             .build(),
-    SURFACE_SCANNER = shape(2, 0, 2, 14, 14, 14).build();
+    SURFACE_SCANNER = shape(2, 0, 2, 14, 14, 14).build(),
+
+    FULL = shape(0, 0, 0, 16, 16, 16).build();
 ;
 
     private static Builder shape(VoxelShape shape) {
