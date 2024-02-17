@@ -1,4 +1,4 @@
-// 1.19.2	2024-01-12T20:54:31.7281576	Registrate Provider for createindustry [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-02-17T07:48:34.5879678	Registrate Provider for createindustry [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 50db526af77cf0ead08cadfd3f7daa8b84a40312 assets/createindustry/blockstates/air_intake.json
 429437419b2ec98bd716e7ba15583b84da7488d5 assets/createindustry/blockstates/aluminum_bars.json
 9e2417e479011e42ebf00685068e6b6f515f0b11 assets/createindustry/blockstates/aluminum_block.json
@@ -1147,6 +1147,7 @@ b36ae4afda731f02f9e9b90da534184e4e6300f0 data/createindustry/recipes/small_bauxi
 76687910efa99f4c1a04429ef5f6846c594f97eb data/createindustry/recipes/steel_bars_from_ingots_steel_stonecutting.json
 4bd3f4b3e1612feee9253f9a77ffc8b03afca749 data/createindustry/recipes/steel_ladder_from_ingots_steel_stonecutting.json
 3a8f9eee9835e5400a9dd664a150985ce336fa61 data/createindustry/recipes/steel_scaffolding_from_ingots_steel_stonecutting.json
+bcd62852c0944a152b179e509ac5b5856267367f data/createindustry/tags/fluids/is_burnable_fluid.json
 9790752bec1ad9dc61eb08c66e62caa28516713c data/createindustry/tags/items/stone_types/bauxite.json
 5117a7556fb8ef2531c9953e9923b8fb0ce8e3d6 data/create/tags/blocks/casing.json
 f562d1124549d82b6df1ef54fc09a15a5ada6b4d data/create/tags/blocks/fan_transparent.json
