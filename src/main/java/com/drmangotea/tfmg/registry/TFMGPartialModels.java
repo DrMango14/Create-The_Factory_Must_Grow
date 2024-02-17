@@ -33,6 +33,7 @@ public class TFMGPartialModels {
                 COKE_OVEN_DOOR_LEFT_TOP = block("coke_oven/door_left_top"),
                 COKE_OVEN_DOOR_RIGHT_TOP = block("coke_oven/door_right_top"),
                 COAL_COKE_DUST_LAYER = block("coal_coke_dust_layer"),
+                MOLTEN_METAL_LAYER = block("molten_metal_layer"),
                 PUMPJACK_HAMMER = block("pumpjack/hammer_holder"),
                 PUMPJACK_FRONT_ROPE = block("pumpjack/pumpjack_front_rope"),
                 PUMPJACK_CONNECTOR = block("pumpjack/pumpjack_connector"),
