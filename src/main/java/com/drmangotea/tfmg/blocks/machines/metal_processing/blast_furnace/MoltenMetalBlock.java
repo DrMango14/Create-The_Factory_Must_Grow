@@ -46,7 +46,6 @@ public class MoltenMetalBlock extends Block implements IBE<MoltenMetalBlockEntit
         super(p_49795_);
     }
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        entity.setSecondsOnFire(10);
         if(!(entity instanceof LivingEntity)){
           // if(entity instanceof ItemEntity)
           //     if(!entity.fireImmune()){
@@ -60,8 +59,9 @@ public class MoltenMetalBlock extends Block implements IBE<MoltenMetalBlockEntit
 
           return;
         }
+        entity.setSecondsOnFire(10);
 
-            entity.makeStuckInBlock(state, new Vec3((double)0.9F, 1.5D, (double)0.9F));
+            entity.makeStuckInBlock(state, new Vec3(0.9F, 1.5D, 0.9F));
 
         int random = Create.RANDOM.nextInt(24);
 
