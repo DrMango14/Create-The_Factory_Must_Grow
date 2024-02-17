@@ -15,12 +15,19 @@ import com.simibubi.create.content.fluids.VirtualFluid;
 import com.tterrag.registrate.util.entry.FluidEntry;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import static com.drmangotea.createindustry.CreateTFMG.REGISTRATE;
 
 public class TFMGFluids {
+
+    public static final TagKey<Fluid> IS_BURNABLE_FLUID = AllTags.optionalTag(ForgeRegistries.FLUIDS, new ResourceLocation(CreateTFMG.MOD_ID, "is_burnable_fluid"));
+
+
 
     public static final ResourceLocation CONCRETE_RL = CreateTFMG.asResource("fluid/liquid_concrete");
 
@@ -85,6 +92,7 @@ public class TFMGFluids {
     public static final FluidEntry<VirtualFluid> LPG =
             REGISTRATE.virtualFluid("lpg",LPG_RL,LPG_RL)
                     .lang("LPG")
+                    .tag(IS_BURNABLE_FLUID)
                     .register();
 
     public static final FluidEntry<VirtualFluid> AIR =
@@ -95,21 +103,25 @@ public class TFMGFluids {
     public static final FluidEntry<VirtualFluid> PROPANE =
             REGISTRATE.virtualFluid("propane",PROPANE_RL,PROPANE_RL)
                     .lang("Propane")
+                    .tag(IS_BURNABLE_FLUID)
                     .register();
 
     public static final FluidEntry<VirtualFluid> BUTANE =
             REGISTRATE.virtualFluid("butane",BUTANE_RL,BUTANE_RL)
                     .lang("Butane")
+                    .tag(IS_BURNABLE_FLUID)
                     .register();
 
     public static final FluidEntry<VirtualFluid> ETHYLENE =
             REGISTRATE.virtualFluid("ethylene",BUTANE_RL,BUTANE_RL)
                     .lang("Ethylene")
+                    .tag(IS_BURNABLE_FLUID)
                     .register();
 
     public static final FluidEntry<VirtualFluid> PROPYLENE =
             REGISTRATE.virtualFluid("propylene",PROPANE_RL,PROPANE_RL)
                     .lang("Propylene")
+                    .tag(IS_BURNABLE_FLUID)
                     .register();
 
 
@@ -191,6 +203,7 @@ public class TFMGFluids {
                             .tickRate(7)
                             .slopeFindDistance(5)
                             .explosionResistance(100f))
+                    .tag(IS_BURNABLE_FLUID)
 
                     .source(BurnableFluid.Source::new)
                     .bucket()
@@ -209,6 +222,7 @@ public class TFMGFluids {
                             .tickRate(7)
                             .slopeFindDistance(5)
                             .explosionResistance(100f))
+                    .tag(IS_BURNABLE_FLUID)
 
                     .source(BurnableFluid.Source::new)
                     .bucket()
@@ -225,6 +239,7 @@ public class TFMGFluids {
                             .tickRate(7)
                             .slopeFindDistance(5)
                             .explosionResistance(100f))
+                    .tag(IS_BURNABLE_FLUID)
 
                     .source(BurnableFluid.Source::new)
                     .bucket()
@@ -241,6 +256,7 @@ public class TFMGFluids {
                             .tickRate(7)
                             .slopeFindDistance(5)
                             .explosionResistance(100f))
+                    .tag(IS_BURNABLE_FLUID)
 
                     .source(BurnableFluid.Source::new)
                     .bucket()
@@ -257,6 +273,7 @@ public class TFMGFluids {
                             .tickRate(10)
                             .slopeFindDistance(5)
                             .explosionResistance(100f))
+                    .tag(IS_BURNABLE_FLUID)
 
                     .source(BurnableFluid.Source::new)
                     .bucket()
@@ -272,6 +289,7 @@ public class TFMGFluids {
                             .tickRate(7)
                             .slopeFindDistance(5)
                             .explosionResistance(100f))
+                    .tag(IS_BURNABLE_FLUID)
 
                     .source(BurnableFluid.Source::new)
                     .bucket()
@@ -316,6 +334,7 @@ public class TFMGFluids {
                             .tickRate(10)
                             .slopeFindDistance(5)
                             .explosionResistance(100f))
+                    .tag(IS_BURNABLE_FLUID)
 
                     .source(BurnableFluid.Source::new)
                     .bucket(CreosoteBucketItem::new)
@@ -371,7 +390,6 @@ public class TFMGFluids {
 
     public static void register() {
     }
-
 /*
     private static class NoColorFluidAttributes extends FluidType {
 
