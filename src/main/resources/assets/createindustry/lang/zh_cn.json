@@ -400,7 +400,7 @@
 	"createindustry.ponder.pumpjack.text_3": "然后在油泵后放置游梁架……",
 	"createindustry.ponder.pumpjack.text_4": "最后，就像展示的一样，放置一个上方置有抽油机曲柄的动力输入口",
 	"createindustry.ponder.pumpjack.text_5": "现在它们需要与`抽油机轴承`连接，请记住需要强力胶来完成结构",
-	"createindustry.ponder.pumpjack.text_6": "最后，将`抽油机曲柄`放在`动力输入口`上方，如场景所示",
+	"createindustry.ponder.pumpjack.text_6": "最后，将`抽油机游梁架`放在`动力输入口`上方，如场景所示",
 	"createindustry.ponder.distillation_tower.text_1": "组装分馏塔需要一个足够大的钢流体储罐",
 	"createindustry.ponder.distillation_tower.text_2": "组装时，先将一个钢分馏塔控制器放置在储罐旁……",
 	"createindustry.ponder.distillation_tower.text_3": "再在上方放置总共六个输出口，并用工业级流体管道连接",
