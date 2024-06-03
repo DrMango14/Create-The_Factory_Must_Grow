@@ -47,6 +47,7 @@
 	"block.createindustry.cement": "Cemento",
 	"block.createindustry.coal_coke_block": "Bloque de coque de carbón",
 	"block.createindustry.coke_oven": "Horno de coque",
+	"block.createindustry.compact_engine": "Motor compacto",
 	"block.createindustry.concrete": "Hormigón",
 	"block.createindustry.concrete_slab": "Losa de hormigón",
 	"block.createindustry.concrete_stairs": "Escaleras de hormigón",
@@ -106,6 +107,10 @@
 	"block.createindustry.heavy_oil": "Petróleo pesado",
 	"block.createindustry.industrial_pipe": "Tubería industrial",
 	"block.createindustry.kerosene": "Queroseno",
+	"block.createindustry.large_pumpjack_hammer_connector": "Conector de bomba de varilla grande",
+	"block.createindustry.large_pumpjack_hammer_head": "Cabezal de bomba de varilla grande",
+	"block.createindustry.large_pumpjack_hammer_part": "Parte de bomba de varilla grande",
+	"block.createindustry.large_radial_engine": "Motor radial grande",
 	"block.createindustry.layered_bauxite": "Bauxita en capas",
 	"block.createindustry.light_blue_concrete": "Hormigón azul claro",
 	"block.createindustry.light_blue_concrete_slab": "Losa de hormigón azul claro",
@@ -120,14 +125,13 @@
 	"block.createindustry.lime_concrete_slab": "Losa de hormigón verde lima",
 	"block.createindustry.lime_concrete_stairs": "Escaleras de hormigón verde lima",
 	"block.createindustry.lime_concrete_wall": "Muro de hormigón verde lima",
-	"block.createindustry.limesand": "Cal",
 	"block.createindustry.liquid_asphalt": "Asfalto líquido",
 	"block.createindustry.liquid_concrete": "Hormigón líquido",
 	"block.createindustry.liquid_plastic": "Plástico líquido",
 	"block.createindustry.lpg_engine": "Motor GLP",
 	"block.createindustry.lpg_engine_back": "Motor GLP trasero",
 	"block.createindustry.lubrication_oil": "Aceite lubricante",
-	"block.createindustry.machine_input": "Entrada de Pumpjack",
+	"block.createindustry.machine_input": "Entrada de bomba de varilla",
 	"block.createindustry.magenta_concrete": "Hormigón magenta",
 	"block.createindustry.magenta_concrete_slab": "Losa de hormigón magenta",
 	"block.createindustry.magenta_concrete_stairs": "Escaleras de hormigón magenta",
@@ -156,13 +160,19 @@
 	"block.createindustry.polished_cut_bauxite_slab": "Losa de bauxita cortada pulida",
 	"block.createindustry.polished_cut_bauxite_stairs": "Escaleras de bauxita cortada pulida",
 	"block.createindustry.polished_cut_bauxite_wall": "Muro de bauxita cortada pulida",
-	"block.createindustry.pumpjack_base": "Base de Pumpjack",
-	"block.createindustry.pumpjack_crank": "Manivela de Pumpjack",
-	"block.createindustry.pumpjack_hammer_holder": "Soporte de Pumpjack",
+	"block.createindustry.pumpjack_base": "Base de bomba de varilla",
+	"block.createindustry.pumpjack_crank": "Manivela de bomba de varilla",
+	"block.createindustry.pumpjack_hammer": "Soporte de bomba de varilla",
+	"block.createindustry.pumpjack_hammer_connector": "Conector de bomba de varilla",
+	"block.createindustry.pumpjack_hammer_head": "Cabeza de bomba de varilla",
+	"block.createindustry.pumpjack_hammer_part": "Parte de bomba de varilla",
 	"block.createindustry.purple_concrete": "Hormigón morado",
 	"block.createindustry.purple_concrete_slab": "Losa de hormigón morado",
 	"block.createindustry.purple_concrete_stairs": "Escaleras de hormigón morado",
 	"block.createindustry.purple_concrete_wall": "Muro de hormigón morado",
+	"block.createindustry.radial_engine": "Motor radial",
+	"block.createindustry.radial_engine_input": "Entrada del motor radial",
+	"block.createindustry.radial_engine_input_ponder": "Ponder sobre la entrada del motor radial",
 	"block.createindustry.rebar_concrete": "Hormigón reforzado",
 	"block.createindustry.rebar_concrete_slab": "Losa de hormigón con barras de refuerzo",
 	"block.createindustry.rebar_concrete_stairs": "Escaleras de hormigón con barras de refuerzo",
@@ -186,6 +196,7 @@
 	"block.createindustry.steel_fluid_tank": "Tanque de fluidos de acero",
 	"block.createindustry.steel_fluid_valve": "Válvula de fluidos de acero",
 	"block.createindustry.steel_flywheel": "Rueda de inercia de acero",
+	"block.createindustry.steel_frame": "Estructura de acero",
 	"block.createindustry.steel_ladder": "Escalera de acero",
 	"block.createindustry.steel_mechanical_pump": "Bomba mecánica de acero",
 	"block.createindustry.steel_pipe": "Tubería de acero",
@@ -258,6 +269,7 @@
 	"item.createindustry.heavy_plate": "Placa pesada",
 	"item.createindustry.ingot_mold": "Lingoteador",
 	"item.createindustry.kerosene_bucket": "Cubo de queroseno",
+	"item.createindustry.limesand": "Cal",
 	"item.createindustry.liquid_asphalt_bucket": "Cubo de asfalto líquido",
 	"item.createindustry.liquid_concrete_bucket": "Cubo de Hormigón líquido",
 	"item.createindustry.liquid_plastic_bucket": "Cubo de plástico líquido",
@@ -267,7 +279,7 @@
 	"item.createindustry.napalm_bucket": "Cubo de napalm",
 	"item.createindustry.naphtha_bucket": "Cubo de nafta",
 	"item.createindustry.nitrate_dust": "Polvo de nitrato",
-	"item.createindustry.plastic_sheet": "Hoja de plástico",
+	"item.createindustry.plastic_sheet": "Lámina de plástico",
 	"item.createindustry.quad_potato_cannon": "Cañón de patatas cuádruple",
 	"item.createindustry.rebar": "Barra de refuerzo",
 	"item.createindustry.screw": "Tornillo",
@@ -286,6 +298,9 @@
 	"item.createindustry.unfinished_turbine_engine": "Motor de turbina sin terminar",
 	"item.createindustry.unprocessed_heavy_plate": "Placa pesada sin procesar",
 	"item.createindustry.zinc_grenade": "Granada de zinc",
+
+	
+	"_": "->------------------------]  UI & Messages  [------------------------<-",
 
 	"itemGroup.createindustry.base": "Create: The Factory Must Grow",
 	"itemGroup.createindustry.building": "Create: TFMG Building Blocks",
@@ -309,7 +324,10 @@
 	"create.goggles.distillation_tower.found_outputs": "Número de salidas: %1$s",
 	"create.goggles.distillation_tower.no_outputs": "No se encontraron bloques de salida",
 	"create.goggles.blast_furnace.stats": "Alto Horno:",
-	"create.goggles.blast_furnace.size_stats": "Tamaño:",
+
+	"create.distillation_tower.size": "Tamaño",
+	"create.distillation_tower.heat": "Calor",
+	
 	"create.goggles.blast_furnace.fuel_amount": "Cantidad de combustible: %1$s",
 	"create.goggles.blast_furnace.item_count": "Recuento de artículos: %1$s",
 	"create.goggles.blast_furnace.height": "Altura: %1$s",
@@ -338,10 +356,10 @@
 	"create.goggles.get_engine_efficiency": "%1$s",
 	"create.goggles.engine.stress": "%1$ssu",
 	"create.goggles.diesel_engine.info": "Motor diésel:",
-	"create.goggles.pumpjack_info": "Información de Pumpjack:",
-	"create.goggles.pumpjack.part_missing": "Falta el martillo o la manivela",
-	"create.goggles.pumpjack.wrong_rotation1": "La base del Pumpjack está orientada incorrectamente, el marcador rojo debe",
-	"create.goggles.pumpjack.wrong_rotation2": "estar de espaldas al soporte del martillo Pumpjack",
+	"create.goggles.pumpjack_info": "Información de bomba de varilla:",
+	"create.goggles.pumpjack.part_missing": "Falta el cabezal o la manivela",
+	"create.goggles.pumpjack.wrong_rotation1": "La base de la bomba de varilla está orientada incorrectamente, el marcador rojo debe",
+	"create.goggles.pumpjack.wrong_rotation2": "estar de espaldas al soporte de la bomba de varilla",
 	"create.goggles.pumpjack_fluid_storage": "Información del tanque de fluido:",
 
 	"create.pumpjack_deposit_amount": "%1$s cubos",
@@ -359,16 +377,8 @@
 	"create.recipe.casting": "Transmisión",
 	"create.recipe.coking": "Coquización",
 	
-	
 	"createindustry.subtitle.engine_sounds": "Sonidos de motor",
 	"createindustry.subtitle.diesel_engine_sounds": "Sonidos de motor diésel",
-
-
-	"_": "->------------------------]  UI & Messages  [------------------------<-",
-
-
-	"create.distillation_tower.size": "Tamaño",
-	"create.distillation_tower.heat": "Calor",
 
 
 	"_": "->------------------------]  Ponders  [------------------------<-",
@@ -385,9 +395,11 @@
 	"createindustry.ponder.surface_scanner.text_2": "Proporcionar a la máquina rotación hace que busque el depósito más cercano",
 	"createindustry.ponder.surface_scanner.text_3": "Si se encuentra un depósito, la brújula señalará su ubicación",
 	"createindustry.ponder.pumpjack.text_1": "Para comenzar a extraer petróleo, primero debes construir un oleoducto encima de un depósito utilizando tuberías industriales",
-	"createindustry.ponder.pumpjack.text_2": "Luego, construye un Pumpjack encima de la tubería colocando primero una base de Pumpjack...",
-	"createindustry.ponder.pumpjack.text_3": "Colocando el martillo detrás...",
-	"createindustry.ponder.pumpjack.text_4": "Y finalmente, colocando la entrada de rotación con una manivela Pumpjack encima, como se muestra en la escena",
+	"createindustry.ponder.pumpjack.text_2": "Luego, construye una bomba de varilla encima de la tubería colocando primero una base de bomba de varilla...",
+	"createindustry.ponder.pumpjack.text_3": "Colocando el cabezal de la bomba de varilla detrás...",
+	"createindustry.ponder.pumpjack.text_4": "El siguiente paso es construir el conector y la cabeza de la bomba de varilla sobre la manivela y la base",
+	"createindustry.ponder.pumpjack.text_5": "Ahora necesitan conectarse con el cabezal de la bomba de varilla y sus partes, tengan en cuenta que se necesita superpegamento para terminar la estructura",
+	"createindustry.ponder.pumpjack.text_6": "Y finalmente, colocando la entrada de la máquina con una manivela de bomba de varilla encima, como se muestra en la escena",
 	"createindustry.ponder.distillation_tower.text_1": "Un tanque de fluidos de acero suficientemente grande se puede convertir en una torre de destilación",
 	"createindustry.ponder.distillation_tower.text_2": "La torre se ensambla colocando primero un controlador de torre de destilación de acero al lado del tanque...",
 	"createindustry.ponder.distillation_tower.text_3": "Y colocando hasta 6 salidas de torre de destilación, todas conectadas con tuberías industriales",
@@ -411,10 +423,15 @@
 	"createindustry.ponder.coke_oven.text_5": "Una vez hecho esto, el coque de carbón saldrá de la abertura",
 	"createindustry.ponder.casting.text_1": "La fundición es el proceso de verter metal líquido en un recipiente de fundición utilizando un caño de fundición",
 	"createindustry.ponder.casting.text_2": "La cuenca de fundición, obviamente, requiere un molde para funcionar",
+	"createindustry.ponder.radial_engines.text_1": "Los motores radiales son un tipo especial de motor que no requiere un bloque de escape y tiene un eje en ambos lados",
+	"createindustry.ponder.radial_engines.text_2": "Al hacer clic en el motor desde uno de sus lados, se generará una ranura de entrada que puede aceptar señales de combustible y redstone",
+	"createindustry.ponder.radial_engines.text_3": "Los motores radiales normales utilizan gasolina como combustible",
+	"createindustry.ponder.radial_engines.text_4": "El motor arrancará cuando se aplique la señal de Redstone a la ranura de entrada o al bloque mismo",
+	"createindustry.ponder.radial_engines.text_5": "La segunda variante de un radial es el motor radial grande que utiliza queroseno como combustible",
 
 	"createindustry.ponder.distillation_tower.header": "Configuración de la torre de destilación",
 
-	"createindustry.ponder.pumpjack.header": "Construyendo Pumpjacks",
+	"createindustry.ponder.pumpjack.header": "Construyendo bombas de varilla",
 	
 	"createindustry.ponder.surface_scanner.header": "Localización de petróleo",
 	
@@ -423,8 +440,11 @@
 	"createindustry.ponder.diesel_engine_expansion.header": "Motores diésel en expansión",
 	
 	"createindustry.ponder.small_engines.header": "Construcción de motores pequeños",
+
+	"createindustry.ponder.radial_engines.header": "Usando motores radiales",
 	
 	"createindustry.ponder.coke_oven.header": "Construcción de un horno de coque",
+
 	"createindustry.ponder.blast_furnace": "Construcción de un alto horno",
 	
 	"createindustry.ponder.casting.header": "Fundición de metal",
