@@ -290,8 +290,8 @@ public class CastingBasinBlockEntity extends TFMGMachineBlockEntity implements I
 
 
     public enum MoldType implements StringRepresentable {
-        INGOT("ingot",112),
-        BLOCK("block",1000),
+        INGOT("ingot",144),
+        BLOCK("block",1296),
 
         NONE("none", 4000);
 
