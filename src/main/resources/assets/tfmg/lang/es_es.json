@@ -399,7 +399,7 @@
   "block.tfmg.zinc_frame": "Marco de zinc",
   "block.tfmg.zinc_truss": "Armazón de zinc",
   "create.goggles.electricity.insufficient_voltage": "Voltaje insuficiente",
-  "create.goggles.electricity.no_power": "Sin energía",
+  "create.goggles.electric_machine.no_power": "Sin energía",
   "create.goggles.energy_meter": "Medidor de energía:",
   "create.goggles.energy_meter.energy": "Energía: %1$s fe",
   "create.goggles.generator.production": "Producción de energía: %1$s fe/t",
