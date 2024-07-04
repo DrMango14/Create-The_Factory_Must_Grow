@@ -552,10 +552,10 @@
   "item.tfmg.lithium_blade.tooltip.summary": "Usando _Lingote de acero_ y _Cargas de litio_, esta espada se prende fuego quemando enemigos y dispara rayos de _Fuego Infernal_",
   "item.tfmg.lithium_charge": "Carga de litio",
   "item.tfmg.lithium_ingot": "Lingote de litio",
-  "item.tfmg.lpg_bucket": "Cubo de GLP",
+  "item.tfmg.lpg_bucket": "Tanque de GLP",
   "item.tfmg.magnetic_ingot": "Lingote magnético",
   "item.tfmg.napalm_potato": "Patata con napalm",
-  "item.tfmg.neon_bucket": "Cubo de neón",
+  "item.tfmg.neon_bucket": "Tanque de neón",
   "item.tfmg.nickel_ingot": "Lingote de níquel",
   "item.tfmg.pipe_bomb": "Bomba de tubo",
   "item.tfmg.pipebomb.tooltip.summary": "Que genial",
@@ -722,5 +722,5 @@
   "tfmg.ponder.radial_engines.text_4": "El motor arrancará cuando se aplique la señal de Redstone a la ranura de entrada o al bloque mismo",
   "tfmg.ponder.radial_engines.text_5": "La segunda variante del motor radial es el motor radial grande que utiliza queroseno como combustible",
   "create.creative_generator.voltage_generation": "Generación de voltaje",
-  "item.tfmg.ethylene_bucket": "Cubo de etileno"
+  "item.tfmg.ethylene_bucket": "Tanque de etileno"
 }
