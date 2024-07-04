@@ -1,6 +1,7 @@
 package com.drmangotea.createindustry.mixins;
 
 
+import com.drmangotea.createindustry.base.TFMGPipes;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
@@ -48,6 +49,10 @@ public class FluidPropagatorMixin {
     }
 
 
+    /**
+     * @author DrMangoTea
+     * @reason felt like it
+     */
     @Overwrite( remap = false)
     public static void propagateChangedPipe(LevelAccessor world, BlockPos pipePos, BlockState pipeState) {
         List<Pair<Integer, BlockPos>> frontier = new ArrayList<>();
@@ -80,12 +85,12 @@ public class FluidPropagatorMixin {
                 BlockState targetState = world.getBlockState(target);
                 if (tileEntity instanceof PumpBlockEntity) {
                     if (
-                            !TFMGBlocks.STEEL_MECHANICAL_PUMP.has(targetState)&&
+                            !TFMGPipes.STEEL_MECHANICAL_PUMP.has(targetState)&&
                                     !AllBlocks.MECHANICAL_PUMP.has(targetState)&&
-                    !TFMGBlocks.BRASS_MECHANICAL_PUMP.has(targetState)&&
-                    !TFMGBlocks.CAST_IRON_MECHANICAL_PUMP.has(targetState)&&
-                    !TFMGBlocks.ALUMINUM_MECHANICAL_PUMP.has(targetState)&&
-                    !TFMGBlocks.PLASTIC_MECHANICAL_PUMP.has(targetState)
+                    !TFMGPipes.BRASS_MECHANICAL_PUMP.has(targetState)&&
+                    !TFMGPipes.CAST_IRON_MECHANICAL_PUMP.has(targetState)&&
+                    !TFMGPipes.ALUMINUM_MECHANICAL_PUMP.has(targetState)&&
+                    !TFMGPipes.PLASTIC_MECHANICAL_PUMP.has(targetState)
                                     || targetState.getValue(PumpBlock.FACING)
                             .getAxis() != direction.getAxis())
                         continue;

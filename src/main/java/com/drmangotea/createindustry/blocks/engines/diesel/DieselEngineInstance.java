@@ -28,11 +28,11 @@ public class DieselEngineInstance extends BlockEntityInstance<DieselEngineBlockE
 
 		piston = materialManager.defaultSolid()
 				.material(Materials.TRANSFORMED)
-				.getModel(AllPartialModels.ENGINE_PISTON, blockState)
+				.getModel(TFMGPartialModels.DIESEL_ENGINE_PISTON, blockState)
 				.createInstance();
 		linkage = materialManager.defaultSolid()
 				.material(Materials.TRANSFORMED)
-				.getModel(AllPartialModels.ENGINE_LINKAGE, blockState)
+				.getModel(TFMGPartialModels.DIESEL_ENGINE_LINKAGE, blockState)
 				.createInstance();
 		connector = materialManager.defaultSolid()
 				.material(Materials.TRANSFORMED)

@@ -1,6 +1,7 @@
 package com.drmangotea.createindustry.blocks.pipes.normal.steel;
 
 
+import com.drmangotea.createindustry.base.TFMGPipes;
 import com.drmangotea.createindustry.blocks.pipes.normal.LockablePipeBlockEntity;
 import com.drmangotea.createindustry.registry.TFMGBlockEntities;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
@@ -151,7 +152,7 @@ public class SteelPipeBlock extends FluidPipeBlock {
                     .ifPresent($ -> AllAdvancements.GLASS_PIPE.awardTo(context.getPlayer())));
 
             FluidTransportBehaviour.cacheFlows(world, pos);
-            world.setBlockAndUpdate(pos, TFMGBlocks.GLASS_STEEL_PIPE.getDefaultState()
+            world.setBlockAndUpdate(pos, TFMGPipes.GLASS_STEEL_PIPE.getDefaultState()
                     .setValue(GlassFluidPipeBlock.AXIS, axis)
                     .setValue(BlockStateProperties.WATERLOGGED, state.getValue(BlockStateProperties.WATERLOGGED)));
             FluidTransportBehaviour.loadFlows(world, pos);
@@ -165,7 +166,7 @@ public class SteelPipeBlock extends FluidPipeBlock {
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos,
                                        Player player) {
-        return TFMGBlocks.STEEL_PIPE.asStack();
+        return TFMGPipes.STEEL_PIPE.asStack();
     }
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
@@ -177,7 +178,7 @@ public class SteelPipeBlock extends FluidPipeBlock {
 
         FluidTransportBehaviour.cacheFlows(world, pos);
         world.setBlockAndUpdate(pos,
-                EncasedPipeBlock.transferSixWayProperties(state, TFMGBlocks.COPPER_ENCASED_STEEL_PIPE.getDefaultState()));
+                EncasedPipeBlock.transferSixWayProperties(state, TFMGPipes.COPPER_ENCASED_STEEL_PIPE.getDefaultState()));
         FluidTransportBehaviour.loadFlows(world, pos);
         return InteractionResult.SUCCESS;
 

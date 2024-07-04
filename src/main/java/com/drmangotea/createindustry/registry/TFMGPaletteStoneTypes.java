@@ -24,6 +24,12 @@ public enum TFMGPaletteStoneTypes {
 
     BAUXITE(STANDARD_RANGE, r -> r.paletteStoneBlock("bauxite", () -> Blocks.DEEPSLATE, true, true)
             .properties(p -> p.destroyTime(1.25f)
+                    .color(MaterialColor.COLOR_BROWN))
+            .register()),
+
+
+    GALENA(STANDARD_RANGE, r -> r.paletteStoneBlock("galena", () -> Blocks.CALCITE, true, true)
+            .properties(p -> p.destroyTime(1.25f)
                     .color(MaterialColor.COLOR_BLUE))
             .register()),
 

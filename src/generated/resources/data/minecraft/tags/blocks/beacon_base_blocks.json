@@ -2,6 +2,9 @@
   "values": [
     "createindustry:steel_block",
     "createindustry:cast_iron_block",
-    "createindustry:aluminum_block"
+    "createindustry:aluminum_block",
+    "createindustry:lead_block",
+    "createindustry:nickel_block",
+    "createindustry:lithium_block"
   ]
 }

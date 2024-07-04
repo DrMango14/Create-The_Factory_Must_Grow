@@ -1,6 +1,7 @@
 package com.drmangotea.createindustry.blocks.engines.diesel;
 
 
+import com.drmangotea.createindustry.registry.TFMGPartialModels;
 import com.jozufozu.flywheel.backend.Backend;
 import com.jozufozu.flywheel.core.PartialModel;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -52,13 +53,13 @@ public class DieselEngineRenderer extends SafeBlockEntityRenderer<DieselEngineBl
 
 
 
-		transformed(AllPartialModels.ENGINE_PISTON, blockState, facing, roll90)
+		transformed(TFMGPartialModels.DIESEL_ENGINE_PISTON, blockState, facing, roll90)
 			.translate(0, piston, 0)
 			.light(light)
 			.renderInto(ms, vb);
 
 
-		transformed(AllPartialModels.ENGINE_LINKAGE, blockState, facing, roll90)
+		transformed(TFMGPartialModels.DIESEL_ENGINE_LINKAGE, blockState, facing, roll90)
 			.centre()
 			.translate(0, 1, 0)
 			.unCentre()

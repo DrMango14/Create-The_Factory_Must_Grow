@@ -5,6 +5,7 @@ import com.drmangotea.createindustry.blocks.engines.diesel.engine_expansion.Dies
 import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.drmangotea.createindustry.registry.TFMGFluids;
 import com.drmangotea.createindustry.registry.TFMGSoundEvents;
+import com.drmangotea.createindustry.registry.TFMGTags;
 import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
@@ -20,6 +21,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOp
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.*;
+import mekanism.common.recipe.lookup.cache.type.FluidInputCache;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,6 +29,7 @@ import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Direction.AxisDirection;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -36,9 +39,9 @@ import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.fml.DistExecutor;
@@ -86,7 +89,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 
 
 
-		fuelTank = createInventory(TFMGFluids.DIESEL.getSource(),false);
+		fuelTank = createInventory(TFMGTags.TFMGFluidTags.DIESEL.tag, false);
 
 
 
@@ -125,10 +128,6 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 	public void tick() {
 		super.tick();
 		Direction direction;
-
-
-
-
 
 
 
@@ -498,7 +497,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 	@SuppressWarnings("removal")
 	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
 
-		if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+		if (cap == ForgeCapabilities.FLUID_HANDLER)
 			return fluidCapability.cast();
 		return super.getCapability(cap, side);
 	}
@@ -536,7 +535,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 
 
 		//--Fluid Info--//
-		LazyOptional<IFluidHandler> handler = this.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY);
+		LazyOptional<IFluidHandler> handler = this.getCapability(ForgeCapabilities.FLUID_HANDLER);
 		Optional<IFluidHandler> resolve = handler.resolve();
 		if (!resolve.isPresent())
 			return false;
@@ -602,6 +601,33 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 			@Override
 			public boolean isFluidValid(FluidStack stack) {
 				return stack.getFluid().isSame(validFluid);
+			}
+
+
+
+			@Override
+			public FluidStack drain(FluidStack resource, FluidAction action) {
+				if (!extractionAllowed)
+					return FluidStack.EMPTY;
+				return super.drain(resource, action);
+			}
+
+			@Override
+			public FluidStack drain(int maxDrain, FluidAction action) {
+				if (!extractionAllowed)
+					return FluidStack.EMPTY;
+				return super.drain(maxDrain, action);
+			}
+
+
+		};
+	}
+	protected SmartFluidTank createInventory(TagKey<Fluid> validFluid, boolean extractionAllowed) {
+		return new SmartFluidTank(1000, this::onFluidStackChanged) {
+			@Override
+			public boolean isFluidValid(FluidStack stack) {
+
+				return stack.getFluid().is(validFluid);
 			}
 
 

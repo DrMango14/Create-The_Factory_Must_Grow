@@ -1,8 +1,9 @@
 package com.drmangotea.createindustry.blocks.pipes.normal.plastic;
 
 
+import com.drmangotea.createindustry.base.TFMGPipes;
 import com.drmangotea.createindustry.registry.TFMGBlockEntities;
-import com.drmangotea.createindustry.registry.TFMGBlocks;
+
 import com.simibubi.create.content.fluids.FluidTransportBehaviour;
 import com.simibubi.create.content.fluids.pipes.EncasedPipeBlock;
 import com.simibubi.create.content.fluids.pipes.FluidPipeBlockEntity;
@@ -30,7 +31,7 @@ public class EncasedPlasticPipeBlock extends EncasedPipeBlock {
 
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
-        return TFMGBlocks.PLASTIC_PIPE.asStack();
+        return TFMGPipes.PLASTIC_PIPE.asStack();
     }
 
     @Override
@@ -43,7 +44,7 @@ public class EncasedPlasticPipeBlock extends EncasedPipeBlock {
 
         context.getLevel()
                 .levelEvent(2001, context.getClickedPos(), Block.getId(state));
-        BlockState equivalentPipe = transferSixWayProperties(state, TFMGBlocks.PLASTIC_PIPE.getDefaultState());
+        BlockState equivalentPipe = transferSixWayProperties(state, TFMGPipes.PLASTIC_PIPE.getDefaultState());
 
         Direction firstFound = Direction.UP;
         for (Direction d : Iterate.directions)
@@ -53,7 +54,7 @@ public class EncasedPlasticPipeBlock extends EncasedPipeBlock {
             }
 
         FluidTransportBehaviour.cacheFlows(world, pos);
-        world.setBlockAndUpdate(pos, TFMGBlocks.PLASTIC_PIPE.get()
+        world.setBlockAndUpdate(pos, TFMGPipes.PLASTIC_PIPE.get()
                 .updateBlockState(equivalentPipe, firstFound, null, world, pos));
         FluidTransportBehaviour.loadFlows(world, pos);
         return InteractionResult.SUCCESS;

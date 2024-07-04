@@ -1,5 +1,6 @@
 package com.drmangotea.createindustry.items;
 
+import com.drmangotea.createindustry.base.TFMGPipes;
 import com.drmangotea.createindustry.blocks.pipes.normal.LockablePipeBlockEntity;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.simibubi.create.content.fluids.pipes.FluidPipeBlock;
@@ -39,9 +40,9 @@ public class ScrewdriverItem extends Item {
 
 
         if(
-                level.getBlockState(positionClicked).is(TFMGBlocks.STEEL_PIPE.get())||
-                        level.getBlockState(positionClicked).is(TFMGBlocks.ALUMINUM_PIPE.get())||
-                                level.getBlockState(positionClicked).is(TFMGBlocks.PLASTIC_PIPE.get())
+                level.getBlockState(positionClicked).is(TFMGPipes.STEEL_PIPE.get())||
+                        level.getBlockState(positionClicked).is(TFMGPipes.ALUMINUM_PIPE.get())||
+                                level.getBlockState(positionClicked).is(TFMGPipes.PLASTIC_PIPE.get())
         ) {
             //level.playSound(player, positionClicked, SoundEvents.COPPER_STEP, SoundSource.BLOCKS, 0.3f,0.5f);
             ((LockablePipeBlockEntity)level.getBlockEntity(positionClicked)).toggleLock(player);

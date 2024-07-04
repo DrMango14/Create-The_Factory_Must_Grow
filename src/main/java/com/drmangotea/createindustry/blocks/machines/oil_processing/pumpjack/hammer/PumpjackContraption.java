@@ -1,7 +1,7 @@
 package com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.hammer;
 
 
-import com.drmangotea.createindustry.base.TFMGContraptions;
+import com.drmangotea.createindustry.registry.TFMGContraptions;
 import com.simibubi.create.content.contraptions.AssemblyException;
 import com.simibubi.create.content.contraptions.ContraptionType;
 import com.simibubi.create.content.contraptions.bearing.AnchoredLighter;

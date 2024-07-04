@@ -9,7 +9,9 @@
     "AllOreFeatureConfigEntriesMixin",
     "FluidPropagatorMixin",
     "FluidPipeBlockMixin",
-    "PipeAttachmentModelMixin"
+    "PipeAttachmentModelMixin",
+    "BucketItemMixin",
+  //  "ArrowMixin"
     //,
    // "ScreenEffectRendererMixin"
   ],

@@ -1,15 +1,22 @@
 package com.drmangotea.createindustry;
 
-import com.drmangotea.createindustry.base.TFMGContraptions;
+import com.drmangotea.createindustry.registry.TFMGContraptions;
 import com.drmangotea.createindustry.base.TFMGLangPartials;
 import com.drmangotea.createindustry.config.TFMGConfigs;
-import com.drmangotea.createindustry.items.gadgets.explosives.thermite_grenades.fire.TFMGColoredFires;
+import com.drmangotea.createindustry.items.weapons.explosives.thermite_grenades.fire.TFMGColoredFires;
 import com.drmangotea.createindustry.registry.*;
 import com.drmangotea.createindustry.worldgen.TFMGConfiguredFeatures;
 import com.drmangotea.createindustry.worldgen.TFMGFeatures;
+import com.drmangotea.createindustry.worldgen.TFMGOreConfigEntries;
 import com.mojang.logging.LogUtils;
+import com.simibubi.create.AllParticleTypes;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.LangMerger;
+import com.simibubi.create.foundation.item.ItemDescription;
+import com.simibubi.create.foundation.item.KineticStats;
+import com.simibubi.create.foundation.item.TooltipHelper;
+import com.simibubi.create.foundation.item.TooltipModifier;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Holder;
@@ -31,6 +38,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
+import static com.simibubi.create.content.fluids.tank.BoilerHeaters.registerHeater;
+
 
 @Mod(CreateTFMG.MOD_ID)
 public class CreateTFMG
@@ -41,8 +50,18 @@ public class CreateTFMG
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
     public static final Logger LOGGER = LogUtils.getLogger();
 
+    static {
+        REGISTRATE.setTooltipModifierFactory(item -> {
+            return new ItemDescription.Modifier(item, TooltipHelper.Palette.STANDARD_CREATE)
+                    .andThen(TooltipModifier.mapNull(KineticStats.create(item)));
+        });
+    }
+
     public CreateTFMG()
     {
+
+
+
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         REGISTRATE.registerEventListeners(FMLJavaModLoadingContext.get().getModEventBus());
@@ -56,9 +75,16 @@ public class CreateTFMG
         TFMGEntityTypes.register();
         TFMGCreativeModeTabs.init();
         TFMGFluids.register();
+        TFMGTags.init();
         TFMGPaletteBlocks.register();
         TFMGSoundEvents.prepare();
         TFMGContraptions.prepare();
+        TFMGOreConfigEntries.init();
+        TFMGParticleTypes.register(modEventBus);
+        TFMGMobEffects.register(modEventBus);
+        TFMGPotions.register(modEventBus);
+        TFMGPackets.registerPackets();
+
 
         TFMGColoredFires.register(modEventBus);
         TFMGFeatures.register(modEventBus);
@@ -67,12 +93,35 @@ public class CreateTFMG
         TFMGConfigs.register(ModLoadingContext.get());
 
         //
+        modEventBus.addListener(CreateTFMG::init);
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(EventPriority.LOWEST, CreateTFMG::gatherData);
         modEventBus.addListener(TFMGSoundEvents::register);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> CreateTFMGClient::new);
         modEventBus.addListener(this::clientSetup);
 
+    }
+
+    public static void init(final FMLCommonSetupEvent event) {
+        TFMGFluids.registerFluidInteractions();
+
+        event.enqueueWork(() -> {
+
+            registerHeater(TFMGBlocks.FIREBOX.get(), (level, pos, state) -> {
+                BlazeBurnerBlock.HeatLevel value = state.getValue(BlazeBurnerBlock.HEAT_LEVEL);
+                if (value == BlazeBurnerBlock.HeatLevel.NONE) {
+                    return -1;
+                }
+                if (value == BlazeBurnerBlock.HeatLevel.SEETHING) {
+                    return 3;
+                }
+                if (value.isAtLeast(BlazeBurnerBlock.HeatLevel.FADING)) {
+                    return 2;
+                }
+                return -1;
+            });
+
+        });
     }
     @SuppressWarnings("removal")
     public static void gatherData(GatherDataEvent event) {
@@ -87,7 +136,7 @@ public class CreateTFMG
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             final Holder<PlacedFeature> initializeOil = TFMGConfiguredFeatures.OIL_PLACED;
-            final Holder<PlacedFeature> initializeSimulatedOil = TFMGConfiguredFeatures.SIMULATED_OIL_PLACED;
+            final Holder<PlacedFeature> initializeSimulatedOil = TFMGConfiguredFeatures.OIL_DEPOSIT_PLACED;
 
         });
     }

@@ -1,8 +1,9 @@
 package com.drmangotea.createindustry.blocks.pipes.normal.brass;
 
 
+import com.drmangotea.createindustry.base.TFMGPipes;
 import com.drmangotea.createindustry.registry.TFMGBlockEntities;
-import com.drmangotea.createindustry.registry.TFMGBlocks;
+
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.fluids.FluidTransportBehaviour;
 import com.simibubi.create.content.fluids.pipes.EncasedPipeBlock;
@@ -36,19 +37,19 @@ public class GlassBrassPipeBlock extends GlassFluidPipeBlock {
 
     @Override
     public ItemRequirement getRequiredItems(BlockState state, BlockEntity te) {
-        return ItemRequirement.of(TFMGBlocks.BRASS_PIPE.getDefaultState(), te);
+        return ItemRequirement.of(TFMGPipes.BRASS_PIPE.getDefaultState(), te);
     }
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos,
                                        Player player) {
-        return TFMGBlocks.BRASS_PIPE.asStack();
+        return TFMGPipes.BRASS_PIPE.asStack();
     }
     @Override
     public BlockState toRegularPipe(LevelAccessor world, BlockPos pos, BlockState state) {
         Direction side = Direction.get(Direction.AxisDirection.POSITIVE, state.getValue(AXIS));
         Map<Direction, BooleanProperty> facingToPropertyMap = FluidPipeBlock.PROPERTY_BY_DIRECTION;
-        return TFMGBlocks.BRASS_PIPE.get()
-                .updateBlockState(TFMGBlocks.BRASS_PIPE.getDefaultState()
+        return TFMGPipes.BRASS_PIPE.get()
+                .updateBlockState(TFMGPipes.BRASS_PIPE.getDefaultState()
                         .setValue(facingToPropertyMap.get(side), true)
                         .setValue(facingToPropertyMap.get(side.getOpposite()), true), side, null, world, pos);
     }
@@ -59,7 +60,7 @@ public class GlassBrassPipeBlock extends GlassFluidPipeBlock {
             return InteractionResult.PASS;
         if (world.isClientSide)
             return InteractionResult.SUCCESS;
-        BlockState newState = TFMGBlocks.COPPER_ENCASED_BRASS_PIPE.getDefaultState();
+        BlockState newState = TFMGPipes.COPPER_ENCASED_BRASS_PIPE.getDefaultState();
         for (Direction d : Iterate.directionsInAxis(getAxis(state)))
             newState = newState.setValue(EncasedPipeBlock.FACING_TO_PROPERTY_MAP.get(d), true);
         FluidTransportBehaviour.cacheFlows(world, pos);

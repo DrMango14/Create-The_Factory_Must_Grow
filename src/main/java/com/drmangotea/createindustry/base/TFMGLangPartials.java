@@ -13,6 +13,8 @@ import com.simibubi.create.foundation.utility.Lang;
 
 public enum TFMGLangPartials implements LangPartial {
     INTERFACE("UI & Messages"),
+
+    TOOLTIPS("Tooltips"),
     PONDERS("Ponders");
 
     ;

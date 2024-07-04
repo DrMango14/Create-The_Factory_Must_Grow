@@ -133,6 +133,7 @@ public class ExhaustBlockEntity extends SmartBlockEntity implements IHaveGoggleI
         };
     }
 
+
     protected void onFluidStackChanged(FluidStack newFluidStack) {
         sendData();
     }

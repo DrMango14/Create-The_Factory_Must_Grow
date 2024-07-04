@@ -10,11 +10,11 @@
   "results": [
     {
       "fluid": "createindustry:molten_steel",
-      "amount": 333
+      "amount": 111
     },
     {
       "fluid": "createindustry:molten_slag",
-      "amount": 111
+      "amount": 75
     }
 
   ]

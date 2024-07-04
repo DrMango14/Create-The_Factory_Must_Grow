@@ -9,6 +9,7 @@ import com.drmangotea.createindustry.registry.TFMGRecipeTypes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
+import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
@@ -161,6 +162,14 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
 
 
     }
+
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        ItemHelper.dropContents(level, worldPosition, inputInventory);
+    }
+
 
     public void setBlockState(){
 

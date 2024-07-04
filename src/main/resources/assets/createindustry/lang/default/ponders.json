@@ -21,7 +21,7 @@
   "createindustry.ponder.pumpjack.text_2": "Then, construct a Pumpjack on top of the pipeline by first placing down a Pumpjack Base...",
   "createindustry.ponder.pumpjack.text_3": "Placing the Pumpjack Hammer behind it...",
   "createindustry.ponder.pumpjack.text_4": "Next step is building the Connector And the Head of the Pumpjack above the crank and the base",
-  "createindustry.ponder.pumpjack.text_5": "Now they need to be connected with Pumpjack Pammer Parts, keep in mind that superglue is needed to finish the structure",
+  "createindustry.ponder.pumpjack.text_5": "Now they need to be connected with Pumpjack Hammer Parts, keep in mind that superglue is needed to finish the structure",
   "createindustry.ponder.pumpjack.text_6": "And finally, placing the Machine Input with a Pumpjack Crank above it, as shown in the scene",
 
   "createindustry.ponder.distillation_tower.text_1": "A sufficiently large Steel Fluid Tank can be turned into a Distillation Tower",
@@ -60,6 +60,14 @@
   "createindustry.ponder.radial_engines.text_5": "The second variant of a radial is The Large Radial Engine which uses kerosene as fuel",
 
 
+  "createindustry.ponder.large_generator.text_1": "The main of the Large Generator is the Rotor",
+  "createindustry.ponder.large_generator.text_2": "To complete the Large Generator, place Stator block around the Rotor",
+  "createindustry.ponder.large_generator.text_3": "Providing rotational power to the Rotor will produce electric energy",
+  "createindustry.ponder.large_generator.text_4": "Clicking a side with a wrench will make it the energy output",
+
+
+
+
 
   "createindustry.ponder.distillation_tower.header": "Distillation Tower Setup",
   "createindustry.ponder.pumpjack.header": "Building Pumpjacks",
@@ -68,6 +76,8 @@
   "createindustry.ponder.diesel_engine_expansion.header": "Expanding Diesel Engines",
   "createindustry.ponder.small_engines.header": "Building Small Engines",
   "createindustry.ponder.radial_engines.header": "Using Radial Engines",
+  "createindustry.ponder.large_generator.header": "Building  a Large Generator",
+
 
   "createindustry.ponder.coke_oven.header": "Building a Coke Oven",
   "createindustry.ponder.blast_furnace.header": "Building a Blast Furnace",
@@ -75,7 +85,7 @@
 
   "createindustry.ponder.tag.oil": "Oil Related Machines",
 
-  "createindustry.ponder.tag.metallurgy": "Metal Working Machines",
+  "createindustry.ponder.tag.metallurgy": "Metal Processing",
 
   "createindustry.ponder.tag.oil.description": "Machines that extract, process or use Crude Oil and its byproducts",
 
