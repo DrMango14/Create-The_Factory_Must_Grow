@@ -2,6 +2,7 @@ package com.drmangotea.createindustry.blocks.machines.flarestack;
 
 
 import com.drmangotea.createindustry.registry.TFMGFluids;
+import com.drmangotea.createindustry.registry.TFMGTags;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -127,19 +128,7 @@ public class FlarestackBlockEntity extends SmartBlockEntity implements IHaveGogg
         return new SmartFluidTank(1000, this::onFluidStackChanged) {
             @Override
             public boolean isFluidValid(FluidStack stack) {
-                return
-                        stack.getFluid().isSame(TFMGFluids.BUTANE.getSource())||
-                        stack.getFluid().isSame(TFMGFluids.PROPANE.getSource())||
-                        stack.getFluid().isSame(TFMGFluids.LPG.getSource())||
-                        stack.getFluid().isSame(TFMGFluids.KEROSENE.getSource())||
-                        stack.getFluid().isSame(TFMGFluids.NAPHTHA.getSource())||
-                        stack.getFluid().isSame(TFMGFluids.ETHYLENE.getSource())||
-                        stack.getFluid().isSame(TFMGFluids.PROPYLENE.getSource())||
-                        stack.getFluid().isSame(TFMGFluids.DIESEL.getSource())||
-                        stack.getFluid().isSame(TFMGFluids.LUBRICATION_OIL.getSource())||
-                        stack.getFluid().isSame(TFMGFluids.HEAVY_OIL.getSource())||
-                        stack.getFluid().isSame(TFMGFluids.CREOSOTE.getSource())||
-                        stack.getFluid().isSame(TFMGFluids.GASOLINE.getSource());
+                return stack.getFluid().is(TFMGTags.TFMGFluidTags.FLAMMABLE.tag);
             }
         };
     }

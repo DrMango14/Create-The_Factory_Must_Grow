@@ -18,6 +18,10 @@ public class TFMGPonderTag extends PonderTag {
             .defaultLang("Metal processing", "Machines related to metal")
             .item(TFMGItems.STEEL_INGOT.get(), true, false).addToIndex();
 
+    public static final PonderTag ELECTRICITY = create("electricity")
+            .defaultLang("Electric Machinery", "")
+            .item(TFMGItems.STEEL_INGOT.get(), true, false).addToIndex();
+
         public TFMGPonderTag(ResourceLocation id) {
             super(id);
         }

@@ -2,8 +2,10 @@ package com.drmangotea.createindustry.mixins;
 
 
 import com.drmangotea.createindustry.worldgen.TFMGLayeredPatterns;
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.DynamicDataProvider;
+import com.simibubi.create.foundation.utility.Couple;
 import com.simibubi.create.infrastructure.worldgen.AllLayerPatterns;
 import com.simibubi.create.infrastructure.worldgen.AllOreFeatureConfigEntries;
 import com.simibubi.create.infrastructure.worldgen.OreFeatureConfigEntry;
@@ -30,6 +32,9 @@ import java.util.Map;
 @Mixin(AllOreFeatureConfigEntries.class)
 public class AllOreFeatureConfigEntriesMixin {
 
+
+
+
 	@Shadow
 	public static final OreFeatureConfigEntry STRIATED_ORES_OVERWORLD =
 			create("striated_ores_overworld", 32, 1 / 18f, -30, 70)
@@ -37,7 +42,7 @@ public class AllOreFeatureConfigEntriesMixin {
 					.withLayerPattern(TFMGLayeredPatterns.BAUXITE)
 					.withLayerPattern(TFMGLayeredPatterns.LIGNITE)
 					.withLayerPattern(TFMGLayeredPatterns.FIRECLAY)
-					//.withLayerPattern(TFMGLayeredPatterns.GALENA)
+					.withLayerPattern(TFMGLayeredPatterns.GALENA)
 					.withLayerPattern(AllLayerPatterns.SCORIA)
 					.withLayerPattern(AllLayerPatterns.CINNABAR)
 					.withLayerPattern(AllLayerPatterns.MAGNETITE)

@@ -1,6 +1,7 @@
 {
   "values": [
     "createindustry:steel_casing",
-    "createindustry:heavy_machinery_casing"
+    "createindustry:heavy_machinery_casing",
+    "createindustry:electric_casing"
   ]
 }

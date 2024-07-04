@@ -1,5 +1,6 @@
 {
   "values": [
-    "createindustry:bauxite"
+    "createindustry:bauxite",
+    "createindustry:galena"
   ]
 }

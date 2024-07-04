@@ -27,6 +27,10 @@ public class CokeOvenBlock extends HorizontalDirectionalBlock implements IBE<Cok
 
     }
     @Override
+    public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        IBE.onRemove(state, worldIn, pos, newState);
+    }
+    @Override
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
 
         Level level = context.getLevel();

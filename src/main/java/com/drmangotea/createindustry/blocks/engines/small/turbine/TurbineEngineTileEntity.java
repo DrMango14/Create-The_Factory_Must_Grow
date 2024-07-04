@@ -1,17 +1,19 @@
 package com.drmangotea.createindustry.blocks.engines.small.turbine;
 
 
-import com.drmangotea.createindustry.blocks.engines.small.AbstractEngineTileEntity;
+import com.drmangotea.createindustry.blocks.engines.small.AbstractEngineBlockEntity;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.drmangotea.createindustry.registry.TFMGFluids;
+import com.drmangotea.createindustry.registry.TFMGTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 
-public class TurbineEngineTileEntity extends AbstractEngineTileEntity {
+public class TurbineEngineTileEntity extends AbstractEngineBlockEntity {
 
 
     public TurbineEngineTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -49,7 +51,7 @@ public class TurbineEngineTileEntity extends AbstractEngineTileEntity {
         return true;
     }
     @Override
-    public Fluid validFuel() {
-        return TFMGFluids.KEROSENE.getSource();
+    public TagKey<Fluid> validFuel() {
+        return TFMGTags.TFMGFluidTags.KEROSENE.tag;
     }
 }

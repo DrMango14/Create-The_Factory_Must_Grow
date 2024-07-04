@@ -52,10 +52,31 @@ public class TFMGPartialModels {
                 ALUMINUM_FLUID_PIPE_CASING = block("aluminum_pipe/casing"),
 
                 INGOT_MOLD = block("casting_basin/mold_base"),
-                BlOCK_MOLD = block("casting_basin/block_mold")
+                BlOCK_MOLD = block("casting_basin/block_mold"),
+
+                STATOR_OUTPUT = block("stator/output"),
+                VOLTMETER_DIAL = block("voltmeter/dial"),
+
+                LIGHT_BULB = block("light_bulb/light"),
+
+                INDUSTRIAL_LIGHT = block("light_bulb/light"),
+
+                NEON_TUBE_LIGHT = block("neon_tube/light"),
+
+                DIESEL_ENGINE_LINKAGE = block("diesel_engine/linkage"),
+                DIESEL_ENGINE_PISTON = block("diesel_engine/piston"),
+
+
+                STEEL_COGHWEEL = block("steel_cogwheel_shaftless"),
+                LARGE_STEEL_COGHWEEL = block("large_steel_cogwheel_shaftless"),
+                ALUMINUM_COGHWEEL = block("aluminum_cogwheel_shaftless"),
+                LARGE_ALUMINUM_COGHWEEL = block("large_aluminum_cogwheel_shaftless")
 
 
                         ;
+
+
+
 
     public static final Map<ResourceLocation, Couple<PartialModel>> FOLDING_DOORS = new HashMap<>();
 

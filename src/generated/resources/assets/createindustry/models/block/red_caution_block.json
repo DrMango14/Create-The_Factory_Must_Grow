@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "createindustry:block/caution_block",
   "textures": {
-    "all": "createindustry:block/red_caution_block"
+    "0": "createindustry:block/caution_block/red",
+    "particle": "createindustry:block/caution_block/red"
   }
 }

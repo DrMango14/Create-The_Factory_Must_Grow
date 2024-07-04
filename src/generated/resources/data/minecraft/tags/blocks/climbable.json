@@ -3,6 +3,9 @@
     "createindustry:steel_scaffolding",
     "createindustry:aluminum_scaffolding",
     "createindustry:steel_ladder",
-    "createindustry:aluminum_ladder"
+    "createindustry:aluminum_ladder",
+    "createindustry:cast_iron_ladder",
+    "createindustry:lead_ladder",
+    "createindustry:nickel_ladder"
   ]
 }

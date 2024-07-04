@@ -4,7 +4,6 @@ package com.drmangotea.createindustry.recipes.jei;
 import com.drmangotea.createindustry.recipes.casting.CastingRecipe;
 import com.drmangotea.createindustry.recipes.coking.CokingRecipe;
 import com.drmangotea.createindustry.recipes.distillation.DistillationRecipe;
-import com.drmangotea.createindustry.recipes.distillation.AdvancedDistillationRecipe;
 import com.drmangotea.createindustry.recipes.industrial_blasting.IndustrialBlastingRecipe;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.drmangotea.createindustry.registry.TFMGFluids;
@@ -59,16 +58,10 @@ public class TFMGJei implements IModPlugin {
 
         CreateRecipeCategory<?>
 
-                distillation = builder(DistillationRecipe.class)
-                .addTypedRecipes(TFMGRecipeTypes.DISTILLATION)
-                .catalyst(TFMGBlocks.CAST_IRON_DISTILLATION_CONTROLLER::get)
-                .itemIcon(TFMGFluids.CRUDE_OIL.getBucket().get())
-                .emptyBackground(177, 123)
-                .build("distillation", DistillationCategory::new)
-                ,
 
-                advancedDistillation = builder(AdvancedDistillationRecipe.class)
-                .addTypedRecipes(TFMGRecipeTypes.ADVANCED_DISTILLATION)
+
+                advancedDistillation = builder(DistillationRecipe.class)
+                .addTypedRecipes(TFMGRecipeTypes.DISTILLATION)
                 .catalyst(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER::get)
                 .catalyst(TFMGBlocks.STEEL_DISTILLATION_OUTPUT::get)
                 .itemIcon(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER.get())

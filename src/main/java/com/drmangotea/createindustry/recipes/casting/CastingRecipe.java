@@ -25,11 +25,11 @@ public class CastingRecipe extends ProcessingRecipe<RecipeWrapper> {
 	protected int getMaxOutputCount() {
 		return 3;
 	}
+
 	@Override
-	protected int getMaxFluidOutputCount() {
+	protected int getMaxFluidInputCount() {
 		return 1;
 	}
-
 
 	public boolean matches(CombinedTankWrapper inv, Level worldIn) {
 		if (inv.getFluidInTank(0).getAmount()==0)

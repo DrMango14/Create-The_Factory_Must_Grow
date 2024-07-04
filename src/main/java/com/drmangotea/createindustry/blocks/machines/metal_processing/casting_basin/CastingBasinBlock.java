@@ -37,6 +37,9 @@ public class CastingBasinBlock extends Block implements IBE<CastingBasinBlockEnt
     public VoxelShape getShape(BlockState pState, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 
         return AllShapes.BASIN_BLOCK_SHAPE;
+    }    @Override
+    public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        IBE.onRemove(state, worldIn, pos, newState);
     }
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {

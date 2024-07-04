@@ -16,7 +16,7 @@ public class RadialEngineRenderer extends KineticBlockEntityRenderer<RadialEngin
 
     @Override
     protected SuperByteBuffer getRotatedModel(RadialEngineBlockEntity be, BlockState state) {
-        return CachedBufferer.partialFacing(AllPartialModels.SHAFT_HALF, state);
+        return CachedBufferer.partialFacing(AllPartialModels.COGWHEEL_SHAFT, state);
     }
 
 }

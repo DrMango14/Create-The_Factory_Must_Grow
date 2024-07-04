@@ -6,6 +6,7 @@ import com.drmangotea.createindustry.recipes.casting.CastingRecipe;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
+import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import com.simibubi.create.foundation.utility.Lang;
@@ -126,6 +127,12 @@ public class CastingBasinBlockEntity extends TFMGMachineBlockEntity implements I
 
     }
 
+    @Override
+    public void destroy() {
+        super.destroy();
+        ItemHelper.dropContents(level, worldPosition, moldInventory);
+        ItemHelper.dropContents(level, worldPosition, outputInventory);
+    }
 
     public void setMold(){
         if(moldInventory.isEmpty())

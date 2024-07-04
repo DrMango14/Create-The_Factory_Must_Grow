@@ -2,7 +2,9 @@ package com.drmangotea.createindustry.blocks.machines.metal_processing.blast_fur
 
 import com.drmangotea.createindustry.registry.TFMGBlockEntities;
 import com.simibubi.create.foundation.block.IBE;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -20,7 +22,9 @@ public class BlastFurnaceOutputBlock extends HorizontalDirectionalBlock implemen
     public Class<BlastFurnaceOutputBlockEntity> getBlockEntityClass() {
         return BlastFurnaceOutputBlockEntity.class;
     }
-
+    public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        IBE.onRemove(state, worldIn, pos, newState);
+    }
     @Override
     public BlockEntityType<? extends BlastFurnaceOutputBlockEntity> getBlockEntityType() {
         return TFMGBlockEntities.BLAST_FURNACE_OUTPUT.get();

@@ -11,6 +11,7 @@
     "createindustry:large_radial_engine",
     "createindustry:radial_engine_input",
     "createindustry:radial_engine_input_ponder",
-    "createindustry:compact_engine"
+    "createindustry:compact_engine",
+    "createindustry:low_grade_fuel_engine"
   ]
 }

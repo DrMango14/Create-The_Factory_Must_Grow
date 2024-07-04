@@ -3,11 +3,11 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "   ",
-    " S ",
+    " A ",
     "   "
   ],
   "key": {
-    "S": {
+    "A": {
       "item": "createindustry:coal_coke_block"
     }
   },

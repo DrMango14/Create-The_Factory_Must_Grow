@@ -2,7 +2,9 @@ package com.drmangotea.createindustry.blocks.engines.radial.large;
 
 import com.drmangotea.createindustry.blocks.engines.radial.RadialEngineBlockEntity;
 import com.drmangotea.createindustry.registry.TFMGFluids;
+import com.drmangotea.createindustry.registry.TFMGTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -41,8 +43,7 @@ public class LargeRadialEngineBlockEntity extends RadialEngineBlockEntity {
 
 
     }
-    @Override
-    public Fluid validFuel(){
-        return TFMGFluids.KEROSENE.get();
+    public TagKey<Fluid> validFuel(){
+        return TFMGTags.TFMGFluidTags.KEROSENE.tag;
     };
 }

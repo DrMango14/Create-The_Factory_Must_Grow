@@ -3,6 +3,7 @@ package com.drmangotea.createindustry.blocks.engines.compact;
 
 import com.drmangotea.createindustry.registry.TFMGFluids;
 import com.drmangotea.createindustry.registry.TFMGSoundEvents;
+import com.drmangotea.createindustry.registry.TFMGTags;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -17,6 +18,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -29,10 +31,10 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
@@ -72,8 +74,8 @@ public class CompactEngineBlockEntity extends GeneratingKineticBlockEntity imple
     public float powerModifier=1;
     public float efficiencyModifier = 1.4f;
 //
-int signal;
-boolean signalChanged;
+    int signal;
+    boolean signalChanged;
 //
 
    // protected ScrollValueBehaviour generatedSpeed;
@@ -123,6 +125,10 @@ boolean signalChanged;
              fuelConsumption = (int)((speed/(efficiency/10)/13)+1);
             if(fuelConsumption<1)
                 fuelConsumption=0;
+
+            if(this.isOverStressed())
+                fuelConsumption = 0;
+
         if(!tankInventory.isEmpty()) {
 
             if(consumptionTimer>=45) {
@@ -223,7 +229,7 @@ boolean signalChanged;
 
 
 ////////////////////////////////////////
-        LazyOptional<IFluidHandler> handler = this.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY);
+        LazyOptional<IFluidHandler> handler = this.getCapability(ForgeCapabilities.FLUID_HANDLER);
         Optional<IFluidHandler> resolve = handler.resolve();
         if (!resolve.isPresent())
             return false;
@@ -372,7 +378,7 @@ public void write(CompoundTag compound, boolean clientPacket) {
             soundTimer++;
 
          //   if(!isExhaustTankFull()) {
-           if (soundTimer >= ((16-signal)/0.8)+1) {
+        if (soundTimer >= (((16-signal)/0.8)+1)/2) {
                if(signal!=0&&
                        tankInventory.getFluidAmount()!=0 &&
                        !overStressed
@@ -448,7 +454,7 @@ public void write(CompoundTag compound, boolean clientPacket) {
         soundTimer=0;
 
 
-            TFMGSoundEvents.ENGINE.playAt(level, worldPosition, 0.6f, 1f, false);
+            TFMGSoundEvents.ENGINE.playAt(level, worldPosition, 0.04f, 1f, false);
 
 
     }
@@ -483,7 +489,7 @@ public void write(CompoundTag compound, boolean clientPacket) {
         return new SmartFluidTank(1000, this::onFluidStackChanged){
             @Override
             public boolean isFluidValid(FluidStack stack) {
-                return stack.getFluid().isSame(validFuel());
+                return stack.getFluid().is(validFuel());
             }
         };
     }
@@ -516,7 +522,7 @@ public void write(CompoundTag compound, boolean clientPacket) {
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
 
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+        if (cap == ForgeCapabilities.FLUID_HANDLER)
             return fluidCapability.cast();
         return super.getCapability(cap, side);
     }
@@ -533,8 +539,8 @@ public void write(CompoundTag compound, boolean clientPacket) {
         return tankInventory;
     }
 
-    public  Fluid validFuel(){
-        return TFMGFluids.GASOLINE.get();
+    public TagKey<Fluid> validFuel(){
+        return TFMGTags.TFMGFluidTags.GASOLINE.tag;
     };
 
 }

@@ -2,6 +2,7 @@ package com.drmangotea.createindustry.ponder;
 
 
 import com.drmangotea.createindustry.CreateTFMG;
+import com.drmangotea.createindustry.ponder.scenes.ElectricityScenes;
 import com.drmangotea.createindustry.ponder.scenes.MetallurgyScenes;
 import com.drmangotea.createindustry.ponder.scenes.OilScenes;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
@@ -24,7 +25,11 @@ public class TFMGPonderIndex {
                 .addStoryBoard("radial_engines", OilScenes::radial_engines, TFMGPonderTag.OIL);
 
 
-        HELPER.forComponents(TFMGBlocks.DIESEL_ENGINE)
+        HELPER.forComponents(
+                TFMGBlocks.DIESEL_ENGINE,
+                TFMGBlocks.AIR_INTAKE,
+                TFMGBlocks.DIESEL_ENGINE_EXPANSION
+                )
 
                 .addStoryBoard("diesel_engine", OilScenes::diesel_engine, TFMGPonderTag.OIL)
                 .addStoryBoard("diesel_engine_expansion", OilScenes::diesel_engine_expansion, TFMGPonderTag.OIL);
@@ -63,6 +68,11 @@ public class TFMGPonderIndex {
         HELPER.forComponents(TFMGBlocks.CASTING_BASIN,TFMGBlocks.CASTING_SPOUT)
 
                 .addStoryBoard("casting", MetallurgyScenes::casting, TFMGPonderTag.METALLURGY);
+        /////////////////////////////////////////
+
+        HELPER.forComponents(TFMGBlocks.ROTOR,TFMGBlocks.STATOR)
+
+                .addStoryBoard("large_generator", ElectricityScenes::large_generator, TFMGPonderTag.ELECTRICITY);
 
 
     }
@@ -93,6 +103,13 @@ public class TFMGPonderIndex {
                     .add(TFMGBlocks.FIREPROOF_BRICKS)
                     .add(TFMGBlocks.FIREPROOF_BRICK_REINFORCEMENT)
                     .add(TFMGBlocks.BLAST_FURNACE_OUTPUT);
+
+            PonderRegistry.TAGS.forTag(TFMGPonderTag.ELECTRICITY)
+                    .add(TFMGBlocks.STATOR)
+                    .add(TFMGBlocks.ROTOR)
+                    .add(TFMGBlocks.CABLE_CONNECTOR)
+                    .add(TFMGBlocks.CAPACITOR)
+                    .add(TFMGBlocks.ACCUMULATOR);
 
 
 

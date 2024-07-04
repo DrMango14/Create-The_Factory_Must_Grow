@@ -11,6 +11,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.function.BiFunction;
 
+import static net.minecraft.core.Direction.SOUTH;
 import static net.minecraft.core.Direction.UP;
 
 public class TFMGShapes {
@@ -41,7 +42,58 @@ public class TFMGShapes {
             COMPACT_ENGINE_VERTICAL = shape(3, 0, 3, 13, 14, 14)
                 .forDirectional(),
             COMPACT_ENGINE = shape(3, 0, 3, 13, 14, 14)
-                .forDirectional()
+                .forDirectional(),
+
+
+
+
+            CABLE_CONNECTOR = shape(6, 0, 6, 10, 9, 10)
+            .forDirectional(),
+            CABLE_CONNECTOR_MIDDLE = shape(6, 0, 6, 10, 16, 10)
+            .forDirectional(),
+            GALVANIC_CELL = shape(5, 10, 5, 11, 16, 16).add(1, 4, 6, 15, 10, 16)
+            .forDirectional(),
+            GENERATOR = shape(3, 0, 3, 13, 14, 13).add(0, 4, 0, 16, 10, 16)
+            .forDirectional(),
+            LIGHT_BULB = shape(5, 0, 5, 11, 9, 11)
+            .forDirectional(),
+
+            RESISTOR = shape(3, 0, 3, 13, 16, 13).add(1, 1, 13, 15, 15, 16)
+            .forDirectional(),
+            ROTOR = shape(3, 3, 2, 13, 13, 14)
+            .forAxis(),
+            VOLTMETER = shape(0, 0, 2, 16, 3, 14)
+            .forDirectional(),
+
+            DIAGONAL_CABLE_BLOCK_DOWN = shape(3, 3, 11, 13, 13, 16)
+                    .add(3, 11, 3, 13, 16, 13)
+                    .add(4, 4, 5, 12, 11, 12)
+                    .forDirectional(),
+            DIAGONAL_CABLE_BLOCK_UP = shape(3, 3, 0, 13, 13, 5)
+                    .add(3, 11, 3, 13, 16, 13)
+                    .add(4, 4, 5, 12, 11, 12)
+                    .forDirectional(),
+
+            CABLE_TUBE = shape(6, 0, 6, 10, 16, 10)
+                    .forDirectional(),
+
+
+            ELECTRICAL_SWITCH = shape(5, 0, 3, 11, 3, 13)
+            .forHorizontalAxis(),
+            ELECTRICAL_SWITCH_CEILING = shape(5, 13, 3, 11, 16, 13)
+                    .forHorizontalAxis(),
+            ELECTRICAL_SWITCH_WALL = shape(5, 3, 0, 11, 13, 3)
+                    .forHorizontal(SOUTH)
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -59,7 +111,9 @@ public class TFMGShapes {
             .build(),
     SURFACE_SCANNER = shape(2, 0, 2, 14, 14, 14).build(),
 
-    FULL = shape(0, 0, 0, 16, 16, 16).build();
+    FULL = shape(0, 0, 0, 16, 16, 16).build(),
+
+    SLAB = shape(0, 0, 0, 16, 8, 16).build();
 ;
 
     private static TFMGShapes.Builder shape(VoxelShape shape) {

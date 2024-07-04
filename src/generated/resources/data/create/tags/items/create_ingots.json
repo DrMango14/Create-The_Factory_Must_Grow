@@ -3,6 +3,9 @@
     "createindustry:steel_ingot",
     "createindustry:cast_iron_ingot",
     "createindustry:aluminum_ingot",
-    "createindustry:plastic_sheet"
+    "createindustry:plastic_sheet",
+    "createindustry:lead_ingot",
+    "createindustry:nickel_ingot",
+    "createindustry:lithium_ingot"
   ]
 }

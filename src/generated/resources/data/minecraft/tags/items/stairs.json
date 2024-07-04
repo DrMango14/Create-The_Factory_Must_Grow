@@ -3,6 +3,10 @@
     "createindustry:cut_bauxite_stairs",
     "createindustry:polished_cut_bauxite_stairs",
     "createindustry:cut_bauxite_brick_stairs",
-    "createindustry:small_bauxite_brick_stairs"
+    "createindustry:small_bauxite_brick_stairs",
+    "createindustry:cut_galena_stairs",
+    "createindustry:polished_cut_galena_stairs",
+    "createindustry:cut_galena_brick_stairs",
+    "createindustry:small_galena_brick_stairs"
   ]
 }

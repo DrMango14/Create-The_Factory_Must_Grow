@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "createindustry:red_caution_block"
+          "name": "minecraft:air"
         }
       ],
       "rolls": 1.0

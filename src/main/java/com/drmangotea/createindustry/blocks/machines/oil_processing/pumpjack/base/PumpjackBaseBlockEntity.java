@@ -1,7 +1,5 @@
 package com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.base;
 
-import com.drmangotea.createindustry.CreateTFMG;
-import com.drmangotea.createindustry.blocks.deposits.FluidDepositBlockEntity;
 import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.crank.PumpjackCrankBlockEntity;
 import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.hammer.PumpjackBlockEntity;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
@@ -20,9 +18,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
@@ -42,7 +40,7 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
 
     protected LazyOptional<IFluidHandler> fluidCapability;
     public FluidTank tankInventory;
-    public FluidDepositBlockEntity deposit;
+    public BlockPos deposit;
 
     public PumpjackBaseBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -119,7 +117,7 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
             BlockPos checkedPos = new BlockPos(this.getBlockPos().getX(), (this.getBlockPos().getY() - 1) - i, this.getBlockPos().getZ());
 
             if (level.getBlockState(new BlockPos(checkedPos)).is(TFMGBlocks.OIL_DEPOSIT.get())) {
-                deposit = (FluidDepositBlockEntity) level.getBlockEntity(checkedPos);
+                deposit = checkedPos;
                 return;
             }
 
@@ -134,15 +132,14 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
 
     }
     public void process() {
-        if (deposit == null || deposit.fluidAmount == 0)
+        if (deposit == null)
             return;
 
         if (tankInventory.getFluidAmount() + miningRate > 8000)
             return;
 
-        deposit.fluidAmount -= miningRate;
 
-        tankInventory.setFluid(new FluidStack(deposit.getDepositFluid(), tankInventory.getFluidAmount() + miningRate));
+        tankInventory.setFluid(new FluidStack(TFMGFluids.CRUDE_OIL.getSource(), tankInventory.getFluidAmount() + miningRate));
 
     }
 
@@ -173,26 +170,14 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
         LangBuilder mb = Lang.translate("generic.unit.millibuckets");
 
 
-        Lang.translate("goggles.pumpjack.deposit_info")
-                .style(ChatFormatting.GRAY)
-                .forGoggles(tooltip);
 
 
-        if (!(deposit == null || deposit.fluidAmount == 0)) {
-            Lang.translate("goggles.pumpjack.fluid_amount")
-                    .style(ChatFormatting.DARK_GRAY)
-                    .add(
-                            Lang.translate("pumpjack_deposit_amount", this.deposit.baseFluidAmount)
-                                    .style(ChatFormatting.BLUE)
-                            //   .add(mb))
-                    ).forGoggles(tooltip, 1);
 
+            //Lang.translate("pumpjack_deposit_amount", this.miningRate)
+            //        .style(ChatFormatting.LIGHT_PURPLE)
+            //        .forGoggles(tooltip, 1);
 
-            Lang.translate("pumpjack_deposit_amount", this.miningRate)
-                    .style(ChatFormatting.LIGHT_PURPLE)
-                    .forGoggles(tooltip, 1);
-
-        } else {
+        if (deposit == null) {
 
             Lang.translate("goggles.zero")
                     .style(ChatFormatting.DARK_RED)
@@ -200,7 +185,7 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
         }
 
         //--Fluid Info--//
-        LazyOptional<IFluidHandler> handler = this.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY);
+        LazyOptional<IFluidHandler> handler = this.getCapability(ForgeCapabilities.FLUID_HANDLER);
         Optional<IFluidHandler> resolve = handler.resolve();
         if (!resolve.isPresent())
             return false;
@@ -273,10 +258,10 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
     }
     @Nonnull
     @Override
-    @SuppressWarnings("removal")
+
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
 
-                if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+                if (cap == ForgeCapabilities.FLUID_HANDLER)
                     return fluidCapability.cast();
         return super.getCapability(cap, side);
     }
