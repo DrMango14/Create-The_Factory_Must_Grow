@@ -226,19 +226,22 @@ public class CableConnectorBlockEntity extends ElectricBlockEntity {
                 }else
                 if(be1!=null) {
 
-                    if (be1.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite()).isPresent() && getForgeEnergy().getEnergyStored() > 0) {
+                    if (be1.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite()).isPresent()) {
 
-                        if (!(be1.getCapability(ForgeCapabilities.ENERGY).orElse(new EnergyStorage(0)) instanceof TFMGForgeEnergyStorage)
-                                && be1.getCapability(ForgeCapabilities.ENERGY).orElse(new EnergyStorage(0)).getEnergyStored() > 0 &&
-                                be1.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite()).orElse(new EnergyStorage(0)).canReceive()
-                        ) {
+                        if (!(be1.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite()).orElse(new EnergyStorage(0)) instanceof TFMGForgeEnergyStorage)) {
 
-                            // lowestDistance = 0;
-                            // setDistanceFromSource(1);
-                            // getsVoltageFromNonTFMGBlock = true;
+
+
+
+                            int i = be1.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite()).orElse(new EnergyStorage(0)).receiveEnergy(1000, true);
+                            int y = getForgeEnergy().extractEnergy(1000, true);
+
+                            int j = be1.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite()).orElse(new EnergyStorage(0)).receiveEnergy(Math.min(y,i), false);
+                            getForgeEnergy().extractEnergy(j, false);
+
                         }
-
                     }
+
                 }
 
             }

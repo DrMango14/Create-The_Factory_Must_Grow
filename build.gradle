@@ -29,7 +29,7 @@ apply plugin: 'org.spongepowered.mixin'
 //  add sourceSets.main, "createindustry.refmap.json"
 //}
 
-version = '0.9.0b-1.19.2'
+version = '0.9.0c-1.19.2'
 group = 'com.drmangotea.createindustry' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'createindustry'
 
