@@ -111,6 +111,8 @@ public class TFMGCreativeModeTabs {
 
                                 if(item ==    TFMGBlocks.RADIAL_ENGINE_INPUT_PONDER.asItem())
                                   continue;
+                                if(item ==    TFMGBlocks.VOLTAGE_CUBE.asItem())
+                                        continue;
                                 if(item == TFMGEncasedBlocks.HEAVY_CASING_ENCASED_ALUMINUM_COGWHEEL.asItem())
                                         continue;
                                 if(item == TFMGEncasedBlocks.HEAVY_CASING_ENCASED_STEEL_COGWHEEL.asItem())

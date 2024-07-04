@@ -67,7 +67,7 @@
   "create.goggles.machine_input.no_rot": "No Rotation Provided!",
   "create.goggles.machine_input.power_level": "Power Level: ",
 
-  "create.goggles.electricity.no_power": "No Power",
+  "create.goggles.electric_machine.no_power": "No Power",
   "create.goggles.electricity.insufficient_voltage": "Insufficient Voltage",
 
   "create.goggles.voltmeter": "Voltmeter:",

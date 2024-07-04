@@ -167,18 +167,8 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
         LangBuilder mb = Lang.translate("generic.unit.millibuckets");
 
 
-        Lang.translate("goggles.pumpjack.deposit_info")
-                .style(ChatFormatting.GRAY)
-                .forGoggles(tooltip);
 
-
-        if (!(deposit == null)) {
-
-            Lang.translate("pumpjack_deposit_amount", this.miningRate)
-                    .style(ChatFormatting.LIGHT_PURPLE)
-                    .forGoggles(tooltip, 1);
-
-        } else {
+        if (deposit == null)  {
 
             Lang.translate("goggles.zero")
                     .style(ChatFormatting.DARK_RED)
