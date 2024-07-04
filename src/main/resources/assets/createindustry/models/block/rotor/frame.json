@@ -1,0 +1,18 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [128, 128],
+	"textures": {
+		"0": "createindustry:block/large_generator",
+		"particle": "createindustry:block/large_generator"
+	},
+	"elements": [
+		{
+			"from": [-10, -10, 2.02],
+			"to": [26, 26, 14.01],
+			"faces": {
+				"north": {"uv": [6.5, 11.5, 11, 16], "texture": "#0"},
+				"south": {"uv": [6.5, 11.5, 11, 16], "texture": "#0"}
+			}
+		}
+	]
+}

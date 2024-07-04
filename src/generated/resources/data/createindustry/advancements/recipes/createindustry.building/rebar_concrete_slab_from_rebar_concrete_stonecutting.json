@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rebar_concrete": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "createindustry:rebar_concrete"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "createindustry:rebar_concrete_slab_from_rebar_concrete_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_rebar_concrete",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "createindustry:rebar_concrete_slab_from_rebar_concrete_stonecutting"
+    ]
+  }
+}

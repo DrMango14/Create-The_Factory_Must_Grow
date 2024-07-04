@@ -1,0 +1,7 @@
+{
+  "parent": "createindustry:block/caution_block",
+  "textures": {
+    "0": "createindustry:block/caution_block/green",
+    "particle": "createindustry:block/caution_block/green"
+  }
+}

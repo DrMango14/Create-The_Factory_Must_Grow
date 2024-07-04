@@ -1,0 +1,8 @@
+{
+  "parent": "createindustry:block/bars/cap_alt",
+  "textures": {
+    "bars": "createindustry:block/bars/nickel_bars",
+    "edge": "createindustry:block/bars/nickel_bars_edge",
+    "particle": "createindustry:block/bars/nickel_bars"
+  }
+}

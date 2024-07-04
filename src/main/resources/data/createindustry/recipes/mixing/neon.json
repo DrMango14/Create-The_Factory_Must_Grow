@@ -1,0 +1,19 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+
+    {
+      "fluid": "createindustry:air",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "fluid": "createindustry:neon",
+      "nbt": {},
+      "amount": 1
+    }
+  ]
+}

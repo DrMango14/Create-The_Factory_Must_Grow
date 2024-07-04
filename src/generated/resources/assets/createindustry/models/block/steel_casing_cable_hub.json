@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "createindustry:block/steel_casing_cable_hub"
+  }
+}

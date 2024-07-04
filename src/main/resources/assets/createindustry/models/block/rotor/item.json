@@ -1,0 +1,6 @@
+{
+	"parent": "createindustry:block/rotor/rotor",
+	"loader": "forge:obj",
+	"flip_v": true,
+	"model": "createindustry:models/block/rotor/item.obj"
+}

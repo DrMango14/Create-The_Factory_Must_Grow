@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "PPP",
+    "   "
+  ],
+  "key": {
+    "P": {
+      "item": "createindustry:plastic_sheet"
+    }
+  },
+  "result": {
+    "item": "createindustry:synthetic_string",
+    "count": 8
+
+
+  }
+}

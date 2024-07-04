@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "createindustry:block/cinderblock_top",
+    "bottom": "createindustry:block/cinderblock_top",
+    "side": "createindustry:block/cinderblock"
+  }
+}

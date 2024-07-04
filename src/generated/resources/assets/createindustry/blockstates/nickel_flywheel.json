@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "createindustry:block/nickel_flywheel/block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "createindustry:block/nickel_flywheel/block"
+    },
+    "axis=z": {
+      "model": "createindustry:block/nickel_flywheel/block",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

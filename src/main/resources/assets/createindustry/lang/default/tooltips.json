@@ -1,0 +1,145 @@
+{
+
+
+	"OwO": "UwU",
+
+
+
+
+
+	"item.createindustry.quad_potato_cannon.tooltip.summary": "Launches 4 of your home-grown vegetables at Enemies. Can be powered with _Air_ _Pressure_ from a _Backtank_",
+	"item.createindustry.quad_potato_cannon.tooltip.condition1": "When R-Clicked",
+	"item.createindustry.quad_potato_cannon.tooltip.behaviour1": "_Shoots_ a suitable item from your _Inventory_.",
+	"item.createindustry.quad_potato_cannon.tooltip.condition2": "While wearing Backtank",
+	"item.createindustry.quad_potato_cannon.tooltip.behaviour2": "_No_ _Durability_ will be used. Instead, _Air_ _pressure_ is drained from the Tank",
+
+	"item.createindustry.advanced_potato_cannon.tooltip.summary": "Launches _Napalm Potatoes_ at Enemies. Can be powered with _Air_ _Pressure_ from a _Backtank_",
+	"item.createindustry.advanced_potato_cannon.tooltip.condition1": "When R-Clicked",
+	"item.createindustry.advanced_potato_cannon.tooltip.behaviour1": "_Shoots_ a _Napalm Potato_ from your _Inventory_.",
+	"item.createindustry.advanced_potato_cannon.tooltip.condition2": "While wearing Backtank",
+	"item.createindustry.advanced_potato_cannon.tooltip.behaviour2": "_No_ _Durability_ will be used. Instead, _Air_ _pressure_ is drained from the Tank",
+
+	"item.createindustry.flamethrower.tooltip.summary": "Burns  burnable _Gases_ and _Fluids_ to shoot out a burst of flame to burn your Enemies",
+	"item.createindustry.flamethrower.tooltip.condition1": "When R-Clicked",
+	"item.createindustry.flamethrower.tooltip.behaviour1": "_Shoots out Flames_ ",
+	"item.createindustry.flamethrower.tooltip.condition2": "When R-Clicking a Fluid Tank with a Burnable Fluid/Gas inside",
+	"item.createindustry.flamethrower.tooltip.behaviour2": "The _Fuel_ will be consumed from the tank. _Range_ and _Spread_ change according to your _Fuel_ of choice",
+
+	"item.createindustry.lithium_blade.tooltip.summary": "Using _Steel Ingot_Lithium Charges_, this Blade is set aflame burning enemies and shooting out Bolts of _Hellfire_",
+	"item.createindustry.lithium_blade.tooltip.condition1": "When R-Clicked when Off",
+	"item.createindustry.lithium_blade.tooltip.behaviour1": "Is set on hellfire, consuming a _Lithium Charge_. Its flame sets enemies on fire for a set amount of time, this fire is renewed even after Enemy extinguishes themself in water ",
+	"item.createindustry.lithium_blade.tooltip.condition2": "When R-Clicking when On",
+	"item.createindustry.lithium_blade.tooltip.behaviour2": "Shoots out several bolts of _Hellfire_ consuming the blades charge",
+
+	"item.createindustry.pipebomb.tooltip.summary": "So cool",
+
+	"item.createindustry.screwdriver.tooltip.summary": "Can lock pipes in place",
+	"item.createindustry.screwdriver.tooltip.condition1": "When R-Clicking pipe",
+	"item.createindustry.screwdriver.tooltip.behaviour1": "Locks _Pipe_ in its current rotation allowing for _Pipes_ to be placed next to eachother _Without Connecting_",
+
+	"block.createindustry.formwork_block.tooltip.summary": "Holds Liquid Concrete until it turns into concrete blocks",
+	"block.createindustry.formwork_block.tooltip.condition1": "When Pumped concrete into",
+	"block.createindustry.formwork_block.tooltip.behaviour1": "Fills out with _Liquid Concrete_, this Concrete eventually turns into solid blocks",
+
+	"block.createindustry.rebar_formwork_block.tooltip.summary": "Holds Liquid Concrete until it turns into rebar concrete blocks",
+	"block.createindustry.rebar_formwork_block.tooltip.condition1": "When Pumped concrete into",
+	"block.createindustry.rebar_formwork_block.tooltip.behaviour1": "Fills out with _Liquid Concrete_, this concrete eventually turns into solid rebar concrete blocks",
+
+	"block.createindustry.firebox.tooltip.summary": "Uses burnables to function as a blaze burner",
+	"block.createindustry.firebox.condition1": "When inputted burnables into",
+	"block.createindustry.firebox.tooltip.behaviour1": "The _Firebox_ will act as a _Blaze Burner_ until it runs out of fuel, there is no way to superheat it",
+
+	"block.createindustry.polarizer.tooltip.summary": "Makes Magnetic Ingots out of Steel",
+	"block.createindustry.polarizer.condition1": "When powered",
+	"block.createindustry.polarizer.tooltip.behaviour1": "Will turn a _Steel Ingot_ into a _Magnetic Ingot_ when right clicked with a _Steel Ingot_",
+
+	"block.createindustry.energy_meter.tooltip.summary": "Measures energy",
+	"block.createindustry.energy_meter.condition1": "When put on Power Source",
+	"block.createindustry.energy_meter.tooltip.behaviour1": "Measures the _Energy_ of the _Power Source_",
+	"block.createindustry.energy_meter.condition2": "When looked on with Engineer's Goggles",
+	"block.createindustry.energy_meter.tooltip.behaviour2": "Shows detailed info on the sources energy",
+
+	"block.createindustry.voltmeter.tooltip.summary": "Measures voltage",
+	"block.createindustry.voltmeter.condition1": "When put on Power Source",
+	"block.createindustry.voltmeter.tooltip.behaviour1": "Measures the _Voltage_ of the _Power Source_ the max energy on the _Voltmeter_ is determined by its _Measuring Range_",
+	"block.createindustry.voltmeter.condition2": "When looked on with Engineer's Goggles",
+	"block.createindustry.voltmeter.tooltip.behaviour2": "Shows detailed info on the sources _Voltage_ as well as the Voltmeters _Measuring Range_",
+	"block.createindustry.voltmeter.condition3": "When R-Clicked with Wrench",
+	"block.createindustry.voltmeter.tooltip.behaviour3": "Changes the _Measuring Range_",
+
+	"block.createindustry.converter.tooltip.summary": "Makes other mods compatible with TFMG by adding voltage",
+	"block.createindustry.converter.condition1": "When Put FE from Bottom",
+	"block.createindustry.converter.behaviour1": "The _Top_ outputs FE With _Voltage_ making it usable with _TFMG_",
+
+	"block.createindustry.light_bulb.tooltip.summary": "Glows when Powered",
+	"block.createindustry.light_bulb.condition1": "When put on Power Source",
+	"block.createindustry.light_bulb.behaviour1": "The lightbulb will _Glow_ if _Voltage_ and _Energy_ are balanced, the higher the _Voltage_, the stronger the glow",
+
+	"block.createindustry.rgb_light_bulb.tooltip.summary": "Glows in a certain color when Powered",
+	"block.createindustry.rgb_light_bulb.condition1": "When put on Power Source",
+	"block.createindustry.rgb_light_bulb.behaviour1": "The lightbulb will _Glow_ if _Voltage_ and _Energy_ are balanced, the higher the _Voltage_, the stronger the glow",
+	"block.createindustry.rgb_light_bulb.condition2": "When R-Clicked with Wrench",
+	"block.createindustry.rgb_light_bulb.behaviour2": "Cycles through colors",
+
+	"block.createindustry.creative_generator.tooltip.summary": "Outputs energy based on the value on its input panel",
+
+	"block.createindustry.cable connector.tooltip.summary": "Right click 2 cable connectors with a _Copper Cable_ amking them transport _Energy_",
+
+	"block.createindustry.lithium_torch.tooltip.summary": "Works underwater and can be placed upside down",
+
+	"block.createindustry.cable_tube.tooltip.summary": "Transports Energy like a Cable",
+
+	"block.createindustry.diagonal_cable_block.tooltip.summary": "Transports Energy like a Cable (But diagonally)",
+
+	"block.createindustry.capacitor.tooltip.summary": "Holds a Small Amount of energy (inserted from bottom) that can be outputted Quickly from the Top",
+
+	"block.createindustry.accumulator.tooltip.summary": "Holds a Large Amount of energy (inserted from bottom) that can be outputted Slowly from the Top",
+
+	"block.createindustry.electric_motor.tooltip.summary": "Changes energy to rotation (rpm configurable on side)",
+
+	"block.createindustry.generator.tooltip.summary": "Changes rotation to energy",
+
+	"block.createindustry.copper_coil.tooltip.summary": "Increases Voltage",
+	"block.createindustry.copper_coil.tooltip.behaviour1": "To increase voltage you have to have to towers of coils either next to or one block from eachother, one atleast 1 block larger than the other, both max 5 blocks in height and with their top blocks touching. R-Click the top block in the larger tower with a wrench  to make it the output. Energy is both inputted and outputted on the top of their respective towers",
+
+	"block.createindustry.flarestack.tooltip.summary": "Burns unneeded oil products",
+	"block.createindustry.flarestack.tooltip.condition1": "When Pumped burnable Fluids/Gases into from the bottom",
+	"block.createindustry.flarestack.tooltip.behaviour1": "Deletes what is pumped inside",
+
+	"block.createindustry.resistor.tooltip.summary": "Reduces voltage",
+	"block.createindustry.resistor.tooltip.condition1": "When Put Energy into from the back (where strip of lead is smaller on top of the texture)",
+	"block.createindustry.resistor.tooltip.behaviour1": "Outputs energy with voltage based on its allowed voltage (configurable on top) on front",
+
+	"block.createindustry.galvanic_cell.tooltip.summary": "Has a small amount of unchargable energy inside, ideal for starting your venture into electricity",
+
+	"block.createindustry.neon_tube.tooltip.summary": "Glows in a certain color when Powered",
+	"block.createindustry.neon_tube.condition1": "When put on Power Source",
+	"block.createindustry.neon_tube.behaviour1": "The tube will _Glow_ ",
+	"block.createindustry.neon_tube.condition2": "When R-Clicked with Dye",
+	"block.createindustry.neon_tube.behaviour2": "Changes Color",
+
+	"block.createindustry.low_grade_fuel_engine.tooltip.summary": "Makes Rotation from Creosote",
+	"block.createindustry.low_grade_fuel_engine.condition1": "When Pumped Creosote into",
+	"block.createindustry.low_grade_fuel_engine.behaviour1": "Will output a small amount of _RPM_ based on the strength of the _Redstone Signal_ inputted into it",
+
+	"block.createindustry.compact_engine.tooltip.summary": "Makes Rotation from Gasoline",
+	"block.createindustry.compact_engine.condition1": "When Gasoline Creosote into",
+	"block.createindustry.compact_engine.behaviour1": "Will output _RPM_ based on the strength of the _Redstone Signal_ inputted into it",
+
+	"block.createindustry.fireclay.tooltip.summary": "It is found in underground veins in the overworld",
+
+	"block.createindustry.copper_cable_hub.tooltip.summary": "Can be turned off with redstone",
+
+	"block.createindustry.aluminium_cable_hub.tooltip.summary": "Can be turned off with redstone",
+
+	"block.createindustry.brass_cable_hub.tooltip.summary": "Can be turned off with redstone",
+
+	"block.createindustry.steel_cable_hub.tooltip.summary": "Can be turned off with redstone",
+
+	"block.createindustry.heavy_cable_hub.tooltip.summary": "Can be turned off with redstone",
+
+	"block.createindustry.steel_casing_cable_hub.tooltip.summary": "Can be turned off with redstone",
+
+	"block.createindustry.copycat_cable_block.tooltip.summary": "Can be turned off with redstone"
+
+}

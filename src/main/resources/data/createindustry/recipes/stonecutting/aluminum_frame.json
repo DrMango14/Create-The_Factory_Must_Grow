@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "tag": "forge:ingots/aluminum"
+  },
+  "result": "createindustry:aluminum_frame",
+  "count": 4
+}

@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    " A ",
+    "   "
+  ],
+  "key": {
+    "A": {
+      "item": "createindustry:voltmeter"
+    }
+  },
+  "result": {
+    "item": "createindustry:energy_meter"
+
+
+
+  }
+}

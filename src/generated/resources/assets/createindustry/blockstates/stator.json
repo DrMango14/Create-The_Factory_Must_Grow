@@ -1,0 +1,138 @@
+{
+  "variants": {
+    "facing=down,stator_state=corner,value=false": {
+      "model": "createindustry:block/stator/block_corner"
+    },
+    "facing=down,stator_state=corner,value=true": {
+      "model": "createindustry:block/stator/block_corner_up"
+    },
+    "facing=down,stator_state=side,value=false": {
+      "model": "createindustry:block/stator/block_side",
+      "x": 90
+    },
+    "facing=down,stator_state=side,value=true": {
+      "model": "createindustry:block/stator/block_side_rotated",
+      "x": 90
+    },
+    "facing=down,stator_state=unused,value=false": {
+      "model": "createindustry:block/stator/block_unused",
+      "x": 90
+    },
+    "facing=down,stator_state=unused,value=true": {
+      "model": "createindustry:block/stator/block_unused",
+      "x": 90
+    },
+    "facing=east,stator_state=corner,value=false": {
+      "model": "createindustry:block/stator/block_corner",
+      "y": 90
+    },
+    "facing=east,stator_state=corner,value=true": {
+      "model": "createindustry:block/stator/block_corner_up",
+      "y": 90
+    },
+    "facing=east,stator_state=side,value=false": {
+      "model": "createindustry:block/stator/block_side",
+      "y": 90
+    },
+    "facing=east,stator_state=side,value=true": {
+      "model": "createindustry:block/stator/block_side_rotated",
+      "y": 90
+    },
+    "facing=east,stator_state=unused,value=false": {
+      "model": "createindustry:block/stator/block_unused",
+      "y": 90
+    },
+    "facing=east,stator_state=unused,value=true": {
+      "model": "createindustry:block/stator/block_unused",
+      "y": 90
+    },
+    "facing=north,stator_state=corner,value=false": {
+      "model": "createindustry:block/stator/block_corner"
+    },
+    "facing=north,stator_state=corner,value=true": {
+      "model": "createindustry:block/stator/block_corner_up"
+    },
+    "facing=north,stator_state=side,value=false": {
+      "model": "createindustry:block/stator/block_side"
+    },
+    "facing=north,stator_state=side,value=true": {
+      "model": "createindustry:block/stator/block_side_rotated"
+    },
+    "facing=north,stator_state=unused,value=false": {
+      "model": "createindustry:block/stator/block_unused"
+    },
+    "facing=north,stator_state=unused,value=true": {
+      "model": "createindustry:block/stator/block_unused"
+    },
+    "facing=south,stator_state=corner,value=false": {
+      "model": "createindustry:block/stator/block_corner",
+      "y": 180
+    },
+    "facing=south,stator_state=corner,value=true": {
+      "model": "createindustry:block/stator/block_corner_up",
+      "y": 180
+    },
+    "facing=south,stator_state=side,value=false": {
+      "model": "createindustry:block/stator/block_side",
+      "y": 180
+    },
+    "facing=south,stator_state=side,value=true": {
+      "model": "createindustry:block/stator/block_side_rotated",
+      "y": 180
+    },
+    "facing=south,stator_state=unused,value=false": {
+      "model": "createindustry:block/stator/block_unused",
+      "y": 180
+    },
+    "facing=south,stator_state=unused,value=true": {
+      "model": "createindustry:block/stator/block_unused",
+      "y": 180
+    },
+    "facing=up,stator_state=corner,value=false": {
+      "model": "createindustry:block/stator/block_corner"
+    },
+    "facing=up,stator_state=corner,value=true": {
+      "model": "createindustry:block/stator/block_corner_up"
+    },
+    "facing=up,stator_state=side,value=false": {
+      "model": "createindustry:block/stator/block_side",
+      "x": 270
+    },
+    "facing=up,stator_state=side,value=true": {
+      "model": "createindustry:block/stator/block_side_rotated",
+      "x": 270
+    },
+    "facing=up,stator_state=unused,value=false": {
+      "model": "createindustry:block/stator/block_unused",
+      "x": 270
+    },
+    "facing=up,stator_state=unused,value=true": {
+      "model": "createindustry:block/stator/block_unused",
+      "x": 270
+    },
+    "facing=west,stator_state=corner,value=false": {
+      "model": "createindustry:block/stator/block_corner",
+      "y": 270
+    },
+    "facing=west,stator_state=corner,value=true": {
+      "model": "createindustry:block/stator/block_corner_up",
+      "y": 270
+    },
+    "facing=west,stator_state=side,value=false": {
+      "model": "createindustry:block/stator/block_side",
+      "y": 270
+    },
+    "facing=west,stator_state=side,value=true": {
+      "model": "createindustry:block/stator/block_side_rotated",
+      "y": 270
+    },
+    "facing=west,stator_state=unused,value=false": {
+      "model": "createindustry:block/stator/block_unused",
+      "y": 270
+    },
+    "facing=west,stator_state=unused,value=true": {
+      "model": "createindustry:block/stator/block_unused",
+      "y": 270
+    }
+  }
+}

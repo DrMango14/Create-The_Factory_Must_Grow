@@ -1,0 +1,17 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"ambientocclusion": false,
+	"textures": {
+		"0": "createindustry:block/large_generator",
+		"particle": "createindustry:block/large_generator"
+	},
+	"display": {
+
+		"gui": {
+			"rotation": [25, 45, 0],
+			"scale": [0.4, 0.4, 0.4]
+		}
+
+	}
+}

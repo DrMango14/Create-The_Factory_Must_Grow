@@ -1,0 +1,28 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "IIPPH",
+    " ATAH"
+  ],
+  "key": {
+    "P": {
+      "item": "createindustry:steel_mechanism"
+    },
+    "A": {
+      "item": "createindustry:plastic_sheet"
+    },
+    "I": {
+      "item": "createindustry:steel_pipe"
+    },
+    "H": {
+      "item": "createindustry:heavy_plate"
+    },
+    "T": {
+      "item": "createindustry:steel_fluid_tank"
+    }
+  },
+  "result": {
+    "item": "createindustry:flamethrower"
+  },
+  "acceptMirrored": true
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "createindustry:cut_galena_slab"
+    },
+    {
+      "item": "createindustry:cut_galena_slab"
+    }
+  ],
+  "result": {
+    "item": "createindustry:cut_galena"
+  }
+}

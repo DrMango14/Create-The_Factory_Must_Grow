@@ -1,0 +1,24 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    " K ",
+    "   "
+  ],
+  "key": {
+    "K": {
+      "item": "createindustry:steel_mechanism"
+    },
+    "C": {
+      "item": "minecraft:compass"
+    }
+  },
+  "result": {
+    "item": "createindustry:voltmeter",
+    "count": 4
+
+
+
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "createindustry:block/hardened_planks",
+    "side": "createindustry:block/hardened_planks",
+    "top": "createindustry:block/hardened_planks"
+  }
+}

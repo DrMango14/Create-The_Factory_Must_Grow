@@ -1,0 +1,48 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"2": "createindustry:block/heavy_gearbox",
+		"3": "createindustry:block/heavy_machinery_casing",
+		"particle": "createindustry:block/heavy_machinery_casing"
+	},
+	"elements": [
+		{
+			"name": "Bottom",
+			"from": [0, 0, 0],
+			"to": [16, 2, 16],
+			"faces": {
+				"north": {"uv": [0, 14, 16, 16], "texture": "#3"},
+				"east": {"uv": [0, 14, 16, 16], "texture": "#3"},
+				"south": {"uv": [0, 14, 16, 16], "texture": "#3"},
+				"west": {"uv": [0, 14, 16, 16], "texture": "#3"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#3"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#3"}
+			}
+		},
+		{
+			"name": "Core",
+			"from": [0.95, 2, 0.95],
+			"to": [15.05, 14, 15.05],
+			"faces": {
+				"north": {"uv": [1, 2, 15, 14], "texture": "#2"},
+				"east": {"uv": [1, 2, 15, 14], "texture": "#2"},
+				"south": {"uv": [1, 2, 15, 14], "texture": "#2"},
+				"west": {"uv": [1, 2, 15, 14], "texture": "#2"}
+			}
+		},
+		{
+			"name": "Top",
+			"from": [0, 14, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 2], "texture": "#3"},
+				"east": {"uv": [0, 0, 16, 2], "texture": "#3"},
+				"south": {"uv": [0, 0, 16, 2], "texture": "#3"},
+				"west": {"uv": [0, 0, 16, 2], "texture": "#3"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#3"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#3"}
+			}
+		}
+	]
+}

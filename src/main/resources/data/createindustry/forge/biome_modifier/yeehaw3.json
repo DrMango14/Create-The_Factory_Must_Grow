@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#forge:is_desert",
+  "features": "createindustry:oil_well",
+  "step": "underground_ores"
+}

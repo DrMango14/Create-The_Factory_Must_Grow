@@ -1,0 +1,29 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NGN",
+    "NSN",
+    "NCN"
+  ],
+  "key": {
+    "N": {
+      "tag": "forge:ingots/lead"
+    },
+    "C": {
+      "item": "createindustry:electric_casing"
+    },
+    "G": {
+      "item": "createindustry:magnetic_ingot"
+    },
+    "S": {
+      "item": "createindustry:sulfuric_acid_bucket"
+    }
+  },
+  "result": {
+    "item": "createindustry:battery",
+    "count": 2
+
+
+  }
+}

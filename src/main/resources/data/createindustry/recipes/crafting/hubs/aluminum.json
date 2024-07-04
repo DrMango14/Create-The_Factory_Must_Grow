@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "AAA",
+    " C "
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:ingots/aluminum"
+    },
+    "C": {
+      "item": "createindustry:copper_cable"
+    }
+  },
+  "result": {
+    "item": "createindustry:aluminum_cable_hub",
+    "count": 2
+
+
+  }
+}

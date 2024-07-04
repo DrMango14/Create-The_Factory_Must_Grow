@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "cut_galena_slab",
+  "key": {
+    "X": {
+      "item": "createindustry:cut_galena"
+    }
+  },
+  "pattern": [
+    "XXX"
+  ],
+  "result": {
+    "count": 6,
+    "item": "createindustry:cut_galena_slab"
+  }
+}

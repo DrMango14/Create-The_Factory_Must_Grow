@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "createindustry:block/resistor/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "createindustry:block/resistor/block"
+    },
+    "facing=south": {
+      "model": "createindustry:block/resistor/block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "createindustry:block/resistor/block",
+      "y": 270
+    }
+  }
+}

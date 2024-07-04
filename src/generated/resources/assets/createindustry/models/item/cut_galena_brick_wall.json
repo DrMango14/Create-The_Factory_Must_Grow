@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "createindustry:block/palettes/stone_types/brick/galena_cut_brick"
+  }
+}

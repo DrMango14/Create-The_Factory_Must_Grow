@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "createindustry:block/lead_truss",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "createindustry:block/lead_truss"
+    },
+    "axis=z": {
+      "model": "createindustry:block/lead_truss",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

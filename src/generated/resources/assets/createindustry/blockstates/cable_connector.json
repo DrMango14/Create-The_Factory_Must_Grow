@@ -1,0 +1,56 @@
+{
+  "variants": {
+    "extension=false,facing=down": {
+      "model": "createindustry:block/cable_connector/block",
+      "x": 180
+    },
+    "extension=false,facing=east": {
+      "model": "createindustry:block/cable_connector/block",
+      "x": 90,
+      "y": 90
+    },
+    "extension=false,facing=north": {
+      "model": "createindustry:block/cable_connector/block",
+      "x": 90
+    },
+    "extension=false,facing=south": {
+      "model": "createindustry:block/cable_connector/block",
+      "x": 90,
+      "y": 180
+    },
+    "extension=false,facing=up": {
+      "model": "createindustry:block/cable_connector/block"
+    },
+    "extension=false,facing=west": {
+      "model": "createindustry:block/cable_connector/block",
+      "x": 90,
+      "y": 270
+    },
+    "extension=true,facing=down": {
+      "model": "createindustry:block/cable_connector/block_extension",
+      "x": 180
+    },
+    "extension=true,facing=east": {
+      "model": "createindustry:block/cable_connector/block_extension",
+      "x": 90,
+      "y": 90
+    },
+    "extension=true,facing=north": {
+      "model": "createindustry:block/cable_connector/block_extension",
+      "x": 90
+    },
+    "extension=true,facing=south": {
+      "model": "createindustry:block/cable_connector/block_extension",
+      "x": 90,
+      "y": 180
+    },
+    "extension=true,facing=up": {
+      "model": "createindustry:block/cable_connector/block_extension"
+    },
+    "extension=true,facing=west": {
+      "model": "createindustry:block/cable_connector/block_extension",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

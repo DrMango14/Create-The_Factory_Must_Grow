@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "tag": "forge:ingots/cast_iron"
+  },
+  "result": "createindustry:cast_iron_truss",
+  "count": 4
+}

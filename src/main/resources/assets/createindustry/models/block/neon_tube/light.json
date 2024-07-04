@@ -1,0 +1,21 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "createindustry:block/neon_tube",
+		"particle": "createindustry:block/neon_tube"
+	},
+	"elements": [
+		{
+			"from": [5.5, 5.5, -0.1],
+			"to": [10.5, 10.5, 16.1],
+			"faces": {
+				"north": {"uv": [11, 0, 16, 5], "rotation": 180, "texture": "#0"},
+				"east": {"uv": [11, 0, 16, 16], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [11, 0, 16, 5], "texture": "#0"},
+				"west": {"uv": [11, 0, 16, 16], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [11, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [11, 0, 16, 16], "rotation": 180, "texture": "#0"}
+			}
+		}
+	]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "createindustry:block/palettes/stone_types/cap/galena_cut_cap",
+    "side": "createindustry:block/palettes/stone_types/pillar/galena_cut_pillar"
+  }
+}

@@ -1,0 +1,7 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"0": "createindustry:block/lead_glass_item",
+		"particle": "createindustry:block/lead_glass"
+	}
+}
