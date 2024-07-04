@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "tfmg:block/green_concrete",
+    "side": "tfmg:block/green_concrete",
+    "top": "tfmg:block/green_concrete"
+  }
+}

@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " M ",
+    "MAM",
+    " M "
+  ],
+  "key": {
+    "A": {
+      "item": "tfmg:thermite_grenade"
+    },
+    "M": {
+      "tag": "forge:ingots/copper"
+    }
+  },
+  "result": {
+    "item": "tfmg:copper_grenade"
+
+
+
+  }
+}

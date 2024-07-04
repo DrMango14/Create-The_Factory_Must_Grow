@@ -1,0 +1,10 @@
+
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "tfmg:raw_lead"
+  },
+  "result": "tfmg:lead_ingot",
+  "experience": 0.5,
+  "cookingtime": 200
+}

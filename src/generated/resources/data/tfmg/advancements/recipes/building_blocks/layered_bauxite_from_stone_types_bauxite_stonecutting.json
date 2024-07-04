@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stone_types_bauxite": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "tfmg:stone_types/bauxite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tfmg:layered_bauxite_from_stone_types_bauxite_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_stone_types_bauxite",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tfmg:layered_bauxite_from_stone_types_bauxite_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

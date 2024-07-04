@@ -1,0 +1,11 @@
+{
+  "values": [
+    "tfmg:steel_scaffolding",
+    "tfmg:aluminum_scaffolding",
+    "tfmg:steel_ladder",
+    "tfmg:aluminum_ladder",
+    "tfmg:cast_iron_ladder",
+    "tfmg:lead_ladder",
+    "tfmg:nickel_ladder"
+  ]
+}

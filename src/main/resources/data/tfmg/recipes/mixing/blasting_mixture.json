@@ -1,0 +1,25 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:limesand"
+    },
+    {
+      "item": "create:crushed_raw_iron"
+    },
+    {
+      "item": "create:crushed_raw_iron"
+    },
+    {
+      "item": "create:crushed_raw_iron"
+    }
+  ],
+  "results": [
+    {
+      "item": "tfmg:blasting_mixture",
+      "count": 3
+    }
+  ]
+
+}

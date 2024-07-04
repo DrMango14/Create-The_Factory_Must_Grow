@@ -1,0 +1,24 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:sulfur_dust"
+    },
+    {
+      "item": "tfmg:nitrate_dust"
+    },
+    {
+      "fluid": "minecraft:water",
+      "nbt": {},
+      "amount": 500
+    }
+  ],
+  "results": [
+    {
+      "fluid": "tfmg:sulfuric_acid",
+      "nbt": {},
+      "amount": 500
+    }
+  ]
+}

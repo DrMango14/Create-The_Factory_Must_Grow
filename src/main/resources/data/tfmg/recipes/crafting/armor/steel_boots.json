@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "E E",
+    "E E",
+    "   "
+  ],
+  "key": {
+    "E": {
+      "tag": "forge:ingot/steel"
+    }
+  },
+  "result": {
+    "item": "tfmg:steel_boots",
+    "count": 1
+
+
+  }
+}

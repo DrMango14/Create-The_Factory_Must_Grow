@@ -1,0 +1,29 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "ICN",
+    "LLL"
+  ],
+  "key": {
+    "L": {
+      "tag": "forge:ingots/lead"
+    },
+    "C": {
+      "item": "tfmg:electric_casing"
+    },
+    "I": {
+      "item": "create:industrial_iron_block"
+    },
+    "N": {
+      "item": "tfmg:steel_mechanism"
+    }
+  },
+  "result": {
+    "item": "tfmg:resistor",
+    "count": 2
+
+
+  }
+}

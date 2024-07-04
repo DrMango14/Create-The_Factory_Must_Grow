@@ -1,0 +1,19 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+
+    {
+      "fluid": "tfmg:air",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "fluid": "tfmg:neon",
+      "nbt": {},
+      "amount": 1
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CSC",
+    "CSC",
+    "CSC"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:ingots/steel"
+    },
+    "C": {
+      "tag": "forge:wires/copper"
+    }
+  },
+  "result": {
+    "item": "tfmg:copper_coil",
+    "count": 2
+
+
+  }
+}

@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " M ",
+    "MAM",
+    " M "
+  ],
+  "key": {
+    "M": {
+      "item": "tfmg:thermite_powder"
+    },
+    "A": {
+      "item": "tfmg:plastic_sheet"
+    }
+  },
+  "result": {
+    "item": "tfmg:thermite_grenade"
+
+
+
+  }
+}

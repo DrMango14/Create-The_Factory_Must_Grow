@@ -1,0 +1,21 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "SSS",
+    "   "
+  ],
+  "key": {
+
+    "S": {
+      "tag": "forge:ingots/brass"
+    }
+  },
+  "result": {
+    "item": "tfmg:brass_pipe",
+    "count": 4
+
+
+  }
+}

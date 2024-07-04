@@ -1,0 +1,33 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    "REB",
+    " A "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:green_stained_glass_pane"
+    },
+    "R": {
+      "item": "minecraft:red_stained_glass_pane"
+    },
+    "B": {
+      "item": "minecraft:blue_stained_glass_pane"
+    },
+    "A": {
+      "item": "tfmg:plastic_sheet"
+    },
+    "E": {
+      "item": "tfmg:light_bulb"
+    }
+
+  },
+  "result": {
+    "item": "tfmg:rgb_light_bulb",
+    "count": 1
+
+
+  }
+}

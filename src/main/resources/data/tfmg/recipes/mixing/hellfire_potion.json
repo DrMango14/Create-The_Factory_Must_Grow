@@ -1,0 +1,30 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "amount": 100,
+      "fluid": "create:potion",
+      "nbt": {
+        "Bottle": "REGULAR",
+        "Potion": "minecraft:awkward"
+      }
+
+    },
+    {
+      "tag": "forge:ingots/lithium"
+    }
+
+  ],
+  "results": [
+    {
+      "amount": 100,
+      "fluid": "create:potion",
+      "nbt": {
+        "Bottle": "REGULAR",
+        "Potion": "tfmg:hellfire_potion"
+      }
+
+    }
+  ]
+}

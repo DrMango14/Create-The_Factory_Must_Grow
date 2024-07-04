@@ -1,0 +1,10 @@
+
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "create:crushed_raw_lead"
+  },
+  "result": "tfmg:lead_ingot",
+  "experience": 0.5,
+  "cookingtime": 100
+}

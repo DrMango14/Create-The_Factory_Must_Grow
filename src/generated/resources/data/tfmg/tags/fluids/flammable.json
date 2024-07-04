@@ -1,0 +1,24 @@
+{
+  "values": [
+    "tfmg:flowing_propane",
+    "tfmg:propane",
+    "tfmg:flowing_butane",
+    "tfmg:butane",
+    "tfmg:flowing_lpg",
+    "tfmg:lpg",
+    "tfmg:flowing_lubrication_oil",
+    "tfmg:lubrication_oil",
+    "tfmg:flowing_napalm",
+    "tfmg:napalm",
+    "tfmg:flowing_naphtha",
+    "tfmg:naphtha",
+    "tfmg:flowing_kerosene",
+    "tfmg:kerosene",
+    "tfmg:flowing_gasoline",
+    "tfmg:gasoline",
+    "tfmg:flowing_diesel",
+    "tfmg:diesel",
+    "tfmg:flowing_creosote",
+    "tfmg:creosote"
+  ]
+}

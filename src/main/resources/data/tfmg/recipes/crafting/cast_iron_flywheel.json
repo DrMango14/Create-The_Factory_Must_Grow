@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "create:shaft"
+    },
+    "C": {
+      "tag": "forge:ingots/cast_iron"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CAC",
+    "CCC"
+  ],
+  "result": {
+    "item": "tfmg:cast_iron_flywheel"
+  }
+}

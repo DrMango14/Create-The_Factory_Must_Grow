@@ -1,0 +1,29 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "tfmg:copper_sulfate"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:bone_meal",
+      "count": 4
+    },
+    {
+      "item": "minecraft:bone_meal",
+      "chance": 0.5,
+      "count": 3
+    },
+    {
+      "item": "minecraft:blue_dye",
+      "chance": 0.5
+    },
+    {
+      "item": "minecraft:cyan_dye",
+      "chance": 0.3
+    }
+  ],
+  "processingTime": 100
+
+}

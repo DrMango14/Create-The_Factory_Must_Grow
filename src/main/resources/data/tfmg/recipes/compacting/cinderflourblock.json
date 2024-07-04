@@ -1,0 +1,18 @@
+
+{
+  "type": "create:compacting",
+  "ingredients": [
+
+    {
+      "item": "create:cinder_flour",
+      "count": 2
+      }
+
+
+  ],
+  "results": [
+    {
+      "item": "tfmg:cinderflourblock"
+    }
+  ]
+}

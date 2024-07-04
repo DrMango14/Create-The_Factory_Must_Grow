@@ -1,0 +1,29 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NZN",
+    "NCN",
+    "NSN"
+  ],
+  "key": {
+    "N": {
+      "tag": "forge:ingots/lithium"
+    },
+    "C": {
+      "item": "tfmg:electric_casing"
+    },
+    "Z": {
+      "tag": "forge:ingots/lead"
+    },
+    "S": {
+      "item": "tfmg:sulfuric_acid_bucket"
+    }
+  },
+  "result": {
+    "item": "tfmg:accumulator",
+    "count": 2
+
+
+  }
+}

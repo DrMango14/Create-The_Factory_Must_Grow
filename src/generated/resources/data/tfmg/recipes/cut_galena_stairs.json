@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "cut_galena_stairs",
+  "key": {
+    "X": {
+      "item": "tfmg:cut_galena"
+    }
+  },
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "result": {
+    "count": 4,
+    "item": "tfmg:cut_galena_stairs"
+  },
+  "show_notification": true
+}

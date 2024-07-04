@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "tfmg:pumpjack_hammer_connector"
+  },
+  "result": "tfmg:large_pumpjack_hammer_connector",
+  "count": 1
+}

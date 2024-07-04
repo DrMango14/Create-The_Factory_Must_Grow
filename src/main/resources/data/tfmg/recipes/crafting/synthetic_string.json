@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "PPP",
+    "   "
+  ],
+  "key": {
+    "P": {
+      "item": "tfmg:plastic_sheet"
+    }
+  },
+  "result": {
+    "item": "tfmg:synthetic_string",
+    "count": 8
+
+
+  }
+}

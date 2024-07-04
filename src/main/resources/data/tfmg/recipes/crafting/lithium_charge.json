@@ -1,0 +1,22 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    " S ",
+    " C "
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:ingots/aluminum"
+    },
+    "C": {
+      "tag": "forge:ingots/lithium"
+    }
+  },
+  "result": {
+    "item": "tfmg:lithium_charge"
+
+
+  }
+}

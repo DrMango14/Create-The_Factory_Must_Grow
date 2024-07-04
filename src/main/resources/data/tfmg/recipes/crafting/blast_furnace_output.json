@@ -1,0 +1,26 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CFC",
+    "CPC"
+  ],
+  "key": {
+    "F": {
+      "item": "tfmg:fireproof_bricks"
+    },
+    "C": {
+      "tag": "forge:ingots/cast_iron"
+    },
+    "P": {
+      "item": "tfmg:cast_iron_pipe"
+    }
+  },
+  "result": {
+    "item": "tfmg:blast_furnace_output",
+    "count": 1
+
+
+  }
+}

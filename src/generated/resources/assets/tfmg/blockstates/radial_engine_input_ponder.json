@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tfmg:block/radial_engine_input_ponder/block"
+    }
+  }
+}

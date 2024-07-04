@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    " I ",
+    "   "
+  ],
+  "key": {
+    "I": {
+      "item": "create:industrial_iron_block"
+    },
+    "C": {
+      "tag": "forge:ingots/cast_iron"
+    }
+  },
+  "result": {
+    "item": "tfmg:coke_oven",
+    "count": 3
+
+
+  }
+}

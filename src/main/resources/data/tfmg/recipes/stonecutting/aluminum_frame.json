@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "tag": "forge:ingots/aluminum"
+  },
+  "result": "tfmg:aluminum_frame",
+  "count": 4
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "polished_cut_bauxite_stairs",
+  "key": {
+    "X": {
+      "item": "tfmg:polished_cut_bauxite"
+    }
+  },
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "result": {
+    "count": 4,
+    "item": "tfmg:polished_cut_bauxite_stairs"
+  },
+  "show_notification": true
+}

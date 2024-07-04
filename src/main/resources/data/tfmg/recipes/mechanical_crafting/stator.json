@@ -1,0 +1,31 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "MMM",
+    "CPC",
+    "RAR"
+  ],
+  "key": {
+
+
+    "C": {
+      "item": "tfmg:copper_cable"
+    },
+    "M": {
+      "item": "tfmg:magnetic_ingot"
+    },
+    "P": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "R": {
+      "tag": "forge:ingots/steel"
+    },
+    "A": {
+      "item": "tfmg:electric_casing"
+    }
+  },
+  "result": {
+    "item": "tfmg:stator"
+  },
+  "acceptMirrored": true
+}

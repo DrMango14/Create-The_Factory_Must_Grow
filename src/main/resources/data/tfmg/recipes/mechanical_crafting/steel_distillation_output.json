@@ -1,0 +1,23 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "HPH",
+    "PTP",
+    "HPH"
+  ],
+  "key": {
+    "T": {
+      "item": "tfmg:steel_fluid_tank"
+    },
+    "H": {
+      "item": "tfmg:heavy_plate"
+    },
+    "P": {
+      "item": "tfmg:steel_pipe"
+    }
+  },
+  "result": {
+    "item": "tfmg:steel_distillation_output"
+  },
+  "acceptMirrored": true
+}

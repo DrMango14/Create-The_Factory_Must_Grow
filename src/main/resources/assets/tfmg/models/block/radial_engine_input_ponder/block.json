@@ -1,0 +1,24 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"texture_size": [128, 128],
+	"textures": {
+		"0": "tfmg:block/radial_engine",
+		"particle": "tfmg:block/radial_engine"
+	},
+	"elements": [
+		{
+			"from": [6, 5, 6.01],
+			"to": [10, 9, 17.01],
+			"rotation": {"angle": 0, "axis": "x", "origin": [0, 7, 8]},
+			"faces": {
+				"north": {"uv": [6.75, 4.25, 7.25, 4.75], "rotation": 180, "texture": "#0"},
+				"east": {"uv": [6.125, 4.25, 6.625, 5.625], "rotation": 270, "texture": "#0"},
+				"south": {"uv": [6.75, 4.25, 7.25, 4.75], "texture": "#0"},
+				"west": {"uv": [6.125, 4.25, 6.625, 5.625], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [6.125, 4.25, 6.625, 5.625], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [6.125, 4.25, 6.625, 5.625], "texture": "#0"}
+			}
+		}
+	]
+}

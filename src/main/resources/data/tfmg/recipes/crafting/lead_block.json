@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SSS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "tfmg:lead_ingot"
+    }
+  },
+  "result": {
+    "item": "tfmg:lead_block",
+    "count": 1
+
+
+  }
+}

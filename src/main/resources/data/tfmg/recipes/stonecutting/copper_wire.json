@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "tag": "forge:ingots/copper"
+  },
+  "result": "tfmg:copper_wire",
+  "count": 2
+}

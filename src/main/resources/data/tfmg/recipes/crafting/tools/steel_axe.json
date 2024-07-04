@@ -1,0 +1,24 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " AA",
+    " WA",
+    " W "
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:stick"
+    },
+    "A": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "tfmg:steel_axe",
+    "count": 1
+
+
+  },
+  "acceptMirrored": true
+}

@@ -1,0 +1,20 @@
+{
+  "values": [
+    "tfmg:flowing_air",
+    "tfmg:air",
+    "tfmg:flowing_carbon_dioxide",
+    "tfmg:carbon_dioxide",
+    "tfmg:flowing_ethylene",
+    "tfmg:ethylene",
+    "tfmg:flowing_propylene",
+    "tfmg:propylene",
+    "tfmg:flowing_propane",
+    "tfmg:propane",
+    "tfmg:flowing_butane",
+    "tfmg:butane",
+    "tfmg:flowing_lpg",
+    "tfmg:lpg",
+    "tfmg:flowing_neon",
+    "tfmg:neon"
+  ]
+}

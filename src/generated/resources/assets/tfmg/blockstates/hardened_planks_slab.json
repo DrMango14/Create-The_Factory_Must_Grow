@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "tfmg:block/hardened_planks_bottom"
+    },
+    "type=double": {
+      "model": "tfmg:block/hardened_planks"
+    },
+    "type=top": {
+      "model": "tfmg:block/hardened_planks_top"
+    }
+  }
+}

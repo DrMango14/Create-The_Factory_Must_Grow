@@ -1,0 +1,35 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"texture_size": [32, 32],
+	"textures": {
+		"1": "tfmg:block/casting_spout"
+	},
+	"elements": [
+
+		{
+			"from": [5, -7, 5],
+			"to": [11, -5, 11],
+			"faces": {
+				"north": {"uv": [8, 4.5, 11, 5.5], "texture": "#1"},
+				"east": {"uv": [8, 4.5, 11, 5.5], "texture": "#1"},
+				"south": {"uv": [8, 4.5, 11, 5.5], "texture": "#1"},
+				"west": {"uv": [8, 4.5, 11, 5.5], "texture": "#1"},
+				"up": {"uv": [8, 5.5, 11, 8.5], "texture": "#1"},
+				"down": {"uv": [8, 5.5, 11, 8.5], "texture": "#1"}
+			}
+		},
+		{
+			"from": [6, -5, 6],
+			"to": [10, -2, 10],
+			"faces": {
+				"north": {"uv": [11.5, 0.5, 13.5, 2], "texture": "#1"},
+				"east": {"uv": [11.5, 0.5, 13.5, 2], "texture": "#1"},
+				"south": {"uv": [11.5, 0.5, 13.5, 2], "texture": "#1"},
+				"west": {"uv": [11.5, 0.5, 13.5, 2], "texture": "#1"},
+				"up": {"uv": [13.5, 0, 15.5, 2], "texture": "#1"},
+				"down": {"uv": [13.5, 0, 15.5, 2], "texture": "#1"}
+			}
+		}
+	]
+}

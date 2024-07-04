@@ -1,0 +1,39 @@
+{
+  "type": "tfmg:distillation",
+  "ingredients": [
+
+    {
+      "fluid": "tfmg:crude_oil",
+      "nbt": {},
+      "amount": 360
+    }
+  ],
+  "results": [
+    {
+      "fluid": "tfmg:heavy_oil",
+      "amount": 80
+    },
+    {
+      "fluid": "tfmg:diesel",
+      "amount": 60
+    },
+    {
+      "fluid": "tfmg:kerosene",
+      "amount": 40
+    },
+    {
+      "fluid": "tfmg:naphtha",
+      "amount": 40
+    },
+    {
+      "fluid": "tfmg:gasoline",
+      "amount": 80
+    },
+    {
+      "fluid": "tfmg:lpg",
+      "amount": 60
+    }
+  ]
+
+
+}

@@ -1,0 +1,26 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FTF",
+    "PPP",
+    "FFF"
+  ],
+  "key": {
+    "P": {
+      "item": "tfmg:brass_pipe"
+    },
+    "F": {
+      "item": "tfmg:fireproof_brick"
+    },
+    "T": {
+      "item": "tfmg:steel_fluid_tank"
+    }
+  },
+  "result": {
+    "item": "tfmg:firebox",
+    "count": 1
+
+
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "tfmg:plastic_sheet"
+    }
+  ],
+  "results": [
+    {
+      "item": "tfmg:synthetic_leather"
+    }
+  ]
+}

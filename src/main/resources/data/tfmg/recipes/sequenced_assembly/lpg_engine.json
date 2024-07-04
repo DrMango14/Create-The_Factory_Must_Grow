@@ -1,0 +1,91 @@
+
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "tfmg:engine_base"
+  },
+  "transitionalItem": {
+    "item": "tfmg:unfinished_lpg_engine"
+  },
+  "sequence": [
+
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_lpg_engine"
+        },
+        {
+          "item": "tfmg:engine_chamber"
+        }
+      ],
+      "results": [
+        {
+          "item": "tfmg:unfinished_lpg_engine"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_lpg_engine"
+        },
+        {
+          "item": "tfmg:screw"
+        }
+      ],
+      "results": [
+        {
+          "item": "tfmg:unfinished_lpg_engine"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_lpg_engine"
+        },
+        {
+          "item": "tfmg:screwdriver"
+        }
+      ],
+      "results": [
+        {
+          "item": "tfmg:unfinished_lpg_engine"
+        }
+      ]
+    },
+
+
+
+
+
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_lpg_engine"
+        },
+        {
+          "fluid": "tfmg:lubrication_oil",
+          "nbt": {},
+          "amount": 1000
+        }
+      ],
+      "results": [
+        {
+          "item": "tfmg:unfinished_lpg_engine"
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "item": "tfmg:lpg_engine",
+      "count": 2
+    }
+  ],
+  "loops": 8
+}

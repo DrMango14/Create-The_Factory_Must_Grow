@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "tfmg:block/radial_engine_input",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "tfmg:block/radial_engine_input",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/radial_engine_input",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "tfmg:block/radial_engine_input",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "tfmg:block/radial_engine_input"
+    },
+    "facing=west": {
+      "model": "tfmg:block/radial_engine_input",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

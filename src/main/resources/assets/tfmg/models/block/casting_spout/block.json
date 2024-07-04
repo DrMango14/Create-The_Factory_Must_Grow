@@ -1,0 +1,47 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"texture_size": [32, 32],
+	"textures": {
+		"1": "tfmg:block/casting_spout",
+		"particle": "create:block/industrial_iron_block"
+	},
+	"elements": [
+		{
+			"from": [1, 2, 1],
+			"to": [15, 14, 15],
+			"faces": {
+				"north": {"uv": [0, 1, 7, 7], "texture": "#1"},
+				"east": {"uv": [0, 1, 7, 7], "texture": "#1"},
+				"south": {"uv": [0, 1, 7, 7], "texture": "#1"},
+				"west": {"uv": [0, 1, 7, 7], "texture": "#1"},
+				"up": {"uv": [0, 8.5, 7, 15.5], "texture": "#1"},
+				"down": {"uv": [8, 8.5, 15, 15.5], "texture": "#1"}
+			}
+		},
+		{
+			"from": [2, 0, 2],
+			"to": [14, 2, 14],
+			"faces": {
+				"north": {"uv": [0.5, 7, 6.5, 8], "texture": "#1"},
+				"east": {"uv": [0.5, 7, 6.5, 8], "texture": "#1"},
+				"south": {"uv": [0.5, 7, 6.5, 8], "texture": "#1"},
+				"west": {"uv": [0.5, 7, 6.5, 8], "texture": "#1"},
+				"up": {"uv": [8.5, 9, 14.5, 15], "texture": "#1"},
+				"down": {"uv": [8.5, 9, 14.5, 15], "texture": "#1"}
+			}
+		},
+		{
+			"from": [2, 14, 2],
+			"to": [14, 16, 14],
+			"faces": {
+				"north": {"uv": [0.5, 0, 6.5, 1], "texture": "#1"},
+				"east": {"uv": [0.5, 0, 6.5, 1], "texture": "#1"},
+				"south": {"uv": [0.5, 0, 6.5, 1], "texture": "#1"},
+				"west": {"uv": [0.5, 0, 6.5, 1], "texture": "#1"},
+				"up": {"uv": [0.5, 9, 6.5, 15], "texture": "#1"},
+				"down": {"uv": [0.5, 9, 6.5, 15], "texture": "#1"}
+			}
+		}
+	]
+}

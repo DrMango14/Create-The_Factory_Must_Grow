@@ -1,0 +1,21 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:concrete_mixture"
+    },
+    {
+      "fluid": "minecraft:water",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "fluid": "tfmg:liquid_concrete",
+      "nbt": {},
+      "amount": 1000
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create:cogwheel"
+    },
+    {
+      "item": "tfmg:aluminum_pipe"
+    }
+  ],
+  "result": {
+    "item": "tfmg:aluminum_mechanical_pump"
+  }
+}

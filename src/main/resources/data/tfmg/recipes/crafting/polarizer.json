@@ -1,0 +1,32 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C C",
+    "ESE",
+    "WKW"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:ingots/steel"
+    },
+    "K": {
+      "item": "tfmg:electric_casing"
+    },
+    "W": {
+      "tag": "forge:wires/copper"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "E": {
+      "item": "tfmg:capacitor_"
+    }
+  },
+  "result": {
+    "item": "tfmg:polarizer",
+    "count": 1
+
+
+  }
+}

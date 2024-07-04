@@ -1,0 +1,6 @@
+{
+	"parent": "tfmg:block/rotor/rotor",
+	"loader": "forge:obj",
+	"flip_v": true,
+	"model": "tfmg:models/block/rotor/item.obj"
+}

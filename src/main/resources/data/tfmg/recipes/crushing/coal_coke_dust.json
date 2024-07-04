@@ -1,0 +1,15 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "tfmg:coal_coke"
+    }
+  ],
+  "results": [
+    {
+      "item": "tfmg:coal_coke_dust"
+    }
+  ],
+  "processingTime": 250
+
+}

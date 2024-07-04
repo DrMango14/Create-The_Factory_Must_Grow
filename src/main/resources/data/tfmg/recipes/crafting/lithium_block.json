@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SSS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "tfmg:lithium_ingot"
+    }
+  },
+  "result": {
+    "item": "tfmg:lithium_block",
+    "count": 1
+
+
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "variants": {
+    "facing=down,wide=false": {
+      "model": "tfmg:block/pumpjack_hammer/block",
+      "y": 180
+    },
+    "facing=down,wide=true": {
+      "model": "tfmg:block/pumpjack_hammer/block_wide",
+      "y": 180
+    },
+    "facing=east,wide=false": {
+      "model": "tfmg:block/pumpjack_hammer/block"
+    },
+    "facing=east,wide=true": {
+      "model": "tfmg:block/pumpjack_hammer/block_wide"
+    },
+    "facing=north,wide=false": {
+      "model": "tfmg:block/pumpjack_hammer/block",
+      "y": 270
+    },
+    "facing=north,wide=true": {
+      "model": "tfmg:block/pumpjack_hammer/block_wide",
+      "y": 270
+    },
+    "facing=south,wide=false": {
+      "model": "tfmg:block/pumpjack_hammer/block",
+      "y": 90
+    },
+    "facing=south,wide=true": {
+      "model": "tfmg:block/pumpjack_hammer/block_wide",
+      "y": 90
+    },
+    "facing=up,wide=false": {
+      "model": "tfmg:block/pumpjack_hammer/block",
+      "y": 180
+    },
+    "facing=up,wide=true": {
+      "model": "tfmg:block/pumpjack_hammer/block_wide",
+      "y": 180
+    },
+    "facing=west,wide=false": {
+      "model": "tfmg:block/pumpjack_hammer/block",
+      "y": 180
+    },
+    "facing=west,wide=true": {
+      "model": "tfmg:block/pumpjack_hammer/block_wide",
+      "y": 180
+    }
+  }
+}

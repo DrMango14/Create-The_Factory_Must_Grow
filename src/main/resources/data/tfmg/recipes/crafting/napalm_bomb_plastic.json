@@ -1,0 +1,24 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "NNN",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "tfmg:plastic_sheet"
+
+    },
+    "N": {
+      "item": "tfmg:napalm_bucket"
+    }
+  },
+  "result": {
+    "item": "tfmg:napalm_bomb",
+    "count": 1
+
+
+  }
+}

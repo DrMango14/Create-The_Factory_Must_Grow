@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "E E",
+    "E E"
+  ],
+  "key": {
+    "E": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "tfmg:steel_leggings",
+    "count": 1
+
+
+  }
+}

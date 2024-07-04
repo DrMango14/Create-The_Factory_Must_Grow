@@ -1,0 +1,27 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:cement"
+    },
+    {
+      "item": "tfmg:slag"
+    },
+    {
+      "item": "minecraft:gravel"
+    },
+    {
+      "fluid": "minecraft:water",
+      "nbt": {},
+      "amount": 500
+    }
+  ],
+  "results": [
+    {
+      "fluid": "tfmg:liquid_concrete",
+      "nbt": {},
+      "amount": 1500
+    }
+  ]
+}

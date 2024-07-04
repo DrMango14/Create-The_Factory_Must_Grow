@@ -1,0 +1,30 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    "WEW",
+    " A "
+  ],
+  "key": {
+    "G": {
+      "item": "tfmg:lead_glass"
+    },
+    "A": {
+      "item": "tfmg:plastic_sheet"
+    },
+    "E": {
+      "item": "tfmg:rgb_light_bulb"
+    },
+    "W": {
+      "tag": "forge:wires/aluminum"
+    }
+
+  },
+  "result": {
+    "item": "tfmg:epic_party_light_bulb",
+    "count": 1
+
+
+  }
+}

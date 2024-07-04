@@ -1,0 +1,35 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MKP",
+    "SCI",
+    "MKP"
+  ],
+  "key": {
+    "S": {
+      "item": "create:shaft"
+    },
+    "C": {
+      "item": "tfmg:electric_casing"
+    },
+    "I": {
+      "item": "create:industrial_iron_block"
+    },
+    "P": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "M": {
+      "item": "tfmg:magnetic_ingot"
+    },
+    "K": {
+      "item": "tfmg:copper_cable"
+    }
+  },
+  "result": {
+    "item": "tfmg:electric_motor",
+    "count": 1
+
+
+  }
+}

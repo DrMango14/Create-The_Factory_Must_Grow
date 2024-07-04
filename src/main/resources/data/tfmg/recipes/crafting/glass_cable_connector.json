@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "GAG",
+    "GAG"
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:ingots/aluminum"
+    },
+    "g": {
+      "item": "create:framed_glass"
+    }
+  },
+  "result": {
+    "item": "tfmg:flass_cable_connector",
+    "count": 4
+
+
+  }
+}

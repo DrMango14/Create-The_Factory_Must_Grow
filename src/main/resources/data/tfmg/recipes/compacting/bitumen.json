@@ -1,0 +1,18 @@
+
+{
+  "type": "create:compacting",
+  "ingredients": [
+
+    {
+      "fluid": "tfmg:heavy_oil",
+      "amount": 10
+      }
+
+
+  ],
+  "results": [
+    {
+      "item": "tfmg:bitumen"
+    }
+  ]
+}

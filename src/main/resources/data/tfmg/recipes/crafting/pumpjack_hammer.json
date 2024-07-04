@@ -1,0 +1,26 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "ATA",
+    "STS"
+  ],
+  "key": {
+    "S": {
+      "item": "tfmg:screw"
+    },
+    "T": {
+      "item": "tfmg:steel_truss"
+    },
+    "A": {
+      "tag": "forge:ingots/aluminum"
+    }
+  },
+  "result": {
+    "item": "tfmg:pumpjack_hammer",
+    "count": 1
+
+
+  }
+}

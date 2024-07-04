@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "tag": "forge:ingots/nickel"
+  },
+  "result": "tfmg:nickel_frame",
+  "count": 4
+}

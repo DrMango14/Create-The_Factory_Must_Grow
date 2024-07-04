@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    " A ",
+    " C "
+  ],
+  "key": {
+    "A": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "C": {
+      "item": "tfmg:copper_cable"
+    }
+  },
+  "result": {
+    "item": "tfmg:heavy_cable_hub",
+    "count": 2
+
+
+  }
+}

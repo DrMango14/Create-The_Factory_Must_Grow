@@ -1,0 +1,22 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    " N ",
+    "   "
+  ],
+  "key": {
+    "G": {
+      "item": "create:framed_glass"
+    },
+    "N": {
+      "item": "tfmg:neon_bucket"
+    }
+  },
+  "result": {
+    "item": "tfmg:neon_tube"
+
+
+  }
+}

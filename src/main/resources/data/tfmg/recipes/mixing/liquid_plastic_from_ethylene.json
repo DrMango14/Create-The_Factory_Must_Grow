@@ -1,0 +1,20 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+
+    {
+      "fluid": "tfmg:ethylene",
+      "amount": 500
+    }
+  ],
+  "results": [
+    {
+      "fluid": "tfmg:liquid_plastic",
+      "amount": 500
+
+    }
+  ]
+
+
+}

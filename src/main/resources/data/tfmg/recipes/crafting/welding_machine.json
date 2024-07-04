@@ -1,0 +1,35 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PSP",
+    "KCK",
+    "MRM"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:ingots/steel"
+    },
+    "P": {
+      "item": "tfmg:plastic_sheet"
+    },
+    "C": {
+      "item": "tfmg:electric_casing"
+    },
+    "K": {
+      "item": "tfmg:copper_cable"
+    },
+    "R": {
+      "item": "tfmg:rebar"
+    },
+    "M": {
+      "item": "tfmg:steel_mechanism"
+    }
+  },
+  "result": {
+    "item": "tfmg:welding_machine",
+    "count": 1
+
+
+  }
+}

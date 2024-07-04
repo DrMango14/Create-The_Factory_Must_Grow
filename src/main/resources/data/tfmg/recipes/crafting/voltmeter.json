@@ -1,0 +1,24 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    " K ",
+    "   "
+  ],
+  "key": {
+    "K": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "C": {
+      "item": "minecraft:compass"
+    }
+  },
+  "result": {
+    "item": "tfmg:voltmeter",
+    "count": 4
+
+
+
+  }
+}

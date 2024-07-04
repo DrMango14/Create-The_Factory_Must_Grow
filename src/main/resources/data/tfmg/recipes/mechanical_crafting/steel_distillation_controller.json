@@ -1,0 +1,33 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "HIH",
+    "PDP",
+    "ECE"
+  ],
+  "key": {
+    "P": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "I": {
+      "item": "tfmg:industrial_pipe"
+    },
+    "H": {
+      "item": "tfmg:heavy_plate"
+    },
+  "C": {
+    "item": "tfmg:heavy_machinery_casing"
+  },
+    "D": {
+      "item": "create:display_board"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    }
+
+  },
+  "result": {
+    "item": "tfmg:steel_distillation_controller"
+  },
+  "acceptMirrored": true
+}

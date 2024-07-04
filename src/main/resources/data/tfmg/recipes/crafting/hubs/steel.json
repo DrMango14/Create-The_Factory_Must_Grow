@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "AAA",
+    " C "
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:ingots/steel"
+    },
+    "C": {
+      "item": "tfmg:copper_cable"
+    }
+  },
+  "result": {
+    "item": "tfmg:steel_cable_hub",
+    "count": 2
+
+
+  }
+}

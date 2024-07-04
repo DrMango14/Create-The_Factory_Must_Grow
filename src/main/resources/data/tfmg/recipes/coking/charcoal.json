@@ -1,0 +1,22 @@
+{
+  "type": "tfmg:coking",
+  "ingredients": [
+    {
+      "count": 1,
+      "item": "minecraft:coal"
+    }
+  ],
+  "processingTime": 400,
+  "results": [
+    {
+      "count": 1,
+      "item": "minecraft:charcoal"
+    }
+  ,
+    {
+      "fluid": "tfmg:creosote",
+      "amount": 1
+    }
+
+  ]
+}

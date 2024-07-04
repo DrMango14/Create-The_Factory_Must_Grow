@@ -1,0 +1,28 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "IIPPH",
+    " ATAH"
+  ],
+  "key": {
+    "P": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "A": {
+      "item": "tfmg:plastic_sheet"
+    },
+    "I": {
+      "item": "tfmg:steel_pipe"
+    },
+    "H": {
+      "item": "tfmg:heavy_plate"
+    },
+    "T": {
+      "item": "tfmg:steel_fluid_tank"
+    }
+  },
+  "result": {
+    "item": "tfmg:flamethrower"
+  },
+  "acceptMirrored": true
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "tag": "tfmg:stone_types/galena"
+  },
+  "result": "tfmg:cut_galena_slab"
+}

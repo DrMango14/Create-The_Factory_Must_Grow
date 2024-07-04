@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "cut_bauxite_brick_stairs",
+  "key": {
+    "X": {
+      "item": "tfmg:cut_bauxite_bricks"
+    }
+  },
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "result": {
+    "count": 4,
+    "item": "tfmg:cut_bauxite_brick_stairs"
+  },
+  "show_notification": true
+}

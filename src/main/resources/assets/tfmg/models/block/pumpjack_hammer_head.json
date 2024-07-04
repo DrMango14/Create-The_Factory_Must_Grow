@@ -1,0 +1,29 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"0": "tfmg:block/pumpjack_hammer_head",
+		"particle": "tfmg:block/pumpjack_hammer_head"
+	},
+	"elements": [
+		{
+			"from": [1, -8, 2],
+			"to": [15, 20, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 8, 14], "texture": "#0"},
+				"east": {"uv": [0, 0, 8, 14], "texture": "#0"},
+				"south": {"uv": [0, 0, 8, 14], "texture": "#0"},
+				"west": {"uv": [0, 0, 8, 14], "texture": "#0"},
+				"up": {"uv": [8, 0, 15, 7], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [8, 0, 15, 7], "rotation": 270, "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"gui": {
+			"rotation": [18, 28, 0],
+			"translation": [-0.25, 1, 0],
+			"scale": [0.4, 0.4, 0.4]
+		}
+	}
+}

@@ -1,0 +1,24 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    " B ",
+    " S "
+  ],
+  "key": {
+    "S": {
+        "tag": "forge:ingots/steel"
+
+    },
+    "B": {
+      "item": "minecraft:barrel"
+    }
+  },
+  "result": {
+    "item": "tfmg:steel_fluid_tank",
+    "count": 2
+
+
+  }
+}

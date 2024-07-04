@@ -1,0 +1,21 @@
+{
+  "type": "tfmg:industrial_blasting",
+  "ingredients": [
+    {
+      "count": 1,
+      "item": "tfmg:blasting_mixture"
+    }
+  ],
+  "processingTime": 200,
+  "results": [
+    {
+      "fluid": "tfmg:molten_steel",
+      "amount": 111
+    },
+    {
+      "fluid": "tfmg:molten_slag",
+      "amount": 75
+    }
+
+  ]
+}

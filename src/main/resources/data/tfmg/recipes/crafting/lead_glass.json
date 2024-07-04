@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "MAM",
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "item": "create:framed_glass"
+    },
+    "A": {
+      "tag": "forge:ingots/lead"
+    }
+  },
+  "result": {
+    "item": "tfmg:lead_glass",
+    "count": 8
+
+
+  }
+}

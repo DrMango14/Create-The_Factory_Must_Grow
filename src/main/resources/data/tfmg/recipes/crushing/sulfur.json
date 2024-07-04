@@ -1,0 +1,19 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "tfmg:sulfur"
+    }
+  ],
+  "results": [
+    {
+      "item": "tfmg:sulfur_dust"
+    },
+    {
+      "item": "tfmg:sulfur_dust",
+      "chance": 0.1
+    }
+  ],
+  "processingTime": 250
+
+}

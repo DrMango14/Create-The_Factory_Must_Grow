@@ -1,0 +1,10 @@
+
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "tfmg:fireclay_ball"
+  },
+  "result": "tfmg:fireproof_brick",
+  "experience": 0.5,
+  "cookingtime": 200
+}

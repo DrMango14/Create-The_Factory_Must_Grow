@@ -1,0 +1,17 @@
+
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "tfmg:concrete"
+    },
+    {
+      "item": "minecraft:brown_dye"
+    }
+  ],
+  "results": [
+    {
+      "item": "tfmg:brown_concrete"
+    }
+  ]
+}

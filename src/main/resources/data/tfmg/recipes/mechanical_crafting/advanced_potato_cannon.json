@@ -1,0 +1,25 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "IIPPH",
+    " AH H"
+  ],
+  "key": {
+    "P": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "A": {
+      "item": "tfmg:plastic_sheet"
+    },
+    "I": {
+      "item": "tfmg:steel_pipe"
+    },
+    "H": {
+      "item": "tfmg:heavy_plate"
+    }
+  },
+  "result": {
+    "item": "tfmg:advanced_potato_cannon"
+  },
+  "acceptMirrored": true
+}

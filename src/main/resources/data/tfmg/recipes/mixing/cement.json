@@ -1,0 +1,20 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:limesand"
+    },
+    {
+      "item": "minecraft:clay_ball"
+    }
+
+  ],
+  "results": [
+    {
+      "count": 4,
+      "item": "tfmg:cement"
+
+    }
+  ]
+}

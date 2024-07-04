@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "tfmg:block/cyan_concrete",
+    "side": "tfmg:block/cyan_concrete",
+    "top": "tfmg:block/cyan_concrete"
+  }
+}

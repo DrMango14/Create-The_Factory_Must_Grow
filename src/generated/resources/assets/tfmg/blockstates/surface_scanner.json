@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfmg:block/surface_scanner/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/surface_scanner/block"
+    },
+    "facing=south": {
+      "model": "tfmg:block/surface_scanner/block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfmg:block/surface_scanner/block",
+      "y": 270
+    }
+  }
+}

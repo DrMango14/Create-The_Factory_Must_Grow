@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "tfmg:block/flarestack/block"
+    },
+    "lit=true": {
+      "model": "tfmg:block/flarestack/block_lit"
+    }
+  }
+}

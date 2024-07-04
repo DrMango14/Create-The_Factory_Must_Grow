@@ -1,0 +1,29 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NGN",
+    "NSN",
+    "NCN"
+  ],
+  "key": {
+    "N": {
+      "tag": "forge:ingots/lead"
+    },
+    "C": {
+      "item": "tfmg:electric_casing"
+    },
+    "G": {
+      "item": "tfmg:magnetic_ingot"
+    },
+    "S": {
+      "item": "tfmg:sulfuric_acid_bucket"
+    }
+  },
+  "result": {
+    "item": "tfmg:battery",
+    "count": 2
+
+
+  }
+}

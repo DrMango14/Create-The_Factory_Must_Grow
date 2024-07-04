@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfmg:block/resistor/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/resistor/block"
+    },
+    "facing=south": {
+      "model": "tfmg:block/resistor/block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfmg:block/resistor/block",
+      "y": 270
+    }
+  }
+}

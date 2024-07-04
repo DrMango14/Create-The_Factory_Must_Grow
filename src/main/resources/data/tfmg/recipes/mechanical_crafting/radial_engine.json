@@ -1,0 +1,38 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "  M  ",
+    " MLM ",
+    "MECPM",
+    " MSM ",
+    "  M  "
+  ],
+  "key": {
+
+    "L": {
+      "item": "tfmg:lubrication_oil_bucket"
+    },
+
+    "C": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "M": {
+      "item": "tfmg:engine_chamber"
+    },
+    "S": {
+      "item": "create:shaft"
+    },
+    "P": {
+      "item": "tfmg:steel_pipe"
+    },
+    "E": {
+      "item": "tfmg:exhaust"
+    }
+
+
+  },
+  "result": {
+    "item": "tfmg:radial_engine"
+  },
+  "acceptMirrored": true
+}

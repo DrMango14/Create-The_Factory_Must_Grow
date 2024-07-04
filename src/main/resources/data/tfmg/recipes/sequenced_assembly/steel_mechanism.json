@@ -1,0 +1,100 @@
+
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "tfmg:heavy_plate"
+  },
+  "transitionalItem": {
+    "item": "tfmg:unfinished_steel_mechanism"
+  },
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_steel_mechanism"
+        },
+        {
+            "tag": "forge:ingots/steel"
+        }
+      ],
+      "results": [
+        {
+          "item": "tfmg:unfinished_steel_mechanism"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_steel_mechanism"
+        },
+        {
+          "tag": "forge:ingots/aluminum"
+        }
+      ],
+      "results": [
+        {
+          "item": "tfmg:unfinished_steel_mechanism"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_steel_mechanism"
+        },
+        {
+          "item": "tfmg:screw"
+        }
+      ],
+      "results": [
+        {
+          "item": "tfmg:unfinished_steel_mechanism"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_steel_mechanism"
+        },
+        {
+          "item": "tfmg:screwdriver"
+        }
+      ],
+      "results": [
+        {
+          "item": "tfmg:unfinished_steel_mechanism"
+        }
+      ]
+    }
+
+  ],
+  "results": [
+    {
+      "chance": 120.0,
+      "item": "tfmg:steel_mechanism"
+    },
+    {
+      "chance": 8.0,
+      "item": "tfmg:heavy_plate"
+    },
+    {
+      "chance": 8.0,
+      "item": "tfmg:steel_ingot"
+    },
+    {
+      "chance": 5.0,
+      "item": "tfmg:aluminum_ingot"
+    },
+    {
+      "chance": 3.0,
+      "item": "tfmg:industrial_pipe"
+    }
+  ],
+  "loops": 1
+}

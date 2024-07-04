@@ -1,0 +1,28 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "APA",
+    "WPW"
+  ],
+  "key": {
+
+
+    "W": {
+      "tag": "forge:wires/copper"
+    },
+    "A": {
+      "tag": "forge:ingots/nickel"
+    },
+    "P": {
+      "item": "tfmg:plastic_sheet"
+    }
+  },
+  "result": {
+    "item": "tfmg:capacitor_",
+    "count": 2
+
+
+  }
+}

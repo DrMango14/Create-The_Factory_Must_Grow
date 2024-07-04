@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    " B ",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "tfmg:steel_block"
+    },
+    "P": {
+      "item": "tfmg:heavy_plate"
+    }
+  },
+  "result": {
+    "item": "tfmg:pumpjack_hammer_head",
+    "count": 1
+
+
+  }
+}

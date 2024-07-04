@@ -1,0 +1,21 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "fluid": "tfmg:sulfuric_acid",
+      "amount": 500
+    },
+    {
+      "tag": "forge:ingots/copper"
+    }
+
+  ],
+  "results": [
+    {
+      "count": 1,
+      "item": "tfmg:copper_sulfate"
+
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "EME",
+    " A "
+  ],
+  "key": {
+    "M": {
+      "item": "tfmg:copper_coil"
+    },
+    "A": {
+      "tag": "forge:ingots/aluminum"
+    },
+    "E": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "tfmg:converter"
+
+
+
+  }
+}

@@ -1,0 +1,33 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "KWK",
+    "ECE",
+    "RWR"
+  ],
+  "key": {
+    "C": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "W": {
+      "item": "tfmg:copper_cable"
+    },
+    "K": {
+      "item": "tfmg:capacitor_"
+    },
+    "R": {
+      "item": "tfmg:resistor_"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    }
+
+  },
+  "result": {
+    "item": "tfmg:electric_casing",
+    "count": 1
+
+
+  }
+}

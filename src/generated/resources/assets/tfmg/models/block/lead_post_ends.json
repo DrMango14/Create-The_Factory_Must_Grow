@@ -1,0 +1,8 @@
+{
+  "parent": "tfmg:block/bars/post_ends",
+  "textures": {
+    "bars": "tfmg:block/bars/lead_bars",
+    "edge": "tfmg:block/bars/lead_bars_edge",
+    "particle": "tfmg:block/bars/lead_bars"
+  }
+}

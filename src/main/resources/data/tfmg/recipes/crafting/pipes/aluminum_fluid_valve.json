@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:plates/iron"
+    },
+    {
+      "item": "tfmg:aluminum_pipe"
+    }
+  ],
+  "result": {
+    "item": "tfmg:aluminum_fluid_valve"
+  }
+}

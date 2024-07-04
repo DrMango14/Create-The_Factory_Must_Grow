@@ -1,0 +1,29 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "tfmg:block/low_grade_fuel_engine/block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=east": {
+      "model": "tfmg:block/low_grade_fuel_engine/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/low_grade_fuel_engine/block"
+    },
+    "facing=south": {
+      "model": "tfmg:block/low_grade_fuel_engine/block",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "tfmg:block/low_grade_fuel_engine/block",
+      "x": 270,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfmg:block/low_grade_fuel_engine/block",
+      "y": 270
+    }
+  }
+}

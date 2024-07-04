@@ -1,0 +1,20 @@
+
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:coal"
+    }
+  ],
+  "results": [
+    {
+      "item": "tfmg:cast_iron_ingot"
+
+    }
+  ],
+  "heatRequirement": "heated",
+  "processingTime": 100
+}

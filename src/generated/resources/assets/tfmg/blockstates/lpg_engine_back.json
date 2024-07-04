@@ -1,0 +1,29 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "tfmg:block/lpg_engine_back/block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=east": {
+      "model": "tfmg:block/lpg_engine_back/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/lpg_engine_back/block"
+    },
+    "facing=south": {
+      "model": "tfmg:block/lpg_engine_back/block",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "tfmg:block/lpg_engine_back/block",
+      "x": 270,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfmg:block/lpg_engine_back/block",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,32 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MEM",
+    "MIM",
+    "SUS"
+  ],
+  "key": {
+    "S": {
+      "item": "tfmg:rebar"
+    },
+    "M": {
+      "item": "tfmg:engine_chamber"
+    },
+    "U": {
+      "item": "tfmg:steel_pipe"
+    },
+    "I": {
+      "item": "tfmg:engine_base"
+    },
+    "E": {
+      "item": "tfmg:exhaust"
+    }
+  },
+  "result": {
+    "item": "tfmg:compact_engine",
+    "count": 1
+
+
+  }
+}

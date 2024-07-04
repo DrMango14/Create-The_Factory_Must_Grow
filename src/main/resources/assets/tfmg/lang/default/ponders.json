@@ -1,0 +1,93 @@
+{
+
+  "tfmg.ponder.small_engines.text_1": "To create a small engine, place the front and back parts adjacent to eachother",
+  "tfmg.ponder.small_engines.text_2": "Fuel is inputted into the front part, and exhaust must be removed from the back part using pipes and an exhaust block",
+  "tfmg.ponder.small_engines.text_3": "Applying a redstone signal to the front part starts the engine",
+  "tfmg.ponder.small_engines.text_4": "Small engines include LPG, kerosene and gasoline engines",
+
+  "tfmg.ponder.diesel_engine.text_1": "Diesel Engines are assembled by placing a shaft infront of a Diesel Engine block",
+  "tfmg.ponder.diesel_engine.text_2": "The engine produces exhaust gas which has to be removed with pipes and an exhaust block",
+  "tfmg.ponder.diesel_engine.text_3": "Air is needed for the engine to run, so an Air Intake is required",
+
+  "tfmg.ponder.diesel_engine_expansion.text_1": "Diesel Engine Expansions can give a Diesel Engine two new input slots, for lubrication and radiator fluids",
+
+
+  "tfmg.ponder.surface_scanner.text_1": "The Surface Scanner is used to locate crude oil deposits",
+  "tfmg.ponder.surface_scanner.text_2": "Providing the machine with rotational power makes it scan for the nearest deposit",
+  "tfmg.ponder.surface_scanner.text_3": "If a deposit is found, the compass will point towards its location",
+
+
+  "tfmg.ponder.pumpjack.text_1": "To start extracting Oil, you must first build a pipeline on top of a deposit using Industrial Pipes",
+  "tfmg.ponder.pumpjack.text_2": "Then, construct a Pumpjack on top of the pipeline by first placing down a Pumpjack Base...",
+  "tfmg.ponder.pumpjack.text_3": "Placing the Pumpjack Hammer behind it...",
+  "tfmg.ponder.pumpjack.text_4": "Next step is building the Connector And the Head of the Pumpjack above the crank and the base",
+  "tfmg.ponder.pumpjack.text_5": "Now they need to be connected with Pumpjack Hammer Parts, keep in mind that superglue is needed to finish the structure",
+  "tfmg.ponder.pumpjack.text_6": "And finally, placing the Machine Input with a Pumpjack Crank above it, as shown in the scene",
+
+  "tfmg.ponder.distillation_tower.text_1": "A sufficiently large Steel Fluid Tank can be turned into a Distillation Tower",
+  "tfmg.ponder.distillation_tower.text_2": "The tower is assembled by first placing a Steel Distillation Tower Controller next to the tank...",
+  "tfmg.ponder.distillation_tower.text_3": "And placing up to 6 Distillation Tower Outputs, all connected with Industrial Pipes",
+  "tfmg.ponder.distillation_tower.text_4": "Blaze Burners are required to run the Distillation Tower. The dial displays current power levels",
+  "tfmg.ponder.distillation_tower.text_5": "To input Crude Oil, it must be pumped into the controller block",
+  "tfmg.ponder.distillation_tower.text_6": "Each output block provides one of the Oil byproducts",
+  "tfmg.ponder.distillation_tower.text_7": "LPG",
+  "tfmg.ponder.distillation_tower.text_8": "Gasoline",
+  "tfmg.ponder.distillation_tower.text_9": "Naphtha",
+  "tfmg.ponder.distillation_tower.text_10": "Kerosene",
+  "tfmg.ponder.distillation_tower.text_11": "Diesel",
+  "tfmg.ponder.distillation_tower.text_12": "Heavy Oil",
+
+
+  "tfmg.ponder.blast_furnace.text_1": "The base of the Blast Furnace is a Blast Furnace Output block",
+  "tfmg.ponder.blast_furnace.text_2": "To assemble a Blast Furnace, construct a chimney using Fireproof Bricks as shown in the scene",
+  "tfmg.ponder.blast_furnace.text_3": "The bottom half of the chimney requires to be reinforced",
+  "tfmg.ponder.blast_furnace.text_4": "Fuel and other items are inserted through the opening at the top",
+
+  "tfmg.ponder.coke_oven.text_1": "The Coke Oven is built by placing Coke Oven blocks as shown in the scene, and clicking its side with a wrench",
+  "tfmg.ponder.coke_oven.text_2": "The process of coking is slow, so it is more efficient to have long arrays of ovens working simultaneously",
+  "tfmg.ponder.coke_oven.text_3": "Coal can be inputted from any side",
+  "tfmg.ponder.coke_oven.text_4": "While running, the oven produces Creosote and CO2 which have to be pumped out for it to function",
+  "tfmg.ponder.coke_oven.text_5": "Once done, Coal Coke will drop out of the opening",
+
+  "tfmg.ponder.casting.text_1": "Casting is the process of pouring liquid metal into a Casting Basin using a Casting Spout",
+  "tfmg.ponder.casting.text_2": "The Casting Basin, obviously, requires a mold to function",
+
+
+  "tfmg.ponder.radial_engines.text_1": "Radial Engines are a special Type of Engine that doesn't require an exhaust block and has a shaft from both sides",
+  "tfmg.ponder.radial_engines.text_2": "Clicking the Engine from one of its sides will spawn an input slot that can accept fuel and redstone signals",
+  "tfmg.ponder.radial_engines.text_3": "Regular Radial Engines uses gasoline as fuel",
+  "tfmg.ponder.radial_engines.text_4": "Engine will start when redstone signal is applied to the input slot or the block itself",
+  "tfmg.ponder.radial_engines.text_5": "The second variant of a radial is The Large Radial Engine which uses kerosene as fuel",
+
+
+  "tfmg.ponder.large_generator.text_1": "The main of the Large Generator is the Rotor",
+  "tfmg.ponder.large_generator.text_2": "To complete the Large Generator, place Stator block around the Rotor",
+  "tfmg.ponder.large_generator.text_3": "Providing rotational power to the Rotor will produce electric energy",
+  "tfmg.ponder.large_generator.text_4": "Clicking a side with a wrench will make it the energy output",
+
+
+
+
+
+  "tfmg.ponder.distillation_tower.header": "Distillation Tower Setup",
+  "tfmg.ponder.pumpjack.header": "Building Pumpjacks",
+  "tfmg.ponder.surface_scanner.header": "Locating Oil",
+  "tfmg.ponder.diesel_engine.header": "Building a Diesel Engine",
+  "tfmg.ponder.diesel_engine_expansion.header": "Expanding Diesel Engines",
+  "tfmg.ponder.small_engines.header": "Building Small Engines",
+  "tfmg.ponder.radial_engines.header": "Using Radial Engines",
+  "tfmg.ponder.large_generator.header": "Building  a Large Generator",
+
+
+  "tfmg.ponder.coke_oven.header": "Building a Coke Oven",
+  "tfmg.ponder.blast_furnace.header": "Building a Blast Furnace",
+  "tfmg.ponder.casting.header": "Casting Metal",
+
+  "tfmg.ponder.tag.oil": "Oil Related Machines",
+
+  "tfmg.ponder.tag.metallurgy": "Metal Processing",
+
+  "tfmg.ponder.tag.oil.description": "Machines that extract, process or use Crude Oil and its byproducts",
+
+  "tfmg.ponder.tag.metallurgy.description": "Machines that produce, process or use Metal and raw materials as such"
+}

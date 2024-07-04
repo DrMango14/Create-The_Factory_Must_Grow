@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfmg:block/blast_furnace_output/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/blast_furnace_output/block"
+    },
+    "facing=south": {
+      "model": "tfmg:block/blast_furnace_output/block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfmg:block/blast_furnace_output/block",
+      "y": 270
+    }
+  }
+}

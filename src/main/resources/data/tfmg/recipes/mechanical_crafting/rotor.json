@@ -1,0 +1,30 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    " CCC ",
+    "CRARC",
+    "CASAC",
+    "CRARC",
+    " CCC "
+  ],
+  "key": {
+
+    "A": {
+      "tag": "forge:ingots/aluminum"
+    },
+
+    "C": {
+      "item": "tfmg:copper_coil"
+    },
+    "S": {
+      "item": "create:shaft"
+    },
+    "R": {
+      "item": "tfmg:rebar"
+    }
+  },
+  "result": {
+    "item": "tfmg:rotor"
+  },
+  "acceptMirrored": true
+}

@@ -1,0 +1,79 @@
+{
+  "variants": {
+    "blaze=fading,facing=east": {
+      "model": "tfmg:block/firebox/block_lit",
+      "y": 90
+    },
+    "blaze=fading,facing=north": {
+      "model": "tfmg:block/firebox/block_lit"
+    },
+    "blaze=fading,facing=south": {
+      "model": "tfmg:block/firebox/block_lit",
+      "y": 180
+    },
+    "blaze=fading,facing=west": {
+      "model": "tfmg:block/firebox/block_lit",
+      "y": 270
+    },
+    "blaze=kindled,facing=east": {
+      "model": "tfmg:block/firebox/block_lit",
+      "y": 90
+    },
+    "blaze=kindled,facing=north": {
+      "model": "tfmg:block/firebox/block_lit"
+    },
+    "blaze=kindled,facing=south": {
+      "model": "tfmg:block/firebox/block_lit",
+      "y": 180
+    },
+    "blaze=kindled,facing=west": {
+      "model": "tfmg:block/firebox/block_lit",
+      "y": 270
+    },
+    "blaze=none,facing=east": {
+      "model": "tfmg:block/firebox/block_lit",
+      "y": 90
+    },
+    "blaze=none,facing=north": {
+      "model": "tfmg:block/firebox/block_lit"
+    },
+    "blaze=none,facing=south": {
+      "model": "tfmg:block/firebox/block_lit",
+      "y": 180
+    },
+    "blaze=none,facing=west": {
+      "model": "tfmg:block/firebox/block_lit",
+      "y": 270
+    },
+    "blaze=seething,facing=east": {
+      "model": "tfmg:block/firebox/block_lit",
+      "y": 90
+    },
+    "blaze=seething,facing=north": {
+      "model": "tfmg:block/firebox/block_lit"
+    },
+    "blaze=seething,facing=south": {
+      "model": "tfmg:block/firebox/block_lit",
+      "y": 180
+    },
+    "blaze=seething,facing=west": {
+      "model": "tfmg:block/firebox/block_lit",
+      "y": 270
+    },
+    "blaze=smouldering,facing=east": {
+      "model": "tfmg:block/firebox/block",
+      "y": 90
+    },
+    "blaze=smouldering,facing=north": {
+      "model": "tfmg:block/firebox/block"
+    },
+    "blaze=smouldering,facing=south": {
+      "model": "tfmg:block/firebox/block",
+      "y": 180
+    },
+    "blaze=smouldering,facing=west": {
+      "model": "tfmg:block/firebox/block",
+      "y": 270
+    }
+  }
+}

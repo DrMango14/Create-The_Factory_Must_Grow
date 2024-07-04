@@ -1,0 +1,27 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    " E ",
+    " A "
+  ],
+  "key": {
+    "G": {
+      "item": "create:framed_glass"
+    },
+    "A": {
+      "tag": "forge:ingots/aluminum"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    }
+
+  },
+  "result": {
+    "item": "tfmg:light_bulb",
+    "count": 4
+
+
+  }
+}

@@ -1,0 +1,28 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "LLL",
+    "WPW"
+  ],
+  "key": {
+
+
+    "W": {
+      "tag": "forge:wires/copper"
+    },
+    "L": {
+      "tag": "forge:ingots/lead"
+    },
+    "P": {
+      "item": "tfmg:plastic_sheet"
+    }
+  },
+  "result": {
+    "item": "tfmg:resistor_",
+    "count": 2
+
+
+  }
+}

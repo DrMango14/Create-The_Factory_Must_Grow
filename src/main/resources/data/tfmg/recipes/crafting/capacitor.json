@@ -1,0 +1,26 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NGN",
+    "NCN",
+    "NGN"
+  ],
+  "key": {
+    "N": {
+      "tag": "forge:ingots/nickel"
+    },
+    "C": {
+      "item": "tfmg:electric_casing"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "result": {
+    "item": "tfmg:capacitor",
+    "count": 2
+
+
+  }
+}

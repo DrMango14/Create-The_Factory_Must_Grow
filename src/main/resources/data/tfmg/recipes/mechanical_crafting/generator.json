@@ -1,0 +1,30 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "EME",
+    "MCM",
+    "KMK"
+  ],
+  "key": {
+
+  "M": {
+    "item": "tfmg:magnetic_ingot"
+  },
+
+  "C": {
+    "item": "tfmg:electric_casing"
+  },
+  "E": {
+    "item": "tfmg:steel_mechanism"
+  },
+  "K": {
+    "item": "tfmg:copper_cable"
+  }
+
+
+  },
+  "result": {
+    "item": "tfmg:generator"
+  },
+  "acceptMirrored": true
+}

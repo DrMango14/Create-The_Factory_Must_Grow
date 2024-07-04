@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "AAA",
+    " C "
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:ingots/zinc"
+    },
+    "C": {
+      "item": "tfmg:copper_cable"
+    }
+  },
+  "result": {
+    "item": "tfmg:copycat_cable_block",
+    "count": 4
+
+
+  }
+}

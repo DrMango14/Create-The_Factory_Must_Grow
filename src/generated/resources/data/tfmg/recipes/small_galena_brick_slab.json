@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "small_galena_brick_slab",
+  "key": {
+    "X": {
+      "item": "tfmg:small_galena_bricks"
+    }
+  },
+  "pattern": [
+    "XXX"
+  ],
+  "result": {
+    "count": 6,
+    "item": "tfmg:small_galena_brick_slab"
+  },
+  "show_notification": true
+}

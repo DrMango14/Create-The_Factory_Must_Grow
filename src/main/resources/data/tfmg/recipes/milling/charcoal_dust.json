@@ -1,0 +1,17 @@
+
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "minecraft:charcoal"
+    }
+  ],
+  "results": [
+    {
+      "item": "tfmg:charcoal_dust"
+
+    }
+  ],
+  "processingTime": 130
+
+}

@@ -1,0 +1,24 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    " A ",
+    " W "
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:stick"
+    },
+    "A": {
+      "tag": "forge:ingots/aluminum"
+    }
+  },
+  "result": {
+    "item": "tfmg:aluminum_sword",
+    "count": 1
+
+
+  },
+  "acceptMirrored": true
+}

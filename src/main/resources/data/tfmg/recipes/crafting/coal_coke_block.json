@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SSS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "tfmg:coal_coke"
+    }
+  },
+  "result": {
+    "item": "tfmg:coal_coke_block",
+    "count": 1
+
+
+  }
+}
