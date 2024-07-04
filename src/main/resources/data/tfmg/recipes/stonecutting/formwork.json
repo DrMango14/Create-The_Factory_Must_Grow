@@ -1,9 +1,0 @@
-
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "tag": "minecraft:planks"
-  },
-  "result": "tfmg:formwork_block",
-  "count": 2
-}

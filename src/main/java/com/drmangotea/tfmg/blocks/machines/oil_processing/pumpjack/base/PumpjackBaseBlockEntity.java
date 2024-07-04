@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.base;
 
 
-import com.drmangotea.tfmg.blocks.deposits.FluidDepositBlockEntity;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.crank.PumpjackCrankBlockEntity;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.hammer.PumpjackBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
@@ -43,7 +42,7 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
 
     protected LazyOptional<IFluidHandler> fluidCapability;
     public FluidTank tankInventory;
-    public FluidDepositBlockEntity deposit;
+    public BlockPos deposit;
 
     public PumpjackBaseBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -115,7 +114,7 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
             BlockPos checkedPos = new BlockPos(this.getBlockPos().getX(), (this.getBlockPos().getY() - 1) - i, this.getBlockPos().getZ());
 
             if (level.getBlockState(new BlockPos(checkedPos)).is(TFMGBlocks.OIL_DEPOSIT.get())) {
-                deposit = (FluidDepositBlockEntity) level.getBlockEntity(checkedPos);
+                deposit = checkedPos;
                 return;
             }
 
@@ -130,14 +129,15 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
 
     }
     public void process() {
-        if (deposit == null || deposit.fluidAmount == 0)
+        if (deposit == null)
             return;
 
         if (tankInventory.getFluidAmount() + miningRate > 8000)
             return;
 
-        deposit.fluidAmount -= miningRate;
-        tankInventory.setFluid(new FluidStack(deposit.getDepositFluid(), tankInventory.getFluidAmount() + miningRate));
+
+        tankInventory.setFluid(new FluidStack(TFMGFluids.CRUDE_OIL.getSource(), tankInventory.getFluidAmount() + miningRate));
+
     }
 
     public void setControllerHammer(PumpjackBlockEntity controllerHammer) {
@@ -172,19 +172,11 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
                 .forGoggles(tooltip);
 
 
-        if (!(deposit == null || deposit.fluidAmount == 0)) {
-            Lang.translate("goggles.pumpjack.fluid_amount")
-                    .style(ChatFormatting.DARK_GRAY)
-                    .add(
-                            Lang.translate("pumpjack_deposit_amount", this.deposit.baseFluidAmount)
-                                    .style(ChatFormatting.BLUE)
-                            //   .add(mb))
-                    ).forGoggles(tooltip, 1);
+        if (!(deposit == null)) {
 
-            Lang.translate("goggles.coke_oven.progress", miningRate)
-                    .style(ChatFormatting.BLUE)
-                    .forGoggles(tooltip,1);
-
+            Lang.translate("pumpjack_deposit_amount", this.miningRate)
+                    .style(ChatFormatting.LIGHT_PURPLE)
+                    .forGoggles(tooltip, 1);
 
         } else {
 

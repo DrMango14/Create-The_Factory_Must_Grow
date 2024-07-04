@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.blocks.tanks;
 
 
+
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -30,8 +31,8 @@ public class SteelFluidTankRenderer extends SafeBlockEntityRenderer<SteelTankBlo
         if (!te.isController())
             return;
         if (!te.window) {
-              if (te.tower.isActive())
-                  renderAsBoiler(te, partialTicks, ms, buffer, light, overlay);
+              if (te.isDistillationTower)
+                  renderAsDistillationTower(te, partialTicks, ms, buffer, light, overlay);
             return;
         }
 
@@ -78,8 +79,8 @@ public class SteelFluidTankRenderer extends SafeBlockEntityRenderer<SteelTankBlo
         ms.popPose();
     }
 
-    protected void renderAsBoiler(SteelTankBlockEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer,
-                                  int light, int overlay) {
+    protected void renderAsDistillationTower(SteelTankBlockEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer,
+                                             int light, int overlay) {
         BlockState blockState = te.getBlockState();
         VertexConsumer vb = buffer.getBuffer(RenderType.solid());
         ms.pushPose();
@@ -87,7 +88,7 @@ public class SteelFluidTankRenderer extends SafeBlockEntityRenderer<SteelTankBlo
         msr.translate(te.width / 2f, 0.5, te.width / 2f);
 
         float dialPivot = 5.75f / 16;
-         float progress = te.tower.gauge.getValue(partialTicks);
+
 
         for (Direction d : Iterate.horizontalDirections) {
             ms.pushPose();

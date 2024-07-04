@@ -4,6 +4,7 @@ import com.drmangotea.tfmg.CreateTFMG;
 
 
 import com.drmangotea.tfmg.base.DebugBlock;
+import com.drmangotea.tfmg.base.TFMGEncasedBlocks;
 import com.simibubi.create.AllCreativeModeTabs;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -16,12 +17,15 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Predicate;
+
+import static com.drmangotea.tfmg.CreateTFMG.asResource;
 
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -91,23 +95,46 @@ public class TFMGCreativeModeTabs {
                         }
                         return items;
                 }
-
-                private static void outputAll(CreativeModeTab.Output output, List<Item> items) {
-                        for (Item item : items) {
-                                output.accept(item);
-                        }
-                }
-
                 List<Item> exclude = List.of(
                         TFMGItems.UNPROCESSED_HEAVY_PLATE.get(),
                         TFMGItems.UNFINISHED_GASOLINE_ENGINE.get(),
                         TFMGItems.UNFINISHED_TURBINE_ENGINE.get(),
                         TFMGItems.UNFINISHED_LPG_ENGINE.get(),
                         TFMGItems.UNFINISHED_STEEL_MECHANISM.get(),
-                        TFMGBlocks.RADIAL_ENGINE_INPUT_PONDER.get().asItem()
+                        TFMGItems.LIT_LITHIUM_BLADE.get(),
+                        TFMGBlocks.RADIAL_ENGINE_INPUT_PONDER.asItem()
 
 
                 );
+                private static void outputAll(CreativeModeTab.Output output, List<Item> items) {
+                        for (Item item : items) {
+
+                                if(item ==    TFMGBlocks.RADIAL_ENGINE_INPUT_PONDER.asItem())
+                                  continue;
+                                if(item == TFMGEncasedBlocks.HEAVY_CASING_ENCASED_ALUMINUM_COGWHEEL.asItem())
+                                        continue;
+                                if(item == TFMGEncasedBlocks.HEAVY_CASING_ENCASED_STEEL_COGWHEEL.asItem())
+                                        continue;
+                                if(item == TFMGEncasedBlocks.HEAVY_CASING_ENCASED_ALUMINUM_COGWHEEL.asItem())
+                                        continue;
+                                if(item == TFMGEncasedBlocks.HEAVY_CASING_ENCASED_STEEL_COGWHEEL.asItem())
+                                        continue;
+
+                                if(item == TFMGEncasedBlocks.HEAVY_CASING_ENCASED_LARGE_ALUMINUM_COGWHEEL.asItem())
+                                        continue;
+                                if(item == TFMGEncasedBlocks.HEAVY_CASING_ENCASED_LARGE_STEEL_COGWHEEL.asItem())
+                                        continue;
+                                if(item == TFMGEncasedBlocks.HEAVY_CASING_ENCASED_LARGE_ALUMINUM_COGWHEEL.asItem())
+                                        continue;
+                                if(item == TFMGEncasedBlocks.HEAVY_CASING_ENCASED_LARGE_STEEL_COGWHEEL.asItem())
+                                        continue;
+
+
+                                output.accept(item);
+                        }
+                }
+
+
 
 
                 @Override

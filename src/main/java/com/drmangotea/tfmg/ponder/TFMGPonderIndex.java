@@ -1,7 +1,9 @@
 package com.drmangotea.tfmg.ponder;
 
 
+
 import com.drmangotea.tfmg.CreateTFMG;
+import com.drmangotea.tfmg.ponder.scenes.ElectricityScenes;
 import com.drmangotea.tfmg.ponder.scenes.MetallurgyScenes;
 import com.drmangotea.tfmg.ponder.scenes.OilScenes;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
@@ -23,7 +25,12 @@ public class TFMGPonderIndex {
 
                 .addStoryBoard("radial_engines", OilScenes::radial_engines, TFMGPonderTag.OIL);
 
-        HELPER.forComponents(TFMGBlocks.DIESEL_ENGINE)
+
+        HELPER.forComponents(
+                TFMGBlocks.DIESEL_ENGINE,
+                TFMGBlocks.AIR_INTAKE,
+                TFMGBlocks.DIESEL_ENGINE_EXPANSION
+                )
 
                 .addStoryBoard("diesel_engine", OilScenes::diesel_engine, TFMGPonderTag.OIL)
                 .addStoryBoard("diesel_engine_expansion", OilScenes::diesel_engine_expansion, TFMGPonderTag.OIL);
@@ -43,7 +50,7 @@ public class TFMGPonderIndex {
                 TFMGBlocks.LARGE_PUMPJACK_HAMMER_PART,
                 TFMGBlocks.LARGE_PUMPJACK_HAMMER_HEAD
 
-        ).addStoryBoard("pumpjack", OilScenes::pumpjack, TFMGPonderTag.OIL);
+                ).addStoryBoard("pumpjack", OilScenes::pumpjack, TFMGPonderTag.OIL);
         HELPER.forComponents(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER,TFMGBlocks.STEEL_DISTILLATION_OUTPUT)
 
                 .addStoryBoard("distillation_tower", OilScenes::distillation_tower, TFMGPonderTag.OIL);
@@ -62,6 +69,11 @@ public class TFMGPonderIndex {
         HELPER.forComponents(TFMGBlocks.CASTING_BASIN,TFMGBlocks.CASTING_SPOUT)
 
                 .addStoryBoard("casting", MetallurgyScenes::casting, TFMGPonderTag.METALLURGY);
+        /////////////////////////////////////////
+
+        HELPER.forComponents(TFMGBlocks.ROTOR,TFMGBlocks.STATOR)
+
+                .addStoryBoard("large_generator", ElectricityScenes::large_generator, TFMGPonderTag.ELECTRICITY);
 
 
     }
@@ -92,6 +104,13 @@ public class TFMGPonderIndex {
                     .add(TFMGBlocks.FIREPROOF_BRICKS)
                     .add(TFMGBlocks.FIREPROOF_BRICK_REINFORCEMENT)
                     .add(TFMGBlocks.BLAST_FURNACE_OUTPUT);
+
+            PonderRegistry.TAGS.forTag(TFMGPonderTag.ELECTRICITY)
+                    .add(TFMGBlocks.STATOR)
+                    .add(TFMGBlocks.ROTOR)
+                    .add(TFMGBlocks.CABLE_CONNECTOR)
+                    .add(TFMGBlocks.CAPACITOR)
+                    .add(TFMGBlocks.ACCUMULATOR);
 
 
 

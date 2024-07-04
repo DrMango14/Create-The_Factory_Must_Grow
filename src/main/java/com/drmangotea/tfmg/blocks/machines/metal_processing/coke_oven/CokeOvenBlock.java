@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.blocks.machines.metal_processing.coke_oven;
 
-
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
@@ -26,6 +25,10 @@ public class CokeOvenBlock extends HorizontalDirectionalBlock implements IBE<Cok
         super(p_54120_);
         registerDefaultState(defaultBlockState().setValue(CONTROLLER_TYPE, ControllerType.CASUAL));
 
+    }
+    @Override
+    public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        IBE.onRemove(state, worldIn, pos, newState);
     }
     @Override
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {

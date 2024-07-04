@@ -1,10 +1,6 @@
 package com.drmangotea.tfmg.recipes.jei;
 
-
-
-
-import com.drmangotea.tfmg.recipes.distillation.AdvancedDistillationRecipe;
-import com.drmangotea.tfmg.recipes.jei.machines.Distillery;
+import com.drmangotea.tfmg.recipes.distillation.DistillationRecipe;
 import com.drmangotea.tfmg.registry.TFMGGuiTextures;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
@@ -20,11 +16,11 @@ import net.minecraft.client.gui.GuiGraphics;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class AdvancedDistillationCategory extends CreateRecipeCategory<AdvancedDistillationRecipe> {
+public class AdvancedDistillationCategory extends CreateRecipeCategory<DistillationRecipe> {
 
 
 
-	public AdvancedDistillationCategory(Info<AdvancedDistillationRecipe> info) {
+	public AdvancedDistillationCategory(Info<DistillationRecipe> info) {
 		super(info);
 	}
 
@@ -32,7 +28,7 @@ public class AdvancedDistillationCategory extends CreateRecipeCategory<AdvancedD
 
 
 	@Override
-	public void setRecipe(IRecipeLayoutBuilder builder, AdvancedDistillationRecipe recipe, IFocusGroup focuses) {
+	public void setRecipe(IRecipeLayoutBuilder builder, DistillationRecipe recipe, IFocusGroup focuses) {
 		FluidIngredient fluidIngredient=recipe.getInputFluid();
 
 		int outputCount = recipe.getOutputCount(recipe);
@@ -59,14 +55,14 @@ public class AdvancedDistillationCategory extends CreateRecipeCategory<AdvancedD
 	}
 
 	@Override
-	public void draw(AdvancedDistillationRecipe recipe, IRecipeSlotsView iRecipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+	public void draw(DistillationRecipe recipe, IRecipeSlotsView iRecipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
 		int outputCount = recipe.getOutputCount(recipe);
 		int yModifier = 60 -(outputCount*10);
 		int y = 126-yModifier;
 
 
 		TFMGGuiTextures.DISTILLATION_TOWER_BOTTOM.render(graphics,10,y);
-	//	TFMGGuiTextures.DISTILLATION_TOWER_FIRE.render(graphics,10,y+24);
+	//	TFMGGuiTextures.DISTILLATION_TOWER_FIRE.render(matrixStack,10,y+24);
 		AllGuiTextures.JEI_ARROW.render(graphics, 56, y);
 
 		for(int i = 0; i<(outputCount-1);i++){

@@ -1,13 +1,12 @@
 package com.drmangotea.tfmg.registry;
 
-
 import com.drmangotea.tfmg.CreateTFMG;
 import com.drmangotea.tfmg.recipes.casting.CastingRecipe;
 import com.drmangotea.tfmg.recipes.coking.CokingRecipe;
 import com.drmangotea.tfmg.recipes.distillation.DistillationRecipe;
-import com.drmangotea.tfmg.recipes.distillation.AdvancedDistillationRecipe;
 import com.drmangotea.tfmg.recipes.industrial_blasting.IndustrialBlastingRecipe;
 import com.google.common.collect.ImmutableSet;
+import com.simibubi.create.AllTags;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeFactory;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
@@ -37,7 +36,6 @@ CASTING(CastingRecipe::new),
 INDUSTRIAL_BLASTING(IndustrialBlastingRecipe::new),
 COKING(CokingRecipe::new),
 DISTILLATION(DistillationRecipe::new),
-ADVANCED_DISTILLATION(AdvancedDistillationRecipe::new)
 ;
 
     private final ResourceLocation id;
@@ -70,7 +68,14 @@ ADVANCED_DISTILLATION(AdvancedDistillationRecipe::new)
    TFMGRecipeTypes(ProcessingRecipeFactory<?> processingFactory) {
         this(() -> new ProcessingRecipeSerializer<>(processingFactory));
     }
-
+    public static boolean shouldIgnoreInAutomation(Recipe<?> recipe) {
+        RecipeSerializer<?> serializer = recipe.getSerializer();
+        if (serializer != null && AllTags.AllRecipeSerializerTags.AUTOMATION_IGNORE.matches(serializer))
+            return true;
+        return recipe.getId()
+                .getPath()
+                .endsWith("_manual_only");
+    }
     public static <T extends Recipe<?>> RecipeType<T> simpleType(ResourceLocation id) {
         String stringId = id.toString();
         return new RecipeType<T>() {

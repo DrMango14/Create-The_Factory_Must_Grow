@@ -1,7 +1,8 @@
 package com.drmangotea.tfmg.base.spark;
 
 
-import com.drmangotea.tfmg.items.gadgets.explosives.thermite_grenades.fire.BlueFireBlock;
+
+import com.drmangotea.tfmg.items.weapons.explosives.thermite_grenades.fire.BlueFireBlock;
 import com.drmangotea.tfmg.registry.TFMGEntityTypes;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.content.trains.CubeParticleData;

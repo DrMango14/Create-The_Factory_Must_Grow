@@ -1,8 +1,8 @@
 package com.drmangotea.tfmg.blocks.machines.exhaust;
 
 
+
 import com.drmangotea.tfmg.registry.TFMGFluids;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -133,6 +133,7 @@ public class ExhaustBlockEntity extends SmartBlockEntity implements IHaveGoggleI
         };
     }
 
+
     protected void onFluidStackChanged(FluidStack newFluidStack) {
         sendData();
     }
@@ -169,9 +170,8 @@ public class ExhaustBlockEntity extends SmartBlockEntity implements IHaveGoggleI
             smokeTimer = 100;
             spawnsSmoke = true;
 
-            int random = Create.RANDOM.nextInt(5);
-            if(random==0)
-            tankInventory.drain(35, IFluidHandler.FluidAction.EXECUTE);
+
+            tankInventory.drain(20, IFluidHandler.FluidAction.EXECUTE);
 
 
 

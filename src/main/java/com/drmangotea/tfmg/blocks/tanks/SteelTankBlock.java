@@ -335,17 +335,37 @@ public class SteelTankBlock extends Block implements IWrenchable, IBE<SteelTankB
                     .orElse(0);
         }
 
-        public static void updateTowerState(BlockState pState, Level pLevel, BlockPos tankPos) {
+        public static boolean updateTowerState(Level pLevel, BlockPos tankPos, boolean assemble,boolean simulate) {
             BlockState tankState = pLevel.getBlockState(tankPos);
+
             if (!(tankState.getBlock()instanceof SteelTankBlock tank))
-                return;
-            SteelTankBlockEntity tankTE = tank.getBlockEntity(pLevel, tankPos);
-            if (tankTE == null)
-                return;
-            SteelTankBlockEntity controllerTE = (SteelTankBlockEntity) tankTE.getControllerBE();
-            if (controllerTE == null)
-                return;
-            controllerTE.updateBoilerState();
+                return false;
+
+            SteelTankBlockEntity tankBE = tank.getBlockEntity(pLevel, tankPos);
+            if (tankBE == null)
+                return false;
+
+            if(assemble && tankBE.getControllerBE().isDistillationTower)
+                return false;
+
+
+
+            if(!simulate) {
+                tankBE.getControllerBE().updateBoilerState();
+                tankBE.getControllerBE().isDistillationTower = assemble;
+                tankBE.getControllerBE().refreshCapability();
+
+
+                tankBE.updateBoilerState();
+                tankBE.isDistillationTower = assemble;
+                tankBE.refreshCapability();
+
+
+            }
+
+
+            return true;
+
         }
 
     }

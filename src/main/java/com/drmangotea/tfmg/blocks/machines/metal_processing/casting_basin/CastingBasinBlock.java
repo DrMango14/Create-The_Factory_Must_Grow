@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin;
 
 
-
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -35,6 +34,9 @@ public class CastingBasinBlock extends Block implements IBE<CastingBasinBlockEnt
     public VoxelShape getShape(BlockState pState, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 
         return AllShapes.BASIN_BLOCK_SHAPE;
+    }    @Override
+    public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        IBE.onRemove(state, worldIn, pos, newState);
     }
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {

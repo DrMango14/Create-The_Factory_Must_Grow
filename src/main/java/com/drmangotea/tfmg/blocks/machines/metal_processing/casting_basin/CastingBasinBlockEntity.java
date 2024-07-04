@@ -1,11 +1,11 @@
 package com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin;
 
-
 import com.drmangotea.tfmg.blocks.machines.TFMGMachineBlockEntity;
 import com.drmangotea.tfmg.recipes.casting.CastingRecipe;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
+import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import com.simibubi.create.foundation.utility.Lang;
@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin.CastingBasinBlock.MOLD_TYPE;
-
 
 public class CastingBasinBlockEntity extends TFMGMachineBlockEntity implements IHaveGoggleInformation {
 
@@ -125,6 +124,12 @@ public class CastingBasinBlockEntity extends TFMGMachineBlockEntity implements I
 
     }
 
+    @Override
+    public void destroy() {
+        super.destroy();
+        ItemHelper.dropContents(level, worldPosition, moldInventory);
+        ItemHelper.dropContents(level, worldPosition, outputInventory);
+    }
 
     public void setMold(){
         if(moldInventory.isEmpty())

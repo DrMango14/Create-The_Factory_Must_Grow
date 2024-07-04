@@ -1,9 +1,0 @@
-
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "tag": "forge:ingots/aluminum"
-  },
-  "result": "tfmg:red_caution_block",
-  "count": 4
-}

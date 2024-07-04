@@ -1,11 +1,18 @@
 package com.drmangotea.tfmg.registry;
 
+
 import com.drmangotea.tfmg.CreateTFMG;
 import com.drmangotea.tfmg.base.spark.*;
-import com.drmangotea.tfmg.items.gadgets.explosives.napalm.NapalmBombEntity;
-import com.drmangotea.tfmg.items.gadgets.explosives.napalm.NapalmBombRenderer;
-import com.drmangotea.tfmg.items.gadgets.explosives.thermite_grenades.ThermiteGrenade;
-import com.drmangotea.tfmg.items.gadgets.explosives.thermite_grenades.ThermiteGrenadeRenderer;
+import com.drmangotea.tfmg.items.weapons.advanced_potato_cannon.projectile.NapalmPotato;
+import com.drmangotea.tfmg.items.weapons.advanced_potato_cannon.projectile.NapalmPotatoRenderer;
+import com.drmangotea.tfmg.items.weapons.explosives.napalm.NapalmBombEntity;
+import com.drmangotea.tfmg.items.weapons.explosives.napalm.NapalmBombRenderer;
+import com.drmangotea.tfmg.items.weapons.explosives.pipe_bomb.PipeBomb;
+import com.drmangotea.tfmg.items.weapons.explosives.pipe_bomb.PipeBombRenderer;
+import com.drmangotea.tfmg.items.weapons.explosives.thermite_grenades.ThermiteGrenade;
+import com.drmangotea.tfmg.items.weapons.explosives.thermite_grenades.ThermiteGrenadeRenderer;
+import com.drmangotea.tfmg.items.weapons.lithium_blade.LithiumSpark;
+import com.drmangotea.tfmg.items.weapons.lithium_blade.LithiumSparkRenderer;
 import com.simibubi.create.foundation.data.CreateEntityBuilder;
 import com.simibubi.create.foundation.utility.Lang;
 import com.tterrag.registrate.util.entry.EntityEntry;
@@ -20,11 +27,19 @@ import net.minecraft.world.entity.MobCategory;
 
 public class TFMGEntityTypes {
 
+    public static final EntityEntry<PipeBomb> PIPE_BOMB =
+            register("pipe_bomb", PipeBomb::new, () -> PipeBombRenderer::new,
+                    MobCategory.MISC, 4, 20, true, true, PipeBomb::build).register();
+
+    public static final EntityEntry<NapalmPotato> NAPALM_POTATO =
+            register("napalm_potato", NapalmPotato::new, () -> NapalmPotatoRenderer::new,
+                    MobCategory.MISC, 4, 20, true, true, NapalmPotato::build).register();
+
     public static final EntityEntry<ThermiteGrenade> THERMITE_GRENADE =
             register("thermite_grenade", ThermiteGrenade::new, () -> ThermiteGrenadeRenderer::regular,
                     MobCategory.MISC, 4, 20, true, true, ThermiteGrenade::build).register();
     public static final EntityEntry<ThermiteGrenade> ZINC_GRENADE =
-            register("zin_grenade", ThermiteGrenade::new, () -> ThermiteGrenadeRenderer::green,
+            register("zinc_grenade", ThermiteGrenade::new, () -> ThermiteGrenadeRenderer::green,
                     MobCategory.MISC, 4, 20, true, true, ThermiteGrenade::build).register();
     public static final EntityEntry<ThermiteGrenade> COPPER_GRENADE =
             register("copper_grenade", ThermiteGrenade::new, () -> ThermiteGrenadeRenderer::blue,
@@ -43,6 +58,10 @@ public class TFMGEntityTypes {
     public static final EntityEntry<BlueSpark> BLUE_SPARK =
             register("blue_spark", BlueSpark::new, () -> BlueSparkRenderer::new,
                     MobCategory.MISC, 4, 20, true, true, BlueSpark::build).register();
+
+    public static final EntityEntry<LithiumSpark> LITHIUM_SPARK =
+            register("lithium_spark", LithiumSpark::new, () -> LithiumSparkRenderer::new,
+                    MobCategory.MISC, 4, 20, true, true, LithiumSpark::build).register();
     //
 
 

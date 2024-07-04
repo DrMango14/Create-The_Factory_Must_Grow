@@ -1,10 +1,7 @@
 package com.drmangotea.tfmg.recipes.jei;
 
-
-
 import com.drmangotea.tfmg.recipes.coking.CokingRecipe;
 import com.drmangotea.tfmg.recipes.jei.machines.CokeOven;
-import com.drmangotea.tfmg.recipes.jei.machines.Distillery;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
@@ -17,7 +14,6 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -37,12 +33,12 @@ public class CokingCategory extends CreateRecipeCategory<CokingRecipe> {
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, CokingRecipe recipe, IFocusGroup focuses) {
 
-
+		RegistryAccess registryAccess = Minecraft.getInstance().level.registryAccess();
 		builder
 				.addSlot(RecipeIngredientRole.INPUT, 1, 13)
 				.setBackground(getRenderedSlot(), -1, -1)
 				.addIngredients(recipe.getIngredients().get(0));
-		RegistryAccess registryAccess = Minecraft.getInstance().level.registryAccess();
+
 		builder
 				.addSlot(RecipeIngredientRole.OUTPUT, 121, 90)
 				.setBackground(getRenderedSlot(), -1, -1)

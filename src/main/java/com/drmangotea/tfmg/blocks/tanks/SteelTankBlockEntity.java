@@ -1,13 +1,14 @@
 package com.drmangotea.tfmg.blocks.tanks;
 
-
-import com.drmangotea.tfmg.blocks.machines.oil_processing.distillation.distillation_tower.DistillationTowerData;
+import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.content.fluids.tank.BoilerHeaters;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
+import com.simibubi.create.foundation.utility.Iterate;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat.Chaser;
 import com.simibubi.create.infrastructure.config.AllConfigs;
@@ -26,7 +27,6 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.IFluidTank;
-
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -54,7 +54,9 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
     public int gaugeRotation=0;
 
 
-    public DistillationTowerData tower;
+    public int activeHeat;
+
+    public boolean isDistillationTower = false;
 
     private static final int SYNC_RATE = 8;
     protected int syncCooldown;
@@ -73,7 +75,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
         window = true;
         height = 1;
         width = 1;
-         tower = new DistillationTowerData();
+
         refreshCapability();
     }
 
@@ -89,6 +91,9 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
             return;
         if (!isController())
             return;
+
+        refreshCapability();
+
         ConnectivityHandler.formMulti(this);
     }
 
@@ -96,6 +101,8 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
     public void tick() {
         super.tick();
         getGaugeRotation();
+
+        updateTemperature();
 
         visualGaugeRotation.chase(gaugeRotation, 0.2f, Chaser.EXP);
         visualGaugeRotation.tickChaser();
@@ -116,8 +123,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
             updateConnectivity();
         if (fluidLevel != null)
             fluidLevel.tickChaser();
-        if (isController())
-            tower.tick(this);
+
     }
 
     @Override
@@ -223,7 +229,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
         controller = null;
         width = 1;
         height = 1;
-            tower.clear();
+
         onFluidStackChanged(tankInventory.getFluid());
 
         BlockState state = getBlockState();
@@ -243,19 +249,12 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
         SteelTankBlockEntity te = getControllerBE();
         if (te == null)
             return;
-        if (te.tower.isActive())
+        if (isDistillationTower)
             return;
         te.setWindows(!te.window);
     }
 
-    public void updateBoilerTemperature() {
-        SteelTankBlockEntity te = getControllerBE();
-        if (te == null)
-            return;
-     if (!te.tower.isActive())
-         return;
-      te.tower.needsHeatLevelUpdate = true;
-    }
+
 
     public void sendDataImmediately() {
         syncCooldown = 0;
@@ -312,11 +311,11 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
         if (!isController())
             return;
 
-        boolean wasBoiler = tower.isActive();
-        boolean changed = tower.evaluate(this);
+        boolean wasTower = isDistillationTower;
+        boolean changed = evaluate();
 
-      if (wasBoiler != tower.isActive()) {
-         if (tower.isActive())
+      if (wasTower != isDistillationTower) {
+         if (isDistillationTower)
              setWindows(false);
 
           for (int yOffset = 0; yOffset < height; yOffset++)
@@ -329,10 +328,74 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
 
       if (changed) {
           notifyUpdate();
+          refreshCapability();
 
       }
     }
+    public boolean evaluate() {
 
+        boolean hadController = isDistillationTower;
+        boolean foundController = false;
+
+        BlockPos pos1 = controller == null ? getBlockPos() : controller;
+
+        for (int yOffset = 0; yOffset < getControllerBE().height; yOffset++) {
+            for (int xOffset = 0; xOffset < getControllerBE().width; xOffset++) {
+                for (int zOffset = 0; zOffset < getControllerBE().width; zOffset++) {
+
+                    BlockPos pos = pos1.offset(xOffset, yOffset, zOffset);
+                    BlockState blockState = level.getBlockState(pos);
+                    if (!SteelTankBlock.isTank(blockState))
+                        continue;
+                    for (Direction d : Iterate.directions) {
+                        BlockPos attachedPos = pos.relative(d);
+                        BlockState attachedState = level.getBlockState(attachedPos);
+
+                        if (attachedState.is(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER.get())) {
+
+                            if(!foundController) {
+                                foundController = true;
+                            }else
+                                level.destroyBlock(attachedPos,true);
+
+                        }
+
+                    }
+                }
+            }
+        }
+        isDistillationTower = foundController;
+
+        return hadController != foundController;
+    }
+
+    public void updateTemperature() {
+
+        int prevHeat = activeHeat;
+
+        activeHeat = 0;
+
+        BlockPos pos1 = controller == null ? getBlockPos() : controller;
+
+        SteelTankBlockEntity be = getControllerBE() == null ? this : getControllerBE();
+
+        for (int xOffset = 0; xOffset < be.width; xOffset++) {
+            for (int zOffset = 0; zOffset < be.width; zOffset++) {
+                BlockPos pos = pos1.offset(xOffset, -1, zOffset);
+                BlockState blockState = level.getBlockState(pos);
+                float heat = BoilerHeaters.getActiveHeat(level, pos, blockState);
+                 if (heat > 0) {
+                    activeHeat += heat;
+                }
+            }
+        }
+
+        if(activeHeat!=prevHeat)
+            notifyUpdate();
+
+
+
+    }
     @Override
     public void setController(BlockPos controller) {
         if (level.isClientSide && !isVirtual())
@@ -345,22 +408,23 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
         sendData();
     }
 
-    private void refreshCapability() {
+    public void refreshCapability() {
         LazyOptional<IFluidHandler> oldCap = fluidCapability;
         fluidCapability = LazyOptional.of(() -> handlerForCapability());
         oldCap.invalidate();
     }
 
-    private IFluidHandler handlerForCapability() {
 
-        return isController()
-                ? tower.isActive()
-                ? tower.createHandler()
 
-                : tankInventory
-                : getControllerBE() != null ? getControllerBE().handlerForCapability()
-                : new FluidTank(0);
-    }
+
+
+        private IFluidHandler handlerForCapability() {
+            return isController() ?
+                    tankInventory
+                    : getControllerBE() != null ? getControllerBE().handlerForCapability() : tankInventory;
+        }
+
+
 
     @Override
     public BlockPos getController() {
@@ -386,10 +450,14 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         SteelTankBlockEntity controllerTE = getControllerBE();
-        if (controllerTE == null)
+
+        if(isDistillationTower)
             return false;
-        if (controllerTE.tower.addToGoggleTooltip(tooltip, isPlayerSneaking, controllerTE.getTotalTankSize()))
-            return true;
+
+        if(getControllerBE()!=null)
+            if(getControllerBE().isDistillationTower)
+                return false;
+
         return containedFluidTooltip(tooltip, isPlayerSneaking,
                 controllerTE.getCapability(ForgeCapabilities.FLUID_HANDLER));
     }
@@ -407,6 +475,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
         luminosity = compound.getInt("Luminosity");
         controller = null;
         lastKnownPos = null;
+        isDistillationTower = compound.getBoolean("isDistillationTower");
 
         if (compound.contains("LastKnownPos"))
             lastKnownPos = NbtUtils.readBlockPos(compound.getCompound("LastKnownPos"));
@@ -423,7 +492,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
                 tankInventory.drain(-tankInventory.getSpace(), FluidAction.EXECUTE);
         }
 
-      tower.read(compound.getCompound("Boiler"), width * width * height);
+
 
         if (compound.contains("ForceFluidLevel") || fluidLevel == null)
             fluidLevel = LerpedFloat.linear()
@@ -457,16 +526,8 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
             fluidLevel.chase(fluidLevel.getChaseTarget(), 0.125f, Chaser.EXP);
     }
     public void getGaugeRotation(){
-       int level=tower.towerLevel;
 
-       if(level>=12){
-           gaugeRotation=90;
-       } else
-       if(level>=4){
-           gaugeRotation=45;
-       } else{
-           gaugeRotation=0;
-       }
+        gaugeRotation = Math.min(90,activeHeat*15);
 
 
     }
@@ -479,7 +540,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
 
         if (updateConnectivity)
             compound.putBoolean("Uninitialized", true);
-        compound.put("Boiler", tower.write());
+        compound.putBoolean("isDistillationTower",isDistillationTower);
         if (lastKnownPos != null)
             compound.put("LastKnownPos", NbtUtils.writeBlockPos(lastKnownPos));
         if (!isController())

@@ -1,9 +1,0 @@
-
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "tfmg:magenta_concrete"
-  },
-  "result": "tfmg:magenta_concrete_stairs",
-  "count": 1
-}

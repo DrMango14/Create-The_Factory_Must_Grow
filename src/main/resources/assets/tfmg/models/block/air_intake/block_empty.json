@@ -1,6 +1,0 @@
-{
-  "parent": "block/air",
-  "textures": {
-    "particle": "tfmg:block/air_intake/air_intake_small"
-  }
-}

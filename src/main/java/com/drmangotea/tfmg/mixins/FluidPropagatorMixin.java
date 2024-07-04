@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.mixins;
 
-
-import com.drmangotea.tfmg.registry.TFMGBlocks;
+import com.drmangotea.tfmg.base.TFMGPipes;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.fluids.FluidPropagator;
@@ -48,6 +47,10 @@ public class FluidPropagatorMixin {
     }
 
 
+    /**
+     * @author DrMangoTea
+     * @reason felt like it
+     */
     @Overwrite( remap = false)
     public static void propagateChangedPipe(LevelAccessor world, BlockPos pipePos, BlockState pipeState) {
         List<Pair<Integer, BlockPos>> frontier = new ArrayList<>();
@@ -80,12 +83,12 @@ public class FluidPropagatorMixin {
                 BlockState targetState = world.getBlockState(target);
                 if (tileEntity instanceof PumpBlockEntity) {
                     if (
-                            !TFMGBlocks.STEEL_MECHANICAL_PUMP.has(targetState)&&
+                            !TFMGPipes.STEEL_MECHANICAL_PUMP.has(targetState)&&
                                     !AllBlocks.MECHANICAL_PUMP.has(targetState)&&
-                    !TFMGBlocks.BRASS_MECHANICAL_PUMP.has(targetState)&&
-                    !TFMGBlocks.CAST_IRON_MECHANICAL_PUMP.has(targetState)&&
-                    !TFMGBlocks.ALUMINUM_MECHANICAL_PUMP.has(targetState)&&
-                    !TFMGBlocks.PLASTIC_MECHANICAL_PUMP.has(targetState)
+                    !TFMGPipes.BRASS_MECHANICAL_PUMP.has(targetState)&&
+                    !TFMGPipes.CAST_IRON_MECHANICAL_PUMP.has(targetState)&&
+                    !TFMGPipes.ALUMINUM_MECHANICAL_PUMP.has(targetState)&&
+                    !TFMGPipes.PLASTIC_MECHANICAL_PUMP.has(targetState)
                                     || targetState.getValue(PumpBlock.FACING)
                             .getAxis() != direction.getAxis())
                         continue;
@@ -149,11 +152,11 @@ public class FluidPropagatorMixin {
     }
     @Shadow
     public static boolean hasFluidCapability(BlockGetter world, BlockPos pos, Direction side) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity == null)
+        BlockEntity tileEntity = world.getBlockEntity(pos);
+        if (tileEntity == null)
             return false;
         LazyOptional<IFluidHandler> capability =
-                blockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER, side);
+                tileEntity.getCapability(ForgeCapabilities.FLUID_HANDLER, side);
         return capability.isPresent();
     }
     @Shadow

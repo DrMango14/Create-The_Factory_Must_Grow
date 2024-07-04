@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.base.palettes;
 
+import com.drmangotea.tfmg.registry.TFMGCreativeModeTabs;
 import com.drmangotea.tfmg.registry.TFMGPaletteStoneTypes;
 import com.google.common.collect.ImmutableList;
 import com.simibubi.create.Create;
@@ -27,6 +28,12 @@ public class TFMGPalettesVariantEntry {
 
     public final ImmutableList<BlockEntry<? extends Block>> registeredBlocks;
     public final ImmutableList<BlockEntry<? extends Block>> registeredPartials;
+
+
+    static {
+        REGISTRATE.setCreativeTab(TFMGCreativeModeTabs.BUILDING_TAB);
+    }
+
     @SuppressWarnings("'onRegister(com.tterrag.registrate.util.nullness.NonNullConsumer<? super capture<? extends net.minecraft.world.level.block.Block>>)' in 'com.tterrag.registrate.builders.Builder' cannot be applied to '(com.tterrag.registrate.util.nullness.NonNullConsumer<capture<? super capture<? extends net.minecraft.world.level.block.Block>>>)'")
     public TFMGPalettesVariantEntry(String name, TFMGPaletteStoneTypes paletteStoneVariants) {
         ImmutableList.Builder<BlockEntry<? extends Block>> registeredBlocks = ImmutableList.builder();

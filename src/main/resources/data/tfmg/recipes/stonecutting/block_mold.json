@@ -1,9 +1,0 @@
-
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:clay"
-  },
-  "result": "tfmg:block_mold",
-  "count": 1
-}

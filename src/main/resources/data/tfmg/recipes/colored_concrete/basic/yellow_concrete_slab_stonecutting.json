@@ -1,9 +1,0 @@
-
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "tfmg:yellow_concrete"
-  },
-  "result": "tfmg:yellow_concrete_slab",
-  "count": 2
-}

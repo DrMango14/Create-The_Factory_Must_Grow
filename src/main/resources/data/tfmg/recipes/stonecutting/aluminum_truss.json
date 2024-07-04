@@ -1,9 +1,0 @@
-
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "tag": "forge:ingots/aluminum"
-  },
-  "result": "tfmg:aluminum_truss",
-  "count": 4
-}

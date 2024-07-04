@@ -8,6 +8,7 @@ import java.util.function.Supplier;
 
 import com.drmangotea.tfmg.CreateTFMG;
 import com.drmangotea.tfmg.base.palettes.TFMGPaletteBlockPattern;
+import com.drmangotea.tfmg.registry.TFMGCreativeModeTabs;
 import com.drmangotea.tfmg.registry.TFMGPaletteStoneTypes;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
@@ -53,6 +54,10 @@ public abstract class TFMGPaletteBlockPartial<B extends Block> {
 
     protected TFMGPaletteBlockPartial(String name) {
         this.name = name;
+    }
+
+    static {
+        REGISTRATE.setCreativeTab(TFMGCreativeModeTabs.BUILDING_TAB);
     }
 
     public @NonnullType BlockBuilder<B, CreateRegistrate> create(String variantName, TFMGPaletteBlockPattern pattern,

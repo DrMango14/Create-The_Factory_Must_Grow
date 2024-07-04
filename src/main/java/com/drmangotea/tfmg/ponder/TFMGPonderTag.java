@@ -1,7 +1,5 @@
 package com.drmangotea.tfmg.ponder;
 
-
-
 import com.drmangotea.tfmg.CreateTFMG;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.drmangotea.tfmg.registry.TFMGItems;
@@ -16,6 +14,10 @@ public class TFMGPonderTag extends PonderTag {
 
     public static final PonderTag METALLURGY = create("metallurgy")
             .defaultLang("Metal processing", "Machines related to metal")
+            .item(TFMGItems.STEEL_INGOT.get(), true, false).addToIndex();
+
+    public static final PonderTag ELECTRICITY = create("electricity")
+            .defaultLang("Electric Machinery", "")
             .item(TFMGItems.STEEL_INGOT.get(), true, false).addToIndex();
 
         public TFMGPonderTag(ResourceLocation id) {

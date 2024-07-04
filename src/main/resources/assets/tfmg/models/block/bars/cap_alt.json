@@ -1,8 +1,0 @@
-{
-  "parent": "create:block/bars/cap_alt",
-  "textures": {
-    "bars": "tfmg:block/bars/aluminum_bars",
-    "edge": "tfmg:block/bars/aluminum_bars_edge",
-    "particle": "tfmg:block/bars/aluminum_bars"
-  }
-}

@@ -8,19 +8,17 @@ import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
+import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -28,8 +26,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
-
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
@@ -81,27 +77,27 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
 
        // if(isController)
        //     level.setBlock(getBlockPos().above(5), Blocks.DIAMOND_BLOCK.defaultBlockState(),3);
-//
 
 
 
-       if(controller==null){
-           controller = this;
-           inputInventory.forbidInsertion();
-       } else {
-           inputInventory.allowInsertion();
-       }
 
-      //  if(controller!=this)
-      //      level.setBlock(this.getBlockPos().above(5), Blocks.GOLD_BLOCK.defaultBlockState(),3);
+        if(controller==null){
+            controller = this;
+            inputInventory.forbidInsertion();
+        } else {
+            inputInventory.allowInsertion();
+        }
+
+       //if(controller!=this)
+       //    level.setBlock(this.getBlockPos().above(5), Blocks.GOLD_BLOCK.defaultBlockState(),3);
 
         visualDoorAngle.chase(doorAngle, 0.2f, LerpedFloat.Chaser.EXP);
         visualDoorAngle.tickChaser();
 
 
 
-       // if(controller != null)
-       //     refreshCapability();
+        // if(controller != null)
+        //     refreshCapability();
         if(isController){
             controller = this;
         }
@@ -125,9 +121,9 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
                 progress = 0;
             }else {
 
-                    progress = 100-(timer/(lastRecipe.getProcessingDuration()/100));
-                 }
+                progress = 100-(timer/(lastRecipe.getProcessingDuration()/100));
             }
+        }
 
 
         if(timer>=0&&timer<44){
@@ -161,6 +157,14 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
 
     }
 
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        ItemHelper.dropContents(level, worldPosition, inputInventory);
+    }
+
+
     public void setBlockState(){
 
         if(controller == this){
@@ -174,18 +178,18 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
 
 
         if(timer==-1) {
-             level.setBlock(getBlockPos(),this.getBlockState().setValue(CONTROLLER_TYPE, CokeOvenBlock.ControllerType.MIDDLE_OFF),2);
+            level.setBlock(getBlockPos(),this.getBlockState().setValue(CONTROLLER_TYPE, CokeOvenBlock.ControllerType.MIDDLE_OFF),2);
             if(level.getBlockEntity(getBlockPos().below())instanceof CokeOvenBlockEntity)
                 level.setBlock(getBlockPos().below(),level.getBlockState(getBlockPos().below()).setValue(CONTROLLER_TYPE, CokeOvenBlock.ControllerType.BOTTOM_OFF).setValue(FACING,this.getBlockState().getValue(FACING)),2);
             if(level.getBlockEntity(getBlockPos().above())instanceof CokeOvenBlockEntity)
                 level.setBlock(getBlockPos().above(),level.getBlockState(getBlockPos().above()).setValue(CONTROLLER_TYPE, CokeOvenBlock.ControllerType.TOP_OFF).setValue(FACING,this.getBlockState().getValue(FACING)),2);
-                }else {
-                    level.setBlock(getBlockPos(),this.getBlockState().setValue(CONTROLLER_TYPE, CokeOvenBlock.ControllerType.MIDDLE_ON),2);
+        }else {
+            level.setBlock(getBlockPos(),this.getBlockState().setValue(CONTROLLER_TYPE, CokeOvenBlock.ControllerType.MIDDLE_ON),2);
             if(level.getBlockEntity(getBlockPos().below())instanceof CokeOvenBlockEntity)
                 level.setBlock(getBlockPos().below(),level.getBlockState(getBlockPos().below()).setValue(CONTROLLER_TYPE, CokeOvenBlock.ControllerType.BOTTOM_ON).setValue(FACING,this.getBlockState().getValue(FACING)),2);
             if(level.getBlockEntity(getBlockPos().above())instanceof CokeOvenBlockEntity)
-               level.setBlock(getBlockPos().above(),level.getBlockState(getBlockPos().above()).setValue(CONTROLLER_TYPE, CokeOvenBlock.ControllerType.TOP_ON).setValue(FACING,this.getBlockState().getValue(FACING)),2);
-            }
+                level.setBlock(getBlockPos().above(),level.getBlockState(getBlockPos().above()).setValue(CONTROLLER_TYPE, CokeOvenBlock.ControllerType.TOP_ON).setValue(FACING,this.getBlockState().getValue(FACING)),2);
+        }
 
 
 
@@ -207,17 +211,17 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
                 (tank1.getPrimaryHandler().getFluidAmount()+lastRecipe.getFluidResults().get(0).getAmount())<=tank1.getPrimaryHandler().getCapacity(
 
 
-        )){
+                )){
             timer = lastRecipe.getProcessingDuration();
             inputInventory.setItem(0,new ItemStack(inputInventory.getItem(0).getItem(),inputInventory.getItem(0).getCount()-1));
 
         }
-      //  if(lastRecipe != null)
-      //      if((tank1.getPrimaryHandler().getFluidAmount()+lastRecipe.getFluidResults().get(0).getAmount())>tank1.getPrimaryHandler().getCapacity())
-      //          timer = -1;
-      //  if(lastRecipe != null)
-      //      if((tank2.getPrimaryHandler().getFluidAmount()+CARBON_DIOXIDE_PRODUCTION)>tank2.getPrimaryHandler().getCapacity())
-      //          timer = -1;
+        //  if(lastRecipe != null)
+        //      if((tank1.getPrimaryHandler().getFluidAmount()+lastRecipe.getFluidResults().get(0).getAmount())>tank1.getPrimaryHandler().getCapacity())
+        //          timer = -1;
+        //  if(lastRecipe != null)
+        //      if((tank2.getPrimaryHandler().getFluidAmount()+CARBON_DIOXIDE_PRODUCTION)>tank2.getPrimaryHandler().getCapacity())
+        //          timer = -1;
 
 
         if(lastRecipe!=null
@@ -247,16 +251,14 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
         //    lastRecipe = recipe.get();
         //})
         BlockPos toSpawn = getBlockPos().below().relative(this.getBlockState().getValue(FACING));
-        //
-       // if(level.isClientSide) {
-       //     RegistryAccess registryAccess = Minecraft.getInstance().level.registryAccess();
+
         if(lastRecipe == null)
             return;
 
-            ItemEntity itemToSpawn = new ItemEntity(level, toSpawn.getX() + 0.5f, toSpawn.getY() + 0.5f, toSpawn.getZ() + 0.5f, lastRecipe.getResultItem(null).copy());
-            level.addFreshEntity(itemToSpawn);
+        ItemEntity itemToSpawn = new ItemEntity(level, toSpawn.getX() + 0.5f, toSpawn.getY() + 0.5f, toSpawn.getZ() + 0.5f, lastRecipe.getResultItem(null).copy());
+        level.addFreshEntity(itemToSpawn);
 
-       // }
+        // }
 
     }
 
@@ -276,7 +278,7 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
                     if (controller.inputInventory != null){
                         fluidCapability = LazyOptional.of(() -> new CombinedTankWrapper(controller.tank1.getPrimaryHandler(), controller.tank2.getPrimaryHandler()));
                         itemCapability = LazyOptional.of(() -> new CombinedInvWrapper(controller.inputInventory));
-    }
+                    }
 
 
     }
@@ -297,10 +299,10 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
 
 
                 CokeOvenBlockEntity checkedBE = (CokeOvenBlockEntity) level.getBlockEntity(checkedPos);
-                    checkedBE.controller = this;
+                checkedBE.controller = this;
 
-                    if(checkedBE.getBlockState().getValue(FACING)!=getBlockState().getValue(FACING))
-                        level.setBlock(checkedPos,checkedBE.getBlockState().setValue(FACING,getBlockState().getValue(FACING)),2);
+                if(checkedBE.getBlockState().getValue(FACING)!=getBlockState().getValue(FACING))
+                    level.setBlock(checkedPos,checkedBE.getBlockState().setValue(FACING,getBlockState().getValue(FACING)),2);
 
                 checkedPos = checkedPos.below();
             }
@@ -327,23 +329,23 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
 
 
 
-                    if(checkedPos == this.getBlockPos()){
-                        if(!isCokeOvenBlock(checkedPos,true)) {
-                            isController = false;
-                            return false;
-                        }
+                if(checkedPos == this.getBlockPos()){
+                    if(!isCokeOvenBlock(checkedPos,true)) {
+                        isController = false;
+                        return false;
                     }
-                    else
+                }
+                else
 //
                     if(!isCokeOvenBlock(checkedPos)) {
                         isController = false;
                         return false;
                     }
 //
-                    if(occupiedByOtherController(checkedPos)) {
-                        isController = false;
-                        return false;
-                    }
+                if(occupiedByOtherController(checkedPos)) {
+                    isController = false;
+                    return false;
+                }
 
 
 
@@ -387,10 +389,10 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
         //    Lang.translate("goggles.surface_scanner.distance",controller.getBlockPos().getY())
         //            .style(ChatFormatting.DARK_BLUE)
         //            .forGoggles(tooltip,1);
-       // if(controller !=null)
-       //     Lang.translate("goggles.surface_scanner.distance",controller.timer)
-       //             .style(ChatFormatting.DARK_BLUE)
-       //             .forGoggles(tooltip,1);
+        // if(controller !=null)
+        //     Lang.translate("goggles.surface_scanner.distance",controller.timer)
+        //             .style(ChatFormatting.DARK_BLUE)
+        //             .forGoggles(tooltip,1);
 //
         //if(controller==null){
         //    Lang.translate("aaaaaaaaaaaaaaaaaaaaaaaaaaa")
@@ -398,8 +400,8 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
         //            .forGoggles(tooltip,1);
 //
 
-       //     return true;
-       // }
+        //     return true;
+        // }
         if(controller!=null)
             if(controller.getBlockPos() == getBlockPos()&&!isValid()){
                 Lang.translate("goggles.coke_oven.invalid")
@@ -420,7 +422,7 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
 
         if(lastRecipe != null)
             if((tank1.getPrimaryHandler().getFluidAmount()+lastRecipe.getFluidResults().get(0).getAmount())>tank1.getPrimaryHandler().getCapacity()
-            &&(tank2.getPrimaryHandler().getFluidAmount()+CARBON_DIOXIDE_PRODUCTION)>tank2.getPrimaryHandler().getCapacity()) {
+                    &&(tank2.getPrimaryHandler().getFluidAmount()+CARBON_DIOXIDE_PRODUCTION)>tank2.getPrimaryHandler().getCapacity()) {
                 Lang.translate("goggles.coke_oven.tank_full")
                         .style(ChatFormatting.DARK_RED)
                         .forGoggles(tooltip,1);
@@ -448,12 +450,12 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
 
 
 
-    //   Lang.translate("goggles.coke_oven.fluid_amount_output",tank1.getPrimaryHandler().getCapacity())
-    //           .style(ChatFormatting.DARK_AQUA)
-    //           .forGoggles(tooltip,1);
-    //   Lang.translate("goggles.coke_oven.fluid_amount_exhaust",tank2.getPrimaryHandler().getCapacity())
-    //           .style(ChatFormatting.DARK_AQUA)
-    //           .forGoggles(tooltip,1);
+        //   Lang.translate("goggles.coke_oven.fluid_amount_output",tank1.getPrimaryHandler().getCapacity())
+        //           .style(ChatFormatting.DARK_AQUA)
+        //           .forGoggles(tooltip,1);
+        //   Lang.translate("goggles.coke_oven.fluid_amount_exhaust",tank2.getPrimaryHandler().getCapacity())
+        //           .style(ChatFormatting.DARK_AQUA)
+        //           .forGoggles(tooltip,1);
         Lang.translate("goggles.coke_oven.item_count",inputInventory.getItem(0).getCount())
                 .style(ChatFormatting.GOLD)
                 .forGoggles(tooltip,1);
@@ -476,12 +478,12 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
         timer = compound.getInt("Timer");
 
 
-       // controller = (CokeOvenBlockEntity) level.getBlockEntity(new BlockPos(
-       //         compound.getInt("controllerX"),
-       //         compound.getInt("controllerY"),
-       //         compound.getInt("controllerZ")
+        // controller = (CokeOvenBlockEntity) level.getBlockEntity(new BlockPos(
+        //         compound.getInt("controllerX"),
+        //         compound.getInt("controllerY"),
+        //         compound.getInt("controllerZ")
 //
-       // ));
+        // ));
 
 
     }
@@ -495,9 +497,9 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
         compound.putInt("Timer", timer);
 
 
-         // compound.putInt("controllerX", controller.getBlockPos().getX());
-         // compound.putInt("controllerY", controller.getBlockPos().getY());
-         // compound.putInt("controllerZ", controller.getBlockPos().getZ());
+        // compound.putInt("controllerX", controller.getBlockPos().getX());
+        // compound.putInt("controllerY", controller.getBlockPos().getY());
+        // compound.putInt("controllerZ", controller.getBlockPos().getZ());
 
 
 

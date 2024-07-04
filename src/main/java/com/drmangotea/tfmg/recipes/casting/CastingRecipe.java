@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.recipes.casting;
 
+
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeParams;
@@ -7,7 +8,6 @@ import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 public class CastingRecipe extends ProcessingRecipe<RecipeWrapper> {
@@ -25,11 +25,11 @@ public class CastingRecipe extends ProcessingRecipe<RecipeWrapper> {
 	protected int getMaxOutputCount() {
 		return 3;
 	}
+
 	@Override
-	protected int getMaxFluidOutputCount() {
+	protected int getMaxFluidInputCount() {
 		return 1;
 	}
-
 
 	public boolean matches(CombinedTankWrapper inv, Level worldIn) {
 		if (inv.getFluidInTank(0).getAmount()==0)
