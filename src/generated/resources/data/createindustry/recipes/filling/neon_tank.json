@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "amount": 1000,
+      "fluid": "createindustry:neon",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:neon_bucket"
+    }
+  ]
+}

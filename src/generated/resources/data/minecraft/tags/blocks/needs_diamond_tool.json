@@ -1,7 +1,7 @@
 {
   "values": [
+    "createindustry:rebar_concrete",
     "createindustry:rebar_concrete_wall",
-    "createindustry:rebar_concrete_stairs",
-    "createindustry:rebar_concrete"
+    "createindustry:rebar_concrete_stairs"
   ]
 }

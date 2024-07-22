@@ -1,6 +1,7 @@
 package com.drmangotea.createindustry.registry;
 
 import com.drmangotea.createindustry.base.*;
+import com.drmangotea.createindustry.base.multiblock.FluidOutputBlock;
 import com.drmangotea.createindustry.blocks.TFMGHorizontalDirectionalBlock;
 import com.drmangotea.createindustry.blocks.cogwheeels.TFMGCogWheelBlock;
 import com.drmangotea.createindustry.blocks.cogwheeels.TFMGCogwheelBlockItem;
@@ -68,6 +69,8 @@ import com.drmangotea.createindustry.blocks.machines.firebox.FireboxBlock;
 import com.drmangotea.createindustry.blocks.machines.firebox.FireboxGenerator;
 import com.drmangotea.createindustry.blocks.machines.flarestack.FlarestackBlock;
 import com.drmangotea.createindustry.blocks.machines.flarestack.FlarestackGenerator;
+import com.drmangotea.createindustry.blocks.machines.metal_processing.blast_stove.BlastStoveBlock;
+import com.drmangotea.createindustry.blocks.machines.metal_processing.blast_stove.BlastStoveGenerator;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.coke_oven.CokeOvenCTBehavior;
 import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.IndustrialPipeBlock;
 import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.controller.DistillationControllerBlock;
@@ -527,7 +530,18 @@ public class TFMGBlocks {
             .register();
 
     //-----------------------MACHINES---------------------------//
-
+    
+    public static final BlockEntry<FluidOutputBlock> FLUID_OUTPUT = REGISTRATE.block("fluid_output", FluidOutputBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .transform(TagGen.pickaxeOnly())
+            .blockstate(simpleCubeAll("fluid_output"))
+            .properties(BlockBehaviour.Properties::noOcclusion)
+            .addLayer(() -> RenderType::cutoutMipped)
+            .item()
+            .build()
+            .register();
+    
+    
     public static final BlockEntry<LightBulbBlock> LIGHT_BULB =
             REGISTRATE.block("light_bulb", LightBulbBlock::new)
                     .initialProperties(() -> Blocks.IRON_BLOCK)
@@ -1112,6 +1126,17 @@ public class TFMGBlocks {
     ///////////
 
     //Blast Furnace
+    
+    public static final BlockEntry<BlastStoveBlock> BLAST_STOVE = REGISTRATE.block("blast_stove", BlastStoveBlock::new)
+            .initialProperties(() -> Blocks.BRICKS)
+            .properties(p -> p.color(MaterialColor.COLOR_RED))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .blockstate(new BlastStoveGenerator()::generate)
+            .transform(pickaxeOnly())
+            .item()
+            .transform(customItemModel())
+            .lang("Blast Stove")
+            .register();
 
     public static final BlockEntry<Block> FIREPROOF_BRICKS = REGISTRATE.block("fireproof_bricks", Block::new)
             .initialProperties(() -> Blocks.BRICKS)
@@ -1901,11 +1926,47 @@ public class TFMGBlocks {
     //        .register();
 
 
-    public static final BlockEntry<Block> CONCRETE = generateConcrete();
-
-    static {
-        generateCautionBlocks();
-    }
+    public static final BlockEntry<Block> CONCRETE = REGISTRATE.block("concrete", Block::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .blockstate(simpleCubeAll("concrete"))
+            .tag(BlockTags.NEEDS_STONE_TOOL)
+            .transform(tagBlockAndItem("concrete"))
+            .build()
+            .lang("Concrete")
+            .register();
+    
+    public static final BlockEntry<WallBlock> CONCRETE_WALL = REGISTRATE.block("concrete_wall", WallBlock::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> TFMGVanillaBlockStates.generateWallBlockState(c, p, "concrete"))
+            .tag(BlockTags.NEEDS_STONE_TOOL)
+            .tag(BlockTags.WALLS)
+            .recipe((c, p) -> p.stonecutting(DataIngredient.items(TFMGBlocks.CONCRETE.get()), c::get, 1))
+            .item()
+            .transform(b -> TFMGVanillaBlockStates.transformWallItem(b, "concrete"))
+            .build()
+            .lang("Concrete Wall")
+            .register();
+    
+    public static final BlockEntry<StairBlock> CONCRETE_STAIRS = REGISTRATE.block("concrete_stairs", p -> new StairBlock(() -> TFMGBlocks.CONCRETE.get().defaultBlockState(), p))
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> TFMGVanillaBlockStates.generateStairBlockState(c, p, "concrete"))
+            .tag(BlockTags.NEEDS_STONE_TOOL)
+            .tag(BlockTags.STAIRS)
+            .recipe((c, p) -> p.stonecutting(DataIngredient.items(TFMGBlocks.CONCRETE.get()), c::get, 1))
+            .item()
+            .transform(b -> TFMGVanillaBlockStates.transformStairItem(b, "concrete"))
+            .build()
+            .lang("Concrete Stairs")
+            .register();
 
 
     public static final BlockEntry<SlabBlock> CONCRETE_SLAB = REGISTRATE.block("concrete_slab", SlabBlock::new)
@@ -1915,7 +1976,7 @@ public class TFMGBlocks {
             .transform(pickaxeOnly())
             .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, "concrete"))
             .tag(BlockTags.NEEDS_STONE_TOOL)
-            .tag(BlockTags.WALLS)
+            .tag(BlockTags.SLABS)
             .recipe((c, p) -> p.stonecutting(DataIngredient.items(TFMGBlocks.CONCRETE.get()), c::get, 2))
             .item()
             .transform(customItemModel("concrete_bottom"))
@@ -1923,8 +1984,49 @@ public class TFMGBlocks {
             .register();
 
 
-    public static final BlockEntry<Block> REBAR_CONCRETE = withVariants("rebar_concrete", Blocks.STONE,
-            MaterialColor.COLOR_GRAY, BlockTags.NEEDS_DIAMOND_TOOL, SoundType.STONE, 40, true);
+    public static final BlockEntry<Block> REBAR_CONCRETE = REGISTRATE.block("rebar_concrete", Block::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.sound(SoundType.STONE))
+            .properties(p -> p.strength(40, 40))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .blockstate(simpleCubeAll("rebar_concrete"))
+            .tag(BlockTags.NEEDS_DIAMOND_TOOL)
+            .transform(tagBlockAndItem("rebar_concrete"))
+            .build()
+            //.lang(displayName)
+            .register();
+    
+    public static final BlockEntry<WallBlock> REBAR_CONCRETE_WALL = REGISTRATE.block("rebar_concrete_wall", WallBlock::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.sound(SoundType.STONE))
+            .properties(p -> p.strength(40, 40))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> TFMGVanillaBlockStates.generateWallBlockState(c, p, "rebar_concrete"))
+            .tag(BlockTags.NEEDS_DIAMOND_TOOL)
+                    .tag(BlockTags.WALLS)
+                    .item()
+                    .transform(b -> TFMGVanillaBlockStates.transformWallItem(b, "rebar_concrete"))
+            .build()
+            .register();
+    
+    public static final BlockEntry<StairBlock> REBAR_CONCRETE_STAIRS = REGISTRATE.block("rebar_concrete_stairs", p -> new StairBlock(() -> TFMGBlocks.CONCRETE.get().defaultBlockState(), p))
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.sound(SoundType.STONE))
+            .properties(p -> p.strength(40, 40))
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> TFMGVanillaBlockStates.generateStairBlockState(c, p, "rebar_concrete"))
+            .tag(BlockTags.NEEDS_DIAMOND_TOOL)
+                .tag(BlockTags.STAIRS)
+                .item()
+                .transform(b -> TFMGVanillaBlockStates.transformStairItem(b, "rebar_concrete"))
+            .build()
+            .register();
 
     public static final BlockEntry<SlabBlock> REBAR_CONCRETE_SLAB = REGISTRATE.block("rebar_concrete_slab", SlabBlock::new)
             .initialProperties(() -> Blocks.STONE)
@@ -1935,218 +2037,11 @@ public class TFMGBlocks {
             .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, "rebar_concrete"))
             .tag(BlockTags.NEEDS_STONE_TOOL)
             .recipe((c, p) -> p.stonecutting(DataIngredient.items(TFMGBlocks.REBAR_CONCRETE.get()), c::get, 2))
-            .tag(BlockTags.WALLS)
+            .tag(BlockTags.SLABS)
             .item()
             .transform(customItemModel("rebar_concrete_bottom"))
             .lang("Rebar Concrete Slab")
             .register();
-
-
-    public static BlockEntry<Block> generateConcrete() {
-
-
-        generateColoredConcrete();
-
-
-        REGISTRATE.block("concrete_wall", WallBlock::new)
-                .initialProperties(() -> Blocks.STONE)
-                .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
-                .properties(p -> p.requiresCorrectToolForDrops())
-                .transform(pickaxeOnly())
-                .blockstate((c, p) -> TFMGVanillaBlockStates.generateWallBlockState(c, p, "concrete"))
-                .tag(BlockTags.NEEDS_STONE_TOOL)
-                .tag(BlockTags.WALLS)
-                .recipe((c, p) -> p.stonecutting(DataIngredient.items(TFMGBlocks.CONCRETE.get()), c::get, 1))
-                .item()
-                .transform(b -> TFMGVanillaBlockStates.transformWallItem(b, "concrete"))
-                .build()
-                .lang("Concrete Wall")
-                .register();
-
-        REGISTRATE.block("concrete_stairs", p -> new StairBlock(() -> TFMGBlocks.CONCRETE.get().defaultBlockState(), p))
-                .initialProperties(() -> Blocks.STONE)
-                .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
-                .properties(p -> p.requiresCorrectToolForDrops())
-                .transform(pickaxeOnly())
-                .blockstate((c, p) -> TFMGVanillaBlockStates.generateStairBlockState(c, p, "concrete"))
-                .tag(BlockTags.NEEDS_STONE_TOOL)
-                .tag(BlockTags.STAIRS)
-                .recipe((c, p) -> p.stonecutting(DataIngredient.items(TFMGBlocks.CONCRETE.get()), c::get, 1))
-                .item()
-                .transform(b -> TFMGVanillaBlockStates.transformStairItem(b, "concrete"))
-                .build()
-                .lang("Concrete Stairs")
-                .register();
-
-
-        return REGISTRATE.block("concrete", Block::new)
-                .initialProperties(() -> Blocks.STONE)
-                .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
-                .properties(p -> p.requiresCorrectToolForDrops())
-                .transform(pickaxeOnly())
-                .blockstate(simpleCubeAll("concrete"))
-                .tag(BlockTags.NEEDS_STONE_TOOL)
-                .transform(tagBlockAndItem("concrete"))
-                .build()
-                .lang("Concrete")
-                .register();
-    }
-
-
-    //this saved so much time
-    public static void generateColoredConcrete() {
-        String[] colours = {"black", "white", "blue", "light_blue", "red", "green", "lime", "pink", "magenta", "yellow", "gray", "light_gray", "brown", "cyan", "purple", "orange"};
-
-
-        for (String color : colours) {
-            String firstLetter = color.substring(0, 1).toUpperCase();
-            String colorWithoutC = color.substring(1);
-
-            String upperCaseColor = firstLetter + colorWithoutC;
-            String light = "Light";
-            if (upperCaseColor.contains(light)) {
-                String nameWithoutLight = upperCaseColor.substring(6);
-
-                String firstLetter2 = nameWithoutLight.substring(0, 1).toUpperCase();
-                String colorWithoutC2 = nameWithoutLight.substring(1);
-
-                upperCaseColor = light + " " + firstLetter2 + colorWithoutC2;
-
-
-            }
-            REGISTRATE.block(color + "_concrete", Block::new)
-                    .initialProperties(() -> Blocks.STONE)
-                    .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
-                    .properties(p -> p.requiresCorrectToolForDrops())
-                    .transform(pickaxeOnly())
-                    .blockstate(simpleCubeAll(color + "_concrete"))
-                    .tag(BlockTags.NEEDS_STONE_TOOL)
-                    .item()
-                    .build()
-                    .lang(upperCaseColor + " Concrete")
-                    .register();
-
-
-            REGISTRATE.block(color + "_concrete_wall", WallBlock::new)
-                    .initialProperties(() -> Blocks.STONE)
-                    .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
-                    .properties(p -> p.requiresCorrectToolForDrops())
-                    .transform(pickaxeOnly())
-                    .blockstate((c, p) -> TFMGVanillaBlockStates.generateWallBlockState(c, p, color + "_concrete"))
-                    .tag(BlockTags.NEEDS_STONE_TOOL)
-                    .tag(BlockTags.WALLS)
-                    .item()
-                    .transform(b -> TFMGVanillaBlockStates.transformWallItem(b, color + "_concrete"))
-                    .build()
-                    .lang(upperCaseColor + " Concrete Wall")
-                    .register();
-
-            REGISTRATE.block(color + "_concrete_stairs", p -> new StairBlock(() -> TFMGBlocks.CONCRETE.get().defaultBlockState(), p))
-                    .initialProperties(() -> Blocks.STONE)
-                    .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
-                    .properties(p -> p.requiresCorrectToolForDrops())
-                    .transform(pickaxeOnly())
-                    .blockstate((c, p) -> TFMGVanillaBlockStates.generateStairBlockState(c, p, color + "_concrete"))
-                    .tag(BlockTags.NEEDS_STONE_TOOL)
-                    .tag(BlockTags.STAIRS)
-                    .item()
-                    .transform(b -> TFMGVanillaBlockStates.transformStairItem(b, color + "_concrete"))
-                    .build()
-                    .lang(upperCaseColor + " Concrete Stairs")
-                    .register();
-
-
-            REGISTRATE.block(color + "_concrete_slab", SlabBlock::new)
-                    .initialProperties(() -> Blocks.STONE)
-                    .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
-                    .properties(p -> p.requiresCorrectToolForDrops())
-                    .transform(pickaxeOnly())
-                    .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, color + "_concrete"))
-                    .tag(BlockTags.NEEDS_STONE_TOOL)
-                    .tag(BlockTags.WALLS)
-                    .item()
-                    .transform(customItemModel(color + "_concrete_bottom"))
-                    .lang(upperCaseColor + " Concrete Slab")
-                    .register();
-
-
-        }
-    }
-
-
-    public static void generateCautionBlocks() {
-        String[] colours = {"white", "blue", "light_blue", "red", "green", "lime", "pink", "magenta", "yellow", "gray", "light_gray", "brown", "cyan", "purple", "orange"};
-
-
-        for (String color : colours) {
-            String firstLetter = color.substring(0, 1).toUpperCase();
-            String colorWithoutC = color.substring(1);
-
-            String upperCaseColor = firstLetter + colorWithoutC;
-            String light = "Light";
-            if (upperCaseColor.contains(light)) {
-                String nameWithoutLight = upperCaseColor.substring(6);
-
-                String firstLetter2 = nameWithoutLight.substring(0, 1).toUpperCase();
-                String colorWithoutC2 = nameWithoutLight.substring(1);
-
-                upperCaseColor = light + " " + firstLetter2 + colorWithoutC2;
-
-
-            }
-
-            REGISTRATE.block(color + "_caution_block", TFMGHorizontalDirectionalBlock::new)
-                    .initialProperties(() -> Blocks.COPPER_BLOCK)
-                    .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
-                    .properties(p -> p.requiresCorrectToolForDrops())
-                    .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-                    .transform(pickaxeOnly())
-                    .blockstate((c, p) -> p.horizontalBlock(c.get(), p.models()
-                            .withExistingParent(c.getName(), p.modLoc("block/caution_block"))
-                            .texture("0", p.modLoc("block/caution_block/" + color))
-                            .texture("particle", p.modLoc("block/caution_block/" + color))
-                    ))
-                    .tag(BlockTags.NEEDS_STONE_TOOL)
-                    .item()
-                    .build()
-                    .lang(upperCaseColor + " Caution Block")
-                    .register();
-
-
-            //REGISTRATE.block(color + "_caution_block_stairs", p -> new StairBlock(()-> TFMGBlocks.CONCRETE.get().defaultBlockState(),p))
-            //        .initialProperties(() -> Blocks.COPPER_BLOCK)
-            //        .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
-            //        .properties(p -> p.requiresCorrectToolForDrops())
-            //        .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-            //        .transform(pickaxeOnly())
-            //        .blockstate((c, p) -> TFMGVanillaBlockStates.generateStairBlockState(c, p, color + "_caution_block"))
-            //        .tag(BlockTags.NEEDS_STONE_TOOL)
-            //        .tag(BlockTags.STAIRS)
-            //        .item()
-            //        .transform(b -> TFMGVanillaBlockStates.transformStairItem(b, color + "_caution_block"))
-            //        .build()
-            //        .lang(upperCaseColor + " Caution Block Stairs")
-            //        .register();
-//
-//
-//
-            //REGISTRATE.block(color + "_caution_block_slab", SlabBlock::new)
-            //        .initialProperties(() -> Blocks.COPPER_BLOCK)
-            //        .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
-            //        .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-            //        .properties(p -> p.requiresCorrectToolForDrops())
-            //        .transform(pickaxeOnly())
-            //        .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, color + "_caution_block"))
-            //        .tag(BlockTags.NEEDS_STONE_TOOL)
-            //        .tag(BlockTags.WALLS)
-            //        .item()
-            //        .transform(customItemModel(color+"_caution_block_bottom"))
-            //        .lang(upperCaseColor + " Caution Block Slab")
-            //        .register();
-
-
-        }
-    }
 
 
     public static BlockEntry<Block> withVariants(String name, Block properties, MaterialColor color, TagKey<Block> toolRequired, SoundType sound, int strenght, boolean wall) {
@@ -2211,5 +2106,6 @@ public class TFMGBlocks {
     public static void register() {
         TFMGEncasedBlocks.register();
         TFMGPipes.register();
+        TFMGColoredBlocks.register();
     }
 }

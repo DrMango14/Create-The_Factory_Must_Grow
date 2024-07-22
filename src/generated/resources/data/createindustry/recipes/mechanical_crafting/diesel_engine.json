@@ -1,0 +1,35 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "A": {
+      "tag": "forge:ingots/aluminum"
+    },
+    "C": {
+      "item": "createindustry:heavy_machinery_casing"
+    },
+    "H": {
+      "item": "createindustry:heavy_plate"
+    },
+    "O": {
+      "tag": "forge:ingots/steel"
+    },
+    "S": {
+      "item": "createindustry:steel_mechanism"
+    },
+    "T": {
+      "item": "createindustry:steel_fluid_tank"
+    }
+  },
+  "pattern": [
+    " O ",
+    " A ",
+    "AOA",
+    "SCS",
+    "STS",
+    "HHH"
+  ],
+  "result": {
+    "item": "createindustry:diesel_engine"
+  }
+}

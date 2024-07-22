@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "tag": "minecraft:planks"
+    },
+    {
+      "amount": 200,
+      "fluid": "createindustry:creosote",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:hardened_planks"
+    }
+  ]
+}

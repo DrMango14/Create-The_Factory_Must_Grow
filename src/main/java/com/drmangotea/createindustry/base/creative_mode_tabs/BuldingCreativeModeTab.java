@@ -1,7 +1,7 @@
 package com.drmangotea.createindustry.base.creative_mode_tabs;
 
-import com.drmangotea.createindustry.registry.TFMGBlocks;
 
+import com.drmangotea.createindustry.base.TFMGColoredBlocks;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 
@@ -16,6 +16,6 @@ public class BuldingCreativeModeTab extends TFMGCreativeModeTab {
 
     @Override
     public ItemStack makeIcon() {
-        return TFMGBlocks.CONCRETE.asStack();
+        return TFMGColoredBlocks.MAGENTA_CONCRETE.asStack();
     }
 }

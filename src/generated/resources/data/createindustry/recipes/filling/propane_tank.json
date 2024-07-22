@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "amount": 1000,
+      "fluid": "createindustry:propane",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:propane_bucket"
+    }
+  ]
+}

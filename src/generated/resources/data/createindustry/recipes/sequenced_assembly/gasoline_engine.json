@@ -1,0 +1,85 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "createindustry:engine_base"
+  },
+  "loops": 8,
+  "results": [
+    {
+      "chance": 120.0,
+      "count": 2,
+      "item": "createindustry:gasoline_engine"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "createindustry:unfinished_gasoline_engine"
+        },
+        {
+          "amount": 1000,
+          "fluid": "createindustry:lubrication_oil",
+          "nbt": {}
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unfinished_gasoline_engine"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createindustry:unfinished_gasoline_engine"
+        },
+        {
+          "item": "createindustry:engine_chamber"
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unfinished_gasoline_engine"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createindustry:unfinished_gasoline_engine"
+        },
+        {
+          "item": "createindustry:screw"
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unfinished_gasoline_engine"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createindustry:unfinished_gasoline_engine"
+        },
+        {
+          "item": "createindustry:screwdriver"
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unfinished_gasoline_engine"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "createindustry:unfinished_gasoline_engine"
+  }
+}

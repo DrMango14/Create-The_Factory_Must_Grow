@@ -230,9 +230,50 @@ public class TFMGTags {
 
         private static void init() {}
     }
+    
+    public enum TFMGBlockTags {
+        AIR_INTAKE_TRANSPARENT,
+        ;
+        
+        public final TagKey<Block> tag;
+        public final boolean alwaysDatagen;
+        
+        TFMGBlockTags() {
+            this(MOD);
+        }
+        
+        TFMGBlockTags(TFMGTags.NameSpace namespace) {
+            this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+        }
+        
+        TFMGBlockTags(TFMGTags.NameSpace namespace, String path) {
+            this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+        }
+        
+        TFMGBlockTags(TFMGTags.NameSpace namespace, boolean optional, boolean alwaysDatagen) {
+            this(namespace, null, optional, alwaysDatagen);
+        }
+        
+        TFMGBlockTags(TFMGTags.NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
+            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
+            if (optional) {
+                tag = optionalTag(ForgeRegistries.BLOCKS, id);
+            } else {
+                tag = BlockTags.create(id);
+            }
+            this.alwaysDatagen = alwaysDatagen;
+        }
+        
+        public boolean matches(BlockState state) {
+            return state.is(tag);
+        }
+        
+        private static void init() {}
+
+    }
 
     public static void init() {
-      //  TFMGBlockTags.init();
+        TFMGBlockTags.init();
       //  TFMGItemTags.init();
         TFMGFluidTags.init();
         TFMGEntityTags.init();

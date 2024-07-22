@@ -1,0 +1,29 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "A": {
+      "item": "createindustry:rebar"
+    },
+    "H": {
+      "item": "createindustry:heavy_plate"
+    },
+    "I": {
+      "item": "createindustry:steel_pipe"
+    },
+    "P": {
+      "item": "createindustry:steel_mechanism"
+    },
+    "S": {
+      "item": "createindustry:industrial_pipe"
+    }
+  },
+  "pattern": [
+    "HIIIS",
+    "HPPIS",
+    "   A "
+  ],
+  "result": {
+    "item": "createindustry:quad_potato_cannon"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "A": {
+      "tag": "forge:ingots/aluminum"
+    },
+    "H": {
+      "item": "createindustry:heavy_plate"
+    },
+    "I": {
+      "item": "createindustry:steel_pipe"
+    },
+    "P": {
+      "item": "createindustry:steel_mechanism"
+    },
+    "T": {
+      "item": "createindustry:steel_fluid_tank"
+    }
+  },
+  "pattern": [
+    "IIPPH",
+    " ATAH"
+  ],
+  "result": {
+    "item": "createindustry:flamethrower"
+  }
+}

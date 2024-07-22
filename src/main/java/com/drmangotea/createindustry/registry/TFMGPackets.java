@@ -2,8 +2,10 @@ package com.drmangotea.createindustry.registry;
 
 import com.drmangotea.createindustry.CreateTFMG;
 import com.drmangotea.createindustry.items.weapons.advanced_potato_cannon.AdvancedPotatoCannonPacket;
+import com.drmangotea.createindustry.items.weapons.flamethrover.FlamethrowerFuelTypeManager;
 import com.drmangotea.createindustry.items.weapons.quad_potato_cannon.QuadPotatoCannonPacket;
 
+import com.simibubi.create.content.equipment.potatoCannon.PotatoProjectileTypeManager;
 import com.simibubi.create.foundation.networking.SimplePacketBase;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -24,7 +26,8 @@ import static net.minecraftforge.network.NetworkDirection.PLAY_TO_CLIENT;
 public enum TFMGPackets {
 
     ADVANCED_POTATO_CANNON(AdvancedPotatoCannonPacket.class, AdvancedPotatoCannonPacket::new, PLAY_TO_CLIENT),
-    QUAD_POTATO_CANNON(QuadPotatoCannonPacket.class, QuadPotatoCannonPacket::new, PLAY_TO_CLIENT)
+    QUAD_POTATO_CANNON(QuadPotatoCannonPacket.class, QuadPotatoCannonPacket::new, PLAY_TO_CLIENT),
+    SYNC_FLAMETHROWER_FUEL_TYPES(FlamethrowerFuelTypeManager.SyncPacket.class, FlamethrowerFuelTypeManager.SyncPacket::new, NetworkDirection.PLAY_TO_CLIENT),
     ;
 
     public static final ResourceLocation CHANNEL_NAME = CreateTFMG.asResource("main");

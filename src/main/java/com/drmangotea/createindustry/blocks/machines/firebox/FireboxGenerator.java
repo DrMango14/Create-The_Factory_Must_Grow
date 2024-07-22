@@ -23,7 +23,7 @@ public class FireboxGenerator extends SpecialBlockStateGen {
 
     protected int getYRotation(BlockState state) {
         short value;
-        switch ((Direction)state.getValue(HorizontalDirectionalBlock.FACING)) {
+        switch (state.getValue(HorizontalDirectionalBlock.FACING)) {
             case NORTH:
                 value = 0;
                 break;
@@ -45,6 +45,6 @@ public class FireboxGenerator extends SpecialBlockStateGen {
     }
 
     public <T extends Block> ModelFile getModel(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov, BlockState state) {
-        return (Boolean)(state.getValue(FireboxBlock.HEAT_LEVEL)!= BlazeBurnerBlock.HeatLevel.SMOULDERING) ? AssetLookup.partialBaseModel(ctx, prov, new String[]{"lit"}) : AssetLookup.partialBaseModel(ctx, prov, new String[0]);
+        return (Boolean)(state.getValue(FireboxBlock.HEAT_LEVEL)!= BlazeBurnerBlock.HeatLevel.SMOULDERING) ? AssetLookup.partialBaseModel(ctx, prov, "lit") : AssetLookup.partialBaseModel(ctx, prov);
     }
 }

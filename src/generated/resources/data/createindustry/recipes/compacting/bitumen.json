@@ -1,0 +1,15 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "amount": 10,
+      "fluid": "createindustry:heavy_oil",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:bitumen"
+    }
+  ]
+}

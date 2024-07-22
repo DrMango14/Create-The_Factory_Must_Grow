@@ -54,6 +54,7 @@ public class TFMGFluids {
     public static final FluidEntry<VirtualFluid>
 
             AIR = gas("air"),
+            HEATED_AIR = gas("heated_air"),
 
             CARBON_DIOXIDE = gas("carbon_dioxide"),
             ETHYLENE = gas("ethylene"),
@@ -61,7 +62,8 @@ public class TFMGFluids {
             PROPANE = gas("propane",TFMGTags.TFMGFluidTags.FLAMMABLE.tag),
             BUTANE = gas("butane",TFMGTags.TFMGFluidTags.FLAMMABLE.tag),
             LPG = gas("lpg",TFMGTags.TFMGFluidTags.LPG.tag,TFMGTags.TFMGFluidTags.FLAMMABLE.tag),
-            NEON = gas("neon")
+            NEON = gas("neon"),
+            BLAST_FURNACE_GAS = gas("blast_furnace_gas",TFMGTags.TFMGFluidTags.FLAMMABLE.tag)
         ;
     public static final FluidEntry<ForgeFlowingFluid.Flowing>
             CRUDE_OIL = flammableFluid("crude_oil",TFMGTags.TFMGFluidTags.CRUDE_OIL.tag),

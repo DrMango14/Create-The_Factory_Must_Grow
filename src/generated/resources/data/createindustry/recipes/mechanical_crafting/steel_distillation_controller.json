@@ -1,0 +1,32 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "C": {
+      "item": "createindustry:heavy_machinery_casing"
+    },
+    "D": {
+      "item": "create:display_board"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    },
+    "H": {
+      "item": "createindustry:heavy_plate"
+    },
+    "I": {
+      "item": "createindustry:industrial_pipe"
+    },
+    "P": {
+      "item": "createindustry:steel_mechanism"
+    }
+  },
+  "pattern": [
+    "HIH",
+    "PDP",
+    "ECE"
+  ],
+  "result": {
+    "item": "createindustry:steel_distillation_controller"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "createindustry:distillation",
+  "ingredients": [
+    {
+      "amount": 100,
+      "fluid": "createindustry:naphtha",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 50,
+      "fluid": "createindustry:ethylene"
+    },
+    {
+      "amount": 50,
+      "fluid": "createindustry:propylene"
+    }
+  ]
+}

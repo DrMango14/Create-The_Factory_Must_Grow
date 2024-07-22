@@ -1,0 +1,19 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "A": {
+      "tag": "forge:ingots/aluminum"
+    },
+    "F": {
+      "item": "minecraft:flint"
+    }
+  },
+  "pattern": [
+    "F",
+    "A"
+  ],
+  "result": {
+    "item": "createindustry:spark_plug"
+  }
+}

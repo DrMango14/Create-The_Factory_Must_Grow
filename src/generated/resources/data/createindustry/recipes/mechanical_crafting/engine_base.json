@@ -1,0 +1,22 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "A": {
+      "item": "create:shaft"
+    },
+    "C": {
+      "item": "createindustry:heavy_machinery_casing"
+    },
+    "H": {
+      "item": "createindustry:heavy_plate"
+    }
+  },
+  "pattern": [
+    "HAH",
+    "HCH"
+  ],
+  "result": {
+    "item": "createindustry:engine_base"
+  }
+}

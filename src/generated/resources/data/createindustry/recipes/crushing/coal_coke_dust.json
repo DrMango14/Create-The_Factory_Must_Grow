@@ -1,0 +1,14 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "createindustry:coal_coke"
+    }
+  ],
+  "processingTime": 250,
+  "results": [
+    {
+      "item": "createindustry:coal_coke_dust"
+    }
+  ]
+}

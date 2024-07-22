@@ -1,0 +1,19 @@
+{
+  "type": "createindustry:industrial_blasting",
+  "ingredients": [
+    {
+      "item": "createindustry:blasting_mixture"
+    }
+  ],
+  "processingTime": 200,
+  "results": [
+    {
+      "amount": 111,
+      "fluid": "createindustry:molten_steel"
+    },
+    {
+      "amount": 75,
+      "fluid": "createindustry:molten_slag"
+    }
+  ]
+}

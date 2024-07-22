@@ -1,0 +1,29 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "A": {
+      "tag": "forge:string"
+    },
+    "C": {
+      "item": "createindustry:heavy_machinery_casing"
+    },
+    "H": {
+      "item": "createindustry:heavy_plate"
+    },
+    "I": {
+      "item": "createindustry:industrial_pipe"
+    },
+    "S": {
+      "item": "createindustry:steel_mechanism"
+    }
+  },
+  "pattern": [
+    "HAH",
+    "SCS",
+    "HIH"
+  ],
+  "result": {
+    "item": "createindustry:pumpjack_base"
+  }
+}

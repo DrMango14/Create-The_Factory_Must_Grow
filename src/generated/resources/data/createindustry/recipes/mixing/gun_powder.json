@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "createindustry:nitrate_dust"
+    },
+    {
+      "item": "createindustry:nitrate_dust"
+    },
+    {
+      "item": "createindustry:nitrate_dust"
+    },
+    {
+      "item": "minecraft:charcoal"
+    },
+    {
+      "item": "minecraft:charcoal"
+    },
+    {
+      "item": "createindustry:sulfur_dust"
+    }
+  ],
+  "results": [
+    {
+      "count": 6,
+      "item": "minecraft:gunpowder"
+    }
+  ]
+}

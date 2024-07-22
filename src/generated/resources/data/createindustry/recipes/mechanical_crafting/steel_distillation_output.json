@@ -1,0 +1,23 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "H": {
+      "item": "createindustry:heavy_plate"
+    },
+    "P": {
+      "item": "createindustry:steel_pipe"
+    },
+    "T": {
+      "item": "createindustry:steel_fluid_tank"
+    }
+  },
+  "pattern": [
+    "HPH",
+    "PTP",
+    "HPH"
+  ],
+  "result": {
+    "item": "createindustry:steel_distillation_output"
+  }
+}

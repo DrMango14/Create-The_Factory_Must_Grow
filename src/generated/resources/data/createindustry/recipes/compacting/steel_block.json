@@ -1,0 +1,37 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "createindustry:steel_ingot"
+    },
+    {
+      "item": "createindustry:steel_ingot"
+    },
+    {
+      "item": "createindustry:steel_ingot"
+    },
+    {
+      "item": "createindustry:steel_ingot"
+    },
+    {
+      "item": "createindustry:steel_ingot"
+    },
+    {
+      "item": "createindustry:steel_ingot"
+    },
+    {
+      "item": "createindustry:steel_ingot"
+    },
+    {
+      "item": "createindustry:steel_ingot"
+    },
+    {
+      "item": "createindustry:steel_ingot"
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:steel_block"
+    }
+  ]
+}

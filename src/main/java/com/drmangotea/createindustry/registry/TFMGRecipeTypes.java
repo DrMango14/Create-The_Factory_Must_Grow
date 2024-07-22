@@ -6,6 +6,7 @@ import com.drmangotea.createindustry.blocks.machines.simple.welding_machine.Weld
 import com.drmangotea.createindustry.recipes.casting.CastingRecipe;
 import com.drmangotea.createindustry.recipes.coking.CokingRecipe;
 import com.drmangotea.createindustry.recipes.distillation.DistillationRecipe;
+import com.drmangotea.createindustry.recipes.gas_blasting.GasBlastingRecipe;
 import com.drmangotea.createindustry.recipes.industrial_blasting.IndustrialBlastingRecipe;
 import com.google.common.collect.ImmutableSet;
 import com.simibubi.create.AllTags;
@@ -37,7 +38,8 @@ CASTING(CastingRecipe::new),
 INDUSTRIAL_BLASTING(IndustrialBlastingRecipe::new),
 COKING(CokingRecipe::new),
 DISTILLATION(DistillationRecipe::new),
-WELDING(WeldingRecipe::new)
+WELDING(WeldingRecipe::new),
+GAS_BLASTING(GasBlastingRecipe::new)
 ;
 
     private final ResourceLocation id;
