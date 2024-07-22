@@ -1,4 +1,4 @@
-// 1.19.2	2024-07-22T13:17:30.0184464	Registrate Provider for createindustry [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-07-22T19:15:46.2542473	Registrate Provider for createindustry [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 618a4fde84a56aca00c6990dbde278f8fb76bb1e assets/createindustry/blockstates/accumulator.json
 50db526af77cf0ead08cadfd3f7daa8b84a40312 assets/createindustry/blockstates/air_intake.json
 429437419b2ec98bd716e7ba15583b84da7488d5 assets/createindustry/blockstates/aluminum_bars.json
@@ -1916,6 +1916,7 @@ dad9566f47a93c6e34c837223d939fdf3eebaac5 data/createindustry/recipes/yellow_conc
 1e45593e1375420bd23210dc0f9099a337e94c78 data/createindustry/recipes/yellow_concrete_wall_from_yellow_concrete_stonecutting.json
 0165af18f74ef648bf5bc43fa6a3e1bfecc28d37 data/createindustry/recipes/zinc_frame_from_ingots_zinc_stonecutting.json
 daa491cd60ae376335b7127363d95f371386facf data/createindustry/recipes/zinc_truss_from_ingots_zinc_stonecutting.json
+9a8080fd49571cad3f24ea0807d9c0c44c117734 data/createindustry/tags/blocks/air_intake_transparent.json
 503c7a40ea8a115006c886e6491ac53f80e7e6fe data/createindustry/tags/fluids/flammable.json
 87856087484f006ce6cb7fd66fb9f604230cf4d0 data/createindustry/tags/fluids/gas.json
 9790752bec1ad9dc61eb08c66e62caa28516713c data/createindustry/tags/items/stone_types/bauxite.json

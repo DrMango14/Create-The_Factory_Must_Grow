@@ -8,6 +8,7 @@ import com.drmangotea.createindustry.recipes.coking.CokingRecipe;
 import com.drmangotea.createindustry.recipes.distillation.DistillationRecipe;
 import com.drmangotea.createindustry.recipes.gas_blasting.GasBlastingRecipe;
 import com.drmangotea.createindustry.recipes.industrial_blasting.IndustrialBlastingRecipe;
+import com.drmangotea.createindustry.recipes.polarizing.PolarizingRecipe;
 import com.google.common.collect.ImmutableSet;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeFactory;
@@ -34,12 +35,13 @@ import java.util.function.Supplier;
 
 public enum TFMGRecipeTypes implements IRecipeTypeInfo {
 
-CASTING(CastingRecipe::new),
-INDUSTRIAL_BLASTING(IndustrialBlastingRecipe::new),
-COKING(CokingRecipe::new),
-DISTILLATION(DistillationRecipe::new),
-WELDING(WeldingRecipe::new),
-GAS_BLASTING(GasBlastingRecipe::new)
+    CASTING(CastingRecipe::new),
+    INDUSTRIAL_BLASTING(IndustrialBlastingRecipe::new),
+    COKING(CokingRecipe::new),
+    DISTILLATION(DistillationRecipe::new),
+    WELDING(WeldingRecipe::new),
+    GAS_BLASTING(GasBlastingRecipe::new),
+    POLARIZING(PolarizingRecipe::new),
 ;
 
     private final ResourceLocation id;
@@ -68,7 +70,6 @@ GAS_BLASTING(GasBlastingRecipe::new)
         typeObject = Registers.TYPE_REGISTER.register(name, () -> simpleType(id));
         type = typeObject;
     }
-
    TFMGRecipeTypes(ProcessingRecipeFactory<?> processingFactory) {
         this(() -> new ProcessingRecipeSerializer<>(processingFactory));
     }

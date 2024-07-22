@@ -300,6 +300,9 @@ public class TFMGRecipeProvider extends RecipeProvider {
         public static ItemLike unfinishedTurbineEngine() {
             return TFMGItems.UNFINISHED_TURBINE_ENGINE.get();
         }
+        public static ItemLike magneticIngot() {
+            return TFMGItems.MAGNETIC_INGOT.get();
+        }
     }
     
     public static class F {

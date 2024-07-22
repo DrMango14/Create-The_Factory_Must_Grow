@@ -23,5 +23,20 @@ public class TFMGTools {
 
 
     }
-
+    
+    public static String formatEnergy(int n) {
+        double var10000;
+        if (n >= 1000000000) {
+            var10000 = (double)Math.round((double)n / 1.0E8);
+            return var10000 / 10.0 + "G";
+        } else if (n >= 1000000) {
+            var10000 = (double)Math.round((double)n / 100000.0);
+            return var10000 / 10.0 + "M";
+        } else if (n >= 1000) {
+            var10000 = (double)Math.round((double)n / 100.0);
+            return var10000 / 10.0 + "K";
+        } else {
+            return "" + n;
+        }
+    }
 }

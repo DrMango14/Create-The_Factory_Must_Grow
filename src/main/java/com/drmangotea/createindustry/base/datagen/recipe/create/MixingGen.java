@@ -105,7 +105,13 @@ public class MixingGen extends TFMGProcessingRecipeGen {
     zincSulfate = create(CreateTFMG.asResource("zinc_sulfate"), b -> b
             .require(F.sulfuricAcid(), 500)
             .require(IT.zincIngot())
-            .output(I.zincSulfate(), 1))
+            .output(I.zincSulfate(), 1)),
+    
+    heatedAirTank = create(CreateTFMG.asResource("heated_air_tank"), b -> b
+            .require(F.airTank())
+            .output(F.heatedAirTank(), 1)
+            .requiresHeat(HeatCondition.SUPERHEATED)
+            .duration(1000))
     ;
     
     public MixingGen(DataGenerator generator) {

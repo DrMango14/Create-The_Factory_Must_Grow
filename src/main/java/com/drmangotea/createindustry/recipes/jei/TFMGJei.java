@@ -6,6 +6,7 @@ import com.drmangotea.createindustry.recipes.coking.CokingRecipe;
 import com.drmangotea.createindustry.recipes.distillation.DistillationRecipe;
 import com.drmangotea.createindustry.recipes.gas_blasting.GasBlastingRecipe;
 import com.drmangotea.createindustry.recipes.industrial_blasting.IndustrialBlastingRecipe;
+import com.drmangotea.createindustry.recipes.polarizing.PolarizingRecipe;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.drmangotea.createindustry.registry.TFMGFluids;
 import com.drmangotea.createindustry.registry.TFMGRecipeTypes;
@@ -97,8 +98,14 @@ public class TFMGJei implements IModPlugin {
                 .catalyst(TFMGBlocks.BLAST_STOVE::get)
                 .doubleItemIcon(TFMGBlocks.BLAST_STOVE.get(), TFMGFluids.AIR.getBucket().get())
                 .emptyBackground(177, 150)
-                .build("gas_blasting", GasBlastingCategory::new)
+                .build("gas_blasting", GasBlastingCategory::new),
                 
+                polarizing = builder(PolarizingRecipe.class)
+                .addTypedRecipes(TFMGRecipeTypes.POLARIZING)
+                .catalyst(TFMGBlocks.POLARIZER::get)
+                .itemIcon(TFMGBlocks.POLARIZER.get())
+                .emptyBackground(177, 53)
+                .build("polarizing", PolarizingCategory::new)
 
                 ;
 

@@ -72,8 +72,7 @@ public abstract class TFMGProcessingRecipeGen extends TFMGRecipeProvider {
      * Create a processing recipe with a single itemstack ingredient, using its id
      * as the name of the recipe
      */
-    protected <T extends ProcessingRecipe<?>> GeneratedRecipe create(String namespace,
-                                                                     Supplier<ItemLike> singleIngredient, UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
+    protected <T extends ProcessingRecipe<?>> GeneratedRecipe create(String namespace, Supplier<ItemLike> singleIngredient, UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
         ProcessingRecipeSerializer<T> serializer = getSerializer();
         GeneratedRecipe generatedRecipe = c -> {
             ItemLike itemLike = singleIngredient.get();
@@ -137,6 +136,8 @@ public abstract class TFMGProcessingRecipeGen extends TFMGRecipeProvider {
             return CreateTFMG.asResource(registryName.getPath() + suffix);
         };
     }
+    
+    
     
     @Override
     public String getName() {
