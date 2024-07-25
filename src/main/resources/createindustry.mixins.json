@@ -1,16 +1,15 @@
 
 {
   "required": true,
-  "minVersion": 0.8,
+  "minVersion": "0.8",
   "package": "com.drmangotea.createindustry.mixins",
-  "compatibilityLevel": "JAVA_8",
-  "refmap": "createindustry.refmap.json",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AllOreFeatureConfigEntriesMixin",
     "FluidPropagatorMixin",
     "FluidPipeBlockMixin",
     "PipeAttachmentModelMixin",
-    "BucketItemMixin",
+    "BucketItemMixin"
   //  "ArrowMixin"
     //,
    // "ScreenEffectRendererMixin"
