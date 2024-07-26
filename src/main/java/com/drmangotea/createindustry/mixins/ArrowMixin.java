@@ -2,6 +2,7 @@ package com.drmangotea.createindustry.mixins;
 
 
 import com.drmangotea.createindustry.registry.TFMGPotions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -37,8 +39,22 @@ public abstract class ArrowMixin extends AbstractArrow {
 
     @Inject(at = @At("HEAD"),method = "tick",remap = false)
     public void tick(CallbackInfo ci) {
-        if(potion == TFMGPotions.HELLFIRE_POTION.get())
+        Vec3 vec3;
+        vec3 = this.getDeltaMovement();
+        double d5 = vec3.x;
+        double d6 = vec3.y;
+        double d1 = vec3.z;
+        if(potion == TFMGPotions.HELLFIRE_POTION.get()) {
             this.setSecondsOnFire(20);
+            for(int i = 0; i < 4; ++i) {
+                this.level.addAlwaysVisibleParticle(ParticleTypes.FLAME, this.getX() + d5 * (double)i / 4.0, this.getY() + d6 * (double)i / 4.0, this.getZ() + d1 * (double)i / 4.0, -d5, -d6 + 0.2, -d1);
+            }
+        }
+        if(potion == TFMGPotions.FROSTY_POTION.get()) {
+            for (int i = 0; i < 4; ++i) {
+                this.level.addAlwaysVisibleParticle(ParticleTypes.SNOWFLAKE, this.getX() + d5 * (double)i / 4.0, this.getY() + d6 * (double)i / 4.0, this.getZ() + d1 * (double)i / 4.0, -d5, -d6 + 0.2, -d1);
+            }
+        }
     }
 
     @Shadow

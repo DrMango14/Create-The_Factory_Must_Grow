@@ -1,0 +1,18 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/copper"
+    },
+    {
+      "amount": 500,
+      "fluid": "createindustry:sulfuric_acid",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:copper_sulfate"
+    }
+  ]
+}

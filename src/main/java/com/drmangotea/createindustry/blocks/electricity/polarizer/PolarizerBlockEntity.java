@@ -2,8 +2,13 @@ package com.drmangotea.createindustry.blocks.electricity.polarizer;
 
 import com.drmangotea.createindustry.base.util.TFMGUtils;
 import com.drmangotea.createindustry.blocks.electricity.base.ElectricBlockEntity;
+import com.drmangotea.createindustry.recipes.polarizing.PolarizingRecipe;
 import com.drmangotea.createindustry.registry.TFMGItems;
+import com.drmangotea.createindustry.registry.TFMGRecipeTypes;
+import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.content.kinetics.press.PressingRecipe;
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.utility.Lang;
@@ -12,9 +17,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -28,6 +35,7 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import javax.annotation.Nonnull;
 
 import java.util.List;
+import java.util.Optional;
 
 import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 
@@ -36,6 +44,7 @@ public class PolarizerBlockEntity extends ElectricBlockEntity implements IHaveGo
     public LazyOptional<IItemHandlerModifiable> itemCapability;
 
     public SmartInventory inventory;
+    Optional<PolarizingRecipe> recipe;
 
     public int timer = 0;
     public PolarizerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -45,42 +54,61 @@ public class PolarizerBlockEntity extends ElectricBlockEntity implements IHaveGo
 
         this.itemCapability = LazyOptional.of(() -> new CombinedInvWrapper(this.inventory));
     }
-
-
+    
 
     @Override
     public void tick() {
         super.tick();
 
         if(voltage<200) {
-            timer = 0;
+            timer = -1;
             return;
         }
-
-        if(!inventory.getItem(0).is(TFMGItems.STEEL_INGOT.get())) {
-            timer = 0;
+        if (inventory.getItem(0).isEmpty()) {
+            timer = -1;
             return;
         }
-
-
-        if(energy.getEnergyStored()!=0) {
-            useEnergy(250);
+        
+        recipe = this.getRecipe(inventory.getItem(0));
+        
+        if (recipe.isEmpty()) {
+            timer = -1;
+            return;
+        }
+        
+        
+        if(!recipe.get().getIngredients().get(0).test(inventory.getItem(0))) {
+            timer = -1;
+            return;
+        }
+        
+        if(energy.getEnergyStored() != 0) {
+            useEnergy(recipe.get().getEnergy());
             if (!inventory.isEmpty()) {
-                if (timer < 100) {
+                if (timer < recipe.get().getProcessingDuration()) {
                     timer++;
                 } else {
-
-                    timer = 0;
-                    inventory.setStackInSlot(0, TFMGItems.MAGNETIC_INGOT.asStack());
+                    timer = -1;
+                    inventory.setStackInSlot(0, recipe.get().getResultItem());
                     TFMGUtils.spawnElectricParticles(level,getBlockPos());
                     sendStuff();
                 }
             }
-        }else timer =0;
+        }
+        else timer = -1;
 
 
     }
-
+    
+    public Optional<PolarizingRecipe> getRecipe(ItemStack item) {
+        Optional<PolarizingRecipe> assemblyRecipe = SequencedAssemblyRecipe.getRecipe(this.level, item, TFMGRecipeTypes.POLARIZING.getType(), PolarizingRecipe.class);
+        if (assemblyRecipe.isPresent()) {
+            return assemblyRecipe;
+        } else {
+            inventory.setItem(0, item);
+            return TFMGRecipeTypes.POLARIZING.find(inventory, this.level);
+        }
+    }
 
 
 
@@ -96,68 +124,42 @@ public class PolarizerBlockEntity extends ElectricBlockEntity implements IHaveGo
     }
 
     public boolean playerInteract(Player player, InteractionHand hand){
-
-        ;
-
         if(inventory.isEmpty()) {
-
-
-            if (player.getItemInHand(hand).is(TFMGItems.STEEL_INGOT.get())) {
-
-
-                inventory.setStackInSlot(0, TFMGItems.STEEL_INGOT.asStack());
-                sendStuff();
-
-                player.getItemInHand(hand).shrink(1);
-
-                return true;
-            }
-
-
+            ItemStack stack = player.getItemInHand(hand).copy();
+            stack.setCount(1);
+            inventory.setStackInSlot(0, stack);
+            sendStuff();
+            player.getItemInHand(hand).shrink(1);
+            return true;
         } else {
-
             if (player.getItemInHand(hand).isEmpty()) {
-
                 player.setItemInHand(hand,inventory.getItem(0));
-                inventory.setStackInSlot(0, Blocks.AIR.asItem().getDefaultInstance());
+                inventory.setStackInSlot(0, ItemStack.EMPTY);
                 sendStuff();
-
-
-
                 return true;
             }
         }
-
-
-
      return false;
     }
     @Override
-    @SuppressWarnings("removal")
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-
-
         if(energy.getEnergyStored()==0){
             Lang.translate("goggles.electric_machine.no_power")
                     .style(ChatFormatting.DARK_RED)
                     .forGoggles(tooltip, 1);
-        return true;
-    }
-        if(energy.getEnergyStored()==0) {
+            return true;
+        }
+        if(voltage < 200) {
             Lang.translate("goggles.electric_machine.insufficient_voltage")
                     .style(ChatFormatting.RED)
                     .forGoggles(tooltip, 1);
             return true;
         }
-        if(timer>0) {
+        if(timer>0 && recipe.isPresent()) {
             Lang.translate("goggles.blast_furnace.status.running")
                     .style(ChatFormatting.GOLD)
                     .forGoggles(tooltip, 1);
-            Lang.translate("goggles.coke_oven.progress", timer)
-                    .style(ChatFormatting.GREEN)
-                    .add(Lang.translate("goggles.misc.percent_symbol")
-                            .style(ChatFormatting.GREEN))
-                    .forGoggles(tooltip, 1);
+            tooltip.add(percent(timer, recipe.get()).withStyle(ChatFormatting.GREEN));
 
         }
         else
@@ -183,7 +185,14 @@ public class PolarizerBlockEntity extends ElectricBlockEntity implements IHaveGo
 
 
     }
-
+    
+    
+    private MutableComponent percent(int timer, PolarizingRecipe recipe) {
+        int percent = Math.round((float) (timer / recipe.getProcessingDuration()) * 100);
+        return Lang.builder().text(" ")
+                .text(percent + "%")
+                .component();
+    }
 
 
     @Override

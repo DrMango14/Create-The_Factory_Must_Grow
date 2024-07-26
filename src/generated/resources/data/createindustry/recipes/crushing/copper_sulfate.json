@@ -1,0 +1,28 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "createindustry:copper_sulfate"
+    }
+  ],
+  "processingTime": 100,
+  "results": [
+    {
+      "count": 4,
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "chance": 0.5,
+      "count": 3,
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "chance": 0.5,
+      "item": "minecraft:blue_dye"
+    },
+    {
+      "chance": 0.3,
+      "item": "minecraft:cyan_dye"
+    }
+  ]
+}

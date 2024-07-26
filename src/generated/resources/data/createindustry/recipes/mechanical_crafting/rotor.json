@@ -1,0 +1,28 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "A": {
+      "tag": "forge:ingots/aluminum"
+    },
+    "C": {
+      "item": "createindustry:copper_coil"
+    },
+    "R": {
+      "item": "createindustry:rebar"
+    },
+    "S": {
+      "item": "create:shaft"
+    }
+  },
+  "pattern": [
+    " CCC ",
+    "CRARC",
+    "CASAC",
+    "CRARC",
+    " CCC "
+  ],
+  "result": {
+    "item": "createindustry:rotor"
+  }
+}

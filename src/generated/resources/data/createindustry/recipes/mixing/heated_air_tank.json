@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "item": "createindustry:air_bucket"
+    }
+  ],
+  "processingTime": 1000,
+  "results": [
+    {
+      "item": "createindustry:heated_air_bucket"
+    }
+  ]
+}

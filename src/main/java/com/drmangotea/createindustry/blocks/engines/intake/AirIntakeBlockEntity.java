@@ -1,10 +1,9 @@
 package com.drmangotea.createindustry.blocks.engines.intake;
 
-import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.drmangotea.createindustry.registry.TFMGFluids;
+import com.drmangotea.createindustry.registry.TFMGTags;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
@@ -31,7 +30,6 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import static com.drmangotea.createindustry.blocks.engines.intake.AirIntakeBlock.INVISIBLE;
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
@@ -47,7 +45,10 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
 
     boolean isUsedByController = false;
 
-
+    int efficiency = 1;
+    boolean allObstructed = false;
+    boolean isObstructed = false;
+    
     public BlockPos controller;
 
     public List<AirIntakeBlockEntity> blockEntities = new ArrayList<>();
@@ -77,14 +78,12 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
 
     //if(!level.isClientSide) {
         int production = ((int) maxShaftSpeed * ((diameter * diameter))) / 10;
-        if (tankInventory.getFluidAmount() + production <= tankInventory.getCapacity()) {
-            //tankInventory.fill(new FluidStack(TFMGFluids.AIR.getSource(), production), IFluidHandler.FluidAction.EXECUTE);
+        if (tankInventory.getFluidAmount() + production <= tankInventory.getCapacity() && !allObstructed) {
             tankInventory.setFluid(new FluidStack(TFMGFluids.AIR.getSource(), production + tankInventory.getFluidAmount()));
-           // if(controller!=null) {
-           //     ((AirIntakeBlockEntity) level.getBlockEntity(controller)).setChanged();
-           //     ((AirIntakeBlockEntity) level.getBlockEntity(controller)).sendData();
-           // }
         }
+        
+        isObstructed = hasBlockInFront(this.getBlockPos());
+        
    // }
         ////////////////
 
@@ -93,7 +92,8 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
             sendData();
             setChanged();
         }
-
+        
+        efficiency = getEfficiency();
 
         if(diameter == 3){
             visual_angle.chase(angle, 0.1f, LerpedFloat.Chaser.EXP);
@@ -108,8 +108,8 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
 
         if(isUsedByController)
             blockEntities.clear();
-
-
+        
+        allObstructed = efficiency == 0;
 
         if(!this.getBlockState().getValue(INVISIBLE)){
             if(isController||isUsedByController){
@@ -127,7 +127,7 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
         diameter =getPossibleDiameter();
 
         if(controller == this.getBlockPos()) {
-
+            
             isUsedByController = false;
         } else {
             isUsedByController = true;
@@ -215,6 +215,30 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
 
 
     }
+    
+    public int getEfficiency(){
+        int result;
+        if (diameter == 1) {
+            result = 1;
+            if (isObstructed) {
+                result = 0;
+            }
+        } else {
+            int fans = blockEntities.toArray().length;
+            for (AirIntakeBlockEntity be : blockEntities) {
+                if (be.isObstructed) {
+                    fans--;
+                }
+            }
+            result = fans;
+        }
+        return result;
+    }
+    
+    public boolean hasBlockInFront(BlockPos pos){
+        return !level.getBlockState(pos.relative(this.getBlockState().getValue(FACING))).is(TFMGTags.TFMGBlockTags.AIR_INTAKE_TRANSPARENT.tag) && !level.getBlockState(pos.relative(this.getBlockState().getValue(FACING))).isAir();
+    }
+    
     @Override
     public void invalidate() {
         super.invalidate();
@@ -291,8 +315,6 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
 
         BlockPos checkedPos = this.getBlockPos();
         Direction direction = this.getBlockState().getValue(FACING);
-
-
 
         List<BlockPos> checkedPosses = new ArrayList<>();
         checkedPos = this.getBlockPos();
@@ -510,7 +532,16 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
                         .style(ChatFormatting.DARK_GREEN))
                 .style(ChatFormatting.DARK_GRAY)
                 .forGoggles(tooltip, 1);
-
+        
+        if (isObstructed) {
+            Lang.translate("gui.goggles.fluid_container.obstructed")
+                    .style(ChatFormatting.RED)
+                    .forGoggles(tooltip, 1);
+        }
+        
+        Lang.number(getEfficiency())
+                .style(ChatFormatting.DARK_GREEN)
+                .forGoggles(tooltip, 1);
 
 
         return true;
@@ -548,7 +579,8 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
         isUsedByController = compound.getBoolean("IsUsed");
         hasShaft = compound.getBoolean("HasShaft");
         tankInventory.readFromNBT(compound.getCompound("TankContent"));
-
+        efficiency = compound.getInt("Efficiency");
+        isObstructed = compound.getBoolean("IsObstructed");
     }
 
     @Override
@@ -561,6 +593,8 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
         compound.putBoolean("IsUsed", isUsedByController);
         compound.putBoolean("HasShaft", hasShaft);
         compound.put("TankContent", tankInventory.writeToNBT(new CompoundTag()));
+        compound.putInt("Efficiency", efficiency);
+        compound.putBoolean("IsObstructed", isObstructed);
 
     }
 }

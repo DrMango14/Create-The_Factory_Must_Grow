@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,running=false": {
+      "model": "createindustry:block/blast_stove/block",
+      "y": 90
+    },
+    "facing=east,running=true": {
+      "model": "createindustry:block/blast_stove/block_running",
+      "y": 90
+    },
+    "facing=north,running=false": {
+      "model": "createindustry:block/blast_stove/block"
+    },
+    "facing=north,running=true": {
+      "model": "createindustry:block/blast_stove/block_running"
+    },
+    "facing=south,running=false": {
+      "model": "createindustry:block/blast_stove/block",
+      "y": 180
+    },
+    "facing=south,running=true": {
+      "model": "createindustry:block/blast_stove/block_running",
+      "y": 180
+    },
+    "facing=west,running=false": {
+      "model": "createindustry:block/blast_stove/block",
+      "y": 270
+    },
+    "facing=west,running=true": {
+      "model": "createindustry:block/blast_stove/block_running",
+      "y": 270
+    }
+  }
+}

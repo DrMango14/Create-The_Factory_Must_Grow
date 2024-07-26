@@ -1,0 +1,10 @@
+{
+  "fluids": [
+    "mekanism:lithium"
+  ],
+  "spread": 18,
+  "speed": 1.2,
+  "amount": 23,
+  "hellfire": true,
+  "color": "0xea4a15"
+}

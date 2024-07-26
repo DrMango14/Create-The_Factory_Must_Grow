@@ -1,0 +1,29 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "A": {
+      "item": "createindustry:electric_casing"
+    },
+    "C": {
+      "item": "createindustry:copper_cable"
+    },
+    "M": {
+      "item": "createindustry:magnetic_ingot"
+    },
+    "P": {
+      "item": "createindustry:steel_mechanism"
+    },
+    "R": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "pattern": [
+    "MMM",
+    "CPC",
+    "RAR"
+  ],
+  "result": {
+    "item": "createindustry:stator"
+  }
+}

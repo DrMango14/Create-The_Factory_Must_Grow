@@ -1,0 +1,19 @@
+{
+  "type": "createindustry:casting",
+  "ingredients": [
+    {
+      "amount": 1,
+      "fluid": "createindustry:molten_steel",
+      "nbt": {}
+    }
+  ],
+  "processingTime": 300,
+  "results": [
+    {
+      "item": "createindustry:steel_ingot"
+    },
+    {
+      "item": "createindustry:steel_block"
+    }
+  ]
+}

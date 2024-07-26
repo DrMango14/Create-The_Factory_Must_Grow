@@ -7,15 +7,13 @@
   "refmap": "createindustry.refmap.json",
   "mixins": [
     "AllOreFeatureConfigEntriesMixin",
-    "FluidPropagatorMixin",
-    "FluidPipeBlockMixin",
-    "PipeAttachmentModelMixin",
+    "AreaEffectCloudMixin",
+    "ArrowMixin",
     "BucketItemMixin",
-  //  "ArrowMixin"
-    //,
-   // "ScreenEffectRendererMixin"
+    "FluidPipeBlockMixin",
+    "FluidPropagatorMixin",
+    "PipeAttachmentModelMixin"
   ],
-
   "injectors": {
     "defaultRequire": 1
   }

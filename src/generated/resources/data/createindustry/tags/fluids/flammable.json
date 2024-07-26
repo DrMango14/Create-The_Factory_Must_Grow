@@ -6,6 +6,8 @@
     "createindustry:butane",
     "createindustry:flowing_lpg",
     "createindustry:lpg",
+    "createindustry:flowing_blast_furnace_gas",
+    "createindustry:blast_furnace_gas",
     "createindustry:flowing_lubrication_oil",
     "createindustry:lubrication_oil",
     "createindustry:flowing_napalm",

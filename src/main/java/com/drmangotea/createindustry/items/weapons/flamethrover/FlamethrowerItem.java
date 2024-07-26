@@ -1,7 +1,9 @@
 package com.drmangotea.createindustry.items.weapons.flamethrover;
 
 import com.drmangotea.createindustry.CreateTFMGClient;
+import com.drmangotea.createindustry.base.util.spark.CoolSpark;
 import com.drmangotea.createindustry.base.util.spark.Spark;
+import com.drmangotea.createindustry.items.weapons.lithium_blade.LithiumSpark;
 import com.drmangotea.createindustry.registry.TFMGCreativeModeTabs;
 import com.drmangotea.createindustry.registry.TFMGEntityTypes;
 import com.drmangotea.createindustry.registry.TFMGItems;
@@ -12,6 +14,8 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -25,8 +29,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Supplier;
 
 public class FlamethrowerItem extends Item implements CustomArmPoseItem {
 
@@ -40,11 +47,14 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
 
 
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int time) {
-
-
-
+        
+        
+        CoolSpark coolSpark = TFMGEntityTypes.COOL_SPARK.create(level);
+        coolSpark.setPos(entity.getX(),entity.getY()+1.2f,entity.getZ());
         Spark spark = TFMGEntityTypes.SPARK.create(level);
         spark.setPos(entity.getX(),entity.getY()+1.2f,entity.getZ());
+        LithiumSpark lithiumSpark = TFMGEntityTypes.LITHIUM_SPARK.create(level);
+        lithiumSpark.setPos(entity.getX(),entity.getY()+1.2f,entity.getZ());
 
         CompoundTag nbt = stack.getOrCreateTag();
 
@@ -55,23 +65,35 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
 
         //if(true)
         //    return;
-        level.playSound((Player)null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.FIRE_EXTINGUISH, SoundSource.NEUTRAL, 0.1F, 0.04F);
+        FlamethrowerFuelType fuel = FlamethrowerFuelTypeManager.getTypeForId(new ResourceLocation(nbt.getString("fuel")));
+        
+        if (fuel == null) {
+            return;
+        }
+        
+        SoundEvent sound = fuel.isCold() ? SoundEvents.SNOW_BREAK : SoundEvents.FIRE_EXTINGUISH;
+        level.playSound((Player)null, entity.getX(), entity.getY(), entity.getZ(), sound, SoundSource.NEUTRAL, 0.1F, 0.04F);
 
-        FlamethrowerFuel fuel = Enum.valueOf(FlamethrowerFuel.class,nbt.getString("fuel").toUpperCase());
 
-        for(int i =0;i<fuel.amount;i++) {
+        for(int i =0;i<fuel.getAmount();i++) {
             if(nbt.getInt("amount")==0) {
                 nbt.putString("fuel","");
                 return;
             }
             nbt.putInt("amount",nbt.getInt("amount")-1);
 
-
-
-
-            spark.shoot(entity.getLookAngle().x,entity.getLookAngle().y,entity.getLookAngle().z,fuel.speed,fuel.spread);
-
-        level.addFreshEntity(spark);
+            //Snuck this in here, sorry Mango :3
+            if (fuel.isCold()) {
+                coolSpark.shoot(entity.getLookAngle().x,entity.getLookAngle().y,entity.getLookAngle().z,fuel.getSpeed(),fuel.getSpread());
+                level.addFreshEntity(coolSpark);
+            } else {
+                spark.shoot(entity.getLookAngle().x, entity.getLookAngle().y, entity.getLookAngle().z, fuel.getSpeed(), fuel.getSpread());
+                level.addFreshEntity(spark);
+            }
+            if (fuel.isHellfire()) {
+                lithiumSpark.shoot(entity.getLookAngle().x,entity.getLookAngle().y,entity.getLookAngle().z,fuel.getSpeed(),fuel.getSpread());
+                level.addFreshEntity(lithiumSpark);
+            }
         }
 
     }
@@ -85,7 +107,7 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
             return;
 
         ItemStack stack = TFMGItems.FLAMETHROWER.asStack();
-        stack.getOrCreateTag().putString("fuel","napalm");
+        stack.getOrCreateTag().putString("fuel","createindustry:napalm");
         stack.getOrCreateTag().putInt("amount",FUEL_CAPACITY);
         list.add(stack);
         super.fillItemCategory(group, list);
@@ -102,9 +124,7 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
 
     @Override
     public int getBarColor(ItemStack stack) {
-        return stack.getOrCreateTag().getString("fuel").isEmpty() ? 0xffffff :
-        Enum.valueOf(FlamethrowerFuel.class,stack.getOrCreateTag().getString("fuel").toUpperCase()).color;
-
+        return stack.getOrCreateTag().getString("fuel").isEmpty() ? 0xffffff : FlamethrowerFuelTypeManager.getGlobalType(new ResourceLocation(stack.getOrCreateTag().getString("fuel"))).getColor();
     }
 
     @Override
@@ -139,33 +159,26 @@ return Math.round( 13* ((float)((float)stack.getOrCreateTag().getInt("amount")/(
 
         if(level.getBlockEntity(pos)!=null)
             if(level.getBlockEntity(pos) instanceof FluidTankBlockEntity fluidTankBe){
-
+                
+                
                 FluidTankBlockEntity be = fluidTankBe.isController() ? fluidTankBe : fluidTankBe.getControllerBE();
-
-            for(FlamethrowerFuel fuel : FlamethrowerFuel.values()) {
-
-                String fluid = be.getFluid(0).getFluid().getFluidType().toString().replaceFirst("createindustry:","");
-
-
-
-                if (fluid.equals(fuel.name().toLowerCase())) {
-                    if(nbt.getString("fuel").equals(fluid)||nbt.getInt("amount")==0) {
-
+                //String fluid = be.getFluid(0).getFluid().getFluidType().toString();
+                //FlamethrowerFuelType fuelType = FlamethrowerFuelTypeManager.getTypeForStack(be.getFluid(0)).orElse(BuiltinFlamethrowerFuelTypes.FALLBACK);
+                //int toDrain = Math.min(FUEL_CAPACITY - nbt.getInt("amount"), be.getFluid(0).getAmount());
+                //nbt.putString("fuel", FlamethrowerFuelTypeManager.getIdForType(fuelType).toString());
+                //be.getTankInventory().drain(toDrain, IFluidHandler.FluidAction.EXECUTE);
+                //nbt.putInt("amount", nbt.getInt("amount") + toDrain);
+                //context.getPlayer().getCooldowns().addCooldown(stack.getItem(), 20);
+                for (FlamethrowerFuelType fuelBuiltin : FlamethrowerFuelTypeManager.GLOBAL_TYPE_MAP.values()) {
+                    if (fuelBuiltin.getFluids().stream().anyMatch(supplier -> supplier.get().isSame(be.getFluid(0).getFluid()))) {
                         int toDrain = Math.min(FUEL_CAPACITY - nbt.getInt("amount"), be.getFluid(0).getAmount());
-
-                        nbt.putString("fuel", fluid);
+                        nbt.putString("fuel", FlamethrowerFuelTypeManager.getIdForType(fuelBuiltin).toString());
                         be.getTankInventory().drain(toDrain, IFluidHandler.FluidAction.EXECUTE);
                         nbt.putInt("amount", nbt.getInt("amount") + toDrain);
                         context.getPlayer().getCooldowns().addCooldown(stack.getItem(), 20);
-
-
+                        return InteractionResult.SUCCESS;
                     }
-
                 }
-
-            }
-
-
             }
 
 
@@ -200,8 +213,10 @@ return Math.round( 13* ((float)((float)stack.getOrCreateTag().getInt("amount")/(
 
         NAPALM(20,1.8f,15,0xA3C649),
 
-        MOLTEN_SLAG(15,0.3f,15,0xFF9621)
-
+        MOLTEN_SLAG(15,0.3f,15,0xFF9621),
+        
+        //Sorry Mango, I had to do it :3
+        COOLING_FLUID(12,0.8f,15,0x4edbdb)
 
         ;
 

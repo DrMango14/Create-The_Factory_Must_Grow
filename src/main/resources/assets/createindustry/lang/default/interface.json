@@ -102,7 +102,13 @@
   "item.minecraft.lingering_potion.effect.hellfire_potion": "Lingering Potion of Hellfire",
   "item.minecraft.tipped_arrow.effect.hellfire_potion": "Arrow of Hellfire",
 
+  "item.minecraft.potion.effect.frostbite_potion": "Potion of Frostbite",
+  "item.minecraft.splash_potion.effect.frostbite_potion": "Splash Potion of Frostbite",
+  "item.minecraft.lingering_potion.effect.frostbite_potion": "Lingering Potion of Frostbite",
+  "item.minecraft.tipped_arrow.effect.frostbite_potion": "Arrow of Frostbite",
+
   "effect.createindustry.hellfire": "Hellfire",
+  "effect.createindustry.frostbite": "Frostbite",
 
   "create.wires.removed_data": "Data Removed",
 

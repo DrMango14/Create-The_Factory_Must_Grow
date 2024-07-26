@@ -1,0 +1,39 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "C": {
+      "tag": "forge:wires/copper"
+    },
+    "K": {
+      "item": "createindustry:capacitor_"
+    },
+    "L": {
+      "item": "createindustry:synthetic_leather"
+    },
+    "M": {
+      "item": "createindustry:steel_mechanism"
+    },
+    "P": {
+      "item": "createindustry:plastic_sheet"
+    },
+    "R": {
+      "item": "createindustry:resistor_"
+    },
+    "S": {
+      "item": "createindustry:steel_sword"
+    },
+    "T": {
+      "item": "createindustry:lithium_torch"
+    }
+  },
+  "pattern": [
+    " T ",
+    "CSC",
+    "CMK",
+    "PLR"
+  ],
+  "result": {
+    "item": "createindustry:lithium_blade"
+  }
+}

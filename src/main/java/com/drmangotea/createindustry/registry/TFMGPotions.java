@@ -14,6 +14,15 @@ public class TFMGPotions {
 
     public static final RegistryObject<Potion> HELLFIRE_POTION = POTIONS.register("hellfire_potion",
             () -> new Potion(new MobEffectInstance(TFMGMobEffects.HELLFIRE.get(), 600, 0)));
+    
+    public static final RegistryObject<Potion> LONG_HELLFIRE_POTION = POTIONS.register("long_hellfire_potion",
+            () -> new Potion(new MobEffectInstance(TFMGMobEffects.HELLFIRE.get(), 1800, 0)));
+    
+    public static final RegistryObject<Potion> FROSTY_POTION = POTIONS.register("frostbite_potion",
+            () -> new Potion(new MobEffectInstance(TFMGMobEffects.FROSTY.get(), 600, 0)));
+    
+    public static final RegistryObject<Potion> LONG_FROSTY_POTION = POTIONS.register("long_frostbite_potion",
+            () -> new Potion(new MobEffectInstance(TFMGMobEffects.FROSTY.get(), 1800, 0)));
 
 
 

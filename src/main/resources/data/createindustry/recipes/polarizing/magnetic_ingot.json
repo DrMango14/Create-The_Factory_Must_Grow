@@ -1,0 +1,15 @@
+{
+  "type": "createindustry:polarizing",
+    "ingredients": [
+        {
+        "tag": "forge:ingots/steel"
+        }
+    ],
+    "processingTime": 400,
+    "results": [
+        {
+        "item": "createindustry:magnetic_ingot"
+        }
+    ],
+  "energy": 300
+}

@@ -1,0 +1,22 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "tag": "createindustry:stone_types/bauxite"
+    }
+  ],
+  "processingTime": 250,
+  "results": [
+    {
+      "item": "create:crushed_raw_aluminum"
+    },
+    {
+      "chance": 0.25,
+      "item": "create:crushed_raw_aluminum"
+    },
+    {
+      "chance": 0.15,
+      "item": "create:experience_nugget"
+    }
+  ]
+}

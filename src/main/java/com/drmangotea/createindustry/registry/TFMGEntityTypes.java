@@ -20,6 +20,7 @@ import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -57,13 +58,16 @@ public class TFMGEntityTypes {
     public static final EntityEntry<BlueSpark> BLUE_SPARK =
             register("blue_spark", BlueSpark::new, () -> BlueSparkRenderer::new,
                     MobCategory.MISC, 4, 20, true, true, BlueSpark::build).register();
+    
+    public static final EntityEntry<CoolSpark> COOL_SPARK =
+            register("cool_spark", CoolSpark::new, () -> CoolSparkRenderer::new,
+                    MobCategory.MISC, 4, 20, true, true, CoolSpark::build).register();
 
     public static final EntityEntry<LithiumSpark> LITHIUM_SPARK =
             register("lithium_spark", LithiumSpark::new, () -> LithiumSparkRenderer::new,
                     MobCategory.MISC, 4, 20, true, true, LithiumSpark::build).register();
     //
-
-
+    
 
     private static <T extends Entity> CreateEntityBuilder<T, ?> register(String name, EntityType.EntityFactory<T> factory,
                                                                          NonNullSupplier<NonNullFunction<EntityRendererProvider.Context, EntityRenderer<? super T>>> renderer,

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "createindustry:item/blast_furnace_gas_bucket"
+  }
+}

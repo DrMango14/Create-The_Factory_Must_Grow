@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "createindustry:sulfur_dust"
+    },
+    {
+      "item": "createindustry:nitrate_dust"
+    },
+    {
+      "amount": 500,
+      "fluid": "minecraft:water",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 500,
+      "fluid": "createindustry:sulfuric_acid"
+    }
+  ]
+}

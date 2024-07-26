@@ -2,6 +2,7 @@ package com.drmangotea.createindustry.registry;
 
 import com.drmangotea.createindustry.base.TFMGEncasedBlocks;
 import com.drmangotea.createindustry.base.TFMGPipes;
+import com.drmangotea.createindustry.base.multiblock.FluidOutputBlockEntity;
 import com.drmangotea.createindustry.blocks.HalfShaftRenderer;
 import com.drmangotea.createindustry.blocks.cogwheeels.*;
 import com.drmangotea.createindustry.blocks.concrete.formwork.FormWorkBlockEntity;
@@ -71,6 +72,7 @@ import com.drmangotea.createindustry.blocks.machines.flarestack.FlarestackBlockE
 import com.drmangotea.createindustry.blocks.machines.metal_processing.blast_furnace.BlastFurnaceOutputBlockEntity;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.blast_furnace.BlastFurnaceRenderer;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.blast_furnace.MoltenMetalBlockEntity;
+import com.drmangotea.createindustry.blocks.machines.metal_processing.blast_stove.BlastStoveBlockEntity;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.casting_basin.CastingBasinBlockEntity;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.casting_basin.CastingBasinRenderer;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.casting_spout.CastingSpoutBlockEntity;
@@ -117,6 +119,11 @@ import static com.drmangotea.createindustry.CreateTFMG.REGISTRATE;
 
 
 public class TFMGBlockEntities {
+    
+    public static final BlockEntityEntry<FluidOutputBlockEntity> FLUID_OUTPUT = REGISTRATE
+            .blockEntity("fluid_output", FluidOutputBlockEntity::new)
+            .validBlocks(TFMGBlocks.FLUID_OUTPUT)
+            .register();
 
     public static final BlockEntityEntry<WeldingMachineBlockEntity> WELDING_MACHINE = REGISTRATE
             .blockEntity("welding_machine", WeldingMachineBlockEntity::new)
@@ -314,7 +321,11 @@ public class TFMGBlockEntities {
             .validBlocks(TFMGBlocks.MACHINE_INPUT)
             .renderer(() -> MachineInputRenderer::new)
             .register();
-
+    
+    public static final BlockEntityEntry<BlastStoveBlockEntity> BLAST_STOVE = REGISTRATE
+            .blockEntity("blast_stove", BlastStoveBlockEntity::new)
+            .validBlocks(TFMGBlocks.BLAST_STOVE)
+            .register();
 
     public static final BlockEntityEntry<BlastFurnaceOutputBlockEntity> BLAST_FURNACE_OUTPUT = REGISTRATE
             .blockEntity("blast_furnace_output", BlastFurnaceOutputBlockEntity::new)

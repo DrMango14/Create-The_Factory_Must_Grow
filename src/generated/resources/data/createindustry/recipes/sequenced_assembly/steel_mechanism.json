@@ -1,0 +1,98 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "forge:ingots/steel"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "chance": 120.0,
+      "item": "createindustry:steel_mechanism"
+    },
+    {
+      "chance": 0.8,
+      "item": "createindustry:heavy_plate"
+    },
+    {
+      "chance": 0.8,
+      "item": "createindustry:steel_ingot"
+    },
+    {
+      "chance": 0.5,
+      "item": "createindustry:aluminum_ingot"
+    },
+    {
+      "chance": 0.3,
+      "item": "createindustry:industrial_pipe"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createindustry:unfinished_steel_mechanism"
+        },
+        {
+          "tag": "forge:ingots/steel"
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unfinished_steel_mechanism"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createindustry:unfinished_steel_mechanism"
+        },
+        {
+          "tag": "forge:ingots/aluminum"
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unfinished_steel_mechanism"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createindustry:unfinished_steel_mechanism"
+        },
+        {
+          "item": "createindustry:screw"
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unfinished_steel_mechanism"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createindustry:unfinished_steel_mechanism"
+        },
+        {
+          "item": "createindustry:screwdriver"
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unfinished_steel_mechanism"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "createindustry:unfinished_steel_mechanism"
+  }
+}

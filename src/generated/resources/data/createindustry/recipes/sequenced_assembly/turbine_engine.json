@@ -1,0 +1,101 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "createindustry:engine_base"
+  },
+  "loops": 6,
+  "results": [
+    {
+      "chance": 120.0,
+      "count": 2,
+      "item": "createindustry:turbine_engine"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createindustry:unfinished_turbine_engine"
+        },
+        {
+          "item": "createindustry:turbine_blade"
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unfinished_turbine_engine"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createindustry:unfinished_turbine_engine"
+        },
+        {
+          "item": "createindustry:screw"
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unfinished_turbine_engine"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createindustry:unfinished_turbine_engine"
+        },
+        {
+          "item": "createindustry:screwdriver"
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unfinished_turbine_engine"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "createindustry:unfinished_turbine_engine"
+        },
+        {
+          "amount": 1000,
+          "fluid": "createindustry:lubrication_oil",
+          "nbt": {}
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unfinished_turbine_engine"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createindustry:unfinished_turbine_engine"
+        },
+        {
+          "item": "createindustry:steel_mechanism"
+        }
+      ],
+      "results": [
+        {
+          "item": "createindustry:unfinished_turbine_engine"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "createindustry:unfinished_turbine_engine"
+  }
+}

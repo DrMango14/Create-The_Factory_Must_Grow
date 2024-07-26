@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "createindustry:white_concrete"
+  },
+  "result": "createindustry:white_concrete_wall"
+}
