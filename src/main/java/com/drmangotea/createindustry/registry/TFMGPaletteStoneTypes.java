@@ -8,12 +8,12 @@ import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.utility.Lang;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import net.minecraft.core.Registry;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Function;
 
@@ -62,7 +62,7 @@ public enum TFMGPaletteStoneTypes {
             paletteStoneVariants.baseBlock = baseBlock;
             String id = Lang.asId(paletteStoneVariants.name());
             paletteStoneVariants.materialTag =
-                    AllTags.optionalTag(ForgeRegistries.ITEMS, CreateTFMG.asResource("stone_types/" + id));
+                    AllTags.optionalTag(Registry.ITEM, CreateTFMG.asResource("stone_types/" + id));
             paletteStoneVariants.variants = new TFMGPalettesVariantEntry(id, paletteStoneVariants);
         }
     }

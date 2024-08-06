@@ -1,39 +1,28 @@
 package com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.controller;
 
 import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.output.DistillationOutputBlockEntity;
-import com.drmangotea.createindustry.blocks.tanks.SteelTankBlock;
 import com.drmangotea.createindustry.blocks.tanks.SteelTankBlockEntity;
 import com.drmangotea.createindustry.recipes.distillation.DistillationRecipe;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
-import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
-import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import com.simibubi.create.foundation.utility.Lang;
-import com.simibubi.create.foundation.utility.animation.LerpedFloat;
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
-import org.checkerframework.checker.units.qual.C;
 
 
 import javax.annotation.Nonnull;
@@ -47,7 +36,7 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
     public DistillationRecipe recipe;
 
 
-    protected LazyOptional<IFluidHandler> fluidCapability;
+    protected LazyOptional<FluidTank> fluidCapability;
 
     public final FluidTank tank= new SmartFluidTank(8000,this::onFluidStackChanged);
 
@@ -110,7 +99,7 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
 
 
         for(DistillationOutputBlockEntity be1 : outputs){
-            if(be1.tank.getSpace()==0)
+            if(be1.tank==0)
                 return;
         }
 

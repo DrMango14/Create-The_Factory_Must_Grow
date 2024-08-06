@@ -5,19 +5,16 @@ package com.drmangotea.createindustry.worldgen;
 import com.drmangotea.createindustry.CreateTFMG;
 import com.drmangotea.createindustry.worldgen.oil_deposit.OilDepositFeature;
 import com.drmangotea.createindustry.worldgen.oil_deposit.OilWellFeature;
+import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
+import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.OreFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.GeodeConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 public class TFMGFeatures {
 
-    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, CreateTFMG.MOD_ID);
+    public static final LazyRegistrar<Feature<?>> FEATURES = LazyRegistrar.create(Registry.FEATURE, CreateTFMG.MOD_ID);
 
     //-------------------------------------------------------------------------------------------------//
 
@@ -38,7 +35,7 @@ public class TFMGFeatures {
 
 
     //-------------------------------------------------------------------------------------------------//
-    public static void register(IEventBus eventBus) {
-        FEATURES.register(eventBus);
+    public static void register() {
+        FEATURES.register();
     }
 }

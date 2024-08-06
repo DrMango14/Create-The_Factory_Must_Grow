@@ -2,54 +2,49 @@ package com.drmangotea.createindustry.registry;
 
 
 import com.drmangotea.createindustry.CreateTFMG;
-import com.simibubi.create.Create;
 import com.simibubi.create.foundation.utility.Lang;
+import net.minecraft.core.DefaultedRegistry;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.Collections;
+import java.util.Map;
 
 import static com.drmangotea.createindustry.registry.TFMGTags.NameSpace.FORGE;
 import static com.drmangotea.createindustry.registry.TFMGTags.NameSpace.MOD;
 
 
 public class TFMGTags {
-    public static <T> TagKey<T> optionalTag(IForgeRegistry<T> registry,
+    public static <T> TagKey<T> optionalTag(Registry<T> registry,
                                             ResourceLocation id) {
-        return registry.tags()
-                .createOptionalTagKey(id, Collections.emptySet());
+        return TagKey.create(registry.key(), id);
     }
 
-    public static <T> TagKey<T> forgeTag(IForgeRegistry<T> registry, String path) {
+    public static <T> TagKey<T> forgeTag(DefaultedRegistry<T> registry, String path) {
         return optionalTag(registry, new ResourceLocation("forge", path));
     }
 
     public static TagKey<Block> forgeBlockTag(String path) {
-        return forgeTag(ForgeRegistries.BLOCKS, path);
+        return forgeTag(Registry.BLOCK, path);
     }
 
     public static TagKey<Item> forgeItemTag(String path) {
-        return forgeTag(ForgeRegistries.ITEMS, path);
+        return forgeTag(Registry.ITEM, path);
     }
 
     public static TagKey<Fluid> forgeFluidTag(String path) {
-        return forgeTag(ForgeRegistries.FLUIDS, path);
+        return forgeTag(Registry.FLUID, path);
     }
 
     public enum NameSpace {
@@ -121,9 +116,9 @@ public class TFMGTags {
         TFMGFluidTags(TFMGTags.NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
             ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
             if (optional) {
-                tag = optionalTag(ForgeRegistries.FLUIDS, id);
+                tag = optionalTag(Registry.FLUID, id);
             } else {
-                tag = FluidTags.create(id);
+                tag = FluidTags.create(String.valueOf(id));
             }
             this.alwaysDatagen = alwaysDatagen;
         }
@@ -170,7 +165,7 @@ public class TFMGTags {
         TFMGEntityTags(TFMGTags.NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
             ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
             if (optional) {
-                tag = optionalTag(ForgeRegistries.ENTITY_TYPES, id);
+                tag = optionalTag(Registry.ENTITY_TYPE, id);
             } else {
                 tag = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, id);
             }
@@ -217,7 +212,7 @@ public class TFMGTags {
         TFMGRecipeSerializerTags(TFMGTags.NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
             ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
             if (optional) {
-                tag = optionalTag(ForgeRegistries.RECIPE_SERIALIZERS, id);
+                tag = optionalTag(Registry.RECIPE_SERIALIZER, id);
             } else {
                 tag = TagKey.create(Registry.RECIPE_SERIALIZER_REGISTRY, id);
             }
@@ -225,7 +220,10 @@ public class TFMGTags {
         }
 
         public boolean matches(RecipeSerializer<?> recipeSerializer) {
-            return ForgeRegistries.RECIPE_SERIALIZERS.getHolder(recipeSerializer).orElseThrow().is(tag);
+
+            return Registry.RECIPE_SERIALIZER.getHolder(
+                    ResourceKey.create(Registry.RECIPE_SERIALIZER.key(), Registry.RECIPE_SERIALIZER.getKey(recipeSerializer)))
+                    .orElseThrow().is(tag);
         }
 
         private static void init() {}

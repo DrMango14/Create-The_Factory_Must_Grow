@@ -6,6 +6,8 @@ import com.mojang.math.Vector3f;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.foundation.utility.Color;
 import com.tterrag.registrate.builders.FluidBuilder;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.util.SimpleFlowableFluid;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -13,17 +15,18 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fluids.FluidStack;
 
 
 import java.util.function.Supplier;
 
-public class ConcreteFluidType extends AllFluids.TintedFluidType {
+import static net.minecraft.client.renderer.block.model.BlockElementFace.NO_TINT;
+
+public class ConcreteFluidType extends SimpleFlowableFluid {
 
 		private Vector3f fogColor;
 		private Supplier<Float> fogDistance;
 
-		public static FluidBuilder.FluidTypeFactory  create(int fogColor, Supplier<Float> fogDistance) {
+		public static FluidBuilder create(int fogColor, Supplier<Float> fogDistance) {
 			return (p, s, f) -> {
 				ConcreteFluidType fluidType = new ConcreteFluidType(p, s, f);
 				fluidType.fogColor = new Color(fogColor, false).asVectorF();
@@ -32,7 +35,7 @@ public class ConcreteFluidType extends AllFluids.TintedFluidType {
 			};
 		}
 
-		private ConcreteFluidType(Properties properties, ResourceLocation stillTexture,
+		private ConcreteFluidType(SimpleFlowableFluid.Properties properties, ResourceLocation stillTexture,
 								  ResourceLocation flowingTexture) {
 			super(properties, stillTexture, flowingTexture);
 		}

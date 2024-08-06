@@ -1,25 +1,11 @@
 package com.drmangotea.createindustry.worldgen;
 
 import com.drmangotea.createindustry.registry.TFMGBlocks;
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.Create;
-import com.simibubi.create.foundation.data.DynamicDataProvider;
 import com.simibubi.create.foundation.utility.Couple;
 import com.simibubi.create.infrastructure.worldgen.OreFeatureConfigEntry;
-import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.world.BiomeModifier;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class TFMGOreConfigEntries {
 

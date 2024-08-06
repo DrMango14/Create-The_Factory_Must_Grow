@@ -1,5 +1,6 @@
 package com.drmangotea.createindustry.blocks.fluids;
 
+import com.tterrag.registrate.fabric.SimpleFlowableFluid;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
@@ -12,7 +13,7 @@ import net.minecraftforge.fluids.ForgeFlowingFluid;
  * makes fluid burn when close to fire,
  * not working for now
  */
-public class FlammableFluid extends ForgeFlowingFluid {
+public class FlammableFluid extends SimpleFlowableFluid {
 
 
     protected FlammableFluid(Properties properties) {

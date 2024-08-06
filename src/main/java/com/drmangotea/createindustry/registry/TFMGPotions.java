@@ -1,24 +1,21 @@
 package com.drmangotea.createindustry.registry;
 
 import com.drmangotea.createindustry.CreateTFMG;
+import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
+import net.minecraft.core.Registry;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 public class TFMGPotions {
-    public static final DeferredRegister<Potion> POTIONS
-            = DeferredRegister.create(ForgeRegistries.POTIONS, CreateTFMG.MOD_ID);
+    public static final LazyRegistrar<Potion> POTIONS
+            = LazyRegistrar.create(Registry.POTION, CreateTFMG.MOD_ID);
 
     public static final RegistryObject<Potion> HELLFIRE_POTION = POTIONS.register("hellfire_potion",
             () -> new Potion(new MobEffectInstance(TFMGMobEffects.HELLFIRE.get(), 600, 0)));
 
-
-
-    public static void register(IEventBus eventBus) {
-        POTIONS.register(eventBus);
+    public static void register() {
+        POTIONS.register();
     }
 
 }

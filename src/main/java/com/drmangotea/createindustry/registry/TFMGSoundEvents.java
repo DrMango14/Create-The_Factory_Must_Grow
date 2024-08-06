@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.simibubi.create.Create;
+import com.tterrag.registrate.fabric.RegistryObject;
 import net.minecraft.core.Registry;
 import net.minecraft.core.Vec3i;
 import net.minecraft.data.CachedOutput;
@@ -21,9 +22,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegisterEvent;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -68,11 +66,9 @@ public class TFMGSoundEvents {
             entry.prepare();
     }
 
-    public static void register(RegisterEvent event) {
-        event.register(Registry.SOUND_EVENT_REGISTRY, helper -> {
-            for (TFMGSoundEvents.SoundEntry entry : ALL.values())
-                entry.register(helper);
-        });
+    public static void register() {
+        for (TFMGSoundEvents.SoundEntry entry : ALL.values())
+            entry.register();
     }
 
     public static JsonObject provideLangEntries() {
@@ -230,7 +226,7 @@ public class TFMGSoundEvents {
 
         public abstract void prepare();
 
-        public abstract void register(RegisterEvent.RegisterHelper<SoundEvent> registry);
+        public abstract void register();
 
         public abstract void write(JsonObject json);
 
@@ -312,23 +308,22 @@ public class TFMGSoundEvents {
             for (int i = 0; i < wrappedEvents.size(); i++) {
                 TFMGSoundEvents.ConfiguredSoundEvent wrapped = wrappedEvents.get(i);
                 ResourceLocation location = getIdOf(i);
-                RegistryObject<SoundEvent> event = RegistryObject.create(location, ForgeRegistries.SOUND_EVENTS);
+                SoundEvent event = new SoundEvent(location);
                 compiledEvents.add(new TFMGSoundEvents.WrappedSoundEntry.CompiledSoundEvent(event, wrapped.volume(), wrapped.pitch()));
             }
         }
 
         @Override
-        public void register(RegisterEvent.RegisterHelper<SoundEvent> helper) {
-            for (TFMGSoundEvents.WrappedSoundEntry.CompiledSoundEvent compiledEvent : compiledEvents) {
-                ResourceLocation location = compiledEvent.event().getId();
-                helper.register(location, new SoundEvent(location));
+        public void register() {
+            for (TFMGSoundEvents.WrappedSoundEntry.CompiledSoundEvent event : compiledEvents) {
+                Registry.register(Registry.SOUND_EVENT, event.event.getLocation(), event.event);
             }
         }
 
         @Override
         public SoundEvent getMainEvent() {
             return compiledEvents.get(0)
-                    .event().get();
+                    .event;
         }
 
         protected ResourceLocation getIdOf(int i) {
@@ -360,7 +355,7 @@ public class TFMGSoundEvents {
         @Override
         public void play(Level world, Player entity, double x, double y, double z, float volume, float pitch) {
             for (TFMGSoundEvents.WrappedSoundEntry.CompiledSoundEvent event : compiledEvents) {
-                world.playSound(entity, x, y, z, event.event().get(), category, event.volume() * volume,
+                world.playSound(entity, x, y, z, event.event, category, event.volume() * volume,
                         event.pitch() * pitch);
             }
         }
@@ -368,12 +363,12 @@ public class TFMGSoundEvents {
         @Override
         public void playAt(Level world, double x, double y, double z, float volume, float pitch, boolean fade) {
             for (TFMGSoundEvents.WrappedSoundEntry.CompiledSoundEvent event : compiledEvents) {
-                world.playLocalSound(x, y, z, event.event().get(), category, event.volume() * volume,
+                world.playLocalSound(x, y, z, event.event, category, event.volume() * volume,
                         event.pitch() * pitch, fade);
             }
         }
 
-        private record CompiledSoundEvent(RegistryObject<SoundEvent> event, float volume, float pitch) {
+        private record CompiledSoundEvent(SoundEvent event, float volume, float pitch) {
         }
 
     }
@@ -381,7 +376,7 @@ public class TFMGSoundEvents {
     private static class CustomSoundEntry extends TFMGSoundEvents.SoundEntry {
 
         protected List<ResourceLocation> variants;
-        protected RegistryObject<SoundEvent> event;
+        protected SoundEvent event;
 
         public CustomSoundEntry(ResourceLocation id, List<ResourceLocation> variants, String subtitle,
                                 SoundSource category, int attenuationDistance) {
@@ -391,17 +386,17 @@ public class TFMGSoundEvents {
 
         @Override
         public void prepare() {
-            event = RegistryObject.create(id, ForgeRegistries.SOUND_EVENTS);
+            event = new SoundEvent(id);
         }
 
-        public void register(RegisterEvent.RegisterHelper<SoundEvent> helper) {
-            ResourceLocation location = event.getId();
-            helper.register(location, new SoundEvent(location));
+        @Override
+        public void register() {
+            Registry.register(Registry.SOUND_EVENT, event.getLocation(), event);
         }
 
         @Override
         public SoundEvent getMainEvent() {
-            return event.get();
+            return event;
         }
 
         @Override
@@ -433,12 +428,12 @@ public class TFMGSoundEvents {
 
         @Override
         public void play(Level world, Player entity, double x, double y, double z, float volume, float pitch) {
-            world.playSound(entity, x, y, z, event.get(), category, volume, pitch);
+            world.playSound(entity, x, y, z, event, category, volume, pitch);
         }
 
         @Override
         public void playAt(Level world, double x, double y, double z, float volume, float pitch, boolean fade) {
-            world.playLocalSound(x, y, z, event.get(), category, volume, pitch, fade);
+            world.playLocalSound(x, y, z, event, category, volume, pitch, fade);
         }
 
     }

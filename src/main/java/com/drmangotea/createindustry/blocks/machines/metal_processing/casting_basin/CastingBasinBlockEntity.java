@@ -1,6 +1,5 @@
 package com.drmangotea.createindustry.blocks.machines.metal_processing.casting_basin;
 
-import com.drmangotea.createindustry.CreateTFMG;
 import com.drmangotea.createindustry.blocks.machines.TFMGMachineBlockEntity;
 import com.drmangotea.createindustry.recipes.casting.CastingRecipe;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
@@ -18,23 +17,13 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.Container;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.Optional;
 
 import static com.drmangotea.createindustry.blocks.machines.metal_processing.casting_basin.CastingBasinBlock.MOLD_TYPE;
 

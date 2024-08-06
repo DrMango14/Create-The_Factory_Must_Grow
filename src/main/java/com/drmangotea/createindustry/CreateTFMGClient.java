@@ -7,42 +7,40 @@ import com.drmangotea.createindustry.items.weapons.quad_potato_cannon.QuadPotato
 import com.drmangotea.createindustry.ponder.TFMGPonderIndex;
 import com.drmangotea.createindustry.registry.TFMGPartialModels;
 import com.drmangotea.createindustry.registry.TFMGParticleTypes;
-import com.simibubi.create.AllParticleTypes;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import io.github.fabricators_of_create.porting_lib.event.client.ParticleManagerRegistrationCallback;
+import net.fabricmc.api.ClientModInitializer;
 
-public class CreateTFMGClient {
+public class CreateTFMGClient implements ClientModInitializer {
     public static final QuadPotatoCannonRenderHandler QUAD_POTATO_CANNON_RENDER_HANDLER = new QuadPotatoCannonRenderHandler();
 
     public static final AdvancedPotatoCannonRenderHandler ADVANCED_POTATO_CANNON_RENDER_HANDLER = new AdvancedPotatoCannonRenderHandler();
 
     public static final FlamethrowerRenderHandler FLAMETHROWER_RENDER_HANDLER = new FlamethrowerRenderHandler();
 
-    public CreateTFMGClient() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+
+    @Override
+    public void onInitializeClient() {
         TFMGPartialModels.init();
-        modEventBus.addListener(TFMGParticleTypes::registerFactories);
-        modEventBus.register(this);
+
+        ADVANCED_POTATO_CANNON_RENDER_HANDLER.registerListeners();
+        QUAD_POTATO_CANNON_RENDER_HANDLER.registerListeners();
+        FLAMETHROWER_RENDER_HANDLER.registerListeners();
 
 
+//        ItemBlockRenderTypes.setRenderLayer(TFMGColoredFires.GREEN_FIRE.get(), RenderType.cutout());
+//        ItemBlockRenderTypes.setRenderLayer(TFMGColoredFires.BLUE_FIRE.get(), RenderType.cutout());
 
-        ADVANCED_POTATO_CANNON_RENDER_HANDLER.registerListeners(forgeEventBus);
-        QUAD_POTATO_CANNON_RENDER_HANDLER.registerListeners(forgeEventBus);
-        FLAMETHROWER_RENDER_HANDLER.registerListeners(forgeEventBus);
-    }
-
-
-    @SubscribeEvent
-    public void setup(final FMLClientSetupEvent event) {
         TFMGPonderIndex.register();
         TFMGPonderIndex.registerTags();
+        ParticleManagerRegistrationCallback.EVENT.register(TFMGParticleTypes::registerFactories);
+        initCompat();
     }
 
-
+    @SuppressWarnings("Convert2MethodRef") // may cause class loading issues if changed
+    private static void initCompat() {
+        //used for client related compat
+        //example: Mods.<YOUR MOD>.executeIfInstalled(() -> () -> <Compat Class>.<clientInit or init>());
+    }
 }
 
 

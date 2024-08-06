@@ -22,8 +22,6 @@ import com.drmangotea.createindustry.blocks.electricity.cable_blocks.DiagonalCab
 import com.drmangotea.createindustry.blocks.electricity.cable_blocks.copycat_cable_block.CopycatCableBlockModel;
 import com.drmangotea.createindustry.blocks.electricity.capacitor.AccumulatorBlock;
 import com.drmangotea.createindustry.blocks.electricity.capacitor.AccumulatorCTBehavior;
-import com.drmangotea.createindustry.blocks.electricity.electrical_switch.ElectricalSwitchBlock;
-import com.drmangotea.createindustry.blocks.electricity.electrical_switch.LeverGenerator;
 import com.drmangotea.createindustry.blocks.electricity.generation.creative_generator.VoltageCubeBlock;
 import com.drmangotea.createindustry.blocks.electricity.lights.neon.NeonTubeBlock;
 import com.drmangotea.createindustry.blocks.electricity.voltmeter.energy_meter.EnergyMeterBlock;
@@ -108,12 +106,12 @@ import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.gearbox.GearboxBlock;
 import com.simibubi.create.content.kinetics.motor.CreativeMotorGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
-import com.simibubi.create.foundation.block.ItemUseOverrides;
 import com.simibubi.create.foundation.data.*;
 import com.simibubi.create.foundation.utility.Couple;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import me.alphamode.forgetags.Tags;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -125,7 +123,6 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
-import net.minecraftforge.common.Tags;
 
 
 import static com.drmangotea.createindustry.CreateTFMG.REGISTRATE;
@@ -380,7 +377,7 @@ public class TFMGBlocks {
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE))
             .transform(pickaxeOnly())
-            .loot((lt, b) -> lt.add(b,
+            .loot((lt, b) -> lt.method_16258(b,
                     RegistrateBlockLootTables.createSilkTouchDispatchTable(b,
                             RegistrateBlockLootTables.applyExplosionDecay(b, LootItem.lootTableItem(TFMGItems.RAW_LEAD.get())
                                     .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))))))
@@ -397,7 +394,7 @@ public class TFMGBlocks {
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.DEEPSLATE))
             .transform(pickaxeOnly())
-            .loot((lt, b) -> lt.add(b,
+            .loot((lt, b) -> lt.method_16258(b,
                     RegistrateBlockLootTables.createSilkTouchDispatchTable(b,
                             RegistrateBlockLootTables.applyExplosionDecay(b, LootItem.lootTableItem(TFMGItems.RAW_LEAD.get())
                                     .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))))))
@@ -414,7 +411,7 @@ public class TFMGBlocks {
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE))
             .transform(pickaxeOnly())
-            .loot((lt, b) -> lt.add(b,
+            .loot((lt, b) -> lt.method_16258(b,
                     RegistrateBlockLootTables.createSilkTouchDispatchTable(b,
                             RegistrateBlockLootTables.applyExplosionDecay(b, LootItem.lootTableItem(TFMGItems.RAW_NICKEL.get())
                                     .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))))))
@@ -431,7 +428,7 @@ public class TFMGBlocks {
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.DEEPSLATE))
             .transform(pickaxeOnly())
-            .loot((lt, b) -> lt.add(b,
+            .loot((lt, b) -> lt.method_16258(b,
                     RegistrateBlockLootTables.createSilkTouchDispatchTable(b,
                             RegistrateBlockLootTables.applyExplosionDecay(b, LootItem.lootTableItem(TFMGItems.RAW_NICKEL.get())
                                     .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))))))
@@ -448,7 +445,7 @@ public class TFMGBlocks {
                      .requiresCorrectToolForDrops()
                      .sound(SoundType.STONE))
              .transform(pickaxeOnly())
-             .loot((lt, b) -> lt.add(b,
+             .loot((lt, b) -> lt.method_16258(b,
                      RegistrateBlockLootTables.createSilkTouchDispatchTable(b,
                              RegistrateBlockLootTables.applyExplosionDecay(b, LootItem.lootTableItem(TFMGItems.RAW_LITHIUM.get())
                                      .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))))))
@@ -465,7 +462,7 @@ public class TFMGBlocks {
                      .requiresCorrectToolForDrops()
                      .sound(SoundType.DEEPSLATE))
              .transform(pickaxeOnly())
-             .loot((lt, b) -> lt.add(b,
+             .loot((lt, b) -> lt.method_16258(b,
                      RegistrateBlockLootTables.createSilkTouchDispatchTable(b,
                              RegistrateBlockLootTables.applyExplosionDecay(b, LootItem.lootTableItem(TFMGItems.RAW_LITHIUM.get())
                                      .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))))))
@@ -511,7 +508,7 @@ public class TFMGBlocks {
             .properties(p -> p.color(MaterialColor.TERRACOTTA_RED))
             //.transform(pickaxeOnly())
             .blockstate(simpleCubeAll("fireclay"))
-            .loot((p, b) -> p.add(b, RegistrateBlockLootTables.createSingleItemTable(TFMGItems.FIRECLAY_BALL.get())
+            .loot((p, b) -> p.method_16258(b, RegistrateBlockLootTables.createSingleItemTable(TFMGItems.FIRECLAY_BALL.get())
                     .withPool(RegistrateBlockLootTables.applyExplosionCondition(TFMGItems.FIRECLAY_BALL.get(), LootPool.lootPool()
                             .add(LootItem.lootTableItem(TFMGItems.FIRECLAY_BALL.get()))))
                     .withPool(RegistrateBlockLootTables.applyExplosionCondition(TFMGItems.FIRECLAY_BALL.get(), LootPool.lootPool()
@@ -1963,7 +1960,7 @@ public class TFMGBlocks {
                 .lang("Concrete Wall")
                 .register();
 
-        REGISTRATE.block("concrete_stairs", p -> new StairBlock(() -> TFMGBlocks.CONCRETE.get().defaultBlockState(), p))
+        REGISTRATE.block("concrete_stairs", p -> new StairBlock(TFMGBlocks.CONCRETE.get().defaultBlockState(), p))
                 .initialProperties(() -> Blocks.STONE)
                 .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
                 .properties(p -> p.requiresCorrectToolForDrops())
@@ -2041,7 +2038,7 @@ public class TFMGBlocks {
                     .lang(upperCaseColor + " Concrete Wall")
                     .register();
 
-            REGISTRATE.block(color + "_concrete_stairs", p -> new StairBlock(() -> TFMGBlocks.CONCRETE.get().defaultBlockState(), p))
+            REGISTRATE.block(color + "_concrete_stairs", p -> new StairBlock(TFMGBlocks.CONCRETE.get().defaultBlockState(), p))
                     .initialProperties(() -> Blocks.STONE)
                     .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
                     .properties(p -> p.requiresCorrectToolForDrops())
@@ -2169,7 +2166,7 @@ public class TFMGBlocks {
                     //.lang(displayName + " Wall")
                     .register();
 //
-        REGISTRATE.block(name + "_stairs", p -> new StairBlock(() -> TFMGBlocks.CONCRETE.get().defaultBlockState(), p))
+        REGISTRATE.block(name + "_stairs", p -> new StairBlock(TFMGBlocks.CONCRETE.get().defaultBlockState(), p))
                 .initialProperties(() -> properties)
                 .properties(p -> p.color(color))
                 .properties(p -> p.sound(sound))

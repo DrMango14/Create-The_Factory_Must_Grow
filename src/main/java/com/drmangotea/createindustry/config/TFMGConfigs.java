@@ -1,20 +1,19 @@
 package com.drmangotea.createindustry.config;
 
+import com.drmangotea.createindustry.CreateTFMG;
 import com.simibubi.create.content.kinetics.BlockStressValues;
 import com.simibubi.create.foundation.config.ConfigBase;
+import net.minecraftforge.api.ModLoadingContext;
+import net.minecraftforge.api.fml.event.config.ModConfigEvents;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+
 public class TFMGConfigs {
 
 	private static final Map<ModConfig.Type, ConfigBase> CONFIGS = new EnumMap<>(ModConfig.Type.class);
@@ -42,27 +41,28 @@ public class TFMGConfigs {
 		return config;
 	}
 
-	public static void register(ModLoadingContext context) {
+	public static void register() {
 		server = register(ServerConfig::new, ModConfig.Type.SERVER);
 
 		for (Map.Entry<ModConfig.Type, ConfigBase> pair : CONFIGS.entrySet())
-			context.registerConfig(pair.getKey(), pair.getValue().specification);
+			ModLoadingContext.registerConfig(CreateTFMG.MOD_ID, pair.getKey(), pair.getValue().specification);
 
-		BlockStressValues.registerProvider(context.getActiveNamespace(), server().stressValues);
+		BlockStressValues.registerProvider(CreateTFMG.MOD_ID, server().stressValues);
+
+		ModConfigEvents.loading(CreateTFMG.MOD_ID).register(TFMGConfigs::onLoad);
+		ModConfigEvents.loading(CreateTFMG.MOD_ID).register(TFMGConfigs::onReload);
 	}
 
-	@SubscribeEvent
-	public static void onLoad(ModConfigEvent.Loading event) {
+	public static void onLoad(ModConfig modConfig) {
 		for (ConfigBase config : CONFIGS.values())
-			if (config.specification == event.getConfig()
+			if (config.specification == modConfig
 					.getSpec())
 				config.onLoad();
 	}
 
-	@SubscribeEvent
-	public static void onReload(ModConfigEvent.Reloading event) {
+	public static void onReload(ModConfig modConfig) {
 		for (ConfigBase config : CONFIGS.values())
-			if (config.specification == event.getConfig()
+			if (config.specification == modConfig
 					.getSpec())
 				config.onReload();
 	}

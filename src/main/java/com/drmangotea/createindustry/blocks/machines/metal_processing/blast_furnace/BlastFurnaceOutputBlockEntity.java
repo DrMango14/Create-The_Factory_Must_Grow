@@ -1,6 +1,5 @@
 package com.drmangotea.createindustry.blocks.machines.metal_processing.blast_furnace;
 
-import com.drmangotea.createindustry.CreateTFMG;
 import com.drmangotea.createindustry.blocks.machines.TFMGMachineBlockEntity;
 import com.drmangotea.createindustry.recipes.industrial_blasting.IndustrialBlastingRecipe;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
@@ -12,8 +11,9 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.utility.Lang;
-import com.simibubi.create.foundation.utility.LangBuilder;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
+import io.github.fabricators_of_create.porting_lib.transfer.item.RecipeWrapper;
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,17 +25,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.wrapper.CombinedInvWrapper;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,7 +79,7 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
         fuelInventory = new SmartInventory(1, this).forbidInsertion().forbidExtraction()
                 .withMaxStackSize(64);
 
-        itemCapability = LazyOptional.of(() -> new CombinedInvWrapper(inputInventory,fuelInventory));
+        itemCapability = LazyOptional.of(() -> new Combined(inputInventory,fuelInventory));
 
 
         tank1.getPrimaryHandler().setCapacity(8000);

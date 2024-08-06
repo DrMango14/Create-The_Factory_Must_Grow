@@ -6,7 +6,6 @@ import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.drmangotea.createindustry.registry.TFMGFluids;
 import com.drmangotea.createindustry.registry.TFMGSoundEvents;
 import com.drmangotea.createindustry.registry.TFMGTags;
-import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.IRotate;
@@ -14,14 +13,17 @@ import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.content.kinetics.steamEngine.PoweredShaftBlockEntity;
 import com.simibubi.create.content.kinetics.steamEngine.SteamEngineBlock;
-import com.simibubi.create.content.kinetics.steamEngine.SteamEngineValueBox;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.*;
-import mekanism.common.recipe.lookup.cache.type.FluidInputCache;
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -36,21 +38,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.fml.DistExecutor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.lang.ref.WeakReference;
 import java.util.List;
-import java.util.Optional;
 
 import static com.drmangotea.createindustry.blocks.engines.diesel.DieselEngineBlock.FACE;
 import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
@@ -341,15 +333,15 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 						fuelModifier = 1;
 
 
-				fuelTank.setFluid(new FluidStack(TFMGFluids.DIESEL.getSource(),fuelTank.getFluidAmount()-(2-fuelModifier)));
+				fuelTank.setFluid(new FluidStack(FluidVariant.of(TFMGFluids.DIESEL.getSource()),fuelTank.getFluidAmount()-(2-fuelModifier)));
 
 
 		}
 				//airTank.drain(1, IFluidHandler.FluidAction.EXECUTE);
 			if(!airTank.isEmpty()) {
-				airTank.setFluid(new FluidStack(TFMGFluids.AIR.getSource(), airTank.getFluidAmount() - 5));
+				airTank.setFluid(new FluidStack(FluidVariant.of(TFMGFluids.AIR.getSource()), airTank.getFluidAmount() - 5));
 			}else expansionBE.airTank.setFluid(new FluidStack(TFMGFluids.AIR.getSource(), expansionBE.airTank.getFluidAmount() - 5));
-			exhaustTank.fill(new FluidStack(TFMGFluids.CARBON_DIOXIDE.getSource(),3), IFluidHandler.FluidAction.EXECUTE);
+			exhaustTank.fill(new FluidStack(FluidVariant.of(TFMGFluids.CARBON_DIOXIDE.getSource()),3), IFluidHandler.FluidAction.EXECUTE);
 				//tanks.get(false).setFluid(new FluidStack(TFMGFluids.CARBON_DIOXIDE.getSource(), tanks.get(false).getFluidAmount()+1));
 
 
@@ -360,12 +352,12 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 			if (!expansionBE.coolantTank.isEmpty()){
 				strengthModifier +=3;
 				if(consumptionTimer>5)
-					expansionBE.coolantTank.setFluid(new FluidStack(TFMGFluids.COOLING_FLUID.getSource(), expansionBE.coolantTank.getFluidAmount() - 1));
+					expansionBE.coolantTank.setFluid(new FluidStack(FluidVariant.of(TFMGFluids.COOLING_FLUID.getSource()), expansionBE.coolantTank.getFluidAmount() - 1));
 			}
 			if (!expansionBE.lubricationOilTank.isEmpty()){
 				strengthModifier +=5;
 				if(consumptionTimer>5)
-					expansionBE.lubricationOilTank.setFluid(new FluidStack(TFMGFluids.LUBRICATION_OIL.getSource(), expansionBE.lubricationOilTank.getFluidAmount() - 1));
+					expansionBE.lubricationOilTank.setFluid(new FluidStack(FluidVariant.of(TFMGFluids.LUBRICATION_OIL.getSource()), expansionBE.lubricationOilTank.getFluidAmount() - 1));
 
 			}
 		}
@@ -398,7 +390,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	protected AABB createRenderBoundingBox() {
 		return super.createRenderBoundingBox().inflate(2);
 	}

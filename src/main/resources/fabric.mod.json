@@ -16,11 +16,18 @@
   "entrypoints": {
     "main": [
       "com.drmangotea.createindustry.CreateTFMG"
+    ],
+    "client": [
+      "com.drmangotea.createindustry.CreateTFMGClient"
+    ],
+    "fabric-datagen": [
+      "com.drmangotea.createindustry.data.CreateTFMGData"
     ]
   },
   "mixins": [
     "createindustry.mixins.json"
   ],
+  "accessWidener": "createindustry.accesswidener",
   "depends": {
     "fabricloader": ">=${fabric_loader_version}",
     "fabric-api": ">=${fabric_api_version}",

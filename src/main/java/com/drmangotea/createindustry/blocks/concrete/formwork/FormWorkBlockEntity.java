@@ -5,15 +5,16 @@ import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.drmangotea.createindustry.registry.TFMGFluids;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 public class FormWorkBlockEntity extends TFMGMachineBlockEntity {
 
@@ -42,9 +43,10 @@ public class FormWorkBlockEntity extends TFMGMachineBlockEntity {
             public boolean isFluidValid(FluidStack stack) {
                 return stack.getFluid().isSame(TFMGFluids.LIQUID_CONCRETE.getSource());
             }
+
             @Override
-            public FluidStack drain(FluidStack resource, FluidAction action) {
-                    return FluidStack.EMPTY;
+            public long extract(FluidVariant extractedVariant, long maxAmount, TransactionContext transaction) {
+                    return 0;
             }
         };
     }
@@ -115,16 +117,16 @@ public class FormWorkBlockEntity extends TFMGMachineBlockEntity {
                     FluidTank checkedTank = ((FormWorkBlockEntity) CheckedBE).tankInventory;
                     if (checkedTank.getFluidAmount() < 1000) {
                   if(checkedTank.getFluidAmount()>=995&&tankInventory.getFluidAmount()>0){
-                      checkedTank.setFluid(new FluidStack(TFMGFluids.LIQUID_CONCRETE.getSource(), checkedTank.getFluidAmount()+1));
+                      checkedTank.setFluid(new FluidStack(FluidVariant.of(TFMGFluids.LIQUID_CONCRETE.getSource()), checkedTank.getFluidAmount()+1));
                       //tankInventory.drain(1, IFluidHandler.FluidAction.EXECUTE);
                 //      continue;
                   }
 
-                        int reducedAmount = tankInventory.getFluidAmount() / 8;
+                        int reducedAmount = (int) (tankInventory.getFluidAmount() / 8);
 
                         if (tankInventory.getFluidAmount() != 0)
                             reducedAmount = 1;
-                        int newFluidAmount = checkedTank.getFluidAmount() + reducedAmount;
+                        int newFluidAmount = (int) (checkedTank.getFluidAmount() + reducedAmount);
 
                         int toRemove = reducedAmount;
                         //if full
@@ -136,7 +138,7 @@ public class FormWorkBlockEntity extends TFMGMachineBlockEntity {
                         }
                         //
                         checkedTank.setFluid(new FluidStack(TFMGFluids.LIQUID_CONCRETE.getSource(), newFluidAmount));
-                        tankInventory.drain(1, IFluidHandler.FluidAction.EXECUTE);
+                        tankInventory.extract(1, FluidTank.FluidAction.EXECUTE);
 
                     }
                 }

@@ -5,17 +5,11 @@ import com.drmangotea.createindustry.blocks.electricity.capacitor.CapacitorBlock
 import com.drmangotea.createindustry.blocks.electricity.resistors.ResistorBlockEntity;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.simibubi.create.Create;
-import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LeverBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.energy.EnergyStorage;
 
 public interface IElectricBlock {
 
@@ -144,7 +138,6 @@ public interface IElectricBlock {
                 }else
 
                 if(be1!=null) {
-
                     if (be1.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite()).isPresent()) {
 
                         if (!(be1.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite()).orElse(new EnergyStorage(0)) instanceof TFMGForgeEnergyStorage)) {

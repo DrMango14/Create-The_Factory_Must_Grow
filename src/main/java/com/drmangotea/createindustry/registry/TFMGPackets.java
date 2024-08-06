@@ -5,21 +5,18 @@ import com.drmangotea.createindustry.items.weapons.advanced_potato_cannon.Advanc
 import com.drmangotea.createindustry.items.weapons.quad_potato_cannon.QuadPotatoCannonPacket;
 
 import com.simibubi.create.foundation.networking.SimplePacketBase;
+import io.github.fabricators_of_create.porting_lib.util.NetworkDirection;
+import me.pepperbell.simplenetworking.SimpleChannel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
-import static net.minecraftforge.network.NetworkDirection.PLAY_TO_CLIENT;
+import static io.github.fabricators_of_create.porting_lib.util.NetworkDirection.PLAY_TO_CLIENT;
+
 
 public enum TFMGPackets {
 

@@ -1,43 +1,26 @@
 package com.drmangotea.createindustry.blocks.machines.firebox;
 
-import com.drmangotea.createindustry.registry.TFMGFluids;
 import com.drmangotea.createindustry.registry.TFMGTags;
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllItems;
-import com.simibubi.create.AllTags.AllItemTags;
 import com.simibubi.create.content.fluids.tank.FluidTankBlock;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HeatLevel;
-import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
-import com.simibubi.create.foundation.utility.AngleHelper;
 import com.simibubi.create.foundation.utility.VecHelper;
-import com.simibubi.create.foundation.utility.animation.LerpedFloat;
-import com.simibubi.create.foundation.utility.animation.LerpedFloat.Chaser;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -51,7 +34,7 @@ public class FireboxBlockEntity extends SmartBlockEntity {
 	protected int remainingBurnTime;
 
 
-	protected LazyOptional<IFluidHandler> fluidCapability;
+	protected LazyOptional<FluidTank> fluidCapability;
 	public FluidTank tankInventory;
 
 
@@ -127,7 +110,7 @@ public class FireboxBlockEntity extends SmartBlockEntity {
 		super.read(compound, clientPacket);
 	}
 	private void refreshCapability() {
-		LazyOptional<IFluidHandler> oldCap = fluidCapability;
+		LazyOptional<FluidTank> oldCap = fluidCapability;
 		fluidCapability = LazyOptional.of(() -> handlerForCapability());
 		oldCap.invalidate();
 	}
@@ -140,7 +123,7 @@ public class FireboxBlockEntity extends SmartBlockEntity {
 			return fluidCapability.cast();
 		return super.getCapability(cap, side);
 	}
-	private IFluidHandler handlerForCapability() {
+	private FluidTank handlerForCapability() {
 
 		return tankInventory;
 	}

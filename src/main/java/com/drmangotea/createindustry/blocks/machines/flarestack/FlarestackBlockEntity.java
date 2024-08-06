@@ -1,7 +1,6 @@
 package com.drmangotea.createindustry.blocks.machines.flarestack;
 
 
-import com.drmangotea.createindustry.registry.TFMGFluids;
 import com.drmangotea.createindustry.registry.TFMGTags;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
@@ -9,6 +8,8 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,13 +17,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -33,7 +27,7 @@ public class FlarestackBlockEntity extends SmartBlockEntity implements IHaveGogg
 
 
 
-    protected LazyOptional<IFluidHandler> fluidCapability;
+    protected LazyOptional<FluidTank> fluidCapability;
     public FluidTank tankInventory;
 
     public boolean spawnsSmoke=false;
@@ -61,12 +55,12 @@ public class FlarestackBlockEntity extends SmartBlockEntity implements IHaveGogg
         LangBuilder mb = Lang.translate("generic.unit.millibuckets");
 
         /////////
-        LazyOptional<IFluidHandler> handler = this.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY);
-        Optional<IFluidHandler> resolve = handler.resolve();
+        LazyOptional<FluidTank> handler = this.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY);
+        Optional<FluidTank> resolve = handler.resolve();
         if (!resolve.isPresent())
             return false;
 
-        IFluidHandler tank = resolve.get();
+        FluidTank tank = resolve.get();
         if (tank.getTanks() == 0)
             return false;
 

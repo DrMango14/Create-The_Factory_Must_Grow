@@ -5,13 +5,12 @@ package com.drmangotea.createindustry.recipes.distillation;
 import com.drmangotea.createindustry.registry.TFMGRecipeTypes;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
-import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 public class DistillationRecipe extends ProcessingRecipe<SmartInventory> {
 
@@ -84,17 +83,17 @@ public class DistillationRecipe extends ProcessingRecipe<SmartInventory> {
 
 
 
-    public boolean matches(FluidTank inv,int outputs) {
+    public boolean matches(FluidTank inv, int outputs) {
 
         int neededOutputs = fluidIngredients.toArray().length;
 
         if(outputs !=neededOutputs)
             return false;
 
-        if (inv.getFluidInTank(0).getAmount()==0)
+        if (inv.getFluidAmount()==0)
             return false;
         return fluidIngredients.get(0)
-                .test(inv.getFluidInTank(0));
+                .test(inv.getFluid());
     }
 
     @Override

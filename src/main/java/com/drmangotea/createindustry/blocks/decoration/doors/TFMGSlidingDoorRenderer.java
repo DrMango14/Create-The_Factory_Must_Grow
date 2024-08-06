@@ -15,13 +15,13 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Registry;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class TFMGSlidingDoorRenderer extends SafeBlockEntityRenderer<TFMGSlidingDoorBlockEntity> {
 
@@ -51,7 +51,7 @@ public class TFMGSlidingDoorRenderer extends SafeBlockEntityRenderer<TFMGSliding
 
         if (((TFMGSlidingDoorBlock) blockState.getBlock()).isFoldingDoor()) {
             Couple<PartialModel> partials =
-                    TFMGPartialModels.FOLDING_DOORS.get(ForgeRegistries.BLOCKS.getKey(blockState.getBlock()));
+                    TFMGPartialModels.FOLDING_DOORS.get(Registry.BLOCK.getKey(blockState.getBlock()));
             if(partials==null)
                 return;
             boolean flip = blockState.getValue(DoorBlock.HINGE) == DoorHingeSide.RIGHT;

@@ -1,15 +1,17 @@
 package com.drmangotea.createindustry.blocks.concrete.asphalt;
 
 import com.drmangotea.createindustry.registry.TFMGBlocks;
+import com.tterrag.registrate.fabric.SimpleFlowableFluid;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
 
-public class AsphaltFluid extends ForgeFlowingFluid {
+import java.util.Properties;
+
+public class AsphaltFluid extends SimpleFlowableFluid {
 
 
     protected AsphaltFluid(Properties properties) {

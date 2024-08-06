@@ -3,18 +3,17 @@ package com.drmangotea.createindustry.registry;
 import com.drmangotea.createindustry.CreateTFMG;
 
 import com.drmangotea.createindustry.base.ElectricSparkParticle;
-import com.simibubi.create.content.equipment.bell.SoulParticle;
 import com.simibubi.create.foundation.particle.ICustomParticleData;
 import com.simibubi.create.foundation.utility.Lang;
+import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.ParticleEngine;
+import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
@@ -30,18 +29,21 @@ public enum TFMGParticleTypes {
 		entry = new ParticleEntry<>(name, typeFactory);
 	}
 
-	public static void register(IEventBus modEventBus) {
-		ParticleEntry.REGISTER.register(modEventBus);
+	public static void register() {
+		ParticleEntry.REGISTER.register();
 	}
 
-	@OnlyIn(Dist.CLIENT)
-	public static void registerFactories(RegisterParticleProvidersEvent event) {
+	@Environment(EnvType.CLIENT)
+	public static void registerFactories() {
+		ParticleEngine particles = Minecraft.getInstance().particleEngine;
 		for (TFMGParticleTypes particle : values())
-			particle.entry.registerFactory(event);
+			particle.entry.registerFactory(particles);
 	}
 
 	public ParticleType<?> get() {
-		return entry.object.get();
+		//don't question it, fabric is stupid /:
+		RegistryObject<? extends ParticleType<?>> object = entry.object;
+		return object.get();
 	}
 
 	public String parameter() {
@@ -49,7 +51,7 @@ public enum TFMGParticleTypes {
 	}
 
 	private static class ParticleEntry<D extends ParticleOptions> {
-		private static final DeferredRegister<ParticleType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, CreateTFMG.MOD_ID);
+		private static final LazyRegistrar<ParticleType<?>> REGISTER = LazyRegistrar.create(Registry.PARTICLE_TYPE, CreateTFMG.MOD_ID);
 
 		private final String name;
 		private final Supplier<? extends ICustomParticleData<D>> typeFactory;
@@ -62,8 +64,8 @@ public enum TFMGParticleTypes {
 			object = REGISTER.register(name, () -> this.typeFactory.get().createType());
 		}
 
-		@OnlyIn(Dist.CLIENT)
-		public void registerFactory(RegisterParticleProvidersEvent event) {
+		@Environment(EnvType.CLIENT)
+		public void registerFactory(ParticleEngine event) {
 			typeFactory.get()
 				.register(object.get(), event);
 		}

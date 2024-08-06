@@ -4,6 +4,7 @@ import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.drmangotea.createindustry.registry.TFMGFluids;
 import com.mojang.serialization.Codec;
 import com.simibubi.create.foundation.utility.Iterate;
+import me.alphamode.forgetags.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -16,7 +17,6 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.Tags;
 
 public class OilWellFeature extends Feature<NoneFeatureConfiguration> {
     public OilWellFeature(Codec<NoneFeatureConfiguration> pCodec) {

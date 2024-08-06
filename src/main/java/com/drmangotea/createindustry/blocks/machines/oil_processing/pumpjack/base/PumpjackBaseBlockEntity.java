@@ -10,6 +10,10 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,12 +21,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -38,7 +36,7 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
 
     public int miningRate = 0;
 
-    protected LazyOptional<IFluidHandler> fluidCapability;
+    protected LazyOptional<FluidTank> fluidCapability;
     public FluidTank tankInventory;
     public BlockPos deposit;
 
@@ -139,7 +137,7 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
             return;
 
 
-        tankInventory.setFluid(new FluidStack(TFMGFluids.CRUDE_OIL.getSource(), tankInventory.getFluidAmount() + miningRate));
+        tankInventory.setFluid(new FluidStack(FluidVariant.of(TFMGFluids.CRUDE_OIL.getSource()), tankInventory.getFluidAmount() + miningRate));
 
     }
 
@@ -185,12 +183,12 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
         }
 
         //--Fluid Info--//
-        LazyOptional<IFluidHandler> handler = this.getCapability(ForgeCapabilities.FLUID_HANDLER);
-        Optional<IFluidHandler> resolve = handler.resolve();
+        LazyOptional<FluidTank> handler = this.getCapability(ForgeCapabilities.FLUID_HANDLER);
+        Optional<FluidTank> resolve = handler.resolve();
         if (!resolve.isPresent())
             return false;
 
-        IFluidHandler tank = resolve.get();
+        FluidTank tank = resolve.get();
         if (tank.getTanks() == 0)
             return false;
 

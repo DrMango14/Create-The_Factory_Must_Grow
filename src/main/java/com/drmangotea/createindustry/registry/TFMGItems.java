@@ -25,11 +25,11 @@ import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import me.alphamode.forgetags.Tags;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
-import net.minecraftforge.common.Tags;
 
 import static com.drmangotea.createindustry.CreateTFMG.REGISTRATE;
 import static com.drmangotea.createindustry.items.weapons.explosives.thermite_grenades.ChemicalColor.*;

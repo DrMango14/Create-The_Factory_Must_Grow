@@ -8,6 +8,12 @@ import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,12 +22,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -30,7 +30,7 @@ import java.util.Optional;
 
 public class DieselEngineExpansionBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
-    protected LazyOptional<IFluidHandler> fluidCapability;
+    protected LazyOptional<CombinedTankWrapper> fluidCapability;
     public FluidTank coolantTank;
     public FluidTank lubricationOilTank;
     public FluidTank airTank;
@@ -50,16 +50,6 @@ public class DieselEngineExpansionBlockEntity extends SmartBlockEntity implement
 
     }
 
-
-    @Nonnull
-    @Override
-    @SuppressWarnings("removal")
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
-            return fluidCapability.cast();
-        return super.getCapability(cap, side);
-    }
     @Override
     public void invalidate() {
         super.invalidate();
@@ -108,17 +98,14 @@ public class DieselEngineExpansionBlockEntity extends SmartBlockEntity implement
     @Override
     @SuppressWarnings("removal")
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-
-
-
         //--Fluid Info--//
-        LazyOptional<IFluidHandler> handler = this.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY);
-        Optional<IFluidHandler> resolve = handler.resolve();
+        LazyOptional<CombinedTankWrapper> handler = this.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY);
+        Optional<CombinedTankWrapper> resolve = handler.resolve();
         if (!resolve.isPresent())
             return false;
 
-        IFluidHandler tank = resolve.get();
-        if (tank.getTanks() == 0)
+        CombinedTankWrapper tanks = resolve.get();
+        if (tanks.parts.isEmpty())
             return false;
 
         LangBuilder mb = Lang.translate("generic.unit.millibuckets");
@@ -127,8 +114,9 @@ public class DieselEngineExpansionBlockEntity extends SmartBlockEntity implement
                 .forGoggles(tooltip);
 
         boolean isEmpty = true;
-        for (int i = 0; i < tank.getTanks(); i++) {
-            FluidStack fluidStack = tank.getFluidInTank(i);
+        for (int i = 0; i < tanks.parts.size(); i++) {
+            Storage<FluidVariant> tank = tanks.parts.get(i);
+            FluidStack fluidStack = tank;
             if (fluidStack.isEmpty())
                 continue;
 
@@ -141,7 +129,7 @@ public class DieselEngineExpansionBlockEntity extends SmartBlockEntity implement
                             .add(mb)
                             .style(ChatFormatting.DARK_GREEN))
                     .text(ChatFormatting.GRAY, " / ")
-                    .add(Lang.number(tank.getTankCapacity(i))
+                    .add(Lang.number(tanks.getTankCapacity(i))
                             .add(mb)
                             .style(ChatFormatting.DARK_GRAY))
                     .forGoggles(tooltip, 1);
@@ -149,7 +137,7 @@ public class DieselEngineExpansionBlockEntity extends SmartBlockEntity implement
             isEmpty = false;
         }
 
-        if (tank.getTanks() > 1) {
+        if (tanks.getTanks() > 1) {
             if (isEmpty)
                 tooltip.remove(tooltip.size() - 1);
             return true;
@@ -159,7 +147,7 @@ public class DieselEngineExpansionBlockEntity extends SmartBlockEntity implement
             return true;
 
         Lang.translate("gui.goggles.fluid_container.capacity")
-                .add(Lang.number(tank.getTankCapacity(0))
+                .add(Lang.number(tanks.getTankCapacity(0))
                         .add(mb)
                         .style(ChatFormatting.DARK_GREEN))
                 .style(ChatFormatting.DARK_GRAY)

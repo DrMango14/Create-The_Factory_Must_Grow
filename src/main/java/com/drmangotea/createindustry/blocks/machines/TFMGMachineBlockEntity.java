@@ -9,6 +9,9 @@ import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.Couple;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,13 +19,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import javax.annotation.Nonnull;
+import java.security.DrbgParameters;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +31,7 @@ public class TFMGMachineBlockEntity extends SmartBlockEntity  implements IHaveGo
 
     private boolean contentsChanged;
 
-    protected LazyOptional<IFluidHandler> fluidCapability;
+    protected LazyOptional<FluidTank> fluidCapability;
 
     public TFMGMachineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -41,7 +40,17 @@ public class TFMGMachineBlockEntity extends SmartBlockEntity  implements IHaveGo
         contentsChanged = true;
 
     }
-
+// im like 90% sure we dont need this
+//    @Nonnull
+//    @Override
+//    public <T> LazyOptional<T> getCapability(@Nonnull DrbgParameters.Capability<T> cap, Direction side) {
+//
+//
+//
+//        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+//            return fluidCapability.cast();
+//        return super.getCapability(cap, side);
+//    }
 
 
     @Override
@@ -58,12 +67,9 @@ public class TFMGMachineBlockEntity extends SmartBlockEntity  implements IHaveGo
         behaviours.add(tank1);
         behaviours.add(tank2);
 
-
-
-
         fluidCapability = LazyOptional.of(() -> {
-            LazyOptional<? extends IFluidHandler> inputCap = tank1.getCapability();
-            LazyOptional<? extends IFluidHandler> outputCap = tank2.getCapability();
+            LazyOptional<? extends FluidTank> inputCap = tank1.getCapability();
+            LazyOptional<? extends FluidTank> outputCap = tank2.getCapability();
             return new CombinedTankWrapper(outputCap.orElse(null), inputCap.orElse(null));
         });
 
@@ -79,16 +85,8 @@ public class TFMGMachineBlockEntity extends SmartBlockEntity  implements IHaveGo
 
         fluidCapability.invalidate();
     }
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
 
 
-
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
-            return fluidCapability.cast();
-        return super.getCapability(cap, side);
-    }
     @Override
     public void notifyUpdate() {
         super.notifyUpdate();
