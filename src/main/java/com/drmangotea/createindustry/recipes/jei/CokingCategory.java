@@ -8,12 +8,12 @@ import com.drmangotea.createindustry.registry.TFMGFluids;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
-import mezz.jei.api.forge.ForgeTypes;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import mezz.jei.api.fabric.constants.FabricTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -48,13 +48,13 @@ public class CokingCategory extends CreateRecipeCategory<CokingRecipe> {
 		builder
 				.addSlot(RecipeIngredientRole.OUTPUT,160, 46)
 				.setBackground(getRenderedSlot(), -1, -1)
-				.addIngredient(ForgeTypes.FLUID_STACK, withImprovedVisibility(new FluidStack(TFMGFluids.CARBON_DIOXIDE.get(),5000)))
+				.addIngredient(FabricTypes.FLUID_STACK, withImprovedVisibility(new FluidStack(TFMGFluids.CARBON_DIOXIDE.get(),5000)))
 				.addTooltipCallback(addFluidTooltip(5000));
 
        builder
        		.addSlot(RecipeIngredientRole.OUTPUT,160, 22)
        		.setBackground(getRenderedSlot(), -1, -1)
-       		.addIngredient(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getFluidResults().get(0)))
+       		.addIngredient(FabricTypes.FLUID_STACK, withImprovedVisibility(recipe.getFluidResults().get(0)))
        		.addTooltipCallback(addFluidTooltip(recipe.getFluidResults().get(0).getAmount()));
 
 	}

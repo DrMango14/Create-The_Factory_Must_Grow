@@ -15,6 +15,11 @@ import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -28,27 +33,17 @@ import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
 
 @SuppressWarnings("removal")
 public abstract class AbstractEngineBlockEntity extends GeneratingKineticBlockEntity implements IHaveGoggleInformation, IWrenchable {
 
-    protected LazyOptional<IFluidHandler> fluidCapability;
+    protected LazyOptional<FluidTank> fluidCapability;
     protected FluidTank tankInventory;
 
     protected FluidTank lubricationOilTank;
@@ -540,7 +535,7 @@ public void write(CompoundTag compound, boolean clientPacket) {
 
 
 
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     private void makeSound(){
         soundTimer=0;
         if(this instanceof TurbineEngineTileEntity){
@@ -610,17 +605,6 @@ public void write(CompoundTag compound, boolean clientPacket) {
         return (float) tankInventory.getFluidAmount() / tankInventory.getCapacity();
     }
 
-
-
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-
-        if (cap == ForgeCapabilities.FLUID_HANDLER)
-            return fluidCapability.cast();
-        return super.getCapability(cap, side);
-    }
-
     @Override
     public void invalidate() {
         super.invalidate();
@@ -629,7 +613,7 @@ public void write(CompoundTag compound, boolean clientPacket) {
 
 
 
-    public IFluidTank getTankInventory() {
+    public FluidTank getTankInventory() {
         return tankInventory;
     }
 

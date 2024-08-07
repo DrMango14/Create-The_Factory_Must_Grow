@@ -3,6 +3,7 @@ package com.drmangotea.createindustry.blocks.tanks;
 
 import com.drmangotea.createindustry.registry.TFMGBlockEntities;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -15,7 +16,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fluids.FluidStack;
 
 public class SteelTankItem extends BlockItem {
 

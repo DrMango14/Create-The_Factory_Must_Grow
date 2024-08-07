@@ -1,18 +1,14 @@
 package com.drmangotea.createindustry.blocks.electricity.base.cables;
 
-import com.drmangotea.createindustry.CreateTFMG;
 import com.drmangotea.createindustry.base.TFMGTools;
 import com.drmangotea.createindustry.blocks.electricity.base.*;
 import com.drmangotea.createindustry.blocks.electricity.resistors.ResistorBlockEntity;
 import com.drmangotea.createindustry.registry.TFMGItems;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.utility.Lang;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -21,8 +17,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.energy.EnergyStorage;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,27 +1,19 @@
 package com.drmangotea.createindustry.blocks.electricity.base.cables;
 
 import com.drmangotea.createindustry.blocks.electricity.base.IHaveCables;
-import com.drmangotea.createindustry.items.weapons.advanced_potato_cannon.AdvancedPotatoCannonItemRenderer;
 import com.drmangotea.createindustry.registry.TFMGItems;
-import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import com.simibubi.create.foundation.utility.Lang;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-
-import java.util.function.Consumer;
 
 public class WireItem extends Item {
 

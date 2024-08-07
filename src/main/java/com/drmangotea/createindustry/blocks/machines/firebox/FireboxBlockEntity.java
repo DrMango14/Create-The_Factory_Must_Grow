@@ -114,15 +114,7 @@ public class FireboxBlockEntity extends SmartBlockEntity {
 		fluidCapability = LazyOptional.of(() -> handlerForCapability());
 		oldCap.invalidate();
 	}
-	@Nonnull
-	@Override
-	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-		if (!fluidCapability.isPresent())
-			refreshCapability();
-		if (cap == ForgeCapabilities.FLUID_HANDLER)
-			return fluidCapability.cast();
-		return super.getCapability(cap, side);
-	}
+
 	private FluidTank handlerForCapability() {
 
 		return tankInventory;

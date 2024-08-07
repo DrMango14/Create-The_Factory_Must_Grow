@@ -2,10 +2,8 @@ package com.drmangotea.createindustry.mixins;
 
 
 import com.drmangotea.createindustry.worldgen.TFMGLayeredPatterns;
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.DynamicDataProvider;
-import com.simibubi.create.foundation.utility.Couple;
 import com.simibubi.create.infrastructure.worldgen.AllLayerPatterns;
 import com.simibubi.create.infrastructure.worldgen.AllOreFeatureConfigEntries;
 import com.simibubi.create.infrastructure.worldgen.OreFeatureConfigEntry;
@@ -17,9 +15,6 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.world.BiomeModifier;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 

@@ -9,6 +9,7 @@ import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
 import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -199,13 +200,12 @@ public class FlarestackBlockEntity extends SmartBlockEntity implements IHaveGogg
 
 
     private void refreshCapability() {
-        LazyOptional<IFluidHandler> oldCap = fluidCapability;
+        LazyOptional<FluidTank> oldCap = fluidCapability;
         fluidCapability = LazyOptional.of(() -> handlerForCapability());
         oldCap.invalidate();
     }
 
-    private IFluidHandler handlerForCapability() {
-
+    private FluidTank handlerForCapability() {
         return tankInventory;
     }
 
@@ -233,25 +233,12 @@ public class FlarestackBlockEntity extends SmartBlockEntity implements IHaveGogg
 
     }
 
-    @Nonnull
-    @Override
-    @SuppressWarnings("removal")
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (!fluidCapability.isPresent())
-            refreshCapability();
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
-            return fluidCapability.cast();
-        return super.getCapability(cap, side);
-    }
-
-
-
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
 
     }
 
-    public IFluidTank getTankInventory() {
+    public FluidTank getTankInventory() {
         return tankInventory;
     }
 

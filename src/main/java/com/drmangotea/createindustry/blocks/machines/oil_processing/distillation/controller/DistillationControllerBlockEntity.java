@@ -221,16 +221,6 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
         return DistillationRecipesKey;
     }
 
-
-
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-        if (cap == ForgeCapabilities.FLUID_HANDLER)
-            return fluidCapability.cast();
-        return super.getCapability(cap, side);
-    }
-
     public ArrayList<DistillationOutputBlockEntity> getOutputs(){
         ArrayList<DistillationOutputBlockEntity> outputs = new ArrayList<>();
 

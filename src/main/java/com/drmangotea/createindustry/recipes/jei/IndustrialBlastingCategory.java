@@ -4,18 +4,15 @@ package com.drmangotea.createindustry.recipes.jei;
 
 import com.drmangotea.createindustry.recipes.industrial_blasting.IndustrialBlastingRecipe;
 import com.drmangotea.createindustry.recipes.jei.machines.BlastFurnace;
-import com.drmangotea.createindustry.registry.TFMGFluids;
 import com.drmangotea.createindustry.registry.TFMGItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -62,14 +59,13 @@ public class IndustrialBlastingCategory extends CreateRecipeCategory<IndustrialB
 	}
 
 	@Override
-	public void draw(IndustrialBlastingRecipe recipe, IRecipeSlotsView iRecipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
+	public void draw(IndustrialBlastingRecipe recipe, IRecipeSlotsView recipeSlotsView, net.minecraft.class_4587 stack, double mouseX, double mouseY) {
 		blastFurnace
-				.draw(matrixStack, 50, 135);
+				.draw(stack, 50, 135);
 
+		AllGuiTextures.JEI_ARROW.render(stack, 96, 121);
 
-		AllGuiTextures.JEI_ARROW.render(matrixStack, 96, 121);
-
-		AllGuiTextures.JEI_DOWN_ARROW.render(matrixStack, 45, 15);
+		AllGuiTextures.JEI_DOWN_ARROW.render(stack, 45, 15);
 
 	}
 

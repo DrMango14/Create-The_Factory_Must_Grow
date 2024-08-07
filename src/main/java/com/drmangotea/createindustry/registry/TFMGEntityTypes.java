@@ -18,6 +18,7 @@ import com.tterrag.registrate.util.entry.EntityEntry;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
@@ -68,13 +69,13 @@ public class TFMGEntityTypes {
     private static <T extends Entity> CreateEntityBuilder<T, ?> register(String name, EntityType.EntityFactory<T> factory,
                                                                          NonNullSupplier<NonNullFunction<EntityRendererProvider.Context, EntityRenderer<? super T>>> renderer,
                                                                          MobCategory group, int range, int updateFrequency, boolean sendVelocity, boolean immuneToFire,
-                                                                         NonNullConsumer<EntityType.Builder<T>> propertyBuilder) {
+                                                                         NonNullConsumer<FabricEntityTypeBuilder<T>> propertyBuilder) {
         String id = Lang.asId(name);
         return (CreateEntityBuilder<T, ?>) CreateTFMG.REGISTRATE
                 .entity(id, factory, group)
-                .properties(b -> b.setTrackingRange(range)
-                        .setUpdateInterval(updateFrequency)
-                        .setShouldReceiveVelocityUpdates(sendVelocity))
+                .properties(b -> b.trackRangeBlocks(range)
+                        .trackedUpdateRate(updateFrequency)
+                        .forceTrackedVelocityUpdates(sendVelocity))
                 .properties(propertyBuilder)
                 .properties(b -> {
                     if (immuneToFire)

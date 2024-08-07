@@ -3,8 +3,8 @@ package com.drmangotea.createindustry.blocks.electricity.cable_blocks.copycat_ca
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import com.simibubi.create.content.decoration.copycat.FilteredBlockAndTintGetter;
-import com.simibubi.create.foundation.model.BakedModelWrapperWithData;
 import com.simibubi.create.foundation.utility.Iterate;
+import net.fabricmc.fabric.api.renderer.v1.model.ForwardingBakedModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -16,14 +16,12 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.model.data.ModelData;
-import net.minecraftforge.client.model.data.ModelProperty;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class AbstractCopycatCableModel extends BakedModelWrapperWithData {
+public abstract class AbstractCopycatCableModel extends ForwardingBakedModel {
 
     public static final ModelProperty<BlockState> MATERIAL_PROPERTY = new ModelProperty<>();
     private static final ModelProperty<OcclusionData> OCCLUSION_PROPERTY = new ModelProperty<>();

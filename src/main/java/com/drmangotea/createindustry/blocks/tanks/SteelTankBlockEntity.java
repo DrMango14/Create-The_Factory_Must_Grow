@@ -1,47 +1,31 @@
 package com.drmangotea.createindustry.blocks.tanks;
 
 
-import com.drmangotea.createindustry.CreateTFMG;
-import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.controller.DistillationControllerBlock;
-import com.drmangotea.createindustry.blocks.machines.oil_processing.distillation.output.DistillationOutputBlock;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
-import com.simibubi.create.content.decoration.steamWhistle.WhistleBlock;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.tank.BoilerHeaters;
-import com.simibubi.create.content.fluids.tank.FluidTankBlock;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
-import com.simibubi.create.content.kinetics.steamEngine.SteamEngineBlock;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.Iterate;
-import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat.Chaser;
 import com.simibubi.create.infrastructure.config.AllConfigs;
-import net.minecraft.ChatFormatting;
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -53,7 +37,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
 
     private static final int MAX_SIZE = 3;
 
-    protected LazyOptional<IFluidHandler> fluidCapability;
+    protected LazyOptional<FluidTank> fluidCapability;
     protected boolean forceFluidLevelUpdate;
     public FluidTank tankInventory;
     protected BlockPos controller;
@@ -166,7 +150,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
         if (!hasLevel())
             return;
 
-        FluidType attributes = newFluidStack.getFluid()
+        FluidVariant attributes = newFluidStack.getFluid()
                 .getFluidType();
         int luminosity = (int) (attributes.getLightLevel(newFluidStack) / 1.2f);
         boolean reversed = attributes.isLighterThanAir();
@@ -226,7 +210,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
 
     public void applyFluidTankSize(int blocks) {
         tankInventory.setCapacity(blocks * getCapacityMultiplier());
-        int overflow = tankInventory.getFluidAmount() - tankInventory.getCapacity();
+        long overflow = tankInventory.getFluidAmount() - tankInventory.getCapacity();
         if (overflow > 0)
             tankInventory.drain(overflow, FluidAction.EXECUTE);
         forceFluidLevelUpdate = true;
@@ -421,7 +405,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
     }
 
     public void refreshCapability() {
-        LazyOptional<IFluidHandler> oldCap = fluidCapability;
+        LazyOptional<FluidTank> oldCap = fluidCapability;
         fluidCapability = LazyOptional.of(() -> handlerForCapability());
         oldCap.invalidate();
     }
@@ -430,7 +414,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
 
 
 
-        private IFluidHandler handlerForCapability() {
+        private FluidTank handlerForCapability() {
             return isController() ?
                     tankInventory
                     : getControllerBE() != null ? getControllerBE().handlerForCapability() : tankInventory;
@@ -576,24 +560,12 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
         forceFluidLevelUpdate = false;
     }
 
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (!fluidCapability.isPresent())
-            refreshCapability();
-        if (cap == ForgeCapabilities.FLUID_HANDLER)
-            return fluidCapability.cast();
-        return super.getCapability(cap, side);
-    }
-
-
-
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         //registerAwardables(behaviours, AllAdvancements.STEAM_ENGINE_MAXED, AllAdvancements.PIPE_ORGAN);
     }
 
-    public IFluidTank getTankInventory() {
+    public FluidTank getTankInventory() {
         return tankInventory;
     }
 
@@ -705,7 +677,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
     }
 
     @Override
-    public int getTankSize(int tank) {
+    public long getTankSize(int tank) {
         return getCapacityMultiplier();
     }
 
@@ -715,7 +687,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
     }
 
     @Override
-    public IFluidTank getTank(int tank) {
+    public FluidTank getTank(int tank) {
         return tankInventory;
     }
 

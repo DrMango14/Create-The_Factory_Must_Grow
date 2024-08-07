@@ -266,16 +266,7 @@ public class CastingBasinBlockEntity extends TFMGMachineBlockEntity implements I
         super.invalidate();
         itemCapability.invalidate();
     }
-    @Nonnull
-    @Override
-    @SuppressWarnings("removal")
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-            return itemCapability.cast();
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
-            return fluidCapability.cast();
-        return super.getCapability(cap, side);
-    }
+
     protected Object getRecipeCacheKey() {
         return CastingRecipesKey;
     }

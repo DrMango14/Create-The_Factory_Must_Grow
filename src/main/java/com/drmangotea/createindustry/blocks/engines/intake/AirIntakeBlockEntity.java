@@ -1,14 +1,16 @@
 package com.drmangotea.createindustry.blocks.engines.intake;
 
-import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.drmangotea.createindustry.registry.TFMGFluids;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,19 +21,11 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 import static com.drmangotea.createindustry.blocks.engines.intake.AirIntakeBlock.INVISIBLE;
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
@@ -58,7 +52,7 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
     public LerpedFloat visual_angle = LerpedFloat.angular();
 
     protected FluidTank tankInventory;
-    protected LazyOptional<IFluidHandler> fluidCapability;
+    protected LazyOptional<FluidTank> fluidCapability;
 
 
 
@@ -79,7 +73,7 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
         int production = ((int) maxShaftSpeed * ((diameter * diameter))) / 10;
         if (tankInventory.getFluidAmount() + production <= tankInventory.getCapacity()) {
             //tankInventory.fill(new FluidStack(TFMGFluids.AIR.getSource(), production), IFluidHandler.FluidAction.EXECUTE);
-            tankInventory.setFluid(new FluidStack(TFMGFluids.AIR.getSource(), production + tankInventory.getFluidAmount()));
+            tankInventory.setFluid(new FluidStack(FluidVariant.of(TFMGFluids.AIR.getSource()), production + tankInventory.getFluidAmount()));
            // if(controller!=null) {
            //     ((AirIntakeBlockEntity) level.getBlockEntity(controller)).setChanged();
            //     ((AirIntakeBlockEntity) level.getBlockEntity(controller)).sendData();
@@ -237,30 +231,9 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
 
     }
 
-
-    @Nonnull
-    @Override
-    @SuppressWarnings("removal")
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-
-
-
-        if (!fluidCapability.isPresent()) {
-            refreshCapability();
-            sendData();
-            setChanged();
-        }
-
-
-
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
-            return fluidCapability.cast();
-        return super.getCapability(cap, side);
-    }
-
     private void refreshCapability() {
 
-        IFluidHandler handlerForCapability;
+        FluidTank handlerForCapability;
 
         if (controller == null || controller == this.getBlockPos()
 
@@ -272,8 +245,8 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
         }else             handlerForCapability = tankInventory;
 
 
-        LazyOptional<IFluidHandler> oldCap = fluidCapability;
-        IFluidHandler finalHandlerForCapability = handlerForCapability;
+        LazyOptional<FluidTank> oldCap = fluidCapability;
+        FluidTank finalHandlerForCapability = handlerForCapability;
         fluidCapability = LazyOptional.of(() -> finalHandlerForCapability);
         //oldCap.invalidate();
     }

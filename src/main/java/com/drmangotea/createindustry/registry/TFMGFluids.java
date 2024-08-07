@@ -81,8 +81,7 @@ public class TFMGFluids {
 
 
     public static final FluidEntry<ConcreteFluid> COOLING_FLUID =
-            REGISTRATE.fluid("cooling_fluid",COOLING_FLUID_STILL_RL,COOLING_FLUID_FLOW_RL,
-                            p -> new ConcreteFluid(p)
+            REGISTRATE.fluid("cooling_fluid",COOLING_FLUID_STILL_RL,COOLING_FLUID_FLOW_RL, ConcreteFluid::new
 //                            ConcreteFluidType.create(0x333333,
 //                                    () -> 1f / 24f )
                     )
@@ -124,10 +123,11 @@ public class TFMGFluids {
 
 
 
-    public static final FluidEntry<SimpleFlowableFluid> LIQUID_CONCRETE =
-            REGISTRATE.fluid("liquid_concrete",CONCRETE_RL,CONCRETE_RL,
-                            ConcreteFluidType.create(0x333333,
-                                    () -> 1f / 24f ))
+    public static final FluidEntry<ConcreteFluid> LIQUID_CONCRETE =
+            REGISTRATE.fluid("liquid_concrete",CONCRETE_RL,CONCRETE_RL, ConcreteFluid::new
+//                            ConcreteFluidType.create(0x333333,
+//                                    () -> 1f / 24f )
+                    )
                     .lang("Liquid Concrete")
                     .fluidProperties(p -> p.levelDecreasePerBlock(0)
                             .tickRate(99999)
@@ -140,10 +140,11 @@ public class TFMGFluids {
                     .build()
                     .register();
 
-    public static final FluidEntry<SimpleFlowableFluid> LIQUID_ASPHALT =
-            REGISTRATE.fluid("liquid_asphalt", ASPHALT_RL, ASPHALT_RL,
-                            ConcreteFluidType.create(0x333333,
-                                    () -> 1f / 24f ))
+    public static final FluidEntry<ConcreteFluid> LIQUID_ASPHALT =
+            REGISTRATE.fluid("liquid_asphalt", ASPHALT_RL, ASPHALT_RL, ConcreteFluid::new
+//                            ConcreteFluidType.create(0x333333,
+//                                    () -> 1f / 24f )
+                    )
                     .lang("Liquid Asphalt")
                     .fluidProperties(p -> p.levelDecreasePerBlock(0)
                             .tickRate(99999)

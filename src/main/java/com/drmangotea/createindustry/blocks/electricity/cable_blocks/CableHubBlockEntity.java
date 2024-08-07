@@ -1,13 +1,11 @@
 package com.drmangotea.createindustry.blocks.electricity.cable_blocks;
 
 import com.drmangotea.createindustry.blocks.electricity.base.ElectricBlockEntity;
-import com.drmangotea.createindustry.blocks.electricity.base.IElectricBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 
 import java.util.ArrayList;
 

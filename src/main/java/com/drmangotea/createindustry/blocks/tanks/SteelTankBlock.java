@@ -1,7 +1,6 @@
 package com.drmangotea.createindustry.blocks.tanks;
 
 
-import com.drmangotea.createindustry.CreateTFMG;
 import com.drmangotea.createindustry.registry.TFMGBlockEntities;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -47,11 +46,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.util.ForgeSoundType;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 
 public class SteelTankBlock extends Block implements IWrenchable, IBE<SteelTankBlockEntity> {
 

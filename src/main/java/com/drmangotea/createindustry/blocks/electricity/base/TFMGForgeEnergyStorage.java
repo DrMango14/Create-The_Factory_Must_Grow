@@ -1,7 +1,5 @@
 package com.drmangotea.createindustry.blocks.electricity.base;
 
-import net.minecraftforge.energy.EnergyStorage;
-
 public abstract class TFMGForgeEnergyStorage extends EnergyStorage {
 
 

@@ -484,16 +484,6 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 		fluidCapability.invalidate();
 	}
 
-	@Nonnull
-	@Override
-	@SuppressWarnings("removal")
-	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-
-		if (cap == ForgeCapabilities.FLUID_HANDLER)
-			return fluidCapability.cast();
-		return super.getCapability(cap, side);
-	}
-
 	@Override
 	public void notifyUpdate() {
 		super.notifyUpdate();

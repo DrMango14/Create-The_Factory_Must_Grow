@@ -5,24 +5,20 @@ import com.drmangotea.createindustry.registry.TFMGItems;
 import com.drmangotea.createindustry.registry.TFMGMobEffects;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Map;
 
@@ -126,11 +122,11 @@ public class LitLithiumBladeItem extends SwordItem {
 
 
 
-        }else {
-            ItemStack stack1 = new ItemStack(TFMGItems.LITHIUM_BLADE.get(),1,stack.getOrCreateTag());
+        } else {
+            ItemStack stack1 = TFMGItems.LITHIUM_BLADE.asStack();
 
 
-            Map<Enchantment, Integer> enchantments = stack.getAllEnchantments();
+            Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
 
             enchantments.forEach(stack1::enchant);
 
@@ -139,15 +135,6 @@ public class LitLithiumBladeItem extends SwordItem {
             ((Player)entity).getInventory().setItem(pSlotId,stack1);
         }
 
-    }
-
-    @Override
-    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-
-        if(!slotChanged)
-            return false;
-
-        return super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);
     }
 
     @Override

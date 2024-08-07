@@ -1,7 +1,6 @@
 package com.drmangotea.createindustry.blocks.engines.radial.input;
 
 
-import com.drmangotea.createindustry.CreateTFMG;
 import com.drmangotea.createindustry.blocks.engines.radial.RadialEngineBlockEntity;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -11,9 +10,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -76,18 +72,6 @@ public class RadialEngineInputBlockEntity extends SmartBlockEntity {
     protected void analogSignalChanged(int newSignal) {
 
         signal = newSignal;
-    }
-
-    @Nonnull
-    @Override
-    @SuppressWarnings("'net.minecraftforge.items.CapabilityItemHandler' is deprecated and marked for removal ")
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-
-        if(engine!=null)
-            if(side == this.getBlockState().getValue(FACING))
-                if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
-                    return engine.fluidCapability.cast();
-        return super.getCapability(cap, side);
     }
 
     @Override

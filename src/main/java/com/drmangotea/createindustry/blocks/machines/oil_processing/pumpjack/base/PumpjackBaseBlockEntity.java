@@ -254,13 +254,5 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
 
 
     }
-    @Nonnull
-    @Override
 
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-
-                if (cap == ForgeCapabilities.FLUID_HANDLER)
-                    return fluidCapability.cast();
-        return super.getCapability(cap, side);
-    }
 }

@@ -3,7 +3,6 @@ package com.drmangotea.createindustry.blocks.engines.diesel.engine_expansion;
 import com.drmangotea.createindustry.registry.TFMGBlockEntities;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
-import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
@@ -11,9 +10,6 @@ import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 public class DieselEngineExpansionBlock extends DirectionalBlock implements IBE<DieselEngineExpansionBlockEntity>, IWrenchable {
 

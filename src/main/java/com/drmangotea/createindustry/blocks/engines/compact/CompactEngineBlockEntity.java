@@ -510,17 +510,6 @@ public void write(CompoundTag compound, boolean clientPacket) {
         return (float) tankInventory.getFluidAmount() / tankInventory.getCapacity();
     }
 
-
-
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-
-        if (cap == ForgeCapabilities.FLUID_HANDLER)
-            return fluidCapability.cast();
-        return super.getCapability(cap, side);
-    }
-
     @Override
     public void invalidate() {
         super.invalidate();

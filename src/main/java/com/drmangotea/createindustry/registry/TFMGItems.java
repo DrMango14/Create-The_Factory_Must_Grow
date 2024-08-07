@@ -190,8 +190,8 @@ public class TFMGItems {
             .model((c, p) -> p.withExistingParent(c.getName(), CreateTFMG.asResource("item/unfinished_engine")))
             .register();
 
-    public static final ItemEntry<CoalCokeItem>
-            COAL_COKE_DUST = REGISTRATE.item("coal_coke_dust", CoalCokeItem::new)
+    public static final ItemEntry<Item>
+            COAL_COKE_DUST = REGISTRATE.item("coal_coke_dust", Item::new)
             .tag(forgeItemTag("dusts/coal_coke"))
             .register();
 
@@ -222,7 +222,7 @@ public class TFMGItems {
     public static final ItemEntry<CastingMoldItem>
             BLOCK_MOLD = REGISTRATE.item("block_mold", p -> new CastingMoldItem(p, CastingBasinBlockEntity.MoldType.BLOCK)).properties(p -> p.stacksTo(1)).register(),
             INGOT_MOLD = REGISTRATE.item("ingot_mold", p -> new CastingMoldItem(p, CastingBasinBlockEntity.MoldType.INGOT)).properties(p -> p.stacksTo(1)).register();
-    public static final ItemEntry<CoalCokeItem> COAL_COKE = REGISTRATE.item("coal_coke", CoalCokeItem::new)
+    public static final ItemEntry<Item> COAL_COKE = REGISTRATE.item("coal_coke", Item::new)
             .register();
 
     public static final ItemEntry<ScrewdriverItem> SCREWDRIVER = REGISTRATE.item("screwdriver", ScrewdriverItem::new)

@@ -1,10 +1,13 @@
 package com.drmangotea.createindustry.blocks.electricity.cable_blocks.copycat_cable_block;
 
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.content.decoration.copycat.CopycatModel;
 import com.simibubi.create.content.decoration.copycat.CopycatSpecialCases;
 import com.simibubi.create.foundation.model.BakedModelHelper;
 import com.simibubi.create.foundation.model.BakedQuadHelper;
 import com.simibubi.create.foundation.utility.Iterate;
+import io.github.fabricators_of_create.porting_lib.model.data.ModelData;
+import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
@@ -13,21 +16,27 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.client.model.data.ModelData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
-public class CopycatCableBlockModel extends com.simibubi.create.content.decoration.copycat.CopycatModel {
+public class CopycatCableBlockModel extends CopycatModel {
 
     protected static final AABB CUBE_AABB = new AABB(BlockPos.ZERO);
 
     public CopycatCableBlockModel(BakedModel originalModel) {
         super(originalModel);
+    }
+
+    @Override
+    protected void emitBlockQuadsInner(BlockAndTintGetter blockView, BlockState state, BlockPos pos, Supplier<RandomSource> randomSupplier, RenderContext context, BlockState material, CullFaceRemovalData cullFaceRemovalData, OcclusionData occlusionData) {
+
     }
 
     @Override

@@ -80,22 +80,6 @@ public class ElectricBlockEntity extends SmartBlockEntity implements IHaveGoggle
         lazyEnergyHandler.invalidate();
     }
 
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-
-
-        if (cap == ForgeCapabilities.ENERGY&&side == null) {
-            return lazyEnergyHandler.cast();
-        } else
-
-            if (cap == ForgeCapabilities.ENERGY&&hasElectricitySlot(side)) {
-                return lazyEnergyHandler.cast();
-            }
-
-        return super.getCapability(cap, side);
-    }
-
-
     public void manageVoltage(){
 
         if(voltageGeneration()>0) {

@@ -509,19 +509,6 @@ public class CokeOvenBlockEntity extends TFMGMachineBlockEntity implements IWren
         super.invalidate();
         itemCapability.invalidate();
     }
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-        if(controller!=null)
-            refreshCapability();
-        if (cap == ForgeCapabilities.ITEM_HANDLER)
-            return itemCapability.cast();
-        if (cap == ForgeCapabilities.FLUID_HANDLER)
-            return fluidCapability.cast();
-        return super.getCapability(cap, side);
-    }
-
-
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {

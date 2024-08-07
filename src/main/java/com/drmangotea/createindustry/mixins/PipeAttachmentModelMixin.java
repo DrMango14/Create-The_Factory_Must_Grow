@@ -1,11 +1,9 @@
 package com.drmangotea.createindustry.mixins;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.drmangotea.createindustry.base.TFMGPipeModelData;
-import com.drmangotea.createindustry.blocks.pipes.normal.plastic.PlasticPipeAttachmentModel;
 import com.simibubi.create.content.fluids.FluidTransportBehaviour;
 import com.simibubi.create.content.fluids.PipeAttachmentModel;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +17,6 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.model.BakedModelWrapperWithData;
 import com.simibubi.create.foundation.utility.Iterate;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -35,7 +32,6 @@ import net.minecraftforge.client.model.data.ModelData.Builder;
 import net.minecraftforge.client.model.data.ModelProperty;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
 
 import static net.minecraft.world.level.block.PipeBlock.PROPERTY_BY_DIRECTION;
 @Mixin(PipeAttachmentModel.class)

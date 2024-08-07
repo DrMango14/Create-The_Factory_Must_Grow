@@ -238,18 +238,6 @@ public class ExhaustBlockEntity extends SmartBlockEntity implements IHaveGoggleI
 
     }
 
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (!fluidCapability.isPresent())
-            refreshCapability();
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
-            return fluidCapability.cast();
-        return super.getCapability(cap, side);
-    }
-
-
-
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
 

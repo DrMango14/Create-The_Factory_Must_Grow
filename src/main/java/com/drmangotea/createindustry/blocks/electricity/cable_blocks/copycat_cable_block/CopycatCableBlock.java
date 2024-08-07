@@ -7,6 +7,8 @@ import com.simibubi.create.AllTags;
 import com.simibubi.create.content.decoration.copycat.CopycatModel;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.core.BlockPos;
@@ -229,7 +231,7 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
     // Connected Textures
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public BlockState getAppearance(BlockState state, BlockAndTintGetter level, BlockPos pos, Direction side,
                                     BlockState queryState, BlockPos queryPos) {
 
@@ -345,12 +347,12 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
 
     //
 
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public static BlockColor wrappedColor() {
         return new WrappedBlockColor();
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public static class WrappedBlockColor implements BlockColor {
 
         @Override
