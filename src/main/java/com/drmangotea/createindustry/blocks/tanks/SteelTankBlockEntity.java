@@ -17,6 +17,8 @@ import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
+import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -150,8 +152,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
         if (!hasLevel())
             return;
 
-        FluidVariant attributes = newFluidStack.getFluid()
-                .getFluidType();
+        FluidVariant attributes = newFluidStack.getType();
         int luminosity = (int) (attributes.getLightLevel(newFluidStack) / 1.2f);
         boolean reversed = attributes.isLighterThanAir();
         int maxY = (int) ((getFillState() * height) + 1);
@@ -212,7 +213,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
         tankInventory.setCapacity(blocks * getCapacityMultiplier());
         long overflow = tankInventory.getFluidAmount() - tankInventory.getCapacity();
         if (overflow > 0)
-            tankInventory.drain(overflow, FluidAction.EXECUTE);
+            tankInventory.extract(tankInventory.variant, overflow, Transaction.openOuter());
         forceFluidLevelUpdate = true;
     }
 

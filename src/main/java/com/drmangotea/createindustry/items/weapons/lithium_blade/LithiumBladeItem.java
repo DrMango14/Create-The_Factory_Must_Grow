@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 
 import java.util.Map;
@@ -29,10 +30,10 @@ public class LithiumBladeItem extends SwordItem {
 
         ItemStack stack = player.getItemInHand(hand);
 
-        ItemStack stack1 = new ItemStack(TFMGItems.LIT_LITHIUM_BLADE.get(), 1, stack.getOrCreateTag());
+        ItemStack stack1 = TFMGItems.LIT_LITHIUM_BLADE.asStack();
 
 
-        Map<Enchantment, Integer> enchantments = stack.getAllEnchantments();
+        Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
 
         enchantments.forEach(stack1::enchant);
 

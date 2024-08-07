@@ -83,8 +83,6 @@ import com.drmangotea.createindustry.blocks.machines.oil_processing.pumpjack.ham
 import com.drmangotea.createindustry.items.weapons.explosives.napalm.NapalmBombBlock;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.casting_basin.CastingBasinBlock;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.casting_spout.CastingSpoutBlock;
-import com.drmangotea.createindustry.items.CoalCokeBlockItem;
-import com.drmangotea.createindustry.items.FossilstoneItem;
 import com.drmangotea.createindustry.blocks.deposits.surface_scanner.SurfaceScannerBlock;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.blast_furnace.BlastFurnaceOutputBlock;
 import com.drmangotea.createindustry.blocks.machines.metal_processing.blast_furnace.MoltenMetalBlock;
@@ -272,7 +270,7 @@ public class TFMGBlocks {
             .blockstate(simpleCubeAll("coal_coke_block"))
             .tag(BlockTags.NEEDS_STONE_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
-            .item(CoalCokeBlockItem::new)
+            .item()
             .tag(Tags.Items.STORAGE_BLOCKS)
             .build()
             .lang("Block of Coal Coke")
@@ -325,8 +323,7 @@ public class TFMGBlocks {
             .properties(p -> p.requiresCorrectToolForDrops())
             .transform(pickaxeOnly())
             .blockstate(simpleCubeAll("fossilstone"))
-            .item(FossilstoneItem::new)
-            .build()
+            .simpleItem()
             .lang("Fossilstone")
             .register();
 

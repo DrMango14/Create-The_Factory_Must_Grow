@@ -1,6 +1,7 @@
 package com.drmangotea.createindustry.blocks.electricity.base.cables;
 
 import com.drmangotea.createindustry.base.TFMGTools;
+import com.drmangotea.createindustry.blocks.electricity.api.EnergyStorage;
 import com.drmangotea.createindustry.blocks.electricity.base.*;
 import com.drmangotea.createindustry.blocks.electricity.resistors.ResistorBlockEntity;
 import com.drmangotea.createindustry.registry.TFMGItems;
@@ -217,8 +218,7 @@ public class CableConnectorBlockEntity extends ElectricBlockEntity {
 
 
 
-                }else
-                if(be1!=null) {
+                } else if(be1!=null) {
 
                     if (be1.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite()).isPresent()) {
 

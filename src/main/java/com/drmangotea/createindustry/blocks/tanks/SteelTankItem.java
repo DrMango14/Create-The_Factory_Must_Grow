@@ -121,10 +121,10 @@ public class SteelTankItem extends BlockItem {
                 if (SteelTankBlock.isTank(blockState))
                     continue;
                 BlockPlaceContext context = BlockPlaceContext.at(ctx, offsetPos, face);
-                player.getPersistentData()
+                player.getExtraCustomData()
                         .putBoolean("SilenceTankSound", true);
                 super.place(context);
-                player.getPersistentData()
+                player.getExtraCustomData()
                         .remove("SilenceTankSound");
             }
         }

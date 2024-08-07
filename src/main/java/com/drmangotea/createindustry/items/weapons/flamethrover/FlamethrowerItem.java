@@ -143,18 +143,18 @@ return Math.round( 13* ((float)((float)stack.getOrCreateTag().getInt("amount")/(
 
             for(FlamethrowerFuel fuel : FlamethrowerFuel.values()) {
 
-                String fluid = be.getFluid(0).getFluid().getFluidType().toString().replaceFirst("createindustry:","");
+                String fluid = be.getFluid(0).getType().toString().replaceFirst("createindustry:","");
 
 
 
                 if (fluid.equals(fuel.name().toLowerCase())) {
                     if(nbt.getString("fuel").equals(fluid)||nbt.getInt("amount")==0) {
 
-                        int toDrain = Math.min(FUEL_CAPACITY - nbt.getInt("amount"), be.getFluid(0).getAmount());
+                        long toDrain = Math.min(FUEL_CAPACITY - nbt.getInt("amount"), be.getFluid(0).getAmount());
 
                         nbt.putString("fuel", fluid);
                         be.getTankInventory().drain(toDrain, IFluidHandler.FluidAction.EXECUTE);
-                        nbt.putInt("amount", nbt.getInt("amount") + toDrain);
+                        nbt.putLong("amount", nbt.getLong("amount") + toDrain);
                         context.getPlayer().getCooldowns().addCooldown(stack.getItem(), 20);
 
 

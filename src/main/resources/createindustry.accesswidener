@@ -1,3 +1,4 @@
 accessWidener v1 named
 
 accessible method net/minecraft/tags/FluidTags create (Ljava/lang/String;)Lnet/minecraft/tags/TagKey;
+accessible method net/minecraft/world/damagesource/DamageSource <init> (Ljava/lang/String;)V

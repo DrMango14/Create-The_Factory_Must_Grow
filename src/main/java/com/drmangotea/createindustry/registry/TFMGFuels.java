@@ -8,5 +8,7 @@ public class TFMGFuels {
     public void register() {
         registry.add(TFMGItems.COAL_COKE.get(), 3200);
         registry.add(TFMGItems.COAL_COKE.get(), 3200);
+        registry.add(TFMGBlocks.COAL_COKE_BLOCK.get().asItem(), 28800);
+        registry.add(TFMGBlocks.FOSSILSTONE.get().asItem(), 4000);
     }
 }

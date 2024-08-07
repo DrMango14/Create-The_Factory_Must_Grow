@@ -8,6 +8,7 @@ import com.drmangotea.createindustry.registry.TFMGItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
+import mezz.jei.api.fabric.constants.FabricTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -47,19 +48,19 @@ public class IndustrialBlastingCategory extends CreateRecipeCategory<IndustrialB
 		builder
 				.addSlot(RecipeIngredientRole.OUTPUT,140, 117)
 				.setBackground(getRenderedSlot(), -1, -1)
-				.addIngredient(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getFluidResults().get(0)))
+				.addIngredient(FabricTypes.FLUID_STACK, withImprovedVisibility(recipe.getFluidResults().get(0)))
 				.addTooltipCallback(addFluidTooltip(recipe.getFluidResults().get(0).getAmount()));
 
        builder
        		.addSlot(RecipeIngredientRole.OUTPUT,160, 117)
        		.setBackground(getRenderedSlot(), -1, -1)
-       		.addIngredient(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getFluidResults().get(1)))
+       		.addIngredient(FabricTypes.FLUID_STACK, withImprovedVisibility(recipe.getFluidResults().get(1)))
        		.addTooltipCallback(addFluidTooltip(recipe.getFluidResults().get(1).getAmount()));
 
 	}
 
 	@Override
-	public void draw(IndustrialBlastingRecipe recipe, IRecipeSlotsView recipeSlotsView, net.minecraft.class_4587 stack, double mouseX, double mouseY) {
+	public void draw(IndustrialBlastingRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
 		blastFurnace
 				.draw(stack, 50, 135);
 

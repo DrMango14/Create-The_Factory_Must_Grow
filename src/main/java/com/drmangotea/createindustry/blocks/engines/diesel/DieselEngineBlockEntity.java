@@ -415,7 +415,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 
 
 	@Nullable
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public Float getTargetAngle() {
 		float angle = 0;
 		BlockState blockState = getBlockState();

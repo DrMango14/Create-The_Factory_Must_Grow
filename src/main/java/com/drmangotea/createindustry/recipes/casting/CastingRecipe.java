@@ -6,6 +6,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.Pro
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import io.github.fabricators_of_create.porting_lib.transfer.item.RecipeWrapper;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
@@ -31,10 +32,10 @@ public class CastingRecipe extends ProcessingRecipe<RecipeWrapper> {
 	}
 
 	public boolean matches(CombinedTankWrapper inv, Level worldIn) {
-		if (inv.getFluidInTank(0).getAmount()==0)
+		if (inv.parts.get(0).iterator().next().getAmount() ==0)
 			return false;
 		return fluidIngredients.get(0)
-				.test(inv.getFluidInTank(0));
+				.test(new FluidStack(inv.parts.get(0).iterator().next().getResource(), inv.parts.get(0).iterator().next().getAmount()));
 	}
 	public FluidIngredient getInputFluid(){
 		return getFluidIngredients().get(0);

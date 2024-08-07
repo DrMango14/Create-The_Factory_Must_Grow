@@ -2,7 +2,6 @@ package com.drmangotea.createindustry.mixins;
 
 
 import com.drmangotea.createindustry.base.TFMGPipes;
-import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.fluids.FluidPropagator;
@@ -27,9 +26,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -123,23 +119,13 @@ public class FluidPropagatorMixin {
         BlockPos connectedPos = pos.relative(side);
         BlockState connectedState = reader.getBlockState(connectedPos);
         FluidTransportBehaviour pipe = FluidPropagator.getPipe(reader, connectedPos);
-        if (pipe != null && pipe.canHaveFlowToward(connectedState, side.getOpposite()))
-            return false;
-        if (PumpBlock.isPump(connectedState) && connectedState.getValue(PumpBlock.FACING)
-                .getAxis() == side.getAxis())
-            return false;
-        if (VanillaFluidTargets.shouldPipesConnectTo(connectedState))
-            return true;
-        if (BlockHelper.hasBlockSolidSide(connectedState, reader, connectedPos, side.getOpposite())
-                && !AllTags.AllBlockTags.FAN_TRANSPARENT.matches(connectedState))
-            return false;
-        if (hasFluidCapability(reader, connectedPos, side.getOpposite()))
-            return false;
-        if (!(connectedState.getMaterial()
-                .isReplaceable() && connectedState.getDestroySpeed(reader, connectedPos) != -1)
-                && !connectedState.hasProperty(BlockStateProperties.WATERLOGGED))
-            return false;
-        return true;
+        return (pipe == null || !pipe.canHaveFlowToward(connectedState, side.getOpposite()))
+                && (!PumpBlock.isPump(connectedState) || connectedState.getValue(PumpBlock.FACING).getAxis() != side.getAxis())
+                && !VanillaFluidTargets.shouldPipesConnectTo(connectedState)
+                && (!BlockHelper.hasBlockSolidSide(connectedState, reader, connectedPos, side.getOpposite())
+                || AllTags.AllBlockTags.FAN_TRANSPARENT.matches(connectedState))
+                && (connectedState.getMaterial().isReplaceable() && connectedState.getDestroySpeed(reader, connectedPos) != -1
+                        || connectedState.hasProperty(BlockStateProperties.WATERLOGGED));
     }
     @Shadow
     public static List<Direction> getPipeConnections(BlockState state, FluidTransportBehaviour pipe) {
@@ -153,15 +139,7 @@ public class FluidPropagatorMixin {
     public static int getPumpRange() {
         return AllConfigs.server().fluids.mechanicalPumpRange.get();
     }
-    @Shadow
-    public static boolean hasFluidCapability(BlockGetter world, BlockPos pos, Direction side) {
-        BlockEntity tileEntity = world.getBlockEntity(pos);
-        if (tileEntity == null)
-            return false;
-        LazyOptional<IFluidHandler> capability =
-                tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
-        return capability.isPresent();
-    }
+
     @Shadow
     @Nullable
     public static Direction.Axis getStraightPipeAxis(BlockState state) {

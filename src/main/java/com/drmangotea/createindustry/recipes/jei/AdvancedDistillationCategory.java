@@ -9,7 +9,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
-import mezz.jei.api.forge.ForgeTypes;
+import mezz.jei.api.fabric.constants.FabricTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -41,7 +41,7 @@ public class AdvancedDistillationCategory extends CreateRecipeCategory<Distillat
 		builder
 				.addSlot(RecipeIngredientRole.INPUT, 18, 130-yModifier)
 				.setBackground(getRenderedSlot(), -1, -1)
-				.addIngredients(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getInputFluid().getMatchingFluidStacks()))
+				.addIngredients(FabricTypes.FLUID_STACK, withImprovedVisibility(recipe.getInputFluid().getMatchingFluidStacks()))
 				.addTooltipCallback(addFluidTooltip(recipe.getInputFluid().getRequiredAmount()));
 
 
@@ -50,7 +50,7 @@ public class AdvancedDistillationCategory extends CreateRecipeCategory<Distillat
 			builder
 					.addSlot(RecipeIngredientRole.OUTPUT, 105, y)
 					.setBackground(getRenderedSlot(), -1, -1)
-					.addIngredient(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getFluidResults().get(i)))
+					.addIngredient(FabricTypes.FLUID_STACK, withImprovedVisibility(recipe.getFluidResults().get(i)))
 					.addTooltipCallback(addFluidTooltip(recipe.getFirstFluidResult().getAmount()));
 		}
 

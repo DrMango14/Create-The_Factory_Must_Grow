@@ -4,12 +4,12 @@ import com.drmangotea.createindustry.CreateTFMG;
 import com.drmangotea.createindustry.CreateTFMGClient;
 import com.simibubi.create.content.equipment.zapper.ShootGadgetPacket;
 import com.simibubi.create.content.equipment.zapper.ShootableGadgetRenderHandler;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class AdvancedPotatoCannonPacket extends ShootGadgetPacket {
 
@@ -46,7 +46,7 @@ public class AdvancedPotatoCannonPacket extends ShootGadgetPacket {
 
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	protected void handleAdditional() {
 		CreateTFMG.LOGGER.debug("AAAAAAAAAAAAAAAAAAAAAAAAAE");
 
@@ -54,7 +54,7 @@ public class AdvancedPotatoCannonPacket extends ShootGadgetPacket {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	protected ShootableGadgetRenderHandler getHandler() {
 		return CreateTFMGClient.ADVANCED_POTATO_CANNON_RENDER_HANDLER;
 	}

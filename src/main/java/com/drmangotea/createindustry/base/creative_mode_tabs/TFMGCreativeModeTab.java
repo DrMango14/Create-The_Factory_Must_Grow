@@ -3,17 +3,18 @@ package com.drmangotea.createindustry.base.creative_mode_tabs;
 import java.util.Collection;
 
 import com.drmangotea.createindustry.CreateTFMG;
+import com.simibubi.create.compat.jei.CreateJEI;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.Registry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public abstract class TFMGCreativeModeTab extends CreativeModeTab {
     public TFMGCreativeModeTab(String id) {
@@ -28,7 +29,7 @@ public abstract class TFMGCreativeModeTab extends CreativeModeTab {
     }
 
     protected Collection<RegistryEntry<Item>> registeredItems() {
-        return CreateTFMG.REGISTRATE.getAll(ForgeRegistries.ITEMS.getRegistryKey());
+        return CreateTFMG.REGISTRATE.getAll(Registry.ITEM.key());
     }
 
     public void addBlocks(NonNullList<ItemStack> items) {
