@@ -3,8 +3,10 @@ package com.drmangotea.createindustry.items.weapons.explosives.napalm;
 
 import com.drmangotea.createindustry.base.util.TFMGUtils;
 import com.drmangotea.createindustry.base.util.spark.Spark;
+import com.drmangotea.createindustry.items.weapons.explosives.pipe_bomb.PipeBomb;
 import com.drmangotea.createindustry.registry.TFMGEntityTypes;
 import com.simibubi.create.Create;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -131,8 +133,8 @@ public class NapalmBombEntity extends Entity {
         return new ClientboundAddEntityPacket(this);
     }
     @SuppressWarnings("unchecked")
-    public static EntityType.Builder<?> build(EntityType.Builder<?> builder) {
-        EntityType.Builder<NapalmBombEntity> entityBuilder = (EntityType.Builder<NapalmBombEntity>) builder;
-        return entityBuilder.sized(.25f, .25f);
+    public static FabricEntityTypeBuilder<NapalmBombEntity> build(FabricEntityTypeBuilder<?> builder) {
+        FabricEntityTypeBuilder<NapalmBombEntity> entityBuilder = (FabricEntityTypeBuilder<NapalmBombEntity>) builder;
+        return entityBuilder.dimensions(EntityDimensions.scalable(.25f, .25f));
     }
 }

@@ -1,17 +1,16 @@
 package com.drmangotea.createindustry.base.util.spark;
 
 
+import com.drmangotea.createindustry.items.weapons.explosives.pipe_bomb.PipeBomb;
 import com.drmangotea.createindustry.items.weapons.explosives.thermite_grenades.fire.BlueFireBlock;
 import com.drmangotea.createindustry.registry.TFMGEntityTypes;
 import com.drmangotea.createindustry.registry.TFMGItems;
 import com.simibubi.create.content.trains.CubeParticleData;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -79,7 +78,7 @@ public class BlueSpark extends ThrowableProjectile {
         super.onHitBlock(p_37384_);
         if (!this.level.isClientSide) {
             Entity entity = this.getOwner();
-            if (!(entity instanceof Mob) || net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this)) {
+            if (!(entity instanceof Mob) || mobGriefingEvent(this.level, this)) {
                 BlockPos blockpos = p_37384_.getBlockPos().relative(p_37384_.getDirection());
                 if (this.level.isEmptyBlock(blockpos)) {
                     this.level.setBlockAndUpdate(blockpos, BlueFireBlock.getState(this.level, blockpos));
@@ -115,8 +114,8 @@ public class BlueSpark extends ThrowableProjectile {
     }
 
     @SuppressWarnings("unchecked")
-    public static EntityType.Builder<?> build(EntityType.Builder<?> builder) {
-        EntityType.Builder<BlueSpark> entityBuilder = (EntityType.Builder<BlueSpark>) builder;
-        return entityBuilder.sized(.25f, .25f);
+    public static FabricEntityTypeBuilder<BlueSpark> build(FabricEntityTypeBuilder<?> builder) {
+        FabricEntityTypeBuilder<BlueSpark> entityBuilder = (FabricEntityTypeBuilder<BlueSpark>) builder;
+        return entityBuilder.dimensions(EntityDimensions.scalable(.25f, .25f));
     }
 }

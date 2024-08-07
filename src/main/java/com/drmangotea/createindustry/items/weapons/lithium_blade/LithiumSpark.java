@@ -1,20 +1,19 @@
 package com.drmangotea.createindustry.items.weapons.lithium_blade;
 
 
+import com.drmangotea.createindustry.items.weapons.explosives.pipe_bomb.PipeBomb;
 import com.drmangotea.createindustry.items.weapons.explosives.thermite_grenades.fire.BlueFireBlock;
 import com.drmangotea.createindustry.registry.TFMGEntityTypes;
 import com.drmangotea.createindustry.registry.TFMGItems;
 import com.drmangotea.createindustry.registry.TFMGMobEffects;
 import com.simibubi.create.content.trains.CubeParticleData;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -124,8 +123,8 @@ public class LithiumSpark extends ThrowableProjectile {
     }
 
     @SuppressWarnings("unchecked")
-    public static EntityType.Builder<?> build(EntityType.Builder<?> builder) {
-        EntityType.Builder<LithiumSpark> entityBuilder = (EntityType.Builder<LithiumSpark>) builder;
-        return entityBuilder.sized(.25f, .25f);
+    public static FabricEntityTypeBuilder<LithiumSpark> build(FabricEntityTypeBuilder<?> builder) {
+        FabricEntityTypeBuilder<LithiumSpark> entityBuilder = (FabricEntityTypeBuilder<LithiumSpark>) builder;
+        return entityBuilder.dimensions(EntityDimensions.scalable(.25f, .25f));
     }
 }

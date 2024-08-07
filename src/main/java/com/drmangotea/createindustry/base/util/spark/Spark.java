@@ -1,15 +1,14 @@
 package com.drmangotea.createindustry.base.util.spark;
 
 
+import com.drmangotea.createindustry.items.weapons.explosives.pipe_bomb.PipeBomb;
 import com.drmangotea.createindustry.registry.TFMGEntityTypes;
 import com.drmangotea.createindustry.registry.TFMGItems;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -111,8 +110,8 @@ public class Spark extends ThrowableProjectile {
     }
 
     @SuppressWarnings("unchecked")
-    public static EntityType.Builder<?> build(EntityType.Builder<?> builder) {
-        EntityType.Builder<Spark> entityBuilder = (EntityType.Builder<Spark>) builder;
-        return entityBuilder.sized(.25f, .25f);
+    public static FabricEntityTypeBuilder<Spark> build(FabricEntityTypeBuilder<?> builder) {
+        FabricEntityTypeBuilder<Spark> entityBuilder = (FabricEntityTypeBuilder<Spark>) builder;
+        return entityBuilder.dimensions(EntityDimensions.scalable(.25f, .25f));
     }
 }

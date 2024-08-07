@@ -3,10 +3,12 @@ package com.drmangotea.createindustry.items.weapons.explosives.pipe_bomb;
 
 import com.drmangotea.createindustry.registry.TFMGEntityTypes;
 import com.drmangotea.createindustry.registry.TFMGItems;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -74,8 +76,8 @@ public class PipeBomb extends ThrowableItemProjectile {
     }
 
     @SuppressWarnings("unchecked")
-    public static EntityType.Builder<?> build(EntityType.Builder<?> builder) {
-        EntityType.Builder<PipeBomb> entityBuilder = (EntityType.Builder<PipeBomb>) builder;
-        return entityBuilder.sized(.25f, .25f);
+    public static FabricEntityTypeBuilder<PipeBomb> build(FabricEntityTypeBuilder<?> builder) {
+        FabricEntityTypeBuilder<PipeBomb> entityBuilder = (FabricEntityTypeBuilder<PipeBomb>) builder;
+        return entityBuilder.dimensions(EntityDimensions.scalable(.25f, .25f));
     }
 }

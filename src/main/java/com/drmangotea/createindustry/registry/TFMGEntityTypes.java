@@ -12,12 +12,13 @@ import com.drmangotea.createindustry.items.weapons.explosives.thermite_grenades.
 import com.drmangotea.createindustry.items.weapons.explosives.thermite_grenades.ThermiteGrenadeRenderer;
 import com.drmangotea.createindustry.items.weapons.lithium_blade.LithiumSpark;
 import com.drmangotea.createindustry.items.weapons.lithium_blade.LithiumSparkRenderer;
-import com.simibubi.create.foundation.data.CreateEntityBuilder;
 import com.simibubi.create.foundation.utility.Lang;
+import com.tterrag.registrate.builders.EntityBuilder;
 import com.tterrag.registrate.util.entry.EntityEntry;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import io.github.fabricators_of_create.porting_lib.attributes.extensions.EntityAttributes;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -66,16 +67,21 @@ public class TFMGEntityTypes {
 
 
 
-    private static <T extends Entity> CreateEntityBuilder<T, ?> register(String name, EntityType.EntityFactory<T> factory,
-                                                                         NonNullSupplier<NonNullFunction<EntityRendererProvider.Context, EntityRenderer<? super T>>> renderer,
-                                                                         MobCategory group, int range, int updateFrequency, boolean sendVelocity, boolean immuneToFire,
-                                                                         NonNullConsumer<FabricEntityTypeBuilder<T>> propertyBuilder) {
+    private static <T extends Entity> EntityBuilder<T, ?> register(String name, EntityType.EntityFactory<T> factory,
+                                                             NonNullSupplier<NonNullFunction<
+                                                                                 EntityRendererProvider.Context,
+                                                                                 EntityRenderer<? super T>>> renderer,
+                                                             MobCategory group,
+                                                             int range, int updateFrequency, boolean sendVelocity, boolean immuneToFire,
+                                                                   NonNullConsumer<FabricEntityTypeBuilder<T>> propertyBuilder ) {
         String id = Lang.asId(name);
-        return (CreateEntityBuilder<T, ?>) CreateTFMG.REGISTRATE
+        return CreateTFMG.REGISTRATE
                 .entity(id, factory, group)
-                .properties(b -> b.trackRangeBlocks(range)
-                        .trackedUpdateRate(updateFrequency)
-                        .forceTrackedVelocityUpdates(sendVelocity))
+                .properties(
+                        b -> b.trackRangeBlocks(range)
+                                .trackedUpdateRate(updateFrequency)
+                                .forceTrackedVelocityUpdates(sendVelocity)
+                )
                 .properties(propertyBuilder)
                 .properties(b -> {
                     if (immuneToFire)

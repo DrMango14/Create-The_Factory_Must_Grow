@@ -16,6 +16,7 @@ import com.tterrag.registrate.util.entry.FluidEntry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariantAttributeHandler;
+import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
@@ -246,7 +247,7 @@ public class TFMGFluids {
     @SafeVarargs
     public static FluidEntry<VirtualFluid> gas(String name, TagKey<Fluid>... tags){
         //ignore error, AW handles it
-        TagKey<Fluid> tag = FluidTags.create(CreateTFMG.asResource(name));
+        TagKey<Fluid> tag = TagKey.create(Registry.FLUID_REGISTRY, CreateTFMG.asResource(name));
 
         TagKey<Fluid>[] fluidTags = tags;
 
