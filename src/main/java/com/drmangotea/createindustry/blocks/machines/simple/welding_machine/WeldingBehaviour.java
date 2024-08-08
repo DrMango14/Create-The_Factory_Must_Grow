@@ -88,7 +88,7 @@ public class WeldingBehaviour extends BeltProcessingBehaviour {
 		super.write(compound, clientPacket);
 
 		if (clientPacket) {
-			compound.put("ParticleItems", NBTHelper.writeCompoundList(particleItems, ItemStack::serializeNBT));
+			compound.put("ParticleItems", NBTHelper.writeCompoundList(particleItems, ItemStack::getTag));
 			particleItems.clear();
 		}
 	}

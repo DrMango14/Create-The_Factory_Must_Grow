@@ -2,7 +2,6 @@ package com.drmangotea.createindustry.blocks.electricity.electric_motor;
 
 import com.drmangotea.createindustry.base.util.TFMGUtils;
 import com.drmangotea.createindustry.blocks.electricity.base.IElectricBlock;
-import com.drmangotea.createindustry.blocks.electricity.base.TFMGForgeEnergyStorage;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;

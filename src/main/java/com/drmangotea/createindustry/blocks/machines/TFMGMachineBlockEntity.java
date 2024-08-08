@@ -12,6 +12,8 @@ import com.simibubi.create.foundation.utility.LangBuilder;
 import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -31,7 +33,7 @@ public class TFMGMachineBlockEntity extends SmartBlockEntity  implements IHaveGo
 
     private boolean contentsChanged;
 
-    protected LazyOptional<FluidTank> fluidCapability;
+    protected LazyOptional<CombinedTankWrapper> fluidCapability;
 
     public TFMGMachineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -68,9 +70,9 @@ public class TFMGMachineBlockEntity extends SmartBlockEntity  implements IHaveGo
         behaviours.add(tank2);
 
         fluidCapability = LazyOptional.of(() -> {
-            LazyOptional<? extends FluidTank> inputCap = tank1.getCapability();
-            LazyOptional<? extends FluidTank> outputCap = tank2.getCapability();
-            return new CombinedTankWrapper(outputCap.orElse(null), inputCap.orElse(null));
+            Storage<FluidVariant> inputCap = tank1.getCapability();
+            Storage<FluidVariant> outputCap = tank2.getCapability();
+            return new CombinedTankWrapper(outputCap, inputCap);
         });
 
 

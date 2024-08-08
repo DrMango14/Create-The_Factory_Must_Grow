@@ -1,5 +1,6 @@
 package com.drmangotea.createindustry.blocks.machines.metal_processing.blast_furnace;
 
+import com.drmangotea.createindustry.base.util.CombinedStorageWrapper;
 import com.drmangotea.createindustry.blocks.machines.TFMGMachineBlockEntity;
 import com.drmangotea.createindustry.recipes.industrial_blasting.IndustrialBlastingRecipe;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
@@ -7,19 +8,25 @@ import com.drmangotea.createindustry.registry.TFMGItems;
 import com.drmangotea.createindustry.registry.TFMGRecipeTypes;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.content.logistics.depot.DepotBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
+import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
 import io.github.fabricators_of_create.porting_lib.transfer.item.RecipeWrapper;
 import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.CombinedStorage;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -27,6 +34,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,13 +66,11 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
     public LerpedFloat coalCokeHeight = LerpedFloat.linear();
 
     //item storage
-    public LazyOptional<IItemHandlerModifiable> itemCapability;
+    public LazyOptional<CombinedStorageWrapper> itemCapability;
 
     public SmartInventory inputInventory;
 
     public SmartInventory fuelInventory;
-
-    int debug = 0;
 
 
 
@@ -79,7 +85,7 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
         fuelInventory = new SmartInventory(1, this).forbidInsertion().forbidExtraction()
                 .withMaxStackSize(64);
 
-        itemCapability = LazyOptional.of(() -> new Combined(inputInventory,fuelInventory));
+        itemCapability = LazyOptional.of(() -> new CombinedStorageWrapper(inputInventory, fuelInventory));
 
 
         tank1.getPrimaryHandler().setCapacity(8000);

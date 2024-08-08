@@ -18,8 +18,6 @@ import net.minecraft.world.item.ItemStack;
 
 public class AdvancedPotatoCannonItemRenderer extends CustomRenderedItemModelRenderer {
 
-
-
 	@Override
 	protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer,
 		TransformType transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {

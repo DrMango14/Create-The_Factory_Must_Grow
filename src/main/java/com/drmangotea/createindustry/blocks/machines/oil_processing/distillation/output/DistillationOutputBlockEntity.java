@@ -4,9 +4,13 @@ import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
+import io.github.fabricators_of_create.porting_lib.transfer.TransferUtil;
 import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -20,12 +24,12 @@ import java.util.List;
 public class DistillationOutputBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
 
-    protected LazyOptional<FluidTank> fluidCapability;
+    protected Storage<FluidVariant> fluidCapability;
 
     public final FluidTank tank = new SmartFluidTank(8000,this::onFluidStackChanged);
     public DistillationOutputBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        fluidCapability = LazyOptional.of(()->tank);
+        fluidCapability = tank.getSlot(0);
     }
 
     @Override
@@ -66,8 +70,6 @@ public class DistillationOutputBlockEntity extends SmartBlockEntity implements I
 
 
         return containedFluidTooltip(tooltip, isPlayerSneaking,
-                getCapability(ForgeCapabilities.FLUID_HANDLER));
-
-
+                fluidCapability);
     }
 }

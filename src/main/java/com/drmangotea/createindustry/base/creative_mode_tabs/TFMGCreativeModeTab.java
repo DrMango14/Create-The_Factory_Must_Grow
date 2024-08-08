@@ -4,8 +4,10 @@ import java.util.Collection;
 
 import com.drmangotea.createindustry.CreateTFMG;
 import com.simibubi.create.compat.jei.CreateJEI;
+import com.simibubi.create.infrastructure.item.CreateCreativeModeTab;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 
+import io.github.fabricators_of_create.porting_lib.util.ItemGroupUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
@@ -18,7 +20,7 @@ import net.minecraft.world.item.ItemStack;
 
 public abstract class TFMGCreativeModeTab extends CreativeModeTab {
     public TFMGCreativeModeTab(String id) {
-        super(CreateTFMG.MOD_ID + "." + id);
+        super(ItemGroupUtil.expandArrayAndGetId(), CreateTFMG.MOD_ID + "." + id);
     }
 
     @Override

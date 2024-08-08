@@ -11,6 +11,8 @@ import com.simibubi.create.content.equipment.zapper.ShootableGadgetItemMethods;
 import com.simibubi.create.foundation.item.CustomArmPoseItem;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import com.simibubi.create.infrastructure.config.AllConfigs;
+import io.github.fabricators_of_create.porting_lib.item.EntitySwingListenerItem;
+import io.github.fabricators_of_create.porting_lib.item.ReequipAnimationItem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -35,8 +37,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class AdvancedPotatoCannonItem extends ProjectileWeaponItem implements CustomArmPoseItem {
-
+public class AdvancedPotatoCannonItem extends ProjectileWeaponItem implements CustomArmPoseItem,
+		EntitySwingListenerItem, ReequipAnimationItem {
 	public static ItemStack CLIENT_CURRENT_AMMO = ItemStack.EMPTY;
 	public static final int MAX_DAMAGE = 500;
 
@@ -219,10 +221,6 @@ public class AdvancedPotatoCannonItem extends ProjectileWeaponItem implements Cu
 		return 15;
 	}
 
-	@Override
-	@Environment(EnvType.CLIENT)
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-		consumer.accept(SimpleCustomRenderer.create(this, new AdvancedPotatoCannonItemRenderer()));
-	}
+
 
 }

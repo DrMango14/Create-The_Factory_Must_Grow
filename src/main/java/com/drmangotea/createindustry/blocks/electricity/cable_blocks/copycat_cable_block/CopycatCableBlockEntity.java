@@ -2,7 +2,6 @@ package com.drmangotea.createindustry.blocks.electricity.cable_blocks.copycat_ca
 
 import com.drmangotea.createindustry.base.util.TFMGUtils;
 import com.drmangotea.createindustry.blocks.electricity.base.IElectricBlock;
-import com.drmangotea.createindustry.blocks.electricity.base.TFMGForgeEnergyStorage;
 import com.simibubi.create.content.decoration.copycat.CopycatBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;

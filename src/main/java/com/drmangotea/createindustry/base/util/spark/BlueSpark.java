@@ -13,6 +13,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -78,7 +79,7 @@ public class BlueSpark extends ThrowableProjectile {
         super.onHitBlock(p_37384_);
         if (!this.level.isClientSide) {
             Entity entity = this.getOwner();
-            if (!(entity instanceof Mob) || mobGriefingEvent(this.level, this)) {
+            if (!(entity instanceof Mob) || level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
                 BlockPos blockpos = p_37384_.getBlockPos().relative(p_37384_.getDirection());
                 if (this.level.isEmptyBlock(blockpos)) {
                     this.level.setBlockAndUpdate(blockpos, BlueFireBlock.getState(this.level, blockpos));

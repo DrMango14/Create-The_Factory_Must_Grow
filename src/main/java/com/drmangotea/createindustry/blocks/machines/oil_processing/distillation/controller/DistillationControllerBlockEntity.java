@@ -5,14 +5,18 @@ import com.drmangotea.createindustry.blocks.tanks.SteelTankBlockEntity;
 import com.drmangotea.createindustry.recipes.distillation.DistillationRecipe;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.content.fluids.pipes.FluidPipeBlock;
+import com.simibubi.create.content.fluids.pump.PumpBlock;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import com.simibubi.create.foundation.utility.Lang;
+import io.github.fabricators_of_create.porting_lib.transfer.TransferUtil;
 import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -28,6 +32,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.drmangotea.createindustry.base.util.TFMGUtils.fill;
 
 public class DistillationControllerBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
@@ -99,7 +105,7 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
 
 
         for(DistillationOutputBlockEntity be1 : outputs){
-            if(be1.tank==0)
+            if(be1.tank.isEmpty())
                 return;
         }
 
@@ -114,15 +120,17 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
             if(fluidStack.isEmpty())
                 break;
 
-            if(output.tank.fill(new FluidStack(fluidStack, (int) (fluidStack.getAmount()*speedModifier)), IFluidHandler.FluidAction.SIMULATE)>output.tank.getCapacity())
+            if(fill(output.tank, new FluidStack(fluidStack, (int) (fluidStack.getAmount()*speedModifier)))>output.tank.getCapacity())
                 break;
 
 
-            output.tank.fill(new FluidStack(fluidStack, (int) (fluidStack.getAmount()*speedModifier)), IFluidHandler.FluidAction.EXECUTE);
+            fill(output.tank, new FluidStack(fluidStack, (int) (fluidStack.getAmount()*speedModifier)));
             int consumption = (recipe.getInputFluid().getRequiredAmount()/6);
 
-
-            tank.drain((int) (consumption*speedModifier), IFluidHandler.FluidAction.EXECUTE);
+            try (Transaction t = TransferUtil.getTransaction()) {
+                tank.extract(tank.variant, (long) (consumption*speedModifier), t);
+                t.commit();
+            }
 
             numero++;
 

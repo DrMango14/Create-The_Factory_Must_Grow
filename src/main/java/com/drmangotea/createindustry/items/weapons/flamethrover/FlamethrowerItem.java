@@ -5,6 +5,7 @@ import com.drmangotea.createindustry.base.util.spark.Spark;
 import com.drmangotea.createindustry.registry.TFMGCreativeModeTabs;
 import com.drmangotea.createindustry.registry.TFMGEntityTypes;
 import com.drmangotea.createindustry.registry.TFMGItems;
+import com.simibubi.create.content.equipment.potatoCannon.PotatoCannonItem;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.item.CustomArmPoseItem;
 import net.minecraft.client.model.HumanoidModel;
@@ -26,6 +27,8 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
+
+import static com.drmangotea.createindustry.base.util.TFMGUtils.drain;
 
 public class FlamethrowerItem extends Item implements CustomArmPoseItem {
 
@@ -153,7 +156,7 @@ return Math.round( 13* ((float)((float)stack.getOrCreateTag().getInt("amount")/(
                         long toDrain = Math.min(FUEL_CAPACITY - nbt.getInt("amount"), be.getFluid(0).getAmount());
 
                         nbt.putString("fuel", fluid);
-                        be.getTankInventory().drain(toDrain, IFluidHandler.FluidAction.EXECUTE);
+                        drain(be.getTankInventory(), toDrain);
                         nbt.putLong("amount", nbt.getLong("amount") + toDrain);
                         context.getPlayer().getCooldowns().addCooldown(stack.getItem(), 20);
 

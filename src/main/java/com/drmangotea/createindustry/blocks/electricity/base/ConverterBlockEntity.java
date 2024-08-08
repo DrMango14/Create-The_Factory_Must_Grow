@@ -28,11 +28,6 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
     @Override
     public void tick() {
         super.tick();
-
-
-
-
-
     }
 
     @Override

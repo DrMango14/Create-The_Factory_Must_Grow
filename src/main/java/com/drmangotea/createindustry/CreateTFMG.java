@@ -28,10 +28,9 @@ public class CreateTFMG implements ModInitializer {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     static {
-        REGISTRATE.setTooltipModifierFactory(item -> {
-            return new ItemDescription.Modifier(item, TooltipHelper.Palette.STANDARD_CREATE)
-                    .andThen(TooltipModifier.mapNull(KineticStats.create(item)));
-        });
+        REGISTRATE.setTooltipModifierFactory(item ->
+                new ItemDescription.Modifier(item, TooltipHelper.Palette.STANDARD_CREATE)
+                        .andThen(TooltipModifier.mapNull(KineticStats.create(item))));
     }
 
     @Override

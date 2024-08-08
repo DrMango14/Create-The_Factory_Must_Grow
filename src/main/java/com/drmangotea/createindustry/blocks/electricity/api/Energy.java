@@ -1,33 +1,39 @@
 package com.drmangotea.createindustry.blocks.electricity.api;
 
-import net.fabricmc.fabric.api.transfer.v1.storage.TransferVariant;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
-import org.jetbrains.annotations.Nullable;
+import com.drmangotea.createindustry.blocks.electricity.base.IElectricBlock;
 
-public class Energy implements TransferVariant<Double> {
-    @Override
-    public boolean isBlank() {
-        return false;
+import static org.apache.commons.lang3.ObjectUtils.min;
+
+public class Energy {
+    long voltage;
+    long current;
+
+    public Energy(long voltage, long current) {
+        this.current = current;
+        this.voltage = current;
     }
 
-    @Override
-    public Double getObject() {
-        return null;
+    public long getVoltage() {
+        return voltage;
     }
 
-    @Override
-    public @Nullable CompoundTag getNbt() {
-        return null;
+    public long getCurrent() {
+        return current;
     }
 
-    @Override
-    public CompoundTag toNbt() {
-        return null;
+    public long discharge(long amount, boolean simulate) {
+
+        return amount;
     }
 
-    @Override
-    public void toPacket(FriendlyByteBuf buf) {
+    public long charge(long amount, boolean simulate) {
 
+        return amount;
+    }
+
+    public long transfer(IElectricBlock to, long amount, boolean simulate) {
+        long discharge = discharge(amount, true);
+        long charge = to.getStorage().charge(amount, true);
+        return min(discharge, charge);
     }
 }

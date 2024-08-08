@@ -13,10 +13,13 @@ import com.simibubi.create.foundation.utility.Iterate;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat.Chaser;
 import com.simibubi.create.infrastructure.config.AllConfigs;
+import io.github.fabricators_of_create.porting_lib.transfer.TransferUtil;
 import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariantAttributeHandler;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariantAttributes;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.core.BlockPos;
@@ -147,14 +150,14 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
         removeController(true);
         lastKnownPos = worldPosition;
     }
-
     protected void onFluidStackChanged(FluidStack newFluidStack) {
         if (!hasLevel())
             return;
 
-        FluidVariant attributes = newFluidStack.getType();
-        int luminosity = (int) (attributes.getLightLevel(newFluidStack) / 1.2f);
-        boolean reversed = attributes.isLighterThanAir();
+        FluidVariantAttributeHandler handler = FluidVariantAttributes.getHandlerOrDefault(newFluidStack.getFluid());
+        FluidVariant variant = newFluidStack.getType();
+        int luminosity = (int) (handler.getLuminance(variant) / 1.2f);
+        boolean reversed = handler.isLighterThanAir(variant);
         int maxY = (int) ((getFillState() * height) + 1);
 
         for (int yOffset = 0; yOffset < height; yOffset++) {
@@ -446,17 +449,14 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        SteelTankBlockEntity controllerTE = getControllerBE();
+        SteelTankBlockEntity controllerBE = getControllerBE();
 
-        if(isDistillationTower)
+        if (isDistillationTower)
             return false;
-
-        if(getControllerBE()!=null)
-            if(getControllerBE().isDistillationTower)
-                return false;
-
+        if (controllerBE != null && controllerBE.isDistillationTower)
+            return true;
         return containedFluidTooltip(tooltip, isPlayerSneaking,
-                controllerTE.getCapability(ForgeCapabilities.FLUID_HANDLER));
+                controllerBE.getFluidStorage(null));
     }
 
     @Override
@@ -486,7 +486,10 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
             tankInventory.setCapacity(getTotalTankSize() * getCapacityMultiplier());
             tankInventory.readFromNBT(compound.getCompound("TankContent"));
             if (tankInventory.getSpace() < 0)
-                tankInventory.drain(-tankInventory.getSpace(), FluidAction.EXECUTE);
+                try (Transaction t = TransferUtil.getTransaction()) {
+                    tankInventory.extract(tankInventory.variant, -tankInventory.getSpace(), t);
+                    t.commit();
+                }
         }
 
 
@@ -578,7 +581,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
         return MAX_SIZE;
     }
 
-    public static int getCapacityMultiplier() {
+    public static long getCapacityMultiplier() {
         return AllConfigs.server().fluids.fluidTankCapacity.get() * 1000;
     }
 

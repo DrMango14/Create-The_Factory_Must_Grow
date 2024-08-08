@@ -1,9 +1,7 @@
 package com.drmangotea.createindustry.blocks.electricity.base;
 
-import com.drmangotea.createindustry.CreateTFMG;
-import com.drmangotea.createindustry.blocks.electricity.capacitor.CapacitorBlockEntity;
+import com.drmangotea.createindustry.blocks.electricity.api.Energy;
 import com.drmangotea.createindustry.blocks.electricity.resistors.ResistorBlockEntity;
-import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.simibubi.create.Create;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,23 +11,17 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 public interface IElectricBlock {
 
-
-
     float internalResistance();
+
+    Energy getStorage();
 
     int getVoltage();
 
-    boolean gotFElastTick(int value);
-
     int getCurrent();
-
-
-    int feGeneration();
 
     int voltageGeneration();
 
     int transferSpeed();
-
 
     void addVoltage(float amount);
 
@@ -41,21 +33,13 @@ public interface IElectricBlock {
         return false;
     }
 
-    TFMGForgeEnergyStorage getForgeEnergy();
-
     boolean hasElectricitySlot(Direction direction);
-
 
     float maxVoltage();
 
     void explode();
 
-    int FECapacity();
-
-
     int getDistanceFromSource();
-
-
 
     void setDistanceFromSource(int value);
 
@@ -75,8 +59,6 @@ public interface IElectricBlock {
 
         boolean getsVoltageFromNonTFMGBlock = false;
 
-
-
         if(canBeDisabled()){
 
 
@@ -92,11 +74,7 @@ public interface IElectricBlock {
 
                 if(be1 instanceof IElectricBlock be2){
 
-
-
                     if(be2.hasElectricitySlot(direction.getOpposite())) {
-
-
 
                         int distance = be2.getDistanceFromSource();
 
@@ -104,25 +82,21 @@ public interface IElectricBlock {
                         if(!isStorage()&&be2.isStorage()&&direction == Direction.UP)
                             distance = Integer.MAX_VALUE;
 
-
                        if(getVoltage()==0) {
                            if(distance>getDistanceFromSource())
                                be2.addVoltage(getVoltage());
                        }
 
                        if(!(be2 instanceof ConverterBlockEntity))
-                        if(!(isStorage()&&direction == Direction.DOWN))
-                            if(!(!isStorage()&&be2.isStorage()&&direction == Direction.DOWN))
-                                if(getVoltage()!=0) {
-                                   // if(Create.RANDOM.nextInt(3) ==1)
-                                        transferCharge(be2);
-                                    if(distance>getDistanceFromSource()){
-                                                be2.addVoltage(getVoltage());
-                                    }
-                                }
-
-                    lowestDistance = Math.min(lowestDistance,distance);
-
+                           if(!(isStorage()&&direction == Direction.DOWN))
+                               if(!(!isStorage()&&be2.isStorage()&&direction == Direction.DOWN))
+                                   if(getVoltage()!=0) {
+                                       // if(Create.RANDOM.nextInt(3) ==1)
+                                       transferCharge(be2);
+                                       if(distance>getDistanceFromSource())
+                                           be2.addVoltage(getVoltage());
+                                   }
+                       lowestDistance = Math.min(lowestDistance,distance);
                     }
                     if(direction.getAxis().isHorizontal()) {
                         if (be2 instanceof ResistorBlockEntity resistorBE)
@@ -133,11 +107,7 @@ public interface IElectricBlock {
 
                     }
 
-
-
-                }else
-
-                if(be1!=null) {
+                } else if(be1!=null) {
                     if (be1.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite()).isPresent()) {
 
                         if (!(be1.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite()).orElse(new EnergyStorage(0)) instanceof TFMGForgeEnergyStorage)) {
@@ -216,114 +186,47 @@ public interface IElectricBlock {
             addVoltage(0);
     }
 
-
+//PLUH
 
     default void transferCharge(IElectricBlock be) {
-
-
-
-        if(!isStorage()) {
-            if (be.getDistanceFromSource() > getDistanceFromSource()||be.isStorage()) {
-
-                //int amount = getForgeEnergy().extractEnergy(transferSpeed(), true);
-                //int amount2 =  be.getForgeEnergy().receiveEnergy( transferSpeed(), true);
-
-
-
-
-
-                    int amount = getForgeEnergy().extractEnergy(transferSpeed()*100, true);
-                    int amount2 = be.getForgeEnergy().receiveEnergy(transferSpeed()*100, true);
-
-
-                    getForgeEnergy().extractEnergy(Math.min(amount, amount2), false);
-                    be.getForgeEnergy().receiveEnergy(Math.min(amount, amount2), false);
-                }
-            if(be.getDistanceFromSource()==getDistanceFromSource()&&getForgeEnergy().getEnergyStored()>be.getForgeEnergy().getEnergyStored()){
-
-                int diff = Math.abs(getForgeEnergy().getEnergyStored()-be.getForgeEnergy().getEnergyStored());
-
-                int amount = getForgeEnergy().extractEnergy(diff / 2, true);
-                int amount2 =  be.getForgeEnergy().receiveEnergy( diff / 2, true);
-                getForgeEnergy().extractEnergy( Math.min(amount,amount2), false);
-                be.getForgeEnergy().receiveEnergy( Math.min(amount,amount2), false);
+        boolean hasHigherVoltage = getStorage().getVoltage() > be.getStorage().getVoltage();
+        if(isStorage()) {
+            if(be.isStorage() && !hasHigherVoltage) {
+                long amount = getStorage().transfer(be, transferSpeed() * 10, true);
+                getStorage().transfer(be, amount, false);
+            } else {
+                long amount = be.getStorage().transfer(be, transferSpeed(), true);
+                getStorage().transfer(be, amount, false);
             }
+        } else {
+            if (be.getDistanceFromSource() > getDistanceFromSource() || be.isStorage()) {
+                long amount = getStorage().transfer(be, transferSpeed()*100, true);
+                getStorage().transfer(be, amount, false);
+            }
+            if(be.getDistanceFromSource() == getDistanceFromSource() && hasHigherVoltage){
 
+                long diff = Math.abs(getStorage().getVoltage() - be.getStorage().getVoltage());
 
+                long amount = getStorage().transfer(be, diff / 2, true);
+                getStorage().transfer(be, amount, false);
+            }
         }
-
-        if(isStorage()){
-                if(be.isStorage()){
-
-                    if(!be.isStorage()||(be.isStorage()&&be.getForgeEnergy().getEnergyStored()<getForgeEnergy().getEnergyStored())) {
-                  //  if(be.getDistanceFromSource()>=getDistanceFromSource()) {
-                        int amount = getForgeEnergy().extractEnergy(transferSpeed()*10, true);
-                        int amount2 = be.getForgeEnergy().receiveEnergy(transferSpeed()*10, true);
-
-
-                        getForgeEnergy().extractEnergy(Math.min(amount, amount2), false);
-                        be.getForgeEnergy().receiveEnergy(Math.min(amount, amount2), false);
-                    }
-
-                }else {
-                    int amount = getForgeEnergy().extractEnergy(transferSpeed(), true);
-                    int amount2 =  be.getForgeEnergy().receiveEnergy(transferSpeed(), true);
-
-
-                    //if(be.getForgeEnergy().getEnergyStored()<be.getForgeEnergy().getMaxEnergyStored()/2) {
-                        getForgeEnergy().extractEnergy(Math.min(amount, amount2), false);
-                        be.getForgeEnergy().receiveEnergy(Math.min(amount, amount2), false);
-                    //}
-                }
-
-        }
-
-
     }
+
+    //PLUH
+
     default void useEnergy(int baseValue){
-
-        getForgeEnergy().extractEnergy(baseValue/(voltageGeneration()+1),false);
-
-    }
-
-
-    default TFMGForgeEnergyStorage createEnergyStorage(){
-        return new TFMGForgeEnergyStorage(FECapacity(), 99999) {
-            @Override
-            public void onEnergyChanged(int energyAmount,boolean setEnergy) {
-
-                if(setEnergy)
-                    return;
-
-
-
-
-
-
-
-                gotFElastTick(1);
-
-
-                sendStuff();
-
-
-            }
-        };
-
+        getStorage().discharge(baseValue/(voltageGeneration()+1),false);
     }
 
 
     default void writeElectrity(CompoundTag compound){
 
-        compound.putInt("Voltage",getVoltage());
-        compound.putInt("Current",getCurrent());
+        compound.putDouble("Voltage",getVoltage());
+        compound.putDouble("Current",getCurrent());
 
         compound.putInt("DistanceFromSource",getDistanceFromSource());
 
-        compound.putInt("ForgeEnergy", getForgeEnergy().getEnergyStored());
+        //compound.putInt("ForgeEnergy", getForgeEnergy().getEnergyStored());
     }
-
-
-
-
 }

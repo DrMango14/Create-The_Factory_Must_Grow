@@ -7,6 +7,7 @@ import com.simibubi.create.AllTags;
 import com.simibubi.create.content.decoration.copycat.CopycatModel;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
+import io.github.fabricators_of_create.porting_lib.block.CustomSoundTypeBlock;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -38,7 +39,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEntity>, IWrenchable {
+public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEntity>, IWrenchable, CustomSoundTypeBlock {
 
     public CopycatCableBlock(Properties pProperties) {
         super(pProperties);

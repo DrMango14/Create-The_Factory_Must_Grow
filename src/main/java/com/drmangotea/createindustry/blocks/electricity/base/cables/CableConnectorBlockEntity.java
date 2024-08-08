@@ -1,7 +1,6 @@
 package com.drmangotea.createindustry.blocks.electricity.base.cables;
 
 import com.drmangotea.createindustry.base.TFMGTools;
-import com.drmangotea.createindustry.blocks.electricity.api.EnergyStorage;
 import com.drmangotea.createindustry.blocks.electricity.base.*;
 import com.drmangotea.createindustry.blocks.electricity.resistors.ResistorBlockEntity;
 import com.drmangotea.createindustry.registry.TFMGItems;

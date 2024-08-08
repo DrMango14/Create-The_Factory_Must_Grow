@@ -14,6 +14,9 @@ import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.VecHelper;
+import io.github.fabricators_of_create.porting_lib.enchant.CustomEnchantingBehaviorItem;
+import io.github.fabricators_of_create.porting_lib.item.EntitySwingListenerItem;
+import io.github.fabricators_of_create.porting_lib.item.ReequipAnimationItem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
@@ -48,7 +51,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class QuadPotatoCannonItem extends ProjectileWeaponItem implements CustomArmPoseItem {
+public class QuadPotatoCannonItem extends ProjectileWeaponItem implements CustomArmPoseItem,
+        CustomEnchantingBehaviorItem, ReequipAnimationItem, EntitySwingListenerItem {
 
     public static ItemStack CLIENT_CURRENT_AMMO = ItemStack.EMPTY;
     public static final int MAX_DAMAGE = 100;
@@ -74,7 +78,7 @@ public class QuadPotatoCannonItem extends ProjectileWeaponItem implements Custom
             return true;
         if (enchantment == AllEnchantments.POTATO_RECOVERY.get())
             return true;
-        return super.canApplyAtEnchantingTable(stack, enchantment);
+        return false;
     }
 
     @Override

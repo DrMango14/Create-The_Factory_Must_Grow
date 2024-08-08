@@ -1,7 +1,6 @@
 package com.drmangotea.createindustry.base.util.spark;
 
 
-import com.drmangotea.createindustry.items.weapons.explosives.pipe_bomb.PipeBomb;
 import com.drmangotea.createindustry.registry.TFMGEntityTypes;
 import com.drmangotea.createindustry.registry.TFMGItems;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -11,6 +10,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.phys.BlockHitResult;
@@ -74,7 +74,7 @@ public class Spark extends ThrowableProjectile {
         super.onHitBlock(p_37384_);
         if (!this.level.isClientSide) {
             Entity entity = this.getOwner();
-            if (!(entity instanceof Mob) || net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this)) {
+            if (!(entity instanceof Mob) || level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
                 BlockPos blockpos = p_37384_.getBlockPos().relative(p_37384_.getDirection());
                 if (this.level.isEmptyBlock(blockpos)) {
                     this.level.setBlockAndUpdate(blockpos, BaseFireBlock.getState(this.level, blockpos));

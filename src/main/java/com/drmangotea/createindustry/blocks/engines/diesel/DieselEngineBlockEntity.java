@@ -24,6 +24,7 @@ import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -43,7 +44,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.Optional;
 
+import static com.drmangotea.createindustry.base.util.TFMGUtils.fill;
 import static com.drmangotea.createindustry.blocks.engines.diesel.DieselEngineBlock.FACE;
 import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 
@@ -340,8 +343,8 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 				//airTank.drain(1, IFluidHandler.FluidAction.EXECUTE);
 			if(!airTank.isEmpty()) {
 				airTank.setFluid(new FluidStack(FluidVariant.of(TFMGFluids.AIR.getSource()), airTank.getFluidAmount() - 5));
-			}else expansionBE.airTank.setFluid(new FluidStack(TFMGFluids.AIR.getSource(), expansionBE.airTank.getFluidAmount() - 5));
-			exhaustTank.fill(new FluidStack(FluidVariant.of(TFMGFluids.CARBON_DIOXIDE.getSource()),3), IFluidHandler.FluidAction.EXECUTE);
+			}else expansionBE.airTank.setFluid(new FluidStack(FluidVariant.of(TFMGFluids.AIR.getSource()), expansionBE.airTank.getFluidAmount() - 5));
+			fill(exhaustTank, new FluidStack(FluidVariant.of(TFMGFluids.CARBON_DIOXIDE.getSource()),3));
 				//tanks.get(false).setFluid(new FluidStack(TFMGFluids.CARBON_DIOXIDE.getSource(), tanks.get(false).getFluidAmount()+1));
 
 
@@ -517,13 +520,13 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 
 
 		//--Fluid Info--//
-		LazyOptional<IFluidHandler> handler = this.getCapability(ForgeCapabilities.FLUID_HANDLER);
-		Optional<IFluidHandler> resolve = handler.resolve();
+		LazyOptional<CombinedTankWrapper> handler = fluidCapability;
+		Optional<CombinedTankWrapper> resolve = handler.resolve();
 		if (!resolve.isPresent())
 			return false;
 
-		IFluidHandler tank = resolve.get();
-		if (tank.getTanks() == 0)
+		CombinedTankWrapper tanks = resolve.get();
+		if (tanks.parts.isEmpty())
 			return false;
 
 		LangBuilder mb = Lang.translate("generic.unit.millibuckets");
@@ -532,8 +535,9 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 				.forGoggles(tooltip);
 
 		boolean isEmpty = true;
-		for (int i = 0; i < tank.getTanks(); i++) {
-			FluidStack fluidStack = tank.getFluidInTank(i);
+		for (int i = 0; i < tanks.parts.size(); i++) {
+			Storage<FluidVariant> tank = tanks.parts.get(i);
+			FluidStack fluidStack = tank.iterator();
 			if (fluidStack.isEmpty())
 				continue;
 
@@ -546,7 +550,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 							.add(mb)
 							.style(ChatFormatting.DARK_GREEN))
 					.text(ChatFormatting.GRAY, " / ")
-					.add(Lang.number(tank.getTankCapacity(i))
+					.add(Lang.number(tanks.getTankCapacity(i))
 							.add(mb)
 							.style(ChatFormatting.DARK_GRAY))
 					.forGoggles(tooltip, 1);
@@ -554,7 +558,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 			isEmpty = false;
 		}
 
-		if (tank.getTanks() > 1) {
+		if (tanks.getTanks() > 1) {
 			if (isEmpty)
 				tooltip.remove(tooltip.size() - 1);
 			return true;
@@ -564,7 +568,7 @@ public class DieselEngineBlockEntity extends SmartBlockEntity implements IHaveGo
 			return true;
 
 		Lang.translate("gui.goggles.fluid_container.capacity")
-				.add(Lang.number(tank.getTankCapacity(0))
+				.add(Lang.number(tanks.getTankCapacity(0))
 						.add(mb)
 						.style(ChatFormatting.DARK_GREEN))
 				.style(ChatFormatting.DARK_GRAY)

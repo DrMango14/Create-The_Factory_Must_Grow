@@ -10,10 +10,12 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
+import io.github.fabricators_of_create.porting_lib.transfer.TransferUtil;
 import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -183,52 +185,36 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
         }
 
         //--Fluid Info--//
-        LazyOptional<FluidTank> handler = this.getCapability(ForgeCapabilities.FLUID_HANDLER);
+        LazyOptional<FluidTank> handler = fluidCapability;
         Optional<FluidTank> resolve = handler.resolve();
         if (!resolve.isPresent())
             return false;
 
         FluidTank tank = resolve.get();
-        if (tank.getTanks() == 0)
-            return false;
 
+        FluidStack fluidStack = tank.getFluid();
 
+        Lang.fluidName(fluidStack)
+                .style(ChatFormatting.GRAY)
+                .forGoggles(tooltip, 1);
 
+        Lang.builder()
+                .add(Lang.number(fluidStack.getAmount())
+                        .add(mb)
+                        .style(ChatFormatting.DARK_GREEN))
+                .text(ChatFormatting.GRAY, " / ")
+                .add(Lang.number(tank.getCapacity())
+                        .add(mb)
+                        .style(ChatFormatting.DARK_GRAY))
+                .forGoggles(tooltip, 1);
 
-        boolean isEmpty = true;
-        for (int i = 0; i < tank.getTanks(); i++) {
-            FluidStack fluidStack = tank.getFluidInTank(i);
-            if (fluidStack.isEmpty())
-                continue;
-
-            Lang.fluidName(fluidStack)
-                    .style(ChatFormatting.GRAY)
-                    .forGoggles(tooltip, 1);
-
-            Lang.builder()
-                    .add(Lang.number(fluidStack.getAmount())
-                            .add(mb)
-                            .style(ChatFormatting.DARK_GREEN))
-                    .text(ChatFormatting.GRAY, " / ")
-                    .add(Lang.number(tank.getTankCapacity(i))
-                            .add(mb)
-                            .style(ChatFormatting.DARK_GRAY))
-                    .forGoggles(tooltip, 1);
-
-            isEmpty = false;
-        }
-
-        if (tank.getTanks() > 1) {
-            if (isEmpty)
-                tooltip.remove(tooltip.size() - 1);
-            return true;
-        }
+        boolean isEmpty = tank.isEmpty();
 
         if (!isEmpty)
             return true;
 
         Lang.translate("gui.goggles.fluid_container.capacity")
-                .add(Lang.number(tank.getTankCapacity(0))
+                .add(Lang.number(tank.getCapacity())
                         .add(mb)
                         .style(ChatFormatting.DARK_GREEN))
                 .style(ChatFormatting.DARK_GRAY)

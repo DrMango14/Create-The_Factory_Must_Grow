@@ -4,14 +4,20 @@ import com.drmangotea.createindustry.base.ElectricSparkParticle;
 import com.drmangotea.createindustry.base.util.spark.Spark;
 import com.drmangotea.createindustry.registry.TFMGEntityTypes;
 import com.simibubi.create.Create;
-import com.simibubi.create.foundation.utility.VecHelper;
+import io.github.fabricators_of_create.porting_lib.mixin.common.ProjectileUtilMixin;
+import io.github.fabricators_of_create.porting_lib.transfer.TransferUtil;
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityEvent;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
@@ -69,5 +75,30 @@ public class TFMGUtils {
 
         }
     }
+
+    public static void drain(FluidTank tank, long amount) {
+        try (Transaction t = TransferUtil.getTransaction()) {
+            tank.extract(tank.variant, amount, t);
+            t.commit();
+        }
+    }
+
+    public static long fill(FluidTank tank, FluidStack fluid) {
+        if (!tank.isEmpty() && tank.variant != fluid.getType())
+            throw new RuntimeException("fluid variant being filled into tank isn't the same variant as the fluid in the tank");
+        try (Transaction t = TransferUtil.getTransaction()) {
+            tank.insert(fluid.getType(), fluid.getAmount(), t);
+            t.commit();
+        }
+        return fluid.getAmount();
+    }
+
+//    public static boolean mobGriefingEvent(Level level, Entity entity) {
+//        EntityEvent event = ProjectileUtil.;
+//        MinecraftForge.EVENT_BUS.post(event);
+//        boolean result = event.getResult();
+//        return result == Result.DEFAULT ? level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) : result == Result.ALLOW;
+//    }
+
 
 }
