@@ -1,0 +1,17 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "createindustry:limesand"
+    },
+    {
+      "item": "minecraft:clay_ball"
+    }
+  ],
+  "results": [
+    {
+      "count": 4,
+      "item": "createindustry:cement"
+    }
+  ]
+}

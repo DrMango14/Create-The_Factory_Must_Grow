@@ -1,0 +1,26 @@
+{
+  "values": [
+    "createindustry:flowing_propane",
+    "createindustry:propane",
+    "createindustry:flowing_butane",
+    "createindustry:butane",
+    "createindustry:flowing_lpg",
+    "createindustry:lpg",
+    "createindustry:flowing_blast_furnace_gas",
+    "createindustry:blast_furnace_gas",
+    "createindustry:flowing_lubrication_oil",
+    "createindustry:lubrication_oil",
+    "createindustry:flowing_napalm",
+    "createindustry:napalm",
+    "createindustry:flowing_naphtha",
+    "createindustry:naphtha",
+    "createindustry:flowing_kerosene",
+    "createindustry:kerosene",
+    "createindustry:flowing_gasoline",
+    "createindustry:gasoline",
+    "createindustry:flowing_diesel",
+    "createindustry:diesel",
+    "createindustry:flowing_creosote",
+    "createindustry:creosote"
+  ]
+}

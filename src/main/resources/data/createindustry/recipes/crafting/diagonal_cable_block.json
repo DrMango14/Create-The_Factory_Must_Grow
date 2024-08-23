@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    " SC",
+    " C "
+  ],
+  "key": {
+    "S": {
+      "item": "createindustry:copper_cable"
+    },
+    "C": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "createindustry:diagonal_cable_block",
+    "count": 4
+
+
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "createindustry:block/copycat_cable_base/block"
+    }
+  }
+}

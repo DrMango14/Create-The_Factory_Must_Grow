@@ -4,6 +4,9 @@
     "createindustry:cast_iron_block",
     "createindustry:aluminum_block",
     "createindustry:plastic_block",
+    "createindustry:lead_block",
+    "createindustry:nickel_block",
+    "createindustry:lithium_block",
     "createindustry:coal_coke_block"
   ]
 }

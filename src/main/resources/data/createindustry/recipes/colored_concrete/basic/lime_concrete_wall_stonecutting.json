@@ -1,9 +1,0 @@
-
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "createindustry:lime_concrete"
-  },
-  "result": "createindustry:lime_concrete_wall",
-  "count": 1
-}

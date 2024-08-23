@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "createindustry:block/lead_flywheel/block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "createindustry:block/lead_flywheel/block"
+    },
+    "axis=z": {
+      "model": "createindustry:block/lead_flywheel/block",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

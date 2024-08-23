@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "active=false,axis=x": {
+      "model": "createindustry:block/neon_tube/block",
+      "x": 90,
+      "y": 90
+    },
+    "active=false,axis=y": {
+      "model": "createindustry:block/neon_tube/block"
+    },
+    "active=false,axis=z": {
+      "model": "createindustry:block/neon_tube/block",
+      "x": 90,
+      "y": 180
+    },
+    "active=true,axis=x": {
+      "model": "createindustry:block/neon_tube/block",
+      "x": 90,
+      "y": 90
+    },
+    "active=true,axis=y": {
+      "model": "createindustry:block/neon_tube/block"
+    },
+    "active=true,axis=z": {
+      "model": "createindustry:block/neon_tube/block",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

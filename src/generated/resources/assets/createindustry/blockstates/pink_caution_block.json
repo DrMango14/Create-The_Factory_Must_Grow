@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "createindustry:block/pink_caution_block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "createindustry:block/pink_caution_block"
+    },
+    "facing=south": {
+      "model": "createindustry:block/pink_caution_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "createindustry:block/pink_caution_block",
+      "y": 270
+    }
+  }
+}

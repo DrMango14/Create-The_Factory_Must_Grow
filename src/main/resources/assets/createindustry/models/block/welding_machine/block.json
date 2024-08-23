@@ -1,0 +1,46 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"0": "createindustry:block/engines/turbine",
+		"particle": "block/anvil"
+	},
+	"elements": [
+		{
+			"from": [1, 4, 5],
+			"to": [15, 10, 16],
+			"faces": {
+				"north": {"uv": [2.125, 8.875, 3.875, 9.625], "texture": "#0"},
+				"east": {"uv": [1.5, 6.375, 2.875, 7.125], "texture": "#0"},
+				"south": {"uv": [2.125, 8.125, 3.875, 8.875], "texture": "#0"},
+				"west": {"uv": [1.125, 7.125, 2.5, 6.375], "rotation": 180, "texture": "#0"},
+				"up": {"uv": [8.5, 5.875, 9.725, 7.625], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [0, 0, 14, 11], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0, 0, 2],
+			"to": [16, 4, 16],
+			"faces": {
+				"north": {"uv": [0.25, 1, 2.25, 1.5], "texture": "#0"},
+				"east": {"uv": [4.5, 1, 2.75, 1.475], "texture": "#0"},
+				"south": {"uv": [5, 1, 7, 1.5], "texture": "#0"},
+				"west": {"uv": [2.75, 1, 4.5, 1.5], "texture": "#0"},
+				"up": {"uv": [5.75, 4.5, 7.75, 6.25], "texture": "#0"},
+				"down": {"uv": [5.125, 5.5, 7.125, 3.75], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 4, 2],
+			"to": [13, 13, 16],
+			"faces": {
+				"north": {"uv": [0.625, 0, 1.875, 1.125], "texture": "#0"},
+				"east": {"uv": [0.5, 11, 1.625, 9.25], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [5.375, 0, 6.625, 1.125], "texture": "#0"},
+				"west": {"uv": [0.5, 9.25, 1.625, 11], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [0.625, 1.75, 1.875, 3.5], "texture": "#0"},
+				"down": {"uv": [0, 0, 10, 14], "texture": "#0"}
+			}
+		}
+	]
+}

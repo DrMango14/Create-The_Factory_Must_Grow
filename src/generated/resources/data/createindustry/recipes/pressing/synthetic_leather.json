@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "createindustry:plastic_sheet"
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:synthetic_leather"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "createindustry:item/lithium_blade_lit"
+  }
+}

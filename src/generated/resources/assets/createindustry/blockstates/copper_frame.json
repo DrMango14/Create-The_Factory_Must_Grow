@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "createindustry:block/copper_frame/block"
+    }
+  }
+}

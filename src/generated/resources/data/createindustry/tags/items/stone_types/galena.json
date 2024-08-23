@@ -1,0 +1,19 @@
+{
+  "values": [
+    "createindustry:cut_galena",
+    "createindustry:cut_galena_stairs",
+    "createindustry:cut_galena_wall",
+    "createindustry:polished_cut_galena",
+    "createindustry:polished_cut_galena_stairs",
+    "createindustry:polished_cut_galena_wall",
+    "createindustry:cut_galena_bricks",
+    "createindustry:cut_galena_brick_stairs",
+    "createindustry:cut_galena_brick_wall",
+    "createindustry:small_galena_bricks",
+    "createindustry:small_galena_brick_stairs",
+    "createindustry:small_galena_brick_wall",
+    "createindustry:layered_galena",
+    "createindustry:galena_pillar",
+    "createindustry:galena"
+  ]
+}

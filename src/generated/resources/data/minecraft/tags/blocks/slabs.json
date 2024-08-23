@@ -1,8 +1,30 @@
 {
   "values": [
+    "createindustry:concrete_slab",
+    "createindustry:rebar_concrete_slab",
+    "createindustry:black_concrete_slab",
+    "createindustry:white_concrete_slab",
+    "createindustry:blue_concrete_slab",
+    "createindustry:light_blue_concrete_slab",
+    "createindustry:red_concrete_slab",
+    "createindustry:green_concrete_slab",
+    "createindustry:lime_concrete_slab",
+    "createindustry:pink_concrete_slab",
+    "createindustry:magenta_concrete_slab",
+    "createindustry:yellow_concrete_slab",
+    "createindustry:gray_concrete_slab",
+    "createindustry:light_gray_concrete_slab",
+    "createindustry:brown_concrete_slab",
+    "createindustry:cyan_concrete_slab",
+    "createindustry:purple_concrete_slab",
+    "createindustry:orange_concrete_slab",
     "createindustry:cut_bauxite_slab",
     "createindustry:polished_cut_bauxite_slab",
     "createindustry:cut_bauxite_brick_slab",
-    "createindustry:small_bauxite_brick_slab"
+    "createindustry:small_bauxite_brick_slab",
+    "createindustry:cut_galena_slab",
+    "createindustry:polished_cut_galena_slab",
+    "createindustry:cut_galena_brick_slab",
+    "createindustry:small_galena_brick_slab"
   ]
 }

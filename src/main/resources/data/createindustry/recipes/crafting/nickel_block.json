@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SSS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "createindustry:nickel_ingot"
+    }
+  },
+  "result": {
+    "item": "createindustry:nickel_block",
+    "count": 1
+
+
+  }
+}

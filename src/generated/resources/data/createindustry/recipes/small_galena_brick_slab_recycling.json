@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "createindustry:small_galena_brick_slab"
+    },
+    {
+      "item": "createindustry:small_galena_brick_slab"
+    }
+  ],
+  "result": {
+    "item": "createindustry:small_galena_bricks"
+  }
+}

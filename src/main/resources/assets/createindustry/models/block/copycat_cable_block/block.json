@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "createindustry:block/copycat_cable_block"
+  }
+}

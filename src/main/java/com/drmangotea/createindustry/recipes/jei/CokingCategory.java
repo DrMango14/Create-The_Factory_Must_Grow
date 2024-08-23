@@ -4,7 +4,6 @@ package com.drmangotea.createindustry.recipes.jei;
 
 import com.drmangotea.createindustry.recipes.coking.CokingRecipe;
 import com.drmangotea.createindustry.recipes.jei.machines.CokeOven;
-import com.drmangotea.createindustry.recipes.jei.machines.Distillery;
 import com.drmangotea.createindustry.registry.TFMGFluids;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
@@ -14,7 +13,6 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;

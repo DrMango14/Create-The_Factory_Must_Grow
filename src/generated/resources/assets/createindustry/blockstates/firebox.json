@@ -1,0 +1,79 @@
+{
+  "variants": {
+    "blaze=fading,facing=east": {
+      "model": "createindustry:block/firebox/block_lit",
+      "y": 90
+    },
+    "blaze=fading,facing=north": {
+      "model": "createindustry:block/firebox/block_lit"
+    },
+    "blaze=fading,facing=south": {
+      "model": "createindustry:block/firebox/block_lit",
+      "y": 180
+    },
+    "blaze=fading,facing=west": {
+      "model": "createindustry:block/firebox/block_lit",
+      "y": 270
+    },
+    "blaze=kindled,facing=east": {
+      "model": "createindustry:block/firebox/block_lit",
+      "y": 90
+    },
+    "blaze=kindled,facing=north": {
+      "model": "createindustry:block/firebox/block_lit"
+    },
+    "blaze=kindled,facing=south": {
+      "model": "createindustry:block/firebox/block_lit",
+      "y": 180
+    },
+    "blaze=kindled,facing=west": {
+      "model": "createindustry:block/firebox/block_lit",
+      "y": 270
+    },
+    "blaze=none,facing=east": {
+      "model": "createindustry:block/firebox/block_lit",
+      "y": 90
+    },
+    "blaze=none,facing=north": {
+      "model": "createindustry:block/firebox/block_lit"
+    },
+    "blaze=none,facing=south": {
+      "model": "createindustry:block/firebox/block_lit",
+      "y": 180
+    },
+    "blaze=none,facing=west": {
+      "model": "createindustry:block/firebox/block_lit",
+      "y": 270
+    },
+    "blaze=seething,facing=east": {
+      "model": "createindustry:block/firebox/block_lit",
+      "y": 90
+    },
+    "blaze=seething,facing=north": {
+      "model": "createindustry:block/firebox/block_lit"
+    },
+    "blaze=seething,facing=south": {
+      "model": "createindustry:block/firebox/block_lit",
+      "y": 180
+    },
+    "blaze=seething,facing=west": {
+      "model": "createindustry:block/firebox/block_lit",
+      "y": 270
+    },
+    "blaze=smouldering,facing=east": {
+      "model": "createindustry:block/firebox/block",
+      "y": 90
+    },
+    "blaze=smouldering,facing=north": {
+      "model": "createindustry:block/firebox/block"
+    },
+    "blaze=smouldering,facing=south": {
+      "model": "createindustry:block/firebox/block",
+      "y": 180
+    },
+    "blaze=smouldering,facing=west": {
+      "model": "createindustry:block/firebox/block",
+      "y": 270
+    }
+  }
+}

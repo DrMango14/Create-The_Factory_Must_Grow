@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "can_extract=false": {
+      "model": "createindustry:block/copper_coil/block"
+    },
+    "can_extract=true": {
+      "model": "createindustry:block/copper_coil/block_arrow"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "createindustry:block/rotor/block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "createindustry:block/rotor/block"
+    },
+    "axis=z": {
+      "model": "createindustry:block/rotor/block",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

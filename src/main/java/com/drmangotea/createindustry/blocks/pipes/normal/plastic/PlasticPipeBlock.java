@@ -1,9 +1,9 @@
 package com.drmangotea.createindustry.blocks.pipes.normal.plastic;
 
 
+import com.drmangotea.createindustry.base.TFMGPipes;
 import com.drmangotea.createindustry.blocks.pipes.normal.LockablePipeBlockEntity;
 import com.drmangotea.createindustry.registry.TFMGBlockEntities;
-import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.decoration.bracket.BracketedBlockEntityBehaviour;
 import com.simibubi.create.content.fluids.FluidPropagator;
@@ -151,7 +151,7 @@ public class PlasticPipeBlock extends FluidPipeBlock {
                     .ifPresent($ -> AllAdvancements.GLASS_PIPE.awardTo(context.getPlayer())));
 
             FluidTransportBehaviour.cacheFlows(world, pos);
-            world.setBlockAndUpdate(pos, TFMGBlocks.GLASS_PLASTIC_PIPE.getDefaultState()
+            world.setBlockAndUpdate(pos, TFMGPipes.GLASS_PLASTIC_PIPE.getDefaultState()
                     .setValue(GlassFluidPipeBlock.AXIS, axis)
                     .setValue(BlockStateProperties.WATERLOGGED, state.getValue(BlockStateProperties.WATERLOGGED)));
             FluidTransportBehaviour.loadFlows(world, pos);
@@ -165,7 +165,7 @@ public class PlasticPipeBlock extends FluidPipeBlock {
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos,
                                        Player player) {
-        return TFMGBlocks.PLASTIC_PIPE.asStack();
+        return TFMGPipes.PLASTIC_PIPE.asStack();
     }
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
@@ -177,7 +177,7 @@ public class PlasticPipeBlock extends FluidPipeBlock {
 
         FluidTransportBehaviour.cacheFlows(world, pos);
         world.setBlockAndUpdate(pos,
-                EncasedPipeBlock.transferSixWayProperties(state, TFMGBlocks.COPPER_ENCASED_PLASTIC_PIPE.getDefaultState()));
+                EncasedPipeBlock.transferSixWayProperties(state, TFMGPipes.COPPER_ENCASED_PLASTIC_PIPE.getDefaultState()));
         FluidTransportBehaviour.loadFlows(world, pos);
         return InteractionResult.SUCCESS;
 

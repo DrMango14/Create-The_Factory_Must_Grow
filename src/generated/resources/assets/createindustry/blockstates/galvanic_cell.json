@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "createindustry:block/galvanic_cell/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "createindustry:block/galvanic_cell/block"
+    },
+    "facing=south": {
+      "model": "createindustry:block/galvanic_cell/block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "createindustry:block/galvanic_cell/block",
+      "y": 270
+    }
+  }
+}

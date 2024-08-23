@@ -1,0 +1,9 @@
+
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "createindustry:hardened_planks"
+  },
+  "result": "createindustry:hardened_planks_slab",
+  "count": 2
+}

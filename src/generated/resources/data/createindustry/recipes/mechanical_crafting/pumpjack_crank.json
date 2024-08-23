@@ -1,0 +1,25 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "A": {
+      "tag": "forge:string"
+    },
+    "C": {
+      "item": "createindustry:heavy_machinery_casing"
+    },
+    "H": {
+      "item": "createindustry:heavy_plate"
+    },
+    "S": {
+      "item": "createindustry:rebar"
+    }
+  },
+  "pattern": [
+    "HAH",
+    "SCS"
+  ],
+  "result": {
+    "item": "createindustry:pumpjack_crank"
+  }
+}

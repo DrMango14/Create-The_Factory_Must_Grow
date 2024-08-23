@@ -1,0 +1,26 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "C": {
+      "item": "createindustry:electric_casing"
+    },
+    "E": {
+      "item": "createindustry:steel_mechanism"
+    },
+    "K": {
+      "item": "createindustry:copper_cable"
+    },
+    "M": {
+      "item": "createindustry:magnetic_ingot"
+    }
+  },
+  "pattern": [
+    "EME",
+    "MCM",
+    "KMK"
+  ],
+  "result": {
+    "item": "createindustry:generator"
+  }
+}

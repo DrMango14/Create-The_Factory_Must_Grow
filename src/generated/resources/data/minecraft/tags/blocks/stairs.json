@@ -1,6 +1,8 @@
 {
   "values": [
     "createindustry:factory_floor_stairs",
+    "createindustry:concrete_stairs",
+    "createindustry:rebar_concrete_stairs",
     "createindustry:black_concrete_stairs",
     "createindustry:white_concrete_stairs",
     "createindustry:blue_concrete_stairs",
@@ -17,11 +19,13 @@
     "createindustry:cyan_concrete_stairs",
     "createindustry:purple_concrete_stairs",
     "createindustry:orange_concrete_stairs",
-    "createindustry:concrete_stairs",
-    "createindustry:rebar_concrete_stairs",
     "createindustry:cut_bauxite_stairs",
     "createindustry:polished_cut_bauxite_stairs",
     "createindustry:cut_bauxite_brick_stairs",
-    "createindustry:small_bauxite_brick_stairs"
+    "createindustry:small_bauxite_brick_stairs",
+    "createindustry:cut_galena_stairs",
+    "createindustry:polished_cut_galena_stairs",
+    "createindustry:cut_galena_brick_stairs",
+    "createindustry:small_galena_brick_stairs"
   ]
 }

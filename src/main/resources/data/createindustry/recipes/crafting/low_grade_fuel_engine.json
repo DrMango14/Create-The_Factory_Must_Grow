@@ -1,0 +1,32 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MEM",
+    "MIM",
+    "SUS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:iron_ingot"
+    },
+    "M": {
+      "item": "createindustry:spark_plug"
+    },
+    "U": {
+      "item": "createindustry:aluminum_pipe"
+    },
+    "I": {
+      "item": "create:andesite_casing"
+    },
+    "E": {
+      "item": "createindustry:exhaust"
+    }
+  },
+  "result": {
+    "item": "createindustry:low_grade_fuel_engine",
+    "count": 1
+
+
+  }
+}

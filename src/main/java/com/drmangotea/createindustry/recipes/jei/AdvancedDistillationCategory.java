@@ -3,8 +3,7 @@ package com.drmangotea.createindustry.recipes.jei;
 
 
 
-import com.drmangotea.createindustry.recipes.distillation.AdvancedDistillationRecipe;
-import com.drmangotea.createindustry.recipes.jei.machines.Distillery;
+import com.drmangotea.createindustry.recipes.distillation.DistillationRecipe;
 import com.drmangotea.createindustry.registry.TFMGGuiTextures;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
@@ -19,11 +18,11 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class AdvancedDistillationCategory extends CreateRecipeCategory<AdvancedDistillationRecipe> {
+public class AdvancedDistillationCategory extends CreateRecipeCategory<DistillationRecipe> {
 
 
 
-	public AdvancedDistillationCategory(Info<AdvancedDistillationRecipe> info) {
+	public AdvancedDistillationCategory(Info<DistillationRecipe> info) {
 		super(info);
 	}
 
@@ -31,7 +30,7 @@ public class AdvancedDistillationCategory extends CreateRecipeCategory<AdvancedD
 
 
 	@Override
-	public void setRecipe(IRecipeLayoutBuilder builder, AdvancedDistillationRecipe recipe, IFocusGroup focuses) {
+	public void setRecipe(IRecipeLayoutBuilder builder, DistillationRecipe recipe, IFocusGroup focuses) {
 		FluidIngredient fluidIngredient=recipe.getInputFluid();
 
 		int outputCount = recipe.getOutputCount(recipe);
@@ -58,7 +57,7 @@ public class AdvancedDistillationCategory extends CreateRecipeCategory<AdvancedD
 	}
 
 	@Override
-	public void draw(AdvancedDistillationRecipe recipe, IRecipeSlotsView iRecipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
+	public void draw(DistillationRecipe recipe, IRecipeSlotsView iRecipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
 		int outputCount = recipe.getOutputCount(recipe);
 		int yModifier = 60 -(outputCount*10);
 		int y = 126-yModifier;

@@ -1,0 +1,10 @@
+{
+  "values": [
+    "createindustry:lead_ore",
+    "createindustry:deepslate_lead_ore",
+    "createindustry:nickel_ore",
+    "createindustry:deepslate_nickel_ore",
+    "createindustry:lithium_ore",
+    "createindustry:deepslate_lithium_ore"
+  ]
+}

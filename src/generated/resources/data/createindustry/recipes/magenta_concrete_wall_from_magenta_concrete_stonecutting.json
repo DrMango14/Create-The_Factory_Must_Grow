@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "createindustry:magenta_concrete"
+  },
+  "result": "createindustry:magenta_concrete_wall"
+}

@@ -4,8 +4,9 @@ package com.drmangotea.createindustry.recipes.jei;
 import com.drmangotea.createindustry.recipes.casting.CastingRecipe;
 import com.drmangotea.createindustry.recipes.coking.CokingRecipe;
 import com.drmangotea.createindustry.recipes.distillation.DistillationRecipe;
-import com.drmangotea.createindustry.recipes.distillation.AdvancedDistillationRecipe;
+import com.drmangotea.createindustry.recipes.gas_blasting.GasBlastingRecipe;
 import com.drmangotea.createindustry.recipes.industrial_blasting.IndustrialBlastingRecipe;
+import com.drmangotea.createindustry.recipes.polarizing.PolarizingRecipe;
 import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.drmangotea.createindustry.registry.TFMGFluids;
 import com.drmangotea.createindustry.registry.TFMGRecipeTypes;
@@ -59,16 +60,10 @@ public class TFMGJei implements IModPlugin {
 
         CreateRecipeCategory<?>
 
-                distillation = builder(DistillationRecipe.class)
-                .addTypedRecipes(TFMGRecipeTypes.DISTILLATION)
-                .catalyst(TFMGBlocks.CAST_IRON_DISTILLATION_CONTROLLER::get)
-                .itemIcon(TFMGFluids.CRUDE_OIL.getBucket().get())
-                .emptyBackground(177, 123)
-                .build("distillation", DistillationCategory::new)
-                ,
 
-                advancedDistillation = builder(AdvancedDistillationRecipe.class)
-                .addTypedRecipes(TFMGRecipeTypes.ADVANCED_DISTILLATION)
+
+                advancedDistillation = builder(DistillationRecipe.class)
+                .addTypedRecipes(TFMGRecipeTypes.DISTILLATION)
                 .catalyst(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER::get)
                 .catalyst(TFMGBlocks.STEEL_DISTILLATION_OUTPUT::get)
                 .itemIcon(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER.get())
@@ -96,8 +91,21 @@ public class TFMGJei implements IModPlugin {
                  .catalyst(TFMGBlocks.CASTING_BASIN::get)
                  .itemIcon(TFMGBlocks.STEEL_BLOCK.get())
                  .emptyBackground(177, 140)
-                 .build("casting", CastingCategory::new)
-
+                 .build("casting", CastingCategory::new),
+                
+                gas_blasting = builder(GasBlastingRecipe.class)
+                .addTypedRecipes(TFMGRecipeTypes.GAS_BLASTING)
+                .catalyst(TFMGBlocks.BLAST_STOVE::get)
+                .doubleItemIcon(TFMGBlocks.BLAST_STOVE.get(), TFMGFluids.AIR.getBucket().get())
+                .emptyBackground(177, 150)
+                .build("gas_blasting", GasBlastingCategory::new),
+                
+                polarizing = builder(PolarizingRecipe.class)
+                .addTypedRecipes(TFMGRecipeTypes.POLARIZING)
+                .catalyst(TFMGBlocks.POLARIZER::get)
+                .itemIcon(TFMGBlocks.POLARIZER.get())
+                .emptyBackground(177, 53)
+                .build("polarizing", PolarizingCategory::new)
 
                 ;
 

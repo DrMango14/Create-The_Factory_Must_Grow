@@ -1,6 +1,8 @@
 {
   "itemGroup.createindustry.base": "Create: The Factory Must Grow",
   "itemGroup.createindustry.building": "Create: TFMG Building Blocks",
+
+
   "create.goggles.misc.number": "%1$s",
   "create.goggles.misc.percent_symbol": "%",
   "create.goggles.misc.dot_one": ".",
@@ -8,20 +10,20 @@
   "create.goggles.misc.dot_three": "...",
   "create.goggles.misc.storage_info": "Storage Info:",
   "create.goggles.fluid_in_tank": "Tank Contents:",
+
   "create.goggles.surface_scanner.no_rotation": "Machine Unpowered",
   "create.goggles.surface_scanner.no_deposit": "No Deposit Found",
   "create.goggles.surface_scanner.deposit_found": "Deposit Located!",
   "create.goggles.surface_scanner.distance": "Distance: %1$s Blocks",
-  "create.goggles.surface_scanner.scanning_surface": "Scanning The Surface...",
+  "create.goggles.surface_scanner.scanning_surface": "Scanning The Surface",
+
   "create.goggles.distillation_tower.status": "Distillation Tower Info:",
   "create.goggles.distillation_tower.tank_not_found": "Steel Fluid Tank Not Found",
-  "create.goggles.distillation_tower.not_tall_enough": "The Fluid Tank is Too Short",
-  "create.goggles.distillation_tower.level": "Distillation Tower Level: %1$s",
-  "create.goggles.distillation_tower.found_outputs": "Number of Outputs: %1$s",
+  "create.goggles.distillation_tower.level": "Heat Level: %1$s",
+  "create.goggles.distillation_tower.found_outputs": "Output Count: %1$s",
   "create.goggles.distillation_tower.no_outputs": "No Output Blocks Found",
+
   "create.goggles.blast_furnace.stats": "Blast Furnace:",
-  "create.distillation_tower.size": "Size",
-  "create.distillation_tower.heat": "Heat",
   "create.goggles.blast_furnace.fuel_amount": "Fuel Amount: %1$s",
   "create.goggles.blast_furnace.item_count": "Item Count: %1$s",
   "create.goggles.blast_furnace.height": "Height: %1$s",
@@ -31,6 +33,7 @@
   "create.goggles.blast_furnace.diameter.one": "Diameter: 1",
   "create.goggles.blast_furnace.diameter.two": "Diameter: 2",
   "create.goggles.blast_furnace.invalid": "Blast Furnace Invalid",
+
   "create.goggles.coke_oven.status": "Coke Oven:",
   "create.goggles.coke_oven.fluid_amount_output": "Internal Tank Contents: %1$s mb",
   "create.goggles.coke_oven.fluid_amount_exhaust": "Carbon Dioxide: %1$s mb",
@@ -38,6 +41,7 @@
   "create.goggles.coke_oven.invalid": "Coke Oven Invalid",
   "create.goggles.coke_oven.tank_full": "An Internal Tank is Full",
   "create.goggles.coke_oven.progress": "Progress: %1$s",
+
   "create.goggles.engine_stats": "Engine Stats:",
   "create.goggles.engine_exhaust_stats": "Engine Exhaust Stats:",
   "create.goggles.fuel_container": "Fluid Storage",
@@ -48,18 +52,44 @@
   "create.goggles.get_engine_efficiency": "%1$s",
   "create.goggles.engine.stress": "%1$ssu",
   "create.goggles.diesel_engine.info": "Diesel Engine:",
+
   "create.goggles.pumpjack_info": "Pumpjack Info:",
   "create.goggles.pumpjack.part_missing": "Hammer or Crank Missing",
   "create.goggles.pumpjack.wrong_rotation1": "The Pumpjack Base is oriented incorrectly, the red marker must",
   "create.goggles.pumpjack.wrong_rotation2": "face away from the Pumpjack Hammer Holder",
   "create.goggles.pumpjack_fluid_storage": "Fluid Tank Info:",
-  "create.pumpjack_deposit_amount": "%1$s Buckets",
-  "create.goggles.pumpjack.deposit_info": "Deposit Info:",
-  "create.goggles.zero": "No Deposit Found",
   "create.goggles.pumpjack.fluid_amount": "Fluid Amount:",
+  "create.goggles.pumpjack.deposit_info": "Deposit Info:",
+  "create.pumpjack_deposit_amount": "%1$s Buckets",
+  "create.goggles.zero": "Machine Invalid",
+
   "create.goggles.machine_input.info": "Machine Input Info",
   "create.goggles.machine_input.no_rot": "No Rotation Provided!",
   "create.goggles.machine_input.power_level": "Power Level: ",
+
+  "create.goggles.electric_machine.no_power": "No Power",
+  "create.goggles.electricity.insufficient_voltage": "Insufficient Voltage",
+
+  "create.goggles.voltmeter": "Voltmeter:",
+  "create.goggles.voltmeter.voltage": "   Measured Voltage: %1$s V",
+  "create.goggles.voltmeter.range": "   Measuring Range: %1$s V",
+
+  "create.goggles.energy_meter": "Energy Meter:",
+  "create.goggles.energy_meter.energy": "   Energy: %1$s fe",
+
+  "create.goggles.motor.usage": "Energy Usage: %1$s fe/t",
+  "create.goggles.generator.production": "Energy Production: %1$s fe/t",
+
+
+  "create.resistor.allowed_voltage": "Allowed Voltage",
+  "create.creative_generator.voltage_generation": "Voltage Generation",
+
+
+  "death.attack.createindustry.concrete": "%1$s tried to eat Concrete",
+  "death.attack.createindustry.concrete.player": "%1$s tried to eat Concrete",
+
+  "death.attack.createindustry.acid": "%1$s took an acid bath",
+  "death.attack.createindustry.acid.player": "%1$s took an acid bath",
 
   "create.recipe.distillation": "Distillation",
   "create.recipe.advanced_distillation": "Advanced Distillation",
@@ -67,6 +97,25 @@
   "create.recipe.casting": "Casting",
   "create.recipe.coking": "Coking",
 
+  "item.minecraft.potion.effect.hellfire_potion": "Potion of Hellfire",
+  "item.minecraft.splash_potion.effect.hellfire_potion": "Splash Potion of Hellfire",
+  "item.minecraft.lingering_potion.effect.hellfire_potion": "Lingering Potion of Hellfire",
+  "item.minecraft.tipped_arrow.effect.hellfire_potion": "Arrow of Hellfire",
+
+  "item.minecraft.potion.effect.frostbite_potion": "Potion of Frostbite",
+  "item.minecraft.splash_potion.effect.frostbite_potion": "Splash Potion of Frostbite",
+  "item.minecraft.lingering_potion.effect.frostbite_potion": "Lingering Potion of Frostbite",
+  "item.minecraft.tipped_arrow.effect.frostbite_potion": "Arrow of Frostbite",
+
+  "effect.createindustry.hellfire": "Hellfire",
+  "effect.createindustry.frostbite": "Frostbite",
+
+  "create.wires.removed_data": "Data Removed",
+
+
+
   "createindustry.subtitle.engine_sounds": "Engine Sounds",
   "createindustry.subtitle.diesel_engine_sounds": "Diesel Engine Sounds"
+
+
 }

@@ -4,6 +4,8 @@ import com.drmangotea.createindustry.CreateTFMG;
 import com.drmangotea.createindustry.blocks.decoration.doors.TFMGSlidingDoorBlock;
 import com.drmangotea.createindustry.blocks.encased.TFMGEncasedCogwheelBlock;
 import com.drmangotea.createindustry.blocks.encased.TFMGEncasedShaftBlock;
+import com.drmangotea.createindustry.blocks.electricity.cable_blocks.copycat_cable_block.CopycatCableBlock;
+import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.contraptions.behaviour.DoorMovingInteraction;
@@ -13,22 +15,19 @@ import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogCTBehaviour;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
-import com.simibubi.create.foundation.data.AssetLookup;
-import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.data.ModelGen;
-import com.simibubi.create.foundation.data.SharedProperties;
+import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.data.loot.BlockLoot;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ModelFile;
 
 import java.util.function.Supplier;
@@ -38,7 +37,7 @@ import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 
-
+@SuppressWarnings("removal")
 public class TFMGBuilderTransformers {
 
     public static <B extends TFMGSlidingDoorBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> slidingDoor(String type) {
@@ -77,7 +76,7 @@ public class TFMGBuilderTransformers {
 
     public static <B extends TFMGEncasedShaftBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> encasedShaft(String casing,
                                                                                                              Supplier<CTSpriteShiftEntry> casingShift) {
-        return builder -> encasedBase(builder, () -> AllBlocks.SHAFT.get())
+        return builder -> encasedBase(builder, () -> TFMGBlocks.NEON_TUBE.get())
                 .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(casingShift.get())))
                 .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, casingShift.get(),
                         (s, f) -> f.getAxis() != s.getValue(TFMGEncasedShaftBlock.AXIS))))
@@ -143,5 +142,20 @@ public class TFMGBuilderTransformers {
                 .loot((p, lb) -> p.dropOther(lb, drop.get()));
     }
 
+
+    public static <B extends CopycatCableBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> copycatCable() {
+        return b -> b.initialProperties(SharedProperties::softMetal)
+                .blockstate((c, p) -> p.simpleBlock(c.get(), p.models()
+                        .getExistingFile(p.mcLoc("air"))))
+                .initialProperties(SharedProperties::softMetal)
+                .properties(p -> p.noOcclusion()
+                        .color(MaterialColor.NONE))
+                .addLayer(() -> RenderType::solid)
+                .addLayer(() -> RenderType::cutout)
+                .addLayer(() -> RenderType::cutoutMipped)
+               // .addLayer(() -> RenderType::translucent)
+                .color(() -> CopycatCableBlock::wrappedColor)
+                .transform(TagGen.axeOrPickaxe());
+    }
 
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "createindustry:item/bars",
+  "textures": {
+    "bars": "createindustry:block/bars/nickel_bars",
+    "edge": "createindustry:block/bars/nickel_bars_edge"
+  }
+}

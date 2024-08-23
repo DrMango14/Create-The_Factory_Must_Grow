@@ -1,0 +1,9 @@
+{
+  "parent": "createindustry:block/encased_cogwheel/item",
+  "textures": {
+    "1": "createindustry:block/heavy_machinery_casing",
+    "casing": "createindustry:block/heavy_machinery_casing",
+    "particle": "createindustry:block/heavy_machinery_casing",
+    "side": "createindustry:block/heavy_machinery_encased_cogwheel_side"
+  }
+}

@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " M ",
+    "MAM",
+    " M "
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:gunpowder"
+    },
+    "A": {
+      "item": "createindustry:steel_pipe"
+    }
+  },
+  "result": {
+    "item": "createindustry:pipe_bomb"
+
+
+
+  }
+}

@@ -85,30 +85,8 @@ public class BlastFurnaceRenderer extends SafeBlockEntityRenderer<BlastFurnaceOu
                         .light(light)
                         .renderInto(ms, vb);
             }
-            int y = -1;
-            if (be.type == BlastFurnaceOutputBlockEntity.BlastFurnaceType.BIG_RIGHT||be.type == BlastFurnaceOutputBlockEntity.BlastFurnaceType.BIG_LEFT) {
-
-                if(be.type == BlastFurnaceOutputBlockEntity.BlastFurnaceType.BIG_LEFT)
-                    y = -2;
-
-                for(int i = 0; i < 2;i++) {
-                    for(int x = 0; x < 2;x++) {
-                        CachedBufferer.partial(TFMGPartialModels.COAL_COKE_DUST_LAYER, blockState)
-                                .rotateY(angle)
-                                .centre()
-                                .translateX(x+y)
-                                .translateZ(i)
-                                .translateY(height)
-                                .light(light)
-                                .renderInto(ms, vb);
 
 
-                    }
-                }
-
-
-
-            }
 
 
             }

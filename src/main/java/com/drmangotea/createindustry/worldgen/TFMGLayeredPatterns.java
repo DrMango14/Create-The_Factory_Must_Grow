@@ -28,23 +28,23 @@ public class TFMGLayeredPatterns {
 					.block(AllPaletteStoneTypes.ANDESITE.getBaseBlock()))
 			.build();
 
-	//public static final NonNullSupplier<LayerPattern>
-//
-	//		GALENA = () -> LayerPattern.builder()
-	//		.layer(l -> l.weight(1)
-	//				.passiveBlock())
-	//		.layer(l -> l.weight(2)
-	//				.block(TFMGBlocks.CONCRETE.get())
-	//				.size(1, 3))
-	//		.layer(l -> l.weight(1)
-	//				.block(Blocks.SMOOTH_BASALT)
-	//				.block(Blocks.GRANITE)
-	//				.size(2, 2))
-	//		.layer(l -> l.weight(1)
-	//				.blocks(Blocks.GRANITE, Blocks.SMOOTH_BASALT))
-	//		.layer(l -> l.weight(1)
-	//				.block(AllPaletteStoneTypes.ANDESITE.getBaseBlock()))
-	//		.build();
+		public static final NonNullSupplier<LayerPattern>
+
+				GALENA = () -> LayerPattern.builder()
+				.layer(l -> l.weight(1)
+						.passiveBlock())
+				.layer(l -> l.weight(2)
+						.block(TFMGPaletteStoneTypes.GALENA.getBaseBlock())
+						.size(1, 3))
+				.layer(l -> l.weight(1)
+						.block(Blocks.SMOOTH_BASALT)
+						.block(Blocks.DRIPSTONE_BLOCK)
+						.size(2, 2))
+				.layer(l -> l.weight(1)
+						.blocks(Blocks.DRIPSTONE_BLOCK, Blocks.SMOOTH_BASALT))
+				.layer(l -> l.weight(1)
+						.block(AllPaletteStoneTypes.DEEPSLATE.getBaseBlock()))
+				.build();
 
 	public static final NonNullSupplier<LayerPattern>
 

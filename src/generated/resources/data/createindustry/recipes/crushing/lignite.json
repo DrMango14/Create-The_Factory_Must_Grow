@@ -1,0 +1,14 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "createindustry:lignite"
+    }
+  ],
+  "processingTime": 250,
+  "results": [
+    {
+      "item": "minecraft:coal"
+    }
+  ]
+}

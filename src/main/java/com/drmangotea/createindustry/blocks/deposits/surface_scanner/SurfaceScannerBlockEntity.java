@@ -1,7 +1,7 @@
 package com.drmangotea.createindustry.blocks.deposits.surface_scanner;
 
 
-import com.drmangotea.createindustry.blocks.deposits.FluidDepositBlockEntity;
+import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.List;
 
 public class SurfaceScannerBlockEntity extends KineticBlockEntity implements IHaveGoggleInformation, IWrenchable {
-    public FluidDepositBlockEntity deposit;
+    public BlockPos deposit;
     public BlockPos checkedPosition;
     public boolean foundDeposit=false;
     public BlockPos depositPos;
@@ -98,11 +98,11 @@ public class SurfaceScannerBlockEntity extends KineticBlockEntity implements IHa
             float xDistance;
 
 
-                zDistance =  deposit.getBlockPos().getZ()-getBlockPos().getZ();
+                zDistance =  deposit.getZ()-getBlockPos().getZ();
 
 
 
-                xDistance =  deposit.getBlockPos().getX()-getBlockPos().getX();
+                xDistance =  deposit.getX()-getBlockPos().getX();
 
 
 
@@ -120,7 +120,7 @@ public class SurfaceScannerBlockEntity extends KineticBlockEntity implements IHa
 
             angle = (float) Math.toDegrees(Math.atan(xDistance/zDistance));
 
-            if(this.getBlockPos().getZ()<deposit.getBlockPos().getZ())
+            if(this.getBlockPos().getZ()<deposit.getZ())
             {
                 angle +=180;
             }
@@ -142,15 +142,15 @@ public class SurfaceScannerBlockEntity extends KineticBlockEntity implements IHa
             int random2 = Create.RANDOM.nextInt(2);
         for(int x = 0; x<2;x++)
             checkedPosition = new BlockPos(this.getBlockPos().getX() + random, -63-random2, this.getBlockPos().getZ() + random1);
-        BlockEntity checkedTileEntity = level.getBlockEntity(checkedPosition);
-        if (checkedTileEntity instanceof FluidDepositBlockEntity) {
-            deposit = (FluidDepositBlockEntity) checkedTileEntity;
+        BlockState checkedState = level.getBlockState(checkedPosition);
+        if (checkedState.is(TFMGBlocks.OIL_DEPOSIT.get())) {
+            deposit = checkedPosition;
             if(level.getBlockState(checkedPosition.above()) != Blocks.BEDROCK.defaultBlockState()&&
                     level.getBlockState(checkedPosition.above(2)) != Blocks.BEDROCK.defaultBlockState()
                     && level.getBlockState(checkedPosition.above(3)) != Blocks.BEDROCK.defaultBlockState()
                     && level.getBlockState(checkedPosition.above(4)) != Blocks.BEDROCK.defaultBlockState())
             foundDeposit = true;
-            depositPos = deposit.getBlockPos();
+            depositPos = deposit;
         }
     }
 

@@ -1,0 +1,25 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "A": {
+      "item": "createindustry:plastic_sheet"
+    },
+    "H": {
+      "item": "createindustry:heavy_plate"
+    },
+    "I": {
+      "item": "createindustry:steel_pipe"
+    },
+    "P": {
+      "item": "createindustry:steel_mechanism"
+    }
+  },
+  "pattern": [
+    "IIPPH",
+    " AH H"
+  ],
+  "result": {
+    "item": "createindustry:advanced_potato_cannon"
+  }
+}

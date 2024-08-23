@@ -4,11 +4,15 @@ buildscript {
         maven { url = 'https://maven.minecraftforge.net' }
         mavenCentral()
         jcenter()
+        maven { url = 'https://maven.parchmentmc.org' }
         maven { url = 'https://repo.spongepowered.org/repository/maven-public' }
+
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath "org.parchmentmc:librarian:${librarian_version}"
         classpath "org.spongepowered:mixingradle:0.7-SNAPSHOT"
+
     }
 }
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
@@ -18,12 +22,14 @@ plugins {
     id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
+
 //mixin {
 //  add sourceSets.main, "createindustry.refmap.json"
 //}
 
-version = '0.7.0c-1.19.2'
+version = '0.9.0c-1.19.2'
 group = 'com.drmangotea.createindustry' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'createindustry'
 
@@ -32,7 +38,8 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
-    mappings channel: 'official', version: '1.19.2'
+    mappings channel: 'parchment', version: "${parchment_version}-${minecraft_version}"
+
 
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
 
@@ -101,7 +108,12 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
 
-
+    maven {
+        url = 'https://www.cursemaven.com'
+        content {
+            includeGroup "curse.maven"
+        }
+    }
     maven {
         // location of the maven that hosts JEI files since January 2023
         // location of the maven for Vazkii's mods
@@ -119,12 +131,25 @@ repositories {
 dependencies {
 
 
-    minecraft 'net.minecraftforge:forge:1.19.2-43.2.3'
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
 
     compileOnly fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
-   implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
+   implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")
 
-   implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}:all") { transitive = false }
+   implementation fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:all") { transitive = false }
+
+
+    implementation fg.deobf("curse.maven:createaddition-439890:5070245")
+    implementation fg.deobf("curse.maven:zinclib-968773:5110339")
+
+    implementation fg.deobf("curse.maven:mekanism-268560:4644795")
+
+    implementation fg.deobf("curse.maven:selene-499980:4983974")
+
+    implementation fg.deobf("curse.maven:spark-361579:4505309")
+
+    //implementation fg.deobf("curse.maven:create-steam-n-rails-688231:5246888")
 
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")

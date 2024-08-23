@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
   "biomes": "#minecraft:is_overworld",
-  "features": "createindustry:simulated_oil",
+  "features": "createindustry:oil_deposit",
   "step": "underground_ores"
 }

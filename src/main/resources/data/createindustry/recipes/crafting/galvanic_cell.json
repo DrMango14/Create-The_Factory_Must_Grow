@@ -1,0 +1,41 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CPZ",
+    "XKS",
+    "CHZ"
+  ],
+  "key": {
+    "Z": {
+      "tag": "forge:ingots/zinc"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "X": {
+      "item": "createindustry:copper_sulfate"
+    },
+    "S": {
+      "item": "createindustry:zinc_sulfate"
+    },
+    "K": {
+      "item": "createindustry:electric_casing"
+    },
+    "H": {
+      "tag": "forge:plates/steel"
+    },
+    "P": {
+      "item": "createindustry:steel_pipe"
+    }
+  },
+  "result": {
+    "item": "createindustry:galvanic_cell",
+    "count": 1,
+    "nbt": {
+    "Capacity": 200000
+    }
+
+
+  }
+}

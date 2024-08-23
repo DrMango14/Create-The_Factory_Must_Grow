@@ -1,6 +1,7 @@
 package com.drmangotea.createindustry.blocks.encased;
 
 import com.drmangotea.createindustry.registry.TFMGBlockEntities;
+import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.simibubi.create.AllBlockEntityTypes;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.contraptions.ITransformableBlock;
@@ -17,6 +18,9 @@ import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.utility.Iterate;
 import com.simibubi.create.foundation.utility.VoxelShaper;
+import com.tterrag.registrate.util.entry.BlockEntityEntry;
+import com.tterrag.registrate.util.entry.BlockEntry;
+import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -52,8 +56,39 @@ public class TFMGEncasedCogwheelBlock extends RotatedPillarKineticBlock
     protected final boolean isLarge;
     private final Supplier<Block> casing;
 
-    public TFMGEncasedCogwheelBlock(Properties properties, boolean large, Supplier<Block> casing) {
+    private final BlockEntry<?> blockSmall;
+
+    private final BlockEntry<?> blockLarge;
+
+    private final BlockEntityEntry<SimpleKineticBlockEntity> beSmall;
+    private final BlockEntityEntry<SimpleKineticBlockEntity> beLarge;
+
+
+
+
+    public static TFMGEncasedCogwheelBlock regular(Properties properties, boolean large, Supplier<Block> casing){
+        return new TFMGEncasedCogwheelBlock(properties,large,casing, AllBlocks.COGWHEEL,AllBlocks.LARGE_COGWHEEL,TFMGBlockEntities.TFMG_ENCASED_COGWHEEL,TFMGBlockEntities.TFMG_ENCASED_LARGE_COGWHEEL);
+    }
+    public static TFMGEncasedCogwheelBlock steel(Properties properties, boolean large, Supplier<Block> casing){
+        return new TFMGEncasedCogwheelBlock(properties,large,casing, TFMGBlocks.STEEL_COGWHEEL,TFMGBlocks.LARGE_STEEL_COGWHEEL,TFMGBlockEntities.ENCASED_STEEL_COGWHEEL,TFMGBlockEntities.ENCASED_LARGE_STEEL_COGWHEEL);
+    }
+    public static TFMGEncasedCogwheelBlock aluminum(Properties properties, boolean large, Supplier<Block> casing){
+        return new TFMGEncasedCogwheelBlock(properties,large,casing, TFMGBlocks.ALUMINUM_COGWHEEL,TFMGBlocks.LARGE_ALUMINUM_COGWHEEL,TFMGBlockEntities.ENCASED_ALUMINUM_COGWHEEL,TFMGBlockEntities.ENCASED_LARGE_ALUMINUM_COGWHEEL);
+    }
+
+
+
+
+
+    public TFMGEncasedCogwheelBlock(Properties properties, boolean large, Supplier<Block> casing, BlockEntry<?> blockSmall, BlockEntry<?> blockLarge,BlockEntityEntry<SimpleKineticBlockEntity> beSmall,BlockEntityEntry<SimpleKineticBlockEntity> beLarge) {
         super(properties);
+
+        this.beSmall = beSmall;
+        this.beLarge = beLarge;
+
+        this.blockSmall = blockSmall;
+        this.blockLarge = blockLarge;
+
         isLarge = large;
         this.casing = casing;
         registerDefaultState(defaultBlockState().setValue(TOP_SHAFT, false)
@@ -73,7 +108,7 @@ public class TFMGEncasedCogwheelBlock extends RotatedPillarKineticBlock
         if (target instanceof BlockHitResult)
             return ((BlockHitResult) target).getDirection()
                     .getAxis() != getRotationAxis(state)
-                    ? isLarge ? AllBlocks.LARGE_COGWHEEL.asStack() : AllBlocks.COGWHEEL.asStack()
+                    ? isLarge ? blockLarge.asStack() : blockSmall.asStack()
                     : getCasing().asItem().getDefaultInstance();
         return super.getCloneItemStack(state, target, world, pos, player);
     }
@@ -131,7 +166,7 @@ public class TFMGEncasedCogwheelBlock extends RotatedPillarKineticBlock
         context.getLevel()
                 .levelEvent(2001, context.getClickedPos(), Block.getId(state));
         KineticBlockEntity.switchToBlockState(context.getLevel(), context.getClickedPos(),
-                (isLarge ? AllBlocks.LARGE_COGWHEEL : AllBlocks.COGWHEEL).getDefaultState()
+                (isLarge ? blockLarge : blockSmall).getDefaultState()
                         .setValue(AXIS, state.getValue(AXIS)));
         return InteractionResult.SUCCESS;
     }
@@ -252,7 +287,7 @@ public class TFMGEncasedCogwheelBlock extends RotatedPillarKineticBlock
     @Override
     public ItemRequirement getRequiredItems(BlockState state, BlockEntity be) {
         return ItemRequirement
-                .of(isLarge ? AllBlocks.LARGE_COGWHEEL.getDefaultState() : AllBlocks.COGWHEEL.getDefaultState(), be);
+                .of(isLarge ? blockLarge.getDefaultState() : blockSmall.getDefaultState(), be);
     }
 
     @Override
@@ -262,7 +297,7 @@ public class TFMGEncasedCogwheelBlock extends RotatedPillarKineticBlock
 
     @Override
     public BlockEntityType<? extends SimpleKineticBlockEntity> getBlockEntityType() {
-        return isLarge ? TFMGBlockEntities.TFMG_ENCASED_LARGE_COGWHEEL.get() : TFMGBlockEntities.TFMG_ENCASED_COGWHEEL.get();
+        return isLarge ? beLarge.get() : beSmall.get();
     }
 
     @Override

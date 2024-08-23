@@ -1,0 +1,16 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/aluminum"
+    },
+    {
+      "item": "create:crimsite"
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:thermite_powder"
+    }
+  ]
+}

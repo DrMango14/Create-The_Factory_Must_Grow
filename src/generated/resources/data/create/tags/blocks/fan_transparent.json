@@ -1,6 +1,10 @@
 {
   "values": [
+    "createindustry:copycat_cable_base",
     "createindustry:steel_bars",
-    "createindustry:aluminum_bars"
+    "createindustry:aluminum_bars",
+    "createindustry:cast_iron_bars",
+    "createindustry:lead_bars",
+    "createindustry:nickel_bars"
   ]
 }

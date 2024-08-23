@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "tag": "createindustry:stone_types/galena"
+  },
+  "result": "createindustry:polished_cut_galena_slab"
+}

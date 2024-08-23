@@ -1,0 +1,15 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "minecraft:dirt"
+    }
+  ],
+  "processingTime": 350,
+  "results": [
+    {
+      "chance": 0.2,
+      "item": "createindustry:nitrate_dust"
+    }
+  ]
+}

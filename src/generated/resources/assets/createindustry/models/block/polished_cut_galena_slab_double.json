@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "createindustry:block/palettes/stone_types/polished/galena_cut_polished",
+    "side": "createindustry:block/palettes/stone_types/slab/galena_cut_slab"
+  }
+}

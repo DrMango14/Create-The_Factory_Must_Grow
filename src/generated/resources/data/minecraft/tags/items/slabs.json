@@ -3,6 +3,10 @@
     "createindustry:cut_bauxite_slab",
     "createindustry:polished_cut_bauxite_slab",
     "createindustry:cut_bauxite_brick_slab",
-    "createindustry:small_bauxite_brick_slab"
+    "createindustry:small_bauxite_brick_slab",
+    "createindustry:cut_galena_slab",
+    "createindustry:polished_cut_galena_slab",
+    "createindustry:cut_galena_brick_slab",
+    "createindustry:small_galena_brick_slab"
   ]
 }

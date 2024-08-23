@@ -1,0 +1,16 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "amount": 500,
+      "fluid": "createindustry:propylene",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 500,
+      "fluid": "createindustry:liquid_plastic"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    " S ",
+    " C "
+  ],
+  "key": {
+    "S": {
+      "item": "createindustry:plastic_sheet"
+    },
+    "C": {
+      "tag": "forge:ingots/lithium"
+    }
+  },
+  "result": {
+    "item": "createindustry:lithium_charge"
+
+
+  }
+}

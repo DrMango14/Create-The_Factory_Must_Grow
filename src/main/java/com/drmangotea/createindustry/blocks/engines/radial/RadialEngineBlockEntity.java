@@ -7,6 +7,7 @@ import com.drmangotea.createindustry.blocks.engines.radial.input.RadialEngineInp
 import com.drmangotea.createindustry.registry.TFMGBlocks;
 import com.drmangotea.createindustry.registry.TFMGFluids;
 import com.drmangotea.createindustry.registry.TFMGSoundEvents;
+import com.drmangotea.createindustry.registry.TFMGTags;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -22,6 +23,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
@@ -35,7 +37,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
@@ -490,7 +491,7 @@ public void write(CompoundTag compound, boolean clientPacket) {
             soundTimer++;
 
          //   if(!isExhaustTankFull()) {
-           if (soundTimer >= ((16-signal)/0.8)+1) {
+        if (soundTimer >= (((16-signal)/0.8)+1)/8) {
                if(signal!=0&&
                        tankInventory.getFluidAmount()!=0 &&
                        !overStressed
@@ -584,7 +585,7 @@ public void write(CompoundTag compound, boolean clientPacket) {
         return new SmartFluidTank(1000, this::onFluidStackChanged){
             @Override
             public boolean isFluidValid(FluidStack stack) {
-                return stack.getFluid().isSame(validFuel());
+                return stack.getFluid().is(validFuel());
             }
         };
     }
@@ -633,8 +634,8 @@ public void write(CompoundTag compound, boolean clientPacket) {
         return tankInventory;
     }
 
-    public  Fluid validFuel(){
-        return TFMGFluids.GASOLINE.get();
+    public TagKey<Fluid> validFuel(){
+        return TFMGTags.TFMGFluidTags.GASOLINE.tag;
     };
 
 }

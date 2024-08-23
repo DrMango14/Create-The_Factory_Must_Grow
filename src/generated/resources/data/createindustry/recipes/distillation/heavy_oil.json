@@ -1,0 +1,20 @@
+{
+  "type": "createindustry:distillation",
+  "ingredients": [
+    {
+      "amount": 150,
+      "fluid": "createindustry:heavy_oil",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 100,
+      "fluid": "createindustry:diesel"
+    },
+    {
+      "amount": 50,
+      "fluid": "createindustry:lubrication_oil"
+    }
+  ]
+}

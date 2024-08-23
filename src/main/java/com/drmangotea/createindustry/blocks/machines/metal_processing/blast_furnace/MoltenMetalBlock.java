@@ -43,27 +43,20 @@ public class MoltenMetalBlock extends Block implements IBE<MoltenMetalBlockEntit
         super(p_49795_);
     }
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        entity.setSecondsOnFire(10);
-        if(!(entity instanceof LivingEntity)){
-          // if(entity instanceof ItemEntity)
-          //     if(!entity.fireImmune()){
-          //         entity.discard();
-          //         if(level.isClientSide)
-          //             level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, .2f,
-          //                     1f + Create.RANDOM.nextFloat());
 
-          //     }
-
-
-          return;
-        }
+        if(entity instanceof LivingEntity){
 
             entity.makeStuckInBlock(state, new Vec3((double)0.9F, 1.5D, (double)0.9F));
 
-        int random = Create.RANDOM.nextInt(24);
+            int random = Create.RANDOM.nextInt(24);
 
-        if(random==7)
-            entity.hurt(DamageSource.IN_FIRE,4);
+            if(random==7)
+                entity.hurt(DamageSource.IN_FIRE,4);
+            entity.setSecondsOnFire(10);
+
+        }
+
+
 
     }
 

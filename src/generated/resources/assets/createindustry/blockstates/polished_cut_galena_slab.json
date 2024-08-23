@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "createindustry:block/polished_cut_galena_slab"
+    },
+    "type=double": {
+      "model": "createindustry:block/polished_cut_galena_slab_double"
+    },
+    "type=top": {
+      "model": "createindustry:block/polished_cut_galena_slab_top"
+    }
+  }
+}

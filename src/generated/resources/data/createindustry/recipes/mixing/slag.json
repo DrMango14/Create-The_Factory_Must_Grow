@@ -1,0 +1,16 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "amount": 1000,
+      "fluid": "createindustry:molten_slag",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "count": 9,
+      "item": "createindustry:slag"
+    }
+  ]
+}

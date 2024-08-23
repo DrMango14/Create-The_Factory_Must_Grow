@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    " A ",
+    " C "
+  ],
+  "key": {
+    "A": {
+      "item": "createindustry:steel_casing"
+    },
+    "C": {
+      "item": "createindustry:copper_cable"
+    }
+  },
+  "result": {
+    "item": "createindustry:steel_casing_cable_hub",
+    "count": 2
+
+
+  }
+}

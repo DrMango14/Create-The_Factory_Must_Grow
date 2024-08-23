@@ -1,0 +1,16 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "create:cinder_flour"
+    },
+    {
+      "item": "create:cinder_flour"
+    }
+  ],
+  "results": [
+    {
+      "item": "createindustry:cinderflour_block"
+    }
+  ]
+}

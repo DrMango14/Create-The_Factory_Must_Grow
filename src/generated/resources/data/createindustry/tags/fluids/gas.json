@@ -1,0 +1,24 @@
+{
+  "values": [
+    "createindustry:flowing_air",
+    "createindustry:air",
+    "createindustry:flowing_heated_air",
+    "createindustry:heated_air",
+    "createindustry:flowing_carbon_dioxide",
+    "createindustry:carbon_dioxide",
+    "createindustry:flowing_ethylene",
+    "createindustry:ethylene",
+    "createindustry:flowing_propylene",
+    "createindustry:propylene",
+    "createindustry:flowing_propane",
+    "createindustry:propane",
+    "createindustry:flowing_butane",
+    "createindustry:butane",
+    "createindustry:flowing_lpg",
+    "createindustry:lpg",
+    "createindustry:flowing_neon",
+    "createindustry:neon",
+    "createindustry:flowing_blast_furnace_gas",
+    "createindustry:blast_furnace_gas"
+  ]
+}

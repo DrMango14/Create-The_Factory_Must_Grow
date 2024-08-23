@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "createindustry:block/hardened_planks_bottom"
+    },
+    "type=double": {
+      "model": "createindustry:block/hardened_planks"
+    },
+    "type=top": {
+      "model": "createindustry:block/hardened_planks_top"
+    }
+  }
+}

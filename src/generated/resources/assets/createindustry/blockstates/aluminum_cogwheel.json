@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "createindustry:block/aluminum_cogwheel",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "createindustry:block/aluminum_cogwheel"
+    },
+    "axis=z": {
+      "model": "createindustry:block/aluminum_cogwheel",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

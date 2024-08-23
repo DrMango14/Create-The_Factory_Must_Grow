@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "createindustry:block/palettes/stone_types/brick/galena_cut_brick",
+    "side": "createindustry:block/palettes/stone_types/brick/galena_cut_brick",
+    "top": "createindustry:block/palettes/stone_types/brick/galena_cut_brick"
+  }
+}

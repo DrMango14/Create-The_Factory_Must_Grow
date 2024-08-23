@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CC ",
+    "CC ",
+    "   "
+  ],
+  "key": {
+    "C": {
+      "item": "createindustry:cinderflourblock"
+    }
+  },
+  "result": {
+    "item": "createindustry:cinderflour_block",
+    "count": 1
+
+
+  }
+}

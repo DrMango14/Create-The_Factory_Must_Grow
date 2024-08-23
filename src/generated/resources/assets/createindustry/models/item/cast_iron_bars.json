@@ -1,0 +1,7 @@
+{
+  "parent": "createindustry:item/bars",
+  "textures": {
+    "bars": "createindustry:block/bars/cast_iron_bars",
+    "edge": "createindustry:block/bars/cast_iron_bars_edge"
+  }
+}

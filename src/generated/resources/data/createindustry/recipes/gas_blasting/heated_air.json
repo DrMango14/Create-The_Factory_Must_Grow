@@ -1,0 +1,26 @@
+{
+  "type": "createindustry:gas_blasting",
+  "ingredients": [
+    {
+      "amount": 1000,
+      "fluid": "createindustry:air",
+      "nbt": {}
+    },
+    {
+      "amount": 250,
+      "fluid": "createindustry:blast_furnace_gas",
+      "nbt": {}
+    }
+  ],
+  "processingTime": 400,
+  "results": [
+    {
+      "amount": 1000,
+      "fluid": "createindustry:heated_air"
+    },
+    {
+      "amount": 750,
+      "fluid": "createindustry:carbon_dioxide"
+    }
+  ]
+}

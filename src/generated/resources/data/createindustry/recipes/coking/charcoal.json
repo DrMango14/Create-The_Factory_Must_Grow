@@ -1,0 +1,18 @@
+{
+  "type": "createindustry:coking",
+  "ingredients": [
+    {
+      "item": "minecraft:coal"
+    }
+  ],
+  "processingTime": 400,
+  "results": [
+    {
+      "item": "minecraft:charcoal"
+    },
+    {
+      "amount": 1,
+      "fluid": "createindustry:creosote"
+    }
+  ]
+}

@@ -1,8 +1,9 @@
 package com.drmangotea.createindustry.blocks.pipes.normal.plastic;
 
 
+import com.drmangotea.createindustry.base.TFMGPipes;
 import com.drmangotea.createindustry.registry.TFMGBlockEntities;
-import com.drmangotea.createindustry.registry.TFMGBlocks;
+
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.fluids.FluidTransportBehaviour;
 import com.simibubi.create.content.fluids.pipes.EncasedPipeBlock;
@@ -36,19 +37,19 @@ public class GlassPlasticPipeBlock extends GlassFluidPipeBlock {
 
     @Override
     public ItemRequirement getRequiredItems(BlockState state, BlockEntity te) {
-        return ItemRequirement.of(TFMGBlocks.PLASTIC_PIPE.getDefaultState(), te);
+        return ItemRequirement.of(TFMGPipes.PLASTIC_PIPE.getDefaultState(), te);
     }
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos,
                                        Player player) {
-        return TFMGBlocks.PLASTIC_PIPE.asStack();
+        return TFMGPipes.PLASTIC_PIPE.asStack();
     }
     @Override
     public BlockState toRegularPipe(LevelAccessor world, BlockPos pos, BlockState state) {
         Direction side = Direction.get(Direction.AxisDirection.POSITIVE, state.getValue(AXIS));
         Map<Direction, BooleanProperty> facingToPropertyMap = FluidPipeBlock.PROPERTY_BY_DIRECTION;
-        return TFMGBlocks.PLASTIC_PIPE.get()
-                .updateBlockState(TFMGBlocks.PLASTIC_PIPE.getDefaultState()
+        return TFMGPipes.PLASTIC_PIPE.get()
+                .updateBlockState(TFMGPipes.PLASTIC_PIPE.getDefaultState()
                         .setValue(facingToPropertyMap.get(side), true)
                         .setValue(facingToPropertyMap.get(side.getOpposite()), true), side, null, world, pos);
     }
@@ -59,7 +60,7 @@ public class GlassPlasticPipeBlock extends GlassFluidPipeBlock {
             return InteractionResult.PASS;
         if (world.isClientSide)
             return InteractionResult.SUCCESS;
-        BlockState newState = TFMGBlocks.COPPER_ENCASED_PLASTIC_PIPE.getDefaultState();
+        BlockState newState = TFMGPipes.COPPER_ENCASED_PLASTIC_PIPE.getDefaultState();
         for (Direction d : Iterate.directionsInAxis(getAxis(state)))
             newState = newState.setValue(EncasedPipeBlock.FACING_TO_PROPERTY_MAP.get(d), true);
         FluidTransportBehaviour.cacheFlows(world, pos);

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "createindustry:block/cast_iron_frame/block"
+    }
+  }
+}
