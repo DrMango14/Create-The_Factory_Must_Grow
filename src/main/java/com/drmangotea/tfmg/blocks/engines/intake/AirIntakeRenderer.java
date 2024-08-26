@@ -34,7 +34,7 @@ public class AirIntakeRenderer  extends KineticBlockEntityRenderer<AirIntakeBloc
         @Override
         protected void renderSafe(AirIntakeBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
                                   int light, int overlay) {
-            if (Backend.canUseInstancing(be.getLevel())) return;
+            //if (Backend.canUseInstancing(be.getLevel())) return;
 
 
             Direction direction = be.getBlockState()

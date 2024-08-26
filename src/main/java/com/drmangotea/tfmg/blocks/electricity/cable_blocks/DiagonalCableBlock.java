@@ -1,6 +1,10 @@
 package com.drmangotea.tfmg.blocks.electricity.cable_blocks;
 
+
+import com.drmangotea.tfmg.blocks.electricity.base.IHaveCables;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.ConnectNeightborsPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
+import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.drmangotea.tfmg.registry.TFMGShapes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
@@ -11,6 +15,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
@@ -24,6 +29,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -32,7 +38,7 @@ import java.util.Objects;
 @SuppressWarnings({"unused","deprecation"})
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class DiagonalCableBlock extends DirectionalBlock implements SimpleWaterloggedBlock, IWrenchable, IBE<DiagonalCableBlockEntity> {
+public class DiagonalCableBlock extends DirectionalBlock implements SimpleWaterloggedBlock, IWrenchable, IBE<DiagonalCableBlockEntity>, IHaveCables {
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty FACING_UP = BooleanProperty.create("facing_up");
@@ -48,6 +54,16 @@ public class DiagonalCableBlock extends DirectionalBlock implements SimpleWaterl
     @Override
     public FluidState getFluidState(BlockState p_51475_) {
         return p_51475_.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(p_51475_);
+    }
+    @Override
+    public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
+        TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new ConnectNeightborsPacket(pos));
+        withBlockEntityDo(level,pos, DiagonalCableBlockEntity::onPlaced);
+
+    }
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        IBE.onRemove(state, level, pos, newState);
     }
     public VoxelShape getShape(BlockState state, BlockGetter p_54562_, BlockPos p_54563_, CollisionContext p_54564_) {
 
@@ -72,6 +88,8 @@ public class DiagonalCableBlock extends DirectionalBlock implements SimpleWaterl
 
         context.getLevel().setBlock(context.getClickedPos(),state.setValue(FACING_UP,!state.getValue(FACING_UP)),2);
 
+        TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new ConnectNeightborsPacket(context.getClickedPos()));
+        withBlockEntityDo(context.getLevel(),context.getClickedPos(), DiagonalCableBlockEntity::onPlaced);
         playRotateSound(context.getLevel(), context.getClickedPos());
         return onWrenched;
     }

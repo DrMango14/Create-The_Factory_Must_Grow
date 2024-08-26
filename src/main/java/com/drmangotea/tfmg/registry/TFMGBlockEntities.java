@@ -18,13 +18,10 @@ import com.drmangotea.tfmg.blocks.deposits.surface_scanner.SurfaceScannerRendere
 import com.drmangotea.tfmg.blocks.electricity.base.ConverterBlockEntity;
 import com.drmangotea.tfmg.blocks.electricity.base.cables.CableConnectorBlockEntity;
 import com.drmangotea.tfmg.blocks.electricity.base.cables.CableConnectorRenderer;
-import com.drmangotea.tfmg.blocks.electricity.batteries.GalvanicCellBlockEntity;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.CableHubBlockEntity;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.CableTubeBlockEntity;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.DiagonalCableBlockEntity;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.copycat_cable_block.CopycatCableBlockEntity;
-import com.drmangotea.tfmg.blocks.electricity.capacitor.AccumulatorBlockEntity;
-import com.drmangotea.tfmg.blocks.electricity.capacitor.CapacitorBlockEntity;
 import com.drmangotea.tfmg.blocks.electricity.electric_motor.ElectricMotorBlockEntity;
 import com.drmangotea.tfmg.blocks.electricity.generation.creative_generator.CreativeGeneratorBlockEntity;
 import com.drmangotea.tfmg.blocks.electricity.generation.creative_generator.VoltageCubeBlockEntity;
@@ -39,6 +36,8 @@ import com.drmangotea.tfmg.blocks.electricity.lights.rgb.RGBLightBulbRenderer;
 import com.drmangotea.tfmg.blocks.electricity.polarizer.PolarizeRenderer;
 import com.drmangotea.tfmg.blocks.electricity.polarizer.PolarizerBlockEntity;
 import com.drmangotea.tfmg.blocks.electricity.resistors.ResistorBlockEntity;
+import com.drmangotea.tfmg.blocks.electricity.storage.AccumulatorBlockEntity;
+import com.drmangotea.tfmg.blocks.electricity.storage.CapacitorBlockEntity;
 import com.drmangotea.tfmg.blocks.electricity.transformer.CoilBlockEntity;
 import com.drmangotea.tfmg.blocks.electricity.voltmeter.VoltMeterBlockEntity;
 import com.drmangotea.tfmg.blocks.electricity.voltmeter.VoltMeterRenderer;
@@ -186,10 +185,10 @@ public class TFMGBlockEntities {
             .validBlocks(TFMGBlocks.ACCUMULATOR)
             .register();
 
-    public static final BlockEntityEntry<GalvanicCellBlockEntity> GALVANIC_CELL = REGISTRATE
-            .blockEntity("galvanic_cell", GalvanicCellBlockEntity::new)
-            .validBlocks(TFMGBlocks.GALVANIC_CELL)
-            .register();
+    //public static final BlockEntityEntry<GalvanicCellBlockEntity> GALVANIC_CELL = REGISTRATE
+    //        .blockEntity("galvanic_cell", GalvanicCellBlockEntity::new)
+    //        .validBlocks(TFMGBlocks.GALVANIC_CELL)
+    //        .register();
     public static final BlockEntityEntry<PolarizerBlockEntity> POLARIZER = REGISTRATE
             .blockEntity("polarizer", PolarizerBlockEntity::new)
             .renderer(() -> PolarizeRenderer::new)
@@ -343,7 +342,7 @@ public class TFMGBlockEntities {
 
     public static final BlockEntityEntry<AirIntakeBlockEntity> AIR_INTAKE = REGISTRATE
             .blockEntity("air_intake", AirIntakeBlockEntity::new)
-            .instance(() -> AirIntakeInstance::new, true)
+          //  .instance(() -> AirIntakeInstance::new, true)
             .renderer(()-> AirIntakeRenderer::new)
             .validBlocks(TFMGBlocks.AIR_INTAKE)
             .register();

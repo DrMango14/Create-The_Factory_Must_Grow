@@ -1,8 +1,11 @@
 package com.drmangotea.tfmg.blocks.electricity.generation.large_generator;
 
 
+import com.drmangotea.tfmg.blocks.electricity.base.IHaveCables;
 import com.drmangotea.tfmg.blocks.electricity.base.WallMountBlock;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.ConnectNeightborsPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
+import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -17,8 +20,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraftforge.network.PacketDistributor;
 
-public class StatorBlock extends WallMountBlock implements IBE<StatorBlockEntity>, IWrenchable {
+public class StatorBlock extends WallMountBlock implements IBE<StatorBlockEntity>, IWrenchable, IHaveCables {
 
     public static final BooleanProperty VALUE = BooleanProperty.create("value");
 
@@ -29,7 +33,16 @@ public class StatorBlock extends WallMountBlock implements IBE<StatorBlockEntity
     }
 
 
+    @Override
+    public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
+        TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new ConnectNeightborsPacket(pos));
+        withBlockEntityDo(level,pos, StatorBlockEntity::onPlaced);
 
+    }
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        IBE.onRemove(state, level, pos, newState);
+    }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
@@ -68,10 +81,18 @@ public class StatorBlock extends WallMountBlock implements IBE<StatorBlockEntity
                         }
 
                         be.hasOutput = true;
+                        be.connectNeighbors();
+                        be.makeControllerAndSpread();
+                        be.needsNetworkUpdate();
                         return InteractionResult.SUCCESS;
 
                     }else {
                         be.hasOutput = false;
+
+                        be.network = be.getId();
+                        be.getOrCreateElectricNetwork().voltage=0;
+                        be.setVoltage(0);
+
                         return InteractionResult.SUCCESS;
                     }
                 }

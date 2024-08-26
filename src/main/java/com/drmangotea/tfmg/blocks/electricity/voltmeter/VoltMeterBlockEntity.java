@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.blocks.electricity.voltmeter;
 
-import com.drmangotea.tfmg.blocks.electricity.base.IElectricBlock;
+
+import com.drmangotea.tfmg.blocks.electricity.base.cables.IElectric;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -47,7 +48,7 @@ public class VoltMeterBlockEntity extends SmartBlockEntity implements IHaveGoggl
 
         BlockEntity beBehind = level.getBlockEntity(getBlockPos().relative(getBlockState().getValue(FACING).getOpposite()));
 
-        if(beBehind instanceof IElectricBlock be){
+        if(beBehind instanceof IElectric be){
             voltage = Math.min(be.getVoltage(), range );
 
         } else voltage = 0;

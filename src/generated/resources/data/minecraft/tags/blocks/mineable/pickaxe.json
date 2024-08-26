@@ -42,7 +42,6 @@
     "tfmg:accumulator",
     "tfmg:capacitor",
     "tfmg:converter",
-    "tfmg:galvanic_cell",
     "tfmg:polarizer",
     "tfmg:voltmeter",
     "tfmg:energy_meter",

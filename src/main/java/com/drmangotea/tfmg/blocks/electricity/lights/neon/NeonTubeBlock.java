@@ -1,7 +1,11 @@
 package com.drmangotea.tfmg.blocks.electricity.lights.neon;
 
+
+import com.drmangotea.tfmg.blocks.electricity.base.IHaveCables;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.ConnectNeightborsPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
+import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.drmangotea.tfmg.registry.TFMGShapes;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.placement.IPlacementHelper;
@@ -30,10 +34,11 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.PacketDistributor;
 
 import java.util.function.Predicate;
 
-public class NeonTubeBlock extends RotatedPillarBlock implements IBE<NeonTubeBlockEntity> {
+public class NeonTubeBlock extends RotatedPillarBlock implements IBE<NeonTubeBlockEntity>, IHaveCables {
     public static final int placementHelperId = PlacementHelpers.register(new PlacementHelper());
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
     public NeonTubeBlock(Properties pProperties) {
@@ -50,7 +55,16 @@ public class NeonTubeBlock extends RotatedPillarBlock implements IBE<NeonTubeBlo
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(ACTIVE,AXIS);
     }
+    @Override
+    public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
+        TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new ConnectNeightborsPacket(pos));
+        withBlockEntityDo(level,pos, NeonTubeBlockEntity::onPlaced);
 
+    }
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        IBE.onRemove(state, level, pos, newState);
+    }
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player player, InteractionHand pHand,

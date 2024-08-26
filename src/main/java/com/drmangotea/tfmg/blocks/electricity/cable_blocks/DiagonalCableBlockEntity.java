@@ -1,12 +1,13 @@
 package com.drmangotea.tfmg.blocks.electricity.cable_blocks;
 
 
+import com.drmangotea.tfmg.base.MaxBlockVoltage;
 import com.drmangotea.tfmg.blocks.electricity.base.ElectricBlockEntity;
+import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-
 
 import static com.drmangotea.tfmg.blocks.electricity.cable_blocks.DiagonalCableBlock.FACING_UP;
 import static net.minecraft.world.level.block.DirectionalBlock.FACING;
@@ -17,8 +18,8 @@ public class DiagonalCableBlockEntity extends ElectricBlockEntity {
     }
 
     @Override
-    public float maxVoltage() {
-        return 6000;
+    public int maxVoltage() {
+        return MaxBlockVoltage.MAX_VOLTAGES.get(TFMGBlockEntities.DIAGONAL_CABLE_BLOCK.get());
     }
 
     @Override

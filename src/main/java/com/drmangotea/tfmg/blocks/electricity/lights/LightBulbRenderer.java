@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.blocks.electricity.lights;
 
+
 import com.drmangotea.tfmg.blocks.electricity.base.WallMountBlock;
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.jozufozu.flywheel.util.transform.TransformStack;

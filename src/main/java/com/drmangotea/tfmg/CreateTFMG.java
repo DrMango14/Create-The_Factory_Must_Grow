@@ -2,6 +2,7 @@ package com.drmangotea.tfmg;
 
 import com.drmangotea.tfmg.base.TFMGContraptions;
 import com.drmangotea.tfmg.base.datagen.TFMGDatagen;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.ElectricNetworkManager;
 import com.drmangotea.tfmg.items.weapons.explosives.thermite_grenades.fire.TFMGColoredFires;
 import com.drmangotea.tfmg.registry.*;
 import com.drmangotea.tfmg.worldgen.TFMGFeatures;
@@ -37,6 +38,9 @@ public class CreateTFMG
 {
 
     public static final String MOD_ID = "tfmg";
+
+    public static final ElectricNetworkManager NETWORK_MANAGER = new ElectricNetworkManager();
+
     public static final String NAME = "Create: The Factory Must Grow";
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
     public static final Logger LOGGER = LogUtils.getLogger();

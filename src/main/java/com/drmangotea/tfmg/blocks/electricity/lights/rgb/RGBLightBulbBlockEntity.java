@@ -1,6 +1,8 @@
 package com.drmangotea.tfmg.blocks.electricity.lights.rgb;
 
+import com.drmangotea.tfmg.base.MaxBlockVoltage;
 import com.drmangotea.tfmg.blocks.electricity.lights.LightBulbBlockEntity;
+import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.Create;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -40,8 +42,11 @@ public class RGBLightBulbBlockEntity extends LightBulbBlockEntity {
         green = compound.getInt("green");
         blue = compound.getInt("blue");
 
+    }
 
-
+    @Override
+    public int maxVoltage() {
+        return MaxBlockVoltage.MAX_VOLTAGES.get(TFMGBlockEntities.RGB_LIGHT_BULB.get());
     }
 
 }

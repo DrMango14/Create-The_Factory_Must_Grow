@@ -1,136 +1,145 @@
 package com.drmangotea.tfmg.blocks.electricity.cable_blocks;
 
+
+import com.drmangotea.tfmg.base.MaxBlockVoltage;
 import com.drmangotea.tfmg.blocks.electricity.base.ElectricBlockEntity;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.ElectricNetworkManager;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.IElectric;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.WireConnection;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.WireManager;
+import com.drmangotea.tfmg.blocks.electricity.resistors.ResistorBlockEntity;
+import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.ArrayList;
-
 public class CableHubBlockEntity extends ElectricBlockEntity {
 
-    int signal;
     boolean signalChanged;
 
-    byte[] directions = new byte[6];
-
-
-
-
-
+    public boolean hasSignal;
     public CableHubBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        neighbourChanged();
+
     }
+    public void onPlaced(){
 
 
-    @Override
-    public boolean hasElectricitySlot(Direction direction) {
 
-        return true;
+        networkUpdate = true;
+        if(!hasSignal)
+            connectNeighbors();
+
+        // needsVoltageUpdate = true;
+
+        setVoltage(voltageGeneration());
+
     }
-
     @Override
     public void tick() {
-
-
-
+        super.tick();
         if (signalChanged) {
             signalChanged = false;
             analogSignalChanged(level.getBestNeighborSignal(worldPosition));
         }
 
-        super.tick();
+
+
+
     }
+
+
 
     public void neighbourChanged() {
         if (!hasLevel())
             return;
-
-        ArrayList<Byte> list = new ArrayList<>();
-
-       // for(Direction direction1 : Direction.values()) {
-       //     if(level.getBlockEntity(getBlockPos().relative(direction1))instanceof IElectricBlock be){
-       //             if(be.hasElectricitySlot(direction1.getOpposite())){
-       //                 list.add((byte) 1);
-       //             }else    list.add((byte) 0);
-//
-       //         }else {
-       //         if(level.getBlockEntity(getBlockPos().relative(direction1))==null){
-       //             list.add((byte) 0);
-       //             continue;
-       //         }
-//
-//
-       //         if (level.getBlockEntity(getBlockPos().relative(direction1)).getCapability(ForgeCapabilities.ENERGY).isPresent()) {
-       //             list.add((byte) 1);
-       //         } else list.add((byte) 0);
-//
-       //     }
-       //     }
-//
-       // directions = new byte[]{list.get(0),list.get(1),list.get(2),list.get(3),list.get(4),list.get(5)};
-
-
-        int power = level.getBestNeighborSignal(worldPosition);
-        if (power != signal)
+        boolean powered = level.getBestNeighborSignal(worldPosition)>0;
+        if (powered != hasSignal)
             signalChanged = true;
     }
-
     @Override
     public void lazyTick() {
         super.lazyTick();
         neighbourChanged();
+
+
     }
-
-
     protected void analogSignalChanged(int newSignal) {
-        //removeSource();
-        signal = newSignal;
+
+        hasSignal = newSignal > 0;
+
+        if(newSignal == 0) {
+
+            for(Direction direction : Direction.values()){
+                if(hasElectricitySlot(direction)) {
+                    BlockPos pos = getBlockPos().relative(direction);
+                    if (level.getBlockEntity(pos) instanceof IElectric be){
+                        if(be instanceof CableHubBlockEntity be1 && (be1.hasSignal||be1 == this))
+                            continue;
+
+                        if (be.hasElectricitySlot(direction.getOpposite()) ) {
+                            be.addConnection(WireManager.Conductor.COPPER, getBlockPos(), false, true);
+                            be.sendStuff();
+                            addConnection(WireManager.Conductor.COPPER, pos, false, true);
+                            sendData();
+                            setChanged();
+
+
+                            be.makeControllerAndSpread();
+
+                        }
+                    }
+                }
+            }
+
+
+        }else {
+            getOrCreateElectricNetwork().remove(this);
+            ElectricNetworkManager.networks.get(level)
+                    .remove(getId());
+            needsNetworkUpdate();
+            needsVoltageUpdate();
+
+
+            onVoltageChanged();
+
+            for(WireConnection connection : wireConnections){
+                BlockPos pos = connection.point1 == getBlockPos() ? connection.point2 : connection.point1;
+
+                if(level.getBlockEntity(pos) instanceof IElectric be){
+
+
+
+
+                    be.makeControllerAndSpread();
+
+
+                    be.getOrCreateElectricNetwork().updateNetworkVoltage();
+                    be.getOrCreateElectricNetwork().updateVoltageFromNetwork();
+
+
+                    if(be instanceof ResistorBlockEntity){
+                        be.getOrCreateElectricNetwork().voltage = 0;
+                    }
+
+
+                }
+
+
+            }
+        }
     }
 
 
     @Override
-    public boolean hasSignal() {
-        return signal>0;
-    }
-
-    @Override
-    public float maxVoltage() {
-        return 6000;
-    }
-
-    @Override
-    public void write(CompoundTag compound, boolean clientPacket) {
-        compound.putInt("Signal", signal);
-
-
-        compound.putByteArray("Directions",directions);
-
-
-        super.write(compound, clientPacket);
-    }
-
-    @Override
-    protected void read(CompoundTag compound, boolean clientPacket) {
-
-
-        signal = compound.getInt("Signal");
-
-        directions = compound.getByteArray("Directions");
-
-
-
-        super.read(compound, clientPacket);
+    public int maxVoltage() {
+        return MaxBlockVoltage.MAX_VOLTAGES.get(TFMGBlockEntities.CABLE_HUB.get());
     }
 
 
-
-
     @Override
-    public boolean canBeDisabled() {
-        return true;
+    public boolean hasElectricitySlot(Direction direction) {
+        return !hasSignal;
     }
 }

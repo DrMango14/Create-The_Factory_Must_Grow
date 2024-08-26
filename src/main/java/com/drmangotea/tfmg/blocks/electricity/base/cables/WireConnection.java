@@ -18,15 +18,18 @@ public class WireConnection {
 
     public final BlockPos point2;
 
+    public final boolean neighborConnection;
+
     public final boolean shouldRender;
 
 
-    public WireConnection(WireManager.Conductor material, float lenght,BlockPos point1, BlockPos point2, boolean render){
+    public WireConnection(WireManager.Conductor material, float lenght,BlockPos point1, BlockPos point2, boolean render, boolean neighborConnection){
         this.material = material;
         this.lenght = lenght;
         this.point1 = point1;
         this.point2 = point2;
         this.shouldRender = render;
+        this.neighborConnection = neighborConnection;
 
         this.resistance = material.resistivity*(lenght/CABLE_THICKNESS);
     }
@@ -40,11 +43,17 @@ public class WireConnection {
         compound.putInt("Y2"+value,point2.getY());
         compound.putInt("Z2"+value,point2.getZ());
 
+        //compound.putLong("Point1"+value, point1.asLong());
+        //compound.putLong("Point2"+value, point2.asLong());
+
         compound.putFloat("Lenght"+value,lenght);
+
+        compound.putBoolean("NeighborConnection"+value,neighborConnection);
 
         compound.putBoolean("ShouldRender"+value,shouldRender);
 
         compound.putString("Material"+value, material.name());
+
 
     }
 

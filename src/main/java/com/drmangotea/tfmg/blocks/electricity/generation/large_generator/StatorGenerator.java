@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.blocks.electricity.generation.large_generator;
 
+
 import com.drmangotea.tfmg.CreateTFMG;
 import com.simibubi.create.foundation.data.SpecialBlockStateGen;
 import com.tterrag.registrate.providers.DataGenContext;

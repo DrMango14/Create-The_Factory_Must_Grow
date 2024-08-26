@@ -1,7 +1,9 @@
 package com.drmangotea.tfmg.blocks.electricity.generation.generator;
 
 
-import com.drmangotea.tfmg.blocks.electricity.base.KineticElectricBlockEntity;
+import com.drmangotea.tfmg.base.MaxBlockVoltage;
+import com.drmangotea.tfmg.blocks.electricity.base.KineticEnergyBlockEntity;
+import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import net.minecraft.ChatFormatting;
@@ -16,7 +18,7 @@ import java.util.List;
 
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
 
-public class GeneratorBlockEntity extends KineticElectricBlockEntity {
+public class GeneratorBlockEntity extends KineticEnergyBlockEntity {
 
     LerpedFloat generationSpeed = LerpedFloat.linear();
     public GeneratorBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
@@ -35,10 +37,9 @@ public class GeneratorBlockEntity extends KineticElectricBlockEntity {
 
 
     }
-    @Override
-    public int feGeneration() {
-        return (int) Math.abs(getSpeed()*1.5);
-    }
+
+
+
     @Override
     public boolean hasElectricitySlot(Direction direction) {
         return direction == getBlockState().getValue(FACING).getOpposite();
@@ -56,7 +57,14 @@ public class GeneratorBlockEntity extends KineticElectricBlockEntity {
         super.read(compound, clientPacket);
         generationSpeed.chase(getGeneratedSpeed(), 1 / 16f, LerpedFloat.Chaser.EXP);
     }
-
+    @Override
+    public int maxVoltage() {
+        return MaxBlockVoltage.MAX_VOLTAGES.get(TFMGBlockEntities.GENERATOR.get());
+    }
+    @Override
+    public int FEProduction() {
+        return (int) (voltageGeneration()/3.5f);
+    }
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
@@ -72,4 +80,13 @@ public class GeneratorBlockEntity extends KineticElectricBlockEntity {
 
         return true;
     }
+
+   // @Override
+   // public void lazyTick() {
+   //     super.lazyTick();
+   //    // if(voltageGeneration() == 0)
+   //    //     getOrCreateElectricNetwork().updateNetworkVoltage();
+//
+//
+   // }
 }

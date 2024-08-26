@@ -1,8 +1,11 @@
 package com.drmangotea.tfmg.blocks.electricity.generation.creative_generator;
 
 
+import com.drmangotea.tfmg.base.MaxBlockVoltage;
 import com.drmangotea.tfmg.blocks.electricity.base.ElectricBlockEntity;
-import com.drmangotea.tfmg.blocks.electricity.base.IElectricBlock;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.VoltagePacket;
+import com.drmangotea.tfmg.registry.TFMGBlockEntities;
+import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -15,12 +18,15 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.PacketDistributor;
 
 import java.util.List;
 
 public class CreativeGeneratorBlockEntity extends ElectricBlockEntity implements IHaveGoggleInformation {
 
     protected ScrollValueBehaviour outputVoltage;
+
+    boolean packetNextTick = false;
 
     public CreativeGeneratorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -30,7 +36,10 @@ public class CreativeGeneratorBlockEntity extends ElectricBlockEntity implements
     public void tick() {
         super.tick();
 
-        energy.setEnergy(5000);
+        if(packetNextTick&&!level.isClientSide){
+            TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new VoltagePacket(getBlockPos()));
+            packetNextTick = false;
+        }
     }
 
     @Override
@@ -41,17 +50,39 @@ public class CreativeGeneratorBlockEntity extends ElectricBlockEntity implements
                 this, new CreativeGeneratorValueBox());
         outputVoltage.between(0, max);
         outputVoltage.value = 50;
+        outputVoltage.withCallback(i -> update());
         //outputVoltage.withCallback(i -> this.updateVoltageOutput());
         behaviours.add(outputVoltage);
     }
-    @Override
-    public float maxVoltage() {
-        return Float.MAX_VALUE;
+
+    public void update(){
+
+
+        needsNetworkUpdate();
+        needsVoltageUpdate();
+
+        packetNextTick = true;
+
+        sendStuff();
     }
+
+
+
     @Override
-    public int feGeneration() {
-        return Integer.MAX_VALUE;
+    public int FEProduction() {
+        return 1000;
     }
+
+    @Override
+    public int FECapacity() {
+        return 100000;
+    }
+
+    @Override
+    public int maxVoltage() {
+        return MaxBlockVoltage.MAX_VOLTAGES.get(TFMGBlockEntities.CREATIVE_GENERATOR.get());
+    }
+
 
     @Override
     public int voltageGeneration() {
@@ -68,10 +99,7 @@ public class CreativeGeneratorBlockEntity extends ElectricBlockEntity implements
         return true;
     }
 
-    @Override
-    public int transferSpeed() {
-        return 1000;
-    }
+
 
     class CreativeGeneratorValueBox extends ValueBoxTransform.Sided {
 
@@ -96,35 +124,10 @@ public class CreativeGeneratorBlockEntity extends ElectricBlockEntity implements
         }
 
     }
-    @Override
-    public void transferCharge(IElectricBlock be) {
 
-
-        int energy = getForgeEnergy().getEnergyStored();
-        int freeSpace = be.getForgeEnergy().getMaxEnergyStored()-be.getForgeEnergy().getEnergyStored();
-
-
-        //  int maxPossibleTransfer = (int) (Math.min(energy,freeSpace));
-
-
-        int maxPossibleTransfer = 1000;
-
-
-        int test = be.getForgeEnergy().receiveEnergy(maxPossibleTransfer, true);
-        int test2 = getForgeEnergy().extractEnergy(maxPossibleTransfer, true);
-
-        maxPossibleTransfer = Math.min(Math.min(test2,test2),maxPossibleTransfer);
-
-
-
-
-        if(be.getForgeEnergy().getEnergyStored() <= getForgeEnergy().getEnergyStored()) {
-            be.getForgeEnergy().receiveEnergy(Integer.MAX_VALUE, false);
-        }
-
-
-
-
-
-    }
+    //@Override
+    //public void lazyTick() {
+    //    super.lazyTick();
+    //    getOrCreateElectricNetwork().updateNetworkVoltage();
+    //}
 }

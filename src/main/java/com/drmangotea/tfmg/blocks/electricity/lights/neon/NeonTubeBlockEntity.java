@@ -1,7 +1,9 @@
 package com.drmangotea.tfmg.blocks.electricity.lights.neon;
 
 
+import com.drmangotea.tfmg.base.MaxBlockVoltage;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.CableTubeBlockEntity;
+import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.utility.NBTHelper;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
@@ -34,6 +36,12 @@ public class NeonTubeBlockEntity extends CableTubeBlockEntity {
     }
 
     @Override
+    public void lazyTick() {
+        super.lazyTick();
+        getOrCreateElectricNetwork().requestEnergy(this);
+    }
+
+    @Override
     public void tick() {
         super.tick();
 
@@ -42,11 +50,11 @@ public class NeonTubeBlockEntity extends CableTubeBlockEntity {
             return;
         }
 
-        if(energy.getEnergyStored()!=0&&voltage!=0) {
-            glow.chase(voltage, 0.4, LerpedFloat.Chaser.EXP);
+        if(energy.getEnergyStored()!=0&&getVoltage()!=0) {
+            glow.chase(getVoltage(), 0.4, LerpedFloat.Chaser.EXP);
             glow.tickChaser();
 
-            if(voltage!=0) {
+            if(getVoltage()!=0) {
                 useEnergy(1);
                 if (!getBlockState().getValue(ACTIVE))
                     level.setBlock(getBlockPos(), getBlockState().setValue(ACTIVE,true), 2);
@@ -64,9 +72,9 @@ public class NeonTubeBlockEntity extends CableTubeBlockEntity {
     }
 
     @Override
-    public void explode() {
+    public void voltageFailure() {
 
-        voltage = 0;
+
 
 
         level.playSound(null, getBlockPos(), SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 2.0F,
@@ -83,6 +91,10 @@ public class NeonTubeBlockEntity extends CableTubeBlockEntity {
 
 
     }
+
+
+
+
     public void setColor(DyeColor color) {
 
 
@@ -95,8 +107,8 @@ public class NeonTubeBlockEntity extends CableTubeBlockEntity {
 
 
     @Override
-    public float maxVoltage() {
-        return 300;
+    public int maxVoltage() {
+        return MaxBlockVoltage.MAX_VOLTAGES.get(TFMGBlockEntities.NEON_TUBE.get());
     }
     public void changeColor(){
         red = Create.RANDOM.nextInt(255);

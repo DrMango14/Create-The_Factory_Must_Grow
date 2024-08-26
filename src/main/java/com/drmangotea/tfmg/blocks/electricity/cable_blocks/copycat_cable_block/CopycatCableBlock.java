@@ -1,8 +1,11 @@
 package com.drmangotea.tfmg.blocks.electricity.cable_blocks.copycat_cable_block;
 
 
+import com.drmangotea.tfmg.blocks.electricity.base.IHaveCables;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.ConnectNeightborsPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
+import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.decoration.copycat.CopycatModel;
@@ -37,10 +40,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.data.ModelDataManager;
+import net.minecraftforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 
-public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEntity>, IWrenchable {
+public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEntity>, IWrenchable, IHaveCables {
 
     public CopycatCableBlock(Properties pProperties) {
         super(pProperties);
@@ -71,6 +75,15 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
             return InteractionResult.SUCCESS;
         });
     }
+
+
+    @Override
+    public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
+        TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new ConnectNeightborsPacket(pos));
+        withBlockEntityDo(level,pos, CopycatCableBlockEntity::onPlaced);
+
+    }
+
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand,
@@ -205,12 +218,15 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
     }
 
     @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (!pState.hasBlockEntity() || pState.getBlock() == pNewState.getBlock())
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean pIsMoving) {
+
+        IBE.onRemove(state, level, pos, newState);
+
+        if (!state.hasBlockEntity() || state.getBlock() == newState.getBlock())
             return;
         if (!pIsMoving)
-            withBlockEntityDo(pLevel, pPos, ufte -> Block.popResource(pLevel, pPos, ufte.getConsumedItem()));
-        pLevel.removeBlockEntity(pPos);
+            withBlockEntityDo(level, pos, ufte -> Block.popResource(level, pos, ufte.getConsumedItem()));
+        level.removeBlockEntity(pos);
     }
 
     @Override

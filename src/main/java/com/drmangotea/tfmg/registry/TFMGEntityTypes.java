@@ -3,6 +3,8 @@ package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.CreateTFMG;
 import com.drmangotea.tfmg.base.spark.*;
+import com.drmangotea.tfmg.base.tesla_coil_lightning.TeslaCoilLightningEntity;
+import com.drmangotea.tfmg.base.tesla_coil_lightning.TeslaCoilLightningRenderer;
 import com.drmangotea.tfmg.items.weapons.advanced_potato_cannon.projectile.NapalmPotato;
 import com.drmangotea.tfmg.items.weapons.advanced_potato_cannon.projectile.NapalmPotatoRenderer;
 import com.drmangotea.tfmg.items.weapons.explosives.napalm.NapalmBombEntity;
@@ -48,6 +50,9 @@ public class TFMGEntityTypes {
             register("napalm_bomb_entity", NapalmBombEntity::new, () -> NapalmBombRenderer::new,
                     MobCategory.MISC, 4, 20, true, true, NapalmBombEntity::build).register();
 
+    public static final EntityEntry<TeslaCoilLightningEntity> TESLA_COIL_LIGHTNING =
+            register("tesla_coil_lightning", TeslaCoilLightningEntity::new, () -> TeslaCoilLightningRenderer::new,
+                    MobCategory.MISC, 4, 20, true, true, TeslaCoilLightningEntity::build).register();
 
     public static final EntityEntry<Spark> SPARK =
             register("spark", Spark::new, () -> SparkRenderer::new,
@@ -61,7 +66,7 @@ public class TFMGEntityTypes {
 
     public static final EntityEntry<LithiumSpark> LITHIUM_SPARK =
             register("lithium_spark", LithiumSpark::new, () -> LithiumSparkRenderer::new,
-                    MobCategory.MISC, 4, 20, true, true, LithiumSpark::build).register();
+                    MobCategory.MISC, 80, 20, true, true, LithiumSpark::build).register();
     //
 
 

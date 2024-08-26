@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.blocks.electricity.electrical_switch;
 
+
 import com.drmangotea.tfmg.registry.TFMGShapes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

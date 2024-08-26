@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.blocks.electricity.base.cables;
 
+
 import com.drmangotea.tfmg.blocks.electricity.base.WallMountBlock;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SpecialBlockStateGen;

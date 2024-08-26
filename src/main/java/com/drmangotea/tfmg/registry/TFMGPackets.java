@@ -2,6 +2,9 @@ package com.drmangotea.tfmg.registry;
 
 
 import com.drmangotea.tfmg.CreateTFMG;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.ConnectNeightborsPacket;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.EnergyNetworkUpdatePacket;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.VoltagePacket;
 import com.drmangotea.tfmg.items.weapons.advanced_potato_cannon.AdvancedPotatoCannonPacket;
 import com.drmangotea.tfmg.items.weapons.quad_potato_cannon.QuadPotatoCannonPacket;
 import com.simibubi.create.foundation.networking.SimplePacketBase;
@@ -24,7 +27,15 @@ import static net.minecraftforge.network.NetworkDirection.PLAY_TO_CLIENT;
 public enum TFMGPackets {
 
     ADVANCED_POTATO_CANNON(AdvancedPotatoCannonPacket.class, AdvancedPotatoCannonPacket::new, PLAY_TO_CLIENT),
-    QUAD_POTATO_CANNON(QuadPotatoCannonPacket.class, QuadPotatoCannonPacket::new, PLAY_TO_CLIENT)
+    QUAD_POTATO_CANNON(QuadPotatoCannonPacket.class, QuadPotatoCannonPacket::new, PLAY_TO_CLIENT),
+
+    ENERGY_NETWORK_UPDATE(EnergyNetworkUpdatePacket.class, EnergyNetworkUpdatePacket::new, PLAY_TO_CLIENT),
+
+    CONNECT_NEIGHBORS(ConnectNeightborsPacket.class, ConnectNeightborsPacket::new, PLAY_TO_CLIENT),
+
+    VOLTAGE_PACKET(VoltagePacket.class, VoltagePacket::new, PLAY_TO_CLIENT)
+
+
     ;
 
     public static final ResourceLocation CHANNEL_NAME = CreateTFMG.asResource("main");
@@ -35,7 +46,7 @@ public enum TFMGPackets {
     private PacketType<?> packetType;
 
     <T extends SimplePacketBase> TFMGPackets(Class<T> type, Function<FriendlyByteBuf, T> factory,
-                                            NetworkDirection direction) {
+                                             NetworkDirection direction) {
         packetType = new PacketType<>(type, factory, direction);
     }
 

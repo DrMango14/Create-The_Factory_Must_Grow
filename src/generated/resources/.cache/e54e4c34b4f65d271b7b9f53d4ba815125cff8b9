@@ -1,5 +1,5 @@
-// 1.20.1	2024-07-04T21:36:26.8420964	Registrate Provider for tfmg [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
-af39bf55e0bf80ce5f79e8d29ea7d8c328918fca assets/tfmg/blockstates/accumulator.json
+// 1.20.1	2024-08-21T12:43:06.9933819	Registrate Provider for tfmg [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+ff5a5721633b83465ab501cbdfdc579a0f20e938 assets/tfmg/blockstates/accumulator.json
 e982a263b6af75821042107fdeff7bd809436d08 assets/tfmg/blockstates/air_intake.json
 e7f63aadfc892e337d9f87b5e50af8b1c7e4103f assets/tfmg/blockstates/aluminum_bars.json
 b7f5146505c40c08cdea7ad01fa99048b7ac5451 assets/tfmg/blockstates/aluminum_block.json
@@ -41,7 +41,7 @@ b846b257ecd76322e904bd9c78a8b263a2799ad5 assets/tfmg/blockstates/brown_concrete.
 0ee9e3a46eaad9b1aa6eeaf1046044a7bf410af8 assets/tfmg/blockstates/brown_concrete_wall.json
 840c72a290cd0731b678233786a87602f3fa8c31 assets/tfmg/blockstates/cable_connector.json
 281009d1dc0a97b1f120c7b2c09f07724b8f3079 assets/tfmg/blockstates/cable_tube.json
-c29dd46ff8c200305f61cd7c41b417c360db7a1a assets/tfmg/blockstates/capacitor.json
+9f5df02dc45367ddf7be9cada20a275ba2289a8c assets/tfmg/blockstates/capacitor.json
 06919cd6d4a6a91ca37c30aebbb68c51feab4f74 assets/tfmg/blockstates/casting_basin.json
 5771fe31474df0e15c3a2756bac1b31a7d898868 assets/tfmg/blockstates/casting_spout.json
 2ccbf31047ec5a9b3dd285fda5a402281869f721 assets/tfmg/blockstates/cast_iron_bars.json
@@ -124,7 +124,6 @@ f16d1cf03e5053455ea485f7aa53a88206f61749 assets/tfmg/blockstates/formwork_block.
 e74acd9562e4b46295cf017d17f2662e20a7f5ea assets/tfmg/blockstates/fossilstone.json
 f2876beb7a70b63cf30209d0b25db0462b851c7f assets/tfmg/blockstates/galena.json
 4325917750f83a2d70f07071af765b388b0df2df assets/tfmg/blockstates/galena_pillar.json
-c83cd54b6c9103a876c0a46e9f2d07e45b1a7775 assets/tfmg/blockstates/galvanic_cell.json
 b0a3f4da5d9efdd01800c8b9738aee194565c6e7 assets/tfmg/blockstates/gasoline.json
 07ac47a4b404bedd672ba3f884b37151d342bbb1 assets/tfmg/blockstates/gasoline_engine.json
 a0da883cd5211a65be30f3118d31c336709be7cf assets/tfmg/blockstates/gasoline_engine_back.json
@@ -325,8 +324,8 @@ a1988ec6a98f23cad8321b46345fbf1c5fd20489 assets/tfmg/blockstates/yellow_concrete
 c58fa20c091e5ecddfb7164cba45538a8f911431 assets/tfmg/blockstates/yellow_concrete_wall.json
 0271e2b940bb94cdb7e951b81e277ee633d64d62 assets/tfmg/blockstates/zinc_frame.json
 1bd66f29acffb67f30bfe94c8535509bd009beab assets/tfmg/blockstates/zinc_truss.json
-a94f513cd2ad1fc9c225eee656548d0c3996fa1d assets/tfmg/lang/en_ud.json
-030f5c7f5c73e73f9a844c49f4a2e37040c67275 assets/tfmg/lang/en_us.json
+496fcfdea77c0c6e260759b2de9e60c713def08f assets/tfmg/lang/en_ud.json
+8ce8c035d9498f10f07fee8cc1c32dc93862e3a0 assets/tfmg/lang/en_us.json
 9e6a6b62f5e7528c4e4d4f72f3510edcd8f0c078 assets/tfmg/models/block/aluminum_block.json
 1d33a893d6ac05f9adaceb7f84423ebe9b195c01 assets/tfmg/models/block/aluminum_cable_hub.json
 da469bf3233944085f07d4ef437827061e408838 assets/tfmg/models/block/aluminum_cap.json
@@ -875,7 +874,7 @@ b9a1477ab92ea6eb6daad65aad5e73f339402588 assets/tfmg/models/block/yellow_concret
 fea28ae2dbee700a4219f227bf6a87502b31cb05 assets/tfmg/models/block/yellow_concrete_wall_post.json
 0a642864362409bfc889345a8a4605c111b326c6 assets/tfmg/models/block/yellow_concrete_wall_side.json
 099f4b7adf652892d7ec572c6f9e38053089c097 assets/tfmg/models/block/yellow_concrete_wall_side_tall.json
-1cb8c3290a5a130ae96cc68b4a82df6d48b74216 assets/tfmg/models/item/accumulator.json
+f28eecee7a67bf88f80788e26db921d507a2e29b assets/tfmg/models/item/accumulator.json
 ff3c6bce6f60d4323cfbd436f1978ca1fcb9ae27 assets/tfmg/models/item/advanced_potato_cannon.json
 c2be2c2933da698fd2888fcb04b71cb372725b6f assets/tfmg/models/item/air_bucket.json
 500ce6e858f96a48d1871fe4c02404faa2ccac29 assets/tfmg/models/item/air_intake.json
@@ -932,7 +931,7 @@ d9b83e727c2e49165304e5b44fbf94da7a6cefd2 assets/tfmg/models/item/brass_truss.jso
 59057a9cf031e1be2ff2098ea5c2299f38f0bf55 assets/tfmg/models/item/butane_bucket.json
 70c4e4f1e88d4380ed1b1f9ee52472b85f34e0c7 assets/tfmg/models/item/cable_connector.json
 3ec85036b72bfab601bdf9c649a148da3f1216e3 assets/tfmg/models/item/cable_tube.json
-762051b6fa2ca79e20f7291f668d0edd4e14c816 assets/tfmg/models/item/capacitor.json
+cc6e390fe01872e017b7fffd968ce3c94d7309ff assets/tfmg/models/item/capacitor.json
 6afc7ea971e65e08eda7a1fc38a860b86c2920b8 assets/tfmg/models/item/capacitor_.json
 4ed6badf38b1a376f628704027a79834d790d853 assets/tfmg/models/item/carbon_dioxide_bucket.json
 1e73706492a2cc569bb603443d56b2e9773b9c6b assets/tfmg/models/item/casting_basin.json
@@ -1027,7 +1026,6 @@ bc322b9bfaa42d51035557552d94f97c02cfa01b assets/tfmg/models/item/formwork_block.
 7e4a58a6d05b19dc8c5fff73434c2d7cefa75343 assets/tfmg/models/item/fossilstone.json
 05c9a5cfc640f82099f5c691942f834996945c1e assets/tfmg/models/item/galena.json
 acd5c31ea8e24ca099199932affdc705e5abe3fd assets/tfmg/models/item/galena_pillar.json
-92c4c179428e8e875cedf25967e8b6263adcadd9 assets/tfmg/models/item/galvanic_cell.json
 ed2830b2988403aebaca633b2e315878b41f7503 assets/tfmg/models/item/gasoline_bucket.json
 58beabb2bcf9d5296f98cd3b5e1e33d678276930 assets/tfmg/models/item/gasoline_engine.json
 c86b4e28c0097a5cd1dd3e5b02652a703ea84f55 assets/tfmg/models/item/gasoline_engine_back.json
@@ -1388,7 +1386,7 @@ d3e737a8cc2d3932c52e43732d4b191e5268da55 data/minecraft/tags/blocks/beacon_base_
 543dbb3bba839c96d454f6e26e7e97ce5ae9dc4e data/minecraft/tags/blocks/dripstone_replaceable_blocks.json
 543dbb3bba839c96d454f6e26e7e97ce5ae9dc4e data/minecraft/tags/blocks/lush_ground_replaceable.json
 ed988828cb10a42381c8b32fb0e629b12875da66 data/minecraft/tags/blocks/mineable/axe.json
-b3226f5aba21d6d1128ecdc27242f05a8907cad2 data/minecraft/tags/blocks/mineable/pickaxe.json
+e10e0e309501be54352ebb4c350907c41f4d4e69 data/minecraft/tags/blocks/mineable/pickaxe.json
 543dbb3bba839c96d454f6e26e7e97ce5ae9dc4e data/minecraft/tags/blocks/moss_replaceable.json
 308629590ea6d2511f33b1f6f145273d6d8512a1 data/minecraft/tags/blocks/needs_diamond_tool.json
 033c6e25bfda5e1adc2ed551be951a0333debc1a data/minecraft/tags/blocks/needs_iron_tool.json
@@ -1612,7 +1610,6 @@ c80724662af3f9c56f560c1272c6a89e26bc8268 data/tfmg/loot_tables/blocks/flarestack
 9f2b65dbcf81aa1cb79c57787b944ddba8d8fb68 data/tfmg/loot_tables/blocks/fossilstone.json
 77c23cc954e4f16bbbecfb01d760307e78ac2d79 data/tfmg/loot_tables/blocks/galena.json
 f8274f88b8a4171676976b58bd30ab283571f6b8 data/tfmg/loot_tables/blocks/galena_pillar.json
-0a14174a8438c6e3352f580210709e02aa2b9b98 data/tfmg/loot_tables/blocks/galvanic_cell.json
 68bf86474688f4673612e2cecb4336d8436e4b06 data/tfmg/loot_tables/blocks/gasoline_engine.json
 7a1f71c97909ee7953966ec9b0921298fd1af844 data/tfmg/loot_tables/blocks/gasoline_engine_back.json
 90322865e154696c6845fbadc81cafd8b5c9f78d data/tfmg/loot_tables/blocks/generator.json

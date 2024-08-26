@@ -10,7 +10,6 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.contraptions.behaviour.DoorMovingInteraction;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
-import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlock;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorMovementBehaviour;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
@@ -35,7 +34,6 @@ import static com.simibubi.create.AllInteractionBehaviours.interactionBehaviour;
 import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
-
 @SuppressWarnings("removal")
 public class TFMGBuilderTransformers {
 
@@ -71,7 +69,7 @@ public class TFMGBuilderTransformers {
                 .item()
                 .transform(ModelGen.customItemModel("surface_scanner", "item"));
 
-}
+    }
     public static <B extends TFMGEncasedShaftBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> encasedShaft(String casing,
                                                                                                              Supplier<CTSpriteShiftEntry> casingShift) {
         return builder -> encasedBase(builder, () -> TFMGBlocks.NEON_TUBE.get())

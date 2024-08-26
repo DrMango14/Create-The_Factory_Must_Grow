@@ -1,6 +1,6 @@
 package com.drmangotea.tfmg.blocks.electricity.generation.large_generator;
 
-import com.drmangotea.tfmg.registry.TFMGPartialModels;
+
 import com.jozufozu.flywheel.api.MaterialManager;
 import com.jozufozu.flywheel.api.instance.DynamicInstance;
 import com.jozufozu.flywheel.core.materials.model.ModelData;
@@ -19,7 +19,7 @@ public class RotorInstance extends KineticBlockEntityInstance<RotorBlockEntity> 
 	protected final RotatingData shaft;
 	protected final ModelData wheel;
 
-	protected final ModelData frame;
+
 	protected float lastAngle = Float.NaN;
 
 	public RotorInstance(MaterialManager materialManager, RotorBlockEntity blockEntity) {
@@ -40,9 +40,7 @@ public class RotorInstance extends KineticBlockEntityInstance<RotorBlockEntity> 
 		if(axis == Direction.Axis.Z)
 			direction = Direction.NORTH;
 
-		frame = getTransformMaterial()
-				.getModel(TFMGPartialModels.AIR_INTAKE_FAN_MEDIUM, blockState, direction)
-				.createInstance();
+
 
 		animate(blockEntity.angle);
 	}
@@ -62,8 +60,7 @@ public class RotorInstance extends KineticBlockEntityInstance<RotorBlockEntity> 
 
 		lastAngle = angle;
 
-		if(!blockEntity.valid)
-			frame.setEmptyTransform();
+
 	}
 
 	private void animate(float angle) {
@@ -85,14 +82,14 @@ public class RotorInstance extends KineticBlockEntityInstance<RotorBlockEntity> 
 
 	@Override
 	public void updateLight() {
-		relight(pos, shaft, wheel,frame);
+		relight(pos, shaft, wheel);
 	}
 
 	@Override
 	public void remove() {
 		shaft.delete();
 		wheel.delete();
-		frame.delete();
+
 	}
 
 }

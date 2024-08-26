@@ -20,17 +20,12 @@ import com.drmangotea.tfmg.blocks.deposits.surface_scanner.SurfaceScannerBlock;
 import com.drmangotea.tfmg.blocks.electricity.base.ConverterBlock;
 import com.drmangotea.tfmg.blocks.electricity.base.cables.CableConnectorBlock;
 import com.drmangotea.tfmg.blocks.electricity.base.cables.CableConnectorGenerator;
-import com.drmangotea.tfmg.blocks.electricity.batteries.GalvanicCellBlock;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.CableHubBlock;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.CableTubeBlock;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.DiagonalCableBlock;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.DiagonalCableGenerator;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.copycat_cable_block.CopycatCableBlock;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.copycat_cable_block.CopycatCableBlockModel;
-import com.drmangotea.tfmg.blocks.electricity.capacitor.AccumulatorBlock;
-import com.drmangotea.tfmg.blocks.electricity.capacitor.AccumulatorCTBehavior;
-import com.drmangotea.tfmg.blocks.electricity.capacitor.CapacitorBlock;
-import com.drmangotea.tfmg.blocks.electricity.capacitor.CapacitorCTBehavior;
 import com.drmangotea.tfmg.blocks.electricity.electric_motor.ElectricMotorBlock;
 import com.drmangotea.tfmg.blocks.electricity.generation.creative_generator.CreativeGeneratorBlock;
 import com.drmangotea.tfmg.blocks.electricity.generation.creative_generator.VoltageCubeBlock;
@@ -43,6 +38,9 @@ import com.drmangotea.tfmg.blocks.electricity.lights.neon.NeonTubeBlock;
 import com.drmangotea.tfmg.blocks.electricity.lights.rgb.RGBLightBulbBlock;
 import com.drmangotea.tfmg.blocks.electricity.polarizer.PolarizerBlock;
 import com.drmangotea.tfmg.blocks.electricity.resistors.ResistorBlock;
+import com.drmangotea.tfmg.blocks.electricity.storage.AccumulatorBlock;
+import com.drmangotea.tfmg.blocks.electricity.storage.CapacitorBlock;
+import com.drmangotea.tfmg.blocks.electricity.storage.CapacitorCTBehavior;
 import com.drmangotea.tfmg.blocks.electricity.transformer.CoilBlock;
 import com.drmangotea.tfmg.blocks.electricity.transformer.CoilGenerator;
 import com.drmangotea.tfmg.blocks.electricity.voltmeter.VoltMeterBlock;
@@ -690,8 +688,8 @@ public class TFMGBlocks {
             REGISTRATE.block("accumulator", AccumulatorBlock::new)
                     .initialProperties(() -> Blocks.IRON_BLOCK)
                     .transform(pickaxeOnly())
-                    .onRegister(connectedTextures(AccumulatorCTBehavior::new))
-                    .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+                    .onRegister(connectedTextures(() -> new CapacitorCTBehavior(TFMGSpriteShifts.ACCUMULATOR)))
+                    .blockstate(BlockStateGen.directionalBlockProvider(true))
                     .item()
                     .build()
                     .register();
@@ -710,8 +708,8 @@ public class TFMGBlocks {
             REGISTRATE.block("capacitor", CapacitorBlock::new)
                     .initialProperties(() -> Blocks.IRON_BLOCK)
                     .transform(pickaxeOnly())
-                    .onRegister(connectedTextures(CapacitorCTBehavior::new))
-                    .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+                    .onRegister(connectedTextures(() -> new CapacitorCTBehavior(TFMGSpriteShifts.CAPACITOR)))
+                    .blockstate(BlockStateGen.directionalBlockProvider(true))
                     .item()
                     .build()
                     .register();
@@ -720,7 +718,6 @@ public class TFMGBlocks {
             REGISTRATE.block("converter", ConverterBlock::new)
                     .initialProperties(() -> Blocks.IRON_BLOCK)
                     .transform(pickaxeOnly())
-                    .onRegister(connectedTextures(CapacitorCTBehavior::new))
                     .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
                     .item()
                     .build()
@@ -728,16 +725,16 @@ public class TFMGBlocks {
 
 
 
-    public static final BlockEntry<GalvanicCellBlock> GALVANIC_CELL =
-            REGISTRATE.block("galvanic_cell", GalvanicCellBlock::new)
-                    .initialProperties(() -> Blocks.IRON_BLOCK)
-                    .transform(pickaxeOnly())
-                    .addLayer(() -> RenderType::cutoutMipped)
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
-                    .item()
-                    .transform(customItemModel())
-                    .register();
+    //public static final BlockEntry<GalvanicCellBlock> GALVANIC_CELL =
+    //        REGISTRATE.block("galvanic_cell", GalvanicCellBlock::new)
+    //                .initialProperties(() -> Blocks.IRON_BLOCK)
+    //                .transform(pickaxeOnly())
+    //                .addLayer(() -> RenderType::cutoutMipped)
+    //                .properties(BlockBehaviour.Properties::noOcclusion)
+    //                .blockstate(BlockStateGen.horizontalBlockProvider(true))
+    //                .item()
+    //                .transform(customItemModel())
+    //                .register();
     public static final BlockEntry<PolarizerBlock> POLARIZER =
             REGISTRATE.block("polarizer", PolarizerBlock::new)
                     .initialProperties(() -> Blocks.IRON_BLOCK)

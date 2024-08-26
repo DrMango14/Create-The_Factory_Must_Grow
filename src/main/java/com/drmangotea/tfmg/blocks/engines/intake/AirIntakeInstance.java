@@ -24,333 +24,252 @@ import java.util.Optional;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
 
+
+import com.jozufozu.flywheel.core.materials.FlatLit;
+
+
 public class AirIntakeInstance extends KineticBlockEntityInstance<AirIntakeBlockEntity> implements DynamicInstance {
-
-
     private final ModelData frame;
-
     private final ModelData frameClosed;
-
-    private  ModelData chassisMedium;
-
-    private  ModelData chassisLarge;
-
+    private ModelData chassisMedium;
+    private ModelData chassisLarge;
     protected Optional<RotatingData> shaft;
     protected final RotatingData fan;
     protected final ModelData fan_medium;
     protected final ModelData fan_large;
-
     final Direction direction;
     private final Direction opposite;
 
     public AirIntakeInstance(MaterialManager materialManager, AirIntakeBlockEntity blockEntity) {
         super(materialManager, blockEntity);
-
-        direction = blockState.getValue(FACING);
-
-        opposite = direction.getOpposite();
-
-            fan = materialManager.defaultCutout()
-                    .material(AllMaterialSpecs.ROTATING)
-                    .getModel(TFMGPartialModels.AIR_INTAKE_FAN, blockState, opposite)
-                    .createInstance();
-        fan_medium = getTransformMaterial()
-                //.defaultCutout()
-                //.material(AllMaterialSpecs.ROTATING)
-                .getModel(TFMGPartialModels.AIR_INTAKE_FAN_MEDIUM, blockState, opposite)
-                .createInstance();
-        fan_large = getTransformMaterial()
-                //.defaultCutout()
-                //.material(AllMaterialSpecs.ROTATING)
-                .getModel(TFMGPartialModels.AIR_INTAKE_FAN_LARGE, blockState, opposite)
-                .createInstance();
-
-
-
-
-            setup(fan, getFanSpeed());
-
-            //setup(fan_large, getFanSpeed());
-
-
-
-        frame = getTransformMaterial()
-                .getModel(TFMGPartialModels.AIR_INTAKE_FRAME,blockState,blockEntity.getBlockState().getValue(FACING))
-                .createInstance();
-        frameClosed = getTransformMaterial()
-                .getModel(TFMGPartialModels.AIR_INTAKE_FRAME_CLOSED,blockState,blockEntity.getBlockState().getValue(FACING))
-                .createInstance();
-
-        chassisMedium = getTransformMaterial()
-                .getModel(TFMGPartialModels.AIR_INTAKE_MEDIUM,blockState,blockEntity.getBlockState().getValue(FACING))
-                .createInstance();
-        chassisLarge = getTransformMaterial()
-                .getModel(TFMGPartialModels.AIR_INTAKE_LARGE,blockState,blockEntity.getBlockState().getValue(FACING))
-                .createInstance();
-
-
-
-
-
-
-
-      //  if(direction.getAxis().isHorizontal()) {
-      //      float x = 0;
-      //      float z = 0;
-      //      if(direction == Direction.NORTH)
-      //          x=0.5f;
-      //      if(direction == Direction.SOUTH)
-      //          x=-0.5f;
-      //      if(direction == Direction.WEST)
-      //          z=-0.5f;
-      //      if(direction == Direction.EAST)
-      //          z=0.5f;
-//
-//
-      //     // fan_large.translate(x*2,1,z*2);
-      //      fan_medium.setPosition(getInstancePosition()).nudge(x,0.5f,z);
-      //  }else {
-      //      fan_medium.setPosition(getInstancePosition()).nudge(0.5f, 0, 0.5f);
-      //      //fan_large.translate(1,0,1);
-      //  }
+        this.direction = (Direction)this.blockState.getValue(FACING);
+        this.opposite = this.direction.getOpposite();
+        this.fan = (RotatingData)materialManager.defaultCutout().material(AllMaterialSpecs.ROTATING).getModel(TFMGPartialModels.AIR_INTAKE_FAN, this.blockState, this.opposite).createInstance();
+        this.fan_medium = (ModelData)this.getTransformMaterial().getModel(TFMGPartialModels.AIR_INTAKE_FAN_MEDIUM, this.blockState, this.opposite).createInstance();
+        this.fan_large = (ModelData)this.getTransformMaterial().getModel(TFMGPartialModels.AIR_INTAKE_FAN_LARGE, this.blockState, this.opposite).createInstance();
+        this.setup(this.fan, this.getFanSpeed());
+        this.frame = (ModelData)this.getTransformMaterial().getModel(TFMGPartialModels.AIR_INTAKE_FRAME, this.blockState, (Direction)blockEntity.getBlockState().getValue(FACING)).createInstance();
+        this.frameClosed = (ModelData)this.getTransformMaterial().getModel(TFMGPartialModels.AIR_INTAKE_FRAME_CLOSED, this.blockState, (Direction)blockEntity.getBlockState().getValue(FACING)).createInstance();
+        this.chassisMedium = (ModelData)this.getTransformMaterial().getModel(TFMGPartialModels.AIR_INTAKE_MEDIUM, this.blockState, (Direction)blockEntity.getBlockState().getValue(FACING)).createInstance();
+        this.chassisLarge = (ModelData)this.getTransformMaterial().getModel(TFMGPartialModels.AIR_INTAKE_LARGE, this.blockState, (Direction)blockEntity.getBlockState().getValue(FACING)).createInstance();
     }
-    @Override
+
     public void init() {
-
-
-
-
-        RotatingData data = setup(getRotatingMaterial().getModel(AllPartialModels.SHAFT_HALF, blockState, blockState.getValue(FACING).getOpposite())
-                .createInstance());
-
-
-            shaft = Optional.of(data);
-
+        RotatingData data = this.setup((RotatingData)this.getRotatingMaterial().getModel(AllPartialModels.SHAFT_HALF, this.blockState, ((Direction)this.blockState.getValue(FACING)).getOpposite()).createInstance());
+        this.shaft = Optional.of(data);
     }
 
     private float getFanSpeed() {
-        float speed = blockEntity.getSpeed();
-        if (speed > 0)
-            speed = Mth.clamp(speed, 80, 64 * 20);
-        if (speed < 0)
-            speed = Mth.clamp(speed, -64 * 20, -80);
+        float speed = ((AirIntakeBlockEntity)this.blockEntity).getSpeed();
+        if (speed > 0.0F) {
+            speed = Mth.clamp(speed, 80.0F, 1280.0F);
+        }
+
+        if (speed < 0.0F) {
+            speed = Mth.clamp(speed, -1280.0F, -80.0F);
+        }
+
         return speed;
     }
 
-    @Override
     public void update() {
-        shaft.ifPresent(this::updateRotation);
-
-
-
+        this.shaft.ifPresent((x$0) -> {
+            this.updateRotation(x$0);
+        });
     }
 
-
-    @Override
     public void beginFrame() {
-
-
-
         PoseStack msFan = new PoseStack();
         TransformStack msrFan = TransformStack.cast(msFan);
-        msrFan.translate(getInstancePosition());
-
+        msrFan.translate(this.getInstancePosition());
         PoseStack msFanMedium = new PoseStack();
         TransformStack msrFanMedium = TransformStack.cast(msFanMedium);
-        msrFanMedium.translate(getInstancePosition());
-        //msrFan.translate(0,0,0);
+        msrFanMedium.translate(this.getInstancePosition());
+        float x;
+        float z;
+        if (this.direction.getAxis().isHorizontal()) {
+            x = 0.0F;
+            z = 0.0F;
+            if (this.direction == Direction.NORTH) {
+                x = 1.0F;
+            }
 
+            if (this.direction == Direction.SOUTH) {
+                x = -1.0F;
+            }
 
+            if (this.direction == Direction.WEST) {
+                z = -1.0F;
+            }
 
+            if (this.direction == Direction.EAST) {
+                z = 1.0F;
+            }
 
-        if(direction.getAxis().isHorizontal()) {
-            float x = 0;
-            float z = 0;
-            if(direction == Direction.NORTH)
-                x=1f;
-            if(direction == Direction.SOUTH)
-                x=-1f;
-            if(direction == Direction.WEST)
-                z=-1f;
-            if(direction == Direction.EAST)
-                z=1f;
-
-
-            msrFan.translate(x,1,z);
-            msrFanMedium.translate(x/2,0.5,z/2);
-        }else {
-            msrFanMedium.translate(0.5,0,0.5);
-            msrFan.translate(1,0,1);
+            msrFan.translate((double)x, 1.0, (double)z);
+            msrFanMedium.translate((double)(x / 2.0F), 0.5, (double)(z / 2.0F));
+        } else {
+            msrFanMedium.translate(0.5, 0.0, 0.5);
+            msrFan.translate(1.0, 0.0, 1.0);
         }
-        //
-        float time = AnimationTickHolder.getRenderTime(world);
-        float speed = blockEntity.maxShaftSpeed * 2;
-        if (speed > 0)
-            speed = Mth.clamp(speed, 80, 64 * 20);
-        if (speed < 0)
-            speed = Mth.clamp(speed, -64 * 20, -80);
-        float angle = (time * speed * 3 / 10f) % 360;
-        //
-        angle = angle / 180f * (float) Math.PI;
+
+        x = AnimationTickHolder.getRenderTime(this.world);
+        z = ((AirIntakeBlockEntity)this.blockEntity).maxShaftSpeed * 2.0F;
+        if (z > 0.0F) {
+            z = Mth.clamp(z, 80.0F, 1280.0F);
+        }
+
+        if (z < 0.0F) {
+            z = Mth.clamp(z, -1280.0F, -80.0F);
+        }
+
+        float angle = x * z * 3.0F / 10.0F % 360.0F;
+        angle = angle / 180.0F * 3.1415927F;
         msrFan.centre();
         msrFanMedium.centre();
-        msrFan.rotate(direction,angle);
-        msrFanMedium.rotate(direction,angle);
+        msrFan.rotate(this.direction, angle);
+        msrFanMedium.rotate(this.direction, angle);
         msrFan.unCentre();
         msrFanMedium.unCentre();
-
-
-
-
-        if(blockEntity.isUsedByController) {
-            fan_medium.setEmptyTransform();
-            fan.delete();
-            fan_large.setEmptyTransform();
-
+        if (((AirIntakeBlockEntity)this.blockEntity).isUsedByController) {
+            this.fan_medium.setEmptyTransform();
+            this.fan.delete();
+            this.fan_large.setEmptyTransform();
         }
-        if(!blockEntity.isController) {
-            chassisMedium.setEmptyTransform();
-            chassisLarge.setEmptyTransform();
-            fan_medium.setEmptyTransform();
-            fan_large.setEmptyTransform();
 
+        if (!((AirIntakeBlockEntity)this.blockEntity).isController) {
+            this.chassisMedium.setEmptyTransform();
+            this.fan_medium.setEmptyTransform();
+            this.fan_large.setEmptyTransform();
         }
-        if(!blockEntity.isUsedByController) {
-            if(blockEntity.diameter ==1) {
-                  updateRotation(fan, getFanSpeed());
-                fan_medium.setEmptyTransform();
-                fan_large.setEmptyTransform();
-            }
-            if(blockEntity.diameter ==2) {
-                //updateRotation(fan_medium, getFanSpeed());
-                fan_medium.setTransform(msFanMedium);
-                fan.delete();
-                fan_large.setEmptyTransform();
 
+        if (!((AirIntakeBlockEntity)this.blockEntity).isUsedByController) {
+            if (((AirIntakeBlockEntity)this.blockEntity).diameter == 1) {
+                this.updateRotation(this.fan, this.getFanSpeed());
+                this.fan_medium.setEmptyTransform();
+                this.fan_large.setEmptyTransform();
             }
 
-            if(blockEntity.diameter ==3) {
-
-                fan_large.setTransform(msFan);
-
-                fan.delete();
-                fan_medium.setEmptyTransform();
+            if (((AirIntakeBlockEntity)this.blockEntity).diameter == 2) {
+                this.fan_medium.setTransform(msFanMedium);
+                this.fan.delete();
+                this.fan_large.setEmptyTransform();
             }
 
-        }else {
-            fan.delete();
-            fan_medium.setEmptyTransform();
-            fan_large.setEmptyTransform();
+            if (((AirIntakeBlockEntity)this.blockEntity).diameter == 3) {
+                this.fan_large.setTransform(msFan);
+                this.fan.delete();
+                this.fan_medium.setEmptyTransform();
+            }
+        } else {
+            this.fan.delete();
+            this.fan_medium.setEmptyTransform();
+            this.fan_large.setEmptyTransform();
         }
-        /////////////
+
         PoseStack ms = new PoseStack();
         TransformStack msr = TransformStack.cast(ms);
-
-        msr.translate(getInstancePosition());
-
-
-        if(direction==Direction.NORTH)
+        msr.translate(this.getInstancePosition());
+        if (this.direction == Direction.NORTH) {
             msr.translateZ(0.001);
-        if(direction==Direction.SOUTH)
+        }
+
+        if (this.direction == Direction.SOUTH) {
             msr.translateZ(-0.001);
-        if(direction==Direction.WEST)
+        }
+
+        if (this.direction == Direction.WEST) {
             msr.translateX(0.001);
-        if(direction==Direction.EAST)
+        }
+
+        if (this.direction == Direction.EAST) {
             msr.translateX(-0.001);
-        if(direction==Direction.UP)
+        }
+
+        if (this.direction == Direction.UP) {
             msr.translateY(-0.001);
-        if(direction==Direction.DOWN)
+        }
+
+        if (this.direction == Direction.DOWN) {
             msr.translateY(0.001);
+        }
 
-         if(blockEntity.hasShaft) {
-             frame.setTransform(ms);
-              frameClosed.setEmptyTransform();
+        if (((AirIntakeBlockEntity)this.blockEntity).hasShaft) {
+            this.frame.setTransform(ms);
+            this.frameClosed.setEmptyTransform();
+        } else {
+            this.frameClosed.setTransform(ms);
+            this.frame.setEmptyTransform();
+        }
 
-          } else {
-              frameClosed.setTransform(ms);
-              frame.setEmptyTransform();
-          }
         PoseStack ms1 = new PoseStack();
         TransformStack msr1 = TransformStack.cast(ms1);
-
-        msr1.translate(getInstancePosition());
-
+        msr1.translate(this.getInstancePosition());
         PoseStack ms2 = new PoseStack();
         TransformStack msr2 = TransformStack.cast(ms2);
+        msr2.translate(this.getInstancePosition());
+        if (this.direction.getAxis().isHorizontal()) {
+            msr1.translateY(1.0);
+            if (this.direction == Direction.NORTH) {
+                msr1.translateX(1.0);
+            }
 
-        msr2.translate(getInstancePosition());
+            if (this.direction == Direction.SOUTH) {
+                msr1.translateX(-1.0);
+            }
 
-        if(direction.getAxis().isHorizontal()){
-            msr1.translateY(1);
-            if(direction == Direction.NORTH)
-                msr1.translateX(1);
-            if(direction == Direction.SOUTH)
-                msr1.translateX(-1);
-            if(direction == Direction.EAST)
-                msr1.translateZ(1);
-            if(direction == Direction.WEST)
-                msr1.translateZ(-1);
-        }else {
+            if (this.direction == Direction.EAST) {
+                msr1.translateZ(1.0);
+            }
 
-                msr1.translateZ(1);
-                msr1.translateX(1);
-                if(direction!=Direction.DOWN)
-                    msr2.translateZ(1);
-                msr2.translateX(1);
+            if (this.direction == Direction.WEST) {
+                msr1.translateZ(-1.0);
+            }
+        } else {
+            msr1.translateZ(1.0);
+            msr1.translateX(1.0);
+            if (this.direction != Direction.DOWN) {
+                msr2.translateZ(1.0);
+            }
 
-
+            msr2.translateX(1.0);
         }
 
-         if(blockEntity.diameter ==2){
-             chassisMedium.setTransform(ms2);
-             chassisLarge.setEmptyTransform();
-         }
-
-        if(blockEntity.diameter ==3){
-            chassisLarge.setTransform(ms1);
-            chassisMedium.setEmptyTransform();
+        if (((AirIntakeBlockEntity)this.blockEntity).diameter == 2) {
+            this.chassisMedium.setTransform(ms2);
+            this.chassisLarge.setEmptyTransform();
         }
 
-
-
-
+        if (((AirIntakeBlockEntity)this.blockEntity).diameter == 3) {
+            this.chassisLarge.setTransform(ms1);
+            this.chassisMedium.setEmptyTransform();
+        }
 
     }
 
-    @Override
     public void updateLight() {
-        BlockPos behind = pos.relative(opposite);
-
-        //AABB a = new AABB(pos);
-        //a.inflate()
-        //blockEntity.getLevel().getBlockStates(a);
-
-
-        shaft.ifPresent(d -> relight(pos, d));
-        relight(pos,frame);
-        relight(pos,frameClosed);
-
-        relight(pos,chassisLarge);
-        relight(pos,chassisMedium);
-
-        BlockPos inFront = pos.relative(direction);
-        relight(pos, fan);
-        relight(pos, fan_medium);
-        relight(pos, fan_large);
-
-
-
+        BlockPos behind = this.pos.relative(this.opposite);
+        this.shaft.ifPresent((d) -> {
+            this.relight(this.pos, new FlatLit[]{d});
+        });
+        this.relight(this.pos, new FlatLit[]{this.frame});
+        this.relight(this.pos, new FlatLit[]{this.frameClosed});
+        this.relight(this.pos, new FlatLit[]{this.chassisLarge});
+        this.relight(this.pos, new FlatLit[]{this.chassisMedium});
+        //BlockPos inFront = this.pos.m_121945_(this.direction);
+        this.relight(this.pos, new FlatLit[]{this.fan});
+        this.relight(this.pos, new FlatLit[]{this.fan_medium});
+        this.relight(this.pos, new FlatLit[]{this.fan_large});
     }
 
-    @Override
     public void remove() {
-        shaft.ifPresent(InstanceData::delete);
-        fan.delete();
-        fan_medium.delete();
-        fan_large.delete();
-        frame.delete();
-        frameClosed.delete();
-        chassisMedium.delete();
-        chassisLarge.delete();
+        this.shaft.ifPresent(InstanceData::delete);
+        this.fan.delete();
+        this.fan_medium.delete();
+        this.fan_large.delete();
+        this.frame.delete();
+        this.frameClosed.delete();
+        this.chassisMedium.delete();
+        this.chassisLarge.delete();
     }
 }

@@ -1,8 +1,9 @@
 package com.drmangotea.tfmg.blocks.electricity.polarizer;
 
-
+import com.drmangotea.tfmg.base.MaxBlockVoltage;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.blocks.electricity.base.ElectricBlockEntity;
+import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.item.SmartInventory;
@@ -43,14 +44,23 @@ public class PolarizerBlockEntity extends ElectricBlockEntity implements IHaveGo
 
         this.itemCapability = LazyOptional.of(() -> new CombinedInvWrapper(this.inventory));
     }
+    @Override
+    public int maxVoltage() {
+        return MaxBlockVoltage.MAX_VOLTAGES.get(TFMGBlockEntities.POLARIZER.get());
+    }
 
+    @Override
+    public void lazyTick() {
+        super.lazyTick();
 
+        getOrCreateElectricNetwork().requestEnergy(this);
+    }
 
     @Override
     public void tick() {
         super.tick();
 
-        if(voltage<200) {
+        if(getVoltage()<200) {
             timer = 0;
             return;
         }
@@ -80,8 +90,15 @@ public class PolarizerBlockEntity extends ElectricBlockEntity implements IHaveGo
     }
 
 
+    @Override
+    public int FECapacity() {
+        return 10000;
+    }
 
-
+    @Override
+    public boolean outputAllowed() {
+        return false;
+    }
 
     @Override
     public void destroy() {

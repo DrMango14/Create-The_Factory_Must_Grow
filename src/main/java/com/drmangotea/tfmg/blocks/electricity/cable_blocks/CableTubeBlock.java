@@ -1,8 +1,11 @@
 package com.drmangotea.tfmg.blocks.electricity.cable_blocks;
 
 
+import com.drmangotea.tfmg.blocks.electricity.base.IHaveCables;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.ConnectNeightborsPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
+import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.drmangotea.tfmg.registry.TFMGShapes;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.placement.IPlacementHelper;
@@ -34,10 +37,11 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.PacketDistributor;
 
 import java.util.function.Predicate;
 
-public class CableTubeBlock extends RotatedPillarBlock implements IBE<CableTubeBlockEntity>, SimpleWaterloggedBlock {
+public class CableTubeBlock extends RotatedPillarBlock implements IBE<CableTubeBlockEntity>, SimpleWaterloggedBlock, IHaveCables {
 
     public static final int placementHelperId = PlacementHelpers.register(new PlacementHelper());
 
@@ -54,7 +58,16 @@ public class CableTubeBlock extends RotatedPillarBlock implements IBE<CableTubeB
         super.createBlockStateDefinition(builder);
     }
 
+    @Override
+    public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
+        TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new ConnectNeightborsPacket(pos));
+        withBlockEntityDo(level,pos, CableTubeBlockEntity::onPlaced);
 
+    }
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        IBE.onRemove(state, level, pos, newState);
+    }
     @Override
     public BlockState updateShape(BlockState p_51461_, Direction p_51462_, BlockState p_51463_, LevelAccessor p_51464_, BlockPos p_51465_, BlockPos p_51466_) {
         if (p_51461_.getValue(WATERLOGGED)) {

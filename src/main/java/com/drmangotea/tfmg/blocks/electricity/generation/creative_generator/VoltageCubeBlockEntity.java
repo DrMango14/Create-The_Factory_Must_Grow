@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.blocks.electricity.generation.creative_generator;
 
+
 import com.drmangotea.tfmg.blocks.electricity.base.ElectricBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,7 +15,12 @@ public class VoltageCubeBlockEntity extends ElectricBlockEntity {
 
     @Override
     public int voltageGeneration() {
-        return 10;
+        return 100;
+    }
+
+    @Override
+    public int maxVoltage() {
+        return Integer.MAX_VALUE;
     }
 
     @Override

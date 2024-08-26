@@ -1,7 +1,11 @@
 package com.drmangotea.tfmg.blocks.electricity.resistors;
 
-import com.drmangotea.tfmg.blocks.electricity.base.ElectricBlockEntity;
-import com.drmangotea.tfmg.blocks.electricity.base.IElectricBlock;
+
+import com.drmangotea.tfmg.base.MaxBlockVoltage;
+import com.drmangotea.tfmg.blocks.electricity.base.VoltageAlteringBlockEntity;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.ElectricalNetwork;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.IElectric;
+import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -12,8 +16,6 @@ import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -23,11 +25,16 @@ import java.util.List;
 import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 
 
-public class ResistorBlockEntity extends ElectricBlockEntity {
+public class ResistorBlockEntity extends VoltageAlteringBlockEntity {
 
     protected ScrollValueBehaviour outputVoltage;
     public ResistorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+    }
+
+    @Override
+    public int getOutputVoltage() {
+        return outputVoltage.value;
     }
 
     @Override
@@ -38,56 +45,105 @@ public class ResistorBlockEntity extends ElectricBlockEntity {
                 this, new ResistorValueBox());
         outputVoltage.between(0, max);
         outputVoltage.value = 50;
-        //outputVoltage.withCallback(i -> this.updateVoltageOutput());
+        outputVoltage.withCallback(i -> setVoltage(voltageGeneration(),true));
         behaviours.add(outputVoltage);
     }
 
 
-    public void updateVoltageOutput(){
+    //public void updateVoltage(){
+    //    needsNetworkUpdate();
+    //    needsVoltageUpdate();
+    //    if(level.getBlockEntity(getBlockPos().relative(getBlockState().getValue(FACING))) instanceof IElectric be){
+    //        be.needsNetworkUpdate();
+    //        be.needsVoltageUpdate();
+//
+    //    }
+    //}
 
-
-
-    }
-
-
-    public int getVoltageOutput(){
-        return Math.min(outputVoltage.getValue(),voltage);
+    @Override
+    public boolean outputAllowed() {
+        return false;
     }
 
     @Override
-    public void tick() {
-        super.tick();
+    public void lazyTick() {
+        super.lazyTick();
 
 
-                BlockEntity be1 = level.getBlockEntity(getBlockPos().relative(getBlockState().getValue(FACING)));
-                if (be1 instanceof IElectricBlock be2)
-                    if (be2.hasElectricitySlot(getBlockState().getValue(FACING).getOpposite())) {
-                        sendCharge(be2);
+
+        getOrCreateElectricNetwork().requestEnergy(this);
+
+        Direction facing = getBlockState().getValue(FACING);
+        if(level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be){
+            if(be.hasElectricitySlot(facing.getOpposite())){
 
 
-                    }
+
+                ElectricalNetwork.sendEnergy(this,be);
+
+
+            }
+        }
 
     }
 
 
-    public void sendCharge(IElectricBlock be){
+    @Override
+    public void setVoltage(int value, boolean update) {
+        super.setVoltage(value, update);
 
 
+        Direction facing = getBlockState().getValue(FACING);
+        if(level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be){
+            if(be.hasElectricitySlot(facing.getOpposite())){
 
-        int maxPossibleTransfer = Math.min(transferSpeed(),Math.min(energy.getEnergyStored(),be.getForgeEnergy().getMaxEnergyStored()-be.getForgeEnergy().getEnergyStored()));
+                be.getOrCreateElectricNetwork().updateNetworkVoltage();
 
 
-        if(be.getForgeEnergy().getEnergyStored() < getForgeEnergy().getEnergyStored()) {
-            be.getForgeEnergy().receiveEnergy(maxPossibleTransfer, false);
-            getForgeEnergy().extractEnergy(maxPossibleTransfer, false);
+            }
         }
     }
 
-
-    @Override
-    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        return false;
+    public int voltageOutput() {
+       // return  0;
+        return Math.min(outputVoltage.getValue(),getVoltage());
     }
+
+    //@Override
+    //public void onPlaced() {
+    //    super.onPlaced();
+//
+    //    Direction facing = getBlockState().getValue(FACING);
+    //    if(level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be){
+    //        if(be.hasElectricitySlot(facing.getOpposite())){
+    //            be.needsVoltageUpdate();
+//
+    //        }
+    //    }
+//
+//
+    //}
+
+    //@Override
+    //public void destroy() {
+//
+    //    outputVoltage.setValue(0);
+//
+    //    Direction facing = getBlockState().getValue(FACING);
+    //    if(level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be){
+    //        if(be.hasElectricitySlot(facing.getOpposite())){
+    //            be.getOrCreateElectricNetwork().updateNetworkVoltage();
+    //            be.needsVoltageUpdate();
+//
+//
+    //        }
+    //    }
+//
+//
+    //    super.destroy();
+//
+//
+    //}
 
     class ResistorValueBox extends ValueBoxTransform.Sided {
 
@@ -125,8 +181,8 @@ public class ResistorBlockEntity extends ElectricBlockEntity {
 
     }
     @Override
-    public float maxVoltage() {
-        return 1500;
+    public int maxVoltage() {
+        return MaxBlockVoltage.MAX_VOLTAGES.get(TFMGBlockEntities.RESISTOR.get());
     }
     @Override
     public boolean hasElectricitySlot(Direction direction) {

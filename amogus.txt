@@ -1,0 +1,23 @@
+# The Electricity Update
+
+## Added:
+generators
+cables
+electric motors
+light bulbs
+galvanic cell
+polarizer
+firebox
+flamethrowers
+advanced potato cannons
+pipe bombs ;3
+lead
+lithium
+nickel
+galena
+colored caution blocks
+
+
+## Fixed:
+compatibility issues with fluids
+many small bugs

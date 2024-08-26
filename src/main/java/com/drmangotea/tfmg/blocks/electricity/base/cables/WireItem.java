@@ -1,7 +1,11 @@
 package com.drmangotea.tfmg.blocks.electricity.base.cables;
 
+
+import com.drmangotea.tfmg.blocks.electricity.base.ElectricBlockEntity;
 import com.drmangotea.tfmg.blocks.electricity.base.IHaveCables;
+import com.drmangotea.tfmg.blocks.electricity.cable_blocks.copycat_cable_block.CopycatCableBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGItems;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.utility.Lang;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -38,6 +42,14 @@ public class WireItem extends Item {
 
 
 
+        if(level.getBlockEntity(pos) instanceof ElectricBlockEntity)
+            return InteractionResult.PASS;
+
+        if(level.getBlockEntity(pos) instanceof CopycatCableBlockEntity)
+            return InteractionResult.PASS;
+
+        if(level.getBlockEntity(pos) instanceof KineticBlockEntity)
+            return InteractionResult.PASS;
 
 
         if(state.getBlock() instanceof IHaveCables){
@@ -51,12 +63,12 @@ public class WireItem extends Item {
                 boolean placeWire = true;
 
                 if(level.getBlockEntity(pos)!=null)
-                    if(level.getBlockEntity(pos) instanceof CableConnectorBlockEntity be){
+                    if(level.getBlockEntity(pos) instanceof CableConnectorBlockEntity be&&!(level.getBlockEntity(pos) instanceof ElectricBlockEntity)){
 
 
                         if(testConnection(stack,be,pos)) {
                             BlockPos pos2 = new BlockPos(stack.getOrCreateTag().getInt("X1"), stack.getOrCreateTag().getInt("Y1"), stack.getOrCreateTag().getInt("Z1"));
-                            if(level.getBlockEntity(pos2) instanceof CableConnectorBlockEntity be2) {
+                            if(level.getBlockEntity(pos2) instanceof CableConnectorBlockEntity be2&&!(level.getBlockEntity(pos2) instanceof ElectricBlockEntity)) {
 
                                 if(be2.getBlockPos() == be.getBlockPos())
                                     return InteractionResult.PASS;
@@ -65,13 +77,18 @@ public class WireItem extends Item {
                                     return InteractionResult.PASS;
 
 
-
-                                be.addConnection(material, pos2, true);
+                                be.addConnection(material, pos2, true,false);
                                 be.sendData();
                                 be.setChanged();
-                                be2.addConnection(material, pos, false);
+                                be2.addConnection(material, pos, false,false);
                                 be2.sendData();
                                 be2.setChanged();
+
+                                be.makeControllerAndSpread();
+
+                                be.getOrCreateElectricNetwork().updateNetworkVoltage();
+
+
                             }
 
 
@@ -94,8 +111,6 @@ public class WireItem extends Item {
             }else            player.setItemInHand(context.getHand(), new ItemStack(TFMGItems.COPPER_CABLE.get(), stack.getCount() - 1));
 
 
-            //if(!placeWire)
-            //    player.kill();
 
             return InteractionResult.SUCCESS;
             }
@@ -104,7 +119,7 @@ public class WireItem extends Item {
             stack.getOrCreateTag().putInt("X1",pos.getX());
             stack.getOrCreateTag().putInt("Y1",pos.getY());
             stack.getOrCreateTag().putInt("Z1",pos.getZ());
-            if(level.getBlockEntity(pos) instanceof CableConnectorBlockEntity connector)
+            if(level.getBlockEntity(pos) instanceof CableConnectorBlockEntity connector&&!(level.getBlockEntity(pos) instanceof ElectricBlockEntity))
                 connector.player = player;
 
 
@@ -125,7 +140,7 @@ public class WireItem extends Item {
             BlockPos pos = new BlockPos(stack.getOrCreateTag().getInt("X1"),stack.getOrCreateTag().getInt("Y1"),stack.getOrCreateTag().getInt("Z1"));
 
 
-            if(level.getBlockEntity(pos) instanceof CableConnectorBlockEntity be){
+            if(level.getBlockEntity(pos) instanceof CableConnectorBlockEntity be&&!(level.getBlockEntity(pos) instanceof ElectricBlockEntity)){
                 be.player = null;
             }
 

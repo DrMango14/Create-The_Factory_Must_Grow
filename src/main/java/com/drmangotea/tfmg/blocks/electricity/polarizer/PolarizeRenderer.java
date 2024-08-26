@@ -44,7 +44,7 @@ public class PolarizeRenderer extends SafeBlockEntityRenderer<PolarizerBlockEnti
 
 
 
-		itemRenderer.renderStatic(heldItem, ItemDisplayContext.FIXED, light, overlay, ms, buffer, be.getLevel(),0);
+		itemRenderer.renderStatic(heldItem, ItemDisplayContext.FIXED, light, overlay, ms, buffer,be.getLevel(), 0);
 
 		ms.popPose();
 	}

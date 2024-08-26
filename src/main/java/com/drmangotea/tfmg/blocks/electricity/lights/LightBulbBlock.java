@@ -1,13 +1,18 @@
 package com.drmangotea.tfmg.blocks.electricity.lights;
 
+
+import com.drmangotea.tfmg.blocks.electricity.base.IHaveCables;
 import com.drmangotea.tfmg.blocks.electricity.base.WallMountBlock;
+import com.drmangotea.tfmg.blocks.electricity.base.cables.ConnectNeightborsPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
+import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.drmangotea.tfmg.registry.TFMGShapes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
@@ -21,8 +26,9 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.PacketDistributor;
 
-public class LightBulbBlock extends WallMountBlock implements IBE<LightBulbBlockEntity>, SimpleWaterloggedBlock, IWrenchable {
+public class LightBulbBlock extends WallMountBlock implements IBE<LightBulbBlockEntity>, SimpleWaterloggedBlock, IWrenchable, IHaveCables {
 
     public static final IntegerProperty LIGHT = BlockStateProperties.LEVEL;
 
@@ -35,7 +41,16 @@ public class LightBulbBlock extends WallMountBlock implements IBE<LightBulbBlock
     }
 
 
+    @Override
+    public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
+        TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new ConnectNeightborsPacket(pos));
+        withBlockEntityDo(level,pos, LightBulbBlockEntity::onPlaced);
 
+    }
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        IBE.onRemove(state, level, pos, newState);
+    }
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 

@@ -1,7 +1,30 @@
 {
   "variants": {
-    "": {
+    "facing=down": {
+      "model": "tfmg:block/capacitor/block",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "tfmg:block/capacitor/block",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/capacitor/block",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "tfmg:block/capacitor/block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
       "model": "tfmg:block/capacitor/block"
+    },
+    "facing=west": {
+      "model": "tfmg:block/capacitor/block",
+      "x": 90,
+      "y": 270
     }
   }
 }

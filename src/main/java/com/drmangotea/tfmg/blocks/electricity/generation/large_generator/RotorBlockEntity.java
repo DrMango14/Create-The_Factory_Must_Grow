@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.blocks.electricity.generation.large_generator;
 
+
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
@@ -46,6 +47,51 @@ public class RotorBlockEntity extends KineticBlockEntity {
     }
 
     @Override
+    public void onSpeedChanged(float previousSpeed) {
+        super.onSpeedChanged(previousSpeed);
+
+        for(BlockPos pos : statorBlocks){
+
+            if(level.getBlockEntity(pos) instanceof StatorBlockEntity be){
+                if(be.hasOutput){
+                    be.needsNetworkUpdate();
+
+                    be.updateVoltage = 5;
+
+
+
+                }
+            }
+
+
+
+        }
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        for(BlockPos pos : statorBlocks){
+
+            if(level.getBlockEntity(pos) instanceof StatorBlockEntity be){
+                if(be.hasOutput){
+
+                    be.setVoltage(0);
+
+                    be.needsNetworkUpdate();
+
+
+
+
+                }
+            }
+
+
+
+        }
+    }
+
+    @Override
     public void tick() {
         super.tick();
 
@@ -81,7 +127,7 @@ public class RotorBlockEntity extends KineticBlockEntity {
 
 
     public void generateVoltage(){
-        float power = 2.5f*getSpeed()*(getSpeed()/25f);
+        float power = Math.abs(getSpeed())*3f;
 
         for(BlockPos pos : statorBlocks){
 
