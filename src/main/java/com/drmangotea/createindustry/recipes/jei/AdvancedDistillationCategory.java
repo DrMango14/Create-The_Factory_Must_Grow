@@ -51,7 +51,7 @@ public class AdvancedDistillationCategory extends CreateRecipeCategory<Distillat
 					.addSlot(RecipeIngredientRole.OUTPUT, 105, y)
 					.setBackground(getRenderedSlot(), -1, -1)
 					.addIngredient(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getFluidResults().get(i)))
-					.addTooltipCallback(addFluidTooltip(recipe.getFirstFluidResult().getAmount()));
+					.addTooltipCallback(addFluidTooltip(recipe.getFluidResults().get(i).getAmount()));
 		}
 
 	}
