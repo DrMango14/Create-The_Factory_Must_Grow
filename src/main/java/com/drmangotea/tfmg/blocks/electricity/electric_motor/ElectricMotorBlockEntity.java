@@ -2,7 +2,7 @@ package com.drmangotea.tfmg.blocks.electricity.electric_motor;
 
 
 import com.drmangotea.tfmg.base.MaxBlockVoltage;
-import com.drmangotea.tfmg.blocks.electricity.base.KineticEnergyBlockEntity;
+import com.drmangotea.tfmg.blocks.electricity.base.KineticElectricBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.jozufozu.flywheel.util.transform.TransformStack;
@@ -25,7 +25,7 @@ import java.util.List;
 
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
 
-public class ElectricMotorBlockEntity extends KineticEnergyBlockEntity implements IHaveGoggleInformation {
+public class ElectricMotorBlockEntity extends KineticElectricBlockEntity implements IHaveGoggleInformation {
 
     public static final int DEFAULT_SPEED = 16;
     public static final int MAX_SPEED = 256;

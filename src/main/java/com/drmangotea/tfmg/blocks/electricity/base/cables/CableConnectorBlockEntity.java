@@ -17,6 +17,8 @@ import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.utility.Lang;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -51,6 +53,8 @@ public class CableConnectorBlockEntity extends SmartBlockEntity implements IHave
     public int voltage=0;
 
     public boolean destroyed=false;
+
+
 
     public boolean networkUpdate = false;
     public boolean needsVoltageUpdate = false;
@@ -103,6 +107,10 @@ public class CableConnectorBlockEntity extends SmartBlockEntity implements IHave
     @Override
     public void lazyTick() {
         super.lazyTick();
+
+        getOrCreateElectricNetwork().members.removeIf(member->!(level.getBlockEntity(BlockPos.of(member.getId()))instanceof IElectric));
+        getOrCreateElectricNetwork().members.removeIf(member->member.getNetwork()!=getNetwork());
+
         getOrCreateElectricNetwork().add(this);
 
 
@@ -140,11 +148,14 @@ public class CableConnectorBlockEntity extends SmartBlockEntity implements IHave
         lazyEnergyHandler = LazyOptional.of(() -> energy);
     }
 
+
+
     public void tick(){
         super.tick();
 
         if(breakNextTick)
             explode();
+
 
         if(getVoltage()>maxVoltage())
             voltageFailure();
@@ -189,11 +200,11 @@ public class CableConnectorBlockEntity extends SmartBlockEntity implements IHave
 
 
     @Override
-    public void destroy() {
+    public void remove() {
         super.destroy();
         voltage = 0;
 
-        getOrCreateElectricNetwork().remove(this);
+
 
        // needsNetworkUpdate();
        // needsVoltageUpdate();
@@ -203,15 +214,19 @@ public class CableConnectorBlockEntity extends SmartBlockEntity implements IHave
 
         destroyed = true;
 
+        getOrCreateElectricNetwork().remove(this);
+        ElectricNetworkManager.networks.get(getLevel())
+                .remove(getId());
 
 
-        if(network == getId()) {
 
-            getOrCreateElectricNetwork().members.forEach(c->c.setNetwork(c.getNetwork(),false));
-
-            ElectricNetworkManager.networks.get(getLevel())
-                    .remove(network);
-        }
+        //if(network == getId()) {
+//
+        //    getOrCreateElectricNetwork().members.forEach(c->c.setNetwork(c.getNetwork(),false));
+//
+        //    ElectricNetworkManager.networks.get(getLevel())
+        //            .remove(network);
+        //}
         ElectricNetworkManager.networks.get(level)
                 .remove(getId());
 
@@ -224,8 +239,8 @@ public class CableConnectorBlockEntity extends SmartBlockEntity implements IHave
 
 
                 be.makeControllerAndSpread();
-                //be.needsNetworkUpdate();
-                //be.needsVoltageUpdate();
+
+
 
                 be.getOrCreateElectricNetwork().updateNetworkVoltage();
                 be.getOrCreateElectricNetwork().updateVoltageFromNetwork();
@@ -258,7 +273,7 @@ public class CableConnectorBlockEntity extends SmartBlockEntity implements IHave
 
 
 
-
+        super.remove();
 
     }
 
@@ -267,41 +282,7 @@ public class CableConnectorBlockEntity extends SmartBlockEntity implements IHave
         return true;
     }
 
-    @Override
-    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 
-
-
-        // Lang.translate("voltage", getVoltage())
-        //         .style(ChatFormatting.GREEN)
-        //         .forGoggles(tooltip, 1);
-//
-        // Lang.translate("voltage", getOrCreateElectricNetwork().members.size())
-        //         .style(ChatFormatting.GOLD)
-        //         .forGoggles(tooltip, 1);
-        // if(getForgeEnergy()!=null)
-        //     Lang.translate("voltage", getOrCreateElectricNetwork().voltage)
-        //             .style(ChatFormatting.GREEN)
-        //             .forGoggles(tooltip, 1);
-        // if(getForgeEnergy()!=null)
-        //     Lang.translate("fe", getForgeEnergy().getEnergyStored())
-        //             .style(ChatFormatting.GREEN)
-        //             .forGoggles(tooltip, 1);
-//
-//
-        // Lang.translate("network", BlockPos.of(network).getX())
-        //         .style(ChatFormatting.YELLOW)
-        //         .forGoggles(tooltip, 1);
-        // Lang.translate("network", BlockPos.of(network).getY())
-        //         .style(ChatFormatting.YELLOW)
-        //         .forGoggles(tooltip, 1);
-        // Lang.translate("network", BlockPos.of(network).getZ())
-        //         .style(ChatFormatting.YELLOW)
-        //         .forGoggles(tooltip, 1);
-
-
-        return true;
-    }
 
     public void changeToExtension(){
 
@@ -335,13 +316,23 @@ public class CableConnectorBlockEntity extends SmartBlockEntity implements IHave
         if(level.isClientSide)
             return;
 
+
+
         getOrCreateElectricNetwork().members.remove(this);
 
         CreateTFMG.NETWORK_MANAGER.getOrCreateNetworkFor(this);
         setNetwork(getId(),false);
         network = getId();
 
+
+
         onConnected();
+
+
+
+
+
+
 
 
     }
@@ -499,6 +490,7 @@ public class CableConnectorBlockEntity extends SmartBlockEntity implements IHave
 
         voltage = 0;
 
+
         networkUpdate = true;
 
         connectNeighbors();
@@ -509,6 +501,9 @@ public class CableConnectorBlockEntity extends SmartBlockEntity implements IHave
 
         if(!level.isClientSide)
             TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new VoltagePacket(getBlockPos()));
+        getOrCreateElectricNetwork().updateNetworkVoltage();
+
+        needsNetworkUpdate();
 
     }
 
@@ -725,7 +720,8 @@ public class CableConnectorBlockEntity extends SmartBlockEntity implements IHave
 //
         //    TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new EnergyNetworkUpdatePacket(getBlockPos(), network));
         //}
-        if((IElectric) level.getBlockEntity(BlockPos.of(network)) != null) {
+
+        if(level.getBlockEntity(BlockPos.of(network)) instanceof IElectric) {
 
             return CreateTFMG.NETWORK_MANAGER.getOrCreateNetworkFor((IElectric) level.getBlockEntity(BlockPos.of(network)));
 

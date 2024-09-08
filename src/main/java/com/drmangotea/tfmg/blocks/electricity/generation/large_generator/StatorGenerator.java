@@ -21,6 +21,9 @@ public class StatorGenerator extends SpecialBlockStateGen {
             case NORTH, SOUTH, WEST, EAST:
                 value = 0;
                 break;
+
+
+
             case DOWN:
                 if(state.getValue(StatorBlock.STATOR_STATE)== StatorBlock.StatorState.CORNER) {
                     value = 0;

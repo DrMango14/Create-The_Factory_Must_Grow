@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.blocks.electricity.base.cables;
 
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
 import java.util.HashMap;
@@ -18,6 +19,8 @@ public class ElectricNetworkManager{
         networks.remove(world);
 
     }
+
+
 
     public ElectricalNetwork getOrCreateNetworkFor(IElectric be) {
         Long id = be.getId();

@@ -3,7 +3,7 @@
 	"texture_size": [64, 64],
 	"parent":"block/block",
 	"textures": {
-		"0": "tfmg:block/voltmeter",
+		"0": "tfmg:block/energy_meter",
 		"particle": "tfmg:block/steel_block"
 	},
 	"elements": [

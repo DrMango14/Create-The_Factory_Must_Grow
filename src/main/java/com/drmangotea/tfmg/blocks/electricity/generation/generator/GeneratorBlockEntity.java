@@ -2,7 +2,8 @@ package com.drmangotea.tfmg.blocks.electricity.generation.generator;
 
 
 import com.drmangotea.tfmg.base.MaxBlockVoltage;
-import com.drmangotea.tfmg.blocks.electricity.base.KineticEnergyBlockEntity;
+import com.drmangotea.tfmg.blocks.electricity.base.KineticElectricBlockEntity;
+import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
@@ -18,7 +19,7 @@ import java.util.List;
 
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
 
-public class GeneratorBlockEntity extends KineticEnergyBlockEntity {
+public class GeneratorBlockEntity extends KineticElectricBlockEntity {
 
     LerpedFloat generationSpeed = LerpedFloat.linear();
     public GeneratorBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
@@ -46,11 +47,17 @@ public class GeneratorBlockEntity extends KineticEnergyBlockEntity {
     }
     @Override
     public int voltageGeneration() {
-        return (int) Math.abs(getSpeed());
+        return (int) Math.min(255,FEProduction()*3.5f);
     }
 
 
+    @Override
+    public int FEProduction() {
+        float modifier = TFMGConfigs.server().machines.smallGeneratorFeModifier.getF();
 
+
+        return  (int) (((Math.log(Math.abs(getSpeed())-68.25)/Math.log(1.026))-22)*modifier);
+    }
 
     @Override
     protected void read(CompoundTag compound, boolean clientPacket) {
@@ -61,10 +68,7 @@ public class GeneratorBlockEntity extends KineticEnergyBlockEntity {
     public int maxVoltage() {
         return MaxBlockVoltage.MAX_VOLTAGES.get(TFMGBlockEntities.GENERATOR.get());
     }
-    @Override
-    public int FEProduction() {
-        return (int) (voltageGeneration()/3.5f);
-    }
+
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {

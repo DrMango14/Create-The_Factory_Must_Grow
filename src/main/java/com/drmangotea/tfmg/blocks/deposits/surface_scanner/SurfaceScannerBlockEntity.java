@@ -2,7 +2,6 @@ package com.drmangotea.tfmg.blocks.deposits.surface_scanner;
 
 
 import com.drmangotea.tfmg.registry.TFMGBlocks;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
@@ -16,25 +15,31 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static com.drmangotea.tfmg.base.TFMGTools.getDistance;
+
 
 public class SurfaceScannerBlockEntity extends KineticBlockEntity implements IHaveGoggleInformation, IWrenchable {
-    public BlockPos deposit;
-    public BlockPos checkedPosition;
-    public boolean foundDeposit=false;
-    public BlockPos depositPos;
+    public List<BlockPos> deposits = new ArrayList<>();
 
-    public int locatingTimer=0;
+    public boolean foundDeposit=false;
+
+    public Optional<BlockPos> closestDeposit = Optional.empty();
+
+
+    public int locatingTimer = -1;
     public boolean noDepositFound=false;
 
     int dotTimer=0;
     int dotCount=1;
 
-    public int distanceFromDeposit=6969;
+
 
     public LerpedFloat visualAngle = LerpedFloat.angular();
     public float angle = 0;
@@ -47,68 +52,116 @@ public class SurfaceScannerBlockEntity extends KineticBlockEntity implements IHa
         super(typeIn, pos, state);
     }
 
-    @Override
-    public void tick() {
-        super.tick();
-        angle%=360;
-        if (getSpeed() == 0) {
-            foundDeposit=false;
-            noDepositFound=false;
-            locatingTimer=0;
-            return;
-        }
-        if(deposit==null) {
-            foundDeposit = false;
-            distanceFromDeposit=6969;
 
-        }
+    public void manageDots(){
+        dotTimer++;
+        if (dotTimer >= 90) {
+            dotCount = 3;
+            dotTimer = 0;
+
+        } else if (dotTimer >= 60) {
+            dotCount = 2;
+        } else if (dotTimer >= 30)
+            dotCount = 1;
+    }
+
+    public void setVisualAngles(){
         visualAngle.chase(angle, 0.2f, LerpedFloat.Chaser.EXP);
         visualAngle.tickChaser();
 
         visualFlagAngle.chase(flagAngle, 0.8f, LerpedFloat.Chaser.EXP);
         visualFlagAngle.tickChaser();
+    }
 
 
-        if (!foundDeposit) {
-            dotTimer++;
-            locatingTimer++;
-            distanceFromDeposit=6969;
-            if(locatingTimer>=2400){
-                locatingTimer=2400;
-                noDepositFound=true;
-                return;
+
+
+    @Override
+    public void tick() {
+        super.tick();
+
+
+
+
+        foundDeposit = !deposits.isEmpty();
+
+        angle%=360;
+
+
+        if (getSpeed() == 0) {
+            locatingTimer = -1;
+            foundDeposit=false;
+            noDepositFound=false;
+            closestDeposit = Optional.empty();
+            return;
+        }else {
+            if(locatingTimer==-1&& deposits.isEmpty()) {
+                locatingTimer = 20 * 30;
+                closestDeposit = Optional.empty();
+
             }
-
-
-            ///
-            if (dotTimer >= 90) {
-                dotCount = 3;
-                dotTimer = 0;
-
-            } else if (dotTimer >= 60) {
-                dotCount = 2;
-            } else if (dotTimer >= 30)
-                dotCount = 1;
         }
 
 
+
+        int range = 50;
+
+
+
+        if(locatingTimer>=0){
+            //BlockPos checkedPos=getBlockPos().north(50).west(50);
+            for(int i = 0;i<10;i++) {
+                BlockPos checkedPos = new BlockPos(getBlockPos().getX()+level.random.nextInt(range * 2) - 50, -64, getBlockPos().getZ()+level.random.nextInt(range * 2) - 50);
+
+                if (level.getBlockState(checkedPos).is(TFMGBlocks.OIL_DEPOSIT.get())) {
+                    deposits.add(checkedPos);
+                }
+
+            }
+
+
+            if(locatingTimer > 0)
+                locatingTimer--;
+            if(deposits.isEmpty()){
+                closestDeposit = Optional.empty();
+            }
+
+        }
+
+
+
+        setVisualAngles();
+        manageDots();
+
+
+    if(locatingTimer==0)
         if (foundDeposit) {
 
             float zDistance;
             float xDistance;
 
 
-            zDistance =  deposit.getZ()-getBlockPos().getZ();
+            closestDeposit= Optional.of(deposits.get(0));
+
+            for(BlockPos deposit : deposits){
+                float distanceClosest = getDistance(getBlockPos(),closestDeposit.get(),true);
+                float distanceCurrent = getDistance(getBlockPos(),deposit,true);
+
+                if(distanceCurrent<distanceClosest)
+                    closestDeposit = Optional.of(deposit);
+
+            }
 
 
 
-            xDistance =  deposit.getX()-getBlockPos().getX();
+            zDistance =  closestDeposit.get().getZ()-getBlockPos().getZ();
 
 
 
-            int positiveXsquared = Math.abs((int)xDistance)*Math.abs((int)xDistance);
-            int positiveZsquared = Math.abs((int)zDistance)*Math.abs((int)xDistance);
-            distanceFromDeposit = (int)Math.sqrt(positiveXsquared+positiveZsquared);
+            xDistance =  closestDeposit.get().getX()-getBlockPos().getX();
+
+
+
 
 
             if(zDistance <10 && zDistance>-10&&xDistance <10 && xDistance>-10){
@@ -120,7 +173,7 @@ public class SurfaceScannerBlockEntity extends KineticBlockEntity implements IHa
 
             angle = (float) Math.toDegrees(Math.atan(xDistance/zDistance));
 
-            if(this.getBlockPos().getZ()<deposit.getZ())
+            if(this.getBlockPos().getZ()<closestDeposit.get().getZ())
             {
                 angle +=180;
             }
@@ -134,25 +187,7 @@ public class SurfaceScannerBlockEntity extends KineticBlockEntity implements IHa
 
             return;
         }
-        for (int i =0;i<100;i++){
-            int random = Create.RANDOM.nextInt(200);
-            random -= 100;
-            int random1 = Create.RANDOM.nextInt(200);
-            random1 -= 100;
-            int random2 = Create.RANDOM.nextInt(2);
-            for(int x = 0; x<2;x++)
-                checkedPosition = new BlockPos(this.getBlockPos().getX() + random, -63-random2, this.getBlockPos().getZ() + random1);
-            BlockState checkedState = level.getBlockState(checkedPosition);
-            if (checkedState.is(TFMGBlocks.OIL_DEPOSIT.get())) {
-                deposit = checkedPosition;
-                if(level.getBlockState(checkedPosition.above()) != Blocks.BEDROCK.defaultBlockState()&&
-                        level.getBlockState(checkedPosition.above(2)) != Blocks.BEDROCK.defaultBlockState()
-                        && level.getBlockState(checkedPosition.above(3)) != Blocks.BEDROCK.defaultBlockState()
-                        && level.getBlockState(checkedPosition.above(4)) != Blocks.BEDROCK.defaultBlockState())
-                    foundDeposit = true;
-                depositPos = deposit;
-            }
-        }
+
 
 
     }
@@ -161,7 +196,8 @@ public class SurfaceScannerBlockEntity extends KineticBlockEntity implements IHa
         flagAngle=0;
         angle=0;
         foundDeposit=false;
-        deposit=null;
+        deposits = new ArrayList<>();
+        locatingTimer = -1;
 
         return InteractionResult.SUCCESS;
     }
@@ -169,11 +205,11 @@ public class SurfaceScannerBlockEntity extends KineticBlockEntity implements IHa
 
     @Override
     public void write(CompoundTag compound, boolean clientPacket) {
-        if(foundDeposit&&depositPos!=null)
-            compound.put("DepositPos", NbtUtils.writeBlockPos(depositPos));
-
-
-        compound.putBoolean("FoundDeposit", foundDeposit);
+        //if(foundDeposit&& deposits.isEmpty())
+        //    compound.put("DepositPos", NbtUtils.writeBlockPos(deposits.get(0)));
+//
+//
+        //compound.putBoolean("FoundDeposit", foundDeposit);
 
 
         super.write(compound, clientPacket);
@@ -182,21 +218,25 @@ public class SurfaceScannerBlockEntity extends KineticBlockEntity implements IHa
     @Override
     protected void read(CompoundTag compound, boolean clientPacket) {
         super.read(compound,clientPacket);
-        if(foundDeposit)
-            depositPos = NbtUtils.readBlockPos(compound.getCompound("DepositPos"));
-        foundDeposit = compound.getBoolean("FoundDeposit");
+        //if(foundDeposit)
+        //    deposits = NbtUtils.readBlockPos(compound.getCompound("DepositPos"));
+        //foundDeposit = compound.getBoolean("FoundDeposit");
 
     }
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+       // Lang.translate("goggles.motor.usage",locatingTimer)
+       //         .style(ChatFormatting.RED)
+       //         .space()
+       //         .forGoggles(tooltip);
         if(getSpeed()==0){
             Lang.translate("goggles.surface_scanner.no_rotation")
                     .style(ChatFormatting.DARK_RED)
                     .forGoggles(tooltip);
             return true;
         }
-        if(noDepositFound){
+        if(getSpeed()>0&&!foundDeposit&&locatingTimer==0){
             Lang.translate("goggles.surface_scanner.no_deposit")
                     .style(ChatFormatting.RED)
                     .space()
@@ -206,7 +246,9 @@ public class SurfaceScannerBlockEntity extends KineticBlockEntity implements IHa
 
 
 
-        if(foundDeposit){
+
+        if(closestDeposit.isPresent()){
+        if(foundDeposit) {
 
             Lang.translate("goggles.surface_scanner.deposit_found")
                     .style(ChatFormatting.DARK_GREEN)
@@ -214,10 +256,10 @@ public class SurfaceScannerBlockEntity extends KineticBlockEntity implements IHa
                     .forGoggles(tooltip);
 
 
-
-            Lang.translate("goggles.surface_scanner.distance", this.distanceFromDeposit)
+            Lang.translate("goggles.surface_scanner.distance", getDistance(getBlockPos(), closestDeposit.get(), true))
                     .style(ChatFormatting.GREEN)
-                    .forGoggles(tooltip,1);
+                    .forGoggles(tooltip, 1);
+        }
 
 //debug
 /*
@@ -242,7 +284,8 @@ public class SurfaceScannerBlockEntity extends KineticBlockEntity implements IHa
 
  */
 
-        }else {
+        }
+        if(locatingTimer>0){
 
             if(dotCount==1)
                 Lang.translate("goggles.surface_scanner.scanning_surface")

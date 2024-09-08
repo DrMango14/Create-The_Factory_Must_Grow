@@ -4,6 +4,7 @@ import com.drmangotea.tfmg.recipes.casting.CastingRecipe;
 import com.drmangotea.tfmg.recipes.coking.CokingRecipe;
 import com.drmangotea.tfmg.recipes.distillation.DistillationRecipe;
 import com.drmangotea.tfmg.recipes.industrial_blasting.IndustrialBlastingRecipe;
+import com.drmangotea.tfmg.recipes.polarizing.PolarizingRecipe;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.simibubi.create.Create;
@@ -87,7 +88,15 @@ public class TFMGJei implements IModPlugin {
                  .catalyst(TFMGBlocks.CASTING_BASIN::get)
                  .itemIcon(TFMGBlocks.STEEL_BLOCK.get())
                  .emptyBackground(177, 140)
-                 .build("casting", CastingCategory::new)
+                 .build("casting", CastingCategory::new),
+
+
+                 polarizing = builder(PolarizingRecipe.class)
+                 .addTypedRecipes(TFMGRecipeTypes.POLARIZING)
+                 .catalyst(TFMGBlocks.POLARIZER::get)
+                 .itemIcon(TFMGBlocks.POLARIZER.get())
+                 .emptyBackground(177, 53)
+                 .build("polarizing", PolarizingCategory::new)
 
 
                 ;

@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.blocks.electricity.generation.creative_generator;
+package com.drmangotea.tfmg.blocks.electricity.debug;
 
 
 import com.drmangotea.tfmg.blocks.electricity.base.ElectricBlockEntity;

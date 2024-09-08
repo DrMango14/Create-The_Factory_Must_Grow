@@ -1,0 +1,15 @@
+{
+  "type": "tfmg:polarizing",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/steel"
+    }
+  ],
+  "processingTime": 250,
+  "results": [
+    {
+      "item": "tfmg:magnetic_ingot"
+    }
+  ],
+  "energy": 150
+}

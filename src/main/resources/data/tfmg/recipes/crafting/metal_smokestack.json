@@ -2,21 +2,21 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " B ",
-    "BSB",
-    " B "
+    "BIB",
+    "BIB",
+    "BIB"
   ],
   "key": {
-    "B": {
-      "item": "minecraft:blaze_rod"
+    "I": {
+      "item": "tfmg:industrial_pipe"
     },
-    "S": {
+    "B": {
       "tag": "forge:ingots/steel"
     }
   },
   "result": {
-    "item": "tfmg:magnetic_ingot"
-
+    "item": "tfmg:metal_smokestack",
+    "count": 4
 
 
   }

@@ -63,6 +63,10 @@
   "create.pumpjack_deposit_amount": "%1$s Buckets",
   "create.goggles.zero": "Machine Invalid",
 
+  "create.voltage": "Voltage: %1$s",
+  "create.fe": "FE: %1$s",
+  "create.network": "Network: %1$s",
+
   "create.goggles.machine_input.info": "Machine Input Info",
   "create.goggles.machine_input.no_rot": "No Rotation Provided!",
   "create.goggles.machine_input.power_level": "Power Level: ",
@@ -96,6 +100,7 @@
   "create.recipe.industrial_blasting": "Industrial Blasting",
   "create.recipe.casting": "Casting",
   "create.recipe.coking": "Coking",
+  "create.recipe.polarizing": "Polarizing",
 
   "item.minecraft.potion.effect.hellfire_potion": "Potion of Hellfire",
   "item.minecraft.splash_potion.effect.hellfire_potion": "Splash Potion of Hellfire",

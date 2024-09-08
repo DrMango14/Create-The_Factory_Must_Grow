@@ -5,6 +5,7 @@ import com.drmangotea.tfmg.CreateTFMG;
 import com.drmangotea.tfmg.blocks.decoration.kinetics.SteelVerticalGearboxItem;
 import com.drmangotea.tfmg.blocks.electricity.base.cables.WireItem;
 import com.drmangotea.tfmg.blocks.electricity.base.cables.WireManager;
+import com.drmangotea.tfmg.blocks.electricity.debug.DebugRockItem;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin.CastingBasinBlockEntity;
 import com.drmangotea.tfmg.blocks.machines.metal_processing.casting_basin.CastingMoldItem;
 import com.drmangotea.tfmg.items.BatteryAcidBottleItem;
@@ -166,7 +167,10 @@ public class TFMGItems {
 
 
                     ;
-
+    public static final ItemEntry<DebugRockItem>
+            DEBUG_ROCK = REGISTRATE.item("the_rock", DebugRockItem::new).lang("Debug Rock")
+            .properties(p -> p.stacksTo(1))
+            .register();
     public static final ItemEntry<BatteryAcidBottleItem>
         BOTTLE_OF_BATTERY_ACID = REGISTRATE.item("bottle_of_battery_acid", BatteryAcidBottleItem::new).lang("Bottle o' Battery Acid")
             .properties(p -> p.stacksTo(16))

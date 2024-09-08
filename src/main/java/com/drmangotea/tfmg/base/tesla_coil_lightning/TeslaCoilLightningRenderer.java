@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.base.tesla_coil_lightning;
 
+import com.drmangotea.tfmg.CreateTFMG;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -27,13 +28,20 @@ public class TeslaCoilLightningRenderer extends EntityRenderer<TeslaCoilLightnin
         float xTop = 0.0F;
         float zTop = 0.0F;
 
-        float block = 0.14f;
+        float block = 0.03f;
 
         BlockPos pos = lightning.coilPos;
 
-        float xDiff = (float) ((int) pos.getX()-lightning.getX());
-        float yDiff = (float) ((int) pos.getY()-lightning.getY());
-        float zDiff = (float) ((int) pos.getZ()-lightning.getZ());
+      //  CreateTFMG.LOGGER.debug("xDifference: "+lightning.coilPos.getX());
+
+
+        float xDiff = (float) (lightning.getBlockX()<pos.getX() ? pos.getX()-lightning.getX() : lightning.getX()-pos.getX());
+        float yDiff = (float) ((int) pos.getY()-((int)lightning.getY()));
+        float zDiff = (float) ((int) pos.getZ()-((int)lightning.getZ()));
+
+        xDiff = pos.getX();
+
+   //     CreateTFMG.LOGGER.debug("xDifference: "+xDiff);
 
 
         RandomSource randomsource = RandomSource.create(lightning.seed);
@@ -50,11 +58,10 @@ public class TeslaCoilLightningRenderer extends EntityRenderer<TeslaCoilLightnin
            // zTop += (float)(randomsource.nextFloat() -0.5f);
 
 
-            xTop+=xDiff*block;
-            zTop+=zDiff*block;
+           xTop+=block*xDiff;
+           //zTop+=block*2;
 
-           // xTop+=xDiff;
-           // zTop+=zDiff;
+
 
 
 
@@ -88,8 +95,8 @@ public class TeslaCoilLightningRenderer extends EntityRenderer<TeslaCoilLightnin
                         z += (float)(randomsource1.nextFloat() -0.5f);
 
 
-                        x+=xDiff*block;
-                        z+=zDiff*block;
+                        x+=block*xDiff;
+                        //z+=block*2;
 
 
 

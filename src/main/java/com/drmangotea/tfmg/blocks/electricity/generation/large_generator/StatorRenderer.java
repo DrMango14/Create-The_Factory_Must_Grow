@@ -25,8 +25,8 @@ public class StatorRenderer extends SafeBlockEntityRenderer<StatorBlockEntity> {
         VertexConsumer vb = buffer.getBuffer(RenderType.solid());
 
         SuperByteBuffer output = CachedBufferer.partialFacing(TFMGPartialModels.STATOR_OUTPUT, be.getBlockState(),be.getBlockState().getValue(FACING).getOpposite());
-        if(be.hasOutput)
-            output.renderInto(ms, vb);
+       // if(be.hasOutput)
+       //     output.renderInto(ms, vb);
 
         ms.popPose();
     }

@@ -36,7 +36,7 @@ import java.util.List;
 import static com.drmangotea.tfmg.blocks.electricity.base.WallMountBlock.FACING;
 
 
-public class KineticEnergyBlockEntity extends GeneratingKineticBlockEntity implements IElectric {
+public class KineticElectricBlockEntity extends GeneratingKineticBlockEntity implements IElectric {
     public long network = getId();
     public Player player = null;
 
@@ -59,7 +59,7 @@ public class KineticEnergyBlockEntity extends GeneratingKineticBlockEntity imple
 
     public ArrayList<WireConnection> wireConnections = new ArrayList<>();
 
-    public KineticEnergyBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public KineticElectricBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
 
     }
@@ -143,6 +143,9 @@ public class KineticEnergyBlockEntity extends GeneratingKineticBlockEntity imple
     public void lazyTick() {
         super.lazyTick();
 
+        getOrCreateElectricNetwork().members.removeIf(member->!(level.getBlockEntity(BlockPos.of(member.getId()))instanceof IElectric));
+        getOrCreateElectricNetwork().members.removeIf(member->member.getNetwork()!=getNetwork());
+
         for(Direction direction : Direction.values()){
             if(hasElectricitySlot(direction)){
                 BlockEntity be = level.getBlockEntity(getBlockPos().relative(direction));
@@ -167,7 +170,7 @@ public class KineticEnergyBlockEntity extends GeneratingKineticBlockEntity imple
     }
 
     @Override
-    public void destroy() {
+    public void remove() {
         super.destroy();
         getOrCreateElectricNetwork().remove(this);
         voltage = 0;
@@ -220,7 +223,7 @@ public class KineticEnergyBlockEntity extends GeneratingKineticBlockEntity imple
 
 
 
-
+        super.remove();
 
     }
 
@@ -282,11 +285,17 @@ public class KineticEnergyBlockEntity extends GeneratingKineticBlockEntity imple
 
         getOrCreateElectricNetwork().members.remove(this);
 
+
+
         CreateTFMG.NETWORK_MANAGER.getOrCreateNetworkFor(this);
         setNetwork(getId(),false);
         network = getId();
 
+
+
         onConnected();
+
+
 
 
     }

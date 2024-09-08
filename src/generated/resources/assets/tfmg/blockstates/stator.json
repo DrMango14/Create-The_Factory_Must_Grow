@@ -6,6 +6,14 @@
     "facing=down,stator_state=corner,value=true": {
       "model": "tfmg:block/stator/block_corner_up"
     },
+    "facing=down,stator_state=corner_horizontal,value=false": {
+      "model": "tfmg:block/stator/block_corner_horizontal",
+      "x": 90
+    },
+    "facing=down,stator_state=corner_horizontal,value=true": {
+      "model": "tfmg:block/stator/block_corner_horizontal",
+      "x": 90
+    },
     "facing=down,stator_state=side,value=false": {
       "model": "tfmg:block/stator/block_side",
       "x": 90
@@ -30,6 +38,14 @@
       "model": "tfmg:block/stator/block_corner_up",
       "y": 90
     },
+    "facing=east,stator_state=corner_horizontal,value=false": {
+      "model": "tfmg:block/stator/block_corner_horizontal",
+      "y": 90
+    },
+    "facing=east,stator_state=corner_horizontal,value=true": {
+      "model": "tfmg:block/stator/block_corner_horizontal",
+      "y": 90
+    },
     "facing=east,stator_state=side,value=false": {
       "model": "tfmg:block/stator/block_side",
       "y": 90
@@ -52,6 +68,12 @@
     "facing=north,stator_state=corner,value=true": {
       "model": "tfmg:block/stator/block_corner_up"
     },
+    "facing=north,stator_state=corner_horizontal,value=false": {
+      "model": "tfmg:block/stator/block_corner_horizontal"
+    },
+    "facing=north,stator_state=corner_horizontal,value=true": {
+      "model": "tfmg:block/stator/block_corner_horizontal"
+    },
     "facing=north,stator_state=side,value=false": {
       "model": "tfmg:block/stator/block_side"
     },
@@ -70,6 +92,14 @@
     },
     "facing=south,stator_state=corner,value=true": {
       "model": "tfmg:block/stator/block_corner_up",
+      "y": 180
+    },
+    "facing=south,stator_state=corner_horizontal,value=false": {
+      "model": "tfmg:block/stator/block_corner_horizontal",
+      "y": 180
+    },
+    "facing=south,stator_state=corner_horizontal,value=true": {
+      "model": "tfmg:block/stator/block_corner_horizontal",
       "y": 180
     },
     "facing=south,stator_state=side,value=false": {
@@ -94,6 +124,14 @@
     "facing=up,stator_state=corner,value=true": {
       "model": "tfmg:block/stator/block_corner_up"
     },
+    "facing=up,stator_state=corner_horizontal,value=false": {
+      "model": "tfmg:block/stator/block_corner_horizontal",
+      "x": 270
+    },
+    "facing=up,stator_state=corner_horizontal,value=true": {
+      "model": "tfmg:block/stator/block_corner_horizontal",
+      "x": 270
+    },
     "facing=up,stator_state=side,value=false": {
       "model": "tfmg:block/stator/block_side",
       "x": 270
@@ -116,6 +154,14 @@
     },
     "facing=west,stator_state=corner,value=true": {
       "model": "tfmg:block/stator/block_corner_up",
+      "y": 270
+    },
+    "facing=west,stator_state=corner_horizontal,value=false": {
+      "model": "tfmg:block/stator/block_corner_horizontal",
+      "y": 270
+    },
+    "facing=west,stator_state=corner_horizontal,value=true": {
+      "model": "tfmg:block/stator/block_corner_horizontal",
       "y": 270
     },
     "facing=west,stator_state=side,value=false": {

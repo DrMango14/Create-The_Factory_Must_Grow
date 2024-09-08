@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.blocks.electricity.base.cables;
 
 import com.drmangotea.tfmg.CreateTFMG;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
+import net.minecraft.core.BlockPos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,11 @@ public class ElectricalNetwork {
 
 
     public void add(IElectric be) {
-        if (members.contains(be))
+        List<Long> posList = new ArrayList<>();
+
+        members.forEach(member->posList.add(member.getId()));
+
+        if(posList.contains(be.getId()))
             return;
 
         members.add(be);

@@ -5,6 +5,8 @@ import com.drmangotea.tfmg.recipes.casting.CastingRecipe;
 import com.drmangotea.tfmg.recipes.coking.CokingRecipe;
 import com.drmangotea.tfmg.recipes.distillation.DistillationRecipe;
 import com.drmangotea.tfmg.recipes.industrial_blasting.IndustrialBlastingRecipe;
+import com.drmangotea.tfmg.recipes.jei.PolarizingCategory;
+import com.drmangotea.tfmg.recipes.polarizing.PolarizingRecipe;
 import com.google.common.collect.ImmutableSet;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeFactory;
@@ -36,6 +38,8 @@ CASTING(CastingRecipe::new),
 INDUSTRIAL_BLASTING(IndustrialBlastingRecipe::new),
 COKING(CokingRecipe::new),
 DISTILLATION(DistillationRecipe::new),
+
+POLARIZING(PolarizingRecipe::new)
 ;
 
     private final ResourceLocation id;

@@ -102,7 +102,10 @@ public class TFMGCreativeModeTabs {
                         TFMGItems.UNFINISHED_LPG_ENGINE.get(),
                         TFMGItems.UNFINISHED_STEEL_MECHANISM.get(),
                         TFMGItems.LIT_LITHIUM_BLADE.get(),
-                        TFMGBlocks.RADIAL_ENGINE_INPUT_PONDER.asItem()
+                        TFMGItems.DEBUG_ROCK.get(),
+                        TFMGBlocks.RADIAL_ENGINE_INPUT_PONDER.asItem(),
+                        TFMGBlocks.DEBUG_SOURCE.asItem(),
+                        TFMGBlocks.DEBUG_ELECTRIC_BLOCK.asItem()
 
 
                 );

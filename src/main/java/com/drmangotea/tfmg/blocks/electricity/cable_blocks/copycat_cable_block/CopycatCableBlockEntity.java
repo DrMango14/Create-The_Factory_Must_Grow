@@ -99,6 +99,11 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
     @Override
     public void lazyTick() {
         super.lazyTick();
+
+
+        getOrCreateElectricNetwork().members.removeIf(member->!(level.getBlockEntity(BlockPos.of(member.getId()))instanceof IElectric));
+        getOrCreateElectricNetwork().members.removeIf(member->member.getNetwork()!=getNetwork());
+
         getOrCreateElectricNetwork().add(this);
        // TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new EnergyNetworkUpdatePacket(getBlockPos(),network));
 
@@ -173,8 +178,8 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
 
 
     @Override
-    public void destroy() {
-        super.destroy();
+    public void remove() {
+
         getOrCreateElectricNetwork().remove(this);
         voltage = 0;
 
@@ -225,7 +230,7 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
         level.addFreshEntity(itemToSpawn);
 
 
-
+        super.remove();
 
 
     }
@@ -275,6 +280,8 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
             return;
 
         getOrCreateElectricNetwork().members.remove(this);
+
+
 
         CreateTFMG.NETWORK_MANAGER.getOrCreateNetworkFor(this);
         setNetwork(getId(),false);

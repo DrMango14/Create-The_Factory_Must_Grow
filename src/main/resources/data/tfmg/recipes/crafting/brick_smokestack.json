@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BIB",
+    "BIB",
+    "BIB"
+  ],
+  "key": {
+    "I": {
+      "item": "tfmg:industrial_pipe"
+    },
+    "B": {
+      "item": "minecraft:bricks"
+    }
+  },
+  "result": {
+    "item": "tfmg:brick_smokestack",
+    "count": 4
+
+
+  }
+}

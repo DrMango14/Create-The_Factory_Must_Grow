@@ -239,7 +239,11 @@ public class ExhaustBlockEntity extends SmartBlockEntity implements IHaveGoggleI
     public void write(CompoundTag compound, boolean clientPacket) {
 
         compound.put("TankContent", tankInventory.writeToNBT(new CompoundTag()));
+
+        compound.putBoolean("Active", smokeTimer>0);
+
         super.write(compound, clientPacket);
+
 
 
     }

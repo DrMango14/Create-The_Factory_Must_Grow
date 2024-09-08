@@ -3,6 +3,7 @@ package com.drmangotea.tfmg;
 import com.drmangotea.tfmg.base.TFMGContraptions;
 import com.drmangotea.tfmg.base.datagen.TFMGDatagen;
 import com.drmangotea.tfmg.blocks.electricity.base.cables.ElectricNetworkManager;
+import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.items.weapons.explosives.thermite_grenades.fire.TFMGColoredFires;
 import com.drmangotea.tfmg.registry.*;
 import com.drmangotea.tfmg.worldgen.TFMGFeatures;
@@ -23,6 +24,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -82,6 +84,7 @@ public class CreateTFMG
         TFMGContraptions.prepare();
 
         modEventBus.addListener(CreateTFMG::init);
+        TFMGConfigs.register(ModLoadingContext.get());
         modEventBus.addListener(EventPriority.LOWEST, TFMGDatagen::gatherData);
         modEventBus.addListener(TFMGSoundEvents::register);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> CreateTFMGClient::new);

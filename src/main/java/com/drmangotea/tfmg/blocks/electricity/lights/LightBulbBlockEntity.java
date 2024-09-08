@@ -48,6 +48,8 @@ public class LightBulbBlockEntity extends ElectricBlockEntity {
     public void tick() {
         super.tick();
 
+
+
         getOrCreateElectricNetwork().requestEnergy(this);
 
         if(!hasSignal&&energy.getEnergyStored()!=0) {
@@ -84,6 +86,9 @@ public class LightBulbBlockEntity extends ElectricBlockEntity {
     @Override
     public void lazyTick() {
         super.lazyTick();
+
+        needsNetworkUpdate();
+
         neighbourChanged();
 
 

@@ -20,15 +20,20 @@ import com.drmangotea.tfmg.blocks.deposits.surface_scanner.SurfaceScannerBlock;
 import com.drmangotea.tfmg.blocks.electricity.base.ConverterBlock;
 import com.drmangotea.tfmg.blocks.electricity.base.cables.CableConnectorBlock;
 import com.drmangotea.tfmg.blocks.electricity.base.cables.CableConnectorGenerator;
+import com.drmangotea.tfmg.blocks.electricity.batteries.BatteryItem;
+import com.drmangotea.tfmg.blocks.electricity.batteries.GalvanicCellBlock;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.CableHubBlock;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.CableTubeBlock;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.DiagonalCableBlock;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.DiagonalCableGenerator;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.copycat_cable_block.CopycatCableBlock;
 import com.drmangotea.tfmg.blocks.electricity.cable_blocks.copycat_cable_block.CopycatCableBlockModel;
+import com.drmangotea.tfmg.blocks.electricity.debug.DebugElectricBlock;
+import com.drmangotea.tfmg.blocks.electricity.debug.DebugSourceBlock;
+import com.drmangotea.tfmg.blocks.electricity.debug.DebugSourceBlockEntity;
 import com.drmangotea.tfmg.blocks.electricity.electric_motor.ElectricMotorBlock;
 import com.drmangotea.tfmg.blocks.electricity.generation.creative_generator.CreativeGeneratorBlock;
-import com.drmangotea.tfmg.blocks.electricity.generation.creative_generator.VoltageCubeBlock;
+import com.drmangotea.tfmg.blocks.electricity.debug.VoltageCubeBlock;
 import com.drmangotea.tfmg.blocks.electricity.generation.generator.GeneratorBlock;
 import com.drmangotea.tfmg.blocks.electricity.generation.large_generator.RotorBlock;
 import com.drmangotea.tfmg.blocks.electricity.generation.large_generator.StatorBlock;
@@ -87,6 +92,8 @@ import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.hammer.parts.
 import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.hammer.parts.large.LargePumpjackHammerHeadBlock;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.hammer.parts.large.LargePumpjackHammerPartBlock;
 import com.drmangotea.tfmg.blocks.machines.oil_processing.pumpjack.machine_input.MachineInputBlock;
+import com.drmangotea.tfmg.blocks.machines.smokestack.SmokestackBlock;
+import com.drmangotea.tfmg.blocks.machines.smokestack.SmokestackGenerator;
 import com.drmangotea.tfmg.blocks.tanks.SteelFluidTankModel;
 import com.drmangotea.tfmg.blocks.tanks.SteelTankBlock;
 import com.drmangotea.tfmg.blocks.tanks.SteelTankGenerator;
@@ -94,10 +101,7 @@ import com.drmangotea.tfmg.blocks.tanks.SteelTankItem;
 import com.drmangotea.tfmg.items.CoalCokeBlockItem;
 import com.drmangotea.tfmg.items.FossilstoneItem;
 import com.drmangotea.tfmg.items.weapons.explosives.napalm.NapalmBombBlock;
-import com.simibubi.create.AllCreativeModeTabs;
-import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.contraptions.bearing.StabilizedBearingMovementBehaviour;
 import com.simibubi.create.content.decoration.MetalLadderBlock;
 import com.simibubi.create.content.decoration.MetalScaffoldingBlock;
@@ -123,7 +127,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
@@ -784,6 +787,9 @@ public class TFMGBlocks {
                     .item()
                     .transform(customItemModel())
                     .register();
+
+
+
     public static final BlockEntry<ElectricMotorBlock> ELECTRIC_MOTOR =
             REGISTRATE.block("electric_motor", ElectricMotorBlock::new)
                     .initialProperties(() -> Blocks.IRON_BLOCK)
@@ -821,9 +827,20 @@ public class TFMGBlocks {
                     .initialProperties(() -> Blocks.IRON_BLOCK)
                     .transform(pickaxeOnly())
                     .properties(BlockBehaviour.Properties::noOcclusion)
-                    .transform(BlockStressDefaults.setImpact(30.0))
+                    .transform(BlockStressDefaults.setImpact(40.0))
                     .blockstate(BlockStateGen.directionalBlockProvider(true))
                     .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<GalvanicCellBlock> GALVANIC_CELL =
+            REGISTRATE.block("galvanic_cell", GalvanicCellBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .transform(pickaxeOnly())
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                    .item(BatteryItem::new)
                     .transform(customItemModel())
                     .register();
 
@@ -863,6 +880,22 @@ public class TFMGBlocks {
 
     public static final BlockEntry<VoltageCubeBlock> VOLTAGE_CUBE =
             REGISTRATE.block("voltage_cube", VoltageCubeBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .transform(pickaxeOnly())
+                    .item()
+                    .build()
+                    .register();
+
+    public static final BlockEntry<DebugSourceBlock> DEBUG_SOURCE =
+            REGISTRATE.block("debug_source", DebugSourceBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .transform(pickaxeOnly())
+                    .item()
+                    .build()
+                    .register();
+
+    public static final BlockEntry<DebugElectricBlock> DEBUG_ELECTRIC_BLOCK =
+            REGISTRATE.block("debug_electric_block", DebugElectricBlock::new)
                     .initialProperties(() -> Blocks.IRON_BLOCK)
                     .transform(pickaxeOnly())
                     .item()
@@ -1144,6 +1177,33 @@ public class TFMGBlocks {
                             .forAllStatesExcept(BlockStateGen.mapToAir(p)))
                     .register();
 
+    public static final BlockEntry<SmokestackBlock> BRICK_SMOKESTACK = REGISTRATE.block("brick_smokestack", SmokestackBlock::new)
+            .initialProperties(() -> Blocks.BRICKS)
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .blockstate(new SmokestackGenerator()::generate)
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<SmokestackBlock> METAL_SMOKESTACK = REGISTRATE.block("metal_smokestack", SmokestackBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .blockstate(new SmokestackGenerator()::generate)
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<SmokestackBlock> CONCRETE_SMOKESTACK = REGISTRATE.block("concrete_smokestack", SmokestackBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.requiresCorrectToolForDrops())
+            .transform(pickaxeOnly())
+            .blockstate(new SmokestackGenerator()::generate)
+            .item()
+            .transform(customItemModel())
+            .register();
+
     //--Casting Basin
     public static final BlockEntry<CastingBasinBlock> CASTING_BASIN = REGISTRATE.block("casting_basin", CastingBasinBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
@@ -1157,6 +1217,9 @@ public class TFMGBlocks {
             .build()
             .lang("Casting Basin")
             .register();
+
+
+
 
     public static final BlockEntry<CastingSpoutBlock> CASTING_SPOUT = REGISTRATE.block("casting_spout", CastingSpoutBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)

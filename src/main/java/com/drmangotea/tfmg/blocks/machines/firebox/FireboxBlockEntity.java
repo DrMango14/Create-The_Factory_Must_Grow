@@ -1,12 +1,14 @@
 package com.drmangotea.tfmg.blocks.machines.firebox;
 
 
+import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.drmangotea.tfmg.registry.TFMGTags;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.fluids.tank.FluidTankBlock;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HeatLevel;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.VecHelper;
 import net.minecraft.core.BlockPos;
@@ -39,7 +41,12 @@ public class FireboxBlockEntity extends SmartBlockEntity {
 
 
 	protected LazyOptional<IFluidHandler> fluidCapability;
+
 	public FluidTank tankInventory;
+
+	public FluidTank exhaustTank;
+
+
 
 
 
@@ -48,11 +55,12 @@ public class FireboxBlockEntity extends SmartBlockEntity {
 		activeFuel = FuelType.NONE;
 
 
-		tankInventory = createInventory();
+		tankInventory = createInventory(true);
+		exhaustTank = createInventory(false);
 		remainingBurnTime = 0;
-		fluidCapability = LazyOptional.of(() -> tankInventory);
+		fluidCapability = LazyOptional.of(() -> new CombinedTankWrapper(tankInventory, exhaustTank));
 
-		refreshCapability();
+
 	}
 
 
@@ -60,6 +68,7 @@ public class FireboxBlockEntity extends SmartBlockEntity {
 	@Override
 	public void tick() {
 		super.tick();
+
 
 		if (level.isClientSide&&!isVirtual()) {
 			spawnParticles(getHeatLevelFromBlock(), 1);
@@ -74,8 +83,15 @@ public class FireboxBlockEntity extends SmartBlockEntity {
 			playSound();
 		}
 
-		if (remainingBurnTime > 0)
+		if (remainingBurnTime > 0) {
+			exhaustTank.fill(new FluidStack(TFMGFluids.CARBON_DIOXIDE.getSource(),15), IFluidHandler.FluidAction.EXECUTE);
 			remainingBurnTime--;
+		}
+
+		if(exhaustTank.getSpace()==0){
+			remainingBurnTime = 0;
+		}
+
 
 		if (activeFuel == FuelType.NORMAL)
 			updateBlockState();
@@ -98,6 +114,11 @@ public class FireboxBlockEntity extends SmartBlockEntity {
 	@Override
 	public void write(CompoundTag compound, boolean clientPacket) {
 
+
+			tankInventory.writeToNBT(compound.getCompound("TankContent"));
+			exhaustTank.writeToNBT(compound.getCompound("ExhaustContent"));
+
+
 			compound.putInt("fuelLevel", activeFuel.ordinal());
 			compound.putInt("burnTimeRemaining", remainingBurnTime);
 
@@ -110,27 +131,23 @@ public class FireboxBlockEntity extends SmartBlockEntity {
 		activeFuel = FuelType.values()[compound.getInt("fuelLevel")];
 		remainingBurnTime = compound.getInt("burnTimeRemaining");
 
+		tankInventory.readFromNBT(compound.getCompound("TankContent"));
+		exhaustTank.readFromNBT(compound.getCompound("ExhaustContent"));
+
 
 		super.read(compound, clientPacket);
 	}
-	private void refreshCapability() {
-		LazyOptional<IFluidHandler> oldCap = fluidCapability;
-		fluidCapability = LazyOptional.of(() -> handlerForCapability());
-		oldCap.invalidate();
-	}
+
 	@Nonnull
 	@Override
-	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-		if (!fluidCapability.isPresent())
-			refreshCapability();
+	@SuppressWarnings("removal")
+	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
+
 		if (cap == ForgeCapabilities.FLUID_HANDLER)
 			return fluidCapability.cast();
 		return super.getCapability(cap, side);
 	}
-	private IFluidHandler handlerForCapability() {
 
-		return tankInventory;
-	}
 	public HeatLevel getHeatLevelFromBlock() {
 		return FireboxBlock.getHeatLevelOf(getBlockState());
 	}
@@ -146,10 +163,32 @@ public class FireboxBlockEntity extends SmartBlockEntity {
 		level.setBlockAndUpdate(worldPosition, getBlockState().setValue(FireboxBlock.HEAT_LEVEL, heat));
 		notifyUpdate();
 	}
-	protected SmartFluidTank createInventory() {
-		return new SmartFluidTank(1000, this::onFluidStackChanged) {
+	protected SmartFluidTank createInventory(boolean mainTank) {
+		return new SmartFluidTank(mainTank ? 1000 : 8000, this::onFluidStackChanged) {
+
+
+			@Override
+			public FluidStack drain(FluidStack resource, FluidAction action) {
+				if (mainTank)
+					return FluidStack.EMPTY;
+				return super.drain(resource, action);
+			}
+
+			@Override
+			public FluidStack drain(int maxDrain, FluidAction action) {
+				if (mainTank)
+					return FluidStack.EMPTY;
+				return super.drain(maxDrain, action);
+			}
+
 			@Override
 			public boolean isFluidValid(FluidStack stack) {
+				if(!mainTank){
+					return stack.getFluid() == TFMGFluids.CARBON_DIOXIDE.getSource();
+				}
+
+
+
 				return stack.getFluid().is(TFMGTags.TFMGFluidTags.DIESEL.tag)
 						||stack.getFluid().is(TFMGTags.TFMGFluidTags.LPG.tag)
 						||stack.getFluid().is(TFMGTags.TFMGFluidTags.KEROSENE.tag)
