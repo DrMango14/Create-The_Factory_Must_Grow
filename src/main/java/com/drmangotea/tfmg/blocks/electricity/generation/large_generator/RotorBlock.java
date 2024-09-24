@@ -45,10 +45,7 @@ public class RotorBlock extends RotatedPillarKineticBlock implements IBE<RotorBl
 
     }
 
-    @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-        IBE.onRemove(state, level, pos, newState);
-    }
+
     @Override
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.ENTITYBLOCK_ANIMATED;

@@ -54,9 +54,6 @@ public class KineticElectricBlockEntity extends GeneratingKineticBlockEntity imp
 
 
 
-
-
-
     public ArrayList<WireConnection> wireConnections = new ArrayList<>();
 
     public KineticElectricBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -234,20 +231,6 @@ public class KineticElectricBlockEntity extends GeneratingKineticBlockEntity imp
 
 
 
-    public void changeToExtension(){
-
-        BlockState state = level.getBlockState(getBlockPos().relative(getBlockState().getValue(FACING)));
-
-        if(state.getBlock() == getBlockState().getBlock()){
-            if(state.getValue(FACING)==getBlockState().getValue(FACING))
-                if(!getBlockState().getValue(CableConnectorBlock.EXTENSION))
-                    level.setBlock(getBlockPos(),getBlockState().setValue(CableConnectorBlock.EXTENSION,true),2);
-        } else
-        if(getBlockState().getValue(CableConnectorBlock.EXTENSION))
-            level.setBlock(getBlockPos(),getBlockState().setValue(CableConnectorBlock.EXTENSION,false),2);
-    }
-
-
     public void  removeInvalidConnections(){
 
 
@@ -257,25 +240,6 @@ public class KineticElectricBlockEntity extends GeneratingKineticBlockEntity imp
 
     }
 
-    // public void findMachine(){
-    //
-    //     getOrCreateNetwork();
-    //
-    //
-    //     if(getEnergySlot().isEmpty())
-    //         return;
-    //
-    //     BlockPos pos = getBlockPos().relative(getEnergySlot().get());
-    //
-    //     if(level.getBlockEntity(pos) instanceof IElectricalBlock be){
-
-    //         if(level.getBlockEntity(BlockPos.of(network)) instanceof IElectricalBlock&&network>=be.getNetwork())
-    //             return;
-    //
-    //         setNetwork(be.getId(),false);
-    //
-    //     }
-    // }
 
 
     public void makeControllerAndSpread(){
@@ -295,16 +259,12 @@ public class KineticElectricBlockEntity extends GeneratingKineticBlockEntity imp
 
         onConnected();
 
-
-
-
     }
 
     @Override
     public TFMGForgeEnergyStorage getForgeEnergy() {
         return energy;
     }
-
 
 
     public void onConnected(){
@@ -408,10 +368,8 @@ public class KineticElectricBlockEntity extends GeneratingKineticBlockEntity imp
 
         network = newNetwork;
 
-
-
         ElectricalNetwork network1 = getOrCreateElectricNetwork();
-//
+
         if(network1.members.contains(this)) {
             network = oldNetwork;
             return;
@@ -420,8 +378,6 @@ public class KineticElectricBlockEntity extends GeneratingKineticBlockEntity imp
         TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new EnergyNetworkUpdatePacket(getBlockPos(),network));
         //network.initialized = true;
         network1.add(this);
-
-
 
     }
     public void onPlaced(){
@@ -478,7 +434,6 @@ public class KineticElectricBlockEntity extends GeneratingKineticBlockEntity imp
         networkUpdate = true;
     }
 
-
     @Override
     public void write(CompoundTag compound, boolean clientPacket) {
         super.write(compound, clientPacket);
@@ -495,7 +450,6 @@ public class KineticElectricBlockEntity extends GeneratingKineticBlockEntity imp
 
         }
         compound.putInt("WireCount",wireConnections.toArray().length);
-
         compound.putInt("ForgeEnergy", getForgeEnergy().getEnergyStored());
     }
 
@@ -503,12 +457,7 @@ public class KineticElectricBlockEntity extends GeneratingKineticBlockEntity imp
     protected void read(CompoundTag compound, boolean clientPacket) {
         super.read(compound, clientPacket);
 
-
-
         voltage = compound.getInt("Voltage");
-
-
-
 
 
         //    sendData();
@@ -565,15 +514,9 @@ public class KineticElectricBlockEntity extends GeneratingKineticBlockEntity imp
     }
 
 
-
-    @Override
-    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-
-    }
-
     @Override
     protected AABB createRenderBoundingBox() {
-        return new AABB(this.getBlockPos()).inflate(30);
+        return new AABB(this.getBlockPos()).inflate(2);
     }
 
 
