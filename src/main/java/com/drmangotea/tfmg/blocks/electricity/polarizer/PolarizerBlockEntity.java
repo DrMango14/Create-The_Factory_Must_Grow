@@ -147,10 +147,10 @@ public class PolarizerBlockEntity extends ElectricBlockEntity implements IHaveGo
         if(inventory.isEmpty()) {
 
 
-            if (player.getItemInHand(hand).is(TFMGItems.STEEL_INGOT.get())) {
+            if (!player.getItemInHand(hand).isEmpty()) {
 
 
-                inventory.setStackInSlot(0, TFMGItems.STEEL_INGOT.asStack());
+                inventory.setStackInSlot(0, player.getItemInHand(hand).copyWithCount(1));
                 sendStuff();
 
                 player.getItemInHand(hand).shrink(1);
