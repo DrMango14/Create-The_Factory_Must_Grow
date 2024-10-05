@@ -25,7 +25,8 @@ public class StressConfig extends ConfigBase implements IStressValueProvider {
 	public void registerAll(Builder builder) {
 		builder.comment(".", Comments.su, Comments.impact)
 				.push("impact");
-		BlockStressDefaults.DEFAULT_IMPACTS.forEach((r, i) -> {
+		Map<ResourceLocation, Double> frozenImpacts = BlockStressDefaults.DEFAULT_IMPACTS;
+		frozenImpacts.forEach((r, i) -> {
 			if (r.getNamespace()
 					.equals(CreateTFMG.MOD_ID))
 				getImpacts().put(r, builder.define(r.getPath(), i));
@@ -34,7 +35,8 @@ public class StressConfig extends ConfigBase implements IStressValueProvider {
 
 		builder.comment(".", Comments.su, Comments.capacity)
 				.push("capacity");
-		BlockStressDefaults.DEFAULT_CAPACITIES.forEach((r, i) -> {
+		Map<ResourceLocation, Double> frozenCapacities = BlockStressDefaults.DEFAULT_CAPACITIES;
+		frozenCapacities.forEach((r, i) -> {
 			if (r.getNamespace()
 					.equals(CreateTFMG.MOD_ID))
 				getCapacities().put(r, builder.define(r.getPath(), i));
