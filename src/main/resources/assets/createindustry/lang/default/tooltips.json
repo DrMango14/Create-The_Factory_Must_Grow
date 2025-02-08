@@ -83,7 +83,7 @@
 
 	"block.createindustry.creative_generator.tooltip.summary": "Outputs energy based on the value on its input panel",
 
-	"block.createindustry.cable connector.tooltip.summary": "Right click 2 cable connectors with a _Copper Cable_ amking them transport _Energy_",
+	"block.createindustry.cable connector.tooltip.summary": "Right click 2 cable connectors with a _Copper Cable_ making them transport _Energy_",
 
 	"block.createindustry.lithium_torch.tooltip.summary": "Works underwater and can be placed upside down",
 
