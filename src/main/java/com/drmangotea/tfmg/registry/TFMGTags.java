@@ -73,6 +73,7 @@ public class TFMGTags {
         GAS(NameSpace.MOD),
 
         FLAMMABLE(NameSpace.MOD),
+        LOWGRADEFUEL(NameSpace.FORGE),
         GASOLINE(NameSpace.FORGE),
         DIESEL(NameSpace.FORGE),
         KEROSENE(NameSpace.FORGE),

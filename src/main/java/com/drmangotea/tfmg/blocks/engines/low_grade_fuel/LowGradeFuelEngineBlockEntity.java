@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.blocks.engines.low_grade_fuel;
 
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.drmangotea.tfmg.registry.TFMGSoundEvents;
+import com.drmangotea.tfmg.registry.TFMGTags;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -31,6 +32,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -455,13 +457,18 @@ public void write(CompoundTag compound, boolean clientPacket) {
 
         ItemStack stack = pPlayer.getItemInHand(pHand);
 
-        if(stack.is(TFMGFluids.CREOSOTE.getBucket().get())&&tankInventory.isEmpty()){
+        if (FluidUtil.getFluidContained(stack).isPresent())
+        {
+            if(TFMGTags.TFMGFluidTags.LOWGRADEFUEL.matches(FluidUtil.getFluidContained(stack).get().getFluid())&&tankInventory.isEmpty()){
 
-            tankInventory.setFluid(new FluidStack(TFMGFluids.CREOSOTE.get(),1000));
-            pPlayer.setItemInHand(pHand, Items.BUCKET.getDefaultInstance());
+                tankInventory.setFluid(new FluidStack(TFMGFluids.CREOSOTE.get(),1000));
+                pPlayer.setItemInHand(pHand, Items.BUCKET.getDefaultInstance());
 
-            return true;
+                return true;
+            }
         }
+
+
 
         return false;
 
@@ -482,7 +489,7 @@ public void write(CompoundTag compound, boolean clientPacket) {
         return new SmartFluidTank(1000, this::onFluidStackChanged){
             @Override
             public boolean isFluidValid(FluidStack stack) {
-                return stack.getFluid().isSame(validFuel());
+                return TFMGTags.TFMGFluidTags.LOWGRADEFUEL.matches(stack.getFluid());
             }
         };
     }

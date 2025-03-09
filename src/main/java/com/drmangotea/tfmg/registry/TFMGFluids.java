@@ -72,7 +72,7 @@ public class TFMGFluids {
             KEROSENE = fuel("kerosene",TFMGTags.TFMGFluidTags.KEROSENE.tag,TFMGTags.TFMGFluidTags.FLAMMABLE.tag),
             GASOLINE = fuel("gasoline",TFMGTags.TFMGFluidTags.GASOLINE.tag,TFMGTags.TFMGFluidTags.FLAMMABLE.tag),
             DIESEL = fuel("diesel",TFMGTags.TFMGFluidTags.DIESEL.tag,TFMGTags.TFMGFluidTags.FLAMMABLE.tag),
-            CREOSOTE = fuel("creosote",TFMGTags.TFMGFluidTags.FLAMMABLE.tag)
+            CREOSOTE = fuel("creosote",TFMGTags.TFMGFluidTags.LOWGRADEFUEL.tag,TFMGTags.TFMGFluidTags.FLAMMABLE.tag)
 
             ;
 
