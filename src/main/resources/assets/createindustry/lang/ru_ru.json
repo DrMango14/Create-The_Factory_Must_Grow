@@ -248,7 +248,7 @@
   "block.tfmg.low_grade_fuel_engine": "Двигатель на низкосортном топливе",
   "block.tfmg.low_grade_fuel_engine.behaviour1": "Выдаёт небольшое количество _об/мин_ в зависимости от силы _редстоун-сигнала_, введённого в него.",
   "block.tfmg.low_grade_fuel_engine.condition1": "Когда закачан креозот",
-  "block.tfmg.low_grade_fuel_engine.tooltip.summary": "Производит вращение из креозота.",
+  "block.tfmg.low_grade_fuel_engine.tooltip.summary": "Производит вращение, расходуя креозот.",
   "block.tfmg.lpg_engine": "Двигатель на сжиженном газе",
   "block.tfmg.lpg_engine_back": "Задняя часть двигателя на сжиженном газе",
   "block.tfmg.lubrication_oil": "Смазочное масло",
