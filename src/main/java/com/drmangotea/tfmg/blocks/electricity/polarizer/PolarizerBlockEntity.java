@@ -5,14 +5,12 @@ import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.blocks.electricity.base.ElectricBlockEntity;
 import com.drmangotea.tfmg.recipes.polarizing.PolarizingRecipe;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
-import com.drmangotea.tfmg.registry.TFMGItems;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.utility.Lang;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -35,6 +33,8 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Optional;
 
+import static com.drmangotea.tfmg.registry.TFMGItems.MAGNETIC_INGOT;
+import static com.drmangotea.tfmg.registry.TFMGItems.STEEL_INGOT;
 import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 
 public class PolarizerBlockEntity extends ElectricBlockEntity implements IHaveGoggleInformation {
@@ -98,7 +98,10 @@ public class PolarizerBlockEntity extends ElectricBlockEntity implements IHaveGo
                     timer++;
                 } else {
                     timer = -1;
-                    inventory.setStackInSlot(0, recipe.get().getResultItem(Minecraft.getInstance().level.registryAccess()));
+                    // I hate this.. but it's the fastest method and this is the only recipe this block does, so meh!!
+                    if (inventory.getStackInSlot(0).is(STEEL_INGOT.asItem()))
+                        inventory.setStackInSlot(0, MAGNETIC_INGOT.asStack(inventory.getStackInSlot(0).getCount()));
+
                     TFMGUtils.spawnElectricParticles(level,getBlockPos());
                     sendStuff();
                 }
