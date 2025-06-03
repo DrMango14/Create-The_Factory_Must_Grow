@@ -276,12 +276,6 @@ public class BlastFurnaceOutputBlockEntity extends TFMGMachineBlockEntity implem
 
 
 
-                if(itemStack.getCount()==1) {
-                    ItemStack stack2 = itemStack;
-                    stack2.setCount(2);
-                    itemEntity.setItem(stack2);
-                }
-
                 int freeSpace2 = inputInventory.getStackInSlot(0).getMaxStackSize()-inputInventory.getStackInSlot(0).getCount();
 
                 int count = itemStack.getCount();
