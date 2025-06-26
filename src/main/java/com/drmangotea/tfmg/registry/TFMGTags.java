@@ -256,9 +256,9 @@ public class TFMGTags {
 
     public static void init() {
         TFMGBlockTags.init();
-       // TFMGItemTags.init();
+       // TFMGItemTags.register();
         TFMGFluidTags.init();
-        //TFMGEntityTags.init();
-        //TFMGRecipeSerializerTags.init();
+        //TFMGEntityTags.register();
+        //TFMGRecipeSerializerTags.register();
     }
 }

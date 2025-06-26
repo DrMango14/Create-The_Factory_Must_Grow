@@ -1,9 +1,6 @@
 package com.drmangotea.tfmg;
 
-import com.drmangotea.tfmg.base.TFMGBoilerHeaters;
-import com.drmangotea.tfmg.base.TFMGContraptions;
-import com.drmangotea.tfmg.base.TFMGCreativeTabs;
-import com.drmangotea.tfmg.base.TFMGRegistrate;
+import com.drmangotea.tfmg.base.*;
 import com.drmangotea.tfmg.content.electricity.base.ElectricNetworkManager;
 import com.drmangotea.tfmg.content.engines.fuels.BaseFuelTypes;
 import com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades.fire.TFMGColoredFires;
@@ -15,7 +12,10 @@ import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipes;
 import com.drmangotea.tfmg.registry.*;
 import com.drmangotea.tfmg.worldgen.TFMGFeatures;
 import com.mojang.logging.LogUtils;
-import com.simibubi.create.AllSoundEvents;
+import com.simibubi.create.foundation.item.ItemDescription;
+import com.simibubi.create.foundation.item.KineticStats;
+import com.simibubi.create.foundation.item.TooltipModifier;
+import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
@@ -32,6 +32,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 
+import static net.createmod.catnip.lang.FontHelper.styleFromColor;
 
 
 @SuppressWarnings("removal")
@@ -48,17 +49,27 @@ public class TFMG {
 
     public static final TFMGRegistrate REGISTRATE = TFMGRegistrate.create();
 
+    public static final FontHelper.Palette TFMG_PALETTE = new FontHelper.Palette(styleFromColor(0x4c5155), styleFromColor(0x838c8a));
+
+    static {
+        REGISTRATE.setTooltipModifierFactory((item) -> (new ItemDescription.Modifier(item, TFMG_PALETTE)).andThen(TooltipModifier.mapNull(KineticStats.create(item))));
+        //.andThen(TooltipModifier.mapNull(CableTypeStats.create(item))) (save this for whenever the fuck I figure out what resistivity is meant to do)
+    }
+
 
     public TFMG() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         REGISTRATE.registerEventListeners(modEventBus);
+        TFMGRegistries.register();
 
         TFMGSoundEvents.prepare();
         TFMGPipes.init();
         TFMGBlocks.init();
         TFMGBlockEntities.init();
         TFMGItems.init();
+        TFMGElectrodes.register();
+        TFMGCableTypes.register();
         TFMGEntityTypes.init();
         TFMGPartialModels.init();
 

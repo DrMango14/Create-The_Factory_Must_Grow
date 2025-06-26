@@ -88,31 +88,10 @@ public class ChemicalVatCategory extends CreateRecipeCategory<VatMachineRecipe> 
 
         TFMGGuiTextures.VAT.render(graphics, 0, 24);
 
-        if (allowedVatTypes.contains("firebrick_lined_vat") && allowedVatTypes.size() == 1) {
-            TFMGGuiTextures.FIREPROOF_BRICK_OVERLAY.render(graphics, 55 - 48, 32);
-        }
+        drawVatTypes(allowedVatTypes, graphics);
 
-        if (machines.contains("tfmg:mixing")) {
-            TFMGGuiTextures.VAT_MACHINE.render(graphics, 55 - 12, 0);
-            TFMGGuiTextures.MIXER.render(graphics, 55 - 19, 32);
-        }
-        if (machines.contains("tfmg:electrode")) {
-            TFMGGuiTextures.VAT_MACHINE.render(graphics, 55 - 12 - 32, 0);
-            TFMGGuiTextures.VAT_MACHINE.render(graphics, 55 - 12 + 32, 0);
-            TFMGGuiTextures.ELECTRODE.render(graphics, 55 - 3 - 32, 32);
-            TFMGGuiTextures.ELECTRODE.render(graphics, 55 - 3 + 32, 32);
-        }
-        if (machines.contains("tfmg:graphite_electrode")) {
-            TFMGGuiTextures.VAT_MACHINE.render(graphics, 55 - 12 - 32, 0);
-            TFMGGuiTextures.VAT_MACHINE.render(graphics, 55 - 12 + 32, 0);
-            TFMGGuiTextures.VAT_MACHINE.render(graphics, 55 - 12, 0);
-            TFMGGuiTextures.GRAPHITE_ELECTRODE.render(graphics, 55 - 4 - 32, 32);
-            TFMGGuiTextures.GRAPHITE_ELECTRODE.render(graphics, 55 - 4 + 32, 32);
-            TFMGGuiTextures.GRAPHITE_ELECTRODE.render(graphics, 55 - 4, 32);
-        }
-        if (recipe.getRequiredHeat() == HeatCondition.HEATED){
-            TFMGGuiTextures.VAT_HEATER.render(graphics, 55 - 10, 109);
-        }
+        drawSprites(machines, graphics);
+        renderHeated(recipe.getRequiredHeat(), graphics);
         int pos = 55;
         int width = ((recipe.getFluidIngredients().size()) * 21) / 2;
         for (int i = 0; i < recipe.getFluidIngredients().size(); i++) {
@@ -137,5 +116,41 @@ public class ChemicalVatCategory extends CreateRecipeCategory<VatMachineRecipe> 
 
     }
 
+    private void renderHeated(HeatCondition heatCondition, GuiGraphics graphics) {
+        if (heatCondition == HeatCondition.HEATED)
+            TFMGGuiTextures.VAT_HEATER.render(graphics, 55 - 10, 109);
+        if (heatCondition == HeatCondition.SUPERHEATED)
+            TFMGGuiTextures.VAT_SUPERHEATER.render(graphics, 55 - 10, 109);
+    }
 
+    //Can be overridden with mixins for easily adding different stuff - Krystal
+    //Might consider a better way of doing this but idk.
+    private void drawVatTypes(List<String> allowedVatTypes, GuiGraphics graphics) {
+        if (allowedVatTypes.contains("firebrick_lined_vat") && allowedVatTypes.size() == 1) {
+            TFMGGuiTextures.FIREPROOF_BRICK_OVERLAY.render(graphics, 55 - 48, 32);
+        }
+    }
+
+    //Can be overridden with mixins for easily adding different stuff - Krystal
+    //Might consider a better way of doing this but idk.
+    private void drawSprites(List<String> machines, GuiGraphics graphics) {
+        if (machines.contains("tfmg:mixing")) {
+            TFMGGuiTextures.VAT_MACHINE.render(graphics, 55 - 12, 0);
+            TFMGGuiTextures.MIXER.render(graphics, 55 - 19, 32);
+        }
+        if (machines.contains("tfmg:electrode")) {
+            TFMGGuiTextures.VAT_MACHINE.render(graphics, 55 - 12 - 32, 0);
+            TFMGGuiTextures.VAT_MACHINE.render(graphics, 55 - 12 + 32, 0);
+            TFMGGuiTextures.ELECTRODE.render(graphics, 55 - 3 - 32, 32);
+            TFMGGuiTextures.ELECTRODE.render(graphics, 55 - 3 + 32, 32);
+        }
+        if (machines.contains("tfmg:graphite_electrode")) {
+            TFMGGuiTextures.VAT_MACHINE.render(graphics, 55 - 12 - 32, 0);
+            TFMGGuiTextures.VAT_MACHINE.render(graphics, 55 - 12 + 32, 0);
+            TFMGGuiTextures.VAT_MACHINE.render(graphics, 55 - 12, 0);
+            TFMGGuiTextures.GRAPHITE_ELECTRODE.render(graphics, 55 - 4 - 32, 32);
+            TFMGGuiTextures.GRAPHITE_ELECTRODE.render(graphics, 55 - 4 + 32, 32);
+            TFMGGuiTextures.GRAPHITE_ELECTRODE.render(graphics, 55 - 4, 32);
+        }
+    }
 }

@@ -71,7 +71,7 @@ public class CableConnectorBlockEntity extends ElectricBlockEntity implements IH
             return;
 
         for (CableConnection connection : connections) {
-            ItemEntity itemToDrop = new ItemEntity(level, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, new ItemStack(connection.type.wire.get(), (int) (connection.getLength()/8)));
+            ItemEntity itemToDrop = new ItemEntity(level, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, new ItemStack(connection.type.getSpool().get(), (int) (connection.getLength()/8)));
             if (itemToDrop.getItem().getCount() > 0) {
                 level.addFreshEntity(itemToDrop);
             }

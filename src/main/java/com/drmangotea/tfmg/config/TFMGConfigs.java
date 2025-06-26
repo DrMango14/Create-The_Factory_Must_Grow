@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg.config;
 
+import com.drmangotea.tfmg.content.electricity.connection.cable_type.ResistivityValues;
 import com.simibubi.create.api.stress.BlockStressValues;
-import com.simibubi.create.infrastructure.config.CCommon;
 import net.createmod.catnip.config.ConfigBase;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -58,6 +58,8 @@ public class TFMGConfigs {
 		TFMGStress stress = TFMGConfigs.server().stressValues;
 		BlockStressValues.IMPACTS.registerProvider(stress::getImpact);
 		BlockStressValues.CAPACITIES.registerProvider(stress::getCapacity);
+		TFMGResistivity resistivity = server().resistivityValues;
+		ResistivityValues.RESISTIVITIES.registerProvider(resistivity::getResistivity);
 	}
 
 	@SubscribeEvent

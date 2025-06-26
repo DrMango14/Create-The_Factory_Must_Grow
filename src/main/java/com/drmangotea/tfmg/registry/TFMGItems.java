@@ -5,7 +5,7 @@ import com.drmangotea.tfmg.base.TFMGArmorMaterials;
 import com.drmangotea.tfmg.base.TFMGTiers;
 import com.drmangotea.tfmg.content.decoration.gearbox.SteelVerticalGearboxItem;
 import com.drmangotea.tfmg.content.electricity.configuration_wrench.ElectriciansWrenchItem;
-import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnection;
+import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableTypeEntry;
 import com.drmangotea.tfmg.content.electricity.debug.DebugCinderBlockItem;
 import com.drmangotea.tfmg.content.electricity.measurement.MultimeterItem;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.MagnetItem;
@@ -37,8 +37,8 @@ import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
@@ -188,14 +188,14 @@ public class TFMGItems {
             ENGINE_CYLINDER = REGISTRATE.item("engine_cylinder", CylinderItem::new).register(),
             TURBINE_BLADE = REGISTRATE.item("turbine_blade", CylinderItem::new).register();
     public static final ItemEntry<SpoolItem>
-            EMPTY_SPOOL = spoolItem("empty", null, 0x000000, CableConnection.CableType.NONE)
-            .recipe((c, p) -> p.stonecutting(DataIngredient.items(TFMGBlocks.HARDENED_PLANKS.asItem()), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
+            EMPTY_SPOOL = spoolItem("empty", 0x000000, TFMG.asResource("empty"))
+            .recipe((c, p) -> p.stonecutting(DataIngredient.items(TFMGBlocks.HARDENED_PLANKS.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 1))
             .register(),
-            COPPER_SPOOL = spoolItem("copper", TFMGPartialModels.COPPER_SPOOL, 0xD8735A, CableConnection.CableType.COPPER)
+            COPPER_SPOOL = spoolItem("copper", 0xD8735A, TFMG.asResource("copper"))
                     .register(),
-            ALUMINUM_SPOOL = spoolItem("aluminum", TFMGPartialModels.ALUMINUM_SPOOL, 0xEDEFEF, CableConnection.CableType.ALUMINUM)
+            ALUMINUM_SPOOL = spoolItem("aluminum", 0xEDEFEF, TFMG.asResource("aluminum"))
                     .register(),
-            CONSTANTAN_SPOOL = spoolItem("constantan", TFMGPartialModels.CONSTANTAN_SPOOL, 0xCFC2A8, CableConnection.CableType.CONSTANTAN)
+            CONSTANTAN_SPOOL = spoolItem("constantan", 0xCFC2A8, TFMG.asResource("constantan"))
                     .register();
 
     public static final ItemEntry<ElectromagneticCoilItem> ELECTROMAGNETIC_COIL =
@@ -432,8 +432,8 @@ public class TFMGItems {
         return map;
     }
 
-    public static ItemBuilder<SpoolItem, CreateRegistrate> spoolItem(String name, PartialModel model, int barColor, CableConnection.CableType type) {
-        return REGISTRATE.item(name + "_spool", p -> new SpoolItem(p, model, barColor, type))
+    public static ItemBuilder<SpoolItem, CreateRegistrate> spoolItem(String name, int barColor, ResourceLocation type) {
+        return REGISTRATE.item(name + "_spool", p -> new SpoolItem(p, barColor, type))
                 .tag(TFMGTags.TFMGItemTags.SPOOLS.tag)
                 .properties(p -> p.stacksTo(1));
 

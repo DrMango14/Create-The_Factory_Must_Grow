@@ -7,10 +7,9 @@
   "mixins": [
     "FluidPipeBlockMixin",
     "FluidPropagatorMixin",
+    "FluidTankBlockEntityMixin",
     "GoggleOverlayRendererMixin",
     "PipeAttachmentModelMixin",
-
-    "FluidTankBlockEntityMixin",
     "accessor.FluidTankBlockEntityAccessor",
     "accessor.TankSegmentAccessor"
   ],

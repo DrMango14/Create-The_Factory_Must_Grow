@@ -48,14 +48,12 @@ public class WindingCategory extends CreateRecipeCategory<WindingRecipe> {
         AllGuiTextures.JEI_ARROW.render(graphics, 85, 32);
         AllGuiTextures.JEI_DOWN_ARROW.render(graphics, 43, 4);
 
-        PartialModel coil = null;
+        int coilColor = 0;
 
         if (recipe.getIngredients().get(1).getItems()[0].getItem() instanceof SpoolItem) {
-
-             coil = ((SpoolItem)recipe.getIngredients().get(1).getItems()[0].getItem()).model;
-
+            coilColor = recipe.getIngredients().get(1).getItems()[0].getBarColor();
         }
-        this.windingMachine.draw(graphics, 48, 27,coil,true);
+        this.windingMachine.draw(graphics, 48, 27,coilColor,true);
         graphics.drawString(Minecraft.getInstance().font, recipe.getProcessingDuration() + " Turns", 86.0F, 9.0F, 4210752, false);
     }
 
@@ -76,18 +74,16 @@ public class WindingCategory extends CreateRecipeCategory<WindingRecipe> {
 
             PoseStack ms = graphics.pose();
 
-            PartialModel coil = null;
+            int coilColor = 0;
 
             if (recipe.getRecipe().getIngredients().get(1).getItems()[0].getItem() instanceof SpoolItem) {
-
-                coil = ((SpoolItem)recipe.getRecipe().getIngredients().get(1).getItems()[0].getItem()).model;
-
+                coilColor = recipe.getRecipe().getIngredients().get(1).getItems()[0].getBarColor();
             }
             windingMachine.offset = index;
             ms.pushPose();
             ms.translate(0.0, 67, 0.0);
             ms.scale(0.7F, 0.7F, 0.7F);
-            this.windingMachine.draw(graphics, this.getWidth() / 2, 0,coil,false);
+            this.windingMachine.draw(graphics, this.getWidth() / 2, 0,coilColor,false);
             ms.popPose();
 
 

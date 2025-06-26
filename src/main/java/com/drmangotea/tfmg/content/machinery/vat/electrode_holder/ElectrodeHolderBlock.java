@@ -1,6 +1,9 @@
 package com.drmangotea.tfmg.content.machinery.vat.electrode_holder;
 
+import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
+import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode.Electrode;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -24,13 +27,19 @@ public class ElectrodeHolderBlock extends Block implements IBE<ElectrodeHolderBl
             return InteractionResult.PASS;
         if(level.getBlockEntity(pos) instanceof ElectrodeHolderBlockEntity be){
             ItemStack stack = player.getItemInHand(hand);
-            ElectrodeHolderBlockEntity.ElectrodeType electrodeType = be.electrodeType;
-            ItemStack stackInside = electrodeType.item;
+            Electrode electrode = be.electrode;
+            ItemStack stackInside = electrode.getStack();
             if(stack.is(stackInside.getItem()))
                 return InteractionResult.PASS;
             if(be.setElectrode(stack, true)) {
-                player.setItemInHand(hand, electrodeType.item);
+                player.setItemInHand(hand, electrode.getStack());
                 be.setElectrode(stack, false);
+                return InteractionResult.SUCCESS;
+            }
+            if (player.isShiftKeyDown() && player.getItemInHand(hand).isEmpty()) {
+                if (be.electrode == TFMGUtils.getElectrode(TFMG.asResource("none"))) return InteractionResult.PASS;
+                player.setItemInHand(hand, electrode.getStack());
+                be.setElectrode(TFMGUtils.getElectrode(TFMG.asResource("none")), false);
                 return InteractionResult.SUCCESS;
             }
         }
