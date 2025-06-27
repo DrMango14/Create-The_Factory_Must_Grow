@@ -95,7 +95,7 @@ public class TFMGItems {
     public static final ItemEntry<Item>
             REBAR = REGISTRATE.item("rebar", Item::new)
             .tag(AllTags.forgeItemTag("rods/steel"))
-            .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), RecipeCategory.BUILDING_BLOCKS, c::get, 4))
+            .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), RecipeCategory.BUILDING_BLOCKS, c::get, 2))
             .register(),
             SYNTHETIC_STRING = REGISTRATE.item("synthetic_string", Item::new)
                     .tag(Tags.Items.STRING, AllTags.forgeItemTag("string"))

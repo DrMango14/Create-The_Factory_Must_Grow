@@ -1,6 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 4,
+  "count": 2,
   "ingredient": {
     "tag": "forge:ingots/steel"
   },
