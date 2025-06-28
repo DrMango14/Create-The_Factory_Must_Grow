@@ -1,4 +1,4 @@
-// 1.20.1	2025-06-27T21:41:45.5674261	Registrate Provider for tfmg [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2025-06-28T21:43:05.723232	Registrate Provider for tfmg [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 ff5a5721633b83465ab501cbdfdc579a0f20e938 assets/tfmg/blockstates/accumulator.json
 e982a263b6af75821042107fdeff7bd809436d08 assets/tfmg/blockstates/air_intake.json
 e7f63aadfc892e337d9f87b5e50af8b1c7e4103f assets/tfmg/blockstates/aluminum_bars.json
@@ -1710,7 +1710,6 @@ bcd97e4d08daef6f60e6e0239222009540dac177 data/forge/tags/items/plates/steel.json
 3f7807c4bc7aece02066f3dc5e0f436a0d5fa078 data/forge/tags/items/raw_materials/lead.json
 808564cbcb70936b3da0a2a1bfa063752a0688d3 data/forge/tags/items/raw_materials/lithium.json
 88f3d6f99c74dabb2491637c6b2ba766a1f662f1 data/forge/tags/items/raw_materials/nickel.json
-9e63c1b017f9b54bb1e81f6c34cc8ac4cb810ac1 data/forge/tags/items/rods/steel.json
 a2029f4d5ac94eb5514d525fa8296d78e65d338f data/forge/tags/items/storage_blocks.json
 5f36040d029001793eb338e1a8c5d95b9abcc9b3 data/forge/tags/items/storage_blocks/aluminum.json
 7c5615c56bb169570a061f052ebb1f5115760c16 data/forge/tags/items/storage_blocks/cast_iron.json
@@ -2584,7 +2583,7 @@ e913ce01ae0e3c5cee5bcdb857848a76da7a9348 data/tfmg/recipes/purple_rebar_concrete
 3dfb0b20b9cabf0d236d3525a5ffeebd6ee24501 data/tfmg/recipes/rebar_concrete_slab_from_rebar_concrete_stonecutting.json
 bc0be1a251af7bbd69e489091f0ad12f9525ecb1 data/tfmg/recipes/rebar_concrete_stairs_from_rebar_concrete_stonecutting.json
 8c3e6974d35f3c4096c3ef658b6535fdaecbd79c data/tfmg/recipes/rebar_concrete_wall_from_rebar_concrete_stonecutting.json
-0f59181ae0d6d5d4715517be8809e174f5d2d011 data/tfmg/recipes/rebar_from_ingots_steel_stonecutting.json
+a70047790bcdc5e0cb15565a76557eead9e31685 data/tfmg/recipes/rebar_from_ingots_steel_stonecutting.json
 a56a4d134f1b4719e3e08d8de8b663e4bb6b4649 data/tfmg/recipes/red_caution_block_from_ingots_aluminum_stonecutting.json
 fcec2523663d5d5bf1bf8e207163b6a36b6327ff data/tfmg/recipes/red_concrete_slab_from_red_concrete_stonecutting.json
 f9369c7d975175a8f6869fef5533008b5a1e8e2b data/tfmg/recipes/red_concrete_stairs_from_red_concrete_stonecutting.json

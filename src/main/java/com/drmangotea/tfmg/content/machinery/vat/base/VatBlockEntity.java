@@ -20,6 +20,7 @@ import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import com.simibubi.create.foundation.utility.CreateLang;
 import com.simibubi.create.infrastructure.config.AllConfigs;
+import io.netty.util.internal.MathUtil;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.createmod.catnip.lang.LangBuilder;
 import net.createmod.catnip.theme.Color;
@@ -30,6 +31,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -54,6 +56,7 @@ import net.minecraftforge.network.PacketDistributor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -856,6 +859,11 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         return null;
     }
 
+    public void addMachineTooltip(String operationId, List<Component> tooltip) {
+        CreateLang.translate("goggles.vat."+operationId.replace(":","."))
+                .forGoggles(tooltip);
+    }
+
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 
@@ -872,8 +880,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip);
         for (String operation : machines)
-            CreateLang.translate("goggles.vat."+operation.replace(":","."))
-                    .forGoggles(tooltip);
+            addMachineTooltip(operation, tooltip);
 
 
         CreateLang.translate("goggles.vat.heat_status")
@@ -1156,6 +1163,15 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
     @Override
     public int getWidth() {
         return width;
+    }
+
+    public int getTimer() {
+        return timer;
+    }
+
+    public float getRecipeCompletion() {
+        if (recipe == null) return 0.0f;
+        return (float) timer / recipe.getProcessingDuration();
     }
 
     @Override
