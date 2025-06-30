@@ -52,6 +52,7 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
 
     public SmartInventory inputInventory;
     public SmartInventory fluxInventory;
+    public SmartInventory fuelInventory;
     public FluidTank primaryTank;
     public FluidTank secondaryTank;
     protected LazyOptional<IFluidHandler> fluidCapability;
@@ -79,12 +80,16 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
                 .forbidExtraction()
                 .withMaxStackSize(64).whenContentsChanged(i -> this.onContentsChanged());
 
+        fuelInventory = new SmartInventory(1, this)
+                .forbidInsertion()
+                .withMaxStackSize(64).whenContentsChanged(i -> this.onContentsChanged());
+
         primaryTank = new SmartFluidTank(4000, this::onFluidChanged);
 
         secondaryTank = new SmartFluidTank(4000, this::onFluidChanged);
 
 
-        itemCapability = LazyOptional.of(() -> new CombinedInvWrapper(inputInventory, fluxInventory));
+        itemCapability = LazyOptional.of(() -> new CombinedInvWrapper(inputInventory, fluxInventory, fuelInventory));
         fluidCapability = LazyOptional.of(() -> new CombinedTankWrapper(primaryTank, secondaryTank));
     }
 
@@ -105,6 +110,51 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
         if (!inputInventory.isEmpty() && timer == -1) {
             executeRecipe();
         }
+    }
+
+    public static int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+
+    private int calculateProcessingTime(IndustrialBlastingRecipe recipe) {
+        int baseDuration = recipe.getProcessingDuration() * 20;
+        double timeModifier = TFMGConfigs.common().machines.blastFurnaceMaxHeight.get() /
+                ((baseDuration / 2) * TFMGConfigs.common().machines.blastFurnaceHeightSpeedModifier.get());
+
+        int actualTicks = (int)(baseDuration - (getSize() / timeModifier));
+        return isReinforced ? actualTicks / 2 : actualTicks;
+    }
+
+    private int[] findCleanRatio(IndustrialBlastingRecipe recipe) {
+        // Get all values from config
+        int ticksPerFuel = TFMGConfigs.common().machines.blastFurnaceFuelConsumption.get();
+        int actualTicks = calculateProcessingTime(recipe);
+
+        // Calculate the exact decimal ratio
+        float exactRatio = (float)ticksPerFuel / actualTicks;
+
+        // Find the smallest integer ratio that approximates this
+        int maxIterations = 1000; // Prevents infinite loops
+        float tolerance = 0.0001f; // How close we need to be
+
+        int a = 1, b = 1;
+        float currentError = Math.abs(exactRatio - ((float)a/b));
+
+        // Farey sequence approximation
+        for (int i = 0; i < maxIterations && currentError > tolerance; i++) {
+            if ((float)a/b < exactRatio) {
+                a++;
+            } else {
+                b++;
+            }
+            currentError = Math.abs(exactRatio - ((float)a/b));
+        }
+
+        // Check if recipe needs flux
+        boolean needsFlux = recipe.getIngredients().size() > 1;
+
+        // Return as [fuel, ore, flux]
+        return new int[]{b, a, needsFlux ? a : 0};
     }
 
     @Override
@@ -130,11 +180,37 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
                     .style(ChatFormatting.GREEN)
                     .forGoggles(tooltip);
 
+        // Dynamic batch ratio calculation for current input
+        if (!inputInventory.isEmpty()) {
+            Optional<IndustrialBlastingRecipe> recipeOpt = TFMGRecipeTypes.INDUSTRIAL_BLASTING
+                    .find(new RecipeWrapper(inputInventory), level);
+
+            if (recipeOpt.isPresent()) {
+                IndustrialBlastingRecipe recipe = recipeOpt.get();
+                int[] batch = findCleanRatio(recipe); // Uses the corrected method
+
+                CreateLang.translate("goggles.blast_furnace.batch_header")
+                        .style(ChatFormatting.GRAY)
+                        .forGoggles(tooltip);
+
+                CreateLang.translate("goggles.blast_furnace.batch_ratio",
+                                batch[0], batch[1], batch[2])
+                        .style(ChatFormatting.AQUA)
+                        .forGoggles(tooltip);
+
+                if (batch[1] > 64) {
+                    CreateLang.translate("goggles.blast_furnace.batch_warning")
+                            .style(ChatFormatting.YELLOW)
+                            .forGoggles(tooltip);
+                }
+            }
+        }
+
         TFMGUtils.createFluidTooltip(this, tooltip);
         TFMGUtils.createItemTooltip(this, tooltip);
 
-
         return true;
+
     }
 
     public void executeRecipe() {
@@ -177,6 +253,17 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
             return;
         if (getSize() < 3)
             return;
+
+        if (fuel <= 0 && !fuelInventory.getItem(0).isEmpty()) {
+            ItemStack fuelStack = fuelInventory.getItem(0);
+            if (fuelStack.is(TFMGTags.TFMGItemTags.BLAST_FURNACE_FUEL.tag)) {
+                int fuelValue = 1;
+                int toConsume = Math.min(fuelStack.getCount(), STORAGE_SPACE - fuel);
+                fuel += toConsume * fuelValue;
+                fuelStack.shrink(toConsume);
+                setChanged();
+            }
+        }
 
         if (fuelConsumeTimer >= TFMGConfigs.common().machines.blastFurnaceFuelConsumption.get() && fuel > 0) {
             fuelConsumeTimer = 0;
@@ -232,8 +319,8 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
                 tuyereBE.tank.getFluidInTank(0).setAmount(Math.max(tuyereBE.tank.getFluidInTank(0).getAmount() - recipe.hotAirUsage, 0));
 
                 if (!recipe.getGasByproduct().isEmpty()) {
-                    if (level.getBlockEntity(getBlockPos().relative(getBlockState().getValue(FACING).getOpposite()).above(getSize())) instanceof BlastFurnaceHatchBlockEntity be) {
-                        be.tank.fill(recipe.getGasByproduct(), IFluidHandler.FluidAction.EXECUTE);
+                    if (level.getBlockEntity(getBlockPos().relative(getBlockState().getValue(FACING).getOpposite()).above(getSize())) instanceof BlastFurnaceHatchBlockEntity chargeHatchBE) {
+                        chargeHatchBE.tank.fill(recipe.getGasByproduct(), IFluidHandler.FluidAction.EXECUTE);
                     }
                 }
                 if (level.isClientSide())
@@ -261,8 +348,8 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
     }
 
     private boolean canProcess(IndustrialBlastingRecipe recipe) {
-        if (fuel == 0)
-            return false;
+        //if (fuel == 0)
+        //    return false;
 
         if (!primaryTank.getFluid().isEmpty() && !primaryTank.getFluid().getFluid().isSame(recipe.getPrimaryResult().getFluid()))
             return false;
@@ -312,12 +399,32 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
             if (itemStack.isEmpty())
                 return;
 
-            if (itemStack.is(TFMGTags.TFMGItemTags.BLAST_FURNACE_FUEL.tag) && fuel < STORAGE_SPACE) {
+            if (itemStack.is(TFMGTags.TFMGItemTags.BLAST_FURNACE_FUEL.tag)) {
+                // If fuel storage is full, try to add to fuel inventory slot
+                if (fuel >= STORAGE_SPACE) {
+                    if (fuelInventory.getItem(0).isEmpty() ||
+                            (fuelInventory.getItem(0).is(itemStack.getItem()) &&
+                                    fuelInventory.getItem(0).getCount() < fuelInventory.getItem(0).getMaxStackSize())) {
 
-                fuel++;
-                itemStack.shrink(1);
-                continue;
+                        int added = Math.min(itemStack.getCount(),
+                                fuelInventory.getItem(0).getMaxStackSize() - fuelInventory.getItem(0).getCount());
+                        if (fuelInventory.getItem(0).isEmpty()) {
+                            fuelInventory.setItem(0, new ItemStack(itemStack.getItem(), added));
+                        } else {
+                            fuelInventory.getItem(0).grow(added);
+                        }
+                        itemStack.shrink(added);
+                        continue;
+                    }
+                } else {
+                    // Add to fuel storage if not full
+                    int toAdd = Math.min(itemStack.getCount(), STORAGE_SPACE - fuel);
+                    fuel += toAdd;
+                    itemStack.shrink(toAdd);
+                    continue;
+                }
             }
+
             if (itemStack.is(TFMGTags.TFMGItemTags.FLUX.tag) && fluxInventory.getItem(0).getCount() < itemStack.getMaxStackSize()) {
                 if (fluxInventory.isEmpty() || fluxInventory.getItem(0).is(itemStack.getItem())) {
                     fluxInventory.setItem(0, new ItemStack(itemStack.getItem(), fluxInventory.getItem(0).getCount() + 1));
@@ -329,7 +436,6 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
                 if (inputInventory.isEmpty() || inputInventory.getItem(0).is(itemStack.getItem())) {
                     inputInventory.setItem(0, new ItemStack(itemStack.getItem(), inputInventory.getItem(0).getCount() + 1));
                     itemStack.shrink(1);
-                    continue;
                 }
             }
         }
@@ -341,6 +447,7 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
         isReinforced = compound.getBoolean("IsReinforce");
         inputInventory.deserializeNBT(compound.getCompound("InputItems"));
         fluxInventory.deserializeNBT(compound.getCompound("Flux"));
+        fuelInventory.deserializeNBT(compound.getCompound("FuelItems"));
         timer = compound.getInt("Timer");
         fuel = compound.getInt("Fuel");
         fuelConsumeTimer = compound.getInt("FuelConsumeTimer");
@@ -354,6 +461,7 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
         compound.putBoolean("IsReinforce", isReinforced);
         compound.put("InputItems", inputInventory.serializeNBT());
         compound.put("Flux", fluxInventory.serializeNBT());
+        compound.put("FuelItems", fuelInventory.serializeNBT());
         compound.putInt("Timer", timer);
         compound.putInt("Fuel", fuel);
         compound.putInt("FuelConsumeTimer", fuelConsumeTimer);
@@ -366,6 +474,7 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
         super.destroy();
         ItemHelper.dropContents(level, worldPosition, inputInventory);
         ItemHelper.dropContents(level, worldPosition, fluxInventory);
+        ItemHelper.dropContents(level, worldPosition, fuelInventory);
     }
 
     public int getSize() {
@@ -382,7 +491,7 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
         int normalAmount = 0;
         int reinforcedAmount = 0;
 
-        for (int i = 0; i < TFMGConfigs.common().machines.blastFurnaceMaxHeight.get(); i++) {
+        for (int i = 0; i <= TFMGConfigs.common().machines.blastFurnaceMaxHeight.get(); i++) {
 
             BlockPos checkedPos = middlePos.above(i).east().south();
 

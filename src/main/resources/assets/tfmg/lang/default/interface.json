@@ -23,6 +23,9 @@
   "create.goggles.blast_furnace.reinforced": "Reinforced",
   "create.goggles.blast_furnace.timer": "Time Left: %1$s",
   "create.goggles.blast_furnace.modifier": "Production Time: %1$s",
+  "create.goggles.blast_furnace.batch_header": "Smelt Batch Ratio:",
+  "create.goggles.blast_furnace.batch_ratio": "%s:%s:%s (Fuel:Ore:Flux)",
+  "create.goggles.blast_furnace.batch_warning": "Warning: Large batch size.",
 
   "create.goggles.blast_stove.header": "Blast Stove: ",
   "create.goggles.blast_stove.tank1": "Input Tank 1: ",
