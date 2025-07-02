@@ -45,7 +45,7 @@ public class TFMGPlacedFeatures {
 
         register(ctx, OIL_DEPOSIT,oilDeposit,oilPlacement(RarityFilter.onAverageOnceEvery(4)));
 
-        register(ctx, OIL_WELL,oilWell,oilPlacement(RarityFilter.onAverageOnceEvery(500)));
+        register(ctx, OIL_WELL,oilWell,oilPlacement(RarityFilter.onAverageOnceEvery(750)));
 
         register(ctx, LEAD_ORE, leadOre, placement(CountPlacement.of(5), -15, 80));
         register(ctx, NICKEL_ORE, nickelOre, placement(CountPlacement.of(5), -63, 20));

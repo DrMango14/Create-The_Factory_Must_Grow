@@ -94,6 +94,9 @@ public class LargeEngineBlockEntity extends AbstractEngineBlockEntity {
 
         PoweredShaftBlockEntity shaft = getShaft();
 
+
+
+
         if (shaft == null) {
             if (!level.isClientSide()) {
 
@@ -207,9 +210,14 @@ public class LargeEngineBlockEntity extends AbstractEngineBlockEntity {
             return;
         }
 
+        boolean isFuelValid = false;
+        for(TagKey<Fluid> tag : getSupportedFuels()){
+            if(fuelTank.getFluid().getFluid().is(tag))
+                isFuelValid = true;
+        }
 
 
-        shaft.update(worldPosition, 2, 15 * getFuelType().getStress());
+        shaft.update(worldPosition, 2, 15 * getFuelType().getStress()*(isFuelValid?1:0));
         sendData();
         setChanged();
     }

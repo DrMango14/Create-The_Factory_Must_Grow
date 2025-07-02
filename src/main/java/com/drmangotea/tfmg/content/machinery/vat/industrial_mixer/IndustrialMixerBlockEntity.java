@@ -18,6 +18,7 @@ import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -65,7 +66,10 @@ public class IndustrialMixerBlockEntity extends KineticBlockEntity implements IV
 
 
     }
-
+    public void destroy() {
+        ItemStack mixerItem = mixerMode.item;
+        Containers.dropItemStack(getLevel(), getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ(), mixerItem);
+    }
 
 
 

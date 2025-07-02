@@ -310,7 +310,7 @@ public class TFMGBlockEntities {
             .blockEntity("engine_gearbox", EngineGearboxBlockEntity::new)
             .visual(() -> SingleAxisRotatingVisual::shaft)
             .validBlocks(TFMGBlocks.ENGINE_GEARBOX)
-            .renderer(() -> EngineGearboxRenderer::new)
+            .renderer(() -> ShaftRenderer::new)
             .register();
 
     public static final BlockEntityEntry<EngineControllerBlockEntity> ENGINE_CONTROLLER = REGISTRATE

@@ -30,6 +30,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -362,11 +363,12 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
         LangBuilder mb = CreateLang.translate("generic.unit.millibuckets");
 
         CreateLang.translate("goggles.blast_stove.header")
-                        .forGoggles(tooltip);
+                .forGoggles(tooltip);
         CreateLang.builder()
                 .add(CreateLang.translate("goggles.blast_stove.tank1"))
-                .add(CreateLang.number(secondaryCapability.orElseGet(null).getFluidInTank(0).getAmount())
+                .add(CreateLang.number(getControllerBE().secondaryCapability.orElseGet(null).getFluidInTank(0).getAmount())
                         .add(mb)
+                        .add(getControllerBE().secondaryCapability.orElseGet(null).getFluidInTank(0).getFluid() == Fluids.EMPTY ? CreateLang.text("") :  CreateLang.text(" "+getControllerBE().secondaryCapability.orElseGet(null).getFluidInTank(0).getDisplayName().getString()))
                         .style(ChatFormatting.DARK_GREEN))
                 .text(ChatFormatting.GRAY, " / ")
                 .add(CreateLang.number(8000)
@@ -375,8 +377,9 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
                 .forGoggles(tooltip, 1);
         CreateLang.builder()
                 .add(CreateLang.translate("goggles.blast_stove.tank2"))
-                .add(CreateLang.number(primaryCapability.orElseGet(null).getFluidInTank(1).getAmount())
+                .add(CreateLang.number(getControllerBE().primaryCapability.orElseGet(null).getFluidInTank(1).getAmount())
                         .add(mb)
+                        .add(getControllerBE().primaryCapability.orElseGet(null).getFluidInTank(1).getFluid() == Fluids.EMPTY ? CreateLang.text("") :  CreateLang.text(" "+getControllerBE().primaryCapability.orElseGet(null).getFluidInTank(1).getDisplayName().getString()))
                         .style(ChatFormatting.DARK_GREEN))
                 .text(ChatFormatting.GRAY, " / ")
                 .add(CreateLang.number(8000)
@@ -385,8 +388,9 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
                 .forGoggles(tooltip, 1);
         CreateLang.builder()
                 .add(CreateLang.translate("goggles.blast_stove.tank3"))
-                .add(CreateLang.number(primaryCapability.orElseGet(null).getFluidInTank(0).getAmount())
+                .add(CreateLang.number(getControllerBE().primaryCapability.orElseGet(null).getFluidInTank(0).getAmount())
                         .add(mb)
+                        .add(getControllerBE().primaryCapability.orElseGet(null).getFluidInTank(0).getFluid() == Fluids.EMPTY ? CreateLang.text("") :  CreateLang.text(" "+getControllerBE().primaryCapability.orElseGet(null).getFluidInTank(0).getDisplayName().getString()))
                         .style(ChatFormatting.YELLOW))
                 .text(ChatFormatting.GRAY, " / ")
                 .add(CreateLang.number(8000)
@@ -395,8 +399,9 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
                 .forGoggles(tooltip, 1);
         CreateLang.builder()
                 .add(CreateLang.translate("goggles.blast_stove.tank4"))
-                .add(CreateLang.number(secondaryCapability.orElseGet(null).getFluidInTank(1).getAmount())
+                .add(CreateLang.number(getControllerBE().secondaryCapability.orElseGet(null).getFluidInTank(1).getAmount())
                         .add(mb)
+                        .add(getControllerBE().secondaryCapability.orElseGet(null).getFluidInTank(1).getFluid() == Fluids.EMPTY ? CreateLang.text("") :  CreateLang.text(" "+getControllerBE().secondaryCapability.orElseGet(null).getFluidInTank(1).getDisplayName().getString()))
                         .style(ChatFormatting.YELLOW))
                 .text(ChatFormatting.GRAY, " / ")
                 .add(CreateLang.number(8000)

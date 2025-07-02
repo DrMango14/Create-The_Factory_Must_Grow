@@ -31,7 +31,7 @@ public class PolarizerBlock extends TFMGHorizontalDirectionalBlock implements IB
         if(level.getBlockEntity(pos) instanceof PolarizerBlockEntity be){
             if(player.getItemInHand(hand).isEmpty()){
                 if(!be.inventory.isEmpty()) {
-                    player.setItemInHand(hand, new ItemStack(be.inventory.getStackInSlot(0).getItem(),1));
+                    player.setItemInHand(hand, be.inventory.getStackInSlot(0));
                     be.inventory.setItem(0, ItemStack.EMPTY);
                     return InteractionResult.SUCCESS;
                 }

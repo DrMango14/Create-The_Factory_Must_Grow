@@ -23,16 +23,19 @@ We wanna be the first ones to try and prove this concept.
 
 ## Features
 
-* Concrete (Rebar Concrete Too)
-* Steel
 * Large Distilleries
-* Blast Furnaces
-* Coke Ovens
-* OIL!!!
-* Quad Potato Cannon (Fwoomp)
-* Bauxite(For Obtaining Aluminum or for Building)
+* Realistic Electricity
+* Steel Mills
+* Concrete
+* Electrolyzers
+* Steel
 * Aluminum
+* Cast Iron
+* Lead
 * Sulfur
+* OIL!!!
+* Quad Potato Cannon
+* Flamethrowers
 * And more..
 
 <br>
