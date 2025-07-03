@@ -3,7 +3,7 @@ package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.electricity.base.ConnectNeightborsPacket;
-import com.drmangotea.tfmg.content.electricity.base.ConnectionPacket;
+import com.drmangotea.tfmg.content.electricity.base.ElectricPlacementPacket;
 import com.drmangotea.tfmg.content.electricity.base.NetworkUpdatePacket;
 import com.drmangotea.tfmg.content.electricity.base.UpdateInFrontPacket;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CablePlacePacket;
@@ -38,7 +38,7 @@ public enum TFMGPackets {
     QUAD_POTATO_CANNON(QuadPotatoCannonPacket.class, QuadPotatoCannonPacket::new, PLAY_TO_CLIENT),
     CONNECT_NEIGHBORS(ConnectNeightborsPacket.class, ConnectNeightborsPacket::new, PLAY_TO_CLIENT),
     NETWORK_UPDATE(NetworkUpdatePacket.class, NetworkUpdatePacket::new, PLAY_TO_CLIENT),
-    CONNECTION_PACKET(ConnectionPacket.class, ConnectionPacket::new, PLAY_TO_CLIENT),
+    CONNECTION_PACKET(ElectricPlacementPacket.class, ElectricPlacementPacket::new, PLAY_TO_CLIENT),
     VAT_EVALUATION(VatEvaluationPacket.class, VatEvaluationPacket::new, PLAY_TO_CLIENT),
     COKE_OVEN_PACKET(CokeOvenPacket.class, CokeOvenPacket::new, PLAY_TO_CLIENT),
     UPDATE_IN_FRONT_PACKET(UpdateInFrontPacket.class, UpdateInFrontPacket::new, PLAY_TO_CLIENT),

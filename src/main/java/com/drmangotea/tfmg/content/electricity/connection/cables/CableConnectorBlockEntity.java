@@ -54,6 +54,7 @@ public class CableConnectorBlockEntity extends ElectricBlockEntity implements IH
     public void remove() {
         super.remove();
         notifyRemoval();
+        dropWires();
     }
 
 
@@ -65,16 +66,23 @@ public class CableConnectorBlockEntity extends ElectricBlockEntity implements IH
         return direction == getBlockState().getValue(FACING).getOpposite();
     }
 
+    public void dropWires(){
+        for (CableConnection connection : connections) {
+            ItemEntity itemToDrop = new ItemEntity(level, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, new ItemStack(connection.type.getSpool().get(), (int) (connection.getLength() / 8)));
+            if (itemToDrop.getItem().getCount() > 0) {
+                level.addFreshEntity(itemToDrop);
+            }
+
+        }
+    }
+
     public void notifyRemoval() {
 
         if(level.isClientSide)
             return;
 
         for (CableConnection connection : connections) {
-            ItemEntity itemToDrop = new ItemEntity(level, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, new ItemStack(connection.type.getSpool().get(), (int) (connection.getLength()/8)));
-            if (itemToDrop.getItem().getCount() > 0) {
-                level.addFreshEntity(itemToDrop);
-            }
+
             BlockPos pos = connection.blockPos1;
 
            // level.setBlock(connection.blockPos1.above(), Blocks.GOLD_BLOCK.defaultBlockState(),3);
@@ -82,11 +90,13 @@ public class CableConnectorBlockEntity extends ElectricBlockEntity implements IH
                 if (be.getBlockPos() == getBlockPos())
                     continue;
                 be.onPlaced();
+
                 be.removeWiresNextTick = true;
 
             }
         }
     }
+
 
    //@Override
    //public float resistance() {

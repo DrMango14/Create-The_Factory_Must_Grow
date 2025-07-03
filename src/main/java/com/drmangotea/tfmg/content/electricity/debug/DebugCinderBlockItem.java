@@ -49,9 +49,9 @@ public class DebugCinderBlockItem extends Item {
         BlockPos pos = context.getClickedPos();
         Level level = context.getLevel();
         if (level.getBlockEntity(pos) instanceof IElectric be) {
-            be.getOrCreateElectricNetwork().handleInsufficientPower();
+            TFMG.LOGGER.debug("VOLTAGE "+be.getData().voltage);
 
         }
-        return InteractionResult.PASS;
+        return InteractionResult.SUCCESS;
     }
 }

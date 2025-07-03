@@ -37,7 +37,9 @@ public class PolarizerBlock extends TFMGHorizontalDirectionalBlock implements IB
                 }
             }else {
                 if(be.inventory.isEmpty()&&!stack.isEmpty()){
-                    be.inventory.setItem(0, stack.copy());
+                    ItemStack stack1 = stack.copy();
+                    stack1.setCount(1);
+                    be.inventory.setItem(0, stack1);
                     player.getItemInHand(hand).shrink(1);
                     return InteractionResult.SUCCESS;
                 }

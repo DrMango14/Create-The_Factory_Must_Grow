@@ -232,6 +232,7 @@ public class ElectricBlockEntity extends SmartBlockEntity implements IElectric, 
             getOrCreateElectricNetwork().checkForLoops(getBlockPos());
             data.checkForLoopsNextTick = false;
         }
+
         if (data.connectNextTick) {
             onPlaced();
             data.connectNextTick = false;

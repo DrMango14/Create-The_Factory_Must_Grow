@@ -75,7 +75,10 @@ public class WindingMachineBlock extends HorizontalKineticBlock implements IBE<W
                 }
             }else {
                 if(be.inventory.isEmpty()&&!(player.getItemInHand(hand).getItem() instanceof SpoolItem)){
-                    be.inventory.setItem(0, player.getItemInHand(hand).copy());
+                    ItemStack stack1 = player.getItemInHand(hand).copy();
+                    stack1.setCount(1);
+                    be.inventory.setItem(0, stack1);
+
                     player.getItemInHand(hand).shrink(1);
                     return InteractionResult.SUCCESS;
                 }

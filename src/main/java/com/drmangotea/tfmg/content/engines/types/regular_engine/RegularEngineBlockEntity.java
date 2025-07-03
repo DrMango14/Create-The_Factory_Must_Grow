@@ -159,6 +159,10 @@ public class RegularEngineBlockEntity extends AbstractSmallEngineBlockEntity {
 
 
         if (itemStack.is(AllItems.EMPTY_SCHEMATIC.get())) {
+
+            if(type == EngineType.RADIAL||type == EngineType.TURBINE)
+                return false;
+
             boolean next = false;
             if (type == EngineType.BOXER) {
                 if (level.getBlockEntity(controller) instanceof RegularEngineBlockEntity be)

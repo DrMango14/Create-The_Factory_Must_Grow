@@ -6,18 +6,18 @@ import com.simibubi.create.foundation.networking.BlockEntityDataPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 
-public class ConnectionPacket extends BlockEntityDataPacket<SmartBlockEntity> {
+public class ElectricPlacementPacket extends BlockEntityDataPacket<SmartBlockEntity> {
 
 
 
 
-    public ConnectionPacket(BlockPos pos) {
+    public ElectricPlacementPacket(BlockPos pos) {
         super(pos);
 
 
     }
 
-    public ConnectionPacket(FriendlyByteBuf buffer) {
+    public ElectricPlacementPacket(FriendlyByteBuf buffer) {
         super(buffer);
 
 
@@ -31,7 +31,7 @@ public class ConnectionPacket extends BlockEntityDataPacket<SmartBlockEntity> {
     protected void handlePacket(SmartBlockEntity blockEntity) {
 
         if(blockEntity instanceof IElectric be) {
-            be.onConnected();
+            be.getData().connectNextTick = true;
         }
 
     }

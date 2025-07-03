@@ -6,6 +6,7 @@ import com.drmangotea.tfmg.content.decoration.concrete.ConcreteloggedBlock;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
+import com.drmangotea.tfmg.registry.TFMGItems;
 import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.placement.PoleHelper;
@@ -130,11 +131,10 @@ public class CableTubeBlock extends RotatedPillarBlock implements IBE<CableTubeB
 
 
 
-
         ItemStack itemInHand = player.getItemInHand(hand);
 
         IPlacementHelper helper = PlacementHelpers.get(placementHelperId);
-        if (helper.matchesItem(itemInHand)) {
+        if (itemInHand.is(state.getBlock().asItem())){
             return helper.getOffset(player, level, state, pos, pHit)
                     .placeInWorld(level, (BlockItem) itemInHand.getItem(), player, hand, pHit);
         }
