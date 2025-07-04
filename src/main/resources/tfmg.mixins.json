@@ -10,7 +10,6 @@
     "FluidTankBlockEntityMixin",
     "GoggleOverlayRendererMixin",
     "PipeAttachmentModelMixin",
-    "UtilMixin",
     "accessor.FluidTankBlockEntityAccessor",
     "accessor.TankSegmentAccessor"
   ],
