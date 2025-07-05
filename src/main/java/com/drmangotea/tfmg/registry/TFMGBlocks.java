@@ -110,6 +110,8 @@ import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.ha
 import com.drmangotea.tfmg.content.machinery.oil_processing.surface_scanner.SurfaceScannerBlock;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlock;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatGenerator;
+import com.drmangotea.tfmg.content.machinery.vat.base.VatItem;
+import com.drmangotea.tfmg.content.machinery.vat.base.VatModel;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.ElectrodeHolderBlock;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerBlock;
 import com.simibubi.create.AllMountedStorageTypes;
@@ -457,10 +459,10 @@ public class TFMGBlocks {
                     .properties(p -> p.isRedstoneConductor((p1, p2, p3) -> true))
                     .transform(pickaxeOnly())
                     .blockstate(new VatGenerator()::generate)
-                    .onRegister(CreateRegistrate.blockModel(() -> SteelFluidTankModel::steelVat))
+                    .onRegister(CreateRegistrate.blockModel(() -> VatModel::steelVat))
                     .addLayer(() -> RenderType::cutoutMipped)
-                    .item(SteelTankItem::new)
-                    .model(AssetLookup.customBlockItemModel("_", "block_single_window"))
+                    .item(VatItem.SteelVatItem::new)
+                    .model(AssetLookup.customBlockItemModel("_", "block_single"))
                     .build()
                     .register();
     public static final BlockEntry<VatBlock> CAST_IRON_CHEMICAL_VAT =
@@ -471,10 +473,10 @@ public class TFMGBlocks {
                     .properties(p -> p.isRedstoneConductor((p1, p2, p3) -> true))
                     .transform(pickaxeOnly())
                     .blockstate(new VatGenerator()::generate)
-                    .onRegister(CreateRegistrate.blockModel(() -> SteelFluidTankModel::castIronVat))
+                    .onRegister(CreateRegistrate.blockModel(() -> VatModel::castIronVat))
                     .addLayer(() -> RenderType::cutoutMipped)
-                    .item(SteelTankItem::new)
-                    .model(AssetLookup.customBlockItemModel("_", "block_single_window"))
+                    .item(VatItem.CastIronVatItem::new)
+                    .model(AssetLookup.customBlockItemModel("_", "block_single"))
                     .build()
                     .register();
     public static final BlockEntry<VatBlock> FIREPROOF_CHEMICAL_VAT =
@@ -485,9 +487,9 @@ public class TFMGBlocks {
                     .properties(p -> p.isRedstoneConductor((p1, p2, p3) -> true))
                     .transform(pickaxeOnly())
                     .blockstate(new VatGenerator()::generate)
-                    .onRegister(CreateRegistrate.blockModel(() -> SteelFluidTankModel::fireproofVat))
+                    .onRegister(CreateRegistrate.blockModel(() -> VatModel::fireproofVat))
                     .addLayer(() -> RenderType::cutoutMipped)
-                    .item(SteelTankItem::new)
+                    .item(VatItem.FireproofVatItem::new)
                     .model(AssetLookup.customBlockItemModel("_", "block_single"))
                     .build()
                     .register();
