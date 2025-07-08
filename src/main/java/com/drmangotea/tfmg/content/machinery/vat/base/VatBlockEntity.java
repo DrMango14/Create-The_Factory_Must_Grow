@@ -92,7 +92,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
     //
     public LerpedFloat[] fluidLevel = new LerpedFloat[8];
     /// /
-    public Map<String, BlockPos> machineMap = new HashMap<>();
+    public Map<BlockPos, String> machineMap = new HashMap<>();
     public Map<BlockPos, Boolean> operationalMachinesMap = new HashMap<>();
     public boolean areMachinesValid = true;
     boolean evaluateNextTick = true;
@@ -395,7 +395,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         handleRecipe();
 
         if (isController()) {
-            for (BlockPos machinePos : machineMap.values()) {
+            for (BlockPos machinePos : machineMap.keySet()) {
                 BlockEntity blockEntity = level.getBlockEntity(machinePos);
                 if (blockEntity instanceof IVatMachine vatMachine) {
                     boolean operational = vatMachine.canOperate(this);
@@ -637,7 +637,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
             return;
         }
 
-        Map<String, BlockPos> oldMachineMap = machineMap;
+        Map<BlockPos, String> oldMachineMap = machineMap;
         machineMap = new HashMap<>();
         heatLevel = 0;
         heatCondition = HeatCondition.NONE;
@@ -665,7 +665,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
                             continue;
 
                         be.vatUpdated(this);
-                        machineMap.put(be.getOperationId(), pos);
+                        machineMap.put(pos, be.getOperationId());
                         efficiency *= (be.getWorkPercentage() / 100);
                     }
 
@@ -906,9 +906,9 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         CreateLang.translate("goggles.vat.attachments")
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip);
-        for (Map.Entry<String, BlockPos> machines : machineMap.entrySet()) {
-            boolean operational = operationalMachinesMap.getOrDefault(machines.getValue(), true);
-            addMachineTooltip(machines.getKey(), operational, tooltip);
+        for (Map.Entry<BlockPos, String> machines : machineMap.entrySet()) {
+            boolean operational = operationalMachinesMap.getOrDefault(machines.getKey(), true);
+            addMachineTooltip(machines.getValue(), operational, tooltip);
         }
 
 
