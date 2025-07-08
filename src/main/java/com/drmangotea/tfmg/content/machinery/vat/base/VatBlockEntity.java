@@ -7,11 +7,15 @@ import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.api.boiler.BoilerHeater;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity;
+import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
+import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
@@ -23,6 +27,7 @@ import com.simibubi.create.infrastructure.config.AllConfigs;
 import io.netty.util.internal.MathUtil;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.createmod.catnip.lang.LangBuilder;
+import net.createmod.catnip.math.VecHelper;
 import net.createmod.catnip.theme.Color;
 import net.createmod.ponder.api.level.PonderLevel;
 import net.minecraft.ChatFormatting;
@@ -40,6 +45,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -86,7 +92,9 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
     //
     public LerpedFloat[] fluidLevel = new LerpedFloat[8];
     /// /
-    public List<String> machines = new ArrayList<>();
+    public Map<String, BlockPos> machineMap = new HashMap<>();
+    public Map<BlockPos, Boolean> operationalMachinesMap = new HashMap<>();
+    public boolean areMachinesValid = true;
     boolean evaluateNextTick = true;
     float efficiency = 1;
     int timer = 0;
@@ -217,7 +225,11 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
                 continue;
             boolean doesntMatch = false;
 
-            if (!Objects.equals(testedRecipe.machines, machines)) {
+            if (!Objects.equals(testedRecipe.machines, machineMap.keySet().stream().toList())) {
+                continue;
+            }
+
+            if (!getControllerBE().areMachinesValid) {
                 continue;
             }
 
@@ -381,6 +393,18 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
 
 
         handleRecipe();
+
+        if (isController()) {
+            for (BlockPos machinePos : machineMap.values()) {
+                BlockEntity blockEntity = level.getBlockEntity(machinePos);
+                if (blockEntity instanceof IVatMachine vatMachine) {
+                    boolean operational = vatMachine.canOperate(this);
+                    operationalMachinesMap.put(machinePos, operational);
+                }
+            }
+        }
+
+        areMachinesValid = operationalMachinesMap.entrySet().stream().allMatch((op) -> op.getValue() == true);
 
         if (syncCooldown > 0) {
             syncCooldown--;
@@ -613,8 +637,8 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
             return;
         }
 
-        List<String> oldMachines = machines;
-        machines = new ArrayList<>();
+        Map<String, BlockPos> oldMachineMap = machineMap;
+        machineMap = new HashMap<>();
         heatLevel = 0;
         heatCondition = HeatCondition.NONE;
 
@@ -641,7 +665,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
                             continue;
 
                         be.vatUpdated(this);
-                        machines.add(be.getOperationId());
+                        machineMap.put(be.getOperationId(), pos);
                         efficiency *= (be.getWorkPercentage() / 100);
                     }
 
@@ -650,12 +674,11 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
             }
         }
         efficiency = speed;
-        if (oldMachines != machines)
+        if (oldMachineMap != machineMap)
             recipe = null;
 
         notifyUpdate();
     }
-
 
     public boolean isAtValidLocation(IVatMachine.PositionRequirement requirement, BlockPos pos) {
         return switch (requirement) {
@@ -859,9 +882,13 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         return null;
     }
 
-    public void addMachineTooltip(String operationId, List<Component> tooltip) {
-        CreateLang.translate("goggles.vat."+operationId.replace(":","."))
-                .forGoggles(tooltip);
+    public void addMachineTooltip(String operationId, boolean isOperational, List<Component> tooltip) {
+        LangBuilder operation = CreateLang.translate("goggles.vat."+operationId.replace(":","."));
+        if (!isOperational) {
+            operation.add(CreateLang.text(" - ")).add(CreateLang.translate("goggles.vat.not_operational")
+                    .style(ChatFormatting.RED));
+        }
+        operation.forGoggles(tooltip);
     }
 
     @Override
@@ -879,8 +906,11 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         CreateLang.translate("goggles.vat.attachments")
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip);
-        for (String operation : machines)
-            addMachineTooltip(operation, tooltip);
+        for (Map.Entry<String, BlockPos> machines : machineMap.entrySet()) {
+            boolean operational = operationalMachinesMap.getOrDefault(machines.getValue(), true);
+            addMachineTooltip(machines.getKey(), operational, tooltip);
+        }
+
 
 
         CreateLang.translate("goggles.vat.heat_status")

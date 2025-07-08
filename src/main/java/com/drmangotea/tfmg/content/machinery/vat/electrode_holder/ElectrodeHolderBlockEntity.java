@@ -126,7 +126,7 @@ public class ElectrodeHolderBlockEntity extends ElectricBlockEntity implements I
 
     @Override
     public String getOperationId() {
-        return isOperational() ? electrode.getOperationId() : "";
+        return electrode.getOperationId();
 
         //return switch (electrodeType) {
 //
@@ -134,6 +134,11 @@ public class ElectrodeHolderBlockEntity extends ElectricBlockEntity implements I
         //    case COPPER, ZINC -> isOperational() ? "tfmg:electrode" : "";
         //    case GRAPHITE -> isOperational() ? "tfmg:graphite_electrode" : "";
         //};
+    }
+
+    @Override
+    public boolean canOperate(VatBlockEntity vat) {
+        return isOperational();
     }
 
     @Override

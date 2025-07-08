@@ -92,6 +92,7 @@
   "create.goggles.vat.no_heat": "No Heat",
   "create.goggles.vat.heated": "Heated",
   "create.goggles.vat.superheated": "Superheated",
+  "create.goggles.vat.not_operational": "Not Operational",
   "create.goggles.vat.tfmg.graphite_electrode": "   Graphite Electrode",
   "create.goggles.vat.tfmg.electrode": "   Electrode",
   "create.goggles.vat.tfmg.mixing": "   Mixer",

@@ -8,6 +8,8 @@ public interface IVatMachine {
      */
     String getOperationId();
 
+    boolean canOperate(VatBlockEntity vat);
+
     /**
      * operations that cant mix with this machine
      */
