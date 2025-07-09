@@ -225,11 +225,11 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
                 continue;
             boolean doesntMatch = false;
 
-            if (!Objects.equals(testedRecipe.machines, machineMap.keySet().stream().toList())) {
+            if (!Objects.equals(testedRecipe.machines, machineMap.values().stream().toList())) {
                 continue;
             }
 
-            if (!getControllerBE().areMachinesValid) {
+            if (!areMachinesValid) {
                 continue;
             }
 
@@ -404,7 +404,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
             }
         }
 
-        areMachinesValid = operationalMachinesMap.entrySet().stream().allMatch((op) -> op.getValue() == true);
+        areMachinesValid = operationalMachinesMap.values().stream().allMatch((op) -> op == true);
 
         if (syncCooldown > 0) {
             syncCooldown--;
@@ -515,23 +515,49 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
             //fluid output
             List<Integer> handledFluidResults = new ArrayList<>();
 
-            for (FluidStack fluidStack : recipe.getFluidResults()) {
-                for (int i = 0; i < outputFluidHandler.getTanks(); i++) {
-                    FluidStack fluidInTank = outputFluidHandler.getFluidInTank(i);
-                    if (fluidInTank.getFluid().isSame(fluidStack.getFluid())) {
-                        outputFluidHandler.fill(new FluidStack(fluidStack.copy(), fluidStack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
-                        handledFluidResults.add(i);
-                        break;
+            List<FluidStack> handledFluidStacks = new ArrayList<>();
+            List<SmartFluidTankBehaviour.TankSegment> tankSegments = List.of(outputTank.getTanks());
+            if (recipe != null)
+                for (FluidStack fluidStack : recipe.getFluidResults()) {
+                    for (SmartFluidTankBehaviour.TankSegment tankSegment : tankSegments) {
+                        SmartFluidTank tank = ((TankSegmentAccessor) tankSegment).tfmg$tank();
+                        FluidStack fluidInTank = tank.getFluid();
+                        if (handledFluidStacks.contains(fluidStack)) break;
+
+                        if (fluidInTank.getFluid().isSame(fluidStack.getFluid())) {
+                            tank.fill(new FluidStack(fluidStack.copy(), fluidStack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
+                            handledFluidStacks.add(fluidStack);
+                            break;
+                        }
+                        if (!handledFluidStacks.contains(fluidStack) && fluidInTank.isEmpty()) {
+                            tank.fill(new FluidStack(fluidStack.copy(), fluidStack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
+                            break;
+                        }
                     }
+                    //for (int i = 0; i < tankSegments.size(); i++) {
+                    //    FluidStack fluidInTank = outputFluidHandler.getFluidInTank(i);
+//
+                    //    if (handledFluidStacks.contains(fluidStack)) break;
+//
+                    //    if (fluidInTank.isEmpty()) {
+                    //        outputFluidHandler.fill(new FluidStack(fluidStack.copy(), fluidStack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
+                    //        handledFluidStacks.add(fluidStack);
+                    //        handledFluidResults.add(i);
+                    //    }
+                    //    else if (fluidInTank.getFluid().isSame(fluidStack.getFluid()) && fluidInTank.getAmount() + fluidStack.getAmount() <= outputFluidHandler.getCapacity()) {
+                    //        outputFluidHandler.fill(new FluidStack(fluidStack.copy(), fluidStack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
+                    //        handledFluidStacks.add(fluidStack);
+                    //        handledFluidResults.add(i);
+                    //    }
+                    //}
+                    //for (int i = 0; i < outputFluidHandler.getTanks(); i++) {
+                    //    FluidStack fluidInTank = outputFluidHandler.getFluidInTank(i);
+                    //    if (!handledFluidResults.contains(i) && fluidInTank.isEmpty()) {
+                    //        outputFluidHandler.fill(new FluidStack(fluidStack.copy(), fluidStack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
+                    //        break;
+                    //    }
+                    //}
                 }
-                for (int i = 0; i < outputFluidHandler.getTanks(); i++) {
-                    FluidStack fluidInTank = outputFluidHandler.getFluidInTank(i);
-                    if (!handledFluidResults.contains(i) && fluidInTank.isEmpty()) {
-                        outputFluidHandler.fill(new FluidStack(fluidStack.copy(), fluidStack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
-                        break;
-                    }
-                }
-            }
             recipe = null;
             timer = 0;
         } else {

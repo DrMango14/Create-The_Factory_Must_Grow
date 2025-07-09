@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-08T20:26:28.2936491	Registrate Provider for tfmg [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2025-07-09T13:44:40.7657277	Registrate Provider for tfmg [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 ff5a5721633b83465ab501cbdfdc579a0f20e938 assets/tfmg/blockstates/accumulator.json
 e982a263b6af75821042107fdeff7bd809436d08 assets/tfmg/blockstates/air_intake.json
 e7f63aadfc892e337d9f87b5e50af8b1c7e4103f assets/tfmg/blockstates/aluminum_bars.json
@@ -1234,7 +1234,7 @@ e7d137a2136040f6e504d0b26cede820d2a1be0d assets/tfmg/models/item/firebox.json
 6adcbf69c17e06e98cc848dc136b8907c9cff7be assets/tfmg/models/item/fireproof_brick.json
 080629b77cc20daacb129c7fe3c3a97d5df677f2 assets/tfmg/models/item/fireproof_bricks.json
 96171ac619fe06339e4888ebf16f744745d5d667 assets/tfmg/models/item/fireproof_brick_reinforcement.json
-492765a0dcafe3346e25697e1e81df64088348af assets/tfmg/models/item/fireproof_chemical_vat.json
+75526784c8d6f3da82d6991ac29decb74e8ffcad assets/tfmg/models/item/fireproof_chemical_vat.json
 e82498c07d178acd47a4eb43b92c86fd99ba3239 assets/tfmg/models/item/flamethrower.json
 6760e6cfe559d9d21c16a1ac8e444423fa8f6c48 assets/tfmg/models/item/flarestack.json
 7e4a58a6d05b19dc8c5fff73434c2d7cefa75343 assets/tfmg/models/item/fossilstone.json
