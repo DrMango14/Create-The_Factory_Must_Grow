@@ -5,8 +5,7 @@ import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -15,8 +14,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class VatItem extends BlockItem {
 
@@ -60,66 +57,19 @@ public class VatItem extends BlockItem {
     @Override
     protected boolean updateCustomBlockEntityTag(BlockPos pos, Level level, Player player,
                                                  ItemStack stack, BlockState state) {
+        MinecraftServer minecraftserver = level.getServer();
+        if (minecraftserver == null)
+            return false;
         CompoundTag nbt = stack.getTagElement("BlockEntityTag");
-        if (nbt == null) return false;
-
-        // 1. Preserve multi-block structure data
-        nbt.remove("Controller"); // Let the vat rebuild connectivity
-        nbt.remove("LastKnownPos");
-
-        // 2. Process inventories (input/output slots)
-        sanitizeInventory(nbt, "InputItems", 4);
-        sanitizeInventory(nbt, "OutputItems", 4);
-
-        // 3. Handle fluids via Create's SmartFluidTankBehaviour
-        if (nbt.contains("CreateData")) {
-            CompoundTag createData = nbt.getCompound("CreateData");
-            int capacity = VatBlockEntity.getCapacityMultiplier(); // Single-block capacity
-
-            // Clamp all tanks (both input and output)
-            clampTankGroup(createData, "InputTanks", capacity);
-            clampTankGroup(createData, "OutputTanks", capacity);
+        if (nbt != null) {
+            nbt.remove("Luminosity");
+            nbt.remove("Size");
+            nbt.remove("Height");
+            nbt.remove("Controller");
+            nbt.remove("LastKnownPos");
         }
-
-        // 4. Clean transient and vat-specific data
-        nbt.remove("Luminosity");
-        nbt.remove("Machines"); // Machines must re-attach after placement
-        nbt.remove("Timer"); // Reset recipe progress
-        nbt.remove("RecipeId");
 
         return super.updateCustomBlockEntityTag(pos, level, player, stack, state);
-    }
-
-    private void sanitizeInventory(CompoundTag nbt, String key, int slots) {
-        if (nbt.contains(key)) {
-            ItemStackHandler handler = new ItemStackHandler(slots);
-            handler.deserializeNBT(nbt.getCompound(key));
-
-            // Validate items (prevent overstacked/illegal items)
-            for (int i = 0; i < slots; i++) {
-                ItemStack stack = handler.getStackInSlot(i);
-                if (stack.getCount() > stack.getMaxStackSize()) {
-                    stack.setCount(stack.getMaxStackSize());
-                }
-            }
-            nbt.put(key, handler.serializeNBT());
-        }
-    }
-
-    private void clampTankGroup(CompoundTag createData, String tankGroup, int capacity) {
-        if (!createData.contains(tankGroup)) return;
-
-        ListTag tanks = createData.getList(tankGroup, Tag.TAG_COMPOUND);
-        for (int i = 0; i < tanks.size(); i++) {
-            CompoundTag tankTag = tanks.getCompound(i);
-            if (tankTag.contains("TankContent")) {
-                FluidStack fluid = FluidStack.loadFluidStackFromNBT(tankTag.getCompound("TankContent"));
-                if (!fluid.isEmpty()) {
-                    fluid.setAmount(Math.min(capacity, fluid.getAmount()));
-                    tankTag.put("TankContent", fluid.writeToNBT(new CompoundTag()));
-                }
-            }
-        }
     }
 
     private void tryMultiPlace(BlockPlaceContext ctx) {
