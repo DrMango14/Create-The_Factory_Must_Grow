@@ -752,6 +752,7 @@
   "item.tfmg.crankshaft": "Crankshaft",
   "item.tfmg.creosote_bucket": "Creosote Bucket",
   "item.tfmg.crude_oil_bucket": "Crude Oil Bucket",
+  "item.tfmg.crushed_raw_lithium": "Crushed Raw Lithium",
   "item.tfmg.cyan_multimeter": "Cyan Multimeter",
   "item.tfmg.cyan_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
   "item.tfmg.cyan_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",

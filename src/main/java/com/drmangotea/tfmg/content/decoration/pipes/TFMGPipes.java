@@ -1,5 +1,8 @@
 package com.drmangotea.tfmg.content.decoration.pipes;
 
+import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.base.TFMGCreativeTabs;
+import com.drmangotea.tfmg.base.TFMGRegistrate;
 import com.drmangotea.tfmg.config.TFMGStress;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSpriteShifts;
@@ -36,6 +39,7 @@ public class TFMGPipes {
 
     public static final Map<PipeMaterial, List<BlockEntry<? extends Block>>> TFMG_PIPES = new HashMap<>();
 
+    public static final TFMGRegistrate registrate = (TFMGRegistrate) REGISTRATE.setCreativeTab(TFMGCreativeTabs.TFMG_DECORATION);
 
     /*
      0: pipe
@@ -54,7 +58,7 @@ public class TFMGPipes {
             List<BlockEntry<? extends Block>> pipes = new ArrayList<>();
 
             BlockEntry<TFMGPipeBlock> pipe =
-                    REGISTRATE.block(pipeType.name + "_pipe", p -> new TFMGPipeBlock(p, pipeType))
+                    registrate.block(pipeType.name + "_pipe", p -> new TFMGPipeBlock(p, pipeType))
                             .initialProperties(SharedProperties::copperMetal)
                             .transform(pickaxeOnly())
                             .blockstate(BlockStateGen.pipe())
@@ -73,7 +77,7 @@ public class TFMGPipes {
             pipes.add(pipe);
 
             BlockEntry<TFMGEncasedPipeBlock> copper_encased_pipe =
-                    REGISTRATE.block("copper_encased_" + pipeType.name + "_pipe", p -> new TFMGEncasedPipeBlock(p, AllBlocks.COPPER_CASING::get, pipeType))
+                    registrate.block("copper_encased_" + pipeType.name + "_pipe", p -> new TFMGEncasedPipeBlock(p, AllBlocks.COPPER_CASING::get, pipeType))
                             .initialProperties(SharedProperties::copperMetal)
                             .properties(p -> p.noOcclusion().mapColor(MapColor.TERRACOTTA_LIGHT_GRAY))
                             .transform(axeOrPickaxe())
@@ -98,7 +102,7 @@ public class TFMGPipes {
            //if(true)
            //    break;
             BlockEntry<TFMGGlassPipeBlock> glass_pipe =
-                    REGISTRATE.block("glass_" + pipeType.name + "_pipe", p -> new TFMGGlassPipeBlock(p, pipeType))
+                    registrate.block("glass_" + pipeType.name + "_pipe", p -> new TFMGGlassPipeBlock(p, pipeType))
                             .initialProperties(SharedProperties::copperMetal)
                             .addLayer(() -> RenderType::cutoutMipped)
                             .transform(pickaxeOnly())
@@ -130,7 +134,7 @@ public class TFMGPipes {
             pipes.add(glass_pipe);
 
             BlockEntry<TFMGPumpBlock> fluid_pump =
-                    REGISTRATE.block(pipeType.name + "_mechanical_pump", TFMGPumpBlock::new)
+                    registrate.block(pipeType.name + "_mechanical_pump", TFMGPumpBlock::new)
                             .initialProperties(SharedProperties::copperMetal)
                             .transform(pickaxeOnly())
                             .blockstate(BlockStateGen.directionalBlockProviderIgnoresWaterlogged(true))
@@ -151,7 +155,7 @@ public class TFMGPipes {
             pipes.add(fluid_pump);
 
             BlockEntry<TFMGSmartFluidPipeBlock> smart_pipe =
-                    REGISTRATE.block(pipeType.name + "_smart_fluid_pipe", TFMGSmartFluidPipeBlock::new)
+                    registrate.block(pipeType.name + "_smart_fluid_pipe", TFMGSmartFluidPipeBlock::new)
                             .initialProperties(SharedProperties::copperMetal)
                             .transform(pickaxeOnly())
                             .blockstate(new SmartFluidPipeGenerator()::generate)
@@ -171,7 +175,7 @@ public class TFMGPipes {
             pipes.add(smart_pipe);
 
             BlockEntry<TFMGFluidValveBlock> fluid_valve =
-                    REGISTRATE.block(pipeType.name + "_fluid_valve", TFMGFluidValveBlock::new)
+                    registrate.block(pipeType.name + "_fluid_valve", TFMGFluidValveBlock::new)
                             .initialProperties(SharedProperties::copperMetal)
                             .transform(pickaxeOnly())
                             .blockstate((c, p) -> BlockStateGen.directionalAxisBlock(c, p,

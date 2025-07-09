@@ -10,7 +10,7 @@ public class TFMGPressingRecipeGen extends TFMGProcessingRecipeGen {
 
     GeneratedRecipe
 
-            CAST_IRON_SHEET = create("cast_iron_ingot", b -> b.require(castIronIngot())
+    CAST_IRON_SHEET = create("cast_iron_ingot", b -> b.require(castIronIngot())
             .output(castIronSheetTFMG()).duration(50)),
 
     ALUMINUM_SHEET = create("aluminum_ingot", b -> b.require(aluminumIngot())

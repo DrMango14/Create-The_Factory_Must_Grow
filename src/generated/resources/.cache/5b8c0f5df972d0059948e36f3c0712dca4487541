@@ -1,23 +1,23 @@
-// 1.20.1	2025-06-02T18:21:37.9498192	TFMG's Processing Recipes
+// 1.20.1	2025-07-09T16:04:00.770188	TFMG's Processing Recipes
 ae24d73a2ef5b8059806e660641bcb9dff2a15f4 data/tfmg/recipes/coking/charcoal.json
 9000fbf96dc2c2b822aa4e526b1c8686d5413e5a data/tfmg/recipes/coking/coal.json
-0615633ddeaab98905fba9020ecb9d0fbac32fcc data/tfmg/recipes/compacting/aluminum_ingot.json
 2b33a020ed88511979447005053ceea2b3ff3c08 data/tfmg/recipes/compacting/bitumen.json
 6fdc2097dc379dd620ffec21797bbf03f38774fa data/tfmg/recipes/compacting/cast_iron.json
-528ca7bc4ba7958bc3295ed53b1ae97f5628f5dd data/tfmg/recipes/compacting/cast_iron_ingot.json
 3e2f2dd950bd134c331a9cbf0a17e82713f11249 data/tfmg/recipes/compacting/cinderflourblock.json
-b0b8677040f2093573fc9ee074d3f29f70b440b3 data/tfmg/recipes/compacting/lead_ingot.json
-fd2a489b06d8ae7eea9635af3a74d773aaf60c25 data/tfmg/recipes/compacting/nickel_ingot.json
-239785319ac742ebaf0d09127404310d68217732 data/tfmg/recipes/compacting/synthetic_leather.json
 f8f004cce2acbbf02207433e88df3e1f3d155053 data/tfmg/recipes/crushing/bauxite.json
 6c8b2797938c86e8bf21508db782f19e6fa1c5d2 data/tfmg/recipes/crushing/coal_coke.json
 45266f40ad082ae192242067acdd148fd738bb81 data/tfmg/recipes/crushing/copper_sulfate.json
+0857149111f629739ad9bf9614db4f152901cd52 data/tfmg/recipes/crushing/deepslate_lithium_ore.json
 c66b8e651bf39232afca35da09b82fc1af29a8d6 data/tfmg/recipes/crushing/dirt.json
 ced4aa7fb9a039d9144959a17381c83d324222a2 data/tfmg/recipes/crushing/galena.json
 46ede7a2a24bb1f7949ad6e98466a47fdb9ee759 data/tfmg/recipes/crushing/lignite.json
 b12cbfd32b1c386b4cc8f28480f36937d756e0cd data/tfmg/recipes/crushing/limestone.json
+a8e3130eb7a1710aed487723b80e979dc0792fe7 data/tfmg/recipes/crushing/lithium_ore.json
+dca0f0038c50981ce8a1c353741856b7b592068e data/tfmg/recipes/crushing/raw_lithium.json
+d95d95710ffd322ba1248f8fd305c58c09f05c3c data/tfmg/recipes/crushing/raw_lithium_block.json
 8a83ba25a8412f503d750c73dd8b5c5e9fdb063f data/tfmg/recipes/crushing/slag_block.json
 f218b0fa35bdb632066225082134f6ba297d49fb data/tfmg/recipes/crushing/sulfur.json
+c4023ecc489f52b2b08eb6d8bdfdcea87a185a56 data/tfmg/recipes/deploying/coated_circuit_board.json
 55a40ebeb7612a9ba4a938e18adcfe6da4388fff data/tfmg/recipes/distillation/crude_oil.json
 c53735f5bedbc3e6fd8c03f2dcc18047e9391d6a data/tfmg/recipes/distillation/crude_oil_light_distillation.json
 2ef242c09ecf8dc0dbd554dac9ec924b65bdd17d data/tfmg/recipes/distillation/crude_oil_no_naphtha.json
@@ -37,7 +37,6 @@ e9287ed78b8ddba564751a2974306eea83e77ab4 data/tfmg/recipes/filling/neon_tank.jso
 83b959dcd319de129fbf76bd967d6d4c3ada9852 data/tfmg/recipes/filling/propylene_tank.json
 46cb31b82c65ef9c724b2ed864ee51cd4234fb04 data/tfmg/recipes/hot_blast/hot_air.json
 3385f19114ca69a40efaf7124bde2a978fee77a4 data/tfmg/recipes/item_application/aluminum_casing.json
-012e7cdfed6d921cb6a032c2997e8e0c598e6f78 data/tfmg/recipes/item_application/coated_circuit_board.json
 6208a999d88f949b1043f13c492f97d52260fe83 data/tfmg/recipes/item_application/heavy_machinery_casing.json
 c19411c5d0a02e974f617fbe377bcac3bea1fd99 data/tfmg/recipes/item_application/steel_casing.json
 56d6c4142fc71e87095e234f1123d14f08e7038d data/tfmg/recipes/mixing/asphalt_mixture.json

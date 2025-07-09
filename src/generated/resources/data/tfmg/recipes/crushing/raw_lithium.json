@@ -1,0 +1,17 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "tfmg:raw_lithium"
+    }
+  ],
+  "results": [
+    {
+      "item": "tfmg:crushed_raw_lithium"
+    },
+    {
+      "chance": 0.75,
+      "item": "create:experience_nugget"
+    }
+  ]
+}

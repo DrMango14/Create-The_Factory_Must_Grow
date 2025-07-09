@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-09T13:44:40.7657277	Registrate Provider for tfmg [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2025-07-09T16:04:00.7541667	Registrate Provider for tfmg [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 ff5a5721633b83465ab501cbdfdc579a0f20e938 assets/tfmg/blockstates/accumulator.json
 e982a263b6af75821042107fdeff7bd809436d08 assets/tfmg/blockstates/air_intake.json
 e7f63aadfc892e337d9f87b5e50af8b1c7e4103f assets/tfmg/blockstates/aluminum_bars.json
@@ -436,8 +436,8 @@ a1988ec6a98f23cad8321b46345fbf1c5fd20489 assets/tfmg/blockstates/yellow_rebar_co
 c58fa20c091e5ecddfb7164cba45538a8f911431 assets/tfmg/blockstates/yellow_rebar_concrete_wall.json
 0271e2b940bb94cdb7e951b81e277ee633d64d62 assets/tfmg/blockstates/zinc_frame.json
 1bd66f29acffb67f30bfe94c8535509bd009beab assets/tfmg/blockstates/zinc_truss.json
-357f4d6abeef0bde539d7075fea14bc2853eb121 assets/tfmg/lang/en_ud.json
-4178184df5302698896a54d0d9d9eaef71340069 assets/tfmg/lang/en_us.json
+5bf8ddfe0df80889f602316c9b4c41dd502750ae assets/tfmg/lang/en_ud.json
+4fb0224e3539ba7862dd28afbd57bd3c9aea9475 assets/tfmg/lang/en_us.json
 9e6a6b62f5e7528c4e4d4f72f3510edcd8f0c078 assets/tfmg/models/block/aluminum_block.json
 1d33a893d6ac05f9adaceb7f84423ebe9b195c01 assets/tfmg/models/block/aluminum_cable_hub.json
 da469bf3233944085f07d4ef437827061e408838 assets/tfmg/models/block/aluminum_cap.json
@@ -1174,6 +1174,7 @@ ad22e8940129ab3a0601244b48387b1832bcb80e assets/tfmg/models/item/copycat_cable_b
 e90663032572b10fff3b45cdf2435211cb1ef05b assets/tfmg/models/item/creative_generator.json
 0abf2b2d61995c4fd3e3c88656e740ffe0a2f083 assets/tfmg/models/item/creosote_bucket.json
 a79994155c228372c913d281a53b5c7303d5a8ee assets/tfmg/models/item/crude_oil_bucket.json
+a2484a203f80efcc0bc630469ded2d8b408e8850 assets/tfmg/models/item/crushed_raw_lithium.json
 ad53ebb7bbb4567ba0bc948b6594c079d1050fb9 assets/tfmg/models/item/cut_bauxite.json
 eb80646f49d4c682fd21fb8054ed5b8427d9b554 assets/tfmg/models/item/cut_bauxite_bricks.json
 7112aa744d3215a868decd72aa42adb62c4f0b66 assets/tfmg/models/item/cut_bauxite_brick_slab.json
@@ -1612,6 +1613,7 @@ f89b8482c9709a46bb2161a70330596c2a723657 data/create/tags/blocks/fan_transparent
 12ccc31f8e00edef9ceb5c3f23af8a4a2897b853 data/create/tags/items/casing.json
 733eedc50a1e81b450633c52efdedf016d0af5fa data/create/tags/items/contraption_controlled.json
 dd1f4f2989edaecd2273411a846f47d0fbc69fbc data/create/tags/items/create_ingots.json
+ded1913401f4b56ac3175be37bf30ffadab245c8 data/create/tags/items/crushed_raw_materials.json
 c4cd22d062b4e5471e0ff25690ba3a07f253e6ec data/forge/tags/blocks/concrete.json
 d2665ad28704027f558ced594fdf4566a9900a0d data/forge/tags/blocks/ores.json
 0dee12a43ee8f732dcbbde658c237412715306cd data/forge/tags/blocks/ores/lead.json
@@ -1675,8 +1677,10 @@ fdf3b8fdf1975b0eee671f428803caa4e17dc5bd data/forge/tags/items/buckets/naphtha.j
 791b0c269e39301f39ca49195d9b0b64aa38675e data/forge/tags/items/buckets/propylene.json
 7ea46c564e02bfa27b4e5847d7379a06633646f3 data/forge/tags/items/buckets/sulfuric_acid.json
 c4cd22d062b4e5471e0ff25690ba3a07f253e6ec data/forge/tags/items/concrete.json
+4be4781148e3f8ddc5433509ff81a97f6bec143a data/forge/tags/items/dusts.json
 f1cc6d710a5e49ab33dbaceea796f0c0b589c82b data/forge/tags/items/dusts/coal_coke.json
 1680fbeada809052df4b6b3669545f26f910b801 data/forge/tags/items/dusts/sulfur.json
+c0131e24e685cf900e572d253f67e23eb96f0dad data/forge/tags/items/ingots.json
 70e609465aa949ff4acc873fb19d4afc07f79aa1 data/forge/tags/items/ingots/aluminum.json
 2da28c9441f79389929080f6f31da841bbee19e7 data/forge/tags/items/ingots/cast_iron.json
 fb19e0080a429f94e31248c2644063e766decc6d data/forge/tags/items/ingots/constantan.json
@@ -1688,6 +1692,7 @@ ff4c520db3f2bb2b7f0e145e546447a67217f54a data/forge/tags/items/ingots/plastic.js
 5ebaae9aae4f5ee54b9fccd128d202e3b33169f7 data/forge/tags/items/ingots/silicon.json
 db02fa414c4049eef32e5270451417518bbcec4b data/forge/tags/items/ingots/steel.json
 6e765d685d327ab489f10f39e883f3feac27824e data/forge/tags/items/leather.json
+b04514fba2122f9f96f2c85d795f03f7bb792ffe data/forge/tags/items/nuggets.json
 bce1eb237b24177298631df74e156c2513de2b2c data/forge/tags/items/nuggets/aluminum.json
 7937b3b14b13d836a619d425918d3b4594ff53f2 data/forge/tags/items/nuggets/cast_iron.json
 175588458a9cf48c7ced4318ba2ac90421009d52 data/forge/tags/items/nuggets/constantan.json
@@ -1701,6 +1706,7 @@ d24579a31b2842ed918f938ad204e91ab405cc32 data/forge/tags/items/ores/lithium.json
 4a4923c9c00653a98fb9b247ee5ac9191d7c2ede data/forge/tags/items/ores/nickel.json
 94ba62223301585f0de8d7bee24c39cce84f6ae8 data/forge/tags/items/ores_in_ground/deepslate.json
 eefda4e96e7bc3a3c3c130eb5593a811b50255ce data/forge/tags/items/ores_in_ground/stone.json
+f3ce36c8924067e41979217af1442178d7bf896b data/forge/tags/items/plates.json
 94e25db7b89d3a7c6bd16051ab827e7d252d5dae data/forge/tags/items/plates/aluminum.json
 c925bfceef2c034d86c923d427bb12318bec9d57 data/forge/tags/items/plates/cast_iron.json
 069748d745ddccbfefe61a406abd80da061216fa data/forge/tags/items/plates/lead.json
@@ -1724,6 +1730,7 @@ c06711f911c6e48111c6441978c6185cc1ef8641 data/forge/tags/items/storage_blocks/ra
 a1f3c8498ccc83ea4a9015e4214c596753f58a81 data/forge/tags/items/storage_blocks/raw_nickel.json
 37b1c9c3ae722d8110db48015993ede3e194c0a0 data/forge/tags/items/storage_blocks/steel.json
 d030bcdb3da4c37703a22037cc3a26830c7a9498 data/forge/tags/items/string.json
+e3afbea07a938bb797c2a112aa1b66ce50433a72 data/forge/tags/items/wires.json
 ffb77323df69802d55e95d7fc30a45b3fbca8db8 data/forge/tags/items/wires/aluminum.json
 ccae2d221dc320981c331f4b8e07fe159176557a data/forge/tags/items/wires/constantan.json
 863e668119b306cf119cb6a7a62a2d1e12bee1ff data/forge/tags/items/wires/copper.json

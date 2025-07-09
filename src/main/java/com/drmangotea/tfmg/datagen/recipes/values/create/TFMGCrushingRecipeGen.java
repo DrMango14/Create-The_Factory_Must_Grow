@@ -1,13 +1,16 @@
 package com.drmangotea.tfmg.datagen.recipes.values.create;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.datagen.recipes.TFMGProcessingRecipeGen;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.drmangotea.tfmg.registry.TFMGPaletteStoneTypes;
 import com.simibubi.create.AllRecipeTypes;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Items;
 
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
+import static com.drmangotea.tfmg.registry.TFMGTags.forgeItemTag;
 
 public class TFMGCrushingRecipeGen extends TFMGProcessingRecipeGen {
 
@@ -46,7 +49,30 @@ public class TFMGCrushingRecipeGen extends TFMGProcessingRecipeGen {
             SULFUR = create(() -> TFMGBlocks.SULFUR, b -> b
                     .output(.2f, sulfurDust(), 1)
                     .output(.1f, sulfurDust(), 1)
-            );
+            ),
+            LITHIUM_ORE = create(() -> TFMGBlocks.LITHIUM_ORE, b -> b
+                    .output(TFMGItems.CRUSHED_LITHIUM, 1)
+                    .output(.25f, TFMGItems.CRUSHED_LITHIUM, 1)
+                    .output(.75f, I.experienceNugget(), 1)
+                    .output(.12f, Items.COBBLESTONE, 1)
+            ),
+            DEEPSLATE_LITHIUM_ORE = create(() -> TFMGBlocks.DEEPSLATE_LITHIUM_ORE, b -> b
+                    .output(TFMGItems.CRUSHED_LITHIUM, 2)
+                    .output(.25f, TFMGItems.CRUSHED_LITHIUM, 1)
+                    .output(.75f, I.experienceNugget(), 1)
+                    .output(.12f, Items.COBBLED_DEEPSLATE, 1)
+            ),
+            RAW_LITHIUM = create(() -> TFMGItems.RAW_LITHIUM, b -> b
+                    .output(TFMGItems.CRUSHED_LITHIUM, 1)
+                    .output(.75f, I.experienceNugget(), 1)
+            ),
+            RAW_LITHIUM_BLOCK = create(() -> TFMGBlocks.RAW_LITHIUM_BLOCK, b -> b
+                    .output(TFMGItems.CRUSHED_LITHIUM, 9)
+                    .output(.75f, I.experienceNugget(), 9)
+            )
+
+
+    ;
 
     public TFMGCrushingRecipeGen(PackOutput output) {
         super(output);

@@ -1,14 +1,14 @@
 package com.drmangotea.tfmg.datagen.recipes.values.create;
 
+import com.drmangotea.tfmg.datagen.recipes.TFMGProcessingRecipeGen;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Items;
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.*;
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
 
-public class TFMGCompactingRecipeGen extends TFMGPressingRecipeGen {
+public class TFMGCompactingRecipeGen extends TFMGProcessingRecipeGen {
 
     GeneratedRecipe
             BITUMEN = create("bitumen", b -> b

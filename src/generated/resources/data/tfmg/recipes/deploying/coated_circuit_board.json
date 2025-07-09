@@ -1,5 +1,5 @@
 {
-  "type": "create:item_application",
+  "type": "create:deploying",
   "ingredients": [
     {
       "item": "tfmg:empty_circuit_board"

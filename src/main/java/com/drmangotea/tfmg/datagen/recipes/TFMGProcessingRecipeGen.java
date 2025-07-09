@@ -29,7 +29,6 @@ public abstract class TFMGProcessingRecipeGen extends TFMGRecipeProvider {
 
 	public static void registerAll(DataGenerator gen, PackOutput output) {
 
-		GENERATORS.add(new TFMGPressingRecipeGen(output));
 		GENERATORS.add(new CokingRecipeGen(output));
 		GENERATORS.add(new DistillationRecipeGen(output));
 		GENERATORS.add(new WindingRecipeGen(output));
@@ -39,7 +38,9 @@ public abstract class TFMGProcessingRecipeGen extends TFMGRecipeProvider {
 		GENERATORS.add(new TFMGFillingRecipeGen(output));
 		GENERATORS.add(new TFMGMixingRecipeGen(output));
 		GENERATORS.add(new TFMGCompactingRecipeGen(output));
+		GENERATORS.add(new TFMGPressingRecipeGen(output));
 		GENERATORS.add(new TFMGCrushingRecipeGen(output));
+		GENERATORS.add(new TFMGDeployingRecipeGen(output));
 
 
 		gen.addProvider(true, new DataProvider() {
