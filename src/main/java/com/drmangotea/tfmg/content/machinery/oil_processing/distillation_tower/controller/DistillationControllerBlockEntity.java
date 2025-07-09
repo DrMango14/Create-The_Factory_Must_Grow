@@ -95,8 +95,11 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
         if (be.isController()) {
             if (be.getHeight() < outputs.toArray().length * 2 || (be.width < 2 && outputs.toArray().length > 3))
                 return;
-        } else if (be.getControllerBE().getHeight() < outputs.toArray().length * 2 || be.getControllerBE().width < 2)
-            return;
+        } else {
+            if (be.getControllerBE() != null)
+                if (be.getControllerBE().getHeight() < outputs.toArray().length * 2 || be.getControllerBE().width < 2)
+                    return;
+        }
 
         for (DistillationOutputBlockEntity be1 : outputs) {
             if (be1.tank.getSpace() == 0&&be1.mode.get() == DistillationOutputBlockEntity.DistillationOutputMode.KEEP_FLUID)
