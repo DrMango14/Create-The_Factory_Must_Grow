@@ -1144,7 +1144,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("CPC")),
 
     SURFACE_SCANNER = create(TFMGBlocks.SURFACE_SCANNER)
-            .unlockedBy(TFMGBlocks.HEAVY_MACHINERY_CASING::get)
+            .unlockedBy(I::heavyMachineryCasing)
             .viaShaped(b -> b
                     .define('H', heavyMachineryCasing())
                     .define('T', electronTube())
@@ -1154,7 +1154,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("MHM")),
 
     POLARIZER = create(TFMGBlocks.POLARIZER)
-            .unlockedBy(TFMGBlocks.STEEL_CASING::get)
+            .unlockedBy(I::steelCasing)
             .viaShaped(b -> b
                     .define('B', brassSheet())
                     .define('W', copperWire())
@@ -1167,7 +1167,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("RSR")),
 
     ELECTRODE_HOLDER = create(TFMGBlocks.ELECTRODE_HOLDER)
-            .unlockedBy(TFMGBlocks.HEAVY_MACHINERY_CASING::get)
+            .unlockedBy(I::heavyMachineryCasing)
             .viaShaped(b -> b
                     .define('S', steelIngot())
                     .define('W', copperWire())
@@ -1178,7 +1178,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("SLS")),
 
     TURBO = create(TFMGItems.TURBO)
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
+            .unlockedBy(I::aluminumPipe)
             .viaShaped(b -> b
                     .define('P', aluminumPipe())
                     .define('F', propeller())
@@ -1208,7 +1208,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("BBB")),
 
     TRANSFORMER = create(TFMGBlocks.TRANSFORMER)
-            .unlockedBy(TFMGBlocks.STEEL_CASING::get)
+            .unlockedBy(I::steelCasing)
             .viaShaped(b -> b
                     .define('C', steelCasing())
                     .define('M', magneticIngot())
@@ -1219,7 +1219,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("WCW")),
 
     CONCRETE_HOSE = create(TFMGBlocks.CONCRETE_HOSE)
-            .unlockedBy(TFMGBlocks.STEEL_CASING::get)
+            .unlockedBy(I::heavyMachineryCasing)
             .viaShaped(b -> b
                     .define('C', heavyMachineryCasing())
                     .define('K', Items.DRIED_KELP_BLOCK)
@@ -1426,7 +1426,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern(" A ")),
 
     STEEL_TRUSS = create(steelTruss()::asItem).returns(4)
-            .unlockedBy(TFMGItems.STEEL_INGOT::get)
+            .unlockedByTag(I::steelNugget)
             .viaShaped(b -> b
                     .define('N', steelNugget())
                     .pattern("N N")
@@ -1434,7 +1434,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("N N")),
 
     ALUMINUM_TRUSS = create(aluminumTruss()::asItem).returns(4)
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
+            .unlockedByTag(I::aluminumNugget)
             .viaShaped(b -> b
                     .define('N', aluminumNugget())
                     .pattern("N N")
@@ -1442,7 +1442,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("N N")),
 
     CAST_IRON_TRUSS = create(castIronTruss()::asItem).returns(4)
-            .unlockedBy(TFMGItems.CAST_IRON_INGOT::get)
+            .unlockedByTag(I::castIronNugget)
             .viaShaped(b -> b
                     .define('N', castIronNugget())
                     .pattern("N N")
@@ -1450,7 +1450,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("N N")),
 
     LEAD_TRUSS = create(leadTruss()::asItem).returns(4)
-            .unlockedBy(TFMGItems.LEAD_INGOT::get)
+            .unlockedByTag(I::leadNugget)
             .viaShaped(b -> b
                     .define('N', leadNugget())
                     .pattern("N N")
@@ -1458,7 +1458,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("N N")),
 
     NICKEL_TRUSS = create(nickelTruss()::asItem).returns(4)
-            .unlockedBy(TFMGItems.NICKEL_INGOT::get)
+            .unlockedByTag(I::nickelNugget)
             .viaShaped(b -> b
                     .define('N', nickelNugget())
                     .pattern("N N")
@@ -1466,7 +1466,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("N N")),
 
     CONSTANTAN_TRUSS = create(constantanTruss()::asItem).returns(4)
-            .unlockedBy(TFMGItems.CONSTANTAN_INGOT::get)
+            .unlockedByTag(I::constantanNugget)
             .viaShaped(b -> b
                     .define('N', constantanNugget())
                     .pattern("N N")
@@ -1474,7 +1474,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("N N")),
 
     COPPER_TRUSS = create(copperTruss()::asItem).returns(4)
-            .unlockedBy(Items.COPPER_INGOT::asItem)
+            .unlockedByTag(I::copperNugget)
             .viaShaped(b -> b
                     .define('N', copperNugget())
                     .pattern("N N")
@@ -1482,7 +1482,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("N N")),
 
     ZINC_TRUSS = create(zincTruss()::asItem).returns(4)
-            .unlockedBy(AllItems.ZINC_INGOT::get)
+            .unlockedByTag(I::zincNugget)
             .viaShaped(b -> b
                     .define('N', zincNugget())
                     .pattern("N N")
@@ -1490,7 +1490,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("N N")),
 
     BRASS_TRUSS = create(brassTruss()::asItem).returns(4)
-            .unlockedBy(AllItems.BRASS_INGOT::get)
+            .unlockedByTag(I::brassNugget)
             .viaShaped(b -> b
                     .define('N', brassNugget())
                     .pattern("N N")
@@ -1499,7 +1499,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
     /// /////////////////////
 
     STEEL_FRAME = create(steelFrame()::asItem).returns(4)
-            .unlockedBy(TFMGItems.STEEL_INGOT::get)
+            .unlockedByTag(I::steelNugget)
             .viaShaped(b -> b
                     .define('N', steelNugget())
                     .pattern("NNN")
@@ -1507,7 +1507,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("NNN")),
 
     ALUMINUM_FRAME = create(aluminumFrame()::asItem).returns(4)
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
+            .unlockedByTag(I::aluminumNugget)
             .viaShaped(b -> b
                     .define('N', aluminumNugget())
                     .pattern("NNN")
@@ -1515,7 +1515,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("NNN")),
 
     CAST_IRON_FRAME = create(castIronFrame()::asItem).returns(4)
-            .unlockedBy(TFMGItems.CAST_IRON_INGOT::get)
+            .unlockedByTag(I::castIronNugget)
             .viaShaped(b -> b
                     .define('N', castIronNugget())
                     .pattern("NNN")
@@ -1523,7 +1523,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("NNN")),
 
     LEAD_FRAME = create(leadFrame()::asItem).returns(4)
-            .unlockedBy(TFMGItems.LEAD_INGOT::get)
+            .unlockedByTag(I::leadNugget)
             .viaShaped(b -> b
                     .define('N', leadNugget())
                     .pattern("NNN")
@@ -1531,7 +1531,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("NNN")),
 
     NICKEL_FRAME = create(nickelFrame()::asItem).returns(4)
-            .unlockedBy(TFMGItems.NICKEL_INGOT::get)
+            .unlockedByTag(I::nickelNugget)
             .viaShaped(b -> b
                     .define('N', nickelNugget())
                     .pattern("NNN")
@@ -1539,7 +1539,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("NNN")),
 
     CONSTANTAN_FRAME = create(constantanFrame()::asItem).returns(4)
-            .unlockedBy(TFMGItems.CONSTANTAN_INGOT::get)
+            .unlockedByTag(I::constantanNugget)
             .viaShaped(b -> b
                     .define('N', constantanNugget())
                     .pattern("NNN")
@@ -1547,7 +1547,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("NNN")),
 
     COPPER_FRAME = create(copperFrame()::asItem).returns(4)
-            .unlockedBy(Items.COPPER_INGOT::asItem)
+            .unlockedByTag(I::copperNugget)
             .viaShaped(b -> b
                     .define('N', copperNugget())
                     .pattern("NNN")
@@ -1555,7 +1555,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("NNN")),
 
     ZINC_FRAME = create(zincFrame()::asItem).returns(4)
-            .unlockedBy(AllItems.ZINC_INGOT::get)
+            .unlockedByTag(I::zincNugget)
             .viaShaped(b -> b
                     .define('N', zincNugget())
                     .pattern("NNN")
@@ -1563,7 +1563,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("NNN")),
 
     BRASS_FRAME = create(brassFrame()::asItem).returns(4)
-            .unlockedBy(AllItems.BRASS_INGOT::get)
+            .unlockedByTag(I::brassNugget)
             .viaShaped(b -> b
                     .define('N', brassNugget())
                     .pattern("NNN")
@@ -1572,7 +1572,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
     /// /////////////////////////
 
     FIREBOX = create(TFMGBlocks.FIREBOX)
-            .unlockedBy(TFMGBlocks.INDUSTRIAL_PIPE::get)
+            .unlockedBy(I::fireproofBricks)
             .viaShaped(b -> b
                     .define('B', fireproofBricks())
                     .define('P', brassPipe())
@@ -1582,7 +1582,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("BPB")),
 
     EMPTY_CIRCUIT_BOARD = create(TFMGItems.EMPTY_CIRCUIT_BOARD)
-            .unlockedBy(TFMGItems.PLASTIC_SHEET::get)
+            .unlockedBy(I::plasticSheet)
             .viaShaped(b -> b
                     .define('P', plasticSheet())
                     .define('G', greenDye())
@@ -1671,7 +1671,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("OQO")),
 
     MACHINE_INPUT = create(TFMGBlocks.MACHINE_INPUT)
-            .unlockedBy(TFMGBlocks.HEAVY_MACHINERY_CASING::get)
+            .unlockedBy(I::heavyMachineryCasing)
             .viaShaped(b -> b
                     .define('M', steelMechanism())
                     .define('H', heavyMachineryCasing())

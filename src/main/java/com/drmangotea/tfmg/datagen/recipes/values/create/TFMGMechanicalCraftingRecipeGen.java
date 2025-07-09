@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.datagen.recipes.values.create;
 
 import java.util.function.UnaryOperator;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGItems;
@@ -169,7 +170,7 @@ public class TFMGMechanicalCraftingRecipeGen extends TFMGRecipeProvider {
             return register(consumer -> {
                 MechanicalCraftingRecipeBuilder b =
                         builder.apply(MechanicalCraftingRecipeBuilder.shapedRecipe(result.get(), amount));
-                ResourceLocation location = Create.asResource("mechanical_crafting/" + CatnipServices.REGISTRIES.getKeyOrThrow(result.get()
+                ResourceLocation location = TFMG.asResource("mechanical_crafting/" + CatnipServices.REGISTRIES.getKeyOrThrow(result.get()
                                 .asItem())
                         .getPath() + suffix);
                 b.build(consumer, location);
