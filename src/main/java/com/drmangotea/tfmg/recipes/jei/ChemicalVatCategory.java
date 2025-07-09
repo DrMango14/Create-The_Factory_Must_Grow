@@ -148,6 +148,10 @@ public class ChemicalVatCategory extends CreateRecipeCategory<VatMachineRecipe> 
             TFMGGuiTextures.VAT_MACHINE.render(graphics, 55 - 12, 0);
             TFMGGuiTextures.MIXER.render(graphics, 55 - 19, 32);
         }
+        if (machines.contains("tfmg:centrifuge")) {
+            TFMGGuiTextures.VAT_MACHINE.render(graphics, 55 - 12, 0);
+            TFMGGuiTextures.CENTRIFUGE.render(graphics, 55 - 12, 32);
+        }
         if (machines.contains("tfmg:electrode")) {
             TFMGGuiTextures.VAT_MACHINE.render(graphics, 55 - 12 - 32, 0);
             TFMGGuiTextures.VAT_MACHINE.render(graphics, 55 - 12 + 32, 0);
