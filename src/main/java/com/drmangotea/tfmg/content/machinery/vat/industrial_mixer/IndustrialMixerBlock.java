@@ -47,7 +47,7 @@ public class IndustrialMixerBlock extends KineticBlock implements IBE<Industrial
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         if(hand == InteractionHand.OFF_HAND)
             return InteractionResult.PASS;
-        if(level.getBlockEntity(pos) instanceof IndustrialMixerBlockEntity be){
+        if(level.getBlockEntity(pos) instanceof IndustrialMixerBlockEntity be) {
             ItemStack stack = player.getItemInHand(hand);
             MixerMode mixerMode = be.mixerMode;
             ItemStack stackInside = mixerMode.item;

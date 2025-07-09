@@ -1369,6 +1369,10 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
     NICKEL_FROM_CRUSHED_BLASTING = create(TFMGItems.NICKEL_INGOT::get).withSuffix("_from_crushed_blasting")
             .viaCooking(() -> AllItems.CRUSHED_NICKEL)
             .inBlastFurnace(),
+
+    LITHIUM_FROM_CRUSHED_BLASTING = create(TFMGItems.LITHIUM_INGOT::get).withSuffix("_from_crushed_blasting")
+            .viaCooking(() -> TFMGItems.CRUSHED_LITHIUM)
+            .inBlastFurnace(),
     //
 
     THERMITE_GRENADE = create(TFMGItems.THERMITE_GRENADE)

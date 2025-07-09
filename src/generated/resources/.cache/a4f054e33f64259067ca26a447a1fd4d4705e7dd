@@ -1,4 +1,4 @@
-// 1.20.1	2025-06-07T11:35:38.5913428	TFMG's Recipes
+// 1.20.1	2025-07-09T17:16:41.2955863	TFMG's Recipes
 0ccd64a6f92e02ac35973434259baee47c8294e2 data/create/recipes/mechanical_crafting/advanced_potato_cannon.json
 d779aa2cf2fca905473c494073443d0289484311 data/create/recipes/mechanical_crafting/engine_controller.json
 dd795cb8dd376f621afb3773cadb99c409aaf875 data/create/recipes/mechanical_crafting/flamethrower.json
@@ -11,6 +11,7 @@ bf785bb02ce59dbf1c6bb409acee87d9902c8a38 data/create/recipes/mechanical_crafting
 9195362b7e061e947c4de657ce3b7c49c1e271d1 data/tfmg/advancements/recipes/misc/blasting/lead_ingot_blasting.json
 14f26d532b7adf630370bfc99bf32a0ce4dc7e77 data/tfmg/advancements/recipes/misc/blasting/lead_ingot_from_crushed_blasting.json
 c918937eba17a031abe7355ef190d20cc1e41f3c data/tfmg/advancements/recipes/misc/blasting/lithium_ingot_blasting.json
+ecfd84b442dced723a3c8c45b34339a7c2157309 data/tfmg/advancements/recipes/misc/blasting/lithium_ingot_from_crushed_blasting.json
 aae5d7bf4b4c3c1db5c04aa8427f8db7939f4d17 data/tfmg/advancements/recipes/misc/blasting/nickel_ingot_blasting.json
 6d137afe5e70d3e68ebf5806d8eee80d1bcd1df8 data/tfmg/advancements/recipes/misc/blasting/nickel_ingot_from_crushed_blasting.json
 ed72d53fe57cb70dbf96b69c081e0c9b0af83b86 data/tfmg/advancements/recipes/misc/crafting/kinetics/accumulator.json
@@ -292,6 +293,7 @@ b8fae2b8920863bd6eee674761e196567f6a3c8a data/tfmg/advancements/recipes/misc/sme
 b4c5dd15d6391d2b32850272ad082bf007678eb7 data/tfmg/advancements/recipes/misc/smelting/lead_ingot_from_crushed_blasting.json
 b038ad57045f5486745a64ab19ac9769c8d08206 data/tfmg/advancements/recipes/misc/smelting/lithium_ingot.json
 276516e97896dfecbc83be6768cc7d4e2b5b3787 data/tfmg/advancements/recipes/misc/smelting/lithium_ingot_blasting.json
+a5d0b36bf4bda5214f4d47620b4c97c751f3a241 data/tfmg/advancements/recipes/misc/smelting/lithium_ingot_from_crushed_blasting.json
 a3bd640f5ee400dfc27ea69194f24d45c2c7440f data/tfmg/advancements/recipes/misc/smelting/nickel_ingot.json
 c3ce53e018d4de6135e87b8bfd152c8498a467a0 data/tfmg/advancements/recipes/misc/smelting/nickel_ingot_blasting.json
 6f75548eb450bc067d86b2a8cf28e25e9fd21ee5 data/tfmg/advancements/recipes/misc/smelting/nickel_ingot_from_crushed_blasting.json
@@ -299,6 +301,7 @@ c3ce53e018d4de6135e87b8bfd152c8498a467a0 data/tfmg/advancements/recipes/misc/sme
 fa176d9914b0268f3dc2bff1471f7724c5f9ec44 data/tfmg/recipes/blasting/lead_ingot_blasting.json
 5c3735c5c5f885a733e151f4411e25669a4e2916 data/tfmg/recipes/blasting/lead_ingot_from_crushed_blasting.json
 f83abce5cbf40a9a2c78c4ce95a094abdfb95da3 data/tfmg/recipes/blasting/lithium_ingot_blasting.json
+73b2c6e14ab061c808e0e99627801b0cda5aa9ec data/tfmg/recipes/blasting/lithium_ingot_from_crushed_blasting.json
 1121750f909dc95ffc3f6790fc046b40f4d65a23 data/tfmg/recipes/blasting/nickel_ingot_blasting.json
 09eed625166679cfa551dbcbf2005c86b484a7bf data/tfmg/recipes/blasting/nickel_ingot_from_crushed_blasting.json
 cb579a4ab0ff4bc8d843e78fe3ec0f5b3267d0ee data/tfmg/recipes/casting/cinderblock.json
@@ -589,6 +592,7 @@ da11d79db201bb9d1567bda1374e2648cf4c9d67 data/tfmg/recipes/industrial_blasting/s
 67419d77c75b25ae63685821c3d26079d68957d0 data/tfmg/recipes/smelting/lead_ingot_from_crushed_blasting.json
 7486a4d715bddf22a61b45e2ce48d70fee6126ff data/tfmg/recipes/smelting/lithium_ingot.json
 7486a4d715bddf22a61b45e2ce48d70fee6126ff data/tfmg/recipes/smelting/lithium_ingot_blasting.json
+cc79bc426111d6f2aa90b5aff3b3ee4c94338e51 data/tfmg/recipes/smelting/lithium_ingot_from_crushed_blasting.json
 502ce34e16301ccc8b45f8545b2984c6adfc9b0b data/tfmg/recipes/smelting/nickel_ingot.json
 502ce34e16301ccc8b45f8545b2984c6adfc9b0b data/tfmg/recipes/smelting/nickel_ingot_blasting.json
 5f3d7cd54c775d64eab2341702edc4498bb94b60 data/tfmg/recipes/smelting/nickel_ingot_from_crushed_blasting.json
