@@ -25,6 +25,11 @@ public class MachineConfig extends ConfigBase {
     public final ConfigInt accumulatorMaxAmpOutput = i(20, 1, "accumulatorMaxAmpOutput", Comments.accumulatorMaxAmpOutput);
     public final ConfigInt accumulatorChargingRate = i(100, 1, "accumulatorChargingRate", Comments.accumulatorChargingRate);
 
+    public final ConfigGroup converter = group(1, "converter", "Converter");
+    public final ConfigInt converterStorage = i(100000, 1, "converterStorage", Comments.converterStorage);
+    public final ConfigInt converterVoltage = i(12, 1, "converterVoltage", Comments.converterVoltage);
+    public final ConfigInt converterChargingRate = i(1000, 1, "converterChargingRate", Comments.converterChargingRate);
+
     public final ConfigGroup firebox = group(1, "firebox", "Firebox");
     public final ConfigBool fireboxExhaustRequirement = b(true, "fireboxExhaustRequirement", Comments.fireboxExhaustRequirement);
     public final ConfigInt fireboxFuelConsumption = i(100, 1, "fireboxFuelConsumption", Comments.fireboxFuelConsumption);
@@ -67,6 +72,9 @@ public class MachineConfig extends ConfigBase {
         static String accumulatorVoltage = "Determines the voltage accumulators output.";
         static String accumulatorMaxAmpOutput = "Sets the maximum amperage an accumulator can provide.";
         static String accumulatorChargingRate = "Sets the maximum charging rate of accumulators.";
+        static String converterStorage = "Determines the storage space of converters.";
+        static String converterVoltage = "Determines the voltage converters output.";
+        static String converterChargingRate = "Sets the maximum charging rate of converters.";
         static String fireboxExhaustRequirement = "If set to true,fireboxes will require exhaust management.";
         static String fireboxFuelConsumption = "Determines the amount of fuel a firebox needs to run for 3 seconds.";
         static String graphiteElectrodeCurrent = "The minimum electric current that will make graphite electrodes superheated.";
