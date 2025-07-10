@@ -161,7 +161,7 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
 
 
         if (getBlockState().getValue(INPUT)) {
-            if (getData().getVoltage() > TFMGConfigs.common().machines.accumulatorVoltage.get()) {
+            if (getData().getVoltage() > TFMGConfigs.common().machines.converterVoltage.get()) {
                 energy.receiveEnergy((int) (getChargingRate() / TFMGConfigs.common().machines.FEtoWattTickConversionRate.get()), false);
 
             }
@@ -201,12 +201,12 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
     }
 
     public int getMaxCapacity() {
-        return TFMGConfigs.common().machines.accumulatorStorage.get();
+        return TFMGConfigs.common().machines.converterStorage.get();
     }
 
     //in FE per tick
     public int getMaxChargingRate() {
-        return TFMGConfigs.common().machines.accumulatorChargingRate.get()*10;
+        return TFMGConfigs.common().machines.converterChargingRate.get();
     }
 
     @Override
