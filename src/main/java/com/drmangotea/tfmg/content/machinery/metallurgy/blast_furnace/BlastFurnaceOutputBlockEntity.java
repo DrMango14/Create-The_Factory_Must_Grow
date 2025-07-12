@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.content.machinery.metallurgy.blast_furnace;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.config.TFMGConfigs;
+import com.drmangotea.tfmg.content.machinery.metallurgy.blast_furnace.util.BlastFurnaceValidator;
 import com.drmangotea.tfmg.datagen.TFMGDamageSources;
 import com.drmangotea.tfmg.recipes.IndustrialBlastingRecipe;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
@@ -28,6 +29,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -66,6 +68,7 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
     public static final int STORAGE_SPACE = 64;
     public LerpedFloat coalCokeHeight = LerpedFloat.linear();
     boolean isReinforced = false;
+    boolean isActive = false;
 
 
     public BlastFurnaceOutputBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -110,10 +113,6 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
         if (!inputInventory.isEmpty() && timer == -1) {
             executeRecipe();
         }
-    }
-
-    public static int gcd(int a, int b) {
-        return b == 0 ? a : gcd(b, a % b);
     }
 
     private int calculateProcessingTime(IndustrialBlastingRecipe recipe) {
@@ -215,8 +214,7 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
 
     public void executeRecipe() {
 
-        RecipeWrapper inventoryIn = new RecipeWrapper(inputInventory);
-        Optional<IndustrialBlastingRecipe> optional = TFMGRecipeTypes.INDUSTRIAL_BLASTING.find(inventoryIn, level);
+        Optional<IndustrialBlastingRecipe> optional = TFMGRecipeTypes.INDUSTRIAL_BLASTING.find(new RecipeWrapper(inputInventory), level);
 
         if (optional.isEmpty())
             return;
@@ -240,6 +238,13 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
             timer /= 2;
     }
 
+    private boolean isActuallyActive(IndustrialBlastingRecipe recipe) {
+        return timer > 0 && fuel > 0
+                && (recipe.getFluidResults().isEmpty() || primaryTank.getSpace() >= recipe.getPrimaryResult().getAmount())
+                && (recipe.getFluidResults().size() < 2 || secondaryTank.getSpace() >= recipe.getSecondaryResult().getAmount())
+                && (recipe.hotAirUsage <= 0 || (tuyereBE != null && tuyereBE.tank.getFluidAmount() >= recipe.hotAirUsage && tuyereBE.tank.getFluid().getFluid().isSame(TFMGFluids.HOT_AIR.getSource())));
+    }
+
     @Override
     public void tick() {
         super.tick();
@@ -253,6 +258,8 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
             return;
         if (getSize() < 3)
             return;
+
+        Optional<IndustrialBlastingRecipe> optionalRecipe = TFMGRecipeTypes.INDUSTRIAL_BLASTING.find(new RecipeWrapper(inputInventory), level);
 
         if (fuel <= 0 && !fuelInventory.getItem(0).isEmpty()) {
             ItemStack fuelStack = fuelInventory.getItem(0);
@@ -271,20 +278,16 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
         }
 
         if (timer > -1) {
-            RecipeWrapper inventoryIn = new RecipeWrapper(inputInventory);
-            Optional<IndustrialBlastingRecipe> optional = TFMGRecipeTypes.INDUSTRIAL_BLASTING.find(inventoryIn, level);
 
-            if (optional.isEmpty()) {
+            if (optionalRecipe.isEmpty()) {
                 timer = -1;
                 return;
             }
 
-            IndustrialBlastingRecipe recipe = optional.get();
+            IndustrialBlastingRecipe recipe = optionalRecipe.get();
 
             if (timer == 0) {
                 if (canProcess(recipe)) {
-                    int itemsUsed = 1;
-                    int fluxUsed = 1;
 
                     if (!(primaryTank.getSpace() >= recipe.getPrimaryResult().getAmount()))
                         return;
@@ -305,16 +308,24 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
                     setChanged();
                 }
             }
-            if (timer > 0 && fuel > 0) {
-                if (recipe.hotAirUsage > 0 && (tuyerePos == null || !level.getBlockState(tuyerePos).is(TFMGBlocks.BLAST_FURNACE_HATCH.get()))) {
-                    tuyereBE = null;
-                    return;
-                }
-                if (tuyereBE == null && tuyerePos != null)
-                    tuyereBE = (BlastFurnaceHatchBlockEntity) level.getBlockEntity(tuyerePos);
 
-                if (tuyereBE.tank.getFluidAmount() < recipe.hotAirUsage || !tuyereBE.tank.getFluid().getFluid().isSame(TFMGFluids.HOT_AIR.getSource()))
-                    return;
+            if (timer > 0 && fuel > 0) {
+                if (recipe.hotAirUsage > 0) {
+                    if (tuyerePos == null || !level.getBlockState(tuyerePos).is(TFMGBlocks.BLAST_FURNACE_HATCH.get())) {
+                        tuyereBE = null;
+                        return;
+                    }
+
+                    if (tuyereBE == null) {
+                        if (!(level.getBlockEntity(tuyerePos) instanceof BlastFurnaceHatchBlockEntity hatch)) return;
+                        tuyereBE = hatch;
+                    }
+
+                    if (tuyereBE.tank.getFluidAmount() < recipe.hotAirUsage ||
+                            !tuyereBE.tank.getFluid().getFluid().isSame(TFMGFluids.HOT_AIR.getSource())) {
+                        return;
+                    }
+                }
 
                 tuyereBE.tank.getFluidInTank(0).setAmount(Math.max(tuyereBE.tank.getFluidInTank(0).getAmount() - recipe.hotAirUsage, 0));
 
@@ -335,6 +346,7 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
                 }
             }
         }
+        isActive = optionalRecipe.map(this::isActuallyActive).orElse(false);
     }
 
     public void makeParticles() {
@@ -348,14 +360,10 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
     }
 
     private boolean canProcess(IndustrialBlastingRecipe recipe) {
-        //if (fuel == 0)
-        //    return false;
 
         if (!primaryTank.getFluid().isEmpty() && !primaryTank.getFluid().getFluid().isSame(recipe.getPrimaryResult().getFluid()))
             return false;
-        if (!secondaryTank.getFluid().isEmpty() && !secondaryTank.getFluid().getFluid().isSame(recipe.getSecondaryResult().getFluid()))
-            return false;
-        return true;
+        return secondaryTank.getFluid().isEmpty() || secondaryTank.getFluid().getFluid().isSame(recipe.getSecondaryResult().getFluid());
     }
 
     @Override
@@ -479,88 +487,18 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
 
     public int getSize() {
 
-        BlockPos middlePos = getBlockPos().relative(getBlockState().getValue(FACING).getOpposite());
-
-        tuyerePos = null;
-
-        if ((isValidWall(middlePos) == FurnaceBlockType.NONE))
-            return 0;
-
-        int size = 0;
-
-        int normalAmount = 0;
-        int reinforcedAmount = 0;
-
-        for (int i = 0; i <= TFMGConfigs.common().machines.blastFurnaceMaxHeight.get(); i++) {
-
-            BlockPos checkedPos = middlePos.above(i).east().south();
-
-            for (int j = 0; j < 3; j++) {
-                for (int y = 0; y < 3; y++) {
-                    FurnaceBlockType wall = isValidWall(checkedPos);
-                    FurnaceBlockType support = isValidSupport(checkedPos);
-                    if (checkedPos.getX() == middlePos.getX() ^ checkedPos.getZ() == middlePos.getZ()) {
-                        if (!(i == 0 && level.getBlockState(checkedPos).is(TFMGBlocks.BLAST_FURNACE_OUTPUT.get()))) {
-                            if (wall == FurnaceBlockType.NONE) {
-                                isReinforced = normalAmount == 0 && reinforcedAmount > 0;
-                                return size;
-                            } else {
-                                if (wall == FurnaceBlockType.REGULAR) {
-                                    normalAmount++;
-                                } else reinforcedAmount++;
-                            }
-                        }
-                    } else if (checkedPos.getX() == middlePos.getX() && checkedPos.getZ() == middlePos.getZ()) {
-                        if (!level.getBlockState(checkedPos).isAir() && i != 0) {
-                            isReinforced = normalAmount == 0 && reinforcedAmount > 0;
-
-                            return size;
-                        }
-                    } else if (support == FurnaceBlockType.NONE) {
-                        isReinforced = normalAmount == 0 && reinforcedAmount > 0;
-                        return size;
-                    } else {
-                        if (support == FurnaceBlockType.REGULAR) {
-                            normalAmount++;
-                        } else reinforcedAmount++;
-                    }
-
-                    checkedPos = checkedPos.west();
-                }
-                checkedPos = checkedPos.north();
-                checkedPos = checkedPos.east(3);
-            }
-            size++;
+        if (this.isRemoved()) {  // Critical check
+            return 0;  // Skip validation if block entity is destroyed
         }
-        return size;
-    }
+        // Create validator and validate the furnace structure
+        BlastFurnaceValidator validator = new BlastFurnaceValidator(getBlockPos(), level);
+        BlastFurnaceValidator.ValidationResult result = validator.validateFurnace();
 
-    public FurnaceBlockType isValidWall(BlockPos pos) {
+        // Update entity state
+        this.isReinforced = result.isReinforced();
+        this.tuyerePos = validator.getTuyerePos();
 
-        BlockState state = level.getBlockState(pos);
-
-        if (state.is(TFMGBlocks.BLAST_FURNACE_HATCH.get())) {
-            if (tuyerePos != null)
-                return FurnaceBlockType.NONE;
-            tuyerePos = pos;
-        }
-
-        if (state.is(TFMGTags.TFMGBlockTags.REINFORCED_BLAST_FURNACE_WALL.tag))
-            return FurnaceBlockType.REINFORCED;
-        if (state.is(TFMGTags.TFMGBlockTags.BLAST_FURNACE_WALL.tag))
-            return FurnaceBlockType.REGULAR;
-        return FurnaceBlockType.NONE;
-    }
-
-    public FurnaceBlockType isValidSupport(BlockPos pos) {
-
-        BlockState state = level.getBlockState(pos);
-
-        if (state.is(TFMGTags.TFMGBlockTags.REINFORCED_BLAST_FURNACE_SUPPORT.tag))
-            return FurnaceBlockType.REINFORCED;
-        if (state.is(TFMGTags.TFMGBlockTags.BLAST_FURNACE_SUPPORT.tag))
-            return FurnaceBlockType.REGULAR;
-        return FurnaceBlockType.NONE;
+        return result.height();
     }
 
     @Nonnull
@@ -571,12 +509,5 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
         if (cap == ForgeCapabilities.FLUID_HANDLER)
             return fluidCapability.cast();
         return super.getCapability(cap, side);
-    }
-
-    enum FurnaceBlockType {
-        NONE,
-        REGULAR,
-        REINFORCED
-
     }
 }
