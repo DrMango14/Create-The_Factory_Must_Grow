@@ -1,14 +1,7 @@
-package com.drmangotea.tfmg.content.machinery.metallurgy.blast_furnace;
+package com.drmangotea.tfmg.content.machinery.metallurgy.blast_furnace.util;
 
-import com.drmangotea.tfmg.registry.TFMGBlocks;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -28,28 +21,21 @@ import java.util.Set;
  */
 public class BlastFurnaceLayer {
 
-    private final Set<String> validRotations;
+    private final Set<String> layerRotations;
 
-    private static final Map<Block, Character> BLOCK_SYMBOLS = Map.of(
-            TFMGBlocks.BLAST_FURNACE_HATCH.get(), 'T',
-            TFMGBlocks.FIREPROOF_BRICKS.get(),'B',
-            TFMGBlocks.FIREPROOF_BRICK_REINFORCEMENT.get(), 'F',
-            TFMGBlocks.BLAST_FURNACE_REINFORCEMENT.get(), 'R',
-            TFMGBlocks.RUSTED_BLAST_FURNACE_REINFORCEMENT.get(), 'R',
-            TFMGBlocks.BLAST_FURNACE_REINFORCEMENT_WALL.get(), 'W',
-            TFMGBlocks.RUSTED_BLAST_FURNACE_REINFORCEMENT_WALL.get(), 'W',
-            TFMGBlocks.BLAST_FURNACE_OUTPUT.get(), 'O',
-            Blocks.AIR, 'A'
-    );
+    public static final int LAYER_SIZE = 5;
+    public static final int LAYER_AREA = LAYER_SIZE * LAYER_SIZE;
+
 
     public BlastFurnaceLayer(String layer) {
-        if (layer == null || layer.length() != 25) {
+        if (layer == null || layer.length() != LAYER_AREA) {
             throw new IllegalArgumentException(
-                    String.format("Layer must be a non-null 25 length string (got %s)",
+                    String.format("Layer must be a non-null %s length string (got %s)",
+                            LAYER_AREA,
                             layer == null ? "null" : layer.length())
             );
         }
-        validRotations = computeRotations(layer);
+        layerRotations = Collections.unmodifiableSet(computeRotations(layer));
     }
 
     private Set<String> computeRotations(String baseLayer) {
@@ -95,30 +81,44 @@ public class BlastFurnaceLayer {
         return new String(rotated);
     }
 
-    boolean isValidLayer(BlockPos center, Level level) {
-        String builtLayer = flattenLayer(center, level);
-        return validRotations.contains(builtLayer);
+    public boolean matchesAnyPattern(Set<String> patterns) {
+        return patterns.stream().anyMatch(pattern ->
+                layerRotations.stream().anyMatch(rotation ->
+                        matchesWithWildcards(rotation, pattern)
+                )
+        );
     }
 
-    /**
-     * Scans a 5x5 square of blocks in the world and converts it to a layer String.
-     * @param center center BlockPos of a layer.
-     * @param level Level (world).
-     * @return row-major String representation of the scanned layer.
-     */
-    String flattenLayer(BlockPos center, Level level) {
-        int size = 5; // 5x5 layers max
-        StringBuilder sb = new StringBuilder(size * size);
-        for (int dz = -2; dz <= 2; dz++) {      // Z = rows
-            for (int dx = -2; dx <= 2; dx++) {   // X = columns
-                BlockPos pos = center.offset(dx, 0, dz);
-                sb.append(getBlockSymbol(level.getBlockState(pos)));
+    private boolean matchesWithWildcards(String actualLayer, String pattern) {
+        if (actualLayer.length() != pattern.length()) return false;
+
+        for (int i = 0; i < actualLayer.length(); i++) {
+            char p = pattern.charAt(i);
+            char a = actualLayer.charAt(i);
+
+            // '*' in pattern matches any character (including air)
+            if (p != '*' && p != a) {
+                return false;
+            }
+            if (pattern.contains("T") && !actualLayer.contains("T")) {
+                return false; // Tuyere required but missing
+            }
+            if (pattern.contains("O") && !actualLayer.contains("O")) {
+                return false; // Output required but missing
             }
         }
-        return sb.toString();
+        return true;
     }
 
-    char getBlockSymbol(BlockState state) {
-        return BLOCK_SYMBOLS.getOrDefault(state.getBlock(), '*');
+    public boolean isBaseLayer() {
+        return matchesAnyPattern(BlastFurnaceLayerPatterns.BASE_LAYERS);
+    }
+
+    public boolean isWallLayer() {
+        return matchesAnyPattern(BlastFurnaceLayerPatterns.WALL_LAYERS);
+    }
+
+    public boolean isReinforced() {
+        return matchesAnyPattern(BlastFurnaceLayerPatterns.REINFORCED_LAYERS);
     }
 }
