@@ -697,6 +697,7 @@ public class TFMGBlocks {
             .item()
             .transform(customItemModel())
             .register();
+
     @SuppressWarnings("'addLayer(java.util.function.Supplier<java.util.function.Supplier<net.minecraft.client.renderer.RenderType>>)' is deprecated and marked for removal ")
     public static final BlockEntry<FireboxBlock> FIREBOX =
             REGISTRATE.block("firebox", FireboxBlock::new)
@@ -781,16 +782,6 @@ public class TFMGBlocks {
             .build()
             .register();
 
-    public static final BlockEntry<Block> REINFORCED_FIREPROOF_BRICKS = REGISTRATE.block("reinforced_fireproof_bricks", Block::new)
-            .initialProperties(() -> Blocks.NETHER_BRICKS)
-            .properties(p -> p.requiresCorrectToolForDrops())
-            .transform(pickaxeOnly())
-            .tag(TFMGTags.TFMGBlockTags.REINFORCED_BLAST_FURNACE_WALL.tag)
-            .tag(BlockTags.NEEDS_STONE_TOOL)
-            .blockstate(simpleCubeAll("fireproof_bricks"))
-            .loot((lt, block) -> lt.dropOther(block, TFMGBlocks.FIREPROOF_BRICKS.get().asItem()))
-            .register();
-
     public static final BlockEntry<Block> BLAST_FURNACE_REINFORCEMENT = REGISTRATE.block("blast_furnace_reinforcement", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p.requiresCorrectToolForDrops())
@@ -858,6 +849,7 @@ public class TFMGBlocks {
             .item()
             .transform(customItemModel())
             .register();
+
     @SuppressWarnings("'addLayer(java.util.function.Supplier<java.util.function.Supplier<net.minecraft.client.renderer.RenderType>>)' is deprecated and marked for removal ")
     public static final BlockEntry<BlastStoveBlock> BLAST_STOVE =
             REGISTRATE.block("blast_stove", BlastStoveBlock::new)
