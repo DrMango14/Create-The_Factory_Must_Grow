@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.content.items.weapons.flamethrover;
 import com.drmangotea.tfmg.TFMGClient;
 import com.drmangotea.tfmg.base.spark.Spark;
 import com.drmangotea.tfmg.registry.TFMGEntityTypes;
+import com.simibubi.create.api.equipment.potatoCannon.PotatoCannonProjectileType;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.item.CustomArmPoseItem;
 import net.minecraft.client.model.HumanoidModel;
@@ -49,9 +50,10 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
             return;
         }
 
+
         //if(true)
         //    return;
-        level.playSound((Player)null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.FIRE_EXTINGUISH, SoundSource.NEUTRAL, 0.1F, 0.04F);
+        level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.FIRE_EXTINGUISH, SoundSource.NEUTRAL, 0.1F, 0.04F);
 
         FlamethrowerFuel fuel = Enum.valueOf(FlamethrowerFuel.class,nbt.getString("fuel").toUpperCase());
 
@@ -172,7 +174,7 @@ return Math.round( 13* ((float)((float)stack.getOrCreateTag().getInt("amount")/(
         return UseAnim.NONE;
     }
 
-    enum FlamethrowerFuel{
+    enum FlamethrowerFuel {
 
         GASOLINE(15,1,3,0xC4AA76),
         DIESEL(7,2,3,0xBA9177),
