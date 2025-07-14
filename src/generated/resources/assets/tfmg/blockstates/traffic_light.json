@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfmg:block/traffic_light/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/traffic_light/block"
+    },
+    "facing=south": {
+      "model": "tfmg:block/traffic_light/block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfmg:block/traffic_light/block",
+      "y": 270
+    }
+  }
+}

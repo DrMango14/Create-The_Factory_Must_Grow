@@ -1,0 +1,7 @@
+{
+  "parent": "tfmg:item/bars",
+  "textures": {
+    "bars": "tfmg:block/bars/aluminum_bars",
+    "edge": "tfmg:block/bars/aluminum_bars_edge"
+  }
+}

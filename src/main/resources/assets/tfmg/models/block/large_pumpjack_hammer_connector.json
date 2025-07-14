@@ -1,0 +1,35 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"0": "tfmg:block/large_pumpjack_hammer_part",
+		"2": "tfmg:block/pumpjack_hammer_connector",
+		"particle": "tfmg:block/large_pumpjack_hammer_part"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [8, 0, 16, 8], "texture": "#0"},
+				"east": {"uv": [0, 0, 8, 8], "texture": "#0"},
+				"south": {"uv": [8, 0.05, 16, 8.05], "texture": "#0"},
+				"west": {"uv": [0, 0.05, 8, 8.05], "texture": "#0"},
+				"up": {"uv": [8, 8, 16, 16], "texture": "#0"},
+				"down": {"uv": [8, 8, 16, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [-1, 6, 6],
+			"to": [17, 10, 10],
+			"faces": {
+				"north": {"uv": [0, 9, 9, 11], "texture": "#2"},
+				"east": {"uv": [0, 12, 2, 14], "texture": "#2"},
+				"south": {"uv": [0, 9, 9, 11], "texture": "#2"},
+				"west": {"uv": [0, 12, 2, 14], "texture": "#2"},
+				"up": {"uv": [0, 9, 9, 11], "texture": "#2"},
+				"down": {"uv": [0, 9, 9, 11], "texture": "#2"}
+			}
+		}
+	]
+}

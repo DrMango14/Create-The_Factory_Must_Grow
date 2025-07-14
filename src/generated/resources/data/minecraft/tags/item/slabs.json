@@ -1,0 +1,12 @@
+{
+  "values": [
+    "tfmg:cut_bauxite_slab",
+    "tfmg:polished_cut_bauxite_slab",
+    "tfmg:cut_bauxite_brick_slab",
+    "tfmg:small_bauxite_brick_slab",
+    "tfmg:cut_galena_slab",
+    "tfmg:polished_cut_galena_slab",
+    "tfmg:cut_galena_brick_slab",
+    "tfmg:small_galena_brick_slab"
+  ]
+}

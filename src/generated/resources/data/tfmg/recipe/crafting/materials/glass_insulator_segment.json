@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:nuggets/copper"
+    },
+    "G": {
+      "item": "minecraft:green_stained_glass_pane"
+    },
+    "O": {
+      "tag": "c:nuggets/steel"
+    }
+  },
+  "pattern": [
+    " O ",
+    "GGG",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:glass_insulator_segment"
+  }
+}

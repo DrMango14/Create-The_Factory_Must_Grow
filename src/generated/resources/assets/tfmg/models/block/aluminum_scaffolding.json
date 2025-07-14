@@ -1,0 +1,10 @@
+{
+  "parent": "tfmg:block/scaffold/block",
+  "textures": {
+    "casing": "tfmg:block/aluminum_casing",
+    "inside": "tfmg:block/scaffold/aluminum_scaffold_inside",
+    "particle": "tfmg:block/scaffold/aluminum_scaffold",
+    "side": "tfmg:block/scaffold/aluminum_scaffold",
+    "top": "tfmg:block/funnel/aluminum_funnel_frame"
+  }
+}

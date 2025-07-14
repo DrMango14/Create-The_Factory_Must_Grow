@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "tfmg:light_bulb"
+    },
+    "N": {
+      "tag": "c:nuggets/steel"
+    },
+    "P": {
+      "item": "create:framed_glass_pane"
+    }
+  },
+  "pattern": [
+    " P ",
+    " B ",
+    "NNN"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:modern_light"
+  }
+}

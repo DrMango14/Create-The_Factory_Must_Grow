@@ -1,0 +1,22 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": false,
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:ingots/aluminum"
+    },
+    "F": {
+      "item": "minecraft:flint"
+    }
+  },
+  "pattern": [
+    "F",
+    "A"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:spark_plug"
+  },
+  "show_notification": false
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tfmg:block/raw_lithium_block"
+    }
+  }
+}

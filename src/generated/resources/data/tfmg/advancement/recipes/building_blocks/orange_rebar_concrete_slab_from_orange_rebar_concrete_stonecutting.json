@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_orange_rebar_concrete": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tfmg:orange_rebar_concrete"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tfmg:orange_rebar_concrete_slab_from_orange_rebar_concrete_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_orange_rebar_concrete"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tfmg:orange_rebar_concrete_slab_from_orange_rebar_concrete_stonecutting"
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "M": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "T": {
+      "item": "create:electron_tube"
+    }
+  },
+  "pattern": [
+    "TTT",
+    "TTT",
+    "MHM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:surface_scanner"
+  }
+}

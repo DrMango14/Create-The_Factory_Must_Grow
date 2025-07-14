@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "tfmg:cut_bauxite_slab"
+    },
+    {
+      "item": "tfmg:cut_bauxite_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:cut_bauxite"
+  }
+}

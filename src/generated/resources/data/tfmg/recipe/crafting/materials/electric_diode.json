@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:plates/cast_iron"
+    },
+    "I": {
+      "item": "create:industrial_iron_block"
+    },
+    "N": {
+      "item": "tfmg:n_semiconductor"
+    },
+    "P": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "S": {
+      "item": "tfmg:p_semiconductor"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    }
+  },
+  "pattern": [
+    "WBW",
+    "SPN",
+    "WIW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:electric_diode"
+  }
+}

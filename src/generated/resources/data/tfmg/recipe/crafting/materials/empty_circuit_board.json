@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:green_dye"
+    },
+    "P": {
+      "item": "tfmg:plastic_sheet"
+    }
+  },
+  "pattern": [
+    "   ",
+    " G ",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:empty_circuit_board"
+  }
+}

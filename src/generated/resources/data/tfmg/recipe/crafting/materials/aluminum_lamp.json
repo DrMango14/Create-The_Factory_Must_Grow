@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "tfmg:light_bulb"
+    },
+    "P": {
+      "item": "create:framed_glass_pane"
+    },
+    "S": {
+      "tag": "c:plates/aluminum"
+    }
+  },
+  "pattern": [
+    " P ",
+    " B ",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:aluminum_lamp"
+  }
+}

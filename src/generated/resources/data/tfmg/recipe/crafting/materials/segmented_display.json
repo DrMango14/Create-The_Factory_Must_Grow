@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "tfmg:industrial_aluminum_casing"
+    },
+    "C": {
+      "item": "tfmg:circuit_board"
+    },
+    "G": {
+      "item": "minecraft:black_stained_glass_pane"
+    },
+    "K": {
+      "item": "tfmg:silicon_ingot"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    }
+  },
+  "pattern": [
+    "WGW",
+    "KAK",
+    "WCW"
+  ],
+  "result": {
+    "count": 4,
+    "id": "tfmg:segmented_display"
+  }
+}

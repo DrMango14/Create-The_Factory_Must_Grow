@@ -1,0 +1,95 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "tfmg:plastic_sheet"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "chance": 120.0,
+      "count": 4,
+      "id": "tfmg:transistor_item"
+    },
+    {
+      "chance": 8.0,
+      "id": "tfmg:silicon_ingot"
+    },
+    {
+      "chance": 8.0,
+      "id": "tfmg:p_semiconductor"
+    },
+    {
+      "chance": 8.0,
+      "id": "tfmg:n_semiconductor"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_transistor"
+        },
+        {
+          "tag": "c:wires/copper"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_transistor"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_transistor"
+        },
+        {
+          "item": "tfmg:n_semiconductor"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_transistor"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_transistor"
+        },
+        {
+          "item": "tfmg:p_semiconductor"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_transistor"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_transistor"
+        },
+        {
+          "item": "tfmg:n_semiconductor"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_transistor"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "tfmg:unfinished_transistor"
+  }
+}

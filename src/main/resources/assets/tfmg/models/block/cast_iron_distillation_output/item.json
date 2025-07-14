@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "tfmg:block/cast_iron_distillation_controller_top",
+    "bottom": "tfmg:block/cast_iron_distillation_controller_top",
+    "side": "tfmg:block/distiller_side"
+  }
+}

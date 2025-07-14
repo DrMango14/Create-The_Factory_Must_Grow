@@ -1,0 +1,11 @@
+{
+  "values": [
+    "tfmg:steel_block",
+    "tfmg:cast_iron_block",
+    "tfmg:aluminum_block",
+    "tfmg:lead_block",
+    "tfmg:constantan_block",
+    "tfmg:nickel_block",
+    "tfmg:lithium_block"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "tfmg:brown_rebar_concrete"
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:brown_rebar_concrete_stairs"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "create:hot_blast",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 25,
+      "fluid": "tfmg:air"
+    },
+    {
+      "type": "fluid_tag",
+      "amount": 5,
+      "fluid_tag": "tfmg:blast_stove_fuel"
+    }
+  ],
+  "processing_time": 200,
+  "results": [
+    {
+      "amount": 25,
+      "id": "tfmg:hot_air"
+    },
+    {
+      "amount": 25,
+      "id": "tfmg:carbon_dioxide"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "controller_type=bottom_on,facing=east": {
+      "model": "tfmg:block/coke_oven/block_bottom_on",
+      "y": 270
+    },
+    "controller_type=bottom_on,facing=north": {
+      "model": "tfmg:block/coke_oven/block_bottom_on",
+      "y": 180
+    },
+    "controller_type=bottom_on,facing=south": {
+      "model": "tfmg:block/coke_oven/block_bottom_on"
+    },
+    "controller_type=bottom_on,facing=west": {
+      "model": "tfmg:block/coke_oven/block_bottom_on",
+      "y": 90
+    },
+    "controller_type=casual,facing=east": {
+      "model": "tfmg:block/coke_oven/block_casual",
+      "y": 270
+    },
+    "controller_type=casual,facing=north": {
+      "model": "tfmg:block/coke_oven/block_casual",
+      "y": 180
+    },
+    "controller_type=casual,facing=south": {
+      "model": "tfmg:block/coke_oven/block_casual"
+    },
+    "controller_type=casual,facing=west": {
+      "model": "tfmg:block/coke_oven/block_casual",
+      "y": 90
+    },
+    "controller_type=middle_on,facing=east": {
+      "model": "tfmg:block/coke_oven/block_middle_on",
+      "y": 270
+    },
+    "controller_type=middle_on,facing=north": {
+      "model": "tfmg:block/coke_oven/block_middle_on",
+      "y": 180
+    },
+    "controller_type=middle_on,facing=south": {
+      "model": "tfmg:block/coke_oven/block_middle_on"
+    },
+    "controller_type=middle_on,facing=west": {
+      "model": "tfmg:block/coke_oven/block_middle_on",
+      "y": 90
+    },
+    "controller_type=top_on,facing=east": {
+      "model": "tfmg:block/coke_oven/block_top_on",
+      "y": 270
+    },
+    "controller_type=top_on,facing=north": {
+      "model": "tfmg:block/coke_oven/block_top_on",
+      "y": 180
+    },
+    "controller_type=top_on,facing=south": {
+      "model": "tfmg:block/coke_oven/block_top_on"
+    },
+    "controller_type=top_on,facing=west": {
+      "model": "tfmg:block/coke_oven/block_top_on",
+      "y": 90
+    }
+  }
+}

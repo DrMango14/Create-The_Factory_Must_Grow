@@ -1,0 +1,28 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "tag": "c:ingots/nickel"
+    },
+    {
+      "tag": "c:ingots/nickel"
+    },
+    {
+      "item": "tfmg:silicon_ingot"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    }
+  ],
+  "processing_time": 300,
+  "results": [
+    {
+      "count": 2,
+      "id": "tfmg:magnetic_alloy_ingot"
+    }
+  ]
+}

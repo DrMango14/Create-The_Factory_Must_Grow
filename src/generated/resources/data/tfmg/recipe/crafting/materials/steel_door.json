@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "tfmg:steel_casing"
+    },
+    {
+      "tag": "minecraft:wooden_doors"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:steel_door"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "tfmg:unfired_insulator"
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:unfinished_insulator"
+  }
+}

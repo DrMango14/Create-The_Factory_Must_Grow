@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:plates/aluminum"
+    },
+    "O": {
+      "tag": "c:ingots/steel"
+    },
+    "R": {
+      "item": "tfmg:rebar"
+    }
+  },
+  "pattern": [
+    "OOA",
+    " R ",
+    " R "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:oil_hammer"
+  }
+}

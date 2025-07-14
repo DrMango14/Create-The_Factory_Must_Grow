@@ -1,0 +1,484 @@
+{
+  "variants": {
+    "engine_state=back,extended=false,facing=east,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 90
+    },
+    "engine_state=back,extended=false,facing=east,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_back"
+    },
+    "engine_state=back,extended=false,facing=east,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 180
+    },
+    "engine_state=back,extended=false,facing=east,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 270
+    },
+    "engine_state=back,extended=false,facing=north,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 90
+    },
+    "engine_state=back,extended=false,facing=north,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_back"
+    },
+    "engine_state=back,extended=false,facing=north,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 180
+    },
+    "engine_state=back,extended=false,facing=north,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 270
+    },
+    "engine_state=back,extended=false,facing=south,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 90
+    },
+    "engine_state=back,extended=false,facing=south,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_back"
+    },
+    "engine_state=back,extended=false,facing=south,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 180
+    },
+    "engine_state=back,extended=false,facing=south,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 270
+    },
+    "engine_state=back,extended=false,facing=west,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 90
+    },
+    "engine_state=back,extended=false,facing=west,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_back"
+    },
+    "engine_state=back,extended=false,facing=west,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 180
+    },
+    "engine_state=back,extended=false,facing=west,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 270
+    },
+    "engine_state=back,extended=true,facing=east,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 90
+    },
+    "engine_state=back,extended=true,facing=east,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_back"
+    },
+    "engine_state=back,extended=true,facing=east,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 180
+    },
+    "engine_state=back,extended=true,facing=east,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 270
+    },
+    "engine_state=back,extended=true,facing=north,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 90
+    },
+    "engine_state=back,extended=true,facing=north,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_back"
+    },
+    "engine_state=back,extended=true,facing=north,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 180
+    },
+    "engine_state=back,extended=true,facing=north,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 270
+    },
+    "engine_state=back,extended=true,facing=south,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 90
+    },
+    "engine_state=back,extended=true,facing=south,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_back"
+    },
+    "engine_state=back,extended=true,facing=south,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 180
+    },
+    "engine_state=back,extended=true,facing=south,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 270
+    },
+    "engine_state=back,extended=true,facing=west,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 90
+    },
+    "engine_state=back,extended=true,facing=west,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_back"
+    },
+    "engine_state=back,extended=true,facing=west,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 180
+    },
+    "engine_state=back,extended=true,facing=west,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_back",
+      "y": 270
+    },
+    "engine_state=front,extended=false,facing=east,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 90
+    },
+    "engine_state=front,extended=false,facing=east,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_front"
+    },
+    "engine_state=front,extended=false,facing=east,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 180
+    },
+    "engine_state=front,extended=false,facing=east,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 270
+    },
+    "engine_state=front,extended=false,facing=north,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 90
+    },
+    "engine_state=front,extended=false,facing=north,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_front"
+    },
+    "engine_state=front,extended=false,facing=north,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 180
+    },
+    "engine_state=front,extended=false,facing=north,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 270
+    },
+    "engine_state=front,extended=false,facing=south,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 90
+    },
+    "engine_state=front,extended=false,facing=south,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_front"
+    },
+    "engine_state=front,extended=false,facing=south,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 180
+    },
+    "engine_state=front,extended=false,facing=south,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 270
+    },
+    "engine_state=front,extended=false,facing=west,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 90
+    },
+    "engine_state=front,extended=false,facing=west,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_front"
+    },
+    "engine_state=front,extended=false,facing=west,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 180
+    },
+    "engine_state=front,extended=false,facing=west,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 270
+    },
+    "engine_state=front,extended=true,facing=east,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 90
+    },
+    "engine_state=front,extended=true,facing=east,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_front"
+    },
+    "engine_state=front,extended=true,facing=east,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 180
+    },
+    "engine_state=front,extended=true,facing=east,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 270
+    },
+    "engine_state=front,extended=true,facing=north,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 90
+    },
+    "engine_state=front,extended=true,facing=north,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_front"
+    },
+    "engine_state=front,extended=true,facing=north,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 180
+    },
+    "engine_state=front,extended=true,facing=north,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 270
+    },
+    "engine_state=front,extended=true,facing=south,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 90
+    },
+    "engine_state=front,extended=true,facing=south,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_front"
+    },
+    "engine_state=front,extended=true,facing=south,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 180
+    },
+    "engine_state=front,extended=true,facing=south,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 270
+    },
+    "engine_state=front,extended=true,facing=west,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 90
+    },
+    "engine_state=front,extended=true,facing=west,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_front"
+    },
+    "engine_state=front,extended=true,facing=west,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 180
+    },
+    "engine_state=front,extended=true,facing=west,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_front",
+      "y": 270
+    },
+    "engine_state=normal,extended=false,facing=east,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 90
+    },
+    "engine_state=normal,extended=false,facing=east,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_normal"
+    },
+    "engine_state=normal,extended=false,facing=east,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 180
+    },
+    "engine_state=normal,extended=false,facing=east,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 270
+    },
+    "engine_state=normal,extended=false,facing=north,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 90
+    },
+    "engine_state=normal,extended=false,facing=north,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_normal"
+    },
+    "engine_state=normal,extended=false,facing=north,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 180
+    },
+    "engine_state=normal,extended=false,facing=north,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 270
+    },
+    "engine_state=normal,extended=false,facing=south,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 90
+    },
+    "engine_state=normal,extended=false,facing=south,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_normal"
+    },
+    "engine_state=normal,extended=false,facing=south,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 180
+    },
+    "engine_state=normal,extended=false,facing=south,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 270
+    },
+    "engine_state=normal,extended=false,facing=west,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 90
+    },
+    "engine_state=normal,extended=false,facing=west,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_normal"
+    },
+    "engine_state=normal,extended=false,facing=west,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 180
+    },
+    "engine_state=normal,extended=false,facing=west,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 270
+    },
+    "engine_state=normal,extended=true,facing=east,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 90
+    },
+    "engine_state=normal,extended=true,facing=east,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_normal"
+    },
+    "engine_state=normal,extended=true,facing=east,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 180
+    },
+    "engine_state=normal,extended=true,facing=east,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 270
+    },
+    "engine_state=normal,extended=true,facing=north,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 90
+    },
+    "engine_state=normal,extended=true,facing=north,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_normal"
+    },
+    "engine_state=normal,extended=true,facing=north,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 180
+    },
+    "engine_state=normal,extended=true,facing=north,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 270
+    },
+    "engine_state=normal,extended=true,facing=south,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 90
+    },
+    "engine_state=normal,extended=true,facing=south,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_normal"
+    },
+    "engine_state=normal,extended=true,facing=south,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 180
+    },
+    "engine_state=normal,extended=true,facing=south,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 270
+    },
+    "engine_state=normal,extended=true,facing=west,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 90
+    },
+    "engine_state=normal,extended=true,facing=west,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_normal"
+    },
+    "engine_state=normal,extended=true,facing=west,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 180
+    },
+    "engine_state=normal,extended=true,facing=west,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_normal",
+      "y": 270
+    },
+    "engine_state=single,extended=false,facing=east,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 90
+    },
+    "engine_state=single,extended=false,facing=east,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_single"
+    },
+    "engine_state=single,extended=false,facing=east,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 180
+    },
+    "engine_state=single,extended=false,facing=east,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 270
+    },
+    "engine_state=single,extended=false,facing=north,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 90
+    },
+    "engine_state=single,extended=false,facing=north,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_single"
+    },
+    "engine_state=single,extended=false,facing=north,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 180
+    },
+    "engine_state=single,extended=false,facing=north,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 270
+    },
+    "engine_state=single,extended=false,facing=south,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 90
+    },
+    "engine_state=single,extended=false,facing=south,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_single"
+    },
+    "engine_state=single,extended=false,facing=south,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 180
+    },
+    "engine_state=single,extended=false,facing=south,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 270
+    },
+    "engine_state=single,extended=false,facing=west,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 90
+    },
+    "engine_state=single,extended=false,facing=west,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_single"
+    },
+    "engine_state=single,extended=false,facing=west,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 180
+    },
+    "engine_state=single,extended=false,facing=west,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 270
+    },
+    "engine_state=single,extended=true,facing=east,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 90
+    },
+    "engine_state=single,extended=true,facing=east,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_single"
+    },
+    "engine_state=single,extended=true,facing=east,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 180
+    },
+    "engine_state=single,extended=true,facing=east,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 270
+    },
+    "engine_state=single,extended=true,facing=north,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 90
+    },
+    "engine_state=single,extended=true,facing=north,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_single"
+    },
+    "engine_state=single,extended=true,facing=north,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 180
+    },
+    "engine_state=single,extended=true,facing=north,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 270
+    },
+    "engine_state=single,extended=true,facing=south,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 90
+    },
+    "engine_state=single,extended=true,facing=south,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_single"
+    },
+    "engine_state=single,extended=true,facing=south,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 180
+    },
+    "engine_state=single,extended=true,facing=south,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 270
+    },
+    "engine_state=single,extended=true,facing=west,shaft_facing=east": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 90
+    },
+    "engine_state=single,extended=true,facing=west,shaft_facing=north": {
+      "model": "tfmg:block/radial_engine/block_single"
+    },
+    "engine_state=single,extended=true,facing=west,shaft_facing=south": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 180
+    },
+    "engine_state=single,extended=true,facing=west,shaft_facing=west": {
+      "model": "tfmg:block/radial_engine/block_single",
+      "y": 270
+    }
+  }
+}

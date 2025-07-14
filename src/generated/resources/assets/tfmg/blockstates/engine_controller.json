@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfmg:block/engine_controller/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/engine_controller/block"
+    },
+    "facing=south": {
+      "model": "tfmg:block/engine_controller/block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfmg:block/engine_controller/block",
+      "y": 270
+    }
+  }
+}

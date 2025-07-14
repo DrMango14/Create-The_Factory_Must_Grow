@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfmg:block/large_pumpjack_hammer_connector",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/large_pumpjack_hammer_connector"
+    },
+    "facing=south": {
+      "model": "tfmg:block/large_pumpjack_hammer_connector",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfmg:block/large_pumpjack_hammer_connector",
+      "y": 270
+    }
+  }
+}

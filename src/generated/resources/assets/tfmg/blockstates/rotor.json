@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "tfmg:block/rotor/block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "tfmg:block/rotor/block"
+    },
+    "axis=z": {
+      "model": "tfmg:block/rotor/block",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

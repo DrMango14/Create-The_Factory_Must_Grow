@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:plates/brass"
+    },
+    "G": {
+      "item": "tfmg:voltmeter"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    }
+  },
+  "pattern": [
+    "BGB",
+    "BWB",
+    "BWB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:multimeter"
+  }
+}

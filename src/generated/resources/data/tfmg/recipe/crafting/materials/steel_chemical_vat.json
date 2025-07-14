@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "tag": "c:plates/nickel"
+    },
+    "P": {
+      "item": "tfmg:heavy_plate"
+    },
+    "T": {
+      "item": "tfmg:steel_fluid_tank"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "NTN",
+    "PPP"
+  ],
+  "result": {
+    "count": 2,
+    "id": "tfmg:steel_chemical_vat"
+  }
+}

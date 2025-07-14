@@ -1,0 +1,16 @@
+{
+  "type": "create:casting",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 144,
+      "fluid": "tfmg:molten_steel"
+    }
+  ],
+  "processing_time": 200,
+  "results": [
+    {
+      "id": "tfmg:steel_ingot"
+    }
+  ]
+}

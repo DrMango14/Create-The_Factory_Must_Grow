@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "tfmg:block/large_steel_cogwheel",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "tfmg:block/large_steel_cogwheel"
+    },
+    "axis=z": {
+      "model": "tfmg:block/large_steel_cogwheel",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

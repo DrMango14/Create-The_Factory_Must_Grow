@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_nether",
+  "features": "tfmg:tfmg_striated_ores_nether",
+  "step": "underground_ores"
+}

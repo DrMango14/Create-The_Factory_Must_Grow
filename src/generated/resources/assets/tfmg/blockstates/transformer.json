@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfmg:block/transformer/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/transformer/block"
+    },
+    "facing=south": {
+      "model": "tfmg:block/transformer/block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfmg:block/transformer/block",
+      "y": 270
+    }
+  }
+}

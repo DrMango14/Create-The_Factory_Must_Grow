@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ingots_rubber": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:ingots/rubber"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tfmg:synthetic_string_from_ingots_rubber_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ingots_rubber"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tfmg:synthetic_string_from_ingots_rubber_stonecutting"
+    ]
+  }
+}

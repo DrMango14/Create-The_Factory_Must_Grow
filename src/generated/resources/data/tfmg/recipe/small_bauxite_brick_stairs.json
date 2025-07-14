@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "small_bauxite_brick_stairs",
+  "key": {
+    "X": {
+      "item": "tfmg:small_bauxite_bricks"
+    }
+  },
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "result": {
+    "count": 4,
+    "id": "tfmg:small_bauxite_brick_stairs"
+  }
+}

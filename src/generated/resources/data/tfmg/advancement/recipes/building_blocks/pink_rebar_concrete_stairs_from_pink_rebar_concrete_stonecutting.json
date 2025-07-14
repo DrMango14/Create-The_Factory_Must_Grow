@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pink_rebar_concrete": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tfmg:pink_rebar_concrete"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tfmg:pink_rebar_concrete_stairs_from_pink_rebar_concrete_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_pink_rebar_concrete"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tfmg:pink_rebar_concrete_stairs_from_pink_rebar_concrete_stonecutting"
+    ]
+  }
+}

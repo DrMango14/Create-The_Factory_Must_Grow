@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfmg:block/rusted_blast_furnace_reinforcement_wall",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/rusted_blast_furnace_reinforcement_wall"
+    },
+    "facing=south": {
+      "model": "tfmg:block/rusted_blast_furnace_reinforcement_wall",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfmg:block/rusted_blast_furnace_reinforcement_wall",
+      "y": 270
+    }
+  }
+}

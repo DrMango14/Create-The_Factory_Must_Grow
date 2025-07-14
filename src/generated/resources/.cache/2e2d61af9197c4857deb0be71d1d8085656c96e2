@@ -1,0 +1,10 @@
+// 1.21.1	2025-06-23T18:15:06.6110781	tfmg's mechanical crafting recipes
+f79bbffbfeaa61e9a7aa8aa5e73cf941745bf261 data/tfmg/recipe/mechanical_crafting/advanced_potato_cannon.json
+76e3f96ca473a1a5190b1e104673e1d8e07320a9 data/tfmg/recipe/mechanical_crafting/engine_controller.json
+82eaa1583b5528c784bace19223d4da9f14bbfb1 data/tfmg/recipe/mechanical_crafting/flamethrower.json
+eb80d3543b399b361b2185b73e4576518922d82c data/tfmg/recipe/mechanical_crafting/large_engine.json
+1e306982a81680a218bd6fb05ad1357bcd35020b data/tfmg/recipe/mechanical_crafting/quad_potato_cannon.json
+ef77cf4c35bebc48f00e0a6b52a90c90d4cf0899 data/tfmg/recipe/mechanical_crafting/rotor.json
+e9d4ff6d7a9d322d180d7c453c909f120bf3f9db data/tfmg/recipe/mechanical_crafting/simple_large_engine.json
+0f65fba04b8a2a9cb3742178c602ce1d72777ee6 data/tfmg/recipe/mechanical_crafting/spark_plug.json
+2ab2a79be9975b12458b264be6a71fde2a257e9d data/tfmg/recipe/mechanical_crafting/stator.json

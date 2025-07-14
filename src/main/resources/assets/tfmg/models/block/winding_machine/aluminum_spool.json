@@ -1,0 +1,20 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "tfmg:block/copper_spool",
+		"particle": "tfmg:block/copper_spool"
+	},
+	"elements": [
+		{
+			"from": [4, 6, 6],
+			"to": [11, 10, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, 7, 7]},
+			"faces": {
+				"north": {"uv": [4, 0, 8, 7], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [4, 0, 8, 7], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [4, 0, 8, 7], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [4, 0, 8, 7], "rotation": 90, "texture": "#0"}
+			}
+		}
+	]
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tfmg:large_steel_cogwheel"
+    },
+    "H": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "K": {
+      "item": "tfmg:screw"
+    },
+    "M": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "S": {
+      "item": "create:shaft"
+    }
+  },
+  "pattern": [
+    "KSK",
+    "MHM",
+    "KCK"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:industrial_mixer"
+  }
+}

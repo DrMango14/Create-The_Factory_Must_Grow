@@ -1,0 +1,24 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"texture_size": [32, 32],
+	"textures": {
+		"1": "tfmg:block/diode",
+		"particle": "tfmg:block/diode"
+	},
+	"elements": [
+		{
+			"from": [3, 0, 3],
+			"to": [13, 16, 13],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 8, 0]},
+			"faces": {
+				"north": {"uv": [8, 0, 0, 5], "rotation": 90, "texture": "#1"},
+				"east": {"uv": [0, 0, 8, 5], "rotation": 270, "texture": "#1"},
+				"south": {"uv": [8, 0, 0, 5], "rotation": 90, "texture": "#1"},
+				"west": {"uv": [8, 0, 0, 5], "rotation": 90, "texture": "#1"},
+				"up": {"uv": [9, 0, 14, 5], "rotation": 180, "texture": "#1"},
+				"down": {"uv": [9, 6, 14, 11], "texture": "#1"}
+			}
+		}
+	]
+}

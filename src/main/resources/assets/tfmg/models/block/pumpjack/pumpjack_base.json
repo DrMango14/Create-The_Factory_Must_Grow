@@ -1,0 +1,34 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"0": "tfmg:block/pumpjack_base",
+		"particle": "tfmg:block/pumpjack_base"
+	},
+	"elements": [
+		{
+			"from": [3, 0, 3],
+			"to": [13, 14, 13],
+			"faces": {
+				"north": {"uv": [0, 2, 5, 9], "texture": "#0"},
+				"east": {"uv": [0, 2, 5, 9], "texture": "#0"},
+				"south": {"uv": [0, 2, 5, 9], "texture": "#0"},
+				"west": {"uv": [0, 2, 5, 9], "texture": "#0"},
+				"up": {"uv": [10.5, 0, 14, 4], "texture": "#0"},
+				"down": {"uv": [0, 11, 5, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [2, 14, 2],
+			"to": [14, 16, 14],
+			"faces": {
+				"north": {"uv": [10, 0, 16, 1], "texture": "#0"},
+				"east": {"uv": [10, 0, 16, 1], "texture": "#0"},
+				"south": {"uv": [10, 0, 16, 1], "texture": "#0"},
+				"west": {"uv": [10, 0, 16, 1], "texture": "#0"},
+				"up": {"uv": [10, 0, 16, 6], "texture": "#0"},
+				"down": {"uv": [10, 0, 16, 6], "texture": "#0"}
+			}
+		}
+	]
+}

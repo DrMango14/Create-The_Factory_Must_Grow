@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:plates/aluminum"
+    },
+    "C": {
+      "item": "tfmg:aluminum_cogwheel"
+    },
+    "M": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "P": {
+      "item": "tfmg:plastic_sheet"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "CPC",
+    "MMM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:transmission"
+  }
+}

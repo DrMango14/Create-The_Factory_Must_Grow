@@ -1,0 +1,7 @@
+{
+  "parent": "tfmg:item/bars",
+  "textures": {
+    "bars": "tfmg:block/bars/nickel_bars",
+    "edge": "tfmg:block/bars/nickel_bars_edge"
+  }
+}

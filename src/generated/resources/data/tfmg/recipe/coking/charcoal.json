@@ -1,0 +1,22 @@
+{
+  "type": "create:coking",
+  "ingredients": [
+    {
+      "tag": "minecraft:logs_that_burn"
+    }
+  ],
+  "processing_time": 600,
+  "results": [
+    {
+      "id": "minecraft:charcoal"
+    },
+    {
+      "amount": 2,
+      "id": "tfmg:flowing_creosote"
+    },
+    {
+      "amount": 20,
+      "id": "tfmg:flowing_carbon_dioxide"
+    }
+  ]
+}

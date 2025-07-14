@@ -1,0 +1,48 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"0": "tfmg:block/engines/turbine_engine",
+		"particle": "tfmg:block/engines/turbine_engine"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 2],
+			"to": [5, 5, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-2, -2, 0]},
+			"faces": {
+				"north": {"uv": [0.5, 13.5, 1.75, 14.75], "texture": "#0"},
+				"east": {"uv": [0.5, 12, 3.5, 13.25], "texture": "#0"},
+				"south": {"uv": [0.5, 13.5, 1.75, 14.75], "texture": "#0"},
+				"west": {"uv": [0.5, 12, 3.5, 13.25], "texture": "#0"},
+				"up": {"uv": [0.5, 12, 3.5, 13.25], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [0.5, 12, 3.5, 13.25], "rotation": 90, "texture": "#0"}
+			}
+		},
+		{
+			"from": [1, 1, 0],
+			"to": [15, 15, 16],
+			"faces": {
+				"north": {"uv": [0, 2.75, 3.5, 6.25], "texture": "#0"},
+				"east": {"uv": [3.75, 2.75, 7.75, 6.25], "texture": "#0"},
+				"south": {"uv": [0, 2.75, 3.5, 6.25], "texture": "#0"},
+				"west": {"uv": [7.75, 2.75, 3.75, 6.25], "texture": "#0"},
+				"up": {"uv": [7.75, 6.5, 3.75, 10], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [7.75, 10.25, 3.75, 13.75], "rotation": 90, "texture": "#0"}
+			}
+		},
+		{
+			"from": [11, 0, 2],
+			"to": [16, 5, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, -2, 0]},
+			"faces": {
+				"north": {"uv": [0.5, 13.5, 1.75, 14.75], "texture": "#0"},
+				"east": {"uv": [0.5, 12, 3.5, 13.25], "texture": "#0"},
+				"south": {"uv": [0.5, 13.5, 1.75, 14.75], "texture": "#0"},
+				"west": {"uv": [0.5, 12, 3.5, 13.25], "texture": "#0"},
+				"up": {"uv": [0.5, 12, 3.5, 13.25], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [0.5, 12, 3.5, 13.25], "rotation": 90, "texture": "#0"}
+			}
+		}
+	]
+}

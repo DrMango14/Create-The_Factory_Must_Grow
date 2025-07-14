@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "tfmg:concrete"
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:concrete_wall"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "minecraft:dirt"
+    }
+  ],
+  "results": [
+    {
+      "chance": 0.05,
+      "id": "tfmg:nitrate_dust"
+    }
+  ]
+}

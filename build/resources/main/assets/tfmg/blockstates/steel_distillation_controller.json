@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfmg:block/steel_distillation_controller/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/steel_distillation_controller/block"
+    },
+    "facing=south": {
+      "model": "tfmg:block/steel_distillation_controller/block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfmg:block/steel_distillation_controller/block",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "tag": "minecraft:planks"
+    },
+    {
+      "type": "fluid_stack",
+      "amount": 250,
+      "fluid": "tfmg:creosote"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:hardened_planks"
+    }
+  ]
+}

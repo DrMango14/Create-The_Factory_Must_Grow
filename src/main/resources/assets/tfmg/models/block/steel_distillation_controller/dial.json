@@ -1,0 +1,21 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "tfmg:block/distillation_controller_front",
+		"particle": "tfmg:block/distillation_controller_front"
+	},
+	"elements": [
+		{
+			"from": [6.5, 7.5, 0.95],
+			"to": [10.5, 8.5, 0.95],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 7.5, 0]},
+			"faces": {
+				"north": {"uv": [13, 4, 14, 8], "rotation": 270, "texture": "#0"},
+				"east": {"uv": [0, 0, 1, 0], "rotation": 90, "texture": "#missing"},
+				"west": {"uv": [0, 0, 1, 0], "rotation": 90, "texture": "#missing"},
+				"up": {"uv": [0, 0, 0, 3], "rotation": 90, "texture": "#missing"},
+				"down": {"uv": [0, 0, 0, 3], "rotation": 90, "texture": "#missing"}
+			}
+		}
+	]
+}

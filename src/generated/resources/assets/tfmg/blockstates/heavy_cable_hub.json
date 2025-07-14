@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tfmg:block/heavy_cable_hub"
+    }
+  }
+}

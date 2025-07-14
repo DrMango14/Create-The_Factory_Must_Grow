@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tfmg:block/pumpjack_base/block"
+    }
+  }
+}

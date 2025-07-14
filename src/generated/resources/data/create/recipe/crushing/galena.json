@@ -1,0 +1,19 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "tfmg:galena"
+    }
+  ],
+  "results": [
+    {
+      "chance": 0.4,
+      "id": "create:crushed_raw_lead"
+    },
+    {
+      "chance": 0.1,
+      "count": 2,
+      "id": "tfmg:lead_nugget"
+    }
+  ]
+}

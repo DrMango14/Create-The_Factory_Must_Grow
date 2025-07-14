@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "tfmg:concrete"
+    },
+    "P": {
+      "item": "tfmg:industrial_pipe"
+    }
+  },
+  "pattern": [
+    "BPB",
+    "BPB",
+    "BPB"
+  ],
+  "result": {
+    "count": 4,
+    "id": "tfmg:concrete_smokestack"
+  }
+}

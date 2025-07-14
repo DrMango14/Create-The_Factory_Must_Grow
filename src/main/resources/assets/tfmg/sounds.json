@@ -1,0 +1,23 @@
+{
+
+  "engine": {
+    "sounds": [
+      {
+        "name": "tfmg:engine",
+        "type": "file",
+        "attenuation_distance": 16
+      }
+    ],
+    "subtitle": "tfmg.subtitle.engine_sounds"
+  },
+  "diesel_engine": {
+    "sounds": [
+      {
+        "name": "tfmg:diesel_engine",
+        "type": "file",
+        "attenuation_distance": 16
+      }
+    ],
+    "subtitle": "tfmg.subtitle.diesel_engine_sounds"
+  }
+}

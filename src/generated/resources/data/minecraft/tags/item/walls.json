@@ -1,0 +1,12 @@
+{
+  "values": [
+    "tfmg:cut_bauxite_wall",
+    "tfmg:polished_cut_bauxite_wall",
+    "tfmg:cut_bauxite_brick_wall",
+    "tfmg:small_bauxite_brick_wall",
+    "tfmg:cut_galena_wall",
+    "tfmg:polished_cut_galena_wall",
+    "tfmg:cut_galena_brick_wall",
+    "tfmg:small_galena_brick_wall"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "tfmg:empty_spool"
+    },
+    "W": {
+      "tag": "c:wires/aluminum"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "WSW",
+    "WWW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:aluminum_spool"
+  }
+}

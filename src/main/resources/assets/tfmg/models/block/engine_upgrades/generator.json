@@ -1,0 +1,22 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "tfmg:block/engine_generator",
+		"particle": "tfmg:block/engine_generator"
+	},
+	"elements": [
+		{
+			"from": [4, 6, 6],
+			"to": [12, 14, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, 4, 7]},
+			"faces": {
+				"north": {"uv": [4, 8, 12, 16], "texture": "#0"},
+				"east": {"uv": [4, 3, 12, 7], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [4, 8, 12, 16], "texture": "#0"},
+				"west": {"uv": [4, 3, 12, 7], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [4, 3, 12, 7], "texture": "#0"},
+				"down": {"uv": [4, 3, 12, 7], "texture": "#0"}
+			}
+		}
+	]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "create:casting",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 144,
+      "fluid": "tfmg:liquid_silicon"
+    }
+  ],
+  "processing_time": 200,
+  "results": [
+    {
+      "id": "tfmg:silicon_ingot"
+    }
+  ]
+}

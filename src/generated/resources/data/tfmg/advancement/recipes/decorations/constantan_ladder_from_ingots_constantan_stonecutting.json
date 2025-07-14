@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ingots_constantan": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:ingots/constantan"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tfmg:constantan_ladder_from_ingots_constantan_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ingots_constantan"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tfmg:constantan_ladder_from_ingots_constantan_stonecutting"
+    ]
+  }
+}

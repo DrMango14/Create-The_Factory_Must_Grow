@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,input=false": {
+      "model": "tfmg:block/converter/block",
+      "y": 90
+    },
+    "facing=east,input=true": {
+      "model": "tfmg:block/converter/block_rotated",
+      "y": 90
+    },
+    "facing=north,input=false": {
+      "model": "tfmg:block/converter/block"
+    },
+    "facing=north,input=true": {
+      "model": "tfmg:block/converter/block_rotated"
+    },
+    "facing=south,input=false": {
+      "model": "tfmg:block/converter/block",
+      "y": 180
+    },
+    "facing=south,input=true": {
+      "model": "tfmg:block/converter/block_rotated",
+      "y": 180
+    },
+    "facing=west,input=false": {
+      "model": "tfmg:block/converter/block",
+      "y": 270
+    },
+    "facing=west,input=true": {
+      "model": "tfmg:block/converter/block_rotated",
+      "y": 270
+    }
+  }
+}

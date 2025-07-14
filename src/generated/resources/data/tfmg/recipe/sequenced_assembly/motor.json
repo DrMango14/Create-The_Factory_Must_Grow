@@ -1,0 +1,91 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "create:shaft"
+  },
+  "loops": 3,
+  "results": [
+    {
+      "chance": 120.0,
+      "id": "tfmg:electric_motor"
+    },
+    {
+      "chance": 4.0,
+      "id": "tfmg:steel_casing"
+    },
+    {
+      "chance": 4.0,
+      "id": "tfmg:nickel_sheet"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:winding",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_electric_motor"
+        },
+        {
+          "item": "tfmg:copper_spool"
+        }
+      ],
+      "processing_time": 75,
+      "results": [
+        {
+          "id": "tfmg:unfinished_electric_motor"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_electric_motor"
+        },
+        {
+          "item": "tfmg:magnet"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_electric_motor"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_electric_motor"
+        },
+        {
+          "item": "tfmg:steel_mechanism"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_electric_motor"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_electric_motor"
+        },
+        {
+          "item": "tfmg:screwdriver"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_electric_motor"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "tfmg:unfinished_electric_motor"
+  }
+}

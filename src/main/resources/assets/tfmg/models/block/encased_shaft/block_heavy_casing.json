@@ -1,0 +1,7 @@
+{
+	"parent": "create:block/encased_shaft/block",
+	"textures": {
+		"casing": "tfmg:block/heavy_machinery_casing",
+		"opening": "tfmg:block/heavy_gearbox"
+	}
+}

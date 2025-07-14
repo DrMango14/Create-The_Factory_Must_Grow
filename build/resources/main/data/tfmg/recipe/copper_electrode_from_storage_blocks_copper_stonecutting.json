@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "tag": "c:storage_blocks/copper"
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:copper_electrode"
+  }
+}

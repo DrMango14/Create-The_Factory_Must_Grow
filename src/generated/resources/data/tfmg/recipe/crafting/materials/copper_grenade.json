@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "tfmg:thermite_grenade"
+    },
+    "T": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    "   ",
+    "TAT",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:copper_grenade"
+  }
+}

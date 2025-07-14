@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "tfmg:block/machine_input/block",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "tfmg:block/machine_input/block",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/machine_input/block",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "tfmg:block/machine_input/block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "tfmg:block/machine_input/block"
+    },
+    "facing=west": {
+      "model": "tfmg:block/machine_input/block",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "polished_cut_galena_slab",
+  "key": {
+    "X": {
+      "item": "tfmg:polished_cut_galena"
+    }
+  },
+  "pattern": [
+    "XXX"
+  ],
+  "result": {
+    "count": 6,
+    "id": "tfmg:polished_cut_galena_slab"
+  }
+}
