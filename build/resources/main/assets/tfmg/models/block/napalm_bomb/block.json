@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "top": "tfmg:block/napalm_bomb_top",
-    "bottom": "tfmg:block/napalm_bomb_bottom",
-    "side": "tfmg:block/napalm_bomb_side"
-  }
-}
