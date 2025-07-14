@@ -31,6 +31,9 @@
 ### Blocks:
 - The Converter now uses its own config instead of the config for the Accumulator.
 
+### Ponder:
+- The ponder for the Pumpjack now specifies the need to  glue the parts together.
+
 
 ### Recipes:
 - The recipe for the Coated Circuit Board is now Deploying instead of Item Application.
