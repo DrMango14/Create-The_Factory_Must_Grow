@@ -30,6 +30,8 @@
 
 ### Blocks:
 - The Converter now uses its own config instead of the config for the Accumulator.
+- Tweaked throughput of Flarestacks & Exhausts.
+- Add pairity between Smokestacks & Flarestacks and Exhausts.
 
 ### Ponder:
 - The ponder for the Pumpjack now specifies the need to  glue the parts together.
