@@ -2,9 +2,12 @@ package com.drmangotea.tfmg.base;
 
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.base.spark.ElectricSparkParticle;
 import com.drmangotea.tfmg.base.spark.Spark;
+import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableType;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CablePos;
+import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode.Electrode;
 import com.drmangotea.tfmg.registry.TFMGEntityTypes;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -22,6 +25,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -382,5 +386,13 @@ public class TFMGUtils {
         vertexConsumer.addVertex(matrix4f, x + p_174319_, y + thickness - p_174318_ + pain, z - p_174320_).setColor(red, green, blue, 1.0F).setLight(k);
     }
 
+
+    public static Electrode getElectrode(ResourceLocation key) {
+        return TFMGRegistries.ELECTRODE_REGISTRY.get(key);
+    }
+
+    public static CableType getCableType(ResourceLocation key) {
+        return TFMGRegistries.CABLE_TYPE_REGISTRY.get(key);
+    }
 
 }

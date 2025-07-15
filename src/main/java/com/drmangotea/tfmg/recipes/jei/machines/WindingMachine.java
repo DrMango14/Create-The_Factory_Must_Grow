@@ -17,7 +17,7 @@ public class WindingMachine extends AnimatedKinetics {
     public WindingMachine() {
     }
 
-    public void draw(GuiGraphics graphics, int xOffset, int yOffset, PartialModel coil, boolean shadow) {
+    public void draw(GuiGraphics graphics, int xOffset, int yOffset, int coilColor, boolean shadow) {
 
         PoseStack matrixStack = graphics.pose();
 
@@ -42,12 +42,13 @@ public class WindingMachine extends AnimatedKinetics {
                 .atLocal(-0.15, -0.4, -0.23)
                 .scale(scale)
                 .render(graphics);
-        if (coil != null)
-            blockElement(coil)
-                    .rotateBlock(22.5, 22.5, 0)
-                    .atLocal(-0.15, -0.4, -0.23)
-                    .scale(scale)
-                    .render(graphics);
+
+        blockElement(TFMGPartialModels.SPOOL_WIRE)
+                .rotateBlock(22.5, 22.5, 0)
+                .atLocal(-0.15, -0.4, -0.23)
+                .color(coilColor)
+                .scale(scale)
+                .render(graphics);
 
         matrixStack.popPose();
     }

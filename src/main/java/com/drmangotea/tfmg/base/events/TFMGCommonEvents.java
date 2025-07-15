@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.base.events;
 
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.content.decoration.tanks.TFMGFluidTankBlockEntity;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
@@ -37,6 +38,7 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
+import net.neoforged.neoforge.registries.NewRegistryEvent;
 
 
 @EventBusSubscriber
@@ -105,6 +107,13 @@ public class TFMGCommonEvents {
             CokeOvenBlockEntity.registerCapabilities(event);
             AirIntakeBlockEntity.registerCapabilities(event);
         }
+
+        @SubscribeEvent
+        public static void newRegistry(NewRegistryEvent event) {
+            event.register(TFMGRegistries.CABLE_TYPE_REGISTRY);
+            event.register(TFMGRegistries.ELECTRODE_REGISTRY);
+        }
     }
+
 
 }

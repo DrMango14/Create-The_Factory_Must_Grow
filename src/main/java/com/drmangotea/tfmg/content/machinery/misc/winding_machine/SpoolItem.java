@@ -1,7 +1,9 @@
 package com.drmangotea.tfmg.content.machinery.misc.winding_machine;
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableType;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnection;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CablePos;
@@ -15,6 +17,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -31,20 +34,19 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.simibubi.create.foundation.utility.Debug.debugMessage;
 
 public class SpoolItem extends Item {
 
-    public final PartialModel model;
     public final int barColor;
-    public final CableConnection.CableType type;
+    public final ResourceLocation cableTypeKey;
 
-    public SpoolItem(Properties properties, PartialModel model, int barColor, CableConnection.CableType type) {
+    public SpoolItem(Properties properties, int barColor, ResourceLocation cableTypeKey) {
         super(properties);
-        this.model = model;
         this.barColor = barColor;
-        this.type = type;
+        this.cableTypeKey = cableTypeKey;
     }
 
 
@@ -108,13 +110,13 @@ public class SpoolItem extends Item {
         if(level.isClientSide)
             return InteractionResult.SUCCESS;
 
-        if(type == CableConnection.CableType.NONE)
+        if(Objects.equals(cableTypeKey, TFMG.asResource("empty")))
             return InteractionResult.PASS;
 
          if(level.getBlockEntity(pos) instanceof CableConnectorBlockEntity be){
              if(stack.get(TFMGDataComponents.POSITION)!=null){
                  BlockPos posToConnect = BlockPos.of(stack.get(TFMGDataComponents.POSITION));
-                 if(posToConnect == pos){
+                 if(posToConnect.equals(pos)){
                      stack.set(TFMGDataComponents.POSITION,0l);
                      if (level.isClientSide)
                          player.displayClientMessage(CreateLang.translateDirect("wires.cant_connect_itself")
@@ -128,9 +130,10 @@ public class SpoolItem extends Item {
                  if(level.getBlockEntity(posToConnect) instanceof CableConnectorBlockEntity otherBE) {
                      //CableConnectorBlockEntity connectedBe1 = pos.asLong()>posToConnect.asLong() ? otherBE : be;
                      //CableConnectorBlockEntity connectedBe2= pos.asLong()>posToConnect.asLong() ? be : otherBE;
-//
-                     CableConnection connection1 = new CableConnection(be.getCablePosition(), otherBE.getCablePosition(), otherBE.getBlockPos(),type,true);
-                     CableConnection connection2 = new CableConnection(otherBE.getCablePosition(), be.getCablePosition(), be.getBlockPos(),type,false);
+                     CableType cableType = TFMGUtils.getCableType(cableTypeKey);
+
+                     CableConnection connection1 = new CableConnection(be.getCablePosition(), otherBE.getCablePosition(), otherBE.getBlockPos(),cableType,true);
+                     CableConnection connection2 = new CableConnection(otherBE.getCablePosition(), be.getCablePosition(), be.getBlockPos(),cableType,false);
 
                      float wireCost =  (connection1.getLength()/8);
 
@@ -224,7 +227,7 @@ public class SpoolItem extends Item {
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        return model != null;
+        return !Objects.equals(cableTypeKey, TFMG.asResource("empty")) && TFMGRegistries.CABLE_TYPE_REGISTRY.containsKey(cableTypeKey);
     }
 
     @Override

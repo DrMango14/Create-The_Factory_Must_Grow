@@ -52,18 +52,18 @@ public class WindingMachineRenderer extends KineticBlockEntityRenderer<WindingMa
                     .uncenter()
                     .renderInto(ms, vb);
 
-            if (((SpoolItem) be.spool.getItem()).model != null) {
-                CachedBuffers.partial(((SpoolItem) be.spool.getItem()).model, blockState)
+            if (!be.spool.isEmpty()) {
+                CachedBuffers.partial(TFMGPartialModels.SPOOL_WIRE, blockState)
                         .light(light)
                         .center()
                         .rotateYDegrees(blockState.getValue(HORIZONTAL_FACING).getAxis() == Direction.Axis.Z ? Math.abs(blockState.getValue(FACING).toYRot() - 180) : blockState.getValue(FACING).toYRot())
                         .translateZ(-0.4f)
                         .translateY(0.4f)
+                        .color(be.spool.getBarColor())
                         .rotateXDegrees(be.angle)
                         .uncenter()
                         .renderInto(ms, vb);
                 if (!be.inventory.isEmpty()) {
-
                     CachedBuffers.partial(be.getSpeed() != 0 ? TFMGPartialModels.CONNNECTING_WIRE_ANIMATED : TFMGPartialModels.CONNNECTING_WIRE, blockState)
                             .light(light)
                             .center()
@@ -75,6 +75,7 @@ public class WindingMachineRenderer extends KineticBlockEntityRenderer<WindingMa
                             .uncenter()
                             .renderInto(ms, vb);
                 }
+
             }
         }
         if (!be.inventory.isEmpty()) {

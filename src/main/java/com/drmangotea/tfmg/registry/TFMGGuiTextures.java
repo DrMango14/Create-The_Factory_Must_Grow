@@ -32,6 +32,7 @@ public enum TFMGGuiTextures implements ScreenElement {
     GRAPHITE_ELECTRODE("chemical_vat", 176, 0, 8, 29),
     FIREPROOF_BRICK_OVERLAY("chemical_vat", 0, 84, 96, 72),
     VAT_HEATER("chemical_vat", 112, 44, 20, 14),
+    VAT_SUPERHEATER("chemical_vat", 112, 58, 20, 14),
 
     ;
 
