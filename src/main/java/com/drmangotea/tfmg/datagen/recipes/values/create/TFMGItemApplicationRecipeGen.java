@@ -20,14 +20,6 @@ public class TFMGItemApplicationRecipeGen extends ItemApplicationRecipeGen {
     GeneratedRecipe HEAVY_CASING = casing("heavy_machinery", () -> Ingredient.of(steelSheet()), TFMGBlocks.HEAVY_MACHINERY_CASING::get, TFMGBlocks.STEEL_CASING::get);
     GeneratedRecipe ALUMINUM = casing("aluminum", () -> Ingredient.of(aluminumSheet()), TFMGBlocks.ALUMINUM_CASING::get, TFMGBlocks.STEEL_CASING::get);
 
-
-    GeneratedRecipe
-            COATED_CIRCUIT_BOARD = create("coated_circuit_board", b -> b
-            .require(TFMGItems.EMPTY_CIRCUIT_BOARD)
-            .require(goldSheet())
-            .output(TFMGItems.COATED_CIRCUIT_BOARD)
-    );
-
     protected GeneratedRecipe casing(String type, Supplier<Ingredient> ingredient,
                                                         Supplier<ItemLike> output, Supplier<ItemLike> block) {
         return create(type + "_casing", b -> b

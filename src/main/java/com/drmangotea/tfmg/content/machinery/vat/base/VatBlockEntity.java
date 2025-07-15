@@ -90,7 +90,9 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
     //
     public LerpedFloat[] fluidLevel = new LerpedFloat[8];
     /// /
-    public List<String> machines = new ArrayList<>();
+    public Map<BlockPos, String> machineMap = new HashMap<>();
+    public Map<BlockPos, Boolean> operationalMachinesMap = new HashMap<>();
+    public boolean areMachinesValid = true;
     boolean evaluateNextTick = true;
     float efficiency = 1;
     int timer = 0;
@@ -238,10 +240,13 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
                 continue;
             boolean doesntMatch = false;
 
-            if (!Objects.equals(testedRecipe.machines, machines)) {
+            if (!Objects.equals(testedRecipe.machines, machineMap.values().stream().toList())) {
                 continue;
             }
 
+            if (!areMachinesValid) {
+                continue;
+            }
 
             if (!testedRecipe.allowedVatTypes.contains(((VatBlock) getBlockState().getBlock()).vatType)) {
                 continue;
@@ -403,6 +408,27 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
 
         handleRecipe();
 
+        if (isController()) {
+            for (BlockPos machinePos : machineMap.keySet()) {
+                BlockEntity blockEntity = level.getBlockEntity(machinePos);
+                if (blockEntity != null) {
+                    if (blockEntity instanceof IVatMachine vatMachine) {
+                        boolean operational = vatMachine.canOperate(this);
+                        operationalMachinesMap.put(machinePos, operational);
+                    } else {
+                        machineMap.remove(machinePos);
+                        operationalMachinesMap.remove(machinePos);
+                    }
+                } else {
+                    machineMap.remove(machinePos);
+                    operationalMachinesMap.remove(machinePos);
+                }
+            }
+        }
+
+        areMachinesValid = operationalMachinesMap.values().stream().allMatch((op) -> op == true);
+
+
         if (syncCooldown > 0) {
             syncCooldown--;
             if (syncCooldown == 0 && queuedSync)
@@ -513,22 +539,25 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
             //fluid output
             List<Integer> handledFluidResults = new ArrayList<>();
 
-            for (FluidStack fluidStack : recipe.getFluidResults()) {
-                for (int i = 0; i < outputFluidHandler.getTanks(); i++) {
-                    FluidStack fluidInTank = outputFluidHandler.getFluidInTank(i);
-                    if (fluidInTank.getFluid().isSame(fluidStack.getFluid())) {
-                        outputFluidHandler.fill(new FluidStack(fluidStack.copy().getFluidHolder(), fluidStack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
-                        handledFluidResults.add(i);
-                        break;
+            List<FluidStack> handledFluidStacks = new ArrayList<>();
+            List<SmartFluidTankBehaviour.TankSegment> tankSegments = List.of(outputTank.getTanks());
+            if (recipe != null)
+                for (FluidStack fluidStack : recipe.getFluidResults()) {
+                    for (SmartFluidTankBehaviour.TankSegment tankSegment : tankSegments) {
+                        SmartFluidTank tank = ((TankSegmentAccessor) tankSegment).tfmg$tank();
+                        FluidStack fluidInTank = tank.getFluid();
+                        if (handledFluidStacks.contains(fluidStack)) break;
+
+                        if (fluidInTank.getFluid().isSame(fluidStack.getFluid())) {
+                            tank.fill(new FluidStack(fluidStack.getFluid(), fluidStack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
+                            handledFluidStacks.add(fluidStack);
+                            break;
+                        }
+                        if (!handledFluidStacks.contains(fluidStack) && fluidInTank.isEmpty()) {
+                            tank.fill(new FluidStack(fluidStack.getFluid(), fluidStack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
+                            break;
+                        }
                     }
-                }
-                for (int i = 0; i < outputFluidHandler.getTanks(); i++) {
-                    FluidStack fluidInTank = outputFluidHandler.getFluidInTank(i);
-                    if (!handledFluidResults.contains(i) && fluidInTank.isEmpty()) {
-                        outputFluidHandler.fill(new FluidStack(fluidStack.copy().getFluidHolder(), fluidStack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
-                        break;
-                    }
-                }
             }
             recipe = null;
             timer = 0;
@@ -635,8 +664,8 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
             return;
         }
 
-        List<String> oldMachines = machines;
-        machines = new ArrayList<>();
+        Map<BlockPos, String> oldMachineMap = machineMap;
+        machineMap = new HashMap<>();
         heatLevel = 0;
         heatCondition = HeatCondition.NONE;
 
@@ -663,8 +692,8 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
                             continue;
 
                         be.vatUpdated(this);
-                        machines.add(be.getOperationId());
-                        efficiency *= (be.getWorkPercentage() / 100);
+                        machineMap.put(pos, be.getOperationId());
+                        efficiency *= ((float) be.getWorkPercentage() / 100);
                     }
 
 
@@ -672,7 +701,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
             }
         }
         efficiency = speed;
-        if (oldMachines != machines)
+        if (oldMachineMap != machineMap)
             recipe = null;
 
         notifyUpdate();
@@ -878,6 +907,15 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         return null;
     }
 
+    public void addMachineTooltip(String operationId, boolean isOperational, List<Component> tooltip) {
+        LangBuilder operation = CreateLang.translate("goggles.vat."+operationId.replace(":","."));
+        if (!isOperational) {
+            operation.add(CreateLang.text(" - ")).add(CreateLang.translate("goggles.vat.not_operational")
+                    .style(ChatFormatting.RED));
+        }
+        operation.forGoggles(tooltip);
+    }
+
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 
@@ -896,9 +934,10 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         CreateLang.translate("goggles.vat.attachments")
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip);
-        for (String operation : machines)
-            CreateLang.translate("goggles.vat."+operation.replace(":","."))
-                    .forGoggles(tooltip);
+        for (Map.Entry<BlockPos, String> machines : machineMap.entrySet()) {
+            boolean operational = operationalMachinesMap.getOrDefault(machines.getKey(), true);
+            addMachineTooltip(machines.getValue(), operational, tooltip);
+        }
 
 
         CreateLang.translate("goggles.vat.heat_status")

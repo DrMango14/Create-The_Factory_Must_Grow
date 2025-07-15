@@ -7,6 +7,7 @@ import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.simibubi.create.AllPartialModels;
+import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.OrientedRotatingVisual;
 import com.simibubi.create.content.kinetics.gantry.GantryShaftBlock;
@@ -104,6 +105,11 @@ public class IndustrialMixerBlockEntity extends KineticBlockEntity implements IV
             case MIXING -> "tfmg:mixing";
             case CENTRIFUGE -> "tfmg:centrifuge";
         };
+    }
+
+    @Override
+    public boolean canOperate(VatBlockEntity vat) {
+        return getSpeed() >= IRotate.SpeedLevel.MEDIUM.getSpeedValue() || getSpeed() <= -IRotate.SpeedLevel.MEDIUM.getSpeedValue();
     }
 
     public boolean setMixerMode(ItemStack modeItem, boolean simulate) {

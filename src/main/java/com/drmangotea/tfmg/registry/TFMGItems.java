@@ -1,11 +1,11 @@
 package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.base.TFMGArmorMaterials;
+import com.drmangotea.tfmg.base.TFMGCreativeTabs;
+import com.drmangotea.tfmg.base.TFMGRegistrate;
 import com.drmangotea.tfmg.base.TFMGTiers;
 import com.drmangotea.tfmg.content.decoration.gearbox.SteelVerticalGearboxItem;
 import com.drmangotea.tfmg.content.electricity.configuration_wrench.ElectriciansWrenchItem;
-import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnection;
 import com.drmangotea.tfmg.content.electricity.debug.DebugCinderBlockItem;
 import com.drmangotea.tfmg.content.electricity.measurement.MultimeterItem;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.MagnetItem;
@@ -30,15 +30,12 @@ import com.drmangotea.tfmg.content.machinery.misc.winding_machine.SpoolItem;
 import com.drmangotea.tfmg.content.machinery.oil_processing.OilHammerItem;
 import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.base.DepositItem;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.content.equipment.tool.AllToolMaterials;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.ItemEntry;
-import com.tterrag.registrate.util.entry.RegistryEntry;
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.core.Holder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.resources.ResourceLocation;
@@ -46,14 +43,12 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.drmangotea.tfmg.TFMG.REGISTRATE;
 import static com.drmangotea.tfmg.base.TFMGBuilderTransformers.COLORS;
 import static com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades.ThermiteGrenade.ChemicalColor.*;
 import static com.simibubi.create.AllTags.AllItemTags.CREATE_INGOTS;
@@ -61,7 +56,7 @@ import static com.simibubi.create.AllTags.commonItemTag;
 
 public class TFMGItems {
 
-
+    public static final TFMGRegistrate REGISTRATE = (TFMGRegistrate) TFMG.REGISTRATE.setCreativeTab(TFMGCreativeTabs.TFMG_MAIN);
     //materials
 
 
@@ -70,30 +65,32 @@ public class TFMGItems {
             CAST_IRON_INGOT = taggedIngredient("cast_iron_ingot", commonItemTag("ingots/cast_iron"), CREATE_INGOTS.tag),
             ALUMINUM_INGOT = taggedIngredient("aluminum_ingot", commonItemTag("ingots/aluminum"), CREATE_INGOTS.tag),
             PLASTIC_SHEET = taggedIngredient("plastic_sheet", commonItemTag("ingots/plastic"), CREATE_INGOTS.tag),
-            HEAVY_PLATE = taggedIngredient("heavy_plate", commonItemTag("plates/steel")),
-            ALUMINUM_SHEET = taggedIngredient("aluminum_sheet", commonItemTag("plates/aluminum")),
-            NICKEL_SHEET = taggedIngredient("nickel_sheet", commonItemTag("plates/nickel")),
-            CAST_IRON_SHEET = taggedIngredient("cast_iron_sheet", commonItemTag("plates/cast_iron")),
-            LEAD_SHEET = taggedIngredient("lead_sheet", commonItemTag("plates/lead")),
+            HEAVY_PLATE = taggedIngredient("heavy_plate", commonItemTag("plates/steel"), commonItemTag("plates")),
+            ALUMINUM_SHEET = taggedIngredient("aluminum_sheet", commonItemTag("plates/aluminum"), commonItemTag("plates")),
+            NICKEL_SHEET = taggedIngredient("nickel_sheet", commonItemTag("plates/nickel"), commonItemTag("plates")),
+            CAST_IRON_SHEET = taggedIngredient("cast_iron_sheet", commonItemTag("plates/cast_iron"), commonItemTag("plates")),
+            LEAD_SHEET = taggedIngredient("lead_sheet", commonItemTag("plates/lead"), commonItemTag("plates")),
             LEAD_INGOT = taggedIngredient("lead_ingot", commonItemTag("ingots/lead"), CREATE_INGOTS.tag),
             NICKEL_INGOT = taggedIngredient("nickel_ingot", commonItemTag("ingots/nickel"), CREATE_INGOTS.tag),
             CONSTANTAN_INGOT = taggedIngredient("constantan_ingot", commonItemTag("ingots/constantan"), CREATE_INGOTS.tag),
             LITHIUM_INGOT = taggedIngredient("lithium_ingot", commonItemTag("ingots/lithium"), CREATE_INGOTS.tag),
-            ALUMINUM_NUGGET = taggedIngredient("aluminum_nugget", commonItemTag("nuggets/aluminum")),
-            STEEL_NUGGET = taggedIngredient("steel_nugget", commonItemTag("nuggets/steel")),
-            CAST_IRON_NUGGET = taggedIngredient("cast_iron_nugget", commonItemTag("nuggets/cast_iron")),
-            CONSTANTAN_NUGGET = taggedIngredient("constantan_nugget", commonItemTag("nuggets/constantan")),
-            LEAD_NUGGET = taggedIngredient("lead_nugget", commonItemTag("nuggets/lead")),
-            NICKEL_NUGGET = taggedIngredient("nickel_nugget", commonItemTag("nuggets/nickel")),
-            LITHIUM_NUGGET = taggedIngredient("lithium_nugget", commonItemTag("nuggets/lithium")),
+            ALUMINUM_NUGGET = taggedIngredient("aluminum_nugget", commonItemTag("nuggets/aluminum"), commonItemTag("nuggets")),
+            STEEL_NUGGET = taggedIngredient("steel_nugget", commonItemTag("nuggets/steel"), commonItemTag("nuggets")),
+            CAST_IRON_NUGGET = taggedIngredient("cast_iron_nugget", commonItemTag("nuggets/cast_iron"), commonItemTag("nuggets")),
+            CONSTANTAN_NUGGET = taggedIngredient("constantan_nugget", commonItemTag("nuggets/constantan"), commonItemTag("nuggets")),
+            LEAD_NUGGET = taggedIngredient("lead_nugget", commonItemTag("nuggets/lead"), commonItemTag("nuggets")),
+            NICKEL_NUGGET = taggedIngredient("nickel_nugget", commonItemTag("nuggets/nickel"), commonItemTag("nuggets")),
+            LITHIUM_NUGGET = taggedIngredient("lithium_nugget", commonItemTag("nuggets/lithium"), commonItemTag("nuggets")),
             RAW_LEAD = taggedIngredient("raw_lead", commonItemTag("raw_materials/lead"), commonItemTag("raw_materials")),
             RAW_NICKEL = taggedIngredient("raw_nickel", commonItemTag("raw_materials/nickel"), commonItemTag("raw_materials")),
             RAW_LITHIUM = taggedIngredient("raw_lithium", commonItemTag("raw_materials/lithium"), commonItemTag("raw_materials")),
             SYNTHETIC_LEATHER = taggedIngredient("synthetic_leather", Tags.Items.LEATHERS, AllTags.commonItemTag("leather")),
             LIMESAND = taggedIngredient("limesand", TFMGTags.TFMGItemTags.FLUX.tag),
-            SULFUR_DUST = taggedIngredient("sulfur_dust", commonItemTag("dusts/sulfur")),
-            RUBBER_SHEET = taggedIngredient("rubber_sheet", commonItemTag("ingots/rubber")),
-            SILICON_INGOT = taggedIngredient("silicon_ingot", commonItemTag("ingots/silicon"));
+            SULFUR_DUST = taggedIngredient("sulfur_dust", commonItemTag("dusts/sulfur"), commonItemTag("dusts")),
+            RUBBER_SHEET = taggedIngredient("rubber_sheet", commonItemTag("ingots/rubber"), commonItemTag("dusts")),
+            SILICON_INGOT = taggedIngredient("silicon_ingot", commonItemTag("ingots/silicon"), commonItemTag("dusts")),
+            CRUSHED_LITHIUM = taggedIngredient("crushed_raw_lithium", AllTags.AllItemTags.CRUSHED_RAW_MATERIALS.tag)
+            ;
 
 
     public static final ItemEntry<Item>
@@ -107,11 +104,11 @@ public class TFMGItems {
                     .register();
 
     public static final ItemEntry<Item>
-            COPPER_WIRE = REGISTRATE.item("copper_wire", Item::new).tag(AllTags.commonItemTag("wires/copper"))
+            COPPER_WIRE = REGISTRATE.item("copper_wire", Item::new).tag(AllTags.commonItemTag("wires/copper"), commonItemTag("wires"))
             .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.commonItemTag("ingots/copper")), RecipeCategory.BUILDING_BLOCKS, c::get, 2)).register(),
-            ALUMINUM_WIRE = REGISTRATE.item("aluminum_wire", Item::new).tag(AllTags.commonItemTag("wires/aluminum"))
+            ALUMINUM_WIRE = REGISTRATE.item("aluminum_wire", Item::new).tag(AllTags.commonItemTag("wires/aluminum"), commonItemTag("wires"))
                     .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.commonItemTag("ingots/aluminum")), RecipeCategory.BUILDING_BLOCKS, c::get, 2)).register(),
-            CONSTANTAN_WIRE = REGISTRATE.item("constantan_wire", Item::new).tag(AllTags.commonItemTag("wires/constantan"))
+            CONSTANTAN_WIRE = REGISTRATE.item("constantan_wire", Item::new).tag(AllTags.commonItemTag("wires/constantan"), commonItemTag("wires"))
                     .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.commonItemTag("ingots/constantan")), RecipeCategory.BUILDING_BLOCKS, c::get, 2)).register();
 
     public static final ItemEntry<Item>
@@ -210,7 +207,7 @@ public class TFMGItems {
     //        .properties(p -> p.stacksTo(1))
     //        .register();
     public static final ItemEntry<CoalCokeItem> COAL_COKE_DUST = REGISTRATE.item("coal_coke_dust", CoalCokeItem::new)
-            .tag(commonItemTag("dusts/coal_coke"), TFMGTags.TFMGItemTags.BLAST_FURNACE_FUEL.tag)
+            .tag(commonItemTag("dusts/coal_coke"), TFMGTags.TFMGItemTags.BLAST_FURNACE_FUEL.tag, commonItemTag("dusts"))
             .register();
 
     public static final ItemEntry<OilHammerItem> OIL_HAMMER = REGISTRATE.item("oil_hammer", OilHammerItem::new)

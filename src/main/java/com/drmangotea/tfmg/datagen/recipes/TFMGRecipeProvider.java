@@ -70,6 +70,7 @@ public class TFMGRecipeProvider extends RecipeProvider {
         GENERATORS.add(new TFMGMixingRecipeGen(output,registries));
         GENERATORS.add(new TFMGCompactingRecipeGen(output,registries));
         GENERATORS.add(new TFMGCrushingRecipeGen(output,registries));
+        GENERATORS.add(new TFMGDeployingRecipeGen(output,registries));
 
         gen.addProvider(true, new DataProvider() {
 

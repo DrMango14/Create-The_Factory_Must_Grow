@@ -124,7 +124,12 @@ public class ElectrodeHolderBlockEntity extends ElectricBlockEntity implements I
 
     @Override
     public String getOperationId() {
-        return isOperational() ? electrode.getOperationId() : "";
+        return electrode.getOperationId();
+    }
+
+    @Override
+    public boolean canOperate(VatBlockEntity vat) {
+        return isOperational();
     }
 
     @Override

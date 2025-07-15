@@ -9,6 +9,7 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.api.data.recipe.CrushingRecipeGen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Items;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -51,7 +52,30 @@ public class TFMGCrushingRecipeGen extends CrushingRecipeGen {
             SULFUR = create(() -> TFMGBlocks.SULFUR, b -> b
                     .output(.2f, sulfurDust(), 1)
                     .output(.1f, sulfurDust(), 1)
-            );
+            ),
+            LITHIUM_ORE = create(() -> TFMGBlocks.LITHIUM_ORE, b -> b
+                    .output(TFMGItems.CRUSHED_LITHIUM, 1)
+                    .output(.25f, TFMGItems.CRUSHED_LITHIUM, 1)
+                            .output(.75f, experienceNugget(), 1)
+                    .output(.12f,Items.COBBLESTONE, 1)
+                    ),
+            DEEPSLATE_LITHIUM_ORE = create(() -> TFMGBlocks.DEEPSLATE_LITHIUM_ORE, b -> b
+                    .output(TFMGItems.CRUSHED_LITHIUM, 2)
+                    .output(.25f, TFMGItems.CRUSHED_LITHIUM, 1)
+                            .output(.75f, experienceNugget(), 1)
+                    .output(.12f, Items.COBBLED_DEEPSLATE, 1)
+                    ),
+            RAW_LITHIUM = create(() -> TFMGItems.RAW_LITHIUM, b -> b
+                    .output(TFMGItems.CRUSHED_LITHIUM, 1)
+                    .output(.75f, experienceNugget(), 1)
+                    ),
+            RAW_LITHIUM_BLOCK = create(() -> TFMGBlocks.RAW_LITHIUM_BLOCK, b -> b
+                    .output(TFMGItems.CRUSHED_LITHIUM, 9)
+                    .output(.75f, experienceNugget(), 9)
+                    )
+
+
+    ;
 
     public TFMGCrushingRecipeGen(PackOutput generator, CompletableFuture<HolderLookup.Provider> registries) {
         super(generator, registries, TFMG.MOD_ID);
