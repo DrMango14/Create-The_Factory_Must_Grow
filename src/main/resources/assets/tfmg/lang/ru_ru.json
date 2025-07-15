@@ -523,7 +523,7 @@
 	"create.goggles.ammeter": "Амперметр:",
 	"create.goggles.ammeter.amps": " Ток: %1$s А",
 	"create.goggles.blast_furnace.batch_header": "Оптимальное соотношение плавки:",
-	"create.goggles.blast_furnace.batch_ratio": "%s:%s:%s (топливо:руда:флюс))",
+	"create.goggles.blast_furnace.batch_ratio": "%s:%s:%s (топливо:руда:флюс)",
 	"create.goggles.blast_furnace.batch_warning": "Внимание: большая партия.",
 	"create.goggles.blast_furnace.fuel_amount": " Топливо : %1$s",
 	"create.goggles.blast_furnace.height": " Высота: %1$s",
