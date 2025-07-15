@@ -1,0 +1,18 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "tfmg:block/coke_oven/coke_oven_front_middle_fire",
+		"particle": "tfmg:block/coke_oven/coke_oven_front_middle_fire"
+	},
+	"elements": [
+		{
+			"from": [4, 0, -0.1],
+			"to": [12, 16, -0.1],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 0, -2]},
+			"faces": {
+				"north": {"uv": [5, 0, 11, 16], "texture": "#0"}
+			}
+		}
+	]
+}
