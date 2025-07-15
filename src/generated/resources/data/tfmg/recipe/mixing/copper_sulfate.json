@@ -1,0 +1,18 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "type": "fluid_stack",
+      "amount": 500,
+      "fluid": "tfmg:sulfuric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:copper_sulfate"
+    }
+  ]
+}

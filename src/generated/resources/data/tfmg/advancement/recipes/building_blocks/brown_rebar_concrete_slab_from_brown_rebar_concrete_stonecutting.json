@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_brown_rebar_concrete": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tfmg:brown_rebar_concrete"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tfmg:brown_rebar_concrete_slab_from_brown_rebar_concrete_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_brown_rebar_concrete"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tfmg:brown_rebar_concrete_slab_from_brown_rebar_concrete_stonecutting"
+    ]
+  }
+}

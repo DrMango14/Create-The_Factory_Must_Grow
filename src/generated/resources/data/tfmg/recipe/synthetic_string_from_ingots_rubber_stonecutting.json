@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "tag": "c:ingots/rubber"
+  },
+  "result": {
+    "count": 4,
+    "id": "tfmg:synthetic_string"
+  }
+}

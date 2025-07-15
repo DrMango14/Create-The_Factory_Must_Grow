@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:barrel"
+    },
+    "P": {
+      "tag": "c:plates/aluminum"
+    }
+  },
+  "pattern": [
+    " P ",
+    " B ",
+    " P "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:aluminum_fluid_tank"
+  }
+}

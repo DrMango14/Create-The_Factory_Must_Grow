@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "tfmg:item/cooling_fluid_bucket"
+  }
+}

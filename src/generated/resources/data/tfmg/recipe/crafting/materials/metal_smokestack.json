@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:nuggets/steel"
+    },
+    "P": {
+      "item": "tfmg:industrial_pipe"
+    }
+  },
+  "pattern": [
+    "BPB",
+    "BPB",
+    "BPB"
+  ],
+  "result": {
+    "count": 4,
+    "id": "tfmg:metal_smokestack"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "top=false": {
+      "model": "tfmg:block/metal_smokestack/block"
+    },
+    "top=true": {
+      "model": "tfmg:block/metal_smokestack/block_top"
+    }
+  }
+}

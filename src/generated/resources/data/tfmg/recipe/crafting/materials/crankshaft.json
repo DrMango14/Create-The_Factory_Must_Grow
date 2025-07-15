@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "tfmg:rebar"
+    },
+    "B": {
+      "tag": "c:plates/aluminum"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "BAB",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:crankshaft"
+  }
+}

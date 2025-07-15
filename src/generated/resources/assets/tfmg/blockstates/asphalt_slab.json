@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "tfmg:block/asphalt_bottom"
+    },
+    "type=double": {
+      "model": "tfmg:block/asphalt"
+    },
+    "type=top": {
+      "model": "tfmg:block/asphalt_top"
+    }
+  }
+}

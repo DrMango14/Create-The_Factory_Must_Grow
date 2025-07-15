@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "tag": "c:plates/aluminum"
+    }
+  },
+  "pattern": [
+    "   ",
+    "P P",
+    "P P"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:diesel_engine_cylinder",
+    "components": {
+      "tfmg:fuel_tags": {
+        "diesel": "c:diesel"
+      },
+      "tfmg:fuels": {
+        "diesel": "fluid.tfmg.diesel"
+      }
+    }
+  }
+}

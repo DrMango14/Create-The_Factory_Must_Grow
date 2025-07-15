@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,powered=false": {
+      "model": "tfmg:block/winding_machine/block",
+      "y": 90
+    },
+    "facing=east,powered=true": {
+      "model": "tfmg:block/winding_machine/block",
+      "y": 90
+    },
+    "facing=north,powered=false": {
+      "model": "tfmg:block/winding_machine/block"
+    },
+    "facing=north,powered=true": {
+      "model": "tfmg:block/winding_machine/block"
+    },
+    "facing=south,powered=false": {
+      "model": "tfmg:block/winding_machine/block",
+      "y": 180
+    },
+    "facing=south,powered=true": {
+      "model": "tfmg:block/winding_machine/block",
+      "y": 180
+    },
+    "facing=west,powered=false": {
+      "model": "tfmg:block/winding_machine/block",
+      "y": 270
+    },
+    "facing=west,powered=true": {
+      "model": "tfmg:block/winding_machine/block",
+      "y": 270
+    }
+  }
+}

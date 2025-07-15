@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "W": {
+      "item": "tfmg:fireproof_bricks"
+    }
+  },
+  "pattern": [
+    "   ",
+    "WWW",
+    "WWW"
+  ],
+  "result": {
+    "count": 6,
+    "id": "tfmg:fireproof_brick_reinforcement"
+  }
+}

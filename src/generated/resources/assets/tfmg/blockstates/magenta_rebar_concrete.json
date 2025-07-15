@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tfmg:block/magenta_rebar_concrete"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:storage_blocks/steel"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "pattern": [
+    "P",
+    "B",
+    " "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:large_pumpjack_hammer_head"
+  }
+}

@@ -1,0 +1,260 @@
+{
+
+
+	"OwO": "UwU",
+
+	"item.tfmg.multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.multimeter.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.multimeter.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"item.tfmg.white_multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.white_multimeter.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.white_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.white_multimeter.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.white_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"item.tfmg.light_gray_multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.light_gray_multimeter.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.light_gray_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.light_gray_multimeter.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.light_gray_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"item.tfmg.gray_multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.gray_multimeter.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.gray_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.gray_multimeter.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.gray_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"item.tfmg.black_multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.black_multimeter.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.black_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.black_multimeter.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.black_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"item.tfmg.red_multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.red_multimeter.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.red_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.red_multimeter.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.red_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"item.tfmg.orange_multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.orange_multimeter.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.orange_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.orange_multimeter.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.orange_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"item.tfmg.yellow_multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.yellow_multimeter.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.yellow_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.yellow_multimeter.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.yellow_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"item.tfmg.lime_multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.lime_multimeter.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.lime_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.lime_multimeter.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.lime_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"item.tfmg.green_multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.green_multimeter_.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.green_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.green_multimeter.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.green_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"item.tfmg.light_blue_multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.light_blue_multimeter.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.light_blue_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.light_blue_multimeter.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.light_blue_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"item.tfmg.cyan_multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.cyan_multimeter.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.cyan_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.cyan_multimeter.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.cyan_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"item.tfmg.blue_multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.blue_multimeter.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.blue_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.blue_multimeter.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.blue_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"item.tfmg.purple_multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.purple_multimeter.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.purple_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.purple_multimeter.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.purple_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"item.tfmg.magenta_multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.magenta_multimeter.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.magenta_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.magenta_multimeter.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.magenta_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"item.tfmg.pink_multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.pink_multimeter.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.pink_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.pink_multimeter.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.pink_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"item.tfmg.brown_multimeter.tooltip.summary": "Shows data about an electrical block and its network",
+	"item.tfmg.brown_multimeter.tooltip.condition1": "When looking at an electric component NOTE: It does not work while wearing Engineers Goggles",
+	"item.tfmg.brown_multimeter.tooltip.behaviour1": "Shows resistance, voltage, current and power in ohms, volts, amperes and kilowatts respectively along with the components group",
+	"item.tfmg.brown_multimeter_cannon.tooltip.condition2": "When looking at an electric component while crouching",
+	"item.tfmg.brown_multimeter.tooltip.behaviour2": "Additionally to the previously mentioned stats the multimeter shows the networks total power generation and consumption",
+
+	"block.tfmg.firebox.tooltip.summary": "Heats machinery when fuel is pumped inside",
+	"block.tfmg.firebox.tooltip.condition1": "When filled with lpg, butane, diesel, propane, naphta or kerosene with carbon dioxide being pumped out",
+	"block.tfmg.firebox.tooltip.behaviour1": "Heats machinery above it acting as a blaze burner",
+
+	"block.tfmg.winding_machine.tooltip.summary": "Changes the amount of turns on spools and the resistance on resistors",
+	"block.tfmg.winding_machine.tooltip.behaviour1": "Right click with your desired item (Electromagnetic Coil or Resistor) and then right click with either a Copper spool for Coils and an Aluminium one for resistors. Interact with it to set the amount of turns/ohms and power with rotation. Use the Engineers goggles to see when your winding is finished.",
+
+	"block.tfmg.surface_scanner.tooltip.summary": "Helps to find chunks with oil",
+	"block.tfmg.surface_scanner.tooltip.condition1": "When powered from below with a Machine Input",
+	"block.tfmg.surface_scanner.tooltip.behaviour1": "The machines top 5x5 grid shows the surrounding chunks with its chunk in the center, the chunks that have atleast 1 oil deposit in them should glow. If the surface does not start to glow within a few seconds then it is likely that there are no oil deposits nearby. Chunks can be seen ingame with F3+G",
+
+	"block.tfmg.casting_basin.tooltip.summary": "Casts ingots",
+	"block.tfmg.casting_basin.tooltip.condition1": "When supplied with molten steel",
+	"block.tfmg.casting_basin.tooltip.behaviour1": "Creates steel ingots which must have a sufficent output as the internal storage of the basin is limited",
+
+	"block.tfmg.neon_tube.tooltip.summary": "Glows",
+	"block.tfmg.neon_tube.tooltip.condition1": "When provided with power",
+	"block.tfmg.neon_tube.tooltip.behaviour1": "Glows relative to the amount of power its receiving",
+	"block.tfmg.neon_tube.tooltip.condition2": "When interacted with a dye",
+	"block.tfmg.neon_tube.tooltip.behaviour2": "Changes color to the color of the light when glowing",
+	"block.tfmg.neon_tube.tooltip.condition3": "When interacted with a Wrench",
+	"block.tfmg.neon_tube.tooltip.behaviour3": "Changes shape providing a space to power the tube",
+
+	"block.tfmg.light_bulb.tooltip.summary": "Glows",
+	"block.tfmg.light_bulb.tooltip.condition1": "When provided with power",
+	"block.tfmg.light_bulb.tooltip.behaviour1": "Glows relative to the amount of power its receiving",
+	"block.tfmg.light_bulb.tooltip.condition2": "When interacted with a dye",
+	"block.tfmg.light_bulb.tooltip.behaviour2": "Changes color to the color of the light when glowing",
+
+	"block.tfmg.circular_light.tooltip.summary": "Glows",
+	"block.tfmg.circular_light.tooltip.condition1": "When provided with power",
+	"block.tfmg.circular_light.tooltip.behaviour1": "Glows relative to the amount of power its receiving",
+	"block.tfmg.circular_light.tooltip.condition2": "When interacted with a dye",
+	"block.tfmg.circular_light.tooltip.behaviour2": "Changes color to the color of the light when glowing",
+
+	"block.tfmg.modern_light.tooltip.summary": "Glows",
+	"block.tfmg.modern_light.tooltip.condition1": "When provided with power",
+	"block.tfmg.modern_light.tooltip.behaviour1": "Glows relative to the amount of power its receiving",
+	"block.tfmg.modern_light.tooltip.condition2": "When interacted with a dye",
+	"block.tfmg.modern_light.tooltip.behaviour2": "Changes color to the color of the light when glowing",
+
+	"block.tfmg.aluminum_lamp.tooltip.summary": "Glows",
+	"block.tfmg.aluminum_lamp.tooltip.condition1": "When provided with power",
+	"block.tfmg.aluminum_lamp.tooltip.behaviour1": "Glows relative to the amount of power its receiving",
+	"block.tfmg.aluminum_lamp.tooltip.condition2": "When interacted with a dye",
+	"block.tfmg.aluminum_lamp.tooltip.behaviour2": "Changes color to the color of the light when glowing",
+
+	"item.tfmg.oil_can.tooltip.summary": "Adds lubrication oil to engines",
+	"item.tfmg.oil_can.tooltip.condition1": "When Right Clicking a tank with lubrication oil inside",
+	"item.tfmg.oil_can.tooltip.behaviour1": "Fills the can with lubrication oil",
+	"item.tfmg.oil_can.tooltip.condition2": "When Right Clicking an engine",
+	"item.tfmg.oil_can.tooltip.behaviour2": "Fills the engine with lubrication oil",
+
+	"block.tfmg.cable_connector.tooltip.summary": "Transfers power",
+	"block.tfmg.cable_connector.tooltip.condition1": "When 2 cable insulators are right clicked with a copper/aluminum/constantan spool",
+	"block.tfmg.cable_connector.tooltip.behaviour1": "Created a connection between the 2 insulators transferring power between them",
+
+	"block.tfmg.glass_cable_insulator.tooltip.summary": "Transfers power",
+	"block.tfmg.glass_cable_insulator.tooltip.condition1": "When 2 cable insulators are right clicked with a copper/aluminum/constantan spool",
+	"block.tfmg.glass_cable_insulator.tooltip.behaviour1": "Created a connection between the 2 insulators transferring power between them",
+
+	"block.tfmg.transformer.tooltip.summary": "Changes the voltage in a circuit",
+	"block.tfmg.transformer.tooltip.behaviour1": "Needs 2 electromagnetic coils of different turn amounts that have to be put on the transformer where the output (indicated by a small line of copper) outputs voltage based on the ratio of the 2 coils (for example if the input has a coil with 50 turns and the output has one with a 100 then the voltage is doubled since 100/50 = 2)",
+
+	"block.tfmg.diode.tooltip.summary": "Functions as a one way gateway for power to flow through",
+	"block.tfmg.diode.tooltip.condition1": "When provided with power from its darker side",
+	"block.tfmg.diode.tooltip.behaviour1": "The power will be outputted on its lighter side acting as a one way pathway for power (meaning any power that would be coming from its lighter side would not be outputted on the darker one)",
+
+	"block.tfmg.blast_stove.tooltip.summary": "Heats Air",
+	"block.tfmg.blast_stove.tooltip.behaviour1": "When 3 blast stoves are placed on top of eachother (or in a 3x2 shape) the smallest version of a blast stove is created, to add further internal storage you can add more stove blocks on top which is generally reccomended. A Blast Stove requires 2 things to be pumped in. Air, from the side of the bottom block and Creosote or Furnace gas from the bottom. Carbon dioxide must be pumped out from the side of the bottom block and finally heated air must be pumped out from the machines top.",
+
+	"block.tfmg.resistor.tooltip.summary": "Adds resistance to a network",
+	"block.tfmg.resistor.tooltip.condition1": "When placed on a block within a group",
+	"block.tfmg.resistor.tooltip.behaviour1": "Adds the resistors respective resistance (to see how to change its resistance look at the winding machines tooltip) to whatever electric group its target block is in",
+
+	"block.tfmg.electrical_switch.tooltip.summary": "Lets power through when powered with redstone",
+
+	"block.tfmg.potentiometer.tooltip.summary": "Lets through a only a set amount of voltage",
+	"block.tfmg.potentiometer.tooltip.behaviour1": "Based on what pecentage you set, this machine only lets through a certain amount of voltage outputted by its output (its output can be seen by the arrow like pattern on its top pointing to it)",
+
+	"block.tfmg.fireclay.tooltip.summary": "Spawns in underground veins located in the overworld",
+
+	"item.tfmg.advanced_potato_cannon.tooltip.summary": "Launches _Napalm Potatoes_ at Enemies. Can be powered with _Air_ _Pressure_ from a _Backtank_",
+	"item.tfmg.advanced_potato_cannon.tooltip.condition1": "When R-Clicked",
+	"item.tfmg.advanced_potato_cannon.tooltip.behaviour1": "_Shoots_ a _Napalm Potato_ from your _Inventory_.",
+	"item.tfmg.advanced_potato_cannon.tooltip.condition2": "While wearing Backtank",
+	"item.tfmg.advanced_potato_cannon.tooltip.behaviour2": "_No_ _Durability_ will be used. Instead, _Air_ _pressure_ is drained from the Tank",
+
+	"item.tfmg.flamethrower.tooltip.summary": "Burns  burnable _Gases_ and _Fluids_ to shoot out a burst of flame to burn your Enemies",
+	"item.tfmg.flamethrower.tooltip.condition1": "When R-Clicked",
+	"item.tfmg.flamethrower.tooltip.behaviour1": "_Shoots out Flames_ ",
+	"item.tfmg.flamethrower.tooltip.condition2": "When R-Clicking a Fluid Tank with Gasoline, Diesel, Kerosene, Naphtha, LPG, Molten Slag or Napalm inside",
+	"item.tfmg.flamethrower.tooltip.behaviour2": "The _Fuel_ will be consumed from the tank. _Range_ and _Spread_ change according to your _Fuel_ of choice",
+
+	"item.tfmg.pipebomb.tooltip.summary": "So cool",
+
+	"item.tfmg.screwdriver.tooltip.summary": "Can lock pipes in place",
+	"item.tfmg.screwdriver.tooltip.condition1": "When R-Clicking pipe",
+	"item.tfmg.screwdriver.tooltip.behaviour1": "Locks _Pipe_ in its current rotation allowing for _Pipes_ to be placed next to eachother _Without Connecting_",
+
+	"block.tfmg.polarizer.tooltip.summary": "Makes Magnetis out of Magnetic Ingots",
+	"block.tfmg.polarizer.tooltip.condition1": "When powered",
+	"block.tfmg.polarizer.tooltip.behaviour1": "Will turn a _Magnetic Ingot_ into a _Magnet_ when right clicked with a _Magnetic Ingot_ after a bit of time",
+
+	"item.tfmg.magnetic_alloy_ingot.tooltip.summary": "Striking this with a lightning might do something...",
+
+	"item.tfmg.lithium_blade.tooltip.summary": "Using _Steel Ingot_Lithium Charges_, this Blade is set aflame burning enemies and shooting out Bolts of _Hellfire_",
+	"item.tfmg.lithium_blade.tooltip.condition1": "When R-Clicked when Off",
+	"item.tfmg.lithium_blade.tooltip.behaviour1": "Is set on hellfire, consuming a _Lithium Charge_. Its flame sets enemies on fire for a set amount of time, this fire is renewed even after Enemy extinguishes themself in water ",
+	"item.tfmg.lithium_blade.tooltip.condition2": "When R-Clicking when On",
+	"item.tfmg.lithium_blade.tooltip.behaviour2": "Shoots out several bolts of _Hellfire_ consuming the blades charge",
+
+	"block.tfmg.accumulator.tooltip.summary": "Holds a Large Amount of energy (inserted from bottom) that can be outputted Slowly from the Top",
+
+	"item.tfmg.electrictians_wrench.tooltip.summary": "Changes the electrical group of a component",
+	"item.tfmg.electrictians_wrench.tooltip.condition1": "When R-Clicking electrical block",
+	"item.tfmg.electrictians_wrench.tooltip.behaviour1": "Opens up a menu where you can choose the group of set block. Groups are explained within the generators ponder",
+
+	"block.tfmg.flarestack.tooltip.summary": "Burns unneeded oil products",
+	"block.tfmg.flarestack.tooltip.condition1": "When Pumped burnable Fluids/Gases into from the bottom",
+	"block.tfmg.flarestack.tooltip.behaviour1": "Deletes what is pumped inside",
+
+	"block.tfmg.large_engine.tooltip.summary": "Creates rotation from less refined fuels",
+	"block.tfmg.large_engine.tooltip.behaviour1": "To function it requires air and fuel to be pumped in (Diesel, Kerosene, Naphta, Furnace Gas) and co2 to be pumped out (needs an exhaust) to generate rotation (a shaft needs to be attached similiar to a steam engine)",
+
+	"block.tfmg.simple_large_engine.tooltip.summary": "Creates rotation (less effectively than its regular counterpart) from less refined fuels",
+	"block.tfmg.simple_large_engine.tooltip.behaviour1": "To function it requires air and fuel to be pumped in (Diesel, Kerosene, Naphta, Furnace Gas) and co2 to be pumped out (needs an exhaust) to generate rotation (a shaft needs to be attached similiar to a steam engine)",
+
+	"block.tfmg.engine_controller.tooltip.summary": "Controls the speed and direction of rotation generated by various types of engine",
+	"block.tfmg.engine_controller.tooltip.condition1": "How to link to an engine",
+	"block.tfmg.engine_controller.tooltip.behaviour1": "R-Click the controller with a transmission item and then do the same with the engine.",
+	"block.tfmg.engine_controller.tooltip.condition2": "How to control an engine",
+	"block.tfmg.engine_controller.tooltip.behaviour2": "Look in the Keybinds part of the minecraft settings specifically in the Create: The Factory Must Grow section",
+
+	"block.tfmg.voltmeter.tooltip.summary": "Shows various different values about an electric component",
+	"block.tfmg.voltmeter.tooltip.behaviour1": "To use put this block on an electric block/component. By default it will measure voltage from 0 to 500 volts. To see what its currently measuring look at it with engineers goggles. To choose from various options of what it can measure R-Click with a wrench.",
+
+	"block.tfmg.converter.tooltip.summary": "Converts FE to TFMG energy and vice versa",
+	"block.tfmg.converter.tooltip.behaviour1": "The block has a TFMG input (copper) and an FE one (redstone) by default it converts TFMG energy to FE with a wrench you can make the converter convert FE to TFMG energy. Voltage of the tfmg output may be abjusted by opening a menu on the side of the Converter",
+
+	"block.tfmg.cocrete_hose.tooltip.summary": "Pumps concrete like a hose pulley into rebar blocks. Set concrete dries as rebar concrete",
+
+	"block.tfmg.voltage_observer.tooltip.summary": "Powers redstone when any voltage is detected",
+
+	"item.tfmg.quad_potato_cannon.tooltip.summary": "Launches 4 of your home-grown vegetables at Enemies. Can be powered with _Air_ _Pressure_ from a _Backtank_",
+	"item.tfmg.quad_potato_cannon.tooltip.condition1": "When R-Clicked",
+	"item.tfmg.quad_potato_cannon.tooltip.behaviour1": "_Shoots_ a suitable item from your _Inventory_.",
+	"item.tfmg.quad_potato_cannon.tooltip.condition2": "While wearing Backtank",
+	"item.tfmg.quad_potato_cannon.tooltip.behaviour2": "_No_ _Durability_ will be used. Instead, _Air_ _pressure_ is drained from the Tank"
+
+
+
+}

@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "tfmg:block/constantan_truss",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "tfmg:block/constantan_truss"
+    },
+    "axis=z": {
+      "model": "tfmg:block/constantan_truss",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

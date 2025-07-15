@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "tfmg:block/red_concrete_bottom"
+    },
+    "type=double": {
+      "model": "tfmg:block/red_concrete"
+    },
+    "type=top": {
+      "model": "tfmg:block/red_concrete_top"
+    }
+  }
+}

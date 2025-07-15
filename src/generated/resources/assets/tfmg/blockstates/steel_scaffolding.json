@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "bottom=false": {
+      "model": "tfmg:block/steel_scaffolding"
+    },
+    "bottom=true": {
+      "model": "tfmg:block/steel_scaffolding_horizontal"
+    }
+  }
+}

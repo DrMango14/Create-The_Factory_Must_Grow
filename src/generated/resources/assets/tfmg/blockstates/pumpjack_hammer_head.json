@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfmg:block/pumpjack_hammer_head",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/pumpjack_hammer_head"
+    },
+    "facing=south": {
+      "model": "tfmg:block/pumpjack_hammer_head",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfmg:block/pumpjack_hammer_head",
+      "y": 270
+    }
+  }
+}

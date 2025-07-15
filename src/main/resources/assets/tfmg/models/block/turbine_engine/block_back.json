@@ -1,0 +1,46 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "tfmg:block/engines/turbine_engine",
+		"particle": "tfmg:block/engines/turbine_engine"
+	},
+	"elements": [
+		{
+			"from": [5.3, 0, 5],
+			"to": [11.3, 3, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16.3, 10, 14]},
+			"faces": {
+				"north": {"uv": [9.25, 0, 10, 1.5], "rotation": 90, "texture": "#0"},
+				"east": {"uv": [8.25, 0, 9, 2.25], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [9.25, 0, 10, 1.5], "rotation": 90, "texture": "#0"},
+				"west": {"uv": [8.25, 0, 9, 2.25], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [12.25, 6.25, 13.75, 8.5], "rotation": 180, "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 3, 2],
+			"to": [13, 13, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 23, 16]},
+			"faces": {
+				"north": {"uv": [0, 0, 2.5, 2.5], "texture": "#0"},
+				"east": {"uv": [6.25, 0, 2.75, 2.5], "texture": "#0"},
+				"south": {"uv": [0.5, 3.25, 3, 5.75], "texture": "#0"},
+				"west": {"uv": [2.75, 0, 6.25, 2.5], "texture": "#0"},
+				"up": {"uv": [6.25, 0, 2.75, 2.5], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [2.75, 0, 6.25, 2.5], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"from": [5, 13, 7],
+			"to": [11, 14, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 23, 16]},
+			"faces": {
+				"north": {"uv": [9.75, 0, 10, 1.5], "rotation": 90, "texture": "#0"},
+				"east": {"uv": [9, 2.25, 9.25, 0], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [9.75, 0, 10, 1.5], "rotation": 90, "texture": "#0"},
+				"west": {"uv": [9, 0, 9.25, 2.25], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [6.5, 0, 8, 2.25], "rotation": 180, "texture": "#0"}
+			}
+		}
+	]
+}

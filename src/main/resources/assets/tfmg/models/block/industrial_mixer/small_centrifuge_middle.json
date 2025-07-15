@@ -1,0 +1,20 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"particle": "tfmg:block/centrifuge"
+	},
+	"elements": [
+		{
+			"from": [3, 0, 3],
+			"to": [13, 16, 13],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [10.5, 0, 15.5, 8], "texture": "#particle"},
+				"east": {"uv": [10.5, 0, 15.5, 8], "texture": "#particle"},
+				"south": {"uv": [10.5, 0, 15.5, 8], "texture": "#particle"},
+				"west": {"uv": [10.5, 0, 15.5, 8], "texture": "#particle"}
+			}
+		}
+	]
+}

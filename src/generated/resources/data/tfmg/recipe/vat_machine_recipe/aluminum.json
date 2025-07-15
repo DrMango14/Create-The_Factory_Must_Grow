@@ -1,0 +1,47 @@
+{
+  "type": "create:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "item": "tfmg:bauxite_powder"
+    },
+    {
+      "item": "tfmg:bauxite_powder"
+    },
+    {
+      "item": "tfmg:bauxite_powder"
+    },
+    {
+      "item": "tfmg:bauxite_powder"
+    }
+  ],
+  "machines": [
+    "tfmg:electrode",
+    "tfmg:electrode"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "results": [
+    {
+      "id": "tfmg:aluminum_ingot"
+    },
+    {
+      "chance": 0.5,
+      "count": 4,
+      "id": "tfmg:aluminum_nugget"
+    },
+    {
+      "chance": 0.25,
+      "count": 2,
+      "id": "tfmg:aluminum_nugget"
+    },
+    {
+      "amount": 500,
+      "id": "tfmg:carbon_dioxide"
+    }
+  ]
+}

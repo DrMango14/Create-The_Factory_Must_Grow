@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_orange_concrete": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tfmg:orange_concrete"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tfmg:orange_concrete_wall_from_orange_concrete_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_orange_concrete"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tfmg:orange_concrete_wall_from_orange_concrete_stonecutting"
+    ]
+  }
+}

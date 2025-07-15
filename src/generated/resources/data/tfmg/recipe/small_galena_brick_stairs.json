@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "small_galena_brick_stairs",
+  "key": {
+    "X": {
+      "item": "tfmg:small_galena_bricks"
+    }
+  },
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "result": {
+    "count": 4,
+    "id": "tfmg:small_galena_brick_stairs"
+  }
+}

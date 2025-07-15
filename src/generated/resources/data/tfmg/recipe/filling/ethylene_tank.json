@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "type": "fluid_stack",
+      "amount": 1000,
+      "fluid": "tfmg:ethylene"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:ethylene_bucket"
+    }
+  ]
+}

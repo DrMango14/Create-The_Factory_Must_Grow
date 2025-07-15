@@ -1,0 +1,22 @@
+{
+  "type": "create:coking",
+  "ingredients": [
+    {
+      "item": "minecraft:coal"
+    }
+  ],
+  "processing_time": 1200,
+  "results": [
+    {
+      "id": "tfmg:coal_coke"
+    },
+    {
+      "amount": 1,
+      "id": "tfmg:flowing_creosote"
+    },
+    {
+      "amount": 30,
+      "id": "tfmg:flowing_carbon_dioxide"
+    }
+  ]
+}

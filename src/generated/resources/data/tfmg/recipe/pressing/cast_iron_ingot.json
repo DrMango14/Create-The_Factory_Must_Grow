@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/cast_iron"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:cast_iron_sheet"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "tag": "c:nuggets/brass"
+    }
+  },
+  "pattern": [
+    "N N",
+    "NNN",
+    "N N"
+  ],
+  "result": {
+    "count": 4,
+    "id": "tfmg:brass_truss"
+  }
+}

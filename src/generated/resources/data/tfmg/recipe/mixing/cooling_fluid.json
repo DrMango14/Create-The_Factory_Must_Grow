@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 250,
+      "fluid": "minecraft:water"
+    },
+    {
+      "type": "fluid_stack",
+      "amount": 1000,
+      "fluid": "tfmg:ethylene"
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "id": "tfmg:cooling_fluid"
+    }
+  ]
+}

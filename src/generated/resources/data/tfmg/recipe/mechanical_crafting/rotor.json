@@ -1,0 +1,28 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": false,
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:ingots/aluminum"
+    },
+    "C": {
+      "item": "tfmg:electromagnetic_coil"
+    },
+    "S": {
+      "tag": "c:storage_blocks/steel"
+    }
+  },
+  "pattern": [
+    " CCC ",
+    "CAAAC",
+    "CASAC",
+    "CAAAC",
+    " CCC "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:rotor"
+  },
+  "show_notification": false
+}

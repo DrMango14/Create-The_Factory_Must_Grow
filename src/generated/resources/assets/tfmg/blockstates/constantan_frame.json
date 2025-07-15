@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tfmg:block/constantan_frame/block"
+    }
+  }
+}

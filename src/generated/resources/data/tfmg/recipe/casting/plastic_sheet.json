@@ -1,0 +1,16 @@
+{
+  "type": "create:casting",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 200,
+      "fluid": "tfmg:molten_plastic"
+    }
+  ],
+  "processing_time": 100,
+  "results": [
+    {
+      "id": "tfmg:plastic_sheet"
+    }
+  ]
+}

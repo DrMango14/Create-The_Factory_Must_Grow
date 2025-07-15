@@ -1,0 +1,36 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"0": "tfmg:block/aluminum_lamp_off",
+		"1": "tfmg:block/aluminum_inlet",
+		"particle": "tfmg:block/aluminum_lamp_off"
+	},
+	"elements": [
+		{
+			"from": [3, 0, 3],
+			"to": [13, 2, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 0, 7]},
+			"faces": {
+				"north": {"uv": [3, 12, 13, 14], "texture": "#0"},
+				"east": {"uv": [3, 12, 13, 14], "texture": "#0"},
+				"south": {"uv": [3, 12, 13, 14], "texture": "#0"},
+				"west": {"uv": [3, 12, 13, 14], "texture": "#0"},
+				"up": {"uv": [3, 3, 13, 13], "texture": "#0"},
+				"down": {"uv": [3, 3, 13, 13], "texture": "#1"}
+			}
+		},
+		{
+			"from": [4, 2, 4],
+			"to": [12, 3, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, -1, 7]},
+			"faces": {
+				"north": {"uv": [4, 2, 12, 3], "texture": "#0"},
+				"east": {"uv": [4, 2, 12, 3], "texture": "#0"},
+				"south": {"uv": [4, 2, 12, 3], "texture": "#0"},
+				"west": {"uv": [4, 2, 12, 3], "texture": "#0"},
+				"up": {"uv": [4, 4, 12, 12], "texture": "#0"}
+			}
+		}
+	]
+}

@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "axis=x,concretelogged=false": {
+      "model": "tfmg:block/concrete_encased_electric_post",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,concretelogged=true": {
+      "model": "tfmg:block/concrete_encased_electric_post",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,concretelogged=false": {
+      "model": "tfmg:block/concrete_encased_electric_post"
+    },
+    "axis=y,concretelogged=true": {
+      "model": "tfmg:block/concrete_encased_electric_post"
+    },
+    "axis=z,concretelogged=false": {
+      "model": "tfmg:block/concrete_encased_electric_post",
+      "x": 90,
+      "y": 180
+    },
+    "axis=z,concretelogged=true": {
+      "model": "tfmg:block/concrete_encased_electric_post",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/aluminum"
+    }
+  },
+  "pattern": [
+    "II ",
+    "II ",
+    "II "
+  ],
+  "result": {
+    "count": 3,
+    "id": "tfmg:aluminum_door"
+  }
+}

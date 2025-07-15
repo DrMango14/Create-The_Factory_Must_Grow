@@ -1,0 +1,56 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "c:ingots/steel"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "tfmg:heavy_plate"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "tfmg:unprocessed_heavy_plate"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unprocessed_heavy_plate"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "tfmg:unprocessed_heavy_plate"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unprocessed_heavy_plate"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "tfmg:unprocessed_heavy_plate"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unprocessed_heavy_plate"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "tfmg:unprocessed_heavy_plate"
+  }
+}

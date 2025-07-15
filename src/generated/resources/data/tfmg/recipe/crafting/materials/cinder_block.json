@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "tfmg:cinderblock"
+    },
+    "C": {
+      "item": "tfmg:liquid_concrete_bucket"
+    },
+    "R": {
+      "item": "tfmg:rebar"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "RCR",
+    "BBB"
+  ],
+  "result": {
+    "count": 8,
+    "id": "tfmg:cinder_block"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "tag": "c:nuggets/zinc"
+    }
+  },
+  "pattern": [
+    "N N",
+    "NNN",
+    "N N"
+  ],
+  "result": {
+    "count": 4,
+    "id": "tfmg:zinc_truss"
+  }
+}

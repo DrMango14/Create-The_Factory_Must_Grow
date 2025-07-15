@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:slime_ball"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    }
+  },
+  "pattern": [
+    " W ",
+    " P ",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:unfinished_resistor"
+  }
+}

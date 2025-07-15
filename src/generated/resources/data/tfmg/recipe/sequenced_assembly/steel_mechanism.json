@@ -1,0 +1,122 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "tfmg:heavy_plate"
+  },
+  "loops": 2,
+  "results": [
+    {
+      "chance": 120.0,
+      "id": "tfmg:steel_mechanism"
+    },
+    {
+      "chance": 4.0,
+      "id": "minecraft:compass"
+    },
+    {
+      "chance": 4.0,
+      "id": "tfmg:steel_ingot"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_steel_mechanism"
+        },
+        {
+          "item": "tfmg:steel_cogwheel"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_steel_mechanism"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_steel_mechanism"
+        },
+        {
+          "item": "tfmg:nickel_sheet"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_steel_mechanism"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_steel_mechanism"
+        },
+        {
+          "item": "tfmg:large_steel_cogwheel"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_steel_mechanism"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_steel_mechanism"
+        },
+        {
+          "item": "tfmg:lead_sheet"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_steel_mechanism"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_steel_mechanism"
+        },
+        {
+          "item": "tfmg:screw"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_steel_mechanism"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_steel_mechanism"
+        },
+        {
+          "item": "tfmg:screwdriver"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_steel_mechanism"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "tfmg:unfinished_steel_mechanism"
+  }
+}

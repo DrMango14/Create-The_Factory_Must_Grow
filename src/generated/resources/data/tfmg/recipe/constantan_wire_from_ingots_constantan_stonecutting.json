@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "tag": "c:ingots/constantan"
+  },
+  "result": {
+    "count": 2,
+    "id": "tfmg:constantan_wire"
+  }
+}

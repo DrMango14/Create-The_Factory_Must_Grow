@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tfmg:block/concrete_encased_industrial_pipe/block"
+    }
+  }
+}

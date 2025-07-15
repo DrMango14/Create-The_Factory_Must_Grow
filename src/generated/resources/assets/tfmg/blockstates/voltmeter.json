@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfmg:block/voltmeter/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/voltmeter/block"
+    },
+    "facing=south": {
+      "model": "tfmg:block/voltmeter/block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfmg:block/voltmeter/block",
+      "y": 270
+    }
+  }
+}

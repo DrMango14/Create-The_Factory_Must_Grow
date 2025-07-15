@@ -1,0 +1,8 @@
+{
+  "parent": "tfmg:block/ladder",
+  "textures": {
+    "0": "tfmg:block/ladder_steel_hoop",
+    "1": "tfmg:block/ladder_steel",
+    "particle": "tfmg:block/ladder_steel"
+  }
+}

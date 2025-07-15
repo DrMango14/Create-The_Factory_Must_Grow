@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "tfmg:cinderflourblock"
+    },
+    "C": {
+      "item": "minecraft:nether_wart_block"
+    },
+    "R": {
+      "item": "tfmg:rebar"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "RCR",
+    "BBB"
+  ],
+  "result": {
+    "count": 8,
+    "id": "tfmg:cinderflour_block"
+  }
+}

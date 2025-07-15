@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "tfmg:blue_concrete"
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:blue_concrete_stairs"
+  }
+}

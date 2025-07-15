@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    }
+  },
+  "pattern": [
+    "WWW",
+    " M ",
+    "WWW"
+  ],
+  "result": {
+    "count": 2,
+    "id": "tfmg:heavy_cable_hub"
+  }
+}

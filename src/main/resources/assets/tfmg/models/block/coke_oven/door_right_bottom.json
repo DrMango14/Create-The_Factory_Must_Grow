@@ -1,0 +1,7 @@
+{
+	"parent": "tfmg:block/coke_oven/door_right",
+	"textures": {
+		"0": "tfmg:block/coke_oven/coke_oven_door_bottom",
+		"particle": "tfmg:block/coke_oven/coke_oven_door"
+	}
+}

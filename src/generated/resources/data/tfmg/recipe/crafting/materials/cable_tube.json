@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:wires/copper"
+    },
+    "N": {
+      "tag": "c:nuggets/steel"
+    },
+    "R": {
+      "item": "tfmg:rubber_sheet"
+    }
+  },
+  "pattern": [
+    " N ",
+    "CRC",
+    " N "
+  ],
+  "result": {
+    "count": 8,
+    "id": "tfmg:cable_tube"
+  }
+}

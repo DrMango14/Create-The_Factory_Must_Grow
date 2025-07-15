@@ -1,0 +1,19 @@
+{
+  "type": "create:vat_machine_recipe",
+  "ingredients": [
+    {
+      "item": "tfmg:coated_circuit_board"
+    },
+    {
+      "type": "fluid_stack",
+      "amount": 250,
+      "fluid": "tfmg:sulfuric_acid"
+    }
+  ],
+  "processing_time": 100,
+  "results": [
+    {
+      "id": "tfmg:etched_circuit_board"
+    }
+  ]
+}

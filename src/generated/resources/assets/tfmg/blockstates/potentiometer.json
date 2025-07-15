@@ -1,0 +1,26 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "tfmg:block/potentiometer/block_vertical",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "tfmg:block/potentiometer/block",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "tfmg:block/potentiometer/block",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "tfmg:block/potentiometer/block"
+    },
+    "facing=up": {
+      "model": "tfmg:block/potentiometer/block_vertical"
+    },
+    "facing=west": {
+      "model": "tfmg:block/potentiometer/block",
+      "y": 90
+    }
+  }
+}

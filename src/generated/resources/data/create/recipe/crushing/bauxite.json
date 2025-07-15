@@ -1,0 +1,19 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "tfmg:bauxite"
+    }
+  ],
+  "results": [
+    {
+      "chance": 0.75,
+      "count": 2,
+      "id": "tfmg:bauxite_powder"
+    },
+    {
+      "chance": 0.2,
+      "id": "tfmg:bauxite_powder"
+    }
+  ]
+}

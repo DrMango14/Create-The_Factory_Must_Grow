@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "type": "fluid_stack",
+      "amount": 500,
+      "fluid": "tfmg:napalm"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:napalm_potato"
+    }
+  ]
+}

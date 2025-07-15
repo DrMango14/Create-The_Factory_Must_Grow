@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "tfmg:block/rusted_blast_furnace_reinforcement"
+  }
+}

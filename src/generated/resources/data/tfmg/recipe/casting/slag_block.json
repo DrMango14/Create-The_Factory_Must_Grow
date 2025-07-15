@@ -1,0 +1,16 @@
+{
+  "type": "create:casting",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 20,
+      "fluid": "tfmg:molten_slag"
+    }
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "id": "tfmg:slag_block"
+    }
+  ]
+}

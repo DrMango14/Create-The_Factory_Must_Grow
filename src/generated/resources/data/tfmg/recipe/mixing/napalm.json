@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "type": "fluid_stack",
+      "amount": 1000,
+      "fluid": "tfmg:gasoline"
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "id": "tfmg:napalm"
+    }
+  ]
+}

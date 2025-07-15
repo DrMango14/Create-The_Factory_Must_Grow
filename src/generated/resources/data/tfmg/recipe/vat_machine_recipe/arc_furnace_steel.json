@@ -1,0 +1,38 @@
+{
+  "type": "create:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:firebrick_lined_vat"
+  ],
+  "ingredients": [
+    {
+      "item": "create:crushed_raw_iron"
+    },
+    {
+      "tag": "tfmg:flux"
+    },
+    {
+      "item": "tfmg:coal_coke_dust"
+    }
+  ],
+  "machines": [
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode"
+  ],
+  "min_size": 9,
+  "processing_time": 20,
+  "results": [
+    {
+      "chance": 0.9,
+      "id": "tfmg:coal_coke_dust"
+    },
+    {
+      "amount": 144,
+      "id": "tfmg:molten_steel"
+    },
+    {
+      "amount": 288,
+      "id": "tfmg:molten_slag"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "tfmg:steel_bars"
+    },
+    "F": {
+      "item": "create:propeller"
+    },
+    "P": {
+      "item": "tfmg:aluminum_pipe"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "BFP",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:turbo"
+  }
+}
