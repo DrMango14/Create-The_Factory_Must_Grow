@@ -1077,5 +1077,17 @@
 	"tfmg.ponder.tag.oil_processing": "Нефтепереработкой",
 	"tfmg.ponder.tag.oil_processing.description": "Блоки, применяемые для добычи и переработки нефти",
 	"tfmg.subtitle.diesel_engine_sounds": "Шум дизельного двигателя",
-	"tfmg.subtitle.engine_sounds": "Шум двигателя"
+	"tfmg.subtitle.engine_sounds": "Шум двигателя",
+	"entity.tfmg.dry_ice_flake": "Крошка сухого льда",
+	"item.tfmg.fire_extinguisher": "Огнетушитель",
+	"item.tfmg.fire_extinguisher.tooltip.summary": "Использует углекислый газ для тушения пожаров",
+	"tfmg.ponder.arc_furnace.header": "Arc Furnace",
+	"tfmg.ponder.arc_furnace.text_1": "3 Graphite Electrodes create an Arc Furnace",
+	"tfmg.ponder.electrolysis.header": "Electrolysis",
+	"tfmg.ponder.electrolysis.text_1": "Placing 2 electrode holders with Copper or Zinc Electrodes creates an Electrolyzer",
+	"tfmg.ponder.industrial_mixer.header": "Industrial Mixer",
+	"tfmg.ponder.industrial_mixer.text_1": "The Industrial Mixer is a machine attachment for the Chemical Vat",
+	"tfmg.ponder.industrial_mixer.text_2": "When the Mixer Blade is inserted, the vat becomes a Mixer",
+	"tfmg.ponder.industrial_mixer.text_3": "The Industrial Mixer can also become a Centrifuge",
+	"tfmg.ponder.pumpjack.text_7": "The last step is placing a machine input (which is the power input for the pumpjack) with a pumpjack crank above it"
 }

@@ -1,0 +1,21 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "tfmg:fire_extinguisher"
+    },
+    {
+      "amount": 1000,
+      "fluid": "tfmg:carbon_dioxide",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "tfmg:fire_extinguisher",
+      "nbt": {
+        "fill_level": 500
+      }
+    }
+  ]
+}

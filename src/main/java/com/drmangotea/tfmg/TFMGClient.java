@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg;
 
 import com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon.AdvancedPotatoCannonRenderHandler;
+import com.drmangotea.tfmg.content.items.weapons.fire_extinguisher.FireExtinguisherRenderHandler;
 import com.drmangotea.tfmg.content.items.weapons.flamethrover.FlamethrowerRenderHandler;
 import com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon.QuadPotatoCannonRenderHandler;
 import com.drmangotea.tfmg.ponder.TFMGPonderPlugin;
@@ -22,6 +23,7 @@ public class TFMGClient {
     public static final AdvancedPotatoCannonRenderHandler ADVANCED_POTATO_CANNON_RENDER_HANDLER = new AdvancedPotatoCannonRenderHandler();
 
     public static final FlamethrowerRenderHandler FLAMETHROWER_RENDER_HANDLER = new FlamethrowerRenderHandler();
+    public static final FireExtinguisherRenderHandler FIRE_EXTINGUISHER_RENDER_HANDLER = new FireExtinguisherRenderHandler();
 
     @SuppressWarnings("removal")
     public TFMGClient() {

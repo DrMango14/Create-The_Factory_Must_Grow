@@ -6,3 +6,4 @@
 /.idea/
 /.vscode/
 /build/classes/java/main/
+/src/generated/resources/.cache/

@@ -22,6 +22,7 @@ import com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon.Advanced
 import com.drmangotea.tfmg.content.items.weapons.explosives.pipe_bomb.PipeBombItem;
 import com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades.ThermiteGrenade;
 import com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades.ThermiteGrenadeItem;
+import com.drmangotea.tfmg.content.items.weapons.fire_extinguisher.FireExtinguisherItem;
 import com.drmangotea.tfmg.content.items.weapons.flamethrover.FlamethrowerItem;
 import com.drmangotea.tfmg.content.items.weapons.lithium_blade.LitLithiumBladeItem;
 import com.drmangotea.tfmg.content.items.weapons.lithium_blade.LithiumBladeItem;
@@ -266,6 +267,12 @@ public class TFMGItems {
 
     public static final ItemEntry<FlamethrowerItem> FLAMETHROWER =
             REGISTRATE.item("flamethrower", FlamethrowerItem::new)
+                    .model(AssetLookup.itemModelWithPartials())
+                    .properties(p -> p.stacksTo(1))
+                    .register();
+
+    public static final ItemEntry<FireExtinguisherItem> FIRE_EXTINGUISHER =
+            REGISTRATE.item("fire_extinguisher", FireExtinguisherItem::new)
                     .model(AssetLookup.itemModelWithPartials())
                     .properties(p -> p.stacksTo(1))
                     .register();

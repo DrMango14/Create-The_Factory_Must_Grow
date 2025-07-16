@@ -22,7 +22,6 @@ import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -69,6 +68,9 @@ public class TFMGEntityTypes {
             register("lithium_spark", LithiumSpark::new, () -> LithiumSparkRenderer::new,
                     MobCategory.MISC, 80, 20, true, true, LithiumSpark::build).register();
 
+    public static final EntityEntry<DryIceFlake> DRY_ICE_FLAKE =
+            register("dry_ice_flake", DryIceFlake::new, () -> DryIceFlakeRenderer::new,
+                    MobCategory.MISC, 4, 20, true, true, DryIceFlake::build).register();
 
 
 
