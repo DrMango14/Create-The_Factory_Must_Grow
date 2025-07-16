@@ -1,10 +1,12 @@
 package com.drmangotea.tfmg.base.spark;
 
-import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGEntityTypes;
+import com.drmangotea.tfmg.registry.TFMGMobEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -78,6 +80,31 @@ public class DryIceFlake extends ThrowableProjectile {
         if (!this.level().isClientSide) {
             Entity hitEntity = entityHit.getEntity();
             hitEntity.extinguishFire();
+
+            if (hitEntity.canFreeze()) {
+                // Apply freezing
+                int currentFreeze = hitEntity.getTicksFrozen();
+                int freezeIncrement = 10;
+                int newFreeze = Math.min(currentFreeze + freezeIncrement, hitEntity.getTicksRequiredToFreeze() + 20); // Slightly overfreeze
+                hitEntity.setTicksFrozen(newFreeze);
+
+                // Damage if fully frozen
+                if (newFreeze >= hitEntity.getTicksRequiredToFreeze()) {
+                    hitEntity.hurt(this.damageSources().freeze(), 2.0F);
+                }
+
+                // Slow movement and remove hellfire
+                if (hitEntity instanceof LivingEntity livingEntity) {
+                    livingEntity.addEffect(new MobEffectInstance(
+                            MobEffects.MOVEMENT_SLOWDOWN,
+                            20,
+                            2,
+                            false, false, true
+                    ));
+
+                    livingEntity.removeEffect(TFMGMobEffects.HELLFIRE.get());
+                }
+            }
         }
     }
 
