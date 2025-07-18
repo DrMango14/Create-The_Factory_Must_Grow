@@ -81,6 +81,7 @@ import com.drmangotea.tfmg.content.machinery.misc.concrete_hose.ConcreteHoseRend
 import com.drmangotea.tfmg.content.machinery.misc.exhaust.ExhaustBlockEntity;
 import com.drmangotea.tfmg.content.machinery.misc.firebox.FireboxBlockEntity;
 import com.drmangotea.tfmg.content.machinery.misc.flarestack.FlarestackBlockEntity;
+import com.drmangotea.tfmg.content.machinery.misc.gas_lamp.GasLampBlockEntity;
 import com.drmangotea.tfmg.content.machinery.misc.machine_input.MachineInputBlockEntity;
 import com.drmangotea.tfmg.content.machinery.misc.smokestack.SmokestackBlockEntity;
 import com.drmangotea.tfmg.content.machinery.misc.winding_machine.WindingMachineBlockEntity;
@@ -400,6 +401,11 @@ public class TFMGBlockEntities {
     public static final BlockEntityEntry<FlarestackBlockEntity> FLARESTACK = REGISTRATE
             .blockEntity("flarestack", FlarestackBlockEntity::new)
             .validBlocks(TFMGBlocks.FLARESTACK)
+            .register();
+
+    public static final BlockEntityEntry<GasLampBlockEntity> GAS_LAMP = REGISTRATE
+            .blockEntity("gas_lamp", GasLampBlockEntity::new)
+            .validBlocks(TFMGBlocks.GAS_LAMP)
             .register();
 
     public static final BlockEntityEntry<BracketedKineticBlockEntity> TFMG_COGWHEEL = REGISTRATE

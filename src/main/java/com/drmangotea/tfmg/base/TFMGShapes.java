@@ -136,6 +136,7 @@ public class TFMGShapes {
             PUMPJACK_CRANK = shape(0, 0, 0, 16, 8, 16).build(),
             INDUSTRIAL_PIPE = shape(4, 0, 4, 12, 16, 12).build(),
             FLARESTACK = shape(3, 0, 3, 13, 14, 14).build(),
+            GAS_LAMP = shape(1, 0, 1, 15, 22, 15).build(),
             PUMPJACK_BASE = shape(3, 0, 3, 13, 16, 13).build(),
             TRAFFIC_LIGHT = shape(3, 0, 3, 13, 16, 13).build(),
             REBAR_FLOOR = shape(0, 4, 0, 16, 12, 16)

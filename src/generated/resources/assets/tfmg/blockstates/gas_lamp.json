@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "tfmg:block/gas_lamp/block"
+    },
+    "lit=true": {
+      "model": "tfmg:block/gas_lamp/block_lit"
+    }
+  }
+}

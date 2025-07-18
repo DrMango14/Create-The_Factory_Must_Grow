@@ -204,6 +204,8 @@
   "block.tfmg.fossilstone": "Fossilstone",
   "block.tfmg.galena": "Galena",
   "block.tfmg.galena_pillar": "Galena Pillar",
+  "block.tfmg.gas_lamp": "Gas Lamp",
+  "block.tfmg.gas_lamp.tooltip.summary": "Burns combustible fluids to provide light.",
   "block.tfmg.gasoline": "Gasoline",
   "block.tfmg.generator": "Generator",
   "block.tfmg.glass_aluminum_pipe": "Glass Aluminum Pipe",

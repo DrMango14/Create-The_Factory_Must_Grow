@@ -204,6 +204,8 @@
 	"block.tfmg.fossilstone": "Окаменелость",
 	"block.tfmg.galena": "Галенит",
 	"block.tfmg.galena_pillar": "Галенитовая колонна",
+	"block.tfmg.gas_lamp": "Газовый фонарь",
+	"block.tfmg.gas_lamp.tooltip.summary": "Источник освещения. Потребляет _горючие жидкости и газы_.",
 	"block.tfmg.gasoline": "Бензин",
 	"block.tfmg.generator": "Генератор",
 	"block.tfmg.glass_aluminum_pipe": "Застеклённая алюминиевая жидкостная труба",
