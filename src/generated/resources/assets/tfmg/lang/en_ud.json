@@ -606,6 +606,9 @@
   "create.multimeter.energy_usage": " :ǝbɐs∩ ʎbɹǝuƎ   ",
   "create.multimeter.group": " :dnoɹ⅁   ",
   "create.multimeter.header": ":ɐʇɐᗡ ɹǝʇǝɯıʇןnW",
+  "create.multimeter.network_power_consumption": " :uoıʇdɯnsuoɔ ɹǝʍod ʞɹoʍʇǝN",
+  "create.multimeter.network_power_generation": " :uoıʇɐɹǝuǝb ɹǝʍod ʞɹoʍʇǝN",
+  "create.multimeter.not_enough_power": "¡ᴚƎMOԀ H⅁∩ONƎ ⟘ON",
   "create.multimeter.power_generated": " :pǝʇɐɹǝuǝ⅁ ɹǝʍoԀ   ",
   "create.multimeter.power_percentage": " :ɥʇbuǝɹʇS pıɹ⅁   ",
   "create.multimeter.power_usage": " :ǝbɐs∩ ɹǝʍoԀ   ",
@@ -1078,6 +1081,10 @@
   "tfmg.ponder.tag.metallurgy.description": "ןɐʇǝɯ buıssǝɔoɹd oʇ pǝʇɐןǝɹ sʞɔoןᗺ",
   "tfmg.ponder.tag.oil_processing": "ʎɹǝuıɥɔɐW buıssǝɔoɹԀ ןıO",
   "tfmg.ponder.tag.oil_processing.description": "ןıo buıuıɯ puɐ buıuıɟǝɹ ɹoɟ pǝsn ʞɔoןᗺ",
-  "tfmg.subtitle.diesel_engine_sounds": "spunoS ǝuıbuƎ ןǝsǝıᗡ",
-  "tfmg.subtitle.engine_sounds": "spunoS ǝuıbuƎ"
+  "tfmg.subtitle.diesel_engine_sounds": "spunos ǝuıbuƎ ןǝsǝıᗡ",
+  "tfmg.subtitle.electric_hum": "ɯnɥ ɔıɹʇɔǝןƎ",
+  "tfmg.subtitle.engine_sounds": "spunos ǝuıbuƎ",
+  "tfmg.subtitle.generator_hum": "ɯnɥ ɹoʇɐɹǝuǝ⅁",
+  "tfmg.subtitle.switch_off": "buıuǝdo ɥɔʇıʍS",
+  "tfmg.subtitle.switch_on": "buısoןɔ ɥɔʇıʍS"
 }

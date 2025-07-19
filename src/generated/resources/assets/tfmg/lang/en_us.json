@@ -606,6 +606,9 @@
   "create.multimeter.energy_usage": "   Energy Usage: ",
   "create.multimeter.group": "   Group: ",
   "create.multimeter.header": "Multimeter Data:",
+  "create.multimeter.network_power_consumption": "Network power consumption: ",
+  "create.multimeter.network_power_generation": "Network power generation: ",
+  "create.multimeter.not_enough_power": "NOT ENOUGH POWER!",
   "create.multimeter.power_generated": "   Power Generated: ",
   "create.multimeter.power_percentage": "   Grid Strength: ",
   "create.multimeter.power_usage": "   Power Usage: ",
@@ -1078,6 +1081,10 @@
   "tfmg.ponder.tag.metallurgy.description": "Blocks related to processing metal",
   "tfmg.ponder.tag.oil_processing": "Oil Processing Machinery",
   "tfmg.ponder.tag.oil_processing.description": "Block used for refining and mining oil",
-  "tfmg.subtitle.diesel_engine_sounds": "Diesel Engine Sounds",
-  "tfmg.subtitle.engine_sounds": "Engine Sounds"
+  "tfmg.subtitle.diesel_engine_sounds": "Diesel Engine sounds",
+  "tfmg.subtitle.electric_hum": "Electric hum",
+  "tfmg.subtitle.engine_sounds": "Engine sounds",
+  "tfmg.subtitle.generator_hum": "Generator hum",
+  "tfmg.subtitle.switch_off": "Switch opening",
+  "tfmg.subtitle.switch_on": "Switch closing"
 }

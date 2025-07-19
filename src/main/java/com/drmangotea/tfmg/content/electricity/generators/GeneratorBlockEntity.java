@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.content.electricity.generators;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.KineticElectricBlockEntity;
+import com.drmangotea.tfmg.registry.TFMGSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -31,6 +32,26 @@ public class GeneratorBlockEntity extends KineticElectricBlockEntity  {
         if(data.updateNextTick){
             updateNetwork();
             data.updateNextTick = false;
+        }
+
+        if (level.isClientSide()) {
+            float speed = Math.abs(getSpeed());
+            float minSpeed = TFMGConfigs.common().machines.largeGeneratorMinSpeed.getF();
+
+            // Only play sound if above minimum speed
+            if (speed > minSpeed) {
+                float maxSpeed = 255f; // Max expected speed
+                // Normalize speed between 0-1 range (clamped)
+                float normalizedSpeed = Math.min(1.0f, (speed - minSpeed) / (maxSpeed - minSpeed));
+
+                // Volume scales from 0.1 to 0.5 with speed
+                float volume = 0.1f + (0.4f * normalizedSpeed);
+
+                // Pitch scales from 0.8 to 1.2 with speed (Java clamps below 0.5)
+                float pitch = 0.8f + (0.4f * normalizedSpeed);
+
+                TFMGSoundEvents.GENERATOR_HUM.playAt(level, worldPosition, volume, pitch, false);
+            }
         }
     }
 

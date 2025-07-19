@@ -5,6 +5,7 @@ import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.KineticElectricBlockEntity;
 import com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorBlock.StatorState;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
+import com.drmangotea.tfmg.registry.TFMGSoundEvents;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -57,6 +58,26 @@ public class RotorBlockEntity extends KineticElectricBlockEntity {
             findStators();
             findNextTick = false;
         }
+
+        if (level.isClientSide()) {
+            float speed = Math.abs(visualSpeed.getValue());
+            float minSpeed = TFMGConfigs.common().machines.largeGeneratorMinSpeed.getF();
+
+            // Only play sound if above minimum speed
+            if (speed > minSpeed) {
+                float maxSpeed = 255f; // Max expected speed
+                // Normalize speed between 0-1 range (clamped)
+                float normalizedSpeed = Math.min(1.0f, (speed - minSpeed) / (maxSpeed - minSpeed));
+
+                // Volume scales from 0.1 to 1.0 with speed
+                float volume = 0.1f + (0.9f * normalizedSpeed);
+
+                // Pitch scales from 0.5 to 1.0 with speed (Java clamps below 0.5)
+                float pitch = 0.5f + (0.5f * normalizedSpeed);
+
+                TFMGSoundEvents.GENERATOR_HUM.playAt(level, worldPosition, volume, pitch, false);
+            }
+        }
     }
 
     @Override
@@ -84,9 +105,9 @@ public class RotorBlockEntity extends KineticElectricBlockEntity {
             return 0;
 
         float modifier = TFMGConfigs.common().machines.largeGeneratorModifier.getF();
-        float maxSpeed = TFMGConfigs.common().machines.largeGeneratorMinSpeed.getF();
+        float minSpeed = TFMGConfigs.common().machines.largeGeneratorMinSpeed.getF();
 
-        return (int) Math.max(0, ((Math.abs(getSpeed()) - maxSpeed) * modifier));
+        return (int) Math.max(0, ((Math.abs(getSpeed()) - minSpeed) * modifier));
     }
 
     @Override
