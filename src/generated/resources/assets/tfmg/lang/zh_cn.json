@@ -18,7 +18,7 @@
   "block.tfmg.aluminum_lamp.tooltip.behaviour2": "发光时会变成灯光的颜色",
   "block.tfmg.aluminum_lamp.tooltip.condition1": "当供电时",
   "block.tfmg.aluminum_lamp.tooltip.condition2": "当使用染料交互时",
-  "block.tfmg.aluminum_lamp.tooltip.summary": "发光"
+  "block.tfmg.aluminum_lamp.tooltip.summary": "发光",
   "block.tfmg.aluminum_mechanical_pump": "铝机械泵",
   "block.tfmg.aluminum_pipe": "铝管道",
   "block.tfmg.aluminum_scaffolding": "铝脚手架",
