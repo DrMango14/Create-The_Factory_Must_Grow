@@ -58,7 +58,7 @@ description='''${mod_description}'''
    modId="create"
    mandatory=true
    versionRange="[6.0.6,6.1.0)"
-   ordering="NONE"
+   ordering="AFTER"
    side="BOTH"
 [[dependencies."${mod_id}"]]
    modId="minecraft"
@@ -67,4 +67,3 @@ description='''${mod_description}'''
    versionRange="${minecraft_version_range}"
    ordering="NONE"
    side="BOTH"
-
