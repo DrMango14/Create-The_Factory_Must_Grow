@@ -60,45 +60,60 @@ public class TFMG {
     public TFMG() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        // ===== PHASE 1: CORE SETUP =====
+        LOGGER.info("[TFMG] Initializing core systems...");
         REGISTRATE.registerEventListeners(modEventBus);
+        TFMGConfigs.register(ModLoadingContext.get());
         TFMGRegistries.register();
 
-        TFMGSoundEvents.prepare();
-        TFMGPipes.init();
-        TFMGBlocks.init();
-        TFMGBlockEntities.init();
-        TFMGItems.init();
-        TFMGElectrodes.register();
-        TFMGCableTypes.register();
-        TFMGEntityTypes.init();
-        TFMGPartialModels.init();
-
-        TFMGFluids.init();
-        TFMGMenuTypes.init();
-        TFMGEncasedBlocks.init();
-        TFMGPaletteBlocks.init();
-
-
-
-        TFMGParticleTypes.register(modEventBus);
-        TFMGCreativeTabs.register(modEventBus);
-        TFMGMobEffects.register(modEventBus);
-        TFMGRecipeTypes.register(modEventBus);
-        TFMGColoredFires.register(modEventBus);
-        TFMGFeatures.register(modEventBus);
-        TFMGMountedStorageTypes.register();
-
-        modEventBus.addListener(TFMG::onRegister);
-        TFMGPackets.registerPackets();
-        TFMGConfigs.register(ModLoadingContext.get());
+        // Register event listeners early
+        modEventBus.addListener(this::onRegister);
+        modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::clientSetup);
         modEventBus.addListener(EventPriority.LOWEST, TFMGDatagen::gatherData);
         modEventBus.addListener(TFMGSoundEvents::register);
-        modEventBus.addListener(TFMG::commonSetup);
-        modEventBus.addListener(this::clientSetup);
-        MinecraftForge.EVENT_BUS.register(this);
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> TFMGClient::new);
-        modEventBus.addListener(TFMGCreativeTabs::addCreative);
 
+        // ===== PHASE 2: CONTENT REGISTRATION =====
+        LOGGER.info("[TFMG] Registering content...");
+
+        // Sounds/Particles
+        TFMGSoundEvents.prepare();
+        TFMGParticleTypes.register(modEventBus);
+        TFMGRecipeTypes.register(modEventBus);
+        TFMGMobEffects.register(modEventBus);
+        TFMGColoredFires.register(modEventBus);
+
+        // Block/Item hierarchy
+        TFMGBlocks.init();
+        TFMGItems.init();
+        TFMGEncasedBlocks.init();
+        TFMGPaletteBlocks.init();
+        TFMGBlockEntities.init();
+        TFMGEntityTypes.init();
+        TFMGMenuTypes.init();
+
+        // Fluids after blocks
+        TFMGFluids.init();
+
+        // ===== PHASE 3: SYSTEMS SETUP =====
+        LOGGER.info("[TFMG] Initializing systems...");
+        TFMGPipes.init();
+        TFMGElectrodes.register();
+        TFMGCableTypes.register();
+        TFMGMountedStorageTypes.register();
+        TFMGFeatures.register(modEventBus);
+        TFMGPackets.registerPackets();
+
+        // ===== PHASE 4: CLIENT & CREATIVE =====
+        LOGGER.info("[TFMG] Setting up client...");
+        TFMGPartialModels.init();
+        TFMGCreativeTabs.register(modEventBus);
+        modEventBus.addListener(TFMGCreativeTabs::addCreative);
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> TFMGClient::new);
+
+        // Common event bus registrations
+        MinecraftForge.EVENT_BUS.register(this);
+        LOGGER.info("[TFMG] Initialization complete!");
     }
 
     @SuppressWarnings("removal")
@@ -110,7 +125,7 @@ public class TFMG {
     /**
      * fluid interaction & firebox heating
      */
-    public static void commonSetup(final FMLCommonSetupEvent event) {
+    public void commonSetup(final FMLCommonSetupEvent event) {
         TFMGFluidInteractions.registerFluidInteractions();
 
         event.enqueueWork(() -> {
@@ -120,7 +135,7 @@ public class TFMG {
         });
     }
 
-    public static void onRegister(final RegisterEvent event) {
+    public void onRegister(final RegisterEvent event) {
         TFMGContraptions.prepare();
     }
 

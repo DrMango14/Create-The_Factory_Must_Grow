@@ -21,14 +21,14 @@ public class TFMGEncasedBlocks {
     public static final BlockEntry<TFMGEncasedShaftBlock> STEEL_ENCASED_SHAFT =
             REGISTRATE.block("steel_encased_shaft", p -> new TFMGEncasedShaftBlock(p, TFMGBlocks.STEEL_CASING::get))
                     .transform(TFMGBuilderTransformers.encasedShaft("steel", () -> TFMGSpriteShifts.STEEL_CASING))
-                   // .transform(EncasingRegistry.addVariantTo(AllBlocks.SHAFT))
+                    .transform(EncasingRegistry.addVariantTo(AllBlocks.SHAFT))
                     .transform(axeOrPickaxe())
                     .register();
 
     public static final BlockEntry<TFMGEncasedShaftBlock> HEAVY_CASING_ENCASED_SHAFT =
             REGISTRATE.block("heavy_casing_encased_shaft", p -> new TFMGEncasedShaftBlock(p, TFMGBlocks.HEAVY_MACHINERY_CASING::get))
                     .transform(TFMGBuilderTransformers.encasedShaft("heavy_casing", () -> TFMGSpriteShifts.HEAVY_MACHINERY_CASING))
-                    //.transform(EncasingRegistry.addVariantTo(AllBlocks.SHAFT))
+                    .transform(EncasingRegistry.addVariantTo(AllBlocks.SHAFT))
                     .transform(axeOrPickaxe())
                     .register();
 
