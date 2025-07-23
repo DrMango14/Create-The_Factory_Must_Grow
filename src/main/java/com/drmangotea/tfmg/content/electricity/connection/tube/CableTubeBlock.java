@@ -74,7 +74,7 @@ public class CableTubeBlock extends RotatedPillarBlock implements IBE<CableTubeB
             tickDrying(level, state, TFMGBlocks.CONCRETE_ENCASED_CABLE_TUBE.getDefaultState().setValue(AXIS, state.getValue(AXIS)), pos, randomSource);
 
         if (state.is(TFMGBlocks.ELECTRIC_POST.get()))
-            tickDrying(level, state, TFMGBlocks.CONCRETE_ENCASED_CABLE_TUBE.getDefaultState().setValue(AXIS, state.getValue(AXIS)), pos, randomSource);
+            tickDrying(level, state, TFMGBlocks.CONCRETE_ENCASED_ELECTRIC_POST.getDefaultState().setValue(AXIS, state.getValue(AXIS)), pos, randomSource);
     }
 
 
