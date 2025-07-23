@@ -16,7 +16,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,9 +26,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -125,12 +122,12 @@ public class DiagonalCableBlock extends Block implements SimpleWaterloggedBlock,
                                              Direction primary, Direction secondary) {
         // Flip primary if clicking it
         if (clickedFace == primary) {
-            return currentState.setValue(FACING_PRIMARY, clickedFace);
+            return currentState.setValue(FACING_PRIMARY, clickedFace.getOpposite());
         }
 
         // Flip secondary if clicking it
         if (clickedFace == secondary) {
-            return currentState.setValue(FACING_SECONDARY, clickedFace);
+            return currentState.setValue(FACING_SECONDARY, clickedFace.getOpposite());
         }
 
         // Rotate secondary around primary axis
