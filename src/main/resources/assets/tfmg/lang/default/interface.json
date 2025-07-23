@@ -147,6 +147,9 @@
   "tfmg.keyinfo.transmission_shift_down": "Transmission Shift Down",
 
   "create.multimeter.header": "Multimeter Data:",
+  "create.multimeter.network_power_consumption": "Network power consumption: ",
+  "create.multimeter.network_power_generation": "Network power generation: ",
+  "create.multimeter.not_enough_power": "NOT ENOUGH POWER!",
   "create.multimeter.additional_values": "Additional Values:",
   "create.multimeter.power_usage": "   Power Usage: ",
   "create.multimeter.group": "   Group: ",
@@ -170,8 +173,11 @@
 
 
 
-  "tfmg.subtitle.engine_sounds": "Engine Sounds",
-  "tfmg.subtitle.diesel_engine_sounds": "Diesel Engine Sounds"
-
+  "tfmg.subtitle.engine_sounds": "Engine sounds",
+  "tfmg.subtitle.diesel_engine_sounds": "Diesel Engine sounds",
+  "tfmg.subtitle.electric_hum": "Electric hum",
+  "tfmg.subtitle.generator_hum": "Generator hum",
+  "tfmg.subtitle.switch_on": "Switch closing",
+  "tfmg.subtitle.switch_off": "Switch opening"
 
 }

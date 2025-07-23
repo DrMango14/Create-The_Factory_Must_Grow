@@ -110,6 +110,7 @@
     "tfmg:electric_motor",
     "tfmg:creative_generator",
     "tfmg:accumulator",
+    "tfmg:gas_lamp",
     "tfmg:light_bulb",
     "tfmg:circular_light",
     "tfmg:modern_light",

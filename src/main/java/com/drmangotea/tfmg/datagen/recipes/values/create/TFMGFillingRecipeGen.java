@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.datagen.recipes.values.create;
 
+import com.drmangotea.tfmg.content.items.weapons.fire_extinguisher.FireExtinguisherItem;
 import com.drmangotea.tfmg.datagen.recipes.TFMGProcessingRecipeGen;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGFluids;
@@ -7,6 +8,7 @@ import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.AllRecipeTypes;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.*;
@@ -81,8 +83,20 @@ public class TFMGFillingRecipeGen extends TFMGProcessingRecipeGen {
                     .require(Items.BUCKET)
                     .require(hotAir(), 1000)
                     .output(hotAirTank())
+            ),
+
+            FILLED_FIRE_EXTINGUISHER = create("filled_fire_extinguisher", b -> b
+                    .require(TFMGItems.FIRE_EXTINGUISHER)
+                    .require(carbonDioxide(), 1000)
+                    .output(createFilledExtinguisherStack())
             );
 
+    // Helper method to create the filled extinguisher ItemStack
+    private static ItemStack createFilledExtinguisherStack() {
+        ItemStack stack = new ItemStack(TFMGItems.FIRE_EXTINGUISHER.get());
+        stack.getOrCreateTag().putInt("fill_level", FireExtinguisherItem.DRY_ICE_CAPACITY);
+        return stack;
+    }
 
     public TFMGFillingRecipeGen(PackOutput output) {
         super(output);

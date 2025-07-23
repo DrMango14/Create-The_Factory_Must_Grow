@@ -4,8 +4,6 @@ import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
-
-
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.createmod.catnip.lang.LangBuilder;
@@ -35,441 +33,336 @@ import static com.drmangotea.tfmg.content.machinery.misc.air_intake.AirIntakeBlo
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
 
 public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrenchable {
+    private static final int SMALL_FAN_DIAMETER = 1;
+    private static final int MEDIUM_FAN_DIAMETER = 2;
+    private static final int LARGE_FAN_DIAMETER = 3;
 
-    int diameter = 1;
-
-    boolean isController=false;
-
-    public boolean hasShaft=true;
-
+    int diameter = SMALL_FAN_DIAMETER;
+    boolean isController = false;
+    public boolean hasShaft = true;
     boolean isUsedByController = false;
-
     public BlockPos controller;
-
     public List<AirIntakeBlockEntity> blockEntities = new ArrayList<>();
-
-    public float maxShaftSpeed =0;
-
+    public float maxShaftSpeed = 0;
     public float angle = 0;
     public LerpedFloat visual_angle = LerpedFloat.angular();
 
     protected FluidTank tankInventory;
     protected LazyOptional<IFluidHandler> fluidCapability;
 
-
     public AirIntakeBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
         tankInventory = createInventory();
         fluidCapability = LazyOptional.of(() -> tankInventory);
-
-
     }
 
-    public void tick(){
+    public void tick() {
         super.tick();
 
-    //if(!level.isClientSide) {
-        int production = ((int) maxShaftSpeed * ((diameter * diameter))) / 40;
-        if (tankInventory.getFluidAmount() + production <= tankInventory.getCapacity()) {
-            //tankInventory.fill(new FluidStack(TFMGFluids.AIR.getSource(), production), IFluidHandler.FluidAction.EXECUTE);
-            tankInventory.setFluid(new FluidStack(TFMGFluids.AIR.getSource(), production + tankInventory.getFluidAmount()));
-           // if(controller!=null) {
-           //     ((AirIntakeBlockEntity) level.getBlockEntity(controller)).setChanged();
-           //     ((AirIntakeBlockEntity) level.getBlockEntity(controller)).sendData();
-           // }
-        }
-   // }
-        ////////////////
+        produceAir();
+        updateVisuals();
+        updateBlockState();
+        validateController();
+        updateShaftSpeed();
+        validateMultiblock();
+    }
 
-        if(isUsedByController) {
+    private void produceAir() {
+        int production = ((int) maxShaftSpeed * (diameter * diameter)) / 40;
+        if (tankInventory.getFluidAmount() + production <= tankInventory.getCapacity()) {
+            tankInventory.setFluid(new FluidStack(TFMGFluids.AIR.getSource(), production + tankInventory.getFluidAmount()));
+        }
+
+        if (isUsedByController) {
             refreshCapability();
             sendData();
             setChanged();
         }
+    }
 
-
-        if(diameter == 3){
+    private void updateVisuals() {
+        if (diameter == LARGE_FAN_DIAMETER) {
             visual_angle.chase(angle, 0.1f, LerpedFloat.Chaser.EXP);
             visual_angle.tickChaser();
         }
-
-            angle+=maxShaftSpeed/2;
-
-
+        angle += maxShaftSpeed / 2;
         angle %= 360;
+    }
 
-
-        if(isUsedByController)
-            blockEntities.clear();
-
-
-
-        if(!this.getBlockState().getValue(INVISIBLE)){
-            if(isController||isUsedByController){
-                level.setBlock(this.getBlockPos(),this.getBlockState().setValue(INVISIBLE,true),2);
+    private void updateBlockState() {
+        if (!this.getBlockState().getValue(INVISIBLE)) {
+            if (isController || isUsedByController) {
+                level.setBlock(this.getBlockPos(), this.getBlockState().setValue(INVISIBLE, true), 2);
             }
-
-
         }
-        if(!isController&&!isUsedByController)
-            level.setBlock(this.getBlockPos(),this.getBlockState().setValue(INVISIBLE,false),2);
+        if (!isController && !isUsedByController) {
+            level.setBlock(this.getBlockPos(), this.getBlockState().setValue(INVISIBLE, false), 2);
+        }
+    }
 
-        if(controller == null)
-            controller = this.getBlockPos();
+    private void validateController() {
+        if (controller == null) controller = this.getBlockPos();
+        diameter = getPossibleDiameter();
 
-        diameter =getPossibleDiameter();
-
-        if(controller == this.getBlockPos()) {
-
+        if (controller == this.getBlockPos()) {
             isUsedByController = false;
         } else {
             isUsedByController = true;
             isController = false;
         }
 
-        if(diameter ==1) {
+        if (diameter == SMALL_FAN_DIAMETER) {
             isController = false;
-
         }
 
-        if(!(level.getBlockEntity(controller) instanceof AirIntakeBlockEntity)) {
+        if (!(level.getBlockEntity(controller) instanceof AirIntakeBlockEntity)) {
             isUsedByController = false;
             controller = this.getBlockPos();
-
-        } else {
-
-            if(!(((AirIntakeBlockEntity) level.getBlockEntity(controller)).isController))
-                isUsedByController = false;
+        } else if (!(((AirIntakeBlockEntity) level.getBlockEntity(controller)).isController)) {
+            isUsedByController = false;
         }
-        //else
-        //    if(!(((AirIntakeBlockEntity) level.getBlockEntity(controller)).isController))
-        //        controller = this.getBlockPos();
 
-        if(controller!=null) {
-            if(level.getBlockEntity(controller)!=null)
-                if(((AirIntakeBlockEntity)level.getBlockEntity(controller)).diameter==2) {
-                    int x = Math.abs(this.getBlockPos().getX() - controller.getX());
-                    int y = Math.abs(this.getBlockPos().getY() - controller.getY());
-                    int z = Math.abs(this.getBlockPos().getZ() - controller.getZ());
+        validateControllerDistance();
+    }
 
-                    int distanceFromController = x + y + z;
-                    if (x > 1 || y > 1 || z > 1) {
-                        isUsedByController = false;
-                        controller = this.getBlockPos();
-                    }
-                }
-            if(level.getBlockEntity(controller)!=null)
-            if(((AirIntakeBlockEntity)level.getBlockEntity(controller)).diameter==1) {
+    private void validateControllerDistance() {
+        if (controller == null || level.getBlockEntity(controller) == null) return;
+
+        AirIntakeBlockEntity controllerBE = (AirIntakeBlockEntity) level.getBlockEntity(controller);
+        if (controllerBE.diameter == MEDIUM_FAN_DIAMETER) {
+            int x = Math.abs(this.getBlockPos().getX() - controller.getX());
+            int y = Math.abs(this.getBlockPos().getY() - controller.getY());
+            int z = Math.abs(this.getBlockPos().getZ() - controller.getZ());
+
+            if (x > 1 || y > 1 || z > 1) {
                 isUsedByController = false;
                 controller = this.getBlockPos();
             }
-
+        } else if (controllerBE.diameter == SMALL_FAN_DIAMETER) {
+            isUsedByController = false;
+            controller = this.getBlockPos();
         }
-
-
-
-        ////////////////////////
-
-        if(diameter == 1){
-            maxShaftSpeed = Math.abs(getSpeed());
-
-        }else {
-            maxShaftSpeed = Math.abs(getSpeed());
-            List<Float> speeds = new ArrayList<>();
-//
-            for (AirIntakeBlockEntity be : blockEntities) {
-                speeds.add(Math.abs(be.getSpeed()));
-//
-            }
-//
-            for(float testedSpeed : speeds){
-                if(testedSpeed> maxShaftSpeed)
-                    maxShaftSpeed = testedSpeed;
-            }
-            // maxShaftSpeed = getSpeed();
-        }
-
-
-
-        if(isUsedByController)
-            return;
-
-        if(diameter ==2){
-
-            if(blockEntities.toArray().length!=4)
-                return;
-        }
-        if(diameter ==3){
-            if(blockEntities.toArray().length!=9)
-                return;
-        }
-
-
-
-
     }
+
+    private void updateShaftSpeed() {
+        maxShaftSpeed = Math.abs(getSpeed());
+
+        if (diameter > SMALL_FAN_DIAMETER) {
+            for (AirIntakeBlockEntity be : blockEntities) {
+                float testedSpeed = Math.abs(be.getSpeed());
+                if (testedSpeed > maxShaftSpeed) {
+                    maxShaftSpeed = testedSpeed;
+                }
+            }
+        }
+    }
+
+    private void validateMultiblock() {
+        if (isUsedByController) return;
+
+        if ((diameter == MEDIUM_FAN_DIAMETER && blockEntities.size() != MEDIUM_FAN_DIAMETER * MEDIUM_FAN_DIAMETER)
+                || (diameter == LARGE_FAN_DIAMETER && blockEntities.size() != LARGE_FAN_DIAMETER * LARGE_FAN_DIAMETER)) return;
+    }
+
     @Override
     public void invalidate() {
         super.invalidate();
-
         fluidCapability.invalidate();
     }
 
-    public InteractionResult onWrenched(BlockState state, UseOnContext context){
+    public InteractionResult onWrenched(BlockState state, UseOnContext context) {
         Direction direction = context.getClickedFace();
-
-        if(direction == getBlockState().getValue(FACING).getOpposite()) {
+        if (direction == getBlockState().getValue(FACING).getOpposite()) {
             hasShaft = !hasShaft;
         }
         return InteractionResult.SUCCESS;
     }
 
     public void setController(BlockPos controllerPos) {
-      //  isUsedByController = true;
-        controller  = controllerPos;
-
+        controller = controllerPos;
     }
-
 
     @Nonnull
     @Override
     @SuppressWarnings("removal")
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-
-
-
         if (!fluidCapability.isPresent()) {
             refreshCapability();
             sendData();
             setChanged();
         }
 
-
-
-        if (cap == ForgeCapabilities.FLUID_HANDLER)
-            return fluidCapability.cast();
+        if (cap == ForgeCapabilities.FLUID_HANDLER) return fluidCapability.cast();
         return super.getCapability(cap, side);
     }
 
     private void refreshCapability() {
-
         IFluidHandler handlerForCapability;
 
-        if (controller == null || controller == this.getBlockPos()
-
-        ) {
+        if (controller == null || controller == this.getBlockPos()) {
             handlerForCapability = tankInventory;
-        } else
-        if(((AirIntakeBlockEntity) level.getBlockEntity(controller))!=null) {
+        } else if (level.getBlockEntity(controller) != null) {
             handlerForCapability = ((AirIntakeBlockEntity) level.getBlockEntity(controller)).tankInventory;
-        }else             handlerForCapability = tankInventory;
+        } else {
+            handlerForCapability = tankInventory;
+        }
 
-
-        LazyOptional<IFluidHandler> oldCap = fluidCapability;
         IFluidHandler finalHandlerForCapability = handlerForCapability;
         fluidCapability = LazyOptional.of(() -> finalHandlerForCapability);
-        //oldCap.invalidate();
     }
 
+    public int getPossibleDiameter() {
+        if (controller != this.getBlockPos()) return SMALL_FAN_DIAMETER;
 
+        boolean canBeMedium = checkMediumDiameter();
+        boolean canBeLarge = checkLargeDiameter();
 
-
-
-    public int getPossibleDiameter(){
-
-        if(controller !=this.getBlockPos())
-            return 1;
-
-
-
-        BlockPos checkedPos = this.getBlockPos();
-        Direction direction = this.getBlockState().getValue(FACING);
-
-
-
-        List<BlockPos> checkedPosses = new ArrayList<>();
-        checkedPos = this.getBlockPos();
-
-        boolean canBeMedium = true;
-        for(int x = 0;x < 2; x++){
-            for(int z = 0;z < 2; z++){
-                checkedPosses.add(checkedPos);
-            if(direction.getAxis().isHorizontal()) {
-                checkedPos = checkedPos.above();
-            }else checkedPos = checkedPos.east();
-            }
-            if(direction.getAxis().isHorizontal()) {
-                checkedPos = checkedPos.below(2);
-                checkedPos = checkedPos.relative(direction.getClockWise());
-            } else {
-                checkedPos = checkedPos.west(2);
-                checkedPos = checkedPos.south();
-
-            }
+        if (canBeLarge) {
+            setupMultiblock(LARGE_FAN_DIAMETER);
+            return LARGE_FAN_DIAMETER;
         }
-        List<BlockPos> checkedPossesLarge = new ArrayList<>();
-        checkedPos = this.getBlockPos();
-
-        boolean canBeLarge = true;
-        for(int x = 0;x < 3; x++){
-            for(int z = 0;z < 3; z++){
-                checkedPossesLarge.add(checkedPos);
-                if(direction.getAxis().isHorizontal()) {
-                    checkedPos = checkedPos.above();
-                }else checkedPos = checkedPos.east();
-            }
-            if(direction.getAxis().isHorizontal()) {
-                checkedPos = checkedPos.below(3);
-                checkedPos = checkedPos.relative(direction.getClockWise());
-            } else {
-                checkedPos = checkedPos.west(3);
-                checkedPos = checkedPos.south();
-
-            }
-        }
-        //LARGE
-        for(BlockPos pos : checkedPossesLarge){
-            if(!(level.getBlockEntity(pos) instanceof AirIntakeBlockEntity)) {
-                canBeLarge = false;
-                break;
-            }
-
-            // ((AirIntakeBlockEntity) level.getBlockEntity(pos)).controller = this.getBlockPos();
-            AirIntakeBlockEntity checkedBE = (AirIntakeBlockEntity) level.getBlockEntity(pos);
-
-            //if(checkedBE.diameter<3)
-            //    ((AirIntakeBlockEntity) level.getBlockEntity(pos)).isController = false;
-
-           // if(pos!=this.getBlockPos())
-           //     if(checkedBE.isController) {
-//
-//
-           //         canBeLarge = false;
-           //         break;
-           //     }
-
-
-
-            if(checkedBE.getBlockState().getValue(FACING) != this.getBlockState().getValue(FACING)) {
-                canBeLarge = false;
-                break;
-            }
-
-            //if(pos!=this.getBlockPos())
-            //    ((AirIntakeBlockEntity) level.getBlockEntity(pos)).isUsedByController = true;
-
-
-        }
-        //MEDIUM
-            for(BlockPos pos : checkedPosses){
-                if(!(level.getBlockEntity(pos) instanceof AirIntakeBlockEntity)) {
-                    canBeMedium = false;
-                    break;
-                }
-
-                   // ((AirIntakeBlockEntity) level.getBlockEntity(pos)).controller = this.getBlockPos();
-                AirIntakeBlockEntity checkedBE = (AirIntakeBlockEntity) level.getBlockEntity(pos);
-
-                if(pos!=this.getBlockPos())
-                    if(checkedBE.isController) {
-                        canBeMedium = false;
-                        break;
-                }
-
-
-                if(checkedBE.getBlockState().getValue(FACING) != this.getBlockState().getValue(FACING)) {
-                    canBeMedium = false;
-                    break;
-                }
-
-                //if(pos!=this.getBlockPos())
-                //    ((AirIntakeBlockEntity) level.getBlockEntity(pos)).isUsedByController = true;
-
-
-            }
-
-
-            if(canBeLarge) {
-                this.blockEntities.clear();
-                for(BlockPos pos : checkedPossesLarge) {
-                    //if(((AirIntakeBlockEntity) level.getBlockEntity(pos)).isUsedByController&&((AirIntakeBlockEntity) level.getBlockEntity(pos)).controller!=this.getBlockPos()&&pos!=this.getBlockPos()) {
-                    //    controller = this.getBlockPos();
-                    //    isController = false;
-                    //    return 1;
-                    //}
-
-                    if((((AirIntakeBlockEntity) level.getBlockEntity(pos)).isUsedByController&&((AirIntakeBlockEntity) level.getBlockEntity(pos)).controller!=this.getBlockPos()&&pos!=this.getBlockPos())||isController) {
-
-                        ((AirIntakeBlockEntity) level.getBlockEntity(pos)).isUsedByController = true;
-                        ((AirIntakeBlockEntity) level.getBlockEntity(pos)).isController = false;
-                        ((AirIntakeBlockEntity) level.getBlockEntity(pos)).controller =this.getBlockPos();
-
-                    }
-
-                    ((AirIntakeBlockEntity) level.getBlockEntity(pos)).setController(this.getBlockPos());
-                    this.blockEntities.add((AirIntakeBlockEntity) level.getBlockEntity(pos));
-                }
-
-                controller = this.getBlockPos();
-                isController = true;
-                return 3;
-            }
-
-
-        if(canBeMedium) {
-            this.blockEntities.clear();
-
-
-
-            for(BlockPos pos : checkedPosses) {
-                if(((AirIntakeBlockEntity) level.getBlockEntity(pos)).isUsedByController&&((AirIntakeBlockEntity) level.getBlockEntity(pos)).controller!=this.getBlockPos()&&pos!=this.getBlockPos()) {
-                    controller = this.getBlockPos();
-                    isController = false;
-                    return 1;
-                }
-                ((AirIntakeBlockEntity) level.getBlockEntity(pos)).setController(this.getBlockPos());
-                this.blockEntities.add((AirIntakeBlockEntity) level.getBlockEntity(pos));
-            }
-
-            controller = this.getBlockPos();
-            isController = true;
-            return 2;
+        if (canBeMedium) {
+            setupMultiblock(MEDIUM_FAN_DIAMETER);
+            return MEDIUM_FAN_DIAMETER;
         }
 
         controller = this.getBlockPos();
         isController = false;
-        return 1;
+        return SMALL_FAN_DIAMETER;
     }
+
+    private boolean checkMediumDiameter() {
+        List<BlockPos> checkedPosses = new ArrayList<>();
+        BlockPos checkedPos = this.getBlockPos();
+        Direction direction = this.getBlockState().getValue(FACING);
+
+        for (int x = 0; x < MEDIUM_FAN_DIAMETER; x++) {
+            for (int z = 0; z < MEDIUM_FAN_DIAMETER; z++) {
+                checkedPosses.add(checkedPos);
+                if (direction.getAxis().isHorizontal()) {
+                    checkedPos = checkedPos.above();
+                } else {
+                    checkedPos = checkedPos.east();
+                }
+            }
+            if (direction.getAxis().isHorizontal()) {
+                checkedPos = checkedPos.below(MEDIUM_FAN_DIAMETER);
+                checkedPos = checkedPos.relative(direction.getClockWise());
+            } else {
+                checkedPos = checkedPos.west(MEDIUM_FAN_DIAMETER);
+                checkedPos = checkedPos.south();
+            }
+        }
+
+        for (BlockPos pos : checkedPosses) {
+            if (!(level.getBlockEntity(pos) instanceof AirIntakeBlockEntity)) return false;
+
+            AirIntakeBlockEntity checkedBE = (AirIntakeBlockEntity) level.getBlockEntity(pos);
+            if (pos != this.getBlockPos() && checkedBE.isController) return false;
+            if (checkedBE.getBlockState().getValue(FACING) != this.getBlockState().getValue(FACING)) return false;
+        }
+        return true;
+    }
+
+    private boolean checkLargeDiameter() {
+        List<BlockPos> checkedPosses = new ArrayList<>();
+        BlockPos checkedPos = this.getBlockPos();
+        Direction direction = this.getBlockState().getValue(FACING);
+
+        for (int x = 0; x < LARGE_FAN_DIAMETER; x++) {
+            for (int z = 0; z < LARGE_FAN_DIAMETER; z++) {
+                checkedPosses.add(checkedPos);
+                if (direction.getAxis().isHorizontal()) {
+                    checkedPos = checkedPos.above();
+                } else {
+                    checkedPos = checkedPos.east();
+                }
+            }
+            if (direction.getAxis().isHorizontal()) {
+                checkedPos = checkedPos.below(LARGE_FAN_DIAMETER);
+                checkedPos = checkedPos.relative(direction.getClockWise());
+            } else {
+                checkedPos = checkedPos.west(LARGE_FAN_DIAMETER);
+                checkedPos = checkedPos.south();
+            }
+        }
+
+        for (BlockPos pos : checkedPosses) {
+            if (!(level.getBlockEntity(pos) instanceof AirIntakeBlockEntity)) return false;
+
+            AirIntakeBlockEntity checkedBE = (AirIntakeBlockEntity) level.getBlockEntity(pos);
+            if (checkedBE.getBlockState().getValue(FACING) != this.getBlockState().getValue(FACING)) return false;
+        }
+        return true;
+    }
+
+    private void setupMultiblock(int diameter) {
+        this.blockEntities.clear();
+        List<BlockPos> positions = getMultiblockPositions(diameter);
+
+        for (BlockPos pos : positions) {
+            AirIntakeBlockEntity be = (AirIntakeBlockEntity) level.getBlockEntity(pos);
+            if (be.isUsedByController && be.controller != this.getBlockPos() && pos != this.getBlockPos()) {
+                be.isUsedByController = true;
+                be.isController = false;
+                be.controller = this.getBlockPos();
+            }
+
+            be.setController(this.getBlockPos());
+            this.blockEntities.add(be);
+        }
+
+        controller = this.getBlockPos();
+        isController = true;
+    }
+
+    private List<BlockPos> getMultiblockPositions(int diameter) {
+        List<BlockPos> positions = new ArrayList<>();
+        BlockPos checkedPos = this.getBlockPos();
+        Direction direction = this.getBlockState().getValue(FACING);
+        int size = diameter == MEDIUM_FAN_DIAMETER ? MEDIUM_FAN_DIAMETER : LARGE_FAN_DIAMETER;
+
+        for (int x = 0; x < size; x++) {
+            for (int z = 0; z < size; z++) {
+                positions.add(checkedPos);
+                if (direction.getAxis().isHorizontal()) {
+                    checkedPos = checkedPos.above();
+                } else {
+                    checkedPos = checkedPos.east();
+                }
+            }
+            if (direction.getAxis().isHorizontal()) {
+                checkedPos = checkedPos.below(size);
+                checkedPos = checkedPos.relative(direction.getClockWise());
+            } else {
+                checkedPos = checkedPos.west(size);
+                checkedPos = checkedPos.south();
+            }
+        }
+        return positions;
+    }
+
     @Override
     protected AABB createRenderBoundingBox() {
-
-
         return new AABB(this.getBlockPos()).inflate(3);
     }
+
     @Override
     @SuppressWarnings("removal")
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-
-
-
-        //--Fluid Info--//
         LazyOptional<IFluidHandler> handler = this.getCapability(ForgeCapabilities.FLUID_HANDLER);
         Optional<IFluidHandler> resolve = handler.resolve();
-        if (!resolve.isPresent())
-            return false;
+        if (!resolve.isPresent()) return false;
 
         IFluidHandler tank = resolve.get();
-        if (tank.getTanks() == 0)
-            return false;
+        if (tank.getTanks() == 0) return false;
 
         LangBuilder mb = CreateLang.translate("generic.unit.millibuckets");
-
-
         boolean isEmpty = true;
+
         for (int i = 0; i < tank.getTanks(); i++) {
             FluidStack fluidStack = tank.getFluidInTank(i);
-            if (fluidStack.isEmpty())
-                continue;
+            if (fluidStack.isEmpty()) continue;
 
             CreateLang.fluidName(fluidStack)
                     .style(ChatFormatting.GRAY)
@@ -489,13 +382,11 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
         }
 
         if (tank.getTanks() > 1) {
-            if (isEmpty)
-                tooltip.remove(tooltip.size() - 1);
+            if (isEmpty) tooltip.remove(tooltip.size() - 1);
             return true;
         }
 
-        if (!isEmpty)
-            return true;
+        if (!isEmpty) return true;
 
         CreateLang.translate("gui.goggles.fluid_container.capacity")
                 .add(CreateLang.number(tank.getTankCapacity(0))
@@ -503,57 +394,40 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
                         .style(ChatFormatting.DARK_GREEN))
                 .style(ChatFormatting.DARK_GRAY)
                 .forGoggles(tooltip, 1);
-
-
-
         return true;
     }
+
     protected SmartFluidTank createInventory() {
-        return new SmartFluidTank(8000, this::onFluidStackChanged){
+        return new SmartFluidTank(8000, this::onFluidStackChanged) {
             @Override
             public boolean isFluidValid(FluidStack stack) {
                 return stack.getFluid().isSame(TFMGFluids.AIR.getSource());
             }
-        //    @Override
-        //    public FluidStack drain(FluidStack resource, FluidAction action) {
-        //        return FluidStack.EMPTY;
-        //    }
         };
     }
 
     protected void onFluidStackChanged(FluidStack newFluidStack) {
-            setChanged();
-            sendData();
-           //if(((AirIntakeBlockEntity) level.getBlockEntity(controller))!=null) {
-           //    ((AirIntakeBlockEntity) level.getBlockEntity(controller)).setChanged();
-           //    ((AirIntakeBlockEntity) level.getBlockEntity(controller)).sendData();
-           //}
-
+        setChanged();
+        sendData();
     }
-
 
     @Override
     protected void read(CompoundTag compound, boolean clientPacket) {
         super.read(compound, clientPacket);
-
         diameter = compound.getInt("Diameter");
         isController = compound.getBoolean("IsController");
         isUsedByController = compound.getBoolean("IsUsed");
         hasShaft = compound.getBoolean("HasShaft");
         tankInventory.readFromNBT(compound.getCompound("TankContent"));
-
     }
 
     @Override
     public void write(CompoundTag compound, boolean clientPacket) {
         super.write(compound, clientPacket);
-
-
         compound.putInt("Diameter", diameter);
         compound.putBoolean("IsController", isController);
         compound.putBoolean("IsUsed", isUsedByController);
         compound.putBoolean("HasShaft", hasShaft);
         compound.put("TankContent", tankInventory.writeToNBT(new CompoundTag()));
-
     }
 }

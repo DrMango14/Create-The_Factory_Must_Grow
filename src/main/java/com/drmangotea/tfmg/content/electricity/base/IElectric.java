@@ -133,7 +133,7 @@ public interface IElectric {
                 .forGoggles(tooltip);
 
         if (getData().notEnoughtPower) {
-            CreateLang.text("NOT ENOUGHT POWER")
+            CreateLang.translate("multimeter.not_enough_power")
                     .color(Color.RED)
                     .forGoggles(tooltip, 1);
 
@@ -186,11 +186,13 @@ public interface IElectric {
             CreateLang.text("----------------------------")
                     .style(ChatFormatting.WHITE)
                     .forGoggles(tooltip);
-            CreateLang.text("Network Power Generation: " + TFMGUtils.formatUnits(getNetworkPowerGeneration(), "W"))
+            CreateLang.translate("multimeter.network_power_generation")
+                    .add(Component.literal(TFMGUtils.formatUnits(getNetworkPowerGeneration(), "W")))
                     .color(0xcc4b74)
                     .forGoggles(tooltip, 1);
 
-            CreateLang.text("Network Power Consumption: " + TFMGUtils.formatUnits(getNetworkPowerUsage(), "W"))
+            CreateLang.translate("multimeter.network_power_consumption")
+                    .add(Component.literal(TFMGUtils.formatUnits(getNetworkPowerUsage(), "W")))
                     .color(0xcc4b74)
                     .forGoggles(tooltip, 1);
 

@@ -44,18 +44,41 @@ public class TFMGSoundEvents {
 
     public static final TFMGSoundEvents.SoundEntry
 
-
-            ENGINE = create("engine")
+    ENGINE = create("engine")
             .subtitle("Engine Sounds")
             .category(SoundSource.BLOCKS)
             .attenuationDistance(10)
             .build(),
 
-            DIESEL_ENGINE = create("diesel_engine")
-                    .subtitle("Diesel Engine Sounds")
-                    .category(SoundSource.BLOCKS)
-                    .attenuationDistance(10)
-                    .build();
+    DIESEL_ENGINE = create("diesel_engine")
+            .subtitle("Diesel Engine Sounds")
+            .category(SoundSource.BLOCKS)
+            .attenuationDistance(10)
+            .build(),
+
+    ELECTRIC_HUM = create("electric_hum")
+            .subtitle("Electric hum")
+            .category(SoundSource.BLOCKS)
+            .attenuationDistance(10)
+            .build(),
+
+    GENERATOR_HUM = create("generator_hum")
+            .subtitle("Generator hum")
+            .category(SoundSource.BLOCKS)
+            .attenuationDistance(10)
+            .build(),
+
+    SWITCH_ON = create("switch_on")
+            .subtitle("Switch closing")
+            .category(SoundSource.BLOCKS)
+            .attenuationDistance(10)
+            .build(),
+
+    SWITCH_OFF = create("switch_off")
+            .subtitle("Switch opening")
+            .category(SoundSource.BLOCKS)
+            .attenuationDistance(10)
+            .build();
 
     private static SoundEntryBuilder create(String name) {
         return create(TFMG.asResource(name));

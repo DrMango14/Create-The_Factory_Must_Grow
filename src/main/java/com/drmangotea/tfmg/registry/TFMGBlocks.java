@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.registry;
 
 
+import com.drmangotea.tfmg.TFMGClient;
 import com.drmangotea.tfmg.base.*;
 import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
 import com.drmangotea.tfmg.base.blocks.TFMGVanillaBlockStates;
@@ -35,6 +36,7 @@ import com.drmangotea.tfmg.content.electricity.generators.creative_generator.Cre
 import com.drmangotea.tfmg.content.electricity.generators.large_generator.RotorBlock;
 import com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorBlock;
 import com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorGenerator;
+import com.drmangotea.tfmg.content.machinery.misc.gas_lamp.GasLampBlock;
 import com.drmangotea.tfmg.content.electricity.lights.LampGenerator;
 import com.drmangotea.tfmg.content.electricity.lights.LightBulbBlock;
 import com.drmangotea.tfmg.content.electricity.lights.neon_tube.NeonTubeBlock;
@@ -49,7 +51,6 @@ import com.drmangotea.tfmg.content.electricity.utilities.diode.EncasedDiodeBlock
 import com.drmangotea.tfmg.content.electricity.utilities.electric_motor.ElectricMotorBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_pump.ElectricPumpBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_switch.ElectricSwitchBlock;
-import com.drmangotea.tfmg.content.electricity.utilities.fuse_block.FuseBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.potentiometer.PotentiometerBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.potentiometer.EncasedPotentiometerBlock;
@@ -90,6 +91,7 @@ import com.drmangotea.tfmg.content.machinery.misc.exhaust.ExhaustBlock;
 import com.drmangotea.tfmg.content.machinery.misc.firebox.FireboxBlock;
 import com.drmangotea.tfmg.content.machinery.misc.flarestack.FlarestackBlock;
 import com.drmangotea.tfmg.content.machinery.misc.flarestack.FlarestackGenerator;
+import com.drmangotea.tfmg.content.machinery.misc.gas_lamp.GasLampGenerator;
 import com.drmangotea.tfmg.content.machinery.misc.machine_input.MachineInputBlock;
 import com.drmangotea.tfmg.content.machinery.misc.smokestack.SmokestackBlock;
 import com.drmangotea.tfmg.content.machinery.misc.smokestack.SmokestackGenerator;
@@ -114,7 +116,6 @@ import com.drmangotea.tfmg.content.machinery.vat.base.VatItem;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatModel;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.ElectrodeHolderBlock;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerBlock;
-import com.simibubi.create.AllMountedStorageTypes;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.content.contraptions.bearing.StabilizedBearingMovementBehaviour;
@@ -148,6 +149,7 @@ import net.minecraftforge.common.Tags;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 import static com.drmangotea.tfmg.TFMG.REGISTRATE;
 import static com.drmangotea.tfmg.base.TFMGBuilderTransformers.*;
@@ -1064,7 +1066,21 @@ public class TFMGBlocks {
                     .item(AccumulatorItem::new)
                     .build()
                     .register();
-    ;
+
+    public static final BlockEntry<GasLampBlock> GAS_LAMP =
+            REGISTRATE.block("gas_lamp", GasLampBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .properties(p -> p
+                            .lightLevel(s -> s.getValue(GasLampBlock.LIT) ? 15 : 0)
+                            .noOcclusion())
+                    .blockstate(new GasLampGenerator()::generate)
+                    .transform(pickaxeOnly())
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
     public static final BlockEntry<LightBulbBlock> LIGHT_BULB =
             REGISTRATE.block("light_bulb", p -> new LightBulbBlock(p, TFMGBlockEntities.LIGHT_BULB, TFMGShapes.LIGHT_BULB))
                     .initialProperties(() -> Blocks.IRON_BLOCK)

@@ -1,7 +1,8 @@
 package com.drmangotea.tfmg.content.electricity.utilities.electric_switch;
 
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.utilities.diode.ElectricDiodeBlockEntity;
+import com.drmangotea.tfmg.registry.TFMGSoundEvents;
+import com.simibubi.create.Create;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -41,6 +42,14 @@ public class ElectricSwitchBlockEntity extends ElectricDiodeBlockEntity {
 
         updateInFrontNextTick();
         updateNextTick();
+
+        if (level.isClientSide()) {
+
+            if (signal == 0)
+                TFMGSoundEvents.SWITCH_OFF.playAt(level, worldPosition, 0.8f + Create.RANDOM.nextFloat() * 0.4f, 0.8f + Create.RANDOM.nextFloat() * 0.4f, false);
+            else
+                TFMGSoundEvents.SWITCH_ON.playAt(level, worldPosition, 0.8f + Create.RANDOM.nextFloat() * 0.4f, 0.8f + Create.RANDOM.nextFloat() * 0.4f, false);
+        }
 
     }
 
