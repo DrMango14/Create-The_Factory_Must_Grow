@@ -99,13 +99,17 @@ public class TFMGShapes {
                     .add(3, 11, 3, 13, 16, 13)
                     .add(3, 0, 3, 13, 5, 13)
                     .forDirectional(),
-            DIAGONAL_CABLE_BLOCK_DOWN = shape(3, 3, 11, 13, 13, 16)
-                    .add(3, 11, 3, 13, 16, 13)
-                    .add(4, 4, 5, 12, 11, 12)
+            DIAGONAL_CABLE_BLOCK_DOWN = shape(3, 3, 11, 13, 13, 16) // DOWN conn
+                    .add(3, 11, 3, 13, 16, 13) // EAST conn
+                    .add(4, 4, 5, 12, 11, 12) // Cable box
                     .forDirectional(),
-            DIAGONAL_CABLE_BLOCK_UP = shape(3, 3, 0, 13, 13, 5)
-                    .add(3, 11, 3, 13, 16, 13)
-                    .add(4, 4, 5, 12, 11, 12)
+            DIAGONAL_CABLE_BLOCK_UP = shape(3, 3, 0, 13, 13, 5) // UP conn
+                    .add(3, 11, 3, 13, 16, 13) // EAST conn
+                    .add(4, 4, 5, 12, 11, 12) // Cable box
+                    .forDirectional(),
+            DIAGONAL_CABLE_BLOCK_HORIZONTAL = shape(0, 3, 3, 5, 13, 13) // NORTH conn
+                    .add(3, 11, 3, 13, 16, 13) // EAST conn
+                    .add(4, 4, 5, 12, 11, 12) // Cable box
                     .forDirectional(),
             CASTING_BASIN = shape(0, 0, 0, 16, 8, 16)
                     .add(4, 8, 14, 12, 13, 16)
@@ -144,7 +148,6 @@ public class TFMGShapes {
             FULL = shape(0, 0, 0, 16, 16, 16).build(),
             ELECTRIC_POST = shape(4, 0, 4, 12, 16, 12).build(),
             SLAB = shape(0, 0, 0, 16, 8, 16).build();
-    ;
 
     private static Builder shape(VoxelShape shape) {
         return new Builder(shape);
