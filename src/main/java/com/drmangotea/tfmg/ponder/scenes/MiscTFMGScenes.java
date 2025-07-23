@@ -16,7 +16,11 @@ import net.createmod.ponder.api.scene.Selection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.Vector;
 
 public class MiscTFMGScenes {
 
@@ -457,7 +461,7 @@ public class MiscTFMGScenes {
 
 
         ////
-        Selection pipez = util.select().fromTo(0, 2, 0, 0, 4, 0);
+        Selection pipes = util.select().fromTo(0, 2, 0, 0, 4, 0);
         Selection hammer = util.select().fromTo(3, 1, 2, 3, 3, 2);
         Selection base = util.select().fromTo(0, 1, 2, 0, 1, 2);
         Selection crank = util.select().fromTo(6, 2, 2, 6, 2, 2);
@@ -471,6 +475,10 @@ public class MiscTFMGScenes {
         Selection hammer_head = util.select().fromTo(6, 4, 2, 6, 4, 2);
         Selection hammer_connector = util.select().fromTo(0, 4, 2, 0, 4, 2);
 
+        //Selection hammerGluingSelection = util.select().fromTo(0, 4, 2, 6, 4, 2);
+        //BlockPos hammerGluingCorner1 = util.grid().at(0, 4, 2);
+
+        AABB hammerGluingSelection = new AABB(util.grid().at(0, 4, 2));
 
         ////
         //  scene.scaleSceneView(.4f);
@@ -491,7 +499,7 @@ public class MiscTFMGScenes {
                 .text("First step of mining oil is building industrial pipes from a deposit to the surface");
 
 
-        ElementLink<WorldSectionElement> pipeElement = scene.world().showIndependentSection(pipez, Direction.SOUTH);
+        ElementLink<WorldSectionElement> pipeElement = scene.world().showIndependentSection(pipes, Direction.SOUTH);
         scene.world().moveSection(pipeElement, new Vec3(0d, -4d, 2d), 0);
         scene.idle(25);
         scene.world().hideIndependentSection(pipeElement, Direction.DOWN);
@@ -530,8 +538,18 @@ public class MiscTFMGScenes {
                 .pointAt(util.vector().blockSurface(util.grid().at(3, 3, 2), Direction.WEST))
                 .placeNearTarget();
 
+        scene.idle(55);
 
-        scene.idle(40);
+        scene.overlay().chaseBoundingBoxOutline(PonderPalette.GREEN, hammerGluingSelection, hammerGluingSelection, 1);
+        scene.overlay().chaseBoundingBoxOutline(PonderPalette.GREEN, hammerGluingSelection, hammerGluingSelection.expandTowards(6, 0, 0), 50);
+        scene.overlay().showText(50)
+                .attachKeyFrame()
+                .text("Make sure to Super Glue the parts together")
+                .pointAt(util.vector().blockSurface(util.grid().at(3, 4, 2), Direction.NORTH))
+                .placeNearTarget();
+
+        scene.idle(55);
+
         scene.world().setKineticSpeed(input, 70);
         scene.world().setKineticSpeed(base1, -140);
         scene.world().showIndependentSection(input, Direction.SOUTH);
