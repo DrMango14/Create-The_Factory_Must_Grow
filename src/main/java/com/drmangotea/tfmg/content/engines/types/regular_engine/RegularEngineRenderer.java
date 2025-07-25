@@ -56,10 +56,9 @@ public class RegularEngineRenderer extends EngineRenderer {
     private PartialModel getCylinderModel(RegularEngineBlockEntity be){
 
         return switch (be.type){
-            case I, U, BOXER -> TFMGPartialModels.SMALL_CYLINDER;
+            case I, U, BOXER, TURBINE -> TFMGPartialModels.SMALL_CYLINDER;
             case V, W -> TFMGPartialModels.CYLINDER;
             case RADIAL -> TFMGPartialModels.RADIAL_ENGINE_CYLINDER;
-            case TURBINE -> null;
         };
 
     }

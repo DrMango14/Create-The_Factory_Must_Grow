@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-09T16:04:00.770188	TFMG's Processing Recipes
+// 1.20.1	2025-07-24T14:48:59.5659809	TFMG's Processing Recipes
 ae24d73a2ef5b8059806e660641bcb9dff2a15f4 data/tfmg/recipes/coking/charcoal.json
 9000fbf96dc2c2b822aa4e526b1c8686d5413e5a data/tfmg/recipes/coking/coal.json
 2b33a020ed88511979447005053ceea2b3ff3c08 data/tfmg/recipes/compacting/bitumen.json
@@ -27,6 +27,7 @@ e4b71e1cfabc347dccef6426d722bb6369f018e6 data/tfmg/recipes/distillation/heavy_oi
 60b3c615bddea5ac236ffb51dc48bb60b3946e9b data/tfmg/recipes/filling/air_tank.json
 5953fc8c14d681e64aad3cba2bc9d0e41e35bc7c data/tfmg/recipes/filling/carbon_dioxide_tank.json
 0e2bdbcb9b7b30f5643b0b639d9ea26f232079c2 data/tfmg/recipes/filling/ethylene_tank.json
+1207ba0097bf33e193d0b89fc049edde91614618 data/tfmg/recipes/filling/filled_fire_extinguisher.json
 4772e8177d5c6fcc9771c6d77a0db070ba614106 data/tfmg/recipes/filling/furnace_gas_tank.json
 dcc60da72dd0f818ea6c5d7a29e60aec0c710bab data/tfmg/recipes/filling/hardened_planks.json
 459633e9d11afdbc30f720a6842e61454b4d42dc data/tfmg/recipes/filling/hot_air_tank.json

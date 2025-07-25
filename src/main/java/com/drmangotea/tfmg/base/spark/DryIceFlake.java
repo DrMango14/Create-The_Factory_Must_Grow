@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.base.spark;
 
+import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.registry.TFMGEntityTypes;
 import com.drmangotea.tfmg.registry.TFMGMobEffects;
 import net.minecraft.core.BlockPos;
@@ -16,11 +17,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
+import java.util.List;
+import java.util.stream.Stream;
+
 public class DryIceFlake extends ThrowableProjectile {
+
+
+
     public DryIceFlake(EntityType<? extends DryIceFlake> entityType, Level level) {
         super(entityType, level);
     }
@@ -67,10 +75,22 @@ public class DryIceFlake extends ThrowableProjectile {
             Entity owner = this.getOwner();
             if (!(owner instanceof Mob) || net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level(), this)) {
                 BlockPos hitBlockPos = blockHit.getBlockPos().relative(blockHit.getDirection());
-                BlockState hitBlockState = this.level().getBlockState(hitBlockPos);
-                if (hitBlockState.getBlock() instanceof BaseFireBlock) {
-                    this.level().setBlockAndUpdate(hitBlockPos, Blocks.AIR.defaultBlockState());
-                }
+
+
+                AABB extinguisRadius = new AABB(hitBlockPos);
+                extinguisRadius = extinguisRadius.inflate(TFMGConfigs.common().machines.fireExtinguisherClearRadius.get());
+
+                Stream<BlockPos> positions = BlockPos.betweenClosedStream(extinguisRadius);
+
+                positions.forEach(p->{
+                    BlockState state = level().getBlockState(p);
+
+                    if (state.getBlock() instanceof BaseFireBlock) {
+                        this.level().setBlockAndUpdate(p, Blocks.AIR.defaultBlockState());
+                    }
+                });
+
+
             }
         }
     }
