@@ -5,13 +5,11 @@ import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.foundation.fluid.FluidHelper;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 
 
-import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.animation.LerpedFloat;
-import net.createmod.catnip.lang.LangBuilder;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -29,10 +27,8 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static com.drmangotea.tfmg.content.machinery.misc.air_intake.AirIntakeBlock.INVISIBLE;
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
@@ -83,7 +79,7 @@ public class AirIntakeBlockEntity extends KineticBlockEntity implements IWrencha
         int production = ((int) maxShaftSpeed * ((diameter * diameter))) / 40;
         if (tankInventory.getFluidAmount() + production <= tankInventory.getCapacity()) {
             //tankInventory.fill(new FluidStack(TFMGFluids.AIR.getSource(), production), IFluidHandler.FluidAction.EXECUTE);
-            tankInventory.setFluid(new FluidStack(TFMGFluids.AIR.get(), production + tankInventory.getFluidAmount()));
+            tankInventory.setFluid(new FluidStack(FluidHelper.convertToStill(TFMGFluids.AIR.get()), production + tankInventory.getFluidAmount()));
            // if(controller!=null) {
            //     ((AirIntakeBlockEntity) level.getBlockEntity(controller)).setChanged();
            //     ((AirIntakeBlockEntity) level.getBlockEntity(controller)).sendData();

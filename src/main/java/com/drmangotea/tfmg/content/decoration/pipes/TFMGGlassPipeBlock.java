@@ -13,11 +13,9 @@ import net.createmod.catnip.data.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -25,7 +23,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 
 import java.util.Map;
 
@@ -40,7 +37,7 @@ public class TFMGGlassPipeBlock extends GlassFluidPipeBlock {
 
     @Override
     public ItemRequirement getRequiredItems(BlockState state, BlockEntity te) {
-        return ItemRequirement.of(TFMGPipes.TFMG_PIPES.get(material).get(0).getDefaultState(), te);
+        return ItemRequirement.of(TFMGPipes.PIPES.get(material).getPipe().getDefaultState(), te);
     }
 
    // @Override
@@ -53,8 +50,8 @@ public class TFMGGlassPipeBlock extends GlassFluidPipeBlock {
     public BlockState toRegularPipe(LevelAccessor world, BlockPos pos, BlockState state) {
         Direction side = Direction.get(Direction.AxisDirection.POSITIVE, state.getValue(AXIS));
         Map<Direction, BooleanProperty> facingToPropertyMap = FluidPipeBlock.PROPERTY_BY_DIRECTION;
-        return ((TFMGPipeBlock) TFMGPipes.TFMG_PIPES.get(material).get(0).get())
-                .updateBlockState(TFMGPipes.TFMG_PIPES.get(material).get(0).getDefaultState()
+        return TFMGPipes.PIPES.get(material).getPipe().get()
+                .updateBlockState(TFMGPipes.PIPES.get(material).getPipe().getDefaultState()
                         .setValue(facingToPropertyMap.get(side), true)
                         .setValue(facingToPropertyMap.get(side.getOpposite()), true), side, null, world, pos);
     }
@@ -65,7 +62,7 @@ public class TFMGGlassPipeBlock extends GlassFluidPipeBlock {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (level.isClientSide)
             return ItemInteractionResult.SUCCESS;
-        BlockState newState = TFMGPipes.TFMG_PIPES.get(material).get(1).getDefaultState();
+        BlockState newState = TFMGPipes.PIPES.get(material).getEncased().getDefaultState();
         for (Direction d : Iterate.directionsInAxis(getAxis(state)))
             newState = newState.setValue(EncasedPipeBlock.FACING_TO_PROPERTY_MAP.get(d), true);
         FluidTransportBehaviour.cacheFlows(level, pos);

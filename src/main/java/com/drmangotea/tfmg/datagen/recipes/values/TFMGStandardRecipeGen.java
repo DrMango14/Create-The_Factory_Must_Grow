@@ -7,11 +7,8 @@ import com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.drmangotea.tfmg.registry.TFMGItems;
-import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -19,13 +16,11 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.decoration.palettes.AllPaletteBlocks;
 import com.simibubi.create.foundation.data.recipe.CompatMetals;
-import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import com.simibubi.create.foundation.data.recipe.Mods;
 import com.simibubi.create.foundation.mixin.accessor.MappedRegistryAccessor;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
-import net.createmod.catnip.platform.CatnipServices;
 import net.createmod.catnip.registry.RegisteredObjectsHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.Advancement;
@@ -169,7 +164,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
             .unlockedBy(TFMGItems.CIRCUIT_BOARD::get)
             .viaShaped(b -> b
                     .define('C', circuitBoard())
-                    .define('P', TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.STEEL).get(3))
+                    .define('P', TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPump())
                     .define('W', copperWire())
                     .define('Q', capacitor())
                     .define('K', TFMGItems.ELECTROMAGNETIC_COIL)
@@ -344,9 +339,9 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("CC ")
                     .pattern("S  ")
                     .pattern("S  ")),
-    /*
+
     /// ////////////
-    STEEL_PIPE = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.STEEL).get(0)).returns(4)
+    STEEL_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPipe()).returns(4)
             .unlockedBy(TFMGItems.STEEL_INGOT::get)
             .viaShaped(b -> b
                     .define('I', steelIngot())
@@ -355,7 +350,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("PIP")
                     .pattern("   ")),
 
-    STEEL_PIPE_VERTICAL = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.STEEL).get(0)).withSuffix("_vertical").returns(4)
+    STEEL_PIPE_VERTICAL = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPipe()).withSuffix("_vertical").returns(4)
             .unlockedBy(TFMGItems.STEEL_INGOT::get)
             .viaShaped(b -> b
                     .define('I', steelIngot())
@@ -364,13 +359,13 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("I")
                     .pattern("P")),
 
-    STEEL_MECHANICAL_PUMP = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.STEEL).get(3))
+    STEEL_MECHANICAL_PUMP = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPump())
             .unlockedBy(TFMGItems.STEEL_INGOT::get)
             .viaShapeless(b -> b
                     .requires(cog())
                     .requires(steelPipe())),
 
-    STEEL_SMART_FLUID_PIPE = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.STEEL).get(4))
+    STEEL_SMART_FLUID_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getSmart())
             .unlockedBy(TFMGItems.STEEL_INGOT::get)
             .viaShaped(b -> b
                     .define('P', electronTube())
@@ -380,13 +375,13 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("S")
                     .pattern("P")),
 
-    STEEL_FLUID_VALVE = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.STEEL).get(5))
+    STEEL_FLUID_VALVE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getValve())
             .unlockedBy(TFMGItems.STEEL_INGOT::get)
             .viaShapeless(b -> b
                     .requires(ironSheet())
                     .requires(steelPipe())),
     /// ////////////
-    ALUMINUM_PIPE = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).get(0)).returns(4)
+    ALUMINUM_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).getPipe()).returns(4)
             .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
             .viaShaped(b -> b
                     .define('I', aluminumIngot())
@@ -395,7 +390,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("PIP")
                     .pattern("   ")),
 
-    ALUMINUM_PIPE_VERTICAL = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).get(0)).withSuffix("_vertical").returns(4)
+    ALUMINUM_PIPE_VERTICAL = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).getPipe()).withSuffix("_vertical").returns(4)
             .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
             .viaShaped(b -> b
                     .define('I', aluminumIngot())
@@ -404,13 +399,13 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("I")
                     .pattern("P")),
 
-    ALUMINUM_MECHANICAL_PUMP = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).get(3))
+    ALUMINUM_MECHANICAL_PUMP = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).getPump())
             .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
             .viaShapeless(b -> b
                     .requires(cog())
                     .requires(aluminumPipe())),
 
-    ALUMINUM_SMART_FLUID_PIPE = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).get(4))
+    ALUMINUM_SMART_FLUID_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).getSmart())
             .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
             .viaShaped(b -> b
                     .define('P', electronTube())
@@ -420,13 +415,13 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("S")
                     .pattern("P")),
 
-    ALUMINUM_FLUID_VALVE = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).get(5))
+    ALUMINUM_FLUID_VALVE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).getValve())
             .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
             .viaShapeless(b -> b
                     .requires(ironSheet())
                     .requires(aluminumPipe())),
     /// ////////////
-    PLASTIC_PIPE = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).get(0)).returns(4)
+    PLASTIC_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).getPipe()).returns(4)
             .unlockedBy(TFMGItems.PLASTIC_SHEET::get)
             .viaShaped(b -> b
                     .define('I', plasticSheet())
@@ -434,7 +429,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("III")
                     .pattern("   ")),
 
-    PLASTIC_PIPE_VERTICAL = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).get(0)).withSuffix("_vertical").returns(4)
+    PLASTIC_PIPE_VERTICAL = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).getPipe()).withSuffix("_vertical").returns(4)
             .unlockedBy(TFMGItems.PLASTIC_SHEET::get)
             .viaShaped(b -> b
                     .define('I', plasticSheet())
@@ -442,13 +437,13 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("I")
                     .pattern("I")),
 
-    PLASTIC_MECHANICAL_PUMP = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).get(3))
+    PLASTIC_MECHANICAL_PUMP = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).getPump())
             .unlockedBy(TFMGItems.PLASTIC_SHEET::get)
             .viaShapeless(b -> b
                     .requires(cog())
                     .requires(plasticPipe())),
 
-    PLASTIC_SMART_FLUID_PIPE = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).get(4))
+    PLASTIC_SMART_FLUID_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).getSmart())
             .unlockedBy(TFMGItems.PLASTIC_SHEET::get)
             .viaShaped(b -> b
                     .define('P', electronTube())
@@ -458,13 +453,13 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("S")
                     .pattern("P")),
 
-    PLASTIC_FLUID_VALVE = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).get(5))
+    PLASTIC_FLUID_VALVE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).getValve())
             .unlockedBy(TFMGItems.PLASTIC_SHEET::get)
             .viaShapeless(b -> b
                     .requires(ironSheet())
                     .requires(plasticPipe())),
     /// ////////////
-    BRASS_PIPE = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.BRASS).get(0)).returns(4)
+    BRASS_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.BRASS).getPipe()).returns(4)
             .unlockedBy(AllItems.BRASS_INGOT::get)
             .viaShaped(b -> b
                     .define('I', brassIngot())
@@ -473,7 +468,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("PIP")
                     .pattern("   ")),
 
-    BRASS_PIPE_VERTICAL = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.BRASS).get(0)).withSuffix("_vertical").returns(4)
+    BRASS_PIPE_VERTICAL = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.BRASS).getPipe()).withSuffix("_vertical").returns(4)
             .unlockedBy(AllItems.BRASS_INGOT::get)
             .viaShaped(b -> b
                     .define('I', brassIngot())
@@ -482,13 +477,13 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("I")
                     .pattern("P")),
 
-    BRASS_MECHANICAL_PUMP = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.BRASS).get(3))
+    BRASS_MECHANICAL_PUMP = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.BRASS).getPump())
             .unlockedBy(AllItems.BRASS_INGOT::get)
             .viaShapeless(b -> b
                     .requires(cog())
                     .requires(brassPipe())),
 
-    BRASS_SMART_FLUID_PIPE = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.BRASS).get(4))
+    BRASS_SMART_FLUID_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.BRASS).getSmart())
             .unlockedBy(AllItems.BRASS_INGOT::get)
             .viaShaped(b -> b
                     .define('P', electronTube())
@@ -498,13 +493,13 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("S")
                     .pattern("P")),
 
-    BRASS_FLUID_VALVE = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.BRASS).get(5))
+    BRASS_FLUID_VALVE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.BRASS).getValve())
             .unlockedBy(AllItems.BRASS_INGOT::get)
             .viaShapeless(b -> b
                     .requires(ironSheet())
                     .requires(brassPipe())),
     /// ////////////
-    CAST_IRON_PIPE = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).get(0)).returns(4)
+    CAST_IRON_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).getPipe()).returns(4)
             .unlockedBy(TFMGItems.CAST_IRON_INGOT::get)
             .viaShaped(b -> b
                     .define('I', castIronIngot())
@@ -513,7 +508,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("PIP")
                     .pattern("   ")),
 
-    CAST_IRON_PIPE_VERTICAL = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).get(0)).withSuffix("_vertical").returns(4)
+    CAST_IRON_PIPE_VERTICAL = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).getPipe()).withSuffix("_vertical").returns(4)
             .unlockedBy(TFMGItems.CAST_IRON_INGOT::get)
             .viaShaped(b -> b
                     .define('I', castIronIngot())
@@ -522,13 +517,13 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("I")
                     .pattern("P")),
 
-    CAST_IRON_MECHANICAL_PUMP = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).get(3))
+    CAST_IRON_MECHANICAL_PUMP = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).getPump())
             .unlockedBy(TFMGItems.CAST_IRON_INGOT::get)
             .viaShapeless(b -> b
                     .requires(cog())
                     .requires(castIronPipe())),
 
-    CAST_IRON_SMART_FLUID_PIPE = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).get(4))
+    CAST_IRON_SMART_FLUID_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).getSmart())
             .unlockedBy(TFMGItems.CAST_IRON_INGOT::get)
             .viaShaped(b -> b
                     .define('P', electronTube())
@@ -538,13 +533,13 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("S")
                     .pattern("P")),
 
-    CAST_IRON_FLUID_VALVE = create(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).get(5))
+    CAST_IRON_FLUID_VALVE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).getValve())
             .unlockedBy(TFMGItems.CAST_IRON_INGOT::get)
             .viaShapeless(b -> b
                     .requires(ironSheet())
                     .requires(castIronPipe())),
     /// ////////////
-    */
+
 
     STEEL_COGWHEEL = create(TFMGBlocks.STEEL_COGWHEEL).returns(4)
             .unlockedBy(() -> TFMGItems.STEEL_INGOT)

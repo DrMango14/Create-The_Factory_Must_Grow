@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.mixin;
 
+import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipeEntry;
 import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipes;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.AllBlocks;
@@ -85,18 +86,12 @@ public class FluidPropagatorMixin {
                 if (tileEntity instanceof PumpBlockEntity) {
 
 
+                    boolean pipesPredicate = TFMGPipes.PIPES.values().stream().map(TFMGPipeEntry::getPump).noneMatch(pump -> pump.has(targetState));
 
-                    if (!AllBlocks.MECHANICAL_PUMP.has(targetState)&&
-                            !TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.STEEL).get(3).has(targetState)&&
-                            !TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).get(3).has(targetState)&&
-                            !TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.BRASS).get(3).has(targetState)&&
-                            !TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).get(3).has(targetState)&&
-                            !TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).get(3).has(targetState)
-
-                            &&
-                            !TFMGBlocks.ELECTRIC_PUMP.has(targetState)
-                            || targetState.getValue(PumpBlock.FACING)
-                            .getAxis() != direction.getAxis())
+                    if (!AllBlocks.MECHANICAL_PUMP.has(targetState) &&
+                            pipesPredicate &&
+                            !TFMGBlocks.ELECTRIC_PUMP.has(targetState)||
+                            targetState.getValue(PumpBlock.FACING).getAxis() != direction.getAxis())
                         continue;
 
 
@@ -110,7 +105,7 @@ public class FluidPropagatorMixin {
                 FluidTransportBehaviour targetPipe = getPipe(world, target);
                 if (targetPipe == null)
                     continue;
-                Integer distance = pair.getFirst();
+                int distance = pair.getFirst();
                 if (distance >= getPumpRange() && !targetPipe.hasAnyPressure())
                     continue;
                 if (targetPipe.canHaveFlowToward(targetState, direction.getOpposite()))

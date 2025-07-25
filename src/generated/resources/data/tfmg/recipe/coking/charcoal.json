@@ -12,11 +12,11 @@
     },
     {
       "amount": 2,
-      "id": "tfmg:flowing_creosote"
+      "id": "tfmg:creosote"
     },
     {
       "amount": 20,
-      "id": "tfmg:flowing_carbon_dioxide"
+      "id": "tfmg:carbon_dioxide"
     }
   ]
 }

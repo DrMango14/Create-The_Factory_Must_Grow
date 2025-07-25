@@ -42,7 +42,7 @@ public class TFMGEncasedPipeBlock extends EncasedPipeBlock {
 
         context.getLevel()
                 .levelEvent(2001, context.getClickedPos(), Block.getId(state));
-        BlockState equivalentPipe = transferSixWayProperties(state, TFMGPipes.TFMG_PIPES.get(material).get(0).getDefaultState());
+        BlockState equivalentPipe = transferSixWayProperties(state, TFMGPipes.PIPES.get(material).getPipe().getDefaultState());
 
         Direction firstFound = Direction.UP;
         for (Direction d : Iterate.directions)
@@ -51,7 +51,7 @@ public class TFMGEncasedPipeBlock extends EncasedPipeBlock {
                 break;
             }
         FluidTransportBehaviour.cacheFlows(world, pos);
-        world.setBlockAndUpdate(pos, ((TFMGPipeBlock)TFMGPipes.TFMG_PIPES.get(material).get(0).get())
+        world.setBlockAndUpdate(pos, TFMGPipes.PIPES.get(material).getPipe().get()
                 .updateBlockState(equivalentPipe, firstFound, null, world, pos));
         FluidTransportBehaviour.loadFlows(world, pos);
         return InteractionResult.SUCCESS;

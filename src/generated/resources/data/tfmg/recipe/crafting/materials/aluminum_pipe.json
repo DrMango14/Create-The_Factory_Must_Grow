@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/aluminum"
+    },
+    "P": {
+      "tag": "c:plates/aluminum"
+    }
+  },
+  "pattern": [
+    "   ",
+    "PIP",
+    "   "
+  ],
+  "result": {
+    "count": 4,
+    "id": "tfmg:aluminum_pipe"
+  }
+}

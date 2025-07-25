@@ -10,10 +10,7 @@ import com.simibubi.create.foundation.block.ProperWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
-public class TFMGFluidValveBlock extends FluidValveBlock
-        implements IAxisPipe, IBE<FluidValveBlockEntity>, ProperWaterloggedBlock {
-
-    public static final BooleanProperty ENABLED = BooleanProperty.create("enabled");
+public class TFMGFluidValveBlock extends FluidValveBlock implements IAxisPipe, IBE<FluidValveBlockEntity>, ProperWaterloggedBlock {
 
     public TFMGFluidValveBlock(Properties properties) {
         super(properties);

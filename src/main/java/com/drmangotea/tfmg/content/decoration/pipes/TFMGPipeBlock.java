@@ -26,11 +26,9 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -146,7 +144,7 @@ public class TFMGPipeBlock extends FluidPipeBlock {
                     .ifPresent($ -> AllAdvancements.GLASS_PIPE.awardTo(context.getPlayer())));
 
             FluidTransportBehaviour.cacheFlows(world, pos);
-            world.setBlockAndUpdate(pos, TFMGPipes.TFMG_PIPES.get(material).get(2).getDefaultState()
+            world.setBlockAndUpdate(pos, TFMGPipes.PIPES.get(material).getGlass().getDefaultState()
                     .setValue(GlassFluidPipeBlock.AXIS, axis)
                     .setValue(BlockStateProperties.WATERLOGGED, state.getValue(BlockStateProperties.WATERLOGGED)));
             FluidTransportBehaviour.loadFlows(world, pos);
@@ -174,7 +172,7 @@ public class TFMGPipeBlock extends FluidPipeBlock {
 
         FluidTransportBehaviour.cacheFlows(world, pos);
         world.setBlockAndUpdate(pos,
-                EncasedPipeBlock.transferSixWayProperties(state, TFMGPipes.TFMG_PIPES.get(material).get(1).getDefaultState()));
+                EncasedPipeBlock.transferSixWayProperties(state, TFMGPipes.PIPES.get(material).getEncased().getDefaultState()));
         FluidTransportBehaviour.loadFlows(world, pos);
         return ItemInteractionResult.SUCCESS;
     }

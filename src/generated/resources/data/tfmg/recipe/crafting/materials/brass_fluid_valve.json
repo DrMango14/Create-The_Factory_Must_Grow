@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:plates/iron"
+    },
+    {
+      "item": "tfmg:brass_pipe"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:brass_fluid_valve"
+  }
+}
