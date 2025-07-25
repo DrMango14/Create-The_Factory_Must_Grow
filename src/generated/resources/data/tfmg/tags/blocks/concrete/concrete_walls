@@ -1,0 +1,21 @@
+{
+  "values": [
+    "tfmg:concrete_walls",
+    "tfmg:white_concrete_walls",
+    "tfmg:blue_concrete_walls",
+    "tfmg:light_blue_concrete_walls",
+    "tfmg:red_concrete_walls",
+    "tfmg:green_concrete_walls",
+    "tfmg:lime_concrete_walls",
+    "tfmg:pink_concrete_walls",
+    "tfmg:magenta_concrete_walls",
+    "tfmg:yellow_concrete_walls",
+    "tfmg:gray_concrete_walls",
+    "tfmg:light_gray_concrete_walls",
+    "tfmg:brown_concrete_walls",
+    "tfmg:cyan_concrete_walls",
+    "tfmg:purple_concrete_walls",
+    "tfmg:orange_concrete_walls",
+    "tfmg:black_concrete_walls"
+  ]
+}
