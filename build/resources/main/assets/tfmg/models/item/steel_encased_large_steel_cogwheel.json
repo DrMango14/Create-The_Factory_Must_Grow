@@ -1,9 +1,0 @@
-{
-  "parent": "tfmg:block/encased_large_cogwheel/item",
-  "textures": {
-    "1": "tfmg:block/steel_casing",
-    "casing": "tfmg:block/steel_casing",
-    "particle": "tfmg:block/steel_casing",
-    "side": "tfmg:block/steel_encased_cogwheel_side_large"
-  }
-}

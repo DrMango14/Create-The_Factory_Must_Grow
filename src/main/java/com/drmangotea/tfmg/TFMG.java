@@ -13,6 +13,7 @@ import com.drmangotea.tfmg.registry.*;
 import com.drmangotea.tfmg.worldgen.TFMGFeatures;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.AllSoundEvents;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
@@ -62,13 +63,15 @@ public class TFMG {
 
 
         TFMGSoundEvents.prepare();
+        TFMGElectrodes.init();
+        TFMGCableTypes.init();
         TFMGCreativeTabs.register(modEventBus);
         TFMGBlocks.init();
+        TFMGPipes.init();
         TFMGBlockEntities.init();
         TFMGItems.init();
         TFMGEntityTypes.init();
         TFMGPartialModels.init();
-        TFMGPipes.init();
         TFMGFluids.init();
         TFMGMenuTypes.init();
         TFMGEncasedBlocks.init();
@@ -126,5 +129,9 @@ public class TFMG {
 
     public static ResourceLocation asResource(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    }
+
+    public static TFMGRegistrate registrate() {
+        return REGISTRATE;
     }
 }

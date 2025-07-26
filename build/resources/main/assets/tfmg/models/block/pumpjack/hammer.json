@@ -1,8 +1,0 @@
-{
-	"parent": "block/block",
-	"ambientocclusion": false,
-	"textures": {
-		"0": "tfmg:block/pumpjack_hammer",
-		"particle": "tfmg:block/steel_block"
-	}
-}

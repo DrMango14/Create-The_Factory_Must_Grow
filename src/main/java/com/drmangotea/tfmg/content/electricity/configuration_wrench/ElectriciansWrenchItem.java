@@ -52,26 +52,22 @@ public class ElectriciansWrenchItem extends Item {
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
+        Player player = context.getPlayer();
 
-        if(!context.getPlayer().isShiftKeyDown()) {
+        if(player != null && !player.isShiftKeyDown()) {
             if (level.getBlockEntity(pos) instanceof IElectric be && be.canBeInGroups()) {
                 be.updateNextTick();
                 be.sendStuff();
-                be.getData().group.id = context.getItemInHand().get(TFMGDataComponents.CONFIGURATION_WRENCH_NUMBER);
+                be.getData().group.id = context.getItemInHand().getOrDefault(TFMGDataComponents.CONFIGURATION_WRENCH_NUMBER, 0);
                 TFMGUtils.playSound(level, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, context.getPlayer());
                 if(be instanceof ElectricMotorBlockEntity kineticBE)
                     kineticBE.delayedUpdate=true;
-
-
                 return InteractionResult.SUCCESS;
             }
             if (level.getBlockEntity(pos) instanceof AbstractEngineBlockEntity be ) {
-
                 be.changeDirection();
                 return InteractionResult.SUCCESS;
-
             }
-
         }
 
 

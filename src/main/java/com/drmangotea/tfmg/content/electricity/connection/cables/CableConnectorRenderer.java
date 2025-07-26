@@ -36,7 +36,7 @@ public class CableConnectorRenderer extends SafeBlockEntityRenderer<CableConnect
 
         for (CableConnection connection : be.connections) {
             if (connection.visible)
-                TFMGUtils.renderWire(be.getLevel(), ms, bufferSource, connection.pos2, connection.pos1, connection.getLength() / 4500, new Color(connection.type.color).getRed(), new Color(connection.type.color).getGreen(), new Color(connection.type.color).getBlue());
+                TFMGUtils.renderWire(be.getLevel(), ms, bufferSource, connection.pos2, connection.pos1, connection.getLength() / 4500, new Color(connection.type.getColor()).getRed(), new Color(connection.type.getColor()).getGreen(), new Color(connection.type.getColor()).getBlue());
         }
 
         //for (BlockPos connection : be.connections) {

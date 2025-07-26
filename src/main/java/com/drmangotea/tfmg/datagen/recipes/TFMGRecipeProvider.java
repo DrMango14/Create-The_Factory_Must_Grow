@@ -70,6 +70,7 @@ public class TFMGRecipeProvider extends RecipeProvider {
         GENERATORS.add(new TFMGMixingRecipeGen(output,registries));
         GENERATORS.add(new TFMGCompactingRecipeGen(output,registries));
         GENERATORS.add(new TFMGCrushingRecipeGen(output,registries));
+        GENERATORS.add(new TFMGDeployingRecipeGen(output,registries));
 
         gen.addProvider(true, new DataProvider() {
 
@@ -373,19 +374,19 @@ public class TFMGRecipeProvider extends RecipeProvider {
             return TFMGBlocks.INDUSTRIAL_PIPE.get();
         }
         public static ItemLike steelPipe() {
-            return TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.STEEL).get(0);
+            return TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPipe();
         }
         public static ItemLike brassPipe() {
-            return TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.BRASS).get(0);
+            return TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.BRASS).getPipe();
         }
         public static ItemLike castIronPipe() {
-            return TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).get(0);
+            return TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).getPipe();
         }
         public static ItemLike aluminumPipe() {
-            return TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).get(0);
+            return TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).getPipe();
         }
         public static ItemLike plasticPipe() {
-            return TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).get(0);
+            return TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).getPipe();
         }
         public static ItemLike magneticIngot() {
             return TFMGItems.MAGNETIC_ALLOY_INGOT.get();

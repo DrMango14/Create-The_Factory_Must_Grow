@@ -486,7 +486,7 @@ public class TFMGBlocks {
                     .onRegister(CreateRegistrate.blockModel(() -> SteelFluidTankModel::fireproofVat))
                     .addLayer(() -> RenderType::cutoutMipped)
                     .item(SteelTankItem::new)
-                    .model(AssetLookup.customBlockItemModel("_", "block_single_window"))
+                    .model(AssetLookup.customBlockItemModel("_", "block_single"))
                     .build()
                     .register();
 

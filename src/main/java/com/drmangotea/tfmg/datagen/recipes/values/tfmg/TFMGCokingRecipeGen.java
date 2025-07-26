@@ -21,15 +21,15 @@ public class TFMGCokingRecipeGen extends CokingRecipeGen {
 
 	COAL_COKE = create(TFMG.asResource("coal"), b ->b
 			.require(Items.COAL)
-			.output(new FluidStack(TFMGFluids.CREOSOTE.get(), 1))
-			.output(new FluidStack(TFMGFluids.CARBON_DIOXIDE.get(), 30))
+			.output(TFMGFluids.CREOSOTE.get(), 1)
+			.output(TFMGFluids.CARBON_DIOXIDE.get(), 30)
 			.output(TFMGItems.COAL_COKE)
 			.duration(20*60)),
 
 	CHARCOAL = create(TFMG.asResource("charcoal"), b ->b
 			.require(log())
-			.output(new FluidStack(TFMGFluids.CREOSOTE.get(), 2))
-			.output(new FluidStack(TFMGFluids.CARBON_DIOXIDE.get(), 20))
+			.output(TFMGFluids.CREOSOTE.get(), 2)
+			.output(TFMGFluids.CARBON_DIOXIDE.get(), 20)
 			.output(Items.CHARCOAL)
 			.duration(20*30));
 ;

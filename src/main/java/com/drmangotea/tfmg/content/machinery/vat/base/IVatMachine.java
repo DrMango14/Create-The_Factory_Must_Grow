@@ -9,6 +9,11 @@ public interface IVatMachine {
     String getOperationId();
 
     /**
+     * checks if this machine can operate
+     */
+    boolean canOperate(VatBlockEntity vat);
+
+    /**
      * operations that cant mix with this machine
      */
     default String[] doesntWorkWith() {

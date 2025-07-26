@@ -103,8 +103,8 @@ public class EngineProperties {
        components.add(Ingredient.of(TFMGBlocks.STEEL_COGWHEEL.asStack()));
        components.add(Ingredient.of(TFMGBlocks.LARGE_STEEL_COGWHEEL.asStack()));
         components.add(Ingredient.of(AllItems.BELT_CONNECTOR.asStack()));
-        components.add(Ingredient.of(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.STEEL).get(0).asStack()));
-        components.add(Ingredient.of(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.STEEL).get(0).asStack()));
+        components.add(Ingredient.of(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPipe().asStack()));
+        components.add(Ingredient.of(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPipe().asStack()));
         components.add(Ingredient.of(TFMGItems.STEEL_MECHANISM.asStack()));
 
         return components;
@@ -115,8 +115,8 @@ public class EngineProperties {
 
         components.add(Ingredient.of(AllBlocks.SHAFT.asStack()));
         components.add(Ingredient.of(TFMGBlocks.STEEL_COGWHEEL.asStack()));
-        components.add(Ingredient.of(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.STEEL).get(0).asStack()));
-        components.add(Ingredient.of(TFMGPipes.TFMG_PIPES.get(TFMGPipes.PipeMaterial.STEEL).get(0).asStack()));
+        components.add(Ingredient.of(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPipe().asStack()));
+        components.add(Ingredient.of(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPipe().asStack()));
         components.add(Ingredient.of(TFMGItems.STEEL_MECHANISM.asStack()));
         components.add(Ingredient.of(TFMGItems.STEEL_MECHANISM.asStack()));
 

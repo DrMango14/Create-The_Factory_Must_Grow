@@ -178,7 +178,7 @@ public class AdvancedPotatoCannonItem extends ProjectileWeaponItem implements Cu
 
 	@Override
 	public Predicate<ItemStack> getAllSupportedProjectiles() {
-		return (Predicate<ItemStack>) TFMGItems.NAPALM_POTATO.asItem();
+		return stack -> stack.is(TFMGItems.NAPALM_POTATO.get());
 	}
 
 	@Override

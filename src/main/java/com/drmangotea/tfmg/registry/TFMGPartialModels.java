@@ -75,6 +75,7 @@ public class TFMGPartialModels {
             SHAFTLESS_LARGE_ALUMINUM_COGHWEEL = block("large_aluminum_cogwheel_shaftless"),
             SHAFTLESS_LARGE_STEEL_COGHWEEL = block("large_steel_cogwheel_shaftless"),
             SPOOL = block("winding_machine/spool"),
+            SPOOL_WIRE = block("winding_machine/spool_wire"),
             COPPER_SPOOL = block("winding_machine/copper_spool"),
             ALUMINUM_SPOOL = block("winding_machine/aluminum_spool"),
             CONSTANTAN_SPOOL = block("winding_machine/constantan_spool"),

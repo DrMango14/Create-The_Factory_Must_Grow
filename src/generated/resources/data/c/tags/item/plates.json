@@ -1,0 +1,9 @@
+{
+  "values": [
+    "tfmg:heavy_plate",
+    "tfmg:aluminum_sheet",
+    "tfmg:nickel_sheet",
+    "tfmg:cast_iron_sheet",
+    "tfmg:lead_sheet"
+  ]
+}

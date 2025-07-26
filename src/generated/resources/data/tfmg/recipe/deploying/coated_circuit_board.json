@@ -1,0 +1,16 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "tfmg:empty_circuit_board"
+    },
+    {
+      "tag": "c:plates/gold"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:coated_circuit_board"
+    }
+  ]
+}

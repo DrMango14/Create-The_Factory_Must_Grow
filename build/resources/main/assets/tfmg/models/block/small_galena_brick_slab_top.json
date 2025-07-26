@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "tfmg:block/palettes/stone_types/small_brick/galena_cut_small_brick",
-    "side": "tfmg:block/palettes/stone_types/small_brick/galena_cut_small_brick",
-    "top": "tfmg:block/palettes/stone_types/small_brick/galena_cut_small_brick"
-  }
-}

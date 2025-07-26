@@ -234,7 +234,7 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
                     tuyereBE = null;
                     return;
                 }
-                if (tuyereBE == null)
+                if (tuyereBE == null && tuyerePos != null)
                     tuyereBE = (BlastFurnaceHatchBlockEntity) level.getBlockEntity(tuyerePos);
 
                 if (tuyereBE.tank.getFluidAmount() < recipe.hotAirUsage || !tuyereBE.tank.getFluid().getFluid().isSame(TFMGFluids.HOT_AIR.getSource()))

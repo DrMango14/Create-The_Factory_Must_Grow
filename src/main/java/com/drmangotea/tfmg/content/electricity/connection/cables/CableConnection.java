@@ -1,10 +1,12 @@
 package com.drmangotea.tfmg.content.electricity.connection.cables;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableType;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import org.checkerframework.checker.units.qual.C;
@@ -46,7 +48,7 @@ public class CableConnection {
 
         compoundTag.putBoolean("Visible", visible);
 
-        compoundTag.putString("CableType", type.toString());
+        compoundTag.putString("CableType", type.getKey().toString());
 
         return compoundTag;
     }
@@ -63,29 +65,11 @@ public class CableConnection {
         BlockPos blockPos1 = BlockPos.of(compoundTag.getLong("Pos"));
 
         boolean visible = compoundTag.getBoolean("Visible");
-        CableType type = CableType.valueOf(compoundTag.getString("CableType"));
+        CableType type = TFMGUtils.getCableType(ResourceLocation.parse(compoundTag.getString("CableType")));
         return new CableConnection(pos1,pos2,blockPos1,type,visible);
     }
     public float getLength(){
         return TFMGUtils.getDistance(new BlockPos((int) pos1.x(), (int) pos1.y(), (int) pos1.z()),new BlockPos((int) pos2.x(), (int) pos2.y(), (int) pos2.z()), false);
     }
 
-
-
-    public enum CableType{
-        NONE(TFMGItems.COPPER_WIRE, 0,0xffffff),
-        COPPER(TFMGItems.COPPER_WIRE, 0.00188f,0xD8735A),
-        ALUMINUM(TFMGItems.ALUMINUM_WIRE, 0.0027f,0xEDEFEF),
-        CONSTANTAN(TFMGItems.CONSTANTAN_WIRE, 1f,0xEDEFEF),
-        STEEL_REINFORCED_ALUMINUM(TFMGItems.COPPER_WIRE, 0.0027f,0xB8A08D)
-        ;
-        public final ItemEntry<?> wire;
-        public final float resistivity;
-        public final int color;
-        CableType(ItemEntry<?> wire, float resistivity, int color){
-            this.wire = wire;
-            this.resistivity = resistivity;
-            this.color = color;
-        }
-    }
 }

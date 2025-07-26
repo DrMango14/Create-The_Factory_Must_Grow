@@ -20,6 +20,13 @@ public class TFMGSpriteShifts {
     public static final CTSpriteShiftEntry STEEL_ENCASED_COGWHEEL_SIDE = vertical("steel_encased_cogwheel_side"), STEEL_ENCASED_COGWHEEL_OTHERSIDE = horizontal("steel_encased_cogwheel_side"), HEAVY_CASING_ENCASED_COGWHEEL_SIDE = vertical("heavy_machinery_encased_cogwheel_side"), HEAVY_CASING_ENCASED_COGWHEEL_OTHERSIDE = horizontal("heavy_machinery_encased_cogwheel_side");
     public static final CTSpriteShiftEntry COKE_OVEN_TOP = getCT(AllCTTypes.RECTANGLE, "coke_oven/top"), COKE_OVEN_BOTTOM = getCT(AllCTTypes.RECTANGLE, "coke_oven/bottom"), COKE_OVEN_BACK = getCT(AllCTTypes.RECTANGLE, "coke_oven/side"), COKE_OVEN_SIDE = getCT(AllCTTypes.RECTANGLE, "coke_oven/side");
 
+    // Fluid Encasing
+    public static final CTSpriteShiftEntry BRASS_FLUID_CASING = omni("copper_encased_brass_pipe_side");
+    public static final CTSpriteShiftEntry STEEL_FLUID_CASING = omni("copper_encased_steel_pipe_side");
+    public static final CTSpriteShiftEntry ALUMINUM_FLUID_CASING = omni("copper_encased_aluminum_pipe_side");
+    public static final CTSpriteShiftEntry CAST_IRON_FLUID_CASING = omni("copper_encased_cast_iron_pipe_side");
+    public static final CTSpriteShiftEntry PLASTIC_FLUID_CASING = omni("copper_encased_plastic_pipe_side");
+
     public static final CTSpriteShiftEntry FIREBOX_TOP = getCT(AllCTTypes.RECTANGLE, "firebox_top");
 
     public static final CTSpriteShiftEntry STEEL_FLUID_TANK = getCT(AllCTTypes.RECTANGLE, "steel_fluid_tank"), STEEL_FLUID_TANK_TOP = getCT(AllCTTypes.RECTANGLE, "steel_fluid_tank_top"), STEEL_FLUID_TANK_INNER = getCT(AllCTTypes.RECTANGLE, "steel_fluid_tank_inner");

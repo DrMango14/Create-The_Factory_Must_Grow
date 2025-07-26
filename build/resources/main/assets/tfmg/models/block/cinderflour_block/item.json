@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "top": "tfmg:block/cinderflourblock_top",
-    "bottom": "tfmg:block/cinderflourblock_top",
-    "side": "tfmg:block/cinderflourblock"
-  }
-}
