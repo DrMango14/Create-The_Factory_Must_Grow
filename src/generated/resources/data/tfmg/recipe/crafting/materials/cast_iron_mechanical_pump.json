@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create:cogwheel"
+    },
+    {
+      "item": "tfmg:cast_iron_pipe"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:cast_iron_mechanical_pump"
+  }
+}
