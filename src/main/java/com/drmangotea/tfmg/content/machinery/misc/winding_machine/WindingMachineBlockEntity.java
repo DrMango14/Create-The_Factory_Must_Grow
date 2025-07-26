@@ -175,28 +175,32 @@ public class WindingMachineBlockEntity extends KineticBlockEntity implements IHa
     }
 
     public void performRecipe() {
+        //Change these if you want. Just fallbacks if the component is null.
+        int defaultResistance = 0;
+        int defaultSpoolAmount = 0;
+        int defaultCoilTurns = 0;
 
         if (getSpeed() == 0)
             return;
-        if (inventory.getItem(0).is(TFMGItems.ELECTROMAGNETIC_COIL.get()) && spool.is(TFMGItems.COPPER_SPOOL.get()) && spool.get(TFMGDataComponents.SPOOL_AMOUNT) > 0 && inventory.getItem(0).get(TFMGDataComponents.COIL_TURNS) < turnPercentage.getValue() * 10) {
-            if(inventory.getItem(0).get(TFMGDataComponents.COIL_TURNS)< turnPercentage.getValue()*10){
-                spool.set(TFMGDataComponents.SPOOL_AMOUNT, spool.get(TFMGDataComponents.SPOOL_AMOUNT) - 1);
-                inventory.getItem(0).set(TFMGDataComponents.COIL_TURNS, inventory.getItem(0).get(TFMGDataComponents.COIL_TURNS) + 1);
+        if (inventory.getItem(0).is(TFMGItems.ELECTROMAGNETIC_COIL.get()) && spool.is(TFMGItems.COPPER_SPOOL.get()) && spool.getOrDefault(TFMGDataComponents.SPOOL_AMOUNT, defaultSpoolAmount) > 0 && inventory.getItem(0).getOrDefault(TFMGDataComponents.COIL_TURNS, defaultCoilTurns) < turnPercentage.getValue() * 10) {
+            if(inventory.getItem(0).getOrDefault(TFMGDataComponents.COIL_TURNS, defaultCoilTurns) < turnPercentage.getValue() * 10){
+                spool.set(TFMGDataComponents.SPOOL_AMOUNT, spool.getOrDefault(TFMGDataComponents.SPOOL_AMOUNT, defaultSpoolAmount) - 1);
+                inventory.getItem(0).set(TFMGDataComponents.COIL_TURNS, inventory.getItem(0).getOrDefault(TFMGDataComponents.COIL_TURNS, defaultCoilTurns) + 1);
                 return;
             }
         }
-        if(spool.get(TFMGDataComponents.SPOOL_AMOUNT)!=null)
-        if (inventory.getItem(0).is(TFMGBlocks.RESISTOR.asItem()) && spool.is(TFMGItems.CONSTANTAN_SPOOL.get()) && spool.get(TFMGDataComponents.SPOOL_AMOUNT) > 0 && inventory.getItem(0).get(TFMGDataComponents.RESISTANCE) < turnPercentage.getValue() * 10) {
-            if(inventory.getItem(0).get(TFMGDataComponents.RESISTANCE)< turnPercentage.getValue()*10) {
-                spool.set(TFMGDataComponents.SPOOL_AMOUNT, spool.get(TFMGDataComponents.SPOOL_AMOUNT) - 1);
-                inventory.getItem(0).set(TFMGDataComponents.RESISTANCE, inventory.getItem(0).get(TFMGDataComponents.RESISTANCE) + 1);
-                return;
+        if(spool.has(TFMGDataComponents.SPOOL_AMOUNT))
+            if (inventory.getItem(0).is(TFMGBlocks.RESISTOR.asItem()) && spool.is(TFMGItems.CONSTANTAN_SPOOL.get()) && spool.getOrDefault(TFMGDataComponents.SPOOL_AMOUNT, defaultSpoolAmount) > 0 && inventory.getItem(0).getOrDefault(TFMGDataComponents.RESISTANCE, defaultResistance) < turnPercentage.getValue() * 10) {
+                if(inventory.getItem(0).getOrDefault(TFMGDataComponents.RESISTANCE, 0)< turnPercentage.getValue() * 10) {
+                    spool.set(TFMGDataComponents.SPOOL_AMOUNT, spool.getOrDefault(TFMGDataComponents.SPOOL_AMOUNT, defaultSpoolAmount) - 1);
+                    inventory.getItem(0).set(TFMGDataComponents.RESISTANCE, inventory.getItem(0).getOrDefault(TFMGDataComponents.RESISTANCE, defaultResistance) + 1);
+                    return;
+                }
             }
-        }
 
-        if(spool.get(TFMGDataComponents.SPOOL_AMOUNT)!=null)
-        if (spool.get(TFMGDataComponents.SPOOL_AMOUNT) == 0 && !spool.is(TFMGItems.EMPTY_SPOOL.get()) && spool.getItem() instanceof SpoolItem)
-            spool = TFMGItems.EMPTY_SPOOL.asStack();
+        if(spool.has(TFMGDataComponents.SPOOL_AMOUNT))
+            if (spool.getOrDefault(TFMGDataComponents.SPOOL_AMOUNT, defaultSpoolAmount) == 0 && !spool.is(TFMGItems.EMPTY_SPOOL.get()) && spool.getItem() instanceof SpoolItem)
+                spool = TFMGItems.EMPTY_SPOOL.asStack();
 
         if (recipe == null) {
             return;
