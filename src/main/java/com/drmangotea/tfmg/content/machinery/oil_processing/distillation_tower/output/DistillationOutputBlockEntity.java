@@ -28,7 +28,9 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 import java.util.List;
-
+/**
+    this block doesn't do anything, it only holds fluids create in the distillation tower
+ */
 public class DistillationOutputBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
 
@@ -44,7 +46,7 @@ public class DistillationOutputBlockEntity extends SmartBlockEntity implements I
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        mode = new ScrollOptionBehaviour<DistillationOutputMode>(DistillationOutputMode.class,
+        mode = new ScrollOptionBehaviour<>(DistillationOutputMode.class,
                 CreateLang.translateDirect("distillation_output.when_tank_is_full"), this, new DistillationOutputValueBox());
         behaviours.add(mode);
     }
@@ -64,13 +66,6 @@ public class DistillationOutputBlockEntity extends SmartBlockEntity implements I
                 (be, context) -> be.fluidCapability
         );
     }
-    //@Nonnull
-    //@Override
-    //public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-    //    if (cap == ForgeCapabilities.FLUID_HANDLER)
-    //        return fluidCapability.cast();
-    //    return super.getCapability(cap, side);
-    //}
     @Override
     protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.read(compound,registries , clientPacket);
@@ -79,22 +74,15 @@ public class DistillationOutputBlockEntity extends SmartBlockEntity implements I
 
     }
 
-
     @Override
     public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.write(compound,registries,clientPacket);
-
         compound.put("TankContent", tank.writeToNBT(registries,new CompoundTag()));
 
     }
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-
-
-        return containedFluidTooltip(tooltip, isPlayerSneaking,
-                fluidCapability);
-
-
+        return containedFluidTooltip(tooltip, isPlayerSneaking, fluidCapability);
     }
 
     public static class DistillationOutputValueBox extends ValueBoxTransform.Sided {

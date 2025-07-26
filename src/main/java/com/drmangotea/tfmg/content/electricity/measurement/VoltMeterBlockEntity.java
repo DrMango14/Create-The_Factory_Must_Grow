@@ -84,7 +84,6 @@ public class VoltMeterBlockEntity extends SmartBlockEntity implements IHaveGoggl
 
         float targetAngle = Math.abs(value * 180);
 
-    //    TFMG.LOGGER.debug(String.valueOf(value));
 
         angle.chase(Math.min(Math.abs(targetAngle),180), 0.05f, LerpedFloat.Chaser.EXP);
         angle.tickChaser();
@@ -121,7 +120,6 @@ public class VoltMeterBlockEntity extends SmartBlockEntity implements IHaveGoggl
         HIGH_VOLTAGE("Voltage (High)", "V", 10000),
         CURRENT("Current", "A", 16),
         RESISTANCE("Resistance", "Ω", 500),
-       // HIGH_RESISTANCE("Resistance (High)", "Ω", 500),
         POWER("Power", "W", 5000),
         NETWORK_POWER_USAGE("Network Power Usage", "W", 50000),
         NETWORK_POWER_GENERATION("Network Power Generation", "W", 50000),

@@ -24,8 +24,6 @@ public class VoltMeterRenderer extends SafeBlockEntityRenderer<VoltMeterBlockEnt
     @Override
     protected void renderSafe(VoltMeterBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource bufferSource, int light, int overlay) {
 
-
-
         BlockState blockState = be.getBlockState();
         VertexConsumer vb = bufferSource.getBuffer(RenderType.solid());
         ms.pushPose();
@@ -42,7 +40,6 @@ public class VoltMeterRenderer extends SafeBlockEntityRenderer<VoltMeterBlockEnt
 
         if(direction.getAxis() == Direction.Axis.X)
             direction = direction.getOpposite();
-      //  TFMG.LOGGER.debug(String.valueOf(be.angle.getValue(partialTicks)));
         dial
                 .rotateYDegrees(direction.toYRot())
                 .uncenter()

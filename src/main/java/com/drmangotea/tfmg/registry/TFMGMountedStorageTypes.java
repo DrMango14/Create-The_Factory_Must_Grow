@@ -12,11 +12,9 @@ public class TFMGMountedStorageTypes {
 
     public static final RegistryEntry<MountedFluidStorageType<?>,FluidTankMountedStorageType> TFMG_FLUID_TANK = simpleFluid("tfmg_fluid_tank", FluidTankMountedStorageType::new);
 
-
     private static <T extends MountedFluidStorageType<?>> RegistryEntry<MountedFluidStorageType<?>, T> simpleFluid(String name, Supplier<T> supplier) {
         return REGISTRATE.mountedFluidStorage(name, supplier).register();
     }
 
-    public static void register() {
-    }
+    public static void register() {}
 }

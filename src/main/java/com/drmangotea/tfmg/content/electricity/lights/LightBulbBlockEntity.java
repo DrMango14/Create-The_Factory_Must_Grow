@@ -30,8 +30,6 @@ public class LightBulbBlockEntity extends ElectricBlockEntity {
 
     public DyeColor color= DyeColor.WHITE;
 
-
-
     public LightBulbBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
@@ -64,15 +62,6 @@ public class LightBulbBlockEntity extends ElectricBlockEntity {
         notifyUpdate();
     }
 
-   // @Override
-   // public int getMaxVoltage() {
-   //     return 500;
-   // }
-//
-   // @Override
-   // public int getMaxAmps() {
-   //     return 5;
-   // }
 
     @Override
     public void blockFail() {
@@ -80,15 +69,6 @@ public class LightBulbBlockEntity extends ElectricBlockEntity {
         TFMGUtils.playSound(level,getBlockPos(), SoundEvents.GLASS_BREAK, SoundSource.BLOCKS);
     }
 
-    //@Override
-    //public int getMaxVoltage() {
-    //    return 500;
-    //}
-//
-    //@Override
-    //public int getMaxCurrent() {
-    //    return 4;
-    //}
 
     @Override
     public void setVoltage(int newVoltage) {

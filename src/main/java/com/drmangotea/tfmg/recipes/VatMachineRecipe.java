@@ -30,9 +30,6 @@ import java.util.function.Function;
 
 public class VatMachineRecipe extends ProcessingRecipe<RecipeInput, VatRecipeParams> {
 
-
-
-
     public List<String> machines;
     public List<String> allowedVatTypes;
     public int minSize;
@@ -45,8 +42,6 @@ public class VatMachineRecipe extends ProcessingRecipe<RecipeInput, VatRecipePar
         minSize = params.min_size;
         heatLevel = params.heat_level;
     }
-
-
 
     @Override
     protected int getMaxInputCount() {
@@ -65,52 +60,6 @@ public class VatMachineRecipe extends ProcessingRecipe<RecipeInput, VatRecipePar
         return 4;
     }
 
-    //@Override
-    //public void readAdditional(FriendlyByteBuf buffer) {
-    //    super.readAdditional(buffer);
-    //    JsonArray machineArray = json.getAsJsonArray("machines");
-    //    if (machineArray != null) {
-    //        for (int i = 0; i < machineArray.size(); i++) {
-//
-//
-//
-    //            machines.add(machineArray.get(i).getAsString());
-    //        }
-    //    }
-    //    //
-    //    JsonArray vatTypeArray = json.getAsJsonArray("allowedVatTypes");
-    //    if (vatTypeArray != null) {
-    //        for (int i = 0; i < vatTypeArray.size(); i++) {
-    //            allowedVatTypes.add(vatTypeArray.get(i).getAsString());
-    //        }
-     //    }
-    //    //
-    //    this.minSize = GsonHelper.getAsInt(json, "minSize", 1);
-    //}
-//
-//
-//
-//
-//
-    //public void writeAdditional(FriendlyByteBuf buffer) {
-    //    super.writeAdditional(buffer);
-    //    JsonArray machineArray = new JsonArray();
-//
-    //    for (String string : machines) {
-    //        machineArray.add(string);
-//
-    //    }
-    //    json.add("machines", machineArray);
-    //    //
-    //    JsonArray vatTypeArray = new JsonArray();
-    //    for (String string : allowedVatTypes) {
-    //        vatTypeArray.add(string);
-    //    }
-    //    json.add("allowedVatTypes", vatTypeArray);
-    //    //
-    //    json.addProperty("minSize", this.minSize);
-//
-    //}
 
     @Override
     public boolean matches(RecipeInput inv, Level worldIn) {

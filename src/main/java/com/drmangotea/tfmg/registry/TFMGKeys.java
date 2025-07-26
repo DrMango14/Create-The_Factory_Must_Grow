@@ -31,10 +31,6 @@ public enum TFMGKeys {
 	private final int key;
 	private final boolean modifiable;
 
-	TFMGKeys(int defaultKey) {
-		this("", defaultKey, "");
-	}
-
 	TFMGKeys(String description, int defaultKey, String translation) {
 		this.description = TFMG.MOD_ID + ".keyinfo." + description;
 		this.key = defaultKey;

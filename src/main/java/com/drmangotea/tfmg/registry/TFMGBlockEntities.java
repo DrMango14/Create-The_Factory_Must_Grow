@@ -7,15 +7,13 @@ import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorRenderer;
 import com.drmangotea.tfmg.content.decoration.flywheels.TFMGFlywheelBlockEntity;
 import com.drmangotea.tfmg.content.decoration.flywheels.TFMGFlywheelRenderer;
 import com.drmangotea.tfmg.content.decoration.flywheels.TFMGFlywheelVisual;
-import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipeBlock;
 import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipeBlockEntity;
-import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipeEntry;
 import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipes;
 import com.drmangotea.tfmg.content.decoration.tanks.TFMGFluidTankBlockEntity;
 import com.drmangotea.tfmg.content.decoration.tanks.TFMGFluidTankRenderer;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelFluidTankRenderer;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
-import com.drmangotea.tfmg.content.electricity.connection.cable_hub.CableHubBlockEntity;
+import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorRenderer;
 import com.drmangotea.tfmg.content.electricity.connection.copycat_cable.CopycatCableBlockEntity;
@@ -50,6 +48,8 @@ import com.drmangotea.tfmg.content.electricity.utilities.potentiometer.Potentiom
 import com.drmangotea.tfmg.content.electricity.utilities.resistor.ResistorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayRenderer;
+import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplaySource;
+import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayTarget;
 import com.drmangotea.tfmg.content.electricity.utilities.traffic_light.TrafficLightBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.traffic_light.TrafficLightRenderer;
 import com.drmangotea.tfmg.content.electricity.utilities.transformer.TransformerBlockEntity;
@@ -59,7 +59,6 @@ import com.drmangotea.tfmg.content.engines.base.EngineRenderer;
 import com.drmangotea.tfmg.content.engines.engine_controller.EngineControllerBlockEntity;
 import com.drmangotea.tfmg.content.engines.engine_controller.EngineControllerRenderer;
 import com.drmangotea.tfmg.content.engines.engine_gearbox.EngineGearboxBlockEntity;
-import com.drmangotea.tfmg.content.engines.engine_gearbox.EngineGearboxRenderer;
 import com.drmangotea.tfmg.content.engines.types.large_engine.LargeEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.types.large_engine.LargeEngineRenderer;
 import com.drmangotea.tfmg.content.engines.types.radial_engine.RadialEngineBlockEntity;
@@ -90,11 +89,11 @@ import com.drmangotea.tfmg.content.machinery.misc.winding_machine.WindingMachine
 import com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.controller.DistillationControllerBlockEntity;
 import com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.controller.DistillationControllerRenderer;
 import com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.output.DistillationOutputBlockEntity;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.base.PumpjackBaseBlockEntity;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.crank.PumpjackCrankBlockEntity;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.crank.PumpjackCrankRenderer;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.hammer.PumpjackBlockEntity;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.hammer.PumpjackRenderer;
+import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.base.PumpjackBaseBlockEntity;
+import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.crank.PumpjackCrankBlockEntity;
+import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.crank.PumpjackCrankRenderer;
+import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.hammer.PumpjackBlockEntity;
+import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.hammer.PumpjackRenderer;
 import com.drmangotea.tfmg.content.machinery.oil_processing.surface_scanner.SurfaceScannerBlockEntity;
 import com.drmangotea.tfmg.content.machinery.oil_processing.surface_scanner.SurfaceScannerRenderer;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
@@ -114,7 +113,6 @@ import com.simibubi.create.content.fluids.pipes.valve.FluidValveRenderer;
 import com.simibubi.create.content.fluids.pipes.valve.FluidValveVisual;
 import com.simibubi.create.content.fluids.pump.PumpBlockEntity;
 import com.simibubi.create.content.fluids.pump.PumpRenderer;
-import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.content.kinetics.base.*;
 import com.simibubi.create.content.kinetics.gearbox.GearboxBlockEntity;
 import com.simibubi.create.content.kinetics.gearbox.GearboxRenderer;
@@ -123,13 +121,6 @@ import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEn
 import com.simibubi.create.content.kinetics.simpleRelays.SimpleKineticBlockEntity;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
-import com.tterrag.registrate.util.entry.BlockEntry;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
-import net.minecraft.world.level.block.Block;
-
-import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import static com.drmangotea.tfmg.TFMG.REGISTRATE;
 
@@ -382,11 +373,6 @@ public class TFMGBlockEntities {
             .validBlocks(TFMGBlocks.TRANSFORMER)
             .renderer(() -> TransformerRenderer::new)
             .register();
-    public static final BlockEntityEntry<FuseBlockEntity> FUSE_BLOCK = REGISTRATE
-            .blockEntity("fuse_block", FuseBlockEntity::new)
-          //  .validBlocks(TFMGBlocks.FUSE_BLOCK)
-            .renderer(() -> FuseBlockRenderer::new)
-            .register();
     public static final BlockEntityEntry<SegmentedDisplayBlockEntity> SEGMENTED_DISPLAY = REGISTRATE
             .blockEntity("segmented_display", SegmentedDisplayBlockEntity::new)
             .validBlocks(TFMGBlocks.SEGMENTED_DISPLAY)
@@ -498,8 +484,8 @@ public class TFMGBlockEntities {
 
 
 
-    public static final BlockEntityEntry<CableHubBlockEntity> CABLE_HUB = REGISTRATE
-            .blockEntity("cable_hub", CableHubBlockEntity::new)
+    public static final BlockEntityEntry<ElectricBlockEntity> CABLE_HUB = REGISTRATE
+            .blockEntity("cable_hub", ElectricBlockEntity::new)
             .validBlocks(TFMGBlocks.BRASS_CABLE_HUB,
                     TFMGBlocks.COPPER_CABLE_HUB,
                     TFMGBlocks.STEEL_CABLE_HUB,

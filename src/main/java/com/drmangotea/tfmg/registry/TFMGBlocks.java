@@ -22,7 +22,7 @@ import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelFluidTankModel;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlock;
 import com.drmangotea.tfmg.content.decoration.tanks.TFMGTankGenerator;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankItem;
-import com.drmangotea.tfmg.content.electricity.connection.cable_hub.CableHubBlock;
+import com.drmangotea.tfmg.content.electricity.connection.CableHubBlock;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlock;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorGenerator;
 import com.drmangotea.tfmg.content.electricity.connection.copycat_cable.CopycatCableBlock;
@@ -49,7 +49,6 @@ import com.drmangotea.tfmg.content.electricity.utilities.diode.EncasedDiodeBlock
 import com.drmangotea.tfmg.content.electricity.utilities.electric_motor.ElectricMotorBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_pump.ElectricPumpBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_switch.ElectricSwitchBlock;
-import com.drmangotea.tfmg.content.electricity.utilities.fuse_block.FuseBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.potentiometer.PotentiometerBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.potentiometer.EncasedPotentiometerBlock;
@@ -97,23 +96,21 @@ import com.drmangotea.tfmg.content.machinery.misc.winding_machine.WindingMachine
 import com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.IndustrialPipeBlock;
 import com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.controller.DistillationControllerBlock;
 import com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.output.DistillationOutputBlock;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.base.PumpjackBaseBlock;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.crank.PumpjackCrankBlock;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.hammer.PumpjackBlock;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.hammer.PumpjackGenerator;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.hammer.parts.PumpjackHammerConnectorBlock;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.hammer.parts.PumpjackHammerHeadBlock;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.hammer.parts.PumpjackHammerPartBlock;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.hammer.parts.large.LargePumpjackHammerConnectorBlock;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.hammer.parts.large.LargePumpjackHammerHeadBlock;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.hammer.parts.large.LargePumpjackHammerPartBlock;
+import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.base.PumpjackBaseBlock;
+import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.crank.PumpjackCrankBlock;
+import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.hammer.PumpjackBlock;
+import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.hammer.PumpjackGenerator;
+import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.hammer.parts.PumpjackHammerConnectorBlock;
+import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.hammer.parts.PumpjackHammerHeadBlock;
+import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.hammer.parts.PumpjackHammerPartBlock;
+import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.hammer.parts.large.LargePumpjackHammerConnectorBlock;
+import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.hammer.parts.large.LargePumpjackHammerHeadBlock;
+import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.hammer.parts.large.LargePumpjackHammerPartBlock;
 import com.drmangotea.tfmg.content.machinery.oil_processing.surface_scanner.SurfaceScannerBlock;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlock;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatGenerator;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.ElectrodeHolderBlock;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerBlock;
-import com.simibubi.create.AllItems;
-import com.simibubi.create.AllMountedStorageTypes;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.content.contraptions.bearing.StabilizedBearingMovementBehaviour;
@@ -130,7 +127,6 @@ import com.simibubi.create.content.kinetics.motor.CreativeMotorGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
 import com.simibubi.create.foundation.block.connected.HorizontalCTBehaviour;
 import com.simibubi.create.foundation.data.*;
-import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
@@ -179,7 +175,7 @@ public class TFMGBlocks {
     //------------------ENGINES------------------//
 
     public static final BlockEntry<TurbineEngineBlock> TURBINE_ENGINE = REGISTRATE.block("turbine_engine", TurbineEngineBlock::new)
-            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .properties(BlockBehaviour.Properties::noOcclusion)
             .addLayer(() -> RenderType::cutoutMipped)
@@ -189,7 +185,7 @@ public class TFMGBlocks {
             .transform(customItemModel())
             .register();
     public static final BlockEntry<RegularEngineBlock> REGULAR_ENGINE = REGISTRATE.block("regular_engine", RegularEngineBlock::new)
-            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .properties(BlockBehaviour.Properties::noOcclusion)
             .onRegister(connectedTextures(() -> new EngineCTBehavior(TFMGSpriteShifts.REGULAR_ENGINE_TOP, TFMGSpriteShifts.REGULAR_ENGINE_BOTTOM, TFMGSpriteShifts.REGULAR_ENGINE_SIDE)))
@@ -199,7 +195,7 @@ public class TFMGBlocks {
             .transform(customItemModel())
             .register();
     public static final BlockEntry<RadialEngineBlock> RADIAL_ENGINE = REGISTRATE.block("radial_engine", RadialEngineBlock::new)
-            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .properties(BlockBehaviour.Properties::noOcclusion)
             .transform(TFMGStress.setCapacity(100))
@@ -774,7 +770,7 @@ public class TFMGBlocks {
     //------------------METALLURGY------------------//
     public static final BlockEntry<BlastFurnaceOutputBlock> BLAST_FURNACE_OUTPUT = REGISTRATE.block("blast_furnace_output", BlastFurnaceOutputBlock::new)
             .initialProperties(() -> Blocks.NETHER_BRICKS)
-            .properties(p -> p.requiresCorrectToolForDrops())
+            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.horizontalBlockProvider(true))
             .tag(BlockTags.NEEDS_STONE_TOOL)
@@ -784,7 +780,7 @@ public class TFMGBlocks {
 
     public static final BlockEntry<BlastFurnaceHatchBlock> BLAST_FURNACE_HATCH = REGISTRATE.block("blast_furnace_hatch", BlastFurnaceHatchBlock::new)
             .initialProperties(() -> Blocks.NETHER_BRICKS)
-            .properties(p -> p.requiresCorrectToolForDrops())
+            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
             .transform(pickaxeOnly())
             .tag(TFMGTags.TFMGBlockTags.BLAST_FURNACE_WALL.tag)
             .tag(TFMGTags.TFMGBlockTags.REINFORCED_BLAST_FURNACE_WALL.tag)
@@ -793,7 +789,7 @@ public class TFMGBlocks {
             .register();
     public static final BlockEntry<Block> FIREPROOF_BRICKS = REGISTRATE.block("fireproof_bricks", Block::new)
             .initialProperties(() -> Blocks.NETHER_BRICKS)
-            .properties(p -> p.requiresCorrectToolForDrops())
+            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
             .transform(pickaxeOnly())
             .tag(TFMGTags.TFMGBlockTags.BLAST_FURNACE_WALL.tag)
             .tag(BlockTags.NEEDS_STONE_TOOL)
@@ -803,7 +799,7 @@ public class TFMGBlocks {
 
     public static final BlockEntry<Block> REINFORCED_FIREPROOF_BRICKS = REGISTRATE.block("reinforced_fireproof_bricks", Block::new)
             .initialProperties(() -> Blocks.NETHER_BRICKS)
-            .properties(p -> p.requiresCorrectToolForDrops())
+            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
             .transform(pickaxeOnly())
             .tag(TFMGTags.TFMGBlockTags.REINFORCED_BLAST_FURNACE_WALL.tag)
             .tag(BlockTags.NEEDS_STONE_TOOL)
@@ -813,7 +809,7 @@ public class TFMGBlocks {
 
     public static final BlockEntry<Block> BLAST_FURNACE_REINFORCEMENT = REGISTRATE.block("blast_furnace_reinforcement", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.requiresCorrectToolForDrops())
+            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
             .transform(pickaxeOnly())
             .onRegister(connectedTextures(() -> new HorizontalCTBehaviour(TFMGSpriteShifts.BLAST_FURNACE_REINFORCEMENT)))
             .tag(TFMGTags.TFMGBlockTags.REINFORCED_BLAST_FURNACE_SUPPORT.tag)
@@ -824,7 +820,7 @@ public class TFMGBlocks {
 
     public static final BlockEntry<BlastFurnaceReinforcementWallBlock> BLAST_FURNACE_REINFORCEMENT_WALL = REGISTRATE.block("blast_furnace_reinforcement_wall", BlastFurnaceReinforcementWallBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.requiresCorrectToolForDrops())
+            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
             .transform(pickaxeOnly())
             .properties(BlockBehaviour.Properties::noOcclusion)
             .onRegister(connectedTextures(() -> new HorizontalCTBehaviour(TFMGSpriteShifts.BLAST_FURNACE_REINFORCEMENT)))
@@ -835,7 +831,7 @@ public class TFMGBlocks {
     //
     public static final BlockEntry<Block> RUSTED_BLAST_FURNACE_REINFORCEMENT = REGISTRATE.block("rusted_blast_furnace_reinforcement", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.requiresCorrectToolForDrops())
+            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
             .transform(pickaxeOnly())
             .onRegister(connectedTextures(() -> new HorizontalCTBehaviour(TFMGSpriteShifts.RUSTED_BLAST_FURNACE_REINFORCEMENT)))
             .tag(TFMGTags.TFMGBlockTags.REINFORCED_BLAST_FURNACE_SUPPORT.tag)
@@ -846,7 +842,7 @@ public class TFMGBlocks {
 
     public static final BlockEntry<BlastFurnaceReinforcementWallBlock> RUSTED_BLAST_FURNACE_REINFORCEMENT_WALL = REGISTRATE.block("rusted_blast_furnace_reinforcement_wall", BlastFurnaceReinforcementWallBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.requiresCorrectToolForDrops())
+            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
             .transform(pickaxeOnly())
             .properties(BlockBehaviour.Properties::noOcclusion)
             .onRegister(connectedTextures(() -> new HorizontalCTBehaviour(TFMGSpriteShifts.RUSTED_BLAST_FURNACE_REINFORCEMENT)))
@@ -858,7 +854,7 @@ public class TFMGBlocks {
 
     public static final BlockEntry<WallBlock> FIREPROOF_BRICK_REINFORCEMENT = REGISTRATE.block("fireproof_brick_reinforcement", WallBlock::new)
             .initialProperties(() -> Blocks.NETHER_BRICKS)
-            .properties(p -> p.requiresCorrectToolForDrops())
+            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
             .transform(pickaxeOnly())
             .tag(BlockTags.WALLS)
             .tag(TFMGTags.TFMGBlockTags.BLAST_FURNACE_SUPPORT.tag)
@@ -878,7 +874,7 @@ public class TFMGBlocks {
             .item()
             .transform(customItemModel())
             .register();
-    @SuppressWarnings("'addLayer(java.util.function.Supplier<java.util.function.Supplier<net.minecraft.client.renderer.RenderType>>)' is deprecated and marked for removal ")
+
     public static final BlockEntry<BlastStoveBlock> BLAST_STOVE =
             REGISTRATE.block("blast_stove", BlastStoveBlock::new)
                     .initialProperties(SharedProperties::copperMetal)
@@ -892,9 +888,8 @@ public class TFMGBlocks {
 
     public static final BlockEntry<CastingBasinBlock> CASTING_BASIN = REGISTRATE.block("casting_basin", CastingBasinBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.requiresCorrectToolForDrops())
+            .properties(p -> p.requiresCorrectToolForDrops().noOcclusion())
             .transform(pickaxeOnly())
-            .properties(BlockBehaviour.Properties::noOcclusion)
             .blockstate(BlockStateGen.horizontalBlockProvider(true))
             .item()
             .transform(customItemModel())

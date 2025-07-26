@@ -12,12 +12,11 @@ public class ElectricBlockValues {
     public boolean getsOutsidePower = false;
     public int networkResistance = 0;
     public int voltage = 0;
-    public int frequency = 0;
     public int voltageSupply = 0;
-    public int networkPowerGeneration =0;
-    public float highestCurrent=0;
+    public int networkPowerGeneration = 0;
+    public float highestCurrent = 0;
 
-    public boolean notEnoughtPower=false;
+    public boolean notEnoughtPower = false;
 
     public boolean setVoltageNextTick = false;
 
@@ -25,17 +24,19 @@ public class ElectricBlockValues {
 
     public ElectricalGroup group = new ElectricalGroup(0);
 
-    public ElectricBlockValues(long pos){
+    public ElectricBlockValues(long pos) {
         this.electricalNetworkId = pos;
     }
 
-    public long getId(){
+    public long getId() {
         return electricalNetworkId;
     }
-    public boolean destroyed(){
+
+    public boolean destroyed() {
         return destroyed;
     }
-    public int getVoltage(){
+
+    public int getVoltage() {
         return voltage;
     }
 }

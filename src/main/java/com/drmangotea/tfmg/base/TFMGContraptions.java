@@ -3,7 +3,7 @@ package com.drmangotea.tfmg.base;
 
 
 import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.hammer.PumpjackContraption;
+import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.hammer.PumpjackContraption;
 import com.simibubi.create.api.contraption.ContraptionType;
 import com.simibubi.create.api.registry.CreateBuiltInRegistries;
 import com.simibubi.create.content.contraptions.Contraption;

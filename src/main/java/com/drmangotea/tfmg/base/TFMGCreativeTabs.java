@@ -112,7 +112,6 @@ public class TFMGCreativeTabs {
 
         list.add(TFMGItems.LIT_LITHIUM_BLADE);
         list.add(TFMGItems.GOLDEN_TURBO);
-        list.add(TFMGItems.DEPOSIT_ITEM);
         list.add(TFMGItems.ALUMINUM_SPOOL);
         list.add(TFMGItems.COPPER_SPOOL);
         list.add(TFMGItems.CONSTANTAN_SPOOL);

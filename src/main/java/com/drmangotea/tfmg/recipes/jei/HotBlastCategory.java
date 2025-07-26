@@ -23,7 +23,6 @@ public class HotBlastCategory extends CreateRecipeCategory<HotBlastRecipe> {
         super(info);
     }
 
-
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, HotBlastRecipe recipe, IFocusGroup focuses) {
 
@@ -32,31 +31,6 @@ public class HotBlastCategory extends CreateRecipeCategory<HotBlastRecipe> {
 
         addFluidSlot(builder,105,51,recipe.getFluidResults().get(0));
         addFluidSlot(builder,105,75,recipe.getFluidResults().get(1));
-        //builder
-        //        .addSlot(RecipeIngredientRole.INPUT, 18, 52)
-        //        .setBackground(getRenderedSlot(), -1, -1)
-        //        .addIngredients(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getFluidIngredients().get(0).getMatchingFluidStacks()))
-        //        .addRichTooltipCallback(addFluidTooltip(recipe.getFluidIngredients().get(0).getRequiredAmount()));
-//
-		//builder
-		//		.addSlot(RecipeIngredientRole.INPUT, 18, 74)
-		//		.setBackground(getRenderedSlot(), -1, -1)
-		//		.addIngredients(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getFluidIngredients().get(1).getMatchingFluidStacks()))
-		//		.addRichTooltipCallback(addFluidTooltip(recipe.getFluidIngredients().get(1).getRequiredAmount()));
-//
-        ///// /
-        //builder
-        //        .addSlot(RecipeIngredientRole.OUTPUT, 105, 51)
-        //        .setBackground(getRenderedSlot(), -1, -1)
-        //        .addIngredient(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getFluidResults().get(0)))
-        //        .addRichTooltipCallback(addFluidTooltip(recipe.getFluidResults().get(0).getAmount()));
-//
-		//builder
-		//		.addSlot(RecipeIngredientRole.OUTPUT, 105, 75)
-		//		.setBackground(getRenderedSlot(), -1, -1)
-		//		.addIngredient(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getFluidResults().get(1)))
-		//		.addRichTooltipCallback(addFluidTooltip(recipe.getFluidResults().get(1).getAmount()));
-
 
     }
 

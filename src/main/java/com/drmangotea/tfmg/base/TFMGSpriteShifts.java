@@ -12,8 +12,8 @@ import net.createmod.catnip.render.SpriteShifter;
 public class TFMGSpriteShifts {
 
     public static final CTSpriteShiftEntry CAST_IRON_BLOCK = omni("cast_iron_block"), LEAD_BLOCK = omni("lead_block"), STEEL_BLOCK = omni("steel_block");
-    public static final CTSpriteShiftEntry HEAVY_MACHINERY_CASING = omni("heavy_machinery_casing"), ELECTRIC_CASING = omni("electric_casing"), STEEL_CASING = omni("steel_casing"), INDUSTRIAL_ALUMINUM_CASING = omni("industrial_aluminum_casing");
-    public static final CTSpriteShiftEntry CAPACITOR = getCT(AllCTTypes.RECTANGLE, "capacitor_side"), ACCUMULATOR = getCT(AllCTTypes.RECTANGLE, "accumulator_side");
+    public static final CTSpriteShiftEntry HEAVY_MACHINERY_CASING = omni("heavy_machinery_casing"), INDUSTRIAL_ALUMINUM_CASING = omni("industrial_aluminum_casing");
+    public static final CTSpriteShiftEntry ACCUMULATOR = getCT(AllCTTypes.RECTANGLE, "accumulator_side");
     public static final CTSpriteShiftEntry STEEL_SCAFFOLD = horizontal("scaffold/steel_scaffold"), ALUMINUM_SCAFFOLD = horizontal("scaffold/aluminum_scaffold");
     public static final CTSpriteShiftEntry ALUMINUM_SCAFFOLD_TOP = omni("aluminum_casing");
     public static final CTSpriteShiftEntry STEEL_SCAFFOLD_INSIDE = horizontal("scaffold/steel_scaffold_inside"), ALUMINUM_SCAFFOLD_INSIDE = horizontal("scaffold/aluminum_scaffold_inside");
@@ -46,7 +46,7 @@ public class TFMGSpriteShifts {
             REGULAR_ENGINE_TOP = vertical("engines/engine_top"),
             REGULAR_ENGINE_BOTTOM = vertical("engines/engine_bottom"),
             REGULAR_ENGINE_SIDE = horizontal("engines/engine_side");
-    public static final SpriteShiftEntry WINDING_MACHINE_COPPER_WIRE = get("block/winding_machine_copper_wire", "block/winding_machine_copper_wire_scroll");
+
 
 
     ///////////////////////

@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlock;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
 import com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.output.DistillationOutputBlockEntity;
 import com.drmangotea.tfmg.mixin.accessor.FluidTankBlockEntityAccessor;
@@ -18,13 +19,16 @@ import com.simibubi.create.foundation.recipe.RecipeFinder;
 
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.animation.LerpedFloat;
+import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,6 +42,8 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.controller.DistillationControllerBlock.getFacing;
+
 public class DistillationControllerBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
     private static final Object DistillationRecipesKey = new Object();
@@ -45,6 +51,7 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
     public DistillationRecipe recipe;
 
     LerpedFloat angle = LerpedFloat.angular();
+
     protected IFluidHandler fluidCapability;
 
     public final FluidTank tank = new SmartFluidTank(8000, this::onFluidStackChanged);
@@ -63,40 +70,46 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
     }
 
     @Override
+    public void remove() {
+        super.remove();
+        SteelTankBlock.updateTowerState(level, getBlockPos().relative(getFacing(getBlockState()).getOpposite()),false,false);
+
+    }
+
+    @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
     }
 
-
-    @Override
-    public void tick() {
-        super.tick();
-
+    public void manageDialRendering(){
         if (level.isClientSide) {
             angle.chase(180 * ((float) tank.getFluidAmount() / tank.getCapacity()), 0.2f, LerpedFloat.Chaser.EXP);
             angle.tickChaser();
         }
+    }
 
-        //
-        ArrayList<DistillationOutputBlockEntity> outputs = getOutputs();
-        BlockEntity beBehind = level.getBlockEntity(getBlockPos().relative(DistillationControllerBlock.getFacing(getBlockState()).getOpposite()));
-        if (!(beBehind instanceof SteelTankBlockEntity be))
-            return;
-
-
-
-        if (outputs.isEmpty() || be.activeHeat == 0)
-            return;
-        ///
-
+    public void findRecipe(ArrayList<DistillationOutputBlockEntity> outputs){
         if (recipe == null || !recipe.matches(tank, outputs.toArray().length)) {
             DistillationRecipe recipe = getMatchingRecipes();
-
 
             if (recipe != null) {
                 this.recipe = recipe;
                 sendData();
             }
         }
+    }
+
+    public void manageRecipe(){
+        ArrayList<DistillationOutputBlockEntity> outputs = getOutputs();
+        BlockEntity beBehind = level.getBlockEntity(getBlockPos().relative(getFacing(getBlockState()).getOpposite()));
+        if (!(beBehind instanceof SteelTankBlockEntity be))
+            return;
+
+
+        if (outputs.isEmpty() || be.activeHeat == 0)
+            return;
+
+        findRecipe(outputs);
+
         if (recipe == null)
             return;
 
@@ -135,6 +148,14 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
             numero++;
         }
     }
+    @Override
+    public void tick() {
+        super.tick();
+
+        manageDialRendering();
+        manageRecipe();
+
+    }
 
     protected void onFluidStackChanged(FluidStack newFluidStack) {
         if (!hasLevel())
@@ -149,7 +170,7 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 
-        BlockEntity beBehind = level.getBlockEntity(getBlockPos().relative(DistillationControllerBlock.getFacing(getBlockState()).getOpposite()));
+        BlockEntity beBehind = level.getBlockEntity(getBlockPos().relative(getFacing(getBlockState()).getOpposite()));
         if (beBehind instanceof SteelTankBlockEntity be) {
 
             CreateLang.translate("goggles.distillation_tower.status")

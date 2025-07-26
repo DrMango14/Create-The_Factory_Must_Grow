@@ -4,14 +4,12 @@ import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnection;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;
-import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.platform.CatnipServices;
 import net.createmod.catnip.theme.Color;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -28,7 +26,7 @@ public interface IElectric {
 
     LevelAccessor getLevelAccessor();
 
-    default boolean destroyed(){
+    default boolean destroyed() {
         return getData().destroyed();
     }
 
@@ -49,7 +47,7 @@ public interface IElectric {
     default void onPlaced() {
 
         if (getLevelAccessor() instanceof ServerLevel serverLevel)
-            CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(BlockPos.of(getPos())),new ConnectNeightborsPacket(BlockPos.of(getPos())));
+            CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(BlockPos.of(getPos())), new ConnectNeightborsPacket(BlockPos.of(getPos())));
         ElectricalNetwork network = TFMG.NETWORK_MANAGER.getOrCreateNetworkFor(this);
         setNetwork(getPos());
         getData().electricalNetworkId = getPos();
@@ -67,7 +65,8 @@ public interface IElectric {
         sendStuff();
 
     }
-    default void onRemoved(){
+
+    default void onRemoved() {
         this.getData().destroyed = true;
         for (Direction d : Direction.values()) {
             if (hasElectricitySlot(d))
@@ -87,19 +86,19 @@ public interface IElectric {
                     .remove(getData().getId());
     }
 
-    default void readElectricity(CompoundTag compound, boolean clientPacket){
+    default void readElectricity(CompoundTag compound, boolean clientPacket) {
         getData().group = new ElectricalGroup(compound.getInt("GroupId"));
         getData().group.resistance = compound.getFloat("GroupResistance");
         if (!clientPacket)
             getData().connectNextTick = true;
     }
 
-    default void writeElectricity(CompoundTag compound, boolean clientPacket){
+    default void writeElectricity(CompoundTag compound, boolean clientPacket) {
         compound.putInt("GroupId", getData().group.id);
         compound.putFloat("GroupResistance", getData().group.resistance);
     }
 
-    default void tickElectricity(){
+    default void tickElectricity() {
         if (getData().checkForLoopsNextTick) {
             getOrCreateElectricNetwork().checkForLoops(getBlockPos());
             getData().checkForLoopsNextTick = false;
@@ -122,12 +121,13 @@ public interface IElectric {
             getData().setVoltageNextTick = false;
         }
     }
-    default void lazyTickElectricity(){
+
+    default void lazyTickElectricity() {
         if (getData().failTimer >= 4) {
             this.blockFail();
             getData().failTimer = 0;
             sendStuff();
-        } else if ((getData().voltage > getMaxVoltage() && getMaxVoltage() > 0) || (getCurrent() > getMaxCurrent()&&getMaxCurrent()>0)) {
+        } else if ((getData().voltage > getMaxVoltage() && getMaxVoltage() > 0) || (getCurrent() > getMaxCurrent() && getMaxCurrent() > 0)) {
             getData().failTimer++;
         }
     }
@@ -165,7 +165,7 @@ public interface IElectric {
 
     }
 
-    default BlockPos getBlockPos(){
+    default BlockPos getBlockPos() {
         return BlockPos.of(getPos());
     }
 
@@ -173,21 +173,19 @@ public interface IElectric {
         alreadyChecked.add(BlockPos.of(getPos()));
         updateNextTick();
 
-        if(this instanceof CableConnectorBlockEntity connectorBE){
-            for(CableConnection connection : connectorBE.connections){
+        if (this instanceof CableConnectorBlockEntity connectorBE) {
+            for (CableConnection connection : connectorBE.connections) {
 
-                if(getLevelAccessor().getBlockEntity(connection.blockPos1) instanceof CableConnectorBlockEntity be2 &&!alreadyChecked.contains(BlockPos.of(be2.getPos()))
-                ){
-                 //   this.getLevelAccessor().setBlock(connection.blockPos1.above(2),Blocks.NETHER_BRICKS.defaultBlockState(),3);
+                if (getLevelAccessor().getBlockEntity(connection.blockPos1) instanceof CableConnectorBlockEntity be2 && !alreadyChecked.contains(BlockPos.of(be2.getPos()))
+                ) {
                     be2.updateUnpowered(alreadyChecked);
                 }
             }
         }
 
         for (Direction direction : Direction.values()) {
-            if(getLevelAccessor().getBlockEntity(BlockPos.of(getPos()).relative(direction)) instanceof IElectric be&&!alreadyChecked.contains(BlockPos.of(be.getPos()))){
+            if (getLevelAccessor().getBlockEntity(BlockPos.of(getPos()).relative(direction)) instanceof IElectric be && !alreadyChecked.contains(BlockPos.of(be.getPos()))) {
                 be.updateUnpowered(alreadyChecked);
-               // be.getLevelAccessor().setBlock(BlockPos.of(getPos()).above(2),Blocks.NETHERRACK.defaultBlockState(),3);
             }
         }
     }
@@ -202,14 +200,7 @@ public interface IElectric {
                     .color(Color.RED)
                     .forGoggles(tooltip, 1);
 
-            //  return true;
         }
-
-
-        //CreateLang.text("Network Power ")
-        //        .color(Color.RED)
-        //        .forGoggles(tooltip, 1);
-
 
         if (voltageGeneration() > 0) {
             CreateLang.translate("multimeter.power_generated")
@@ -267,7 +258,7 @@ public interface IElectric {
     default void updateNearbyNetworks(IElectric member) {
         if (true)
             return;
-        //if (member.getData().getsOutsidePower) {
+
 
         for (Direction direction : Direction.values()) {
             if (member.getLevelAccessor().getBlockEntity(BlockPos.of(member.getPos()).relative(direction)) instanceof IElectric be && be.getData().getId() != member.getData().getId()) {
@@ -275,7 +266,7 @@ public interface IElectric {
                 be.updateNextTick();
             }
         }
-        //  }
+
     }
 
     ElectricBlockValues getData();
@@ -310,7 +301,6 @@ public interface IElectric {
     }
 
 
-
     default int getNetworkPowerGeneration() {
         int power = 0;
         for (IElectric member : getOrCreateElectricNetwork().members)
@@ -339,7 +329,7 @@ public interface IElectric {
     }
 
 
-    default float resistance(){
+    default float resistance() {
         return 0;
     }
 
@@ -368,7 +358,6 @@ public interface IElectric {
     }
 
 
-
     default int powerGeneration() {
 
         int powerGeneration = 0;
@@ -376,15 +365,15 @@ public interface IElectric {
         for (Direction direction : Direction.values()) {
             if (hasElectricitySlot(direction)) {
 
-                if (getLevelAccessor().getBlockEntity(getBlockPos().relative(direction)) instanceof VoltageAlteringBlockEntity be&&be.canWork()) {
+                if (getLevelAccessor().getBlockEntity(getBlockPos().relative(direction)) instanceof VoltageAlteringBlockEntity be && be.canWork()) {
 
                     if (be.getData().getId() != getData().getId())
                         if (be.getData().getVoltage() != 0)
                             if (be.hasElectricitySlot(direction)) {
                                 powerGeneration = Math.max(powerGeneration, be.getPowerUsage()) + 1;
-                                if(powerGeneration>be.getNetworkPowerGeneration()) {
+                                if (powerGeneration > be.getNetworkPowerGeneration()) {
                                     powerGeneration = 0;
-                                    be.data.updatePowerNextTick=true;
+                                    be.data.updatePowerNextTick = true;
                                 }
                             }
                 }
@@ -411,27 +400,14 @@ public interface IElectric {
         return getData().getVoltage() == 0 || resistance() == 0 ? 0 : ((float) getData().getVoltage() / (float) resistance());
     }
 
-    default float getCableCurrent() {
-        float current = 0;
-        List<Integer> groups = new ArrayList<>();
-        for (IElectric member : getOrCreateElectricNetwork().members) {
-            if (member.canBeInGroups())
-                if (!groups.contains(member.getData().group.id)) {
-                    current += member.getCurrent();
-                    groups.add(member.getData().group.id);
-                }
-        }
-        return current;
-    }
-
-    default void updateNextTick(){
+    default void updateNextTick() {
         getData().updateNextTick = true;
     }
 
     default void updateNetwork() {
         getOrCreateElectricNetwork().updateNetwork();
         if (getLevelAccessor() instanceof ServerLevel serverLevel)
-            CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(getBlockPos()),new NetworkUpdatePacket(BlockPos.of(getPos())));
+            CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(getBlockPos()), new NetworkUpdatePacket(BlockPos.of(getPos())));
         sendStuff();
     }
 
@@ -439,7 +415,6 @@ public interface IElectric {
 
 
     default void setVoltage(int newVoltage) {
-
 
 
         if (canBeInGroups()) {
@@ -450,10 +425,9 @@ public interface IElectric {
     }
 
 
-    default void setNetworkResistance(int newUsage){
+    default void setNetworkResistance(int newUsage) {
         getData().networkResistance = newUsage;
     }
-
 
 
     default void setNetwork(long network) {

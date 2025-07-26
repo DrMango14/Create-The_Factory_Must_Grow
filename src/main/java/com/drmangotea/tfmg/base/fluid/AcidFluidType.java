@@ -58,10 +58,7 @@ public class AcidFluidType extends AllFluids.TintedFluidType {
 
 
     @Override
-    public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity)
-    {
-
-
+    public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity) {
 
         if(Create.RANDOM.nextInt(2)==0)
             entity.hurt(TFMGDamageSources.acid(entity.level()),2);

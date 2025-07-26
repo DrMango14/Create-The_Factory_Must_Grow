@@ -37,7 +37,6 @@ public class PolarizingCategory extends CreateRecipeCategory<PolarizingRecipe> {
         AllGuiTextures.JEI_DOWN_ARROW.render(graphics, 43, 4);
         this.polarizer.draw(graphics, 48, 27);
 
-
     }
 
     public static class AssemblyPolarizing extends SequencedAssemblySubCategory {

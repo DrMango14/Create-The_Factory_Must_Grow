@@ -17,14 +17,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class DistillationCategory extends CreateRecipeCategory<DistillationRecipe> {
 
-
-
 	public DistillationCategory(Info<DistillationRecipe> info) {
 		super(info);
 	}
-
-
-
 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, DistillationRecipe recipe, IFocusGroup focuses) {
@@ -34,13 +29,6 @@ public class DistillationCategory extends CreateRecipeCategory<DistillationRecip
 		int yModifier = 60 -(outputCount*10);
 		int y = 147-yModifier;
 
-
-		//builder
-		//		.addSlot(RecipeIngredientRole.INPUT, 18, 130-yModifier)
-		//		.setBackground(getRenderedSlot(), -1, -1)
-		//		.addIngredients(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getInputFluid().getMatchingFluidStacks()))
-		//		.addRichTooltipCallback(addFluidTooltip(recipe.getInputFluid().getRequiredAmount()));
-
 		addFluidSlot(builder,18,130-yModifier,recipe.getInputFluid());
 
 
@@ -48,11 +36,6 @@ public class DistillationCategory extends CreateRecipeCategory<DistillationRecip
 			y -= 24;
 
 			addFluidSlot(builder,105,y,recipe.getFluidResults().get(i));
-			//builder
-			//		.addSlot(RecipeIngredientRole.OUTPUT, 105, y)
-			//		.setBackground(getRenderedSlot(), -1, -1)
-			//		.addIngredient(ForgeTypes.FLUID_STACK, withImprovedVisibility(recipe.getFluidResults().get(i)))
-			//		.addRichTooltipCallback(addFluidTooltip(recipe.getFluidResults().get(i).getAmount()));
 		}
 
 	}
@@ -77,5 +60,4 @@ public class DistillationCategory extends CreateRecipeCategory<DistillationRecip
 		TFMGGuiTextures.DISTILLATION_TOWER_TOP.render(graphics,10,y);
 
 	}
-
 }

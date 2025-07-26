@@ -11,6 +11,7 @@ import com.drmangotea.tfmg.content.engines.engine_controller.TransmissionRemoveP
 import com.drmangotea.tfmg.content.engines.engine_controller.packets.*;
 import com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon.AdvancedPotatoCannonPacket;
 import com.drmangotea.tfmg.content.machinery.metallurgy.coke_oven.CokeOvenPacket;
+import com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.controller.DistillationTowerPacket;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatEvaluationPacket;
 import com.simibubi.create.AllPackets;
 import com.simibubi.create.Create;
@@ -32,6 +33,7 @@ public enum TFMGPackets implements BasePacketPayload.PacketTypeProvider {
     CONNECTION_PACKET(ConnectionPacket.class, ConnectionPacket.STREAM_CODEC),
     VAT_EVALUATION(VatEvaluationPacket.class, VatEvaluationPacket.STREAM_CODEC),
     COKE_OVEN_PACKET(CokeOvenPacket.class, CokeOvenPacket.STREAM_CODEC),
+    DISTILLATION_PACKET(DistillationTowerPacket.class, DistillationTowerPacket.STREAM_CODEC),
     UPDATE_IN_FRONT_PACKET(UpdateInFrontPacket.class, UpdateInFrontPacket.STREAM_CODEC),
     TRANSMISSION_REMOVE(TransmissionRemovePacket.class, TransmissionRemovePacket.STREAM_CODEC),
     CABLE_PLACE_PACKET(CablePlacePacket.class, CablePlacePacket.STREAM_CODEC),

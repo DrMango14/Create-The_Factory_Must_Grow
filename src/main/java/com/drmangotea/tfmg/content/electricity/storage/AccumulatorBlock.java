@@ -24,9 +24,6 @@ import java.util.List;
 
 public class AccumulatorBlock extends TFMGDirectionalBlock implements IBE<AccumulatorBlockEntity> {
 
-
-
-
     public AccumulatorBlock(Properties p_49795_) {
         super(p_49795_);
     }
@@ -82,7 +79,7 @@ public class AccumulatorBlock extends TFMGDirectionalBlock implements IBE<Accumu
             BlockPos neighborPos = pos.relative(direction);
             if(level.getBlockState(pos).is(TFMGBlocks.ACCUMULATOR.get()))
                 withBlockEntityDo(level,neighborPos,AccumulatorBlockEntity::refreshMultiblock);
-//
+
         }
         IBE.onRemove(state, level, pos, newState);
     }

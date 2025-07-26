@@ -64,17 +64,7 @@ public class VoltMeterBlock extends TFMGHorizontalDirectionalBlock implements IB
             return InteractionResult.SUCCESS;
         });
 
-        //return onBlockEntityUse(level, pos, be -> {
-//
-        //    be.range = be.getRange() + 100;
-//
-        //    if(be.getRange() > 2000)
-        //        be.range = 100;
-//
-        //    return InteractionResult.SUCCESS;
-//
-//
-        //});
+
 
 
     }

@@ -169,8 +169,7 @@ public class TFMGUtils {
 
         /////////
         IFluidHandler handler = Capabilities.FluidHandler.BLOCK.getCapability(be.getLevel(),be.getBlockPos(),be.getBlockState(),be,null);
-        //Optional<IFluidHandler> resolve = handler.resolve();
-        //if (!resolve.isPresent()) return false;
+
 
         if(handler == null)
             return true;

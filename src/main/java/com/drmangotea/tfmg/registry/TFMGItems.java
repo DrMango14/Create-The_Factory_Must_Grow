@@ -6,7 +6,7 @@ import com.drmangotea.tfmg.base.TFMGRegistrate;
 import com.drmangotea.tfmg.base.TFMGTiers;
 import com.drmangotea.tfmg.content.decoration.gearbox.SteelVerticalGearboxItem;
 import com.drmangotea.tfmg.content.electricity.configuration_wrench.ElectriciansWrenchItem;
-import com.drmangotea.tfmg.content.electricity.debug.DebugCinderBlockItem;
+import com.drmangotea.tfmg.base.debug.DebugCinderBlockItem;
 import com.drmangotea.tfmg.content.electricity.measurement.MultimeterItem;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.MagnetItem;
 import com.drmangotea.tfmg.content.electricity.utilities.resistor.ResistorItem;
@@ -28,7 +28,6 @@ import com.drmangotea.tfmg.content.items.weapons.lithium_blade.LithiumBladeItem;
 import com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon.QuadPotatoCannonItem;
 import com.drmangotea.tfmg.content.machinery.misc.winding_machine.SpoolItem;
 import com.drmangotea.tfmg.content.machinery.oil_processing.OilHammerItem;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.base.DepositItem;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.AssetLookup;
@@ -87,6 +86,7 @@ public class TFMGItems {
             SYNTHETIC_LEATHER = taggedIngredient("synthetic_leather", Tags.Items.LEATHERS, AllTags.commonItemTag("leather")),
             LIMESAND = taggedIngredient("limesand", TFMGTags.TFMGItemTags.FLUX.tag),
             SULFUR_DUST = taggedIngredient("sulfur_dust", commonItemTag("dusts/sulfur"), commonItemTag("dusts")),
+            NITRATE_DUST = taggedIngredient("nitrate_dust", commonItemTag("dusts/saltpeter"), commonItemTag("dusts")),
             RUBBER_SHEET = taggedIngredient("rubber_sheet", commonItemTag("ingots/rubber"), commonItemTag("dusts")),
             SILICON_INGOT = taggedIngredient("silicon_ingot", commonItemTag("ingots/silicon"), commonItemTag("dusts")),
             CRUSHED_LITHIUM = taggedIngredient("crushed_raw_lithium", AllTags.AllItemTags.CRUSHED_RAW_MATERIALS.tag)
@@ -123,7 +123,6 @@ public class TFMGItems {
                     .register(),
             THERMITE_POWDER = REGISTRATE.item("thermite_powder", Item::new).register(),
             STEEL_MECHANISM = REGISTRATE.item("steel_mechanism", Item::new).register(),
-            NITRATE_DUST = REGISTRATE.item("nitrate_dust", Item::new).register(),
             CONCRETE_MIXTURE = REGISTRATE.item("concrete_mixture", Item::new).register(),
             ASPHALT_MIXTURE = REGISTRATE.item("asphalt_mixture", Item::new).register(),
             MAGNETIC_ALLOY_INGOT = REGISTRATE.item("magnetic_alloy_ingot", Item::new).register(),
@@ -224,10 +223,8 @@ public class TFMGItems {
                     .durability(256))
             .register();
 
-    public static final ItemEntry<DepositItem> DEPOSIT_ITEM = REGISTRATE.item("deposit_item", DepositItem::new)
-            .properties(p -> p.stacksTo(1)
-                    .durability(1))
-            .register();
+
+
    // public static final ItemEntry<ArmorItem>
    //         STEEL_HELMET = armor("steel_helmet", TFMGArmorMaterials.STEEL, ArmorItem.Type.HELMET),
    //         STEEL_CHESTPLATE = armor("steel_chestplate", TFMGArmorMaterials.STEEL, ArmorItem.Type.CHESTPLATE),

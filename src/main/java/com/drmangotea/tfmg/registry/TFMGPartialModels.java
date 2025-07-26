@@ -18,7 +18,6 @@ import java.util.*;
 public class TFMGPartialModels {
 
     public static final PartialModel
-            AIR_INTAKE_FAN = block("air_intake/fan"),
             AIR_INTAKE_FAN_MEDIUM = block("air_intake/fan_medium"),
             AIR_INTAKE_FAN_LARGE = block("air_intake/fan_large"),
             AIR_INTAKE_FRAME = block("air_intake/frame"),
@@ -41,19 +40,9 @@ public class TFMGPartialModels {
             LEAD_FLYWHEEL = block("lead_flywheel/block"),
             NICKEL_FLYWHEEL = block("nickel_flywheel/block"),
             DISTILLATION_CONTROLLER_DIAL = block("steel_distillation_controller/dial"),
-            PUMPJACK_HAMMER = block("pumpjack/hammer_holder"),
-            PUMPJACK_FRONT_ROPE = block("pumpjack/pumpjack_front_rope"),
-            PUMPJACK_CONNECTOR = block("pumpjack/pumpjack_connector"),
-            PUMPJACK_CRANK_BLOCK = block("pumpjack/pumpjack_crank_block"),
             PUMPJACK_CRANK = block("pumpjack_crank/crank"),
-            PUMPJACK_CONNECTORS = block("pumpjack_crank/connectors"),
             TOWER_GAUGE = block("distillation_tower/gauge"),
-            SURFACE_SCANNER_DIAL = block("surface_scanner/dial"),
-            SURFACE_SCANNER_FLAG = block("surface_scanner/flag"),
             ROTOR = block("rotor/block"),
-            INGOT_MOLD = block("casting_basin/mold_base"),
-            BlOCK_MOLD = block("casting_basin/block_mold"),
-            STATOR_OUTPUT = block("stator/output"),
             VOLTMETER_DIAL = block("voltmeter/dial"),
             LIGHT_BULB = block("light_bulb/light"),
             ALUMINUM_LAMP = block("aluminum_lamp/light"),
@@ -76,9 +65,6 @@ public class TFMGPartialModels {
             SHAFTLESS_LARGE_STEEL_COGHWEEL = block("large_steel_cogwheel_shaftless"),
             SPOOL = block("winding_machine/spool"),
             SPOOL_WIRE = block("winding_machine/spool_wire"),
-            COPPER_SPOOL = block("winding_machine/copper_spool"),
-            ALUMINUM_SPOOL = block("winding_machine/aluminum_spool"),
-            CONSTANTAN_SPOOL = block("winding_machine/constantan_spool"),
             CYLINDER = block("regular_engine/cylinder"),
             RADIAL_ENGINE_CYLINDER = block("radial_engine/cylinder"),
             SMALL_CYLINDER = block("regular_engine/cylinder_small"),
@@ -107,10 +93,6 @@ public class TFMGPartialModels {
             LARGE_CENTRIFUGE_MIDDLE = block("industrial_mixer/large_centrifuge_middle"),
             LARGE_CENTRIFUGE_TOP = block("industrial_mixer/large_centrifuge_top"),
             LARGE_CENTRIFUGE_ALONE = block("industrial_mixer/large_centrifuge_alone"),
-            COPPER_ELECTRODE = block("electrode_holder/copper_electrode"),
-            ZINC_ELECTRODE = block("electrode_holder/zinc_electrode"),
-            GRAPHITE_ELECTRODE = block("electrode_holder/graphite_electrode"),
-            GRAPHITE_ELECTRODE_SUPERHEATED = block("electrode_holder/superheated_graphite_electrode"),
             SURFACE_SCANNER_LIGHT = block("surface_scanner/light");
 
     //Display Segments

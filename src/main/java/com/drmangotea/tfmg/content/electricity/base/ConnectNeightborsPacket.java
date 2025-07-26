@@ -25,7 +25,6 @@ public class ConnectNeightborsPacket extends BlockEntityDataPacket<SmartBlockEnt
 
     }
 
-
     @Override
     protected void handlePacket(SmartBlockEntity blockEntity) {
 
@@ -33,7 +32,6 @@ public class ConnectNeightborsPacket extends BlockEntityDataPacket<SmartBlockEnt
             be.onPlaced();
 
         }
-
     }
 
     @Override

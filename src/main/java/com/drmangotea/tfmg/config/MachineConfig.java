@@ -5,14 +5,11 @@ import net.createmod.catnip.config.ConfigBase;
 
 public class MachineConfig extends ConfigBase {
 
-
-    public final ConfigInt electricMotorMinimumPower = i(250, 1, "electricMotorMinimumPower", Comments.electricMotorMinimumPower);
-    public final ConfigInt electricMotorMinimumVoltage = i(150, 1, "electricMotorMinimumVoltage", Comments.electricMotorMinimumVoltage);
     public final ConfigFloat electricMotorInternalResistance = f(100, 0, "electricMotorInternalResistance", Comments.electricMotorInternalResistance);
     public final ConfigInt cokeOvenMaxSize = i(5, 1, "cokeOvenMaxSize", Comments.cokeOvenMaxSize);
     public final ConfigFloat FEtoWattTickConversionRate = f(1, 0, "FEtoWattTickConversionRate", Comments.FEtoWattTickConversionRate);
 
-    public final ConfigInt graphiteElectrodeCurrent = i(10, 1, "graphiteElectrodeCurrent", Comments.graphiteElectrodeCurrent);
+
     public final ConfigInt electrolysisMinimumCurrent = i(5, 1, "electrolysisMinimumCurrent", Comments.electrolysisMinimumCurrent);
     public final ConfigInt engineMaxLength = i(5, 1, "engineMaxLength", Comments.engineMaxLength);
     public final ConfigInt surfaceScannerScanDepth = i(-64, -512, "surfaceScannerScanDepth", Comments.surfaceScannerScanDepth);
@@ -59,8 +56,6 @@ public class MachineConfig extends ConfigBase {
         static String blastFurnaceHeight = "Changes the maximum height of the blast furnace.";
         static String blastFurnaceHeightSpeedModifier = "Sets the maximum time that can be saved by increasing blast furnace height.";
         static String blastFurnaceFuelConsumption = "Determines how many ticks does it take to consume one fuel.";
-        static String electricMotorMinimumPower = "Determines the minimum power an electric motor can run on.";
-        static String electricMotorMinimumVoltage = "Determines the minimum voltage an electric motor can run on.";
         static String electricMotorInternalResistance = "Sets the internal resistance of the electric motor.";
         static String cokeOvenMaxSize = "Determines the maximum size of coke ovens.";
         static String accumulatorStorage = "Determines the storage space of accumulators.";
@@ -69,7 +64,6 @@ public class MachineConfig extends ConfigBase {
         static String accumulatorChargingRate = "Sets the maximum charging rate of accumulators.";
         static String fireboxExhaustRequirement = "If set to true,fireboxes will require exhaust management.";
         static String fireboxFuelConsumption = "Determines the amount of fuel a firebox needs to run for 3 seconds.";
-        static String graphiteElectrodeCurrent = "The minimum electric current that will make graphite electrodes superheated.";
         static String electrolysisMinimumCurrent = "The minimum electric current that will make electrolyzers operational.";
         static String engineMaxLength = "The maximum length of engines.";
         static String surfaceScannerScanDepth = "Y level surface scanner scan at.";

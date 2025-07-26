@@ -92,7 +92,7 @@ public class BlastStoveItem extends BlockItem {
         if (controllerTE == null)
             return;
 
-        int width = controllerTE.width;
+        int width = controllerTE.getWidth();
         if (width == 1)
             return;
 
@@ -100,7 +100,7 @@ public class BlastStoveItem extends BlockItem {
         BlockPos startPos = face == Direction.DOWN ? controllerTE.getBlockPos()
                 .below()
                 : controllerTE.getBlockPos()
-                .above(controllerTE.height);
+                .above(controllerTE.getHeight());
 
         if (startPos.getY() != pos.getY())
             return;

@@ -30,10 +30,6 @@ import java.util.function.Function;
 
 public class IndustrialBlastingRecipe extends ProcessingRecipe<RecipeInput, IndustrialBlastingRecipeParams> {
 
-
-
-
-
     public int hotAirUsage;
 
     public IndustrialBlastingRecipe(IndustrialBlastingRecipeParams params) {
@@ -72,15 +68,6 @@ public class IndustrialBlastingRecipe extends ProcessingRecipe<RecipeInput, Indu
         }else return FluidStack.EMPTY;
     }
 
-   //public void readAdditional(JsonObject json) {
-   //    super.readAdditional(json);
-   //    this.hotAirUsage = GsonHelper.getAsInt(json, "hotAirUsage", 0);
-   //}
-
-   //public void writeAdditional(JsonObject json) {
-   //    super.writeAdditional(json);
-   //    json.addProperty("hotAirUsage", this.hotAirUsage);
-   //}
 
     @FunctionalInterface
     public interface Factory<R extends IndustrialBlastingRecipe> extends ProcessingRecipe.Factory<IndustrialBlastingRecipeParams, R> {
@@ -137,8 +124,5 @@ public class IndustrialBlastingRecipe extends ProcessingRecipe<RecipeInput, Indu
         }
 
     }
-
-
-
 
 }

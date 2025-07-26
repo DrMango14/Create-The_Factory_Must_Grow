@@ -27,7 +27,6 @@ public class IndustrialBlastingCategory extends CreateRecipeCategory<IndustrialB
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, IndustrialBlastingRecipe recipe, IFocusGroup focuses) {
 
-
         builder
                 .addSlot(RecipeIngredientRole.INPUT, 25, 13)
                 .setBackground(getRenderedSlot(), -1, -1)

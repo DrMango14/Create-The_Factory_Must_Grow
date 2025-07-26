@@ -52,8 +52,6 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
     protected BlockPos controller;
     protected BlockPos lastKnownPos;
     public boolean updateConnectivity;
-    public int width;
-    public int height;
     private static final Object HotBlastRecipesKey = new Object();
     private static final int SYNC_RATE = 8;
     protected int syncCooldown;
@@ -266,8 +264,6 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
     }
 
     public void refreshCapability() {
-        IFluidHandler oldCap = primaryCapability;
-        IFluidHandler oldSecondaryCap = secondaryCapability;
         primaryCapability = handlerForCapability();
         secondaryCapability = handlerForSecondaryCapability();
         invalidateCapabilities();
@@ -312,7 +308,6 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
         updateConnectivity = compound.contains("Uninitialized");
         controller = null;
         lastKnownPos = null;
-
 
         if (compound.contains("LastKnownPos"))
             lastKnownPos = NbtUtils.readBlockPos(compound, "LastKnownPos").get();
@@ -401,12 +396,6 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
                         .add(mb)
                         .style(ChatFormatting.DARK_GRAY))
                 .forGoggles(tooltip, 1);
-
-
-
-
-
-
         return true;
     }
 
@@ -439,31 +428,6 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
 
     }
 
-    //@Nonnull
-    //@Override
-    //public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-    //    if (!primaryCapability.isPresent())
-    //        refreshCapability();
-    //    if (!secondaryCapability.isPresent())
-    //        refreshCapability();
-    //    if(side==null)
-    //        return LazyOptional.empty();
-//
-//
-//
-    //    if (cap == ForgeCapabilities.FLUID_HANDLER) {
-    //        if(side.getAxis() == Direction.Axis.Y) {
-    //            return primaryCapability.cast();
-    //        }else
-    //        if(getController().getY()==getBlockPos().getY()){
-    //            return secondaryCapability.cast();
-    //        }
-    //    }else
-    //        return super.getCapability(cap, side);
-//
-    //    return LazyOptional.empty();
-    //}
-
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK,
@@ -491,13 +455,6 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
         return primaryOutputInventory;
     }
 
-    public int getTotalTankSize() {
-        return width * width * height;
-    }
-
-    public static int getMaxSize() {
-        return MAX_SIZE;
-    }
 
     public static int getCapacityMultiplier() {
         return AllConfigs.server().fluids.fluidTankCapacity.get() * 1000;
@@ -518,29 +475,10 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
         onFluidStackChanged(primaryOutputInventory.getFluid());
         updateBoilerState();
         setChanged();
-
         updateConnectivity = true;
-        //if(isController())
-        //    for (int yOffset = 0; yOffset < height; yOffset++)
-        //        for (int xOffset = 0; xOffset < width; xOffset++)
-        //            for (int zOffset = 0; zOffset < width; zOffset++)
-        //                if (level.getBlockEntity(
-        //                        worldPosition.offset(xOffset, yOffset, zOffset)) instanceof BlastStoveBlockEntity fbe)
-        //                    fbe.refreshCapability();
+
         sendData();
         setChanged();
-    }
-
-    @Override
-    public void setExtraData(@Nullable Object data) {
-        if (data instanceof Boolean)
-            window = (boolean) data;
-    }
-
-    @Override
-    @Nullable
-    public Object getExtraData() {
-        return window;
     }
 
     @Override
@@ -563,42 +501,5 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
             return getMaxHeight();
         return getMaxWidth();
     }
-
-    @Override
-    public int getMaxWidth() {
-        return MAX_SIZE;
-    }
-
-    @Override
-    public int getHeight() {
-        return height;
-    }
-
-    @Override
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    @Override
-    public int getWidth() {
-        return width;
-    }
-
-    @Override
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    @Override
-    public boolean hasTank() {
-        return true;
-    }
-
-    @Override
-    public void setTankSize(int tank, int blocks) {
-        applyFluidTankSize(blocks);
-    }
-
-
 }
 

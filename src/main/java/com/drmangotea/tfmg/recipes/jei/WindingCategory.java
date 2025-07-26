@@ -32,8 +32,6 @@ public class WindingCategory extends CreateRecipeCategory<WindingRecipe> {
         super(info);
     }
 
-
-
     public void setRecipe(IRecipeLayoutBuilder builder, WindingRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 15, 9).setBackground(getRenderedSlot(), -1, -1).addIngredients(recipe.getIngredients().get(0));
 
@@ -86,7 +84,6 @@ public class WindingCategory extends CreateRecipeCategory<WindingRecipe> {
             ms.scale(0.7F, 0.7F, 0.7F);
             this.windingMachine.draw(graphics, this.getWidth() / 2, 0,coilColor,false);
             ms.popPose();
-
 
         }
     }

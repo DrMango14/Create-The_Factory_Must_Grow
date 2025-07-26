@@ -38,17 +38,7 @@ public class GeneratorBlockEntity extends KineticElectricBlockEntity  {
     public void updateNetwork() {
         super.updateNetwork();
     }
-//
-   // @Override
-   // public float calculateStressApplied() {
-   //     if(getData().voltageSupply == 0)
-   //         return super.calculateStressApplied();
-//
-   //     if(getNetworkResistance() ==0)
-   //         return super.calculateStressApplied();
-//
-   //     return (int)(Math.min(super.calculateStressApplied()+(getGeneratorLoad() * 0.01f), 1000));
-   // }
+
 
     @Override
     public void onSpeedChanged(float previousSpeed) {

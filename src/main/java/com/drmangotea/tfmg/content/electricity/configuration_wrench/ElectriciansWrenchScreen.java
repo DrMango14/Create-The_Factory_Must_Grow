@@ -70,14 +70,6 @@ public class ElectriciansWrenchScreen extends AbstractSimiScreen {
 
     public void addNumber() {
         group++;
-        // CompoundTag tag = wrench.getOrCreateTag();
-//
-        // int number = tag.getInt("Number");
-        // tag.putInt("Number", number+1);
-//
-        // ElectritiansWrenchPacket packet = new ElectritiansWrenchPacket(tag.getInt("Number"), hand);
-        // packet.applyGroup(wrench);
-        // TFMGPackets.getChannel().sendToServer(packet);
     }
 
     @Override
@@ -95,16 +87,6 @@ public class ElectriciansWrenchScreen extends AbstractSimiScreen {
     public void substractNumber() {
         if (group > 0)
             group--;
-
-        //CompoundTag tag = wrench.getOrCreateTag();
-//
-        //int number = tag.getInt("Number");
-        //if(number>0)
-        //    tag.putInt("Number", number-1);
-//
-        //ElectritiansWrenchPacket packet = new ElectritiansWrenchPacket(tag.getInt("Number"), hand);
-        //packet.applyGroup(wrench);
-        //TFMGPackets.getChannel().sendToServer(packet);
     }
 
     public TFMGGuiTextures background() {

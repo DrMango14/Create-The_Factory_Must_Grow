@@ -39,7 +39,7 @@ public class TFMGCableTypes {
             .transform(TFMGResistivity.setResistivity(1f))
             .register();
 
-    // Why is this a thing? I'll leave it her in case you do need it. - Krystal
+    // Why is this a thing? I'll leave it here in case you do need it. - Krystal
     //public static final CableTypeEntry<CableType> steelReinforcedAluminum = REGISTRATE.cableType("steel_reinforced_aluminum", CableType::new)
     //        .properties((p) -> p.color(0xB8A08D).spool(TFMGItems.COPPER_SPOOL))
     //        .transform(TFMGResistivity.setResistivity(0.0027f))

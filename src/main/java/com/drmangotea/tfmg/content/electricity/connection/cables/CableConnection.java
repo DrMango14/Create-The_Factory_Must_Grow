@@ -38,8 +38,6 @@ public class CableConnection {
         compoundTag.putDouble("Y2", pos2.y());
         compoundTag.putDouble("Z2", pos2.z());
 
-        //compoundTag.putLong("BlockPos1", blockPos1.asLong());
-        //compoundTag.putLong("BlockPos2", blockPos2.asLong());
 
         compoundTag.putLong("Pos", blockPos1.asLong());
 
@@ -59,8 +57,6 @@ public class CableConnection {
         CablePos pos1  = new CablePos(compoundTag.getDouble("X1"),compoundTag.getDouble("Y1"),compoundTag.getDouble("Z1"));
         CablePos pos2 = new CablePos(compoundTag.getDouble("X2"),compoundTag.getDouble("Y2"),compoundTag.getDouble("Z2"));
 
-        //BlockPos blockPos1 = BlockPos.of(compoundTag.getLong("BlockPos1"));
-        //BlockPos blockPos2 = BlockPos.of(compoundTag.getLong("BlockPos2"));
 
         BlockPos blockPos1 = BlockPos.of(compoundTag.getLong("Pos"));
 

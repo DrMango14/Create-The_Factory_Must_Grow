@@ -29,11 +29,6 @@ import net.minecraft.world.entity.MobCategory;
 
 public class TFMGEntityTypes {
 
-
-
-
-
-
     public static final EntityEntry<PipeBomb> PIPE_BOMB =
             register("pipe_bomb", PipeBomb::new, () -> PipeBombRenderer::new,
                     MobCategory.MISC, 4, 20, true, true, PipeBomb::build).register();
@@ -70,9 +65,6 @@ public class TFMGEntityTypes {
                     MobCategory.MISC, 80, 20, true, true, LithiumSpark::build).register();
 
 
-
-
-
     private static <T extends Entity> CreateEntityBuilder<T, ?> register(String name, EntityType.EntityFactory<T> factory,
                                                                          NonNullSupplier<NonNullFunction<EntityRendererProvider.Context, EntityRenderer<? super T>>> renderer,
                                                                          MobCategory group, int range, int updateFrequency, boolean sendVelocity, boolean immuneToFire,
@@ -90,8 +82,6 @@ public class TFMGEntityTypes {
                 })
                 .renderer(renderer);
     }
-
-
 
     public static void init(){
 

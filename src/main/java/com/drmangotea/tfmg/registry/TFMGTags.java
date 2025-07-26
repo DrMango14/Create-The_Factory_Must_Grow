@@ -31,8 +31,6 @@ public class TFMGTags {
 
         MOD(TFMG.MOD_ID, false, true),
         COMMON("c")
-
-
         ;
 
         public final String id;
@@ -72,10 +70,6 @@ public class TFMGTags {
 
         TFMGBlockTags(NameSpace namespace) {
             this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
-        }
-
-        TFMGBlockTags(NameSpace namespace, String path) {
-            this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
         }
 
         TFMGBlockTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
@@ -191,17 +185,12 @@ public class TFMGTags {
         public final TagKey<Fluid> tag;
         public final boolean alwaysDatagen;
 
-        TFMGFluidTags() {
-            this(MOD);
-        }
+
 
         TFMGFluidTags(NameSpace namespace) {
             this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
         }
 
-        TFMGFluidTags(NameSpace namespace, String path) {
-            this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
-        }
 
         TFMGFluidTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
             this(namespace, null, optional, alwaysDatagen);

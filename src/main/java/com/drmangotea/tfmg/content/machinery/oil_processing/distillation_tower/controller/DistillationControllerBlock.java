@@ -2,11 +2,15 @@ package com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.
 
 import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlock;
+import com.drmangotea.tfmg.content.machinery.metallurgy.coke_oven.CokeOvenPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
+import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -18,16 +22,20 @@ public class DistillationControllerBlock extends TFMGHorizontalDirectionalBlock 
     }
 
     @Override
-    public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pIsMoving) {
-        SteelTankBlock.updateTowerState(pLevel, pPos.relative(getFacing(pState).getOpposite()),true,false);
+    public void onPlace(BlockState pState, Level level, BlockPos pPos, BlockState pOldState, boolean pIsMoving) {
+        super.onPlace(pState,level,pPos,pOldState,pIsMoving);
+        SteelTankBlock.updateTowerState(level, pPos.relative(getFacing(pState).getOpposite()),true,false);
+        if (level instanceof ServerLevel serverLevel)
+            CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(pPos),new DistillationTowerPacket(pPos,pPos.relative(getFacing(pState).getOpposite()),true));
 
     }
 
     @Override
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean pIsMoving) {
-        if (state.hasBlockEntity() && (!state.is(newState.getBlock()) || !newState.hasBlockEntity()))
-            world.removeBlockEntity(pos);
-        SteelTankBlock.updateTowerState(world, pos.relative(getFacing(state).getOpposite()),false,false);
+
+        super.onRemove(state,world,pos,newState,pIsMoving);
+        IBE.onRemove(state,world,pos,newState);
+
 
     }
 

@@ -1,21 +1,10 @@
 package com.drmangotea.tfmg.content.electricity.configuration_wrench;
 
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGPackets;
-import com.simibubi.create.content.equipment.zapper.PlacementPatterns;
-import com.simibubi.create.content.equipment.zapper.terrainzapper.ConfigureWorldshaperPacket;
-import com.simibubi.create.content.equipment.zapper.terrainzapper.PlacementOptions;
-import com.simibubi.create.content.equipment.zapper.terrainzapper.TerrainBrushes;
-import com.simibubi.create.content.equipment.zapper.terrainzapper.TerrainTools;
-import com.simibubi.create.content.logistics.stockTicker.StockKeeperCategoryEditPacket;
-import io.netty.buffer.ByteBuf;
-import net.createmod.catnip.codecs.stream.CatnipLargerStreamCodecs;
 import net.createmod.catnip.codecs.stream.CatnipStreamCodecs;
 import net.createmod.catnip.net.base.ServerboundPacketPayload;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -29,11 +18,6 @@ public class ElectriciansWrenchPacket implements ServerboundPacketPayload {
             CatnipStreamCodecs.HAND, packet -> packet.hand,
             ElectriciansWrenchPacket::new
     );
-
-
-
-
-
     public final int group;
     public final InteractionHand hand;
 
@@ -43,24 +27,23 @@ public class ElectriciansWrenchPacket implements ServerboundPacketPayload {
     }
 
 
-
     @Override
     public void handle(ServerPlayer player) {
-            if (player == null) {
-                return;
-            }
-            ItemStack stack = player.getItemInHand(hand);
-            if (stack.getItem() instanceof ElectriciansWrenchItem) {
-                applyGroup(stack);
-            }
+        if (player == null) {
+            return;
+        }
+        ItemStack stack = player.getItemInHand(hand);
+        if (stack.getItem() instanceof ElectriciansWrenchItem) {
+            applyGroup(stack);
+        }
 
 
     }
 
-    public void applyGroup(ItemStack stack){
+    public void applyGroup(ItemStack stack) {
 
 
-        stack.set(TFMGDataComponents.CONFIGURATION_WRENCH_NUMBER,group);
+        stack.set(TFMGDataComponents.CONFIGURATION_WRENCH_NUMBER, group);
     }
 
     @Override

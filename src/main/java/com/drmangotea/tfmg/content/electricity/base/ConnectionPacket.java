@@ -19,8 +19,6 @@ public class ConnectionPacket extends BlockEntityDataPacket<SmartBlockEntity> {
 
     public ConnectionPacket(BlockPos pos) {
         super(pos);
-
-
     }
 
 
@@ -30,9 +28,7 @@ public class ConnectionPacket extends BlockEntityDataPacket<SmartBlockEntity> {
         if(blockEntity instanceof IElectric be) {
             be.onConnected();
         }
-
     }
-
 
     @Override
     public PacketTypeProvider getTypeProvider() {

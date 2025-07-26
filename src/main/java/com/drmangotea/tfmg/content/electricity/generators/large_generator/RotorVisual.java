@@ -52,9 +52,6 @@ public class RotorVisual extends KineticBlockEntityVisual<RotorBlockEntity> impl
 			.rotate(new Quaternionf().rotateTo(0, 1, 0, align.getStepX(), align.getStepY(), align.getStepZ()));
 
 
-		//wheel.rotateX((float) Math.PI/2);
-		//wheel.rotateY((float) Math.PI/2);
-		//wheel.rotateZ((float) Math.PI/2);
 
 
 		baseTransform.set(wheel.pose);

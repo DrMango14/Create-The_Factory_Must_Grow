@@ -196,14 +196,6 @@ public class TFMGJei implements IModPlugin {
         Collection<FluidStack> potionFluids = new ArrayList<>(potions.size() * 3);
         Set<Set<Holder<MobEffect>>> visitedEffects = new HashSet<>();
         for (Holder.Reference<Potion> potion : potions) {
-            // @goshante: Ingame potion fluids always have Bottle tag that specifies
-            // to what bottle type this potion belongs
-            // Potion fluid without this tag wouldn't be recognized by other mods
-
-//			for (PotionFluid.BottleType bottleType : PotionFluid.BottleType.values()) {
-//				FluidStack potionFluid = PotionFluid.of(1000, new PotionContents(potion), bottleType);
-//				potionFluids.add(potionFluid);
-//			}
 
             PotionContents potionContents = new PotionContents(potion);
 
@@ -301,7 +293,6 @@ public class TFMGJei implements IModPlugin {
     public void onRuntimeAvailable(IJeiRuntime runtime) {
         TFMGJei.runtime = runtime;
     }
-
 
 }
 

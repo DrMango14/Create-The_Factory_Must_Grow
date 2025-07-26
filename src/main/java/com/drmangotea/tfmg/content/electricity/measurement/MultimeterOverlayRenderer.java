@@ -98,17 +98,6 @@ public class MultimeterOverlayRenderer {
 
 		((IElectric)be).makeMultimeterTooltip(tooltip,isShifting);
 
-        // break early if goggle or hover returned false when present
-		// if ((!isElectricBlock)||!holdsMultimeter) {
-		//	     hoverTicks = 0;
-		//	     return;
-		//	 }
-//
-//
-        //if (tooltip.isEmpty()) {
-        //    hoverTicks = 0;
-        //    return;
-        //}
 
         PoseStack poseStack = graphics.pose();
         poseStack.pushPose();
@@ -161,14 +150,6 @@ public class MultimeterOverlayRenderer {
             return;
         }
 
-        /*
-         * special handling for modernUI
-         *
-         * their tooltip handler causes the overlay to jiggle each frame,
-         * if the mouse is moving, guiScale is anything but 1 and exactPositioning is enabled
-         *
-         * this is a workaround to fix this behavior
-         */
         MouseHandler mouseHandler = Minecraft.getInstance().mouseHandler;
         Window window = Minecraft.getInstance().getWindow();
         double guiScale = window.getGuiScale();
