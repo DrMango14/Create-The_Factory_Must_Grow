@@ -30,11 +30,6 @@
     "tfmg:steel_encased_aluminum_cogwheel",
     "tfmg:heavy_casing_encased_aluminum_cogwheel",
     "tfmg:steel_encased_large_aluminum_cogwheel",
-    "tfmg:heavy_casing_encased_large_aluminum_cogwheel",
-    "tfmg:copper_encased_brass_pipe",
-    "tfmg:copper_encased_steel_pipe",
-    "tfmg:copper_encased_aluminum_pipe",
-    "tfmg:copper_encased_cast_iron_pipe",
-    "tfmg:copper_encased_plastic_pipe"
+    "tfmg:heavy_casing_encased_large_aluminum_cogwheel"
   ]
 }

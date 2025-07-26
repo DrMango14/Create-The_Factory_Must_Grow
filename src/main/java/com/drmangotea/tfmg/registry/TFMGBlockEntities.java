@@ -40,8 +40,7 @@ import com.drmangotea.tfmg.content.electricity.utilities.diode.ElectricDiodeBloc
 import com.drmangotea.tfmg.content.electricity.utilities.electric_motor.ElectricMotorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_pump.ElectricPumpBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_switch.ElectricSwitchBlockEntity;
-import com.drmangotea.tfmg.content.electricity.utilities.fuse_block.FuseBlockEntity;
-import com.drmangotea.tfmg.content.electricity.utilities.fuse_block.FuseBlockRenderer;
+
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerRenderer;
 import com.drmangotea.tfmg.content.electricity.utilities.potentiometer.PotentiometerBlockEntity;
