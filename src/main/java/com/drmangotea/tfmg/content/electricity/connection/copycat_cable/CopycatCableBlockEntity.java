@@ -31,8 +31,6 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
 
     public ElectricBlockValues data = new ElectricBlockValues(getPos());
 
-    int powerPercentage = 100;
-    boolean setNextTick = true;
     public CopycatCableBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         data.connectNextTick = true;
@@ -40,38 +38,19 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
             data.group = new ElectricalGroup(-1);
         }
     }
-    @Override
-    public boolean hasCustomMaterial() {
-        return !AllBlocks.COPYCAT_BASE.has(getMaterial());
-    }
-    @Override
-    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-    }
 
     @Override
     public LevelAccessor getLevelAccessor() {
         return level;
     }
 
-    @Override
-    public boolean destroyed() {
-        return data.destroyed;
-    }
 
-    @Override
-    public ElectricalNetwork getOrCreateElectricNetwork() {
-        if (level.getBlockEntity(BlockPos.of(data.electricalNetworkId)) instanceof IElectric) {
-            return TFMG.NETWORK_MANAGER.getOrCreateNetworkFor((IElectric) level.getBlockEntity(BlockPos.of(data.electricalNetworkId)));
-        } else {
-            ElectricNetworkManager.networks.get(getLevel())
-                    .remove(data.electricalNetworkId);
-            return TFMG.NETWORK_MANAGER.getOrCreateNetworkFor(this);
-        }
-    }
+
 
     @Override
     public void lazyTick() {
         super.lazyTick();
+        lazyTickElectricity();
     }
 
     @Override
@@ -80,114 +59,12 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
     }
 
 
-    @Override
-    public float resistance() {
-        return 0;
-    }
 
-    @Override
-    public int voltageGeneration() {
 
-        int voltageGeneration = 0;
-
-        for (Direction direction : Direction.values()) {
-            if (hasElectricitySlot(direction)) {
-
-                if (level.getBlockEntity(getBlockPos().relative(direction)) instanceof VoltageAlteringBlockEntity be)
-                    if (be.getData().getId() != getData().getId())
-                        if (be.getData().getVoltage() != 0)
-                            if (be.hasElectricitySlot(direction)) {
-                                voltageGeneration = Math.max(voltageGeneration, be.getOutputVoltage());
-                                data.getsOutsidePower = true;
-                            }
-            }
-        }
-
-        if (voltageGeneration == 0)
-            data.getsOutsidePower = false;
-
-        return voltageGeneration;
-    }
-
-    @Override
-    public int powerGeneration() {
-
-        int powerGeneration = 0;
-
-        for (Direction direction : Direction.values()) {
-            if (hasElectricitySlot(direction)) {
-
-                if (level.getBlockEntity(getBlockPos().relative(direction)) instanceof VoltageAlteringBlockEntity be) {
-                    if (be.getData().getId() != getData().getId())
-                        if (be.getData().getVoltage() != 0)
-                            if (be.hasElectricitySlot(direction)) {
-                                powerGeneration = Math.max(powerGeneration, be.getPowerUsage()) + 1;
-                            }
-                }
-            }
-        }
-
-        return powerGeneration;
-    }
-
-    @Override
-    public int frequencyGeneration() {
-        return 0;
-    }
-
-    @Override
-    public void updateNextTick() {
-        data.updateNextTick = true;
-    }
-
-    @Override
-    public void updateNetwork() {
-        getOrCreateElectricNetwork().updateNetwork();
-        if (level instanceof ServerLevel serverLevel)
-            CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(worldPosition),new NetworkUpdatePacket(BlockPos.of(getPos())));
-
-        sendData();
-    }
 
     @Override
     public void sendStuff() {
         sendData();
-    }
-
-    @Override
-    public void setVoltage(int newVoltage) {
-        if (canBeInGroups()) {
-            data.voltage = (int) (((float) resistance() / data.group.resistance) * (float) data.voltageSupply);
-            return;
-        }
-        data.voltage = newVoltage;
-    }
-
-    @Override
-    public void setFrequency(int newFrequency) {
-        data.frequency = newFrequency;
-    }
-
-    @Override
-    public void setNetworkResistance(int newUsage) {
-        data.networkResistance = newUsage;
-    }
-
-    @Override
-    public int getNetworkResistance() {
-        return data.networkResistance;
-    }
-    
-    @Override
-    public void setNetwork(long network) {
-        this.data.electricalNetworkId = network;
-        if (network != getPos())
-            ElectricNetworkManager.networks.get(getLevel())
-                    .remove(getPos());
-    }
-
-    public boolean networkUndersupplied() {
-        return getNetworkPowerUsage() > data.networkPowerGeneration;
     }
 
 
@@ -199,52 +76,20 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
     @Override
     public void remove() {
         super.remove();
-        this.data.destroyed = true;
-        for (Direction d : Direction.values()) {
-            if (hasElectricitySlot(d))
-                if (getLevelAccessor().getBlockEntity(BlockPos.of(getPos()).relative(d)) instanceof IElectric be && be.hasElectricitySlot(d.getOpposite())) {
-                    ElectricNetworkManager.networks.get(getLevel())
-                            .remove(be.getPos());
-                    be.setNetwork(be.getPos());
-                    be.onPlaced();
-                    be.updateNextTick();
-                }
-        }
-        if (data.electricalNetworkId != getPos())
-            getOrCreateElectricNetwork().getMembers().remove(this);
-
-        if (data.electricalNetworkId == getPos())
-            ElectricNetworkManager.networks.get(getLevel())
-                    .remove(getData().getId());
+       onRemoved();
     }
 
     @Override
     public void tick() {
         super.tick();
-        if (data.connectNextTick) {
-            onPlaced();
-            data.connectNextTick = false;
-        }
-        if (data.updateNextTick) {
-            updateNetwork();
-            data.updateNextTick = false;
-        }
-        if (data.setVoltageNextTick) {
-            setVoltage(data.voltageSupply);
-            data.setVoltageNextTick = false;
-        }
-        //if(setNextTick) {
-        //    setMaterial(TFMGBlocks.COPYCAT_CABLE_BASE.getDefaultState());
-        //    setNextTick = false;
-        //}
+       tickElectricity();
     }
 
     @Override
     protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.write(compound,registries , clientPacket);
 
-        compound.putInt("GroupId", data.group.id);
-        compound.putFloat("GroupResistance", data.group.resistance);
+        writeElectricity(compound,clientPacket);
     }
 
     @Override
@@ -264,9 +109,6 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
         }
 
         //
-        data.group = new ElectricalGroup(compound.getInt("GroupId"));
-        data.group.resistance = compound.getFloat("GroupResistance");
-        if (!clientPacket)
-            data.connectNextTick = true;
+        readElectricity(compound,clientPacket);
     }
 }
