@@ -167,7 +167,14 @@
 
 
   "tfmg.subtitle.engine_sounds": "Engine Sounds",
-  "tfmg.subtitle.diesel_engine_sounds": "Diesel Engine Sounds"
+  "tfmg.subtitle.diesel_engine_sounds": "Diesel Engine Sounds",
+
+  "create.flamethrower.fuel.spread": "%s Projectile Spread",
+  "create.flamethrower.fuel.speed": "%s Projectile Speed",
+  "create.flamethrower.fuel.amount": "%s Projectile Amount",
+  "create.flamethrower.fuel.cold": "Cold Flame",
+  "create.flamethrower.fuel.hellfire": "Scorching Flame",
+  "create.flamethrower.fuel.capacity": "Fuel Capacity: %s"
 
 
 }

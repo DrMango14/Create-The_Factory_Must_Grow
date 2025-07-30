@@ -2,6 +2,8 @@ package com.drmangotea.tfmg.datagen;
 
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.TFMGRegistries;
+import com.drmangotea.tfmg.registry.TFMGFlamethrowerFuelTypes;
 import com.drmangotea.tfmg.worldgen.TFMGBiomeModifiers;
 import com.drmangotea.tfmg.worldgen.TFMGConfiguredFeatures;
 import com.drmangotea.tfmg.worldgen.TFMGPlacedFeatures;
@@ -17,7 +19,8 @@ import java.util.concurrent.CompletableFuture;
 
 public class TFMGGeneratedEntriesProvider extends DatapackBuiltinEntriesProvider {
     private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-            .add(Registries.CONFIGURED_FEATURE, (RegistrySetBuilder.RegistryBootstrap) TFMGConfiguredFeatures::bootstrap)
+            .add(TFMGRegistries.FLAMETHROWER_FUEL_TYPE, TFMGFlamethrowerFuelTypes::bootstrap)
+            .add(Registries.CONFIGURED_FEATURE, TFMGConfiguredFeatures::bootstrap)
             .add(Registries.PLACED_FEATURE, TFMGPlacedFeatures::bootstrap)
             .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, TFMGBiomeModifiers::bootstrap)
             .add(Registries.DAMAGE_TYPE, TFMGDamageTypes::bootstrap);

@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.registry;
 
+import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode.ArcElectrode;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode.Electrode;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode.ElectrodeEntry;
 
@@ -27,11 +28,10 @@ public class TFMGElectrodes {
             )
             .register();
 
-    public static final ElectrodeEntry<Electrode> graphite = REGISTRATE.electrode("graphite", Electrode::new)
+    public static final ElectrodeEntry<ArcElectrode> graphite = REGISTRATE.electrode("graphite", ArcElectrode::new)
             .properties((p) -> p
                     .resistance(300)
                     .item(TFMGItems.GRAPHITE_ELECTRODE)
-                    .operationId("tfmg:graphite_electrode")
             )
             .register();
 

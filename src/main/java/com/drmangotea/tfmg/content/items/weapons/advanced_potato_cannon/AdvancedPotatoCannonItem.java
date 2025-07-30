@@ -90,14 +90,7 @@ public class AdvancedPotatoCannonItem extends ProjectileWeaponItem implements Cu
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		return findAmmoInInventory(world, player, stack).map(itemStack -> {
-
-
-
-
-			//if(itemStack.isEmpty())
-			//	return InteractionResultHolder.fail(stack);
-
+		return findAmmoInInventory(player).map(itemStack -> {
 			if (ShootableGadgetItemMethods.shouldSwap(player, stack, hand, this::isCannon))
 				return InteractionResultHolder.fail(stack);
 
@@ -147,8 +140,8 @@ public class AdvancedPotatoCannonItem extends ProjectileWeaponItem implements Cu
 			AllSoundEvents.FWOOMP.play(world,player,player.getX(),player.getY(),player.getZ(),1,0.2f);
 
 			ShootableGadgetItemMethods.applyCooldown(player, stack, hand, this::isCannon, cooldown);
-			//ShootableGadgetItemMethods.sendPackets(player,
-			//	b -> new AdvancedPotatoCannonPacket(barrelPos, lookVec.normalize(), itemStack, hand, soundPitch, b));
+			ShootableGadgetItemMethods.sendPackets(player,
+				b -> new AdvancedPotatoCannonPacket(barrelPos, lookVec.normalize(), itemStack, hand, soundPitch, b));
 			return InteractionResultHolder.success(stack);
 		})
 			.orElse(InteractionResultHolder.pass(stack));
@@ -159,9 +152,7 @@ public class AdvancedPotatoCannonItem extends ProjectileWeaponItem implements Cu
 		return slotChanged || newStack.getItem() != oldStack.getItem();
 	}
 
-	private Optional<ItemStack> findAmmoInInventory(Level world, Player player, ItemStack held) {
-
-
+	protected static Optional<ItemStack> findAmmoInInventory(Player player) {
 		for(int i = 0; i < player.getInventory().getContainerSize(); ++i) {
 			ItemStack stack = player.getInventory().getItem(i);
 			if(stack.is(TFMGItems.NAPALM_POTATO.get())){

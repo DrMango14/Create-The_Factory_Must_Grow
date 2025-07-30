@@ -20,6 +20,8 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
@@ -37,7 +39,9 @@ public class TFMGPipeEntry {
     private final BlockEntry<? extends TFMGSmartFluidPipeBlock> smart;
     private final BlockEntry<? extends TFMGFluidValveBlock> valve;
 
+    @OnlyIn(Dist.CLIENT)
     private NonNullFunction<BakedModel, ? extends BakedModel> attachmentModel;
+
     private CTSpriteShiftEntry encasedSpriteShift;
 
     public TFMGPipeEntry(TFMGPipes.PipeMaterial material, TFMGRegistrate registrate) {
@@ -51,6 +55,7 @@ public class TFMGPipeEntry {
         this.valve = registerValve();
     }
 
+    @OnlyIn(Dist.CLIENT)
     public TFMGPipeEntry attachmentModel(NonNullFunction<BakedModel, ? extends BakedModel> attachmentModel) {
         this.attachmentModel = attachmentModel;
         return this;

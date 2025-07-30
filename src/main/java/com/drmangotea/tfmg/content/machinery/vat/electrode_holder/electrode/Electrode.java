@@ -1,10 +1,13 @@
 package com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode;
 
+import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.Util;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class Electrode {
     private String descriptionId;
@@ -34,6 +37,10 @@ public class Electrode {
 
     public String getOperationId() {
         return this.operationId;
+    }
+
+    public void tick(VatBlockEntity controllerVat, Level level, BlockPos pos, boolean active, boolean clientTick) {
+
     }
 
     public String getOrCreateDescriptionId() {

@@ -67,12 +67,12 @@ public class Spark extends ThrowableProjectile {
             }
         }
     }
-    protected void onHitBlock(BlockHitResult p_37384_) {
-        super.onHitBlock(p_37384_);
+    protected void onHitBlock(BlockHitResult hitResult) {
+        super.onHitBlock(hitResult);
         if (!this.level().isClientSide) {
             Entity entity = this.getOwner();
             if (!(entity instanceof Mob) ) {
-                BlockPos blockpos = p_37384_.getBlockPos().relative(p_37384_.getDirection());
+                BlockPos blockpos = hitResult.getBlockPos().relative(hitResult.getDirection());
                 if (this.level().isEmptyBlock(blockpos)) {
                     this.level().setBlockAndUpdate(blockpos, BaseFireBlock.getState(this.level(), blockpos));
                 }
@@ -84,7 +84,10 @@ public class Spark extends ThrowableProjectile {
         super.onHitEntity(p_37386_);
         if (!this.level().isClientSide) {
             Entity entity = p_37386_.getEntity();
-            entity.setRemainingFireTicks(10);
+            entity.igniteForSeconds(4.0F);
+            if (entity.getRemainingFireTicks() > 0 && !entity.fireImmune()) {
+                entity.hurt(this.damageSources().onFire(), 1.0F);
+            }
         }
     }
 

@@ -4,16 +4,16 @@ package com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon;
 
 
 
+import com.drmangotea.tfmg.TFMGClient;
 import com.simibubi.create.AllEnchantments;
 import com.simibubi.create.AllEntityTypes;
-import com.simibubi.create.CreateClient;
 import com.simibubi.create.api.equipment.potatoCannon.PotatoCannonProjectileType;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.content.equipment.potatoCannon.PotatoCannonItem;
-import com.simibubi.create.content.equipment.potatoCannon.PotatoCannonPacket;
 import com.simibubi.create.content.equipment.potatoCannon.PotatoProjectileEntity;
 import com.simibubi.create.content.equipment.zapper.ShootableGadgetItemMethods;
 import com.simibubi.create.foundation.item.CustomArmPoseItem;
+import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import com.simibubi.create.foundation.utility.CreateLang;
 import com.simibubi.create.foundation.utility.GlobalRegistryAccess;
 import com.simibubi.create.infrastructure.config.AllConfigs;
@@ -44,7 +44,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -53,10 +52,12 @@ import net.minecraft.world.phys.Vec3;
 
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class QuadPotatoCannonItem extends ProjectileWeaponItem implements CustomArmPoseItem {
@@ -91,7 +92,7 @@ public class QuadPotatoCannonItem extends ProjectileWeaponItem implements Custom
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack heldStack = player.getItemInHand(hand);
-        if (ShootableGadgetItemMethods.shouldSwap(player, heldStack, hand, s -> s.getItem() instanceof PotatoCannonItem)) {
+        if (ShootableGadgetItemMethods.shouldSwap(player, heldStack, hand, s -> s.getItem() instanceof QuadPotatoCannonItem)) {
             return InteractionResultHolder.fail(heldStack);
         }
 
@@ -103,7 +104,7 @@ public class QuadPotatoCannonItem extends ProjectileWeaponItem implements Custom
         PotatoCannonProjectileType projectileType = ammo.type();
 
         if (level.isClientSide) {
-            CreateClient.POTATO_CANNON_RENDER_HANDLER.dontAnimateItem(hand);
+            TFMGClient.QUAD_POTATO_CANNON_RENDER_HANDLER.dontAnimateItem(hand);
             return InteractionResultHolder.success(heldStack);
         }
 
@@ -157,9 +158,9 @@ public class QuadPotatoCannonItem extends ProjectileWeaponItem implements Custom
         if (!BacktankUtil.canAbsorbDamage(player, maxUses()))
             heldStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 
-        ShootableGadgetItemMethods.applyCooldown(player, heldStack, hand, s -> s.getItem() instanceof PotatoCannonItem, projectileType.reloadTicks());
+        ShootableGadgetItemMethods.applyCooldown(player, heldStack, hand, s -> s.getItem() instanceof QuadPotatoCannonItem, projectileType.reloadTicks());
         ShootableGadgetItemMethods.sendPackets(player,
-                b -> new PotatoCannonPacket(barrelPos, lookVec.normalize(), ammoStack, hand, soundPitch, b));
+                b -> new QuadPotatoCannonPacket(barrelPos, lookVec.normalize(), ammoStack, hand, soundPitch, b));
         return InteractionResultHolder.success(heldStack);
     }
 
@@ -300,6 +301,12 @@ public class QuadPotatoCannonItem extends ProjectileWeaponItem implements Custom
             return HumanoidModel.ArmPose.CROSSBOW_HOLD;
         }
         return null;
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(SimpleCustomRenderer.create(this, new QuadPotatoCannonItemRenderer()));
     }
 
 

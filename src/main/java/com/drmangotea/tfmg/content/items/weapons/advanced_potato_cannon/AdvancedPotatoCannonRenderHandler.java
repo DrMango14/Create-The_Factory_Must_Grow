@@ -1,10 +1,10 @@
 package com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon;
 
-import com.drmangotea.tfmg.registry.TFMGItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.equipment.potatoCannon.PotatoProjectileEntity;
 import com.simibubi.create.content.equipment.zapper.ShootableGadgetRenderHandler;
 import com.simibubi.create.foundation.particle.AirParticleData;
+import dev.engine_room.flywheel.lib.transform.TransformStack;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -25,14 +25,13 @@ public class AdvancedPotatoCannonRenderHandler extends ShootableGadgetRenderHand
 
 	@Override
 	protected boolean appliesTo(ItemStack stack) {
-		return false;
+		return stack.getItem() instanceof AdvancedPotatoCannonItem;
 	}
 
 	public void beforeShoot(float nextPitch, Vec3 location, Vec3 motion, ItemStack stack) {
 		this.nextPitch = nextPitch;
 		if (stack.isEmpty())
 			return;
-
 
 		ClientLevel world = Minecraft.getInstance().level;
 		for (int i = 0; i < 2; i++) {
@@ -47,12 +46,17 @@ public class AdvancedPotatoCannonRenderHandler extends ShootableGadgetRenderHand
 
 	@Override
 	protected void transformTool(PoseStack ms, float flip, float equipProgress, float recoil, float pt) {
-
+		ms.translate(flip * -.1f, 0.125, .34f);
+		ms.scale(.75f, .75f, .75f);
+		TransformStack.of(ms)
+				.rotateXDegrees(recoil * 80);
 	}
 
 	@Override
 	protected void transformHand(PoseStack ms, float flip, float equipProgress, float recoil, float pt) {
-
+		ms.translate(flip * -.09, -.275, -.25);
+		TransformStack.of(ms)
+				.rotateZDegrees(flip * -10);
 	}
 
 }

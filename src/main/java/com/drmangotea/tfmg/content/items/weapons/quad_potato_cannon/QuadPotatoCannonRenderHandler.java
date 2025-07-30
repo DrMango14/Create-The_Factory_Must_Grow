@@ -1,10 +1,10 @@
 package com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon;
 
-import com.drmangotea.tfmg.registry.TFMGItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.equipment.potatoCannon.PotatoProjectileEntity;
 import com.simibubi.create.content.equipment.zapper.ShootableGadgetRenderHandler;
 import com.simibubi.create.foundation.particle.AirParticleData;
+import dev.engine_room.flywheel.lib.transform.TransformStack;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -25,7 +25,7 @@ public class QuadPotatoCannonRenderHandler extends ShootableGadgetRenderHandler 
 
     @Override
     protected boolean appliesTo(ItemStack stack) {
-        return false;
+        return stack.getItem() instanceof QuadPotatoCannonItem;
     }
 
     public void beforeShoot(float nextPitch, Vec3 location, Vec3 motion, ItemStack stack) {
@@ -47,12 +47,17 @@ public class QuadPotatoCannonRenderHandler extends ShootableGadgetRenderHandler 
 
     @Override
     protected void transformTool(PoseStack ms, float flip, float equipProgress, float recoil, float pt) {
-
+        ms.translate(flip * -.1f, 0, .14f);
+        ms.scale(.75f, .75f, .75f);
+        TransformStack.of(ms)
+                .rotateXDegrees(recoil * 80);
     }
 
     @Override
     protected void transformHand(PoseStack ms, float flip, float equipProgress, float recoil, float pt) {
-
+        ms.translate(flip * -.09, -.275, -.25);
+        TransformStack.of(ms)
+                .rotateZDegrees(flip * -10);
     }
 
 }

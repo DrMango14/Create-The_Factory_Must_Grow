@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon;
 
 
 import com.drmangotea.tfmg.TFMGClient;
+import com.drmangotea.tfmg.registry.TFMGItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.content.equipment.potatoCannon.PotatoCannonItem;
@@ -12,39 +13,59 @@ import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.client.IItemDecorator;
 
 public class QuadPotatoCannonItemRenderer extends CustomRenderedItemModelRenderer {
-    @Override
-    protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer,
-                          ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-        ItemRenderer itemRenderer = Minecraft.getInstance()
-                .getItemRenderer();
-        renderer.render(model.getOriginalModel(), light);
+    public static final IItemDecorator DECORATOR = (guiGraphics, font, stack, xOffset, yOffset) -> {
         LocalPlayer player = Minecraft.getInstance().player;
-        boolean mainHand = player.getMainHandItem() == stack;
-        boolean offHand = player.getOffhandItem() == stack;
-        boolean leftHanded = player.getMainArm() == HumanoidArm.LEFT;
+        if (player == null) {
+            return false;
+        }
 
-        float offset = .5f / 16;
-        float worldTime = AnimationTickHolder.getRenderTime() / 10;
-        float angle = worldTime * -25;
-        float speed = TFMGClient.QUAD_POTATO_CANNON_RENDER_HANDLER.getAnimation(mainHand ^ leftHanded,
-                AnimationTickHolder.getPartialTicks());
+        PotatoCannonItem.Ammo ammo = QuadPotatoCannonItem.getAmmo(player, stack);
+        if (ammo == null || TFMGItems.QUAD_POTATO_CANNON.is(ammo.stack())) {
+            return false;
+        }
 
-        if (mainHand || offHand)
-            angle += 360 * Mth.clamp(speed * 5, 0, 1);
+        PoseStack poseStack = guiGraphics.pose();
+        poseStack.pushPose();
+        poseStack.translate(xOffset, yOffset + 8, 100);
+        poseStack.scale(.5f, .5f, .5f);
+        guiGraphics.renderItem(ammo.stack(), 0, 0);
+        poseStack.popPose();
+        return false;
+    };
+
+    @Override
+    protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+        renderer.render(model.getOriginalModel(), light);
+        Minecraft mc = Minecraft.getInstance();
+        LocalPlayer player = mc.player;
+
+        float angle = AnimationTickHolder.getRenderTime() * -2.5f;
+
+        if (player != null) {
+            boolean inMainHand = player.getMainHandItem() == stack;
+            boolean inOffHand = player.getOffhandItem() == stack;
+            if (inMainHand || inOffHand) {
+                boolean leftHanded = player.getMainArm() == HumanoidArm.LEFT;
+                float speed = TFMGClient.QUAD_POTATO_CANNON_RENDER_HANDLER.getAnimation(inMainHand ^ leftHanded,
+                        AnimationTickHolder.getPartialTicks());
+                angle += 360 * Mth.clamp(speed * 5, 0, 1);
+            }
+        }
+
         angle %= 360;
+        float offset = .5f / 16;
 
         ms.pushPose();
         ms.translate(0, offset, 0);
         ms.mulPose(Axis.ZP.rotationDegrees(angle));
         ms.translate(0, -offset, 0);
-      //  renderer.render(model.getPartial("cog"), light);
         ms.popPose();
 
 

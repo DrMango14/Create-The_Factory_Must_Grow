@@ -70,6 +70,19 @@ public class ElectrodeHolderBlockEntity extends ElectricBlockEntity implements I
     }
 
     @Override
+    public void tick() {
+        super.tick();
+
+        if (level == null) return;
+
+        var vatBE = level.getBlockEntity(getBlockPos().relative(Direction.DOWN));
+        if (vatBE instanceof VatBlockEntity vat) {
+            BlockPos electrodePos = getBlockPos().relative(Direction.DOWN);
+            this.electrode.tick(vat.getControllerBE(), this.level, electrodePos, isOperational(), this.level.isClientSide());
+        }
+    }
+
+    @Override
     public float resistance() {
         return this.electrode.getResistance();
     }

@@ -5,6 +5,8 @@ import java.util.UUID;
 import java.util.function.UnaryOperator;
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.content.items.weapons.flamethrover.FlamethrowerFuel;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.ApiStatus.Internal;
 
 import com.mojang.serialization.Codec;
@@ -77,9 +79,9 @@ public class TFMGDataComponents {
 			"timer",
 			builder -> builder.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT)
 	);
-	public static final DataComponentType<String> FLAMETHROWER_FUEL = register(
+	public static final DataComponentType<FlamethrowerFuel> FLAMETHROWER_FUEL = register(
 			"flamethrower_fuel",
-			builder -> builder.persistent(Codec.STRING).networkSynchronized(ByteBufCodecs.STRING_UTF8)
+			builder -> builder.persistent(FlamethrowerFuel.CODEC).networkSynchronized(FlamethrowerFuel.STREAM_CODEC)
 	);
 	public static final DataComponentType<Integer> ACCUMULATOR_STORAGE = register(
 			"storage",

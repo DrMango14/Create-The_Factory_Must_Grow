@@ -1,10 +1,8 @@
 package com.drmangotea.tfmg.content.machinery.vat.base;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.mixin.accessor.TankSegmentAccessor;
 import com.drmangotea.tfmg.recipes.VatMachineRecipe;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
-import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.simibubi.create.api.boiler.BoilerHeater;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
@@ -24,9 +22,8 @@ import com.simibubi.create.foundation.recipe.RecipeFinder;
 import com.simibubi.create.foundation.utility.CreateLang;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.createmod.catnip.animation.LerpedFloat;
+import net.createmod.catnip.data.Couple;
 import net.createmod.catnip.lang.LangBuilder;
-import net.createmod.catnip.platform.CatnipServices;
-import net.createmod.catnip.theme.Color;
 import net.createmod.ponder.api.level.PonderLevel;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -35,13 +32,11 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -59,7 +54,6 @@ import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -73,6 +67,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
     public VatInventory outputInventory;
     public SmartFluidTankBehaviour inputTank;
     public SmartFluidTankBehaviour outputTank;
+    private Couple<SmartFluidTankBehaviour> tanks;
     protected IFluidHandler fluidCapability;
     protected IItemHandlerModifiable itemCapability;
     protected boolean forceFluidLevelUpdate;
@@ -112,6 +107,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         //     window = false;
         inputInventory = new VatInventory(4, this);
         outputInventory = new VatInventory(4, this);
+        tanks = Couple.create(inputTank, outputTank);
         itemCapability = new CombinedInvWrapper(inputInventory, outputInventory);
         forceFluidLevelUpdate = true;
         updateConnectivity = false;
@@ -122,6 +118,10 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         refreshCapability();
 
 
+    }
+
+    public Couple<SmartFluidTankBehaviour> getTanks() {
+        return tanks;
     }
 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
@@ -186,9 +186,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
             int tankNumber = 0;
             for (int i = 0; i < 8; i++) {
                 IFluidHandler fluidHandler = fluidCapability;
-
                 if(fluidHandler != null) {
-
                     fluidLevel[i].chase((double) (fluidHandler.getFluidInTank(tankNumber).getAmount()) / inputTank.getPrimaryHandler().getCapacity(), .5f, LerpedFloat.Chaser.EXP);
                     getFillState();
                     tankNumber++;
@@ -602,8 +600,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
 
         recipe = getMatchingRecipe();
         FluidStack newFluidStack = inputTank.getPrimaryHandler().getFluid();
-        FluidType attributes = newFluidStack.getFluid()
-                .getFluidType();
+        FluidType attributes = newFluidStack.getFluid().getFluidType();
         int luminosity = (int) (attributes.getLightLevel(newFluidStack) / 1.2f);
         boolean reversed = attributes.isLighterThanAir();
         int maxY = (int) ((getFillState() * height) + 1);
@@ -707,6 +704,43 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         notifyUpdate();
     }
 
+    public int getTotalCapacity() {
+        int totalCapacity = 0;
+        for (SmartFluidTankBehaviour behaviour : getTanks()) {
+            if (behaviour == null)
+                continue;
+            for (SmartFluidTankBehaviour.TankSegment tankSegment : behaviour.getTanks()) {
+                totalCapacity += ((TankSegmentAccessor)tankSegment).tfmg$tank().getCapacity();
+            }
+        }
+        return totalCapacity;
+    }
+
+    public float getTotalFluidUnits(float partialTicks) {
+        int renderedFluids = 0;
+        float totalUnits = 0;
+
+        for (SmartFluidTankBehaviour behaviour : getTanks()) {
+            if (behaviour == null)
+                continue;
+            for (SmartFluidTankBehaviour.TankSegment tankSegment : behaviour.getTanks()) {
+                if (tankSegment.getRenderedFluid()
+                        .isEmpty())
+                    continue;
+                float units = tankSegment.getTotalUnits(partialTicks);
+                if (units < 1)
+                    continue;
+                totalUnits += units;
+                renderedFluids++;
+            }
+        }
+
+        if (renderedFluids == 0)
+            return 0;
+        if (totalUnits < 1)
+            return 0;
+        return totalUnits;
+    }
 
     public boolean isAtValidLocation(IVatMachine.PositionRequirement requirement, BlockPos pos) {
         return switch (requirement) {
@@ -725,25 +759,20 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
     }
 
     public void applyVatSize(int blocks) {
-
-
-        //inputTank.getPrimaryHandler().setCapacity(blocks * getCapacityMultiplier());
-        //outputTank.getPrimaryHandler().setCapacity(blocks * getCapacityMultiplier());
-
         inputTank.forEach(s -> {
-            ((TankSegmentAccessor) s).tfmg$tank().setCapacity(blocks * getCapacityMultiplier());
+            SmartFluidTank tank = ((TankSegmentAccessor) s).tfmg$tank();
+            tank.setCapacity(blocks * getCapacityMultiplier());
+            int overflow = tank.getFluidAmount() - tank.getCapacity();
+            if (overflow > 0)
+                tank.drain(overflow, IFluidHandler.FluidAction.EXECUTE);
         });
         outputTank.forEach(s -> {
-            ((TankSegmentAccessor) s).tfmg$tank().setCapacity(blocks * getCapacityMultiplier());
+            SmartFluidTank tank = ((TankSegmentAccessor) s).tfmg$tank();
+            tank.setCapacity(blocks * getCapacityMultiplier());
+            int overflow = tank.getFluidAmount() - tank.getCapacity();
+            if (overflow > 0)
+                tank.drain(overflow, IFluidHandler.FluidAction.EXECUTE);
         });
-        int overflow = inputTank.getPrimaryHandler().getFluidAmount() - inputTank.getPrimaryHandler().getCapacity();
-        if (overflow > 0)
-            inputTank.getPrimaryHandler().drain(overflow, IFluidHandler.FluidAction.EXECUTE);
-
-
-        int overflow2 = outputTank.getPrimaryHandler().getFluidAmount() - outputTank.getPrimaryHandler().getCapacity();
-        if (overflow2 > 0)
-            outputTank.getPrimaryHandler().drain(overflow2, IFluidHandler.FluidAction.EXECUTE);
 
         forceFluidLevelUpdate = true;
 
@@ -1012,12 +1041,18 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
             window = compound.getBoolean("Window");
             width = compound.getInt("Size");
             height = compound.getInt("Height");
-            inputTank.getPrimaryHandler().setCapacity(getTotalTankSize() * getCapacityMultiplier());
-            outputTank.getPrimaryHandler().setCapacity(getTotalTankSize() * getCapacityMultiplier());
-            if (inputTank.getPrimaryHandler().getSpace() < 0)
-                inputTank.getPrimaryHandler().drain(-inputTank.getPrimaryHandler().getSpace(), IFluidHandler.FluidAction.EXECUTE);
-            if (outputTank.getPrimaryHandler().getSpace() < 0)
-                outputTank.getPrimaryHandler().drain(-outputTank.getPrimaryHandler().getSpace(), IFluidHandler.FluidAction.EXECUTE);
+            inputTank.forEach(s -> {
+                SmartFluidTank tank = ((TankSegmentAccessor) s).tfmg$tank();
+                tank.setCapacity(getTotalTankSize() * getCapacityMultiplier());
+                if (tank.getSpace() < 0)
+                    tank.drain(-tank.getSpace(), IFluidHandler.FluidAction.EXECUTE);
+            });
+            outputTank.forEach(s -> {
+                SmartFluidTank tank = ((TankSegmentAccessor) s).tfmg$tank();
+                tank.setCapacity(getTotalTankSize() * getCapacityMultiplier());
+                if (tank.getSpace() < 0)
+                    tank.drain(-tank.getSpace(), IFluidHandler.FluidAction.EXECUTE);
+            });
             inputInventory.deserializeNBT(registries,compound.getCompound("InputItems"));
             outputInventory.deserializeNBT(registries,compound.getCompound("OutputItems"));
             //
@@ -1041,8 +1076,8 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
             if (hasLevel())
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 16);
             if (isController()) {
-                inputTank.getPrimaryHandler().setCapacity(getCapacityMultiplier() * getTotalTankSize());
-                outputTank.getPrimaryHandler().setCapacity(getCapacityMultiplier() * getTotalTankSize());
+                inputTank.forEach(s -> ((TankSegmentAccessor) s).tfmg$tank().setCapacity(getCapacityMultiplier() * getTotalTankSize()));
+                outputTank.forEach(s -> ((TankSegmentAccessor) s).tfmg$tank().setCapacity(getCapacityMultiplier() * getTotalTankSize()));
             }
             invalidateRenderBoundingBox();
         }

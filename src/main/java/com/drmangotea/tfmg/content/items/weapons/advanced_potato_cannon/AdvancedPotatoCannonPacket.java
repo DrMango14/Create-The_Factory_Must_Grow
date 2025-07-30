@@ -21,8 +21,6 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 
 public class AdvancedPotatoCannonPacket extends ShootGadgetPacket {
-
-
 		public static final StreamCodec<RegistryFriendlyByteBuf, AdvancedPotatoCannonPacket> STREAM_CODEC = StreamCodec.composite(
 				CatnipStreamCodecs.VEC3, packet -> packet.location,
 				CatnipStreamCodecs.VEC3, packet -> packet.motion,
@@ -47,17 +45,17 @@ public class AdvancedPotatoCannonPacket extends ShootGadgetPacket {
 		@Override
 		@OnlyIn(Dist.CLIENT)
 		protected void handleAdditional() {
-			CreateClient.POTATO_CANNON_RENDER_HANDLER.beforeShoot(pitch, location, motion, item);
+			TFMGClient.ADVANCED_POTATO_CANNON_RENDER_HANDLER.beforeShoot(pitch, location, motion, item);
 		}
 
 		@Override
 		@OnlyIn(Dist.CLIENT)
 		protected ShootableGadgetRenderHandler getHandler() {
-			return CreateClient.POTATO_CANNON_RENDER_HANDLER;
+			return TFMGClient.ADVANCED_POTATO_CANNON_RENDER_HANDLER;
 		}
 
 		@Override
 		public PacketTypeProvider getTypeProvider() {
-			return AllPackets.POTATO_CANNON;
+			return TFMGPackets.ADVANCED_POTATO_CANNON;
 		}
 	}
