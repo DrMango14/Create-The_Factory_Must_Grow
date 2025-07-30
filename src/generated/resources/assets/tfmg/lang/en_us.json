@@ -771,7 +771,7 @@
   "item.tfmg.flamethrower.tooltip.behaviour1": "_Shoots out Flames_ ",
   "item.tfmg.flamethrower.tooltip.behaviour2": "The _Fuel_ will be consumed from the tank. _Range_ and _Spread_ change according to your _Fuel_ of choice",
   "item.tfmg.flamethrower.tooltip.condition1": "When R-Clicked",
-  "item.tfmg.flamethrower.tooltip.condition2": "When R-Clicking a Fluid Tank with Gasoline, Diesel, Kerosene, Naphtha, LPG, Molten Slag or Napalm inside",
+  "item.tfmg.flamethrower.tooltip.condition2": "When R-Clicking a Fluid Container with _Valid Fuel_ inside",
   "item.tfmg.flamethrower.tooltip.summary": "Burns  burnable _Gases_ and _Fluids_ to shoot out a burst of flame to burn your Enemies",
   "item.tfmg.furnace_gas_bucket": "Furnace Gas Tank",
   "item.tfmg.gasoline_bucket": "Gasoline Bucket",
