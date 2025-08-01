@@ -99,7 +99,7 @@ public class VoltMeterBlockEntity extends SmartBlockEntity implements IHaveGoggl
     @SuppressWarnings("removal")
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 
-        CreateLang.text(mode.displayName)
+        CreateLang.translate(mode.langKey)
                 .style(ChatFormatting.DARK_GRAY)
                 .forGoggles(tooltip, 1);
 
@@ -116,26 +116,25 @@ public class VoltMeterBlockEntity extends SmartBlockEntity implements IHaveGoggl
 
     public enum MeasureMode {
 
-        VOLTAGE("Voltage", "V", 500),
-        HIGH_VOLTAGE("Voltage (High)", "V", 10000),
-        CURRENT("Current", "A", 16),
-        RESISTANCE("Resistance", "Ω", 500),
-        POWER("Power", "W", 5000),
-        NETWORK_POWER_USAGE("Network Power Usage", "W", 50000),
-        NETWORK_POWER_GENERATION("Network Power Generation", "W", 50000),
-        CAPACITY("Capacity", "Fe", 300000),
-        FALLBACK("fallback", "", 0),
-
-
+        VOLTAGE("V", 500),
+        HIGH_VOLTAGE("V", 10000),
+        CURRENT("A", 16),
+        RESISTANCE("Ω", 500),
+        POWER("W", 5000),
+        NETWORK_POWER_USAGE("W", 50000),
+        NETWORK_POWER_GENERATION("W", 50000),
+        CAPACITY("Fe", 300000),
+        FALLBACK("", 0),
         ;
-        public final String displayName;
+
         public final String unit;
         public final int defaultRange;
+        public final String langKey;
 
-        MeasureMode(String displayName, String unit, int defaultRange) {
+        MeasureMode(String unit, int defaultRange) {
             this.unit = unit;
-            this.displayName = displayName;
             this.defaultRange = defaultRange;
+            this.langKey = "goggles.voltmeter.mode." + this.name().toLowerCase();
         }
 
     }

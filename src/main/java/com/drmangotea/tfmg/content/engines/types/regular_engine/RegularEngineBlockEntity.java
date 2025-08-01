@@ -403,35 +403,28 @@ public class RegularEngineBlockEntity extends AbstractSmallEngineBlockEntity {
         }
 
 
-        CreateLang.translate("goggles.engine.type")
-                .add(CreateLang.text(type.name()))
+        CreateLang.translate("goggles.engine.type", CreateLang.translate(type.langKey))
                 .color(0xfcad03)
-                .forGoggles(tooltip);
-        CreateLang.translate("goggles.engine.rpm")
-                .add(CreateLang.text((int)rpm+" rpm"))
+                .forGoggles(tooltip, 1);
+        CreateLang.translate("goggles.engine.rpm", (int)rpm)
                 .color(0xa36f00)
-                .forGoggles(tooltip);
-        CreateLang.translate("goggles.engine.signal")
-                .add(CreateLang.text(String.valueOf(highestSignal)))
+                .forGoggles(tooltip, 1);
+        CreateLang.translate("goggles.engine.signal", highestSignal)
                 .color(0xfcad03)
-                .forGoggles(tooltip);
-        CreateLang.translate("goggles.engine.torque")
-                .add(CreateLang.text(String.valueOf((int)torque)))
+                .forGoggles(tooltip, 1);
+        CreateLang.translate("goggles.engine.torque", (int)torque)
                 .color(0xa36f00)
-                .forGoggles(tooltip);
-        CreateLang.translate("goggles.engine.fuel_consumption")
-                .add(CreateLang.text(getFuelConsumption()/1.5f+" mb/s"))
+                .forGoggles(tooltip, 1);
+        CreateLang.translate("goggles.engine.fuel_consumption", getFuelConsumption()/1.5f)
                 .color(0xfcad03)
-                .forGoggles(tooltip);
+                .forGoggles(tooltip, 1);
         if(oil>0){
-            CreateLang.translate("goggles.engine.oil")
-                    .add(CreateLang.number(oil))
+            CreateLang.translate("goggles.engine.oil", CreateLang.number(oil))
                     .color(0xf5dd42)
                     .forGoggles(tooltip);
         }
         if(coolingFluid>0){
-            CreateLang.translate("goggles.engine.cooling_fluid")
-                    .add(CreateLang.number(coolingFluid))
+            CreateLang.translate("goggles.engine.cooling_fluid", CreateLang.number(coolingFluid))
                     .color(0x51bdb9)
                     .forGoggles(tooltip);
         }
@@ -461,6 +454,7 @@ public class RegularEngineBlockEntity extends AbstractSmallEngineBlockEntity {
         public final List<Fluid> fluidBlacklist;
         public final String name;
         public final boolean upgradesOnSide;
+        public final String langKey;
 
         EngineType(String name, List<PistonPosition> positions, float speedModifier,
                    float torqueModifier, float efficiencyModifier, boolean upgradesOnSide) {
@@ -481,6 +475,7 @@ public class RegularEngineBlockEntity extends AbstractSmallEngineBlockEntity {
             this.effeciencyModifier = efficiencyModifier;
             this.fluidBlacklist = fluidBlacklist;
             this.upgradesOnSide = upgradesOnSide;
+            this.langKey = "engine.type." + name;
 
         }
 

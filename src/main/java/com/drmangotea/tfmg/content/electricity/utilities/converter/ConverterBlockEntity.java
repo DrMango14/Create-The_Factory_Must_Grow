@@ -179,21 +179,15 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
     }
     @Override
     public boolean makeMultimeterTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-
         super.makeMultimeterTooltip(tooltip, isPlayerSneaking);
 
-
-        CreateLang.text("Capacity ")
-                .add(Component.literal(TFMGUtils.formatUnits(energy.getEnergyStored(), "FE")))
+        CreateLang.translate("electricity.capacity", Component.literal(TFMGUtils.formatUnits(energy.getEnergyStored(), "FE")))
                 .color(0x127799)
                 .forGoggles(tooltip, 1);
-
-        CreateLang.text("Charging Rate ")
-                .add(CreateLang.number(getChargingRate()))
+        CreateLang.translate("electricity.charging_rate", CreateLang.number(getChargingRate()))
                 .color(0x127799)
                 .forGoggles(tooltip, 1);
-        CreateLang.text("Max Capacity ")
-                .add(CreateLang.number(getMaxCapacity()))
+        CreateLang.translate("electricity.max_capacity", CreateLang.number(getMaxCapacity()))
                 .color(0x127799)
                 .forGoggles(tooltip, 1);
 

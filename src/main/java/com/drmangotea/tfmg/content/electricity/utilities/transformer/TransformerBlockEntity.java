@@ -128,7 +128,7 @@ public class TransformerBlockEntity extends VoltageAlteringBlockEntity {
         super.makeMultimeterTooltip(tooltip, isPlayerSneaking);
 
         if(coilRatio!=0) {
-            CreateLang.text("----------------------------")
+            CreateLang.translate("multimeter.separator")
                     .style(ChatFormatting.WHITE)
                     .forGoggles(tooltip);
             CreateLang.translate("multimeter.transformer_ratio")

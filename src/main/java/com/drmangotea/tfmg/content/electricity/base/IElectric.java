@@ -196,22 +196,20 @@ public interface IElectric {
                 .forGoggles(tooltip);
 
         if (getData().notEnoughtPower) {
-            CreateLang.text("NOT ENOUGHT POWER")
+            CreateLang.translate("multimeter.insufficient_power")
                     .color(Color.RED)
                     .forGoggles(tooltip, 1);
 
         }
 
         if (voltageGeneration() > 0) {
-            CreateLang.translate("multimeter.power_generated")
-                    .add(Component.literal(TFMGUtils.formatUnits(powerGeneration(), "W")))
+            CreateLang.translate("multimeter.power_generated", TFMGUtils.formatUnits(powerGeneration(), "W"))
                     .color(0x852e4a)
                     .forGoggles(tooltip, 1);
-            CreateLang.translate("multimeter.voltage_generated")
-                    .add(Component.literal(TFMGUtils.formatUnits(voltageGeneration(), "V")))
+            CreateLang.translate("multimeter.voltage_generated", TFMGUtils.formatUnits(voltageGeneration(), "V"))
                     .color(0x127799)
                     .forGoggles(tooltip, 1);
-            CreateLang.text("----------------------------")
+            CreateLang.translate("multimeter.separator")
                     .style(ChatFormatting.WHITE)
                     .forGoggles(tooltip);
         }
@@ -229,24 +227,23 @@ public interface IElectric {
                 .color(0xcc4b74)
                 .forGoggles(tooltip, 1);
         if (getData().group.id != -1) {
-            CreateLang.text("----------------------------")
+            CreateLang.translate("multimeter.separator")
                     .style(ChatFormatting.WHITE)
                     .forGoggles(tooltip);
-            CreateLang.translate("multimeter.group")
-                    .add(CreateLang.number(getData().group.id))
+            CreateLang.translate("multimeter.group", CreateLang.number(getData().group.id))
                     .color(0xd8db27)
                     .forGoggles(tooltip, 1);
         }
 
         if (isPlayerSneaking) {
-            CreateLang.text("----------------------------")
+            CreateLang.translate("multimeter.separator")
                     .style(ChatFormatting.WHITE)
                     .forGoggles(tooltip);
-            CreateLang.text("Network Power Generation: " + TFMGUtils.formatUnits(getNetworkPowerGeneration(), "W"))
+            CreateLang.translate("multimeter.network.generation", TFMGUtils.formatUnits(getNetworkPowerGeneration(), "W"))
                     .color(0xcc4b74)
                     .forGoggles(tooltip, 1);
 
-            CreateLang.text("Network Power Consumption: " + TFMGUtils.formatUnits(getNetworkPowerUsage(), "W"))
+            CreateLang.translate("multimeter.network.consumption", TFMGUtils.formatUnits(getNetworkPowerUsage(), "W"))
                     .color(0xcc4b74)
                     .forGoggles(tooltip, 1);
 

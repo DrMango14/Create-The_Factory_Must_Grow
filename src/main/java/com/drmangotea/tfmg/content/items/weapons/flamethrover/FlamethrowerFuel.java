@@ -1,11 +1,13 @@
 package com.drmangotea.tfmg.content.items.weapons.flamethrover;
 
 import com.drmangotea.tfmg.TFMGRegistries;
+import com.drmangotea.tfmg.registry.TFMGFlamethrowerFuelTypes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
@@ -29,21 +31,21 @@ public record FlamethrowerFuel(@Nullable ResourceKey<FlamethrowerFuelType> fuelT
             ByteBufCodecs.INT,
             FlamethrowerFuel::amount,
             ByteBufCodecs.INT,
-            fuel -> fuel.color == 0 ? 0xFFFFFF : fuel.color,
+            FlamethrowerFuel::color,
             FlamethrowerFuel::new
     );
 
-    public static final FlamethrowerFuel EMPTY = new FlamethrowerFuel(null, 0, 0xFFFFFF);
+    public static final FlamethrowerFuel EMPTY = new FlamethrowerFuel(TFMGFlamethrowerFuelTypes.FALLBACK, 0, 0xFFFFFF);
 
     public FlamethrowerFuel decrement(int amount) {
-        if (this.amount <= amount || fuelType == null) {
+        if (this.amount <= amount || fuelType == TFMGFlamethrowerFuelTypes.FALLBACK) {
             return EMPTY;
         }
         return new FlamethrowerFuel(fuelType, this.amount - amount, color);
     }
 
     public FlamethrowerFuel increment(int amount, int capacity) {
-        if (fuelType == null) {
+        if (fuelType == TFMGFlamethrowerFuelTypes.FALLBACK) {
             return EMPTY;
         }
         if (this.amount + amount > capacity) {
@@ -54,7 +56,7 @@ public record FlamethrowerFuel(@Nullable ResourceKey<FlamethrowerFuelType> fuelT
 
     public static FlamethrowerFuel createForType(RegistryAccess registryAccess, Fluid fluid, int amount) {
         Optional<Holder.Reference<FlamethrowerFuelType>> type = FlamethrowerFuelType.getTypeForFluid(registryAccess, fluid);
-        return type.map(typeReference -> new FlamethrowerFuel(typeReference.getKey(), amount, typeReference.value().color())).orElse(null);
+        return type.map(typeReference -> new FlamethrowerFuel(typeReference.getKey(), amount, typeReference.value().color())).orElse(EMPTY);
     }
 
     public static FlamethrowerFuel createForType(RegistryAccess registryAccess, FluidStack stack) {
@@ -62,14 +64,14 @@ public record FlamethrowerFuel(@Nullable ResourceKey<FlamethrowerFuelType> fuelT
     }
 
     public boolean isEmpty() {
-        if (fuelType == null) {
+        if (fuelType == TFMGFlamethrowerFuelTypes.FALLBACK) {
             return true;
         }
         return this.amount <= 0;
     }
 
     public boolean hasFuel() {
-        return fuelType != null;
+        return fuelType != TFMGFlamethrowerFuelTypes.FALLBACK;
     }
 
     public Optional<FlamethrowerFuelType> getFuelType(RegistryAccess registryAccess) {

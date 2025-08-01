@@ -535,17 +535,17 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 
         if (controller.asLong() == getBlockPos().asLong())
-            CreateLang.text("CONTROLLER").forGoggles(tooltip);
+            CreateLang.translate("engine.controller.header").forGoggles(tooltip);
 
-        CreateLang.text("Shift " + shift.toString()).forGoggles(tooltip);
-        CreateLang.text("Speed Efficiency " + getSpeedEfficiency()).forGoggles(tooltip);
-        CreateLang.text("Efficiency " + efficiencyModifier()).forGoggles(tooltip);
-        CreateLang.text("Fuel Consumption " + getFuelConsumption()).forGoggles(tooltip);
-        CreateLang.text("Rpm " + rpm).forGoggles(tooltip);
-        CreateLang.text("length " + engineLength()).forGoggles(tooltip);
-        CreateLang.text("Torque " + torque).forGoggles(tooltip);
-        CreateLang.text("Injection Rate " + fuelInjectionRate).forGoggles(tooltip);
-        CreateLang.text("Signal " + highestSignal).forGoggles(tooltip);
+        CreateLang.translate("engine.shift", CreateLang.translate(shift.langKey)).forGoggles(tooltip);
+        CreateLang.translate("engine.speed_efficiency", getSpeedEfficiency()).forGoggles(tooltip);
+        CreateLang.translate("engine.efficiency", efficiencyModifier()).forGoggles(tooltip);
+        CreateLang.translate("engine.fuel_consumption", getFuelConsumption()).forGoggles(tooltip);
+        CreateLang.translate("engine.rpm", rpm).forGoggles(tooltip);
+        CreateLang.translate("engine.length", engineLength()).forGoggles(tooltip);
+        CreateLang.translate("engine.torque", torque).forGoggles(tooltip);
+        CreateLang.translate("engine.injection_rate", fuelInjectionRate).forGoggles(tooltip);
+        CreateLang.translate("engine.signal ", highestSignal).forGoggles(tooltip);
 
 
         CreateLang.number(engineNumber).style(ChatFormatting.DARK_GREEN).forGoggles(tooltip);

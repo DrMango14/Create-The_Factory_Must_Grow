@@ -69,17 +69,18 @@ public class TransmissionUpgrade extends EngineUpgrade{
         SHIFT_5(1.5f),
         SHIFT_6(1.9f)
 
-
-
         ;
         public final float value;
         public final boolean reverse;
+        public final String langKey;
+
         TransmissionState(float value){
             this(value,false);
         }
         TransmissionState(float value, boolean reverse){
             this.value = value;
             this.reverse = reverse;
+            this.langKey = "engine.upgrade.transmission." + this.name().toLowerCase();
         }
     }
 }

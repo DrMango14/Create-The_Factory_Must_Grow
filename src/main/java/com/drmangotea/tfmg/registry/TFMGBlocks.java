@@ -111,6 +111,7 @@ import com.drmangotea.tfmg.content.machinery.vat.base.VatBlock;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatGenerator;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.ElectrodeHolderBlock;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerBlock;
+import com.simibubi.create.AllDisplaySources;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.content.contraptions.bearing.StabilizedBearingMovementBehaviour;
@@ -151,6 +152,7 @@ import java.util.Map;
 import static com.drmangotea.tfmg.TFMG.REGISTRATE;
 import static com.drmangotea.tfmg.base.TFMGBuilderTransformers.*;
 import static com.drmangotea.tfmg.content.electricity.lights.LightBulbBlock.LIGHT;
+import static com.simibubi.create.api.behaviour.display.DisplaySource.displaySource;
 import static com.simibubi.create.api.behaviour.movement.MovementBehaviour.movementBehaviour;
 import static com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType.mountedFluidStorage;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
@@ -1206,6 +1208,16 @@ public class TFMGBlocks {
                     .transform(pickaxeOnly())
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .blockstate(new VoltageObserverGenerator()::generate)
+                    .transform(displaySource(TFMGDisplaySources.CURRENT))
+                    .transform(displaySource(TFMGDisplaySources.POWER_USAGE))
+                    .transform(displaySource(TFMGDisplaySources.RESISTANCE))
+                    .transform(displaySource(TFMGDisplaySources.VOLTAGE))
+                    .transform(displaySource(TFMGDisplaySources.POWER_GENERATION))
+                    .transform(displaySource(TFMGDisplaySources.VOLTAGE_GENERATION))
+                    .transform(displaySource(TFMGDisplaySources.NETWORK_CONSUMPTION))
+                    .transform(displaySource(TFMGDisplaySources.NETWORK_GENERATION))
+                    .transform(displaySource(TFMGDisplaySources.NETWORK_ID))
+                    .transform(displaySource(TFMGDisplaySources.NETWORK_RESISTANCE))
                     .item()
                     .transform(customItemModel())
                     .register();
