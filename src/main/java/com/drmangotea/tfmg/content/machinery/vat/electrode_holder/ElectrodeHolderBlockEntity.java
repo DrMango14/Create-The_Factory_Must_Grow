@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.content.machinery.vat.electrode_holder;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.base.IVatMachine;
@@ -61,10 +62,7 @@ public class ElectrodeHolderBlockEntity extends ElectricBlockEntity implements I
 
         super.makeMultimeterTooltip(tooltip, isPlayerSneaking);
         if (getCurrent() < TFMGConfigs.common().machines.electrolysisMinimumCurrent.get())
-            CreateLang.translate("goggles.electrode_holder.min_amps")
-                    .style(ChatFormatting.RED)
-                    .add(CreateLang.text(TFMGConfigs.common().machines.electrolysisMinimumCurrent.get() + "A)"))
-                    .forGoggles(tooltip);
+            TFMGTexts.Multimeter.notEnoughCurrent(TFMGConfigs.common().machines.electrolysisMinimumCurrent.get()).forGoggles(tooltip);
 
         return true;
     }

@@ -2,6 +2,8 @@ package com.drmangotea.tfmg.content.electricity.base;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnection;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;
 import com.simibubi.create.foundation.utility.CreateLang;
@@ -191,62 +193,31 @@ public interface IElectric {
     }
 
     default boolean makeMultimeterTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        CreateLang.translate("multimeter.header")
-                .style(ChatFormatting.WHITE)
+        TFMGTexts.header("multimeter").style(ChatFormatting.WHITE)
                 .forGoggles(tooltip);
 
-        if (getData().notEnoughtPower) {
-            CreateLang.translate("multimeter.insufficient_power")
-                    .color(Color.RED)
-                    .forGoggles(tooltip, 1);
-
-        }
+        if (getData().notEnoughtPower) TFMGTexts.Multimeter.notEnoughPower().forGoggles(tooltip, 1);
 
         if (voltageGeneration() > 0) {
-            CreateLang.translate("multimeter.power_generated", TFMGUtils.formatUnits(powerGeneration(), "W"))
-                    .color(0x852e4a)
-                    .forGoggles(tooltip, 1);
-            CreateLang.translate("multimeter.voltage_generated", TFMGUtils.formatUnits(voltageGeneration(), "V"))
-                    .color(0x127799)
-                    .forGoggles(tooltip, 1);
-            CreateLang.translate("multimeter.separator")
-                    .style(ChatFormatting.WHITE)
-                    .forGoggles(tooltip);
+            TFMGTexts.Multimeter.powerGenerated(powerGeneration()).forGoggles(tooltip, 1);
+            TFMGTexts.Multimeter.voltageGenerated(voltageGeneration()).forGoggles(tooltip, 1);
+            TFMGTexts.Multimeter.separator().forGoggles(tooltip);
         }
 
-        CreateLang.text("   R = " + TFMGUtils.formatUnits(voltageGeneration() > 0 ? getGeneratorResistance() : resistance(), "Ω"))
-                .color(0xc98969)
-                .forGoggles(tooltip, 1);
-        CreateLang.text("   U = " + TFMGUtils.formatUnits(getData().getVoltage(), "V"))
-                .color(0x4bbbcc)
-                .forGoggles(tooltip, 1);
-        CreateLang.text("   I = " + TFMGUtils.formatUnits(getCurrent(), "A"))
-                .color(0x22a146)
-                .forGoggles(tooltip, 1);
-        CreateLang.text("   P = " + TFMGUtils.formatUnits(getPowerUsage(), "W"))
-                .color(0xcc4b74)
-                .forGoggles(tooltip, 1);
+        TFMGTexts.Multimeter.resistance(voltageGeneration() > 0 ? getGeneratorResistance() : resistance()).forGoggles(tooltip, 1);
+        TFMGTexts.Multimeter.voltage(getData().getVoltage()).forGoggles(tooltip, 1);
+        TFMGTexts.Multimeter.current(getCurrent()).forGoggles(tooltip, 1);
+        TFMGTexts.Multimeter.power(getPowerUsage()).forGoggles(tooltip, 1);
+
         if (getData().group.id != -1) {
-            CreateLang.translate("multimeter.separator")
-                    .style(ChatFormatting.WHITE)
-                    .forGoggles(tooltip);
-            CreateLang.translate("multimeter.group", CreateLang.number(getData().group.id))
-                    .color(0xd8db27)
-                    .forGoggles(tooltip, 1);
+            TFMGTexts.Multimeter.separator().forGoggles(tooltip);
+            TFMGTexts.Multimeter.group(getData().group.id).forGoggles(tooltip, 1);
         }
 
         if (isPlayerSneaking) {
-            CreateLang.translate("multimeter.separator")
-                    .style(ChatFormatting.WHITE)
-                    .forGoggles(tooltip);
-            CreateLang.translate("multimeter.network.generation", TFMGUtils.formatUnits(getNetworkPowerGeneration(), "W"))
-                    .color(0xcc4b74)
-                    .forGoggles(tooltip, 1);
-
-            CreateLang.translate("multimeter.network.consumption", TFMGUtils.formatUnits(getNetworkPowerUsage(), "W"))
-                    .color(0xcc4b74)
-                    .forGoggles(tooltip, 1);
-
+            TFMGTexts.Multimeter.separator().forGoggles(tooltip);
+            TFMGTexts.Multimeter.networkGeneration(getNetworkPowerGeneration()).forGoggles(tooltip, 1);
+            TFMGTexts.Multimeter.networkConsumption(getNetworkPowerUsage()).forGoggles(tooltip, 1);
         }
 
         return true;

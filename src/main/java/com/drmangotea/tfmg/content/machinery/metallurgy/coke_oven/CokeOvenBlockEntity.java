@@ -2,6 +2,8 @@ package com.drmangotea.tfmg.content.machinery.metallurgy.coke_oven;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.ConnectNeightborsPacket;
 import com.drmangotea.tfmg.recipes.CokingRecipe;
@@ -187,13 +189,13 @@ public class CokeOvenBlockEntity extends SmartBlockEntity implements IHaveGoggle
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 
-        CreateLang.translate("goggles.coke_oven.header")
+        TFMGTexts.header("coke_oven")
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip);
 
         if(level.getBlockEntity(controller) instanceof CokeOvenBlockEntity controller)
             if (controller.timer > 0)
-                CreateLang.translate("goggles.coke_oven.progress", controller.timer / 20)
+                TFMGTexts.progress((double) controller.timer / 20)
                         .style(ChatFormatting.GOLD)
                         .forGoggles(tooltip);
 
@@ -214,15 +216,15 @@ public class CokeOvenBlockEntity extends SmartBlockEntity implements IHaveGoggle
 
             if (tank.getTanks() == 0) return false;
 
-            CreateLang.translate("goggles.fluid_storage").style(ChatFormatting.GRAY).forGoggles(tooltip);
+            TFMGLang.translate("goggles.fluid_storage").style(ChatFormatting.GRAY).forGoggles(tooltip);
 
 
             boolean isEmpty = true;
             for (int i = 0; i < tank.getTanks(); i++) {
                 FluidStack fluidStack = tank.getFluidInTank(i);
                 if (fluidStack.isEmpty()) continue;
-                CreateLang.fluidName(fluidStack).style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
-                CreateLang.builder().add(CreateLang.number(fluidStack.getAmount()).add(mb).style(ChatFormatting.DARK_GREEN)).text(ChatFormatting.GRAY, " / ").add(CreateLang.number(tank.getTankCapacity(i)).add(mb).style(ChatFormatting.DARK_GRAY)).forGoggles(tooltip, 1);
+                TFMGLang.fluidName(fluidStack).style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
+                TFMGLang.builder().add(TFMGLang.number(fluidStack.getAmount()).add(mb).style(ChatFormatting.DARK_GREEN)).text(ChatFormatting.GRAY, " / ").add(TFMGLang.number(tank.getTankCapacity(i)).add(mb).style(ChatFormatting.DARK_GRAY)).forGoggles(tooltip, 1);
                 isEmpty = false;
             }
             if (tank.getTanks() > 1) {
@@ -231,7 +233,7 @@ public class CokeOvenBlockEntity extends SmartBlockEntity implements IHaveGoggle
             }
             if (!isEmpty) return true;
 
-            CreateLang.translate("gui.goggles.fluid_container.capacity").add(CreateLang.number(tank.getTankCapacity(0)).add(mb).style(ChatFormatting.DARK_GREEN)).style(ChatFormatting.DARK_GRAY).forGoggles(tooltip, 1);
+            CreateLang.translate("gui.goggles.fluid_container.capacity").add(TFMGLang.number(tank.getTankCapacity(0)).add(mb).style(ChatFormatting.DARK_GREEN)).style(ChatFormatting.DARK_GRAY).forGoggles(tooltip, 1);
 
         }
         return true;

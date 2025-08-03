@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.content.items.weapons.flamethrover;
 
 import com.drmangotea.tfmg.TFMGClient;
 import com.drmangotea.tfmg.TFMGRegistries;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.spark.Spark;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGEntityTypes;
@@ -265,25 +266,25 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
         fuelCapacity = fuelCapacity.withStyle(stack.get(TFMGDataComponents.FLAMETHROWER_FUEL).amount() == 0 ? red : green);
 
         tooltip.add(spacing.plainCopy()
-                .append(CreateLang.translateDirect(_capacity, fuelCapacity)
+                .append(TFMGLang.translateDirect(_capacity, fuelCapacity)
                         .withStyle(darkGreen)));
 
         tooltip.add(spacing.plainCopy()
-                .append(CreateLang.translateDirect(_spread, spread)
+                .append(TFMGLang.translateDirect(_spread, spread)
                         .withStyle(darkGreen)));
         tooltip.add(spacing.plainCopy()
-                .append(CreateLang.translateDirect(_speed, speed)
+                .append(TFMGLang.translateDirect(_speed, speed)
                         .withStyle(darkGreen)));
         tooltip.add(spacing.plainCopy()
-                .append(CreateLang.translateDirect(_amount, amount)
+                .append(TFMGLang.translateDirect(_amount, amount)
                         .withStyle(darkGreen)));
         if (coldF) {
             tooltip.add(spacing.plainCopy()
-                    .append(CreateLang.translateDirect(_cold)
+                    .append(TFMGLang.translateDirect(_cold)
                             .withStyle(darkGreen)));
         } else if (hellfireF) {
             tooltip.add(spacing.plainCopy()
-                    .append(CreateLang.translateDirect(_hellfire)
+                    .append(TFMGLang.translateDirect(_hellfire)
                             .withStyle(darkGreen)));
         }
     }

@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.registry;
 
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.palettes.TFMGPaletteBlockPattern;
 import com.drmangotea.tfmg.base.palettes.TFMGPalettesVariantEntry;
 import com.simibubi.create.AllTags;
@@ -59,7 +60,7 @@ public enum TFMGPaletteStoneTypes {
         for (TFMGPaletteStoneTypes paletteStoneVariants : values()) {
             NonNullSupplier<Block> baseBlock = paletteStoneVariants.factory.apply(registrate);
             paletteStoneVariants.baseBlock = baseBlock;
-            String id = CreateLang.asId(paletteStoneVariants.name());
+            String id = TFMGLang.asId(paletteStoneVariants.name());
             paletteStoneVariants.materialTag =
                     AllTags.optionalTag(BuiltInRegistries.ITEM, TFMG.asResource("stone_types/" + id));
             paletteStoneVariants.variants = new TFMGPalettesVariantEntry(id, paletteStoneVariants);

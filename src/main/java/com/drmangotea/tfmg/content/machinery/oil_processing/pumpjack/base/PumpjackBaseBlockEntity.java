@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.base;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.crank.PumpjackCrankBlockEntity;
 import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.hammer.PumpjackBlockEntity;
@@ -191,12 +192,9 @@ public class PumpjackBaseBlockEntity extends SmartBlockEntity implements IHaveGo
     @Override
     @SuppressWarnings("removal")
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        CreateLang.translate("goggles.pumpjack_info")
-                .forGoggles(tooltip);
+        TFMGTexts.header("pumpjack").forGoggles(tooltip);
         if (deposit == null) {
-            CreateLang.translate("goggles.zero")
-                    .style(ChatFormatting.DARK_RED)
-                    .forGoggles(tooltip, 1);
+            TFMGTexts.invalidMachine().forGoggles(tooltip, 1);
         }
 
         TFMGUtils.createFluidTooltip(this, tooltip);

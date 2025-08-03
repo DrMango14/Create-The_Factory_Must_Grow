@@ -56,7 +56,7 @@
       ]
     },
     {
-      "type": "create:winding",
+      "type": "tfmg:winding",
       "ingredients": [
         {
           "item": "tfmg:unfinished_generator"

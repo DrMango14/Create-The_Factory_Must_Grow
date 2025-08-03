@@ -2,6 +2,8 @@ package com.drmangotea.tfmg.content.electricity.utilities.converter;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
@@ -74,7 +76,7 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
         int max = 250;
-        voltageGenerated = new ScrollValueBehaviour(CreateLang.translateDirect("creative_generator.voltage_generation"),
+        voltageGenerated = new ScrollValueBehaviour(TFMGLang.translateDirect("creative_generator.voltage_generation"),
                 this, new ConverterValueBox());
         voltageGenerated.between(1, max);
         voltageGenerated.value = 20;
@@ -181,15 +183,9 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
     public boolean makeMultimeterTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         super.makeMultimeterTooltip(tooltip, isPlayerSneaking);
 
-        CreateLang.translate("electricity.capacity", Component.literal(TFMGUtils.formatUnits(energy.getEnergyStored(), "FE")))
-                .color(0x127799)
-                .forGoggles(tooltip, 1);
-        CreateLang.translate("electricity.charging_rate", CreateLang.number(getChargingRate()))
-                .color(0x127799)
-                .forGoggles(tooltip, 1);
-        CreateLang.translate("electricity.max_capacity", CreateLang.number(getMaxCapacity()))
-                .color(0x127799)
-                .forGoggles(tooltip, 1);
+        TFMGTexts.electricalCapacity(energy.getEnergyStored()).forGoggles(tooltip, 1);
+        TFMGTexts.chargingRate(getChargingRate()).forGoggles(tooltip, 1);
+        TFMGTexts.electricalMaxCapacity(getMaxCapacity()).forGoggles(tooltip, 1);
 
         return true;
     }

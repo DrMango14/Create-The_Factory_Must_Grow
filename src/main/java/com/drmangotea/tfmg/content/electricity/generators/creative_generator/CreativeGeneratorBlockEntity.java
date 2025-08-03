@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.generators.creative_generator;
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.Create;
@@ -30,7 +31,7 @@ public class CreativeGeneratorBlockEntity extends ElectricBlockEntity {
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
         int max = 250;
-        outputVoltage = new ScrollValueBehaviour(CreateLang.translateDirect("creative_generator.voltage_generation"),
+        outputVoltage = new ScrollValueBehaviour(TFMGLang.translateDirect("creative_generator.voltage_generation"),
                 this, new CreativeGeneratorValueBox());
         outputVoltage.between(0, max);
         outputVoltage.value = 50;

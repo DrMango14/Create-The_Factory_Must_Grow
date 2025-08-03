@@ -1,5 +1,5 @@
 {
-  "type": "create:hot_blast",
+  "type": "tfmg:hot_blast",
   "ingredients": [
     {
       "type": "fluid_stack",

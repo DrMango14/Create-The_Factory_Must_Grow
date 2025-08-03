@@ -1,6 +1,8 @@
 package com.drmangotea.tfmg.content.machinery.misc.winding_machine;
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.engines.base.AbstractEngineBlockEntity;
 import com.drmangotea.tfmg.recipes.PolarizingRecipe;
 import com.drmangotea.tfmg.recipes.WindingRecipe;
@@ -79,7 +81,7 @@ public class WindingMachineBlockEntity extends KineticBlockEntity implements IHa
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
         int max = 100;
-        turnPercentage = new ScrollValueBehaviour(CreateLang.translateDirect("winding_machine.turn_percentage"),
+        turnPercentage = new ScrollValueBehaviour(TFMGLang.translateDirect("winding_machine.turn_percentage"),
                 this, new WindingMachineValueBox());
         turnPercentage.between(1, max);
         turnPercentage.value = 20;
@@ -131,24 +133,21 @@ public class WindingMachineBlockEntity extends KineticBlockEntity implements IHa
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        CreateLang.translate("goggles.winding_machine.header")
+        TFMGTexts.header("winding_machine")
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip, 1);
+
         if (!spool.isEmpty()) {
-            CreateLang.text(spool.getDisplayName().getString().replace("[","").replace("]",""))
+            TFMGLang.text(spool.getDisplayName().getString().replace("[","").replace("]",""))
                     .color(spool.getBarColor())
                     .forGoggles(tooltip);
             if(spool.get(TFMGDataComponents.SPOOL_AMOUNT)!=null)
-            CreateLang.translate("goggles.winding_machine.turns")
-                    .add(CreateLang.number(spool.get(TFMGDataComponents.SPOOL_AMOUNT)))
+                TFMGTexts.turnsLeft(spool.getOrDefault(TFMGDataComponents.SPOOL_AMOUNT, 0))
                     .color(spool.getBarColor())
                     .forGoggles(tooltip);
 
         if (recipe != null)
-            CreateLang.text("")
-                    .add(CreateLang.translate("goggles.winding_machine.progress"))
-                    .add(CreateLang.number(amountWinded))
-                    .add(Component.literal("/" + recipe.getProcessingDuration()))
+            TFMGTexts.progress(TFMGLang.number(amountWinded) + "/" + recipe.getProcessingDuration())
                     .color(spool.getBarColor())
                     .forGoggles(tooltip);
         }

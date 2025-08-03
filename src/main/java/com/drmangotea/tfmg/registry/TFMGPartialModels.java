@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.registry;
 
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipes;
 import com.simibubi.create.content.fluids.FluidTransportBehaviour;
 
@@ -122,8 +123,8 @@ public class TFMGPartialModels {
             for (FluidTransportBehaviour.AttachmentTypes.ComponentPartials type : FluidTransportBehaviour.AttachmentTypes.ComponentPartials.values()) {
                 Map<Direction, PartialModel> map = new HashMap<>();
                 for (Direction d : Iterate.directions) {
-                    String asId = CreateLang.asId(type.name());
-                    map.put(d, block(material.name + "_pipe/" + asId + "/" + CreateLang.asId(d.getSerializedName())));
+                    String asId = TFMGLang.asId(type.name());
+                    map.put(d, block(material.name + "_pipe/" + asId + "/" + TFMGLang.asId(d.getSerializedName())));
                 }
                 attachments.put(type, map);
             }

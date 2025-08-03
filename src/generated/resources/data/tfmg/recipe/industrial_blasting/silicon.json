@@ -1,5 +1,5 @@
 {
-  "type": "create:industrial_blasting",
+  "type": "tfmg:industrial_blasting",
   "ingredients": [
     {
       "item": "minecraft:quartz"

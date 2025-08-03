@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.utilities.transformer;
 
 
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.minecraft.ChatFormatting;
@@ -23,7 +24,7 @@ public class ElectromagneticCoilItem extends Item {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(CreateLang.translateDirect("tooltip.coils", stack.get(TFMGDataComponents.COIL_TURNS)==null?0:stack.get(TFMGDataComponents.COIL_TURNS))
+        tooltip.add(TFMGLang.translateDirect("tooltip.coils", stack.get(TFMGDataComponents.COIL_TURNS)==null?0:stack.get(TFMGDataComponents.COIL_TURNS))
                 .withStyle(ChatFormatting.GREEN)
         );
         super.appendHoverText(stack, context, tooltip, flag);

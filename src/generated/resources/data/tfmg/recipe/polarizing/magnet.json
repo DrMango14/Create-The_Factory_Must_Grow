@@ -1,5 +1,5 @@
 {
-  "type": "create:polarizing",
+  "type": "tfmg:polarizing",
   "ingredients": [
     {
       "item": "tfmg:magnetic_alloy_ingot"

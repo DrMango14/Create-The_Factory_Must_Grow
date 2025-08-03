@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlock;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
 import com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.output.DistillationOutputBlockEntity;
@@ -172,33 +173,12 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
 
         BlockEntity beBehind = level.getBlockEntity(getBlockPos().relative(getFacing(getBlockState()).getOpposite()));
         if (beBehind instanceof SteelTankBlockEntity be) {
-
-            CreateLang.translate("goggles.distillation_tower.status")
-                    .style(ChatFormatting.GRAY)
-                    .forGoggles(tooltip, 1);
-
-            if (be.getControllerBE().activeHeat > 0) {
-                CreateLang.translate("goggles.distillation_tower.level", be.getControllerBE().activeHeat)
-                        .style(ChatFormatting.GOLD)
-                        .forGoggles(tooltip, 1);
-            } else
-                CreateLang.translate("goggles.distillation_tower.level", be.getControllerBE().activeHeat)
-                        .style(ChatFormatting.RED)
-                        .forGoggles(tooltip, 1);
-            if (getOutputs().toArray().length > 0) {
-                CreateLang.translate("goggles.distillation_tower.found_outputs", getOutputs().toArray().length)
-                        .style(ChatFormatting.GOLD)
-                        .forGoggles(tooltip, 1);
-            } else
-                CreateLang.translate("goggles.distillation_tower.found_outputs", getOutputs().toArray().length)
-                        .style(ChatFormatting.RED)
-                        .forGoggles(tooltip, 1);
-
-
+            TFMGTexts.header("distillation_tower").style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
+            TFMGTexts.Distillation.level(be.getControllerBE().activeHeat).forGoggles(tooltip, 1);
+            TFMGTexts.Distillation.outputs(getOutputs().toArray().length).forGoggles(tooltip, 1);
         } else
-            CreateLang.translate("goggles.distillation_tower.tank_not_found")
-                    .style(ChatFormatting.RED)
-                    .forGoggles(tooltip, 1);
+            TFMGTexts.Distillation.tankNotFound().forGoggles(tooltip, 1);
+
         TFMGUtils.createFluidTooltip(this,tooltip);
 
         return true;

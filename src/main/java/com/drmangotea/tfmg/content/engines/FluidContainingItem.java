@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.engines;
 
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.items.weapons.flamethrover.FlamethrowerItem;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGItems;
@@ -39,7 +40,7 @@ public class FluidContainingItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(CreateLang.translateDirect("tooltip.fluid_item", stack.get(TFMGDataComponents.AMOUNT)==null?0:stack.get(TFMGDataComponents.AMOUNT))
+        tooltipComponents.add(TFMGLang.translateDirect("tooltip.fluid_item", stack.get(TFMGDataComponents.AMOUNT)==null?0:stack.get(TFMGDataComponents.AMOUNT))
                 .withStyle(ChatFormatting.GREEN)
         );
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);

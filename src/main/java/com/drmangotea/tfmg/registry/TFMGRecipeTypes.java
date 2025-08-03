@@ -1,15 +1,14 @@
 package com.drmangotea.tfmg.registry;
 
 
+import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.recipes.*;
 import com.mojang.serialization.Codec;
-import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
-import net.createmod.catnip.lang.Lang;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -54,12 +53,12 @@ public enum TFMGRecipeTypes implements IRecipeTypeInfo, StringRepresentable {
 
     private boolean isProcessingRecipe;
 
-    public static final Codec<AllRecipeTypes> CODEC = StringRepresentable.fromEnum(AllRecipeTypes::values);
+    public static final Codec<TFMGRecipeTypes> CODEC = StringRepresentable.fromEnum(TFMGRecipeTypes::values);
 
 
     TFMGRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
-        String name = Lang.asId(name());
-        id = Create.asResource(name);
+        String name = TFMGLang.asId(name());
+        id = TFMG.asResource(name);
         this.serializerSupplier = serializerSupplier;
         serializerObject = Registers.SERIALIZER_REGISTER.register(name, serializerSupplier);
         typeObject = Registers.TYPE_REGISTER.register(name, () -> RecipeType.simple(id));
@@ -123,8 +122,8 @@ public enum TFMGRecipeTypes implements IRecipeTypeInfo, StringRepresentable {
     }
 
     private static class Registers {
-        private static final DeferredRegister<RecipeSerializer<?>> SERIALIZER_REGISTER = DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, Create.ID);
-        private static final DeferredRegister<RecipeType<?>> TYPE_REGISTER = DeferredRegister.create(Registries.RECIPE_TYPE, Create.ID);
+        private static final DeferredRegister<RecipeSerializer<?>> SERIALIZER_REGISTER = DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, TFMG.MOD_ID);
+        private static final DeferredRegister<RecipeType<?>> TYPE_REGISTER = DeferredRegister.create(Registries.RECIPE_TYPE, TFMG.MOD_ID);
     }
 
 }

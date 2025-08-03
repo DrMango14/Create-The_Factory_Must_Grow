@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.utilities.potentiometer;
 
 import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.utilities.diode.ElectricDiodeBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
@@ -32,7 +33,7 @@ public class PotentiometerBlockEntity extends ElectricDiodeBlockEntity {
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
         int max = 100;
-        outputPercentage = new ScrollValueBehaviour(CreateLang.translateDirect("resistor.allowed_voltage"),
+        outputPercentage = new ScrollValueBehaviour(TFMGLang.translateDirect("resistor.allowed_voltage"),
                 this, new PotentiometerValueBox());
         outputPercentage.between(0, max);
         outputPercentage.value = 100;

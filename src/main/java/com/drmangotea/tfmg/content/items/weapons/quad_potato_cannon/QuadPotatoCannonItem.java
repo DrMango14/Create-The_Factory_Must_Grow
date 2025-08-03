@@ -5,6 +5,7 @@ package com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon;
 
 
 import com.drmangotea.tfmg.TFMGClient;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.simibubi.create.AllEnchantments;
 import com.simibubi.create.AllEntityTypes;
 import com.simibubi.create.api.equipment.potatoCannon.PotatoCannonProjectileType;
@@ -211,13 +212,13 @@ public class QuadPotatoCannonItem extends ProjectileWeaponItem implements Custom
         reloadTicks = reloadTicks.withStyle(darkGreen);
 
         tooltip.add(spacing.plainCopy()
-                .append(CreateLang.translateDirect(_attack, damage)
+                .append(TFMGLang.translateDirect(_attack, damage)
                         .withStyle(darkGreen)));
         tooltip.add(spacing.plainCopy()
-                .append(CreateLang.translateDirect(_reload, reloadTicks)
+                .append(TFMGLang.translateDirect(_reload, reloadTicks)
                         .withStyle(darkGreen)));
         tooltip.add(spacing.plainCopy()
-                .append(CreateLang.translateDirect(_knockback, knockback)
+                .append(TFMGLang.translateDirect(_knockback, knockback)
                         .withStyle(darkGreen)));
 
         super.appendHoverText(stack, context, tooltip, flag);

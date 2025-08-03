@@ -1,5 +1,5 @@
 {
-  "type": "create:vat_machine_recipe",
+  "type": "tfmg:vat_machine_recipe",
   "allowed_vat_types": [
     "tfmg:firebrick_lined_vat"
   ],

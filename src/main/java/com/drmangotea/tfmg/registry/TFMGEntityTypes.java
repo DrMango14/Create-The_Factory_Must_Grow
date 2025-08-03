@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.registry;
 
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.spark.*;
 import com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon.projectile.NapalmPotato;
 import com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon.projectile.NapalmPotatoRenderer;
@@ -69,7 +70,7 @@ public class TFMGEntityTypes {
                                                                          NonNullSupplier<NonNullFunction<EntityRendererProvider.Context, EntityRenderer<? super T>>> renderer,
                                                                          MobCategory group, int range, int updateFrequency, boolean sendVelocity, boolean immuneToFire,
                                                                          NonNullConsumer<EntityType.Builder<T>> propertyBuilder) {
-        String id = CreateLang.asId(name);
+        String id = TFMGLang.asId(name);
         return (CreateEntityBuilder<T, ?>) TFMG.REGISTRATE
                 .entity(id, factory, group)
                 .properties(b -> b.setTrackingRange(range)

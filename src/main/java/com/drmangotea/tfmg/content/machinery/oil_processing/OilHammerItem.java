@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.machinery.oil_processing;
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.minecraft.ChatFormatting;
@@ -31,7 +32,7 @@ public class OilHammerItem extends Item {
                 int oilReserves = TFMG.DEPOSITS.getReservoirFor(posToCheck.asLong()).oilReserves;
 
                 if (level.isClientSide&&player!=null)
-                    player.displayClientMessage(CreateLang.translateDirect("oil_hammer.reserves", oilReserves)
+                    player.displayClientMessage(TFMGLang.translateDirect("oil_hammer.reserves", oilReserves)
                             .withStyle(ChatFormatting.YELLOW), true);
 
                 return InteractionResult.SUCCESS;

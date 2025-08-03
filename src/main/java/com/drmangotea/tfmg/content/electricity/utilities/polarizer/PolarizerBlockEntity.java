@@ -2,6 +2,8 @@ package com.drmangotea.tfmg.content.electricity.utilities.polarizer;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
 import com.drmangotea.tfmg.recipes.PolarizingRecipe;
@@ -104,20 +106,12 @@ public class PolarizerBlockEntity extends ElectricBlockEntity implements IHaveGo
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 
         if(getPowerUsage()<2000&&!inventory.isEmpty()){
-            CreateLang.translate("goggles.polarizer.insufficient_power")
-                    .style(ChatFormatting.GRAY)
-                    .forGoggles(tooltip, 1);
+            TFMGTexts.Multimeter.notEnoughPower(2000).forGoggles(tooltip, 1);
             return true;
         }
+        TFMGTexts.header("polarizer").style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
 
-        CreateLang.translate("goggles.polarizer.header")
-                .style(ChatFormatting.GRAY)
-                .forGoggles(tooltip, 1);
-
-        CreateLang.translate("goggles.polarizer.charge")
-                .add(CreateLang.text(capacitorPercentage/2f+"%"))
-                .style(ChatFormatting.DARK_AQUA)
-                .forGoggles(tooltip);
+        TFMGTexts.Multimeter.charge(capacitorPercentage/2f).forGoggles(tooltip);
 
         return true;
     }

@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.content.electricity.measurement;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlockEntity;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
@@ -98,18 +99,10 @@ public class VoltMeterBlockEntity extends SmartBlockEntity implements IHaveGoggl
     @Override
     @SuppressWarnings("removal")
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        TFMGTexts.Voltmeter.mode(mode.langKey).forGoggles(tooltip, 1);
 
-        CreateLang.translate(mode.langKey)
-                .style(ChatFormatting.DARK_GRAY)
-                .forGoggles(tooltip, 1);
-
-
-        CreateLang.text(TFMGUtils.formatUnits(value, mode.unit))
-                .style(ChatFormatting.AQUA)
-                .forGoggles(tooltip, 1);
-        CreateLang.translate("goggles.voltmeter.range", mode.defaultRange)
-                .style(ChatFormatting.DARK_AQUA)
-                .forGoggles(tooltip, 1);
+        TFMGTexts.Voltmeter.value(value, mode.unit).forGoggles(tooltip, 1);
+        TFMGTexts.Voltmeter.range(mode.defaultRange).forGoggles(tooltip, 1);
 
         return true;
     }
