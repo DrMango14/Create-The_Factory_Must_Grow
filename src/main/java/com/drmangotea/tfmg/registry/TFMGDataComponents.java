@@ -79,9 +79,13 @@ public class TFMGDataComponents {
 			"timer",
 			builder -> builder.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT)
 	);
-	public static final DataComponentType<FlamethrowerFuel> FLAMETHROWER_FUEL = register(
-			"flamethrower_fuel",
+	public static final DataComponentType<FlamethrowerFuel> FLAMETHROWER = register(
+			"flamethrower",
 			builder -> builder.persistent(FlamethrowerFuel.CODEC).networkSynchronized(FlamethrowerFuel.STREAM_CODEC)
+	);
+	public static final DataComponentType<String> FLAMETHROWER_FUEL = register(
+			"flamethrower_fuel",
+			builder -> builder.persistent(Codec.STRING).networkSynchronized(ByteBufCodecs.STRING_UTF8)
 	);
 	public static final DataComponentType<Integer> ACCUMULATOR_STORAGE = register(
 			"storage",

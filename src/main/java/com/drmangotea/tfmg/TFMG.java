@@ -30,7 +30,6 @@ import net.neoforged.neoforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 
 
-@SuppressWarnings("removal")
 @Mod(TFMG.MOD_ID)
 public class TFMG {
 

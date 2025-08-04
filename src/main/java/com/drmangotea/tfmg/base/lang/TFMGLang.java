@@ -23,7 +23,7 @@ public class TFMGLang extends Lang {
      */
     public static MutableComponent translateDirect(String key, Object... args) {
         Object[] args1 = LangBuilder.resolveBuilders(args);
-        return Component.translatable(Create.ID + "." + key, args1);
+        return Component.translatable(TFMG.MOD_ID + "." + key, args1);
     }
 
     public static List<Component> translatedOptions(String prefix, String... keys) {
