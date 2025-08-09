@@ -127,10 +127,7 @@ public class TFMGUtils {
 
     public static void spawnElectricParticles(Level level, BlockPos pos) {
         if (level == null) return;
-
-
         RandomSource r = level.getRandom();
-
 
         for (int i = 0; i < r.nextInt(40); i++) {
             float x = Create.RANDOM.nextFloat(2) - 1;
@@ -138,8 +135,6 @@ public class TFMGUtils {
             float z = Create.RANDOM.nextFloat(2) - 1;
 
             level.addParticle(new ElectricSparkParticle.Data(), pos.getX() + 0.5f + x, pos.getY() + 0.5f + y, pos.getZ() + 0.5f + z, x, y, z);
-
-
         }
     }
 

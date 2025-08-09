@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.engines.engine_controller;
 
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.registry.TFMGGuiTextures;
 import com.google.common.collect.ImmutableList;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
@@ -103,7 +104,7 @@ public class EngineControllerScreen extends AbstractSimiContainerScreen<EngineCo
 	private List<Component> addToTooltip(List<Component> list, int slot) {
 		if (slot < 0 || slot >= 12)
 			return list;
-		list.add(CreateLang.translateDirect("engine_controller0.frequency_slot_" + ((slot % 2) + 1), ControlsUtil.getControls()
+		list.add(TFMGLang.translateDirect("engine_controller0.frequency_slot_" + ((slot % 2) + 1), ControlsUtil.getControls()
 			.get(slot / 2)
 			.getTranslatedKeyMessage()
 			.getString())

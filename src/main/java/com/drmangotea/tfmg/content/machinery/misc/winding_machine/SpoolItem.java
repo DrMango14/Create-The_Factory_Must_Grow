@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.content.machinery.misc.winding_machine;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableType;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnection;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;
@@ -69,7 +70,7 @@ public class SpoolItem extends Item {
             stack.remove(TFMGDataComponents.Y_POS);
             stack.remove(TFMGDataComponents.Z_POS);
             if (level.isClientSide)
-                player.displayClientMessage(CreateLang.translateDirect("wires.removed_data")
+                player.displayClientMessage(TFMGLang.translateDirect("wires.removed_data")
                         .withStyle(ChatFormatting.YELLOW), true);
             return InteractionResultHolder.success(stack);
 
@@ -84,14 +85,14 @@ public class SpoolItem extends Item {
 
 
 
-        tooltip.add(CreateLang.translateDirect("tooltip.coils", stack.get(TFMGDataComponents.SPOOL_AMOUNT)==null?0:stack.get(TFMGDataComponents.SPOOL_AMOUNT))
+        tooltip.add(TFMGLang.translateDirect("tooltip.coils", stack.get(TFMGDataComponents.SPOOL_AMOUNT)==null?0:stack.get(TFMGDataComponents.SPOOL_AMOUNT))
                 .withStyle(ChatFormatting.GREEN)
         );
         if(stack.get(TFMGDataComponents.POSITION)==null)
             return;
         BlockPos pos = BlockPos.of(stack.get(TFMGDataComponents.POSITION));
         if(pos.asLong()!=0)
-            tooltip.add(CreateLang.text("" + pos.getX() + " " + pos.getY() + " " + pos.getZ()).component()
+            tooltip.add(TFMGLang.text(pos.getX() + " " + pos.getY() + " " + pos.getZ()).component()
                     .withStyle(ChatFormatting.AQUA)
             );
         super.appendHoverText(stack, context, tooltip, flag);
@@ -119,7 +120,7 @@ public class SpoolItem extends Item {
                  if(posToConnect.equals(pos)){
                      stack.set(TFMGDataComponents.POSITION,0l);
                      if (level.isClientSide)
-                         player.displayClientMessage(CreateLang.translateDirect("wires.cant_connect_itself")
+                         player.displayClientMessage(TFMGLang.translateDirect("wires.cant_connect_itself")
                                  .withStyle(ChatFormatting.YELLOW), true);
                      be.player = null;
                      be.sendData();
@@ -143,7 +144,7 @@ public class SpoolItem extends Item {
                      }
                      if(be.connections.contains(connection1)||otherBE.connections.contains(connection1)){
                          if (level.isClientSide)
-                             player.displayClientMessage(CreateLang.translateDirect("wires.connection_already_created")
+                             player.displayClientMessage(TFMGLang.translateDirect("wires.connection_already_created")
                                      .withStyle(ChatFormatting.YELLOW), true);
                          be.player = null;
                          be.sendData();

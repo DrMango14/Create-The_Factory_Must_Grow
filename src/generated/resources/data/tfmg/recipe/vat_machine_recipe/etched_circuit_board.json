@@ -1,5 +1,5 @@
 {
-  "type": "create:vat_machine_recipe",
+  "type": "tfmg:vat_machine_recipe",
   "ingredients": [
     {
       "item": "tfmg:coated_circuit_board"

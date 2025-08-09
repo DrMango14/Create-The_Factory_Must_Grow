@@ -1,5 +1,5 @@
 {
-  "type": "create:distillation",
+  "type": "tfmg:distillation",
   "ingredients": [
     {
       "type": "fluid_stack",

@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.content.electricity.utilities.transformer;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.base.UpdateInFrontPacket;
 import com.drmangotea.tfmg.content.electricity.base.VoltageAlteringBlockEntity;
@@ -128,13 +129,8 @@ public class TransformerBlockEntity extends VoltageAlteringBlockEntity {
         super.makeMultimeterTooltip(tooltip, isPlayerSneaking);
 
         if(coilRatio!=0) {
-            CreateLang.translate("multimeter.separator")
-                    .style(ChatFormatting.WHITE)
-                    .forGoggles(tooltip);
-            CreateLang.translate("multimeter.transformer_ratio")
-                    .add(CreateLang.number(coilRatio))
-                    .color(0xc6e82c)
-                    .forGoggles(tooltip, 1);
+            TFMGTexts.Multimeter.separator().forGoggles(tooltip);
+            TFMGTexts.Multimeter.transformerRatio(coilRatio).forGoggles(tooltip, 1);
         }
         return true;
     }

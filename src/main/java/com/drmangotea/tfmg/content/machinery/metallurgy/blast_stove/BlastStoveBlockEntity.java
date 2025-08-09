@@ -2,6 +2,8 @@ package com.drmangotea.tfmg.content.machinery.metallurgy.blast_stove;
 
 
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.recipes.HotBlastRecipe;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
@@ -350,49 +352,48 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
 
         LangBuilder mb = CreateLang.translate("generic.unit.millibuckets");
 
-        CreateLang.translate("goggles.blast_stove.header")
-                .forGoggles(tooltip);
-        CreateLang.builder()
-                .add(CreateLang.translate("goggles.blast_stove.tank1"))
-                .add(CreateLang.number(getControllerBE().secondaryCapability.getFluidInTank(0).getAmount())
+        TFMGTexts.header("blast_stove").forGoggles(tooltip);
+        TFMGLang.builder()
+                .add(TFMGLang.translate("goggles.blast_stove.tank1"))
+                .add(TFMGLang.number(getControllerBE().secondaryCapability.getFluidInTank(0).getAmount())
                         .add(mb)
-                        .add(getControllerBE().secondaryCapability.getFluidInTank(0).getFluid() == Fluids.EMPTY ? CreateLang.text("") :  CreateLang.text(" "+getControllerBE().secondaryCapability.getFluidInTank(0).getDisplayName().getString()))
+                        .add(getControllerBE().secondaryCapability.getFluidInTank(0).getFluid() == Fluids.EMPTY ? TFMGLang.text("") :  TFMGLang.text(" "+getControllerBE().secondaryCapability.getFluidInTank(0).getDisplayName().getString()))
                         .style(ChatFormatting.DARK_GREEN))
                 .text(ChatFormatting.GRAY, " / ")
-                .add(CreateLang.number(8000)
+                .add(TFMGLang.number(8000)
                         .add(mb)
                         .style(ChatFormatting.DARK_GRAY))
                 .forGoggles(tooltip, 1);
-        CreateLang.builder()
-                .add(CreateLang.translate("goggles.blast_stove.tank2"))
-                .add(CreateLang.number(getControllerBE().primaryCapability.getFluidInTank(1).getAmount())
+        TFMGLang.builder()
+                .add(TFMGLang.translate("goggles.blast_stove.tank2"))
+                .add(TFMGLang.number(getControllerBE().primaryCapability.getFluidInTank(1).getAmount())
                         .add(mb)
-                        .add(getControllerBE().primaryCapability.getFluidInTank(1).getFluid() == Fluids.EMPTY ? CreateLang.text("") :  CreateLang.text(" "+getControllerBE().primaryCapability.getFluidInTank(1).getDisplayName().getString()))
+                        .add(getControllerBE().primaryCapability.getFluidInTank(1).getFluid() == Fluids.EMPTY ? TFMGLang.text("") :  TFMGLang.text(" "+getControllerBE().primaryCapability.getFluidInTank(1).getDisplayName().getString()))
                         .style(ChatFormatting.DARK_GREEN))
                 .text(ChatFormatting.GRAY, " / ")
-                .add(CreateLang.number(8000)
+                .add(TFMGLang.number(8000)
                         .add(mb)
                         .style(ChatFormatting.DARK_GRAY))
                 .forGoggles(tooltip, 1);
-        CreateLang.builder()
-                .add(CreateLang.translate("goggles.blast_stove.tank3"))
-                .add(CreateLang.number(getControllerBE().primaryCapability.getFluidInTank(0).getAmount())
+        TFMGLang.builder()
+                .add(TFMGLang.translate("goggles.blast_stove.tank3"))
+                .add(TFMGLang.number(getControllerBE().primaryCapability.getFluidInTank(0).getAmount())
                         .add(mb)
-                        .add(getControllerBE().primaryCapability.getFluidInTank(0).getFluid() == Fluids.EMPTY ? CreateLang.text("") :  CreateLang.text(" "+getControllerBE().primaryCapability.getFluidInTank(0).getDisplayName().getString()))
+                        .add(getControllerBE().primaryCapability.getFluidInTank(0).getFluid() == Fluids.EMPTY ? TFMGLang.text("") :  TFMGLang.text(" "+getControllerBE().primaryCapability.getFluidInTank(0).getDisplayName().getString()))
                         .style(ChatFormatting.YELLOW))
                 .text(ChatFormatting.GRAY, " / ")
-                .add(CreateLang.number(8000)
+                .add(TFMGLang.number(8000)
                         .add(mb)
                         .style(ChatFormatting.DARK_GRAY))
                 .forGoggles(tooltip, 1);
-        CreateLang.builder()
-                .add(CreateLang.translate("goggles.blast_stove.tank4"))
-                .add(CreateLang.number(getControllerBE().secondaryCapability.getFluidInTank(1).getAmount())
+        TFMGLang.builder()
+                .add(TFMGLang.translate("goggles.blast_stove.tank4"))
+                .add(TFMGLang.number(getControllerBE().secondaryCapability.getFluidInTank(1).getAmount())
                         .add(mb)
-                        .add(getControllerBE().secondaryCapability.getFluidInTank(1).getFluid() == Fluids.EMPTY ? CreateLang.text("") :  CreateLang.text(" "+getControllerBE().secondaryCapability.getFluidInTank(1).getDisplayName().getString()))
+                        .add(getControllerBE().secondaryCapability.getFluidInTank(1).getFluid() == Fluids.EMPTY ? TFMGLang.text("") :  TFMGLang.text(" "+getControllerBE().secondaryCapability.getFluidInTank(1).getDisplayName().getString()))
                         .style(ChatFormatting.YELLOW))
                 .text(ChatFormatting.GRAY, " / ")
-                .add(CreateLang.number(8000)
+                .add(TFMGLang.number(8000)
                         .add(mb)
                         .style(ChatFormatting.DARK_GRAY))
                 .forGoggles(tooltip, 1);

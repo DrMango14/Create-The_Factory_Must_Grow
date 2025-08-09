@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.machinery.metallurgy.blast_furnace;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.datagen.TFMGDamageSources;
 import com.drmangotea.tfmg.recipes.IndustrialBlastingRecipe;
@@ -121,25 +122,17 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 
-        CreateLang.translate("goggles.blast_furnace.stats", inputInventory.getStackInSlot(0).getCount())
-                .style(ChatFormatting.GRAY)
-                .forGoggles(tooltip, 1);
+        TFMGTexts.BlastFurnace.stats(inputInventory.getStackInSlot(0).getCount()).forGoggles(tooltip, 1);
 
-        CreateLang.translate("goggles.blast_furnace.height", getSize())
-                .forGoggles(tooltip, 1);
-        CreateLang.translate("goggles.blast_furnace.fuel_amount", fuel)
-                .forGoggles(tooltip, 1);
+        TFMGTexts.BlastFurnace.height(getSize()).forGoggles(tooltip, 1);
+        TFMGTexts.BlastFurnace.fuelAmount(fuel).forGoggles(tooltip, 1);
 
         if (timer != -1)
-            CreateLang.translate("goggles.blast_furnace.timer", timer)
-                    .style(ChatFormatting.GOLD)
-                    .forGoggles(tooltip, 1);
+            TFMGTexts.BlastFurnace.timer(timer).forGoggles(tooltip, 1);
 
 
         if (isReinforced)
-            CreateLang.translate("goggles.blast_furnace.reinforced")
-                    .style(ChatFormatting.GREEN)
-                    .forGoggles(tooltip);
+            TFMGTexts.BlastFurnace.reinforced().forGoggles(tooltip);
 
         TFMGUtils.createFluidTooltip(this, tooltip);
         TFMGUtils.createItemTooltip(this, tooltip);

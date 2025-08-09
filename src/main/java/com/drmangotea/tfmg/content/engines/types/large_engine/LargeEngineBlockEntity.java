@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.content.engines.types.large_engine;
 
 
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.engines.base.AbstractEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.base.EngineFluidTank;
@@ -242,7 +243,7 @@ public class LargeEngineBlockEntity extends AbstractEngineBlockEntity {
         if(getShaft() == null)
             return false;
 
-        CreateLang.text("").style(ChatFormatting.GRAY).forGoggles(tooltip);
+        TFMGLang.text("").style(ChatFormatting.GRAY).forGoggles(tooltip);
 
         TFMGUtils.createFluidTooltip(this,tooltip);
 

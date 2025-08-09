@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.registry;
 
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.spark.ElectricSparkParticle;
 import com.simibubi.create.foundation.particle.ICustomParticleData;
 
@@ -26,7 +27,7 @@ public enum TFMGParticleTypes {
 	private final ParticleEntry<?> entry;
 
 	<D extends ParticleOptions> TFMGParticleTypes(Supplier<? extends ICustomParticleData<D>> typeFactory) {
-		String name = CreateLang.asId(name());
+		String name = TFMGLang.asId(name());
 		entry = new ParticleEntry<>(name, typeFactory);
 	}
 

@@ -1,5 +1,7 @@
 package com.drmangotea.tfmg.content.engines;
 
+import com.drmangotea.tfmg.base.lang.TFMGLang;
+import com.drmangotea.tfmg.content.items.weapons.flamethrover.FlamethrowerFuel;
 import com.drmangotea.tfmg.content.items.weapons.flamethrover.FlamethrowerItem;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGItems;
@@ -39,13 +41,35 @@ public class FluidContainingItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(CreateLang.translateDirect("tooltip.fluid_item", stack.get(TFMGDataComponents.AMOUNT)==null?0:stack.get(TFMGDataComponents.AMOUNT))
+        tooltipComponents.add(TFMGLang.translateDirect("tooltip.fluid_item", stack.getOrDefault(TFMGDataComponents.AMOUNT, 0))
                 .withStyle(ChatFormatting.GREEN)
         );
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 
+    @Override
+    public boolean isBarVisible(ItemStack stack) {
+        if(!stack.has(TFMGDataComponents.AMOUNT))
+            return false;
 
+        return stack.getOrDefault(TFMGDataComponents.AMOUNT, 0) > 0;
+    }
+
+    @Override
+    public int getBarColor(ItemStack stack) {
+        if(!stack.has(TFMGDataComponents.AMOUNT))
+            stack.set(TFMGDataComponents.AMOUNT, 0);
+
+        return 0xC7C4A4;
+    }
+
+    @Override
+    public int getBarWidth(ItemStack stack) {
+        if(!stack.has(TFMGDataComponents.AMOUNT))
+            stack.set(TFMGDataComponents.AMOUNT, 0);
+
+        return Math.round( 13* ((float)stack.getOrDefault(TFMGDataComponents.AMOUNT, 0)/(float)CAPACITY));
+    }
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
@@ -55,7 +79,7 @@ public class FluidContainingItem extends Item {
         ItemStack stack = context.getItemInHand();
 
 
-        if (context.getPlayer().isShiftKeyDown()&&stack.get(TFMGDataComponents.AMOUNT)>0) {
+        if (context.getPlayer().isShiftKeyDown()&&stack.getOrDefault(TFMGDataComponents.AMOUNT, 0) > 0) {
 
             level.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1f, 1f);
             stack.set(TFMGDataComponents.AMOUNT, 0);
@@ -69,12 +93,12 @@ public class FluidContainingItem extends Item {
 
                 if (be.getFluid(0).getFluid().isSame(fluid.get())) {
 
-                    int toDrain = Math.min(CAPACITY - stack.get(TFMGDataComponents.AMOUNT), be.getFluid(0).getAmount());
+                    int toDrain = Math.min(CAPACITY - stack.getOrDefault(TFMGDataComponents.AMOUNT, 0), be.getFluid(0).getAmount());
                     if(toDrain == 0||context.getPlayer().getCooldowns().isOnCooldown(stack.getItem()))
                         return InteractionResult.PASS;
                     level.playSound(null, be.getBlockPos(), SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1f, 1f);
                     be.getTankInventory().drain(toDrain, IFluidHandler.FluidAction.EXECUTE);
-                    stack.set(TFMGDataComponents.AMOUNT, stack.get(TFMGDataComponents.AMOUNT) + toDrain);
+                    stack.set(TFMGDataComponents.AMOUNT, stack.getOrDefault(TFMGDataComponents.AMOUNT, 0) + toDrain);
                     context.getPlayer().getCooldowns().addCooldown(stack.getItem(), 20);
 
 

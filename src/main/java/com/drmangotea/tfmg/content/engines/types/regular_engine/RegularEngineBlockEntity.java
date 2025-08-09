@@ -2,6 +2,8 @@ package com.drmangotea.tfmg.content.engines.types.regular_engine;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.types.turbine_engine.TurbineEngineBlockEntity;
@@ -373,60 +375,33 @@ public class RegularEngineBlockEntity extends AbstractSmallEngineBlockEntity {
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-
         if(!isController())
             return getControllerBE().addToGoggleTooltip(tooltip,isPlayerSneaking);
 
-
-
-        CreateLang.translate("goggles.engine.header")
+        TFMGTexts.header("engine")
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip);
 
         if(nextComponent()!= Ingredient.EMPTY){
-            CreateLang.translate("goggles.engine.unfinished")
-                    .color(0xde5050)
-                    .forGoggles(tooltip);
-            CreateLang.translate("goggles.engine.next_component")
-                    .add(Component.empty().append(nextComponent().getItems()[0].getHoverName()))
-                    .color(0xfff240)
-                    .forGoggles(tooltip);
+            TFMGTexts.Engine.unfinished().forGoggles(tooltip);
+            TFMGTexts.Engine.nextComponent(nextComponent().getItems()[0]).forGoggles(tooltip);
             return true;
         }
         if(!hasAllPistons()){
-
-            CreateLang.translate(this instanceof TurbineEngineBlockEntity ? "goggles.engine.turbines_missing" : "goggles.engine.pistons_missing")
-                    .color(0xde5050)
-                    .forGoggles(tooltip);
-
+            TFMGTexts.Engine.lastRequirement(this instanceof TurbineEngineBlockEntity ? "turbines" : "pistons").forGoggles(tooltip);
             return true;
         }
 
-
-        CreateLang.translate("goggles.engine.type", CreateLang.translate(type.langKey))
-                .color(0xfcad03)
-                .forGoggles(tooltip, 1);
-        CreateLang.translate("goggles.engine.rpm", (int)rpm)
-                .color(0xa36f00)
-                .forGoggles(tooltip, 1);
-        CreateLang.translate("goggles.engine.signal", highestSignal)
-                .color(0xfcad03)
-                .forGoggles(tooltip, 1);
-        CreateLang.translate("goggles.engine.torque", (int)torque)
-                .color(0xa36f00)
-                .forGoggles(tooltip, 1);
-        CreateLang.translate("goggles.engine.fuel_consumption", getFuelConsumption()/1.5f)
-                .color(0xfcad03)
-                .forGoggles(tooltip, 1);
+        TFMGTexts.Engine.type(type.langKey).forGoggles(tooltip, 1);
+        TFMGTexts.Engine.rpm(rpm).forGoggles(tooltip, 1);
+        TFMGTexts.Engine.signal(highestSignal).forGoggles(tooltip, 1);
+        TFMGTexts.Engine.torque(torque).forGoggles(tooltip, 1);
+        TFMGTexts.Engine.fuelConsumption(getFuelConsumption()/1.5f).forGoggles(tooltip, 1);
         if(oil>0){
-            CreateLang.translate("goggles.engine.oil", CreateLang.number(oil))
-                    .color(0xf5dd42)
-                    .forGoggles(tooltip);
+            TFMGTexts.Engine.oil(oil).forGoggles(tooltip);
         }
         if(coolingFluid>0){
-            CreateLang.translate("goggles.engine.cooling_fluid", CreateLang.number(coolingFluid))
-                    .color(0x51bdb9)
-                    .forGoggles(tooltip);
+            TFMGTexts.Engine.coolingFluid(coolingFluid).forGoggles(tooltip);
         }
 
         TFMGUtils.createFluidTooltip(this,tooltip);

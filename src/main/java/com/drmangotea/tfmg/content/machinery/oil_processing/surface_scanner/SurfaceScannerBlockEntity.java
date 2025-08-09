@@ -1,6 +1,8 @@
 package com.drmangotea.tfmg.content.machinery.oil_processing.surface_scanner;
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.machinery.misc.machine_input.MachineInputBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGTags;
@@ -55,7 +57,7 @@ public class SurfaceScannerBlockEntity extends SmartBlockEntity implements IHave
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        CreateLang.translate("goggles.surface_scanner.header")
+        TFMGTexts.header("surface_scanner")
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip);
         if(level.getBlockEntity(getBlockPos().below()) instanceof MachineInputBlockEntity be&&Math.abs(be.getSpeed())>=64) {
@@ -68,19 +70,11 @@ public class SurfaceScannerBlockEntity extends SmartBlockEntity implements IHave
             }
 
             if(depositsFound>0){
-                CreateLang.number(depositsFound)
-                        .add(CreateLang.translate("goggles.surface_scanner.deposits_found"))
-                        .style(ChatFormatting.GREEN)
-                        .forGoggles(tooltip);
+                TFMGTexts.SurfaceScanner.deposits(depositsFound).forGoggles(tooltip);
             }else
-                CreateLang.translate("goggles.surface_scanner.no_deposit")
-                        .style(ChatFormatting.RED)
-                        .forGoggles(tooltip);
-
+                TFMGTexts.SurfaceScanner.noDeposit().forGoggles(tooltip);
         }else
-            CreateLang.translate("goggles.surface_scanner.no_rotation")
-                    .style(ChatFormatting.DARK_RED)
-                    .forGoggles(tooltip);
+            TFMGTexts.SurfaceScanner.noRotation().forGoggles(tooltip);
 
         return true;
     }

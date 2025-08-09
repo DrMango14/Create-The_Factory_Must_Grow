@@ -1,6 +1,8 @@
 package com.drmangotea.tfmg.content.engines.types;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.engines.base.AbstractEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.base.EngineBlock;
 import com.drmangotea.tfmg.content.engines.base.EngineComponentsInventory;
@@ -535,22 +537,21 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 
         if (controller.asLong() == getBlockPos().asLong())
-            CreateLang.translate("engine.controller.header").forGoggles(tooltip);
+            TFMGTexts.header("engine_controller").forGoggles(tooltip);
 
-        CreateLang.translate("engine.shift", CreateLang.translate(shift.langKey)).forGoggles(tooltip);
-        CreateLang.translate("engine.speed_efficiency", getSpeedEfficiency()).forGoggles(tooltip);
-        CreateLang.translate("engine.efficiency", efficiencyModifier()).forGoggles(tooltip);
-        CreateLang.translate("engine.fuel_consumption", getFuelConsumption()).forGoggles(tooltip);
-        CreateLang.translate("engine.rpm", rpm).forGoggles(tooltip);
-        CreateLang.translate("engine.length", engineLength()).forGoggles(tooltip);
-        CreateLang.translate("engine.torque", torque).forGoggles(tooltip);
-        CreateLang.translate("engine.injection_rate", fuelInjectionRate).forGoggles(tooltip);
-        CreateLang.translate("engine.signal ", highestSignal).forGoggles(tooltip);
+        TFMGTexts.Engine.shift(shift.langKey).forGoggles(tooltip);
+        TFMGTexts.Engine.speedEfficiency(getSpeedEfficiency()).forGoggles(tooltip);
+        TFMGTexts.Engine.efficiency(efficiencyModifier()).forGoggles(tooltip);
+        TFMGTexts.Engine.fuelConsumption(getFuelConsumption()).forGoggles(tooltip);
+        TFMGTexts.Engine.rpm(rpm).forGoggles(tooltip);
+        TFMGTexts.Engine.length(engineLength()).forGoggles(tooltip);
+        TFMGTexts.Engine.torque(torque).forGoggles(tooltip);
+        TFMGTexts.Engine.injectionRate(fuelInjectionRate).forGoggles(tooltip);
+        TFMGTexts.Engine.signal(highestSignal).forGoggles(tooltip);
 
-
-        CreateLang.number(engineNumber).style(ChatFormatting.DARK_GREEN).forGoggles(tooltip);
+        TFMGLang.number(engineNumber).style(ChatFormatting.DARK_GREEN).forGoggles(tooltip);
         if (isController() && !nextComponent().isEmpty())
-            CreateLang.text(nextComponent().getItems()[0].getDisplayName().getString()).forGoggles(tooltip);
+            TFMGLang.text(nextComponent().getItems()[0].getDisplayName().getString()).forGoggles(tooltip);
 
         TFMGUtils.createFluidTooltip(this, tooltip);
 

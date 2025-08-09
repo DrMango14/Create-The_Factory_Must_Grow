@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.measurement;
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.mojang.blaze3d.platform.Window;
@@ -94,7 +95,7 @@ public class MultimeterOverlayRenderer {
 
         ItemStack item = TFMGItems.MULTIMETER.asStack();
         List<Component> tooltip = new ArrayList<>();
-        tooltip.add(CreateLang.number(1).component());
+        tooltip.add(TFMGLang.number(1).component());
 
 		((IElectric)be).makeMultimeterTooltip(tooltip,isShifting);
 

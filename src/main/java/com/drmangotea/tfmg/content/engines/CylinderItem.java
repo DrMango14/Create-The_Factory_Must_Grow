@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.engines;
 
 
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.minecraft.ChatFormatting;
@@ -37,13 +38,13 @@ public class CylinderItem extends Item {
 
         if(fuels.isEmpty())
             return;
-        tooltip.add(CreateLang.translateDirect("tooltip.cylinder")
+        tooltip.add(TFMGLang.translateDirect("tooltip.cylinder")
                 .withStyle(ChatFormatting.GRAY));
 
         for(String key : fuels.getAllKeys()) {
 
 
-            MutableComponent component = CreateLang.text("- ").component()
+            MutableComponent component = TFMGLang.text("- ").component()
                     .append(Component.translatable(fuels.getString(key)))
                     .withStyle(ChatFormatting.AQUA);
             tooltip.add(component);

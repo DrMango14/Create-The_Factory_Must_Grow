@@ -1,5 +1,5 @@
 {
-  "type": "create:industrial_blasting",
+  "type": "tfmg:industrial_blasting",
   "hot_air_usage": 20,
   "ingredients": [
     {

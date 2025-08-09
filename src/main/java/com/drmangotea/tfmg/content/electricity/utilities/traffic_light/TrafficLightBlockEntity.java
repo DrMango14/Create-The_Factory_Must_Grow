@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.utilities.traffic_light;
 
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -32,7 +33,7 @@ public class TrafficLightBlockEntity extends ElectricBlockEntity {
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
-        timerLength = new TimerScrollBehaviour(CreateLang.translateDirect("traffic_light.timer"), this,
+        timerLength = new TimerScrollBehaviour(TFMGLang.translateDirect("traffic_light.timer"), this,
                 new TrafficLightScrollSlot()).between(180, 60 * 20 * 60);
         timerLength.withFormatter(this::format);
         timerLength.withCallback(value-> timer = value);

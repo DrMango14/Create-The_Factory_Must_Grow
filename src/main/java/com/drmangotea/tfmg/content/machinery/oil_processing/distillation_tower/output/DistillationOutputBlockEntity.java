@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.output;
 
 import com.drmangotea.tfmg.base.TFMGIcons;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
@@ -47,7 +48,7 @@ public class DistillationOutputBlockEntity extends SmartBlockEntity implements I
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         mode = new ScrollOptionBehaviour<>(DistillationOutputMode.class,
-                CreateLang.translateDirect("distillation_output.when_tank_is_full"), this, new DistillationOutputValueBox());
+                TFMGLang.translateDirect("distillation_output.when_tank_is_full"), this, new DistillationOutputValueBox());
         behaviours.add(mode);
     }
 
@@ -114,7 +115,7 @@ public class DistillationOutputBlockEntity extends SmartBlockEntity implements I
 
         @Override
         public String getTranslationKey() {
-            return "distillation_output.mode."+ CreateLang.asId(name());
+            return "distillation_output.mode."+ TFMGLang.asId(name());
         }
     }
 }

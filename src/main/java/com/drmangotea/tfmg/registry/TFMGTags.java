@@ -3,7 +3,7 @@ package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.TFMG;
 
-import com.simibubi.create.foundation.utility.CreateLang;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -77,7 +77,7 @@ public class TFMGTags {
         }
 
         TFMGBlockTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? CreateLang.asId(name()) : path);
+            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? TFMGLang.asId(name()) : path);
             if (optional) {
                 tag = optionalTag(BuiltInRegistries.BLOCK, id);
             } else {
@@ -134,7 +134,7 @@ public class TFMGTags {
         }
 
         TFMGItemTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? CreateLang.asId(name()) : path);
+            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? TFMGLang.asId(name()) : path);
             if (optional) {
                 tag = optionalTag(BuiltInRegistries.ITEM, id);
             } else {
@@ -197,7 +197,7 @@ public class TFMGTags {
         }
 
         TFMGFluidTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? CreateLang.asId(name()) : path);
+            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? TFMGLang.asId(name()) : path);
             if (optional) {
                 tag = optionalTag(BuiltInRegistries.FLUID, id);
             } else {

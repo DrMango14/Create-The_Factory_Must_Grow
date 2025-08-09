@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.engines.upgrades;
 
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.engines.engine_controller.EngineControllerBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.simibubi.create.foundation.utility.CreateLang;
@@ -62,7 +63,7 @@ public class TransmissionItem extends Item {
 
         BlockPos pos = BlockPos.of(stack.get(TFMGDataComponents.POSITION));
         if(pos.asLong()!=0)
-            tooltip.add(CreateLang.text("" + pos.getX() + " " + pos.getY() + " " + pos.getZ()).component()
+            tooltip.add(TFMGLang.text(pos.getX() + " " + pos.getY() + " " + pos.getZ()).component()
                     .withStyle(ChatFormatting.AQUA)
             );
         super.appendHoverText(stack, context, tooltip, flag);

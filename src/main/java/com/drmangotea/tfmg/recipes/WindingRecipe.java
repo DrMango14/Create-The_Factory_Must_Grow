@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.recipes;
 
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.recipes.jei.WindingCategory;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
@@ -59,7 +60,7 @@ public class WindingRecipe extends StandardProcessingRecipe<RecipeWrapper> imple
 //
 	@Override
 	public Component getDescriptionForAssembly() {
-		return CreateLang.translateDirect("recipe.assembly.winding");
+		return TFMGLang.translateDirect("recipe.assembly.winding");
 	}
 
 	@Override

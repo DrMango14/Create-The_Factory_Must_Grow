@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.storage;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
@@ -94,15 +95,9 @@ public class AccumulatorBlockEntity extends ElectricBlockEntity {
                 return be.makeMultimeterTooltip(tooltip, isPlayerSneaking);
         super.makeMultimeterTooltip(tooltip, isPlayerSneaking);
 
-        CreateLang.translate("electricity.capacity", Component.literal(TFMGUtils.formatUnits(energy.getEnergyStored(), "FE")))
-                .color(0x127799)
-                .forGoggles(tooltip, 1);
-        CreateLang.translate("electricity.charging_rate", CreateLang.number(getChargingRate()))
-                .color(0x127799)
-                .forGoggles(tooltip, 1);
-        CreateLang.translate("electricity.max_capacity", CreateLang.number(getMaxCapacity()))
-                .color(0x127799)
-                .forGoggles(tooltip, 1);
+        TFMGTexts.electricalCapacity(energy.getEnergyStored()).forGoggles(tooltip, 1);
+        TFMGTexts.chargingRate(getChargingRate()).forGoggles(tooltip, 1);
+        TFMGTexts.electricalMaxCapacity(getMaxCapacity()).forGoggles(tooltip, 1);
 
         return true;
     }

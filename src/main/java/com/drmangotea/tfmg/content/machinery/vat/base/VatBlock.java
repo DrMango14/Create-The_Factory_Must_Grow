@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.machinery.vat.base;
 
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -182,7 +183,7 @@ public class VatBlock extends Block implements IWrenchable, IBE<VatBlockEntity> 
 
         @Override
         public String getSerializedName() {
-            return CreateLang.asId(name());
+            return TFMGLang.asId(name());
         }
     }
 

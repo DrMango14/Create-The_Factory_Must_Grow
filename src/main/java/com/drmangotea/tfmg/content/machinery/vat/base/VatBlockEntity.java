@@ -1,5 +1,7 @@
 package com.drmangotea.tfmg.content.machinery.vat.base;
 
+import com.drmangotea.tfmg.base.lang.TFMGLang;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.mixin.accessor.TankSegmentAccessor;
 import com.drmangotea.tfmg.recipes.VatMachineRecipe;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
@@ -937,10 +939,9 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
     }
 
     public void addMachineTooltip(String operationId, boolean isOperational, List<Component> tooltip) {
-        LangBuilder operation = CreateLang.translate("goggles.vat."+operationId.replace(":","."));
+        LangBuilder operation = TFMGTexts.Vat.operation(operationId);
         if (!isOperational) {
-            operation.add(CreateLang.text(" - ")).add(CreateLang.translate("goggles.vat.not_operational")
-                    .style(ChatFormatting.RED));
+            operation.add(TFMGTexts.Vat.notOperational());
         }
         operation.forGoggles(tooltip);
     }
@@ -953,14 +954,12 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
 
         if(!isController())
             return getControllerBE().addToGoggleTooltip(tooltip,isPlayerSneaking);
-        CreateLang.translate("goggles.vat.header")
-                .style(ChatFormatting.GRAY)
+        TFMGTexts.header("vat").style(ChatFormatting.GRAY)
                 .forGoggles(tooltip);
 
-        CreateLang.translate("goggles.vat.contents")
-                .forGoggles(tooltip);
+        TFMGTexts.Vat.contents().forGoggles(tooltip);
 
-        CreateLang.translate("goggles.vat.attachments")
+        TFMGTexts.Vat.attachments()
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip);
         for (Map.Entry<BlockPos, String> machines : machineMap.entrySet()) {
@@ -969,13 +968,9 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         }
 
 
-        CreateLang.translate("goggles.vat.heat_status")
-                .add(CreateLang.translate(heatCondition == HeatCondition.NONE ? "goggles.vat.no_heat" : heatCondition == HeatCondition.HEATED ? "goggles.vat.heated" : "goggles.vat.superheated"))
-                .color(heatCondition == HeatCondition.NONE ? 0x7a7a77 : heatCondition == HeatCondition.HEATED ? 0xdea216 : 0x16c7de)
-                .forGoggles(tooltip);
+        TFMGTexts.heatStatus(heatCondition).forGoggles(tooltip);
 
-        CreateLang.translate("goggles.vat.contents")
-                .forGoggles(tooltip);
+        TFMGTexts.Vat.contents().forGoggles(tooltip);
 
         ///
 
@@ -987,10 +982,10 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
             ItemStack stackInSlot = items.getStackInSlot(i);
             if (stackInSlot.isEmpty())
                 continue;
-            CreateLang.text("")
+            TFMGLang.text("")
                     .add(Component.translatable(stackInSlot.getDescriptionId())
                             .withStyle(ChatFormatting.GRAY))
-                    .add(CreateLang.text(" x" + stackInSlot.getCount())
+                    .add(TFMGLang.text(" x" + stackInSlot.getCount())
                             .style(ChatFormatting.GREEN))
                     .forGoggles(tooltip, 1);
             isEmpty = false;
@@ -1001,11 +996,11 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
             FluidStack fluidStack = fluids.getFluidInTank(i);
             if (fluidStack.isEmpty())
                 continue;
-            CreateLang.text("")
-                    .add(CreateLang.fluidName(fluidStack)
-                            .add(CreateLang.text(" "))
+            TFMGLang.text("")
+                    .add(TFMGLang.fluidName(fluidStack)
+                            .add(TFMGLang.text(" "))
                             .style(ChatFormatting.GRAY)
-                            .add(CreateLang.number(fluidStack.getAmount())
+                            .add(TFMGLang.number(fluidStack.getAmount())
                                     .add(mb)
                                     .style(ChatFormatting.BLUE)))
                     .forGoggles(tooltip, 1);

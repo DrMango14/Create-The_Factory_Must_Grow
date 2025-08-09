@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.recipes;
 
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.recipes.jei.PolarizingCategory;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
@@ -52,7 +53,7 @@ public class PolarizingRecipe extends StandardProcessingRecipe<RecipeInput> impl
     
     @Override
     public Component getDescriptionForAssembly() {
-        return CreateLang.translateDirect("recipe.assembly.polarizing");
+        return TFMGLang.translateDirect("recipe.assembly.polarizing");
     }
     
     @Override

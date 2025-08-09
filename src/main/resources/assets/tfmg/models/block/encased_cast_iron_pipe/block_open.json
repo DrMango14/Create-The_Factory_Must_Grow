@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "tfmg:block/copper_encased_aluminum_pipe",
-		"particle": "tfmg:block/copper_encased_aluminum_pipe"
+		"0": "tfmg:block/encased_cast_iron_pipe",
+		"particle": "tfmg:block/encased_cast_iron_pipe"
 	},
 	"elements": [
 		{

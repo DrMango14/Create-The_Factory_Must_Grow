@@ -1,5 +1,5 @@
 {
-  "type": "create:casting",
+  "type": "tfmg:casting",
   "ingredients": [
     {
       "type": "fluid_stack",

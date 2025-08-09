@@ -102,7 +102,7 @@ public class TFMGPipeEntry {
     }
 
     protected BlockEntry<? extends TFMGEncasedPipeBlock> registerEncasedPipe() {
-        return this.registrate.block("copper_encased_" + this.material.name + "_pipe", p -> new TFMGEncasedPipeBlock(p, AllBlocks.COPPER_CASING::get, this.material))
+        return this.registrate.block("encased_" + this.material.name + "_pipe", p -> new TFMGEncasedPipeBlock(p, AllBlocks.COPPER_CASING::get, this.material))
                 .initialProperties(SharedProperties::copperMetal)
                 .properties(p -> p.noOcclusion().mapColor(MapColor.TERRACOTTA_LIGHT_GRAY))
                 .transform(axeOrPickaxe())

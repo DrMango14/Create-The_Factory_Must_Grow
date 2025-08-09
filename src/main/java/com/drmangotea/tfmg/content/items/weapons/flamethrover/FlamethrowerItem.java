@@ -1,7 +1,9 @@
 package com.drmangotea.tfmg.content.items.weapons.flamethrover;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGClient;
 import com.drmangotea.tfmg.TFMGRegistries;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.spark.Spark;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGEntityTypes;
@@ -60,25 +62,30 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
 
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         super.inventoryTick(stack, level, entity, slotId, isSelected);
-        if(!stack.has(TFMGDataComponents.FLAMETHROWER_FUEL))
-            stack.set(TFMGDataComponents.FLAMETHROWER_FUEL, FlamethrowerFuel.EMPTY);
+        if (remapOldComponents(stack, level.registryAccess())) {
+            TFMG.LOGGER.info("[TFMG Remapper] Remapped old Flamethrower components");
+        } else {
+            if(!stack.has(TFMGDataComponents.FLAMETHROWER)) {
+                stack.set(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY);
+            }
+        }
     }
 
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int time) {
-        if (stack.getOrDefault(TFMGDataComponents.FLAMETHROWER_FUEL, FlamethrowerFuel.EMPTY) == FlamethrowerFuel.EMPTY)
+        if (stack.getOrDefault(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY) == FlamethrowerFuel.EMPTY)
             return;
 
-        int fuelAmount = stack.getOrDefault(TFMGDataComponents.FLAMETHROWER_FUEL, FlamethrowerFuel.EMPTY).amount();
+        int fuelAmount = stack.getOrDefault(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY).amount();
 
         if(fuelAmount==0) {
-            stack.set(TFMGDataComponents.FLAMETHROWER_FUEL, FlamethrowerFuel.EMPTY);
+            stack.set(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY);
             entity.stopUsingItem();
             return;
         }
 
         level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.FIRE_EXTINGUISH, SoundSource.NEUTRAL, 0.1F, 0.04F);
 
-        FlamethrowerFuel fuel = stack.getOrDefault(TFMGDataComponents.FLAMETHROWER_FUEL, FlamethrowerFuel.EMPTY);
+        FlamethrowerFuel fuel = stack.getOrDefault(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY);
         FlamethrowerFuelType fuelType = getFuel(level.registryAccess(), stack);
 
         Vec3 barrelPos = getGunBarrelVec(entity, entity.getUsedItemHand() == InteractionHand.MAIN_HAND,
@@ -95,9 +102,9 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
                 }
             }
             int fuelConsumed = level.random.nextIntBetweenInclusive(amountToFire / 2, amountToFire);
-            stack.set(TFMGDataComponents.FLAMETHROWER_FUEL, fuel.decrement(fuelConsumed));
+            stack.set(TFMGDataComponents.FLAMETHROWER, fuel.decrement(fuelConsumed));
         } else {
-            stack.set(TFMGDataComponents.FLAMETHROWER_FUEL, FlamethrowerFuel.EMPTY);
+            stack.set(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY);
             entity.stopUsingItem();
         }
     }
@@ -116,30 +123,33 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        if(!stack.has(TFMGDataComponents.FLAMETHROWER_FUEL))
+        if(!stack.has(TFMGDataComponents.FLAMETHROWER))
             return false;
 
-        return !stack.getOrDefault(TFMGDataComponents.FLAMETHROWER_FUEL, FlamethrowerFuel.EMPTY).isEmpty();
+        return !stack.getOrDefault(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY).isEmpty();
     }
 
     @Override
     public int getBarColor(ItemStack stack) {
-        if(!stack.has(TFMGDataComponents.FLAMETHROWER_FUEL))
-            stack.set(TFMGDataComponents.FLAMETHROWER_FUEL, FlamethrowerFuel.EMPTY);
+        if(!stack.has(TFMGDataComponents.FLAMETHROWER))
+            stack.set(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY);
 
-        return stack.getOrDefault(TFMGDataComponents.FLAMETHROWER_FUEL, FlamethrowerFuel.EMPTY).color();
+        return stack.getOrDefault(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY).color();
     }
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        if(!stack.has(TFMGDataComponents.FLAMETHROWER_FUEL))
-            stack.set(TFMGDataComponents.FLAMETHROWER_FUEL, FlamethrowerFuel.EMPTY);
+        if(!stack.has(TFMGDataComponents.FLAMETHROWER))
+            stack.set(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY);
 
-        return Math.round( 13* ((float)stack.getOrDefault(TFMGDataComponents.FLAMETHROWER_FUEL, FlamethrowerFuel.EMPTY).amount()/(float)FUEL_CAPACITY));
+        return Math.round( 13* ((float)stack.getOrDefault(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY).amount()/(float)FUEL_CAPACITY));
     }
 
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        player.startUsingItem(hand);
+        ItemStack stack = player.getItemInHand(hand);
+        if (!stack.getOrDefault(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY).isEmpty()) {
+            player.startUsingItem(hand);
+        }
 
         if (level.isClientSide) {
             TFMGClient.FLAMETHROWER_RENDER_HANDLER.dontAnimateItem(hand);
@@ -162,9 +172,9 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
 
         BlockEntity blockEntity = level.getBlockEntity(pos);
 
-        if (!stack.has(TFMGDataComponents.FLAMETHROWER_FUEL)) stack.set(TFMGDataComponents.FLAMETHROWER_FUEL, FlamethrowerFuel.EMPTY);
+        if (!stack.has(TFMGDataComponents.FLAMETHROWER)) stack.set(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY);
 
-        FlamethrowerFuel existingFuel = stack.getOrDefault(TFMGDataComponents.FLAMETHROWER_FUEL, FlamethrowerFuel.EMPTY);
+        FlamethrowerFuel existingFuel = stack.getOrDefault(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY);
 
         int containedFuel = existingFuel.amount();
         @Nullable ResourceKey<FlamethrowerFuelType> fuelType = existingFuel.fuelType();
@@ -184,13 +194,13 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
                         if (fuel == FlamethrowerFuel.EMPTY) continue;
                         if (fuelType != TFMGFlamethrowerFuelTypes.FALLBACK) {
                             if (fuelType.equals(fuel.fuelType())) {
-                                stack.set(TFMGDataComponents.FLAMETHROWER_FUEL, existingFuel.increment(toDrain, FUEL_CAPACITY));
+                                stack.set(TFMGDataComponents.FLAMETHROWER, existingFuel.increment(toDrain, FUEL_CAPACITY));
                                 capability.drain(stackToDrain, IFluidHandler.FluidAction.EXECUTE);
                                 context.getPlayer().getCooldowns().addCooldown(stack.getItem(), 20);
                                 foundFluid = true;
                             }
                         } else {
-                            stack.set(TFMGDataComponents.FLAMETHROWER_FUEL, fuel);
+                            stack.set(TFMGDataComponents.FLAMETHROWER, fuel);
                             capability.drain(stackToDrain, IFluidHandler.FluidAction.EXECUTE);
                             context.getPlayer().getCooldowns().addCooldown(stack.getItem(), 20);
                             foundFluid = true;
@@ -205,14 +215,14 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
 
     @Nullable
     public static FlamethrowerFuelType getFuel(RegistryAccess registryAccess, ItemStack heldStack) {
-        var type = heldStack.getOrDefault(TFMGDataComponents.FLAMETHROWER_FUEL, FlamethrowerFuel.EMPTY).getFuelType(registryAccess);
+        var type = heldStack.getOrDefault(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY).getFuelType(registryAccess);
         return type.orElse(registryAccess.registryOrThrow(TFMGRegistries.FLAMETHROWER_FUEL_TYPE).get(TFMGFlamethrowerFuelTypes.FALLBACK));
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        if (!stack.has(TFMGDataComponents.FLAMETHROWER_FUEL) || stack.get(TFMGDataComponents.FLAMETHROWER_FUEL) == FlamethrowerFuel.EMPTY) {
+        if (!stack.has(TFMGDataComponents.FLAMETHROWER) || stack.get(TFMGDataComponents.FLAMETHROWER) == FlamethrowerFuel.EMPTY) {
             super.appendHoverText(stack, context, tooltip, flag);
             return;
         }
@@ -223,7 +233,7 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
         }
         FlamethrowerFuelType fallback = player.registryAccess().registryOrThrow(TFMGRegistries.FLAMETHROWER_FUEL_TYPE).get(TFMGFlamethrowerFuelTypes.FALLBACK);
         FlamethrowerFuelType fuelType = getFuel(player.registryAccess(), stack);
-        FlamethrowerFuel fuel = stack.getOrDefault(TFMGDataComponents.FLAMETHROWER_FUEL, FlamethrowerFuel.EMPTY);
+        FlamethrowerFuel fuel = stack.getOrDefault(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY);
 
         if (fuelType == fallback || !fuel.hasFuel()) {
             super.appendHoverText(stack, context, tooltip, flag);
@@ -262,30 +272,43 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
         spread = spread.withStyle(spreadF > 20 ? green : darkGreen);
         speed = speed.withStyle(speedF > 1 ? green : darkGreen);
         amount = amount.withStyle(amountF > 10 ? green : darkGreen);
-        fuelCapacity = fuelCapacity.withStyle(stack.get(TFMGDataComponents.FLAMETHROWER_FUEL).amount() == 0 ? red : green);
+        fuelCapacity = fuelCapacity.withStyle(stack.get(TFMGDataComponents.FLAMETHROWER).amount() == 0 ? red : green);
 
         tooltip.add(spacing.plainCopy()
-                .append(CreateLang.translateDirect(_capacity, fuelCapacity)
+                .append(TFMGLang.translateDirect(_capacity, fuelCapacity)
                         .withStyle(darkGreen)));
 
         tooltip.add(spacing.plainCopy()
-                .append(CreateLang.translateDirect(_spread, spread)
+                .append(TFMGLang.translateDirect(_spread, spread)
                         .withStyle(darkGreen)));
         tooltip.add(spacing.plainCopy()
-                .append(CreateLang.translateDirect(_speed, speed)
+                .append(TFMGLang.translateDirect(_speed, speed)
                         .withStyle(darkGreen)));
         tooltip.add(spacing.plainCopy()
-                .append(CreateLang.translateDirect(_amount, amount)
+                .append(TFMGLang.translateDirect(_amount, amount)
                         .withStyle(darkGreen)));
         if (coldF) {
             tooltip.add(spacing.plainCopy()
-                    .append(CreateLang.translateDirect(_cold)
+                    .append(TFMGLang.translateDirect(_cold)
                             .withStyle(darkGreen)));
         } else if (hellfireF) {
             tooltip.add(spacing.plainCopy()
-                    .append(CreateLang.translateDirect(_hellfire)
+                    .append(TFMGLang.translateDirect(_hellfire)
                             .withStyle(darkGreen)));
         }
+    }
+
+    private boolean remapOldComponents(ItemStack stack, RegistryAccess registryAccess) {
+        if (stack.has(TFMGDataComponents.FLAMETHROWER_FUEL) && stack.has(TFMGDataComponents.AMOUNT)) {
+            int fuelAmount = stack.getOrDefault(TFMGDataComponents.AMOUNT, 0);
+            String fuelType = stack.getOrDefault(TFMGDataComponents.FLAMETHROWER_FUEL, "fallback");
+            if (fuelType.isEmpty()) fuelType = "fallback";
+            FlamethrowerFuel fuel = FlamethrowerFuel.createForLegacy(registryAccess, fuelType, fuelAmount);
+            stack.set(TFMGDataComponents.FLAMETHROWER, fuel);
+            stack.remove(TFMGDataComponents.FLAMETHROWER_FUEL); stack.remove(TFMGDataComponents.AMOUNT);
+            return true;
+        }
+        return false;
     }
 
     @Override

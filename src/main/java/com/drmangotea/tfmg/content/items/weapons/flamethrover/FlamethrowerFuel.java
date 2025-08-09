@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.items.weapons.flamethrover;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.registry.TFMGFlamethrowerFuelTypes;
 import com.mojang.serialization.Codec;
@@ -61,6 +62,12 @@ public record FlamethrowerFuel(@Nullable ResourceKey<FlamethrowerFuelType> fuelT
 
     public static FlamethrowerFuel createForType(RegistryAccess registryAccess, FluidStack stack) {
         return createForType(registryAccess, stack.getFluid(), stack.getAmount());
+    }
+
+    public static FlamethrowerFuel createForLegacy(RegistryAccess registryAccess, String fuelType, int amount) {
+        ResourceKey<FlamethrowerFuelType> key = ResourceKey.create(TFMGRegistries.FLAMETHROWER_FUEL_TYPE, TFMG.asResource(fuelType));
+        Optional<Holder.Reference<FlamethrowerFuelType>> type = registryAccess.lookupOrThrow(TFMGRegistries.FLAMETHROWER_FUEL_TYPE).get(key);
+        return type.map(typeReference -> new FlamethrowerFuel(typeReference.getKey(), amount, type.get().value().color())).orElse(EMPTY);
     }
 
     public boolean isEmpty() {
