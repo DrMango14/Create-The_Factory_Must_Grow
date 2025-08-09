@@ -1,8 +1,10 @@
-package com.drmangotea.tfmg.content.decoration.flywheels;
+package com.drmangotea.tfmg.content.decoration.kinetics.flywheels;
 
+import com.drmangotea.tfmg.mixin.accessor.FlywheelBlockEntityMixin;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
+import com.simibubi.create.content.kinetics.flywheel.FlywheelBlockEntity;
 import dev.engine_room.flywheel.api.visualization.VisualizationManager;
 import net.createmod.catnip.math.AngleHelper;
 import net.createmod.catnip.render.CachedBuffers;
@@ -12,14 +14,14 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class TFMGFlywheelRenderer extends KineticBlockEntityRenderer<TFMGFlywheelBlockEntity> {
+public class TFMGFlywheelRenderer extends KineticBlockEntityRenderer<FlywheelBlockEntity> {
 
 	public TFMGFlywheelRenderer(BlockEntityRendererProvider.Context context) {
 		super(context);
 	}
 
 	@Override
-	protected void renderSafe(TFMGFlywheelBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
+	protected void renderSafe(FlywheelBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
 							  int light, int overlay) {
 		super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
 
@@ -28,14 +30,14 @@ public class TFMGFlywheelRenderer extends KineticBlockEntityRenderer<TFMGFlywhee
 
 		BlockState blockState = be.getBlockState();
 
-		float speed = be.visualSpeed.getValue(partialTicks) * 3 / 10f;
-		float angle = be.angle + speed * partialTicks;
+		float speed = ((FlywheelBlockEntityMixin)be).tfmg$visualSpeed().getValue(partialTicks) * 3 / 10f;
+		float angle = ((FlywheelBlockEntityMixin)be).tfmg$angle() + speed * partialTicks;
 
 		VertexConsumer vb = buffer.getBuffer(RenderType.solid());
 		renderFlywheel(be, ms, light, blockState, angle, vb);
 	}
 
-	private void renderFlywheel(TFMGFlywheelBlockEntity be, PoseStack ms, int light, BlockState blockState, float angle,
+	private void renderFlywheel(FlywheelBlockEntity be, PoseStack ms, int light, BlockState blockState, float angle,
 								VertexConsumer vb) {
 		SuperByteBuffer wheel = CachedBuffers.block(blockState);
 		kineticRotationTransform(wheel, be, getRotationAxisOf(be), AngleHelper.rad(angle), light);
@@ -43,7 +45,7 @@ public class TFMGFlywheelRenderer extends KineticBlockEntityRenderer<TFMGFlywhee
 	}
 
 	@Override
-	protected BlockState getRenderedBlockState(TFMGFlywheelBlockEntity be) {
+	protected BlockState getRenderedBlockState(FlywheelBlockEntity be) {
 		return shaft(getRotationAxisOf(be));
 	}
 

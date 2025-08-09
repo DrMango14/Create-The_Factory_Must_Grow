@@ -1,6 +1,6 @@
-package com.drmangotea.tfmg.content.decoration.flywheels;
+package com.drmangotea.tfmg.content.decoration.kinetics.flywheels;
 
-import com.drmangotea.tfmg.registry.TFMGPartialModels;
+import com.drmangotea.tfmg.mixin.accessor.FlywheelBlockEntityMixin;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityVisual;
 import com.simibubi.create.content.kinetics.base.RotatingInstance;
@@ -11,7 +11,6 @@ import dev.engine_room.flywheel.api.visualization.VisualizationContext;
 import dev.engine_room.flywheel.lib.instance.InstanceTypes;
 import dev.engine_room.flywheel.lib.instance.TransformedInstance;
 import dev.engine_room.flywheel.lib.model.Models;
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import dev.engine_room.flywheel.lib.visual.SimpleDynamicVisual;
 import net.createmod.catnip.math.AngleHelper;
 import net.minecraft.core.Direction;
@@ -20,7 +19,7 @@ import org.joml.Quaternionf;
 
 import java.util.function.Consumer;
 
-public class TFMGFlywheelVisual extends KineticBlockEntityVisual<TFMGFlywheelBlockEntity> implements SimpleDynamicVisual {
+public class TFMGFlywheelVisual extends KineticBlockEntityVisual<FlywheelBlockEntity> implements SimpleDynamicVisual {
 
 	protected final RotatingInstance shaft;
 	protected final TransformedInstance wheel;
@@ -32,7 +31,7 @@ public class TFMGFlywheelVisual extends KineticBlockEntityVisual<TFMGFlywheelBlo
 
 
 
-	public TFMGFlywheelVisual(VisualizationContext context, TFMGFlywheelBlockEntity blockEntity, float partialTick) {
+	public TFMGFlywheelVisual(VisualizationContext context, FlywheelBlockEntity blockEntity, float partialTick) {
 		super(context, blockEntity, partialTick);
 
 		var axis = rotationAxis();
@@ -56,7 +55,7 @@ public class TFMGFlywheelVisual extends KineticBlockEntityVisual<TFMGFlywheelBlo
 
 		baseTransform.set(wheel.pose);
 
-		animate(blockEntity.angle);
+		animate(((FlywheelBlockEntityMixin)blockEntity).tfmg$angle());
 	}
 
 	@Override
@@ -64,8 +63,8 @@ public class TFMGFlywheelVisual extends KineticBlockEntityVisual<TFMGFlywheelBlo
 
 		float partialTicks = ctx.partialTick();
 
-		float speed = blockEntity.visualSpeed.getValue(partialTicks) * 3 / 10f;
-		float angle = blockEntity.angle + speed * partialTicks;
+		float speed = ((FlywheelBlockEntityMixin)blockEntity).tfmg$visualSpeed().getValue(partialTicks) * 3 / 10f;
+		float angle = ((FlywheelBlockEntityMixin)blockEntity).tfmg$angle() + speed * partialTicks;
 
 		if (Math.abs(angle - lastAngle) < 0.001)
 			return;

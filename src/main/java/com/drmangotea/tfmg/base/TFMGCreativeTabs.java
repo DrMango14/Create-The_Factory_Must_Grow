@@ -1,50 +1,26 @@
 package com.drmangotea.tfmg.base;
 
-import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.content.decoration.encased.TFMGEncasedCogwheelBlock;
+import com.drmangotea.tfmg.content.decoration.kinetics.encased.TFMGEncasedCogwheelBlock;
 import com.drmangotea.tfmg.content.machinery.misc.winding_machine.SpoolItem;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
-import com.drmangotea.tfmg.registry.TFMGEncasedBlocks;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.*;
-import com.simibubi.create.content.contraptions.actors.seat.SeatBlock;
-import com.simibubi.create.content.equipment.armor.BacktankUtil;
-import com.simibubi.create.content.equipment.toolbox.ToolboxBlock;
-import com.simibubi.create.content.kinetics.crank.ValveHandleBlock;
-import com.simibubi.create.content.logistics.box.PackageStyles;
-import com.simibubi.create.content.logistics.packagePort.postbox.PostboxBlock;
-import com.simibubi.create.content.logistics.tableCloth.TableClothBlock;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.item.TagDependentIngredientItem;
-import com.tterrag.registrate.util.entry.BlockEntry;
-import com.tterrag.registrate.util.entry.ItemEntry;
-import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
-import it.unimi.dsi.fastutil.objects.*;
-import net.createmod.catnip.platform.CatnipServices;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Block;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.apache.commons.lang3.mutable.MutableObject;
 import org.jetbrains.annotations.ApiStatus;
 
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 import static com.drmangotea.tfmg.TFMG.MOD_ID;
 import static com.drmangotea.tfmg.TFMG.REGISTRATE;

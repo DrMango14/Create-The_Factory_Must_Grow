@@ -4,7 +4,6 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 
 public class MaterialSet {
 
-
     public BlockEntry<?> block;
     public BlockEntry<?> slab;
     public BlockEntry<?> stairs;

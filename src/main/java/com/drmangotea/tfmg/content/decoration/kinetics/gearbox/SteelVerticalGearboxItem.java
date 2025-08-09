@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.decoration.gearbox;
+package com.drmangotea.tfmg.content.decoration.kinetics.gearbox;
 
 
 import com.drmangotea.tfmg.registry.TFMGBlocks;

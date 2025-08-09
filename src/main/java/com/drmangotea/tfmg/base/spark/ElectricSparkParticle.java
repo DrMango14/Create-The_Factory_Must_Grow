@@ -20,6 +20,8 @@ public class ElectricSparkParticle extends CustomRotationParticle {
 	protected int endFrames = 20;
 	protected int totalFrames = 53;
 
+
+
 	public ElectricSparkParticle(ClientLevel worldIn, double x, double y, double z, double vx, double vy, double vz,
                                  SpriteSet spriteSet, ParticleOptions data) {
 		super(worldIn, x, y, z, spriteSet, 0);

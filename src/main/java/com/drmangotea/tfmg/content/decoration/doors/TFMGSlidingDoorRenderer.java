@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.content.decoration.doors;
 
 
 
+import com.drmangotea.tfmg.mixin.accessor.SlidingDoorBlockEntityAccessor;
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -30,15 +31,15 @@ import net.minecraft.world.phys.Vec3;
 
 
 
-public class TFMGSlidingDoorRenderer extends SafeBlockEntityRenderer<TFMGSlidingDoorBlockEntity> {
+public class TFMGSlidingDoorRenderer extends SafeBlockEntityRenderer<SlidingDoorBlockEntity> {
 
     public TFMGSlidingDoorRenderer(Context context) {}
 
     @Override
-    protected void renderSafe(TFMGSlidingDoorBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
+    protected void renderSafe(SlidingDoorBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
                               int light, int overlay) {
         BlockState blockState = be.getBlockState();
-        if (!be.shouldRenderSpecial(blockState))
+        if (!((SlidingDoorBlockEntityAccessor)be).i_architecture$shouldRenderSpecial(blockState))
             return;
 
         Direction facing = blockState.getValue(DoorBlock.FACING);
@@ -47,7 +48,7 @@ public class TFMGSlidingDoorRenderer extends SafeBlockEntityRenderer<TFMGSliding
         if (blockState.getValue(DoorBlock.HINGE) == DoorHingeSide.LEFT)
             movementDirection = movementDirection.getOpposite();
 
-        float value = be.animation.getValue(partialTicks);
+        float value = ((SlidingDoorBlockEntityAccessor)be).i_architecture$getAnimation().getValue(partialTicks);
         float value2 = Mth.clamp(value * 10, 0, 1);
 
         VertexConsumer vb = buffer.getBuffer(RenderType.cutoutMipped());

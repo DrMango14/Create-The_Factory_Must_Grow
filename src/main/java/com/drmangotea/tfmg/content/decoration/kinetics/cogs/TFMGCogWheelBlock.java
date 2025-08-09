@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.decoration.cogs;
+package com.drmangotea.tfmg.content.decoration.kinetics.cogs;
 
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.AllBlocks;
@@ -15,7 +15,6 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

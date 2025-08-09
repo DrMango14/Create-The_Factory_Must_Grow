@@ -3,7 +3,6 @@ package com.drmangotea.tfmg.registry;
 import com.drmangotea.tfmg.TFMG;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import net.minecraft.core.Holder;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
@@ -37,8 +36,6 @@ public class TFMGSoundEvents {
     public static final Map<ResourceLocation, SoundEntry> ALL = new HashMap<>();
 
     public static final SoundEntry
-
-
             ENGINE = create("engine")
             .subtitle("Engine Sounds")
             .category(SoundSource.BLOCKS)
@@ -130,7 +127,8 @@ public class TFMGSoundEvents {
 
     }
 
-    public record ConfiguredSoundEvent(Supplier<SoundEvent> event, float volume, float pitch) {}
+    public record ConfiguredSoundEvent(Supplier<SoundEvent> event, float volume, float pitch) {
+    }
 
     public static class SoundEntryBuilder {
 

@@ -1,10 +1,11 @@
-package com.drmangotea.tfmg.content.decoration.flywheels;
+package com.drmangotea.tfmg.content.decoration.kinetics.flywheels;
 
 
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
+import com.simibubi.create.content.kinetics.flywheel.FlywheelBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.core.BlockPos;
@@ -18,7 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class TFMGFlywheelBlock extends RotatedPillarKineticBlock implements IBE<TFMGFlywheelBlockEntity> {
+public class TFMGFlywheelBlock extends RotatedPillarKineticBlock implements IBE<FlywheelBlockEntity> {
 
 
     public final PartialModel model;
@@ -46,8 +47,8 @@ public class TFMGFlywheelBlock extends RotatedPillarKineticBlock implements IBE<
     }
 
     @Override
-    public Class<TFMGFlywheelBlockEntity> getBlockEntityClass() {
-        return TFMGFlywheelBlockEntity.class;
+    public Class<FlywheelBlockEntity> getBlockEntityClass() {
+        return FlywheelBlockEntity.class;
     }
 
     @Override
@@ -61,7 +62,7 @@ public class TFMGFlywheelBlock extends RotatedPillarKineticBlock implements IBE<
     }
 
     @Override
-    public BlockEntityType<? extends TFMGFlywheelBlockEntity> getBlockEntityType() {
+    public BlockEntityType<? extends FlywheelBlockEntity> getBlockEntityType() {
         return TFMGBlockEntities.TFMG_FLYWHEEL.get();
     }
 

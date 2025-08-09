@@ -13,8 +13,10 @@
     "PipeAttachmentModelMixin",
     "RecipeProviderMixin",
     "accessor.FluidTankBlockEntityAccessor",
+    "accessor.FlywheelBlockEntityMixin",
     "accessor.ProcessingRecipeAccessor",
     "accessor.SequencedAssemblyRecipeAccessor",
+    "accessor.SlidingDoorBlockEntityAccessor",
     "accessor.TankSegmentAccessor"
   ],
   "client": [

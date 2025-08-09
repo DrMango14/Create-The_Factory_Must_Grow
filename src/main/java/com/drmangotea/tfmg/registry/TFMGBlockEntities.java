@@ -1,12 +1,10 @@
 package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.base.HalfShaftRenderer;
-import com.drmangotea.tfmg.content.decoration.cogs.*;
-import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorBlockEntity;
+import com.drmangotea.tfmg.content.decoration.kinetics.cogs.*;
 import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorRenderer;
-import com.drmangotea.tfmg.content.decoration.flywheels.TFMGFlywheelBlockEntity;
-import com.drmangotea.tfmg.content.decoration.flywheels.TFMGFlywheelRenderer;
-import com.drmangotea.tfmg.content.decoration.flywheels.TFMGFlywheelVisual;
+import com.drmangotea.tfmg.content.decoration.kinetics.flywheels.TFMGFlywheelRenderer;
+import com.drmangotea.tfmg.content.decoration.kinetics.flywheels.TFMGFlywheelVisual;
 import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipeBlockEntity;
 import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipes;
 import com.drmangotea.tfmg.content.decoration.tanks.TFMGFluidTankBlockEntity;
@@ -47,8 +45,6 @@ import com.drmangotea.tfmg.content.electricity.utilities.potentiometer.Potentiom
 import com.drmangotea.tfmg.content.electricity.utilities.resistor.ResistorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayRenderer;
-import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplaySource;
-import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayTarget;
 import com.drmangotea.tfmg.content.electricity.utilities.traffic_light.TrafficLightBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.traffic_light.TrafficLightRenderer;
 import com.drmangotea.tfmg.content.electricity.utilities.transformer.TransformerBlockEntity;
@@ -103,6 +99,7 @@ import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixe
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerRenderer;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerVisual;
 import com.simibubi.create.AllPartialModels;
+import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlockEntity;
 import com.simibubi.create.content.fluids.pipes.FluidPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.SmartFluidPipeBlockEntity;
 import com.simibubi.create.content.fluids.pipes.StraightPipeBlockEntity;
@@ -113,6 +110,7 @@ import com.simibubi.create.content.fluids.pipes.valve.FluidValveVisual;
 import com.simibubi.create.content.fluids.pump.PumpBlockEntity;
 import com.simibubi.create.content.fluids.pump.PumpRenderer;
 import com.simibubi.create.content.kinetics.base.*;
+import com.simibubi.create.content.kinetics.flywheel.FlywheelBlockEntity;
 import com.simibubi.create.content.kinetics.gearbox.GearboxBlockEntity;
 import com.simibubi.create.content.kinetics.gearbox.GearboxRenderer;
 import com.simibubi.create.content.kinetics.gearbox.GearboxVisual;
@@ -299,8 +297,8 @@ public class TFMGBlockEntities {
             .validBlocks(TFMGBlocks.POTENTIOMETER, TFMGBlocks.ENCASED_POTENTIOMETER)
             .register();
 
-    public static final BlockEntityEntry<TFMGSlidingDoorBlockEntity> TFMG_SLIDING_DOOR =
-            REGISTRATE.blockEntity("tfmg_sliding_door", TFMGSlidingDoorBlockEntity::new)
+    public static final BlockEntityEntry<SlidingDoorBlockEntity> TFMG_SLIDING_DOOR =
+            REGISTRATE.blockEntity("tfmg_sliding_door", SlidingDoorBlockEntity::new)
                     .renderer(() -> TFMGSlidingDoorRenderer::new)
                     .validBlocks(TFMGBlocks.HEAVY_CASING_DOOR, TFMGBlocks.STEEL_CASING_DOOR, TFMGBlocks.HEAVY_PLATED_DOOR, TFMGBlocks.ALUMINUM_DOOR)
                     .register();
@@ -456,8 +454,8 @@ public class TFMGBlockEntities {
             .renderer(() -> GearboxRenderer::new)
             .register();
 
-    public static final BlockEntityEntry<TFMGFlywheelBlockEntity> TFMG_FLYWHEEL = REGISTRATE
-            .blockEntity("steel_flywheel", TFMGFlywheelBlockEntity::new)
+    public static final BlockEntityEntry<FlywheelBlockEntity> TFMG_FLYWHEEL = REGISTRATE
+            .blockEntity("steel_flywheel", FlywheelBlockEntity::new)
             .visual(() -> TFMGFlywheelVisual::new, false)
             .validBlocks(
                     TFMGBlocks.STEEL_FLYWHEEL,

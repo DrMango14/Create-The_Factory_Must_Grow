@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.decoration.cogs;
+package com.drmangotea.tfmg.content.decoration.kinetics.cogs;
 
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;

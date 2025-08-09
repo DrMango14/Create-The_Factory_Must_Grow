@@ -2,9 +2,8 @@ package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.base.TFMGBuilderTransformers;
 import com.drmangotea.tfmg.base.TFMGSpriteShifts;
-import com.drmangotea.tfmg.content.decoration.encased.TFMGEncasedCogwheelBlock;
-import com.drmangotea.tfmg.content.decoration.encased.TFMGEncasedShaftBlock;
-import com.simibubi.create.AllBlocks;
+import com.drmangotea.tfmg.content.decoration.kinetics.encased.TFMGEncasedCogwheelBlock;
+import com.drmangotea.tfmg.content.decoration.kinetics.encased.TFMGEncasedShaftBlock;
 import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogCTBehaviour;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -12,8 +11,8 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.createmod.catnip.data.Couple;
 
 import static com.drmangotea.tfmg.TFMG.REGISTRATE;
-import static com.drmangotea.tfmg.content.decoration.encased.TFMGEncasedCogwheelBlock.aluminum;
-import static com.drmangotea.tfmg.content.decoration.encased.TFMGEncasedCogwheelBlock.steel;
+import static com.drmangotea.tfmg.content.decoration.kinetics.encased.TFMGEncasedCogwheelBlock.aluminum;
+import static com.drmangotea.tfmg.content.decoration.kinetics.encased.TFMGEncasedCogwheelBlock.steel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 
 public class TFMGEncasedBlocks {

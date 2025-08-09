@@ -11,10 +11,7 @@ import com.drmangotea.tfmg.content.items.weapons.explosives.pipe_bomb.PipeBomb;
 import com.drmangotea.tfmg.content.items.weapons.explosives.pipe_bomb.PipeBombRenderer;
 import com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades.ThermiteGrenade;
 import com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades.ThermiteGrenadeRenderer;
-import com.drmangotea.tfmg.content.items.weapons.lithium_blade.LithiumSpark;
-import com.drmangotea.tfmg.content.items.weapons.lithium_blade.LithiumSparkRenderer;
 import com.simibubi.create.foundation.data.CreateEntityBuilder;
-
 import com.simibubi.create.foundation.utility.CreateLang;
 import com.tterrag.registrate.util.entry.EntityEntry;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
@@ -22,7 +19,6 @@ import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -54,15 +50,16 @@ public class TFMGEntityTypes {
             register("spark", Spark::new, () -> SparkRenderer::new,
                     MobCategory.MISC, 4, 20, true, true, Spark::build).register();
     public static final EntityEntry<GreenSpark> GREEN_SPARK =
-            register("green_spark", GreenSpark::new, () -> GreenSparkRenderer::new,
-                    MobCategory.MISC, 4, 20, true, true, GreenSpark::build).register();
+            register("green_spark", GreenSpark::new, () -> SparkRenderer::new,
+                    MobCategory.MISC, 4, 20, true, true, Spark::build).register();
+
     public static final EntityEntry<BlueSpark> BLUE_SPARK =
-            register("blue_spark", BlueSpark::new, () -> BlueSparkRenderer::new,
-                    MobCategory.MISC, 4, 20, true, true, BlueSpark::build).register();
+            register("blue_spark", BlueSpark::new, () -> SparkRenderer::new,
+                    MobCategory.MISC, 4, 20, true, true, Spark::build).register();
 
     public static final EntityEntry<LithiumSpark> LITHIUM_SPARK =
-            register("lithium_spark", LithiumSpark::new, () -> LithiumSparkRenderer::new,
-                    MobCategory.MISC, 80, 20, true, true, LithiumSpark::build).register();
+            register("lithium_spark", LithiumSpark::new, () -> SparkRenderer::new,
+                    MobCategory.MISC, 4, 20, true, true, Spark::build).register();
 
 
     private static <T extends Entity> CreateEntityBuilder<T, ?> register(String name, EntityType.EntityFactory<T> factory,
@@ -83,7 +80,7 @@ public class TFMGEntityTypes {
                 .renderer(renderer);
     }
 
-    public static void init(){
+    public static void init() {
 
     }
 }
