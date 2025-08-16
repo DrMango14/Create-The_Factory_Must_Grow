@@ -605,7 +605,10 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
         Direction facing = getBlockState().getValue(HORIZONTAL_FACING);
         Direction updateDirection = facing.getOpposite();
 
-        if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof AbstractSmallEngineBlockEntity be && be.getBlockState().getBlock() == this.getBlockState().getBlock()) {
+        if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof AbstractSmallEngineBlockEntity be
+                && be.getBlockState().getBlock() == this.getBlockState().getBlock()
+                && be.getBlockState().getValue(HORIZONTAL_FACING) == getBlockState().getValue(HORIZONTAL_FACING)
+        ) {
             be.connect();
             return;
         }
