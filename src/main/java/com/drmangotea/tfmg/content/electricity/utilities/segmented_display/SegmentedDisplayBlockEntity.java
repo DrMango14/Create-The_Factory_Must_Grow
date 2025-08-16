@@ -72,11 +72,11 @@ public class SegmentedDisplayBlockEntity extends ElectricBlockEntity {
         customText = Optional.empty();
     }
     public List<Integer> getSegments(){
-        List<Integer> segments = SegmentedDisplayRenderer.SYMBOLS_TO_SEGMENTS.get(getDisplayedStrings().get(true).toLowerCase());
+        List<Integer> segments = SegmentedDisplaySegments.SYMBOLS_TO_SEGMENTS.get(getDisplayedStrings().get(true).toLowerCase());
 
 
 
-        List<Integer> segments2 = SegmentedDisplayRenderer.SYMBOLS_TO_SEGMENTS.get(getDisplayedStrings().get(false).toLowerCase());
+        List<Integer> segments2 = SegmentedDisplaySegments.SYMBOLS_TO_SEGMENTS.get(getDisplayedStrings().get(false).toLowerCase());
 
         if(segments2 == null)
             segments2 = new ArrayList<>();
