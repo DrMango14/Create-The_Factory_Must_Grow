@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.content.items;
 
 import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipeBlockEntity;
-import com.drmangotea.tfmg.content.engines.base.AbstractEngineBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,17 +23,13 @@ public class ScrewdriverItem extends Item {
 
         Level level = pContext.getLevel();
 
-        if(level.getBlockEntity(positionClicked) instanceof AbstractEngineBlockEntity){
-
-
-
-            return super.useOn(pContext);
-        }
-        if(level.getBlockEntity(positionClicked)!=null) {
-            ((TFMGPipeBlockEntity) level.getBlockEntity(positionClicked)).toggleLock(player);
+        if (level.getBlockEntity(positionClicked) != null && level.getBlockEntity(positionClicked) instanceof TFMGPipeBlockEntity pipeBlockEntity) {
+            pipeBlockEntity.toggleLock(player);
             pContext.getItemInHand().hurtAndBreak(1, pContext.getPlayer(),
                     LivingEntity.getSlotForHand(pContext.getHand()));
+            return InteractionResult.SUCCESS;
+        } else {
+            return super.useOn(pContext);
         }
-        return InteractionResult.SUCCESS;
     }
 }
