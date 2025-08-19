@@ -6,6 +6,8 @@ import com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider;
 import com.drmangotea.tfmg.recipes.WindingRecipe;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGItems;
+import com.drmangotea.tfmg.registry.TFMGTags;
+import com.simibubi.create.AllTags;
 import com.simibubi.create.api.data.recipe.BaseRecipeProvider;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
@@ -80,9 +82,9 @@ public class TFMGSequencedAssemblyRecipeGen extends TFMGRecipeProvider {
             .addOutput(TFMGItems.STEEL_INGOT, 4)
             .loops(2)
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGBlocks.STEEL_COGWHEEL))
-            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.NICKEL_SHEET))
+            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(nickelSheet()))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGBlocks.LARGE_STEEL_COGWHEEL))
-            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.LEAD_SHEET))
+            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(steelSheet()))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.SCREW))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.SCREWDRIVER))
 

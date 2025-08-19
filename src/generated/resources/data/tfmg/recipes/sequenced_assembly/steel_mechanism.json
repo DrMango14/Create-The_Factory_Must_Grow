@@ -42,7 +42,7 @@
           "item": "tfmg:unfinished_steel_mechanism"
         },
         {
-          "item": "tfmg:nickel_sheet"
+          "tag": "forge:plates/nickel"
         }
       ],
       "results": [
@@ -74,7 +74,7 @@
           "item": "tfmg:unfinished_steel_mechanism"
         },
         {
-          "item": "tfmg:lead_sheet"
+          "tag": "forge:plates/steel"
         }
       ],
       "results": [
