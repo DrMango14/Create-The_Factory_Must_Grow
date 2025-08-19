@@ -1,9 +1,15 @@
-# Project exclude paths
-/.gradle/
-/build/
-/run/
-/run-data/
-/.idea/
-/.vscode/
-/build/classes/java/main/
-/src/generated/resources/.cache/
+/*
+!/src/
+!.gitignore
+!gradlew*
+!/gradle/
+!/LICENSE.txt
+!/README.md
+!build.gradle
+!.travis.yml
+!/textures/
+!/gradle.properties
+!.gitattributes
+!ASSETS_LICENSE.txt
+
+src/generated/resources/\.cache/
