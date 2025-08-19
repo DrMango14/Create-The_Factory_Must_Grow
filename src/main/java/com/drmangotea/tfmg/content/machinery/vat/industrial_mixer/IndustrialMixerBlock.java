@@ -6,9 +6,11 @@ import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -44,25 +46,57 @@ public class IndustrialMixerBlock extends KineticBlock implements IBE<Industrial
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-        if(hand == InteractionHand.OFF_HAND)
+    public InteractionResult use(BlockState state, Level level, BlockPos pos,
+                                 Player player, InteractionHand hand, BlockHitResult hit) {
+        if (hand == InteractionHand.OFF_HAND)
             return InteractionResult.PASS;
-        if(level.getBlockEntity(pos) instanceof IndustrialMixerBlockEntity be) {
-            ItemStack stack = player.getItemInHand(hand);
-            MixerMode mixerMode = be.mixerMode;
-            ItemStack stackInside = mixerMode.item;
-            if(stack.is(stackInside.getItem()))
-                return InteractionResult.PASS;
 
-            if(be.setMixerMode(stack, true)) {
+        if (!(level.getBlockEntity(pos) instanceof IndustrialMixerBlockEntity be))
+            return InteractionResult.PASS;
 
-                player.setItemInHand(hand, mixerMode.item);
-                be.setMixerMode(stack, false);
-                return InteractionResult.SUCCESS;
+        ItemStack held = player.getItemInHand(hand);
+        MixerMode current = be.mixerMode;
+        Item installedItem = current.item;
+
+        if (held.isEmpty() && installedItem != null) {
+            if (!level.isClientSide) {
+                ItemStack refund = new ItemStack(installedItem);
+                if (!player.addItem(refund)) {
+                    Containers.dropItemStack(level, player.getX(), player.getY(), player.getZ(), refund);
+                }
+                be.setMixerMode("none", false);
             }
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
-        return InteractionResult.PASS;
+
+        if (held.isEmpty())
+            return InteractionResult.PASS;
+
+        if (installedItem != null && held.getItem() == installedItem)
+            return InteractionResult.PASS;
+
+        if (!be.setMixerMode(held, true))
+            return InteractionResult.PASS;
+
+        if (!level.isClientSide) {
+            if (installedItem != null) {
+                ItemStack prev = new ItemStack(installedItem);
+                if (!player.addItem(prev)) {
+                    Containers.dropItemStack(level, player.getX(), player.getY(), player.getZ(), prev);
+                }
+            }
+
+            ItemStack toInstall = held.copy();
+            toInstall.setCount(1);
+            be.setMixerMode(toInstall, false);
+
+            held.shrink(1);
+        }
+
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
+
+
 
     @Override
     public void onPlace(BlockState state, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pIsMoving) {
