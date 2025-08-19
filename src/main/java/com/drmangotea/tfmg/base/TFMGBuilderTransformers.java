@@ -302,6 +302,7 @@ public class TFMGBuilderTransformers {
                 .tag(BlockTags.WALLS)
                 .recipe((c, p) -> p.stonecutting(DataIngredient.items(concrete.block.get()), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
                 .item()
+                .tag(ItemTags.WALLS)
                 .transform(b -> TFMGVanillaBlockStates.transformWallItem(b, "concrete"))
                 .build()
                 .register();
@@ -316,6 +317,7 @@ public class TFMGBuilderTransformers {
                 .tag(BlockTags.STAIRS)
                 .recipe((c, p) -> p.stonecutting(DataIngredient.items(concrete.block.get()), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
                 .item()
+                .tag(ItemTags.STAIRS)
                 //.transform(b -> TFMGVanillaBlockStates.transformStairItem(b, "concrete"))
                 .transform(customItemModel("concrete_stairs"))
                 .register();
@@ -342,6 +344,7 @@ public class TFMGBuilderTransformers {
                 .tag(BlockTags.SLABS)
                 .recipe((c, p) -> p.stonecutting(DataIngredient.items(concrete.block.get()), RecipeCategory.BUILDING_BLOCKS, c::get, 2))
                 .item()
+                .tag(ItemTags.SLABS)
                 .transform(customItemModel("concrete_bottom"))
                 .register();
 
@@ -380,6 +383,7 @@ public class TFMGBuilderTransformers {
                     .tag(BlockTags.WALLS)
                     .recipe((c, p) -> p.stonecutting(DataIngredient.items(set.block.asItem()), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
                     .item()
+                    .tag(ItemTags.WALLS)
                     .transform(b -> TFMGVanillaBlockStates.transformWallItem(b, color + "_concrete"))
                     .build()
                     .register();
@@ -394,6 +398,7 @@ public class TFMGBuilderTransformers {
                     .tag(BlockTags.STAIRS)
                     .recipe((c, p) -> p.stonecutting(DataIngredient.items(set.block.asItem()), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
                     .item()
+                    .tag(ItemTags.STAIRS)
                     // .transform(b -> TFMGVanillaBlockStates.transformStairItem(b, color + "_concrete"))
                     .transform(customItemModel(color + "_concrete_stairs"))
                     .register();
@@ -409,6 +414,7 @@ public class TFMGBuilderTransformers {
                     .tag(BlockTags.SLABS)
                     .recipe((c, p) -> p.stonecutting(DataIngredient.items(set.block.asItem()), RecipeCategory.BUILDING_BLOCKS, c::get, 2))
                     .item()
+                    .tag(ItemTags.SLABS)
                     .transform(customItemModel(color + "_concrete_bottom"))
                     .register();
 
@@ -438,6 +444,7 @@ public class TFMGBuilderTransformers {
                 .tag(BlockTags.WALLS)
                 .recipe((c, p) -> p.stonecutting(DataIngredient.items(blockEntry.asItem()), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
                 .item()
+                .tag(ItemTags.WALLS)
                 .transform(b -> TFMGVanillaBlockStates.transformWallItem(b, name))
                 .build()
                 .register();
@@ -451,6 +458,7 @@ public class TFMGBuilderTransformers {
                 .tag(BlockTags.SLABS)
                 .recipe((c, p) -> p.stonecutting(DataIngredient.items(blockEntry.asItem()), RecipeCategory.BUILDING_BLOCKS, c::get, 2))
                 .item()
+                .tag(ItemTags.SLABS)
                 .transform(customItemModel(name + "_bottom"))
                 .register();
         REGISTRATE.block(name + "_stairs", p -> new StairBlock(() -> TFMGBlocks.CONCRETE.block.get().defaultBlockState(), p))
@@ -461,6 +469,7 @@ public class TFMGBuilderTransformers {
                 .tag(BlockTags.STAIRS)
                 .recipe((c, p) -> p.stonecutting(DataIngredient.items(blockEntry.asItem()), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
                 .item()
+                .tag(ItemTags.STAIRS)
                 .transform(customItemModel(name + "_stairs"))
                 .register();
 

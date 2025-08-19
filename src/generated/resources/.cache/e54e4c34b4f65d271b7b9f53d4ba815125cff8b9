@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-24T14:48:59.5355109	Registrate Provider for tfmg [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2025-08-19T12:45:17.4755551	Registrate Provider for tfmg [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 ff5a5721633b83465ab501cbdfdc579a0f20e938 assets/tfmg/blockstates/accumulator.json
 e982a263b6af75821042107fdeff7bd809436d08 assets/tfmg/blockstates/air_intake.json
 e7f63aadfc892e337d9f87b5e50af8b1c7e4103f assets/tfmg/blockstates/aluminum_bars.json
@@ -139,7 +139,7 @@ e6c37a1b35654860e8e7bce70c17bb9c463cbcf0 assets/tfmg/blockstates/cyan_caution_bl
 da3ce72a164ba44b83d2e0a34aba7a2e0bf1f7e0 assets/tfmg/blockstates/deepslate_lead_ore.json
 29fabca149c689611b3066ffd546b48e305b795b assets/tfmg/blockstates/deepslate_lithium_ore.json
 0c1f4a179de5361677ab6a190f3b3279374dfdf0 assets/tfmg/blockstates/deepslate_nickel_ore.json
-c9291b06874778c72b970c234fdf7b48cbc443cb assets/tfmg/blockstates/diagonal_cable_block.json
+b893f9afd6bd02e680fcc301ec1d7ad5c790f1b0 assets/tfmg/blockstates/diagonal_cable_block.json
 03983ce3de10310cd75b98f17c9161653b7034cd assets/tfmg/blockstates/diesel.json
 9e5371b956a65a7a49581208e331ee1fc8b8acc2 assets/tfmg/blockstates/electrical_switch.json
 fce44cbe5ec7bc7ec527327088be37cea56ac85c assets/tfmg/blockstates/electric_diode.json
@@ -1757,10 +1757,10 @@ d75ac2fd181405edb6efaffcf2f659e1a64ae69a data/minecraft/tags/blocks/trapdoors.js
 7f2ce9c0c2595d78a2230a5e478bd1ece53f63d1 data/minecraft/tags/blocks/wither_immune.json
 733eedc50a1e81b450633c52efdedf016d0af5fa data/minecraft/tags/blocks/wooden_doors.json
 733eedc50a1e81b450633c52efdedf016d0af5fa data/minecraft/tags/items/doors.json
-9480fc3484245c6bda20447787a84a65740bfa78 data/minecraft/tags/items/slabs.json
-6d79cd77a7fe348b9f0bc829b70486aec245c70f data/minecraft/tags/items/stairs.json
+6ce79880fa6d0ce5ab486b901d381984084010e4 data/minecraft/tags/items/slabs.json
+c3802419cedb943585c780fc702b16bb0cafc1e2 data/minecraft/tags/items/stairs.json
 d75ac2fd181405edb6efaffcf2f659e1a64ae69a data/minecraft/tags/items/trapdoors.json
-39578c3e522d04fdec3a94af42d633793b49c68e data/minecraft/tags/items/walls.json
+00cbd58415ad6753788138cd3766448df48e904f data/minecraft/tags/items/walls.json
 733eedc50a1e81b450633c52efdedf016d0af5fa data/quark/tags/blocks/non_double_door.json
 b50ed6dd16692e94de91b37eff549fae442ff22f data/tfmg/advancements/recipes/building_blocks/aluminum_wire_from_ingots_aluminum_stonecutting.json
 64a64a5b1e3e68968ab60d51974c66a7e33ad29a data/tfmg/advancements/recipes/building_blocks/asphalt_slab_from_asphalt_stonecutting.json
