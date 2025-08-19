@@ -84,7 +84,7 @@ public class TFMGSequencedAssemblyRecipeGen extends TFMGRecipeProvider {
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGBlocks.STEEL_COGWHEEL))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(nickelSheet()))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGBlocks.LARGE_STEEL_COGWHEEL))
-            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(steelSheet()))
+            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(leadSheet()))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.SCREW))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.SCREWDRIVER))
 
