@@ -30,6 +30,11 @@ public class CastingRecipe extends ProcessingRecipe<RecipeWrapper> {
     protected int getMaxOutputCount() {
         return 1;
     }
+    
+	@Override
+	protected boolean canSpecifyDuration() {
+		return true;
+	}
 
     @Override
     public boolean matches(RecipeWrapper p_44002_, Level p_44003_) {

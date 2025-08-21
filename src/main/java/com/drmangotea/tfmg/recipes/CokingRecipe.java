@@ -22,17 +22,25 @@ public class CokingRecipe extends ProcessingRecipe<RecipeWrapper> {
 	protected int getMaxOutputCount() {
 		return 1;
 	}
+
 	@Override
 	protected int getMaxFluidOutputCount() {
 		return 2;
 	}
 
-	public FluidStack getPrimaryResult(){
+	@Override
+	protected boolean canSpecifyDuration() {
+		return true;
+	}
+
+	public FluidStack getPrimaryResult() {
 		return getFluidResults().get(0);
 	}
-	public FluidStack getSecondaryResult(){
+
+	public FluidStack getSecondaryResult() {
 		return getFluidResults().get(1);
 	}
+
 	@Override
 	public boolean matches(RecipeWrapper inv, Level worldIn) {
 		if (inv.isEmpty())

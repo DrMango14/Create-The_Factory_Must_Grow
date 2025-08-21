@@ -36,6 +36,11 @@ public class WindingRecipe extends ProcessingRecipe<RecipeWrapper>  implements I
 		return 1;
 	}
 
+	@Override
+    protected boolean canSpecifyDuration() {
+        return true;
+    }
+
 
 	public Ingredient getIngredient(){
 		return getIngredients().get(0);

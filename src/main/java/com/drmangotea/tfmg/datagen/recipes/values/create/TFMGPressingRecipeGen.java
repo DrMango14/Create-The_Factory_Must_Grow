@@ -11,21 +11,20 @@ public class TFMGPressingRecipeGen extends TFMGProcessingRecipeGen {
     GeneratedRecipe
 
     CAST_IRON_SHEET = create("cast_iron_ingot", b -> b.require(castIronIngot())
-            .output(castIronSheetTFMG()).duration(50)),
+            .output(castIronSheetTFMG())),
 
     ALUMINUM_SHEET = create("aluminum_ingot", b -> b.require(aluminumIngot())
-            .output(aluminumSheetTFMG()).duration(50)),
+            .output(aluminumSheetTFMG())),
 
     LEAD_SHEET = create("lead_ingot", b -> b.require(leadIngot())
-            .output(leadSheetTFMG()).duration(50)),
+            .output(leadSheetTFMG())),
 
     NICKEL_SHEET = create("nickel_ingot", b -> b.require(nickelIngot())
-            .output(nickelSheetTFMG()).duration(50)),
+            .output(nickelSheetTFMG())),
 
     SYNTHETIC_LEATHER = create("synthetic_leather", b -> b
             .require(rubber())
-            .output(syntheticLeather())
-            .duration(200));
+            .output(syntheticLeather()));
 
     public TFMGPressingRecipeGen(PackOutput output) {
         super(output);

@@ -37,10 +37,22 @@ public class VatMachineRecipe extends ProcessingRecipe<RecipeWrapper> {
     protected int getMaxFluidInputCount() {
         return 4;
     }
+
     @Override
     protected int getMaxFluidOutputCount() {
         return 4;
     }
+
+    @Override
+    protected boolean canSpecifyDuration() {
+        return true;
+    }
+
+    @Override
+    protected boolean canRequireHeat() {
+        return true;
+    }
+
     public void readAdditional(JsonObject json) {
         super.readAdditional(json);
         JsonArray machineArray = json.getAsJsonArray("machines");

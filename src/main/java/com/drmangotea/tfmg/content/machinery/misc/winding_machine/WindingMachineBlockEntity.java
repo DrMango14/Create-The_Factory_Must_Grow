@@ -166,21 +166,26 @@ public class WindingMachineBlockEntity extends KineticBlockEntity implements IHa
 
         if (getSpeed() == 0)
             return;
-        if (inventory.getItem(0).is(TFMGItems.ELECTROMAGNETIC_COIL.get()) && spool.is(TFMGItems.COPPER_SPOOL.get()) && spool.getOrCreateTag().getInt("Amount") > 0 && inventory.getItem(0).getOrCreateTag().getInt("Turns") < turnPercentage.getValue() * 10) {
-            if(inventory.getItem(0).getOrCreateTag().getInt("Turns")< turnPercentage.getValue()*10){
+        if (inventory.getItem(0).is(TFMGItems.ELECTROMAGNETIC_COIL.get()) && spool.is(TFMGItems.COPPER_SPOOL.get())
+                && spool.getOrCreateTag().getInt("Amount") > 0
+                && inventory.getItem(0).getOrCreateTag().getInt("Turns") < turnPercentage.getValue() * 10) {
+            if (inventory.getItem(0).getOrCreateTag().getInt("Turns") < turnPercentage.getValue() * 10) {
                 spool.getOrCreateTag().putInt("Amount", spool.getOrCreateTag().getInt("Amount") - 1);
-                inventory.getItem(0).getOrCreateTag().putInt("Turns", inventory.getItem(0).getOrCreateTag().getInt("Turns") + 1);
+                inventory.getItem(0).getOrCreateTag().putInt("Turns",
+                        inventory.getItem(0).getOrCreateTag().getInt("Turns") + 1);
                 return;
             }
         }
-        if (inventory.getItem(0).is(TFMGBlocks.RESISTOR.asItem()) && spool.is(TFMGItems.CONSTANTAN_SPOOL.get()) && spool.getOrCreateTag().getInt("Amount") > 0 && inventory.getItem(0).getOrCreateTag().getInt("Resistance") < turnPercentage.getValue() * 10) {
-            if(inventory.getItem(0).getOrCreateTag().getInt("Resistance")< turnPercentage.getValue()*10) {
+        if (inventory.getItem(0).is(TFMGBlocks.RESISTOR.asItem()) && spool.is(TFMGItems.CONSTANTAN_SPOOL.get())
+                && spool.getOrCreateTag().getInt("Amount") > 0
+                && inventory.getItem(0).getOrCreateTag().getInt("Resistance") < turnPercentage.getValue() * 10) {
+            if (inventory.getItem(0).getOrCreateTag().getInt("Resistance") < turnPercentage.getValue() * 10) {
                 spool.getOrCreateTag().putInt("Amount", spool.getOrCreateTag().getInt("Amount") - 1);
-                inventory.getItem(0).getOrCreateTag().putInt("Resistance", inventory.getItem(0).getOrCreateTag().getInt("Resistance") + 1);
+                inventory.getItem(0).getOrCreateTag().putInt("Resistance",
+                        inventory.getItem(0).getOrCreateTag().getInt("Resistance") + 1);
                 return;
             }
         }
-
 
         if (spool.getOrCreateTag().getInt("Amount") == 0 && !spool.is(TFMGItems.EMPTY_SPOOL.get()) && spool.getItem() instanceof SpoolItem)
             spool = TFMGItems.EMPTY_SPOOL.asStack();

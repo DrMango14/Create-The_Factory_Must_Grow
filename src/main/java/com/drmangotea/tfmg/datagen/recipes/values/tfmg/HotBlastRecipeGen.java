@@ -17,7 +17,8 @@ public class HotBlastRecipeGen extends TFMGProcessingRecipeGen {
 			.require(TFMGTags.TFMGFluidTags.BLAST_STOVE_FUEL.tag,5)
 			.output(hotAir(), 25)
 			.output(carbonDioxide(), 25)
-			.duration(200));
+			//Duration isn't actually used.
+			/*.duration(200)*/);
 	public HotBlastRecipeGen(PackOutput output) {
 		super(output);
 	}

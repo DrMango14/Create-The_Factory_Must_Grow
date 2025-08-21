@@ -1,4 +1,4 @@
-// 1.20.1	2025-08-19T11:44:56.028449	TFMG's Processing Recipes
+// 1.20.1	2025-08-21T15:06:34.6205685	TFMG's Processing Recipes
 ae24d73a2ef5b8059806e660641bcb9dff2a15f4 data/tfmg/recipes/coking/charcoal.json
 9000fbf96dc2c2b822aa4e526b1c8686d5413e5a data/tfmg/recipes/coking/coal.json
 2b33a020ed88511979447005053ceea2b3ff3c08 data/tfmg/recipes/compacting/bitumen.json
@@ -36,7 +36,7 @@ dcc60da72dd0f818ea6c5d7a29e60aec0c710bab data/tfmg/recipes/filling/hardened_plan
 a1a29b4093de1014fefaa9a89eeb9b016260b0c2 data/tfmg/recipes/filling/napalm_potato.json
 e9287ed78b8ddba564751a2974306eea83e77ab4 data/tfmg/recipes/filling/neon_tank.json
 83b959dcd319de129fbf76bd967d6d4c3ada9852 data/tfmg/recipes/filling/propylene_tank.json
-46cb31b82c65ef9c724b2ed864ee51cd4234fb04 data/tfmg/recipes/hot_blast/hot_air.json
+48c3a1109c56b3750363672439533dad4e8ac33a data/tfmg/recipes/hot_blast/hot_air.json
 3385f19114ca69a40efaf7124bde2a978fee77a4 data/tfmg/recipes/item_application/aluminum_casing.json
 6208a999d88f949b1043f13c492f97d52260fe83 data/tfmg/recipes/item_application/heavy_machinery_casing.json
 c19411c5d0a02e974f617fbe377bcac3bea1fd99 data/tfmg/recipes/item_application/steel_casing.json
@@ -57,10 +57,10 @@ d0b6208fbe3a36bbab8f93ccd5e11cafcdc348ea data/tfmg/recipes/mixing/copper_sulfate
 693355c65c5a7da122dc8e305241e25063bd99d5 data/tfmg/recipes/mixing/p_semiconductor.json
 8799991718c10d5abcc89bf205756fdb2849a2e0 data/tfmg/recipes/mixing/thermite.json
 499dddbb8a717629960cbbb1513102dc219800ef data/tfmg/recipes/polarizing/magnet.json
-afc122bccc8ab383b52732fa6fdf18fe2464c7ae data/tfmg/recipes/pressing/aluminum_ingot.json
-4f46d2585fd590dcbdceef73696125cc57f66bdc data/tfmg/recipes/pressing/cast_iron_ingot.json
-b527cf71f4ad61fecc6d001f68905848128235a5 data/tfmg/recipes/pressing/lead_ingot.json
-26c57e64b3d9ec56f92f89732adcd7e2fa1a5801 data/tfmg/recipes/pressing/nickel_ingot.json
-3cd7243dc9f9d95ecfb8ec1cc560ac2c047b0bfa data/tfmg/recipes/pressing/synthetic_leather.json
+9fa8bf1ae9a0e50c64ab5e408fb6c27c4e63282b data/tfmg/recipes/pressing/aluminum_ingot.json
+9b207d8edd803639004998278d735cd22621d817 data/tfmg/recipes/pressing/cast_iron_ingot.json
+c1f7d212e9331735b6a1f1d94a056fee7719d3cf data/tfmg/recipes/pressing/lead_ingot.json
+c15bcdcf9cc27ab9f3189634eecb1a4165dde898 data/tfmg/recipes/pressing/nickel_ingot.json
+cbc7edebd0f9344690bd3cb5a94925e9a32d32ba data/tfmg/recipes/pressing/synthetic_leather.json
 b9cabd88bc2b0f7cbcc3d02f12d0c78f9f2101d7 data/tfmg/recipes/winding/electromagnetic_coil.json
 d92d7979e880bfa2675b0d7c9c7f2be4c8c735ee data/tfmg/recipes/winding/resistor.json

@@ -5,7 +5,6 @@
       "tag": "forge:ingots/cast_iron"
     }
   ],
-  "processingTime": 50,
   "results": [
     {
       "item": "tfmg:cast_iron_sheet"

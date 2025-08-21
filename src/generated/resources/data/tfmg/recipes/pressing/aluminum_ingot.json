@@ -5,7 +5,6 @@
       "tag": "forge:ingots/aluminum"
     }
   ],
-  "processingTime": 50,
   "results": [
     {
       "item": "tfmg:aluminum_sheet"

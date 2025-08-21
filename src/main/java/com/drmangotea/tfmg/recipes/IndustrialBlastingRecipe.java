@@ -31,6 +31,11 @@ public class IndustrialBlastingRecipe extends ProcessingRecipe<RecipeWrapper> {
         return 3;
     }
 
+    @Override
+	protected boolean canSpecifyDuration() {
+		return true;
+	}
+
     public FluidStack getPrimaryResult(){
         return getFluidResults().get(0);
     }
