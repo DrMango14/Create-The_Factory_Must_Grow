@@ -350,6 +350,10 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
     @SuppressWarnings("removal")
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 
+        if (getControllerBE() == null) {
+            return false;
+        }
+
         LangBuilder mb = CreateLang.translate("generic.unit.millibuckets");
 
         TFMGTexts.header("blast_stove").forGoggles(tooltip);
