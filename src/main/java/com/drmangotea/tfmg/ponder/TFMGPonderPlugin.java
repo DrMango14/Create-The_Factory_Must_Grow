@@ -6,7 +6,6 @@ import com.simibubi.create.Create;
 import com.simibubi.create.content.kinetics.crank.ValveHandleBlock;
 import com.simibubi.create.content.logistics.packagePort.postbox.PostboxBlock;
 import com.simibubi.create.content.logistics.tableCloth.TableClothBlock;
-import com.simibubi.create.foundation.ponder.PonderWorldBlockEntityFix;
 import com.simibubi.create.infrastructure.ponder.AllCreatePonderScenes;
 import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
 import net.createmod.ponder.api.level.PonderLevel;
@@ -42,11 +41,4 @@ public class TFMGPonderPlugin implements PonderPlugin {
 		helper.registerSharedText("behaviour_modify_value_panel", "This behaviour can be modified using the value panel");
 		helper.registerSharedText("storage_on_contraption", "Inventories attached to the Contraption will pick up their drops automatically");
 	}
-
-	@Override
-	public void onPonderLevelRestore(PonderLevel ponderLevel) {
-		PonderWorldBlockEntityFix.fixControllerBlockEntities(ponderLevel);
-	}
-
-
 }
