@@ -151,14 +151,6 @@ public class FlarestackBlockEntity extends SmartBlockEntity implements IHaveGogg
 
     }
 
-    //@Nonnull
-    //@Override
-    //public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-//
-    //    if (cap == ForgeCapabilities.FLUID_HANDLER)
-    //        return fluidCapability.cast();
-    //    return super.getCapability(cap, side);
-    //}
 
 
 

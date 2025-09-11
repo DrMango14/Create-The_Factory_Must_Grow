@@ -39,18 +39,14 @@ public class EngineCTBehavior extends ConnectedTextureBehaviour.Base {
 
     @Override
     public boolean connectsTo(BlockState state, BlockState other, BlockAndTintGetter reader, BlockPos pos, BlockPos otherPos, Direction face) {
-       //if(reader.getBlockEntity(pos) instanceof AbstractEngineBlockEntity be && reader.getBlockEntity(otherPos) instanceof AbstractEngineBlockEntity be2){
-       //    if(be.controller.asLong()==be2.controller.asLong())
-       //        return true;
-       //}
-       // return false;
-        return true;
+        return reader.getBlockEntity(pos) instanceof AbstractEngineBlockEntity be && reader.getBlockEntity(otherPos) instanceof AbstractEngineBlockEntity be2;
+
     }
 
     @Override
     protected Direction getUpDirection(BlockAndTintGetter reader, BlockPos pos, BlockState state, Direction face) {
         if(face.getAxis().isVertical())
-            return state.getValue(HORIZONTAL_FACING);
+            return state.getValue(EngineBlock.SHAFT_FACING);
         return super.getUpDirection(reader, pos, state, face);
     }
 }

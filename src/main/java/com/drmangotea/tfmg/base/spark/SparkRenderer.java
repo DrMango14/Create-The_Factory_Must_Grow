@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
@@ -27,8 +28,8 @@ public class SparkRenderer extends EntityRenderer<Spark> {
 
 
 
-    private static final ResourceLocation TEXTURE_LOCATION = TFMG.asResource("textures/entity/spark.png");
-    private static final RenderType RENDER_TYPE = RenderType.entityCutoutNoCull(TEXTURE_LOCATION);
+
+
     public SparkRenderer(EntityRendererProvider.Context p_173962_) {
         super(p_173962_);
     }
@@ -45,7 +46,7 @@ public class SparkRenderer extends EntityRenderer<Spark> {
         PoseStack.Pose posestack$pose = poseStack.last();
         Matrix4f matrix4f = posestack$pose.pose();
         Matrix3f matrix3f = posestack$pose.normal();
-        VertexConsumer vertexconsumer = bufferSource.getBuffer(RENDER_TYPE);
+        VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(spark.getTexture()));
 
 
 
@@ -59,8 +60,8 @@ public class SparkRenderer extends EntityRenderer<Spark> {
     private void vertex(VertexConsumer vertexConsumer, Matrix4f matrix4f, Matrix3f matrix3f, int p_114093_, float p_114094_, int p_114095_, int p_114096_, int p_114097_,int color) {
         vertexConsumer.addVertex(matrix4f, p_114094_ - 0.5F, (float)p_114095_ - 0.25F, 0.0F).setColor(color).setUv((float)p_114096_, (float)p_114097_).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setUv2(p_114093_,p_114093_).setNormal( 0.0F, 1.0F, 0.0F);
     }
-    public ResourceLocation getTextureLocation(Spark p_114078_) {
-        return TEXTURE_LOCATION;
+    public @NotNull ResourceLocation getTextureLocation(Spark spark) {
+        return spark.getTexture();
     }
 
 

@@ -3,7 +3,7 @@ package com.drmangotea.tfmg.base;
 
 import net.createmod.catnip.math.VoxelShaper;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Direction.Axis;
+import net.minecraft.core.Direction.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -140,6 +140,7 @@ public class TFMGShapes {
             TRAFFIC_LIGHT = shape(3, 0, 3, 13, 16, 13).build(),
             REBAR_FLOOR = shape(0, 4, 0, 16, 12, 16)
                     .build(),
+            GAS_LAMP = shape(1, 0, 1, 15, 22, 15).build(),
             SURFACE_SCANNER = shape(2, 0, 2, 14, 14, 14).build(),
             FULL = shape(0, 0, 0, 16, 16, 16).build(),
             ELECTRIC_POST = shape(4, 0, 4, 12, 16, 12).build(),

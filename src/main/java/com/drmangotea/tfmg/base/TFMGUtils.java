@@ -15,6 +15,8 @@ import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.lang.LangBuilder;
+import net.createmod.catnip.outliner.Outliner;
+import net.createmod.catnip.theme.Color;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -32,6 +34,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
@@ -109,6 +112,16 @@ public class TFMGUtils {
         }
 
         createFireExplosion(be.getLevel(), null, new BlockPos(be.getBlockPos().getX() + (be.getWidth() / 2), be.getBlockPos().getY() + (be.getHeight() / 2), be.getBlockPos().getZ() + (be.getWidth() / 2)), power * 15, (float) power);
+    }
+
+    public static void createOutline(Vec3 pos1, Vec3 pos2,String name,Color color){
+        createOutline(pos1,pos2,name,color,1/32f);
+    }
+
+    public static void createOutline(Vec3 pos1, Vec3 pos2,String name,Color color,float width){
+        Outliner.getInstance().showAABB(name, new AABB(pos1, pos2))
+                .lineWidth(width)
+                .colored(color);
     }
 
     public static String fromId(String key) {

@@ -601,65 +601,69 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
 
     public void connect() {
 
+        try {
+            Direction facing = getBlockState().getValue(HORIZONTAL_FACING);
+            Direction updateDirection = facing.getOpposite();
 
-        Direction facing = getBlockState().getValue(HORIZONTAL_FACING);
-        Direction updateDirection = facing.getOpposite();
-
-        if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof AbstractSmallEngineBlockEntity be && be.getBlockState().getBlock() == this.getBlockState().getBlock()) {
-            be.connect();
-            return;
-        }
-
-        engines = new ArrayList<>();
-
-        for (int i = 0; i < getMaxLength(); i++) {
-            BlockPos pos = getBlockPos().relative(updateDirection, i);
-            if (level.getBlockEntity(pos) instanceof AbstractSmallEngineBlockEntity be) {
-                if (be.getBlockState().getValue(HORIZONTAL_FACING) != facing) {
-                    return;
-                }
-
-                level.setBlock(be.getBlockPos(), be.getBlockState().setValue(SHAFT_FACING, be.getBlockPos() == this.getBlockPos() ? facing : updateDirection), 2);
-
-                //if (be instanceof RegularEngineBlockEntity be1 && this instanceof RegularEngineBlockEntity be2 && be1.type != be2.type) {
-                //    setBlockStates(this, getBlockPos().relative(updateDirection, i - 1));
-                //    TFMG.LOGGER.debug("set blockstates");
-                //    return;
-                //}
-                be.detashEngines();
-                engines.add(pos.asLong());
-
-                // level.setBlock(be.getBlockPos().above(), Blocks.GOLD_BLOCK.defaultBlockState(),3);
-
-                be.engineNumber = i;
-                be.engines = new ArrayList<>();
-                be.controller = getBlockPos();
-                be.refreshCapability();
-
-                setBlockStates(be, null);
-                updateGeneratedRotation();
-                onUpdated();
-                be.sendData();
-                be.setChanged();
-
-                if (be.getBlockState().getValue(ENGINE_STATE) != NORMAL && i != 0) {
-                    setBlockStates(this, getBlockPos().relative(updateDirection, i - 1));
-                    break;
-                }
-                if (i == getMaxLength() - 1)
-                    setBlockStates(this, getBlockPos().relative(updateDirection, i));
-
-
-            } else {
-                setBlockStates(this, getBlockPos().relative(updateDirection, i - 1));
+            if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof AbstractSmallEngineBlockEntity be && be.getBlockState().getBlock() == this.getBlockState().getBlock()) {
+                be.connect();
                 return;
             }
-        }
 
-        updateGeneratedRotation();
-        updateRotation();
-        setChanged();
-        sendData();
+            engines = new ArrayList<>();
+
+            for (int i = 0; i < getMaxLength(); i++) {
+                BlockPos pos = getBlockPos().relative(updateDirection, i);
+                if (level.getBlockEntity(pos) instanceof AbstractSmallEngineBlockEntity be) {
+                    if (be.getBlockState().getValue(HORIZONTAL_FACING) != facing) {
+                        return;
+                    }
+
+                    level.setBlock(be.getBlockPos(), be.getBlockState().setValue(SHAFT_FACING, be.getBlockPos() == this.getBlockPos() ? facing : updateDirection), 2);
+
+                    //if (be instanceof RegularEngineBlockEntity be1 && this instanceof RegularEngineBlockEntity be2 && be1.type != be2.type) {
+                    //    setBlockStates(this, getBlockPos().relative(updateDirection, i - 1));
+                    //    TFMG.LOGGER.debug("set blockstates");
+                    //    return;
+                    //}
+                    be.detashEngines();
+                    engines.add(pos.asLong());
+
+                    // level.setBlock(be.getBlockPos().above(), Blocks.GOLD_BLOCK.defaultBlockState(),3);
+
+                    be.engineNumber = i;
+                    be.engines = new ArrayList<>();
+                    be.controller = getBlockPos();
+                    be.refreshCapability();
+
+                    setBlockStates(be, null);
+                    updateGeneratedRotation();
+                    onUpdated();
+                    be.sendData();
+                    be.setChanged();
+
+                    if (be.getBlockState().getValue(ENGINE_STATE) != NORMAL && i != 0) {
+                        setBlockStates(this, getBlockPos().relative(updateDirection, i - 1));
+                        break;
+                    }
+                    if (i == getMaxLength() - 1)
+                        setBlockStates(this, getBlockPos().relative(updateDirection, i));
+
+
+                } else {
+                    setBlockStates(this, getBlockPos().relative(updateDirection, i - 1));
+                    return;
+                }
+            }
+
+            updateGeneratedRotation();
+            updateRotation();
+            setChanged();
+            sendData();
+
+        } catch (StackOverflowError ignored){
+
+        }
 
     }
 

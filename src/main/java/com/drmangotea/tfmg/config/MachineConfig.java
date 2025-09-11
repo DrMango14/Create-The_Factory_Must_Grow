@@ -5,6 +5,8 @@ import net.createmod.catnip.config.ConfigBase;
 
 public class MachineConfig extends ConfigBase {
 
+    public final ConfigInt fireExtinguisherClearRadius = i(1, 0, "fireExtinguisherClearRadius", Comments.fireExtinguisherClearRadius);
+
     public final ConfigFloat electricMotorInternalResistance = f(100, 0, "electricMotorInternalResistance", Comments.electricMotorInternalResistance);
     public final ConfigInt cokeOvenMaxSize = i(5, 1, "cokeOvenMaxSize", Comments.cokeOvenMaxSize);
     public final ConfigFloat FEtoWattTickConversionRate = f(1, 0, "FEtoWattTickConversionRate", Comments.FEtoWattTickConversionRate);
@@ -49,6 +51,7 @@ public class MachineConfig extends ConfigBase {
 
 
     private static class Comments {
+        static String fireExtinguisherClearRadius = "Changes the radius fire extinguishers can remove fire in.";
         static String largeGenerator = "Determines how powerful the large generator is.";
         static String generator = "Determines how powerful the generator is.";
         static String largeGeneratorMinSpeed = "Changes the lowest speed the large generator can work on.";

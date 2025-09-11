@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.storage;
 
-import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
@@ -8,7 +7,6 @@ import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.utilities.converter.ConverterBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
-import com.simibubi.create.foundation.utility.CreateLang;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -277,7 +275,7 @@ public class AccumulatorBlockEntity extends ElectricBlockEntity {
     public int getChargingRate() {
         //
         // int chargingRate = Math.max((data.networkPowerGeneration - getNetworkPowerUsage()), 0);
-        if (energy.getEnergyStored() >= getMaxCapacity() || getData().getVoltage() < getOutputVoltage() || canPower() || data.notEnoughtPower)
+        if (energy.getEnergyStored() >= getMaxCapacity() || getData().getVoltage() < getOutputVoltage() || canPower() || data.notEnoughPower)
             return 0;
 
         //return Math.min(chargingRate, getMaxChargingRate());

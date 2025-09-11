@@ -1,14 +1,10 @@
 package com.drmangotea.tfmg.content.electricity.base;
 
 import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.base.TFMGUtils;
-import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnection;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;
-import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.platform.CatnipServices;
-import net.createmod.catnip.theme.Color;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -196,18 +192,20 @@ public interface IElectric {
         TFMGTexts.header("multimeter").style(ChatFormatting.WHITE)
                 .forGoggles(tooltip);
 
-        if (getData().notEnoughtPower) TFMGTexts.Multimeter.notEnoughPower().forGoggles(tooltip, 1);
+        if (getData().notEnoughPower) TFMGTexts.Multimeter.notEnoughPower().forGoggles(tooltip, 1);
 
         if (voltageGeneration() > 0) {
             TFMGTexts.Multimeter.powerGenerated(powerGeneration()).forGoggles(tooltip, 1);
             TFMGTexts.Multimeter.voltageGenerated(voltageGeneration()).forGoggles(tooltip, 1);
             TFMGTexts.Multimeter.separator().forGoggles(tooltip);
         }
-
-        TFMGTexts.Multimeter.resistance(voltageGeneration() > 0 ? getGeneratorResistance() : resistance()).forGoggles(tooltip, 1);
+        if (resistance() != 0)
+            TFMGTexts.Multimeter.resistance(voltageGeneration() > 0 ? getGeneratorResistance() : resistance()).forGoggles(tooltip, 1);
         TFMGTexts.Multimeter.voltage(getData().getVoltage()).forGoggles(tooltip, 1);
-        TFMGTexts.Multimeter.current(getCurrent()).forGoggles(tooltip, 1);
-        TFMGTexts.Multimeter.power(getPowerUsage()).forGoggles(tooltip, 1);
+        TFMGTexts.Multimeter.current(resistance() == 0 ? getData().highestCurrent : getCurrent()).forGoggles(tooltip, 1);
+        if (resistance() != 0)
+            TFMGTexts.Multimeter.power(getPowerUsage()).forGoggles(tooltip, 1);
+
 
         if (getData().group.id != -1) {
             TFMGTexts.Multimeter.separator().forGoggles(tooltip);
@@ -240,7 +238,7 @@ public interface IElectric {
     ElectricBlockValues getData();
 
     default boolean canWork() {
-        return !getData().notEnoughtPower;
+        return !getData().notEnoughPower;
     }
 
     default void blockFail() {

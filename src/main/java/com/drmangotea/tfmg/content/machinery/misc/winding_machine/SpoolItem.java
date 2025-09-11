@@ -37,6 +37,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import java.util.List;
 import java.util.Objects;
 
+import static com.drmangotea.tfmg.base.blocks.WallMountBlock.FACING;
 import static com.simibubi.create.foundation.utility.Debug.debugMessage;
 
 public class SpoolItem extends Item {
@@ -113,8 +114,19 @@ public class SpoolItem extends Item {
 
         if(Objects.equals(cableTypeKey, TFMG.asResource("empty")))
             return InteractionResult.PASS;
+        Direction direction = level.getBlockState(pos).getValue(FACING);
+        for (int i = 0; i < 64; i++) {
+            if (level.getBlockEntity(pos.relative(direction)) instanceof CableConnectorBlockEntity) {
+                pos = pos.relative(direction);
+
+            } else break;
+
+        }
 
          if(level.getBlockEntity(pos) instanceof CableConnectorBlockEntity be){
+
+
+
              if(stack.get(TFMGDataComponents.POSITION)!=null){
                  BlockPos posToConnect = BlockPos.of(stack.get(TFMGDataComponents.POSITION));
                  if(posToConnect.equals(pos)){
@@ -127,7 +139,13 @@ public class SpoolItem extends Item {
                      be.setChanged();
                      return InteractionResult.SUCCESS;
                  }
+                 for (int i = 0; i < 64; i++) {
+                     if (level.getBlockEntity(posToConnect.relative(direction)) instanceof CableConnectorBlockEntity) {
+                         posToConnect = posToConnect.relative(direction);
 
+                     } else break;
+
+                 }
                  if(level.getBlockEntity(posToConnect) instanceof CableConnectorBlockEntity otherBE) {
                      //CableConnectorBlockEntity connectedBe1 = pos.asLong()>posToConnect.asLong() ? otherBE : be;
                      //CableConnectorBlockEntity connectedBe2= pos.asLong()>posToConnect.asLong() ? be : otherBE;

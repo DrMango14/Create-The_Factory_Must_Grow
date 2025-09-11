@@ -91,6 +91,7 @@ public class TFMGDataComponents {
 			"storage",
 			builder -> builder.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT)
 	);
+
 	public static final DataComponentType<Integer> RESISTANCE = register(
 			"resistance",
 			builder -> builder.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT)

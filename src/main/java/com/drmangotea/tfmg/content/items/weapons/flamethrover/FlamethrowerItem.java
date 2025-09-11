@@ -158,6 +158,7 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
         return InteractionResultHolder.pass(player.getItemInHand(hand));
     }
 
+
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return 1000;

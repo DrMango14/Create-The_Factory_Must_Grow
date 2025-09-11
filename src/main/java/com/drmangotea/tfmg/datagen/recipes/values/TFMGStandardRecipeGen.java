@@ -1804,6 +1804,31 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern(" B ")
                     .pattern("NNN")),
 
+    GAS_LAMP = create(TFMGBlocks.GAS_LAMP)
+            .unlockedBy(TFMGBlocks.CAST_IRON_BARS::get)
+            .viaShaped(b -> b
+                    .define('B', TFMGBlocks.CAST_IRON_BARS)
+                    .define('P', industrialPipe())
+                    .define('G', AllPaletteBlocks.FRAMED_GLASS)
+                    .define('C', castIronSheet())
+                    .pattern(" C ")
+                    .pattern("BGB")
+                    .pattern(" P ")),
+
+    FIRE_EXTINGUISHER = create(TFMGItems.FIRE_EXTINGUISHER)
+            .unlockedBy(TFMGRegistrate.getBucket("carbon_dioxide")::asItem)
+            .viaShaped(b -> b
+                    .define('N', steelNugget())
+                    .define('R', Items.RED_DYE)
+                    .define('S', steelIngot())
+                    .define('C', TFMGRegistrate.getBucket("carbon_dioxide"))
+                    .define('A', aluminumSheet())
+                    .pattern("NSR")
+                    .pattern("ACA")
+                    .pattern("AAA")),
+
+
+
     TRAFFIC_LIGHT = create(TFMGBlocks.TRAFFIC_LIGHT)
             .unlockedBy(TFMGBlocks.LIGHT_BULB::get)
             .viaShaped(b -> b

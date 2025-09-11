@@ -77,7 +77,7 @@ public class LightBulbBlockEntity extends ElectricBlockEntity {
 
     @Override
     public float resistance() {
-        return 100;
+        return 400;
     }
 
 

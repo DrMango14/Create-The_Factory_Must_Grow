@@ -15,15 +15,13 @@ public class BlueSpark extends Spark{
     }
     @Override
     public int getColor() {
-        return 0x00FFFF;
+        return 0xC4F2F2;
     }
 
-    public float[] getCustomParticleTrail() {
-        return new float[]{4.1f, 60.2f, 100.3f};
-    }
+
 
     @Override
     public Optional<BlockState> getFireState(BlockPos pos) {
-        return Optional.of(BlueFireBlock.getState(this.level(),pos));
+        return Optional.empty();
     }
 }

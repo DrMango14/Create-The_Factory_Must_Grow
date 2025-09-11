@@ -1,8 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.base;
 
-import com.drmangotea.tfmg.content.electricity.utilities.diode.ElectricDiodeBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_motor.ElectricMotorBlockEntity;
-import com.drmangotea.tfmg.content.electricity.utilities.transformer.TransformerBlockEntity;
 import net.minecraft.core.BlockPos;
 
 import java.util.ArrayList;
@@ -44,7 +42,7 @@ public class ElectricalNetwork {
         Map<Integer, Float> groups = new HashMap<>();
 
         for (IElectric member : members) {
-            member.getData().notEnoughtPower = false;
+            member.getData().notEnoughPower = false;
             int groupId = member.getData().group.id;
 
             maxVoltage = Math.max(member.voltageGeneration(), maxVoltage);
@@ -79,12 +77,10 @@ public class ElectricalNetwork {
             member.getData().highestCurrent = getCableCurrent(member);
 
             member.updateNearbyNetworks(member);
-            if (member instanceof ElectricDiodeBlockEntity be) {
+            if (member instanceof VoltageAlteringBlockEntity be) {
                 be.updateInFront();
             }
-            if (member instanceof TransformerBlockEntity be) {
-                be.updateInFront();
-            }
+
 
         }
 
@@ -96,18 +92,15 @@ public class ElectricalNetwork {
         if (!members.isEmpty())
             if (members.get(0).getNetworkPowerUsage() > members.get(0).getNetworkPowerGeneration()) {
                 for (IElectric member : members) {
-                    member.getData().notEnoughtPower = true;
+                    member.getData().notEnoughPower = true;
                     if (member instanceof ElectricMotorBlockEntity be) {
                         be.updateGeneratedRotation();
                     }
-                    if (member instanceof ElectricDiodeBlockEntity be)
+                    if (member instanceof VoltageAlteringBlockEntity be)
                         be.updateInFront = true;
-                    if (member instanceof TransformerBlockEntity be)
-                        be.updateInFront();
                 }
             }
     }
-
 
     public static float getCableCurrent(IElectric be) {
 

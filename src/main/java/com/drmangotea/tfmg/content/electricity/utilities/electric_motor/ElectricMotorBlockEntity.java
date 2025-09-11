@@ -127,7 +127,7 @@ public class ElectricMotorBlockEntity extends KineticElectricBlockEntity {
 
     @Override
     public float calculateAddedStressCapacity() {
-        float speedModifier = getSpeed()/256;
+        float speedModifier = Math.abs(getSpeed()/256);
 
 
         return (int)(super.calculateAddedStressCapacity()*speedModifier);

@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.base.spark;
 
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.registry.TFMGMobEffects;
 import com.simibubi.create.content.trains.CubeParticleData;
 import net.minecraft.core.BlockPos;
@@ -51,6 +52,10 @@ public class Spark extends ThrowableProjectile {
 
     public ParticleOptions getTrailParticle(){
         return ParticleTypes.FLAME;
+    }
+
+    public ResourceLocation getTexture(){
+        return TFMG.asResource("textures/entity/spark.png");
     }
 
     @Override

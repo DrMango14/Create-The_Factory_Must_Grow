@@ -44,20 +44,20 @@ import com.drmangotea.tfmg.content.electricity.storage.AccumulatorItem;
 import com.drmangotea.tfmg.content.electricity.storage.CapacitorCTBehavior;
 import com.drmangotea.tfmg.content.electricity.utilities.converter.ConverterBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.converter.ConverterGenerator;
-import com.drmangotea.tfmg.content.electricity.utilities.diode.ElectricDiodeBlock;
-import com.drmangotea.tfmg.content.electricity.utilities.diode.EncasedDiodeBlock;
+import com.drmangotea.tfmg.content.electricity.network.diode.ElectricDiodeBlock;
+import com.drmangotea.tfmg.content.electricity.network.diode.EncasedDiodeBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_motor.ElectricMotorBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_pump.ElectricPumpBlock;
-import com.drmangotea.tfmg.content.electricity.utilities.electric_switch.ElectricSwitchBlock;
+import com.drmangotea.tfmg.content.electricity.network.electric_switch.ElectricSwitchBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerBlock;
-import com.drmangotea.tfmg.content.electricity.utilities.potentiometer.EncasedPotentiometerBlock;
-import com.drmangotea.tfmg.content.electricity.utilities.potentiometer.PotentiometerBlock;
+import com.drmangotea.tfmg.content.electricity.network.potentiometer.EncasedPotentiometerBlock;
+import com.drmangotea.tfmg.content.electricity.network.potentiometer.PotentiometerBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.resistor.ResistorBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.resistor.ResistorBlockItem;
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayCTBehavior;
 import com.drmangotea.tfmg.content.electricity.utilities.traffic_light.TrafficLightBlock;
-import com.drmangotea.tfmg.content.electricity.utilities.transformer.TransformerBlock;
+import com.drmangotea.tfmg.content.electricity.network.transformer.TransformerBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.voltage_observer.VoltageObserverBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.voltage_observer.VoltageObserverGenerator;
 import com.drmangotea.tfmg.content.engines.base.EngineCTBehavior;
@@ -89,6 +89,8 @@ import com.drmangotea.tfmg.content.machinery.misc.exhaust.ExhaustBlock;
 import com.drmangotea.tfmg.content.machinery.misc.firebox.FireboxBlock;
 import com.drmangotea.tfmg.content.machinery.misc.flarestack.FlarestackBlock;
 import com.drmangotea.tfmg.content.machinery.misc.flarestack.FlarestackGenerator;
+import com.drmangotea.tfmg.content.machinery.misc.gas_lamp.GasLampBlock;
+import com.drmangotea.tfmg.content.machinery.misc.gas_lamp.GasLampGenerator;
 import com.drmangotea.tfmg.content.machinery.misc.machine_input.MachineInputBlock;
 import com.drmangotea.tfmg.content.machinery.misc.smokestack.SmokestackBlock;
 import com.drmangotea.tfmg.content.machinery.misc.smokestack.SmokestackGenerator;
@@ -1344,6 +1346,20 @@ public class TFMGBlocks {
                             .lightLevel(s -> s.getValue(FlarestackBlock.LIT) ? 15 : 0)
                             .noOcclusion())
                     .blockstate(new FlarestackGenerator()::generate)
+                    .transform(pickaxeOnly())
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<GasLampBlock> GAS_LAMP =
+            REGISTRATE.block("gas_lamp", GasLampBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .properties(p -> p
+                            .lightLevel(s -> s.getValue(GasLampBlock.LIT) ? 15 : 0)
+                            .noOcclusion())
+                    .blockstate(new GasLampGenerator()::generate)
                     .transform(pickaxeOnly())
                     .item()
                     .transform(customItemModel())

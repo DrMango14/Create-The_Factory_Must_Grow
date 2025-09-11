@@ -62,6 +62,10 @@ public class TFMGEntityTypes {
             register("lithium_spark", LithiumSpark::new, () -> SparkRenderer::new,
                     MobCategory.MISC, 4, 20, true, true, Spark::build).register();
 
+    public static final EntityEntry<DryIceFlake> DRY_ICE_FLAKE =
+            register("dry_ice_flake", DryIceFlake::new, () -> SparkRenderer::new,
+                    MobCategory.MISC, 4, 20, true, true, Spark::build).register();
+
 
     private static <T extends Entity> CreateEntityBuilder<T, ?> register(String name, EntityType.EntityFactory<T> factory,
                                                                          NonNullSupplier<NonNullFunction<EntityRendererProvider.Context, EntityRenderer<? super T>>> renderer,

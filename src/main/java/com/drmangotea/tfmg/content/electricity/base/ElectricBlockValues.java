@@ -4,19 +4,30 @@ public class ElectricBlockValues {
 
 
     public long electricalNetworkId;
+
     public boolean destroyed = false;
+
     public boolean connectNextTick = false;
+
     public boolean checkForLoopsNextTick = false;
+
     public boolean updatePowerNextTick = false;
+
     public boolean updateNextTick = false;
+
     public boolean getsOutsidePower = false;
+
     public int networkResistance = 0;
+
     public int voltage = 0;
+
     public int voltageSupply = 0;
+
     public int networkPowerGeneration = 0;
+
     public float highestCurrent = 0;
 
-    public boolean notEnoughtPower = false;
+    public boolean notEnoughPower = false;
 
     public boolean setVoltageNextTick = false;
 

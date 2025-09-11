@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "tfmg:cast_iron_bars"
+    },
+    "C": {
+      "tag": "c:plates/cast_iron"
+    },
+    "G": {
+      "item": "create:framed_glass"
+    },
+    "P": {
+      "item": "tfmg:industrial_pipe"
+    }
+  },
+  "pattern": [
+    " C ",
+    "BGB",
+    " P "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:gas_lamp"
+  }
+}
