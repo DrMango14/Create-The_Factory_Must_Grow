@@ -63,7 +63,11 @@ public class GoggleOverlayRendererMixin {
         Minecraft mc = Minecraft.getInstance();
         ClientLevel world = mc.level;
         HitResult objectMouseOver = mc.hitResult;
-        BlockHitResult result = (BlockHitResult) objectMouseOver;
+        if (!(objectMouseOver instanceof BlockHitResult result)) {
+            tfmg$lastHovered = null;
+            tfmg$hoverTicks = 0;
+            return;
+        }
 
         BlockPos pos = result.getBlockPos();
 

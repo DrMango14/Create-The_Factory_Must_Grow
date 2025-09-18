@@ -23,6 +23,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Containers;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -71,8 +72,9 @@ public class IndustrialMixerBlockEntity extends KineticBlockEntity implements IV
 
     }
     public void destroy() {
-        ItemStack mixerItem = mixerMode.item;
-        Containers.dropItemStack(getLevel(), getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ(), mixerItem);
+        ItemStack toDrop = mixerMode.newStack(); // fresh instance every time
+        if (!toDrop.isEmpty())
+            Containers.dropItemStack(getLevel(), worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), toDrop);
     }
 
 
@@ -120,7 +122,7 @@ public class IndustrialMixerBlockEntity extends KineticBlockEntity implements IV
 
     public boolean setMixerMode(ItemStack modeItem, boolean simulate) {
         for (MixerMode mode : MixerMode.values()) {
-            if (mode.item.is(modeItem.getItem())) {
+            if (mode.item != null && mode.item == modeItem.getItem()) {
                 if (!simulate) {
                     mixerMode = mode;
                 } else return true;
@@ -163,15 +165,19 @@ public class IndustrialMixerBlockEntity extends KineticBlockEntity implements IV
     }
 
     enum MixerMode {
-        NONE("none", ItemStack.EMPTY),
-        MIXING("mixing", TFMGItems.MIXER_BLADE.asStack()),
-        CENTRIFUGE("centrifuge", TFMGItems.CENTRIFUGE.asStack());
+        NONE("none", null),
+        MIXING("mixing", TFMGItems.MIXER_BLADE.get()),
+        CENTRIFUGE("centrifuge", TFMGItems.CENTRIFUGE.get());
         public final String name;
-        public final ItemStack item;
+        public final Item item;
 
-        MixerMode(String name, ItemStack stack) {
+        MixerMode(String name, Item item) {
             this.name = name;
-            this.item = stack;
+            this.item = item;
+        }
+
+        public ItemStack newStack() {
+            return item == null ? ItemStack.EMPTY : new ItemStack(item);
         }
     }
 }
