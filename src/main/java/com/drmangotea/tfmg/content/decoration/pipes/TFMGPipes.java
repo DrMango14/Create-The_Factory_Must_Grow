@@ -24,8 +24,12 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,16 +46,21 @@ public class TFMGPipes {
 
     public static final Map<PipeMaterial, TFMGPipeEntry> PIPES = new HashMap<>();
 
+
     static {
-        PIPES.put(PipeMaterial.BRASS, createEntry(PipeMaterial.BRASS, TFMGPipeAttachmentModel::withAOBrass, TFMGSpriteShifts.BRASS_FLUID_CASING));
-        PIPES.put(PipeMaterial.STEEL, createEntry(PipeMaterial.STEEL, TFMGPipeAttachmentModel::withAOSteel, TFMGSpriteShifts.STEEL_FLUID_CASING));
-        PIPES.put(PipeMaterial.ALUMINUM, createEntry(PipeMaterial.ALUMINUM, TFMGPipeAttachmentModel::withAOAluminum, TFMGSpriteShifts.ALUMINUM_FLUID_CASING));
-        PIPES.put(PipeMaterial.CAST_IRON, createEntry(PipeMaterial.CAST_IRON, TFMGPipeAttachmentModel::withAOCastIron, TFMGSpriteShifts.CAST_IRON_FLUID_CASING));
-        PIPES.put(PipeMaterial.PLASTIC, createEntry(PipeMaterial.PLASTIC, TFMGPipeAttachmentModel::withAOPlastic, TFMGSpriteShifts.PLASTIC_FLUID_CASING));
+        PIPES.put(PipeMaterial.BRASS, createEntry(PipeMaterial.BRASS, (FMLEnvironment.dist.isDedicatedServer()) ? null : TFMGPipeAttachmentModel::withAOBrass, TFMGSpriteShifts.BRASS_FLUID_CASING));
+        PIPES.put(PipeMaterial.STEEL, createEntry(PipeMaterial.STEEL, (FMLEnvironment.dist.isDedicatedServer()) ? null : TFMGPipeAttachmentModel::withAOSteel, TFMGSpriteShifts.STEEL_FLUID_CASING));
+        PIPES.put(PipeMaterial.ALUMINUM, createEntry(PipeMaterial.ALUMINUM, (FMLEnvironment.dist.isDedicatedServer()) ? null : TFMGPipeAttachmentModel::withAOAluminum, TFMGSpriteShifts.ALUMINUM_FLUID_CASING));
+        PIPES.put(PipeMaterial.CAST_IRON, createEntry(PipeMaterial.CAST_IRON, (FMLEnvironment.dist.isDedicatedServer()) ? null : TFMGPipeAttachmentModel::withAOCastIron, TFMGSpriteShifts.CAST_IRON_FLUID_CASING));
+        PIPES.put(PipeMaterial.PLASTIC, createEntry(PipeMaterial.PLASTIC, (FMLEnvironment.dist.isDedicatedServer()) ? null : TFMGPipeAttachmentModel::withAOPlastic, TFMGSpriteShifts.PLASTIC_FLUID_CASING));
     }
 
-    private static TFMGPipeEntry createEntry(PipeMaterial material, NonNullFunction<BakedModel, ? extends BakedModel> attachmentModel, CTSpriteShiftEntry spriteShiftEntry) {
-        return new TFMGPipeEntry(material, registrate).attachmentModel(attachmentModel).encasedSpriteShift(spriteShiftEntry);
+
+    private static TFMGPipeEntry createEntry(PipeMaterial material, @Nullable NonNullFunction<BakedModel, ? extends BakedModel> attachmentModel, CTSpriteShiftEntry spriteShiftEntry) {
+        if (FMLEnvironment.dist.isClient())
+            return new TFMGPipeEntry(material, registrate).attachmentModel(attachmentModel).encasedSpriteShift(spriteShiftEntry);
+        else
+            return new TFMGPipeEntry(material, registrate).encasedSpriteShift(spriteShiftEntry);
     }
 
     public static void init() {
