@@ -1,9 +1,9 @@
-// 1.20.1	2025-06-02T17:55:45.0307406	Recipes
+// 1.20.1	2025-08-19T12:15:05.6622524	Recipes
 8e18331462285f0f09e5897f4cd797c89b6ffc23 data/tfmg/recipes/sequenced_assembly/capacitor.json
 782800c146c9d0485149cf0c1c552274ca6e78da data/tfmg/recipes/sequenced_assembly/generator.json
 1ec9510103d905de21001b87c64f4d4db0a9299f data/tfmg/recipes/sequenced_assembly/heavy_plate.json
 3dcce4adf59b0d9041fb7dd8316223af1696ec81 data/tfmg/recipes/sequenced_assembly/motor.json
 6943441658b1aa9175e6dce859896609b2d7aa28 data/tfmg/recipes/sequenced_assembly/potentiometer.json
-fa180f8f12a0e27125b0eae636afdd7c0309b1be data/tfmg/recipes/sequenced_assembly/steel_mechanism.json
+a2b2311863219150397b12d30d84e12113ba3dd2 data/tfmg/recipes/sequenced_assembly/steel_mechanism.json
 70be470bb0b72de21713f1c0e08a529780a199c0 data/tfmg/recipes/sequenced_assembly/transistor.json
 cdf0bd7304a854c1db7e9caf65e1490b146931c5 data/tfmg/recipes/sequenced_assembly/unfinished_circuit_board.json

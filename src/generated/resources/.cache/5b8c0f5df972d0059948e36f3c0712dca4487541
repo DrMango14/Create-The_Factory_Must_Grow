@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-24T14:48:59.5659809	TFMG's Processing Recipes
+// 1.20.1	2025-08-19T11:46:11.8907784	TFMG's Processing Recipes
 ae24d73a2ef5b8059806e660641bcb9dff2a15f4 data/tfmg/recipes/coking/charcoal.json
 9000fbf96dc2c2b822aa4e526b1c8686d5413e5a data/tfmg/recipes/coking/coal.json
 2b33a020ed88511979447005053ceea2b3ff3c08 data/tfmg/recipes/compacting/bitumen.json
@@ -18,9 +18,9 @@ d95d95710ffd322ba1248f8fd305c58c09f05c3c data/tfmg/recipes/crushing/raw_lithium_
 8a83ba25a8412f503d750c73dd8b5c5e9fdb063f data/tfmg/recipes/crushing/slag_block.json
 f218b0fa35bdb632066225082134f6ba297d49fb data/tfmg/recipes/crushing/sulfur.json
 c4023ecc489f52b2b08eb6d8bdfdcea87a185a56 data/tfmg/recipes/deploying/coated_circuit_board.json
-55a40ebeb7612a9ba4a938e18adcfe6da4388fff data/tfmg/recipes/distillation/crude_oil.json
-c53735f5bedbc3e6fd8c03f2dcc18047e9391d6a data/tfmg/recipes/distillation/crude_oil_light_distillation.json
-2ef242c09ecf8dc0dbd554dac9ec924b65bdd17d data/tfmg/recipes/distillation/crude_oil_no_naphtha.json
+3906cf193eb9d1b3747e3bfe37d60da4dabd5860 data/tfmg/recipes/distillation/crude_oil.json
+86b54781380e759cf4c5eb7cb6dcd1944e769a43 data/tfmg/recipes/distillation/crude_oil_light_distillation.json
+5d72fedf5882b6a6e75513f085e1edfc27fbc637 data/tfmg/recipes/distillation/crude_oil_no_naphtha.json
 8c80e612bd4187241a90e40c68241826e222b1c3 data/tfmg/recipes/distillation/heavy_oil.json
 001bc3e8ddeb2fc3d633faf873553157b5c1878c data/tfmg/recipes/distillation/heavy_oil_light_distillation.json
 e4b71e1cfabc347dccef6426d722bb6369f018e6 data/tfmg/recipes/distillation/heavy_oil_no_naphtha.json

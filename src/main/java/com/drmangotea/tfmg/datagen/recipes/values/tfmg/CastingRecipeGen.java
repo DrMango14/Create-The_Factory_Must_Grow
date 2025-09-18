@@ -1,10 +1,7 @@
 package com.drmangotea.tfmg.datagen.recipes.values.tfmg;
 
 import com.drmangotea.tfmg.datagen.recipes.TFMGProcessingRecipeGen;
-import com.drmangotea.tfmg.registry.TFMGBlocks;
-import com.drmangotea.tfmg.registry.TFMGFluids;
-import com.drmangotea.tfmg.registry.TFMGItems;
-import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
+import com.drmangotea.tfmg.registry.*;
 import net.minecraft.data.PackOutput;
 
 public class CastingRecipeGen extends TFMGProcessingRecipeGen {
@@ -12,7 +9,7 @@ public class CastingRecipeGen extends TFMGProcessingRecipeGen {
 	GeneratedRecipe
 
 	STEEL_INGOT = create("steel", b ->b
-			.require(TFMGFluids.MOLTEN_STEEL.get(),144)
+			.require(TFMGTags.TFMGFluidTags.MOLTEN_STEEL.tag, 144)
 			.output(TFMGItems.STEEL_INGOT)
 			.duration(200)),
 

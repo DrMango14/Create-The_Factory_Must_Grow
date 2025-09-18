@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-24T14:48:59.5355109	Registrate Provider for tfmg [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2025-08-19T11:21:09.9744599	Registrate Provider for tfmg [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 ff5a5721633b83465ab501cbdfdc579a0f20e938 assets/tfmg/blockstates/accumulator.json
 e982a263b6af75821042107fdeff7bd809436d08 assets/tfmg/blockstates/air_intake.json
 e7f63aadfc892e337d9f87b5e50af8b1c7e4103f assets/tfmg/blockstates/aluminum_bars.json
@@ -139,7 +139,7 @@ e6c37a1b35654860e8e7bce70c17bb9c463cbcf0 assets/tfmg/blockstates/cyan_caution_bl
 da3ce72a164ba44b83d2e0a34aba7a2e0bf1f7e0 assets/tfmg/blockstates/deepslate_lead_ore.json
 29fabca149c689611b3066ffd546b48e305b795b assets/tfmg/blockstates/deepslate_lithium_ore.json
 0c1f4a179de5361677ab6a190f3b3279374dfdf0 assets/tfmg/blockstates/deepslate_nickel_ore.json
-c9291b06874778c72b970c234fdf7b48cbc443cb assets/tfmg/blockstates/diagonal_cable_block.json
+b893f9afd6bd02e680fcc301ec1d7ad5c790f1b0 assets/tfmg/blockstates/diagonal_cable_block.json
 03983ce3de10310cd75b98f17c9161653b7034cd assets/tfmg/blockstates/diesel.json
 9e5371b956a65a7a49581208e331ee1fc8b8acc2 assets/tfmg/blockstates/electrical_switch.json
 fce44cbe5ec7bc7ec527327088be37cea56ac85c assets/tfmg/blockstates/electric_diode.json

@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-09T18:18:33.1137676	TFMG's Recipes
+// 1.20.1	2025-08-19T11:46:11.8917904	TFMG's Recipes
 9195362b7e061e947c4de657ce3b7c49c1e271d1 data/tfmg/advancements/recipes/misc/blasting/lead_ingot_blasting.json
 14f26d532b7adf630370bfc99bf32a0ce4dc7e77 data/tfmg/advancements/recipes/misc/blasting/lead_ingot_from_crushed_blasting.json
 c918937eba17a031abe7355ef190d20cc1e41f3c data/tfmg/advancements/recipes/misc/blasting/lithium_ingot_blasting.json
@@ -299,7 +299,7 @@ cb579a4ab0ff4bc8d843e78fe3ec0f5b3267d0ee data/tfmg/recipes/casting/cinderblock.j
 b8046892f4b2e40ef25f4d7f6e6be5d6cc02ee70 data/tfmg/recipes/casting/plastic_sheet.json
 4ca0426d93219655bbff0c359a5cc9c3ea9201ff data/tfmg/recipes/casting/silicon.json
 02ad3d1f8c3fa29349d2a48216146b05e30f2060 data/tfmg/recipes/casting/slag_block.json
-bcc188834b31ab695c9dd610e06d17707f5167a9 data/tfmg/recipes/casting/steel.json
+51400cd773409554cd8f841948ed7f0aa4709546 data/tfmg/recipes/casting/steel.json
 3032d7f8ddeda567a78664d6a8574f656263113e data/tfmg/recipes/crafting/kinetics/accumulator.json
 5a862ab9f6982644f1452df3ef0fa130b57adf2d data/tfmg/recipes/crafting/kinetics/accumulatorfrom_lithium.json
 7f965b40cda04e83d51b0e388b6e5a364f5affdb data/tfmg/recipes/crafting/kinetics/air_intake.json
