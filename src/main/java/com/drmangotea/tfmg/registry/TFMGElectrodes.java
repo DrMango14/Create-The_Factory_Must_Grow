@@ -14,7 +14,7 @@ public class TFMGElectrodes {
 
     public static final ElectrodeEntry<Electrode> copper = REGISTRATE.electrode("copper", Electrode::new)
             .properties((p) -> p
-                    .resistance(100)
+                    .resistance(10)
                     .item(TFMGItems.COPPER_ELECTRODE)
                     .operationId("tfmg:electrode")
             )
@@ -22,7 +22,7 @@ public class TFMGElectrodes {
 
     public static final ElectrodeEntry<Electrode> zinc = REGISTRATE.electrode("zinc", Electrode::new)
             .properties((p) -> p
-                    .resistance(100)
+                    .resistance(10)
                     .item(TFMGItems.ZINC_ELECTRODE)
                     .operationId("tfmg:electrode")
             )

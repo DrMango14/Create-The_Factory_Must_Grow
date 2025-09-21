@@ -1048,7 +1048,7 @@ public class TFMGBlocks {
                     .transform(pickaxeOnly())
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .blockstate(new CreativeMotorGenerator()::generate)
-                    .transform(TFMGStress.setCapacity(45.0))
+                    .transform(TFMGStress.setCapacity(12))
                     .onRegister(BlockStressValues.setGeneratorSpeed(64, true))
                     .item()
                     .transform(customItemModel())

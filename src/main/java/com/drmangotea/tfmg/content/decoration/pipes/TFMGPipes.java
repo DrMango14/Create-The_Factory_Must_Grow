@@ -43,15 +43,15 @@ public class TFMGPipes {
     public static final Map<PipeMaterial, TFMGPipeEntry> PIPES = new HashMap<>();
 
     static {
-        PIPES.put(PipeMaterial.BRASS, createEntry(PipeMaterial.BRASS, TFMGPipeAttachmentModel::withAOBrass, TFMGSpriteShifts.BRASS_FLUID_CASING));
-        PIPES.put(PipeMaterial.STEEL, createEntry(PipeMaterial.STEEL, TFMGPipeAttachmentModel::withAOSteel, TFMGSpriteShifts.STEEL_FLUID_CASING));
-        PIPES.put(PipeMaterial.ALUMINUM, createEntry(PipeMaterial.ALUMINUM, TFMGPipeAttachmentModel::withAOAluminum, TFMGSpriteShifts.ALUMINUM_FLUID_CASING));
-        PIPES.put(PipeMaterial.CAST_IRON, createEntry(PipeMaterial.CAST_IRON, TFMGPipeAttachmentModel::withAOCastIron, TFMGSpriteShifts.CAST_IRON_FLUID_CASING));
-        PIPES.put(PipeMaterial.PLASTIC, createEntry(PipeMaterial.PLASTIC, TFMGPipeAttachmentModel::withAOPlastic, TFMGSpriteShifts.PLASTIC_FLUID_CASING));
+        PIPES.put(PipeMaterial.BRASS, createEntry(PipeMaterial.BRASS,  TFMGSpriteShifts.BRASS_FLUID_CASING));
+        PIPES.put(PipeMaterial.STEEL, createEntry(PipeMaterial.STEEL,  TFMGSpriteShifts.STEEL_FLUID_CASING));
+        PIPES.put(PipeMaterial.ALUMINUM, createEntry(PipeMaterial.ALUMINUM,  TFMGSpriteShifts.ALUMINUM_FLUID_CASING));
+        PIPES.put(PipeMaterial.CAST_IRON, createEntry(PipeMaterial.CAST_IRON, TFMGSpriteShifts.CAST_IRON_FLUID_CASING));
+        PIPES.put(PipeMaterial.PLASTIC, createEntry(PipeMaterial.PLASTIC, TFMGSpriteShifts.PLASTIC_FLUID_CASING));
     }
 
-    private static TFMGPipeEntry createEntry(PipeMaterial material, NonNullFunction<BakedModel, ? extends BakedModel> attachmentModel, CTSpriteShiftEntry spriteShiftEntry) {
-        return new TFMGPipeEntry(material, registrate).attachmentModel(attachmentModel).encasedSpriteShift(spriteShiftEntry);
+    private static TFMGPipeEntry createEntry(PipeMaterial material, CTSpriteShiftEntry spriteShiftEntry) {
+        return new TFMGPipeEntry(material, registrate).encasedSpriteShift(spriteShiftEntry);
     }
 
     public static void init() {

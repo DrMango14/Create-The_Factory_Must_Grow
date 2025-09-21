@@ -97,6 +97,7 @@ public class ElectricMotorBlockEntity extends KineticElectricBlockEntity {
     public void onNetworkChanged(int oldVoltage, int oldPower) {
         //if (oldPower != getPowerUsage() || oldVoltage != data.voltage) {
         delayedUpdate = true;
+        updateNextTick();
         notifyUpdate();
         // }
     }

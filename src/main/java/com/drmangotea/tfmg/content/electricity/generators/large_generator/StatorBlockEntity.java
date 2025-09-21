@@ -5,6 +5,10 @@ import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+
+import java.util.Iterator;
+import java.util.List;
 
 
 public class StatorBlockEntity extends ElectricBlockEntity implements IHaveGoggleInformation {
@@ -31,6 +35,8 @@ public class StatorBlockEntity extends ElectricBlockEntity implements IHaveGoggl
 
     }
 
+
+
     @Override
     public void tick() {
         super.tick();
@@ -43,9 +49,23 @@ public class StatorBlockEntity extends ElectricBlockEntity implements IHaveGoggl
         }
     }
 
+    public void updateRotor(){
+
+
+        Iterable<BlockPos> blocksAround = BlockPos.betweenClosed(getBlockPos().below().north().west(),getBlockPos().above().east().east());
+
+        for (BlockPos blockPos : blocksAround) {
+            if(level.getBlockEntity(blockPos) instanceof RotorBlockEntity be) {
+                be.updateNextTick();
+                timer = 11;
+            }
+        }
+    }
+
     @Override
     public void onPlaced() {
         super.onPlaced();
+        updateRotor();
         if (rotor != null)
             if (level.getBlockEntity(rotor) instanceof RotorBlockEntity be) {
                 timer =11;
@@ -56,6 +76,7 @@ public class StatorBlockEntity extends ElectricBlockEntity implements IHaveGoggl
     @Override
     public void destroy() {
         super.destroy();
+        updateRotor();
         if (rotor != null)
             if (level.getBlockEntity(rotor) instanceof RotorBlockEntity be) {
                 be.updateNextTick();

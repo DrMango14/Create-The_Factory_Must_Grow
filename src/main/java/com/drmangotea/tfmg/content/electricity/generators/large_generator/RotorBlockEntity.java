@@ -91,6 +91,12 @@ public class RotorBlockEntity extends KineticElectricBlockEntity {
     }
 
     @Override
+    public void onSpeedChanged(float previousSpeed) {
+        super.onSpeedChanged(previousSpeed);
+        updateNextTick();
+    }
+
+    @Override
     public int powerGeneration() {
         return (int) (generation() * 40*1.84563);
     }
