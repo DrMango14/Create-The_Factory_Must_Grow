@@ -22,6 +22,7 @@ import com.drmangotea.tfmg.content.machinery.misc.concrete_hose.ConcreteHoseBloc
 import com.drmangotea.tfmg.content.machinery.misc.exhaust.ExhaustBlockEntity;
 import com.drmangotea.tfmg.content.machinery.misc.firebox.FireboxBlockEntity;
 import com.drmangotea.tfmg.content.machinery.misc.flarestack.FlarestackBlockEntity;
+import com.drmangotea.tfmg.content.machinery.misc.gas_lamp.GasLampBlockEntity;
 import com.drmangotea.tfmg.content.machinery.misc.smokestack.SmokestackBlockEntity;
 import com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.controller.DistillationControllerBlockEntity;
 import com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.output.DistillationOutputBlockEntity;
@@ -103,6 +104,7 @@ public class TFMGCommonEvents {
             ExhaustBlockEntity.registerCapabilities(event);
             BlastFurnaceHatchBlockEntity.registerCapabilities(event);
             FlarestackBlockEntity.registerCapabilities(event);
+            GasLampBlockEntity.registerCapabilities(event);
             BlastFurnaceOutputBlockEntity.registerCapabilities(event);
             CokeOvenBlockEntity.registerCapabilities(event);
             AirIntakeBlockEntity.registerCapabilities(event);

@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.network.transformer;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
@@ -104,18 +105,22 @@ public class TransformerBlockEntity extends VoltageAlteringBlockEntity {
         }
 
         return 0;
-
     }
 
 
 
     public void updateCoils(){
-        if(primaryCoil.get(TFMGDataComponents.COIL_TURNS)==null||secondaryCoil.get(TFMGDataComponents.COIL_TURNS)==null)
+        if(primaryCoil.get(TFMGDataComponents.COIL_TURNS)==null||secondaryCoil.get(TFMGDataComponents.COIL_TURNS)==null) {
+            coilRatio = 0;
+            updateNextTick();
+            updateInFront();
             return;
+        }
         int primaryTurns = primaryCoil.get(TFMGDataComponents.COIL_TURNS);
         int secondaryTurns = secondaryCoil.get(TFMGDataComponents.COIL_TURNS);
 
         if(primaryCoil.isEmpty()||secondaryCoil.isEmpty()||primaryTurns<50||secondaryTurns<50){
+
             coilRatio = 0;
             updateNextTick();
             updateInFront();

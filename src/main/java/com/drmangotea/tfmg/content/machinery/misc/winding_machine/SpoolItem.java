@@ -8,6 +8,7 @@ import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableType;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnection;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CablePos;
+import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.foundation.utility.CreateLang;
@@ -62,8 +63,8 @@ public class SpoolItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (player.isCrouching() && stack.get(TFMGDataComponents.POSITION) != 0) {
-            if (level.getBlockEntity(BlockPos.of(stack.get(TFMGDataComponents.POSITION))) instanceof CableConnectorBlockEntity be)
+        if (player.isCrouching() && stack.getOrDefault(TFMGDataComponents.POSITION,0f).longValue() != 0f) {
+            if (level.getBlockEntity(BlockPos.of(stack.getOrDefault(TFMGDataComponents.POSITION,0f).longValue())) instanceof CableConnectorBlockEntity be)
                 be.player = null;
             stack.set(TFMGDataComponents.POSITION, 0l);
             stack.remove(TFMGDataComponents.POSITION);
@@ -106,6 +107,19 @@ public class SpoolItem extends Item {
         BlockPos pos = context.getClickedPos();
         Player player = context.getPlayer();
         ItemStack stack = context.getItemInHand();
+
+        if(level.getBlockEntity(pos) instanceof WindingMachineBlockEntity be){
+            ItemStack oldSpool = ItemStack.EMPTY;
+            if(!be.spool.isEmpty()){
+                oldSpool = be.spool;
+            }
+            be.spool = context.getItemInHand();
+            context.getPlayer().setItemInHand(context.getHand(), oldSpool);
+            be.sendData();
+            be.setChanged();
+//
+            return InteractionResult.SUCCESS;
+        }
 
         if(stack.get(TFMGDataComponents.SPOOL_AMOUNT)==null)
             return InteractionResult.PASS;
@@ -207,18 +221,7 @@ public class SpoolItem extends Item {
          }
 //
 //
-         if(level.getBlockEntity(pos) instanceof WindingMachineBlockEntity be){
-             ItemStack oldSpool = ItemStack.EMPTY;
-             if(!be.spool.isEmpty()){
-                 oldSpool = be.spool;
-             }
-             be.spool = context.getItemInHand();
-             context.getPlayer().setItemInHand(context.getHand(), oldSpool);
-             be.sendData();
-             be.setChanged();
-//
-             return InteractionResult.SUCCESS;
-         }
+
          return InteractionResult.PASS;
          }
         public void removeOtherConnections(Player player, ItemStack stack){

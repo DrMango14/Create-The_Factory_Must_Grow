@@ -141,6 +141,9 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
     public void lazyTick() {
         super.lazyTick();
 
+        if(!canWork())
+            return;
+
         if (level.random.nextInt(45) == 0) {
             if (oil > 0)
                 oil--;
@@ -252,6 +255,11 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
         if (controller == null)
             return;
 
+        if (!canWork()) {
+            fuelInjectionRate = 0;
+            return;
+        }
+
         if (hasEngineController()) {
             fuelInjectionRate = highestSignal / 15f;
             return;
@@ -297,6 +305,12 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
             if (level.getBlockEntity(controller) instanceof AbstractSmallEngineBlockEntity be)
                 be.updateRotation();
             return;
+        }
+
+        if(fuelTank.isEmpty()){
+            rpm = 0;
+            torque = 0;
+            fuelInjectionRate = 0;
         }
 
         List<Long> allEngines = new ArrayList<>(engines);

@@ -12,8 +12,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.energy.IEnergyStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +65,20 @@ public interface IElectric {
         onConnected();
         sendStuff();
 
+    }
+
+    default void onNeighborChanged() {
+        Level level = (Level) getLevelAccessor();
+        for(Direction direction : Direction.values()){
+            IEnergyStorage capability = level.getCapability(Capabilities.EnergyStorage.BLOCK,getBlockPos().relative(direction), direction);
+
+            if(capability==null)
+                continue;
+
+
+
+
+        }
     }
 
     default void onRemoved() {

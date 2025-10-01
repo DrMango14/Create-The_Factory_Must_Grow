@@ -12,6 +12,7 @@
     "GoggleOverlayRendererMixin",
     "PipeAttachmentModelMixin",
     "RecipeProviderMixin",
+    "UtilMixin",
     "accessor.FluidTankBlockEntityAccessor",
     "accessor.FlywheelBlockEntityMixin",
     "accessor.ProcessingRecipeAccessor",

@@ -2,7 +2,7 @@
   "creative_tab.tfmg_main": "Create: The Factory Must Grow",
   "creative_tab.tfmg_decoration": "Create: TFMG Building Blocks",
 
-  "tfmg.goggles.fluid_storage": "Fluid Storage:",
+  "create.goggles.fluid_storage": "Fluid Storage:",
   "tfmg.goggles.item_storage": "Item Storage:",
   "tfmg.goggles.item_storage_empty": "*Empty*",
 

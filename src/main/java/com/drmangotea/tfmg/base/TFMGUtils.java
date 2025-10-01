@@ -202,7 +202,7 @@ public class TFMGUtils {
         }
         if (!isEmpty) return true;
 
-        CreateLang.translate("gui.goggles.fluid_container.capacity").add(CreateLang.number(tank.getTankCapacity(0)).add(mb).style(ChatFormatting.DARK_GREEN)).style(ChatFormatting.DARK_GRAY).forGoggles(tooltip, 1);
+        CreateLang.translate("goggles.fluid_storage").add(CreateLang.number(tank.getTankCapacity(0)).add(mb).style(ChatFormatting.DARK_GREEN)).style(ChatFormatting.DARK_GRAY).forGoggles(tooltip, 1);
         return true;
     }
 

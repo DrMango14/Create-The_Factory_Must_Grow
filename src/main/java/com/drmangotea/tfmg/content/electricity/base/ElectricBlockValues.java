@@ -1,5 +1,10 @@
 package com.drmangotea.tfmg.content.electricity.base;
 
+import net.minecraft.core.BlockPos;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class ElectricBlockValues {
 
 
@@ -32,6 +37,8 @@ public class ElectricBlockValues {
     public boolean setVoltageNextTick = false;
 
     public int failTimer = 0;
+
+    public List<BlockPos> blocksToPower = new ArrayList<>();
 
     public ElectricalGroup group = new ElectricalGroup(0);
 
