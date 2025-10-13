@@ -77,3 +77,9 @@ side = "BOTH"
 # stop your mod loading on the server for example.
 #[features."${mod_id}"]
 #openGLVersion="[3.2,)"
+
+[[dependencies."${mod_id}"]]
+modId = "create"
+type = "required"
+versionRange = "[6.0.6,)"
+side = "BOTH"
