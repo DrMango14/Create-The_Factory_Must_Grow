@@ -474,7 +474,7 @@
   "block.tfmg.sulfuric_acid": "Sulfuric Acid",
   "block.tfmg.surface_scanner": "Surface Scanner",
   "block.tfmg.surface_scanner.tooltip.behaviour1": "The machine's top 5x5 grid shows the surrounding chunks with its chunk in the center, the chunks that have at least 1 oil deposit in them should glow. If the surface does not start to glow within a few seconds then it is likely that there are no oil deposits nearby. Chunks can be seen ingame with F3+G",
-  "block.tfmg.surface_scanner.tooltip.1": "When powered from below with a Machine Input",
+  "block.tfmg.surface_scanner.tooltip.condition1": "When powered from below with a Machine Input",
   "block.tfmg.surface_scanner.tooltip.summary": "Helps to find chunks with oil",
   "block.tfmg.traffic_light": "Traffic Light",
   "block.tfmg.transformer": "Transformer",
