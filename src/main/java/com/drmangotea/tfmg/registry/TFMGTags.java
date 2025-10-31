@@ -78,7 +78,7 @@ public class TFMGTags {
         ORES_LITHIUM(COMMON, "ores/lithium"),
         PLATES_CAST_IRON(COMMON, "plates/cast_iron"),
         RAW_LITHIUM(COMMON, "raw_materials/lithium"),
-        RODS_STEEL(COMMON, "rots/steel"),
+        RODS_STEEL(COMMON, "rods/steel"),
         SPOOLS,
         STORAGE_BLOCKS_CAST_IRON(COMMON, "storage_blocks/cast_iron"),
         STORAGE_BLOCKS_COAL_COKE(COMMON, "storage_blocks/coal_coke"),
