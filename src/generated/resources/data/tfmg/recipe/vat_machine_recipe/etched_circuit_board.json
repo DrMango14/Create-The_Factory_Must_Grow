@@ -5,7 +5,7 @@
       "item": "tfmg:coated_circuit_board"
     },
     {
-      "type": "fluid_stack",
+      "type": "neoforge:single",
       "amount": 250,
       "fluid": "tfmg:sulfuric_acid"
     }
