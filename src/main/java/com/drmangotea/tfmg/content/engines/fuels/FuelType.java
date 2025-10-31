@@ -4,20 +4,13 @@ import com.drmangotea.tfmg.registry.TFMGTags;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import com.simibubi.create.AllTags;
-import net.minecraft.ResourceLocationException;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
-
-import static com.simibubi.create.AllTags.optionalTag;
 
 public class FuelType {
     TagKey<Fluid> fluid = TFMGTags.TFMGFluidTags.GASOLINE.tag;
@@ -51,7 +44,7 @@ public class FuelType {
     public static FuelType fromJson(JsonObject object) {
         FuelType type = new FuelType();
         try {
-            parseJsonPrimitive(object, "fluid", JsonPrimitive::isString, primitive -> type.fluid = optionalTag(BuiltInRegistries.FLUID, ResourceLocation.fromNamespaceAndPath("",primitive.getAsString())));
+            parseJsonPrimitive(object, "fluid", JsonPrimitive::isString, primitive -> type.fluid = FluidTags.create(ResourceLocation.fromNamespaceAndPath("",primitive.getAsString())));
 
             parseJsonPrimitive(object, "speed", JsonPrimitive::isNumber, primitive -> type.speed = primitive.getAsFloat());
             parseJsonPrimitive(object, "efficiency", JsonPrimitive::isNumber, primitive -> type.efficiency = primitive.getAsFloat());
@@ -83,7 +76,7 @@ public class FuelType {
     
     public static FuelType fromBuffer(FriendlyByteBuf buffer) {
         FuelType type = new FuelType();
-        type.fluid = optionalTag(BuiltInRegistries.FLUID,buffer.readResourceLocation());
+        type.fluid = FluidTags.create(buffer.readResourceLocation());
         type.speed = buffer.readFloat();
         type.efficiency = buffer.readFloat();
         type.stress = buffer.readFloat();
@@ -114,7 +107,7 @@ public class FuelType {
             result.stress = stress;
             return this;
         }
-        
+
 
 
         public final Builder addFluids(TagKey<Fluid> tag) {

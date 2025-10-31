@@ -3,7 +3,6 @@ package com.drmangotea.tfmg.content.engines.upgrades;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.engines.engine_controller.EngineControllerBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
-import com.simibubi.create.foundation.utility.CreateLang;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -20,7 +19,6 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 
-import javax.tools.Tool;
 import java.util.List;
 
 public class TransmissionItem extends Item {

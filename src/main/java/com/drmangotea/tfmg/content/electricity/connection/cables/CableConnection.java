@@ -2,14 +2,9 @@ package com.drmangotea.tfmg.content.electricity.connection.cables;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableType;
-import com.drmangotea.tfmg.registry.TFMGItems;
-import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import org.checkerframework.checker.units.qual.C;
 
 public class CableConnection {
 

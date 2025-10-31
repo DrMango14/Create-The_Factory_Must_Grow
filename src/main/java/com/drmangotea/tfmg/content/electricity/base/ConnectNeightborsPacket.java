@@ -2,15 +2,10 @@ package com.drmangotea.tfmg.content.electricity.base;
 
 
 import com.drmangotea.tfmg.registry.TFMGPackets;
-import com.simibubi.create.content.logistics.tunnel.TunnelFlapPacket;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.networking.BlockEntityDataPacket;
 import io.netty.buffer.ByteBuf;
-import net.createmod.catnip.codecs.stream.CatnipStreamCodecBuilders;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
 public class ConnectNeightborsPacket extends BlockEntityDataPacket<SmartBlockEntity> {

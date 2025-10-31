@@ -1,10 +1,8 @@
 package com.drmangotea.tfmg.content.engines.engine_controller;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.engines.engine_controller.packets.*;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGKeys;
-import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.simibubi.create.*;
 import com.simibubi.create.content.redstone.link.LinkBehaviour;

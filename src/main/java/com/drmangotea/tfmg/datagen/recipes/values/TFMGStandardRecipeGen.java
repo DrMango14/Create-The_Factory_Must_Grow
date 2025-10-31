@@ -15,7 +15,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.decoration.palettes.AllPaletteBlocks;
-import com.simibubi.create.foundation.data.recipe.CompatMetals;
+import com.simibubi.create.foundation.data.recipe.CommonMetal;
 import com.simibubi.create.foundation.data.recipe.Mods;
 import com.simibubi.create.foundation.mixin.accessor.MappedRegistryAccessor;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -61,7 +61,6 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.brassPipe;
 
 
 public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
@@ -2425,8 +2424,8 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                 .inBlastFurnace();
     }
 
-    TFMGRecipeProvider.GeneratedRecipe blastModdedCrushedMetal(ItemEntry<? extends Item> ingredient, CompatMetals metal) {
-        for (Mods mod : metal.getMods()) {
+    TFMGRecipeProvider.GeneratedRecipe blastModdedCrushedMetal(ItemEntry<? extends Item> ingredient, CommonMetal metal) {
+        for (Mods mod : metal.mods) {
             String metalName = metal.getName(mod);
             ResourceLocation ingot = mod.ingotOf(metalName);
             String modId = mod.getId();

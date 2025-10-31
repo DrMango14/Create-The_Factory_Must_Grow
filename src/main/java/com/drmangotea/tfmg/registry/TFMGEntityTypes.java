@@ -13,7 +13,6 @@ import com.drmangotea.tfmg.content.items.weapons.explosives.pipe_bomb.PipeBombRe
 import com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades.ThermiteGrenade;
 import com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades.ThermiteGrenadeRenderer;
 import com.simibubi.create.foundation.data.CreateEntityBuilder;
-import com.simibubi.create.foundation.utility.CreateLang;
 import com.tterrag.registrate.util.entry.EntityEntry;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;

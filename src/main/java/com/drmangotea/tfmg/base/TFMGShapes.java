@@ -3,7 +3,6 @@ package com.drmangotea.tfmg.base;
 
 import net.createmod.catnip.math.VoxelShaper;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Direction.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;

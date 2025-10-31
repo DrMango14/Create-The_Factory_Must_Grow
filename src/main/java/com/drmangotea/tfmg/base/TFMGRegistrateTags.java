@@ -9,6 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 
 public class TFMGRegistrateTags {
     private static final TFMGRegistrate REGISTRATE = TFMG.registrate();
@@ -22,7 +23,7 @@ public class TFMGRegistrateTags {
     private static void genItemTags(RegistrateTagsProvider<Item> provIn) {
         TagGen.CreateTagsProvider<Item> prov = new TagGen.CreateTagsProvider<>(provIn, Item::builtInRegistryHolder);
 
-        prov.tag(TFMGTags.TFMGItemTags.RODS.tag)
+        prov.tag(Tags.Items.RODS)
                 .add(Items.STICK);
 
         for (TFMGTags.TFMGItemTags tag : TFMGTags.TFMGItemTags.values()) {

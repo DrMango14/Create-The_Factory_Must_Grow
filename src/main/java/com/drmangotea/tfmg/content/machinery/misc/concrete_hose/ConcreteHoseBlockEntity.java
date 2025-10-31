@@ -1,20 +1,14 @@
 package com.drmangotea.tfmg.content.machinery.misc.concrete_hose;
 
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
-import com.simibubi.create.AllBlockEntityTypes;
 import com.simibubi.create.content.fluids.hosePulley.HosePulleyBlock;
-import com.simibubi.create.content.fluids.hosePulley.HosePulleyFluidHandler;
-import com.simibubi.create.content.fluids.transfer.FluidDrainingBehaviour;
-import com.simibubi.create.content.fluids.transfer.FluidFillingBehaviour;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.item.TooltipHelper;
 import com.simibubi.create.foundation.utility.ServerSpeedProvider;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;

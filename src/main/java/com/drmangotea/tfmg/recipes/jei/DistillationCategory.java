@@ -3,13 +3,12 @@ package com.drmangotea.tfmg.recipes.jei;
 import com.drmangotea.tfmg.recipes.DistillationRecipe;
 import com.drmangotea.tfmg.registry.TFMGGuiTextures;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
-import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.gui.GuiGraphics;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -23,7 +22,7 @@ public class DistillationCategory extends CreateRecipeCategory<DistillationRecip
 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, DistillationRecipe recipe, IFocusGroup focuses) {
-		FluidIngredient fluidIngredient=recipe.getInputFluid();
+		SizedFluidIngredient fluidIngredient=recipe.getInputFluid();
 
 		int outputCount = recipe.getOutputCount(recipe);
 		int yModifier = 60 -(outputCount*10);

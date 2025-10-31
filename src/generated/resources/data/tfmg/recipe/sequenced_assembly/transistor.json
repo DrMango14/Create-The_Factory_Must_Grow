@@ -3,7 +3,6 @@
   "ingredient": {
     "item": "tfmg:plastic_sheet"
   },
-  "loops": 1,
   "results": [
     {
       "chance": 120.0,

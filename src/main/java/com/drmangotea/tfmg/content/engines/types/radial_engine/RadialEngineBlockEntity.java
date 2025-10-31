@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.engines.types.radial_engine;
 
-import com.drmangotea.tfmg.content.engines.base.AbstractEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.types.regular_engine.RegularEngineBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -12,7 +11,6 @@ import net.minecraft.world.phys.AABB;
 import static com.drmangotea.tfmg.content.engines.base.EngineBlock.ENGINE_STATE;
 import static com.drmangotea.tfmg.content.engines.base.EngineBlock.EngineState.*;
 import static com.drmangotea.tfmg.content.engines.base.EngineBlock.SHAFT_FACING;
-import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING;
 
 public class RadialEngineBlockEntity extends RegularEngineBlockEntity {
 

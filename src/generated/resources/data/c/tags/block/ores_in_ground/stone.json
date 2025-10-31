@@ -2,6 +2,9 @@
   "values": [
     "tfmg:lead_ore",
     "tfmg:nickel_ore",
+    "tfmg:lithium_ore",
+    "tfmg:lead_ore",
+    "tfmg:nickel_ore",
     "tfmg:lithium_ore"
   ]
 }

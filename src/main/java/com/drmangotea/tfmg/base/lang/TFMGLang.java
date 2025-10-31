@@ -1,8 +1,6 @@
 package com.drmangotea.tfmg.base.lang;
 
 import com.drmangotea.tfmg.TFMG;
-import com.simibubi.create.Create;
-import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.lang.Lang;
 import net.createmod.catnip.lang.LangBuilder;
 import net.createmod.catnip.lang.LangNumberFormat;

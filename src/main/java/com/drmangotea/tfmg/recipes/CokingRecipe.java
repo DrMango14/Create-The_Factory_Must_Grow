@@ -1,14 +1,12 @@
 package com.drmangotea.tfmg.recipes;
 
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 
 
 public class CokingRecipe extends StandardProcessingRecipe<RecipeInput> {

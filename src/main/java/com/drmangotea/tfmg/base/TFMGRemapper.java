@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public class TFMGRemapper {
     /**
      * @see String The old name of the block/item (String)

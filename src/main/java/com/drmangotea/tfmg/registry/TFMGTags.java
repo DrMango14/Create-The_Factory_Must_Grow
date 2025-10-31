@@ -4,7 +4,6 @@ package com.drmangotea.tfmg.registry;
 import com.drmangotea.tfmg.TFMG;
 
 import com.drmangotea.tfmg.base.lang.TFMGLang;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.material.FluidState;
 
 import static com.drmangotea.tfmg.registry.TFMGTags.NameSpace.COMMON;
 import static com.drmangotea.tfmg.registry.TFMGTags.NameSpace.MOD;
-import static com.simibubi.create.AllTags.optionalTag;
 
 
 public class TFMGTags {
@@ -29,36 +27,41 @@ public class TFMGTags {
 
     public enum NameSpace {
 
-        MOD(TFMG.MOD_ID, false, true),
+        MOD(TFMG.MOD_ID, true),
         COMMON("c")
         ;
 
         public final String id;
-        public final boolean optionalDefault;
         public final boolean alwaysDatagenDefault;
 
         NameSpace(String id) {
-            this(id, true, false);
+            this(id, false);
         }
 
-        NameSpace(String id, boolean optionalDefault, boolean alwaysDatagenDefault) {
+        NameSpace(String id, boolean alwaysDatagenDefault) {
             this.id = id;
-            this.optionalDefault = optionalDefault;
             this.alwaysDatagenDefault = alwaysDatagenDefault;
         }
     }
 
     public enum TFMGBlockTags {
-        BLAST_FURNACE_WALL,
-        REINFORCED_BLAST_FURNACE_WALL,
         BLAST_FURNACE_SUPPORT,
+        BLAST_FURNACE_WALL,
         INDUSTRIAL_PIPE,
-        REINFORCED_BLAST_FURNACE_SUPPORT,
-        SURFACE_SCANNER_FINDABLE,
-        PUMPJACK_PART,
-        PUMPJACK_HEAD,
+        ORES_LITHIUM(COMMON, "ores/lithium"),
         PUMPJACK_CONNECTOR,
-        PUMPJACK_SMALL_PART
+        PUMPJACK_HEAD,
+        PUMPJACK_PART,
+        PUMPJACK_SMALL_PART,
+        RAW_LITHIUM(COMMON, "raw_materials/lithium"),
+        REINFORCED_BLAST_FURNACE_SUPPORT,
+        REINFORCED_BLAST_FURNACE_WALL,
+        STORAGE_BLOCKS_CAST_IRON(COMMON, "storage_blocks/cast_iron"),
+        STORAGE_BLOCKS_COAL_COKE(COMMON, "storage_blocks/coal_coke"),
+        STORAGE_BLOCKS_LITHIUM(COMMON, "storage_blocks/lithium"),
+        STORAGE_BLOCKS_PLASTIC(COMMON, "storage_blocks/plastic"),
+        STORAGE_BLOCKS_RAW_LITHIUM(COMMON, "storage_blocks/raw_lithium"),
+        SURFACE_SCANNER_FINDABLE,
         ;
 
         public final TagKey<Block> tag;
@@ -69,20 +72,20 @@ public class TFMGTags {
         }
 
         TFMGBlockTags(NameSpace namespace) {
-            this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+            this(namespace, namespace.alwaysDatagenDefault);
         }
 
-        TFMGBlockTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
-            this(namespace, null, optional, alwaysDatagen);
+        TFMGBlockTags(NameSpace namespace, boolean alwaysDatagen) {
+            this(namespace, null, alwaysDatagen);
         }
 
-        TFMGBlockTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
+        TFMGBlockTags(NameSpace namespace, String path) {
+            this(namespace, path, namespace.alwaysDatagenDefault);
+        }
+
+        TFMGBlockTags(NameSpace namespace, String path, boolean alwaysDatagen) {
             ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? TFMGLang.asId(name()) : path);
-            if (optional) {
-                tag = optionalTag(BuiltInRegistries.BLOCK, id);
-            } else {
-                tag = BlockTags.create(id);
-            }
+            this.tag = BlockTags.create(id);
             this.alwaysDatagen = alwaysDatagen;
         }
 
@@ -104,14 +107,33 @@ public class TFMGTags {
 
     }
     public enum TFMGItemTags {
-
-        FLUX,
-        SPOOLS,
         BLAST_FURNACE_FUEL,
-        RODS,
-        IRON_PLATES(COMMON, "plates/iron"),
-        ALUMINUM_PLATES(COMMON, "plates/aluminum")
-
+        DUSTS_COAL_COKE(COMMON, "dusts/coal_coke"),
+        DUSTS_IRON(COMMON, "dusts/iron"),
+        DUSTS_SALTPETER(COMMON, "dusts/saltpeter"),
+        DUSTS_SULFUR(COMMON, "dusts/sulfur"),
+        FLUX,
+        INGOTS_CAST_IRON(COMMON, "ingots/cast_iron"),
+        INGOTS_LITHIUM(COMMON, "ingots/lithium"),
+        INGOTS_PLASTIC(COMMON, "ingots/plastic"),
+        INGOTS_RUBBER(COMMON, "ingots/rubber"),
+        INGOTS_SILICON(COMMON, "ingots/silicon"),
+        NUGGETS_CAST_IRON(COMMON, "nuggets/cast_iron"),
+        NUGGETS_LITHIUM(COMMON, "nuggets/lithium"),
+        ORES_LITHIUM(COMMON, "ores/lithium"),
+        PLATES_CAST_IRON(COMMON, "plates/cast_iron"),
+        RAW_LITHIUM(COMMON, "raw_materials/lithium"),
+        RODS_STEEL(COMMON, "rots/steel"),
+        SPOOLS,
+        STORAGE_BLOCKS_CAST_IRON(COMMON, "storage_blocks/cast_iron"),
+        STORAGE_BLOCKS_COAL_COKE(COMMON, "storage_blocks/coal_coke"),
+        STORAGE_BLOCKS_LITHIUM(COMMON, "storage_blocks/lithium"),
+        STORAGE_BLOCKS_PLASTIC(COMMON, "storage_blocks/plastic"),
+        STORAGE_BLOCKS_RAW_LITHIUM(COMMON, "storage_blocks/raw_lithium"),
+        WIRES(COMMON),
+        WIRES_ALUMINUM(COMMON, "wires/aluminum"),
+        WIRES_CONSTANTAN(COMMON, "wires/constantan"),
+        WIRES_COPPER(COMMON, "wires/copper"),
         ;
 
         public final TagKey<Item> tag;
@@ -122,24 +144,20 @@ public class TFMGTags {
         }
 
         TFMGItemTags(NameSpace namespace) {
-            this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+            this(namespace, namespace.alwaysDatagenDefault);
         }
 
         TFMGItemTags(NameSpace namespace, String path) {
-            this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+            this(namespace, path, namespace.alwaysDatagenDefault);
         }
 
-        TFMGItemTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
-            this(namespace, null, optional, alwaysDatagen);
+        TFMGItemTags(NameSpace namespace, boolean alwaysDatagen) {
+            this(namespace, null, alwaysDatagen);
         }
 
-        TFMGItemTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
+        TFMGItemTags(NameSpace namespace, String path, boolean alwaysDatagen) {
             ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? TFMGLang.asId(name()) : path);
-            if (optional) {
-                tag = optionalTag(BuiltInRegistries.ITEM, id);
-            } else {
-                tag = ItemTags.create(id);
-            }
+            this.tag = ItemTags.create(id);
             this.alwaysDatagen = alwaysDatagen;
         }
 
@@ -188,21 +206,17 @@ public class TFMGTags {
 
 
         TFMGFluidTags(NameSpace namespace) {
-            this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+            this(namespace, namespace.alwaysDatagenDefault);
         }
 
 
-        TFMGFluidTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
-            this(namespace, null, optional, alwaysDatagen);
+        TFMGFluidTags(NameSpace namespace, boolean alwaysDatagen) {
+            this(namespace, null, alwaysDatagen);
         }
 
-        TFMGFluidTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
+        TFMGFluidTags(NameSpace namespace, String path, boolean alwaysDatagen) {
             ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? TFMGLang.asId(name()) : path);
-            if (optional) {
-                tag = optionalTag(BuiltInRegistries.FLUID, id);
-            } else {
-                tag = FluidTags.create(id);
-            }
+            this.tag = FluidTags.create(id);
             this.alwaysDatagen = alwaysDatagen;
         }
 

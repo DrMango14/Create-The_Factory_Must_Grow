@@ -1,54 +1,19 @@
 package com.drmangotea.tfmg.registry;
 
-import java.util.List;
-import java.util.UUID;
 import java.util.function.UnaryOperator;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.items.weapons.flamethrover.FlamethrowerFuel;
-import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.ApiStatus.Internal;
 
 import com.mojang.serialization.Codec;
-import com.simibubi.create.content.equipment.clipboard.ClipboardEntry;
-import com.simibubi.create.content.equipment.clipboard.ClipboardOverrides.ClipboardType;
-import com.simibubi.create.content.equipment.sandPaper.SandPaperItemComponent;
-import com.simibubi.create.content.equipment.symmetryWand.mirror.SymmetryMirror;
-import com.simibubi.create.content.equipment.zapper.PlacementPatterns;
-import com.simibubi.create.content.equipment.zapper.terrainzapper.PlacementOptions;
-import com.simibubi.create.content.equipment.zapper.terrainzapper.TerrainBrushes;
-import com.simibubi.create.content.equipment.zapper.terrainzapper.TerrainTools;
-import com.simibubi.create.content.fluids.potion.PotionFluid.BottleType;
-import com.simibubi.create.content.logistics.box.PackageItem.PackageOrderData;
-import com.simibubi.create.content.logistics.filter.AttributeFilterWhitelistMode;
-import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute.ItemAttributeEntry;
-import com.simibubi.create.content.logistics.redstoneRequester.AutoRequestData;
-import com.simibubi.create.content.logistics.stockTicker.PackageOrderWithCrafts;
-import com.simibubi.create.content.logistics.tableCloth.ShoppingListItem.ShoppingList;
-import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe.SequencedAssembly;
-import com.simibubi.create.content.redstone.displayLink.ClickToLinkBlockItem.ClickToLinkData;
-import com.simibubi.create.content.schematics.cannon.SchematicannonBlockEntity.SchematicannonOptions;
-import com.simibubi.create.content.trains.track.BezierTrackPointLocation;
-import com.simibubi.create.content.trains.track.TrackPlacement.ConnectingFrom;
 
-import net.createmod.catnip.codecs.stream.CatnipStreamCodecBuilders;
-import net.createmod.catnip.codecs.stream.CatnipStreamCodecs;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.UUIDUtil;
-import net.minecraft.core.Vec3i;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponentType.Builder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ExtraCodecs;
-import net.minecraft.util.Unit;
-import net.minecraft.world.item.component.ItemContainerContents;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 

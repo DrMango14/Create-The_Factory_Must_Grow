@@ -10,22 +10,15 @@ import com.simibubi.create.content.fluids.VirtualFluid;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.VirtualFluidBuilder;
 import com.simibubi.create.foundation.item.TooltipModifier;
-import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
 import static com.drmangotea.tfmg.registry.TFMGFluids.getGasTexture;
-import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 
 public class TFMGRegistrate extends CreateRegistrate {
     protected TFMGRegistrate(String modid) {

@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.base.spark;
 
-import com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades.fire.BlueFireBlock;
 import com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades.fire.GreenFireBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;

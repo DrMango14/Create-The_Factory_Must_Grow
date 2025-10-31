@@ -80,7 +80,7 @@ public class TFMGCommonEvents {
     public static void addReloadListeners(AddReloadListenerEvent event) {
         event.addListener(EngineFuelTypeManager.ReloadListener.INSTANCE);
     }
-    @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+    @EventBusSubscriber
     public static class ModBusEvents {
         @net.neoforged.bus.api.SubscribeEvent
         public static void registerCapabilities(RegisterCapabilitiesEvent event) {

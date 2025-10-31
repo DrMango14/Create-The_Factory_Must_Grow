@@ -1,8 +1,6 @@
 package com.drmangotea.tfmg.content.engines.types.regular_engine;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
-import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
@@ -13,7 +11,6 @@ import com.drmangotea.tfmg.registry.TFMGSoundEvents;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.foundation.item.SmartInventory;
-import com.simibubi.create.foundation.utility.CreateLang;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,6 +19,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -95,7 +93,7 @@ public class RegularEngineBlockEntity extends AbstractSmallEngineBlockEntity {
 
             String id = fuelsToAllow.getString(key);
 
-            TagKey<Fluid> tag = optionalTag(BuiltInRegistries.FLUID, ResourceLocation.fromNamespaceAndPath("c",id.replace("c:","")));
+            TagKey<Fluid> tag = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c",id.replace("c:","")));
 
             fuelsFound.add(tag);
         }

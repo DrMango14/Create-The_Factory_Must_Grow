@@ -5,7 +5,7 @@
       "item": "tfmg:asphalt_mixture"
     },
     {
-      "type": "fluid_stack",
+      "type": "neoforge:single",
       "amount": 250,
       "fluid": "minecraft:water"
     }

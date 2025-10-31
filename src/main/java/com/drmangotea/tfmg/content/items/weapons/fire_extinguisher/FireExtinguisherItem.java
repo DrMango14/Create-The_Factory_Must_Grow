@@ -1,12 +1,10 @@
 package com.drmangotea.tfmg.content.items.weapons.fire_extinguisher;
 
-import com.drmangotea.tfmg.TFMGClient;
 import com.drmangotea.tfmg.base.spark.DryIceFlake;
 import com.drmangotea.tfmg.registry.TFMGEntityTypes;
 import com.simibubi.create.foundation.item.CustomArmPoseItem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;

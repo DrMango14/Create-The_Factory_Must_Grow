@@ -1,8 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.utilities.polarizer;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
-import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
@@ -13,7 +11,6 @@ import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
 import com.simibubi.create.foundation.item.SmartInventory;
 
-import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -29,8 +26,6 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -143,7 +138,7 @@ public class PolarizerBlockEntity extends ElectricBlockEntity implements IHaveGo
     }
 
     public void performRecipe(PolarizingRecipe recipe) {
-        ItemStack stack = recipe.getRollableResults().get(0).rollOutput();
+        ItemStack stack = recipe.getRollableResults().get(0).rollOutput(level.random);
         inventory.setStackInSlot(0, stack);
         TFMGUtils.spawnElectricParticles(level, getBlockPos());
         capacitorPercentage = 0;

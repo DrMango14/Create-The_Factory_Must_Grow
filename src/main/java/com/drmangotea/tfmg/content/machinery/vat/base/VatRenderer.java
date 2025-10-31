@@ -2,18 +2,13 @@ package com.drmangotea.tfmg.content.machinery.vat.base;
 
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
-import com.simibubi.create.foundation.fluid.FluidRenderer;
-import com.simibubi.create.foundation.fluid.SmartFluidTank;
-import net.createmod.catnip.animation.LerpedFloat;
 import net.createmod.catnip.platform.NeoForgeCatnipServices;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.util.Mth;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 
 public class VatRenderer extends SafeBlockEntityRenderer<VatBlockEntity> {

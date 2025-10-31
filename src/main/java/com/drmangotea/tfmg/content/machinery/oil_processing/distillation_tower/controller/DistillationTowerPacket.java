@@ -2,9 +2,7 @@ package com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.
 
 
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlock;
-import com.drmangotea.tfmg.content.machinery.metallurgy.coke_oven.CokeOvenBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGPackets;
-import com.simibubi.create.compat.computercraft.AttachedComputerPacket;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.networking.BlockEntityDataPacket;
 import io.netty.buffer.ByteBuf;

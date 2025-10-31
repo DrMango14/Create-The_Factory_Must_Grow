@@ -1,15 +1,5 @@
 package com.drmangotea.tfmg.base.fluid;
 
-import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.registry.TFMGBlocks;
-import com.simibubi.create.content.decoration.palettes.AllPaletteBlocks;
-import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
-import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.fluids.FluidInteractionRegistry;
-
-
-import static com.drmangotea.tfmg.registry.TFMGFluids.*;
-
 public class TFMGFluidInteractions {
     public static void registerFluidInteractions() {
       //  FluidInteractionRegistry.addInteraction(ForgeMod.LAVA_TYPE.get(), new FluidInteractionRegistry.InteractionInformation(

@@ -15,7 +15,7 @@
       "item": "tfmg:industrial_pipe"
     },
     "S": {
-      "tag": "c:string"
+      "tag": "c:strings"
     },
     "T": {
       "item": "tfmg:steel_fluid_tank"

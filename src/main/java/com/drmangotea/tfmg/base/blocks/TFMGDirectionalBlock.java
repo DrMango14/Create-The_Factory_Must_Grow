@@ -1,13 +1,11 @@
 package com.drmangotea.tfmg.base.blocks;
 
-import com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorBlock;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import org.checkerframework.checker.units.qual.C;
 
 public class TFMGDirectionalBlock extends DirectionalBlock {
 

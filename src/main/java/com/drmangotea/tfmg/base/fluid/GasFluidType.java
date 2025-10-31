@@ -4,7 +4,6 @@ package com.drmangotea.tfmg.base.fluid;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.simibubi.create.AllFluids;
 import com.tterrag.registrate.builders.FluidBuilder;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -19,7 +18,6 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 import static com.drmangotea.tfmg.registry.TFMGFluids.getGasTexture;
 

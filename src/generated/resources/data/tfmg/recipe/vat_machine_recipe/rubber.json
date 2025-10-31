@@ -10,7 +10,7 @@
       "item": "tfmg:sulfur_dust"
     },
     {
-      "type": "fluid_stack",
+      "type": "neoforge:single",
       "amount": 250,
       "fluid": "tfmg:heavy_oil"
     }

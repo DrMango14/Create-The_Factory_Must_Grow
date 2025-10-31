@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.base.spark;
 
-import com.drmangotea.tfmg.TFMG;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;

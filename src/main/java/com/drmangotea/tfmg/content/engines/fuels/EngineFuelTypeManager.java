@@ -1,15 +1,11 @@
 package com.drmangotea.tfmg.content.engines.fuels;
 
 import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.tags.TagKey;
@@ -21,7 +17,6 @@ import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 public class EngineFuelTypeManager {
     public static final Map<ResourceLocation, FuelType> BUILTIN_TYPE_MAP = new HashMap<>();

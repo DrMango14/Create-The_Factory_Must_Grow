@@ -2,7 +2,6 @@ package com.drmangotea.tfmg.config;
 
 import com.drmangotea.tfmg.content.electricity.connection.cable_type.ResistivityValues;
 import com.simibubi.create.api.stress.BlockStressValues;
-import com.simibubi.create.infrastructure.config.CCommon;
 
 import net.createmod.catnip.config.ConfigBase;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -18,7 +17,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public class TFMGConfigs {
 
 	private static final Map<ModConfig.Type, ConfigBase> CONFIGS = new EnumMap<>(ModConfig.Type.class);

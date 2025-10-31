@@ -79,7 +79,7 @@
           "item": "tfmg:unfinished_potentiometer"
         },
         {
-          "type": "fluid_stack",
+          "type": "neoforge:single",
           "amount": 50,
           "fluid": "tfmg:lubrication_oil"
         }

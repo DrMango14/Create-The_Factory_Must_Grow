@@ -1,30 +1,14 @@
 package com.drmangotea.tfmg.base;
 
 import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.registry.TFMGItems;
-import com.simibubi.create.AllSoundEvents;
-import com.simibubi.create.AllTags;
-import com.simibubi.create.Create;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.sounds.SoundEvent;
+import com.simibubi.create.foundation.data.recipe.CommonMetal;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.LazyLoadedValue;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.common.SimpleTier;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.registries.DeferredRegister;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.EnumMap;
-import java.util.List;
 import java.util.function.Supplier;
 
 public enum TFMGTiers implements Tier {
@@ -33,9 +17,9 @@ public enum TFMGTiers implements Tier {
 
 
 
-    STEEL(TFMG.asResource("steel").toString(),1000, 7.5f, 3f, 12,()-> Ingredient.of(AllTags.commonItemTag("ingots/steel"))),
-    ALUMINUM(TFMG.asResource("aluminum").toString(),220, 6, 2f, 22,()-> Ingredient.of(AllTags.commonItemTag("ingots/aluminum"))),
-    LEAD(TFMG.asResource("lead").toString(),32, 2, 0.5f, 5,()-> Ingredient.of(AllTags.commonItemTag("ingots/lead")));
+    STEEL(TFMG.asResource("steel").toString(),1000, 7.5f, 3f, 12,()-> Ingredient.of(CommonMetal.STEEL.ingots)),
+    ALUMINUM(TFMG.asResource("aluminum").toString(),220, 6, 2f, 22,()-> Ingredient.of(CommonMetal.ALUMINUM.ingots)),
+    LEAD(TFMG.asResource("lead").toString(),32, 2, 0.5f, 5,()-> Ingredient.of(CommonMetal.LEAD.ingots));
 
 
     public final String name;

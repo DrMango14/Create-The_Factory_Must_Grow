@@ -5,7 +5,7 @@
       "item": "minecraft:bucket"
     },
     {
-      "type": "fluid_stack",
+      "type": "neoforge:single",
       "amount": 1000,
       "fluid": "tfmg:hydrogen"
     }

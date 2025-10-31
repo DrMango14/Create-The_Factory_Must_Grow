@@ -3,7 +3,6 @@
   "ingredient": {
     "tag": "c:ingots/steel"
   },
-  "loops": 1,
   "results": [
     {
       "id": "tfmg:heavy_plate"

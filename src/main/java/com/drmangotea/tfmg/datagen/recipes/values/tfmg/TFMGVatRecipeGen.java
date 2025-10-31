@@ -4,17 +4,15 @@ package com.drmangotea.tfmg.datagen.recipes.values.tfmg;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.datagen.recipes.builder.VatRecipeGen;
 import com.drmangotea.tfmg.recipes.VatMachineRecipe;
-import com.drmangotea.tfmg.recipes.VatRecipeParams;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.drmangotea.tfmg.registry.TFMGItems;
-import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.drmangotea.tfmg.registry.TFMGTags;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
-import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +52,7 @@ public class TFMGVatRecipeGen extends VatRecipeGen {
                             .duration(10)
                     .values(centrifuge())),
             SULFURIC_ACID = create("sulfuric_acid", b -> ((VatMachineRecipe.Builder<VatMachineRecipe>) b)
-                    .require(water(), 1000)
+                    .require(SizedFluidIngredient.of(water(), 1000))
                     .require(sulfurDust())
                     .require(sulfurDust())
                     .require(sulfurDust())
@@ -63,26 +61,26 @@ public class TFMGVatRecipeGen extends VatRecipeGen {
                     .values(mixing())),
 
             RUBBER = create("rubber", b -> ((VatMachineRecipe.Builder<VatMachineRecipe>) b)
-                            .require(heavyOil(), 250)
+                            .require(SizedFluidIngredient.of(heavyOil(), 250))
                             .require(sulfurDust())
                             .output(rubber())
                             .requiresHeat(HeatCondition.HEATED)
                     .values(mixing())),
 
             NAPHTHA = create("naphtha", b -> ((VatMachineRecipe.Builder<VatMachineRecipe>) b)
-                            .require(naphtha(), 500)
+                            .require(SizedFluidIngredient.of(naphtha(), 500))
                             .output(ethylene(), 250)
                             .output(propylene(), 250)
                             .requiresHeat(HeatCondition.HEATED)
                     .values(mixing())),
 
             PLASTIC_FROM_ETHYLENE = create("plastic_from_ethylene", b -> ((VatMachineRecipe.Builder<VatMachineRecipe>) b)
-                            .require(ethylene(), 500)
+                            .require(SizedFluidIngredient.of(ethylene(), 500))
                             .output(liquidPlastic(), 500)
                             .requiresHeat(HeatCondition.HEATED)
                     .values(mixing())),
             PLASTIC_FROM_PROPYLENE = create("plastic_from_propylene", b -> ((VatMachineRecipe.Builder<VatMachineRecipe>) b)
-                            .require(propylene(), 500)
+                            .require(SizedFluidIngredient.of(propylene(), 500))
                             .output(liquidPlastic(), 500)
                             .requiresHeat(HeatCondition.HEATED)
                     .values(mixing())),

@@ -10,14 +10,13 @@ import com.simibubi.create.api.data.recipe.SequencedAssemblyRecipeGen;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
-import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.function.UnaryOperator;
 
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.lubricationOil;
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
@@ -35,7 +34,7 @@ public class TFMGSequencedAssemblyRecipeGen extends SequencedAssemblyRecipeGen {
             .addStep(WindingRecipe::new, rb -> rb.require(TFMGItems.CONSTANTAN_SPOOL.get()).duration(100))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGBlocks.STEEL_COGWHEEL))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.COPPER_WIRE))
-            .addStep(FillingRecipe::new, rb -> rb.require(lubricationOil(), 50))),
+            .addStep(FillingRecipe::new, rb -> rb.require(SizedFluidIngredient.of(lubricationOil(), 50)))),
 
     GENERATOR = create("generator", b -> b.require(shaft())
             .transitionTo(TFMGItems.UNFINISHED_GENERATOR.get())

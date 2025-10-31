@@ -8,6 +8,7 @@ import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -67,19 +68,19 @@ public class TFMGMixingRecipeGen extends MixingRecipeGen {
 	),
 
 	COPPER_SULFATE = create("copper_sulfate", b -> b
-			.require(sulfuricAcid(),500)
+			.require(SizedFluidIngredient.of(sulfuricAcid(),500))
 			.require(copperIngot())
 			.output(copperSulfate())
 	),
 
 	LIQUID_CONCRETE = create("liquid_concrete", b -> b
-			.require(water(),250)
+			.require(SizedFluidIngredient.of(water(),250))
 			.require(concreteMixture())
 			.output(liquidConcrete(),1000)
 	),
 
 	LIQUID_ASPHALT = create("liquid_asphalt", b -> b
-			.require(water(),250)
+			.require(SizedFluidIngredient.of(water(),250))
 			.require(asphaltMixture())
 			.output(liquidAsphalt(),1000)
 	),
@@ -107,14 +108,14 @@ public class TFMGMixingRecipeGen extends MixingRecipeGen {
 	),
 
 	NAPALM = create("napalm", b -> b
-			.require(gasoline(),1000)
+			.require(SizedFluidIngredient.of(gasoline(),1000))
 			.require(aluminumIngot())
 				.output(napalm(),250)
 	),
 
 	COOLING_FLUID = create("cooling_fluid", b -> b
-			.require(water(),250)
-			.require(ethylene(),1000)
+			.require(SizedFluidIngredient.of(water(),250))
+			.require(SizedFluidIngredient.of(ethylene(),1000))
 			.output(coolingFluid(),250)
 	),
 

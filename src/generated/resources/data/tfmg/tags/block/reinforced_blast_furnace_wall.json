@@ -2,6 +2,9 @@
   "values": [
     "tfmg:blast_furnace_hatch",
     "tfmg:reinforced_fireproof_bricks",
+    "tfmg:blast_furnace_hatch",
+    "tfmg:reinforced_fireproof_bricks",
+    "tfmg:steel_block",
     "tfmg:steel_block"
   ]
 }

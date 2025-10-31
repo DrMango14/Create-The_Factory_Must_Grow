@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.measurement;
 
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

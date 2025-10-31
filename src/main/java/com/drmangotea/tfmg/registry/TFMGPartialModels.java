@@ -6,7 +6,6 @@ import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipes;
 import com.simibubi.create.content.fluids.FluidTransportBehaviour;
 
-import com.simibubi.create.foundation.utility.CreateLang;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.data.Couple;
 import net.createmod.catnip.data.Iterate;

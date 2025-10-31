@@ -1,17 +1,10 @@
 package com.drmangotea.tfmg.ponder;
 
-import com.drmangotea.tfmg.content.engines.base.EngineBlock;
 import com.drmangotea.tfmg.content.engines.types.regular_engine.RegularEngineBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGItems;
-import com.simibubi.create.content.fluids.pump.PumpBlockEntity;
-import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import com.simibubi.create.content.kinetics.gauge.SpeedGaugeBlockEntity;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import net.createmod.ponder.api.scene.SceneBuilder;
-import net.createmod.ponder.api.scene.Selection;
 import net.minecraft.core.BlockPos;
-
-import java.util.function.UnaryOperator;
 
 public class TFMGSceneBuilder extends CreateSceneBuilder {
 

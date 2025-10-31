@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.recipes;
 
-import com.drmangotea.tfmg.TFMG;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

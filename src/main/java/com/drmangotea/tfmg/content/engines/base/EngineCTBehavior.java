@@ -9,8 +9,6 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING;
-
 public class EngineCTBehavior extends ConnectedTextureBehaviour.Base {
 
     protected CTSpriteShiftEntry topShift;
