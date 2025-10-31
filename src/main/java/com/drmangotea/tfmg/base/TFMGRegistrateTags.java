@@ -25,26 +25,14 @@ public class TFMGRegistrateTags {
 
         prov.tag(Tags.Items.RODS)
                 .add(Items.STICK);
-
-        for (TFMGTags.TFMGItemTags tag : TFMGTags.TFMGItemTags.values()) {
-            if (tag.alwaysDatagen) {
-                prov.getOrCreateRawBuilder(tag.tag);
-            }
-        }
     }
     private static void genBlockTags(RegistrateTagsProvider<Block> provIn) {
         TagGen.CreateTagsProvider<Block> prov = new TagGen.CreateTagsProvider<>(provIn, Block::builtInRegistryHolder);
 
-
         prov.tag(TFMGTags.TFMGBlockTags.PUMPJACK_HEAD.tag)
                 .add(Blocks.IRON_BLOCK);
+
         prov.tag(TFMGTags.TFMGBlockTags.PUMPJACK_PART.tag)
                 .addTag(TFMGTags.TFMGBlockTags.PUMPJACK_SMALL_PART.tag);
-
-        for (TFMGTags.TFMGBlockTags tag : TFMGTags.TFMGBlockTags.values()) {
-            if (tag.alwaysDatagen) {
-                prov.getOrCreateRawBuilder(tag.tag);
-            }
-        }
     }
 }
