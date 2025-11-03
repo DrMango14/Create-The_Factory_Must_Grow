@@ -409,18 +409,20 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         handleRecipe();
 
         if (isController()) {
-            for (BlockPos machinePos : machineMap.keySet()) {
+            Iterator<BlockPos> iter = machineMap.keySet().iterator();
+            while (iter.hasNext()) {
+                BlockPos machinePos = iter.next();
                 BlockEntity blockEntity = level.getBlockEntity(machinePos);
                 if (blockEntity != null) {
                     if (blockEntity instanceof IVatMachine vatMachine) {
                         boolean operational = vatMachine.canOperate(this);
                         operationalMachinesMap.put(machinePos, operational);
                     } else {
-                        machineMap.remove(machinePos);
+                        iter.remove();
                         operationalMachinesMap.remove(machinePos);
                     }
                 } else {
-                    machineMap.remove(machinePos);
+                    iter.remove();
                     operationalMachinesMap.remove(machinePos);
                 }
             }
