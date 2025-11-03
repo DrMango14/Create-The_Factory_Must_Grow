@@ -14,6 +14,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -79,13 +80,17 @@ public class BlastFurnaceHatchBlockEntity extends SmartBlockEntity implements IH
     public void dropItems(){
 
         if(level.getBlockState(getBlockPos().below()).isAir()){
-            Vec3 dropVec = VecHelper.getCenterOf(worldPosition)
-                    .add(0, -12 / 16f, 0);
-            ItemEntity dropped = new ItemEntity(level, dropVec.x, dropVec.y, dropVec.z, inventory.getItem(0).copy());
-            dropped.setDefaultPickUpDelay();
-            dropped.setDeltaMovement(0, -.25f, 0);
-            level.addFreshEntity(dropped);
-            inventory.setStackInSlot(0, ItemStack.EMPTY);
+            if (inventory.getItem(0).getItem() == Items.AIR){
+                return;
+            } else {
+                Vec3 dropVec = VecHelper.getCenterOf(worldPosition)
+                        .add(0, -12 / 16f, 0);
+                ItemEntity dropped = new ItemEntity(level, dropVec.x, dropVec.y, dropVec.z, inventory.getItem(0).copy());
+                dropped.setDefaultPickUpDelay();
+                dropped.setDeltaMovement(0, -.25f, 0);
+                level.addFreshEntity(dropped);
+                inventory.setStackInSlot(0, ItemStack.EMPTY);
+            }
         }
     }
 
