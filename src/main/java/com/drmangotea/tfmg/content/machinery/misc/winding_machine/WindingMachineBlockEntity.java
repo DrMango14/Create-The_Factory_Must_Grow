@@ -1,10 +1,7 @@
 package com.drmangotea.tfmg.content.machinery.misc.winding_machine;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
-import com.drmangotea.tfmg.content.engines.base.AbstractEngineBlockEntity;
-import com.drmangotea.tfmg.recipes.PolarizingRecipe;
 import com.drmangotea.tfmg.recipes.WindingRecipe;
 import com.drmangotea.tfmg.registry.*;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
@@ -16,7 +13,6 @@ import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollVa
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
 
-import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.math.VecHelper;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.ChatFormatting;
@@ -35,8 +31,6 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -208,7 +202,7 @@ public class WindingMachineBlockEntity extends KineticBlockEntity implements IHa
 
 
         if (amountWinded >= recipe.getProcessingDuration()) {
-            inventory.setStackInSlot(0, recipe.rollResults().get(0));
+            inventory.setStackInSlot(0, recipe.rollResults(level.random).get(0));
             recipe = null;
             amountWinded = 0;
 
@@ -225,7 +219,7 @@ public class WindingMachineBlockEntity extends KineticBlockEntity implements IHa
                     amountWinded++;
                 }
             } else {
-                inventory.setStackInSlot(0, recipe.rollResults().get(0));
+                inventory.setStackInSlot(0, recipe.rollResults(level.random).get(0));
                 sendData();
                 setChanged();
             }

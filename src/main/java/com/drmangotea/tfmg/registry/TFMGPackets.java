@@ -14,7 +14,6 @@ import com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon.QuadPotatoCa
 import com.drmangotea.tfmg.content.machinery.metallurgy.coke_oven.CokeOvenPacket;
 import com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.controller.DistillationTowerPacket;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatEvaluationPacket;
-import com.simibubi.create.AllPackets;
 import com.simibubi.create.Create;
 import net.createmod.catnip.net.base.BasePacketPayload;
 import net.createmod.catnip.net.base.CatnipPacketRegistry;

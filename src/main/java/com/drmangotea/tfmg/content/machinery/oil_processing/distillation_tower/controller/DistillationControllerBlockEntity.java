@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.controller;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlock;
@@ -18,18 +17,14 @@ import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.recipe.RecipeConditions;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 
-import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.animation.LerpedFloat;
-import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -116,7 +111,7 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
 
         ///
         float speedModifier = (float) be.activeHeat / 2;
-        if (recipe.getInputFluid().getRequiredAmount() * speedModifier > tank.getFluidAmount())
+        if (recipe.getInputFluid().amount() * speedModifier > tank.getFluidAmount())
             return;
 
         if (recipe.getFluidResults().toArray().length != getOutputs().toArray().length)
@@ -143,7 +138,7 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
                 break;
 
             output.tank.fill(new FluidStack(fluidStack.getFluidHolder(), (int) (fluidStack.getAmount() * speedModifier)), IFluidHandler.FluidAction.EXECUTE);
-            int consumption = (recipe.getInputFluid().getRequiredAmount() / 6);
+            int consumption = (recipe.getInputFluid().amount() / 6);
 
             tank.drain((int) (consumption * speedModifier), IFluidHandler.FluidAction.EXECUTE);
             numero++;
@@ -189,9 +184,9 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
         for (int i = 0; i < list.toArray().length; i++) {
             DistillationRecipe recipe = (DistillationRecipe) list.get(i).value();
             if (recipe.getFluidResults().toArray().length == getOutputs().toArray().length)
-                for (int y = 0; y < recipe.getFluidIngredients().get(0).getMatchingFluidStacks().toArray().length; y++)
-                    if (tank.getFluid().getFluid() == recipe.getFluidIngredients().get(0).getMatchingFluidStacks().get(y).getFluid())
-                        if (tank.getFluidAmount() >= recipe.getFluidIngredients().get(0).getRequiredAmount())
+                for (int y = 0; y < recipe.getFluidIngredients().getFirst().getFluids().length; y++)
+                    if (tank.getFluid().getFluid() == recipe.getFluidIngredients().getFirst().getFluids()[y].getFluid())
+                        if (tank.getFluidAmount() >= recipe.getFluidIngredients().getFirst().amount())
                             return recipe;
         }
         return null;

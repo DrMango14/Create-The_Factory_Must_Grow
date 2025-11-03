@@ -2,7 +2,6 @@ package com.drmangotea.tfmg.content.items.weapons.lithium_blade;
 
 
 import com.drmangotea.tfmg.base.spark.LithiumSpark;
-import com.drmangotea.tfmg.base.spark.Spark;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGEntityTypes;
 import com.drmangotea.tfmg.registry.TFMGItems;

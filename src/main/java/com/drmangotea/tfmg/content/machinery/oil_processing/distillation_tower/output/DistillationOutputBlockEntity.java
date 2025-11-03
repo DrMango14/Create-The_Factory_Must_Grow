@@ -12,7 +12,6 @@ import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOp
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.gui.AllIcons;
 
-import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

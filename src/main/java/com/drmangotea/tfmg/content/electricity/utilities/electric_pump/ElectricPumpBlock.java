@@ -1,11 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.utilities.electric_pump;
 
 import com.drmangotea.tfmg.base.TFMGShapes;
-import com.drmangotea.tfmg.content.electricity.base.ConnectNeightborsPacket;
-import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
-import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.content.fluids.pump.PumpBlock;
 import com.simibubi.create.content.fluids.pump.PumpBlockEntity;
 import com.simibubi.create.foundation.block.IBE;

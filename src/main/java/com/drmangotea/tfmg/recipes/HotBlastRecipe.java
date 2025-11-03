@@ -1,16 +1,11 @@
 package com.drmangotea.tfmg.recipes;
 
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
-import com.google.gson.JsonObject;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 
 public class HotBlastRecipe extends StandardProcessingRecipe<RecipeWrapper> {
@@ -48,10 +43,10 @@ public class HotBlastRecipe extends StandardProcessingRecipe<RecipeWrapper> {
         return getFluidResults().get(1);
     }
 
-    public FluidIngredient getPrimaryIngredient(){
+    public SizedFluidIngredient getPrimaryIngredient(){
         return getFluidIngredients().get(0);
     }
-    public FluidIngredient getSecondaryIngredient(){
+    public SizedFluidIngredient getSecondaryIngredient(){
         return getFluidIngredients().get(1);
     }
 

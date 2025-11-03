@@ -5,7 +5,6 @@ import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
-import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.level.block.state.properties.WallSide;
 

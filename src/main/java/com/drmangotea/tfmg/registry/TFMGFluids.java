@@ -15,12 +15,12 @@ import com.tterrag.registrate.util.nullness.NonNullFunction;
 import net.createmod.catnip.theme.Color;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
-import net.neoforged.neoforge.fluids.FluidStack;
 import org.joml.Vector3f;
 
 import java.util.function.Supplier;
@@ -79,7 +79,7 @@ public class TFMGFluids {
                 .tag(tags)
                 .source(BaseFlowingFluid.Source::new)
                 .bucket()
-                .tag(AllTags.commonItemTag("buckets/" + name))
+                .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "buckets/" + name)))
                 .build()
                 .register();
     }
@@ -97,7 +97,7 @@ public class TFMGFluids {
                 .tag(tags)
                 .source(BaseFlowingFluid.Source::new)
                 .bucket()
-                .tag(AllTags.commonItemTag("buckets/" + name))
+                .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "buckets/" + name)))
                 .build()
                 .register();
     }
@@ -117,7 +117,7 @@ public class TFMGFluids {
                 .tag(TFMGTags.TFMGFluidTags.FUEL.tag, TFMGTags.TFMGFluidTags.FLAMMABLE.tag)
                 .source(BaseFlowingFluid.Source::new)
                 .bucket()
-                .tag(AllTags.commonItemTag("buckets/" + name))
+                .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "buckets/" + name)))
                 .build()
                 .register();
     }
@@ -136,7 +136,7 @@ public class TFMGFluids {
                 .tag(tags)
                 .source(BaseFlowingFluid.Source::new)
                 .bucket()
-                .tag(AllTags.commonItemTag("buckets/" + name))
+                .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "buckets/" + name)))
                 .build()
                 .register();
     }
@@ -155,7 +155,7 @@ public class TFMGFluids {
                 .tag(tags)
                 .source(factory)
                 .bucket()
-                .tag(AllTags.commonItemTag("buckets/" + name))
+                .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "buckets/" + name)))
                 .build()
                 .register();
     }
@@ -169,7 +169,7 @@ public class TFMGFluids {
                 .tag(TFMGTags.TFMGFluidTags.GAS.tag)
                 .bucket()
                 .lang(TFMGUtils.fromId(name) + " Tank")
-                .tag(AllTags.commonItemTag("buckets/" + name))
+                .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "buckets/" + name)))
                 .build()
                 .register();
     }
@@ -184,7 +184,7 @@ public class TFMGFluids {
                 .tag(TFMGTags.TFMGFluidTags.FLAMMABLE.tag)
                 .bucket()
                 .lang(TFMGUtils.fromId(name) + " Tank")
-                .tag(AllTags.commonItemTag("buckets/" + name))
+                .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "buckets/" + name)))
                 .build()
                 .register();
     }

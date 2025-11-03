@@ -14,7 +14,6 @@ import com.simibubi.create.foundation.recipe.RecipeConditions;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -28,13 +27,8 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.function.Supplier;
-
-import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 
 public class CastingBasinBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
@@ -79,7 +73,7 @@ public class CastingBasinBlockEntity extends SmartBlockEntity implements IHaveGo
                 if(recipe.getIngrenient().test(tank.getFluid())) {
                     if (timer >= recipe.getProcessingDuration()) {
                         tank.setFluid(FluidStack.EMPTY);
-                        inventory.setStackInSlot(0, recipe.getRollableResults().get(0).rollOutput());
+                        inventory.setStackInSlot(0, recipe.getRollableResults().get(0).rollOutput(level.random));
                         recipe = null;
                         timer = 0;
                     } else timer++;

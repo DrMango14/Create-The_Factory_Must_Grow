@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.network.transformer;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
@@ -9,12 +8,7 @@ import com.drmangotea.tfmg.content.electricity.base.VoltageAlteringBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGItems;
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllItems;
-import com.simibubi.create.content.decoration.girder.GirderWrenchBehavior;
 import net.createmod.catnip.animation.AnimationTickHolder;
-import net.createmod.catnip.data.Couple;
-import net.createmod.catnip.data.Pair;
 import net.createmod.catnip.math.VecHelper;
 import net.createmod.catnip.placement.IPlacementHelper;
 import net.createmod.catnip.theme.Color;
@@ -32,14 +26,12 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

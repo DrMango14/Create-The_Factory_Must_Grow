@@ -1,17 +1,13 @@
 package com.drmangotea.tfmg.content.engines.engine_controller;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.upgrades.TransmissionUpgrade;
-import com.drmangotea.tfmg.registry.TFMGMenuTypes;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.createmod.catnip.data.Couple;
-import net.createmod.catnip.gui.ScreenOpener;
 import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -19,7 +15,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.Entity;

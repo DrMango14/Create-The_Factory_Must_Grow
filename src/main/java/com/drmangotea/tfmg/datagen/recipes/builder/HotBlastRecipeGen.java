@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.datagen.recipes.builder;
 
-import com.drmangotea.tfmg.recipes.CastingRecipe;
 import com.drmangotea.tfmg.recipes.HotBlastRecipe;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.simibubi.create.api.data.recipe.StandardProcessingRecipeGen;

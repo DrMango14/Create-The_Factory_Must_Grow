@@ -1,20 +1,11 @@
 package com.drmangotea.tfmg.content.machinery.vat.industrial_mixer;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.machinery.vat.base.IVatMachine;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlock;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGItems;
-import com.drmangotea.tfmg.registry.TFMGPartialModels;
-import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import com.simibubi.create.content.kinetics.base.OrientedRotatingVisual;
-import com.simibubi.create.content.kinetics.gantry.GantryShaftBlock;
-import com.simibubi.create.content.kinetics.gantry.GantryShaftBlockEntity;
-import dev.engine_room.flywheel.api.visual.BlockEntityVisual;
-import dev.engine_room.flywheel.api.visualization.VisualizationContext;
-import dev.engine_room.flywheel.lib.model.Models;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

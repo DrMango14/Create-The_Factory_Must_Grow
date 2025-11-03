@@ -3,7 +3,7 @@
   "heat_requirement": "heated",
   "ingredients": [
     {
-      "type": "fluid_stack",
+      "type": "neoforge:single",
       "amount": 1000,
       "fluid": "tfmg:heavy_oil"
     }

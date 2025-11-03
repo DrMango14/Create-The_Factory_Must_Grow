@@ -4,7 +4,6 @@ package com.drmangotea.tfmg.base.palettes;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGCreativeTabs;
 import com.drmangotea.tfmg.registry.TFMGPaletteStoneTypes;
-import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 
 import com.simibubi.create.foundation.utility.CreateLang;

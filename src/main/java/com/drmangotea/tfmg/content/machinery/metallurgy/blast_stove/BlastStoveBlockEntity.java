@@ -37,7 +37,6 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 
@@ -112,8 +111,8 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
                     if ((primaryOutputInventory.isEmpty() || primaryOutputInventory.getFluid().isFluidEqual(recipe.getPrimaryResult())) && (secondaryOutputInventory.isEmpty() || secondaryOutputInventory.getFluid().isFluidEqual(recipe.getSecondaryResult()))) {
 
 
-                        primaryInputInventory.setFluid(new FluidStack(primaryInputInventory.getFluid().copy().getFluidHolder(), primaryInputInventory.getFluidAmount() - recipe.getPrimaryIngredient().getRequiredAmount()));
-                        secondaryInputInventory.setFluid(new FluidStack(secondaryInputInventory.getFluid().copy().getFluidHolder(), secondaryInputInventory.getFluidAmount() - recipe.getSecondaryIngredient().getRequiredAmount()));
+                        primaryInputInventory.setFluid(new FluidStack(primaryInputInventory.getFluid().copy().getFluidHolder(), primaryInputInventory.getFluidAmount() - recipe.getPrimaryIngredient().amount()));
+                        secondaryInputInventory.setFluid(new FluidStack(secondaryInputInventory.getFluid().copy().getFluidHolder(), secondaryInputInventory.getFluidAmount() - recipe.getSecondaryIngredient().amount()));
 
 
                         primaryOutputInventory.setFluid(new FluidStack(recipe.getPrimaryResult().getFluidHolder(), primaryOutputInventory.getFluidAmount() + recipe.getPrimaryResult().getAmount()));

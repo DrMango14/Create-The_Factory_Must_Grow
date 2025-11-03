@@ -16,7 +16,6 @@ import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.RecipeConditions;
@@ -51,6 +50,7 @@ import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.IFluidTank;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
@@ -275,9 +275,9 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
             //checks if vat contains needed fluids
             Map<Integer, Integer> isFluidFound = new HashMap<>();
             for (int i = 0; i < testedRecipe.getFluidIngredients().size(); i++) {
-                FluidIngredient ingredient = testedRecipe.getFluidIngredients().get(i);
+                SizedFluidIngredient ingredient = testedRecipe.getFluidIngredients().get(i);
                 Integer foundAt = null;
-                if (ingredient.getMatchingFluidStacks().isEmpty())
+                if (ingredient.getFluids().length == 0)
                     break;
 
                 for (int y = 0; y < fluidHandler.getTanks(); y++) {
@@ -486,11 +486,11 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
 
 
             //fluid input
-            for (FluidIngredient ingredient : recipe.getFluidIngredients()) {
+            for (SizedFluidIngredient ingredient : recipe.getFluidIngredients()) {
                 for (int i = 0; i < fluidHandler.getTanks(); i++) {
                     FluidStack fluidInTank = fluidHandler.getFluidInTank(i);
                     if (ingredient.test(new FluidStack(fluidInTank.getFluidHolder(), 4000))) {
-                        fluidHandler.getFluidInTank(i).setAmount(fluidInTank.getAmount() - ingredient.getRequiredAmount());
+                        fluidHandler.getFluidInTank(i).setAmount(fluidInTank.getAmount() - ingredient.amount());
                         break;
                     }
                 }
@@ -499,7 +499,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
 
             for (ProcessingOutput output : recipe.getRollableResults()) {
 
-                ItemStack itemStack = output.rollOutput();
+                ItemStack itemStack = output.rollOutput(level.random);
 
 
                 boolean handled = false;

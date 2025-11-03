@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.content.decoration.pipes;
 
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.fluids.FluidTransportBehaviour;
 import com.simibubi.create.content.fluids.pipes.EncasedPipeBlock;
 import com.simibubi.create.content.fluids.pipes.FluidPipeBlockEntity;
@@ -14,7 +13,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;

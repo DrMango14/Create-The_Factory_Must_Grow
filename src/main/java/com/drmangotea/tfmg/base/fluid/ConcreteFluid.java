@@ -10,8 +10,6 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 
-import static com.drmangotea.tfmg.content.decoration.concrete.ConcreteloggedBlock.CONCRETELOGGED;
-
 public class ConcreteFluid extends BaseFlowingFluid {
     protected ConcreteFluid(Properties properties) {
         super(properties);

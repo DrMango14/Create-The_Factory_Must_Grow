@@ -1,18 +1,13 @@
 package com.drmangotea.tfmg.content.machinery.metallurgy.coke_oven;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
-import com.drmangotea.tfmg.content.electricity.base.ConnectNeightborsPacket;
 import com.drmangotea.tfmg.recipes.CokingRecipe;
-import com.drmangotea.tfmg.recipes.IndustrialBlastingRecipe;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
-import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
-import com.simibubi.create.Create;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -35,10 +30,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -49,8 +42,6 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;

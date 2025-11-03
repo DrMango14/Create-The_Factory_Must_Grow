@@ -3,12 +3,9 @@ package com.drmangotea.tfmg;
 import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableType;
 import com.drmangotea.tfmg.content.items.weapons.flamethrover.FlamethrowerFuelType;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode.Electrode;
-import com.simibubi.create.api.equipment.potatoCannon.PotatoCannonProjectileType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.neoforged.neoforge.registries.RegistryBuilder;
-
-import static com.drmangotea.tfmg.TFMG.REGISTRATE;
 
 public class TFMGRegistries {
     public static final ResourceKey<Registry<CableType>> CABLE_TYPE = createRegistryKey("cable_types");

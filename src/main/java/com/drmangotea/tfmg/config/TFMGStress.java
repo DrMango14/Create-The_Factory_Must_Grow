@@ -7,7 +7,6 @@ import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.createmod.catnip.config.ConfigBase;
-import net.createmod.catnip.platform.CatnipServices;
 import net.createmod.catnip.registry.RegisteredObjectsHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;

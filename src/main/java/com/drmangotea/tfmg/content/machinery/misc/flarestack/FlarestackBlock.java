@@ -3,14 +3,11 @@ package com.drmangotea.tfmg.content.machinery.misc.flarestack;
 
 import com.drmangotea.tfmg.base.TFMGShapes;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;

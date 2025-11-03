@@ -4,12 +4,9 @@ import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.datagen.recipes.builder.CokingRecipeGen;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.drmangotea.tfmg.registry.TFMGItems;
-import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
-import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.concurrent.CompletableFuture;
 

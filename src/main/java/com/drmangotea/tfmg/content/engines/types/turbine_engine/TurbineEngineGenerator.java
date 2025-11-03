@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 
 import static com.drmangotea.tfmg.content.engines.base.EngineBlock.ENGINE_STATE;
-import static com.drmangotea.tfmg.content.engines.types.regular_engine.RegularEngineBlock.EXTENDED;
 
 
 public class TurbineEngineGenerator extends SpecialBlockStateGen {

@@ -2,7 +2,6 @@ package com.drmangotea.tfmg.content.machinery.vat.base;
 
 import com.simibubi.create.foundation.item.SmartInventory;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
 
 
 public class VatInventory extends SmartInventory {

@@ -2,7 +2,7 @@
   "type": "tfmg:distillation",
   "ingredients": [
     {
-      "type": "fluid_stack",
+      "type": "neoforge:single",
       "amount": 340,
       "fluid": "tfmg:crude_oil"
     }

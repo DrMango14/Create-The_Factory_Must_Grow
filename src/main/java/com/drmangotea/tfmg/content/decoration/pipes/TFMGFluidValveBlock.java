@@ -8,7 +8,6 @@ import com.simibubi.create.content.fluids.pipes.valve.FluidValveBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.block.ProperWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 public class TFMGFluidValveBlock extends FluidValveBlock implements IAxisPipe, IBE<FluidValveBlockEntity>, ProperWaterloggedBlock {
 

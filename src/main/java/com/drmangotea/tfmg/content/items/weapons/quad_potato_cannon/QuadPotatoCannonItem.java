@@ -15,7 +15,6 @@ import com.simibubi.create.content.equipment.potatoCannon.PotatoProjectileEntity
 import com.simibubi.create.content.equipment.zapper.ShootableGadgetItemMethods;
 import com.simibubi.create.foundation.item.CustomArmPoseItem;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
-import com.simibubi.create.foundation.utility.CreateLang;
 import com.simibubi.create.foundation.utility.GlobalRegistryAccess;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.createmod.catnip.math.VecHelper;
@@ -54,6 +53,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -91,7 +91,7 @@ public class QuadPotatoCannonItem extends ProjectileWeaponItem implements Custom
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack heldStack = player.getItemInHand(hand);
         if (ShootableGadgetItemMethods.shouldSwap(player, heldStack, hand, s -> s.getItem() instanceof QuadPotatoCannonItem)) {
             return InteractionResultHolder.fail(heldStack);

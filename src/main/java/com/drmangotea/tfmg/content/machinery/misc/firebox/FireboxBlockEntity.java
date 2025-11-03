@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.machinery.misc.firebox;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
@@ -34,7 +33,6 @@ import net.neoforged.neoforge.fluids.IFluidTank;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;

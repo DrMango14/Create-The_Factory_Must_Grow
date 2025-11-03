@@ -1,17 +1,12 @@
 package com.drmangotea.tfmg.content.engines;
 
 import com.drmangotea.tfmg.base.lang.TFMGLang;
-import com.drmangotea.tfmg.content.items.weapons.flamethrover.FlamethrowerFuel;
-import com.drmangotea.tfmg.content.items.weapons.flamethrover.FlamethrowerItem;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
-import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 
-import com.simibubi.create.foundation.utility.CreateLang;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -21,8 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 

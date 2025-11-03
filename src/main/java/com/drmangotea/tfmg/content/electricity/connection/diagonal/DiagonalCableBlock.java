@@ -6,7 +6,6 @@ import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
-import com.simibubi.create.content.kinetics.crusher.CrushingWheelControllerBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;

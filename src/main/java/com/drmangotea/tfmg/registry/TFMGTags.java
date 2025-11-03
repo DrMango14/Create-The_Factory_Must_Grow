@@ -1,230 +1,146 @@
 package com.drmangotea.tfmg.registry;
 
-
 import com.drmangotea.tfmg.TFMG;
-
 import com.drmangotea.tfmg.base.lang.TFMGLang;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.FluidState;
 
-
-import static com.drmangotea.tfmg.registry.TFMGTags.NameSpace.COMMON;
-import static com.drmangotea.tfmg.registry.TFMGTags.NameSpace.MOD;
-import static com.simibubi.create.AllTags.optionalTag;
+import static com.drmangotea.tfmg.registry.TFMGTags.NameSpace.*;
 
 
 public class TFMGTags {
 
 
     public enum NameSpace {
-
-        MOD(TFMG.MOD_ID, false, true),
+        MOD(TFMG.MOD_ID),
         COMMON("c")
         ;
 
         public final String id;
-        public final boolean optionalDefault;
-        public final boolean alwaysDatagenDefault;
-
         NameSpace(String id) {
-            this(id, true, false);
-        }
-
-        NameSpace(String id, boolean optionalDefault, boolean alwaysDatagenDefault) {
             this.id = id;
-            this.optionalDefault = optionalDefault;
-            this.alwaysDatagenDefault = alwaysDatagenDefault;
         }
     }
 
     public enum TFMGBlockTags {
-        BLAST_FURNACE_WALL,
-        REINFORCED_BLAST_FURNACE_WALL,
         BLAST_FURNACE_SUPPORT,
+        BLAST_FURNACE_WALL,
         INDUSTRIAL_PIPE,
-        REINFORCED_BLAST_FURNACE_SUPPORT,
-        SURFACE_SCANNER_FINDABLE,
-        PUMPJACK_PART,
-        PUMPJACK_HEAD,
+        ORES_LITHIUM(COMMON, "ores/lithium"),
         PUMPJACK_CONNECTOR,
-        PUMPJACK_SMALL_PART
+        PUMPJACK_HEAD,
+        PUMPJACK_PART,
+        PUMPJACK_SMALL_PART,
+        RAW_LITHIUM(COMMON, "raw_materials/lithium"),
+        REINFORCED_BLAST_FURNACE_SUPPORT,
+        REINFORCED_BLAST_FURNACE_WALL,
+        STORAGE_BLOCKS_CAST_IRON(COMMON, "storage_blocks/cast_iron"),
+        STORAGE_BLOCKS_COAL_COKE(COMMON, "storage_blocks/coal_coke"),
+        STORAGE_BLOCKS_LITHIUM(COMMON, "storage_blocks/lithium"),
+        STORAGE_BLOCKS_PLASTIC(COMMON, "storage_blocks/plastic"),
+        STORAGE_BLOCKS_RAW_LITHIUM(COMMON, "storage_blocks/raw_lithium"),
+        SURFACE_SCANNER_FINDABLE,
         ;
 
         public final TagKey<Block> tag;
-        public final boolean alwaysDatagen;
 
         TFMGBlockTags() {
             this(MOD);
         }
-
         TFMGBlockTags(NameSpace namespace) {
-            this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+            this(namespace, null);
         }
-
-        TFMGBlockTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
-            this(namespace, null, optional, alwaysDatagen);
-        }
-
-        TFMGBlockTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
+        TFMGBlockTags(NameSpace namespace, String path) {
             ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? TFMGLang.asId(name()) : path);
-            if (optional) {
-                tag = optionalTag(BuiltInRegistries.BLOCK, id);
-            } else {
-                tag = BlockTags.create(id);
-            }
-            this.alwaysDatagen = alwaysDatagen;
+            this.tag = BlockTags.create(id);
         }
-
-        @SuppressWarnings("deprecation")
-        public boolean matches(Block block) {
-            return block.builtInRegistryHolder()
-                    .is(tag);
-        }
-
-        public boolean matches(ItemStack stack) {
-            return stack != null && stack.getItem() instanceof BlockItem blockItem && matches(blockItem.getBlock());
-        }
-
-        public boolean matches(BlockState state) {
-            return state.is(tag);
-        }
-
-        private static void init() {}
-
     }
     public enum TFMGItemTags {
-
-        FLUX,
-        SPOOLS,
         BLAST_FURNACE_FUEL,
-        RODS,
-        IRON_PLATES(COMMON, "plates/iron"),
-        ALUMINUM_PLATES(COMMON, "plates/aluminum")
-
+        DUSTS_COAL_COKE(COMMON, "dusts/coal_coke"),
+        DUSTS_IRON(COMMON, "dusts/iron"),
+        DUSTS_SALTPETER(COMMON, "dusts/saltpeter"),
+        DUSTS_SULFUR(COMMON, "dusts/sulfur"),
+        FLUX,
+        INGOTS_CAST_IRON(COMMON, "ingots/cast_iron"),
+        INGOTS_LITHIUM(COMMON, "ingots/lithium"),
+        INGOTS_PLASTIC(COMMON, "ingots/plastic"),
+        INGOTS_RUBBER(COMMON, "ingots/rubber"),
+        INGOTS_SILICON(COMMON, "ingots/silicon"),
+        NUGGETS_CAST_IRON(COMMON, "nuggets/cast_iron"),
+        NUGGETS_LITHIUM(COMMON, "nuggets/lithium"),
+        ORES_LITHIUM(COMMON, "ores/lithium"),
+        PLATES_CAST_IRON(COMMON, "plates/cast_iron"),
+        RAW_LITHIUM(COMMON, "raw_materials/lithium"),
+        RODS_STEEL(COMMON, "rods/steel"),
+        SPOOLS,
+        STORAGE_BLOCKS_CAST_IRON(COMMON, "storage_blocks/cast_iron"),
+        STORAGE_BLOCKS_COAL_COKE(COMMON, "storage_blocks/coal_coke"),
+        STORAGE_BLOCKS_LITHIUM(COMMON, "storage_blocks/lithium"),
+        STORAGE_BLOCKS_PLASTIC(COMMON, "storage_blocks/plastic"),
+        STORAGE_BLOCKS_RAW_LITHIUM(COMMON, "storage_blocks/raw_lithium"),
+        WIRES(COMMON),
+        WIRES_ALUMINUM(COMMON, "wires/aluminum"),
+        WIRES_CONSTANTAN(COMMON, "wires/constantan"),
+        WIRES_COPPER(COMMON, "wires/copper"),
         ;
 
         public final TagKey<Item> tag;
-        public final boolean alwaysDatagen;
 
         TFMGItemTags() {
             this(NameSpace.MOD);
         }
-
         TFMGItemTags(NameSpace namespace) {
-            this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+            this(namespace, null);
         }
-
         TFMGItemTags(NameSpace namespace, String path) {
-            this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
-        }
-
-        TFMGItemTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
-            this(namespace, null, optional, alwaysDatagen);
-        }
-
-        TFMGItemTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
             ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? TFMGLang.asId(name()) : path);
-            if (optional) {
-                tag = optionalTag(BuiltInRegistries.ITEM, id);
-            } else {
-                tag = ItemTags.create(id);
-            }
-            this.alwaysDatagen = alwaysDatagen;
+            this.tag = ItemTags.create(id);
         }
-
-        @SuppressWarnings("deprecation")
-        public boolean matches(Item item) {
-            return item.builtInRegistryHolder()
-                    .is(tag);
-        }
-
-        public boolean matches(ItemStack stack) {
-            return stack.is(tag);
-        }
-
-        private static void init() {}
-
     }
     public enum TFMGFluidTags {
-        GAS(MOD),
+        GAS,
 
-        FLAMMABLE(MOD),
-        FIREBOX_FUEL(MOD),
-        BLAST_STOVE_FUEL(MOD),
-        AIR(NameSpace.COMMON),
-        COOLING_FLUID(NameSpace.COMMON),
+        FLAMMABLE,
+        FIREBOX_FUEL,
+        BLAST_STOVE_FUEL,
+        AIR(COMMON),
+        COOLING_FLUID(COMMON),
 
-        GASOLINE(NameSpace.COMMON),
-        DIESEL(NameSpace.COMMON),
-        KEROSENE(NameSpace.COMMON),
+        GASOLINE(COMMON),
+        DIESEL(COMMON),
+        KEROSENE(COMMON),
 
-        CREOSOTE(NameSpace.COMMON),
-        FURNACE_GAS(NameSpace.COMMON),
+        CREOSOTE(COMMON),
+        FURNACE_GAS(COMMON),
 
-        LPG(NameSpace.COMMON),
-        HEAVY_OIL(NameSpace.COMMON),
-        LUBRICATION_OIL(NameSpace.COMMON),
-        NAPHTHA(NameSpace.COMMON),
-        CRUDE_OIL(NameSpace.COMMON),
-        MOLTEN_STEEL(NameSpace.COMMON),
-        FUEL(NameSpace.COMMON)
+        LPG(COMMON),
+        HEAVY_OIL(COMMON),
+        LUBRICATION_OIL(COMMON),
+        NAPHTHA(COMMON),
+        CRUDE_OIL(COMMON),
+        MOLTEN_STEEL(COMMON),
+        FUEL(COMMON)
 
         ;
 
         public final TagKey<Fluid> tag;
-        public final boolean alwaysDatagen;
 
-
-
+        TFMGFluidTags() {
+            this(NameSpace.MOD);
+        }
         TFMGFluidTags(NameSpace namespace) {
-            this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+            this(namespace, null);
         }
-
-
-        TFMGFluidTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
-            this(namespace, null, optional, alwaysDatagen);
-        }
-
-        TFMGFluidTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
+        TFMGFluidTags(NameSpace namespace, String path) {
             ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? TFMGLang.asId(name()) : path);
-            if (optional) {
-                tag = optionalTag(BuiltInRegistries.FLUID, id);
-            } else {
-                tag = FluidTags.create(id);
-            }
-            this.alwaysDatagen = alwaysDatagen;
+            this.tag = FluidTags.create(id);
         }
-
-
-        public boolean matches(Fluid fluid) {
-            return fluid.is(tag);
-        }
-
-        public boolean matches(FluidState state) {
-            return state.is(tag);
-        }
-
-        private static void init() {}
-
-    }
-    
-
-    public static void init() {
-        TFMGBlockTags.init();
-       // TFMGItemTags.init();
-        TFMGFluidTags.init();
-        //TFMGEntityTags.init();
-        //TFMGRecipeSerializerTags.init();
     }
 }

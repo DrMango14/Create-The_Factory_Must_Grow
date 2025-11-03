@@ -12,7 +12,6 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -29,10 +28,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 @SuppressWarnings("removal")

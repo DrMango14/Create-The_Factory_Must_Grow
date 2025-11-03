@@ -3,8 +3,6 @@ package com.drmangotea.tfmg.datagen.recipes.values.tfmg;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.datagen.recipes.builder.WindingRecipeGen;
 import com.drmangotea.tfmg.registry.TFMGItems;
-import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
-import com.simibubi.create.api.data.recipe.WashingRecipeGen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 

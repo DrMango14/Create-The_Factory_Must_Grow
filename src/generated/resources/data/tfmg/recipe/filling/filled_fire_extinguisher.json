@@ -5,7 +5,7 @@
       "item": "tfmg:fire_extinguisher"
     },
     {
-      "type": "fluid_stack",
+      "type": "neoforge:single",
       "amount": 1000,
       "fluid": "tfmg:carbon_dioxide"
     }

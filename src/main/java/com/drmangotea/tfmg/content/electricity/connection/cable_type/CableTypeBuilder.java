@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.connection.cable_type;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGRegistries;
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.builders.AbstractBuilder;
@@ -10,7 +9,6 @@ import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import com.tterrag.registrate.util.nullness.NonnullType;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.registries.DeferredHolder;
 

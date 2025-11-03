@@ -2,7 +2,6 @@ package com.drmangotea.tfmg.content.machinery.metallurgy.blast_furnace;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
-import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -10,7 +9,6 @@ import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -26,7 +24,6 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 

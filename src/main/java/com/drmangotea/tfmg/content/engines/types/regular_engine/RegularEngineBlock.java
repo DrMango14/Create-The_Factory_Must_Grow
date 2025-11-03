@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.content.engines.types.regular_engine;
 
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
-import com.drmangotea.tfmg.content.engines.base.AbstractEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.base.EngineBlock;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
@@ -9,7 +8,6 @@ import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;

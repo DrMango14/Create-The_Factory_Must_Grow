@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.machinery.misc.concrete_hose;
 
-import com.simibubi.create.AllPackets;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.fluids.transfer.FluidSplashPacket;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;

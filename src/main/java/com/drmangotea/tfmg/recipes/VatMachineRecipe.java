@@ -2,31 +2,18 @@ package com.drmangotea.tfmg.recipes;
 
 import com.drmangotea.tfmg.datagen.recipes.values.tfmg.TFMGVatRecipeGen;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.mojang.datafixers.util.Either;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 public class VatMachineRecipe extends ProcessingRecipe<RecipeInput, VatRecipeParams> {
 

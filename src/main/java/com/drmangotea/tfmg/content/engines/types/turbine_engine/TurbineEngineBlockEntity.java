@@ -1,33 +1,20 @@
 package com.drmangotea.tfmg.content.engines.types.turbine_engine;
 
-import com.drmangotea.tfmg.content.engines.base.AbstractEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.base.EngineComponentsInventory;
 import com.drmangotea.tfmg.content.engines.base.EngineProperties;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
-import com.drmangotea.tfmg.content.engines.types.radial_engine.RadialEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.types.regular_engine.RegularEngineBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGItems;
-import com.drmangotea.tfmg.registry.TFMGTags;
-import com.simibubi.create.foundation.item.SmartInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.phys.AABB;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.drmangotea.tfmg.content.engines.base.EngineBlock.ENGINE_STATE;
 import static com.drmangotea.tfmg.content.engines.base.EngineBlock.EngineState.*;
 import static com.drmangotea.tfmg.content.engines.base.EngineBlock.SHAFT_FACING;
-import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING;
+
 public class TurbineEngineBlockEntity extends RegularEngineBlockEntity {
 
     public TurbineEngineBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {

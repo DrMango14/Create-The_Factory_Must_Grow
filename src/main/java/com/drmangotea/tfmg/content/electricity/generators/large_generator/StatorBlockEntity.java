@@ -5,10 +5,6 @@ import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
-
-import java.util.Iterator;
-import java.util.List;
 
 
 public class StatorBlockEntity extends ElectricBlockEntity implements IHaveGoggleInformation {

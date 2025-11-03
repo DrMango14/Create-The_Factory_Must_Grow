@@ -1,14 +1,11 @@
 package com.drmangotea.tfmg.base.fluid;
 
 import com.drmangotea.tfmg.registry.TFMGFluids;
-import com.simibubi.create.AllFluids;
 import com.simibubi.create.Create;
 import com.tterrag.registrate.builders.FluidBuilder;
 import net.createmod.catnip.theme.Color;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.BlockAndTintGetter;

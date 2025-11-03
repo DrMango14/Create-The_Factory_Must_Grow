@@ -6,7 +6,6 @@ import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.simibubi.create.AllFluids;
-import com.simibubi.create.Create;
 import com.simibubi.create.compat.jei.*;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.equipment.blueprint.BlueprintScreen;
@@ -18,22 +17,16 @@ import com.simibubi.create.content.redstone.link.controller.LinkedControllerScre
 import com.simibubi.create.content.trains.schedule.ScheduleScreen;
 import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
 import com.simibubi.create.foundation.item.ItemHelper;
-import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
-import com.simibubi.create.foundation.utility.CreateLang;
-import com.simibubi.create.infrastructure.config.AllConfigs;
-import com.simibubi.create.infrastructure.config.CRecipes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
-import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IPlatformFluidHelper;
 import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IIngredientManager;
 import mezz.jei.api.runtime.IJeiRuntime;
-import net.createmod.catnip.config.ConfigBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
@@ -47,16 +40,13 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 @JeiPlugin
 @SuppressWarnings("unused")

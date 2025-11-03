@@ -3,16 +3,12 @@ package com.drmangotea.tfmg.content.items.weapons.flamethrover;
 import com.drmangotea.tfmg.TFMGRegistries;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.simibubi.create.api.equipment.potatoCannon.PotatoCannonProjectileType;
-import com.simibubi.create.api.registry.CreateRegistries;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.RegistryCodecs;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 
 import java.util.ArrayList;

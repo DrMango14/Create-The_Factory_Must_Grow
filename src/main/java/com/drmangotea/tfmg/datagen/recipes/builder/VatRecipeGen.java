@@ -1,8 +1,6 @@
 package com.drmangotea.tfmg.datagen.recipes.builder;
 
 import com.drmangotea.tfmg.recipes.VatMachineRecipe;
-import com.drmangotea.tfmg.recipes.IndustrialBlastingRecipeParams;
-import com.drmangotea.tfmg.recipes.VatMachineRecipe;
 import com.drmangotea.tfmg.recipes.VatRecipeParams;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.simibubi.create.api.data.recipe.ProcessingRecipeGen;
@@ -14,8 +12,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
 
 public abstract class VatRecipeGen<P extends ProcessingRecipeParams, R extends ProcessingRecipe<?, P>, B extends ProcessingRecipeBuilder<P, R, B>> extends ProcessingRecipeGen<VatRecipeParams, VatMachineRecipe, VatMachineRecipe.Builder<VatMachineRecipe>> {
 

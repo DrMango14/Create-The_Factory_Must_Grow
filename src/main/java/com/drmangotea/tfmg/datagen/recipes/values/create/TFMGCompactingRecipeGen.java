@@ -7,7 +7,7 @@ import com.simibubi.create.api.data.recipe.CompactingRecipeGen;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -18,7 +18,7 @@ public class TFMGCompactingRecipeGen extends CompactingRecipeGen {
 
     GeneratedRecipe
             BITUMEN = create(TFMG.asResource("bitumen"), b -> b
-            .require(heavyOil(),1000)
+            .require(SizedFluidIngredient.of(heavyOil(),1000))
             .output(bitumen(), 1)
             .requiresHeat(HeatCondition.HEATED)
             ),

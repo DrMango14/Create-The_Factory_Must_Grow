@@ -16,8 +16,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
-
 public class SegmentedDisplayRenderer extends SafeBlockEntityRenderer<SegmentedDisplayBlockEntity> {
 
     public SegmentedDisplayRenderer(BlockEntityRendererProvider.Context context) {}

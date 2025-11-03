@@ -12,7 +12,7 @@
       "item": "tfmg:steel_mechanism"
     },
     "P": {
-      "tag": "c:string"
+      "tag": "c:strings"
     },
     "R": {
       "item": "tfmg:rebar"

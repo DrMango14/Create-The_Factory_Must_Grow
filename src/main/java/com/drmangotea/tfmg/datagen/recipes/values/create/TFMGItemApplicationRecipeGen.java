@@ -2,7 +2,6 @@ package com.drmangotea.tfmg.datagen.recipes.values.create;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
-import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.api.data.recipe.ItemApplicationRecipeGen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

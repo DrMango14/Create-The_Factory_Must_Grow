@@ -2,12 +2,12 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "type": "fluid_stack",
+      "type": "neoforge:single",
       "amount": 250,
       "fluid": "minecraft:water"
     },
     {
-      "type": "fluid_stack",
+      "type": "neoforge:single",
       "amount": 1000,
       "fluid": "tfmg:ethylene"
     }

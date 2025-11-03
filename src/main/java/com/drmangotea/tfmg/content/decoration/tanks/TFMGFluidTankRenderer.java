@@ -1,11 +1,9 @@
 package com.drmangotea.tfmg.content.decoration.tanks;
 
 
-import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
-import com.simibubi.create.foundation.fluid.FluidRenderer;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.createmod.catnip.platform.NeoForgeCatnipServices;
 import net.minecraft.client.renderer.MultiBufferSource;

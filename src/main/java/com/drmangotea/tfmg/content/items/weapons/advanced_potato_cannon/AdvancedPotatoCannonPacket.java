@@ -1,15 +1,10 @@
 package com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGClient;
 import com.drmangotea.tfmg.registry.TFMGPackets;
-import com.simibubi.create.AllPackets;
-import com.simibubi.create.CreateClient;
-import com.simibubi.create.content.equipment.potatoCannon.PotatoCannonPacket;
 import com.simibubi.create.content.equipment.zapper.ShootGadgetPacket;
 import com.simibubi.create.content.equipment.zapper.ShootableGadgetRenderHandler;
 import net.createmod.catnip.codecs.stream.CatnipStreamCodecs;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

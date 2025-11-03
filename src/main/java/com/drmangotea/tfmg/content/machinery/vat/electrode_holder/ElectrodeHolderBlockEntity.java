@@ -10,8 +10,6 @@ import com.drmangotea.tfmg.content.machinery.vat.base.IVatMachine;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlock;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode.Electrode;
-import com.simibubi.create.foundation.utility.CreateLang;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;

@@ -2,7 +2,6 @@ package com.drmangotea.tfmg.content.decoration.tanks;
 
 import com.drmangotea.tfmg.mixin.accessor.FluidTankBlockEntityAccessor;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
-import com.simibubi.create.AllBlockEntityTypes;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;

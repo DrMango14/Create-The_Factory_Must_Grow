@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.measurement;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.registry.TFMGItems;
@@ -11,7 +10,6 @@ import com.simibubi.create.compat.Mods;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBox;
 import com.simibubi.create.foundation.gui.RemovedGuiUtils;
 import com.simibubi.create.foundation.mixin.accessor.MouseHandlerAccessor;
-import com.simibubi.create.foundation.utility.CreateLang;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CClient;
 import net.createmod.catnip.gui.element.BoxElement;

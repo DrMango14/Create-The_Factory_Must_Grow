@@ -68,7 +68,7 @@ public class TFMGClientEvents {
 		return !(Minecraft.getInstance().level == null || Minecraft.getInstance().player == null);
 	}
 
-	@EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+	@EventBusSubscriber(value = Dist.CLIENT)
 	public static class ModBusEvents {
 		@SubscribeEvent
 		public static void registerItemDecorations(RegisterItemDecorationsEvent event) {

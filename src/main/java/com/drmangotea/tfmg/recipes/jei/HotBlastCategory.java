@@ -1,18 +1,14 @@
 package com.drmangotea.tfmg.recipes.jei;
 
-import com.drmangotea.tfmg.recipes.DistillationRecipe;
 import com.drmangotea.tfmg.recipes.HotBlastRecipe;
 import com.drmangotea.tfmg.registry.TFMGGuiTextures;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
-import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.gui.GuiGraphics;
-import net.neoforged.neoforge.fluids.FluidStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

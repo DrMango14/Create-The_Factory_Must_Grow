@@ -6,8 +6,6 @@ import com.drmangotea.tfmg.mixin.accessor.SlidingDoorBlockEntityAccessor;
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.simibubi.create.AllPartialModels;
-import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlock;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlockEntity;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 

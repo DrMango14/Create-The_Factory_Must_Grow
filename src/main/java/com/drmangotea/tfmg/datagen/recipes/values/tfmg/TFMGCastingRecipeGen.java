@@ -5,7 +5,6 @@ import com.drmangotea.tfmg.datagen.recipes.builder.CastingRecipeGen;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.drmangotea.tfmg.registry.TFMGItems;
-import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.simibubi.create.api.data.recipe.BaseRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

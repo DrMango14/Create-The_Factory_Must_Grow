@@ -7,17 +7,12 @@ import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableType;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnection;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;
-import com.drmangotea.tfmg.content.electricity.connection.cables.CablePos;
-import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGItems;
-import com.simibubi.create.foundation.utility.CreateLang;
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -27,7 +22,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -39,7 +33,6 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.drmangotea.tfmg.base.blocks.WallMountBlock.FACING;
-import static com.simibubi.create.foundation.utility.Debug.debugMessage;
 
 public class SpoolItem extends Item {
 

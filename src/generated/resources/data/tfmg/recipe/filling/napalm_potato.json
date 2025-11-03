@@ -5,7 +5,7 @@
       "item": "minecraft:potato"
     },
     {
-      "type": "fluid_stack",
+      "type": "neoforge:single",
       "amount": 500,
       "fluid": "tfmg:napalm"
     }

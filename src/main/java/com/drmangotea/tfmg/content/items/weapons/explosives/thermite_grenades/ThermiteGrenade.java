@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.spark.BlueSpark;
 import com.drmangotea.tfmg.base.spark.GreenSpark;
 import com.drmangotea.tfmg.base.spark.Spark;

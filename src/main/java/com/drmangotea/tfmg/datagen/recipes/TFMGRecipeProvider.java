@@ -24,7 +24,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -48,7 +47,7 @@ public class TFMGRecipeProvider extends RecipeProvider {
     }
 
     @Override
-    protected void buildRecipes(@NotNull RecipeOutput pRecipeOutput) {
+    protected void buildRecipes(RecipeOutput pRecipeOutput) {
         all.forEach(c -> c.register(pRecipeOutput));
         TFMG.LOGGER.info("{} registered {} recipe{}", getName(), all.size(), all.size() == 1 ? "" : "s");
     }
@@ -75,12 +74,12 @@ public class TFMGRecipeProvider extends RecipeProvider {
         gen.addProvider(true, new DataProvider() {
 
             @Override
-            public String getName() {
+            public @NotNull String getName() {
                 return "TFMG's Processing Recipes";
             }
 
             @Override
-            public CompletableFuture<?> run(CachedOutput dc) {
+            public @NotNull CompletableFuture<?> run(CachedOutput dc) {
                 return CompletableFuture.allOf(GENERATORS.stream()
                         .map(gen -> gen.run(dc))
                         .toArray(CompletableFuture[]::new));
@@ -120,91 +119,87 @@ public class TFMGRecipeProvider extends RecipeProvider {
             return TFMGItems.COAL_COKE_DUST.get();
         }
         public static TagKey<Item> steelIngot() {
-            return AllTags.commonItemTag("ingots/steel");
+            return CommonMetal.STEEL.ingots;
         }
         public static TagKey<Item> steelNugget() {
-            return AllTags.commonItemTag("nuggets/steel");
+            return CommonMetal.STEEL.nuggets;
         }
         public static TagKey<Item> steelSheet() {
-            return AllTags.commonItemTag("plates/steel");
+            return CommonMetal.STEEL.plates;
         }
         public static TagKey<Item> steelBlock() {
-            return AllTags.commonItemTag("storage_blocks/steel");
+            return CommonMetal.STEEL.storageBlocks.items();
         }
         public static TagKey<Item> aluminumIngot() {
-            return AllTags.commonItemTag("ingots/aluminum");
+            return CommonMetal.ALUMINUM.ingots;
         }
         public static TagKey<Item> aluminumNugget() {
-            return AllTags.commonItemTag("nuggets/aluminum");
+            return CommonMetal.ALUMINUM.nuggets;
         }
-        public static TagKey<Item> aluminumBlock() {
-            return AllTags.commonItemTag("storage_blocks/aluminum");
-        }
-        public static TagKey<Item> aluminumSheet() {
-            return AllTags.commonItemTag("plates/aluminum");
-        }
+        public static TagKey<Item> aluminumBlock() { return CommonMetal.ALUMINUM.storageBlocks.items(); }
+        public static TagKey<Item> aluminumSheet() { return CommonMetal.ALUMINUM.plates; }
         public static TagKey<Item> castIronIngot() {
-            return AllTags.commonItemTag("ingots/cast_iron");
+            return TFMGTags.TFMGItemTags.INGOTS_CAST_IRON.tag;
         }
         public static TagKey<Item> castIronNugget() {
-            return AllTags.commonItemTag("nuggets/cast_iron");
+            return TFMGTags.TFMGItemTags.NUGGETS_CAST_IRON.tag;
         }
         public static TagKey<Item> castIronBlock() {
-            return AllTags.commonItemTag("storage_blocks/cast_iron");
+            return TFMGTags.TFMGItemTags.STORAGE_BLOCKS_CAST_IRON.tag;
         }
         public static TagKey<Item> castIronSheet() {
-            return AllTags.commonItemTag("plates/cast_iron");
+            return TFMGTags.TFMGItemTags.PLATES_CAST_IRON.tag;
         }
         public static TagKey<Item> leadIngot() {
-            return AllTags.commonItemTag("ingots/lead");
+            return CommonMetal.LEAD.ingots;
         }
         public static TagKey<Item> leadNugget() {
-            return AllTags.commonItemTag("nuggets/lead");
+            return CommonMetal.LEAD.nuggets;
         }
         public static TagKey<Item> leadSheet() {
-            return AllTags.commonItemTag("plates/lead");
+            return CommonMetal.LEAD.plates;
         }
         public static TagKey<Item> leadBlock() {
-            return AllTags.commonItemTag("storage_blocks/lead");
+            return CommonMetal.LEAD.storageBlocks.items();
         }
         public static TagKey<Item> nickelIngot() {
-            return AllTags.commonItemTag("ingots/nickel");
+            return CommonMetal.NICKEL.ingots;
         }
         public static TagKey<Item> nickelNugget() {
-            return AllTags.commonItemTag("nuggets/nickel");
+            return CommonMetal.NICKEL.nuggets;
         }
         public static TagKey<Item> nickelBlock() {
-            return AllTags.commonItemTag("storage_blocks/nickel");
+            return CommonMetal.NICKEL.storageBlocks.items();
         }
         public static TagKey<Item> nickelSheet() {
-            return AllTags.commonItemTag("plates/nickel");
+            return CommonMetal.NICKEL.plates;
         }
         public static TagKey<Item> lithiumIngot() {
-            return AllTags.commonItemTag("ingots/lithium");
+            return TFMGTags.TFMGItemTags.INGOTS_LITHIUM.tag;
         }
         public static TagKey<Item> lithiumNugget() {
-            return AllTags.commonItemTag("nuggets/lithium");
+            return TFMGTags.TFMGItemTags.NUGGETS_LITHIUM.tag;
         }
         public static TagKey<Item> lithiumBlock() {
-            return AllTags.commonItemTag("storage_blocks/lithium");
+            return TFMGTags.TFMGItemTags.STORAGE_BLOCKS_LITHIUM.tag;
         }
         public static TagKey<Item> constantanIngot() {
-            return AllTags.commonItemTag("ingots/constantan");
+            return CommonMetal.CONSTANTAN.ingots;
         }
         public static TagKey<Item> constantanNugget() {
-            return AllTags.commonItemTag("nuggets/constantan");
+            return CommonMetal.CONSTANTAN.nuggets;
         }
         public static TagKey<Item> constantanBlock() {
-            return AllTags.commonItemTag("storage_blocks/constantan");
+            return CommonMetal.CONSTANTAN.storageBlocks.items();
         }
         public static TagKey<Item> copperWire() {
-            return AllTags.commonItemTag("wires/copper");
+            return TFMGTags.TFMGItemTags.WIRES_COPPER.tag;
         }
         public static TagKey<Item> constantanWire() {
-            return AllTags.commonItemTag("wires/constantan");
+            return TFMGTags.TFMGItemTags.WIRES_CONSTANTAN.tag;
         }
         public static TagKey<Item> aluminumWire() {
-            return AllTags.commonItemTag("wires/aluminum");
+            return TFMGTags.TFMGItemTags.WIRES_ALUMINUM.tag;
         }
 
         //
@@ -224,14 +219,8 @@ public class TFMGRecipeProvider extends RecipeProvider {
         }
 
 
-        public static ItemLike crimsite() {
-            return AllPaletteStoneTypes.CRIMSITE.getBaseBlock().get();
-        }
         public static ItemLike thermitePowder() {
             return TFMGItems.THERMITE_POWDER.get();
-        }
-        public static ItemLike crushedRawAluminum() {
-            return AllItems.CRUSHED_BAUXITE.get();
         }
         public static ItemLike experienceNugget() {
             return AllItems.EXP_NUGGET.get();
@@ -277,15 +266,6 @@ public class TFMGRecipeProvider extends RecipeProvider {
         }
         public static ItemLike bucket() {
             return Items.BUCKET;
-        }
-        public static ItemLike bottle() {
-            return Items.GLASS_BOTTLE;
-        }
-        public static ItemLike potato() {
-            return Items.POTATO;
-        }
-        public static ItemLike napalmPotato() {
-            return TFMGItems.NAPALM_POTATO.get();
         }
         public static ItemLike heavyMachineryCasing() {
            return TFMGBlocks.HEAVY_MACHINERY_CASING.get();
@@ -355,14 +335,8 @@ public class TFMGRecipeProvider extends RecipeProvider {
         public static ItemLike cement() {
             return TFMGBlocks.CEMENT;
         }
-        public static ItemLike aluminumTank() {
-            return TFMGBlocks.ALUMINUM_FLUID_TANK;
-        }
         public static ItemLike syntheticLeather() {
             return TFMGItems.SYNTHETIC_LEATHER.get();
-        }
-        public static ItemLike engineChamber() {
-            return TFMGItems.ENGINE_CYLINDER.get();
         }
         public static ItemLike screw() {
             return TFMGItems.SCREW.get();
@@ -399,21 +373,11 @@ public class TFMGRecipeProvider extends RecipeProvider {
             return Tags.Items.DUSTS_REDSTONE;
         }
 
-        public static TagKey<Item> planks() {
-            return ItemTags.PLANKS;
-        }
-
-        public static TagKey<Item> woodSlab() {
-            return ItemTags.WOODEN_SLABS;
-        }
         public static TagKey<Item> log() {
             return ItemTags.LOGS_THAT_BURN;
         }
-        public static TagKey<Item> gold() {
-            return AllTags.commonItemTag("ingots/gold");
-        }
         public static TagKey<Item> string() {
-            return AllTags.commonItemTag("string");
+            return Tags.Items.STRINGS;
         }
 
         public static ItemLike propeller() {
@@ -491,15 +455,7 @@ public class TFMGRecipeProvider extends RecipeProvider {
 
 
         public static TagKey<Item> goldSheet() {
-            return AllTags.commonItemTag("plates/gold");
-        }
-
-        //public static TagKey<Item> stone() {
-        //    return Tags.Items.STONE;
-        //}
-
-        public static ItemLike andesite() {
-            return AllItems.ANDESITE_ALLOY.get();
+            return CommonMetal.GOLD.plates;
         }
 
         public static ItemLike fireproofBricks() {
@@ -519,52 +475,29 @@ public class TFMGRecipeProvider extends RecipeProvider {
             return TFMGItems.RUBBER_SHEET.get();
         }
 
-        public static ItemLike largeCog() {
-            return AllBlocks.LARGE_COGWHEEL.get();
-        }
-
-        public static ItemLike andesiteCasing() {
-            return AllBlocks.ANDESITE_CASING.get();
-        }
-
         public static TagKey<Item> brassIngot() {
-            return AllTags.commonItemTag("ingots/brass");
+            return CommonMetal.BRASS.ingots;
         }
 
         public static TagKey<Item> brassSheet() {
-            return AllTags.commonItemTag("plates/brass");
+
+            return CommonMetal.BRASS.plates;
         }
 
         public static TagKey<Item> iron() {
             return Tags.Items.INGOTS_IRON;
         }
 
-        public static TagKey<Item> ironNugget() {
-            return AllTags.commonItemTag("nuggets/iron");
-        }
-
         public static TagKey<Item> ironDust() {
-            return AllTags.commonItemTag("dusts/iron");
+            return TFMGTags.TFMGItemTags.DUSTS_IRON.tag;
         }
 
         public static TagKey<Item> zincIngot() {
-            return AllTags.commonItemTag("ingots/zinc");
+            return CommonMetal.ZINC.ingots;
         }
 
         public static TagKey<Item> ironSheet() {
-            return AllTags.commonItemTag("plates/iron");
-        }
-
-        public static TagKey<Item> sturdySheet() {
-            return AllTags.commonItemTag("plates/obsidian");
-        }
-
-        public static ItemLike brassCasing() {
-            return AllBlocks.BRASS_CASING.get();
-        }
-
-        public static ItemLike railwayCasing() {
-            return AllBlocks.RAILWAY_CASING.get();
+            return CommonMetal.IRON.plates;
         }
 
         public static ItemLike electronTube() {
@@ -575,58 +508,25 @@ public class TFMGRecipeProvider extends RecipeProvider {
             return AllItems.PRECISION_MECHANISM.get();
         }
 
-        public static ItemLike copperBlock() {
-            return Items.COPPER_BLOCK;
-        }
-
-        public static TagKey<Item> brassBlock() {
-            return AllTags.commonItemTag("storage_blocks/brass");
-        }
-
-        public static TagKey<Item> zincBlock() {
-            return AllTags.commonItemTag("storage_blocks/zinc");
-        }
-
-        public static TagKey<Item> wheatFlour() {
-            return AllTags.commonItemTag("flour/wheat");
-        }
-
         public static ItemLike copperIngot() {
             return Items.COPPER_INGOT;
         }
 
         public static TagKey<Item> copperSheet() {
-            return AllTags.commonItemTag("plates/copper");
+            return CommonMetal.COPPER.plates;
         }
 
         public static TagKey<Item> copperNugget() {
-            return AllTags.commonItemTag("nuggets/copper");
+            return CommonMetal.COPPER.nuggets;
         }
 
         public static TagKey<Item> brassNugget() {
-            return AllTags.commonItemTag("nuggets/brass");
+            return CommonMetal.BRASS.nuggets;
         }
 
         public static TagKey<Item> zincNugget() {
-            return AllTags.commonItemTag("nuggets/zinc");
+            return CommonMetal.ZINC.nuggets;
         }
-
-        public static ItemLike copperCasing() {
-            return AllBlocks.COPPER_CASING.get();
-        }
-
-        public static ItemLike refinedRadiance() {
-            return AllItems.REFINED_RADIANCE.get();
-        }
-
-        public static ItemLike shadowSteel() {
-            return AllItems.SHADOW_STEEL.get();
-        }
-
-        public static Ingredient netherite() {
-            return Ingredient.of(AllTags.commonItemTag("ingots/netherite"));
-        }
-
 
         public static ItemStack resistor10Ohms(){
             ItemStack stack = TFMGBlocks.RESISTOR.asStack();
@@ -662,66 +562,66 @@ public class TFMGRecipeProvider extends RecipeProvider {
     public static class F {
         //GASSES
         public static Fluid air() {
-            return TFMGFluids.AIR.get();
+            return TFMGFluids.AIR.getSource();
         }
         public static Fluid hotAir() {
-            return TFMGFluids.HOT_AIR.get();
+            return TFMGFluids.HOT_AIR.getSource();
         }
         public static Fluid carbonDioxide() {
-            return TFMGFluids.CARBON_DIOXIDE.get();
+            return TFMGFluids.CARBON_DIOXIDE.getSource();
         }
         public static Fluid ethylene() {
-            return TFMGFluids.ETHYLENE.get();
+            return TFMGFluids.ETHYLENE.getSource();
         }
         public static Fluid propylene() {
-            return TFMGFluids.PROPYLENE.get();
+            return TFMGFluids.PROPYLENE.getSource();
         }
         public static Fluid propane() {
-            return TFMGFluids.PROPANE.get();
+            return TFMGFluids.PROPANE.getSource();
         }
         public static Fluid hydrogen() {
-            return TFMGFluids.HYDROGEN.get();
+            return TFMGFluids.HYDROGEN.getSource();
         }
         public static Fluid butane() {
-            return TFMGFluids.BUTANE.get();
+            return TFMGFluids.BUTANE.getSource();
         }
         public static Fluid lpg() {
-            return TFMGFluids.LPG.get();
+            return TFMGFluids.LPG.getSource();
         }
         public static Fluid neon() {
-            return TFMGFluids.NEON.get();
+            return TFMGFluids.NEON.getSource();
         }
         public static Fluid blastFurnaceGas() {
-            return TFMGFluids.FURNACE_GAS.get();
+            return TFMGFluids.FURNACE_GAS.getSource();
         }
 
         //LIQUIDS
         public static Fluid crudeOil() {
-            return TFMGFluids.CRUDE_OIL.get();
+            return TFMGFluids.CRUDE_OIL.getSource();
         }
         public static Fluid heavyOil() {
-            return TFMGFluids.HEAVY_OIL.get();
+            return TFMGFluids.HEAVY_OIL.getSource();
         }
         public static Fluid lubricationOil() {
-            return TFMGFluids.LUBRICATION_OIL.get();
+            return TFMGFluids.LUBRICATION_OIL.getSource();
         }
        public static Fluid napalm() {
-           return TFMGFluids.NAPALM.get();
+           return TFMGFluids.NAPALM.getSource();
        }
         public static Fluid naphtha() {
-            return TFMGFluids.NAPHTHA.get();
+            return TFMGFluids.NAPHTHA.getSource();
         }
         public static Fluid kerosene() {
-            return TFMGFluids.KEROSENE.get();
+            return TFMGFluids.KEROSENE.getSource();
         }
         public static Fluid gasoline() {
-            return TFMGFluids.GASOLINE.get();
+            return TFMGFluids.GASOLINE.getSource();
         }
         public static Fluid diesel() {
-            return TFMGFluids.DIESEL.get();
+            return TFMGFluids.DIESEL.getSource();
         }
         public static Fluid creosote() {
-            return TFMGFluids.CREOSOTE.get();
+            return TFMGFluids.CREOSOTE.getSource();
         }
         public static Fluid water() {
             return Fluids.WATER;
@@ -729,28 +629,28 @@ public class TFMGRecipeProvider extends RecipeProvider {
 
         //MISC
         public static Fluid coolingFluid() {
-            return TFMGFluids.COOLING_FLUID.get();
+            return TFMGFluids.COOLING_FLUID.getSource();
         }
         public static Fluid sulfuricAcid() {
-            return TFMGFluids.SULFURIC_ACID.get();
+            return TFMGFluids.SULFURIC_ACID.getSource();
         }
         public static Fluid liquidConcrete() {
-            return TFMGFluids.LIQUID_CONCRETE.get();
+            return TFMGFluids.LIQUID_CONCRETE.getSource();
         }
         public static Fluid liquidAsphalt() {
-            return TFMGFluids.LIQUID_ASPHALT.get();
+            return TFMGFluids.LIQUID_ASPHALT.getSource();
         }
         public static Fluid liquidPlastic() {
-            return TFMGFluids.MOLTEN_PLASTIC.get();
+            return TFMGFluids.MOLTEN_PLASTIC.getSource();
         }
         public static Fluid moltenSteel() {
-            return TFMGFluids.MOLTEN_STEEL.get();
+            return TFMGFluids.MOLTEN_STEEL.getSource();
         }
         public static Fluid moltenSlag() {
-            return TFMGFluids.MOLTEN_SLAG.get();
+            return TFMGFluids.MOLTEN_SLAG.getSource();
         }
         public static Fluid potion() {
-            return AllFluids.POTION.get();
+            return AllFluids.POTION.getSource();
         }
 
         //BUCKETS
@@ -773,6 +673,12 @@ public class TFMGRecipeProvider extends RecipeProvider {
             return TFMGRegistrate.getBucket("propane");
         }
         public static ItemLike hydrogenTank() {
+//            LOGGER.info("hydrogen fluid: {}", TFMGFluids.HYDROGEN);
+//            LOGGER.info("hydrogen source: {}", TFMGFluids.HYDROGEN.getSource());
+//            LOGGER.info("hydrogen bucket: {}", TFMGFluids.HYDROGEN.getSource().getBucket());
+//            var bucket = TFMGFluids.HYDROGEN.getSource().getBucket();
+//            LOGGER.info("bucket: {}", bucket);
+//            return bucket;
             return TFMGRegistrate.getBucket("hydrogen");
         }
         public static ItemLike butaneTank() {

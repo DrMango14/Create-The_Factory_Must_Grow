@@ -15,7 +15,7 @@ import org.lwjgl.glfw.GLFW;
 
 import java.util.function.BiConsumer;
 
-@EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(value = Dist.CLIENT)
 public enum TFMGKeys {
 
 	TRANSMISSION_SHIFT_UP("transmission_shift_up", GLFW.GLFW_KEY_V, "Increases transmission shift"),

@@ -3,7 +3,6 @@ package com.drmangotea.tfmg.content.electricity.lights;
 
 import com.drmangotea.tfmg.base.blocks.WallMountBlock;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
-import com.drmangotea.tfmg.content.electricity.lights.neon_tube.NeonTubeBlockEntity;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
@@ -13,7 +12,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;

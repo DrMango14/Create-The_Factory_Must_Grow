@@ -2,9 +2,7 @@ package com.drmangotea.tfmg.content.electricity.generators.large_generator;
 
 import com.drmangotea.tfmg.base.TFMGShapes;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
-import com.drmangotea.tfmg.content.electricity.connection.diagonal.DiagonalCableBlock;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
-import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;

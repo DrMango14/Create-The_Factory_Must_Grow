@@ -2,7 +2,6 @@ package com.drmangotea.tfmg.content.machinery.metallurgy.casting_basin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
-import com.simibubi.create.foundation.fluid.FluidRenderer;
 import net.createmod.catnip.platform.NeoForgeCatnipServices;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;

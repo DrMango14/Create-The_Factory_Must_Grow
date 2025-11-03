@@ -1,8 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.utilities.electric_pump;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.electricity.base.*;
-import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.content.fluids.FluidPropagator;
 import com.simibubi.create.content.fluids.FluidTransportBehaviour;
 import com.simibubi.create.content.fluids.PipeConnection;
@@ -14,15 +12,11 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import net.createmod.catnip.data.Couple;
 import net.createmod.catnip.data.Pair;
 import net.createmod.catnip.math.BlockFace;
-import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;

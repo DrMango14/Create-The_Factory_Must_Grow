@@ -4,7 +4,6 @@ package com.drmangotea.tfmg.content.electricity.utilities.voltage_observer;
 import com.drmangotea.tfmg.base.blocks.WallMountBlock;
 import com.drmangotea.tfmg.content.electricity.base.ConnectNeightborsPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
-import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.foundation.block.IBE;
 import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.core.BlockPos;

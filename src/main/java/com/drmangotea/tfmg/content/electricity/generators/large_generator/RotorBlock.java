@@ -2,10 +2,8 @@ package com.drmangotea.tfmg.content.electricity.generators.large_generator;
 
 
 import com.drmangotea.tfmg.base.TFMGShapes;
-import com.drmangotea.tfmg.content.electricity.base.ConnectNeightborsPacket;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
-import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;

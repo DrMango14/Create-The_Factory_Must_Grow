@@ -1,22 +1,16 @@
 package com.drmangotea.tfmg.content.electricity.connection.cables;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
-import com.drmangotea.tfmg.content.machinery.misc.winding_machine.SpoolItem;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGTags;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
-import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
 

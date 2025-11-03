@@ -2,7 +2,6 @@ package com.drmangotea.tfmg.base.lang;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
-import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.lang.LangBuilder;
 import net.createmod.catnip.theme.Color;
 import net.minecraft.ChatFormatting;
