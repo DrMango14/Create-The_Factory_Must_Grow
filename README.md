@@ -5,40 +5,48 @@
   <a href="https://modrinth.com/mod/create-tfmg"><picture><source srcset="https://img.shields.io/badge/Modrinth-202830?style=for-the-badge&logo=modrinth" media="(prefers-color-scheme: dark)"><img src="https://img.shields.io/badge/Modrinth-white?style=for-the-badge&logo=modrinth" alt="Modrinth"></picture></a>
   <a href="https://discord.gg/HCRF9PYdSy"><picture><source srcset="https://img.shields.io/badge/Discord-202830?style=for-the-badge&logo=discord" media="(prefers-color-scheme: dark)"><img src="https://img.shields.io/badge/Discord-white?style=for-the-badge&logo=discord" alt="Discord"></picture></a>
   <br>
+  <br>
   <a>Heavy Engineering & Oil For The Create Mod</a>
+  <br>
+  <br>
+  <div>
+    <img src="https://cdn.modrinth.com/data/USgVjXsk/images/16f8c83fbec919fdc571236d62434b2d8050cf11.png" style="width:75%;display:block;">
+  </div>
 </div>
 
-<br>
+## About the Mod
 
-## Info
+The original Create mod establishes a fantastic foundation in a steam/clockpunk aesthetic. While most addons expand on that theme, **Create: The Factory Must Grow** takes the next natural step in industrial evolution: transitioning from steampunk to a robust dieselpunk era.
+We believe that Create is more than just a single tech mod; its modularity and polished mechanics make it a perfect base (essentially a library) for new technological expansions. Our goal is to use Create as a platform to introduce heavy industry and prove this concept is possible.
 
-Create is by default a steam/clockpunk mod and most addons aim to expand this part of Create and do that pretty well,
-we thought the next natural expansion would be moving on from steampunk to dieselpunk.
-We believe that create could be later used not just as a single steampunk tech mod,
-but due to its modularity and polishedness, it is a perfect base for other tech mods aiming to Create (get it) something new with it,
-essentially using it as a library.
-We wanna be the first ones to try and prove this concept.
+## Key Features
 
-<br>
+This mod introduces complex new systems and materials to elevate your factory to the next level:
 
-## Features
+- OIL!!! (Extraction, Processing, and Refining)
+- Realistic Electricity (Generation and Management)
+- Large Distilleries
+- Steel Mills
+- Electrolyzers
 
-* Large Distilleries
-* Realistic Electricity
-* Steel Mills
-* Concrete
-* Electrolyzers
-* Steel
-* Aluminum
-* Cast Iron
-* Lead
-* Sulfur
-* OIL!!!
-* Quad Potato Cannon
+## New Materials & Resources
+
+Expand your resource pipeline with essential industrial ingredients:
+
+- Steel
+- Aluminum
+- Cast Iron
+- Lead
+- Sulfur
+- Concrete
+
+## Tools of the Trade
+
+We also added some fun new items for factory defense and utility:
+- Flamethrowers
+- Quad Potato Cannon
+
+...and more to discover!
 * Flamethrowers
 * And more..
-
-<br>
-
-![refinery image](https://cdn.modrinth.com/data/USgVjXsk/images/16f8c83fbec919fdc571236d62434b2d8050cf11.png)
 
