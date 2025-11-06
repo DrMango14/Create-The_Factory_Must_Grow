@@ -1,14 +1,9 @@
 package com.drmangotea.tfmg.content.electricity.storage;
 
 import com.drmangotea.tfmg.config.TFMGConfigs;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
-import org.jetbrains.annotations.Nullable;
 
 
 public class AccumulatorItem extends BlockItem {

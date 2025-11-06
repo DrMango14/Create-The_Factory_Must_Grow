@@ -1,7 +1,13 @@
 package com.drmangotea.tfmg.content.electricity.utilities.electric_pump;
 
 import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.content.electricity.base.*;
+import com.drmangotea.tfmg.content.electricity.base.ElectricBlockValues;
+import com.drmangotea.tfmg.content.electricity.base.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.base.ElectricalGroup;
+import com.drmangotea.tfmg.content.electricity.base.ElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.base.IElectric;
+import com.drmangotea.tfmg.content.electricity.base.NetworkUpdatePacket;
+import com.drmangotea.tfmg.content.electricity.base.VoltageAlteringBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.content.fluids.FluidPropagator;
 import com.simibubi.create.content.fluids.FluidTransportBehaviour;
@@ -17,7 +23,6 @@ import net.createmod.catnip.math.BlockFace;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -28,7 +33,13 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.network.PacketDistributor;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
 

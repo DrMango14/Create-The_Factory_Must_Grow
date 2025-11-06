@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.connection.cable_hub;
 
-import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;

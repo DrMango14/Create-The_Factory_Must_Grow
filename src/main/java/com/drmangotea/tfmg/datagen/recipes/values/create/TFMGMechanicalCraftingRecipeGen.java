@@ -1,14 +1,10 @@
 package com.drmangotea.tfmg.datagen.recipes.values.create;
 
-import java.util.function.UnaryOperator;
-
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.google.common.base.Supplier;
-import com.simibubi.create.Create;
-
 import com.simibubi.create.api.data.recipe.MechanicalCraftingRecipeBuilder;
 import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.data.PackOutput;
@@ -16,7 +12,25 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
+import java.util.function.UnaryOperator;
+
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.aluminumIngot;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.aluminumSheet;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.castIronIngot;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.circuitBoard;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.copperWire;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.heavyMachineryCasing;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.magnet;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.precisionMechanism;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.rebar;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.rubber;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.shaft;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.steelBlock;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.steelIngot;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.steelMechanism;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.steelPipe;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.steelSheet;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.steelTank;
 
 public class TFMGMechanicalCraftingRecipeGen extends TFMGRecipeProvider {
 

@@ -4,7 +4,16 @@ import com.drmangotea.tfmg.datagen.recipes.TFMGProcessingRecipeGen;
 import com.simibubi.create.AllRecipeTypes;
 import net.minecraft.data.PackOutput;
 
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.aluminumIngot;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.aluminumSheetTFMG;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.castIronIngot;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.castIronSheetTFMG;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.leadIngot;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.leadSheetTFMG;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.nickelIngot;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.nickelSheetTFMG;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.rubber;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.syntheticLeather;
 
 public class TFMGPressingRecipeGen extends TFMGProcessingRecipeGen {
 

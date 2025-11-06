@@ -1,11 +1,9 @@
 package com.drmangotea.tfmg.datagen.recipes.values.tfmg;
 
 import com.drmangotea.tfmg.datagen.recipes.TFMGProcessingRecipeGen;
-import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.level.block.Blocks;
 
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.coil100Turns;
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.resistor10Ohms;

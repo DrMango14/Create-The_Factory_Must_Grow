@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 public class EngineFuelTypeManager {
     public static final Map<ResourceLocation, FuelType> BUILTIN_TYPE_MAP = new HashMap<>();

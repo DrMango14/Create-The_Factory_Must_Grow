@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.engines.base;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.KineticElectricBlockEntity;
 import com.drmangotea.tfmg.content.engines.fuels.BaseFuelTypes;
@@ -9,7 +8,6 @@ import com.drmangotea.tfmg.content.engines.fuels.FuelType;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.drmangotea.tfmg.registry.TFMGTags;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
-import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -34,9 +32,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
-
-import static com.drmangotea.tfmg.content.engines.base.EngineBlock.ENGINE_STATE;
-import static com.drmangotea.tfmg.content.engines.base.EngineBlock.EngineState.SHAFT;
 
 public abstract class AbstractEngineBlockEntity extends KineticElectricBlockEntity {
 

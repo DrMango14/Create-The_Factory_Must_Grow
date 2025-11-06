@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGClient;
 import com.simibubi.create.content.equipment.zapper.ShootGadgetPacket;
 import com.simibubi.create.content.equipment.zapper.ShootableGadgetRenderHandler;

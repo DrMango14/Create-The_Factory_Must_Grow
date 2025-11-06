@@ -1,14 +1,14 @@
 package com.drmangotea.tfmg.content.electricity.base;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.electricity.utilities.diode.ElectricDiodeBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_motor.ElectricMotorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.transformer.TransformerBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.Blocks;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ElectricalNetwork {
 

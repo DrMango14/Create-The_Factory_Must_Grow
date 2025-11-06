@@ -3,7 +3,6 @@ package com.drmangotea.tfmg.datagen.recipes.values.create;
 import com.drmangotea.tfmg.datagen.recipes.TFMGProcessingRecipeGen;
 import com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
-import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.AllRecipeTypes;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -11,7 +10,9 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Supplier;
 
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.aluminumSheet;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.steelIngot;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.steelSheet;
 
 public class TFMGItemApplicationRecipeGen extends TFMGProcessingRecipeGen {
 

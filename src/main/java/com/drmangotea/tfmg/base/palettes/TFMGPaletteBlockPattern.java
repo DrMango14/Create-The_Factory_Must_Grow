@@ -3,7 +3,13 @@ package com.drmangotea.tfmg.base.palettes;
 
 import com.drmangotea.tfmg.TFMG;
 import com.simibubi.create.content.decoration.palettes.ConnectedPillarBlock;
-import com.simibubi.create.foundation.block.connected.*;
+import com.simibubi.create.foundation.block.connected.AllCTTypes;
+import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
+import com.simibubi.create.foundation.block.connected.CTSpriteShifter;
+import com.simibubi.create.foundation.block.connected.CTType;
+import com.simibubi.create.foundation.block.connected.ConnectedTextureBehaviour;
+import com.simibubi.create.foundation.block.connected.HorizontalCTBehaviour;
+import com.simibubi.create.foundation.block.connected.RotatedPillarCTBehaviour;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
@@ -28,7 +34,9 @@ import java.util.function.Supplier;
 
 import static com.drmangotea.tfmg.base.palettes.TFMGPaletteBlockPartial.ALL_PARTIALS;
 import static com.drmangotea.tfmg.base.palettes.TFMGPaletteBlockPartial.FOR_POLISHED;
-import static com.drmangotea.tfmg.base.palettes.TFMGPaletteBlockPattern.PatternNameType.*;
+import static com.drmangotea.tfmg.base.palettes.TFMGPaletteBlockPattern.PatternNameType.PREFIX;
+import static com.drmangotea.tfmg.base.palettes.TFMGPaletteBlockPattern.PatternNameType.SUFFIX;
+import static com.drmangotea.tfmg.base.palettes.TFMGPaletteBlockPattern.PatternNameType.WRAP;
 
 
 public class TFMGPaletteBlockPattern {

@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.content.machinery.metallurgy.blast_furnace;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
-import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;

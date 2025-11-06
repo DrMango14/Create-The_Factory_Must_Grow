@@ -5,7 +5,13 @@ import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.drmangotea.tfmg.registry.TFMGTags;
 import net.minecraft.data.PackOutput;
 
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.*;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.diesel;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.gasoline;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.heavyOil;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.kerosene;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.lpg;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.lubricationOil;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.naphtha;
 
 public class DistillationRecipeGen extends TFMGProcessingRecipeGen {
 

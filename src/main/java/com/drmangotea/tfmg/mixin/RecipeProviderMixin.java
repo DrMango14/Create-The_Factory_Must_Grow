@@ -1,6 +1,6 @@
 package com.drmangotea.tfmg.mixin;
 
-import com.drmangotea.tfmg.datagen.recipes.values.*;
+import com.drmangotea.tfmg.datagen.recipes.values.TFMGStandardRecipeGen;
 import com.drmangotea.tfmg.datagen.recipes.values.create.TFMGMechanicalCraftingRecipeGen;
 import com.drmangotea.tfmg.datagen.recipes.values.create.TFMGSequencedAssemblyRecipeGen;
 import com.drmangotea.tfmg.datagen.recipes.values.tfmg.IndustrialBlastingRecipeGen;

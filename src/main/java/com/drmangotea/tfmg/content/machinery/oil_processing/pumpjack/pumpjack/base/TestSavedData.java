@@ -5,7 +5,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.saveddata.SavedData;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestSavedData extends SavedData {
 

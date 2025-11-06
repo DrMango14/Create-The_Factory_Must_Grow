@@ -17,7 +17,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING;
 import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 
 public class PolarizerRenderer extends SafeBlockEntityRenderer<PolarizerBlockEntity> {

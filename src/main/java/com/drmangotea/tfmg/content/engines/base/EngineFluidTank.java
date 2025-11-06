@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.engines.base;
 
-import com.drmangotea.tfmg.TFMG;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;

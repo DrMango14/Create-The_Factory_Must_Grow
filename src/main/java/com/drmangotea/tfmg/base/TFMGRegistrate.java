@@ -16,11 +16,10 @@ import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import static com.drmangotea.tfmg.registry.TFMGFluids.getGasTexture;
-import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 
 public class TFMGRegistrate extends CreateRegistrate {
     public static String autoLang(String id) {

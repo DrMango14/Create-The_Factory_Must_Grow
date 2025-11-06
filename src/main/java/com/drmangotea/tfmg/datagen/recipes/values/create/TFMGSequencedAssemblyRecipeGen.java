@@ -6,22 +6,27 @@ import com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider;
 import com.drmangotea.tfmg.recipes.WindingRecipe;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGItems;
-import com.drmangotea.tfmg.registry.TFMGTags;
-import com.simibubi.create.AllTags;
-import com.simibubi.create.api.data.recipe.BaseRecipeProvider;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
-import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 import java.util.function.UnaryOperator;
 
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.*;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.lubricationOil;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.copperSheet;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.copperWire;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.leadSheet;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.magnet;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.nickelSheet;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.plasticSheet;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.shaft;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.steelIngot;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.steelMechanism;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.steelSheet;
 
 
 public class TFMGSequencedAssemblyRecipeGen extends TFMGRecipeProvider {

@@ -1,7 +1,11 @@
 package com.drmangotea.tfmg.datagen.recipes.values.tfmg;
 
 import com.drmangotea.tfmg.datagen.recipes.TFMGProcessingRecipeGen;
-import com.drmangotea.tfmg.registry.*;
+import com.drmangotea.tfmg.registry.TFMGBlocks;
+import com.drmangotea.tfmg.registry.TFMGFluids;
+import com.drmangotea.tfmg.registry.TFMGItems;
+import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
+import com.drmangotea.tfmg.registry.TFMGTags;
 import net.minecraft.data.PackOutput;
 
 public class CastingRecipeGen extends TFMGProcessingRecipeGen {

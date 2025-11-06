@@ -3,7 +3,6 @@ package com.drmangotea.tfmg.registry;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.engines.engine_controller.EngineControllerMenu;
 import com.drmangotea.tfmg.content.engines.engine_controller.EngineControllerScreen;
-import com.simibubi.create.Create;
 import com.tterrag.registrate.builders.MenuBuilder.ForgeMenuFactory;
 import com.tterrag.registrate.builders.MenuBuilder.ScreenFactory;
 import com.tterrag.registrate.util.entry.MenuEntry;

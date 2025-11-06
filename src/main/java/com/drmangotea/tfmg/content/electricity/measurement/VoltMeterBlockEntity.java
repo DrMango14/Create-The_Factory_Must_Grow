@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.measurement;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlockEntity;

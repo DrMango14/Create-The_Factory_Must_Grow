@@ -3,7 +3,6 @@ package com.drmangotea.tfmg.content.machinery.misc.concrete_hose;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.content.contraptions.pulley.AbstractPulleyVisual;
-import com.simibubi.create.content.fluids.hosePulley.HosePulleyBlockEntity;
 import com.simibubi.create.content.processing.burner.ScrollInstance;
 import com.simibubi.create.foundation.render.AllInstanceTypes;
 import dev.engine_room.flywheel.api.instance.Instancer;

@@ -1,18 +1,13 @@
 package com.drmangotea.tfmg.ponder;
 
 import com.drmangotea.tfmg.TFMG;
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.Create;
-import com.simibubi.create.content.kinetics.crank.ValveHandleBlock;
-import com.simibubi.create.content.logistics.packagePort.postbox.PostboxBlock;
-import com.simibubi.create.content.logistics.tableCloth.TableClothBlock;
 import com.simibubi.create.foundation.ponder.PonderWorldBlockEntityFix;
-import com.simibubi.create.infrastructure.ponder.AllCreatePonderScenes;
-import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
 import net.createmod.ponder.api.level.PonderLevel;
-import net.createmod.ponder.api.registration.*;
+import net.createmod.ponder.api.registration.PonderPlugin;
+import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
+import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
+import net.createmod.ponder.api.registration.SharedTextRegistrationHelper;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.DyeColor;
 
 public class TFMGPonderPlugin implements PonderPlugin {
 

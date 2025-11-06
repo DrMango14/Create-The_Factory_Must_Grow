@@ -5,7 +5,6 @@ import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueSettingsBoard;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueSettingsFormatter;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
-
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;

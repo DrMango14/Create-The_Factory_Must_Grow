@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.base;
 
-import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;

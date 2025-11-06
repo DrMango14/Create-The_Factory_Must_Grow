@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.utilities.electric_motor;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.config.MachineConfig;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.KineticElectricBlockEntity;

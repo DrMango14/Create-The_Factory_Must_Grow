@@ -11,7 +11,12 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import static com.drmangotea.tfmg.content.electricity.connection.diagonal.DiagonalCableBlock.FACING_PRIMARY;
 import static com.drmangotea.tfmg.content.electricity.connection.diagonal.DiagonalCableBlock.FACING_SECONDARY;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
-import static net.minecraft.core.Direction.*;
+import static net.minecraft.core.Direction.DOWN;
+import static net.minecraft.core.Direction.EAST;
+import static net.minecraft.core.Direction.NORTH;
+import static net.minecraft.core.Direction.SOUTH;
+import static net.minecraft.core.Direction.UP;
+import static net.minecraft.core.Direction.WEST;
 
 public class DiagonalCableGenerator extends SpecialBlockStateGen {
 

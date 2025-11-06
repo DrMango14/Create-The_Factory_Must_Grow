@@ -2,21 +2,15 @@ package com.drmangotea.tfmg.registry;
 
 
 import com.drmangotea.tfmg.TFMG;
-import com.simibubi.create.AllTags;
-
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -35,7 +29,7 @@ public class TFMGTags {
     }
 
     public static <T> TagKey<T> forgeTag(IForgeRegistry<T> registry, String path) {
-        return optionalTag(registry, new ResourceLocation("forge", path));
+        return optionalTag(registry, ResourceLocation.fromNamespaceAndPath("forge", path));
     }
 
     public static TagKey<Block> forgeBlockTag(String path) {
@@ -51,138 +45,99 @@ public class TFMGTags {
     }
 
     public enum NameSpace {
-
-        MOD(TFMG.MOD_ID, false, true),
+        MOD(TFMG.MOD_ID),
         FORGE("forge")
-
-
         ;
 
         public final String id;
-        public final boolean optionalDefault;
-        public final boolean alwaysDatagenDefault;
 
         NameSpace(String id) {
-            this(id, true, false);
-        }
-
-        NameSpace(String id, boolean optionalDefault, boolean alwaysDatagenDefault) {
             this.id = id;
-            this.optionalDefault = optionalDefault;
-            this.alwaysDatagenDefault = alwaysDatagenDefault;
         }
     }
 
     public enum TFMGBlockTags {
-        BLAST_FURNACE_WALL,
-        REINFORCED_BLAST_FURNACE_WALL,
-        BLAST_FURNACE_SUPPORT,
-        INDUSTRIAL_PIPE,
-        REINFORCED_BLAST_FURNACE_SUPPORT,
-        SURFACE_SCANNER_FINDABLE,
-        PUMPJACK_PART,
-        PUMPJACK_HEAD,
-        PUMPJACK_CONNECTOR,
-        PUMPJACK_SMALL_PART
+	    BLAST_FURNACE_SUPPORT,
+	    BLAST_FURNACE_WALL,
+	    INDUSTRIAL_PIPE,
+	    ORES_LITHIUM(FORGE, "ores/lithium"),
+	    PUMPJACK_CONNECTOR,
+	    PUMPJACK_HEAD,
+	    PUMPJACK_PART,
+	    PUMPJACK_SMALL_PART,
+	    RAW_LITHIUM(FORGE, "raw_materials/lithium"),
+	    REINFORCED_BLAST_FURNACE_SUPPORT,
+	    REINFORCED_BLAST_FURNACE_WALL,
+	    STORAGE_BLOCKS_CAST_IRON(FORGE, "storage_blocks/cast_iron"),
+	    STORAGE_BLOCKS_COAL_COKE(FORGE, "storage_blocks/coal_coke"),
+	    STORAGE_BLOCKS_LITHIUM(FORGE, "storage_blocks/lithium"),
+	    STORAGE_BLOCKS_PLASTIC(FORGE, "storage_blocks/plastic"),
+	    STORAGE_BLOCKS_RAW_LITHIUM(FORGE, "storage_blocks/raw_lithium"),
+	    SURFACE_SCANNER_FINDABLE,
+        CONCRETE(FORGE, "concrete")
         ;
 
         public final TagKey<Block> tag;
-        public final boolean alwaysDatagen;
 
         TFMGBlockTags() {
             this(MOD);
         }
 
         TFMGBlockTags(NameSpace namespace) {
-            this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+            this(namespace, null);
         }
 
         TFMGBlockTags(NameSpace namespace, String path) {
-            this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+	        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? CreateLang.asId(name()) : path);
+	        this.tag = BlockTags.create(id);
         }
-
-        TFMGBlockTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
-            this(namespace, null, optional, alwaysDatagen);
-        }
-
-        TFMGBlockTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? CreateLang.asId(name()) : path);
-            if (optional) {
-                tag = optionalTag(ForgeRegistries.BLOCKS, id);
-            } else {
-                tag = BlockTags.create(id);
-            }
-            this.alwaysDatagen = alwaysDatagen;
-        }
-
-        @SuppressWarnings("deprecation")
-        public boolean matches(Block block) {
-            return block.builtInRegistryHolder()
-                    .is(tag);
-        }
-
-        public boolean matches(ItemStack stack) {
-            return stack != null && stack.getItem() instanceof BlockItem blockItem && matches(blockItem.getBlock());
-        }
-
-        public boolean matches(BlockState state) {
-            return state.is(tag);
-        }
-
-        private static void init() {}
 
     }
     public enum TFMGItemTags {
-
-        FLUX,
-        SPOOLS,
-        BLAST_FURNACE_FUEL,
-        RODS,
-        IRON_PLATES(FORGE, "plates/iron"),
-        ALUMINUM_PLATES(FORGE, "plates/aluminum")
-
+	    BLAST_FURNACE_FUEL,
+	    DUSTS_COAL_COKE(FORGE, "dusts/coal_coke"),
+	    DUSTS_IRON(FORGE, "dusts/iron"),
+	    DUSTS_SALTPETER(FORGE, "dusts/saltpeter"),
+	    DUSTS_SULFUR(FORGE, "dusts/sulfur"),
+	    FLUX,
+	    INGOTS_CAST_IRON(FORGE, "ingots/cast_iron"),
+	    INGOTS_LITHIUM(FORGE, "ingots/lithium"),
+	    INGOTS_PLASTIC(FORGE, "ingots/plastic"),
+	    INGOTS_RUBBER(FORGE, "ingots/rubber"),
+	    INGOTS_SILICON(FORGE, "ingots/silicon"),
+	    NUGGETS_CAST_IRON(FORGE, "nuggets/cast_iron"),
+	    NUGGETS_LITHIUM(FORGE, "nuggets/lithium"),
+	    ORES_LITHIUM(FORGE, "ores/lithium"),
+	    PLATES_CAST_IRON(FORGE, "plates/cast_iron"),
+	    RAW_LITHIUM(FORGE, "raw_materials/lithium"),
+	    RODS_STEEL(FORGE, "rods/steel"),
+	    SPOOLS,
+	    STORAGE_BLOCKS_CAST_IRON(FORGE, "storage_blocks/cast_iron"),
+	    STORAGE_BLOCKS_COAL_COKE(FORGE, "storage_blocks/coal_coke"),
+	    STORAGE_BLOCKS_LITHIUM(FORGE, "storage_blocks/lithium"),
+	    STORAGE_BLOCKS_PLASTIC(FORGE, "storage_blocks/plastic"),
+	    STORAGE_BLOCKS_RAW_LITHIUM(FORGE, "storage_blocks/raw_lithium"),
+	    WIRES(FORGE),
+	    WIRES_ALUMINUM(FORGE, "wires/aluminum"),
+	    WIRES_CONSTANTAN(FORGE, "wires/constantan"),
+	    WIRES_COPPER(FORGE, "wires/copper"),
+        CONCRETE(FORGE, "concrete")
         ;
 
         public final TagKey<Item> tag;
-        public final boolean alwaysDatagen;
 
         TFMGItemTags() {
             this(NameSpace.MOD);
         }
 
         TFMGItemTags(NameSpace namespace) {
-            this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+            this(namespace, null);
         }
 
         TFMGItemTags(NameSpace namespace, String path) {
-            this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? CreateLang.asId(name()) : path);
+            this.tag = ItemTags.create(id);
         }
-
-        TFMGItemTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
-            this(namespace, null, optional, alwaysDatagen);
-        }
-
-        TFMGItemTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? CreateLang.asId(name()) : path);
-            if (optional) {
-                tag = optionalTag(ForgeRegistries.ITEMS, id);
-            } else {
-                tag = ItemTags.create(id);
-            }
-            this.alwaysDatagen = alwaysDatagen;
-        }
-
-        @SuppressWarnings("deprecation")
-        public boolean matches(Item item) {
-            return item.builtInRegistryHolder()
-                    .is(tag);
-        }
-
-        public boolean matches(ItemStack stack) {
-            return stack.is(tag);
-        }
-
-        private static void init() {}
 
     }
     public enum TFMGFluidTags {
@@ -191,74 +146,40 @@ public class TFMGTags {
         FLAMMABLE(MOD),
         FIREBOX_FUEL(MOD),
         BLAST_STOVE_FUEL(MOD),
-        AIR(NameSpace.FORGE),
-        COOLING_FLUID(NameSpace.FORGE),
+        AIR(FORGE),
+        COOLING_FLUID(FORGE),
 
-        GASOLINE(NameSpace.FORGE),
-        DIESEL(NameSpace.FORGE),
-        KEROSENE(NameSpace.FORGE),
+        GASOLINE(FORGE),
+        DIESEL(FORGE),
+        KEROSENE(FORGE),
 
-        CREOSOTE(NameSpace.FORGE),
-        FURNACE_GAS(NameSpace.FORGE),
+        CREOSOTE(FORGE),
+        FURNACE_GAS(FORGE),
 
-        LPG(NameSpace.FORGE),
-        HEAVY_OIL(NameSpace.FORGE),
-        LUBRICATION_OIL(NameSpace.FORGE),
-        NAPHTHA(NameSpace.FORGE),
-        CRUDE_OIL(NameSpace.FORGE),
-        MOLTEN_STEEL(NameSpace.FORGE),
-        FUEL(NameSpace.FORGE)
-
+        LPG(FORGE),
+        HEAVY_OIL(FORGE),
+        LUBRICATION_OIL(FORGE),
+        NAPHTHA(FORGE),
+        CRUDE_OIL(FORGE),
+        MOLTEN_STEEL(FORGE),
+        FUEL(FORGE)
         ;
 
         public final TagKey<Fluid> tag;
-        public final boolean alwaysDatagen;
 
         TFMGFluidTags() {
             this(MOD);
         }
 
         TFMGFluidTags(NameSpace namespace) {
-            this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+            this(namespace, null);
         }
 
         TFMGFluidTags(NameSpace namespace, String path) {
-            this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? CreateLang.asId(name()) : path);
+            this.tag = FluidTags.create(id);
         }
-
-        TFMGFluidTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
-            this(namespace, null, optional, alwaysDatagen);
-        }
-
-        TFMGFluidTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? CreateLang.asId(name()) : path);
-            if (optional) {
-                tag = optionalTag(ForgeRegistries.FLUIDS, id);
-            } else {
-                tag = FluidTags.create(id);
-            }
-            this.alwaysDatagen = alwaysDatagen;
-        }
-
-        @SuppressWarnings("deprecation")
-        public boolean matches(Fluid fluid) {
-            return fluid.is(tag);
-        }
-
-        public boolean matches(FluidState state) {
-            return state.is(tag);
-        }
-
-        private static void init() {}
 
     }
-    
 
-    public static void init() {
-        TFMGBlockTags.init();
-       // TFMGItemTags.register();
-        TFMGFluidTags.init();
-        //TFMGEntityTags.register();
-        //TFMGRecipeSerializerTags.register();
-    }
 }

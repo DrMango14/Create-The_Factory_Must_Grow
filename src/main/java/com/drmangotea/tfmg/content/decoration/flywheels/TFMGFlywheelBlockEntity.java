@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.content.decoration.flywheels;
 
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

@@ -4,9 +4,7 @@ package com.drmangotea.tfmg.base.palettes;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGCreativeTabs;
 import com.drmangotea.tfmg.registry.TFMGPaletteStoneTypes;
-import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-
 import com.simibubi.create.foundation.utility.CreateLang;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
@@ -34,7 +32,6 @@ import net.minecraftforge.client.model.generators.ModelFile;
 
 import java.util.Arrays;
 import java.util.function.Supplier;
-
 
 import static com.drmangotea.tfmg.TFMG.REGISTRATE;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;

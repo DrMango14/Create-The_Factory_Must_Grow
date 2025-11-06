@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.engines.types.regular_engine;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
@@ -32,7 +31,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.drmangotea.tfmg.content.engines.base.EngineProperties.*;
+import static com.drmangotea.tfmg.content.engines.base.EngineProperties.pistonsBoxer;
+import static com.drmangotea.tfmg.content.engines.base.EngineProperties.pistonsI;
+import static com.drmangotea.tfmg.content.engines.base.EngineProperties.pistonsRadial;
+import static com.drmangotea.tfmg.content.engines.base.EngineProperties.pistonsTurbine;
+import static com.drmangotea.tfmg.content.engines.base.EngineProperties.pistonsU;
+import static com.drmangotea.tfmg.content.engines.base.EngineProperties.pistonsV;
+import static com.drmangotea.tfmg.content.engines.base.EngineProperties.pistonsW;
 import static com.drmangotea.tfmg.content.engines.types.regular_engine.RegularEngineBlock.EXTENDED;
 import static com.drmangotea.tfmg.registry.TFMGTags.optionalTag;
 import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING;

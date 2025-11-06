@@ -3,9 +3,6 @@ package com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.h
 
 import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.base.PumpjackBaseBlockEntity;
 import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.crank.PumpjackCrankBlockEntity;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.hammer.parts.PumpjackHammerConnectorBlock;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.hammer.parts.large.LargePumpjackHammerConnectorBlock;
-import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGTags;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;

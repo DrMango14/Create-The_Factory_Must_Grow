@@ -2,7 +2,14 @@ package com.drmangotea.tfmg.registry;
 
 
 import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.base.spark.*;
+import com.drmangotea.tfmg.base.spark.BlueSpark;
+import com.drmangotea.tfmg.base.spark.BlueSparkRenderer;
+import com.drmangotea.tfmg.base.spark.DryIceFlake;
+import com.drmangotea.tfmg.base.spark.DryIceFlakeRenderer;
+import com.drmangotea.tfmg.base.spark.GreenSpark;
+import com.drmangotea.tfmg.base.spark.GreenSparkRenderer;
+import com.drmangotea.tfmg.base.spark.Spark;
+import com.drmangotea.tfmg.base.spark.SparkRenderer;
 import com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon.projectile.NapalmPotato;
 import com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon.projectile.NapalmPotatoRenderer;
 import com.drmangotea.tfmg.content.items.weapons.explosives.napalm.NapalmBombEntity;
@@ -14,7 +21,6 @@ import com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades.Th
 import com.drmangotea.tfmg.content.items.weapons.lithium_blade.LithiumSpark;
 import com.drmangotea.tfmg.content.items.weapons.lithium_blade.LithiumSparkRenderer;
 import com.simibubi.create.foundation.data.CreateEntityBuilder;
-
 import com.simibubi.create.foundation.utility.CreateLang;
 import com.tterrag.registrate.util.entry.EntityEntry;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;

@@ -3,7 +3,6 @@ package com.drmangotea.tfmg.content.items.weapons.flamethrover;
 import com.drmangotea.tfmg.TFMGClient;
 import com.drmangotea.tfmg.base.spark.Spark;
 import com.drmangotea.tfmg.registry.TFMGEntityTypes;
-import com.simibubi.create.api.equipment.potatoCannon.PotatoCannonProjectileType;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.item.CustomArmPoseItem;
 import net.minecraft.client.model.HumanoidModel;

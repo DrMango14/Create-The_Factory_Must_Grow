@@ -7,7 +7,11 @@ import com.drmangotea.tfmg.datagen.recipes.builder.IndustrialBlastingRecipeBuild
 import com.drmangotea.tfmg.datagen.recipes.builder.VatMachineRecipeBuilder;
 import com.drmangotea.tfmg.recipes.IndustrialBlastingRecipe;
 import com.drmangotea.tfmg.recipes.VatMachineRecipe;
-import com.drmangotea.tfmg.registry.*;
+import com.drmangotea.tfmg.registry.TFMGBlocks;
+import com.drmangotea.tfmg.registry.TFMGFluids;
+import com.drmangotea.tfmg.registry.TFMGItems;
+import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
+import com.drmangotea.tfmg.registry.TFMGTags;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllItems;

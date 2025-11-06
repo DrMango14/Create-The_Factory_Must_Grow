@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon;
 
-import com.drmangotea.tfmg.registry.TFMGItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.equipment.potatoCannon.PotatoProjectileEntity;
 import com.simibubi.create.content.equipment.zapper.ShootableGadgetRenderHandler;

@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.mixin;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.decoration.tanks.aluminum.AluminumTankBlock;
 import com.drmangotea.tfmg.content.decoration.tanks.cast_iron.CastIronTankBlock;
 import com.drmangotea.tfmg.mixin.accessor.FluidTankBlockEntityAccessor;

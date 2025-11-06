@@ -1,8 +1,6 @@
 package com.drmangotea.tfmg.content.machinery.misc.winding_machine;
 
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
-import com.drmangotea.tfmg.registry.TFMGTags;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.AllPartialModels;
@@ -20,6 +18,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.Tags;
 
 import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING;
 import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
@@ -88,7 +87,7 @@ public class WindingMachineRenderer extends KineticBlockEntityRenderer<WindingMa
                     .translateZ(0.4f)
                     .translateY(0.33f)
                     .rotateXDegrees(be.angle)
-                    .rotateZDegrees(item.is(TFMGTags.TFMGItemTags.RODS.tag) ? 45 : 0)
+                    .rotateZDegrees(item.is(Tags.Items.RODS) ? 45 : 0)
                     .rotateZDegrees(blockItem ? 90 : 0)
                     .scale(blockItem ? .5f : .375f);
             itemRenderer.render(item, ItemDisplayContext.FIXED, false, ms, bufferSource, light, overlay, bakedModel);
