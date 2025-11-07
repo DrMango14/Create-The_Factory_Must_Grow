@@ -17,7 +17,7 @@ import org.joml.Matrix4f;
 
 @OnlyIn(Dist.CLIENT)
 public class DryIceFlakeRenderer extends EntityRenderer<DryIceFlake> {
-    private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("tfmg:textures/entity/dry_ice_flake.png");
+    private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.parse("tfmg:textures/entity/dry_ice_flake.png");
     private static final RenderType RENDER_TYPE = RenderType.entityCutoutNoCull(TEXTURE_LOCATION);
     public DryIceFlakeRenderer(EntityRendererProvider.Context context) {
         super(context);

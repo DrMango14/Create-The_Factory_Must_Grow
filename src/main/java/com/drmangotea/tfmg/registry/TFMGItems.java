@@ -29,10 +29,11 @@ import com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon.QuadPotatoCa
 import com.drmangotea.tfmg.content.machinery.misc.winding_machine.SpoolItem;
 import com.drmangotea.tfmg.content.machinery.oil_processing.OilHammerItem;
 import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.pumpjack.base.DepositItem;
-import com.simibubi.create.AllTags;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.drmangotea.tfmg.registry.TFMGTags.TFMGItemTags;
+import com.simibubi.create.foundation.data.recipe.CommonMetal;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.ItemEntry;
@@ -64,7 +65,8 @@ import static com.drmangotea.tfmg.content.items.weapons.explosives.thermite_gren
 import static com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades.ThermiteGrenade.ChemicalColor.BLUE;
 import static com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades.ThermiteGrenade.ChemicalColor.GREEN;
 import static com.simibubi.create.AllTags.AllItemTags.CREATE_INGOTS;
-import static com.simibubi.create.AllTags.forgeItemTag;
+import static com.simibubi.create.AllTags.AllItemTags.PLATES;
+import static com.simibubi.create.AllTags.AllItemTags;
 
 public class TFMGItems {
 
@@ -73,54 +75,55 @@ public class TFMGItems {
 
 
     public static final ItemEntry<Item>
-            STEEL_INGOT = taggedIngredient("steel_ingot", forgeItemTag("ingots/steel"), CREATE_INGOTS.tag),
-            CAST_IRON_INGOT = taggedIngredient("cast_iron_ingot", forgeItemTag("ingots/cast_iron"), CREATE_INGOTS.tag),
-            ALUMINUM_INGOT = taggedIngredient("aluminum_ingot", forgeItemTag("ingots/aluminum"), CREATE_INGOTS.tag),
-            PLASTIC_SHEET = taggedIngredient("plastic_sheet", forgeItemTag("ingots/plastic"), CREATE_INGOTS.tag),
-            HEAVY_PLATE = taggedIngredient("heavy_plate", forgeItemTag("plates/steel"), forgeItemTag("plates")),
-            ALUMINUM_SHEET = taggedIngredient("aluminum_sheet", forgeItemTag("plates/aluminum"), forgeItemTag("plates")),
-            NICKEL_SHEET = taggedIngredient("nickel_sheet", forgeItemTag("plates/nickel"), forgeItemTag("plates")),
-            CAST_IRON_SHEET = taggedIngredient("cast_iron_sheet", forgeItemTag("plates/cast_iron"), forgeItemTag("plates")),
-            LEAD_SHEET = taggedIngredient("lead_sheet", forgeItemTag("plates/lead"), forgeItemTag("plates")),
-            LEAD_INGOT = taggedIngredient("lead_ingot", forgeItemTag("ingots/lead"), CREATE_INGOTS.tag),
-            NICKEL_INGOT = taggedIngredient("nickel_ingot", forgeItemTag("ingots/nickel"), CREATE_INGOTS.tag),
-            CONSTANTAN_INGOT = taggedIngredient("constantan_ingot", forgeItemTag("ingots/constantan"), CREATE_INGOTS.tag),
-            LITHIUM_INGOT = taggedIngredient("lithium_ingot", forgeItemTag("ingots/lithium"), CREATE_INGOTS.tag),
-            ALUMINUM_NUGGET = taggedIngredient("aluminum_nugget", forgeItemTag("nuggets/aluminum"), forgeItemTag("nuggets")),
-            STEEL_NUGGET = taggedIngredient("steel_nugget", forgeItemTag("nuggets/steel"), forgeItemTag("nuggets")),
-            CAST_IRON_NUGGET = taggedIngredient("cast_iron_nugget", forgeItemTag("nuggets/cast_iron"), forgeItemTag("nuggets")),
-            CONSTANTAN_NUGGET = taggedIngredient("constantan_nugget", forgeItemTag("nuggets/constantan"), forgeItemTag("nuggets")),
-            LEAD_NUGGET = taggedIngredient("lead_nugget", forgeItemTag("nuggets/lead"), forgeItemTag("nuggets")),
-            NICKEL_NUGGET = taggedIngredient("nickel_nugget", forgeItemTag("nuggets/nickel"), forgeItemTag("nuggets")),
-            LITHIUM_NUGGET = taggedIngredient("lithium_nugget", forgeItemTag("nuggets/lithium"), forgeItemTag("nuggets")),
-            RAW_LEAD = taggedIngredient("raw_lead", forgeItemTag("raw_materials/lead"), forgeItemTag("raw_materials")),
-            RAW_NICKEL = taggedIngredient("raw_nickel", forgeItemTag("raw_materials/nickel"), forgeItemTag("raw_materials")),
-            RAW_LITHIUM = taggedIngredient("raw_lithium", forgeItemTag("raw_materials/lithium"), forgeItemTag("raw_materials")),
-            SYNTHETIC_LEATHER = taggedIngredient("synthetic_leather", Tags.Items.LEATHER, AllTags.forgeItemTag("leather")),
-            LIMESAND = taggedIngredient("limesand", TFMGTags.TFMGItemTags.FLUX.tag),
-            SULFUR_DUST = taggedIngredient("sulfur_dust", forgeItemTag("dusts/sulfur"), forgeItemTag("dusts")),
-            RUBBER_SHEET = taggedIngredient("rubber_sheet", forgeItemTag("ingots/rubber"), forgeItemTag("ingots")),
-            SILICON_INGOT = taggedIngredient("silicon_ingot", forgeItemTag("ingots/silicon"), forgeItemTag("ingots")),
-            CRUSHED_LITHIUM = taggedIngredient("crushed_raw_lithium", AllTags.AllItemTags.CRUSHED_RAW_MATERIALS.tag)
+            STEEL_INGOT = taggedIngredient("steel_ingot", CommonMetal.STEEL.ingots, Tags.Items.INGOTS, CREATE_INGOTS.tag),
+            CAST_IRON_INGOT = taggedIngredient("cast_iron_ingot", TFMGItemTags.INGOTS_CAST_IRON.tag, Tags.Items.INGOTS, CREATE_INGOTS.tag),
+            ALUMINUM_INGOT = taggedIngredient("aluminum_ingot", CommonMetal.ALUMINUM.ingots, Tags.Items.INGOTS, CREATE_INGOTS.tag),
+            PLASTIC_SHEET = taggedIngredient("plastic_sheet", TFMGItemTags.INGOTS_PLASTIC.tag, Tags.Items.INGOTS, CREATE_INGOTS.tag),
+            HEAVY_PLATE = taggedIngredient("heavy_plate", CommonMetal.STEEL.plates, PLATES.tag),
+            ALUMINUM_SHEET = taggedIngredient("aluminum_sheet", CommonMetal.ALUMINUM.plates, PLATES.tag),
+            NICKEL_SHEET = taggedIngredient("nickel_sheet", CommonMetal.NICKEL.plates, PLATES.tag),
+            CAST_IRON_SHEET = taggedIngredient("cast_iron_sheet", TFMGItemTags.PLATES_CAST_IRON.tag, PLATES.tag),
+            LEAD_SHEET = taggedIngredient("lead_sheet", CommonMetal.LEAD.plates, PLATES.tag),
+            LEAD_INGOT = taggedIngredient("lead_ingot", CommonMetal.LEAD.ingots, Tags.Items.INGOTS, CREATE_INGOTS.tag),
+            NICKEL_INGOT = taggedIngredient("nickel_ingot", CommonMetal.NICKEL.ingots, Tags.Items.INGOTS, CREATE_INGOTS.tag),
+            CONSTANTAN_INGOT = taggedIngredient("constantan_ingot", CommonMetal.CONSTANTAN.ingots, Tags.Items.INGOTS, CREATE_INGOTS.tag),
+            LITHIUM_INGOT = taggedIngredient("lithium_ingot", TFMGItemTags.INGOTS_LITHIUM.tag, Tags.Items.INGOTS, CREATE_INGOTS.tag),
+            ALUMINUM_NUGGET = taggedIngredient("aluminum_nugget", CommonMetal.ALUMINUM.nuggets, Tags.Items.NUGGETS),
+            STEEL_NUGGET = taggedIngredient("steel_nugget", CommonMetal.STEEL.nuggets, Tags.Items.NUGGETS),
+            CAST_IRON_NUGGET = taggedIngredient("cast_iron_nugget", TFMGItemTags.NUGGETS_CAST_IRON.tag, Tags.Items.NUGGETS),
+            CONSTANTAN_NUGGET = taggedIngredient("constantan_nugget", CommonMetal.CONSTANTAN.nuggets, Tags.Items.NUGGETS),
+            LEAD_NUGGET = taggedIngredient("lead_nugget", CommonMetal.LEAD.nuggets, Tags.Items.NUGGETS),
+            NICKEL_NUGGET = taggedIngredient("nickel_nugget", CommonMetal.NICKEL.nuggets, Tags.Items.NUGGETS),
+            LITHIUM_NUGGET = taggedIngredient("lithium_nugget", TFMGItemTags.NUGGETS_LITHIUM.tag, Tags.Items.NUGGETS),
+            RAW_LEAD = taggedIngredient("raw_lead", CommonMetal.LEAD.rawOres, Tags.Items.RAW_MATERIALS),
+            RAW_NICKEL = taggedIngredient("raw_nickel", CommonMetal.NICKEL.rawOres, Tags.Items.RAW_MATERIALS),
+            RAW_LITHIUM = taggedIngredient("raw_lithium", TFMGItemTags.RAW_LITHIUM.tag, Tags.Items.RAW_MATERIALS),
+            SYNTHETIC_LEATHER = taggedIngredient("synthetic_leather", Tags.Items.LEATHER),
+            LIMESAND = taggedIngredient("limesand", TFMGItemTags.FLUX.tag),
+            SULFUR_DUST = taggedIngredient("sulfur_dust", TFMGItemTags.DUSTS_SULFUR.tag, Tags.Items.DUSTS),
+            RUBBER_SHEET = taggedIngredient("rubber_sheet", TFMGItemTags.INGOTS_RUBBER.tag, PLATES.tag),
+            SILICON_INGOT = taggedIngredient("silicon_ingot", TFMGItemTags.INGOTS_SILICON.tag, CREATE_INGOTS.tag),
+            CRUSHED_LITHIUM = taggedIngredient("crushed_raw_lithium", AllItemTags.CRUSHED_RAW_MATERIALS.tag)
     ;
 
 
     public static final ItemEntry<Item>
             REBAR = REGISTRATE.item("rebar", Item::new)
-            .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), RecipeCategory.BUILDING_BLOCKS, c::get, 4))
+		    .tag(TFMGItemTags.RODS_STEEL.tag, Tags.Items.RODS)
+            .recipe((c, p) -> p.stonecutting(DataIngredient.tag(CommonMetal.STEEL.ingots), RecipeCategory.BUILDING_BLOCKS, c, 4))
             .register(),
             SYNTHETIC_STRING = REGISTRATE.item("synthetic_string", Item::new)
-                    .tag(Tags.Items.STRING, AllTags.forgeItemTag("string"))
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/rubber")), RecipeCategory.MISC, c::get, 4))
+		            .tag(Tags.Items.STRING)
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(TFMGItemTags.INGOTS_RUBBER.tag), RecipeCategory.MISC, c, 4))
                     .register();
 
     public static final ItemEntry<Item>
-            COPPER_WIRE = REGISTRATE.item("copper_wire", Item::new).tag(AllTags.forgeItemTag("wires/copper"), forgeItemTag("wires"))
-            .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/copper")), RecipeCategory.BUILDING_BLOCKS, c::get, 2)).register(),
-            ALUMINUM_WIRE = REGISTRATE.item("aluminum_wire", Item::new).tag(AllTags.forgeItemTag("wires/aluminum"), forgeItemTag("wires"))
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/aluminum")), RecipeCategory.BUILDING_BLOCKS, c::get, 2)).register(),
-            CONSTANTAN_WIRE = REGISTRATE.item("constantan_wire", Item::new).tag(AllTags.forgeItemTag("wires/constantan"), forgeItemTag("wires"))
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/constantan")), RecipeCategory.BUILDING_BLOCKS, c::get, 2)).register();
+            COPPER_WIRE = REGISTRATE.item("copper_wire", Item::new).tag(TFMGItemTags.WIRES_COPPER.tag, TFMGItemTags.WIRES.tag)
+            .recipe((c, p) -> p.stonecutting(DataIngredient.tag(CommonMetal.COPPER.ingots), RecipeCategory.BUILDING_BLOCKS, c, 2)).register(),
+            ALUMINUM_WIRE = REGISTRATE.item("aluminum_wire", Item::new).tag(TFMGItemTags.WIRES_ALUMINUM.tag, TFMGItemTags.WIRES.tag)
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(CommonMetal.ALUMINUM.ingots), RecipeCategory.BUILDING_BLOCKS, c, 2)).register(),
+            CONSTANTAN_WIRE = REGISTRATE.item("constantan_wire", Item::new).tag(TFMGItemTags.WIRES_CONSTANTAN.tag, TFMGItemTags.WIRES.tag)
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(CommonMetal.CONSTANTAN.ingots), RecipeCategory.BUILDING_BLOCKS, c, 2)).register();
 
     public static final ItemEntry<Item>
             SPARK_PLUG = REGISTRATE.item("spark_plug", Item::new).register(),
@@ -129,7 +132,7 @@ public class TFMGItems {
             FIREPROOF_BRICK = REGISTRATE.item("fireproof_brick", Item::new).register(),
             FIRECLAY_BALL = REGISTRATE.item("fireclay_ball", Item::new).register(),
             SCREW = REGISTRATE.item("screw", Item::new)
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), RecipeCategory.BUILDING_BLOCKS, c::get, 4))
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(CommonMetal.STEEL.ingots), RecipeCategory.BUILDING_BLOCKS, c, 4))
                     .lang("Screws")
                     .register(),
             THERMITE_POWDER = REGISTRATE.item("thermite_powder", Item::new).register(),
@@ -151,7 +154,7 @@ public class TFMGItems {
             TURBO = REGISTRATE.item("turbo", Item::new).register(),
             GOLDEN_TURBO = REGISTRATE.item("golden_turbo", Item::new).register(),
             CINDERBLOCK = REGISTRATE.item("cinderblock", Item::new)
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.items(TFMGBlocks.CONCRETE.block.asItem()), RecipeCategory.BUILDING_BLOCKS, c::get, 8))
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.items(TFMGBlocks.CONCRETE.block.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 8))
                     .register(),
             CINDERFLOURBLOCK = REGISTRATE.item("cinderflourblock", Item::new).register(),
             NAPALM_POTATO = REGISTRATE.item("napalm_potato", Item::new).register(),
@@ -171,19 +174,19 @@ public class TFMGItems {
             UNFINISHED_ELECTROMAGNETIC_COIL = REGISTRATE.item("unfinished_electromagnetic_coil", Item::new).register(),
             COPPER_ELECTRODE = REGISTRATE.item("copper_electrode", Item::new)
                     .properties(p -> p.stacksTo(1))
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("storage_blocks/copper")), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(CommonMetal.COPPER.storageBlocks.items()), RecipeCategory.BUILDING_BLOCKS, c, 1))
                     .model((c, p) -> p.withExistingParent(c.getName(), TFMG.asResource("item/copper_electrode_model"))).register(),
             ZINC_ELECTRODE = REGISTRATE.item("zinc_electrode", Item::new)
                     .properties(p -> p.stacksTo(1))
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("storage_blocks/zinc")), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(CommonMetal.ZINC.storageBlocks.items()), RecipeCategory.BUILDING_BLOCKS, c, 1))
                     .model((c, p) -> p.withExistingParent(c.getName(), TFMG.asResource("item/zinc_electrode_model"))).register(),
             GRAPHITE_ELECTRODE = REGISTRATE.item("graphite_electrode", Item::new)
                     .properties(p -> p.stacksTo(1))
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("storage_blocks/coal_coke")), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(TFMGItemTags.STORAGE_BLOCKS_COAL_COKE.tag), RecipeCategory.BUILDING_BLOCKS, c, 1))
                     .model((c, p) -> p.withExistingParent(c.getName(), TFMG.asResource("item/graphite_electrode_model"))).register(),
             UNFIRED_INSULATOR = REGISTRATE.item("unfired_insulator", Item::new)
                     .model((c, p) -> p.withExistingParent(c.getName(), TFMG.asResource("item/unfired_insulator_model")))
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.items(Blocks.CLAY.asItem()), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.items(Blocks.CLAY.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 1))
                     .register(),
             UNFINISHED_INSULATOR = REGISTRATE.item("unfinished_insulator", Item::new)
                     .model((c, p) -> p.withExistingParent(c.getName(), TFMG.asResource("item/unfinished_insulator_model"))).register(),
@@ -222,7 +225,7 @@ public class TFMGItems {
     //        .properties(p -> p.stacksTo(1))
     //        .register();
     public static final ItemEntry<CoalCokeItem> COAL_COKE_DUST = REGISTRATE.item("coal_coke_dust", CoalCokeItem::new)
-            .tag(forgeItemTag("dusts/coal_coke"), TFMGTags.TFMGItemTags.BLAST_FURNACE_FUEL.tag, forgeItemTag("dusts"))
+            .tag(TFMGItemTags.DUSTS_COAL_COKE.tag, TFMGTags.TFMGItemTags.BLAST_FURNACE_FUEL.tag, Tags.Items.DUSTS)
             .register();
 
     public static final ItemEntry<OilHammerItem> OIL_HAMMER = REGISTRATE.item("oil_hammer", OilHammerItem::new)
@@ -456,7 +459,7 @@ public class TFMGItems {
 
     public static ItemBuilder<SpoolItem, CreateRegistrate> spoolItem(String name, int barColor, ResourceLocation type) {
         return REGISTRATE.item(name + "_spool", p -> new SpoolItem(p, barColor, type))
-                .tag(TFMGTags.TFMGItemTags.SPOOLS.tag)
+                .tag(TFMGItemTags.SPOOLS.tag)
                 .properties(p -> p.stacksTo(1));
 
     }

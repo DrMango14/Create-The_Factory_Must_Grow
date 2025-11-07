@@ -47,7 +47,7 @@ public class FuelType {
     public static FuelType fromJson(JsonObject object) {
         FuelType type = new FuelType();
         try {
-            parseJsonPrimitive(object, "fluid", JsonPrimitive::isString, primitive -> type.fluid = optionalTag(ForgeRegistries.FLUIDS,new ResourceLocation(primitive.getAsString())));
+            parseJsonPrimitive(object, "fluid", JsonPrimitive::isString, primitive -> type.fluid = optionalTag(ForgeRegistries.FLUIDS, ResourceLocation.fromNamespaceAndPath("", primitive.getAsString())));
 
             parseJsonPrimitive(object, "speed", JsonPrimitive::isNumber, primitive -> type.speed = primitive.getAsFloat());
             parseJsonPrimitive(object, "efficiency", JsonPrimitive::isNumber, primitive -> type.efficiency = primitive.getAsFloat());

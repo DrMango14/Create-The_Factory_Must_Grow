@@ -20,7 +20,7 @@ public class ElectrodeBuilder<T extends Electrode, P> extends AbstractBuilder<El
 
     private final NonNullFunction<Electrode.Properties, T> factory;
 
-    private NonNullSupplier<Electrode.Properties> initialProperties = () -> new Electrode.Properties(new ResourceLocation(getOwner().getModid(), getName()));
+    private NonNullSupplier<Electrode.Properties> initialProperties = () -> new Electrode.Properties(ResourceLocation.fromNamespaceAndPath(getOwner().getModid(), getName()));
     private NonNullFunction<Electrode.Properties, Electrode.Properties> propertiesCallback = NonNullUnaryOperator.identity();
 
     public ElectrodeBuilder(AbstractRegistrate<?> owner, P parent, String name, BuilderCallback callback, NonNullFunction<Electrode.Properties, T> factory) {
@@ -60,7 +60,7 @@ public class ElectrodeBuilder<T extends Electrode, P> extends AbstractBuilder<El
 
     @Override
     public ElectrodeEntry<T> register() {
-        TFMGRegistries.registeredElectrodes.put(new ResourceLocation(getOwner().getModid(), getName()), createEntry());
+        TFMGRegistries.registeredElectrodes.put(ResourceLocation.fromNamespaceAndPath(getOwner().getModid(), getName()), createEntry());
         return (ElectrodeEntry<T>) super.register();
     }
 }

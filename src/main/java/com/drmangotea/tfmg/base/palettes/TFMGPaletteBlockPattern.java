@@ -223,7 +223,7 @@ public class TFMGPaletteBlockPattern {
         ResourceLocation resLoc = texture.srcFactory.apply(variant);
         ResourceLocation resLocTarget = texture.targetFactory.apply(variant);
         return CTSpriteShifter.getCT(texture.type, resLoc,
-                new ResourceLocation(resLocTarget.getNamespace(), resLocTarget.getPath() + "_connected"));
+                ResourceLocation.fromNamespaceAndPath(resLocTarget.getNamespace(), resLocTarget.getPath() + "_connected"));
     }
 
     @FunctionalInterface

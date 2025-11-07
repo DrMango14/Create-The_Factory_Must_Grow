@@ -116,7 +116,7 @@ public class ElectrodeHolderBlockEntity extends ElectricBlockEntity implements I
     @Override
     protected void read(CompoundTag compound, boolean clientPacket) {
         super.read(compound, clientPacket);
-        setElectrode(TFMGUtils.getElectrode(new ResourceLocation(compound.getString("Electrode"))), false);
+        setElectrode(TFMGUtils.getElectrode(ResourceLocation.parse(compound.getString("Electrode"))), false);
     }
 
     public void destroy() {

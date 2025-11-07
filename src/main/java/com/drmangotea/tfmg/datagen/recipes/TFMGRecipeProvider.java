@@ -15,11 +15,11 @@ import com.drmangotea.tfmg.registry.TFMGTags;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.AllTags;
 import com.simibubi.create.content.decoration.palettes.AllPaletteBlocks;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
+import com.simibubi.create.foundation.data.recipe.CommonMetal;
 import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -382,10 +382,10 @@ public class TFMGRecipeProvider extends RecipeProvider {
             return ItemTags.LOGS_THAT_BURN;
         }
         public static TagKey<Item> gold() {
-            return AllTags.forgeItemTag("ingots/gold");
+            return CommonMetal.GOLD.ingots;
         }
         public static TagKey<Item> string() {
-            return AllTags.forgeItemTag("string");
+            return Tags.Items.STRING;
         }
 
         public static ItemLike propeller() {
@@ -463,7 +463,7 @@ public class TFMGRecipeProvider extends RecipeProvider {
 
 
         public static TagKey<Item> goldSheet() {
-            return AllTags.forgeItemTag("plates/gold");
+            return CommonMetal.GOLD.plates;
         }
 
         public static TagKey<Item> stone() {
@@ -500,11 +500,11 @@ public class TFMGRecipeProvider extends RecipeProvider {
         }
 
         public static TagKey<Item> brassIngot() {
-            return AllTags.forgeItemTag("ingots/brass");
+            return CommonMetal.BRASS.ingots;
         }
 
         public static TagKey<Item> brassSheet() {
-            return AllTags.forgeItemTag("plates/brass");
+            return CommonMetal.BRASS.plates;
         }
 
         public static TagKey<Item> iron() {
@@ -512,23 +512,19 @@ public class TFMGRecipeProvider extends RecipeProvider {
         }
 
         public static TagKey<Item> ironNugget() {
-            return AllTags.forgeItemTag("nuggets/iron");
+            return CommonMetal.IRON.nuggets;
         }
 
         public static TagKey<Item> ironDust() {
-            return AllTags.forgeItemTag("dusts/iron");
+            return TFMGTags.TFMGItemTags.DUSTS_IRON.tag;
         }
 
         public static TagKey<Item> zincIngot() {
-            return AllTags.forgeItemTag("ingots/zinc");
+            return CommonMetal.ZINC.ingots;
         }
 
         public static TagKey<Item> ironSheet() {
-            return AllTags.forgeItemTag("plates/iron");
-        }
-
-        public static TagKey<Item> sturdySheet() {
-            return AllTags.forgeItemTag("plates/obsidian");
+            return CommonMetal.IRON.plates;
         }
 
         public static ItemLike brassCasing() {
@@ -552,15 +548,11 @@ public class TFMGRecipeProvider extends RecipeProvider {
         }
 
         public static TagKey<Item> brassBlock() {
-            return AllTags.forgeItemTag("storage_blocks/brass");
+            return CommonMetal.BRASS.storageBlocks.items();
         }
 
         public static TagKey<Item> zincBlock() {
-            return AllTags.forgeItemTag("storage_blocks/zinc");
-        }
-
-        public static TagKey<Item> wheatFlour() {
-            return AllTags.forgeItemTag("flour/wheat");
+            return CommonMetal.ZINC.storageBlocks.items();
         }
 
         public static ItemLike copperIngot() {
@@ -568,19 +560,19 @@ public class TFMGRecipeProvider extends RecipeProvider {
         }
 
         public static TagKey<Item> copperSheet() {
-            return AllTags.forgeItemTag("plates/copper");
+            return CommonMetal.COPPER.plates;
         }
 
         public static TagKey<Item> copperNugget() {
-            return AllTags.forgeItemTag("nuggets/copper");
+            return CommonMetal.COPPER.nuggets;
         }
 
         public static TagKey<Item> brassNugget() {
-            return AllTags.forgeItemTag("nuggets/brass");
+            return CommonMetal.BRASS.nuggets;
         }
 
         public static TagKey<Item> zincNugget() {
-            return AllTags.forgeItemTag("nuggets/zinc");
+            return CommonMetal.ZINC.nuggets;
         }
 
         public static ItemLike copperCasing() {
@@ -593,10 +585,6 @@ public class TFMGRecipeProvider extends RecipeProvider {
 
         public static ItemLike shadowSteel() {
             return AllItems.SHADOW_STEEL.get();
-        }
-
-        public static Ingredient netherite() {
-            return Ingredient.of(AllTags.forgeItemTag("ingots/netherite"));
         }
 
 
@@ -818,7 +806,7 @@ public class TFMGRecipeProvider extends RecipeProvider {
             ItemLike itemLike = singleIngredient.get();
             transform
                     .apply((IndustrialBlastingRecipeBuilder) new IndustrialBlastingRecipeBuilder(serializer.getFactory(),hotAirUsage,
-                            new ResourceLocation(namespace, CatnipServices.REGISTRIES.getKeyOrThrow(itemLike.asItem())
+                            ResourceLocation.fromNamespaceAndPath(namespace, CatnipServices.REGISTRIES.getKeyOrThrow(itemLike.asItem())
                                     .getPath())).withItemIngredients(Ingredient.of(itemLike)))
                     .build(c);
         };
@@ -863,7 +851,7 @@ public class TFMGRecipeProvider extends RecipeProvider {
             ItemLike itemLike = singleIngredient.get();
             transform
                     .apply((VatMachineRecipeBuilder) new VatMachineRecipeBuilder(serializer.getFactory(),params,
-                            new ResourceLocation(namespace, CatnipServices.REGISTRIES.getKeyOrThrow(itemLike.asItem())
+                            ResourceLocation.fromNamespaceAndPath(namespace, CatnipServices.REGISTRIES.getKeyOrThrow(itemLike.asItem())
                                     .getPath())).withItemIngredients(Ingredient.of(itemLike)))
                     .build(c);
         };
