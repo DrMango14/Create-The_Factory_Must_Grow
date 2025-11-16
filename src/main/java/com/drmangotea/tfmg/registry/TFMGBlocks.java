@@ -162,7 +162,6 @@ import static com.simibubi.create.foundation.data.CreateRegistrate.casingConnect
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.*;
-import static com.simibubi.create.foundation.data.TagGen.tagBlockAndItem;
 
 @SuppressWarnings("removal")
 public class TFMGBlocks {
