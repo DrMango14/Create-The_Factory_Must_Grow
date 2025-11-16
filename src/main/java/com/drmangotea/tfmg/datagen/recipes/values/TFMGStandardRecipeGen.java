@@ -15,7 +15,7 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.decoration.palettes.AllPaletteBlocks;
-import com.simibubi.create.foundation.data.recipe.CompatMetals;
+import com.simibubi.create.foundation.data.recipe.CommonMetal;
 import com.simibubi.create.foundation.data.recipe.Mods;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
@@ -2399,9 +2399,9 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                 .inBlastFurnace();
     }
 
-    TFMGRecipeProvider.GeneratedRecipe blastModdedCrushedMetal(ItemEntry<? extends Item> ingredient, CompatMetals metal) {
-        String metalName = metal.getName();
-        for (Mods mod : metal.getMods()) {
+    TFMGRecipeProvider.GeneratedRecipe blastModdedCrushedMetal(ItemEntry<? extends Item> ingredient, CommonMetal metal) {
+        for (Mods mod : metal.mods) {
+            String metalName = metal.getName(mod);
             ResourceLocation ingot = mod.ingotOf(metalName);
             String modId = mod.getId();
             create(ingot).withSuffix("_compat_" + modId)

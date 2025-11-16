@@ -328,7 +328,7 @@ public class TFMGBuilderTransformers {
                 .transform(pickaxeOnly())
                 .blockstate(simpleCubeAll("concrete"))
                 .tag(BlockTags.NEEDS_STONE_TOOL)
-                .transform(tagBlockAndItem("concrete"))
+                .transform(tagBlockAndItem(com.drmangotea.tfmg.registry.TFMGTags.forgeBlockTag("concrete"), com.drmangotea.tfmg.registry.TFMGTags.forgeItemTag("concrete")))
                 .build()
                 .register();
 
