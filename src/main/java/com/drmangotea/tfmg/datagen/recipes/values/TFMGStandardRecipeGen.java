@@ -2487,8 +2487,8 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
     }
 
     TFMGRecipeProvider.GeneratedRecipe blastModdedCrushedMetal(ItemEntry<? extends Item> ingredient, CommonMetal metal) {
-        String metalName = metal.name;
         for (Mods mod : metal.mods) {
+            String metalName = metal.getName(mod);
             ResourceLocation ingot = mod.ingotOf(metalName);
             String modId = mod.getId();
             create(ingot).withSuffix("_compat_" + modId)

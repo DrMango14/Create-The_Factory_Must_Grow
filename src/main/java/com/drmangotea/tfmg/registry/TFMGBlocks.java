@@ -195,6 +195,8 @@ import static com.simibubi.create.foundation.data.TagGen.axeOnly;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 import static com.simibubi.create.foundation.data.TagGen.tagBlockAndItem;
+import static com.drmangotea.tfmg.registry.TFMGTags.forgeBlockTag;
+import static com.drmangotea.tfmg.registry.TFMGTags.forgeItemTag;
 
 @SuppressWarnings("removal")
 public class TFMGBlocks {
