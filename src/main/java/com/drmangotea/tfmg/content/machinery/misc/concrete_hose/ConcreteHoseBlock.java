@@ -1,8 +1,6 @@
 package com.drmangotea.tfmg.content.machinery.misc.concrete_hose;
 
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
-import com.simibubi.create.AllBlockEntityTypes;
-import com.simibubi.create.content.fluids.hosePulley.HosePulleyBlockEntity;
 import com.simibubi.create.content.fluids.pipes.FluidPipeBlock;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;

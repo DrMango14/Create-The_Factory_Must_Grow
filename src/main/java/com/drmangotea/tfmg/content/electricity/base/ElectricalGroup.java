@@ -1,7 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.base;
 
-import java.util.List;
-
 public class ElectricalGroup {
 
     public int id;

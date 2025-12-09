@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.content.machinery.metallurgy.coke_oven;
 
 
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.networking.BlockEntityDataPacket;
 import net.minecraft.core.BlockPos;

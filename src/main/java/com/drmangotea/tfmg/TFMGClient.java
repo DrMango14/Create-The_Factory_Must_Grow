@@ -6,7 +6,6 @@ import com.drmangotea.tfmg.content.items.weapons.flamethrover.FlamethrowerRender
 import com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon.QuadPotatoCannonRenderHandler;
 import com.drmangotea.tfmg.ponder.TFMGPonderPlugin;
 import com.drmangotea.tfmg.registry.TFMGParticleTypes;
-import com.simibubi.create.foundation.ponder.CreatePonderPlugin;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;

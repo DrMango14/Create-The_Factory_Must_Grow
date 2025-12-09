@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.items.weapons.fire_extinguisher;
 
-import com.drmangotea.tfmg.content.items.weapons.flamethrover.FlamethrowerItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.equipment.potatoCannon.PotatoProjectileEntity;
 import com.simibubi.create.content.equipment.zapper.ShootableGadgetRenderHandler;

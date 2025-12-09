@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.machinery.misc.firebox;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.registry.TFMGFluids;

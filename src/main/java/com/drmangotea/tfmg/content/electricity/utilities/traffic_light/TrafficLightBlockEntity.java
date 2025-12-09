@@ -1,10 +1,8 @@
 package com.drmangotea.tfmg.content.electricity.utilities.traffic_light;
 
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
-import com.simibubi.create.Create;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
-
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;

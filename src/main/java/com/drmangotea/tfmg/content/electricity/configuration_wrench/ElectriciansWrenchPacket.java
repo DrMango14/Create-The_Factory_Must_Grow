@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.configuration_wrench;
 
 
-import com.drmangotea.tfmg.TFMG;
 import com.simibubi.create.foundation.networking.SimplePacketBase;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;

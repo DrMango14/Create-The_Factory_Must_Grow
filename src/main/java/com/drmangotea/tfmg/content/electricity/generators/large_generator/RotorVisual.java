@@ -1,7 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.generators.large_generator;
 
-import com.drmangotea.tfmg.content.decoration.flywheels.TFMGFlywheelBlock;
-import com.drmangotea.tfmg.content.decoration.flywheels.TFMGFlywheelBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityVisual;

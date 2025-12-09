@@ -1,10 +1,8 @@
 package com.drmangotea.tfmg.content.electricity.lights.neon_tube;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.connection.cables.SimplePos;
 import com.drmangotea.tfmg.content.electricity.lights.LightBulbBlock;
-import com.drmangotea.tfmg.content.electricity.lights.LightBulbBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -28,7 +26,6 @@ import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;

@@ -7,14 +7,22 @@ import com.drmangotea.tfmg.registry.TFMGItems;
 import com.drmangotea.tfmg.registry.TFMGTags;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.ArrayList;
 
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.*;
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.ethylene;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.heavyOil;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.liquidPlastic;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.naphtha;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.propylene;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.sulfuricAcid;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.water;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.crushedRawIron;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.nitrateDust;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.rubber;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.sulfurDust;
 import static com.drmangotea.tfmg.datagen.recipes.builder.VatMachineRecipeBuilder.VatRecipeParams;
 
 public class VatRecipeGen extends TFMGRecipeProvider {

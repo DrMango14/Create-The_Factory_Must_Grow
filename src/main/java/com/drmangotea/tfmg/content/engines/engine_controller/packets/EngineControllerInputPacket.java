@@ -1,20 +1,18 @@
 package com.drmangotea.tfmg.content.engines.engine_controller.packets;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.engines.engine_controller.EngineControllerBlockEntity;
 import com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler;
-import com.simibubi.create.content.redstone.link.controller.LecternControllerBlockEntity;
-import com.simibubi.create.content.redstone.link.controller.LinkedControllerItem;
 import com.simibubi.create.content.redstone.link.controller.LinkedControllerServerHandler;
 import net.createmod.catnip.data.Couple;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 
 public class EngineControllerInputPacket extends EngineControllerPacketBase {
 

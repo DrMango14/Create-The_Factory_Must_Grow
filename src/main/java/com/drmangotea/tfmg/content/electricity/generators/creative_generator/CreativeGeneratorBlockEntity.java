@@ -1,13 +1,10 @@
 package com.drmangotea.tfmg.content.electricity.generators.creative_generator;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.Create;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
-
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;

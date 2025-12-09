@@ -6,8 +6,34 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import net.minecraft.data.PackOutput;
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.*;
+
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.coolingFluid;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.ethylene;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.gasoline;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.liquidAsphalt;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.liquidConcrete;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.napalm;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.sulfuricAcid;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.water;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.aluminumIngot;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.asphaltMixture;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.bitumen;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.cement;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.charcoal;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.clayBall;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.concreteMixture;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.copperIngot;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.copperSulfate;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.gravel;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.gunpowder;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.limesand;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.magneticIngot;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.nickelIngot;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.nitrateDust;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.sand;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.slag;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.steelIngot;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.sulfurDust;
 public class TFMGMixingRecipeGen extends TFMGProcessingRecipeGen {
 
 	GeneratedRecipe

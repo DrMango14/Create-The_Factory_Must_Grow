@@ -2,18 +2,26 @@ package com.drmangotea.tfmg.registry;
 
 
 import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.recipes.*;
+import com.drmangotea.tfmg.recipes.CastingRecipe;
+import com.drmangotea.tfmg.recipes.CokingRecipe;
+import com.drmangotea.tfmg.recipes.DistillationRecipe;
+import com.drmangotea.tfmg.recipes.HotBlastRecipe;
+import com.drmangotea.tfmg.recipes.IndustrialBlastingRecipe;
+import com.drmangotea.tfmg.recipes.PolarizingRecipe;
+import com.drmangotea.tfmg.recipes.VatMachineRecipe;
+import com.drmangotea.tfmg.recipes.WindingRecipe;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.content.equipment.toolbox.ToolboxDyeingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeFactory;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
-
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;

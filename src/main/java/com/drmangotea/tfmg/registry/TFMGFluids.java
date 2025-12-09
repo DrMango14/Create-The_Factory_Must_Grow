@@ -7,7 +7,6 @@ import com.drmangotea.tfmg.base.fluid.AsphaltFluid;
 import com.drmangotea.tfmg.base.fluid.ConcreteFluid;
 import com.drmangotea.tfmg.base.fluid.HotFluidType;
 import com.simibubi.create.AllFluids;
-import com.simibubi.create.AllTags;
 import com.simibubi.create.content.fluids.VirtualFluid;
 import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
@@ -15,6 +14,7 @@ import com.tterrag.registrate.util.nullness.NonNullFunction;
 import net.createmod.catnip.theme.Color;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.material.Fluid;
@@ -79,7 +79,7 @@ public class TFMGFluids {
                 .tag(tags)
                 .source(ForgeFlowingFluid.Source::new)
                 .bucket()
-                .tag(AllTags.forgeItemTag("buckets/" + name))
+                .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "buckets/" + name)))
                 .build()
                 .register();
     }
@@ -97,7 +97,7 @@ public class TFMGFluids {
                 .tag(tags)
                 .source(ForgeFlowingFluid.Source::new)
                 .bucket()
-                .tag(AllTags.forgeItemTag("buckets/" + name))
+                .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "buckets/" + name)))
                 .build()
                 .register();
     }
@@ -117,7 +117,7 @@ public class TFMGFluids {
                 .tag(TFMGTags.TFMGFluidTags.FUEL.tag, TFMGTags.TFMGFluidTags.FLAMMABLE.tag)
                 .source(ForgeFlowingFluid.Source::new)
                 .bucket()
-                .tag(AllTags.forgeItemTag("buckets/" + name))
+                .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "buckets/" + name)))
                 .build()
                 .register();
     }
@@ -136,7 +136,7 @@ public class TFMGFluids {
                 .tag(tags)
                 .source(ForgeFlowingFluid.Source::new)
                 .bucket()
-                .tag(AllTags.forgeItemTag("buckets/" + name))
+                .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "buckets/" + name)))
                 .build()
                 .register();
     }
@@ -155,7 +155,7 @@ public class TFMGFluids {
                 .tag(tags)
                 .source(factory)
                 .bucket()
-                .tag(AllTags.forgeItemTag("buckets/" + name))
+                .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "buckets/" + name)))
                 .build()
                 .register();
     }
@@ -169,7 +169,7 @@ public class TFMGFluids {
                 .tag(TFMGTags.TFMGFluidTags.GAS.tag)
                 .bucket()
                 .lang(TFMGUtils.fromId(name) + " Tank")
-                .tag(AllTags.forgeItemTag("buckets/" + name))
+                .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "buckets/" + name)))
                 .build()
                 .register();
     }
@@ -184,7 +184,7 @@ public class TFMGFluids {
                 .tag(TFMGTags.TFMGFluidTags.FLAMMABLE.tag)
                 .bucket()
                 .lang(TFMGUtils.fromId(name) + " Tank")
-                .tag(AllTags.forgeItemTag("buckets/" + name))
+                .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "buckets/" + name)))
                 .build()
                 .register();
     }

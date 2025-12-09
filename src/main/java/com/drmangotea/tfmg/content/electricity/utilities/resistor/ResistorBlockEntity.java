@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.utilities.resistor;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -14,12 +14,22 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import static com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorBlock.STATOR_STATE;
 import static com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorBlock.VALUE;
 import static com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock.AXIS;
-import static net.minecraft.core.Direction.*;
+import static net.minecraft.core.Direction.Axis;
+import static net.minecraft.core.Direction.DOWN;
+import static net.minecraft.core.Direction.EAST;
+import static net.minecraft.core.Direction.NORTH;
+import static net.minecraft.core.Direction.SOUTH;
+import static net.minecraft.core.Direction.UP;
+import static net.minecraft.core.Direction.WEST;
 import static net.minecraft.world.level.block.DirectionalBlock.FACING;
 
 

@@ -1,8 +1,6 @@
 package com.drmangotea.tfmg.datagen.recipes.builder;
 
 import com.drmangotea.tfmg.recipes.IndustrialBlastingRecipe;
-import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;

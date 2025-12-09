@@ -5,8 +5,12 @@ import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import net.minecraft.data.PackOutput;
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.*;
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
+
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.heavyOil;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.bitumen;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.cinderFlour;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.coal;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.ironIngot;
 
 public class TFMGCompactingRecipeGen extends TFMGProcessingRecipeGen {
 

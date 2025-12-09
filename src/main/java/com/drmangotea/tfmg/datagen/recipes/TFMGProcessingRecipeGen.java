@@ -1,8 +1,18 @@
 package com.drmangotea.tfmg.datagen.recipes;
 
 import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.datagen.recipes.values.create.*;
-import com.drmangotea.tfmg.datagen.recipes.values.tfmg.*;
+import com.drmangotea.tfmg.datagen.recipes.values.create.TFMGCompactingRecipeGen;
+import com.drmangotea.tfmg.datagen.recipes.values.create.TFMGCrushingRecipeGen;
+import com.drmangotea.tfmg.datagen.recipes.values.create.TFMGDeployingRecipeGen;
+import com.drmangotea.tfmg.datagen.recipes.values.create.TFMGFillingRecipeGen;
+import com.drmangotea.tfmg.datagen.recipes.values.create.TFMGItemApplicationRecipeGen;
+import com.drmangotea.tfmg.datagen.recipes.values.create.TFMGMixingRecipeGen;
+import com.drmangotea.tfmg.datagen.recipes.values.create.TFMGPressingRecipeGen;
+import com.drmangotea.tfmg.datagen.recipes.values.tfmg.CokingRecipeGen;
+import com.drmangotea.tfmg.datagen.recipes.values.tfmg.DistillationRecipeGen;
+import com.drmangotea.tfmg.datagen.recipes.values.tfmg.HotBlastRecipeGen;
+import com.drmangotea.tfmg.datagen.recipes.values.tfmg.PolarizingRecipeGen;
+import com.drmangotea.tfmg.datagen.recipes.values.tfmg.WindingRecipeGen;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
@@ -72,7 +82,7 @@ public abstract class TFMGProcessingRecipeGen extends TFMGRecipeProvider {
 			ItemLike itemLike = singleIngredient.get();
 			transform
 				.apply(new ProcessingRecipeBuilder<>(serializer.getFactory(),
-					new ResourceLocation(namespace, CatnipServices.REGISTRIES.getKeyOrThrow(itemLike.asItem())
+					ResourceLocation.fromNamespaceAndPath(namespace, CatnipServices.REGISTRIES.getKeyOrThrow(itemLike.asItem())
 						.getPath())).withItemIngredients(Ingredient.of(itemLike)))
 				.build(c);
 		};

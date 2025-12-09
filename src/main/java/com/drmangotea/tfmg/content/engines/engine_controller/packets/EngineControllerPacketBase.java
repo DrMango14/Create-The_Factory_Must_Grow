@@ -1,12 +1,10 @@
 package com.drmangotea.tfmg.content.engines.engine_controller.packets;
 
 import com.drmangotea.tfmg.content.engines.engine_controller.EngineControllerBlockEntity;
-import com.simibubi.create.AllItems;
 import com.simibubi.create.foundation.networking.SimplePacketBase;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.network.NetworkEvent.Context;
 

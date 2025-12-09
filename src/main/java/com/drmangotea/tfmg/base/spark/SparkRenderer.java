@@ -17,7 +17,7 @@ import org.joml.Matrix4f;
 
 @OnlyIn(Dist.CLIENT)
 public class SparkRenderer extends EntityRenderer<Spark> {
-    private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("textures/particle/lava.png");
+    private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.parse("textures/particle/lava.png");
     private static final RenderType RENDER_TYPE = RenderType.entityCutoutNoCull(TEXTURE_LOCATION);
     public SparkRenderer(EntityRendererProvider.Context p_173962_) {
         super(p_173962_);
