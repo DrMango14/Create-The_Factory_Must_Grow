@@ -3,7 +3,6 @@ package com.drmangotea.tfmg.base;
 import com.drmangotea.tfmg.content.decoration.encased.TFMGEncasedCogwheelBlock;
 import com.drmangotea.tfmg.content.machinery.misc.winding_machine.SpoolItem;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
-import com.drmangotea.tfmg.registry.TFMGEncasedBlocks;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.AllCreativeModeTabs;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;

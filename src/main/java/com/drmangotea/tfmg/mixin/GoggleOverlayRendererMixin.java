@@ -12,7 +12,6 @@ import com.simibubi.create.content.equipment.goggles.GoggleOverlayRenderer;
 import com.simibubi.create.content.equipment.goggles.GogglesItem;
 import com.simibubi.create.foundation.gui.RemovedGuiUtils;
 import com.simibubi.create.foundation.mixin.accessor.MouseHandlerAccessor;
-import com.simibubi.create.foundation.utility.CreateLang;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CClient;
 import net.createmod.catnip.gui.element.GuiGameElement;

@@ -8,7 +8,6 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.model.BakedModelWrapperWithData;
 import net.createmod.catnip.data.Iterate;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
@@ -27,8 +26,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static net.minecraft.world.level.block.PipeBlock.PROPERTY_BY_DIRECTION;
 
 @OnlyIn(Dist.CLIENT)
 public class TFMGPipeAttachmentModel extends BakedModelWrapperWithData {

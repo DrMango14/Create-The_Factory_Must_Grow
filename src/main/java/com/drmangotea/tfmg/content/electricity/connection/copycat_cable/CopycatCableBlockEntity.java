@@ -1,19 +1,22 @@
 package com.drmangotea.tfmg.content.electricity.connection.copycat_cable;
 
 import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.content.electricity.base.*;
-import com.drmangotea.tfmg.registry.TFMGBlocks;
+import com.drmangotea.tfmg.content.electricity.base.ElectricBlockValues;
+import com.drmangotea.tfmg.content.electricity.base.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.base.ElectricalGroup;
+import com.drmangotea.tfmg.content.electricity.base.ElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.base.IElectric;
+import com.drmangotea.tfmg.content.electricity.base.NetworkUpdatePacket;
+import com.drmangotea.tfmg.content.electricity.base.VoltageAlteringBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.api.equipment.goggles.IHaveHoveringInformation;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatBlockEntity;
-import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
-import com.simibubi.create.api.equipment.goggles.IHaveHoveringInformation;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.entity.BlockEntityType;

@@ -20,7 +20,7 @@ public class CableTypeBuilder<T extends CableType, P> extends AbstractBuilder<Ca
 
     private final NonNullFunction<CableType.Properties, T> factory;
 
-    private NonNullSupplier<CableType.Properties> initialProperties = () -> new CableType.Properties(new ResourceLocation(getOwner().getModid(), getName()));
+    private NonNullSupplier<CableType.Properties> initialProperties = () -> new CableType.Properties(ResourceLocation.fromNamespaceAndPath(getOwner().getModid(), getName()));
     private NonNullFunction<CableType.Properties, CableType.Properties> propertiesCallback = NonNullUnaryOperator.identity();
 
     public CableTypeBuilder(AbstractRegistrate<?> owner, P parent, String name, BuilderCallback callback, NonNullFunction<CableType.Properties, T> factory) {
@@ -60,7 +60,7 @@ public class CableTypeBuilder<T extends CableType, P> extends AbstractBuilder<Ca
 
     @Override
     public CableTypeEntry<T> register() {
-        TFMGRegistries.registeredCableTypes.put(new ResourceLocation(getOwner().getModid(), getName()), createEntry());
+        TFMGRegistries.registeredCableTypes.put(ResourceLocation.fromNamespaceAndPath(getOwner().getModid(), getName()), createEntry());
         return (CableTypeEntry<T>) super.register();
     }
 }

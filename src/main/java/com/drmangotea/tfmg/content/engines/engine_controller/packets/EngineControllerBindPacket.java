@@ -1,15 +1,9 @@
 package com.drmangotea.tfmg.content.engines.engine_controller.packets;
 
 import com.drmangotea.tfmg.content.engines.engine_controller.EngineControllerBlockEntity;
-import com.simibubi.create.content.redstone.link.LinkBehaviour;
-import com.simibubi.create.content.redstone.link.controller.LecternControllerBlockEntity;
-import com.simibubi.create.content.redstone.link.controller.LinkedControllerItem;
-import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class EngineControllerBindPacket extends EngineControllerPacketBase {
 

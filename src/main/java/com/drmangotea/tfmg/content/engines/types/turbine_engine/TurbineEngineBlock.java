@@ -1,16 +1,12 @@
 package com.drmangotea.tfmg.content.engines.types.turbine_engine;
 
 import com.drmangotea.tfmg.base.TFMGShapes;
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
-import com.drmangotea.tfmg.content.engines.base.EngineBlock;
 import com.drmangotea.tfmg.content.engines.types.radial_engine.RadialEngineBlock;
 import com.drmangotea.tfmg.content.engines.types.regular_engine.RegularEngineBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
-import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;

@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.engines.types.regular_engine;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
@@ -17,6 +16,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -27,14 +27,18 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.drmangotea.tfmg.content.engines.base.EngineProperties.*;
+import static com.drmangotea.tfmg.content.engines.base.EngineProperties.pistonsBoxer;
+import static com.drmangotea.tfmg.content.engines.base.EngineProperties.pistonsI;
+import static com.drmangotea.tfmg.content.engines.base.EngineProperties.pistonsRadial;
+import static com.drmangotea.tfmg.content.engines.base.EngineProperties.pistonsTurbine;
+import static com.drmangotea.tfmg.content.engines.base.EngineProperties.pistonsU;
+import static com.drmangotea.tfmg.content.engines.base.EngineProperties.pistonsV;
+import static com.drmangotea.tfmg.content.engines.base.EngineProperties.pistonsW;
 import static com.drmangotea.tfmg.content.engines.types.regular_engine.RegularEngineBlock.EXTENDED;
-import static com.drmangotea.tfmg.registry.TFMGTags.optionalTag;
 import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING;
 
 public class RegularEngineBlockEntity extends AbstractSmallEngineBlockEntity {
@@ -88,7 +92,7 @@ public class RegularEngineBlockEntity extends AbstractSmallEngineBlockEntity {
 
             String id = fuelsToAllow.getString(key);
 
-            TagKey<Fluid> tag = optionalTag(ForgeRegistries.FLUIDS, new ResourceLocation(id));
+            TagKey<Fluid> tag = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", id.replace("forge:", "")));
 
             fuelsFound.add(tag);
         }

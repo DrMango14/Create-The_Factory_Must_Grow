@@ -8,7 +8,6 @@ import com.drmangotea.tfmg.content.engines.base.EngineFluidTank;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGSoundEvents;
 import com.drmangotea.tfmg.registry.TFMGTags;
-import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.content.kinetics.steamEngine.PoweredShaftBlockEntity;

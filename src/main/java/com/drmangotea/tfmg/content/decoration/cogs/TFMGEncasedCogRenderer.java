@@ -9,7 +9,6 @@ import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEn
 import com.simibubi.create.content.kinetics.simpleRelays.SimpleKineticBlockEntity;
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogwheelBlock;
 import dev.engine_room.flywheel.api.visualization.VisualizationManager;
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.render.CachedBuffers;
 import net.createmod.catnip.render.SuperByteBuffer;

@@ -1,9 +1,6 @@
 package com.drmangotea.tfmg.content.engines;
 
-import com.drmangotea.tfmg.content.items.weapons.flamethrover.FlamethrowerItem;
-import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
-
 import com.simibubi.create.foundation.utility.CreateLang;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import net.minecraft.ChatFormatting;
@@ -20,7 +17,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import java.util.List;

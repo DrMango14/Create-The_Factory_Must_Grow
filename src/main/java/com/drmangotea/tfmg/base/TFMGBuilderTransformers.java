@@ -14,6 +14,7 @@ import com.drmangotea.tfmg.content.decoration.flywheels.TFMGFlywheelBlock;
 import com.drmangotea.tfmg.content.electricity.connection.copycat_cable.CopycatCableBlock;
 import com.drmangotea.tfmg.content.electricity.lights.neon_tube.NeonTubeBlock;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
+import com.drmangotea.tfmg.registry.TFMGTags;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.contraptions.behaviour.DoorMovingInteraction;
@@ -22,7 +23,12 @@ import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorMovementBeh
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogCTBehaviour;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
-import com.simibubi.create.foundation.data.*;
+import com.simibubi.create.foundation.data.AssetLookup;
+import com.simibubi.create.foundation.data.BlockStateGen;
+import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.simibubi.create.foundation.data.SharedProperties;
+import com.simibubi.create.foundation.data.TagGen;
+import com.simibubi.create.foundation.data.recipe.CommonMetal;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
@@ -36,12 +42,20 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.PipeBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import static com.drmangotea.tfmg.TFMG.REGISTRATE;
@@ -50,7 +64,9 @@ import static com.simibubi.create.api.behaviour.movement.MovementBehaviour.movem
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
 import static com.simibubi.create.foundation.data.BlockStateGen.simpleCubeAll;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
-import static com.simibubi.create.foundation.data.TagGen.*;
+import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
+import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
+import static com.simibubi.create.foundation.data.TagGen.tagBlockAndItem;
 
 @SuppressWarnings("removal")
 public class TFMGBuilderTransformers {
@@ -144,7 +160,7 @@ public class TFMGBuilderTransformers {
                                                                                                   String casing, Supplier<CTSpriteShiftEntry> casingShift, Supplier<ItemLike> drop, boolean large) {
         String encasedSuffix;
         if (!large) {
-            encasedSuffix = "_encased_cogwheel_side" + (large ? "_connected" : "");
+            encasedSuffix = "_encased_cogwheel_side";
         } else encasedSuffix = "_encased_cogwheel_side_large";
         String blockFolder = large ? "encased_large_cogwheel" : "encased_cogwheel";
         String wood = casing.equals("steel") ? "steel_casing" : "heavy_machinery_casing";
@@ -215,7 +231,7 @@ public class TFMGBuilderTransformers {
     public static BlockEntry<TrussBlock> truss(String name) {
         return REGISTRATE.block(name + "_truss", TrussBlock::new)
                 .initialProperties(() -> Blocks.IRON_BLOCK)
-                .properties(p -> p.noOcclusion())
+                .properties(BlockBehaviour.Properties::noOcclusion)
                 .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
                 .transform(pickaxeOnly())
                 .addLayer(() -> RenderType::cutoutMipped)
@@ -267,7 +283,7 @@ public class TFMGBuilderTransformers {
             REGISTRATE.block(color + "_caution_block", TFMGHorizontalDirectionalBlock::new)
                     .initialProperties(() -> Blocks.COPPER_BLOCK)
 
-                    .properties(p -> p.requiresCorrectToolForDrops())
+                    .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
                     .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
                     .transform(pickaxeOnly())
                     .blockstate((c, p) -> p.horizontalBlock(c.get(), p.models()
@@ -276,7 +292,7 @@ public class TFMGBuilderTransformers {
                             .texture("particle", p.modLoc("block/caution_block/" + color))
                     ))
                     .tag(BlockTags.NEEDS_STONE_TOOL)
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/aluminum")), RecipeCategory.BUILDING_BLOCKS, c::get, 2))
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(CommonMetal.ALUMINUM.ingots), RecipeCategory.BUILDING_BLOCKS, c, 2))
                     .item()
                     .build()
                     .lang(upperCaseColor + " Caution Block")
@@ -294,13 +310,13 @@ public class TFMGBuilderTransformers {
 
         concrete.wall = REGISTRATE.block(name + "_wall", WallBlock::new)
                 .initialProperties(() -> Blocks.STONE)
-                .properties(p -> p.requiresCorrectToolForDrops())
+                .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
                 .properties(p -> p.strength(rebar ? 12f : 3.5f, rebar ? 1200f : 3.5f))
                 .transform(pickaxeOnly())
                 .blockstate((c, p) -> TFMGVanillaBlockStates.generateWallBlockState(c, p, "concrete"))
                 .tag(BlockTags.NEEDS_STONE_TOOL)
                 .tag(BlockTags.WALLS)
-                .recipe((c, p) -> p.stonecutting(DataIngredient.items(concrete.block.get()), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
+                .recipe((c, p) -> p.stonecutting(DataIngredient.items(concrete.block.get()), RecipeCategory.BUILDING_BLOCKS, c, 1))
                 .item()
                 .transform(b -> TFMGVanillaBlockStates.transformWallItem(b, "concrete"))
                 .build()
@@ -308,13 +324,13 @@ public class TFMGBuilderTransformers {
 
         concrete.stairs = REGISTRATE.block(name + "_stairs", p -> new StairBlock(() -> concrete.block.get().defaultBlockState(), p))
                 .initialProperties(() -> Blocks.STONE)
-                .properties(p -> p.requiresCorrectToolForDrops())
+                .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
                 .properties(p -> p.strength(rebar ? 12f : 3.5f, rebar ? 1200f : 3.5f))
                 .transform(pickaxeOnly())
                 .blockstate((c, p) -> TFMGVanillaBlockStates.generateStairBlockState(c, p, "concrete"))
                 .tag(BlockTags.NEEDS_STONE_TOOL)
                 .tag(BlockTags.STAIRS)
-                .recipe((c, p) -> p.stonecutting(DataIngredient.items(concrete.block.get()), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
+                .recipe((c, p) -> p.stonecutting(DataIngredient.items(concrete.block.get()), RecipeCategory.BUILDING_BLOCKS, c, 1))
                 .item()
                 //.transform(b -> TFMGVanillaBlockStates.transformStairItem(b, "concrete"))
                 .transform(customItemModel("concrete_stairs"))
@@ -324,23 +340,23 @@ public class TFMGBuilderTransformers {
         concrete.block = REGISTRATE.block(name, Block::new)
                 .initialProperties(() -> Blocks.STONE)
                 .properties(p -> p.strength(rebar ? 12f : 3.5f, rebar ? 1200f : 3.5f))
-                .properties(p -> p.requiresCorrectToolForDrops())
+                .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
                 .transform(pickaxeOnly())
                 .blockstate(simpleCubeAll("concrete"))
                 .tag(BlockTags.NEEDS_STONE_TOOL)
-                .transform(tagBlockAndItem(com.drmangotea.tfmg.registry.TFMGTags.forgeBlockTag("concrete"), com.drmangotea.tfmg.registry.TFMGTags.forgeItemTag("concrete")))
+                .transform(tagBlockAndItem(TFMGTags.TFMGBlockTags.CONCRETE.tag, TFMGTags.TFMGItemTags.CONCRETE.tag))
                 .build()
                 .register();
 
         concrete.slab = REGISTRATE.block(name + "_slab", SlabBlock::new)
                 .initialProperties(() -> Blocks.STONE)
                 .properties(p -> p.strength(rebar ? 12f : 3.5f, rebar ? 1200f : 3.5f))
-                .properties(p -> p.requiresCorrectToolForDrops())
+                .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
                 .transform(pickaxeOnly())
                 .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, "concrete"))
                 .tag(BlockTags.NEEDS_STONE_TOOL)
                 .tag(BlockTags.SLABS)
-                .recipe((c, p) -> p.stonecutting(DataIngredient.items(concrete.block.get()), RecipeCategory.BUILDING_BLOCKS, c::get, 2))
+                .recipe((c, p) -> p.stonecutting(DataIngredient.items(concrete.block.get()), RecipeCategory.BUILDING_BLOCKS, c, 2))
                 .item()
                 .transform(customItemModel("concrete_bottom"))
                 .register();
@@ -361,7 +377,7 @@ public class TFMGBuilderTransformers {
             set.block=REGISTRATE.block(color + name, Block::new)
                     .initialProperties(() -> Blocks.STONE)
                     .properties(p -> p.strength(rebar ? 12f : 3.5f, rebar ? 1200f : 3.5f))
-                    .properties(p -> p.requiresCorrectToolForDrops())
+                    .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
                     .transform(pickaxeOnly())
                     .blockstate(simpleCubeAll(color + "_concrete"))
                     .tag(BlockTags.NEEDS_STONE_TOOL)
@@ -373,12 +389,12 @@ public class TFMGBuilderTransformers {
             set.wall=REGISTRATE.block(color + name + "_wall", WallBlock::new)
                     .initialProperties(() -> Blocks.STONE)
                     .properties(p -> p.strength(rebar ? 12f : 3.5f, rebar ? 1200f : 3.5f))
-                    .properties(p -> p.requiresCorrectToolForDrops())
+                    .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
                     .transform(pickaxeOnly())
                     .blockstate((c, p) -> TFMGVanillaBlockStates.generateWallBlockState(c, p, color + "_concrete"))
                     .tag(BlockTags.NEEDS_STONE_TOOL)
                     .tag(BlockTags.WALLS)
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.items(set.block.asItem()), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.items(set.block.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 1))
                     .item()
                     .transform(b -> TFMGVanillaBlockStates.transformWallItem(b, color + "_concrete"))
                     .build()
@@ -387,12 +403,12 @@ public class TFMGBuilderTransformers {
             set.stairs=REGISTRATE.block(color + name + "_stairs", p -> new StairBlock(() -> TFMGBlocks.CONCRETE.block.get().defaultBlockState(), p))
                     .initialProperties(() -> Blocks.STONE)
                     .properties(p -> p.strength(rebar ? 12f : 3.5f, rebar ? 1200f : 3.5f))
-                    .properties(p -> p.requiresCorrectToolForDrops())
+                    .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
                     .transform(pickaxeOnly())
                     .blockstate((c, p) -> TFMGVanillaBlockStates.generateStairBlockState(c, p, color + "_concrete"))
                     .tag(BlockTags.NEEDS_STONE_TOOL)
                     .tag(BlockTags.STAIRS)
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.items(set.block.asItem()), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.items(set.block.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 1))
                     .item()
                     // .transform(b -> TFMGVanillaBlockStates.transformStairItem(b, color + "_concrete"))
                     .transform(customItemModel(color + "_concrete_stairs"))
@@ -402,12 +418,12 @@ public class TFMGBuilderTransformers {
             set.slab=REGISTRATE.block(color + name + "_slab", SlabBlock::new)
                     .initialProperties(() -> Blocks.STONE)
                     .properties(p -> p.strength(rebar ? 12f : 3.5f, rebar ? 1200f : 3.5f))
-                    .properties(p -> p.requiresCorrectToolForDrops())
+                    .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
                     .transform(pickaxeOnly())
                     .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, color + "_concrete"))
                     .tag(BlockTags.NEEDS_STONE_TOOL)
                     .tag(BlockTags.SLABS)
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.items(set.block.asItem()), RecipeCategory.BUILDING_BLOCKS, c::get, 2))
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.items(set.block.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 2))
                     .item()
                     .transform(customItemModel(color + "_concrete_bottom"))
                     .register();
@@ -431,25 +447,25 @@ public class TFMGBuilderTransformers {
 
 
         REGISTRATE.block(name + "_wall", WallBlock::new)
-                .initialProperties(() -> blockEntry.get())
+                .initialProperties(blockEntry)
                 .transform(pickaxeOnly())
                 .blockstate((c, p) -> TFMGVanillaBlockStates.generateWallBlockState(c, p, name))
                 .tag(BlockTags.NEEDS_STONE_TOOL)
                 .tag(BlockTags.WALLS)
-                .recipe((c, p) -> p.stonecutting(DataIngredient.items(blockEntry.asItem()), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
+                .recipe((c, p) -> p.stonecutting(DataIngredient.items(blockEntry.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 1))
                 .item()
                 .transform(b -> TFMGVanillaBlockStates.transformWallItem(b, name))
                 .build()
                 .register();
 
         REGISTRATE.block(name + "_slab", SlabBlock::new)
-                .initialProperties(() -> blockEntry.get())
-                .properties(p -> p.requiresCorrectToolForDrops())
+                .initialProperties(blockEntry)
+                .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
                 .transform(pickaxeOnly())
                 .blockstate((c, p) -> TFMGVanillaBlockStates.generateSlabBlockState(c, p, name))
                 .tag(BlockTags.NEEDS_STONE_TOOL)
                 .tag(BlockTags.SLABS)
-                .recipe((c, p) -> p.stonecutting(DataIngredient.items(blockEntry.asItem()), RecipeCategory.BUILDING_BLOCKS, c::get, 2))
+                .recipe((c, p) -> p.stonecutting(DataIngredient.items(blockEntry.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 2))
                 .item()
                 .transform(customItemModel(name + "_bottom"))
                 .register();
@@ -459,7 +475,7 @@ public class TFMGBuilderTransformers {
                 .blockstate((c, p) -> TFMGVanillaBlockStates.generateStairBlockState(c, p, name))
                 .tag(BlockTags.NEEDS_STONE_TOOL)
                 .tag(BlockTags.STAIRS)
-                .recipe((c, p) -> p.stonecutting(DataIngredient.items(blockEntry.asItem()), RecipeCategory.BUILDING_BLOCKS, c::get, 1))
+                .recipe((c, p) -> p.stonecutting(DataIngredient.items(blockEntry.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 1))
                 .item()
                 .transform(customItemModel(name + "_stairs"))
                 .register();

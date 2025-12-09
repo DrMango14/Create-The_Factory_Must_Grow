@@ -60,7 +60,7 @@ public class CableConnection {
         BlockPos blockPos1 = BlockPos.of(compoundTag.getLong("Pos"));
 
         boolean visible = compoundTag.getBoolean("Visible");
-        CableType type = TFMGUtils.getCableType(new ResourceLocation(compoundTag.getString("CableType")));
+        CableType type = TFMGUtils.getCableType(ResourceLocation.parse(compoundTag.getString("CableType")));
         return new CableConnection(pos1,pos2,blockPos1,type,visible);
     }
     public float getLength(){

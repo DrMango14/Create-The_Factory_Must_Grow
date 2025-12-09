@@ -1,22 +1,14 @@
 package com.drmangotea.tfmg.content.machinery.metallurgy.blast_stove;
 
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
-import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipeBlockEntity;
-import com.drmangotea.tfmg.recipes.DistillationRecipe;
 import com.drmangotea.tfmg.recipes.HotBlastRecipe;
-import com.drmangotea.tfmg.registry.TFMGFluids;
-import com.simibubi.create.Create;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
-import com.simibubi.create.content.fluids.pipes.FluidPipeBlockEntity;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
-
-
 import com.simibubi.create.foundation.utility.CreateLang;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.createmod.catnip.lang.LangBuilder;
@@ -36,16 +28,12 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
-
-import static java.lang.Math.abs;
 
 
 public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHaveGoggleInformation, IMultiBlockEntityContainer.Fluid {

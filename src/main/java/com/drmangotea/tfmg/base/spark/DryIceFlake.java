@@ -22,7 +22,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 public class DryIceFlake extends ThrowableProjectile {

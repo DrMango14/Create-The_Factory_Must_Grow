@@ -1,15 +1,15 @@
 package com.drmangotea.tfmg.registry;
 
 
-
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.palettes.TFMGPaletteBlockPattern;
 import com.drmangotea.tfmg.base.palettes.TFMGPalettesVariantEntry;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-
 import com.simibubi.create.foundation.utility.CreateLang;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -60,8 +60,8 @@ public enum TFMGPaletteStoneTypes {
             NonNullSupplier<Block> baseBlock = paletteStoneVariants.factory.apply(registrate);
             paletteStoneVariants.baseBlock = baseBlock;
             String id = CreateLang.asId(paletteStoneVariants.name());
-            paletteStoneVariants.materialTag =
-                    AllTags.optionalTag(ForgeRegistries.ITEMS, TFMG.asResource("stone_types/" + id));
+	        paletteStoneVariants.materialTag =
+			        ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "stone_types/" + id.replace("forge:", "")));
             paletteStoneVariants.variants = new TFMGPalettesVariantEntry(id, paletteStoneVariants);
         }
     }

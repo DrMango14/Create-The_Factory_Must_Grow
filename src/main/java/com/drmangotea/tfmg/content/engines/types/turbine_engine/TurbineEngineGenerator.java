@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.content.engines.types.turbine_engine;
 
 
-
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.engines.base.EngineBlock;
 import com.simibubi.create.foundation.data.SpecialBlockStateGen;
@@ -12,7 +11,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.generators.ModelFile;
 
 import static com.drmangotea.tfmg.content.engines.base.EngineBlock.ENGINE_STATE;
-import static com.drmangotea.tfmg.content.engines.types.regular_engine.RegularEngineBlock.EXTENDED;
 
 
 public class TurbineEngineGenerator extends SpecialBlockStateGen {

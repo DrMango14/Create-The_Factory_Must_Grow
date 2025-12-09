@@ -1,8 +1,6 @@
 package com.drmangotea.tfmg.content.decoration.concrete;
 
-import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGFluids;
-import com.simibubi.create.foundation.data.SharedProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -14,9 +12,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;

@@ -1,16 +1,12 @@
 package com.drmangotea.tfmg.content.electricity.connection.cables;
 
-import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
 import com.simibubi.create.api.equipment.goggles.IHaveHoveringInformation;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-
 import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;

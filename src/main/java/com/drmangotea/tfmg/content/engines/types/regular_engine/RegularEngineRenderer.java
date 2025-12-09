@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.engines.types.regular_engine;
 
-import com.drmangotea.tfmg.content.engines.base.AbstractEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.base.EngineRenderer;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.types.turbine_engine.TurbineEngineBlockEntity;

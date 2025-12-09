@@ -4,7 +4,6 @@ import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGRegistries;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.content.electricity.base.ElectricPlacementPacket;
-import com.drmangotea.tfmg.content.electricity.base.UpdateInFrontPacket;
 import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableType;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnection;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;

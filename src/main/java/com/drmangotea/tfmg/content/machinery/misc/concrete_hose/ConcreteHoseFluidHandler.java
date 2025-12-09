@@ -1,15 +1,12 @@
 package com.drmangotea.tfmg.content.machinery.misc.concrete_hose;
 
 import com.drmangotea.tfmg.registry.TFMGFluids;
-import com.simibubi.create.content.fluids.transfer.FluidDrainingBehaviour;
-import com.simibubi.create.content.fluids.transfer.FluidFillingBehaviour;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import net.minecraft.core.BlockPos;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class ConcreteHoseFluidHandler implements IFluidHandler {

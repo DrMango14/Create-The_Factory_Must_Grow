@@ -28,7 +28,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 

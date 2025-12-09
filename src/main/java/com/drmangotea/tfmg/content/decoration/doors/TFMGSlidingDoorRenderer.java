@@ -1,15 +1,10 @@
 package com.drmangotea.tfmg.content.decoration.doors;
 
 
-
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.simibubi.create.AllPartialModels;
-import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlock;
-import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlockEntity;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
-
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.data.Couple;
 import net.createmod.catnip.data.Iterate;
@@ -26,7 +21,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.Vec3;
-
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class TFMGSlidingDoorRenderer extends SafeBlockEntityRenderer<TFMGSlidingDoorBlockEntity> {

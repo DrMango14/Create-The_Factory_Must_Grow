@@ -4,7 +4,6 @@ package com.drmangotea.tfmg.registry;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipes;
 import com.simibubi.create.content.fluids.FluidTransportBehaviour;
-
 import com.simibubi.create.foundation.utility.CreateLang;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.data.Couple;
@@ -12,7 +11,11 @@ import net.createmod.catnip.data.Iterate;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class TFMGPartialModels {

@@ -20,7 +20,10 @@ import net.minecraftforge.client.model.generators.ModelFile;
 
 import java.util.function.Supplier;
 
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.*;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.EAST;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.NORTH;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.SOUTH;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WEST;
 
 public class TFMGMetalBarsGen {
 

@@ -2,8 +2,6 @@ package com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.
 
 import com.drmangotea.tfmg.base.TFMGIcons;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
-import com.simibubi.create.content.kinetics.mechanicalArm.ArmBlockEntity;
-import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
@@ -11,7 +9,6 @@ import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.INamedIc
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.gui.AllIcons;
-
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
@@ -30,8 +27,6 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-
-import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING;
 
 public class DistillationOutputBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 

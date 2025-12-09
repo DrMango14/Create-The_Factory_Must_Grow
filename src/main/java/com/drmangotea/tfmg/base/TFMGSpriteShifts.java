@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.base;
 
 import com.drmangotea.tfmg.TFMG;
-import com.simibubi.create.Create;
 import com.simibubi.create.foundation.block.connected.AllCTTypes;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
 import com.simibubi.create.foundation.block.connected.CTSpriteShifter;

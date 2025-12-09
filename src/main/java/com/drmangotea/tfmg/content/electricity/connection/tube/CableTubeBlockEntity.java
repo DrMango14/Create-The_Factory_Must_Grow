@@ -1,9 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.connection.tube;
 
 
-
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
-import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntityType;

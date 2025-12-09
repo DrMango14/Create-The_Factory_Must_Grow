@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.datagen.recipes.builder;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.recipes.VatMachineRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import net.minecraft.data.recipes.FinishedRecipe;

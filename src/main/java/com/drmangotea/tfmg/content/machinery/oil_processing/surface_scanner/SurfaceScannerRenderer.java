@@ -1,14 +1,12 @@
 package com.drmangotea.tfmg.content.machinery.oil_processing.surface_scanner;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
-import net.createmod.catnip.render.CachedBuffers;
 import com.simibubi.create.foundation.render.RenderTypes;
+import net.createmod.catnip.render.CachedBuffers;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.state.BlockState;
 

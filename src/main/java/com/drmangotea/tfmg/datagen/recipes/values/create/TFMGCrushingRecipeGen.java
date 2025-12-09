@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.datagen.recipes.values.create;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.datagen.recipes.TFMGProcessingRecipeGen;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGItems;
@@ -9,8 +8,16 @@ import com.simibubi.create.AllRecipeTypes;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
-import static com.drmangotea.tfmg.registry.TFMGTags.forgeItemTag;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.blueDye;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.boneMeal;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.coal;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.coalCokeDust;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.crushedRawLead;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.cyanDye;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.limesand;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.nitrateDust;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.slag;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.sulfurDust;
 
 public class TFMGCrushingRecipeGen extends TFMGProcessingRecipeGen {
 

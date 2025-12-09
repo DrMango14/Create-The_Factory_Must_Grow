@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.ponder;
 
-import com.drmangotea.tfmg.ponder.scenes.MiscTFMGScenes;
 import com.drmangotea.tfmg.ponder.scenes.electricity.GeneratorScenes;
 import com.drmangotea.tfmg.ponder.scenes.kinetics.engines.EngineScenes;
 import com.drmangotea.tfmg.ponder.scenes.metallurgy.BlastFurnaceScenes;

@@ -1,10 +1,8 @@
 package com.drmangotea.tfmg.base.spark;
 
 
-
 import com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades.fire.GreenFireBlock;
 import com.drmangotea.tfmg.registry.TFMGEntityTypes;
-import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.content.trains.CubeParticleData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -14,7 +12,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;

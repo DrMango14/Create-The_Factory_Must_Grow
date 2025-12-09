@@ -1,10 +1,10 @@
 package com.drmangotea.tfmg.content.machinery.vat.industrial_mixer;
 
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.render.CachedBuffers;
 import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.client.Minecraft;

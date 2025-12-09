@@ -11,7 +11,24 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.*;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.air;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.airTank;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.blastFurnaceGas;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.carbonDioxide;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.carbonDioxideTank;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.ethylene;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.ethyleneTank;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.furnaceGasTank;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.hotAir;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.hotAirTank;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.hydrogen;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.hydrogenTank;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.lpg;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.lpgTank;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.neon;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.neonTank;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.propylene;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.propyleneTank;
 
 
 public class TFMGFillingRecipeGen extends TFMGProcessingRecipeGen {

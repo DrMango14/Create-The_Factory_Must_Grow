@@ -1,12 +1,9 @@
 package com.drmangotea.tfmg.content.electricity.utilities.transformer;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
-import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.base.UpdateInFrontPacket;
 import com.drmangotea.tfmg.content.electricity.base.VoltageAlteringBlockEntity;
-
 import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.drmangotea.tfmg.registry.TFMGSoundEvents;
 import com.simibubi.create.foundation.utility.CreateLang;

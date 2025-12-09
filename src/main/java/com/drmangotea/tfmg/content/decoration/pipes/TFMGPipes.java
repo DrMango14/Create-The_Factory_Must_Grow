@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.decoration.pipes;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGCreativeTabs;
 import com.drmangotea.tfmg.base.TFMGRegistrate;
 import com.drmangotea.tfmg.config.TFMGStress;
@@ -8,7 +7,6 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
-import com.simibubi.create.content.fluids.PipeAttachmentModel;
 import com.simibubi.create.content.fluids.pipes.SmartFluidPipeGenerator;
 import com.simibubi.create.content.fluids.pipes.valve.FluidValveBlock;
 import com.simibubi.create.foundation.data.AssetLookup;
@@ -27,7 +25,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
 import static com.drmangotea.tfmg.TFMG.REGISTRATE;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;

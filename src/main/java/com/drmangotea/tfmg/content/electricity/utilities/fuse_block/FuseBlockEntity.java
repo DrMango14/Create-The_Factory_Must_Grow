@@ -1,14 +1,10 @@
 package com.drmangotea.tfmg.content.electricity.utilities.fuse_block;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.base.UpdateInFrontPacket;
 import com.drmangotea.tfmg.content.electricity.utilities.diode.ElectricDiodeBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGPackets;
-
-import com.simibubi.create.foundation.utility.CreateLang;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -17,7 +13,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.DirectionalBlock;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.PacketDistributor;

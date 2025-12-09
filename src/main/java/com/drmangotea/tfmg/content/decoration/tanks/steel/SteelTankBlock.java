@@ -11,7 +11,6 @@ import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.blockEntity.ComparatorUtil;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import com.simibubi.create.foundation.fluid.FluidHelper.FluidExchange;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -20,7 +19,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;

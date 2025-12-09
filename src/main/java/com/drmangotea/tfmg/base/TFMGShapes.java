@@ -11,7 +11,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.function.BiFunction;
 
-import static net.minecraft.core.Direction.*;
+import static net.minecraft.core.Direction.NORTH;
+import static net.minecraft.core.Direction.SOUTH;
+import static net.minecraft.core.Direction.UP;
 
 public class TFMGShapes {
     public static final VoxelShaper

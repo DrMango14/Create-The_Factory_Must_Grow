@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.engines.types;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.content.engines.base.AbstractEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.base.EngineBlock;

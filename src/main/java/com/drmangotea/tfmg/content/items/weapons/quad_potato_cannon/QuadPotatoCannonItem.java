@@ -1,9 +1,6 @@
 package com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon;
 
 
-
-
-
 import com.simibubi.create.AllEnchantments;
 import com.simibubi.create.AllEntityTypes;
 import com.simibubi.create.CreateClient;
@@ -41,7 +38,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;

@@ -3,7 +3,6 @@ package com.drmangotea.tfmg.content.machinery.misc.concrete_hose;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.content.contraptions.pulley.AbstractPulleyRenderer;
-
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.render.CachedBuffers;
 import net.createmod.catnip.render.SpriteShiftEntry;

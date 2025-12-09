@@ -1,17 +1,12 @@
 package com.drmangotea.tfmg.content.electricity.utilities.polarizer;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.registry.TFMGItems;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
 @EventBusSubscriber
 public class PolarizeByLightningEvent {

@@ -3,8 +3,6 @@ package com.drmangotea.tfmg.ponder;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGItems;
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllItems;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.createmod.catnip.platform.CatnipServices;
 import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;

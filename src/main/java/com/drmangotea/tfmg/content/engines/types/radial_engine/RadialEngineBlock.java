@@ -4,7 +4,6 @@ import com.drmangotea.tfmg.base.TFMGShapes;
 import com.drmangotea.tfmg.content.engines.types.regular_engine.RegularEngineBlock;
 import com.drmangotea.tfmg.content.engines.types.regular_engine.RegularEngineBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
-import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;

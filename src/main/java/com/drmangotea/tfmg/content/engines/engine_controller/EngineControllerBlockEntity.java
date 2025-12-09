@@ -1,13 +1,11 @@
 package com.drmangotea.tfmg.content.engines.engine_controller;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.upgrades.TransmissionUpgrade;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.createmod.catnip.data.Couple;
 import net.minecraft.client.Minecraft;

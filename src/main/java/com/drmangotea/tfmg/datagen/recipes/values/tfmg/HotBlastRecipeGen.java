@@ -5,7 +5,9 @@ import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.drmangotea.tfmg.registry.TFMGTags;
 import net.minecraft.data.PackOutput;
 
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.*;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.air;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.carbonDioxide;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.hotAir;
 
 public class HotBlastRecipeGen extends TFMGProcessingRecipeGen {
 
