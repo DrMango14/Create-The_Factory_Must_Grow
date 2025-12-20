@@ -10,13 +10,16 @@ import com.drmangotea.tfmg.content.machinery.vat.base.IVatMachine;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlock;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode.Electrode;
+import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -98,6 +101,21 @@ public class ElectrodeHolderBlockEntity extends ElectricBlockEntity implements I
             VatBlock.updateVatState(getBlockState(), getLevel(), getBlockPos().relative(Direction.DOWN));
         sendData();
         return false;
+    }
+
+
+    @Override
+    public void remove() {
+
+        if (level.isClientSide || electrode.getItem()==null)
+            return;
+
+
+        ItemEntity itemToDrop = new ItemEntity(level, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, electrode.getStack());
+
+        level.addFreshEntity(itemToDrop);
+
+
     }
 
     @Override

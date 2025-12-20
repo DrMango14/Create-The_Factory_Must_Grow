@@ -43,16 +43,13 @@ public abstract class AbstractEngineBlockEntity extends KineticElectricBlockEnti
 
     //
     public float rpm = 0;
-    public float fuelInjectionRate = 0;
     //
     public boolean reverse = false;
     //
-    public int highestSignal;
+    public float highestSignal;
     public int signal;
     //
     public BlockPos engineController;
-    //
-
     //
 
     public float torque = 0;
@@ -104,10 +101,8 @@ public abstract class AbstractEngineBlockEntity extends KineticElectricBlockEnti
     public void tankUpdated(FluidStack stack, boolean fuelTank) {
 
         if (fuelTank && stack.isEmpty()) {
-            TFMG.LOGGER.debug("FUEL OFF");
 
-            fuelInjectionRate = 0;
-            rpm =0 ;
+            rpm = 0;
             updateRotation();
             analogSignalChanged();
         }
@@ -119,19 +114,13 @@ public abstract class AbstractEngineBlockEntity extends KineticElectricBlockEnti
         return engineController != null;
     }
 
-
     @Override
     public void updateNetwork() {
         super.updateNetwork();
     }
 
     protected void analogSignalChanged() {
-        if (!canWork()) {
-            fuelInjectionRate = 0;
-            return;
-        }
         if (hasEngineController()) {
-            fuelInjectionRate = highestSignal / 15f;
             return;
         }
 
@@ -139,22 +128,11 @@ public abstract class AbstractEngineBlockEntity extends KineticElectricBlockEnti
 
         signal = newSignal;
 
-
         newSignal = Math.max(level.getBestNeighborSignal(getBlockPos()), newSignal);
-        highestSignal = newSignal;
-        fuelInjectionRate = highestSignal / 15f;
+        highestSignal = newSignal / 15f;
         updateRotation();
 
     }
-
-    //@Override
-    //public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-//
-    //    CreateLang.text("SIGNAL " + highestSignal).forGoggles(tooltip);
-//
-//
-    //    return super.addToGoggleTooltip(tooltip, isPlayerSneaking);
-    //}
 
 
     @Override
@@ -162,8 +140,6 @@ public abstract class AbstractEngineBlockEntity extends KineticElectricBlockEnti
         super.lazyTick();
 
         neighbourChanged();
-
-
         manageFuelAndExhaust();
     }
 
@@ -181,7 +157,6 @@ public abstract class AbstractEngineBlockEntity extends KineticElectricBlockEnti
 
         }
     }
-
 
     @Override
     public boolean makeMultimeterTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
@@ -224,8 +199,6 @@ public abstract class AbstractEngineBlockEntity extends KineticElectricBlockEnti
 
     public abstract float torqueModifier();
 
-    public abstract String engineId();
-
 
     public FuelType getFuelType() {
 
@@ -243,7 +216,6 @@ public abstract class AbstractEngineBlockEntity extends KineticElectricBlockEnti
     }
 
     public void refreshCapability() {
-        IFluidHandler oldCap = fluidCapability;
         fluidCapability = this.handlerForCapability();
         invalidateCapabilities();
     }
@@ -291,22 +263,14 @@ public abstract class AbstractEngineBlockEntity extends KineticElectricBlockEnti
         signal = compound.getInt("Signal") + 1;
         if (hasEngineController())
             engineController = BlockPos.of(compound.getLong("EngineController"));
-        fuelInjectionRate = compound.getFloat("RPM");
-
-        // if (isController()) {
-        // if (!BlockPos.of(compound.getLong("ControllerPos")).equals(new BlockPos(0, 0, 0)))
-        //     controller = BlockPos.of(compound.getLong("ControllerPos"));
 
         fuelTank.readFromNBT(registries, compound.getCompound("FuelTank"));
         exhaustTank.readFromNBT(registries, compound.getCompound("ExhaustTank"));
 
-        highestSignal = compound.getInt("HighestSignal");
 
-        //signalChanged = true;
         updateRotation();
         updateGeneratedRotation();
 
-        //}
 
     }
 
@@ -318,29 +282,20 @@ public abstract class AbstractEngineBlockEntity extends KineticElectricBlockEnti
         compound.putInt("Signal", signal);
         if (hasEngineController())
             compound.putLong("EngineController", engineController.asLong());
-        compound.putFloat("RPM", fuelInjectionRate);
-
 
         compound.put("FuelTank", fuelTank.writeToNBT(registries, new CompoundTag()));
         compound.put("ExhaustTank", exhaustTank.writeToNBT(registries, new CompoundTag()));
 
-        compound.putInt("HighestSignal", highestSignal);
-
-
     }
 
-
     public abstract int getFuelConsumption();
-
 
     @Override
     public void onPlaced() {
         super.onPlaced();
     }
 
-
     public void neighbourChanged() {
-
 
         if (!hasLevel())
             return;
@@ -353,6 +308,4 @@ public abstract class AbstractEngineBlockEntity extends KineticElectricBlockEnti
             this.signalChanged = true;
 
     }
-
-
 }

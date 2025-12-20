@@ -53,6 +53,7 @@ public class SpoolItem extends Item {
 
     }
 
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
@@ -228,9 +229,10 @@ public class SpoolItem extends Item {
 
 
 
+
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean p_41408_) {
-        super.inventoryTick(stack, level, entity, slot, p_41408_);
+
 
         if(stack.get(TFMGDataComponents.SPOOL_AMOUNT)==null)
             return;

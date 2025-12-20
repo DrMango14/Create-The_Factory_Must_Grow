@@ -4,6 +4,8 @@ import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
 import com.drmangotea.tfmg.content.machinery.misc.winding_machine.SpoolItem;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
+import com.drmangotea.tfmg.registry.TFMGCableTypes;
+import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.api.equipment.goggles.IHaveHoveringInformation;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.createmod.catnip.animation.AnimationTickHolder;
@@ -14,11 +16,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -81,7 +86,7 @@ public class CableConnectorBlockEntity extends ElectricBlockEntity implements IH
             return;
 
         for (CableConnection connection : connections) {
-            ItemEntity itemToDrop = new ItemEntity(level, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, new ItemStack(connection.type.getSpool().get(), (int) (connection.getLength() / 8)));
+            ItemEntity itemToDrop = new ItemEntity(level, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, new ItemStack(connection.type.getWire().asItem(), (int) (connection.getLength() / 8)));
             if (itemToDrop.getItem().getCount() > 0) {
                 level.addFreshEntity(itemToDrop);
             }

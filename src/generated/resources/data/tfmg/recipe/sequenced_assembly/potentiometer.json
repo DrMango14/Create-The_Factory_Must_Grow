@@ -63,7 +63,7 @@
           "item": "tfmg:unfinished_potentiometer"
         },
         {
-          "item": "tfmg:copper_wire"
+          "tag": "c:wires/copper"
         }
       ],
       "results": [

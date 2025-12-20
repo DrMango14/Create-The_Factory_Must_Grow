@@ -1,10 +1,10 @@
 package com.drmangotea.tfmg.content.engines.types;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.engines.base.AbstractEngineBlockEntity;
-import com.drmangotea.tfmg.content.engines.base.EngineBlock;
 import com.drmangotea.tfmg.content.engines.base.EngineComponentsInventory;
 import com.drmangotea.tfmg.content.engines.base.EngineProperties;
 import com.drmangotea.tfmg.content.engines.engine_controller.EngineControllerBlockEntity;
@@ -31,6 +31,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -81,20 +82,10 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
         float coolingFluidModifier = coolingFluid > 0 ? 0.7f : 1f;
 
 
-        return (int) (12.5f * (1 / efficiencyModifier()) * getSpeedEfficiency() * fuelInjectionRate * oilModifier * coolingFluidModifier) * (engineLength() + 1);
+        return (int) (12.5f * (1 / efficiencyModifier()) * getSpeedEfficiency() * highestSignal / 15 * oilModifier * coolingFluidModifier) * (engineLength() + 1);
     }
 
     public void detashEngines() {
-        //for (long id : engines) {
-        //    BlockPos pos = BlockPos.of(id);
-        //    if (level.getBlockEntity(pos) instanceof AbstractEngineBlockEntity be) {
-        //        be.controller = be.getBlockPos();
-        //        be.engineNumber = 0;
-        //        be.refreshCapability();
-        //        be.sendData();
-        //        be.setChanged();
-        //    }
-        //}
     }
 
     public void setBlockStates(AbstractSmallEngineBlockEntity be, BlockPos last) {
@@ -139,10 +130,12 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
     @Override
     public void lazyTick() {
         super.lazyTick();
+        upgrade.ifPresent(engineUpgrade -> engineUpgrade.lazyTickUpgrade(this));
 
-        if(!canWork())
+        if (!canWork())
             return;
-
+        if(rpm==0)
+            return;
         if (level.random.nextInt(45) == 0) {
             if (oil > 0)
                 oil--;
@@ -152,12 +145,13 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
                 coolingFluid--;
         }
 
-        upgrade.ifPresent(engineUpgrade -> engineUpgrade.lazyTickUpgrade(this));
+
     }
 
     @Override
     public float calculateAddedStressCapacity() {
         float stress = super.calculateAddedStressCapacity() + (torque);
+
         return hasTwoShafts() ? stress / 2 : stress;
     }
 
@@ -165,12 +159,10 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
 
         if (!isController())
             return getControllerBE().hasTwoShafts();
-
         if (this.getBlockState().getValue(ENGINE_STATE) == SHAFT) {
-            BlockState state = level.getBlockState(controller.south(engineLength()));
-            if (state.getBlock() instanceof EngineBlock)
-                if (engineLength() > 1 && state.getValue(ENGINE_STATE) == SHAFT)
-                    return true;
+            BlockPos pos = getBlockPos().relative(this.getBlockState().getValue(SHAFT_FACING).getOpposite(), engineLength() );
+            if (level.getBlockState(pos).getValue(ENGINE_STATE) == SHAFT)
+                return true;
         }
         return false;
     }
@@ -254,13 +246,9 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
         if (controller == null)
             return;
 
-        if (!canWork()) {
-            fuelInjectionRate = 0;
-            return;
-        }
+
 
         if (hasEngineController()) {
-            fuelInjectionRate = highestSignal / 15f;
             return;
         }
 
@@ -271,6 +259,7 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
         signal = newSignal;
 
         if (!isController()) {
+
             if (level.getBlockEntity(controller) instanceof AbstractSmallEngineBlockEntity be) {
                 be.analogSignalChanged();
                 return;
@@ -282,9 +271,9 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
             newSignal = Math.max(level.getBestNeighborSignal(pos), newSignal);
 
         }
+
         newSignal = Math.max(level.getBestNeighborSignal(controller), newSignal);
-        highestSignal = newSignal;
-        fuelInjectionRate = highestSignal / 15f;
+        highestSignal = newSignal/15f;
         updateRotation();
 
     }
@@ -306,10 +295,9 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
             return;
         }
 
-        if(fuelTank.isEmpty()){
+        if (fuelTank.isEmpty()) {
             rpm = 0;
             torque = 0;
-            fuelInjectionRate = 0;
         }
 
         List<Long> allEngines = new ArrayList<>(engines);
@@ -333,8 +321,8 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
                 allEngines.forEach(l -> {
                     BlockPos pos = BlockPos.of(l);
                     if (level.getBlockEntity(pos) instanceof AbstractEngineBlockEntity be) {
-                        be.rpm = 4000 * speedModifier() * fuelInjectionRate;
-                        be.torque = 15 * torqueModifier() * fuelInjectionRate * engineLength();
+                        be.rpm = 4000 * speedModifier() * highestSignal ;
+                        be.torque = 15 * torqueModifier() * highestSignal* engineLength();
                         be.updateGeneratedRotation();
                     }
                 });
@@ -364,7 +352,6 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
 
         if (!canGenerateSpeed())
             return 0;
-
         float speed;
 
 
@@ -397,7 +384,6 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
 
 
             }
-
 
             return convertToDirection(Math.min((int) speed, 256), getBlockState().getValue(HORIZONTAL_FACING));
         }
@@ -486,7 +472,7 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
                     upgrade.ifPresent(u -> u.updateUpgrade(this));
                     itemStack.shrink(1);
                     if (upgrade.isPresent())
-                        if (upgrade.get() instanceof TransmissionUpgrade transmissionUpgrade) {
+                        if (upgrade.get() instanceof TransmissionUpgrade) {
                             if (itemStack.has(TFMGDataComponents.POSITION) && itemStack.get(TFMGDataComponents.POSITION) != null) {
                                 BlockPos pos = BlockPos.of(itemStack.get(TFMGDataComponents.POSITION));
                                 if (level.getBlockEntity(pos) instanceof EngineControllerBlockEntity engineControllerBE) {
@@ -559,9 +545,7 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
         TFMGTexts.Engine.rpm(rpm).forGoggles(tooltip);
         TFMGTexts.Engine.length(engineLength()).forGoggles(tooltip);
         TFMGTexts.Engine.torque(torque).forGoggles(tooltip);
-        TFMGTexts.Engine.injectionRate(fuelInjectionRate).forGoggles(tooltip);
-        TFMGTexts.Engine.signal(highestSignal).forGoggles(tooltip);
-
+        TFMGTexts.Engine.signal((int) (highestSignal*15)).forGoggles(tooltip);
         TFMGLang.number(engineNumber).style(ChatFormatting.DARK_GREEN).forGoggles(tooltip);
         if (isController() && !nextComponent().isEmpty())
             TFMGLang.text(nextComponent().getItems()[0].getDisplayName().getString()).forGoggles(tooltip);
@@ -674,7 +658,7 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
             setChanged();
             sendData();
 
-        } catch (StackOverflowError ignored){
+        } catch (StackOverflowError ignored) {
 
         }
 

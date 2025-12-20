@@ -43,9 +43,13 @@ public class LitLithiumBladeItem extends SwordItem {
 
         //   :3
 
-
         ItemStack stack = player.getItemInHand(hand);
 
+        if (stack.get(TFMGDataComponents.LITHIUM_BLADE_TIMER) ==null){
+            ItemStack stack1 = TFMGItems.LITHIUM_BLADE.asStack();
+            player.setItemInHand(hand,stack1);
+            return InteractionResultHolder.pass(stack1);
+        }
 
         if (stack.get(TFMGDataComponents.LITHIUM_BLADE_TIMER) <= 100)
             return super.use(level, player, hand);
@@ -54,8 +58,6 @@ public class LitLithiumBladeItem extends SwordItem {
 
         level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.FIRECHARGE_USE, SoundSource.NEUTRAL, 0.5F, 0.4F);
 
-
-        Vec3 motion = player.getLookAngle();
 
         for (int i = 0; i < 10; i++) {
 

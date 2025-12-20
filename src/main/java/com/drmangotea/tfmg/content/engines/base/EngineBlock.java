@@ -71,12 +71,9 @@ public class EngineBlock extends HorizontalKineticBlock {
                                 engineController.sendData();
                             }
                         }
-                        //if(!level.isClientSide)
-                        //    TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new UpdateInFrontPacket(BlockPos.of(be.getPos())));
                         be.getControllerBE().engineController = null;
                         be.getControllerBE().highestSignal = 0;
                         be.getControllerBE().connectNextTick = true;
-                        be.getControllerBE().fuelInjectionRate = 0;
                         be.updateGeneratedRotation();
                         be.getControllerBE().updateGeneratedRotation();
                         be.getControllerBE().sendData();
@@ -100,6 +97,8 @@ public class EngineBlock extends HorizontalKineticBlock {
                     be.connectNextTick = true;
                     be.detachKinetics();
                     be.getControllerBE().updateGeneratedRotation();
+                    be.getControllerBE().calculateAddedStressCapacity();
+                    be.calculateAddedStressCapacity();
                     be.updateGeneratedRotation();
                     if (be.getOrCreateNetwork() != null)
                         be.getOrCreateNetwork().remove(be);

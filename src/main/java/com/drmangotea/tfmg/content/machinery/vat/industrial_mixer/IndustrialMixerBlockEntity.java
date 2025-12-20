@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -60,9 +61,6 @@ public class IndustrialMixerBlockEntity extends KineticBlockEntity implements IV
     }
 
 
-
-
-
     @Override
     public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         for (MixerMode mode : MixerMode.values()) {
@@ -70,7 +68,7 @@ public class IndustrialMixerBlockEntity extends KineticBlockEntity implements IV
                 compound.putString("MixerMode", mode.name);
             }
         }
-        super.write(compound,registries , clientPacket);
+        super.write(compound, registries, clientPacket);
     }
 
     @Override
@@ -80,7 +78,22 @@ public class IndustrialMixerBlockEntity extends KineticBlockEntity implements IV
 
         if (clientPacket)
             visualSpeed.chase(getGeneratedSpeed(), (double) 1 / 32, LerpedFloat.Chaser.EXP);
-        super.read(compound,registries , clientPacket);
+        super.read(compound, registries, clientPacket);
+    }
+
+
+    @Override
+    public void remove() {
+
+        if (level.isClientSide || mixerMode == MixerMode.NONE)
+            return;
+
+
+        ItemEntity itemToDrop = new ItemEntity(level, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, mixerMode.item);
+
+        level.addFreshEntity(itemToDrop);
+
+
     }
 
     @Override
@@ -134,7 +147,7 @@ public class IndustrialMixerBlockEntity extends KineticBlockEntity implements IV
 
     @Override
     public int getWorkPercentage() {
-        return (int) ((getSpeed()/255f)*100);
+        return (int) ((getSpeed() / 255f) * 100);
     }
 
     @Override

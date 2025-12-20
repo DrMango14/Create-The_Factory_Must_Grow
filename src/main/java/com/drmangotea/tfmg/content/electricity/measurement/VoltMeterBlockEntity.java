@@ -8,6 +8,8 @@ import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -55,6 +57,22 @@ public class VoltMeterBlockEntity extends SmartBlockEntity implements IHaveGoggl
 
     }
 
+    @Override
+    protected void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
+        super.write(tag, registries, clientPacket);
+
+        if (mode != MeasureMode.VOLTAGE)
+            tag.putString("mode", mode.toString());
+
+    }
+
+    @Override
+    protected void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
+        super.read(tag, registries, clientPacket);
+        if (!tag.getString("mode").isEmpty())
+            mode = MeasureMode.valueOf(tag.getString("mode"));
+    }
+
     public float getUnit(IElectric be) {
         return switch (mode) {
             case VOLTAGE, HIGH_VOLTAGE -> be.getData().getVoltage();
@@ -63,7 +81,8 @@ public class VoltMeterBlockEntity extends SmartBlockEntity implements IHaveGoggl
             case POWER -> be.powerGeneration() > 0 ? be.powerGeneration() : be.getPowerUsage();
             case NETWORK_POWER_USAGE -> be.getNetworkPowerUsage();
             case NETWORK_POWER_GENERATION -> be.getNetworkPowerGeneration();
-            case CAPACITY -> be instanceof AccumulatorBlockEntity accumulator ? level.getBlockEntity(accumulator.controller) instanceof AccumulatorBlockEntity controllerBE ? controllerBE.energy.getEnergyStored() :0 :0;
+            case CAPACITY ->
+                    be instanceof AccumulatorBlockEntity accumulator ? level.getBlockEntity(accumulator.controller) instanceof AccumulatorBlockEntity controllerBE ? controllerBE.energy.getEnergyStored() : 0 : 0;
 
             case FALLBACK -> 0;
         };
@@ -82,7 +101,7 @@ public class VoltMeterBlockEntity extends SmartBlockEntity implements IHaveGoggl
         float targetAngle = Math.abs(value * 180);
 
 
-        angle.chase(Math.min(Math.abs(targetAngle),180), 0.05f, LerpedFloat.Chaser.EXP);
+        angle.chase(Math.min(Math.abs(targetAngle), 180), 0.05f, LerpedFloat.Chaser.EXP);
         angle.tickChaser();
 
     }

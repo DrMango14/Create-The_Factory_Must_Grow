@@ -154,12 +154,7 @@ public class LargeEngineBlockEntity extends AbstractEngineBlockEntity {
         return 1;
     }
 
-    @Override
-    public String engineId() {
-        return "Large";
-    }
-
-
+    
     @OnlyIn(Dist.CLIENT)
     private void makeSound() {
         Float targetAngle = getTargetAngle();

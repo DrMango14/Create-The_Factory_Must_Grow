@@ -11,11 +11,13 @@ public class CableType {
     private final ResourceLocation id;
     private final int color;
     private final ItemEntry<?> spool;
+    private final ItemEntry<?> wire;
 
     public CableType(Properties properties) {
         this.id = properties.id;
         this.color = properties.color;
         this.spool = properties.spool;
+        this.wire = properties.wire;
     }
 
     public int getColor() {
@@ -24,6 +26,10 @@ public class CableType {
 
     public ItemEntry<?> getSpool() {
         return this.spool;
+    }
+
+    public ItemEntry<?> getWire() {
+        return this.wire;
     }
 
     public String getOrCreateDescriptionId() {
@@ -51,6 +57,7 @@ public class CableType {
 
         int color = 0xffffff;
         ItemEntry<?> spool = TFMGItems.COPPER_SPOOL;
+        ItemEntry<?> wire = TFMGItems.COPPER_WIRE;
 
         public Properties color(int color) {
             this.color = color;
@@ -59,6 +66,11 @@ public class CableType {
 
         public Properties spool(ItemEntry<?> spool) {
             this.spool = spool;
+            return this;
+        }
+
+        public Properties wire(ItemEntry<?> wire) {
+            this.wire = wire;
             return this;
         }
 

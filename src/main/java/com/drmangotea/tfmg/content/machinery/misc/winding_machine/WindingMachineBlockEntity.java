@@ -43,7 +43,6 @@ public class WindingMachineBlockEntity extends KineticBlockEntity implements IHa
     LerpedFloat spoolSpeed = LerpedFloat.linear();
     float angle;
     public SmartInventory inventory;
-    public IItemHandlerModifiable itemCapability;
     public ItemStack spool = ItemStack.EMPTY;
     public WindingRecipe recipe;
     public int amountWinded = 0;
@@ -58,7 +57,6 @@ public class WindingMachineBlockEntity extends KineticBlockEntity implements IHa
                 .withMaxStackSize(1)
                 .whenContentsChanged(i -> this.onContentsChanged());
 
-        itemCapability = inventory;
     }
 
 
@@ -66,7 +64,7 @@ public class WindingMachineBlockEntity extends KineticBlockEntity implements IHa
         event.registerBlockEntity(
                 Capabilities.ItemHandler.BLOCK,
                 TFMGBlockEntities.WINDING_MACHINE.get(),
-                (be, context) -> be.itemCapability
+                (be, context) -> be.inventory
         );
     }
 
@@ -141,7 +139,7 @@ public class WindingMachineBlockEntity extends KineticBlockEntity implements IHa
                     .forGoggles(tooltip);
 
         if (recipe != null)
-            TFMGTexts.progress(TFMGLang.number(amountWinded) + "/" + recipe.getProcessingDuration())
+            TFMGTexts.progress(amountWinded + "/" + recipe.getProcessingDuration())
                     .color(spool.getBarColor())
                     .forGoggles(tooltip);
         }

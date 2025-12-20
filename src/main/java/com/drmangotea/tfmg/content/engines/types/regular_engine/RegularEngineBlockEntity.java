@@ -36,7 +36,6 @@ import java.util.List;
 
 import static com.drmangotea.tfmg.content.engines.base.EngineProperties.*;
 import static com.drmangotea.tfmg.content.engines.types.regular_engine.RegularEngineBlock.EXTENDED;
-import static com.simibubi.create.AllTags.optionalTag;
 import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING;
 
 public class RegularEngineBlockEntity extends AbstractSmallEngineBlockEntity {
@@ -383,16 +382,18 @@ public class RegularEngineBlockEntity extends AbstractSmallEngineBlockEntity {
         if(nextComponent()!= Ingredient.EMPTY){
             TFMGTexts.Engine.unfinished().forGoggles(tooltip);
             TFMGTexts.Engine.nextComponent(nextComponent().getItems()[0]).forGoggles(tooltip);
+            TFMGTexts.Engine.type(type.langKey).forGoggles(tooltip, 1);
             return true;
         }
         if(!hasAllPistons()){
             TFMGTexts.Engine.lastRequirement(this instanceof TurbineEngineBlockEntity ? "turbines" : "pistons").forGoggles(tooltip);
+            TFMGTexts.Engine.type(type.langKey).forGoggles(tooltip, 1);
             return true;
         }
 
         TFMGTexts.Engine.type(type.langKey).forGoggles(tooltip, 1);
         TFMGTexts.Engine.rpm(rpm).forGoggles(tooltip, 1);
-        TFMGTexts.Engine.signal(highestSignal).forGoggles(tooltip, 1);
+        TFMGTexts.Engine.signal((int) (highestSignal*15)).forGoggles(tooltip, 1);
         TFMGTexts.Engine.torque(torque).forGoggles(tooltip, 1);
         TFMGTexts.Engine.fuelConsumption(getFuelConsumption()/1.5f).forGoggles(tooltip, 1);
         if(oil>0){
@@ -407,10 +408,6 @@ public class RegularEngineBlockEntity extends AbstractSmallEngineBlockEntity {
         return true;
     }
 
-    @Override
-    public String engineId() {
-        return type.name;
-    }
 
     public enum EngineType {
         I("engine_i", pistonsI(), 1, 1, 1, true),

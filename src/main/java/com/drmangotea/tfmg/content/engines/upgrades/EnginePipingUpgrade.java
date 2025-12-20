@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.engines.upgrades;
 
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
@@ -40,6 +41,8 @@ public class EnginePipingUpgrade extends EngineUpgrade {
     @Override
     public void lazyTickUpgrade(AbstractSmallEngineBlockEntity engine) {
 
+     
+
         if (tank.isPresent()) {
 
             AbstractSmallEngineBlockEntity controller = engine.getControllerBE();
@@ -57,7 +60,7 @@ public class EnginePipingUpgrade extends EngineUpgrade {
             tankBE.getTankInventory().drain(amount, IFluidHandler.FluidAction.EXECUTE);
             controller.getControllerBE().fuelTank.fill(new FluidStack(tankBE.getFluid(0).getFluidHolder(), amount), IFluidHandler.FluidAction.EXECUTE);
 
-        }
+        } else findTank(engine);
 
     }
 

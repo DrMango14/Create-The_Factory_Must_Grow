@@ -55,6 +55,11 @@ public class BlastFurnaceHatchBlockEntity extends SmartBlockEntity implements IH
                 TFMGBlockEntities.BLAST_FURNACE_HATCH.get(),
                 (be, context) -> be.fluidCapability
         );
+        event.registerBlockEntity(
+                Capabilities.ItemHandler.BLOCK,
+                TFMGBlockEntities.BLAST_FURNACE_HATCH.get(),
+                (be, context) -> be.inventory
+        );
     }
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {}

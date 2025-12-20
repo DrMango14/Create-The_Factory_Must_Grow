@@ -174,7 +174,7 @@
 	"block.tfmg.diode.tooltip.behaviour1": "The power will be outputted on its lighter side acting as a one way pathway for power (meaning any power that would be coming from its lighter side would not be outputted on the darker one)",
 
 	"block.tfmg.blast_stove.tooltip.summary": "Heats Air",
-	"block.tfmg.blast_stove.tooltip.behaviour1": "When 3 blast stoves are placed on top of eachother (or in a 3x2 shape) the smallest version of a blast stove is created, to add further internal storage you can add more stove blocks on top which is generally reccomended. A Blast Stove requires 2 things to be pumped in. Air, from the side of the bottom block and Creosote or Furnace gas from the bottom. Carbon dioxide must be pumped out from the side of the bottom block and finally heated air must be pumped out from the machines top.",
+	"block.tfmg.blast_stove.tooltip.behaviour1": "When 3 blast stoves are placed on top of eachother (or in a 3x2 shape) the smallest version of a blast stove is created, to add further internal storage you can add more stove blocks on top which is generally recommended. A Blast Stove requires 2 things to be pumped in. Air, from the side of the bottom block and Creosote or Furnace gas from the bottom. Carbon dioxide must be pumped out from the side of the bottom block and finally heated air must be pumped out from the machines top.",
 
 	"block.tfmg.resistor.tooltip.summary": "Adds resistance to a network",
 	"block.tfmg.resistor.tooltip.condition1": "When placed on a block within a group",

@@ -22,7 +22,7 @@ public class VatRenderer extends SafeBlockEntityRenderer<VatBlockEntity> {
         if (!be.isController())
             return;
 
-        float fluidLevel = renderFluids(be, partialTicks, ms, bufferSource, light, overlay);
+        renderFluids(be, partialTicks, ms, bufferSource, light, overlay);
 
     }
 

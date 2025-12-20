@@ -33,7 +33,7 @@ public class TFMGSequencedAssemblyRecipeGen extends SequencedAssemblyRecipeGen {
             .loops(3)
             .addStep(WindingRecipe::new, rb -> rb.require(TFMGItems.CONSTANTAN_SPOOL.get()).duration(100))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGBlocks.STEEL_COGWHEEL))
-            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.COPPER_WIRE))
+            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(copperWire()))
             .addStep(FillingRecipe::new, rb -> rb.require(SizedFluidIngredient.of(lubricationOil(), 50)))),
 
     GENERATOR = create("generator", b -> b.require(shaft())

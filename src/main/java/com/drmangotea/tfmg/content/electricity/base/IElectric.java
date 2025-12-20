@@ -21,16 +21,33 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * data and actions for electric blocks
+ */
 public interface IElectric {
+
+    /**
+     * block's world position as a long
+     */
     long getPos();
 
+    /**
+     * world the blocks is in
+     */
     LevelAccessor getLevelAccessor();
 
+    /**
+     *
+     * @return true if the block is marked as removed
+     */
     default boolean destroyed() {
         return getData().destroyed();
     }
 
+    /**
+     * checks if this block is part of a valid network
+     * @return block's network if valid, newly created network for this block otherwise
+     */
     default ElectricalNetwork getOrCreateElectricNetwork() {
         if (getLevelAccessor().getBlockEntity(BlockPos.of(getData().electricalNetworkId)) instanceof IElectric) {
             return TFMG.NETWORK_MANAGER.getOrCreateNetworkFor((IElectric) getLevelAccessor().getBlockEntity(BlockPos.of(getData().electricalNetworkId)));
@@ -41,10 +58,16 @@ public interface IElectric {
         }
     }
 
+    /**
+     * tells the block which sides of it can be attached to the grid
+     */
     default boolean hasElectricitySlot(Direction direction) {
         return true;
     }
 
+    /**
+     * initialization, called when the block is placed
+     */
     default void onPlaced() {
 
         if (getLevelAccessor() instanceof ServerLevel serverLevel)
@@ -67,20 +90,9 @@ public interface IElectric {
 
     }
 
-    default void onNeighborChanged() {
-        Level level = (Level) getLevelAccessor();
-        for(Direction direction : Direction.values()){
-            IEnergyStorage capability = level.getCapability(Capabilities.EnergyStorage.BLOCK,getBlockPos().relative(direction), direction);
-
-            if(capability==null)
-                continue;
-
-
-
-
-        }
-    }
-
+    /**
+     * manages removal of this block after it is destroyed
+     */
     default void onRemoved() {
         this.getData().destroyed = true;
         for (Direction d : Direction.values()) {
@@ -101,6 +113,9 @@ public interface IElectric {
                     .remove(getData().getId());
     }
 
+    /**
+     * loads data
+     */
     default void readElectricity(CompoundTag compound, boolean clientPacket) {
         getData().group = new ElectricalGroup(compound.getInt("GroupId"));
         getData().group.resistance = compound.getFloat("GroupResistance");
@@ -108,11 +123,17 @@ public interface IElectric {
             getData().connectNextTick = true;
     }
 
+    /**
+     * saves data
+     */
     default void writeElectricity(CompoundTag compound, boolean clientPacket) {
         compound.putInt("GroupId", getData().group.id);
         compound.putFloat("GroupResistance", getData().group.resistance);
     }
 
+    /**
+     * handles action that need to happen every tick and checks for scheduled updates
+     */
     default void tickElectricity() {
         if (getData().checkForLoopsNextTick) {
             getOrCreateElectricNetwork().checkForLoops(getBlockPos());
@@ -137,6 +158,9 @@ public interface IElectric {
         }
     }
 
+    /**
+     * handles actions that need to repeat every second
+     */
     default void lazyTickElectricity() {
         if (getData().failTimer >= 4) {
             this.blockFail();
@@ -147,6 +171,9 @@ public interface IElectric {
         }
     }
 
+    /**
+     * WIP, not functional
+     */
     default int getMaxVoltage() {
         return 0;
     }
@@ -155,6 +182,9 @@ public interface IElectric {
         return 0;
     }
 
+    /**
+     * handles connecting blocks into a network
+     */
     default void onConnected() {
 
         BlockPos pos = BlockPos.of(getPos());
@@ -180,10 +210,17 @@ public interface IElectric {
 
     }
 
+    /**
+     *
+     * @return the block's world position
+     */
     default BlockPos getBlockPos() {
         return BlockPos.of(getPos());
     }
 
+    /**
+     * tells blocks when the network doesn't have enough power
+     */
     default void updateUnpowered(List<BlockPos> alreadyChecked) {
         alreadyChecked.add(BlockPos.of(getPos()));
         updateNextTick();
@@ -205,6 +242,9 @@ public interface IElectric {
         }
     }
 
+    /**
+     * the multimeter tooltip
+     */
     default boolean makeMultimeterTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         TFMGTexts.header("multimeter").style(ChatFormatting.WHITE)
                 .forGoggles(tooltip);
@@ -238,22 +278,16 @@ public interface IElectric {
         return true;
     }
 
-    default void updateNearbyNetworks(IElectric member) {
-        if (true)
-            return;
 
-
-        for (Direction direction : Direction.values()) {
-            if (member.getLevelAccessor().getBlockEntity(BlockPos.of(member.getPos()).relative(direction)) instanceof IElectric be && be.getData().getId() != member.getData().getId()) {
-                be.getLevelAccessor().setBlock(BlockPos.of(be.getPos()).above(3), Blocks.GOLD_BLOCK.defaultBlockState(), 3);
-                be.updateNextTick();
-            }
-        }
-
-    }
-
+    /**
+     * contains data related to electricity
+     */
     ElectricBlockValues getData();
 
+    /**
+     *
+     * @return true if the network has enough power
+     */
     default boolean canWork() {
         return !getData().notEnoughPower;
     }
@@ -401,7 +435,7 @@ public interface IElectric {
 
 
         if (canBeInGroups()) {
-            getData().voltage = (int) (((float) resistance() / getData().group.resistance) * (float) getData().voltageSupply);
+            getData().voltage = (int) ((resistance() / getData().group.resistance) * (float) getData().voltageSupply);
             return;
         }
         getData().voltage = newVoltage;

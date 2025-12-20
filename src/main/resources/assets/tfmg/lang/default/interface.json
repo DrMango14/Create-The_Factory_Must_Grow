@@ -2,8 +2,8 @@
   "creative_tab.tfmg_main": "Create: The Factory Must Grow",
   "creative_tab.tfmg_decoration": "Create: TFMG Building Blocks",
 
-  "create.goggles.fluid_storage": "Fluid Storage:",
-  "tfmg.goggles.item_storage": "Item Storage:",
+  "tfmg.goggles.fluid_storage": "Fluid Storage:",
+  "create.goggles.item_storage": "Item Storage:",
   "tfmg.goggles.item_storage_empty": "*Empty*",
 
   "tfmg.surface_scanner.header": "Surface Scanner",
@@ -56,7 +56,7 @@
   "tfmg.goggles.machine_input.power_level": "Power Level: ",
 
   "tfmg.winding_machine.header": "Winding Machine",
-  "tfmg.goggles.winding_machine.turns": "Turns Left: %s",
+  "tfmg.goggles.winding_machine.turns": "Turns Left: %1$",
   "tfmg.goggles.winding_machine.progress": "Progress: ",
 
   "tfmg.polarizer.header": "Polarizer",
@@ -124,21 +124,20 @@
 
   "tfmg.tooltip.fuse": "Rating: %1$s",
   "tfmg.tooltip.resistor": "Resistance: %1$s",
-  "tfmg.tooltip.coils": "Turns: %1$s",
+  "tfmg.tooltip.coils": "Turns: ",
   "tfmg.tooltip.cylinder": "Supported Fuels:",
   "tfmg.tooltip.fluid_item": "Fluid Amount: %1$s",
 
-  "tfmg.recipe.assembly.winding": "Wind a Spool",
-
-  "tfmg.recipe.distillation": "Distillation",
-  "tfmg.recipe.advanced_distillation": "Advanced Distillation",
-  "tfmg.recipe.industrial_blasting": "Industrial Blasting",
-  "tfmg.recipe.casting": "Casting",
-  "tfmg.recipe.coking": "Coking",
-  "tfmg.recipe.polarizing": "Polarizing",
-  "tfmg.recipe.chemical_vat": "Chemical Vat",
-  "tfmg.recipe.hot_blast": "Air Blasting",
-  "tfmg.recipe.winding": "Winding",
+  "create.recipe.assembly.winding": "Wind a Spool",
+  "create.recipe.distillation": "Distillation",
+  "create.recipe.advanced_distillation": "Advanced Distillation",
+  "create.recipe.industrial_blasting": "Industrial Blasting",
+  "create.recipe.casting": "Casting",
+  "create.recipe.coking": "Coking",
+  "create.recipe.polarizing": "Polarizing",
+  "create.recipe.chemical_vat": "Chemical Vat",
+  "create.recipe.hot_blast": "Air Blasting",
+  "create.recipe.winding": "Winding",
 
   "tfmg.keyinfo.custom_button": "Engine Controller Custom Button",
   "tfmg.keyinfo.engine_start": "Start Engine",
@@ -150,7 +149,7 @@
   "tfmg.multimeter.insufficient_power": "Not Enough Power",
   "tfmg.multimeter.insufficient_power.requirement": "Not Enough Power (Needs %s)",
   "tfmg.multimeter.insufficient_current": "Not Enough Current (Needs %s)",
-  "tfmg.multimeter.charge": "Charge: %s",
+  "tfmg.multimeter.charge": "Charge: ",
   "tfmg.multimeter.additional_values": "Additional Values:",
   "tfmg.multimeter.power_usage": "   Power Usage: ",
   "tfmg.multimeter.group": "   Group: %s",
@@ -191,7 +190,7 @@
   "tfmg.engine.type.engine_v": "V",
   "tfmg.engine.type.engine_w": "W",
   "tfmg.engine.type.engine_u": "U",
-  "tfmg.engine.type.boxer": "Boxer",
+  "tfmg.engine.type.engine_boxer": "Boxer",
   "tfmg.engine.type.radial": "Radial",
   "tfmg.engine.type.turbine": "Turbine",
 
@@ -200,8 +199,8 @@
   "tfmg.goggles.voltmeter.mode.current": "Current",
   "tfmg.goggles.voltmeter.mode.resistance": "Resistance",
   "tfmg.goggles.voltmeter.mode.power": "Power",
-  "tfmg.goggles.voltmeter.mode.net_power_use": "Network Power Usage",
-  "tfmg.goggles.voltmeter.mode.net_power_gen": "Network Power Generation",
+  "tfmg.goggles.voltmeter.mode.network_power_use": "Network Power Usage",
+  "tfmg.goggles.voltmeter.mode.network_power_generation": "Network Power Generation",
   "tfmg.goggles.voltmeter.mode.capacity": "Capacity",
   "tfmg.goggles.voltmeter.mode.fallback": "Fallback",
 

@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.machinery.vat.base;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.mixin.accessor.TankSegmentAccessor;
@@ -77,7 +78,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
     protected BlockPos lastKnownPos;
     protected boolean updateConnectivity;
     protected boolean updateCapability;
-    protected boolean window = false;
+    protected boolean window;
     protected int luminosity;
     protected int width;
     protected int height;
@@ -252,23 +253,6 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
                 continue;
             }
 
-            //for(int i =0;i<machines.size();i++){
-            //    if(!Objects.equals(machines.get(i),testedRecipe.machines)){
-            //        doesntMatch = true;
-            //        break;
-            //    }
-            //}
-
-
-            //for (String string : testedRecipe.machines) {
-//
-            //    if (!machines.contains(string)) {
-            //        doesntMatch = true;
-            //        break;
-            //    }
-            //}
-
-
             IFluidHandler fluidHandler = fluidCapability;
             IItemHandler itemHandler = itemCapability;
 
@@ -321,27 +305,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
                 }
             }
 
-            if (false) {
-                Map<Integer, Integer> isFound = new HashMap<>();
-                for (int i = 0; i < testedRecipe.getIngredients().size(); i++) {
-                    Integer foundAt = null;
-                    if (testedRecipe.getIngredients().get(i).isEmpty())
-                        break;
 
-                    for (int y = 0; y < itemHandler.getSlots(); y++) {
-                        if (isFound.containsValue(y))
-                            continue;
-                        ItemStack stack = itemHandler.getStackInSlot(y);
-                        if (testedRecipe.getIngredients().get(i).test(stack)) {
-                            foundAt = y;
-                            break;
-                        }
-                    }
-                    if (foundAt != null) {
-                        isFound.put(i, foundAt);
-                    } else doesntMatch = true;
-                }
-            }
 
             //////////////////////////////////////////
             if (doesntMatch)
@@ -468,6 +432,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
      * ticks the processing timer
      */
     public void handleRecipe() {
+
         if (recipe == null)
             return;
         if (!isController())
@@ -539,7 +504,8 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
                     }
                 }
             //fluid output
-            List<Integer> handledFluidResults = new ArrayList<>();
+
+
 
             List<FluidStack> handledFluidStacks = new ArrayList<>();
             List<SmartFluidTankBehaviour.TankSegment> tankSegments = List.of(outputTank.getTanks());
@@ -903,8 +869,9 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
     }
 
     private IFluidHandler getNewFluidCapability() {
-        IFluidHandler inputHandler = inputTank.getCapability();
         IFluidHandler outputHandler = outputTank.getCapability();
+        IFluidHandler inputHandler = inputTank.getCapability();
+
 
 
         if (inputHandler == null || outputHandler == null)

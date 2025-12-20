@@ -6,7 +6,7 @@
       "item": "tfmg:empty_spool"
     },
     "W": {
-      "tag": "c:wires/aluminum"
+      "tag": "c:wires/copper"
     }
   },
   "pattern": [
@@ -16,6 +16,9 @@
   ],
   "result": {
     "count": 1,
-    "id": "tfmg:aluminum_spool"
+    "id": "tfmg:copper_spool",
+    "components": {
+      "tfmg:spool_amount": 1000
+    }
   }
 }

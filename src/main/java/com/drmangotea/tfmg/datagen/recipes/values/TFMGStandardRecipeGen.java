@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.datagen.recipes.values;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGRegistrate;
 import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipes;
+import com.drmangotea.tfmg.content.machinery.misc.winding_machine.SpoolItem;
 import com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGFluids;
@@ -1011,32 +1012,32 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("CPC")
                     .pattern("MMM")),
 
-    COPPER_SPOOL = create(TFMGItems.COPPER_SPOOL)
-            .unlockedBy(TFMGItems.EMPTY_SPOOL::get)
-            .viaShaped(b -> b
-                    .define('S', TFMGItems.EMPTY_SPOOL)
-                    .define('W', copperWire())
-                    .pattern("WWW")
-                    .pattern("WSW")
-                    .pattern("WWW")),
-
-    ALUMINUM_SPOOL = create(TFMGItems.ALUMINUM_SPOOL)
-            .unlockedBy(TFMGItems.EMPTY_SPOOL::get)
-            .viaShaped(b -> b
-                    .define('S', TFMGItems.EMPTY_SPOOL)
-                    .define('W', aluminumWire())
-                    .pattern("WWW")
-                    .pattern("WSW")
-                    .pattern("WWW")),
-
-    CONSTANTAN_SPOOL = create(TFMGItems.CONSTANTAN_SPOOL)
-            .unlockedBy(TFMGItems.EMPTY_SPOOL::get)
-            .viaShaped(b -> b
-                    .define('S', TFMGItems.EMPTY_SPOOL)
-                    .define('W', constantanWire())
-                    .pattern("WWW")
-                    .pattern("WSW")
-                    .pattern("WWW")),
+   // COPPER_SPOOL = create(TFMGItems.COPPER_SPOOL)
+   //         .unlockedBy(TFMGItems.EMPTY_SPOOL::get)
+   //         .viaShaped(b -> b
+   //                 .define('S', TFMGItems.EMPTY_SPOOL)
+   //                 .define('W', copperWire())
+   //                 .pattern("WWW")
+   //                 .pattern("WSW")
+   //                 .pattern("WWW")),
+//
+   // ALUMINUM_SPOOL = create(TFMGItems.ALUMINUM_SPOOL)
+   //         .unlockedBy(TFMGItems.EMPTY_SPOOL::get)
+   //         .viaShaped(b -> b
+   //                 .define('S', TFMGItems.EMPTY_SPOOL)
+   //                 .define('W', aluminumWire())
+   //                 .pattern("WWW")
+   //                 .pattern("WSW")
+   //                 .pattern("WWW")),
+//
+   // CONSTANTAN_SPOOL = create(TFMGItems.CONSTANTAN_SPOOL)
+   //         .unlockedBy(TFMGItems.EMPTY_SPOOL::get)
+   //         .viaShaped(b -> b
+   //                 .define('S', TFMGItems.EMPTY_SPOOL)
+   //                 .define('W', constantanWire())
+   //                 .pattern("WWW")
+   //                 .pattern("WSW")
+   //                 .pattern("WWW")),
 
     REGULAR_ENGINE = create(TFMGBlocks.REGULAR_ENGINE).returns(2)
             .unlockedBy(TFMGBlocks.HEAVY_MACHINERY_CASING::asItem)
@@ -2404,6 +2405,8 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
         return new GeneratedRecipeBuilder(currentFolder, result);
     }
 
+
+
     GeneratedRecipeBuilder create(ItemProviderEntry<? extends ItemLike, ? extends ItemLike> result) {
         return create(result::get);
     }
@@ -2561,9 +2564,9 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
             return this;
         }
 
-        // FIXME 5.1 refactor - recipe categories as markers instead of sections?
         TFMGRecipeProvider.GeneratedRecipe viaShaped(UnaryOperator<ShapedRecipeBuilder> builder) {
             return register(consumer -> {
+
                 ShapedRecipeBuilder b =
                         builder.apply(ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result.get(), amount));
                 if (unlockedBy != null)

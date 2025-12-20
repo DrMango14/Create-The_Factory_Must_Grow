@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.engines.engine_controller;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.upgrades.TransmissionUpgrade;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
@@ -267,7 +268,7 @@ public class EngineControllerBlockEntity extends SmartBlockEntity implements IHa
         if (enginePos != null && (engine == null)) {
             if (level.getBlockEntity(enginePos) instanceof AbstractSmallEngineBlockEntity be) {
                 engine = be;
-                engine.getControllerBE().highestSignal = 4;
+                engine.getControllerBE().highestSignal = 4/15;
             }
         }
 
@@ -296,8 +297,7 @@ public class EngineControllerBlockEntity extends SmartBlockEntity implements IHa
         if (engine == null)
             return;
         engine.getControllerBE().engineController = this.getBlockPos();
-        engine.getControllerBE().highestSignal = accelerationRate;
-        engine.getControllerBE().fuelInjectionRate = engine.getControllerBE().highestSignal / 15f;
+        engine.getControllerBE().highestSignal = accelerationRate/15;
         engine.getControllerBE().updateRotation();
 
 
@@ -306,6 +306,7 @@ public class EngineControllerBlockEntity extends SmartBlockEntity implements IHa
     public void disconnectEngine() {
         if (engine == null)
             return;
+
         engine.getControllerBE().highestSignal = 0;
         engine.getControllerBE().engineController = null;
         engine.getControllerBE().updateGeneratedRotation();

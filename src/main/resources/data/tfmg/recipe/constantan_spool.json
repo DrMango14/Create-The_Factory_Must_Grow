@@ -16,6 +16,9 @@
   ],
   "result": {
     "count": 1,
-    "id": "tfmg:constantan_spool"
+    "id": "tfmg:constantan_spool",
+    "components": {
+      "tfmg:spool_amount": 1000
+    }
   }
 }
