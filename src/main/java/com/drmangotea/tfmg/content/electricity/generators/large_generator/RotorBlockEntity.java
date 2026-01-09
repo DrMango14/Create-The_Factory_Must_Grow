@@ -31,6 +31,7 @@ public class RotorBlockEntity extends KineticElectricBlockEntity {
     boolean findNextTick = false;
 
 
+
     List<BlockPos> stators = new ArrayList<>();
 
     public static final Map<Axis, Map<StatorOffset, BlockState>> statorPosition = setStatorPositons();
@@ -48,6 +49,12 @@ public class RotorBlockEntity extends KineticElectricBlockEntity {
     protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.read(compound,registries , clientPacket);
         visualSpeed.chase(getGeneratedSpeed(), 1 / 128f, LerpedFloat.Chaser.EXP);
+    }
+
+
+    @Override
+    public int getMaxVoltage() {
+        return 10000;
     }
 
     @Override

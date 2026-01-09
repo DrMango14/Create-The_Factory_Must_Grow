@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.electricity.network.transformer;
+package com.drmangotea.tfmg.content.electricity.network.transformer.small;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
@@ -141,8 +141,11 @@ public class TransformerBlockEntity extends VoltageAlteringBlockEntity {
     public float resistance() {
         Direction facing = getBlockState().getValue(FACING).getCounterClockWise();
         if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be && be.getData().getId() != data.getId()) {
-            if (be.hasElectricitySlot(facing.getOpposite()))
-                return Math.max(be.getNetworkResistance(), 0);
+            if (be.hasElectricitySlot(facing.getOpposite())) {
+                int count = getBlocksConnectedToNetworkCount(getControlledBlock().getData().getId());
+                if(count!=0)
+                    return Math.max(be.getNetworkResistance()*count, 0);
+            }
         }
         return 0;
     }

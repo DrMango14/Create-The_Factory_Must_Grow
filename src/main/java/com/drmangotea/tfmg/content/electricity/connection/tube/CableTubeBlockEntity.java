@@ -15,7 +15,10 @@ public class CableTubeBlockEntity extends ElectricBlockEntity {
         super(type, pos, state);
     }
 
-
+    @Override
+    public int getMaxVoltage() {
+        return 10000;
+    }
 
     @Override
     public boolean hasElectricitySlot(Direction direction) {

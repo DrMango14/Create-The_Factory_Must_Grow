@@ -20,9 +20,7 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
     public CopycatCableBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         data.connectNextTick = true;
-        if (!canBeInGroups()) {
-            data.group = new ElectricalGroup(-1);
-        }
+
     }
 
     @Override
@@ -71,12 +69,7 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
        tickElectricity();
     }
 
-    @Override
-    protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
-        super.write(compound,registries , clientPacket);
 
-        writeElectricity(compound,clientPacket);
-    }
 
     @Override
     protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {

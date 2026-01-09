@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.datagen.recipes.values.create;
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.api.data.recipe.PressingRecipeGen;
 import net.minecraft.core.HolderLookup;
@@ -25,6 +26,9 @@ public class TFMGPressingRecipeGen extends PressingRecipeGen {
 
     NICKEL_SHEET = create(TFMG.asResource("nickel_ingot"), b -> b.require(nickelIngot())
             .output(nickelSheetTFMG())),
+
+    MAGNETIC_ALLOY_SHEET = create(TFMG.asResource("magnetic_alloy_ingot"), b -> b.require(TFMGItems.MAGNETIC_ALLOY_INGOT)
+            .output(TFMGItems.MAGNETIC_ALLOY_SHEET)),
 
     SYNTHETIC_LEATHER = create(TFMG.asResource("synthetic_leather"), b -> b
             .require(rubber())

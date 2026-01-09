@@ -40,7 +40,14 @@ public class VoltageAlteringBlockEntity extends ElectricBlockEntity{
         }
     }
 
+    public int getMaxPowerOutput(){
+        return 10000;
+    }
 
+    @Override
+    public int getMaxCurrent() {
+        return 100;
+    }
 
     @Override
     public int getPowerUsage() {
@@ -70,8 +77,11 @@ public class VoltageAlteringBlockEntity extends ElectricBlockEntity{
     public float resistance() {
         Direction facing = getDirection();
         if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be && be.getData().getId() != data.getId()) {
-            if (be.hasElectricitySlot(facing.getOpposite()))
-                return Math.max(be.getNetworkResistance(), 0);
+            if (be.hasElectricitySlot(facing.getOpposite())){
+                int count = getBlocksConnectedToNetworkCount(getControlledBlock().getData().getId());
+                if(count!=0)
+                    return Math.max(be.getNetworkResistance()*count, 0);
+            }
         }
         return 0;
     }

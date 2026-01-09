@@ -541,6 +541,11 @@ public class TFMGRecipeProvider extends RecipeProvider {
             stack.set(TFMGDataComponents.COIL_TURNS,100);
             return stack;
         }
+        public static ItemStack largeCoil100Turns(){
+            ItemStack stack = TFMGBlocks.LARGE_COIL.asStack();
+            stack.set(TFMGDataComponents.COIL_TURNS,100);
+            return stack;
+        }
 
         public static ItemStack turbineBlade(){
             ItemStack stack = TFMGItems.TURBINE_BLADE.asStack();

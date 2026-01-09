@@ -1,9 +1,13 @@
 package com.drmangotea.tfmg.content.electricity.base;
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnection;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;
+import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchBlockEntity;
+import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeTransformerBlockEntity;
 import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -12,11 +16,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,6 @@ public interface IElectric {
     LevelAccessor getLevelAccessor();
 
     /**
-     *
      * @return true if the block is marked as removed
      */
     default boolean destroyed() {
@@ -46,6 +45,7 @@ public interface IElectric {
 
     /**
      * checks if this block is part of a valid network
+     *
      * @return block's network if valid, newly created network for this block otherwise
      */
     default ElectricalNetwork getOrCreateElectricNetwork() {
@@ -117,8 +117,6 @@ public interface IElectric {
      * loads data
      */
     default void readElectricity(CompoundTag compound, boolean clientPacket) {
-        getData().group = new ElectricalGroup(compound.getInt("GroupId"));
-        getData().group.resistance = compound.getFloat("GroupResistance");
         if (!clientPacket)
             getData().connectNextTick = true;
     }
@@ -126,10 +124,7 @@ public interface IElectric {
     /**
      * saves data
      */
-    default void writeElectricity(CompoundTag compound, boolean clientPacket) {
-        compound.putInt("GroupId", getData().group.id);
-        compound.putFloat("GroupResistance", getData().group.resistance);
-    }
+
 
     /**
      * handles action that need to happen every tick and checks for scheduled updates
@@ -158,24 +153,35 @@ public interface IElectric {
         }
     }
 
+    default boolean isCable() {
+        return false;
+    }
+
     /**
      * handles actions that need to repeat every second
      */
     default void lazyTickElectricity() {
+
+        if (getPowerUsage() > getData().networkPowerGeneration && !getData().notEnoughPower)
+            onPlaced();
+
         if (getData().failTimer >= 4) {
+
             this.blockFail();
+            if (getLevelAccessor() instanceof ServerLevel serverLevel)
+                CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(getBlockPos()), new ElectricalBlockFailPacket(BlockPos.of(getPos())));
             getData().failTimer = 0;
             sendStuff();
-        } else if ((getData().voltage > getMaxVoltage() && getMaxVoltage() > 0) || (getCurrent() > getMaxCurrent() && getMaxCurrent() > 0)) {
+        } else if ((getData().voltage > getMaxVoltage() && getMaxVoltage() > 0) || (getCurrent() > getMaxCurrent() && getMaxCurrent() > 0) || ((getData().highestCurrent > getMaxCurrent() && getMaxCurrent() > 0) && isCable())) {
+
             getData().failTimer++;
         }
+
     }
 
-    /**
-     * WIP, not functional
-     */
+
     default int getMaxVoltage() {
-        return 0;
+        return 1000;
     }
 
     default int getMaxCurrent() {
@@ -211,7 +217,6 @@ public interface IElectric {
     }
 
     /**
-     *
      * @return the block's world position
      */
     default BlockPos getBlockPos() {
@@ -249,6 +254,13 @@ public interface IElectric {
         TFMGTexts.header("multimeter").style(ChatFormatting.WHITE)
                 .forGoggles(tooltip);
 
+
+        if(getMaxVoltage()!=0&&getMaxVoltage()*0.8f < getData().getVoltage())
+            TFMGLang.translate("multimeter.approaching_overvoltage").add(TFMGLang.text("("+ TFMGUtils.formatUnits(getMaxVoltage(),"V" +")"))).style(ChatFormatting.RED).forGoggles(tooltip);
+        if(getMaxCurrent()!=0&&getMaxCurrent()*0.8f <getCurrent())
+            TFMGLang.translate("multimeter.approaching_overcurrent").add(TFMGLang.text("("+ TFMGUtils.formatUnits(getMaxCurrent(),"A" +")"))).style(ChatFormatting.RED).forGoggles(tooltip);
+
+
         if (getData().notEnoughPower) TFMGTexts.Multimeter.notEnoughPower().forGoggles(tooltip, 1);
 
         if (voltageGeneration() > 0) {
@@ -263,11 +275,6 @@ public interface IElectric {
         if (resistance() != 0)
             TFMGTexts.Multimeter.power(getPowerUsage()).forGoggles(tooltip, 1);
 
-
-        if (getData().group.id != -1) {
-            TFMGTexts.Multimeter.separator().forGoggles(tooltip);
-            TFMGTexts.Multimeter.group(getData().group.id).forGoggles(tooltip, 1);
-        }
 
         if (isPlayerSneaking) {
             TFMGTexts.Multimeter.separator().forGoggles(tooltip);
@@ -285,7 +292,6 @@ public interface IElectric {
     ElectricBlockValues getData();
 
     /**
-     *
      * @return true if the network has enough power
      */
     default boolean canWork() {
@@ -295,6 +301,7 @@ public interface IElectric {
     default void blockFail() {
 
         getLevelAccessor().destroyBlock(BlockPos.of(getPos()), false);
+
     }
 
     default int getPowerUsage() {
@@ -345,6 +352,30 @@ public interface IElectric {
         return (float) powerGeneration() / (float) getData().networkPowerGeneration * getNetworkPowerUsage();
     }
 
+    default int getBlocksConnectedToNetworkCount(long id) {
+
+        int count = 0;
+
+        for (IElectric member : getOrCreateElectricNetwork().members) {
+            if (member instanceof VoltageAlteringBlockEntity be && be.getControlledBlock() != null) {
+                if (be.getControlledBlock().getData().getId() == id)
+                    count++;
+            }
+            if (member instanceof LargeSwitchBlockEntity be && be.getControlledBlock() != null) {
+                if (be.getControlledBlock().getData().getId() == id)
+                    count++;
+            }
+            if (member instanceof LargeTransformerBlockEntity be && be.getControlledBlock() != null) {
+                if (be.getControlledBlock().getData().getId() == id)
+                    count++;
+            }
+
+        }
+
+        return count;
+
+    }
+
 
     default float resistance() {
         return 0;
@@ -387,7 +418,8 @@ public interface IElectric {
                     if (be.getData().getId() != getData().getId())
                         if (be.getData().getVoltage() != 0)
                             if (be.hasElectricitySlot(direction)) {
-                                powerGeneration = Math.max(powerGeneration, be.getPowerUsage()) + 1;
+                                // powerGeneration = Math.max(powerGeneration, be.getPowerUsage()) + 1;
+                                powerGeneration = Math.max(powerGeneration, be.getMaxPowerOutput());
                                 if (powerGeneration > be.getNetworkPowerGeneration()) {
                                     powerGeneration = 0;
                                     be.data.updatePowerNextTick = true;
@@ -404,14 +436,11 @@ public interface IElectric {
         return getData().networkResistance;
     }
 
+
     default boolean networkUndersupplied() {
         return getNetworkPowerUsage() > getData().networkPowerGeneration;
     }
 
-
-    default int getMaxAmps() {
-        return (int) getCurrent();
-    }
 
     default float getCurrent() {
         return getData().getVoltage() == 0 || resistance() == 0 ? 0 : ((float) getData().getVoltage() / (float) resistance());
@@ -433,17 +462,13 @@ public interface IElectric {
 
     default void setVoltage(int newVoltage) {
 
-
-        if (canBeInGroups()) {
-            getData().voltage = (int) ((resistance() / getData().group.resistance) * (float) getData().voltageSupply);
-            return;
-        }
         getData().voltage = newVoltage;
     }
 
 
-    default void setNetworkResistance(int newUsage) {
-        getData().networkResistance = newUsage;
+    default void setNetworkResistance(float newUsage) {
+
+        getData().networkResistance = (int) newUsage;
     }
 
 
@@ -452,10 +477,6 @@ public interface IElectric {
         if (network != getPos())
             ElectricNetworkManager.networks.get(getLevelAccessor())
                     .remove(getPos());
-    }
-
-    default boolean canBeInGroups() {
-        return false;
     }
 
 

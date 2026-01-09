@@ -6,6 +6,7 @@
     "tfmg:lead_block",
     "tfmg:constantan_block",
     "tfmg:nickel_block",
-    "tfmg:lithium_block"
+    "tfmg:lithium_block",
+    "tfmg:laminated_magnetic_alloy_block"
   ]
 }

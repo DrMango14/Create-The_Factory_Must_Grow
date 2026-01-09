@@ -111,6 +111,7 @@ public class TFMGTexts {
         public static LangBuilder power(double value) {
             return TFMGLang.text("   P = " + TFMGTexts.power(value)).color(0xcc4b74);
         }
+
     }
 
     // Voltmeter Tooltips

@@ -16,6 +16,10 @@ public class DiagonalCableBlockEntity extends ElectricBlockEntity {
         super(type, pos, state);
     }
 
+    @Override
+    public int getMaxVoltage() {
+        return 100000;
+    }
 
     @Override
     public boolean hasElectricitySlot(Direction direction) {

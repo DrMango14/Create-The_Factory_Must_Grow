@@ -19,11 +19,11 @@ public class NetIdDisplaySource extends SingleLineDisplaySource {
         if (!(smart instanceof IElectric electric))
             return EMPTY_LINE;
 
-        int id = electric.getData().group.id;
+        double id = electric.getOrCreateElectricNetwork().id;
 
         if (smart.getBehaviour(ObservedElectricBehaviour.TYPE) != null) {
             IElectric observed = smart.getBehaviour(ObservedElectricBehaviour.TYPE).getObservedElectric();
-            if (observed != null) id = observed.getData().group.id;
+            if (observed != null) id = observed.getOrCreateElectricNetwork().id;
         }
 
         if (id == -1) return EMPTY_LINE;

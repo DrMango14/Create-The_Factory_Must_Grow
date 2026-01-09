@@ -63,19 +63,7 @@ public class TFMGCommonEvents {
         TFMG.DEPOSITS.levelLoaded(world);
     }
 
-    @SubscribeEvent
-    public static void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {
 
-        if (event.getEntity() instanceof Player player) {
-            if (player.getItemInHand(InteractionHand.OFF_HAND).is(TFMGItems.CONFIGURATION_WRENCH.get()) && event.getLevel().getBlockEntity(event.getPos()) instanceof IElectric be && be.canBeInGroups()) {
-
-                be.getData().group.id = player.getItemInHand(InteractionHand.OFF_HAND).get(TFMGDataComponents.CONFIGURATION_WRENCH_NUMBER);
-                be.updateNextTick();
-                be.sendStuff();
-
-            }
-        }
-    }
 
     @SubscribeEvent
     public static void addReloadListeners(AddReloadListenerEvent event) {

@@ -38,8 +38,6 @@ public class ElectricBlockValues {
 
     public int failTimer = 0;
 
-    public ElectricalGroup group = new ElectricalGroup(0);
-
     public ElectricBlockValues(long pos) {
         this.electricalNetworkId = pos;
     }

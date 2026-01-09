@@ -1,10 +1,7 @@
 package com.drmangotea.tfmg.registry;
 
 
-import com.drmangotea.tfmg.content.electricity.base.ConnectNeightborsPacket;
-import com.drmangotea.tfmg.content.electricity.base.ConnectionPacket;
-import com.drmangotea.tfmg.content.electricity.base.NetworkUpdatePacket;
-import com.drmangotea.tfmg.content.electricity.base.UpdateInFrontPacket;
+import com.drmangotea.tfmg.content.electricity.base.*;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CablePlacePacket;
 import com.drmangotea.tfmg.content.electricity.configuration_wrench.ElectriciansWrenchPacket;
 import com.drmangotea.tfmg.content.engines.engine_controller.TransmissionRemovePacket;
@@ -31,6 +28,7 @@ public enum TFMGPackets implements BasePacketPayload.PacketTypeProvider {
     QUAD_POTATO_CANNON(QuadPotatoCannonPacket.class, QuadPotatoCannonPacket.STREAM_CODEC),
     CONNECT_NEIGHBORS(ConnectNeightborsPacket.class, ConnectNeightborsPacket.STREAM_CODEC),
     NETWORK_UPDATE(NetworkUpdatePacket.class, NetworkUpdatePacket.STREAM_CODEC),
+    ELECTRICAL_BLOCK_FAIL(ElectricalBlockFailPacket.class, ElectricalBlockFailPacket.STREAM_CODEC),
     CONNECTION_PACKET(ConnectionPacket.class, ConnectionPacket.STREAM_CODEC),
     VAT_EVALUATION(VatEvaluationPacket.class, VatEvaluationPacket.STREAM_CODEC),
     COKE_OVEN_PACKET(CokeOvenPacket.class, CokeOvenPacket.STREAM_CODEC),

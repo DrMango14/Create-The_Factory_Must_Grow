@@ -111,10 +111,6 @@ public class PolarizerBlockEntity extends ElectricBlockEntity implements IHaveGo
         return true;
     }
 
-    @Override
-    public boolean canBeInGroups() {
-        return false;
-    }
 
     @Override
     public void tick() {

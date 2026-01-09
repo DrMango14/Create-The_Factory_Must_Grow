@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "tfmg:block/laminated_magnetic_alloy_block"
+  }
+}

@@ -36,6 +36,15 @@ public class CreativeGeneratorBlockEntity extends ElectricBlockEntity {
         behaviours.add(outputVoltage);
     }
 
+    @Override
+    public int getMaxVoltage() {
+        return 0;
+    }
+
+    @Override
+    public int getMaxCurrent() {
+        return 0;
+    }
 
     public static void update(CreativeGeneratorBlockEntity be){
         be.updateNextTick();;
@@ -48,7 +57,7 @@ public class CreativeGeneratorBlockEntity extends ElectricBlockEntity {
 
     @Override
     public int powerGeneration() {
-        return outputVoltage.getValue()*100;
+        return 999999999;
     }
 
     class CreativeGeneratorValueBox extends ValueBoxTransform.Sided {

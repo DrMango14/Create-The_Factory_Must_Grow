@@ -1,5 +1,7 @@
 {
   "values": [
-    "tfmg:oil_deposit"
+    "tfmg:oil_deposit",
+    "tfmg:large_switch",
+    "tfmg:large_transformer"
   ]
 }

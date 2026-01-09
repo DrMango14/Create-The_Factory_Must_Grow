@@ -1,5 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.base;
 
+import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchBlockEntity;
+import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeTransformerBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_motor.ElectricMotorBlockEntity;
 import net.minecraft.core.BlockPos;
 
@@ -11,12 +13,13 @@ import java.util.Map;
 public class ElectricalNetwork {
 
     /**
-     *  This class manages individual networks
+     * This class manages individual networks
      */
 
     public ElectricalNetwork(long id) {
         this.id = id;
     }
+
     //blocks in the network
     public List<IElectric> members = new ArrayList<>();
 
@@ -26,6 +29,7 @@ public class ElectricalNetwork {
     public long getId() {
         return id;
     }
+
     //adds a new block to the network if it is not in it already
     public void add(IElectric be) {
         List<Long> posList = new ArrayList<>();
@@ -43,7 +47,7 @@ public class ElectricalNetwork {
     public void updateNetwork() {
 
         int maxVoltage = 0;
-        int resistance = 0;
+        float resistance = 0;
         int powerGeneration = 0;
 
 
@@ -58,13 +62,12 @@ public class ElectricalNetwork {
          */
         for (IElectric member : members) {
             member.getData().notEnoughPower = false;
-            int groupId = member.getData().group.id;
+            member.getData().highestCurrent = 0;
 
             maxVoltage = Math.max(member.voltageGeneration(), maxVoltage);
-            resistance += (int) member.resistance();
+            if (member.resistance() != 0)
+                resistance += 1f / member.resistance();
             powerGeneration += member.powerGeneration();
-            if (member.canBeInGroups())
-                groups.put(groupId, groups.containsKey(groupId) ? groups.get(groupId) + member.resistance() : member.resistance());
         }
         /**
          *  Phase II:
@@ -84,11 +87,12 @@ public class ElectricalNetwork {
                 member.getData().setVoltageNextTick = true;
 
                 member.getData().networkPowerGeneration = powerGeneration;
-                member.setNetworkResistance(resistance);
+                if (resistance != 0) {
+                    member.setNetworkResistance(1f / resistance);
+                }else member.setNetworkResistance(0);
                 member.onNetworkChanged(oldVoltage, oldPower);
 
-                if (groups.containsKey(member.getData().group.id))
-                    member.getData().group.resistance = groups.get(member.getData().group.id);
+
             }
         }
         /**
@@ -97,9 +101,11 @@ public class ElectricalNetwork {
          * 2) informs subnetworks
          */
         for (IElectric member : members) {
-            member.getData().highestCurrent = getCableCurrent(member);
 
+            if (member.resistance() == 0) {
 
+                member.getData().highestCurrent = getCableCurrent(member);
+            }
             if (member instanceof VoltageAlteringBlockEntity be) {
                 be.updateInFront();
             }
@@ -124,6 +130,10 @@ public class ElectricalNetwork {
                     }
                     if (member instanceof VoltageAlteringBlockEntity be)
                         be.updateInFront = true;
+                    if (member instanceof LargeSwitchBlockEntity be)
+                        be.updateInFront = true;
+                    if (member instanceof LargeTransformerBlockEntity be)
+                        be.updateInFront = true;
                 }
             }
     }
@@ -131,23 +141,15 @@ public class ElectricalNetwork {
     public static float getCableCurrent(IElectric be) {
 
         float current = 0;
-        List<Integer> groups = new ArrayList<>();
+
 
         for (IElectric member : be.getOrCreateElectricNetwork().members) {
-
-            if (member.canBeInGroups())
-                if (!groups.contains(member.getData().group.id)) {
-                    groups.add(member.getData().group.id);
-                    if (member.resistance() != 0)
-
-                        current += member.getData().voltage / member.resistance();
-                }
+            current += member.getCurrent();
         }
 
 
         return current;
     }
-
 
 
     public void checkForLoops(BlockPos pos) {

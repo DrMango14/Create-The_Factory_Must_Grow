@@ -31,7 +31,10 @@ public class StatorBlockEntity extends ElectricBlockEntity implements IHaveGoggl
 
     }
 
-
+    @Override
+    public int getMaxVoltage() {
+        return 10000;
+    }
 
     @Override
     public void tick() {

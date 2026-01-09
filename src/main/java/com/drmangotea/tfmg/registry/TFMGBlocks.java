@@ -39,6 +39,9 @@ import com.drmangotea.tfmg.content.electricity.lights.LampGenerator;
 import com.drmangotea.tfmg.content.electricity.lights.LightBulbBlock;
 import com.drmangotea.tfmg.content.electricity.lights.neon_tube.NeonTubeBlock;
 import com.drmangotea.tfmg.content.electricity.measurement.VoltMeterBlock;
+import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchBlock;
+import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchGenerator;
+import com.drmangotea.tfmg.content.electricity.network.transformer.large.*;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlock;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorItem;
 import com.drmangotea.tfmg.content.electricity.storage.CapacitorCTBehavior;
@@ -57,7 +60,7 @@ import com.drmangotea.tfmg.content.electricity.utilities.resistor.ResistorBlockI
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayCTBehavior;
 import com.drmangotea.tfmg.content.electricity.utilities.traffic_light.TrafficLightBlock;
-import com.drmangotea.tfmg.content.electricity.network.transformer.TransformerBlock;
+import com.drmangotea.tfmg.content.electricity.network.transformer.small.TransformerBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.voltage_observer.VoltageObserverBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.voltage_observer.VoltageObserverGenerator;
 import com.drmangotea.tfmg.content.engines.base.EngineCTBehavior;
@@ -323,7 +326,7 @@ public class TFMGBlocks {
             .tag(TFMGBlockTags.INDUSTRIAL_PIPE.tag)
             .recipe((c, p) -> p.stonecutting(DataIngredient.tag(CommonMetal.STEEL.ingots), RecipeCategory.BUILDING_BLOCKS, c, 8))
             .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
-     .simpleItem()
+            .simpleItem()
             .register();
     public static final BlockEntry<Block> CONCRETE_ENCASED_INDUSTRIAL_PIPE = REGISTRATE.block("concrete_encased_industrial_pipe", Block::new)
             .initialProperties(SharedProperties::softMetal)
@@ -369,7 +372,7 @@ public class TFMGBlocks {
             .tag(TFMGBlockTags.PUMPJACK_SMALL_PART.tag)
             .recipe((c, p) -> p.stonecutting(DataIngredient.tag(CommonMetal.STEEL.storageBlocks.items()),
                     RecipeCategory.DECORATIONS, c, 2))
-     .simpleItem()
+            .simpleItem()
             .register();
     public static final BlockEntry<PumpjackHammerHeadBlock> PUMPJACK_HAMMER_HEAD = REGISTRATE.block("pumpjack_hammer_head", PumpjackHammerHeadBlock::new)
             .initialProperties(SharedProperties::softMetal)
@@ -377,7 +380,7 @@ public class TFMGBlocks {
             .properties(BlockBehaviour.Properties::noOcclusion)
             .blockstate(BlockStateGen.horizontalBlockProvider(false))
             .tag(TFMGBlockTags.PUMPJACK_HEAD.tag)
-     .simpleItem()
+            .simpleItem()
             .register();
 
     public static final BlockEntry<PumpjackHammerConnectorBlock> PUMPJACK_HAMMER_CONNECTOR = REGISTRATE.block("pumpjack_hammer_connector", PumpjackHammerConnectorBlock::new)
@@ -386,7 +389,7 @@ public class TFMGBlocks {
             .properties(BlockBehaviour.Properties::noOcclusion)
             .blockstate(BlockStateGen.horizontalBlockProvider(false))
             .tag(TFMGBlockTags.PUMPJACK_CONNECTOR.tag)
-     .simpleItem()
+            .simpleItem()
             .register();
     public static final BlockEntry<LargePumpjackHammerPartBlock> LARGE_PUMPJACK_HAMMER_PART = REGISTRATE.block("large_pumpjack_hammer_part", LargePumpjackHammerPartBlock::new)
             .initialProperties(SharedProperties::softMetal)
@@ -395,7 +398,7 @@ public class TFMGBlocks {
             .tag(TFMGBlockTags.PUMPJACK_PART.tag)
             .recipe((c, p) -> p.stonecutting(DataIngredient.tag(CommonMetal.STEEL.storageBlocks.items()),
                     RecipeCategory.DECORATIONS, c, 2))
-     .simpleItem()
+            .simpleItem()
             .register();
 
     public static final BlockEntry<LargePumpjackHammerHeadBlock> LARGE_PUMPJACK_HAMMER_HEAD = REGISTRATE.block("large_pumpjack_hammer_head", LargePumpjackHammerHeadBlock::new)
@@ -403,21 +406,21 @@ public class TFMGBlocks {
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.horizontalBlockProvider(false))
             .tag(TFMGBlockTags.PUMPJACK_HEAD.tag)
-     .simpleItem()
+            .simpleItem()
             .register();
     public static final BlockEntry<LargePumpjackHammerConnectorBlock> LARGE_PUMPJACK_HAMMER_CONNECTOR = REGISTRATE.block("large_pumpjack_hammer_connector", LargePumpjackHammerConnectorBlock::new)
             .initialProperties(SharedProperties::softMetal)
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.horizontalBlockProvider(false))
             .tag(TFMGBlockTags.PUMPJACK_CONNECTOR.tag)
-     .simpleItem()
+            .simpleItem()
             .register();
     public static final BlockEntry<PumpjackBaseBlock> PUMPJACK_BASE = REGISTRATE.block("pumpjack_base", PumpjackBaseBlock::new)
             .initialProperties(SharedProperties::softMetal)
             .transform(pickaxeOnly())
             .properties(BlockBehaviour.Properties::noOcclusion)
             .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
-     .simpleItem()
+            .simpleItem()
             .register();
     public static final BlockEntry<Block> OIL_DEPOSIT = REGISTRATE.block("oil_deposit", Block::new)
             .initialProperties(() -> Blocks.BEDROCK)
@@ -431,7 +434,7 @@ public class TFMGBlocks {
             .tag(BlockTags.INFINIBURN_OVERWORLD)
             .tag(BlockTags.FEATURES_CANNOT_REPLACE)
             .tag(AllTags.AllBlockTags.NON_MOVABLE.tag)
-     .simpleItem()
+            .simpleItem()
             .register();
     //------------------VAT_MACHINES------------------//
     @SuppressWarnings("'addLayer(java.util.function.Supplier<java.util.function.Supplier<net.minecraft.client.renderer.RenderType>>)' is deprecated and marked for removal ")
@@ -511,9 +514,9 @@ public class TFMGBlocks {
             })
             .tag(BlockTags.NEEDS_STONE_TOOL)
             .transform(tagBlockAndItem(Map.of(
-                Tags.Blocks.ORES, Tags.Items.ORES,
-                CommonMetal.LEAD.ores.blocks(), CommonMetal.LEAD.ores.items(),
-                Tags.Blocks.ORES_IN_GROUND_STONE, Tags.Items.ORES_IN_GROUND_STONE
+                    Tags.Blocks.ORES, Tags.Items.ORES,
+                    CommonMetal.LEAD.ores.blocks(), CommonMetal.LEAD.ores.items(),
+                    Tags.Blocks.ORES_IN_GROUND_STONE, Tags.Items.ORES_IN_GROUND_STONE
             )))
             .build()
             .register();
@@ -635,12 +638,12 @@ public class TFMGBlocks {
     public static final BlockEntry<Block> SULFUR = REGISTRATE.block("sulfur", Block::new)
             .initialProperties(() -> Blocks.CALCITE)
             .transform(pickaxeOnly())
-     .simpleItem()
+            .simpleItem()
             .register();
     public static final BlockEntry<Block> LIGNITE = REGISTRATE.block("lignite", Block::new)
             .initialProperties(() -> Blocks.CALCITE)
             .transform(pickaxeOnly())
-     .simpleItem()
+            .simpleItem()
             .register();
     public static final BlockEntry<Block> FIRECLAY = REGISTRATE.block("fireclay", Block::new)
             .initialProperties(() -> Blocks.CLAY)
@@ -793,7 +796,7 @@ public class TFMGBlocks {
             .transform(pickaxeOnly())
             .tag(TFMGBlockTags.BLAST_FURNACE_WALL.tag)
             .tag(BlockTags.NEEDS_STONE_TOOL)
-     .simpleItem()
+            .simpleItem()
             .register();
 
     public static final BlockEntry<Block> REINFORCED_FIREPROOF_BRICKS = REGISTRATE.block("reinforced_fireproof_bricks", Block::new)
@@ -968,14 +971,14 @@ public class TFMGBlocks {
             .blockstate((c, p) -> p.simpleBlock(c.get(), AssetLookup.partialBaseModel(c, p)))
             .register();
     public static final BlockEntry<CableHubBlock> BRASS_CABLE_HUB =
-            REGISTRATE.block("brass_cable_hub", CableHubBlock::new)
+            REGISTRATE.block("brass_cable_hub", p -> new CableHubBlock(p, 50))
                     .initialProperties(SharedProperties::softMetal)
                     .transform(pickaxeOnly())
                     .item()
                     .build()
                     .register();
     public static final BlockEntry<CableHubBlock> COPPER_CABLE_HUB =
-            REGISTRATE.block("copper_cable_hub", CableHubBlock::new)
+            REGISTRATE.block("copper_cable_hub", p -> new CableHubBlock(p, 16))
                     .initialProperties(() -> Blocks.COPPER_BLOCK)
                     .properties(p -> p.sound(SoundType.COPPER))
                     .transform(pickaxeOnly())
@@ -983,28 +986,28 @@ public class TFMGBlocks {
                     .build()
                     .register();
     public static final BlockEntry<CableHubBlock> STEEL_CABLE_HUB =
-            REGISTRATE.block("steel_cable_hub", CableHubBlock::new)
+            REGISTRATE.block("steel_cable_hub", p -> new CableHubBlock(p, 250))
                     .initialProperties(SharedProperties::softMetal)
                     .transform(pickaxeOnly())
                     .item()
                     .build()
                     .register();
     public static final BlockEntry<CableHubBlock> ALUMINUM_CABLE_HUB =
-            REGISTRATE.block("aluminum_cable_hub", CableHubBlock::new)
+            REGISTRATE.block("aluminum_cable_hub", p -> new CableHubBlock(p, 80))
                     .initialProperties(SharedProperties::softMetal)
                     .transform(pickaxeOnly())
                     .item()
                     .build()
                     .register();
     public static final BlockEntry<CableHubBlock> STEEL_CASING_CABLE_HUB =
-            REGISTRATE.block("steel_casing_cable_hub", CableHubBlock::new)
+            REGISTRATE.block("steel_casing_cable_hub", p -> new CableHubBlock(p, 100))
                     .initialProperties(SharedProperties::softMetal)
                     .transform(pickaxeOnly())
                     .item()
                     .build()
                     .register();
     public static final BlockEntry<CableHubBlock> HEAVY_CABLE_HUB =
-            REGISTRATE.block("heavy_cable_hub", CableHubBlock::new)
+            REGISTRATE.block("heavy_cable_hub", p -> new CableHubBlock(p, 100))
                     .initialProperties(SharedProperties::softMetal)
                     .transform(pickaxeOnly())
                     .item()
@@ -1182,6 +1185,17 @@ public class TFMGBlocks {
                     .item()
                     .transform(customItemModel())
                     .register();
+    public static final BlockEntry<LargeSwitchBlock> LARGE_SWITCH =
+            REGISTRATE.block("large_switch", LargeSwitchBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .blockstate(new LargeSwitchGenerator()::generate)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .tag(AllTags.AllBlockTags.NON_MOVABLE.tag)
+                    .transform(pickaxeOnly())
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .item()
+                    .transform(customItemModel())
+                    .register();
     public static final BlockEntry<EncasedPotentiometerBlock> ENCASED_POTENTIOMETER =
             REGISTRATE.block("encased_potentiometer", EncasedPotentiometerBlock::new)
                     .initialProperties(SharedProperties::softMetal)
@@ -1288,6 +1302,16 @@ public class TFMGBlocks {
                     .transform(customItemModel())
                     .register();
 
+    public static final BlockEntry<LargeTransformerBlock> LARGE_TRANSFORMER =
+            REGISTRATE.block("large_transformer", LargeTransformerBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .blockstate(new LargeTransformerGenerator()::generate)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .tag(AllTags.AllBlockTags.NON_MOVABLE.tag)
+                    .transform(pickaxeOnly())
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .register();
+
 
     public static final BlockEntry<ConverterBlock> CONVERTER =
             REGISTRATE.block("converter", ConverterBlock::new)
@@ -1296,6 +1320,16 @@ public class TFMGBlocks {
                     .blockstate(new ConverterGenerator()::generate)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<LargeCoilBlock> LARGE_COIL =
+            REGISTRATE.block("large_coil", LargeCoilBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .transform(pickaxeOnly())
+                    .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .item(LargeElectromagneticCoilItem::new)
                     .transform(customItemModel())
                     .register();
 
@@ -1598,10 +1632,21 @@ public class TFMGBlocks {
             .lang("Block of Coal Coke")
             .register();
 
+    public static final BlockEntry<Block> LAMINATED_MAGNETIC_ALLOY_BLOCK = REGISTRATE.block("laminated_magnetic_alloy_block", Block::new)
+            .initialProperties(SharedProperties::softMetal)
+            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
+            .transform(pickaxeOnly())
+            .tag(BlockTags.BEACON_BASE_BLOCKS)
+            .blockstate(simpleCubeAll("laminated_magnetic_alloy_block"))
+            .tag(BlockTags.NEEDS_IRON_TOOL)
+            .item(CoalCokeBlockItem::new)
+            .build()
+            .register();
+
     public static final BlockEntry<ColoredFallingBlock> CEMENT = REGISTRATE.block("cement", p -> new ColoredFallingBlock(new ColorRGBA(-8356741), p))
             .initialProperties(() -> Blocks.CLAY)
             .tag(BlockTags.MINEABLE_WITH_SHOVEL)
-     .simpleItem()
+            .simpleItem()
             .register();
 
     //------------------DOOR------------------//

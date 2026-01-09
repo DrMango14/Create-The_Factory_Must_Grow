@@ -62,6 +62,11 @@ public class LightBulbBlockEntity extends ElectricBlockEntity {
         notifyUpdate();
     }
 
+    @Override
+    public int getMaxCurrent() {
+        return 1;
+    }
+
 
     @Override
     public void blockFail() {
@@ -106,10 +111,7 @@ public class LightBulbBlockEntity extends ElectricBlockEntity {
         color = NBTHelper.readEnum(compound,"color",DyeColor.class);
     }
 
-    @Override
-    public boolean canBeInGroups() {
-        return true;
-    }
+
 
     protected void analogSignalChanged(int newSignal) {
             hasSignal = newSignal > 0;

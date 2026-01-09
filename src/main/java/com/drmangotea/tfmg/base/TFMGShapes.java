@@ -29,6 +29,15 @@ public class TFMGShapes {
             TURBINE_ENGINE_FRONT = shape(2, 2, 0, 14, 14, 16)
                     .add(3, 0, 8, 13, 2, 16)
                     .forHorizontal(SOUTH),
+            LARGE_SWITCH_SECONDARY = shape(5, 1, 0, 11, 7, 16)
+                    .add(5, 7, 8, 11, 14, 16)
+                    .forHorizontal(SOUTH),
+            LARGE_SWITCH_PRIMARY = shape(0, 0, 0, 16, 13, 16)
+                    .forHorizontal(SOUTH),
+            LARGE_TRANSFORMER_UNFINISHED = shape(4, 0, 0, 12, 20, 12).add(0, 4, 0, 16, 16, 16)
+                    .forHorizontal(SOUTH),
+            LARGE_TRANSFORMER = shape(-1, 2, 4, 17, 17, 16).add(2, 0, 5, 14, 19, 16).add(2, 3, 0, 14, 16, 16)
+                    .forHorizontal(SOUTH),
             TURBINE_ENGINE_MIDDLE = shape(11, 0, 2, 16, 5, 14)
                     .add(1, 1, 0, 15, 15, 16)
                     .add(0, 0, 2, 5, 5, 14)

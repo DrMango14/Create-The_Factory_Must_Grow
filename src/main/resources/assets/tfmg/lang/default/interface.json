@@ -56,7 +56,7 @@
   "tfmg.goggles.machine_input.power_level": "Power Level: ",
 
   "tfmg.winding_machine.header": "Winding Machine",
-  "tfmg.goggles.winding_machine.turns": "Turns Left: %1$",
+  "tfmg.goggles.winding_machine.turns": "Turns Left: ",
   "tfmg.goggles.winding_machine.progress": "Progress: ",
 
   "tfmg.polarizer.header": "Polarizer",
@@ -157,10 +157,15 @@
   "tfmg.multimeter.power_generated": "   Power Generated: %s",
   "tfmg.multimeter.power_percentage": "   Grid Strength: ",
   "tfmg.multimeter.energy_usage": "   Energy Usage: ",
+  "tfmg.multimeter.approaching_overvoltage": "   Approaching Overvoltage ",
+  "tfmg.multimeter.approaching_overcurrent": "   Approaching Overcurrent ",
   "tfmg.multimeter.energy_stored": "   Energy Stored: ",
   "tfmg.multimeter.network.generation": "Network Power Generation: %s",
   "tfmg.multimeter.network.consumption": "Network Power Consumption: %s",
   "tfmg.multimeter.transformer_ratio": "   Turn Ratio: ",
+  "tfmg.multimeter.large_transformer.air_cooled": "   State: Air Cooled",
+  "tfmg.multimeter.large_transformer.metal_cooled": "   State: Metal Heat Sink Cooled",
+  "tfmg.multimeter.large_transformer.oil_cooled": "   State: Oil + Heat Sink Cooled",
 
   "tfmg.electricity.capacity": "Capacity: %s",
   "tfmg.electricity.charging_rate": "Charging Rate: %s",

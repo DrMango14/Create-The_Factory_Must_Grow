@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.base.debug;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlock;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
+import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
@@ -28,8 +29,9 @@ public class DebugCinderBlockItem extends Item {
         BlockPos pos = context.getClickedPos();
         Level level = context.getLevel();
 
-        if (level.getBlockEntity(pos) instanceof StatorBlockEntity be) {
-            be.updateRotor();
+        if (level.getBlockEntity(pos) instanceof IElectric be) {
+
+           be.onPlaced();
 
         }
 
@@ -45,6 +47,6 @@ public class DebugCinderBlockItem extends Item {
                 TFMG.LOGGER.debug(String.valueOf(be.isDistillationTower));
             }
         }
-        return InteractionResult.PASS;
+        return InteractionResult.SUCCESS;
     }
 }

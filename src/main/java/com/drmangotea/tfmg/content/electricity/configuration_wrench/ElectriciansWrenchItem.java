@@ -46,31 +46,7 @@ public class ElectriciansWrenchItem extends Item {
     }
 
 
-    @Override
-    public InteractionResult useOn(UseOnContext context) {
-        Level level = context.getLevel();
-        BlockPos pos = context.getClickedPos();
-        Player player = context.getPlayer();
 
-        if(player != null && !player.isShiftKeyDown()) {
-            if (level.getBlockEntity(pos) instanceof IElectric be && be.canBeInGroups()) {
-                be.updateNextTick();
-                be.sendStuff();
-                be.getData().group.id = context.getItemInHand().getOrDefault(TFMGDataComponents.CONFIGURATION_WRENCH_NUMBER, 0);
-                TFMGUtils.playSound(level, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, context.getPlayer());
-                if(be instanceof ElectricMotorBlockEntity kineticBE)
-                    kineticBE.delayedUpdate=true;
-                return InteractionResult.SUCCESS;
-            }
-            if (level.getBlockEntity(pos) instanceof AbstractEngineBlockEntity be ) {
-                be.changeDirection();
-                return InteractionResult.SUCCESS;
-            }
-        }
-
-
-        return super.useOn(context);
-    }
 
     @OnlyIn(Dist.CLIENT)
     private void openWandGUI(ItemStack itemStack, InteractionHand hand) {

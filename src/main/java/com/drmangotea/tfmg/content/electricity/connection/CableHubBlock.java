@@ -11,9 +11,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class CableHubBlock extends Block implements IBE<ElectricBlockEntity>, IWrenchable {
-    public CableHubBlock(Properties p_49795_) {
-        super(p_49795_);
+public class CableHubBlock extends Block implements IBE<CableHubBlockEntity>, IWrenchable {
+
+    public int maxCurrent;
+
+    public CableHubBlock(Properties properties, int maxCurrent) {
+        super(properties);
+        this.maxCurrent = maxCurrent;
     }
 
     @Override
@@ -23,16 +27,17 @@ public class CableHubBlock extends Block implements IBE<ElectricBlockEntity>, IW
 
 
 
+
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         IBE.onRemove(state, level, pos, newState);
     }
     @Override
-    public Class<ElectricBlockEntity> getBlockEntityClass() {
-        return ElectricBlockEntity.class;
+    public Class<CableHubBlockEntity> getBlockEntityClass() {
+        return CableHubBlockEntity.class;
     }
     @Override
-    public BlockEntityType<? extends ElectricBlockEntity> getBlockEntityType() {
+    public BlockEntityType<? extends CableHubBlockEntity> getBlockEntityType() {
         return TFMGBlockEntities.CABLE_HUB.get();
     }
 }

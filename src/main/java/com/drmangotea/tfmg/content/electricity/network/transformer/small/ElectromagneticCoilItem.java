@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.electricity.network.transformer;
+package com.drmangotea.tfmg.content.electricity.network.transformer.small;
 
 
 import com.drmangotea.tfmg.base.lang.TFMGLang;
@@ -22,8 +22,10 @@ public class ElectromagneticCoilItem extends Item {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(TFMGLang.translateDirect("tooltip.coils", stack.get(TFMGDataComponents.COIL_TURNS)==null?0:stack.get(TFMGDataComponents.COIL_TURNS))
-                .withStyle(ChatFormatting.GREEN)
+        String text = TFMGLang.translateDirect("tooltip.coils").getString();
+
+        tooltip.add(TFMGLang.text(text+stack.getOrDefault(TFMGDataComponents.COIL_TURNS,0)).component().withStyle(ChatFormatting.GREEN)
+
         );
         super.appendHoverText(stack, context, tooltip, flag);
     }

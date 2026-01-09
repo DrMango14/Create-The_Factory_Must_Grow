@@ -25,9 +25,10 @@ public class NeonTubeBlockEntity extends ElectricBlockEntity {
     }
 
     @Override
-    public boolean canBeInGroups() {
-        return true;
+    public int getMaxCurrent() {
+        return 1;
     }
+
     @Override
     public void tick() {
         super.tick();

@@ -25,10 +25,7 @@ public class ResistorBlockEntity extends ElectricBlockEntity {
         return direction == getBlockState().getValue(FACING).getOpposite();
     }
 
-    @Override
-    public boolean canBeInGroups() {
-        return true;
-    }
+
 
     @Override
     public float resistance() {

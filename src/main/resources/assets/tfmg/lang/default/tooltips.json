@@ -162,6 +162,10 @@
 	"block.tfmg.cable_connector.tooltip.condition1": "When 2 cable insulators are right clicked with a copper/aluminum/constantan spool",
 	"block.tfmg.cable_connector.tooltip.behaviour1": "Created a connection between the 2 insulators transferring power between them",
 
+	"block.tfmg.large_coil.tooltip.summary": "Used for creating the Large Transformer",
+	"block.tfmg.large_coil.tooltip.condition1": "When 2 Large Coils are placed next to each other and right-clicked with a Laminated Magnetic Alloy Block",
+	"block.tfmg.large_coil.tooltip.behaviour1": "The Large Transformer is Created, to make it efficient, right-click it with a Block of Steel and a Lubrication Oil Bucket",
+
 	"block.tfmg.glass_cable_insulator.tooltip.summary": "Transfers power",
 	"block.tfmg.glass_cable_insulator.tooltip.condition1": "When 2 cable insulators are right clicked with a copper/aluminum/constantan spool",
 	"block.tfmg.glass_cable_insulator.tooltip.behaviour1": "Created a connection between the 2 insulators transferring power between them",

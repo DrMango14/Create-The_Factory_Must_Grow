@@ -247,12 +247,7 @@ public class ElectricPumpBlockEntity extends PumpBlockEntity implements IElectri
 
     }
 
-    @Override
-    protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
-        super.write(compound,registries , clientPacket);
 
-        writeElectricity(compound,clientPacket);
-    }
 
     @Override
     protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {

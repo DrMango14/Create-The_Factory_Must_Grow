@@ -29,12 +29,20 @@ import java.util.List;
 public class ElectrodeHolderBlockEntity extends ElectricBlockEntity implements IVatMachine {
 
     Electrode electrode = TFMGUtils.getElectrode(TFMG.asResource("none"));
-    boolean isTallEnough = true;
 
     public ElectrodeHolderBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
+    @Override
+    public int getMaxVoltage() {
+        return 20000;
+    }
+
+    @Override
+    public int getMaxCurrent() {
+        return 400;
+    }
 
     @Override
     public boolean hasElectricitySlot(Direction direction) {
@@ -86,10 +94,7 @@ public class ElectrodeHolderBlockEntity extends ElectricBlockEntity implements I
         return this.electrode.getResistance();
     }
 
-    @Override
-    public boolean canBeInGroups() {
-        return true;
-    }
+
 
     public boolean setElectrode(Electrode electrode, boolean simulate) {
         if (electrode != null) {

@@ -173,6 +173,14 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("CPW")
                     .pattern("MQK")),
 
+    LAMINATED_MAGNETIC_ALLOY_BLOCK = create(TFMGBlocks.LAMINATED_MAGNETIC_ALLOY_BLOCK)
+           .unlockedBy(TFMGItems.MAGNETIC_ALLOY_INGOT::get)
+            .viaShaped(b -> b
+                    .define('C', TFMGItems.MAGNETIC_ALLOY_SHEET.get())
+                    .pattern("CCC")
+                    .pattern("CCC")
+                    .pattern("CCC")),
+
     //STEEL_HELMET = create(TFMGItems.STEEL_HELMET)
     //        .unlockedBy(TFMGItems.STEEL_INGOT::get)
     //        .viaShaped(b -> b
@@ -762,6 +770,21 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("LCL")
                     .pattern("RPR")),
 
+
+    LARGE_SWITCH = create(TFMGBlocks.LARGE_SWITCH)
+            .unlockedBy(TFMGBlocks.CABLE_CONNECTOR::get)
+            .viaShaped(b -> b
+                    .define('B', brassSheet())
+                    .define('R', rebar())
+                    .define('W', copperWire())
+                    .define('S', TFMGBlocks.STEEL_CABLE_HUB)
+                    .define('M', steelMechanism())
+                    .define('I', TFMGBlocks.CABLE_CONNECTOR)
+                    .define('P', TFMGBlocks.ELECTRIC_POST)
+                    .pattern("WRB")
+                    .pattern("SMP")
+                    .pattern("III")),
+
    // FUSE_BLOCK = create(TFMGBlocks.FUSE_BLOCK)
    //         .unlockedBy(TFMGItems.COPPER_WIRE::get)
    //         .viaShaped(b -> b
@@ -1215,7 +1238,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
             .unlockedBy(TFMGBlocks.STEEL_CASING::get)
             .viaShaped(b -> b
                     .define('C', steelCasing())
-                    .define('M', magneticIngot())
+                    .define('M', TFMGItems.MAGNETIC_ALLOY_SHEET)
                     .define('N', nickelSheet())
                     .define('W', copperWire())
                     .pattern("MMM")

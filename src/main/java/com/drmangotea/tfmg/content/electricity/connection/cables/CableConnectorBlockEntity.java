@@ -71,6 +71,10 @@ public class CableConnectorBlockEntity extends ElectricBlockEntity implements IH
         notifyRemoval();
     }
 
+    @Override
+    public int getMaxVoltage() {
+        return 100000;
+    }
 
     @Override
     public boolean hasElectricitySlot(Direction direction) {
