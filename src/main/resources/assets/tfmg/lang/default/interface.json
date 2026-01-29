@@ -66,6 +66,10 @@
   "tfmg.goggles.electric_machine.no_power": "No Power",
   "tfmg.goggles.electricity.insufficient_voltage": "Insufficient Voltage",
 
+  "tfmg.goggles.compressor.non_operational": "State: Non Operational(Needs at least 120 RPM)",
+  "tfmg.goggles.compressor.pressurizing": "State: Pressurizing",
+  "tfmg.goggles.compressor.depressurizing": "State: Depressurizing",
+
   "tfmg.goggles.voltmeter": "Voltmeter:",
   "tfmg.goggles.gauge.value": "   Measured Voltage:",
   "tfmg.goggles.voltmeter.range": "   Range: %1$s",
@@ -97,6 +101,10 @@
   "tfmg.goggles.vat.tfmg.electrode": "   Electrode",
   "tfmg.goggles.vat.tfmg.mixing": "   Mixer",
   "tfmg.goggles.vat.tfmg.centrifuge": "   Centrifuge",
+  "create.vat.pressure_dots": "... ",
+  "create.vat.pressure": "Pressure",
+  "create.vat.heat_dots": "................ ",
+  "create.vat.heat": "Heat",
 
 
   "tfmg.goggles.ammeter": "Ammeter:",
@@ -208,6 +216,8 @@
   "tfmg.goggles.voltmeter.mode.network_power_generation": "Network Power Generation",
   "tfmg.goggles.voltmeter.mode.capacity": "Capacity",
   "tfmg.goggles.voltmeter.mode.fallback": "Fallback",
+
+
 
   "tfmg.display_source.electricity.power_usage": "Power Usage",
   "tfmg.display_source.electricity.network_resistance": "Network Resistance",

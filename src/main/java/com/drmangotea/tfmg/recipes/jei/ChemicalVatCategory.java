@@ -11,6 +11,7 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.createmod.catnip.data.Pair;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -94,7 +95,14 @@ public class ChemicalVatCategory extends CreateRecipeCategory<VatMachineRecipe> 
         drawVatTypes(allowedVatTypes, graphics);
 
         drawSprites(machines, graphics);
-        renderHeated(recipe.getRequiredHeat(), graphics);
+
+
+
+
+        if(recipe.heatLevel!=0) {
+            TFMGGuiTextures.VAT_HEATER.render(graphics, 55 - 10, 109);
+            graphics.drawString(Minecraft.getInstance().font, String.valueOf((recipe.heatLevel + 10f) / 10f), 76.0F, 113.0F, 0xFF501C, false);
+        }
 
         int pos = 55;
         int width = ((recipe.getFluidIngredients().size()) * 21) / 2;

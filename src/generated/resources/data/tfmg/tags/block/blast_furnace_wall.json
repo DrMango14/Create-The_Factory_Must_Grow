@@ -1,6 +1,8 @@
 {
   "values": [
     "tfmg:blast_furnace_hatch",
+    "tfmg:fireproof_bricks",
+    "tfmg:blast_furnace_hatch",
     "tfmg:fireproof_bricks"
   ]
 }

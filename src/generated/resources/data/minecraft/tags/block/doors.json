@@ -3,6 +3,10 @@
     "tfmg:heavy_casing_door",
     "tfmg:steel_door",
     "tfmg:aluminum_door",
+    "tfmg:heavy_plated_door",
+    "tfmg:heavy_casing_door",
+    "tfmg:steel_door",
+    "tfmg:aluminum_door",
     "tfmg:heavy_plated_door"
   ]
 }

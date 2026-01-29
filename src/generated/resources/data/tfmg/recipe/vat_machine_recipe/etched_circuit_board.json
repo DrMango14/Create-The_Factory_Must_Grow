@@ -10,6 +10,7 @@
       "fluid": "tfmg:sulfuric_acid"
     }
   ],
+  "min_size": 1,
   "processing_time": 100,
   "results": [
     {

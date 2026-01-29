@@ -1,10 +1,11 @@
 {
   "type": "tfmg:vat_machine_recipe",
   "allowed_vat_types": [
+    "tfmg:cast_iron_vat",
     "tfmg:steel_vat",
     "tfmg:firebrick_lined_vat"
   ],
-  "heat_requirement": "heated",
+  "heat_level": 2,
   "ingredients": [
     {
       "type": "neoforge:single",

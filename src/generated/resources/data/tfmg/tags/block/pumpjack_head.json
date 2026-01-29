@@ -2,6 +2,7 @@
   "values": [
     "tfmg:pumpjack_hammer_head",
     "tfmg:large_pumpjack_hammer_head",
+    "minecraft:iron_block",
     "minecraft:iron_block"
   ]
 }

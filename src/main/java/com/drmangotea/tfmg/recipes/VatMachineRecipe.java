@@ -83,7 +83,8 @@ public class VatMachineRecipe extends ProcessingRecipe<RecipeInput, VatRecipePar
         public VatMachineRecipe.Builder<R> values(TFMGVatRecipeGen.VatRecipeValues value) {
             params.machines = value.machines;
             params.allowedVatTypes = value.allowedVatTypes;
-
+            params.pressure = value.pressure;
+            params.heat_level = value.heat;
             params.min_size = value.minSize;
             return this;
         }

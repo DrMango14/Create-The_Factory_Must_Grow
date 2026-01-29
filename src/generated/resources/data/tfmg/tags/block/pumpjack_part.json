@@ -1,6 +1,7 @@
 {
   "values": [
     "tfmg:large_pumpjack_hammer_part",
+    "#tfmg:pumpjack_small_part",
     "#tfmg:pumpjack_small_part"
   ]
 }

@@ -22,7 +22,7 @@ public class TFMGCastingRecipeGen extends CastingRecipeGen {
 
 
 	PLASTIC_SHEET = create("plastic_sheet", b ->b
-			.require(TFMGFluids.MOLTEN_PLASTIC.get(),200)
+			.require(TFMGFluids.MOLTEN_PLASTIC.get(),144)
 			.output(TFMGItems.PLASTIC_SHEET)
 			.duration(100)),
 

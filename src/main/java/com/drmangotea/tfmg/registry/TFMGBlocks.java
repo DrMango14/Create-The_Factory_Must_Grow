@@ -114,7 +114,9 @@ import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.hammer.part
 import com.drmangotea.tfmg.content.machinery.oil_processing.surface_scanner.SurfaceScannerBlock;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlock;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatGenerator;
+import com.drmangotea.tfmg.content.machinery.vat.compressor.CompressorBlock;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.ElectrodeHolderBlock;
+import com.drmangotea.tfmg.content.machinery.vat.freezer.FreezerBlock;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerBlock;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.api.stress.BlockStressValues;
@@ -493,6 +495,23 @@ public class TFMGBlocks {
             .initialProperties(SharedProperties::softMetal)
             .transform(pickaxeOnly())
             .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+            .item()
+            .transform(customItemModel())
+            .register();
+    public static final BlockEntry<FreezerBlock> FREEZER = REGISTRATE.block("freezer", FreezerBlock::new)
+            .initialProperties(SharedProperties::softMetal)
+            .transform(pickaxeOnly())
+            .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<CompressorBlock> COMPRESSOR = REGISTRATE.block("compressor", CompressorBlock::new)
+            .initialProperties(SharedProperties::softMetal)
+            .transform(pickaxeOnly())
+            .blockstate(BlockStateGen.horizontalBlockProvider(true))
+           // .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+            .transform(TFMGStress.setImpact(24.0))
             .item()
             .transform(customItemModel())
             .register();

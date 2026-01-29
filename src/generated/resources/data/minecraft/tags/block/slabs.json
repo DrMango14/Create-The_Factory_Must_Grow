@@ -1,20 +1,5 @@
 {
   "values": [
-    "tfmg:concrete_slab",
-    "tfmg:rebar_concrete_slab",
-    "tfmg:white_concrete_slab",
-    "tfmg:blue_concrete_slab",
-    "tfmg:light_blue_concrete_slab",
-    "tfmg:red_concrete_slab",
-    "tfmg:green_concrete_slab",
-    "tfmg:lime_concrete_slab",
-    "tfmg:pink_concrete_slab",
-    "tfmg:magenta_concrete_slab",
-    "tfmg:yellow_concrete_slab",
-    "tfmg:gray_concrete_slab",
-    "tfmg:light_gray_concrete_slab",
-    "tfmg:brown_concrete_slab",
-    "tfmg:cyan_concrete_slab",
     "tfmg:purple_concrete_slab",
     "tfmg:orange_concrete_slab",
     "tfmg:black_concrete_slab",
@@ -42,6 +27,16 @@
     "tfmg:cut_galena_slab",
     "tfmg:polished_cut_galena_slab",
     "tfmg:cut_galena_brick_slab",
-    "tfmg:small_galena_brick_slab"
+    "tfmg:concrete_slab",
+    "tfmg:small_galena_brick_slab",
+    "tfmg:rebar_concrete_slab",
+    "tfmg:white_concrete_slab",
+    "tfmg:blue_concrete_slab",
+    "tfmg:light_blue_concrete_slab",
+    "tfmg:red_concrete_slab",
+    "tfmg:green_concrete_slab",
+    "tfmg:lime_concrete_slab",
+    "tfmg:pink_concrete_slab",
+    "tfmg:magenta_concrete_slab"
   ]
 }

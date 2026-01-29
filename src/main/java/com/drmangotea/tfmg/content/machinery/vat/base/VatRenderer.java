@@ -60,7 +60,7 @@ public class VatRenderer extends SafeBlockEntityRenderer<VatBlockEntity> {
                 if (units < 1)
                     continue;
                 float yMin = capHeight + level;
-                float yMax = yMin + (fluidLevel * (vat.height - (2 * capHeight))) / 5;
+                float yMax = Math.min(yMin + (fluidLevel * (vat.height - (2 * capHeight))),vat.height);
 
                 NeoForgeCatnipServices.FLUID_RENDERER.renderFluidBox(renderedFluid, xMin, yMin, zMin, xMax, yMax, zMax,
                         buffer, ms, light, false, false);

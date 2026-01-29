@@ -4,7 +4,7 @@
     "tfmg:steel_vat",
     "tfmg:firebrick_lined_vat"
   ],
-  "heat_requirement": "heated",
+  "heat_level": 2,
   "ingredients": [
     {
       "item": "tfmg:bauxite_powder"

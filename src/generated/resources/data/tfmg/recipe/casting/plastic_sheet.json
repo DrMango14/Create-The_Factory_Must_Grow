@@ -3,7 +3,7 @@
   "ingredients": [
     {
       "type": "neoforge:single",
-      "amount": 200,
+      "amount": 144,
       "fluid": "tfmg:molten_plastic"
     }
   ],

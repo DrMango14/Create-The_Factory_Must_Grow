@@ -99,8 +99,12 @@ import com.drmangotea.tfmg.content.machinery.oil_processing.surface_scanner.Surf
 import com.drmangotea.tfmg.content.machinery.oil_processing.surface_scanner.SurfaceScannerRenderer;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatRenderer;
+import com.drmangotea.tfmg.content.machinery.vat.compressor.CompressorBlockEntity;
+import com.drmangotea.tfmg.content.machinery.vat.compressor.CompressorRenderer;
+import com.drmangotea.tfmg.content.machinery.vat.compressor.CompressorVisual;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.ElectrodeHolderBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.ElectrodeHolderRenderer;
+import com.drmangotea.tfmg.content.machinery.vat.freezer.FreezerBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerRenderer;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerVisual;
@@ -350,6 +354,16 @@ public class TFMGBlockEntities {
             .blockEntity("electrode_holder", ElectrodeHolderBlockEntity::new)
             .validBlocks(TFMGBlocks.ELECTRODE_HOLDER)
             .renderer(() -> ElectrodeHolderRenderer::new)
+            .register();
+    public static final BlockEntityEntry<FreezerBlockEntity> FREEZER = REGISTRATE
+            .blockEntity("freezer", FreezerBlockEntity::new)
+            .validBlocks(TFMGBlocks.FREEZER)
+            .register();
+    public static final BlockEntityEntry<CompressorBlockEntity> COMPRESSOR = REGISTRATE
+            .blockEntity("compressor", CompressorBlockEntity::new)
+            .visual(() -> CompressorVisual::new)
+            .validBlocks(TFMGBlocks.COMPRESSOR)
+            .renderer(() -> CompressorRenderer::new)
             .register();
     public static final BlockEntityEntry<SteelTankBlockEntity> STEEL_FLUID_TANK = REGISTRATE
             .blockEntity("steel_fluid_tank", SteelTankBlockEntity::new)
