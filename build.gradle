@@ -97,6 +97,7 @@ repositories {
     maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // ForgeConfigAPIPort
     maven { url = "https://maven.blamejared.com" } // JEI, Vazkii's Mods
     maven { url = "https://cursemaven.com" }
+    maven { url = "https://modmaven.dev/" }
 }
 
 dependencies {
@@ -107,6 +108,8 @@ dependencies {
     runtimeOnly("curse.maven:configured-457570:7122915")
     implementation("mezz.jei:jei-${jei_minecraft_version}-neoforge:${jei_version}")
     implementation("com.tterrag.registrate:Registrate:${registrate_version}")
+    compileOnly("dev.technici4n:GrandPower:${grandpower_version}")
+    runtimeOnly("dev.technici4n:GrandPower:${grandpower_version}")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
