@@ -33,6 +33,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.drmangotea.tfmg.content.engines.base.EngineProperties.*;
 import static com.drmangotea.tfmg.content.engines.types.regular_engine.RegularEngineBlock.EXTENDED;
@@ -261,7 +262,7 @@ public class RegularEngineBlockEntity extends AbstractSmallEngineBlockEntity {
                             continue;
 
                         CompoundTag tagInside = be.pistonInventory.getItem(y).get(TFMGDataComponents.FUELS);
-                        if (!tagInside.toString().equals(tag.toString()))
+                        if (!Objects.equals(tagInside, tag))
                             return false;
 
                     }
