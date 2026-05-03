@@ -11,6 +11,7 @@ import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
+import dev.technici4n.grandpower.api.ILongEnergyStorage;
 
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
@@ -18,12 +19,13 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 
 import java.util.List;
 
@@ -34,8 +36,9 @@ import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 public class ConverterBlockEntity extends ElectricBlockEntity {
 
     public final TFMGForgeEnergyStorage energy = createEnergyStorage();
-    private IEnergyStorage energyCapability;
+    private final ILongEnergyStorage longEnergy = ILongEnergyStorage.of(energy);
 
+    private static final int MAX_FE_TRANSFER = 10000;
 
     public int timer = 0;
 
@@ -43,11 +46,11 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
 
     public ConverterBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        energyCapability = energy;
     }
 
     public TFMGForgeEnergyStorage createEnergyStorage() {
-        return new TFMGForgeEnergyStorage(500000, 10000) {
+        int cap = TFMGConfigs.common().machines.accumulatorStorage.get();
+        return new TFMGForgeEnergyStorage(cap, MAX_FE_TRANSFER) {
             @Override
             public void onEnergyChanged(int amount, int a) {
                 sendStuff();
@@ -60,7 +63,12 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
         event.registerBlockEntity(
                 Capabilities.EnergyStorage.BLOCK,
                 TFMGBlockEntities.CONVERTER.get(),
-                (be, context) -> be.energyCapability
+                (be, context) -> be.energy
+        );
+        event.registerBlockEntity(
+                ILongEnergyStorage.BLOCK,
+                TFMGBlockEntities.CONVERTER.get(),
+                (be, context) -> be.longEnergy
         );
     }
 
@@ -153,6 +161,7 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
             timer--;
         }
 
+        pushFeToLongEnergyNeighbors();
 
         if (getBlockState().getValue(INPUT)) {
             if (getData().getVoltage() > TFMGConfigs.common().machines.accumulatorVoltage.get()) {
@@ -171,6 +180,40 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
         }
 
     }
+
+    private void pushFeToLongEnergyNeighbors() {
+        Level level = this.level;
+        if (level == null || level.isClientSide() || energy.getEnergyStored() <= 0) {
+            return;
+        }
+        BlockPos origin = getBlockPos();
+        for (Direction dir : Direction.values()) {
+            BlockPos p = origin.relative(dir);
+            ILongEnergyStorage target = level.getCapability(
+                    ILongEnergyStorage.BLOCK,
+                    p,
+                    level.getBlockState(p),
+                    level.getBlockEntity(p),
+                    dir.getOpposite()
+            );
+            if (target == null || !target.canReceive()) {
+                continue;
+            }
+            int offer = Math.min(energy.getEnergyStored(), MAX_FE_TRANSFER);
+            long accepted = target.receive(offer, true);
+            if (accepted <= 0L) {
+                continue;
+            }
+            int moved = energy.extractEnergy((int) Math.min(accepted, offer), false);
+            if (moved > 0) {
+                target.receive(moved, false);
+            }
+            if (energy.getEnergyStored() <= 0) {
+                break;
+            }
+        }
+    }
+
     @Override
     public boolean makeMultimeterTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         super.makeMultimeterTooltip(tooltip, isPlayerSneaking);
