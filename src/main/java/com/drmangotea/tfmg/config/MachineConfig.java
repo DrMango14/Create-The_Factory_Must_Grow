@@ -9,8 +9,8 @@ public class MachineConfig extends ConfigBase {
 
     public final ConfigFloat electricMotorInternalResistance = f(30, 0, "electricMotorInternalResistance", Comments.electricMotorInternalResistance);
     public final ConfigInt cokeOvenMaxSize = i(5, 1, "cokeOvenMaxSize", Comments.cokeOvenMaxSize);
-    public final ConfigFloat FEtoWattTickConversionRate = f(1, 0, "FEtoWattTickConversionRate", Comments.FEtoWattTickConversionRate);
-
+    //public final ConfigFloat FEtoWattTickConversionRate = f(1, 0, "FEtoWattTickConversionRate", Comments.FEtoWattTickConversionRate);
+    public final ConfigInt forgeEnergyConversionVoltage = i(230,1,"forgeEnergyConversionVoltage", Comments.forgeEnergyConversionVoltage);
 
     public final ConfigInt electrolysisMinimumCurrent = i(5, 1, "electrolysisMinimumCurrent", Comments.electrolysisMinimumCurrent);
     public final ConfigInt engineMaxLength = i(5, 1, "engineMaxLength", Comments.engineMaxLength);
@@ -19,10 +19,9 @@ public class MachineConfig extends ConfigBase {
 
 
     public final ConfigGroup accumulator = group(1, "accumulator", "Accumulator");
-    public final ConfigInt accumulatorStorage = i(100000, 1, "accumulatorStorage", Comments.accumulatorStorage);
-    public final ConfigInt accumulatorVoltage = i(12, 1, "accumulatorVoltage", Comments.accumulatorVoltage);
-    public final ConfigInt accumulatorMaxAmpOutput = i(20, 1, "accumulatorMaxAmpOutput", Comments.accumulatorMaxAmpOutput);
-    public final ConfigInt accumulatorChargingRate = i(100, 1, "accumulatorChargingRate", Comments.accumulatorChargingRate);
+    public final ConfigInt accumulatorStorage = i(2500000, 1, "accumulatorStorage", Comments.accumulatorStorage);
+   // public final ConfigInt accumulatorVoltage = i(12, 1, "accumulatorVoltage", Comments.accumulatorVoltage);
+   // public final ConfigInt accumulatorChargingRate = i(100, 1, "accumulatorChargingRate", Comments.accumulatorChargingRate);
 
     public final ConfigGroup firebox = group(1, "firebox", "Firebox");
     public final ConfigBool fireboxExhaustRequirement = b(true, "fireboxExhaustRequirement", Comments.fireboxExhaustRequirement);
@@ -73,5 +72,6 @@ public class MachineConfig extends ConfigBase {
         static String FEtoWattTickConversionRate = "How much Forge Energy is in one watt-tick.";
         static String polarizerItemChargingRate = "How much FE can polarizer charge per tick.";
         static String engineLoudness = "Changes the volume of engines.";
+        static String forgeEnergyConversionVoltage = "What voltage is created when FE is converted.";
     }
 }

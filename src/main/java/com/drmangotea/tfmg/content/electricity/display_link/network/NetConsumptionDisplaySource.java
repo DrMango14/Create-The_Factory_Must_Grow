@@ -20,7 +20,7 @@ public class NetConsumptionDisplaySource extends SingleLineDisplaySource {
         if (!(smart instanceof IElectric electric))
             return EMPTY_LINE;
 
-        int netUsage = electric.getNetworkPowerUsage();
+        float netUsage = electric.getNetworkPowerUsage();
 
         if (smart.getBehaviour(ObservedElectricBehaviour.TYPE) != null) {
             IElectric observed = smart.getBehaviour(ObservedElectricBehaviour.TYPE).getObservedElectric();

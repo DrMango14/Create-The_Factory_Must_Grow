@@ -120,7 +120,7 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
     }
 
     @Override
-    public int powerGeneration() {
+    public float powerGeneration() {
         if (upgrade.isPresent() && upgrade.get().getItem() == TFMGBlocks.GENERATOR.asItem())
             return (int) rpm;
 

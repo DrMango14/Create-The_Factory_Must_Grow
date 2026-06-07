@@ -4,6 +4,7 @@ package com.drmangotea.tfmg.content.electricity.measurement;
 import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
 import com.drmangotea.tfmg.base.TFMGShapes;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
+import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -28,7 +29,7 @@ public class VoltMeterBlock extends TFMGHorizontalDirectionalBlock implements IB
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 
-        return TFMGShapes.VOLTMETER.get(pState.getValue(FACING));
+        return pState.is(TFMGBlocks.VOLTMETER) ? TFMGShapes.VOLTMETER.get(pState.getValue(FACING)) : super.getShape(pState,worldIn,pos,context);
     }
 
 

@@ -20,7 +20,7 @@ public class GeneratorBlockEntity extends KineticElectricBlockEntity  {
     }
 
     @Override
-    public int powerGeneration() {
+    public float powerGeneration() {
         return generation()*40;
     }
 
@@ -46,7 +46,7 @@ public class GeneratorBlockEntity extends KineticElectricBlockEntity  {
     }
 
     @Override
-    public void onNetworkChanged(int oldVoltage, int oldPower) {
+    public void onNetworkChanged(int oldVoltage, float oldPower) {
         super.onNetworkChanged(oldVoltage, oldPower);
         updateStress();
         sendStuff();

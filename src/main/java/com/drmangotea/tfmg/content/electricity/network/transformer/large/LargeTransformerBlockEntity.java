@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.network.transformer.large;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -37,6 +39,8 @@ public class LargeTransformerBlockEntity extends KineticElectricBlockEntity {
 
     public float turnRatio = 1;
 
+    public int resistanceTimer = -1;
+
 
     final boolean isMainPart;
 
@@ -47,17 +51,17 @@ public class LargeTransformerBlockEntity extends KineticElectricBlockEntity {
         isMainPart = state.getValue(IS_MAIN_PART);
     }
 
-    @Override
-    public int getPowerUsage() {
-
-        if (super.getPowerUsage() == 0)
-            return 0;
-
-        if (isMainPart && level.getBlockEntity(getBlockPos().relative(getBlockState().getValue(HORIZONTAL_FACING))) instanceof LargeTransformerBlockEntity be)
-            return (int) ((int) Math.pow(be.data.getVoltage(), 2) / resistance());
-
-        return super.getPowerUsage();
-    }
+    // @Override
+    // public int getPowerUsage() {
+//
+    //     if (super.getPowerUsage() == 0)
+    //         return 0;
+//
+    //     if (isMainPart && level.getBlockEntity(getBlockPos().relative(getBlockState().getValue(HORIZONTAL_FACING))) instanceof LargeTransformerBlockEntity be)
+    //         return (int) ((Math.pow(be.data.getVoltage(), 2) / resistance())/(turnRatio/10));
+//
+    //     return (int) (super.getPowerUsage()/(turnRatio/10));
+    // }
 
     public ItemInteractionResult addComponent(ItemStack stack, Player player, InteractionHand hand) {
 
@@ -146,24 +150,32 @@ public class LargeTransformerBlockEntity extends KineticElectricBlockEntity {
         if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be && be.getData().getId() != data.getId()) {
             int count = getBlocksConnectedToNetworkCount(getControlledBlock().getData().getId());
             if (count != 0)
-                return Math.max(be.getNetworkResistance() * count, 0);
+                return Math.max((be.getNetworkResistance() * count) / (turnRatio / 10), 0);
         }
         return 0;
     }
 
+
     @Override
-    public void onNetworkChanged(int oldVoltage, int oldPower) {
+    public void onNetworkChanged(int oldVoltage, float oldPower) {
         super.onNetworkChanged(oldVoltage, oldPower);
 
         if (oldVoltage != getData().getVoltage() || oldPower != getPowerUsage()) {
             updateInFront = true;
             getOrCreateElectricNetwork().handleInsufficientPower();
         }
+
+        if (!isMainPart &&level.getBlockEntity(getBlockPos().relative(getBlockState().getValue(HORIZONTAL_FACING)))instanceof LargeTransformerBlockEntity be) {
+
+            be.resistanceTimer = 20;
+
+        }
+
         sendStuff();
         setChanged();
     }
 
-    public int powerGeneration() {
+    public float powerGeneration() {
 
         if (isMainPart)
             return 0;
@@ -215,6 +227,14 @@ public class LargeTransformerBlockEntity extends KineticElectricBlockEntity {
             updateInFront();
             updateInFront = false;
         }
+        if(resistanceTimer>=0){
+            if(resistanceTimer == 0){
+                recalculateNetworkResistance();
+                level.setBlock(getBlockPos().above(2), Blocks.GOLD_BLOCK.defaultBlockState(),3);
+                sendStuff();
+            }
+            resistanceTimer--;
+        }
 
     }
 
@@ -239,6 +259,7 @@ public class LargeTransformerBlockEntity extends KineticElectricBlockEntity {
 
         TFMGLang.translate(stateKey).color(0x69c9c5).forGoggles(tooltip);
         TFMGTexts.Multimeter.transformerRatio(turnRatio);
+
 
         super.makeMultimeterTooltip(tooltip, isPlayerSneaking);
         return true;

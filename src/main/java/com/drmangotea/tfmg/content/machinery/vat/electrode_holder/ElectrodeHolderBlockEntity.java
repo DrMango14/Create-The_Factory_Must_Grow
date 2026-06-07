@@ -124,7 +124,7 @@ public class ElectrodeHolderBlockEntity extends ElectricBlockEntity implements I
     }
 
     @Override
-    public void onNetworkChanged(int oldVoltage, int oldPower) {
+    public void onNetworkChanged(int oldVoltage, float oldPower) {
         super.onNetworkChanged(oldVoltage, oldPower);
         VatBlock.updateVatState(getBlockState(), level, getBlockPos().relative(Direction.DOWN));
     }
@@ -166,7 +166,7 @@ public class ElectrodeHolderBlockEntity extends ElectricBlockEntity implements I
 
     @Override
     public int getWorkPercentage() {
-        return (getPowerUsage() / 5000) * 100;
+        return (int) ((getPowerUsage() / 5000) * 100);
     }
 
     @Override

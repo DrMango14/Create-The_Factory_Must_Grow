@@ -944,6 +944,7 @@ public class TFMGBlocks {
             REGISTRATE.block("cable_connector", CableConnectorBlock::new)
                     .initialProperties(() -> Blocks.TERRACOTTA)
                     .transform(pickaxeOnly())
+                    .addLayer(() -> RenderType::cutoutMipped)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .blockstate(new CableConnectorGenerator()::generate)
                     .lang("Cable Insulator")
@@ -1260,6 +1261,18 @@ public class TFMGBlocks {
                     .item()
                     .transform(customItemModel())
                     .register();
+
+    public static final BlockEntry<VoltMeterBlock> ELECTRIC_MEASUREMENT_BLOCK =
+            REGISTRATE.block("electric_measurement_block", VoltMeterBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .transform(pickaxeOnly())
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
     public static final BlockEntry<PolarizerBlock> POLARIZER =
             REGISTRATE.block("polarizer", PolarizerBlock::new)
                     .initialProperties(SharedProperties::softMetal)
@@ -1332,15 +1345,15 @@ public class TFMGBlocks {
                     .register();
 
 
-    public static final BlockEntry<ConverterBlock> CONVERTER =
-            REGISTRATE.block("converter", ConverterBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .blockstate(new ConverterGenerator()::generate)
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .item()
-                    .transform(customItemModel())
-                    .register();
+    //public static final BlockEntry<ConverterBlock> CONVERTER =
+    //        REGISTRATE.block("converter", ConverterBlock::new)
+    //                .initialProperties(SharedProperties::softMetal)
+    //                .transform(pickaxeOnly())
+    //                .blockstate(new ConverterGenerator()::generate)
+    //                .properties(BlockBehaviour.Properties::noOcclusion)
+    //                .item()
+    //                .transform(customItemModel())
+    //                .register();
 
     public static final BlockEntry<LargeCoilBlock> LARGE_COIL =
             REGISTRATE.block("large_coil", LargeCoilBlock::new)

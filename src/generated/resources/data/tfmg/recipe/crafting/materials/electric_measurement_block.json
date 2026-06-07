@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "V": {
+      "item": "tfmg:voltmeter"
+    }
+  },
+  "pattern": [
+    " V ",
+    " M ",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:electric_measurement_block"
+  }
+}

@@ -20,7 +20,7 @@ public class PowerGenerationDisplaySource extends SingleLineDisplaySource {
         if (!(smart instanceof IElectric electric))
             return EMPTY_LINE;
 
-        int powerGen = electric.powerGeneration();
+        float powerGen = electric.powerGeneration();
 
         if (smart.getBehaviour(ObservedElectricBehaviour.TYPE) != null) {
             IElectric observed = smart.getBehaviour(ObservedElectricBehaviour.TYPE).getObservedElectric();

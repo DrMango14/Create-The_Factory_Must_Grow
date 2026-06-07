@@ -16,13 +16,13 @@ public class BuiltInRegistriesMixin {
         //TFMGBuiltInRegistries.init();
     }
 
-    @WrapOperation(method = "validate", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/Registry;forEach(Ljava/util/function/Consumer;)V"))
-    private static <T extends Registry<?>> void create$ourRegistriesAreNotEmpty(Registry<T> instance, Consumer<T> consumer, Operation<Void> original) {
-        Consumer<T> callback = (t) -> {
-            if (!t.key().location().getNamespace().equals(TFMG.MOD_ID))
-                consumer.accept(t);
-        };
-
-        original.call(instance, callback);
-    }
+    //@WrapOperation(method = "validate", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/Registry;forEach(Ljava/util/function/Consumer;)V"))
+    //private static <T extends Registry<?>> void create$ourRegistriesAreNotEmpty(Registry<T> instance, Consumer<T> consumer, Operation<Void> original) {
+    //    Consumer<T> callback = (t) -> {
+    //        if (!t.key().location().getNamespace().equals(TFMG.MOD_ID))
+    //            consumer.accept(t);
+    //    };
+//
+    //    original.call(instance, callback);
+    //}
 }

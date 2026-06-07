@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tfmg:converter"
+          "name": "tfmg:electric_measurement_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "tfmg:blocks/converter"
+  "random_sequence": "tfmg:blocks/electric_measurement_block"
 }

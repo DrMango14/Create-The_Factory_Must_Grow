@@ -934,6 +934,15 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("NCN")
                     .pattern("AMA")),
 
+    ELECTRIC_MEASUREMENT_BLOCK = create(TFMGBlocks.ELECTRIC_MEASUREMENT_BLOCK)
+            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
+            .viaShaped(b -> b
+                    .define('M', heavyMachineryCasing())
+                    .define('V', TFMGBlocks.VOLTMETER)
+                    .pattern(" V ")
+                    .pattern(" M ")
+                    .pattern("   ")),
+
     DISTILLATION_CONTROLLER = create(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER)
             .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
             .viaShaped(b -> b
@@ -1001,6 +1010,29 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("   ")
                     .pattern("ITP")
                     .pattern("ICM")),
+
+    COMPRESSOR = create(TFMGBlocks.COMPRESSOR)
+            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
+            .viaShaped(b -> b
+                    .define('T', shaft())
+                    .define('S', steelTank())
+                    .define('P', aluminumPipe())
+                    .define('C', heavyMachineryCasing())
+                    .define('B', AllItems.COPPER_BACKTANK)
+                    .pattern("PTP")
+                    .pattern("SCS")
+                    .pattern("PBP")),
+
+    FREEZER = create(TFMGBlocks.FREEZER)
+            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
+            .viaShaped(b -> b
+                    .define('R', TFMGRegistrate.getBucket("lpg"))
+                    .define('P', AllBlocks.FLUID_PIPE)
+                    .define('C', TFMGBlocks.COMPRESSOR)
+                    .define('W', TFMGItems.ELECTROMAGNETIC_COIL)
+                    .pattern("PWP")
+                    .pattern("WCW")
+                    .pattern("RWR")),
 
     DISTILLATION_OUTPUT = create(TFMGBlocks.STEEL_DISTILLATION_OUTPUT)
             .unlockedBy(TFMGBlocks.HEAVY_MACHINERY_CASING::get)
@@ -1281,16 +1313,16 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("SBS")
                     .pattern("LCL")),
 
-    CONVERTER = create(TFMGBlocks.CONVERTER)
-            .unlockedBy(TFMGBlocks.TRANSFORMER::get)
-            .viaShaped(b -> b
-                    .define('T', TFMGBlocks.TRANSFORMER)
-                    .define('R', redstone())
-                    .define('W', copperWire())
-                    .define('L', leadSheet())
-                    .pattern("WLR")
-                    .pattern("WTR")
-                    .pattern("WLR")),
+   // CONVERTER = create(TFMGBlocks.CONVERTER)
+   //         .unlockedBy(TFMGBlocks.TRANSFORMER::get)
+   //         .viaShaped(b -> b
+   //                 .define('T', TFMGBlocks.TRANSFORMER)
+   //                 .define('R', redstone())
+   //                 .define('W', copperWire())
+   //                 .define('L', leadSheet())
+   //                 .pattern("WLR")
+   //                 .pattern("WTR")
+   //                 .pattern("WLR")),
 
     MULTIMETER = create(TFMGItems.MULTIMETER)
             .unlockedBy(TFMGBlocks.VOLTMETER::get)

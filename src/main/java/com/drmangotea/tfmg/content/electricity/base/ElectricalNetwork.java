@@ -1,20 +1,20 @@
 package com.drmangotea.tfmg.content.electricity.base;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchBlockEntity;
 import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeTransformerBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_motor.ElectricMotorBlockEntity;
 import net.minecraft.core.BlockPos;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ElectricalNetwork {
 
     /**
      * This class manages individual networks
      */
+
 
     public ElectricalNetwork(long id) {
         this.id = id;
@@ -30,7 +30,7 @@ public class ElectricalNetwork {
         return id;
     }
 
-    //adds a new block to the network if it is not in it already
+    //adds a new block to the network if it's not in it already
     public void add(IElectric be) {
         List<Long> posList = new ArrayList<>();
 
@@ -51,8 +51,6 @@ public class ElectricalNetwork {
         int powerGeneration = 0;
 
 
-        Map<Integer, Float> groups = new HashMap<>();
-
         /**
          *  Phase I:
          *  1) gives each blocks the networks id
@@ -60,13 +58,17 @@ public class ElectricalNetwork {
          *  3) counts the resistance and power generation of the network
          *  4) creates groups
          */
+
+
         for (IElectric member : members) {
             member.getData().notEnoughPower = false;
+
             member.getData().highestCurrent = 0;
 
+            //    member.getLevelAccessor().setBlock(member.getBlockPos().above(2), Blocks.GOLD_BLOCK.defaultBlockState(),2);
+
             maxVoltage = Math.max(member.voltageGeneration(), maxVoltage);
-            if (member.resistance() != 0)
-                resistance += 1f / member.resistance();
+
             powerGeneration += member.powerGeneration();
         }
         /**
@@ -81,17 +83,16 @@ public class ElectricalNetwork {
             for (IElectric member : list) {
 
                 int oldVoltage = member.getData().getVoltage();
-                int oldPower = member.getPowerUsage();
+                float oldPower = member.getPowerUsage();
                 member.getData().voltageSupply = maxVoltage;
                 member.setVoltage(maxVoltage);
                 member.getData().setVoltageNextTick = true;
 
                 member.getData().networkPowerGeneration = powerGeneration;
-                if (resistance != 0) {
-                    member.setNetworkResistance(1f / resistance);
-                }else member.setNetworkResistance(0);
-                member.onNetworkChanged(oldVoltage, oldPower);
 
+                member.onNetworkChanged(oldVoltage, oldPower);
+                //if (member.resistance() != 0)
+                //    resistance += 1f / member.resistance();
 
             }
         }
@@ -109,22 +110,28 @@ public class ElectricalNetwork {
             if (member instanceof VoltageAlteringBlockEntity be) {
                 be.updateInFront();
             }
-
+           // if (resistance != 0) {
+           //     member.setNetworkResistance(1f / resistance);
+           // } else member.setNetworkResistance(0);
 
         }
         /**
          * Phase IV:
          * 1) stops the network from functioning if it consumes more power than it creates
          */
+        if (!members.isEmpty())
+            members.get(0).doActionNextTick(i-> members.get(0).recalculateNetworkResistance());
         handleInsufficientPower();
 
     }
+
 
     public void handleInsufficientPower() {
         if (!members.isEmpty())
             if (members.get(0).getNetworkPowerUsage() > members.get(0).getNetworkPowerGeneration()) {
                 for (IElectric member : members) {
                     member.getData().notEnoughPower = true;
+                    member.getData().tickUntilConnectFE = 20 * 2;
                     if (member instanceof ElectricMotorBlockEntity be) {
                         be.updateGeneratedRotation();
                     }

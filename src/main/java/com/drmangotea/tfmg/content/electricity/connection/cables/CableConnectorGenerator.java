@@ -72,6 +72,18 @@ public class CableConnectorGenerator extends SpecialBlockStateGen {
     }
 
     public <T extends Block> ModelFile getModel(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov, BlockState state) {
-        return (Boolean)state.getValue(CableConnectorBlock.EXTENSION) ? AssetLookup.partialBaseModel(ctx, prov, new String[]{"extension"}) : AssetLookup.partialBaseModel(ctx, prov, new String[0]);
+        String suffix = "";
+        if(state.getValue(CableConnectorBlock.EXTENSION)&&state.getValue(CableConnectorBlock.INPUT_MODE))
+            suffix = "extension_extracting";
+        if(state.getValue(CableConnectorBlock.EXTENSION)&&!state.getValue(CableConnectorBlock.INPUT_MODE))
+            suffix = "extension";
+        if(!state.getValue(CableConnectorBlock.EXTENSION)&&!state.getValue(CableConnectorBlock.INPUT_MODE))
+            return AssetLookup.partialBaseModel(ctx, prov);
+        if(!state.getValue(CableConnectorBlock.EXTENSION)&&state.getValue(CableConnectorBlock.INPUT_MODE))
+            suffix = "extracting";
+
+
+            return AssetLookup.partialBaseModel(ctx, prov, suffix);
+        //return (Boolean)state.getValue(CableConnectorBlock.EXTENSION) ? AssetLookup.partialBaseModel(ctx, prov, new String[]{"extension"}) : AssetLookup.partialBaseModel(ctx, prov, new String[0]);
     }
 }

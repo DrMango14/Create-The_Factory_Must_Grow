@@ -80,7 +80,7 @@ public class TFMGCommonEvents {
             PumpjackBaseBlockEntity.registerCapabilities(event);
             PolarizerBlockEntity.registerCapabilities(event);
             LargeEngineBlockEntity.registerCapabilities(event);
-            ConverterBlockEntity.registerCapabilities(event);
+           // ConverterBlockEntity.registerCapabilities(event);
             CastingBasinBlockEntity.registerCapabilities(event);
             FireboxBlockEntity.registerCapabilities(event);
             DistillationControllerBlockEntity.registerCapabilities(event);

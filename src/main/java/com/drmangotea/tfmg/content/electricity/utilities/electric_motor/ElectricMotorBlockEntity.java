@@ -88,10 +88,10 @@ public class ElectricMotorBlockEntity extends KineticElectricBlockEntity {
 
 
     @Override
-    public void onNetworkChanged(int oldVoltage, int oldPower) {
+    public void onNetworkChanged(int oldVoltage, float oldPower) {
         //if (oldPower != getPowerUsage() || oldVoltage != data.voltage) {
         delayedUpdate = true;
-        updateNextTick();
+     //   updateNextTick();
         notifyUpdate();
         // }
     }

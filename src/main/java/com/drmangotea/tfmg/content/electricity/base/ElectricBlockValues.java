@@ -1,9 +1,14 @@
 package com.drmangotea.tfmg.content.electricity.base;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.neoforged.neoforge.energy.IEnergyStorage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
 
 public class ElectricBlockValues {
 
@@ -22,7 +27,7 @@ public class ElectricBlockValues {
 
     public boolean getsOutsidePower = false;
 
-    public int networkResistance = 0;
+    public float networkResistance = 0;
 
     public int voltage = 0;
 
@@ -34,9 +39,21 @@ public class ElectricBlockValues {
 
     public boolean notEnoughPower = false;
 
+    public int tickUntilConnectFE = -1;
+
+    public boolean waitingForNextCharge = false;
+
     public boolean setVoltageNextTick = false;
 
     public int failTimer = 0;
+
+    public int energyGiven = 0;
+
+    public int energyTakenPerTick = 0;
+
+    public int energyTaken = 0;
+
+    public boolean importsFE = false;
 
     public ElectricBlockValues(long pos) {
         this.electricalNetworkId = pos;
@@ -53,4 +70,8 @@ public class ElectricBlockValues {
     public int getVoltage() {
         return voltage;
     }
+
+    public Map<Direction, IEnergyStorage> energyOutputs = new HashMap<>();
+
+    public List<Consumer<Integer>> scheduledActions = new ArrayList<>();
 }

@@ -157,8 +157,8 @@ public class SpoolItem extends Item {
                     //CableConnectorBlockEntity connectedBe2= pos.asLong()>posToConnect.asLong() ? be : otherBE;
                     CableType cableType = TFMGUtils.getCableType(cableTypeKey);
 
-                    CableConnection connection1 = new CableConnection(be.getCablePosition(), otherBE.getCablePosition(), otherBE.getBlockPos(), cableType, true);
-                    CableConnection connection2 = new CableConnection(otherBE.getCablePosition(), be.getCablePosition(), be.getBlockPos(), cableType, false);
+                    CableConnection connection1 = new CableConnection(be.getCablePosition(), otherBE.getCablePosition(), otherBE.getBlockPos(),be.getBlockPos(), cableType, true);
+                    CableConnection connection2 = new CableConnection(otherBE.getCablePosition(), be.getCablePosition(), be.getBlockPos(),otherBE.getBlockPos(), cableType, false);
 
                     float wireCost = (connection1.getLength() / 8);
 

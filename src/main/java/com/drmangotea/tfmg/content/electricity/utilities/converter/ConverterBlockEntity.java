@@ -56,13 +56,13 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
 
     }
 
-    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.registerBlockEntity(
-                Capabilities.EnergyStorage.BLOCK,
-                TFMGBlockEntities.CONVERTER.get(),
-                (be, context) -> be.energyCapability
-        );
-    }
+    //public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+    //    event.registerBlockEntity(
+    //            Capabilities.EnergyStorage.BLOCK,
+    //            TFMGBlockEntities.CONVERTER.get(),
+    //            (be, context) -> be.energyCapability
+    //    );
+    //}
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
@@ -92,25 +92,25 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
 
 
 
-    @Override
-    public float resistance() {
-        if (voltageGeneration() > 0)
-            return 0;
+   //@Override
+   //public float resistance() {
+   //    if (voltageGeneration() > 0)
+   //        return 0;
 
 
-        int power = 0;
-        for (IElectric member : getOrCreateElectricNetwork().members)
-            if (!(member instanceof ConverterBlockEntity) && !(member instanceof AccumulatorBlockEntity))
-                power += member.getPowerUsage();
-        if (energy.getEnergyStored() == getMaxCapacity() || getData().getVoltage() <= voltageGenerated.getValue() || canPower())
-            return 0;
-        if(Math.min(Math.max((data.networkPowerGeneration - power), 0), getMaxChargingRate())==0){
-            return 0;
-        }
+   //    int power = 0;
+   //    for (IElectric member : getOrCreateElectricNetwork().members)
+   //        if (!(member instanceof ConverterBlockEntity) && !(member instanceof AccumulatorBlockEntity))
+   //            power += member.getPowerUsage();
+   //    if (energy.getEnergyStored() == getMaxCapacity() || getData().getVoltage() <= voltageGenerated.getValue() || canPower())
+   //        return 0;
+   //    if(Math.min(Math.max((data.networkPowerGeneration - power), 0), getMaxChargingRate())==0){
+   //        return 0;
+   //    }
 
 
-        return (float) (data.voltage * data.voltage) /Math.min(Math.max((data.networkPowerGeneration - power), 0), getMaxChargingRate());
-    }
+   //    return (float) (data.voltage * data.voltage) /Math.min(Math.max((data.networkPowerGeneration - power), 0), getMaxChargingRate());
+   //}
 
     public boolean canPower() {
         if(timer!=0)
@@ -123,18 +123,18 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
     }
 
 
-    public int getChargingRate() {
-        //
-        // int chargingRate = Math.max((data.networkPowerGeneration - getNetworkPowerUsage()), 0);
-        if (energy.getEnergyStored() == getMaxCapacity() || getData().getVoltage() < voltageGenerated.value || canPower()|| data.notEnoughPower)
-            return 0;
+   //public int getChargingRate() {
+   //    //
+    //    // int chargingRate = Math.max((data.networkPowerGeneration - getNetworkPowerUsage()), 0);
+   //    if (energy.getEnergyStored() == getMaxCapacity() || getData().getVoltage() < voltageGenerated.value || canPower()|| data.notEnoughPower)
+   //        return 0;
 
-        //return Math.min(chargingRate, getMaxChargingRate());
-        return getMaxChargingRate();
-    }
+   //    //return Math.min(chargingRate, getMaxChargingRate());
+   //    return getMaxChargingRate();
+   //}
 
     @Override
-    public int powerGeneration() {
+    public float powerGeneration() {
         if (canPower()) {
             return 10000;
         }
@@ -155,15 +155,15 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
 
 
         if (getBlockState().getValue(INPUT)) {
-            if (getData().getVoltage() > TFMGConfigs.common().machines.accumulatorVoltage.get()) {
-                energy.receiveEnergy((int) (getChargingRate() / TFMGConfigs.common().machines.FEtoWattTickConversionRate.get()), false);
-
-            }
+           // if (getData().getVoltage() > TFMGConfigs.common().machines.accumulatorVoltage.get()) {
+           //     energy.receiveEnergy((int) (getChargingRate() / 1), false);
+//
+           // }
         } else if (canPower()) {
 
-            int energyToExtract = data.networkPowerGeneration == 0 ? getNetworkPowerUsage() : (int) Math.max(0, Math.max(((float) powerGeneration() / (float) data.networkPowerGeneration) * (float) getNetworkPowerUsage(), 0));
-            energyToExtract /= TFMGConfigs.common().machines.FEtoWattTickConversionRate.get();
-            energy.extractEnergy(Math.max(energyToExtract, 1), false);
+            float energyToExtract = data.networkPowerGeneration == 0 ? getNetworkPowerUsage() : (int) Math.max(0, Math.max(((float) powerGeneration() / (float) data.networkPowerGeneration) * (float) getNetworkPowerUsage(), 0));
+            energyToExtract /= 1;
+            energy.extractEnergy((int) Math.max(energyToExtract, 1), false);
             if (energy.getEnergyStored() == 0) {
                 timer = 100;
                 updateNextTick();
@@ -176,7 +176,7 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
         super.makeMultimeterTooltip(tooltip, isPlayerSneaking);
 
         TFMGTexts.electricalCapacity(energy.getEnergyStored()).forGoggles(tooltip, 1);
-        TFMGTexts.chargingRate(getChargingRate()).forGoggles(tooltip, 1);
+        //TFMGTexts.chargingRate(getChargingRate()).forGoggles(tooltip, 1);
         TFMGTexts.electricalMaxCapacity(getMaxCapacity()).forGoggles(tooltip, 1);
 
         return true;
@@ -185,11 +185,11 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
     public int getMaxCapacity() {
         return TFMGConfigs.common().machines.accumulatorStorage.get();
     }
-
-    //in FE per tick
-    public int getMaxChargingRate() {
-        return TFMGConfigs.common().machines.accumulatorChargingRate.get()*10;
-    }
+//
+    ////in FE per tick
+    //public int getMaxChargingRate() {
+    //    return TFMGConfigs.common().machines.accumulatorChargingRate.get()*10;
+    //}
 
     @Override
     public int voltageGeneration() {

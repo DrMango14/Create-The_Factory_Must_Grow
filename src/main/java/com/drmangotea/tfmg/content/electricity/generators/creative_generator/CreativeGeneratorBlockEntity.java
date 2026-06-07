@@ -56,7 +56,7 @@ public class CreativeGeneratorBlockEntity extends ElectricBlockEntity {
     }
 
     @Override
-    public int powerGeneration() {
+    public float powerGeneration() {
         return 999999999;
     }
 

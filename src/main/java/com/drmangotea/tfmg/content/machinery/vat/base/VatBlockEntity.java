@@ -209,7 +209,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
                 .append(CreateLang.translateDirect("vat." + label + "_dots")
                         .withStyle(style2))
                 .append(base)
-                .append("("+level/10f+")");
+                .append("(" + level / 10f + ")");
     }
 
     private MutableComponent blockComponent(int level) {
@@ -217,25 +217,59 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
     }
 
     private MutableComponent barComponent(int level) {
-        ChatFormatting color = level - minValue >19 ? ChatFormatting.DARK_RED : ChatFormatting.DARK_GREEN;
+        ChatFormatting color = level - minValue > 19 ? ChatFormatting.DARK_RED : ChatFormatting.DARK_GREEN;
         switch (level - minValue) {
-            case 1: color = ChatFormatting.BLUE; break;
-            case 2: color = ChatFormatting.DARK_AQUA; break;
-            case 3: color = ChatFormatting.DARK_AQUA; break;
-            case 4: color = ChatFormatting.AQUA; break;
-            case 5: color = ChatFormatting.AQUA; break;
-            case 6: color = ChatFormatting.AQUA; break;
-            case 7: color = ChatFormatting.AQUA; break;
-            case 8: color = ChatFormatting.AQUA; break;
-            case 11: color = ChatFormatting.YELLOW; break;
-            case 12: color = ChatFormatting.YELLOW; break;
-            case 13: color = ChatFormatting.YELLOW; break;
-            case 14: color = ChatFormatting.YELLOW; break;
-            case 15: color = ChatFormatting.YELLOW; break;
-            case 16: color = ChatFormatting.GOLD; break;
-            case 17: color = ChatFormatting.RED; break;
-            case 18: color = ChatFormatting.RED; break;
-            case 19: color = ChatFormatting.DARK_RED; break;
+            case 1:
+                color = ChatFormatting.BLUE;
+                break;
+            case 2:
+                color = ChatFormatting.DARK_AQUA;
+                break;
+            case 3:
+                color = ChatFormatting.DARK_AQUA;
+                break;
+            case 4:
+                color = ChatFormatting.AQUA;
+                break;
+            case 5:
+                color = ChatFormatting.AQUA;
+                break;
+            case 6:
+                color = ChatFormatting.AQUA;
+                break;
+            case 7:
+                color = ChatFormatting.AQUA;
+                break;
+            case 8:
+                color = ChatFormatting.AQUA;
+                break;
+            case 11:
+                color = ChatFormatting.YELLOW;
+                break;
+            case 12:
+                color = ChatFormatting.YELLOW;
+                break;
+            case 13:
+                color = ChatFormatting.YELLOW;
+                break;
+            case 14:
+                color = ChatFormatting.YELLOW;
+                break;
+            case 15:
+                color = ChatFormatting.YELLOW;
+                break;
+            case 16:
+                color = ChatFormatting.GOLD;
+                break;
+            case 17:
+                color = ChatFormatting.RED;
+                break;
+            case 18:
+                color = ChatFormatting.RED;
+                break;
+            case 19:
+                color = ChatFormatting.DARK_RED;
+                break;
 
         }
 
@@ -1034,8 +1068,6 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
             boolean operational = operationalMachinesMap.getOrDefault(machines.getKey(), true);
             addMachineTooltip(machines.getValue(), operational, tooltip);
         }
-
-
 
 
         TFMGTexts.Vat.contents().forGoggles(tooltip);

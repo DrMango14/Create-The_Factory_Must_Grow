@@ -20,7 +20,7 @@ public class NetResistanceDisplaySource extends SingleLineDisplaySource {
         if (!(smart instanceof IElectric electric))
             return EMPTY_LINE;
 
-        int netResistance = electric.getNetworkResistance();
+        float netResistance = electric.getNetworkResistance();
 
         if (smart.getBehaviour(ObservedElectricBehaviour.TYPE) != null) {
             IElectric observed = smart.getBehaviour(ObservedElectricBehaviour.TYPE).getObservedElectric();

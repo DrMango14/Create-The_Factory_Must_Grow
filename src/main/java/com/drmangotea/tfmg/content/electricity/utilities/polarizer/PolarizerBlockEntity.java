@@ -123,7 +123,7 @@ public class PolarizerBlockEntity extends ElectricBlockEntity implements IHaveGo
         }
 
 
-            if (getPowerUsage() >= 2000) {
+            if (getPowerUsage() >= 1000) {
                 if (chargeCapacitors) {
                     if (capacitorPercentage < 200) {
                         capacitorPercentage++;

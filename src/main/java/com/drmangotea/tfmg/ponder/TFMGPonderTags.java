@@ -121,7 +121,7 @@ public class TFMGPonderTags {
                 .add(TFMGBlocks.LIGHT_BULB)
                 .add(TFMGBlocks.BRASS_CABLE_HUB)
                 .add(TFMGBlocks.SEGMENTED_DISPLAY)
-                .add(TFMGBlocks.CONVERTER)
+              //  .add(TFMGBlocks.CONVERTER)
                 .add(TFMGBlocks.TRAFFIC_LIGHT)
                 .add(TFMGItems.COPPER_SPOOL)
                 .add(TFMGItems.ALUMINUM_SPOOL)

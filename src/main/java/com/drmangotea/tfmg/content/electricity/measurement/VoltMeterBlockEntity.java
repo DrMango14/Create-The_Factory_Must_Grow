@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.measurement;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlockEntity;
@@ -46,6 +47,8 @@ public class VoltMeterBlockEntity extends SmartBlockEntity implements IHaveGoggl
     @Override
     public void lazyTick() {
         super.lazyTick();
+
+
         //if(!level.isClientSide)
         //    return;
         BlockEntity beBehind = level.getBlockEntity(getBlockPos().relative(getBlockState().getValue(FACING).getOpposite()));
@@ -97,7 +100,7 @@ public class VoltMeterBlockEntity extends SmartBlockEntity implements IHaveGoggl
         float value = (float) Math.abs(this.value) / getRange();
         if (value > 1)
             value = 1;
-
+       // TFMG.LOGGER.debug("angle "+value);
         float targetAngle = Math.abs(value * 180);
 
 
@@ -131,7 +134,7 @@ public class VoltMeterBlockEntity extends SmartBlockEntity implements IHaveGoggl
         POWER("W", 5000),
         NETWORK_POWER_USAGE("W", 50000),
         NETWORK_POWER_GENERATION("W", 50000),
-        CAPACITY("Fe", 300000),
+        CAPACITY("Fe", 2500000),
         FALLBACK("", 0),
         ;
 

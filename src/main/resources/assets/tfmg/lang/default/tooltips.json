@@ -161,6 +161,8 @@
 	"block.tfmg.cable_connector.tooltip.summary": "Transfers power",
 	"block.tfmg.cable_connector.tooltip.condition1": "When 2 cable insulators are right clicked with a copper/aluminum/constantan spool",
 	"block.tfmg.cable_connector.tooltip.behaviour1": "Created a connection between the 2 insulators transferring power between them",
+	"block.tfmg.cable_connector.tooltip.condition2": "When wrenched",
+	"block.tfmg.cable_connector.tooltip.behaviour2": "The block switches between FE import and export modes",
 
 	"block.tfmg.large_coil.tooltip.summary": "Used for creating the Large Transformer",
 	"block.tfmg.large_coil.tooltip.condition1": "When 2 Large Coils are placed next to each other and right-clicked with a Laminated Magnetic Alloy Block",

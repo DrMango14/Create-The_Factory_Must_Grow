@@ -70,8 +70,8 @@ public class LightBulbBlockEntity extends ElectricBlockEntity {
 
     @Override
     public void blockFail() {
-        super.blockFail();
-        TFMGUtils.playSound(level,getBlockPos(), SoundEvents.GLASS_BREAK, SoundSource.BLOCKS);
+      //  super.blockFail();
+      //  TFMGUtils.playSound(level,getBlockPos(), SoundEvents.GLASS_BREAK, SoundSource.BLOCKS);
     }
 
 

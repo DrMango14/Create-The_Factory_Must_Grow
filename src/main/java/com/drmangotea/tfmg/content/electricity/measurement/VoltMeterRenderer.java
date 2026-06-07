@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.measurement;
 
 
+import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -18,7 +19,8 @@ import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 
 public class VoltMeterRenderer extends SafeBlockEntityRenderer<VoltMeterBlockEntity> {
 
-    public VoltMeterRenderer(BlockEntityRendererProvider.Context context) {}
+    public VoltMeterRenderer(BlockEntityRendererProvider.Context context) {
+    }
 
     @Override
     protected void renderSafe(VoltMeterBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource bufferSource, int light, int overlay) {
@@ -29,7 +31,7 @@ public class VoltMeterRenderer extends SafeBlockEntityRenderer<VoltMeterBlockEnt
         var msr = TransformStack.of(ms);
         msr.translate(0.5, 0.5, 0.5);
 
-        float dialPivot = 5.75f / 16;
+        float dialPivot =   5.75f / 16;
 
         float dialPivot2 = 5.75f / 12;
 
@@ -37,17 +39,17 @@ public class VoltMeterRenderer extends SafeBlockEntityRenderer<VoltMeterBlockEnt
 
         Direction direction = blockState.getValue(FACING).getCounterClockWise();
 
-        if(direction.getAxis() == Direction.Axis.X)
+        if (direction.getAxis() == Direction.Axis.X)
             direction = direction.getOpposite();
         dial
                 .rotateYDegrees(direction.toYRot())
                 .uncenter()
-                .translate(0, dialPivot, dialPivot2)
-                .rotateXDegrees(Math.abs(Math.min( be.angle.getValue(partialTicks),180)))
+                .translate(be.getBlockState().is(TFMGBlocks.VOLTMETER) ? 0 : -11.3f/16, dialPivot, dialPivot2)
+                .rotateXDegrees(Math.abs(Math.min(be.angle.getValue(partialTicks), 180)))
                 .translate(0, -dialPivot, -dialPivot2)
                 .light(light);
 
-        dial.renderInto(ms,vb);
+        dial.renderInto(ms, vb);
 
 
         ms.popPose();

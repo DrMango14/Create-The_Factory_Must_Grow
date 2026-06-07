@@ -1,11 +1,11 @@
 package com.drmangotea.tfmg.content.electricity.connection.cables;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
 import com.drmangotea.tfmg.content.machinery.misc.winding_machine.SpoolItem;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
-import com.drmangotea.tfmg.registry.TFMGCableTypes;
-import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.api.equipment.goggles.IHaveHoveringInformation;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.createmod.catnip.animation.AnimationTickHolder;
@@ -16,14 +16,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -75,6 +72,32 @@ public class CableConnectorBlockEntity extends ElectricBlockEntity implements IH
     public int getMaxVoltage() {
         return 100000;
     }
+
+    @Override
+    public void onPlaced() {
+        Direction facing = getBlockState().getValue(FACING);
+        List<Direction> directions = new ArrayList<>();
+        directions.add(facing.getOpposite());
+
+        doActionNextTick(i -> checkForFEOutputs(directions));
+        super.onPlaced();
+    }
+
+
+    @Override
+    public float resistance() {
+
+        if (getData().energyTaken == 0 && getData().energyGiven != 0) {
+
+            return (float) Math.pow(getData().getVoltage(), 2) / (this.getData().energyGiven*11);
+        }
+        return super.resistance();
+        //if(this.getData().energyGiven !=0) {
+        //    return (float) getData().getVoltage() / ((float) (this.getData().energyGiven * 20) / getData().getVoltage());
+        //} else return 0;
+
+    }
+
 
     @Override
     public boolean hasElectricitySlot(Direction direction) {
@@ -219,6 +242,44 @@ public class CableConnectorBlockEntity extends ElectricBlockEntity implements IH
     public void lazyTick() {
         super.lazyTick();
 
+        if (getBlockState().getValue(CableConnectorBlock.INPUT_MODE)) {
+            int oldValue = getData().energyTaken;
+            getData().energyTaken = 0;
+
+            double powerNeeded = getData().networkResistance != 0 ? 1.1 * (Math.pow(getData().getVoltage() == 0 ? 230 : getData().getVoltage(), 2) / getData().networkResistance) : 0;
+            //  TFMG.LOGGER.debug("meowe "+powerNeeded);
+
+            getData().energyOutputs.forEach((d, c) -> {
+
+
+                int energyToTake = (int) Math.min(Math.min(1028 * 10, Math.max(powerNeeded,10)), c.getEnergyStored());
+                int FETaken = 0;
+                int energyLeft = energyToTake;
+
+                while(energyLeft>0) {
+                    int taken = c.extractEnergy(Math.min(energyLeft,100), false);
+                    energyLeft-=taken;
+                    FETaken += taken;
+                }
+
+               // TFMG.LOGGER.debug(FETaken + "");
+                getData().energyTakenPerTick = FETaken;
+                getData().energyTaken += energyToTake;
+            });
+            if (oldValue != getData().energyTaken)
+                updateNextTick();
+        } else getData().energyTaken = 0;
+
+    }
+
+    @Override
+    public float powerGeneration() {
+        return getData().energyTaken;
+    }
+
+    @Override
+    public int voltageGeneration() {
+        return getData().energyTaken > 0 ? TFMGConfigs.common().machines.forgeEnergyConversionVoltage.get() : 0;
     }
 
     @Override
@@ -288,7 +349,6 @@ public class CableConnectorBlockEntity extends ElectricBlockEntity implements IH
 
             } else break;
         }
-
 
 
         Vec3 center = VecHelper.getCenterOf(pos);

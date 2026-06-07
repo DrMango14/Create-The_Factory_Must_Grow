@@ -111,6 +111,12 @@ public class TFMGTexts {
         public static LangBuilder power(double value) {
             return TFMGLang.text("   P = " + TFMGTexts.power(value)).color(0xcc4b74);
         }
+        public static LangBuilder sendingFE(double value) {
+            return TFMGLang.translate("multimeter.fe_output").add(TFMGLang.text(TFMGUtils.formatUnits(value,"FE/tick")).color(0x4BCC4B));
+        }
+        public static LangBuilder takingFE(double value) {
+            return TFMGLang.translate("multimeter.fe_input").add(TFMGLang.text(TFMGUtils.formatUnits(value/10,"FE/tick")).color(0x0596FF));
+        }
 
     }
 

@@ -219,10 +219,10 @@ public class TFMGBlockEntities {
             .blockEntity("pumpjack_base", PumpjackBaseBlockEntity::new)
             .validBlocks(TFMGBlocks.PUMPJACK_BASE)
             .register();
-    public static final BlockEntityEntry<ConverterBlockEntity> CONVERTER = REGISTRATE
-            .blockEntity("converter", ConverterBlockEntity::new)
-            .validBlocks(TFMGBlocks.CONVERTER)
-            .register();
+    //public static final BlockEntityEntry<ConverterBlockEntity> CONVERTER = REGISTRATE
+    //        .blockEntity("converter", ConverterBlockEntity::new)
+    //        .validBlocks(TFMGBlocks.CONVERTER)
+    //        .register();
     public static final BlockEntityEntry<CastingBasinBlockEntity> CASTING_BASIN = REGISTRATE
             .blockEntity("casting_basin", CastingBasinBlockEntity::new)
             .validBlocks(TFMGBlocks.CASTING_BASIN)
@@ -396,7 +396,7 @@ public class TFMGBlockEntities {
 
     public static final BlockEntityEntry<VoltMeterBlockEntity> VOLTMETER = REGISTRATE
             .blockEntity("voltmeter", VoltMeterBlockEntity::new)
-            .validBlocks(TFMGBlocks.VOLTMETER)
+            .validBlocks(TFMGBlocks.VOLTMETER,TFMGBlocks.ELECTRIC_MEASUREMENT_BLOCK)
             .renderer(() -> VoltMeterRenderer::new)
             .register();
 

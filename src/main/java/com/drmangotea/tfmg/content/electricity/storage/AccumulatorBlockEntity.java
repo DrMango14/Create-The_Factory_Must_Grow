@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.storage;
 
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
@@ -91,10 +92,9 @@ public class AccumulatorBlockEntity extends ElectricBlockEntity {
         if (!isController())
             if (level.getBlockEntity(controller) instanceof AccumulatorBlockEntity be)
                 return be.makeMultimeterTooltip(tooltip, isPlayerSneaking);
-        super.makeMultimeterTooltip(tooltip, isPlayerSneaking);
-
+       // super.makeMultimeterTooltip(tooltip, isPlayerSneaking);
         TFMGTexts.electricalCapacity(energy.getEnergyStored()).forGoggles(tooltip, 1);
-        TFMGTexts.chargingRate(getChargingRate()).forGoggles(tooltip, 1);
+       // TFMGTexts.chargingRate(getChargingRate()).forGoggles(tooltip, 1);
         TFMGTexts.electricalMaxCapacity(getMaxCapacity()).forGoggles(tooltip, 1);
 
         return true;
@@ -158,7 +158,7 @@ public class AccumulatorBlockEntity extends ElectricBlockEntity {
     }
 
     public TFMGForgeEnergyStorage createEnergyStorage(int multiplier) {
-        return new TFMGForgeEnergyStorage(getMaxCapacity() * multiplier, 10000) {
+        return new TFMGForgeEnergyStorage(getMaxCapacity(), 2500000) {
             @Override
             public void onEnergyChanged(int amount, int oldAmount) {
 
@@ -200,10 +200,10 @@ public class AccumulatorBlockEntity extends ElectricBlockEntity {
     @Override
     public void tick() {
         super.tick();
-        if (signalChanged) {
-            signalChanged = false;
-            analogSignalChanged();
-        }
+       // if (signalChanged) {
+       //     signalChanged = false;
+       //     analogSignalChanged();
+       // }
         if (!isController())
             return;
 
@@ -212,19 +212,19 @@ public class AccumulatorBlockEntity extends ElectricBlockEntity {
             refreshNextTick = false;
         }
 
-        if (getData().getVoltage() > TFMGConfigs.common().machines.accumulatorVoltage.get() * length) {
-            energy.receiveEnergy((int) (getChargingRate() / TFMGConfigs.common().machines.FEtoWattTickConversionRate.get()), false);
-
-            return;
-        }
-        if (canPower()) {
-
-            int energyToExtract = data.networkPowerGeneration == 0 ? getNetworkPowerUsage() : (int) Math.max(0, Math.max(((float) powerGeneration() / (float) data.networkPowerGeneration) * (float) getNetworkPowerUsage(), 0));
-            energyToExtract /= TFMGConfigs.common().machines.FEtoWattTickConversionRate.get();
-            energy.extractEnergy(Math.max(energyToExtract, 1), false);
-            if (energy.getEnergyStored() == 0)
-                updateNextTick();
-        }
+       // if (getData().getVoltage() > TFMGConfigs.common().machines.accumulatorVoltage.get() * length) {
+       //     energy.receiveEnergy((int) (getChargingRate() / TFMGConfigs.common().machines.FEtoWattTickConversionRate.get()), false);
+//
+       //     return;
+       // }
+       // if (canPower()) {
+//
+       //     int energyToExtract = data.networkPowerGeneration == 0 ? getNetworkPowerUsage() : (int) Math.max(0, Math.max(((float) powerGeneration() / (float) data.networkPowerGeneration) * (float) getNetworkPowerUsage(), 0));
+       //     energyToExtract /= TFMGConfigs.common().machines.FEtoWattTickConversionRate.get();
+       //     energy.extractEnergy(Math.max(energyToExtract, 1), false);
+       //     if (energy.getEnergyStored() == 0)
+       //         updateNextTick();
+       // }
 
     }
 
@@ -247,78 +247,74 @@ public class AccumulatorBlockEntity extends ElectricBlockEntity {
 
     }
 
-    @Override
-    public float resistance() {
-        if (voltageGeneration() > 0)
-            return 0;
-        if (!isController())
-            return 0;
+    //@Override
+    //public float resistance() {
+    //    if (voltageGeneration() > 0)
+    //        return 0;
+    //    if (!isController())
+    //        return 0;
+//
+    //    int power = 0;
+    //    for (IElectric member : getOrCreateElectricNetwork().members)
+    //        if (!(member instanceof ConverterBlockEntity) && !(member instanceof AccumulatorBlockEntity))
+    //            power += member.getPowerUsage();
+    //    if (energy.getEnergyStored() == getMaxCapacity() || getData().getVoltage() <= getOutputVoltage() || canPower())
+    //        return 0;
+    //    if (Math.min(Math.max((data.networkPowerGeneration - power), 0), getMaxChargingRate()) == 0) {
+    //        return 0;
+    //    }
+//
+    //    return (float) Math.min((Math.pow(data.voltage, 2)) / Math.min(Math.max((data.networkPowerGeneration - power), 0), getMaxChargingRate()), 750);
+    //}
 
-        int power = 0;
-        for (IElectric member : getOrCreateElectricNetwork().members)
-            if (!(member instanceof ConverterBlockEntity) && !(member instanceof AccumulatorBlockEntity))
-                power += member.getPowerUsage();
-        if (energy.getEnergyStored() == getMaxCapacity() || getData().getVoltage() <= getOutputVoltage() || canPower())
-            return 0;
-        if (Math.min(Math.max((data.networkPowerGeneration - power), 0), getMaxChargingRate()) == 0) {
-            return 0;
-        }
+   // public boolean canPower() {
+   //     return getData().networkResistance > 0 && (getData().getVoltage() <= getOutputVoltage()) && energy.getEnergyStored() > 0 && signal == 0;
+   // }
+//
+//
+   // public int getChargingRate() {
+   //     //
+   //     // int chargingRate = Math.max((data.networkPowerGeneration - getNetworkPowerUsage()), 0);
+   //     if (energy.getEnergyStored() >= getMaxCapacity() || getData().getVoltage() < getOutputVoltage() || canPower() || data.notEnoughPower)
+   //         return 0;
+//
+   //     //return Math.min(chargingRate, getMaxChargingRate());
+   //     return getMaxChargingRate();
+   // }
 
-        return (float) Math.min((Math.pow(data.voltage, 2)) / Math.min(Math.max((data.networkPowerGeneration - power), 0), getMaxChargingRate()), 750);
-    }
+   // @Override
+   // public int powerGeneration() {
+   //     if (canPower()) {
+   //         return getData().networkResistance > 0 ? maxPowerOutput() : 0;
+   //     }
+   //     return 0;
+   // }
 
-    public boolean canPower() {
-        return getData().networkResistance > 0 && (getData().getVoltage() <= getOutputVoltage()) && energy.getEnergyStored() > 0 && signal == 0;
-    }
-
-
-    public int getChargingRate() {
-        //
-        // int chargingRate = Math.max((data.networkPowerGeneration - getNetworkPowerUsage()), 0);
-        if (energy.getEnergyStored() >= getMaxCapacity() || getData().getVoltage() < getOutputVoltage() || canPower() || data.notEnoughPower)
-            return 0;
-
-        //return Math.min(chargingRate, getMaxChargingRate());
-        return getMaxChargingRate();
-    }
-
-    @Override
-    public int powerGeneration() {
-        if (canPower()) {
-            return getData().networkResistance > 0 ? maxPowerOutput() : 0;
-        }
-        return 0;
-    }
-
-    public int maxPowerOutput() {
-        return getOutputVoltage() * TFMGConfigs.common().machines.accumulatorMaxAmpOutput.get();
-    }
+   // public int maxPowerOutput() {
+   //     return getOutputVoltage() * TFMGConfigs.common().machines.accumulatorMaxAmpOutput.get();
+   // }
 
     public int getMaxCapacity() {
         return TFMGConfigs.common().machines.accumulatorStorage.get() * length;
     }
 
-    //in FE per tick
-    public int getMaxChargingRate() {
-        return TFMGConfigs.common().machines.accumulatorChargingRate.get();
-    }
 
 
-    public int getOutputVoltage() {
+   // public int getOutputVoltage() {
+//
+//
+   //     return TFMGConfigs.common().machines.accumulatorVoltage.get() * length;
+   // }
 
-
-        return TFMGConfigs.common().machines.accumulatorVoltage.get() * length;
-    }
-
-    @Override
-    public int voltageGeneration() {
-
-        return canPower() ? getOutputVoltage() : 0;
-    }
+   // @Override
+   // public int voltageGeneration() {
+//
+   //     return canPower() ? getOutputVoltage() : 0;
+   // }
 
 
     @Override
     public boolean hasElectricitySlot(Direction direction) {
-        return direction.getAxis() == getBlockState().getValue(FACING).getAxis();
+        return false;
     }
 }

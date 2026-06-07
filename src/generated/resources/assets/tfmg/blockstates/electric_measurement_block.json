@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfmg:block/electric_measurement_block/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/electric_measurement_block/block"
+    },
+    "facing=south": {
+      "model": "tfmg:block/electric_measurement_block/block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfmg:block/electric_measurement_block/block",
+      "y": 270
+    }
+  }
+}

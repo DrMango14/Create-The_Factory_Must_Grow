@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.network.large_switch;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.base.KineticElectricBlockEntity;
@@ -8,6 +9,8 @@ import net.createmod.catnip.animation.LerpedFloat;
 import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
@@ -71,6 +74,20 @@ public class LargeSwitchBlockEntity extends KineticElectricBlockEntity {
     }
 
     @Override
+    protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+        super.read(compound, registries, clientPacket);
+        angle = compound.getFloat("Angle");
+        closed = compound.getBoolean("Closed");
+    }
+
+    @Override
+    protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+        super.write(compound, registries, clientPacket);
+        compound.putFloat("Angle",angle);
+        compound.putBoolean("Closed",closed);
+    }
+
+    @Override
     public void lazyTick() {
         super.lazyTick();
         if(data.notEnoughPower&&!getBlockState().getValue(IS_MAIN_PART))
@@ -95,6 +112,7 @@ public class LargeSwitchBlockEntity extends KineticElectricBlockEntity {
         Direction facing = getBlockState().getValue(HORIZONTAL_FACING);
         if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be && be.getData().getId() != data.getId()) {
             int count = getBlocksConnectedToNetworkCount(getControlledBlock().getData().getId());
+
             if(count!=0)
                 return Math.max(be.getNetworkResistance()*count, 0);
         }
@@ -102,7 +120,7 @@ public class LargeSwitchBlockEntity extends KineticElectricBlockEntity {
     }
 
     @Override
-    public void onNetworkChanged(int oldVoltage, int oldPower) {
+    public void onNetworkChanged(int oldVoltage, float oldPower) {
         super.onNetworkChanged(oldVoltage, oldPower);
 
         if (oldVoltage != getData().getVoltage() || oldPower != getPowerUsage()) {
@@ -112,7 +130,7 @@ public class LargeSwitchBlockEntity extends KineticElectricBlockEntity {
         setChanged();
     }
 
-    public int powerGeneration() {
+    public float powerGeneration() {
 
         if (isMainPart)
             return 0;
@@ -127,7 +145,7 @@ public class LargeSwitchBlockEntity extends KineticElectricBlockEntity {
             if (be.getData().getId() != getData().getId())
                 if (be.getData().getVoltage() != 0)
                     if (be.closed) {
-                        powerGeneration = Math.max(powerGeneration, 10000);
+                        powerGeneration = Math.max(powerGeneration, 100000);
                         getData().getsOutsidePower = true;
                     }
 

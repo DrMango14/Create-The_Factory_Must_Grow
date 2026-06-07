@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import static net.minecraft.world.level.block.DirectionalBlock.FACING;
 
-public class VoltageAlteringBlockEntity extends ElectricBlockEntity{
+public class VoltageAlteringBlockEntity extends ElectricBlockEntity {
 
     public boolean updateInFront = false;
 
@@ -27,7 +27,7 @@ public class VoltageAlteringBlockEntity extends ElectricBlockEntity{
     }
 
 
-    public int getOutputPower() {
+    public float getOutputPower() {
         return getPowerUsage();
     }
 
@@ -40,7 +40,7 @@ public class VoltageAlteringBlockEntity extends ElectricBlockEntity{
         }
     }
 
-    public int getMaxPowerOutput(){
+    public int getMaxPowerOutput() {
         return 10000;
     }
 
@@ -49,20 +49,20 @@ public class VoltageAlteringBlockEntity extends ElectricBlockEntity{
         return 100;
     }
 
-    @Override
-    public int getPowerUsage() {
-        getOrCreateElectricNetwork().checkForLoops(getBlockPos());
-        Direction facing = getDirection();
-        if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be && be.getData().getId() != data.getId()) {
-            if (be.hasElectricitySlot(facing.getOpposite()))
-
-                return Math.max(be.getNetworkPowerUsage(this), 0);
-
-        }
-
-        return 0;
-
-    }
+    //@Override
+    //public int getPowerUsage() {
+    //    getOrCreateElectricNetwork().checkForLoops(getBlockPos());
+    //    Direction facing = getDirection();
+    //    if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be && be.getData().getId() != data.getId()) {
+    //        if (be.hasElectricitySlot(facing.getOpposite()))
+//
+    //            return Math.max(be.getNetworkPowerUsage(this), 0);
+//
+    //    }
+//
+    //    return 0;
+//
+    //}
 
 
     public IElectric getControlledBlock() {
@@ -77,17 +77,27 @@ public class VoltageAlteringBlockEntity extends ElectricBlockEntity{
     public float resistance() {
         Direction facing = getDirection();
         if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be && be.getData().getId() != data.getId()) {
-            if (be.hasElectricitySlot(facing.getOpposite())){
+            if (be.hasElectricitySlot(facing.getOpposite())) {
                 int count = getBlocksConnectedToNetworkCount(getControlledBlock().getData().getId());
-                if(count!=0)
-                    return Math.max(be.getNetworkResistance()*count, 0);
+                if (count != 0)
+                    return Math.max((be.getNetworkResistance() * count)*getVoltageRatio(), 0);
             }
         }
         return 0;
     }
 
-    public Direction getDirection(){
-        if(!getBlockState().hasProperty(FACING)){
+    public float getVoltageRatio() {
+        Direction facing = getDirection();
+        if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be && be.getData().getId() != data.getId()) {
+            if (be.hasElectricitySlot(facing.getOpposite()) && be.getData().getVoltage() != 0) {
+                return (float) getData().getVoltage() / be.getData().getVoltage();
+            }
+        }
+        return 0;
+    }
+
+    public Direction getDirection() {
+        if (!getBlockState().hasProperty(FACING)) {
             return getBlockState().getValue(TFMGHorizontalDirectionalBlock.FACING).getCounterClockWise();
         }
 
@@ -100,16 +110,15 @@ public class VoltageAlteringBlockEntity extends ElectricBlockEntity{
     }
 
     @Override
-    public void onNetworkChanged(int oldVoltage, int oldPower) {
+    public void onNetworkChanged(int oldVoltage, float oldPower) {
         super.onNetworkChanged(oldVoltage, oldPower);
-
+        //
         if (oldVoltage != getData().getVoltage() || oldPower != getPowerUsage()) {
             updateInFront = true;
         }
         sendStuff();
         setChanged();
     }
-
 
 
     @Override
@@ -126,14 +135,14 @@ public class VoltageAlteringBlockEntity extends ElectricBlockEntity{
         updateInFront = true;
     }
 
-    public void updateInFrontNextTick(){
+    public void updateInFrontNextTick() {
         updateInFront = true;
     }
 
     public void updateInFront() {
 
         if (level instanceof ServerLevel serverLevel)
-            CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(worldPosition),new UpdateInFrontPacket(BlockPos.of(getPos())));
+            CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(worldPosition), new UpdateInFrontPacket(BlockPos.of(getPos())));
         Direction facing = getBlockState().hasProperty(FACING) ? getBlockState().getValue(FACING) : getBlockState().getValue(HorizontalDirectionalBlock.FACING).getCounterClockWise();
         if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be && be.getData().getId() != data.getId()) {
             if (be.hasElectricitySlot(facing.getOpposite())) {
@@ -144,10 +153,11 @@ public class VoltageAlteringBlockEntity extends ElectricBlockEntity{
         sendStuff();
         setChanged();
     }
+
     public void updateBehind() {
 
         if (level instanceof ServerLevel serverLevel)
-            CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(worldPosition),new UpdateInFrontPacket(BlockPos.of(getPos())));
+            CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(worldPosition), new UpdateInFrontPacket(BlockPos.of(getPos())));
         Direction facing = getBlockState().hasProperty(FACING) ? getBlockState().getValue(FACING) : getBlockState().getValue(HorizontalDirectionalBlock.FACING).getCounterClockWise();
         facing = facing.getOpposite();
         if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be && be.getData().getId() != data.getId()) {

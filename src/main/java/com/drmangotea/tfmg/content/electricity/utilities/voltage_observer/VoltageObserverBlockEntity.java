@@ -32,7 +32,7 @@ public class VoltageObserverBlockEntity extends ElectricBlockEntity {
 
 
     @Override
-    public void onNetworkChanged(int oldVoltage, int oldPower) {
+    public void onNetworkChanged(int oldVoltage, float oldPower) {
         super.onNetworkChanged(oldVoltage, oldPower);
         update = true;
     }

@@ -104,7 +104,7 @@ public class RotorBlockEntity extends KineticElectricBlockEntity {
     }
 
     @Override
-    public int powerGeneration() {
+    public float powerGeneration() {
         return (int) (generation() * 40*1.84563);
     }
 

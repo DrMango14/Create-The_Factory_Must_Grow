@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.base.debug;
 
 import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlock;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
@@ -11,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 
 
 public class DebugCinderBlockItem extends Item {
@@ -31,7 +33,16 @@ public class DebugCinderBlockItem extends Item {
 
         if (level.getBlockEntity(pos) instanceof IElectric be) {
 
-           be.onPlaced();
+        if(context.getPlayer().isCrouching()){
+              be.recalculateNetworkResistance();
+        }else {
+          //  be.getOrCreateElectricNetwork().add(be);
+            be.updateNextTick();
+
+            TFMG.LOGGER.debug(""+ BlockPos.of(be.getData().electricalNetworkId));
+            TFMG.LOGGER.debug(""+be.getOrCreateElectricNetwork().members.size());
+
+        }
 
         }
 

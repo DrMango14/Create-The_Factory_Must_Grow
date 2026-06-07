@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "tfmg:transformer"
+            "items": "tfmg:aluminum_ingot"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tfmg:crafting/materials/converter"
+        "recipe": "tfmg:crafting/materials/electric_measurement_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "tfmg:crafting/materials/converter"
+      "tfmg:crafting/materials/electric_measurement_block"
     ]
   }
 }

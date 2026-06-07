@@ -62,6 +62,7 @@ public class ConverterBlock extends TFMGHorizontalDirectionalBlock implements IB
 
     @Override
     public BlockEntityType<? extends ConverterBlockEntity> getBlockEntityType() {
-        return TFMGBlockEntities.CONVERTER.get();
+      //  return TFMGBlockEntities.CONVERTER.get();
+        return null;
     }
 }
