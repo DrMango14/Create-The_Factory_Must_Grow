@@ -3,19 +3,7 @@
   "category": "misc",
   "key": {
     "C": {
-      "item": "tfmg:engine_cylinder",
-      "nbt": {
-        "Fuels": {
-          "gasoline": "forge:gasoline",
-          "naphtha": "forge:naphtha",
-          "kerosene": "forge:kerosene"
-        },
-        "FuelNames": {
-          "gasoline": "Gasoline",
-          "naphtha": "Naphtha",
-          "kerosene": "Kerosene"
-        }
-      }
+      "item": "tfmg:engine_cylinder"
     },
     "B": {
       "item": "tfmg:brass_pipe"
@@ -27,12 +15,13 @@
     " B "
   ],
   "result": {
-    "item": "tfmg:engine_cylinder",
-    "nbt": {
-      "Fuels": {
-        "lpg": "forge:lpg"
+    "count": 1,
+    "id": "tfmg:engine_cylinder",
+    "components": {
+      "tfmg:fuel_tags": {
+        "lpg": "c:lpg"
       },
-      "FuelNames": {
+      "tfmg:fuels": {
         "lpg": "LPG"
       }
     }

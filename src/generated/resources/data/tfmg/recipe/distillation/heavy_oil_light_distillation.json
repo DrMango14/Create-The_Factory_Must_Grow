@@ -1,0 +1,24 @@
+{
+  "type": "tfmg:distillation",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 200,
+      "fluid": "tfmg:heavy_oil"
+    }
+  ],
+  "results": [
+    {
+      "amount": 100,
+      "id": "tfmg:heavy_oil"
+    },
+    {
+      "amount": 50,
+      "id": "tfmg:diesel"
+    },
+    {
+      "amount": 50,
+      "id": "tfmg:lubrication_oil"
+    }
+  ]
+}

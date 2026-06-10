@@ -5,6 +5,7 @@ import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.electricity.base.ConnectNeightborsPacket;
 import com.drmangotea.tfmg.content.electricity.base.ElectricPlacementPacket;
 import com.drmangotea.tfmg.content.electricity.base.NetworkUpdatePacket;
+import com.drmangotea.tfmg.content.electricity.base.ElectricalBlockFailPacket;
 import com.drmangotea.tfmg.content.electricity.base.UpdateInFrontPacket;
 import com.drmangotea.tfmg.content.electricity.configuration_wrench.ElectriciansWrenchPacket;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CablePlacePacket;
@@ -42,6 +43,7 @@ public enum TFMGPackets {
     QUAD_POTATO_CANNON(QuadPotatoCannonPacket.class, QuadPotatoCannonPacket::new, PLAY_TO_CLIENT),
     CONNECT_NEIGHBORS(ConnectNeightborsPacket.class, ConnectNeightborsPacket::new, PLAY_TO_CLIENT),
     NETWORK_UPDATE(NetworkUpdatePacket.class, NetworkUpdatePacket::new, PLAY_TO_CLIENT),
+    ELECTRICAL_BLOCK_FAIL(ElectricalBlockFailPacket.class, ElectricalBlockFailPacket::new, PLAY_TO_CLIENT),
     CONNECTION_PACKET(ElectricPlacementPacket.class, ElectricPlacementPacket::new, PLAY_TO_CLIENT),
     VAT_EVALUATION(VatEvaluationPacket.class, VatEvaluationPacket::new, PLAY_TO_CLIENT),
     COKE_OVEN_PACKET(CokeOvenPacket.class, CokeOvenPacket::new, PLAY_TO_CLIENT),
@@ -58,7 +60,7 @@ public enum TFMGPackets {
 
 
     public static final ResourceLocation CHANNEL_NAME = TFMG.asResource("main");
-    public static final int NETWORK_VERSION = 3;
+    public static final int NETWORK_VERSION = 4;
     public static final String NETWORK_VERSION_STR = String.valueOf(NETWORK_VERSION);
     private static SimpleChannel channel;
 

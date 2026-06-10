@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "tfmg:rubber_sheet"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:synthetic_leather"
+    }
+  ]
+}

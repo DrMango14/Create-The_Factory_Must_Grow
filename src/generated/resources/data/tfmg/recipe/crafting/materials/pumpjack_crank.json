@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "H": {
+      "item": "tfmg:heavy_plate"
+    },
+    "M": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "P": {
+      "tag": "c:strings"
+    },
+    "R": {
+      "item": "tfmg:rebar"
+    }
+  },
+  "pattern": [
+    "P P",
+    "HMH",
+    "RCR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:pumpjack_crank"
+  }
+}

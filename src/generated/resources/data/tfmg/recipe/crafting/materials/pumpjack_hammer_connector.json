@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": {
+      "item": "tfmg:pumpjack_hammer_part"
+    },
+    "R": {
+      "item": "tfmg:rebar"
+    }
+  },
+  "pattern": [
+    "   ",
+    "RHR",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:pumpjack_hammer_connector"
+  }
+}

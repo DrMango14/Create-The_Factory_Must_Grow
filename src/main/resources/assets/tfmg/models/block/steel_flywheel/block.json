@@ -1,6 +1,6 @@
 {
 	"parent": "tfmg:block/steel_flywheel/flywheel",
-	"loader": "forge:obj",
+	"loader": "neoforge:obj",
 	"flip-v": true,
 	"model": "create:models/block/flywheel/flywheel_shaftless.obj"
 }

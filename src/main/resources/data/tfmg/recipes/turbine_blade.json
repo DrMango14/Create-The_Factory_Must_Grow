@@ -6,7 +6,7 @@
       "item": "create:shaft"
     },
     "I": {
-      "tag": "forge:plates/iron"
+      "tag": "c:plates/iron"
     }
   },
   "pattern": [
@@ -15,12 +15,13 @@
     "III"
   ],
   "result": {
-    "item": "tfmg:turbine_blade",
-    "nbt": {
-      "Fuels": {
-        "kerosene": "forge:kerosene"
+    "count": 1,
+    "id": "tfmg:turbine_blade",
+    "components": {
+      "tfmg:fuel_tags": {
+        "kerosene": "c:kerosene"
       },
-      "FuelNames": {
+      "tfmg:fuels": {
         "kerosene": "Kerosene"
       }
     }

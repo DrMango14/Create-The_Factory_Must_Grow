@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "tfmg:polished_cut_galena_slab"
+    },
+    {
+      "item": "tfmg:polished_cut_galena_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:polished_cut_galena"
+  }
+}

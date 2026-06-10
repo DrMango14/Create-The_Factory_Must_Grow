@@ -1,0 +1,16 @@
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "tfmg:steel_casing"
+    },
+    {
+      "tag": "c:plates/aluminum"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:industrial_aluminum_casing"
+    }
+  ]
+}

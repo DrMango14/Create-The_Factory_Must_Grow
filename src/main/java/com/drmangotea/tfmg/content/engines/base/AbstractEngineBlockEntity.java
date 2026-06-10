@@ -95,12 +95,6 @@ public abstract class AbstractEngineBlockEntity extends KineticElectricBlockEnti
         return engineController != null;
     }
 
-
-    @Override
-    public void updateNetwork() {
-        super.updateNetwork();
-    }
-
     protected void analogSignalChanged() {
 
 

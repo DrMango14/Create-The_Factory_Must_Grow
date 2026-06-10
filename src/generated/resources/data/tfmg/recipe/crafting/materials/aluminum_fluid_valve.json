@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:plates/iron"
+    },
+    {
+      "item": "tfmg:aluminum_pipe"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:aluminum_fluid_valve"
+  }
+}

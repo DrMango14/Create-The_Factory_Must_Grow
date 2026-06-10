@@ -162,6 +162,10 @@
 	"block.tfmg.cable_connector.tooltip.condition1": "When 2 cable insulators are right clicked with a copper/aluminum/constantan spool",
 	"block.tfmg.cable_connector.tooltip.behaviour1": "Created a connection between the 2 insulators transferring power between them",
 
+	"block.tfmg.large_coil.tooltip.summary": "Used for creating the Large Transformer",
+	"block.tfmg.large_coil.tooltip.condition1": "When 2 Large Coils are placed next to each other and right-clicked with a Laminated Magnetic Alloy Block",
+	"block.tfmg.large_coil.tooltip.behaviour1": "The Large Transformer is Created, to make it efficient, right-click it with a Block of Steel and a Lubrication Oil Bucket",
+
 	"block.tfmg.glass_cable_insulator.tooltip.summary": "Transfers power",
 	"block.tfmg.glass_cable_insulator.tooltip.condition1": "When 2 cable insulators are right clicked with a copper/aluminum/constantan spool",
 	"block.tfmg.glass_cable_insulator.tooltip.behaviour1": "Created a connection between the 2 insulators transferring power between them",
@@ -174,7 +178,7 @@
 	"block.tfmg.diode.tooltip.behaviour1": "The power will be outputted on its lighter side acting as a one way pathway for power (meaning any power that would be coming from its lighter side would not be outputted on the darker one)",
 
 	"block.tfmg.blast_stove.tooltip.summary": "Heats Air",
-	"block.tfmg.blast_stove.tooltip.behaviour1": "When 3 blast stoves are placed on top of eachother (or in a 3x2 shape) the smallest version of a blast stove is created, to add further internal storage you can add more stove blocks on top which is generally reccomended. A Blast Stove requires 2 things to be pumped in. Air, from the side of the bottom block and Creosote or Furnace gas from the bottom. Carbon dioxide must be pumped out from the side of the bottom block and finally heated air must be pumped out from the machines top.",
+	"block.tfmg.blast_stove.tooltip.behaviour1": "When 3 blast stoves are placed on top of eachother (or in a 3x2 shape) the smallest version of a blast stove is created, to add further internal storage you can add more stove blocks on top which is generally recommended. A Blast Stove requires 2 things to be pumped in. Air, from the side of the bottom block and Creosote or Furnace gas from the bottom. Carbon dioxide must be pumped out from the side of the bottom block and finally heated air must be pumped out from the machines top.",
 
 	"block.tfmg.resistor.tooltip.summary": "Adds resistance to a network",
 	"block.tfmg.resistor.tooltip.condition1": "When placed on a block within a group",
@@ -196,7 +200,7 @@
 	"item.tfmg.flamethrower.tooltip.summary": "Burns  burnable _Gases_ and _Fluids_ to shoot out a burst of flame to burn your Enemies",
 	"item.tfmg.flamethrower.tooltip.condition1": "When R-Clicked",
 	"item.tfmg.flamethrower.tooltip.behaviour1": "_Shoots out Flames_ ",
-	"item.tfmg.flamethrower.tooltip.condition2": "When R-Clicking a Fluid Tank with Gasoline, Diesel, Kerosene, Naphtha, LPG, Molten Slag or Napalm inside",
+	"item.tfmg.flamethrower.tooltip.condition2": "When R-Clicking a Fluid Container with _Valid Fuel_ inside",
 	"item.tfmg.flamethrower.tooltip.behaviour2": "The _Fuel_ will be consumed from the tank. _Range_ and _Spread_ change according to your _Fuel_ of choice",
 
 	"item.tfmg.pipebomb.tooltip.summary": "So cool",
@@ -253,8 +257,8 @@
 	"item.tfmg.quad_potato_cannon.tooltip.condition1": "When R-Clicked",
 	"item.tfmg.quad_potato_cannon.tooltip.behaviour1": "_Shoots_ a suitable item from your _Inventory_.",
 	"item.tfmg.quad_potato_cannon.tooltip.condition2": "While wearing Backtank",
-	"item.tfmg.quad_potato_cannon.tooltip.behaviour2": "_No_ _Durability_ will be used. Instead, _Air_ _pressure_ is drained from the Tank",
+	"item.tfmg.quad_potato_cannon.tooltip.behaviour2": "_No_ _Durability_ will be used. Instead, _Air_ _pressure_ is drained from the Tank"
 
-	"item.tfmg.fire_extinguisher.tooltip.summary": "Uses _Carbon Dioxide_ to extinguish fires.",
-	"block.tfmg.gas_lamp.tooltip.summary": "Burns combustible fluids to provide light."
+
+
 }

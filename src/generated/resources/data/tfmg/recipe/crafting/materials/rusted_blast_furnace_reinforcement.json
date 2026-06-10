@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "tfmg:blast_furnace_reinforcement"
+    },
+    {
+      "item": "tfmg:blast_furnace_reinforcement"
+    },
+    {
+      "item": "tfmg:blast_furnace_reinforcement"
+    },
+    {
+      "item": "tfmg:blast_furnace_reinforcement"
+    },
+    {
+      "item": "tfmg:blast_furnace_reinforcement"
+    },
+    {
+      "item": "tfmg:blast_furnace_reinforcement"
+    },
+    {
+      "item": "tfmg:blast_furnace_reinforcement"
+    },
+    {
+      "item": "tfmg:blast_furnace_reinforcement"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "id": "tfmg:rusted_blast_furnace_reinforcement"
+  }
+}

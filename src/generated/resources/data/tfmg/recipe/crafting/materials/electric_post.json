@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:wires/copper"
+    },
+    "N": {
+      "tag": "c:nuggets/steel"
+    },
+    "R": {
+      "tag": "c:ingots/steel"
+    }
+  },
+  "pattern": [
+    " N ",
+    "CRC",
+    " N "
+  ],
+  "result": {
+    "count": 4,
+    "id": "tfmg:electric_post"
+  }
+}

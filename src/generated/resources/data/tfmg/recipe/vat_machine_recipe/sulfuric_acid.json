@@ -1,0 +1,37 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:cast_iron_vat",
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "ingredients": [
+    {
+      "item": "tfmg:sulfur_dust"
+    },
+    {
+      "item": "tfmg:sulfur_dust"
+    },
+    {
+      "item": "tfmg:sulfur_dust"
+    },
+    {
+      "item": "tfmg:nitrate_dust"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "machines": [
+    "tfmg:mixing"
+  ],
+  "min_size": 1,
+  "results": [
+    {
+      "amount": 500,
+      "id": "tfmg:sulfuric_acid"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "tfmg:coal_coke"
+    },
+    {
+      "item": "tfmg:coal_coke"
+    },
+    {
+      "item": "tfmg:coal_coke"
+    },
+    {
+      "item": "tfmg:coal_coke"
+    },
+    {
+      "item": "tfmg:coal_coke"
+    },
+    {
+      "item": "tfmg:coal_coke"
+    },
+    {
+      "item": "tfmg:coal_coke"
+    },
+    {
+      "item": "tfmg:coal_coke"
+    },
+    {
+      "item": "tfmg:coal_coke"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:coal_coke_block"
+  }
+}

@@ -7,6 +7,7 @@ import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -32,9 +33,12 @@ public class VoltageObserverBlock extends WallMountBlock implements IBE<VoltageO
     }
     @Override
     public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
-        TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new ConnectNeightborsPacket(pos));
-        withBlockEntityDo(level,pos, VoltageObserverBlockEntity::onPlaced);
-
+        if (!level.isClientSide()) {
+            TFMGPackets.getChannel().send(
+                    PacketDistributor.TRACKING_CHUNK.with(() -> ((ServerLevel) level).getChunkAt(pos)),
+                    new ConnectNeightborsPacket(pos));
+        }
+        withBlockEntityDo(level, pos, VoltageObserverBlockEntity::onPlaced);
     }
 
     @Override

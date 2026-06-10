@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "P": {
-      "tag": "forge:plates/aluminum"
+      "tag": "c:plates/aluminum"
     }
   },
   "pattern": [
@@ -12,13 +12,14 @@
     "P P"
   ],
   "result": {
-    "item": "tfmg:diesel_engine_cylinder",
-    "nbt": {
-      "Fuels": {
-        "gasoline": "forge:diesel"
+    "count": 1,
+    "id": "tfmg:diesel_engine_cylinder",
+    "components": {
+      "tfmg:fuel_tags": {
+        "diesel": "c:diesel"
       },
-      "FuelNames": {
-        "gasoline": "Diesel"
+      "tfmg:fuels": {
+        "diesel": "fluid.tfmg.diesel"
       }
     }
   }

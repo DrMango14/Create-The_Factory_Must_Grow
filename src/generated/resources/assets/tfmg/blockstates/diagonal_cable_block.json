@@ -1,256 +1,88 @@
 {
   "variants": {
-    "facing_primary=down,facing_secondary=down,waterlogged=false": {
-      "model": "minecraft:block/air"
+    "facing=down,facing_up=false,waterlogged=false": {
+      "model": "tfmg:block/diagonal_cable_block/block"
     },
-    "facing_primary=down,facing_secondary=down,waterlogged=true": {
-      "model": "minecraft:block/air"
+    "facing=down,facing_up=false,waterlogged=true": {
+      "model": "tfmg:block/diagonal_cable_block/block"
     },
-    "facing_primary=down,facing_secondary=east,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_down"
-    },
-    "facing_primary=down,facing_secondary=east,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_down"
-    },
-    "facing_primary=down,facing_secondary=north,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_down",
-      "y": 270
-    },
-    "facing_primary=down,facing_secondary=north,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_down",
-      "y": 270
-    },
-    "facing_primary=down,facing_secondary=south,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_down",
-      "y": 90
-    },
-    "facing_primary=down,facing_secondary=south,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_down",
-      "y": 90
-    },
-    "facing_primary=down,facing_secondary=up,waterlogged=false": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=down,facing_secondary=up,waterlogged=true": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=down,facing_secondary=west,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_down",
-      "y": 180
-    },
-    "facing_primary=down,facing_secondary=west,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_down",
-      "y": 180
-    },
-    "facing_primary=east,facing_secondary=down,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_down"
-    },
-    "facing_primary=east,facing_secondary=down,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_down"
-    },
-    "facing_primary=east,facing_secondary=east,waterlogged=false": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=east,facing_secondary=east,waterlogged=true": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=east,facing_secondary=north,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_horizontal"
-    },
-    "facing_primary=east,facing_secondary=north,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_horizontal"
-    },
-    "facing_primary=east,facing_secondary=south,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_horizontal",
-      "y": 90
-    },
-    "facing_primary=east,facing_secondary=south,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_horizontal",
-      "y": 90
-    },
-    "facing_primary=east,facing_secondary=up,waterlogged=false": {
+    "facing=down,facing_up=true,waterlogged=false": {
       "model": "tfmg:block/diagonal_cable_block/block_up"
     },
-    "facing_primary=east,facing_secondary=up,waterlogged=true": {
+    "facing=down,facing_up=true,waterlogged=true": {
       "model": "tfmg:block/diagonal_cable_block/block_up"
     },
-    "facing_primary=east,facing_secondary=west,waterlogged=false": {
-      "model": "minecraft:block/air"
+    "facing=east,facing_up=false,waterlogged=false": {
+      "model": "tfmg:block/diagonal_cable_block/block"
     },
-    "facing_primary=east,facing_secondary=west,waterlogged=true": {
-      "model": "minecraft:block/air"
+    "facing=east,facing_up=false,waterlogged=true": {
+      "model": "tfmg:block/diagonal_cable_block/block"
     },
-    "facing_primary=north,facing_secondary=down,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_down",
-      "y": 270
-    },
-    "facing_primary=north,facing_secondary=down,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_down",
-      "y": 270
-    },
-    "facing_primary=north,facing_secondary=east,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_horizontal"
-    },
-    "facing_primary=north,facing_secondary=east,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_horizontal"
-    },
-    "facing_primary=north,facing_secondary=north,waterlogged=false": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=north,facing_secondary=north,waterlogged=true": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=north,facing_secondary=south,waterlogged=false": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=north,facing_secondary=south,waterlogged=true": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=north,facing_secondary=up,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_up",
-      "y": 270
-    },
-    "facing_primary=north,facing_secondary=up,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_up",
-      "y": 270
-    },
-    "facing_primary=north,facing_secondary=west,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_horizontal",
-      "y": 270
-    },
-    "facing_primary=north,facing_secondary=west,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_horizontal",
-      "y": 270
-    },
-    "facing_primary=south,facing_secondary=down,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_down",
-      "y": 90
-    },
-    "facing_primary=south,facing_secondary=down,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_down",
-      "y": 90
-    },
-    "facing_primary=south,facing_secondary=east,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_horizontal",
-      "y": 90
-    },
-    "facing_primary=south,facing_secondary=east,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_horizontal",
-      "y": 90
-    },
-    "facing_primary=south,facing_secondary=north,waterlogged=false": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=south,facing_secondary=north,waterlogged=true": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=south,facing_secondary=south,waterlogged=false": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=south,facing_secondary=south,waterlogged=true": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=south,facing_secondary=up,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_up",
-      "y": 90
-    },
-    "facing_primary=south,facing_secondary=up,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_up",
-      "y": 90
-    },
-    "facing_primary=south,facing_secondary=west,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_horizontal",
-      "y": 180
-    },
-    "facing_primary=south,facing_secondary=west,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_horizontal",
-      "y": 180
-    },
-    "facing_primary=up,facing_secondary=down,waterlogged=false": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=up,facing_secondary=down,waterlogged=true": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=up,facing_secondary=east,waterlogged=false": {
+    "facing=east,facing_up=true,waterlogged=false": {
       "model": "tfmg:block/diagonal_cable_block/block_up"
     },
-    "facing_primary=up,facing_secondary=east,waterlogged=true": {
+    "facing=east,facing_up=true,waterlogged=true": {
       "model": "tfmg:block/diagonal_cable_block/block_up"
     },
-    "facing_primary=up,facing_secondary=north,waterlogged=false": {
+    "facing=north,facing_up=false,waterlogged=false": {
+      "model": "tfmg:block/diagonal_cable_block/block",
+      "y": 270
+    },
+    "facing=north,facing_up=false,waterlogged=true": {
+      "model": "tfmg:block/diagonal_cable_block/block",
+      "y": 270
+    },
+    "facing=north,facing_up=true,waterlogged=false": {
       "model": "tfmg:block/diagonal_cable_block/block_up",
       "y": 270
     },
-    "facing_primary=up,facing_secondary=north,waterlogged=true": {
+    "facing=north,facing_up=true,waterlogged=true": {
       "model": "tfmg:block/diagonal_cable_block/block_up",
       "y": 270
     },
-    "facing_primary=up,facing_secondary=south,waterlogged=false": {
+    "facing=south,facing_up=false,waterlogged=false": {
+      "model": "tfmg:block/diagonal_cable_block/block",
+      "y": 90
+    },
+    "facing=south,facing_up=false,waterlogged=true": {
+      "model": "tfmg:block/diagonal_cable_block/block",
+      "y": 90
+    },
+    "facing=south,facing_up=true,waterlogged=false": {
       "model": "tfmg:block/diagonal_cable_block/block_up",
       "y": 90
     },
-    "facing_primary=up,facing_secondary=south,waterlogged=true": {
+    "facing=south,facing_up=true,waterlogged=true": {
       "model": "tfmg:block/diagonal_cable_block/block_up",
       "y": 90
     },
-    "facing_primary=up,facing_secondary=up,waterlogged=false": {
-      "model": "minecraft:block/air"
+    "facing=up,facing_up=false,waterlogged=false": {
+      "model": "tfmg:block/diagonal_cable_block/block"
     },
-    "facing_primary=up,facing_secondary=up,waterlogged=true": {
-      "model": "minecraft:block/air"
+    "facing=up,facing_up=false,waterlogged=true": {
+      "model": "tfmg:block/diagonal_cable_block/block"
     },
-    "facing_primary=up,facing_secondary=west,waterlogged=false": {
+    "facing=up,facing_up=true,waterlogged=false": {
+      "model": "tfmg:block/diagonal_cable_block/block_up"
+    },
+    "facing=up,facing_up=true,waterlogged=true": {
+      "model": "tfmg:block/diagonal_cable_block/block_up"
+    },
+    "facing=west,facing_up=false,waterlogged=false": {
+      "model": "tfmg:block/diagonal_cable_block/block",
+      "y": 180
+    },
+    "facing=west,facing_up=false,waterlogged=true": {
+      "model": "tfmg:block/diagonal_cable_block/block",
+      "y": 180
+    },
+    "facing=west,facing_up=true,waterlogged=false": {
       "model": "tfmg:block/diagonal_cable_block/block_up",
       "y": 180
     },
-    "facing_primary=up,facing_secondary=west,waterlogged=true": {
+    "facing=west,facing_up=true,waterlogged=true": {
       "model": "tfmg:block/diagonal_cable_block/block_up",
       "y": 180
-    },
-    "facing_primary=west,facing_secondary=down,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_down",
-      "y": 180
-    },
-    "facing_primary=west,facing_secondary=down,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_down",
-      "y": 180
-    },
-    "facing_primary=west,facing_secondary=east,waterlogged=false": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=west,facing_secondary=east,waterlogged=true": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=west,facing_secondary=north,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_horizontal",
-      "y": 270
-    },
-    "facing_primary=west,facing_secondary=north,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_horizontal",
-      "y": 270
-    },
-    "facing_primary=west,facing_secondary=south,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_horizontal",
-      "y": 180
-    },
-    "facing_primary=west,facing_secondary=south,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_horizontal",
-      "y": 180
-    },
-    "facing_primary=west,facing_secondary=up,waterlogged=false": {
-      "model": "tfmg:block/diagonal_cable_block/block_up",
-      "y": 180
-    },
-    "facing_primary=west,facing_secondary=up,waterlogged=true": {
-      "model": "tfmg:block/diagonal_cable_block/block_up",
-      "y": 180
-    },
-    "facing_primary=west,facing_secondary=west,waterlogged=false": {
-      "model": "minecraft:block/air"
-    },
-    "facing_primary=west,facing_secondary=west,waterlogged=true": {
-      "model": "minecraft:block/air"
     }
   }
 }

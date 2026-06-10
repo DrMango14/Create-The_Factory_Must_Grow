@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create:cogwheel"
+    },
+    {
+      "item": "tfmg:brass_pipe"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:brass_mechanical_pump"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:plates/steel"
+    },
+    "P": {
+      "item": "create:electron_tube"
+    },
+    "S": {
+      "item": "tfmg:plastic_pipe"
+    }
+  },
+  "pattern": [
+    "I",
+    "S",
+    "P"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:plastic_smart_fluid_pipe"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "tfmg:fireproof_brick"
+    },
+    "C": {
+      "tag": "c:ingots/cast_iron"
+    },
+    "P": {
+      "item": "tfmg:cast_iron_pipe"
+    }
+  },
+  "pattern": [
+    "BPB",
+    "CBC",
+    "CCC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:casting_basin"
+  }
+}

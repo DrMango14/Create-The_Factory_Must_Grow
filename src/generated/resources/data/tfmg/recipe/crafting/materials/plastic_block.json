@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "tfmg:plastic_sheet"
+    },
+    {
+      "item": "tfmg:plastic_sheet"
+    },
+    {
+      "item": "tfmg:plastic_sheet"
+    },
+    {
+      "item": "tfmg:plastic_sheet"
+    },
+    {
+      "item": "tfmg:plastic_sheet"
+    },
+    {
+      "item": "tfmg:plastic_sheet"
+    },
+    {
+      "item": "tfmg:plastic_sheet"
+    },
+    {
+      "item": "tfmg:plastic_sheet"
+    },
+    {
+      "item": "tfmg:plastic_sheet"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:plastic_block"
+  }
+}

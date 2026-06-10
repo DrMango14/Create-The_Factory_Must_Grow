@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:light_blue_dye"
+    },
+    "P": {
+      "item": "tfmg:plastic_sheet"
+    }
+  },
+  "pattern": [
+    " P ",
+    "PBP",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:cooling_fluid_bottle"
+  }
+}

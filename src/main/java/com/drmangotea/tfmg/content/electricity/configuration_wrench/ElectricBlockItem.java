@@ -21,7 +21,7 @@ public class ElectricBlockItem extends BlockItem {
         BlockPos pos = context.getClickedPos();
 
         if(level.getBlockEntity(pos) instanceof IElectric be&&be.canBeInGroups()){
-            be.getData().group.id = context.getItemInHand().getOrCreateTag().getInt("Number");
+                // group system removed - wrench no longer sets group id
             be.updateNextTick();
             be.sendStuff();
         }

@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:plates/aluminum"
+    },
+    "C": {
+      "item": "tfmg:circuit_board"
+    },
+    "M": {
+      "item": "tfmg:steel_sword"
+    },
+    "P": {
+      "item": "tfmg:heavy_plate"
+    },
+    "S": {
+      "item": "tfmg:spark_plug"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    }
+  },
+  "pattern": [
+    " P ",
+    "AMS",
+    "ACW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:lithium_blade"
+  }
+}

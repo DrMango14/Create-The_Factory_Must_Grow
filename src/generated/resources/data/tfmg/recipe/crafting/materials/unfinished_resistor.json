@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "tfmg:plastic_sheet"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    }
+  },
+  "pattern": [
+    " W ",
+    " P ",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:unfinished_resistor"
+  }
+}

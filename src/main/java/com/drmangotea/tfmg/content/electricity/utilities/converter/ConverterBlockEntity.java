@@ -127,7 +127,7 @@ public class ConverterBlockEntity extends ElectricBlockEntity {
     public int getChargingRate() {
         //
         // int chargingRate = Math.max((data.networkPowerGeneration - getNetworkPowerUsage()), 0);
-        if (energy.getEnergyStored() == getMaxCapacity() || getData().getVoltage() < voltageGenerated.value || canPower()|| data.notEnoughtPower)
+        if (energy.getEnergyStored() == getMaxCapacity() || getData().getVoltage() < voltageGenerated.value || canPower()|| data.notEnoughPower)
             return 0;
 
         //return Math.min(chargingRate, getMaxChargingRate());

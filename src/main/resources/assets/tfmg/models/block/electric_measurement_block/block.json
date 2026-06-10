@@ -1,0 +1,36 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "tfmg:block/heavy_machinery_casing",
+		"1": "tfmg:block/voltmeter",
+		"2": "tfmg:block/heavy_cable_hub",
+		"particle": "tfmg:block/heavy_machinery_casing"
+	},
+	"elements": [
+		{
+			"from": [1.95, 2.95, 1.9],
+			"to": [14.05, 13.05, 0],
+			"rotation": {"angle": 0, "axis": "y", "origin": [13, 5, 2]},
+			"faces": {
+				"north": {"uv": [0.5, 0.25, 3.5, 2.75], "texture": "#1"},
+				"east": {"uv": [0, 0.25, 0.5, 2.75], "texture": "#1"},
+				"west": {"uv": [0.5, 2.75, 0, 0.25], "texture": "#1"},
+				"up": {"uv": [0.5, 3.25, 3.5, 2.75], "texture": "#1"},
+				"down": {"uv": [0.5, 3.25, 3.5, 2.75], "rotation": 180, "texture": "#1"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [8, 0, 12, 4], "texture": "#1"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
+			}
+		}
+	]
+}

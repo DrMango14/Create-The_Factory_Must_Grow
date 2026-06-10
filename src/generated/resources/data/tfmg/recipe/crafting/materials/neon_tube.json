@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:nuggets/copper"
+    },
+    "N": {
+      "item": "tfmg:neon_bucket"
+    },
+    "O": {
+      "tag": "c:nuggets/steel"
+    },
+    "W": {
+      "item": "create:framed_glass"
+    }
+  },
+  "pattern": [
+    "OCO",
+    "NWN",
+    "OCO"
+  ],
+  "result": {
+    "count": 4,
+    "id": "tfmg:neon_tube"
+  }
+}

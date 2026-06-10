@@ -1,0 +1,15 @@
+{
+  "type": "tfmg:industrial_blasting",
+  "ingredients": [
+    {
+      "item": "minecraft:quartz"
+    }
+  ],
+  "processing_time": 5,
+  "results": [
+    {
+      "amount": 40,
+      "id": "tfmg:liquid_silicon"
+    }
+  ]
+}

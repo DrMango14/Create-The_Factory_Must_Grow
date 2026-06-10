@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:ingots/steel"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "CC ",
+    "S  ",
+    "S  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:steel_hoe"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,is_main_part=false": {
+      "model": "tfmg:block/large_switch/block_secondary",
+      "y": 270
+    },
+    "facing=east,is_main_part=true": {
+      "model": "tfmg:block/large_switch/block_primary",
+      "y": 270
+    },
+    "facing=north,is_main_part=false": {
+      "model": "tfmg:block/large_switch/block_secondary",
+      "y": 180
+    },
+    "facing=north,is_main_part=true": {
+      "model": "tfmg:block/large_switch/block_primary",
+      "y": 180
+    },
+    "facing=south,is_main_part=false": {
+      "model": "tfmg:block/large_switch/block_secondary"
+    },
+    "facing=south,is_main_part=true": {
+      "model": "tfmg:block/large_switch/block_primary"
+    },
+    "facing=west,is_main_part=false": {
+      "model": "tfmg:block/large_switch/block_secondary",
+      "y": 90
+    },
+    "facing=west,is_main_part=true": {
+      "model": "tfmg:block/large_switch/block_primary",
+      "y": 90
+    }
+  }
+}

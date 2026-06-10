@@ -1,0 +1,39 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": false,
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "M": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "R": {
+      "item": "tfmg:rubber_sheet"
+    },
+    "S": {
+      "item": "create:shaft"
+    },
+    "V": {
+      "item": "tfmg:voltmeter"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    },
+    "Z": {
+      "item": "tfmg:circuit_board"
+    }
+  },
+  "pattern": [
+    "RRR",
+    "VSV",
+    "WCW",
+    "ZMZ"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:engine_controller"
+  },
+  "show_notification": false
+}

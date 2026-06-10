@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:iron_bars"
+    },
+    "C": {
+      "tag": "c:ingots/steel"
+    },
+    "P": {
+      "item": "tfmg:cast_iron_pipe"
+    },
+    "S": {
+      "item": "minecraft:flint_and_steel"
+    }
+  },
+  "pattern": [
+    "SPS",
+    "BPB",
+    "CPC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:flarestack"
+  }
+}

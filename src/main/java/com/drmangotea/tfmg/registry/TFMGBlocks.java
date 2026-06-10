@@ -53,6 +53,12 @@ import com.drmangotea.tfmg.content.electricity.lights.LampGenerator;
 import com.drmangotea.tfmg.content.electricity.lights.LightBulbBlock;
 import com.drmangotea.tfmg.content.electricity.lights.neon_tube.NeonTubeBlock;
 import com.drmangotea.tfmg.content.electricity.measurement.VoltMeterBlock;
+import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchBlock;
+import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchGenerator;
+import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeCoilBlock;
+import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeElectromagneticCoilItem;
+import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeTransformerBlock;
+import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeTransformerGenerator;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlock;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorItem;
 import com.drmangotea.tfmg.content.electricity.storage.CapacitorCTBehavior;
@@ -127,7 +133,9 @@ import com.drmangotea.tfmg.content.machinery.vat.base.VatBlock;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatGenerator;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatItem;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatModel;
+import com.drmangotea.tfmg.content.machinery.vat.compressor.CompressorBlock;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.ElectrodeHolderBlock;
+import com.drmangotea.tfmg.content.machinery.vat.freezer.FreezerBlock;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerBlock;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.api.stress.BlockStressValues;
@@ -997,14 +1005,14 @@ public class TFMGBlocks {
             .blockstate((c, p) -> p.simpleBlock(c.get(), AssetLookup.partialBaseModel(c, p)))
             .register();
     public static final BlockEntry<CableHubBlock> BRASS_CABLE_HUB =
-            REGISTRATE.block("brass_cable_hub", CableHubBlock::new)
+            REGISTRATE.block("brass_cable_hub", p -> new CableHubBlock(p, 50))
                     .initialProperties(() -> Blocks.IRON_BLOCK)
                     .transform(pickaxeOnly())
                     .item()
                     .build()
                     .register();
     public static final BlockEntry<CableHubBlock> COPPER_CABLE_HUB =
-            REGISTRATE.block("copper_cable_hub", CableHubBlock::new)
+            REGISTRATE.block("copper_cable_hub", p -> new CableHubBlock(p, 16))
                     .initialProperties(() -> Blocks.COPPER_BLOCK)
                     .properties(p -> p.sound(SoundType.COPPER))
                     .transform(pickaxeOnly())
@@ -1012,28 +1020,28 @@ public class TFMGBlocks {
                     .build()
                     .register();
     public static final BlockEntry<CableHubBlock> STEEL_CABLE_HUB =
-            REGISTRATE.block("steel_cable_hub", CableHubBlock::new)
+            REGISTRATE.block("steel_cable_hub", p -> new CableHubBlock(p, 250))
                     .initialProperties(() -> Blocks.IRON_BLOCK)
                     .transform(pickaxeOnly())
                     .item()
                     .build()
                     .register();
     public static final BlockEntry<CableHubBlock> ALUMINUM_CABLE_HUB =
-            REGISTRATE.block("aluminum_cable_hub", CableHubBlock::new)
+            REGISTRATE.block("aluminum_cable_hub", p -> new CableHubBlock(p, 80))
                     .initialProperties(() -> Blocks.IRON_BLOCK)
                     .transform(pickaxeOnly())
                     .item()
                     .build()
                     .register();
     public static final BlockEntry<CableHubBlock> STEEL_CASING_CABLE_HUB =
-            REGISTRATE.block("steel_casing_cable_hub", CableHubBlock::new)
+            REGISTRATE.block("steel_casing_cable_hub", p -> new CableHubBlock(p, 100))
                     .initialProperties(() -> Blocks.IRON_BLOCK)
                     .transform(pickaxeOnly())
                     .item()
                     .build()
                     .register();
     public static final BlockEntry<CableHubBlock> HEAVY_CABLE_HUB =
-            REGISTRATE.block("heavy_cable_hub", CableHubBlock::new)
+            REGISTRATE.block("heavy_cable_hub", p -> new CableHubBlock(p, 100))
                     .initialProperties(() -> Blocks.IRON_BLOCK)
                     .transform(pickaxeOnly())
                     .item()
@@ -1322,7 +1330,70 @@ public class TFMGBlocks {
                     .register();
 
 
-    public static final BlockEntry<ConverterBlock> CONVERTER =
+    public static final BlockEntry<LargeSwitchBlock> LARGE_SWITCH =
+            REGISTRATE.block("large_switch", LargeSwitchBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .blockstate(new LargeSwitchGenerator()::generate)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .tag(AllTags.AllBlockTags.NON_MOVABLE.tag)
+                    .transform(pickaxeOnly())
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<LargeTransformerBlock> LARGE_TRANSFORMER =
+            REGISTRATE.block("large_transformer", LargeTransformerBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .blockstate(new LargeTransformerGenerator()::generate)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .tag(AllTags.AllBlockTags.NON_MOVABLE.tag)
+                    .transform(pickaxeOnly())
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .register();
+
+    public static final BlockEntry<LargeCoilBlock> LARGE_COIL =
+            REGISTRATE.block("large_coil", LargeCoilBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .transform(pickaxeOnly())
+                    .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .item(LargeElectromagneticCoilItem::new)
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<Block> LAMINATED_MAGNETIC_ALLOY_BLOCK =
+            REGISTRATE.block("laminated_magnetic_alloy_block", Block::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .properties(p -> p.requiresCorrectToolForDrops())
+                    .transform(pickaxeOnly())
+                    .tag(BlockTags.NEEDS_IRON_TOOL)
+                    .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(),
+                            prov.models().cubeAll(ctx.getName(),
+                                    new net.minecraft.resources.ResourceLocation("tfmg", "block/laminated_magnetic_alloy_block"))))
+                    .simpleItem()
+                    .register();
+
+    public static final BlockEntry<FreezerBlock> FREEZER =
+            REGISTRATE.block("freezer", FreezerBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .transform(pickaxeOnly())
+                    .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<CompressorBlock> COMPRESSOR =
+            REGISTRATE.block("compressor", CompressorBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .transform(pickaxeOnly())
+                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                    .transform(TFMGStress.setImpact(24.0))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+        public static final BlockEntry<ConverterBlock> CONVERTER =
             REGISTRATE.block("converter", ConverterBlock::new)
                     .initialProperties(() -> Blocks.IRON_BLOCK)
                     .transform(pickaxeOnly())

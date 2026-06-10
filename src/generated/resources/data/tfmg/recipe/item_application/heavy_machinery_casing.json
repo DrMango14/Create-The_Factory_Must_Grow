@@ -1,0 +1,16 @@
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "tfmg:steel_casing"
+    },
+    {
+      "tag": "c:plates/steel"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:heavy_machinery_casing"
+    }
+  ]
+}

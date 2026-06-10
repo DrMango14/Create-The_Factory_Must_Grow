@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_hardened_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tfmg:hardened_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tfmg:empty_spool_from_hardened_planks_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_hardened_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tfmg:empty_spool_from_hardened_planks_stonecutting"
+    ]
+  }
+}

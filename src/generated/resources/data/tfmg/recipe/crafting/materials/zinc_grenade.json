@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "tfmg:thermite_grenade"
+    },
+    "T": {
+      "tag": "c:ingots/zinc"
+    }
+  },
+  "pattern": [
+    "   ",
+    "TAT",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:zinc_grenade"
+  }
+}

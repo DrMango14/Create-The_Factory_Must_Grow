@@ -1,0 +1,127 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "create:shaft"
+  },
+  "loops": 3,
+  "results": [
+    {
+      "chance": 120.0,
+      "id": "tfmg:generator"
+    },
+    {
+      "chance": 8.0,
+      "id": "tfmg:steel_casing"
+    },
+    {
+      "chance": 8.0,
+      "id": "tfmg:steel_cogwheel"
+    },
+    {
+      "chance": 8.0,
+      "id": "tfmg:capacitor_item"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_generator"
+        },
+        {
+          "item": "tfmg:capacitor_item"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_generator"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_generator"
+        },
+        {
+          "tag": "c:plates/steel"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_generator"
+        }
+      ]
+    },
+    {
+      "type": "tfmg:winding",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_generator"
+        },
+        {
+          "item": "tfmg:copper_spool"
+        }
+      ],
+      "processing_time": 75,
+      "results": [
+        {
+          "id": "tfmg:unfinished_generator"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_generator"
+        },
+        {
+          "item": "tfmg:magnet"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_generator"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_generator"
+        },
+        {
+          "item": "tfmg:steel_mechanism"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_generator"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_generator"
+        },
+        {
+          "item": "tfmg:screwdriver"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_generator"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "tfmg:unfinished_generator"
+  }
+}

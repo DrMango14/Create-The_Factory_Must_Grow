@@ -1,0 +1,16 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:sulfur_dust"
+    },
+    {
+      "item": "tfmg:silicon_ingot"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:n_semiconductor"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:clay"
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:unfired_insulator"
+  }
+}

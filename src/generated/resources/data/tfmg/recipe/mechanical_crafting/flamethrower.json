@@ -1,0 +1,41 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": false,
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "tfmg:aluminum_bars"
+    },
+    "C": {
+      "item": "tfmg:circuit_board"
+    },
+    "M": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "O": {
+      "tag": "c:ingots/steel"
+    },
+    "P": {
+      "item": "tfmg:steel_pipe"
+    },
+    "S": {
+      "item": "tfmg:spark_plug"
+    },
+    "T": {
+      "item": "tfmg:steel_fluid_tank"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    }
+  },
+  "pattern": [
+    "BWC ",
+    "PPTM",
+    "S O "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:flamethrower"
+  },
+  "show_notification": false
+}
