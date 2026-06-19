@@ -16,20 +16,6 @@ public class TFMGMechanicalCraftingRecipeGen extends MechanicalCraftingRecipeGen
 
     GeneratedRecipe
 
-            ENGINE_CONTROLLER = create(TFMGBlocks.ENGINE_CONTROLLER::get)
-            .recipe(b -> b
-                    .key('R', rubber())
-                    .key('S', shaft())
-                    .key('V', TFMGBlocks.VOLTMETER)
-                    .key('W', copperWire())
-                    .key('C', heavyMachineryCasing())
-                    .key('Z', circuitBoard())
-                    .key('M', steelMechanism())
-                    .patternLine("RRR")
-                    .patternLine("VSV")
-                    .patternLine("WCW")
-                    .patternLine("ZMZ")
-                    .disallowMirrored()),
 
     ROTOR = create(TFMGBlocks.ROTOR::get)
             .recipe(b -> b

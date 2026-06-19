@@ -171,7 +171,7 @@ public class TFMGUtils {
         createFluidTooltip(be, tooltip);
         createItemTooltip(be, tooltip);
     }
-
+    /// makes a goggle tooltip for every tank a block entity has
     public static boolean createFluidTooltip(BlockEntity be, List<Component> tooltip) {
         LangBuilder mb = CreateLang.translate("generic.unit.millibuckets");
 
@@ -191,7 +191,7 @@ public class TFMGUtils {
         boolean isEmpty = true;
         for (int i = 0; i < tank.getTanks(); i++) {
             FluidStack fluidStack = tank.getFluidInTank(i);
-            if (fluidStack.isEmpty()) continue;
+            //if (fluidStack.isEmpty()) continue;
             CreateLang.fluidName(fluidStack).style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
             CreateLang.builder().add(CreateLang.number(fluidStack.getAmount()).add(mb).style(ChatFormatting.DARK_GREEN)).text(ChatFormatting.GRAY, " / ").add(CreateLang.number(tank.getTankCapacity(i)).add(mb).style(ChatFormatting.DARK_GRAY)).forGoggles(tooltip, 1);
             isEmpty = false;

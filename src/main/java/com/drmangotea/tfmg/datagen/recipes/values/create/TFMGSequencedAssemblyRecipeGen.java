@@ -100,6 +100,18 @@ public class TFMGSequencedAssemblyRecipeGen extends SequencedAssemblyRecipeGen {
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.SCREWDRIVER))
     ),
 
+    HEAVY_MOTOR = create("heavy_motor", b -> b.require(TFMGBlocks.ELECTRIC_MOTOR.get())
+                    .transitionTo(TFMGItems.UNFINISHED_HEAVY_ELECTRIC_MOTOR.get())
+                    .addOutput(TFMGBlocks.HEAVY_ELECTRIC_MOTOR.get(), 120)
+                    .addOutput(TFMGBlocks.STEEL_CASING.get(), 4)
+                    .addOutput(TFMGItems.NICKEL_SHEET.get(), 4)
+                    .loops(3)
+                    .addStep(WindingRecipe::new, rb -> rb.require(TFMGItems.COPPER_SPOOL.get()).duration(75))
+                    .addStep(DeployerApplicationRecipe::new, rb -> rb.require(magnet()))
+                    .addStep(DeployerApplicationRecipe::new, rb -> rb.require(steelMechanism()))
+                    .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.SCREWDRIVER))
+            ),
+
     TRANSISTOR_PLASTIC = create("transistor", b -> b.require(plasticSheet())
             .transitionTo(TFMGItems.UNFINISHED_TRANSISTOR.get())
             .addOutput(new ItemStack(TFMGItems.TRANSISTOR.get(), 4), 120)

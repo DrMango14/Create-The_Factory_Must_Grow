@@ -2,9 +2,6 @@
   "values": [
     "tfmg:deepslate_lead_ore",
     "tfmg:deepslate_nickel_ore",
-    "tfmg:deepslate_lithium_ore",
-    "tfmg:deepslate_lead_ore",
-    "tfmg:deepslate_nickel_ore",
     "tfmg:deepslate_lithium_ore"
   ]
 }

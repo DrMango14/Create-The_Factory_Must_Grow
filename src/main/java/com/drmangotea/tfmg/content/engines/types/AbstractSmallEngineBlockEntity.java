@@ -1,16 +1,14 @@
 package com.drmangotea.tfmg.content.engines.types;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
+import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.engines.base.AbstractEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.base.EngineComponentsInventory;
 import com.drmangotea.tfmg.content.engines.base.EngineProperties;
-import com.drmangotea.tfmg.content.engines.engine_controller.EngineControllerBlockEntity;
 import com.drmangotea.tfmg.content.engines.upgrades.EnginePipingUpgrade;
 import com.drmangotea.tfmg.content.engines.upgrades.EngineUpgrade;
-import com.drmangotea.tfmg.content.engines.upgrades.TransmissionUpgrade;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGFluids;
@@ -31,7 +29,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -52,7 +49,6 @@ import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.H
 public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlockEntity {
 
     public Optional<? extends EngineUpgrade> upgrade = Optional.empty();
-    public TransmissionUpgrade.TransmissionState shift = TransmissionUpgrade.TransmissionState.NEUTRAL;
     public boolean clutchPressed = false;
 
 
@@ -64,8 +60,11 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
     public BlockPos controller = getBlockPos();
     public boolean connectNextTick = true;
     public boolean delayedConnect = false;
+
     public List<Long> engines = new ArrayList<>();
     public int engineNumber = 0;
+
+
 
     public AbstractSmallEngineBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
@@ -82,7 +81,7 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
         float coolingFluidModifier = coolingFluid > 0 ? 0.7f : 1f;
 
 
-        return (int) (12.5f * (1 / efficiencyModifier()) * getSpeedEfficiency() * highestSignal / 15 * oilModifier * coolingFluidModifier) * (engineLength() + 1);
+        return (int) ((12.5f * (1 / efficiencyModifier()) * getSpeedEfficiency() * highestSignal / 15 * oilModifier * coolingFluidModifier) * (engineLength() )+ 1);
     }
 
     public void detashEngines() {
@@ -150,7 +149,7 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
 
     @Override
     public float calculateAddedStressCapacity() {
-        float stress = super.calculateAddedStressCapacity() + (torque);
+        float stress = (int)(super.calculateAddedStressCapacity() + (torque))*(TFMGConfigs.common().machines.enginePower.getF() /100)*(Math.max(1,engines.size()))*0.7f;
 
         return hasTwoShafts() ? stress / 2 : stress;
     }
@@ -186,7 +185,6 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
     @Override
     protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         compound.putLong("Controller", controller.asLong());
-        compound.putString("Shift", shift.name());
         if (controller != null) {
             compound.putLong("ControllerPos", controller.asLong());
         } else compound.remove("ControllerPos");
@@ -207,8 +205,6 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
             upgrade = Optional.of(EngineUpgrade.getUpgrades().get(stack.getItem()));
 
         }
-        if (!compound.getString("Shift").isEmpty())
-            shift = TransmissionUpgrade.TransmissionState.valueOf(compound.getString("Shift"));
         oil = compound.getInt("Oil");
         coolingFluid = compound.getInt("CoolingFluid");
         componentsInventory.deserializeNBT(registries, compound.getCompound("Components"));
@@ -322,7 +318,7 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
                     BlockPos pos = BlockPos.of(l);
                     if (level.getBlockEntity(pos) instanceof AbstractEngineBlockEntity be) {
                         be.rpm = 4000 * speedModifier() * highestSignal ;
-                        be.torque = 15 * torqueModifier() * highestSignal* engineLength();
+                        be.torque = 15 * torqueModifier() * highestSignal;
                         be.updateGeneratedRotation();
                     }
                 });
@@ -362,28 +358,11 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
             if (!getControllerBE().canWork())
                 return 0;
 
-            speed = rpm / 40;
+            speed = rpm / 15;
             if (reverse)
                 speed = speed * -1;
 
-            if (getControllerBE().hasEngineController()) {
 
-                if (getControllerBE().hasTwoShafts())
-
-
-                    speed = switch (getControllerBE().shift) {
-                        case REVERSE -> speed * -0.3f;
-                        case NEUTRAL -> 0;
-                        case SHIFT_1 -> speed * 0.2f;
-                        case SHIFT_2 -> speed * 0.4f;
-                        case SHIFT_3 -> speed * 0.6f;
-                        case SHIFT_4 -> speed * 0.8f;
-                        case SHIFT_5 -> speed;
-                        case SHIFT_6 -> speed * 1.2f;
-                    };
-
-
-            }
 
             return convertToDirection(Math.min((int) speed, 256), getBlockState().getValue(HORIZONTAL_FACING));
         }
@@ -471,20 +450,6 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
                     updateRotation();
                     upgrade.ifPresent(u -> u.updateUpgrade(this));
                     itemStack.shrink(1);
-                    if (upgrade.isPresent())
-                        if (upgrade.get() instanceof TransmissionUpgrade) {
-                            if (itemStack.has(TFMGDataComponents.POSITION) && itemStack.get(TFMGDataComponents.POSITION) != null) {
-                                BlockPos pos = BlockPos.of(itemStack.get(TFMGDataComponents.POSITION));
-                                if (level.getBlockEntity(pos) instanceof EngineControllerBlockEntity engineControllerBE) {
-
-                                    this.getControllerBE().updateGeneratedRotation();
-
-                                    getControllerBE().controller = pos;
-                                    engineControllerBE.enginePos = this.getBlockPos();
-                                    getControllerBE().highestSignal = 0;
-                                }
-                            }
-                        }
                     setChanged();
                     sendData();
                     return true;
@@ -493,6 +458,13 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
 
         if (!isController())
             return false;
+
+        if(player.isCreative()){
+            while (!hasAllComponents()) {
+                    componentsInventory.insertItem(nextComponent().getItems()[0]);
+            }
+        }
+
         if (nextComponent().test(itemStack)) {
             if (componentsInventory.insertItem(itemStack)) {
                 if (!itemStack.is(TFMGItems.SCREWDRIVER.get()))
@@ -538,7 +510,6 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
         if (controller.asLong() == getBlockPos().asLong())
             TFMGTexts.header("engine_controller").forGoggles(tooltip);
 
-        TFMGTexts.Engine.shift(shift.langKey).forGoggles(tooltip);
         TFMGTexts.Engine.speedEfficiency(getSpeedEfficiency()).forGoggles(tooltip);
         TFMGTexts.Engine.efficiency(efficiencyModifier()).forGoggles(tooltip);
         TFMGTexts.Engine.fuelConsumption(getFuelConsumption()).forGoggles(tooltip);

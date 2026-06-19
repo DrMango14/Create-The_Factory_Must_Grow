@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.base;
 
-import com.drmangotea.tfmg.content.engines.types.regular_engine.RegularEngineBlockEntity;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.api.equipment.goggles.IHaveHoveringInformation;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
@@ -80,8 +79,8 @@ public class KineticElectricBlockEntity extends GeneratingKineticBlockEntity imp
     public void onSpeedChanged(float previousSpeed) {
         super.onSpeedChanged(previousSpeed);
 
-        if (this instanceof RegularEngineBlockEntity)
-            notifyNetworkAboutSpeedChange();
+      // if (this instanceof RegularEngineBlockEntity)
+      //     notifyNetworkAboutSpeedChange();
 
 
     }

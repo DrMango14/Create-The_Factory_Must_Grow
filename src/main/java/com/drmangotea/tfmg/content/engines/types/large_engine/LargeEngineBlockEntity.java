@@ -38,7 +38,6 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
-
 import javax.annotation.Nullable;
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -96,9 +95,9 @@ public class LargeEngineBlockEntity extends AbstractEngineBlockEntity {
     public void manageFuelAndExhaust() {
         super.manageFuelAndExhaust();
 
-        if (fuelConsumptionTimer > 2) {
-            airTank.forceDrain(150, IFluidHandler.FluidAction.EXECUTE);
-        }
+
+            airTank.forceDrain(50, IFluidHandler.FluidAction.EXECUTE);
+
     }
 
     @Override

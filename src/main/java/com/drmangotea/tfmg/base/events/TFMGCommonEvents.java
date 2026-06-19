@@ -9,9 +9,10 @@ import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.converter.ConverterBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerBlockEntity;
-import com.drmangotea.tfmg.content.engines.base.AbstractEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.fuels.EngineFuelTypeManager;
+import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.types.large_engine.LargeEngineBlockEntity;
+import com.drmangotea.tfmg.content.engines.types.regular_engine.RegularEngineBlockEntity;
 import com.drmangotea.tfmg.content.machinery.metallurgy.blast_furnace.BlastFurnaceHatchBlockEntity;
 import com.drmangotea.tfmg.content.machinery.metallurgy.blast_furnace.BlastFurnaceOutputBlockEntity;
 import com.drmangotea.tfmg.content.machinery.metallurgy.blast_stove.BlastStoveBlockEntity;
@@ -74,7 +75,7 @@ public class TFMGCommonEvents {
         @net.neoforged.bus.api.SubscribeEvent
         public static void registerCapabilities(RegisterCapabilitiesEvent event) {
 
-            AbstractEngineBlockEntity.registerCapabilities(event);
+            AbstractSmallEngineBlockEntity.registerCapabilities(event);
             DistillationOutputBlockEntity.registerCapabilities(event);
             ConcreteHoseBlockEntity.registerCapabilities(event);
             PumpjackBaseBlockEntity.registerCapabilities(event);

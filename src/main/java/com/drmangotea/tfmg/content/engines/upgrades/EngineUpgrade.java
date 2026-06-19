@@ -46,7 +46,7 @@ public abstract class EngineUpgrade {
         map.put(TFMGItems.GOLDEN_TURBO.get(), new GoldenTurboUpgradeData());
         map.put(TFMGBlocks.GENERATOR.asItem(), new GeneratorEngineUpgrade());
         map.put(TFMGBlocks.INDUSTRIAL_PIPE.asItem(), new EnginePipingUpgrade());
-        map.put(TFMGItems.TRANSMISSION.get(), new TransmissionUpgrade());
+       // map.put(TFMGItems.TRANSMISSION.get(), new TransmissionUpgrade());
 
         return map;
     }

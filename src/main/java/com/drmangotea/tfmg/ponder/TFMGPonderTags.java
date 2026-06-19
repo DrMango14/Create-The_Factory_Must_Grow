@@ -37,12 +37,12 @@ public class TFMGPonderTags {
                 .title("Oil Processing Machinery")
                 .description("Block used for refining and mining oil")
                 .register();
-        helper.registerTag(ENGINES)
-                .addToIndex()
-                .item(TFMGBlocks.TURBINE_ENGINE, true, false)
-                .title("Engines")
-                .description("Engines and equipment related to them")
-                .register();
+      //  helper.registerTag(ENGINES)
+      //          .addToIndex()
+      //          .item(TFMGBlocks.TURBINE_ENGINE, true, false)
+      //          .title("Engines")
+      //          .description("Engines and equipment related to them")
+      //          .register();
         helper.registerTag(METALLURGY)
                 .addToIndex()
                 .item(TFMGBlocks.BLAST_FURNACE_OUTPUT, true, false)
@@ -79,20 +79,19 @@ public class TFMGPonderTags {
                 .add(TFMGBlocks.LARGE_PUMPJACK_HAMMER_PART)
     ;
 
-        HELPER.addToTag(ENGINES)
-                .add(TFMGBlocks.REGULAR_ENGINE)
-                .add(TFMGBlocks.TURBINE_ENGINE)
-                .add(TFMGBlocks.RADIAL_ENGINE)
-                .add(TFMGBlocks.LARGE_ENGINE)
-                .add(TFMGBlocks.SIMPLE_LARGE_ENGINE)
-                .add(TFMGBlocks.ENGINE_CONTROLLER)
-                .add(TFMGBlocks.ENGINE_GEARBOX)
-                .add(TFMGBlocks.EXHAUST)
-                .add(TFMGBlocks.AIR_INTAKE)
-                .add(TFMGItems.OIL_CAN)
-                .add(TFMGItems.COOLING_FLUID_BOTTLE)
-                .add(TFMGItems.TRANSMISSION)
-                .add(TFMGItems.TURBO);
+        //HELPER.addToTag(ENGINES)
+        //        .add(TFMGBlocks.REGULAR_ENGINE)
+        //        .add(TFMGBlocks.TURBINE_ENGINE)
+        //        .add(TFMGBlocks.RADIAL_ENGINE)
+        //        .add(TFMGBlocks.LARGE_ENGINE)
+        //        .add(TFMGBlocks.SIMPLE_LARGE_ENGINE)
+        //        .add(TFMGBlocks.ENGINE_CONTROLLER)
+        //        .add(TFMGBlocks.ENGINE_GEARBOX)
+        //        .add(TFMGBlocks.EXHAUST)
+        //        .add(TFMGBlocks.AIR_INTAKE)
+        //        .add(TFMGItems.OIL_CAN)
+        //        .add(TFMGItems.COOLING_FLUID_BOTTLE)
+        //        .add(TFMGItems.TURBO);
 
         HELPER.addToTag(METALLURGY)
                 .add(TFMGBlocks.BLAST_FURNACE_OUTPUT)

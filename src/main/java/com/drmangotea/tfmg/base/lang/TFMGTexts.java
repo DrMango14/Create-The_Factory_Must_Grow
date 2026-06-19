@@ -160,6 +160,7 @@ public class TFMGTexts {
         public static LangBuilder rpm(float rpm) {
             return TFMGLang.translate("goggles.engine.rpm", TFMGLang.number(rpm)).color(0xa36f00);
         }
+
         public static LangBuilder length(int length) {
             return TFMGLang.translate("engine.length", TFMGLang.number(length));
         }

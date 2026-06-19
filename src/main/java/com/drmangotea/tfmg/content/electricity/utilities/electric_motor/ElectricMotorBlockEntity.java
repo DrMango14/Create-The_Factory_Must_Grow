@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.content.electricity.utilities.electric_motor;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.base.KineticElectricBlockEntity;
+import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -81,6 +82,9 @@ public class ElectricMotorBlockEntity extends KineticElectricBlockEntity {
 
     @Override
     public boolean hasElectricitySlot(Direction direction) {
+
+        if(getBlockState().is(TFMGBlocks.HEAVY_ELECTRIC_MOTOR))
+            return direction != getBlockState().getValue(FACING);
         return direction == getBlockState().getValue(FACING).getOpposite() || (direction.getAxis().isHorizontal() && direction == Direction.DOWN);
     }
 
@@ -124,6 +128,9 @@ public class ElectricMotorBlockEntity extends KineticElectricBlockEntity {
     public float calculateAddedStressCapacity() {
         float speedModifier = Math.abs(getSpeed()/256);
 
+        if(getBlockState().is(TFMGBlocks.HEAVY_ELECTRIC_MOTOR)){
+            return super.calculateAddedStressCapacity();
+        }
 
         return (int)(super.calculateAddedStressCapacity()*speedModifier);
     }
@@ -135,6 +142,10 @@ public class ElectricMotorBlockEntity extends KineticElectricBlockEntity {
     @Override
     public float resistance() {
 
+        if(getBlockState().is(TFMGBlocks.HEAVY_ELECTRIC_MOTOR)){
+            return TFMGConfigs.common().machines.electricMotorInternalResistance.getF()/9;
+        }
+
         return TFMGConfigs.common().machines.electricMotorInternalResistance.getF();
     }
 
@@ -142,6 +153,9 @@ public class ElectricMotorBlockEntity extends KineticElectricBlockEntity {
 
         @Override
         protected Vec3 getSouthLocation() {
+            if(getBlockState().is(TFMGBlocks.HEAVY_ELECTRIC_MOTOR)){
+                return VecHelper.voxelSpace(8, 8, 14.5);
+            }
             return VecHelper.voxelSpace(8, 8, 12.5);
         }
 

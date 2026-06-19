@@ -547,19 +547,19 @@ public class TFMGRecipeProvider extends RecipeProvider {
             return stack;
         }
 
-        public static ItemStack turbineBlade(){
-            ItemStack stack = TFMGItems.TURBINE_BLADE.asStack();
-
-            CompoundTag keroseneTag = new CompoundTag();
-            keroseneTag.putString("kerosene", "forge:kerosene");
-            CompoundTag keroseneTagName = new CompoundTag();
-            keroseneTagName.putString("kerosene", "Kerosene");
-
-            stack.set(TFMGDataComponents.FUEL_TAGS, keroseneTag);
-            stack.set(TFMGDataComponents.FUELS, keroseneTagName);
-
-            return stack;
-        }
+        //public static ItemStack turbineBlade(){
+        //    ItemStack stack = TFMGItems.TURBINE_BLADE.asStack();
+//
+        //    CompoundTag keroseneTag = new CompoundTag();
+        //    keroseneTag.putString("kerosene", "forge:kerosene");
+        //    CompoundTag keroseneTagName = new CompoundTag();
+        //    keroseneTagName.putString("kerosene", "Kerosene");
+//
+        //    stack.set(TFMGDataComponents.FUEL_TAGS, keroseneTag);
+        //    stack.set(TFMGDataComponents.FUELS, keroseneTagName);
+//
+        //    return stack;
+        //}
 
 
     }

@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.engines.base;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.KineticElectricBlockEntity;
 import com.drmangotea.tfmg.content.engines.fuels.BaseFuelTypes;
@@ -55,14 +54,13 @@ public abstract class AbstractEngineBlockEntity extends KineticElectricBlockEnti
     public float torque = 0;
     public boolean signalChanged;
     //
-    public int fuelConsumptionTimer = 0;
-    //
+    public boolean drainFuel = true;
 
 
     public AbstractEngineBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
         setLazyTickRate(10);
-        fuelTank = new EngineFluidTank(4000, false, true, f -> tankUpdated(f, true), TFMGTags.TFMGFluidTags.AIR.tag);
+        fuelTank = new EngineFluidTank(8000, false, true, f -> tankUpdated(f, true), TFMGTags.TFMGFluidTags.AIR.tag);
         exhaustTank = new EngineFluidTank(8000, true, false, f -> tankUpdated(f, false));
         fluidCapability = new CombinedTankWrapper(fuelTank, exhaustTank);
 
@@ -140,22 +138,21 @@ public abstract class AbstractEngineBlockEntity extends KineticElectricBlockEnti
         super.lazyTick();
 
         neighbourChanged();
-        manageFuelAndExhaust();
-    }
+        if(drainFuel) {
+            manageFuelAndExhaust();
+        } else drainFuel = true;
+        }
 
     public void manageFuelAndExhaust() {
         exhaustTank.forceFill(new FluidStack(TFMGFluids.CARBON_DIOXIDE.get(), Math.min(300, getFuelConsumption())), IFluidHandler.FluidAction.EXECUTE);
 
-        if (fuelConsumptionTimer <= 2) {
-            fuelConsumptionTimer++;
-        } else {
-            fuelConsumptionTimer = 0;
             fuelTank.forceDrain(getFuelConsumption(), IFluidHandler.FluidAction.EXECUTE);
 
             if (fuelTank.isEmpty())
                 updateRotation();
 
-        }
+            drainFuel = false;
+
     }
 
     @Override

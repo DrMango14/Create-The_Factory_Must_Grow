@@ -6,6 +6,7 @@ import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlock;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorBlockEntity;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
@@ -45,6 +46,8 @@ public class DebugCinderBlockItem extends Item {
         }
 
         }
+
+
 
         if (level.getBlockEntity(pos) instanceof SteelTankBlockEntity be) {
             if (!context.getPlayer().isCrouching()) {

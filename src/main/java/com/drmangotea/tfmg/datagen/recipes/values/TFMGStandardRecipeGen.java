@@ -1056,16 +1056,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("HMH")
                     .pattern("RCR")),
 
-    TRANSMISSION = create(TFMGItems.TRANSMISSION)
-            .unlockedBy(TFMGItems.PLASTIC_SHEET::get)
-            .viaShaped(b -> b
-                    .define('M', steelMechanism())
-                    .define('A', aluminumSheet())
-                    .define('P', plasticSheet())
-                    .define('C', TFMGBlocks.ALUMINUM_COGWHEEL)
-                    .pattern("AAA")
-                    .pattern("CPC")
-                    .pattern("MMM")),
+
 
    // COPPER_SPOOL = create(TFMGItems.COPPER_SPOOL)
    //         .unlockedBy(TFMGItems.EMPTY_SPOOL::get)
@@ -1113,7 +1104,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("OOO")
                     .pattern("PHP")
                     .pattern("OOO")),
-
+//
     RADIAL_ENGINE = create(TFMGBlocks.RADIAL_ENGINE)
             .unlockedBy(TFMGBlocks.HEAVY_MACHINERY_CASING::asItem)
             .viaShaped(b -> b
@@ -1145,14 +1136,14 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("OCA")
                     .pattern(" R ")),
 
-    OIL_CAN = create(TFMGItems.OIL_CAN)
-            .unlockedBy(TFMGItems.STEEL_NUGGET::get)
-            .viaShaped(b -> b
-                    .define('O', steelNugget())
-                    .define('B', brassSheet())
-                    .pattern(" OO")
-                    .pattern("BBB")
-                    .pattern(" BB")),
+   OIL_CAN = create(TFMGItems.OIL_CAN)
+           .unlockedBy(TFMGItems.STEEL_NUGGET::get)
+           .viaShaped(b -> b
+                   .define('O', steelNugget())
+                   .define('B', brassSheet())
+                   .pattern(" OO")
+                   .pattern("BBB")
+                   .pattern(" BB")),
 
     COOLING_FLUID_BOTTLE = create(TFMGItems.COOLING_FLUID_BOTTLE)
             .unlockedBy(TFMGItems.PLASTIC_SHEET::get)

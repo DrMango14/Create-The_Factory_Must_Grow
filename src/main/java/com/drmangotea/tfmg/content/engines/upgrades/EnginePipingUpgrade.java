@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.content.engines.upgrades;
 
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;

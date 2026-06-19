@@ -479,6 +479,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
                 fluidLevel = LerpedFloat.linear()
                         .startWithValue(fillState);
             fluidLevel.chase(fillState, 0.5f, LerpedFloat.Chaser.EXP);
+            isDistillationTower = compound.getBoolean("IsDistillationTower");
         }
         if (luminosity != prevLum && hasLevel())
             level.getChunkSource()
@@ -511,6 +512,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
             compound.put("TankContent", tankInventory.writeToNBT(registries, new CompoundTag()));
             compound.putInt("Size", width);
             compound.putInt("Height", height);
+            compound.putBoolean("IsDistillationTower",isDistillationTower);
         }
         compound.putInt("Luminosity", luminosity);
         super.write(compound, registries, clientPacket);

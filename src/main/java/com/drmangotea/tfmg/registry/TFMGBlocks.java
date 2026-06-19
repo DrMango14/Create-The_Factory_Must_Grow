@@ -6,10 +6,10 @@ import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
 import com.drmangotea.tfmg.base.blocks.TFMGVanillaBlockStates;
 import com.drmangotea.tfmg.config.TFMGStress;
 import com.drmangotea.tfmg.content.decoration.*;
-import com.drmangotea.tfmg.content.decoration.kinetics.cogs.TFMGCogWheelBlock;
-import com.drmangotea.tfmg.content.decoration.kinetics.cogs.TFMGCogwheelBlockItem;
 import com.drmangotea.tfmg.content.decoration.concrete.*;
 import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorBlock;
+import com.drmangotea.tfmg.content.decoration.kinetics.cogs.TFMGCogWheelBlock;
+import com.drmangotea.tfmg.content.decoration.kinetics.cogs.TFMGCogwheelBlockItem;
 import com.drmangotea.tfmg.content.decoration.kinetics.flywheels.TFMGFlywheelBlock;
 import com.drmangotea.tfmg.content.decoration.kinetics.gearbox.SteelGearboxBlock;
 import com.drmangotea.tfmg.content.decoration.tanks.TFMGTankGenerator;
@@ -39,33 +39,33 @@ import com.drmangotea.tfmg.content.electricity.lights.LampGenerator;
 import com.drmangotea.tfmg.content.electricity.lights.LightBulbBlock;
 import com.drmangotea.tfmg.content.electricity.lights.neon_tube.NeonTubeBlock;
 import com.drmangotea.tfmg.content.electricity.measurement.VoltMeterBlock;
+import com.drmangotea.tfmg.content.electricity.network.diode.ElectricDiodeBlock;
+import com.drmangotea.tfmg.content.electricity.network.diode.EncasedDiodeBlock;
+import com.drmangotea.tfmg.content.electricity.network.electric_switch.ElectricSwitchBlock;
 import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchBlock;
 import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchGenerator;
-import com.drmangotea.tfmg.content.electricity.network.transformer.large.*;
+import com.drmangotea.tfmg.content.electricity.network.potentiometer.EncasedPotentiometerBlock;
+import com.drmangotea.tfmg.content.electricity.network.potentiometer.PotentiometerBlock;
+import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeCoilBlock;
+import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeElectromagneticCoilItem;
+import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeTransformerBlock;
+import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeTransformerGenerator;
+import com.drmangotea.tfmg.content.electricity.network.transformer.small.TransformerBlock;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlock;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorItem;
 import com.drmangotea.tfmg.content.electricity.storage.CapacitorCTBehavior;
-import com.drmangotea.tfmg.content.electricity.utilities.converter.ConverterBlock;
-import com.drmangotea.tfmg.content.electricity.utilities.converter.ConverterGenerator;
-import com.drmangotea.tfmg.content.electricity.network.diode.ElectricDiodeBlock;
-import com.drmangotea.tfmg.content.electricity.network.diode.EncasedDiodeBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_motor.ElectricMotorBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_pump.ElectricPumpBlock;
-import com.drmangotea.tfmg.content.electricity.network.electric_switch.ElectricSwitchBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerBlock;
-import com.drmangotea.tfmg.content.electricity.network.potentiometer.EncasedPotentiometerBlock;
-import com.drmangotea.tfmg.content.electricity.network.potentiometer.PotentiometerBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.resistor.ResistorBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.resistor.ResistorBlockItem;
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayCTBehavior;
 import com.drmangotea.tfmg.content.electricity.utilities.traffic_light.TrafficLightBlock;
-import com.drmangotea.tfmg.content.electricity.network.transformer.small.TransformerBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.voltage_observer.VoltageObserverBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.voltage_observer.VoltageObserverGenerator;
 import com.drmangotea.tfmg.content.engines.base.EngineCTBehavior;
 import com.drmangotea.tfmg.content.engines.base.EngineGenerator;
-import com.drmangotea.tfmg.content.engines.engine_controller.EngineControllerBlock;
 import com.drmangotea.tfmg.content.engines.engine_gearbox.EngineGearboxBlock;
 import com.drmangotea.tfmg.content.engines.types.large_engine.LargeEngineBlock;
 import com.drmangotea.tfmg.content.engines.types.radial_engine.RadialEngineBlock;
@@ -159,7 +159,8 @@ import java.util.Map;
 import static com.drmangotea.tfmg.TFMG.REGISTRATE;
 import static com.drmangotea.tfmg.base.TFMGBuilderTransformers.*;
 import static com.drmangotea.tfmg.content.electricity.lights.LightBulbBlock.LIGHT;
-import static com.drmangotea.tfmg.registry.TFMGTags.*;
+import static com.drmangotea.tfmg.registry.TFMGTags.TFMGBlockTags;
+import static com.drmangotea.tfmg.registry.TFMGTags.TFMGItemTags;
 import static com.simibubi.create.api.behaviour.display.DisplaySource.displaySource;
 import static com.simibubi.create.api.behaviour.movement.MovementBehaviour.movementBehaviour;
 import static com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType.mountedFluidStorage;
@@ -199,7 +200,7 @@ public class TFMGBlocks {
             .properties(BlockBehaviour.Properties::noOcclusion)
             .onRegister(connectedTextures(() -> new EngineCTBehavior(TFMGSpriteShifts.REGULAR_ENGINE_TOP, TFMGSpriteShifts.REGULAR_ENGINE_BOTTOM, TFMGSpriteShifts.REGULAR_ENGINE_SIDE)))
             .blockstate(new EngineGenerator()::generate)
-            .transform(TFMGStress.setCapacity(100.0))
+            .transform(TFMGStress.setCapacity(100))
             .item()
             .transform(customItemModel())
             .register();
@@ -241,14 +242,7 @@ public class TFMGBlocks {
             .transform(customItemModel())
             .register();
 
-    public static final BlockEntry<EngineControllerBlock> ENGINE_CONTROLLER = REGISTRATE.block("engine_controller", EngineControllerBlock::new)
-            .initialProperties(SharedProperties::softMetal)
-            .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-            .properties(BlockBehaviour.Properties::noOcclusion)
-            .blockstate(BlockStateGen.horizontalBlockProvider(true))
-            .item()
-            .transform(customItemModel())
-            .register();
+
     //------------------TANKS------------------//
     public static final BlockEntry<AluminumTankBlock> ALUMINUM_FLUID_TANK =
             REGISTRATE.block("aluminum_fluid_tank", AluminumTankBlock::regular)
@@ -510,7 +504,7 @@ public class TFMGBlocks {
             .initialProperties(SharedProperties::softMetal)
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.horizontalBlockProvider(true))
-           // .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
+            // .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
             .transform(TFMGStress.setImpact(24.0))
             .item()
             .transform(customItemModel())
@@ -1087,6 +1081,18 @@ public class TFMGBlocks {
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .blockstate(new CreativeMotorGenerator()::generate)
                     .transform(TFMGStress.setCapacity(12))
+                    .onRegister(BlockStressValues.setGeneratorSpeed(64, true))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<ElectricMotorBlock> HEAVY_ELECTRIC_MOTOR =
+            REGISTRATE.block("heavy_electric_motor", ElectricMotorBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .transform(pickaxeOnly())
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .blockstate(new CreativeMotorGenerator()::generate)
+                    .transform(TFMGStress.setCapacity(100))
                     .onRegister(BlockStressValues.setGeneratorSpeed(64, true))
                     .item()
                     .transform(customItemModel())
@@ -1997,7 +2003,7 @@ public class TFMGBlocks {
             .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
             .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_STONE_TOOL)
-     .simpleItem()
+            .simpleItem()
             .register();
     public static final MaterialSet ASPHALT_SET = makeVariants(ASPHALT);
 

@@ -15,7 +15,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -357,7 +356,7 @@ public class RegularEngineBlockEntity extends AbstractSmallEngineBlockEntity {
 
     @Override
     public float efficiencyModifier() {
-        return type.effeciencyModifier * getFuelType().getEfficiency() * getUpgradeEfficiencyModifier();
+        return type.effeciencyModifier * getFuelType().getEfficiency() * getUpgradeEfficiencyModifier()*(TFMGConfigs.common().machines.engineFuelConsumption.getF()/100f);
     }
 
     @Override
@@ -395,7 +394,7 @@ public class RegularEngineBlockEntity extends AbstractSmallEngineBlockEntity {
         TFMGTexts.Engine.rpm(rpm).forGoggles(tooltip, 1);
         TFMGTexts.Engine.signal((int) (highestSignal*15)).forGoggles(tooltip, 1);
         TFMGTexts.Engine.torque(torque).forGoggles(tooltip, 1);
-        TFMGTexts.Engine.fuelConsumption(getFuelConsumption()/1.5f).forGoggles(tooltip, 1);
+        TFMGTexts.Engine.fuelConsumption(getFuelConsumption()).forGoggles(tooltip, 1);
         if(oil>0){
             TFMGTexts.Engine.oil(oil).forGoggles(tooltip);
         }

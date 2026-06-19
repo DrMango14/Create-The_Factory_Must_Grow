@@ -1,8 +1,6 @@
 package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.content.engines.engine_controller.EngineControllerMenu;
-import com.drmangotea.tfmg.content.engines.engine_controller.EngineControllerScreen;
 import com.tterrag.registrate.builders.MenuBuilder.ForgeMenuFactory;
 import com.tterrag.registrate.builders.MenuBuilder.ScreenFactory;
 import com.tterrag.registrate.util.entry.MenuEntry;
@@ -13,8 +11,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 
 public class TFMGMenuTypes {
 
-	public static final MenuEntry<EngineControllerMenu> ENGINE_CONTROLLER =
-		init("engine_controller", EngineControllerMenu::new, () -> EngineControllerScreen::new);
+	//public static final MenuEntry<EngineControllerMenu> ENGINE_CONTROLLER =
+	//	init("engine_controller", EngineControllerMenu::new, () -> EngineControllerScreen::new);
 
 	
 	private static <C extends AbstractContainerMenu, S extends Screen & MenuAccess<C>> MenuEntry<C> init(

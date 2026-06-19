@@ -11,9 +11,9 @@ import com.drmangotea.tfmg.content.electricity.measurement.MultimeterItem;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.MagnetItem;
 import com.drmangotea.tfmg.content.electricity.utilities.resistor.ResistorItem;
 import com.drmangotea.tfmg.content.electricity.network.transformer.small.ElectromagneticCoilItem;
+
 import com.drmangotea.tfmg.content.engines.CylinderItem;
 import com.drmangotea.tfmg.content.engines.FluidContainingItem;
-import com.drmangotea.tfmg.content.engines.upgrades.TransmissionItem;
 import com.drmangotea.tfmg.content.items.CoalCokeItem;
 import com.drmangotea.tfmg.content.items.ScrewdriverItem;
 import com.drmangotea.tfmg.content.items.weapons.LeadAxeItem;
@@ -176,20 +176,20 @@ public class TFMGItems {
                     .model((c, p) -> p.withExistingParent(c.getName(), TFMG.asResource("item/unfinished_insulator_model"))).register(),
             GLASS_INSULATOR_SEGMENT = REGISTRATE.item("glass_insulator_segment", Item::new)
                     .model((c, p) -> p.withExistingParent(c.getName(), TFMG.asResource("item/glass_insulator_segment_model"))).register();
-    public static final ItemEntry<TransmissionItem>
-            TRANSMISSION = REGISTRATE.item("transmission", TransmissionItem::new)
-            .properties(p -> p.stacksTo(1))
-            .model((c, p) -> p.withExistingParent(c.getName(), TFMG.asResource("item/transmission_model"))).register();
+    //public static final ItemEntry<TransmissionItem>
+    //        TRANSMISSION = REGISTRATE.item("transmission", TransmissionItem::new)
+    //        .properties(p -> p.stacksTo(1))
+    //        .model((c, p) -> p.withExistingParent(c.getName(), TFMG.asResource("item/transmission_model"))).register();
     public static final ItemEntry<MagnetItem>
             MAGNET = REGISTRATE.item("magnet", MagnetItem::new).register();
 
     public static final ItemEntry<ResistorItem>
             UNFINISHED_RESISTOR = REGISTRATE.item("unfinished_resistor", ResistorItem::new).register();
-    public static final ItemEntry<CylinderItem>
-            DIESEL_ENGINE_CYLINDER = REGISTRATE.item("diesel_engine_cylinder", CylinderItem::new).register(),
-            SIMPLE_ENGINE_CYLINDER = REGISTRATE.item("simple_engine_cylinder", CylinderItem::new).register(),
-            ENGINE_CYLINDER = REGISTRATE.item("engine_cylinder", CylinderItem::new).register(),
-            TURBINE_BLADE = REGISTRATE.item("turbine_blade", CylinderItem::new).register();
+   //public static final ItemEntry<CylinderItem>
+   //        DIESEL_ENGINE_CYLINDER = REGISTRATE.item("diesel_engine_cylinder", CylinderItem::new).register(),
+   //        SIMPLE_ENGINE_CYLINDER = REGISTRATE.item("simple_engine_cylinder", CylinderItem::new).register(),
+   //        ENGINE_CYLINDER = REGISTRATE.item("engine_cylinder", CylinderItem::new).register(),
+   //        TURBINE_BLADE = REGISTRATE.item("turbine_blade", CylinderItem::new).register();
     public static final ItemEntry<SpoolItem>
             EMPTY_SPOOL = spoolItem("empty", 0x000000, TFMG.asResource("empty"))
             .recipe((c, p) -> p.stonecutting(DataIngredient.items(TFMGBlocks.HARDENED_PLANKS.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 1))
@@ -282,6 +282,7 @@ public class TFMGItems {
     public static final ItemEntry<SequencedAssemblyItem>
             UNFINISHED_POTENTIOMETER = sequencedIngredient("unfinished_potentiometer", "block/potentiometer/unfinished"),
             UNFINISHED_ELECTRIC_MOTOR = sequencedIngredient("unfinished_electric_motor", "block/electric_motor/unfinished"),
+            UNFINISHED_HEAVY_ELECTRIC_MOTOR = sequencedIngredient("unfinished_heavy_electric_motor", "block/heavy_electric_motor/unfinished"),
             UNFINISHED_GENERATOR = sequencedIngredient("unfinished_generator", "item/unfinished_generator_model"),
             UNFINISHED_STEEL_MECHANISM = sequencedIngredient("unfinished_steel_mechanism"),
             UNFINISHED_TRANSISTOR = sequencedIngredient("unfinished_transistor"),
@@ -299,6 +300,13 @@ public class TFMGItems {
             PIPE_BOMB = REGISTRATE.item("pipe_bomb", PipeBombItem::new)
             .register();
 
+    public static final ItemEntry<CylinderItem>
+            DIESEL_ENGINE_CYLINDER = REGISTRATE.item("diesel_engine_cylinder", CylinderItem::new).register(),
+            SIMPLE_ENGINE_CYLINDER = REGISTRATE.item("simple_engine_cylinder", CylinderItem::new).register(),
+            ENGINE_CYLINDER = REGISTRATE.item("engine_cylinder", CylinderItem::new).register(),
+            TURBINE_BLADE = REGISTRATE.item("turbine_blade", CylinderItem::new).register();
+
+
     public static final ItemEntry<FluidContainingItem>
             OIL_CAN = REGISTRATE.item("oil_can", p -> new FluidContainingItem(p, TFMGFluids.LUBRICATION_OIL))
             .properties(p -> p.stacksTo(1))
@@ -307,6 +315,15 @@ public class TFMGItems {
             COOLING_FLUID_BOTTLE = REGISTRATE.item("cooling_fluid_bottle", p -> new FluidContainingItem(p, TFMGFluids.COOLING_FLUID))
                     .properties(p -> p.stacksTo(1))
                     .register();
+
+    //public static final ItemEntry<FluidContainingItem>
+    //        OIL_CAN = REGISTRATE.item("oil_can", p -> new FluidContainingItem(p, TFMGFluids.LUBRICATION_OIL))
+    //        .properties(p -> p.stacksTo(1))
+    //        .model((c, p) -> p.withExistingParent(c.getName(), TFMG.asResource("item/oil_can_model")))
+    //        .register(),
+    //        COOLING_FLUID_BOTTLE = REGISTRATE.item("cooling_fluid_bottle", p -> new FluidContainingItem(p, TFMGFluids.COOLING_FLUID))
+    //                .properties(p -> p.stacksTo(1))
+    //                .register();
     public static final ItemEntry<ElectriciansWrenchItem>
             CONFIGURATION_WRENCH = REGISTRATE.item("electricians_wrench", ElectriciansWrenchItem::new)
             .lang("Configuration Wrench")

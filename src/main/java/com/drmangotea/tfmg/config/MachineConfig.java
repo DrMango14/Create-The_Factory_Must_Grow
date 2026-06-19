@@ -29,6 +29,9 @@ public class MachineConfig extends ConfigBase {
 
     public final ConfigGroup engines = group(1, "engines", "Engines");
     public final ConfigFloat engineLoudness = f(1,0, "engineLoudness", Comments.engineLoudness);
+    public final ConfigFloat engineFuelConsumption = f(100,0, "engineFuelConsumption", Comments.engineFuelConsumption);
+    public final ConfigFloat enginePower = f(100,0, "enginePower", Comments.enginePower);
+    public final ConfigFloat engineElectricPower = f(100,0, "engineElectricPower", Comments.engineElectricPower);
 
 
     public final ConfigGroup generators = group(1, "generators", "Generators");
@@ -68,6 +71,9 @@ public class MachineConfig extends ConfigBase {
         static String fireboxFuelConsumption = "Determines the amount of fuel a firebox needs to run for 3 seconds.";
         static String electrolysisMinimumCurrent = "The minimum electric current that will make electrolyzers operational.";
         static String engineMaxLength = "The maximum length of engines.";
+        static String engineFuelConsumption = "Modifier of engine fuel consumption in %.";
+        static String enginePower = "Modifier of engine stress capacity in %.";
+        static String engineElectricPower = "Modifier of engine power generation in %.";
         static String surfaceScannerScanDepth = "Y level surface scanner scan at.";
         static String FEtoWattTickConversionRate = "How much Forge Energy is in one watt-tick.";
         static String polarizerItemChargingRate = "How much FE can polarizer charge per tick.";

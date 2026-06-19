@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.content.electricity.utilities.electric_motor;
 
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
+import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
@@ -21,19 +22,26 @@ public class ElectricMotorBlock extends DirectionalKineticBlock implements IBE<E
     public ElectricMotorBlock(Properties properties) {
         super(properties);
     }
+
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+
+        if (state.is(TFMGBlocks.HEAVY_ELECTRIC_MOTOR))
+            return super.getShape(state, worldIn, pos, context);
+
         return AllShapes.MOTOR_BLOCK.get(state.getValue(FACING));
     }
+
     @Override
     public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
-        withBlockEntityDo(level,pos, IElectric::onPlaced);
+        withBlockEntityDo(level, pos, IElectric::onPlaced);
     }
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         IBE.onRemove(state, level, pos, newState);
     }
+
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Direction preferred = getPreferredFacing(context);
@@ -42,7 +50,6 @@ public class ElectricMotorBlock extends DirectionalKineticBlock implements IBE<E
             return super.getStateForPlacement(context);
         return defaultBlockState().setValue(FACING, preferred);
     }
-
 
 
     @Override

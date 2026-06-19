@@ -5,7 +5,7 @@ import com.drmangotea.tfmg.TFMGClient;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.measurement.MultimeterOverlayRenderer;
 import com.drmangotea.tfmg.content.electricity.network.transformer.small.TransformerBlockEntity;
-import com.drmangotea.tfmg.content.engines.engine_controller.EngineControllerClientHandler;
+
 import com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon.AdvancedPotatoCannonItemRenderer;
 import com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon.QuadPotatoCannonItemRenderer;
 import com.drmangotea.tfmg.registry.TFMGItems;
@@ -44,9 +44,7 @@ public class TFMGClientEvents {
 		TFMGClient.ADVANCED_POTATO_CANNON_RENDER_HANDLER.tick();
 		TFMGClient.FLAMETHROWER_RENDER_HANDLER.tick();
 
-		if (isPreEvent) {
-			EngineControllerClientHandler.tick();
-		}
+
 
 		TransformerBlockEntity.tickOutliner();
 		CableConnectorBlockEntity.tickOutliner();

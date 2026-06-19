@@ -1,0 +1,41 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"4": "tfmg:block/heavy_electric_motor",
+		"particle": "tfmg:block/large_coil_side"
+	},
+	"elements": [
+		{
+			"from": [1, 1, 16],
+			"to": [15, 15, 26],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 24]},
+			"faces": {
+				"east": {"uv": [8, 0, 3, 7], "texture": "#4"},
+				"south": {"uv": [9, 0, 16, 7], "texture": "#4"},
+				"west": {"uv": [3, 0, 8, 7], "texture": "#4"},
+				"up": {"uv": [3, 0, 8, 7], "rotation": 90, "texture": "#4"},
+				"down": {"uv": [3, 0, 8, 7], "rotation": 270, "texture": "#4"}
+			}
+		},
+		{
+			"from": [15, 15, 26],
+			"to": [1, 1, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 1, 22]},
+			"faces": {
+				"east": {"uv": [3, 0, 8, 7], "texture": "#4"},
+				"west": {"uv": [3, 0, 8, 7], "rotation": 180, "texture": "#4"},
+				"up": {"uv": [3, 0, 8, 7], "rotation": 270, "texture": "#4"},
+				"down": {"uv": [3, 0, 8, 7], "rotation": 90, "texture": "#4"}
+			}
+		}
+	],
+	"display": {
+		"gui": {
+			"rotation": [24, -134, 2],
+			"translation": [1.75, -0.5, 0],
+			"scale": [0.51, 0.51, 0.51]
+		}
+	}
+}

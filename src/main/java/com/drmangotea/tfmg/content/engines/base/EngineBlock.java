@@ -1,12 +1,10 @@
 package com.drmangotea.tfmg.content.engines.base;
 
 import com.drmangotea.tfmg.base.TFMGShapes;
-import com.drmangotea.tfmg.content.engines.engine_controller.EngineControllerBlockEntity;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.types.radial_engine.RadialEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.types.turbine_engine.TurbineEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.upgrades.EnginePipingUpgrade;
-import com.drmangotea.tfmg.content.engines.upgrades.TransmissionUpgrade;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
@@ -56,29 +54,6 @@ public class EngineBlock extends HorizontalKineticBlock {
             if (be.hasUpgrade()) {
 
                 if (be.upgrade.isPresent()) {
-
-                    if (be.upgrade.get() instanceof TransmissionUpgrade) {
-                        if (be.getControllerBE().engineController != null) {
-                            if (level.getBlockEntity(be.getControllerBE().engineController) instanceof EngineControllerBlockEntity engineController) {
-                                engineController.engineStarted = false;
-                                engineController.accelerationRate = 0;
-                                engineController.shift = TransmissionUpgrade.TransmissionState.NEUTRAL;
-                                be.shift = TransmissionUpgrade.TransmissionState.NEUTRAL;
-                                be.clutchPressed = false;
-                                engineController.engine = null;
-                                engineController.enginePos = null;
-                                engineController.disconnectEngine();
-                                engineController.sendData();
-                            }
-                        }
-                        be.getControllerBE().engineController = null;
-                        be.getControllerBE().highestSignal = 0;
-                        be.getControllerBE().connectNextTick = true;
-                        be.updateGeneratedRotation();
-                        be.getControllerBE().updateGeneratedRotation();
-                        be.getControllerBE().sendData();
-
-                    }
 
                     be.playRemovalSound();
                     be.dropItem(be.upgrade.get().getItem().getDefaultInstance());
