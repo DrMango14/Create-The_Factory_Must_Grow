@@ -295,6 +295,10 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
     public void updateBoilerState() {
         if (!isController())
             return;
+
+        if (getControllerBE() == null)
+            return;
+
         boolean wasTower = isDistillationTower;
         boolean changed = evaluate();
 

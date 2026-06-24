@@ -339,6 +339,9 @@ public class SteelTankBlock extends Block implements IWrenchable, IBE<SteelTankB
         if (tankBE == null)
             return false;
 
+        if (tankBE.getControllerBE() == null)
+            return false;
+
         if (assemble && tankBE.getControllerBE().isDistillationTower)
             return false;
 
