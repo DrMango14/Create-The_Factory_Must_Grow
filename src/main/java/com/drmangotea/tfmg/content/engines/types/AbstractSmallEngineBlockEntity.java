@@ -406,9 +406,9 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
             if (level.getBlockEntity(controller) instanceof AbstractSmallEngineBlockEntity be) {
                 Integer amount = itemStack.get(TFMGDataComponents.AMOUNT);
                 if (amount == null)
-                    return true;
+                    return false;
 
-                int toDrain = Math.min(2000 - coolingFluid, amount);
+                int toDrain = Math.min(2000 - be.coolingFluid, amount);
                 itemStack.set(TFMGDataComponents.AMOUNT, amount - toDrain);
                 be.coolingFluid += toDrain;
                 level.playSound(null, getBlockPos(), SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1f, 1f);
