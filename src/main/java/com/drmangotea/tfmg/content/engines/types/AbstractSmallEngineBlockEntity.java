@@ -441,8 +441,10 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
             }
         }
         if (itemStack.is(TFMGFluids.LUBRICATION_OIL.getBucket().get())) {
-            if (oil <= 1000) {
-                oil += 1000;
+            if (level.getBlockEntity(controller) instanceof AbstractSmallEngineBlockEntity be) {
+                if (be.oil > 1000) 
+                    return false;
+                be.oil += 1000;
                 player.setItemInHand(hand, Items.BUCKET.getDefaultInstance());
                 level.playSound(null, getBlockPos(), SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1f, 1f);
                 updateRotation();
