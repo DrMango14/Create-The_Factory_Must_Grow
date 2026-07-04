@@ -430,8 +430,10 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
             }
         }
         if (itemStack.is(TFMGFluids.COOLING_FLUID.getBucket().get())) {
-            if (coolingFluid <= 1000) {
-                coolingFluid += 1000;
+            if (level.getBlockEntity(controller) instanceof AbstractSmallEngineBlockEntity be) {
+                if (be.coolingFluid > 1000)
+                    return false;
+                be.coolingFluid += 1000;
                 player.setItemInHand(hand, Items.BUCKET.getDefaultInstance());
                 level.playSound(null, getBlockPos(), SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1f, 1f);
                 updateRotation();
