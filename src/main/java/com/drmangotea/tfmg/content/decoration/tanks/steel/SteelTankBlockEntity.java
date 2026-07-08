@@ -459,6 +459,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
             tankInventory.readFromNBT(registries, compound.getCompound("TankContent"));
             if (tankInventory.getSpace() < 0)
                 tankInventory.drain(-tankInventory.getSpace(), IFluidHandler.FluidAction.EXECUTE);
+            isDistillationTower = compound.getBoolean("IsDistillationTower");          
         }
 
         boiler.read(compound.getCompound("Boiler"), width * width * height);
@@ -486,7 +487,6 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
                 fluidLevel = LerpedFloat.linear()
                         .startWithValue(fillState);
             fluidLevel.chase(fillState, 0.5f, LerpedFloat.Chaser.EXP);
-            isDistillationTower = compound.getBoolean("IsDistillationTower");
         }
         if (luminosity != prevLum && hasLevel())
             level.getChunkSource()
