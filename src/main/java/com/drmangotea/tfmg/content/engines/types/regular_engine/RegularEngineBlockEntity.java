@@ -394,7 +394,8 @@ public class RegularEngineBlockEntity extends AbstractSmallEngineBlockEntity {
         TFMGTexts.Engine.rpm(rpm).forGoggles(tooltip, 1);
         TFMGTexts.Engine.signal((int) (highestSignal*15)).forGoggles(tooltip, 1);
         TFMGTexts.Engine.torque(torque).forGoggles(tooltip, 1);
-        TFMGTexts.Engine.fuelConsumption(getFuelConsumption()).forGoggles(tooltip, 1);
+        // fuel consumption supports float, so changed getFuelConsumption() to getFuelConsumptionFloat() for more accuracy
+        TFMGTexts.Engine.fuelConsumption(getFuelConsumptionFloat()).forGoggles(tooltip, 1);
         if(oil>0){
             TFMGTexts.Engine.oil(oil).forGoggles(tooltip);
         }

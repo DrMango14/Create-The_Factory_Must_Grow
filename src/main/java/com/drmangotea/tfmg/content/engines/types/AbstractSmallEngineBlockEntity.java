@@ -71,8 +71,7 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
         componentsInventory = new EngineComponentsInventory(this, EngineProperties.commonRegularComponents());
     }
 
-    public int getFuelConsumption() {
-
+    public float getFuelConsumptionFloat() {
         if (rpm == 0)
             return 0;
 
@@ -80,8 +79,22 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
 
         float coolingFluidModifier = coolingFluid > 0 ? 0.7f : 1f;
 
+        return ((12.5f * (1 / efficiencyModifier()) * getSpeedEfficiency() * highestSignal / 15 * oilModifier * coolingFluidModifier) * (engineLength() )+ 1);
+    }
 
-        return (int) ((12.5f * (1 / efficiencyModifier()) * getSpeedEfficiency() * highestSignal / 15 * oilModifier * coolingFluidModifier) * (engineLength() )+ 1);
+    public int getFuelConsumption() {
+        if (!((Object)this instanceof BlockEntity be)) return 0;
+        if (be.getLevel() == null) return 0;
+
+        // use float for more accuracy
+        float consumption = getFuelConsumptionFloat();
+
+        // we cannot use float as fuel consumption, so we compensate it with this block
+        // basically we sum up tail until it hits 1, but in more optimized way
+        long gameTime = be.getLevel().getGameTime();
+        float tail = consumption - (int)consumption;
+        if (tail > 0.0f && gameTime % (1.f/tail) < 1.f) return (int)consumption+1;
+        else return (int)consumption;
     }
 
     public void detashEngines() {
