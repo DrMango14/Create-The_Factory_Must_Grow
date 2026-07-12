@@ -19,30 +19,17 @@ public class FluidPipeBlockMixin {
 		method = "updateBlockState",
 		at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/fluids/pipes/FluidPipeBlock;canConnectTo(Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/Direction;)Z")
 	)
-	private boolean tfmg$filterLockedPipes(
-		final BlockAndTintGetter neighbourWorld,
-		final BlockPos neighbourPos,
-		final BlockState neighbourState,
-		final Direction direction,
-		final Operation<Boolean> original,
-		final BlockState state,
-		final Direction preferredDirection,
-		final Direction ignore,
-		final BlockAndTintGetter world,
-		final BlockPos pos
-	) {
+	private boolean tfmg$filterLockedPipes(BlockAndTintGetter neighbourWorld, BlockPos neighbourPos, BlockState neighbourState, Direction direction, Operation<Boolean> original, BlockState state, Direction preferredDirection, Direction ignore, BlockAndTintGetter world, BlockPos pos) {
 		boolean shouldConnect = original.call(neighbourWorld, neighbourPos, neighbourState, direction);
 
 		BlockEntity be = world.getBlockEntity(neighbourPos);
 
 		if (be instanceof TFMGPipeBlockEntity tfmgPipe) {
 			if (tfmgPipe.locked) {
-				shouldConnect = false;
-
 				var oppositeProperty = FluidPipeBlock.PROPERTY_BY_DIRECTION.get(direction.getOpposite());
-				if (neighbourState.hasProperty(oppositeProperty) && neighbourState.getValue(oppositeProperty)) {
-					shouldConnect = true;
-				}
+				shouldConnect =
+					neighbourState.hasProperty(oppositeProperty) &&
+					neighbourState.getValue(oppositeProperty);
 			}
 		}
 
