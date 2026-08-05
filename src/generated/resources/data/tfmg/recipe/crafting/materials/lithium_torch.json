@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:ingots/aluminum"
+    },
+    "L": {
+      "tag": "c:ingots/lithium"
+    }
+  },
+  "pattern": [
+    " L ",
+    " A ",
+    "   "
+  ],
+  "result": {
+    "count": 4,
+    "id": "tfmg:lithium_torch"
+  }
+}

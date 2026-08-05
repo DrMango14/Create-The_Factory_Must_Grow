@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "K": {
+      "item": "minecraft:dried_kelp_block"
+    },
+    "N": {
+      "tag": "c:plates/nickel"
+    },
+    "P": {
+      "item": "tfmg:steel_pipe"
+    },
+    "S": {
+      "item": "create:shaft"
+    }
+  },
+  "pattern": [
+    " C ",
+    "SKP",
+    " N "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:concrete_hose"
+  }
+}

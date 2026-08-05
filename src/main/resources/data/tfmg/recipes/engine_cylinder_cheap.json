@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "P": {
-      "tag": "forge:plates/iron"
+      "tag": "c:plates/iron"
     },
     "F": {
       "item": "minecraft:flint_and_steel"
@@ -15,13 +15,14 @@
     "P P"
   ],
   "result": {
-    "item": "tfmg:simple_engine_cylinder",
-    "nbt": {
-      "Fuels": {
-        "furnace_gas": "forge:furnace_gas",
-        "creosote": "forge:creosote"
+    "count": 1,
+    "id": "tfmg:simple_engine_cylinder",
+    "components": {
+      "tfmg:fuel_tags": {
+        "furnace_gas": "c:furnace_gas",
+        "creosote": "c:creosote"
       },
-      "FuelNames": {
+      "tfmg:fuels": {
         "furnace_gas": "Furnace Gas",
         "creosote": "Creosote"
       }

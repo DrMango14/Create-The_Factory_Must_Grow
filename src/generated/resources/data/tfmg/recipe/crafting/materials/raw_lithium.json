@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "tfmg:raw_lithium_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "tfmg:raw_lithium"
+  }
+}

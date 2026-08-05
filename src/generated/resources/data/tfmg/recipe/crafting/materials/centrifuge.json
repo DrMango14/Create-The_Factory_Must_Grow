@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:ingots/aluminum"
+    },
+    "B": {
+      "item": "tfmg:aluminum_bars"
+    }
+  },
+  "pattern": [
+    "BAB",
+    "BAB",
+    "BAB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:centrifuge"
+  }
+}

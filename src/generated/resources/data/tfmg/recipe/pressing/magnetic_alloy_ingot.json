@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "tfmg:magnetic_alloy_ingot"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:magnetic_alloy_sheet"
+    }
+  ]
+}

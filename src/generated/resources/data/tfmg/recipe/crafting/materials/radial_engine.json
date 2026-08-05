@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "I": {
+      "tag": "c:nuggets/steel"
+    },
+    "O": {
+      "tag": "c:ingots/steel"
+    },
+    "S": {
+      "item": "create:shaft"
+    }
+  },
+  "pattern": [
+    "IOI",
+    "OCO",
+    "ISI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:radial_engine"
+  }
+}

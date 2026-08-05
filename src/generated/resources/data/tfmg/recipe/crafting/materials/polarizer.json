@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:plates/brass"
+    },
+    "C": {
+      "item": "tfmg:capacitor_item"
+    },
+    "R": {
+      "item": "tfmg:resistor"
+    },
+    "S": {
+      "item": "tfmg:steel_casing"
+    },
+    "V": {
+      "item": "tfmg:voltmeter"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    }
+  },
+  "pattern": [
+    "BWB",
+    "CVC",
+    "RSR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:polarizer"
+  }
+}

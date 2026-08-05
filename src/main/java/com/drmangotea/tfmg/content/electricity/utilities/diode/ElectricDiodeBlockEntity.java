@@ -7,6 +7,7 @@ import com.drmangotea.tfmg.content.electricity.base.UpdateInFrontPacket;
 import com.drmangotea.tfmg.content.electricity.base.VoltageAlteringBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGPackets;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
@@ -131,7 +132,9 @@ public class ElectricDiodeBlockEntity extends VoltageAlteringBlockEntity {
     public void updateInFront() {
 
         if(!level.isClientSide)
-            TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new UpdateInFrontPacket(BlockPos.of(getPos())));
+            TFMGPackets.getChannel().send(
+                    PacketDistributor.TRACKING_CHUNK.with(() -> ((ServerLevel) getLevelAccessor()).getChunkAt(getBlockPos())),
+                    new UpdateInFrontPacket(BlockPos.of(getPos())));
         Direction facing = getBlockState().hasProperty(FACING) ? getBlockState().getValue(FACING) : getBlockState().getValue(HorizontalDirectionalBlock.FACING).getCounterClockWise();
         if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be && be.getData().getId() != data.getId()) {
             if (be.hasElectricitySlot(facing.getOpposite())) {
@@ -145,7 +148,9 @@ public class ElectricDiodeBlockEntity extends VoltageAlteringBlockEntity {
     public void updateBehind() {
 
         if(!level.isClientSide)
-            TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new UpdateInFrontPacket(BlockPos.of(getPos())));
+            TFMGPackets.getChannel().send(
+                    PacketDistributor.TRACKING_CHUNK.with(() -> ((ServerLevel) getLevelAccessor()).getChunkAt(getBlockPos())),
+                    new UpdateInFrontPacket(BlockPos.of(getPos())));
         Direction facing = getBlockState().hasProperty(FACING) ? getBlockState().getValue(FACING) : getBlockState().getValue(HorizontalDirectionalBlock.FACING).getCounterClockWise();
         facing = facing.getOpposite();
         if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be && be.getData().getId() != data.getId()) {

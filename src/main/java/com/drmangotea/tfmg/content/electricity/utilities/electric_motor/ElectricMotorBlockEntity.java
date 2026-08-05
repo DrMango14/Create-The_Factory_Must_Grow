@@ -51,7 +51,7 @@ public class ElectricMotorBlockEntity extends KineticElectricBlockEntity {
     @Override
     public void lazyTick() {
         super.lazyTick();
-        if(data.notEnoughtPower)
+        if(data.notEnoughPower)
             setSpeed(0);
         if(data.voltage>0)
             setSpeed(0);

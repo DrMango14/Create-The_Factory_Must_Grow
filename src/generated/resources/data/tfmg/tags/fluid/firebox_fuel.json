@@ -1,0 +1,16 @@
+{
+  "values": [
+    "tfmg:flowing_lpg",
+    "tfmg:lpg",
+    "tfmg:flowing_butane",
+    "tfmg:butane",
+    "tfmg:flowing_propane",
+    "tfmg:propane",
+    "tfmg:flowing_diesel",
+    "tfmg:diesel",
+    "tfmg:flowing_naphtha",
+    "tfmg:naphtha",
+    "tfmg:flowing_kerosene",
+    "tfmg:kerosene"
+  ]
+}

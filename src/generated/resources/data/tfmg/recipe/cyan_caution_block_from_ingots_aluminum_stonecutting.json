@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "tag": "c:ingots/aluminum"
+  },
+  "result": {
+    "count": 2,
+    "id": "tfmg:cyan_caution_block"
+  }
+}

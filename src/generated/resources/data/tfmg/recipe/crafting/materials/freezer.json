@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tfmg:compressor"
+    },
+    "P": {
+      "item": "create:fluid_pipe"
+    },
+    "R": {
+      "item": "tfmg:lpg_bucket"
+    },
+    "W": {
+      "item": "tfmg:electromagnetic_coil"
+    }
+  },
+  "pattern": [
+    "PWP",
+    "WCW",
+    "RWR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:freezer"
+  }
+}

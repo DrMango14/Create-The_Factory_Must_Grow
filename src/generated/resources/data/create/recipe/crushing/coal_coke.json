@@ -1,0 +1,13 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "tfmg:coal_coke"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:coal_coke_dust"
+    }
+  ]
+}

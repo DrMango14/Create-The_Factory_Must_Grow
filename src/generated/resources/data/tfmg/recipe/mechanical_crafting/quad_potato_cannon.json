@@ -1,0 +1,29 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": false,
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:ingots/cast_iron"
+    },
+    "M": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "O": {
+      "tag": "c:ingots/steel"
+    },
+    "P": {
+      "item": "tfmg:steel_pipe"
+    }
+  },
+  "pattern": [
+    "PMPC",
+    "PMPC",
+    " O  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:quad_potato_cannon"
+  },
+  "show_notification": false
+}

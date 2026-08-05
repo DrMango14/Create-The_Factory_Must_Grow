@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/cast_iron"
+    },
+    "P": {
+      "tag": "c:plates/cast_iron"
+    }
+  },
+  "pattern": [
+    "   ",
+    "PIP",
+    "   "
+  ],
+  "result": {
+    "count": 4,
+    "id": "tfmg:cast_iron_pipe"
+  }
+}

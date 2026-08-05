@@ -1,0 +1,21 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "tfmg:air"
+    }
+  ],
+  "machines": [
+    "tfmg:centrifuge"
+  ],
+  "min_size": 1,
+  "processing_time": 10,
+  "results": [
+    {
+      "amount": 1,
+      "id": "tfmg:neon"
+    }
+  ]
+}

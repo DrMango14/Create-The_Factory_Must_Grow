@@ -135,7 +135,19 @@ public class TFMGShapes {
             .add(11, 8, 4, 15, 12, 11)
             .add(1, 8, 4, 5, 12, 11)
             .add(0, 0, 0, 16, 8, 16)
-            .forHorizontal(NORTH);
+            .forHorizontal(NORTH),
+
+    // Large Switch — main part (shaft side) and secondary part (output side)
+    LARGE_SWITCH_PRIMARY = shape(0, 0, 0, 16, 16, 16)
+            .forHorizontal(SOUTH),
+    LARGE_SWITCH_SECONDARY = shape(0, 0, 0, 16, 16, 16)
+            .forHorizontal(SOUTH),
+
+    // Large Transformer — finished and unfinished states
+    LARGE_TRANSFORMER = shape(0, 0, 0, 16, 16, 16)
+            .forHorizontal(SOUTH),
+    LARGE_TRANSFORMER_UNFINISHED = shape(0, 0, 0, 16, 12, 16)
+            .forHorizontal(SOUTH);
     public static final VoxelShape
 
             EMPTY = shape(0, 0, 0, 0, 0, 0).build(),

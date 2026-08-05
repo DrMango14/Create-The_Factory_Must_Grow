@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:ingots/cast_iron"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "tfmg:cast_iron_nugget"
+  }
+}

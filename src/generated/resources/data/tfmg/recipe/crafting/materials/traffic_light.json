@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "tfmg:light_bulb"
+    },
+    "C": {
+      "item": "tfmg:circuit_board"
+    },
+    "G": {
+      "item": "minecraft:green_stained_glass_pane"
+    },
+    "N": {
+      "tag": "c:wires/copper"
+    },
+    "O": {
+      "item": "minecraft:orange_stained_glass_pane"
+    },
+    "P": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "R": {
+      "item": "minecraft:red_stained_glass_pane"
+    }
+  },
+  "pattern": [
+    "CBR",
+    "PBO",
+    "NBG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:traffic_light"
+  }
+}

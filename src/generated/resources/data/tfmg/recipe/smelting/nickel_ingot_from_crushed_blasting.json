@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "create:crushed_raw_nickel"
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:nickel_ingot"
+  }
+}

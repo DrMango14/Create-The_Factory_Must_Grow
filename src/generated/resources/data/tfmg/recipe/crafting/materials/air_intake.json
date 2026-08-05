@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "create:andesite_bars"
+    },
+    "C": {
+      "item": "create:industrial_iron_block"
+    },
+    "G": {
+      "item": "create:cogwheel"
+    },
+    "P": {
+      "item": "create:propeller"
+    },
+    "S": {
+      "item": "create:shaft"
+    },
+    "T": {
+      "item": "tfmg:cast_iron_pipe"
+    }
+  },
+  "pattern": [
+    "SPT",
+    "GCG",
+    " B "
+  ],
+  "result": {
+    "count": 3,
+    "id": "tfmg:air_intake"
+  }
+}

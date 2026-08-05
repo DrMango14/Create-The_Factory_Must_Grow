@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_purple_rebar_concrete": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tfmg:purple_rebar_concrete"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tfmg:purple_rebar_concrete_stairs_from_purple_rebar_concrete_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_purple_rebar_concrete"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tfmg:purple_rebar_concrete_stairs_from_purple_rebar_concrete_stonecutting"
+    ]
+  }
+}

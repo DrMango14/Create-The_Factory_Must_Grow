@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "tag": "c:ingots/lead"
+  },
+  "result": {
+    "count": 4,
+    "id": "tfmg:lead_bars"
+  }
+}

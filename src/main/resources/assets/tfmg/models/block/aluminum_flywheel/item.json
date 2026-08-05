@@ -1,6 +1,6 @@
 {
 	"parent": "tfmg:block/aluminum_flywheel/flywheel",
-	"loader": "forge:obj",
+	"loader": "neoforge:obj",
 	"flip-v": true,
 	"model": "create:models/block/flywheel/flywheel.obj",
 	"display": {

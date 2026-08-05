@@ -1,0 +1,25 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "tfmg:lithium_ore"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:crushed_raw_lithium"
+    },
+    {
+      "chance": 0.25,
+      "id": "tfmg:crushed_raw_lithium"
+    },
+    {
+      "chance": 0.75,
+      "id": "create:experience_nugget"
+    },
+    {
+      "chance": 0.12,
+      "id": "minecraft:cobblestone"
+    }
+  ]
+}

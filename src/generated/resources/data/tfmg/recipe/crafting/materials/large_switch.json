@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:plates/brass"
+    },
+    "I": {
+      "item": "tfmg:cable_connector"
+    },
+    "M": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "P": {
+      "item": "tfmg:electric_post"
+    },
+    "R": {
+      "item": "tfmg:rebar"
+    },
+    "S": {
+      "item": "tfmg:steel_cable_hub"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    }
+  },
+  "pattern": [
+    "WRB",
+    "SMP",
+    "III"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:large_switch"
+  }
+}

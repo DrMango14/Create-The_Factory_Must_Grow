@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/lead"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:lead_sheet"
+    }
+  ]
+}

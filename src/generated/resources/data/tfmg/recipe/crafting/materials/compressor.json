@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "create:copper_backtank"
+    },
+    "C": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "P": {
+      "item": "tfmg:aluminum_pipe"
+    },
+    "S": {
+      "item": "tfmg:steel_fluid_tank"
+    },
+    "T": {
+      "item": "create:shaft"
+    }
+  },
+  "pattern": [
+    "PTP",
+    "SCS",
+    "PBP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:compressor"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "tfmg:hot_blast",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 25,
+      "fluid": "tfmg:air"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 5,
+      "tag": "tfmg:blast_stove_fuel"
+    }
+  ],
+  "processing_time": 200,
+  "results": [
+    {
+      "amount": 25,
+      "id": "tfmg:hot_air"
+    },
+    {
+      "amount": 25,
+      "id": "tfmg:carbon_dioxide"
+    }
+  ]
+}

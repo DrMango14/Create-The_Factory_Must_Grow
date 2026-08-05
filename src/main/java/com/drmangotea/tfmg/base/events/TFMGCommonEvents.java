@@ -40,7 +40,7 @@ public class TFMGCommonEvents {
         if (event.getEntity() instanceof Player player) {
             if (player.getItemInHand(InteractionHand.OFF_HAND).is(TFMGItems.CONFIGURATION_WRENCH.get()) && event.getLevel().getBlockEntity(event.getPos()) instanceof IElectric be && be.canBeInGroups()) {
 
-                be.getData().group.id = player.getItemInHand(InteractionHand.OFF_HAND).getOrCreateTag().getInt("Number");
+                // group system removed - wrench no longer sets group id
                 be.updateNextTick();
                 be.sendStuff();
 

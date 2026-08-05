@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "M": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "O": {
+      "item": "tfmg:steel_pipe"
+    },
+    "Q": {
+      "item": "tfmg:industrial_pipe"
+    },
+    "S": {
+      "tag": "c:strings"
+    },
+    "T": {
+      "item": "tfmg:steel_fluid_tank"
+    }
+  },
+  "pattern": [
+    "STS",
+    "MCM",
+    "OQO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:pumpjack_base"
+  }
+}

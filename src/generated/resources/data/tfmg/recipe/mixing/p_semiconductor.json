@@ -1,0 +1,16 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "item": "tfmg:silicon_ingot"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:p_semiconductor"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,is_main_part=false,unfinished_model=false": {
+      "model": "tfmg:block/large_transformer/block",
+      "y": 90
+    },
+    "facing=east,is_main_part=false,unfinished_model=true": {
+      "model": "tfmg:block/large_transformer/block_unfinished",
+      "y": 90
+    },
+    "facing=east,is_main_part=true,unfinished_model=false": {
+      "model": "tfmg:block/large_transformer/block",
+      "y": 270
+    },
+    "facing=east,is_main_part=true,unfinished_model=true": {
+      "model": "tfmg:block/large_transformer/block_unfinished",
+      "y": 270
+    },
+    "facing=north,is_main_part=false,unfinished_model=false": {
+      "model": "tfmg:block/large_transformer/block"
+    },
+    "facing=north,is_main_part=false,unfinished_model=true": {
+      "model": "tfmg:block/large_transformer/block_unfinished"
+    },
+    "facing=north,is_main_part=true,unfinished_model=false": {
+      "model": "tfmg:block/large_transformer/block",
+      "y": 180
+    },
+    "facing=north,is_main_part=true,unfinished_model=true": {
+      "model": "tfmg:block/large_transformer/block_unfinished",
+      "y": 180
+    },
+    "facing=south,is_main_part=false,unfinished_model=false": {
+      "model": "tfmg:block/large_transformer/block",
+      "y": 180
+    },
+    "facing=south,is_main_part=false,unfinished_model=true": {
+      "model": "tfmg:block/large_transformer/block_unfinished",
+      "y": 180
+    },
+    "facing=south,is_main_part=true,unfinished_model=false": {
+      "model": "tfmg:block/large_transformer/block"
+    },
+    "facing=south,is_main_part=true,unfinished_model=true": {
+      "model": "tfmg:block/large_transformer/block_unfinished"
+    },
+    "facing=west,is_main_part=false,unfinished_model=false": {
+      "model": "tfmg:block/large_transformer/block",
+      "y": 270
+    },
+    "facing=west,is_main_part=false,unfinished_model=true": {
+      "model": "tfmg:block/large_transformer/block_unfinished",
+      "y": 270
+    },
+    "facing=west,is_main_part=true,unfinished_model=false": {
+      "model": "tfmg:block/large_transformer/block",
+      "y": 90
+    },
+    "facing=west,is_main_part=true,unfinished_model=true": {
+      "model": "tfmg:block/large_transformer/block_unfinished",
+      "y": 90
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:plates/aluminum"
+    },
+    "C": {
+      "item": "tfmg:carbon_dioxide_bucket"
+    },
+    "N": {
+      "tag": "c:nuggets/steel"
+    },
+    "R": {
+      "item": "minecraft:red_dye"
+    },
+    "S": {
+      "tag": "c:ingots/steel"
+    }
+  },
+  "pattern": [
+    "NSR",
+    "ACA",
+    "AAA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:fire_extinguisher"
+  }
+}

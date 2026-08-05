@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:has_structure/desert_pyramid",
+  "features": "tfmg:oil_well",
+  "step": "fluid_springs"
+}

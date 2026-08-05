@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:plates/aluminum"
+    },
+    "C": {
+      "item": "tfmg:steel_cogwheel"
+    },
+    "O": {
+      "tag": "c:plates/steel"
+    },
+    "R": {
+      "item": "tfmg:rebar"
+    }
+  },
+  "pattern": [
+    "OA ",
+    "OCA",
+    " R "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:electricians_wrench"
+  }
+}

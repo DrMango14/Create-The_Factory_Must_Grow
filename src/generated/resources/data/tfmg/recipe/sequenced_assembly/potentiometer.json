@@ -1,0 +1,97 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "tfmg:heavy_machinery_casing"
+  },
+  "loops": 3,
+  "results": [
+    {
+      "chance": 120.0,
+      "id": "tfmg:potentiometer"
+    },
+    {
+      "chance": 8.0,
+      "id": "tfmg:steel_casing"
+    },
+    {
+      "chance": 8.0,
+      "id": "tfmg:steel_cogwheel"
+    },
+    {
+      "chance": 8.0,
+      "id": "tfmg:electric_post"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "tfmg:winding",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_potentiometer"
+        },
+        {
+          "item": "tfmg:constantan_spool"
+        }
+      ],
+      "processing_time": 100,
+      "results": [
+        {
+          "id": "tfmg:unfinished_potentiometer"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_potentiometer"
+        },
+        {
+          "item": "tfmg:steel_cogwheel"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_potentiometer"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_potentiometer"
+        },
+        {
+          "tag": "c:wires/copper"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_potentiometer"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_potentiometer"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 50,
+          "fluid": "tfmg:lubrication_oil"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_potentiometer"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "tfmg:unfinished_potentiometer"
+  }
+}

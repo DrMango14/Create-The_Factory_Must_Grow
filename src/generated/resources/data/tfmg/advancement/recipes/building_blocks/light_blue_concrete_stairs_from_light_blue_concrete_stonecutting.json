@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_light_blue_concrete": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tfmg:light_blue_concrete"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tfmg:light_blue_concrete_stairs_from_light_blue_concrete_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_light_blue_concrete"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tfmg:light_blue_concrete_stairs_from_light_blue_concrete_stonecutting"
+    ]
+  }
+}

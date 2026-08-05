@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tfmg:unfinished_insulator"
+    },
+    "N": {
+      "item": "minecraft:copper_ingot"
+    },
+    "O": {
+      "tag": "c:nuggets/steel"
+    }
+  },
+  "pattern": [
+    "OOO",
+    " C ",
+    " N "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:cable_connector"
+  }
+}

@@ -6,6 +6,7 @@ import com.drmangotea.tfmg.content.electricity.base.UpdateInFrontPacket;
 import com.drmangotea.tfmg.content.electricity.utilities.diode.ElectricDiodeBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGPackets;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -38,7 +39,9 @@ public class FuseBlockEntity extends ElectricDiodeBlockEntity {
     public void updateInFront() {
 
         if(!level.isClientSide)
-            TFMGPackets.getChannel().send(PacketDistributor.ALL.noArg(), new UpdateInFrontPacket(BlockPos.of(getPos())));
+            TFMGPackets.getChannel().send(
+                    PacketDistributor.TRACKING_CHUNK.with(() -> ((ServerLevel) getLevelAccessor()).getChunkAt(getBlockPos())),
+                    new UpdateInFrontPacket(BlockPos.of(getPos())));
         Direction facing = getBlockState().hasProperty(DirectionalBlock.FACING) ? getBlockState().getValue(DirectionalBlock.FACING) : getBlockState().getValue(FACING).getCounterClockWise();
         if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be && be.getData().getId() != data.getId()) {
             if (be.hasElectricitySlot(facing.getOpposite())) {

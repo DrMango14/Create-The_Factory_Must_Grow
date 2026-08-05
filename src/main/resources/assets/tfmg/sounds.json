@@ -19,45 +19,5 @@
       }
     ],
     "subtitle": "tfmg.subtitle.diesel_engine_sounds"
-  },
-  "electric_hum": {
-    "sounds": [
-      {
-        "name": "tfmg:electric_hum",
-        "type": "file",
-        "attenuation_distance": 16
-      }
-    ],
-    "subtitle": "tfmg.subtitle.electric_hum"
-  },
-  "generator_hum": {
-    "sounds": [
-      {
-        "name": "tfmg:generator_hum",
-        "type": "file",
-        "attenuation_distance": 16
-      }
-    ],
-    "subtitle": "tfmg.subtitle.generator_hum"
-  },
-  "switch_on": {
-    "sounds": [
-      {
-        "name": "tfmg:switch_on",
-        "type": "file",
-        "attenuation_distance": 16
-      }
-    ],
-    "subtitle": "tfmg.subtitle.switch_on"
-  },
-  "switch_off": {
-    "sounds": [
-      {
-        "name": "tfmg:switch_off",
-        "type": "file",
-        "attenuation_distance": 16
-      }
-    ],
-    "subtitle": "tfmg.subtitle.switch_off"
   }
 }

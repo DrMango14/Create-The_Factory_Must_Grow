@@ -292,7 +292,7 @@ public class AccumulatorBlockEntity extends ElectricBlockEntity {
     public int getChargingRate() {
         //
         // int chargingRate = Math.max((data.networkPowerGeneration - getNetworkPowerUsage()), 0);
-        if (energy.getEnergyStored() >= getMaxCapacity() || getData().getVoltage() < getOutputVoltage() || canPower()|| data.notEnoughtPower)
+        if (energy.getEnergyStored() >= getMaxCapacity() || getData().getVoltage() < getOutputVoltage() || canPower()|| data.notEnoughPower)
             return 0;
 
         //return Math.min(chargingRate, getMaxChargingRate());

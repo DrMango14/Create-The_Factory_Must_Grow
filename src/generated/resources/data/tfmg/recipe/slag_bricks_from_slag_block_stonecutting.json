@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "tfmg:slag_block"
+  },
+  "result": {
+    "count": 4,
+    "id": "tfmg:slag_bricks"
+  }
+}

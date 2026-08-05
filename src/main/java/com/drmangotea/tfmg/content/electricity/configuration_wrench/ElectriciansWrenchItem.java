@@ -53,7 +53,7 @@ public class ElectriciansWrenchItem extends Item {
             if (level.getBlockEntity(pos) instanceof IElectric be && be.canBeInGroups()) {
                 be.updateNextTick();
                 be.sendStuff();
-                be.getData().group.id = context.getItemInHand().getOrCreateTag().getInt("Number");
+                // group system removed - wrench no longer sets group id
                 TFMGUtils.playSound(level, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, context.getPlayer());
                 if(be instanceof ElectricMotorBlockEntity kineticBE)
                     kineticBE.delayedUpdate=true;

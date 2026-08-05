@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:compass"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    },
+    "H": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "M": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "P": {
+      "item": "tfmg:industrial_pipe"
+    },
+    "S": {
+      "tag": "c:plates/lead"
+    }
+  },
+  "pattern": [
+    "SPS",
+    "ECE",
+    "MHM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:steel_distillation_controller"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    {
+      "tag": "minecraft:wooden_doors"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:heavy_casing_door"
+  }
+}

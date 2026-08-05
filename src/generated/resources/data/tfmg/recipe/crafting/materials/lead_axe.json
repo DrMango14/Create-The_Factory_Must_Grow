@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:ingots/lead"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " CC",
+    " SC",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:lead_axe"
+  }
+}

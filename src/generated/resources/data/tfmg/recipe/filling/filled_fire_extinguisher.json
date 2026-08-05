@@ -1,0 +1,21 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "tfmg:fire_extinguisher"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "tfmg:carbon_dioxide"
+    }
+  ],
+  "results": [
+    {
+      "components": {
+        "tfmg:amount": 500
+      },
+      "id": "tfmg:fire_extinguisher"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:plates/brass"
+    },
+    "O": {
+      "tag": "c:nuggets/steel"
+    }
+  },
+  "pattern": [
+    " OO",
+    "BBB",
+    " BB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:oil_can"
+  }
+}

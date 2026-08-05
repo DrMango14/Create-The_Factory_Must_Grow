@@ -1,0 +1,11 @@
+{
+  "values": [
+    "tfmg:aluminum_nugget",
+    "tfmg:steel_nugget",
+    "tfmg:cast_iron_nugget",
+    "tfmg:constantan_nugget",
+    "tfmg:lead_nugget",
+    "tfmg:nickel_nugget",
+    "tfmg:lithium_nugget"
+  ]
+}

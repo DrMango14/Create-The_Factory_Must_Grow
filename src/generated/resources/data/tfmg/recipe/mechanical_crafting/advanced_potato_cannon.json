@@ -1,0 +1,31 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": false,
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tfmg:circuit_board"
+    },
+    "M": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "O": {
+      "item": "tfmg:rebar"
+    },
+    "P": {
+      "item": "tfmg:steel_pipe"
+    },
+    "T": {
+      "item": "tfmg:steel_fluid_tank"
+    }
+  },
+  "pattern": [
+    "PPPT",
+    " MCO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:advanced_potato_cannon"
+  },
+  "show_notification": false
+}

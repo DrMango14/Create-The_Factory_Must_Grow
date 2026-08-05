@@ -3,15 +3,7 @@
   "category": "misc",
   "key": {
     "C": {
-      "item": "tfmg:diesel_engine_cylinder",
-      "nbt": {
-        "Fuels": {
-          "gasoline": "forge:diesel"
-        },
-        "FuelNames": {
-          "gasoline": "Diesel"
-        }
-      }
+      "item": "tfmg:diesel_engine_cylinder"
     },
     "S": {
       "item": "tfmg:spark_plug"
@@ -23,14 +15,15 @@
     "   "
   ],
   "result": {
-    "item": "tfmg:engine_cylinder",
-    "nbt": {
-      "Fuels": {
-        "gasoline": "forge:gasoline",
-        "naphtha": "forge:naphtha",
-        "kerosene": "forge:kerosene"
+    "count": 1,
+    "id": "tfmg:engine_cylinder",
+    "components": {
+      "tfmg:fuel_tags": {
+        "gasoline": "c:gasoline",
+        "naphtha": "c:naphtha",
+        "kerosene": "c:kerosene"
       },
-      "FuelNames": {
+      "tfmg:fuels": {
         "gasoline": "Gasoline",
         "naphtha": "Naphtha",
         "kerosene": "Kerosene"

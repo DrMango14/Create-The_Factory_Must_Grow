@@ -36,6 +36,11 @@ import com.drmangotea.tfmg.content.electricity.lights.variants.CircularLightRend
 import com.drmangotea.tfmg.content.electricity.lights.variants.ModernLightRenderer;
 import com.drmangotea.tfmg.content.electricity.measurement.VoltMeterBlockEntity;
 import com.drmangotea.tfmg.content.electricity.measurement.VoltMeterRenderer;
+import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchBlockEntity;
+import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchRenderer;
+import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchVisual;
+import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeCoilBlockEntity;
+import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeTransformerBlockEntity;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.converter.ConverterBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.diode.ElectricDiodeBlockEntity;
@@ -100,8 +105,12 @@ import com.drmangotea.tfmg.content.machinery.oil_processing.surface_scanner.Surf
 import com.drmangotea.tfmg.content.machinery.oil_processing.surface_scanner.SurfaceScannerRenderer;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatRenderer;
+import com.drmangotea.tfmg.content.machinery.vat.compressor.CompressorBlockEntity;
+import com.drmangotea.tfmg.content.machinery.vat.compressor.CompressorRenderer;
+import com.drmangotea.tfmg.content.machinery.vat.compressor.CompressorVisual;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.ElectrodeHolderBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.ElectrodeHolderRenderer;
+import com.drmangotea.tfmg.content.machinery.vat.freezer.FreezerBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerRenderer;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerVisual;
@@ -209,7 +218,36 @@ public class TFMGBlockEntities {
             .blockEntity("pumpjack_base", PumpjackBaseBlockEntity::new)
             .validBlocks(TFMGBlocks.PUMPJACK_BASE)
             .register();
-    public static final BlockEntityEntry<ConverterBlockEntity> CONVERTER = REGISTRATE
+    public static final BlockEntityEntry<LargeSwitchBlockEntity> LARGE_SWITCH = REGISTRATE
+            .blockEntity("large_switch", LargeSwitchBlockEntity::new)
+            .visual(() -> LargeSwitchVisual::new)
+            .renderer(() -> LargeSwitchRenderer::new)
+            .validBlocks(TFMGBlocks.LARGE_SWITCH)
+            .register();
+
+    public static final BlockEntityEntry<LargeTransformerBlockEntity> LARGE_TRANSFORMER = REGISTRATE
+            .blockEntity("large_transformer", LargeTransformerBlockEntity::new)
+            .validBlocks(TFMGBlocks.LARGE_TRANSFORMER)
+            .register();
+
+    public static final BlockEntityEntry<LargeCoilBlockEntity> LARGE_COIL = REGISTRATE
+            .blockEntity("large_coil", LargeCoilBlockEntity::new)
+            .validBlocks(TFMGBlocks.LARGE_COIL)
+            .register();
+
+    public static final BlockEntityEntry<FreezerBlockEntity> FREEZER = REGISTRATE
+            .blockEntity("freezer", FreezerBlockEntity::new)
+            .validBlocks(TFMGBlocks.FREEZER)
+            .register();
+
+    public static final BlockEntityEntry<CompressorBlockEntity> COMPRESSOR = REGISTRATE
+            .blockEntity("compressor", CompressorBlockEntity::new)
+            .visual(() -> CompressorVisual::new)
+            .renderer(() -> CompressorRenderer::new)
+            .validBlocks(TFMGBlocks.COMPRESSOR)
+            .register();
+
+        public static final BlockEntityEntry<ConverterBlockEntity> CONVERTER = REGISTRATE
             .blockEntity("converter", ConverterBlockEntity::new)
             .validBlocks(TFMGBlocks.CONVERTER)
             .register();
