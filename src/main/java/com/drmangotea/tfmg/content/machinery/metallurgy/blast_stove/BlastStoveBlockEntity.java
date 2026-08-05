@@ -505,5 +505,7 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
             return getMaxHeight();
         return getMaxWidth();
     }
+	
+	@Override
+	public int getMaxWidth() { return MAX_SIZE; }
 }
-
