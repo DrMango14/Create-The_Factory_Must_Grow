@@ -295,6 +295,10 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
     public void updateBoilerState() {
         if (!isController())
             return;
+
+        if (getControllerBE() == null)
+            return;
+
         boolean wasTower = isDistillationTower;
         boolean changed = evaluate();
 
@@ -412,15 +416,18 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
     }
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        SteelTankBlockEntity controllerTE = getControllerBE();
+        SteelTankBlockEntity controllerBE = getControllerBE();
         if (isDistillationTower)
             return false;
-        if (getControllerBE() != null)
-            if (getControllerBE().isDistillationTower)
-                return false;
+
+        if (controllerBE == null)
+            return false;
+
+        if (controllerBE.isDistillationTower)
+            return false;
 
         return containedFluidTooltip(tooltip, isPlayerSneaking,
-                level.getCapability(Capabilities.FluidHandler.BLOCK, getControllerBE().getBlockPos(), null));
+                level.getCapability(Capabilities.FluidHandler.BLOCK, controllerBE.getBlockPos(), null));
     }
 
     @Override
@@ -452,6 +459,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
             tankInventory.readFromNBT(registries, compound.getCompound("TankContent"));
             if (tankInventory.getSpace() < 0)
                 tankInventory.drain(-tankInventory.getSpace(), IFluidHandler.FluidAction.EXECUTE);
+            isDistillationTower = compound.getBoolean("IsDistillationTower");          
         }
 
         boiler.read(compound.getCompound("Boiler"), width * width * height);
@@ -479,7 +487,6 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
                 fluidLevel = LerpedFloat.linear()
                         .startWithValue(fillState);
             fluidLevel.chase(fillState, 0.5f, LerpedFloat.Chaser.EXP);
-            isDistillationTower = compound.getBoolean("IsDistillationTower");
         }
         if (luminosity != prevLum && hasLevel())
             level.getChunkSource()

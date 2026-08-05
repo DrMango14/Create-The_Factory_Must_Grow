@@ -92,10 +92,12 @@ public class FireboxBlockEntity extends SmartBlockEntity implements IHaveGoggleI
     public void lazyTick() {
         super.lazyTick();
 
-        boolean wasRunning = running;
-
-
         FireboxBlockEntity controller = isController() ? this : getControllerBE();
+
+        if (controller == null)
+            return;
+
+        boolean wasRunning = running;
 
         if (!canBurn(controller)) {
             if (wasRunning)

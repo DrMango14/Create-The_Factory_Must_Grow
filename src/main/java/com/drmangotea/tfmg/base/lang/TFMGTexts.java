@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
  */
 public class TFMGTexts {
     public static String percent(double value) {
-        return TFMGLang.number(value) + "%";
+        return String.valueOf(value) + "%";
     }
     // Electricity info
     public static String power(double value) {
