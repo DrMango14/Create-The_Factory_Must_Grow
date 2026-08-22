@@ -100,8 +100,9 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
         if (!(beBehind instanceof SteelTankBlockEntity be))
             return;
 
+        SteelTankBlockEntity controllerBe = be.getControllerBE() == null ? be : be.getControllerBE();
 
-        if (outputs.isEmpty() || be.activeHeat == 0)
+        if (outputs.isEmpty() || controllerBe.activeHeat == 0)
             return;
 
         findRecipe(outputs);
@@ -110,7 +111,7 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
             return;
 
         ///
-        float speedModifier = (float) be.activeHeat / 2;
+        float speedModifier = (float) controllerBe.activeHeat / 2;
         if (recipe.getInputFluid().amount() * speedModifier > tank.getFluidAmount())
             return;
 
@@ -168,8 +169,9 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
 
         BlockEntity beBehind = level.getBlockEntity(getBlockPos().relative(getFacing(getBlockState()).getOpposite()));
         if (beBehind instanceof SteelTankBlockEntity be) {
+            SteelTankBlockEntity controllerBe = be.getControllerBE() == null ? be : be.getControllerBE();
             TFMGTexts.header("distillation_tower").style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
-            TFMGTexts.Distillation.level(be.getControllerBE().activeHeat).forGoggles(tooltip, 1);
+            TFMGTexts.Distillation.level(controllerBe.activeHeat).forGoggles(tooltip, 1);
             TFMGTexts.Distillation.outputs(getOutputs().toArray().length).forGoggles(tooltip, 1);
         } else
             TFMGTexts.Distillation.tankNotFound().forGoggles(tooltip, 1);

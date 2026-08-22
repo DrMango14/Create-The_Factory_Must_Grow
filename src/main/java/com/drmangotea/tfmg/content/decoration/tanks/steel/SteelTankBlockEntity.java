@@ -133,6 +133,8 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
     @Override
     public void initialize() {
         super.initialize();
+        if (isDistillationTower)
+            updateTemperature();
         sendData();
         if (level.isClientSide)
             invalidateRenderBoundingBox();
