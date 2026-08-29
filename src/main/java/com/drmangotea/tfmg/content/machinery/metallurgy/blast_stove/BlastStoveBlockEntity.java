@@ -437,16 +437,19 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
                 Capabilities.FluidHandler.BLOCK,
                 TFMGBlockEntities.BLAST_STOVE.get(),
                 (be, context) -> {
-                    if (be.fluidCapability == null)
-                        be.refreshCapability();
-                    if (be.secondaryCapability == null)
-                        be.refreshCapability();
+                    if (be.getControllerBE() == null)
+                        return null;
+                    
+                    if (be.getControllerBE().fluidCapability == null)
+                        be.getControllerBE().refreshCapability();
+                    if (be.getControllerBE().secondaryCapability == null)
+                        be.getControllerBE().refreshCapability();
 
 
                     if (context.getAxis() == Direction.Axis.Y) {
-                        return be.primaryCapability;
+                        return be.getControllerBE().primaryCapability;
                     } else if (be.getController().getY() == be.getBlockPos().getY()) {
-                        return be.secondaryCapability;
+                        return be.getControllerBE().secondaryCapability;
                     }
 
                     return null;
@@ -505,5 +508,7 @@ public class BlastStoveBlockEntity extends FluidTankBlockEntity implements IHave
             return getMaxHeight();
         return getMaxWidth();
     }
+	
+	@Override
+	public int getMaxWidth() { return MAX_SIZE; }
 }
-
