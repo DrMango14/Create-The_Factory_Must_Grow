@@ -6,6 +6,8 @@ import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.content.decoration.tanks.TFMGFluidTankBlockEntity;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
+import com.drmangotea.tfmg.content.electricity.experimental.RealElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.converter.ConverterBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerBlockEntity;
@@ -32,6 +34,8 @@ import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.base.Pumpja
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGItems;
+import com.simibubi.create.Create;
+import com.simibubi.create.content.equipment.toolbox.ToolboxHandler;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
@@ -39,6 +43,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
@@ -54,7 +59,7 @@ public class TFMGCommonEvents {
         LevelAccessor world = event.getLevel();
         TFMG.NETWORK_MANAGER.onUnloadWorld(world);
 
-
+        TFMG.ELECTRIC_NETWORK_MANAGER.onUnloadWorld(world);
     }
 
     @SubscribeEvent
@@ -62,9 +67,19 @@ public class TFMGCommonEvents {
         LevelAccessor world = event.getLevel();
         TFMG.NETWORK_MANAGER.onLoadWorld(world);
         TFMG.DEPOSITS.levelLoaded(world);
+
+        //
+        TFMG.ELECTRIC_NETWORK_MANAGER.onLoadWorld(world);
+
+        TFMG.ELECTRICAL_NETWORK_DATA.levelLoaded(world);
     }
 
+    @SubscribeEvent
+    public static void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        Player player = event.getEntity();
 
+        RealElectricNetworkManager.playerLogin(player);
+    }
 
     @SubscribeEvent
     public static void addReloadListeners(AddReloadListenerEvent event) {

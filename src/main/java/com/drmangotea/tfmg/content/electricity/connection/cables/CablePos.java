@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.connection.cables;
 
 
+import net.minecraft.core.BlockPos;
 
 public class CablePos extends SimplePos {
     public CablePos(double x, double y, double z) {
@@ -8,6 +9,10 @@ public class CablePos extends SimplePos {
     }
     public CablePos subtract(CablePos pos) {
         return this.offset(-pos.x(), -pos.y(), -pos.z());
+    }
+
+    public CablePos add(BlockPos pos) {
+        return this.offset(pos.getX(), pos.getY(), pos.getZ());
     }
 
     public CablePos offset(double x, double y, double z) {

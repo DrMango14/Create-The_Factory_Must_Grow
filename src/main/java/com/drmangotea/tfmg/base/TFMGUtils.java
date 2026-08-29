@@ -151,6 +151,20 @@ public class TFMGUtils {
         }
     }
 
+    public static float getDistance(Vec3 pos1, Vec3 pos2) {
+
+
+        double x = Math.abs(pos1.x() - pos2.x());
+        double y = Math.abs(pos1.y() - pos2.y());
+        double z = Math.abs(pos1.z() - pos2.z());
+
+
+        float distance2D = (float) Math.sqrt(x * x + z * z);
+
+
+        return (float) Math.sqrt(distance2D * distance2D + y * y);
+    }
+
     public static float getDistance(BlockPos pos1, BlockPos pos2, boolean _2D) {
 
 

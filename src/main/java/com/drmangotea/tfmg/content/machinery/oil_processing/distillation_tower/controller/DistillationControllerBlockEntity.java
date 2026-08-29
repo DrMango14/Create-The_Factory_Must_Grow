@@ -18,13 +18,16 @@ import com.simibubi.create.foundation.recipe.RecipeConditions;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 
 import net.createmod.catnip.animation.LerpedFloat;
+import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -92,6 +95,15 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
                 sendData();
             }
         }
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        SteelTankBlock.updateTowerState(level, getBlockPos().relative(getFacing(getBlockState()).getOpposite()),true,false);
+        if (level instanceof ServerLevel serverLevel)
+            CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(getBlockPos()),new DistillationTowerPacket(getBlockPos(),getBlockPos().relative(getFacing(getBlockState()).getOpposite()),true));
+
     }
 
     public void manageRecipe(){

@@ -12,13 +12,13 @@ import net.minecraft.world.level.LevelAccessor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestSavedDataManager {
+public class OilDataManager {
 
     public List<FluidReservoir> list;
 
-    private TestSavedData savedData;
+    private OilSavedData savedData;
 
-    public TestSavedDataManager() {
+    public OilDataManager() {
         list = new ArrayList<>();
     }
 
@@ -127,8 +127,8 @@ public class TestSavedDataManager {
     private void loadLogisticsData(MinecraftServer server) {
         if (savedData != null)
             return;
-        savedData = TestSavedData.load(server);
-        list = savedData.getLogisticsNetworks();
+        savedData = OilSavedData.load(server);
+        list = savedData.getReservoirs();
     }
     public void markDirty() {
         if (savedData != null)

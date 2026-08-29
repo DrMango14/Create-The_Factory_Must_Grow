@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg;
 
+import com.drmangotea.tfmg.content.electricity.experimental.ElectricNetworkRenderer;
 import com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon.AdvancedPotatoCannonRenderHandler;
 import com.drmangotea.tfmg.content.items.weapons.flamethrover.FlamethrowerRenderHandler;
 import com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon.QuadPotatoCannonRenderHandler;
@@ -20,8 +21,9 @@ public class TFMGClient {
      */
     public static final QuadPotatoCannonRenderHandler QUAD_POTATO_CANNON_RENDER_HANDLER = new QuadPotatoCannonRenderHandler();
     public static final AdvancedPotatoCannonRenderHandler ADVANCED_POTATO_CANNON_RENDER_HANDLER = new AdvancedPotatoCannonRenderHandler();
-
     public static final FlamethrowerRenderHandler FLAMETHROWER_RENDER_HANDLER = new FlamethrowerRenderHandler();
+
+    public static final ElectricNetworkRenderer ELECTRIC_NETWORK_RENDERER = new ElectricNetworkRenderer();
 
     public TFMGClient(IEventBus modEventBus) {
         onCtorClient(modEventBus);

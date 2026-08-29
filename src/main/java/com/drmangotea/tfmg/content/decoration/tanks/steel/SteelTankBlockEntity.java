@@ -420,7 +420,7 @@ public class SteelTankBlockEntity extends FluidTankBlockEntity implements IHaveG
                 return false;
 
         return containedFluidTooltip(tooltip, isPlayerSneaking,
-                level.getCapability(Capabilities.FluidHandler.BLOCK, getControllerBE().getBlockPos(), null));
+                level.getCapability(Capabilities.FluidHandler.BLOCK,getControllerBE() == null ? getBlockPos() : getControllerBE().getBlockPos(), null));
     }
 
     @Override

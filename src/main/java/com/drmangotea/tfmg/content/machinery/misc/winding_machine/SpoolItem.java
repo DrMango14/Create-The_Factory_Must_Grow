@@ -136,7 +136,7 @@ public class SpoolItem extends Item {
             if (stack.get(TFMGDataComponents.POSITION) != null) {
                 BlockPos posToConnect = BlockPos.of(stack.get(TFMGDataComponents.POSITION));
                 if (posToConnect.equals(pos)) {
-                    stack.set(TFMGDataComponents.POSITION, 0l);
+                    stack.set(TFMGDataComponents.POSITION, 0L);
                     if (level.isClientSide)
                         player.displayClientMessage(TFMGLang.translateDirect("wires.cant_connect_itself")
                                 .withStyle(ChatFormatting.YELLOW), true);

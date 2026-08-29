@@ -70,6 +70,11 @@ public class TFMGDataComponents {
 			builder -> builder.persistent(Codec.LONG).networkSynchronized(ByteBufCodecs.VAR_LONG)
 	);
 
+	public static final DataComponentType<Integer> CONNECTOR_ID = register(
+			"connector_id",
+			builder -> builder.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT)
+	);
+
 	public static final DataComponentType<Integer> X_POS = register(
 			"x_pos",
 			builder -> builder.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT)

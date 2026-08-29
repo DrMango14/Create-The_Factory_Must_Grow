@@ -30,6 +30,9 @@ import com.drmangotea.tfmg.content.electricity.connection.copycat_cable.CopycatC
 import com.drmangotea.tfmg.content.electricity.connection.diagonal.DiagonalCableBlock;
 import com.drmangotea.tfmg.content.electricity.connection.diagonal.DiagonalCableGenerator;
 import com.drmangotea.tfmg.content.electricity.connection.tube.CableTubeBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.blocks.DebugResistorBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.blocks.RealConnectorBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.blocks.ThreePhaseGeneratorBlock;
 import com.drmangotea.tfmg.content.electricity.generators.GeneratorBlock;
 import com.drmangotea.tfmg.content.electricity.generators.creative_generator.CreativeGeneratorBlock;
 import com.drmangotea.tfmg.content.electricity.generators.large_generator.RotorBlock;
@@ -181,9 +184,33 @@ public class TFMGBlocks {
         REGISTRATE.setCreativeTab(TFMGCreativeTabs.TFMG_MAIN);
     }
 
+    public static final BlockEntry<ThreePhaseGeneratorBlock> THREE_PHASE_GENERATOR = REGISTRATE.block("three_phase_generator", ThreePhaseGeneratorBlock::new)
+            .initialProperties(SharedProperties::softMetal)
+            .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
+            .properties(BlockBehaviour.Properties::noOcclusion)
+            .blockstate(BlockStateGen.directionalBlockProvider(true))
+            .transform(TFMGStress.setImpact(50.0f))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .item()
+            .transform(customItemModel())
+            .register();
 
+    public static final BlockEntry<RealConnectorBlock> DEBUG_CONNECTOR = REGISTRATE.block("debug_connector", RealConnectorBlock::new)
+            .initialProperties(SharedProperties::softMetal)
+            .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
+            .properties(BlockBehaviour.Properties::noOcclusion)
+            .addLayer(() -> RenderType::cutoutMipped)
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<DebugResistorBlock> DEBUG_RESISTOR = REGISTRATE.block("debug_resistor", DebugResistorBlock::new)
+            .initialProperties(SharedProperties::softMetal)
+            .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
+            .properties(BlockBehaviour.Properties::noOcclusion)
+            .addLayer(() -> RenderType::cutoutMipped)
+            .simpleItem()
+            .register();
     //------------------ENGINES------------------//
-
     public static final BlockEntry<TurbineEngineBlock> TURBINE_ENGINE = REGISTRATE.block("turbine_engine", TurbineEngineBlock::new)
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))

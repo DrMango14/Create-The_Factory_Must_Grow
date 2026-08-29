@@ -15,8 +15,11 @@ public class ConnectNeightborsPacket extends BlockEntityDataPacket<SmartBlockEnt
             ConnectNeightborsPacket::new
     );
 
+
+
     public ConnectNeightborsPacket(BlockPos pos) {
         super(pos);
+
 
     }
 

@@ -73,6 +73,8 @@ public class TFMGPartialModels {
             SMALL_CYLINDER = block("regular_engine/cylinder_small"),
             TRANSFORMER_COIL = block("transformer/coil"),
             FUSE = block("fuse_block/fuse"),
+            CABLE = block("cable"),
+            CABLE_FUNNY = block("cable_funny"),
             CONNNECTING_WIRE = block("winding_machine/connecting_wire"),
             CONNNECTING_WIRE_ANIMATED = block("winding_machine/connecting_wire_animated"),
             SMALL_MIXER = block("industrial_mixer/mixer_small"),

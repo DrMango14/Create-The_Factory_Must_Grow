@@ -7,6 +7,7 @@ import com.drmangotea.tfmg.base.TFMGTiers;
 import com.drmangotea.tfmg.content.decoration.kinetics.gearbox.SteelVerticalGearboxItem;
 import com.drmangotea.tfmg.content.electricity.configuration_wrench.ElectriciansWrenchItem;
 import com.drmangotea.tfmg.base.debug.DebugCinderBlockItem;
+import com.drmangotea.tfmg.content.electricity.experimental.BetterSpoolItem;
 import com.drmangotea.tfmg.content.electricity.measurement.MultimeterItem;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.MagnetItem;
 import com.drmangotea.tfmg.content.electricity.utilities.resistor.ResistorItem;
@@ -199,6 +200,11 @@ public class TFMGItems {
             ALUMINUM_SPOOL = spoolItem("aluminum", 0xEDEFEF, TFMG.asResource("aluminum"))
                     .register(),
             CONSTANTAN_SPOOL = spoolItem("constantan", 0xCFC2A8, TFMG.asResource("constantan"))
+                    .register();
+
+    public static final ItemEntry<BetterSpoolItem> DEBUG_SPOOL =
+            REGISTRATE.item("debug_spool", BetterSpoolItem::new)
+                    .properties(p -> p.stacksTo(1))
                     .register();
 
     public static final ItemEntry<ElectromagneticCoilItem> ELECTROMAGNETIC_COIL =
