@@ -1,30 +1,26 @@
 {
   "variants": {
     "facing=down": {
-      "model": "tfmg:block/resistor/block",
+      "model": "tfmg:block/resistor/block_vertical",
       "x": 180
     },
     "facing=east": {
       "model": "tfmg:block/resistor/block",
-      "x": 90,
-      "y": 90
+      "y": 270
     },
     "facing=north": {
       "model": "tfmg:block/resistor/block",
-      "x": 90
-    },
-    "facing=south": {
-      "model": "tfmg:block/resistor/block",
-      "x": 90,
       "y": 180
     },
-    "facing=up": {
+    "facing=south": {
       "model": "tfmg:block/resistor/block"
+    },
+    "facing=up": {
+      "model": "tfmg:block/resistor/block_vertical"
     },
     "facing=west": {
       "model": "tfmg:block/resistor/block",
-      "x": 90,
-      "y": 270
+      "y": 90
     }
   }
 }

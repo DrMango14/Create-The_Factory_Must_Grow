@@ -4,6 +4,8 @@ import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGClient;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.ElectricNetworkRenderer;
+import com.drmangotea.tfmg.content.electricity.experimental.RealElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.measurement.MultimeterOverlayRenderer;
 import com.drmangotea.tfmg.content.electricity.network.transformer.small.TransformerBlockEntity;
 import com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon.AdvancedPotatoCannonItemRenderer;
@@ -61,6 +63,12 @@ public class TFMGClientEvents {
     }
 
     @SubscribeEvent
+    public static void PlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(event.getEntity().level());
+        network.update();
+    }
+
+    @SubscribeEvent
     public static void PlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
         Player player = event.getEntity();
 
@@ -68,8 +76,9 @@ public class TFMGClientEvents {
             player.getPersistentData().remove("IsUsingEngineController");
     }
 
-    //@SubscribeEvent
+    @SubscribeEvent
     public static void registerGuiOverlays(RegisterGuiLayersEvent event) {
+
         event.registerAbove(VanillaGuiLayers.HOTBAR, TFMG.asResource("multimeter_info"), MultimeterOverlayRenderer.OVERLAY);
 
     }

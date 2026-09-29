@@ -4,11 +4,20 @@ import com.drmangotea.tfmg.content.electricity.experimental.ElectricalProperties
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricNetworkManager;
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.experimental.WireConnection;
-import com.drmangotea.tfmg.content.electricity.experimental.blocks.ConnectorProperties;
-import com.drmangotea.tfmg.content.electricity.experimental.blocks.DebugResistorProperties;
-import com.drmangotea.tfmg.content.electricity.experimental.blocks.DirectionalElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.experimental.blocks.ThreePhaseGeneratorProperties;
-import com.drmangotea.tfmg.content.electricity.experimental.simulation.*;
+import com.drmangotea.tfmg.content.electricity.experimental.content.DirectionalElectricalProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.ThreePhaseGeneratorProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.DebugResistorProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.lights.LightProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.adapters.FourSlotAdapterProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.adapters.TwoSlotAdapterProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.CableProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.ConnectorProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.ElectricalComponent;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.IdealVoltageSource;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.Resistance;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectableElectricalNode;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectingElectricalNode;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ElectricalNode;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -43,7 +52,7 @@ public class NetworkSavedData extends SavedData {
 
                 CompoundTag members = new CompoundTag();
                 networkNBT.putInt("Member Count", network.members.size());
-                networkNBT.putInt("Node Count",network.totalNodes);
+                networkNBT.putInt("Node Count", network.totalNodes);
                 for (int i = 0; i < network.members.size(); i++) {
                     CompoundTag member = new CompoundTag();
                     ElectricalProperties properties = network.members.values().stream().toList().get(i);
@@ -84,17 +93,19 @@ public class NetworkSavedData extends SavedData {
 
                     WireConnection connection = network.connections.get(i);
 
-                    connectionTag.putDouble("Resistance", connection.resistance());
+                    connectionTag.putDouble("Resistance", connection.resistance);
+                    connectionTag.putBoolean("Should Render",connection.render);
 
                     CompoundTag node1 = new CompoundTag();
-                    node1.putLong("position", connection.node1().pos);
-                    node1.putInt("local id", connection.node1().getLocalId());
+                    node1.putLong("position", connection.node1.pos);
+                    node1.putInt("local id", connection.node1.getLocalId());
                     connectionTag.put("Node1", node1);
 
                     CompoundTag node2 = new CompoundTag();
-                    node2.putLong("position", connection.node2().pos);
-                    node2.putInt("local id", connection.node2().getLocalId());
+                    node2.putLong("position", connection.node2.pos);
+                    node2.putInt("local id", connection.node2.getLocalId());
                     connectionTag.put("Node2", node2);
+
 
                     connections.put("connection " + i, connectionTag);
 
@@ -131,10 +142,10 @@ public class NetworkSavedData extends SavedData {
 
                     Direction direction = Direction.NORTH;
 
-                    if(member.contains("direction")){
+                    if (member.contains("direction")) {
                         direction = Direction.from3DDataValue(member.getInt("direction"));
                     }
-                    ElectricalProperties properties = getElectricalProperties(member.getInt("Property Id"), direction);
+                    ElectricalProperties properties = getElectricalProperties(member.getInt("Property Id"), direction,pos);
 
                     properties.position = pos;
                     network.members.put(pos, properties);
@@ -144,25 +155,26 @@ public class NetworkSavedData extends SavedData {
                 for (int i = 0; i < connectionCount; i++) {
                     CompoundTag connection = networkTag.getCompound("connections").getCompound("connection " + i);
                     double resistance = connection.getDouble("Resistance");
+                    boolean shouldRender = connection.getBoolean("Should Render");
 
-                    ConnectingElectricalNode node1 = null;
+                    ConnectableElectricalNode node1 = null;
                     CompoundTag node1Tag = connection.getCompound("Node1");
                     long pos1 = node1Tag.getLong("position");
                     int id1 = node1Tag.getInt("local id");
                     for (ElectricalNode node : network.getNodes(pos1)) {
-                        if (node.localId == id1 && node instanceof ConnectingElectricalNode connectingNode) {
+                        if (node.localId == id1 && node instanceof ConnectableElectricalNode connectingNode) {
                             node1 = connectingNode;
                             node1.pos = pos1;
                         }
                     }
 
 
-                    ConnectingElectricalNode node2 = null;
+                    ConnectableElectricalNode node2 = null;
                     CompoundTag node2Tag = connection.getCompound("Node2");
                     long pos2 = node2Tag.getLong("position");
                     int id2 = node2Tag.getInt("local id");
                     for (ElectricalNode node : network.getNodes(pos2)) {
-                        if (node.localId == id2 && node instanceof ConnectingElectricalNode connectingNode) {
+                        if (node.localId == id2 && node instanceof ConnectableElectricalNode connectingNode) {
                             node2 = connectingNode;
                             node2.pos = pos2;
                         }
@@ -170,9 +182,9 @@ public class NetworkSavedData extends SavedData {
 
                     if (node1 != null && node2 != null) {
 
-                        long test = node1.pos;
 
-                        network.connections.add(new WireConnection(node1, node2, resistance));
+
+                        network.connections.add(new WireConnection(node1, node2, resistance, shouldRender));
                     }
 
                 }
@@ -182,14 +194,18 @@ public class NetworkSavedData extends SavedData {
         return sd;
     }
 
-    public static ElectricalProperties getElectricalProperties(int id, Direction direction) {
+    public static ElectricalProperties getElectricalProperties(int id, Direction direction, long pos) {
 
 
         return switch (id) {
-            case 1 -> new ThreePhaseGeneratorProperties(0,direction);
-            case 2 -> new ConnectorProperties(0);
-            case 3 -> new DebugResistorProperties(0, direction);
-            default -> new ElectricalProperties(0);
+            case 1 -> new ThreePhaseGeneratorProperties(pos, direction);
+            case 2 -> new ConnectorProperties(pos);
+            case 3 -> new DebugResistorProperties(pos, direction);
+            case 4 -> new CableProperties(pos, List.of(Direction.values()));
+            case 5 -> new FourSlotAdapterProperties(pos, direction);
+            case 6 -> new TwoSlotAdapterProperties(pos,  direction);
+            case 7 -> new LightProperties(pos);
+            default -> new ElectricalProperties(pos);
 
         };
     }

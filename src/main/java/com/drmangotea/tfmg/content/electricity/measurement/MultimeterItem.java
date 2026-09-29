@@ -5,8 +5,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 
 public class MultimeterItem extends Item {
-    public MultimeterItem(Properties p_41383_) {
+
+    public final int color;
+
+    public MultimeterItem(Properties p_41383_,int color) {
         super(p_41383_);
+        this.color = color;
+
     }
 
     public static boolean isHeldByPlayer(Player player){

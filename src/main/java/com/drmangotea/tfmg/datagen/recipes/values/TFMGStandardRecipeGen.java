@@ -1820,35 +1820,35 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("B")
                     .pattern(" ")),
 
-    CIRCULAR_LAMP = create(TFMGBlocks.CIRCULAR_LIGHT)
-            .unlockedBy(TFMGBlocks.LIGHT_BULB::get)
-            .viaShaped(b -> b
-                    .define('S', steelNugget())
-                    .define('P', AllPaletteBlocks.FRAMED_GLASS)
-                    .define('B', lightBulb())
-                    .pattern("P")
-                    .pattern("B")
-                    .pattern("S")),
-
-    ALUMINUM_LAMP = create(TFMGBlocks.ALUMINUM_LAMP)
-            .unlockedBy(TFMGBlocks.LIGHT_BULB::get)
-            .viaShaped(b -> b
-                    .define('S', aluminumSheet())
-                    .define('P', AllPaletteBlocks.FRAMED_GLASS_PANE)
-                    .define('B', lightBulb())
-                    .pattern(" P ")
-                    .pattern(" B ")
-                    .pattern(" S ")),
-
-    MODERN_LIGHT = create(TFMGBlocks.MODERN_LIGHT)
-            .unlockedBy(TFMGBlocks.LIGHT_BULB::get)
-            .viaShaped(b -> b
-                    .define('N', steelNugget())
-                    .define('P', AllPaletteBlocks.FRAMED_GLASS_PANE)
-                    .define('B', lightBulb())
-                    .pattern(" P ")
-                    .pattern(" B ")
-                    .pattern("NNN")),
+   // CIRCULAR_LAMP = create(TFMGBlocks.CIRCULAR_LIGHT)
+   //         .unlockedBy(TFMGBlocks.LIGHT_BULB::get)
+   //         .viaShaped(b -> b
+   //                 .define('S', steelNugget())
+   //                 .define('P', AllPaletteBlocks.FRAMED_GLASS)
+   //                 .define('B', lightBulb())
+   //                 .pattern("P")
+   //                 .pattern("B")
+   //                 .pattern("S")),
+//
+   // ALUMINUM_LAMP = create(TFMGBlocks.ALUMINUM_LAMP)
+   //         .unlockedBy(TFMGBlocks.LIGHT_BULB::get)
+   //         .viaShaped(b -> b
+   //                 .define('S', aluminumSheet())
+   //                 .define('P', AllPaletteBlocks.FRAMED_GLASS_PANE)
+   //                 .define('B', lightBulb())
+   //                 .pattern(" P ")
+   //                 .pattern(" B ")
+   //                 .pattern(" S ")),
+//
+   // MODERN_LIGHT = create(TFMGBlocks.MODERN_LIGHT)
+   //         .unlockedBy(TFMGBlocks.LIGHT_BULB::get)
+   //         .viaShaped(b -> b
+   //                 .define('N', steelNugget())
+   //                 .define('P', AllPaletteBlocks.FRAMED_GLASS_PANE)
+   //                 .define('B', lightBulb())
+   //                 .pattern(" P ")
+   //                 .pattern(" B ")
+   //                 .pattern("NNN")),
 
     GAS_LAMP = create(TFMGBlocks.GAS_LAMP)
             .unlockedBy(TFMGBlocks.CAST_IRON_BARS::get)

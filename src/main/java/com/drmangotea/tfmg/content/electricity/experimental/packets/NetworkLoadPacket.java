@@ -5,9 +5,12 @@ import com.drmangotea.tfmg.content.electricity.experimental.ElectricalProperties
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricNetworkManager;
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.experimental.WireConnection;
-import com.drmangotea.tfmg.content.electricity.experimental.blocks.DirectionalElectricalProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.DirectionalElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.saved_data.NetworkSavedData;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.*;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectableElectricalNode;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectingElectricalNode;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ElectricalNode;
 import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.content.trains.graph.DimensionPalette;
 import net.createmod.catnip.data.Pair;
@@ -62,7 +65,7 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
                // Direction direction = Direction.NORTH;
 
 
-                ElectricalProperties properties = NetworkSavedData.getElectricalProperties(id, direction);
+                ElectricalProperties properties = NetworkSavedData.getElectricalProperties(id, direction,position);
 
 
                 int resistorCount = buffer.readInt();
@@ -83,6 +86,7 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
 
                     if (c instanceof Resistance r && !resistors.isEmpty()) {
                         r.resistance = resistors.get(rIndex);
+
                         rIndex++;
                     }
                     if (c instanceof IdealVoltageSource s && !sources.isEmpty()) {
@@ -98,6 +102,7 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
             int connectionCount = buffer.readInt();
 
             for (int j = 0; j < connectionCount; j++) {
+                boolean shouldRender = buffer.readBoolean();
                 double resistance = buffer.readDouble();
 
                 long pos1 = buffer.readLong();
@@ -108,16 +113,16 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
                 List<ElectricalNode> nodes1 = network.getNodes(pos1);
                 List<ElectricalNode> nodes2 = network.getNodes(pos2);
 
-                ConnectingElectricalNode n1 = null;
-                ConnectingElectricalNode n2 = null;
+                ConnectableElectricalNode n1 = null;
+                ConnectableElectricalNode n2 = null;
 
                 for (ElectricalNode electricalNode : nodes1) {
-                    if (electricalNode instanceof ConnectingElectricalNode node && node.localId == id1) {
+                    if (electricalNode instanceof ConnectableElectricalNode node && node.localId == id1) {
                         n1 = node;
                     }
                 }
                 for (ElectricalNode electricalNode : nodes2) {
-                    if (electricalNode instanceof ConnectingElectricalNode node && node.localId == id2) {
+                    if (electricalNode instanceof ConnectableElectricalNode node && node.localId == id2) {
                         n2 = node;
                     }
                 }
@@ -125,7 +130,7 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
                 if (n1 != null && n2 != null) {
                     n1.pos = pos1;
                     n2.pos = pos2;
-                    network.connections.add(new WireConnection(n1, n2, resistance));
+                    network.connections.add(new WireConnection(n1, n2, resistance,shouldRender));
                 }
 
             }
@@ -192,12 +197,12 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
             buffer.writeInt(connectionCount);
             for (int i = 0; i < connectionCount; i++) {
                 WireConnection connection = connections.get(i);
-                buffer.writeDouble(connection.resistance());
-                long meow = connection.node1().pos;
-                buffer.writeLong(connection.node1().pos);
-                buffer.writeInt(connection.node1().getLocalId());
-                buffer.writeLong(connection.node2().pos);
-                buffer.writeInt(connection.node2().getLocalId());
+                buffer.writeBoolean(connection.render);
+                buffer.writeDouble(connection.resistance);
+                buffer.writeLong(connection.node1.pos);
+                buffer.writeInt(connection.node1.getLocalId());
+                buffer.writeLong(connection.node2.pos);
+                buffer.writeInt(connection.node2.getLocalId());
 
 
             }

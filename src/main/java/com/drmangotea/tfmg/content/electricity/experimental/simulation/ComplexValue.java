@@ -1,7 +1,8 @@
 package com.drmangotea.tfmg.content.electricity.experimental.simulation;
 
 public class ComplexValue {
-    final double real, imag;
+    public double real;
+    public double imag;
 
     public ComplexValue(double real, double imag) {
         this.real = real;
@@ -31,6 +32,8 @@ public class ComplexValue {
                 (this.imag * b.real - this.real * b.imag) / denom
         );
     }
+
+
 
     public ComplexValue reciprocal() {
         return ComplexValue.ONE.div(this);

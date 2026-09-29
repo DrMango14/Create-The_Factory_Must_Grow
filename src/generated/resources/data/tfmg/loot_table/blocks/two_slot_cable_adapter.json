@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "tfmg:two_slot_cable_adapter"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "tfmg:blocks/two_slot_cable_adapter"
+}

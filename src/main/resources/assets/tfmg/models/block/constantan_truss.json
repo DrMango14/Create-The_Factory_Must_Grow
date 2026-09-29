@@ -3,7 +3,7 @@
 	"parent": "minecraft:block/block",
 	"textures": {
 		"0": "tfmg:block/constantan_truss",
-		"particle": "tfmg:block/constantan_truss_truss"
+		"particle": "tfmg:block/constantan_truss"
 	},
 	"elements": [
 		{

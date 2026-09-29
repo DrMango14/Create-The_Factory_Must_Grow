@@ -163,6 +163,8 @@
   "tfmg.multimeter.group": "   Group: %s",
   "tfmg.multimeter.voltage_generated": "   Voltage Generated: %s",
   "tfmg.multimeter.power_generated": "   Power Generated: %s",
+  "tfmg.multimeter.phase_offset": "   Phase Offset: %s",
+  "tfmg.multimeter.max_power": "   Max Power Output: %s",
   "tfmg.multimeter.power_percentage": "   Grid Strength: ",
   "tfmg.multimeter.energy_usage": "   Energy Usage: ",
   "tfmg.multimeter.approaching_overvoltage": "   Approaching Overvoltage ",

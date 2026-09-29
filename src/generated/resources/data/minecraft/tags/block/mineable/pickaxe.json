@@ -1,5 +1,6 @@
 {
   "values": [
+    "tfmg:light_bulb",
     "tfmg:aluminum_fluid_tank",
     "tfmg:cast_iron_fluid_tank",
     "tfmg:steel_fluid_tank",
@@ -57,9 +58,6 @@
     "tfmg:casting_basin",
     "tfmg:napalm_bomb",
     "tfmg:generator",
-    "tfmg:cable_connector",
-    "tfmg:glass_cable_insulator",
-    "tfmg:resistor",
     "tfmg:copycat_cable_block",
     "tfmg:copycat_cable_base",
     "tfmg:brass_cable_hub",
@@ -77,10 +75,6 @@
     "tfmg:heavy_electric_motor",
     "tfmg:creative_generator",
     "tfmg:accumulator",
-    "tfmg:light_bulb",
-    "tfmg:circular_light",
-    "tfmg:modern_light",
-    "tfmg:aluminum_lamp",
     "tfmg:neon_tube",
     "tfmg:electric_diode",
     "tfmg:encased_diode",

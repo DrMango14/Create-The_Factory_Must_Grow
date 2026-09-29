@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.content.electricity.connection.cables;
 
 
 import com.drmangotea.tfmg.base.blocks.WallMountBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.RealConnectorBlock;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SpecialBlockStateGen;
 import com.tterrag.registrate.providers.DataGenContext;
@@ -73,13 +74,13 @@ public class CableConnectorGenerator extends SpecialBlockStateGen {
 
     public <T extends Block> ModelFile getModel(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov, BlockState state) {
         String suffix = "";
-        if(state.getValue(CableConnectorBlock.EXTENSION)&&state.getValue(CableConnectorBlock.INPUT_MODE))
+        if(state.getValue(RealConnectorBlock.EXTENSION))
             suffix = "extension_extracting";
-        if(state.getValue(CableConnectorBlock.EXTENSION)&&!state.getValue(CableConnectorBlock.INPUT_MODE))
+        if(state.getValue(RealConnectorBlock.EXTENSION))
             suffix = "extension";
-        if(!state.getValue(CableConnectorBlock.EXTENSION)&&!state.getValue(CableConnectorBlock.INPUT_MODE))
+        if(!state.getValue(RealConnectorBlock.EXTENSION))
             return AssetLookup.partialBaseModel(ctx, prov);
-        if(!state.getValue(CableConnectorBlock.EXTENSION)&&state.getValue(CableConnectorBlock.INPUT_MODE))
+        if(!state.getValue(RealConnectorBlock.EXTENSION))
             suffix = "extracting";
 
 

@@ -46,6 +46,7 @@ import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 
 
@@ -79,6 +80,11 @@ public class TFMGCommonEvents {
         Player player = event.getEntity();
 
         RealElectricNetworkManager.playerLogin(player);
+    }
+
+    @SubscribeEvent
+    public static void onServerTick(ServerTickEvent.Post event) {
+        RealElectricNetworkManager.handleNetworkUpdate(event);
     }
 
     @SubscribeEvent

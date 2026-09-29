@@ -45,8 +45,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.client.event.RenderTooltipEvent;
 import net.neoforged.neoforge.common.Tags;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -282,7 +284,7 @@ public class TFMGItems {
 
     public static final Map<String, ItemEntry<MultimeterItem>> MULTIMETERS = multimeters();
 
-    public static final ItemEntry<MultimeterItem> MULTIMETER = REGISTRATE.item("multimeter", MultimeterItem::new)
+    public static final ItemEntry<MultimeterItem> MULTIMETER = REGISTRATE.item("multimeter", p -> new MultimeterItem(p,getMultimeterColor("yellow")))
             .register();
 
     public static final ItemEntry<SequencedAssemblyItem>
@@ -466,11 +468,37 @@ public class TFMGItems {
 
         for (String color : COLORS) {
 
-            map.put(color, REGISTRATE.item(color + "_multimeter", MultimeterItem::new)
+            map.put(color, REGISTRATE.item(color + "_multimeter", p -> new MultimeterItem(p,getMultimeterColor(color)))
                     .register());
         }
 
         return map;
+    }
+
+    public static int getMultimeterColor(String color){
+
+        return switch (color){
+            case "black" -> 0x0B0B44;
+            case "gray" -> 0x5B5B5B;
+            case "light_gray" -> 0xB7CECE;
+            case "blue" -> 0x4E5EBA;
+            case "light_blue" -> 0x719DBA;
+            case "lime" -> 0x77916C;
+            case "green" -> 0x2B5A1A;
+            case "yellow" -> 0xCFD300;
+            case "brown" -> 0x4C2817;
+            case "orange" -> 0xDB9A74;
+            case "cyan" -> 0x4B5B60;
+            case "pink" -> 0xDB9CBB;
+            case "purple" -> 0xA53798;
+            case "magenta" -> 0x915BAE;
+            case "white" -> 0xB1C6CC;
+            case "red" -> 0x922B12;
+            default -> 0;
+        };
+
+
+
     }
 
     public static ItemBuilder<SpoolItem, CreateRegistrate> spoolItem(String name, int barColor, ResourceLocation type) {
