@@ -7,7 +7,7 @@ import com.drmangotea.tfmg.content.electricity.experimental.ElectricNetworkRende
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricNetworkManager;
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.measurement.MultimeterOverlayRenderer;
-import com.drmangotea.tfmg.content.electricity.network.transformer.small.TransformerBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.small.TransformerBlockEntity;
 import com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon.AdvancedPotatoCannonItemRenderer;
 import com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon.QuadPotatoCannonItemRenderer;
 import com.drmangotea.tfmg.registry.TFMGItems;

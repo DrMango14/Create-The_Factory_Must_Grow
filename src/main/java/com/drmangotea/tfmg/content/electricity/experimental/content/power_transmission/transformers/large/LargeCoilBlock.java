@@ -1,13 +1,10 @@
-package com.drmangotea.tfmg.content.electricity.network.transformer.large;
+package com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large;
 
-import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
-import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;

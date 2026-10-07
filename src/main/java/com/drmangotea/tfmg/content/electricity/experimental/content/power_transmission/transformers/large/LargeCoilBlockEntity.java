@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.electricity.network.transformer.large;
+package com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.registry.TFMGBlocks;

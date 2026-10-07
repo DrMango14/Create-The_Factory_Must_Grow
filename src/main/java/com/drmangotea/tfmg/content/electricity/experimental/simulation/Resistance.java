@@ -6,6 +6,8 @@ import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.Ele
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.MergedNode;
 import net.minecraft.world.level.Level;
 
+import java.util.List;
+
 public class Resistance extends ElectricalComponent {
 
     public double resistance;
@@ -30,18 +32,35 @@ public class Resistance extends ElectricalComponent {
         boolean isNode1Merged = !network.nodeVoltages.containsKey(node1.getNetworkId());
         boolean isNode2Merged = !network.nodeVoltages.containsKey(node2.getNetworkId());
 
-        if(isNode1Merged){
-            if(node1 instanceof MergedNode m1){
+        if (isNode1Merged) {
+            if (node1 instanceof MergedNode m1) {
 
             }
         }
 
         // if(!network.nodeVoltages.containsKey(nodeA.getNetworkId())||!network.nodeVoltages.containsKey(nodeB.getNetworkId()))
         //     return new ComplexValue(0,0);
-        if ( node1 == null||node2 == null||network.nodeVoltages.get(node1.getNetworkId()) == null || network.nodeVoltages.get(node2.getNetworkId()) == null) {
+        if (node1 == null || node2 == null || network.nodeVoltages.get(node1.getNetworkId()) == null || network.nodeVoltages.get(node2.getNetworkId()) == null) {
             return new ComplexValue(0, 0);
         }
         return network.nodeVoltages.get(node1.getNetworkId()).minus(network.nodeVoltages.get(node2.getNetworkId()));
+    }
+
+    @Override
+    public List<ElectricalNode> getConnectedNodes() { return List.of(nodeA, nodeB); }
+
+    @Override
+    public void stamp(ComplexValue[][] G, ComplexValue[] I, int extraRowOffset) {
+        int idxA = nodeA.networkId;
+        int idxB = nodeB.networkId;
+        ComplexValue conductance = new ComplexValue(1.0 / resistance, 0.0);
+
+        if (idxA != 0) G[idxA][idxA] = G[idxA][idxA].plus(conductance);
+        if (idxB != 0) G[idxB][idxB] = G[idxB][idxB].plus(conductance);
+        if (idxA != 0 && idxB != 0) {
+            G[idxA][idxB] = G[idxA][idxB].minus(conductance);
+            G[idxB][idxA] = G[idxB][idxA].minus(conductance);
+        }
     }
 
     public double getVoltage(Level level) {

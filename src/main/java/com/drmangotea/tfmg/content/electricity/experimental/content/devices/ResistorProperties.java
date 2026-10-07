@@ -10,10 +10,10 @@ import net.minecraft.core.Direction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DebugResistorProperties extends DirectionalElectricalProperties {
+public class ResistorProperties extends DirectionalElectricalProperties {
 
 
-    public DebugResistorProperties(long pos, Direction direction) {
+    public ResistorProperties(long pos, Direction direction) {
         super(pos,direction);
         BlockPos pos1 = BlockPos.of(position);
         ConnectingElectricalNode node1 = new ConnectingElectricalNode(position, 0, getRotation(this.direction).getFirst());

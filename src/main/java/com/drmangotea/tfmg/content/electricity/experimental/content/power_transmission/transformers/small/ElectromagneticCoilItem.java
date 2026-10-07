@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.electricity.network.transformer.small;
+package com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.small;
 
 
 import com.drmangotea.tfmg.base.lang.TFMGLang;

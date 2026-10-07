@@ -36,6 +36,9 @@ public class BetterSpoolItem extends Item {
         if (level.getBlockEntity(pos) instanceof IRealisticElectric be) {
             ConnectingElectricalNode node1 = closestNode(be, clickPosition);
 
+            if(node1 == null){
+                return InteractionResult.PASS;
+            }
             if (stack.get(TFMGDataComponents.POSITION) == null) {
                 stack.set(TFMGDataComponents.POSITION, pos.asLong());
                 stack.set(TFMGDataComponents.CONNECTOR_ID, node1.getLocalId());

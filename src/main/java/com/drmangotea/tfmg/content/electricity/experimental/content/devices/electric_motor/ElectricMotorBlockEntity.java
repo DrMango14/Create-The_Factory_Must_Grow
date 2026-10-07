@@ -1,11 +1,23 @@
-package com.drmangotea.tfmg.content.electricity.utilities.electric_motor;
+package com.drmangotea.tfmg.content.electricity.experimental.content.devices.electric_motor;
 
+import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.base.KineticElectricBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.ElectricalProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
+import com.drmangotea.tfmg.content.electricity.experimental.RealElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.experimental.content.ThreePhaseGeneratorProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.Resistance;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
+import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
+import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;
@@ -15,6 +27,8 @@ import net.createmod.catnip.math.AngleHelper;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,44 +38,62 @@ import java.util.List;
 
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
 
-public class ElectricMotorBlockEntity extends KineticElectricBlockEntity {
+public class ElectricMotorBlockEntity extends GeneratingKineticBlockEntity implements IRealisticElectric, IHaveGoggleInformation {
 
 
 
-    public boolean delayedUpdate = false;
 
+    ElectricalProperties properties;
+
+    public float current = 0;
 
 
     protected ScrollOptionBehaviour<WindmillBearingBlockEntity.RotationDirection> movementDirection;
 
     public ElectricMotorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+        properties = new ElectricMotorProperties(getPos(), state.getValue(DirectionalKineticBlock.FACING));
 
     }
 
     @Override
-    public void onPlaced() {
-        super.onPlaced();
-        for(IElectric member : getOrCreateElectricNetwork().members){
-            if(member instanceof ElectricMotorBlockEntity be)
-                be.delayedUpdate = true;
-
-        }
+    public void remove() {
+        super.remove();
+        this.removeBlock();
     }
 
 
-
     @Override
-    public void tick() {
-        super.tick();
+    public void onUpdated() {
 
+        this.current = 0;
 
+        float current = 0;
+        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
+        for (int i = 0; i < 3; i++) {
+            Resistance resistor = network.getResistance(getPos(),i);
 
-        if(delayedUpdate){
-            updateGeneratedRotation();
-            delayedUpdate = false;
+            if(resistor != null){
+
+                double resistance = resistor.resistance;
+                double voltage = resistor.getVoltage(level);
+                current += (float) (voltage / resistance);
+
+            }
         }
 
+        this.current = current;
+
+        updateGeneratedRotation();
+    }
+
+    @Override
+    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+
+
+        TFMGLang.text("Current "+current).forGoggles(tooltip);
+
+        return true ;
     }
 
     @Override
@@ -75,53 +107,34 @@ public class ElectricMotorBlockEntity extends KineticElectricBlockEntity {
     }
 
     private void onDirectionChanged() {
-        updateNextTick();
-    }
 
-
-
-    @Override
-    public boolean hasElectricitySlot(Direction direction) {
-
-        if(getBlockState().is(TFMGBlocks.HEAVY_ELECTRIC_MOTOR))
-            return direction != getBlockState().getValue(FACING);
-        return direction == getBlockState().getValue(FACING).getOpposite() || (direction.getAxis().isHorizontal() && direction == Direction.DOWN);
     }
 
 
 
 
-    @Override
-    public void onNetworkChanged(int oldVoltage, float oldPower) {
-        //if (oldPower != getPowerUsage() || oldVoltage != data.voltage) {
-        delayedUpdate = true;
-     //   updateNextTick();
-        notifyUpdate();
-        // }
-    }
+
+
+
+
 
     @Override
     public void initialize() {
         super.initialize();
-        if (!hasSource() || getPowerUsage()>0)
-            updateNextTick();
+
     }
 
     @Override
     public float getGeneratedSpeed() {
-        if(networkUndersupplied())
+        if(current == 0)
             return 0;
-        if (!canWork())
-            return 0;
+
 
         int rotation = movementDirection.get() == WindmillBearingBlockEntity.RotationDirection.CLOCKWISE ? 1 : -1;
 
-        float speed = Math.min(255,data.getVoltage()*.8f)*rotation;
+        float speed = Math.min(255,current*20)*rotation;
 
         return speed;
-
-
-
     }
 
     @Override
@@ -139,7 +152,7 @@ public class ElectricMotorBlockEntity extends KineticElectricBlockEntity {
     //public boolean canBeInGroups() {
     //    return true;
     //}
-    @Override
+
     public float resistance() {
 
         if(getBlockState().is(TFMGBlocks.HEAVY_ELECTRIC_MOTOR)){
@@ -147,6 +160,21 @@ public class ElectricMotorBlockEntity extends KineticElectricBlockEntity {
         }
 
         return TFMGConfigs.common().machines.electricMotorInternalResistance.getF();
+    }
+
+    @Override
+    public long getPos() {
+        return getBlockPos().asLong();
+    }
+
+    @Override
+    public Level getWorld() {
+        return level;
+    }
+
+    @Override
+    public ElectricalProperties getProperties() {
+        return properties;
     }
 
     class MotorValueBox extends ValueBoxTransform.Sided {

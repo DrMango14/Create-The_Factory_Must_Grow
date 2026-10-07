@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.base;
 
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.spark.ElectricSparkParticle;
@@ -9,9 +8,7 @@ import com.drmangotea.tfmg.base.spark.Spark;
 import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableType;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CablePos;
 import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
-import com.drmangotea.tfmg.content.electricity.experimental.RealElectricNetworkManager;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectingElectricalNode;
-import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ElectricalNode;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode.Electrode;
 import com.drmangotea.tfmg.registry.TFMGEntityTypes;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -62,7 +59,7 @@ import java.util.stream.Collectors;
 public class TFMGUtils {
 
     public static float toYRot(Direction facing) {
-        return switch (facing){
+        return switch (facing) {
             case DOWN -> 0.0F;
             case UP -> 0.0F;
             case NORTH -> 0.0F;
@@ -89,24 +86,22 @@ public class TFMGUtils {
             distances.put(distance, n);
         });
         AtomicReference<Float> closestDistance = new AtomicReference<>((float) 1000);
-        if(be.getProperties().nodes.get(0) instanceof ConnectingElectricalNode connectingNode) {
-
-            AtomicReference<ConnectingElectricalNode> closestConnector = new AtomicReference<>(connectingNode);
-            distances.forEach((f, n) -> {
-                if (f < closestDistance.get()) {
-                    closestDistance.set(f);
-                    closestConnector.set(n);
-                }
-            });
-
-            //for (ElectricalNode node : RealElectricNetworkManager.getNetwork(be.getWorld()).getNodes(be.getPos())) {
-            //    TFMG.LOGGER.debug("nodes are " + node.getNetworkId());
-            //}
-            return closestConnector.get();
-        }
 
 
-        return null;
+        AtomicReference<ConnectingElectricalNode> closestConnector = new AtomicReference<>(null);
+        distances.forEach((f, n) -> {
+            if (f < closestDistance.get()) {
+                closestDistance.set(f);
+                closestConnector.set(n);
+            }
+        });
+
+        //for (ElectricalNode node : RealElectricNetworkManager.getNetwork(be.getWorld()).getNodes(be.getPos())) {
+        //    TFMG.LOGGER.debug("nodes are " + node.getNetworkId());
+        //}
+        return closestConnector.get();
+
+
     }
 
     public static void createFireExplosion(Level level, Entity entity, BlockPos pos, int sparkAmount, float radius) {
@@ -128,17 +123,21 @@ public class TFMGUtils {
         }
         level.explode(null, pos.getX(), pos.getY(), pos.getZ(), radius, Level.ExplosionInteraction.BLOCK);
     }
-    public static void playSound(Level level, BlockPos pos, SoundEvent sound, SoundSource source){
-        playSound(level,pos,sound,source,1,1,null);
+
+    public static void playSound(Level level, BlockPos pos, SoundEvent sound, SoundSource source) {
+        playSound(level, pos, sound, source, 1, 1, null);
     }
-    public static void playSound(Level level, BlockPos pos, SoundEvent sound, SoundSource source, Player player){
-        playSound(level,pos,sound,source,1,1,player);
+
+    public static void playSound(Level level, BlockPos pos, SoundEvent sound, SoundSource source, Player player) {
+        playSound(level, pos, sound, source, 1, 1, player);
     }
-    public static void playSound(Level level, BlockPos pos, SoundEvent sound, SoundSource source, float volume, float pitch){
-        playSound(level,pos,sound,source,volume,pitch,null);
+
+    public static void playSound(Level level, BlockPos pos, SoundEvent sound, SoundSource source, float volume, float pitch) {
+        playSound(level, pos, sound, source, volume, pitch, null);
     }
-    public static void playSound(Level level, BlockPos pos, SoundEvent sound, SoundSource source, float volume, float pitch, Player player){
-        level.playSound(player,pos,sound,source,volume,pitch);
+
+    public static void playSound(Level level, BlockPos pos, SoundEvent sound, SoundSource source, float volume, float pitch, Player player) {
+        level.playSound(player, pos, sound, source, volume, pitch);
     }
 
     public static void blowUpTank(FluidTankBlockEntity tank, int power) {
@@ -160,11 +159,11 @@ public class TFMGUtils {
         createFireExplosion(be.getLevel(), null, new BlockPos(be.getBlockPos().getX() + (be.getWidth() / 2), be.getBlockPos().getY() + (be.getHeight() / 2), be.getBlockPos().getZ() + (be.getWidth() / 2)), power * 15, (float) power);
     }
 
-    public static void createOutline(Vec3 pos1, Vec3 pos2,String name,Color color){
-        createOutline(pos1,pos2,name,color,1/32f);
+    public static void createOutline(Vec3 pos1, Vec3 pos2, String name, Color color) {
+        createOutline(pos1, pos2, name, color, 1 / 32f);
     }
 
-    public static void createOutline(Vec3 pos1, Vec3 pos2,String name,Color color,float width){
+    public static void createOutline(Vec3 pos1, Vec3 pos2, String name, Color color, float width) {
         Outliner.getInstance().showAABB(name, new AABB(pos1, pos2))
                 .lineWidth(width)
                 .colored(color);
@@ -231,15 +230,16 @@ public class TFMGUtils {
         createFluidTooltip(be, tooltip);
         createItemTooltip(be, tooltip);
     }
+
     /// makes a goggle tooltip for every tank a block entity has
     public static boolean createFluidTooltip(BlockEntity be, List<Component> tooltip) {
         LangBuilder mb = CreateLang.translate("generic.unit.millibuckets");
 
         /////////
-        IFluidHandler handler = Capabilities.FluidHandler.BLOCK.getCapability(be.getLevel(),be.getBlockPos(),be.getBlockState(),be,null);
+        IFluidHandler handler = Capabilities.FluidHandler.BLOCK.getCapability(be.getLevel(), be.getBlockPos(), be.getBlockState(), be, null);
 
 
-        if(handler == null)
+        if (handler == null)
             return true;
 
         IFluidHandler tank = handler;
@@ -269,7 +269,7 @@ public class TFMGUtils {
 
     public static boolean createItemTooltip(BlockEntity be, List<Component> tooltip) {
 
-        IItemHandlerModifiable handler = (IItemHandlerModifiable) Capabilities.ItemHandler.BLOCK.getCapability(be.getLevel(),be.getBlockPos(),be.getBlockState(),be,null);
+        IItemHandlerModifiable handler = (IItemHandlerModifiable) Capabilities.ItemHandler.BLOCK.getCapability(be.getLevel(), be.getBlockPos(), be.getBlockState(), be, null);
 
         IItemHandlerModifiable inventory = handler;
         if (inventory.getSlots() == 0) return false;
@@ -355,8 +355,8 @@ public class TFMGUtils {
                 return super.drain(resource, action);
             }
 
-            public FluidStack forceDrain(FluidStack resource, FluidAction action){
-                return super.drain(resource,action);
+            public FluidStack forceDrain(FluidStack resource, FluidAction action) {
+                return super.drain(resource, action);
             }
 
             @Override
@@ -423,7 +423,6 @@ public class TFMGUtils {
         }
         pMatrixStack.popPose();
     }
-
 
 
     private static void addVertexPair(VertexConsumer vertexConsumer, Matrix4f matrix4f, float p_174310_, float p_174311_, float p_174312_, int light_1, int light_2, int p_174315_, int p_174316_, float thickness, float p_174318_, float p_174319_, float p_174320_, int value, boolean p_174322_, float curve, float r, float g, float b) {

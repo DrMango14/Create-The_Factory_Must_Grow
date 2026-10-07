@@ -26,13 +26,17 @@ public class ComplexValue {
 
     public ComplexValue div(ComplexValue b) {
         double denom = b.real * b.real + b.imag * b.imag;
-        if (denom == 0) throw new ArithmeticException("Division by zero in ComplexValue solver.");
+     //   if (denom == 0) throw new ArithmeticException("Division by zero in ComplexValue solver.");
+        if (denom == 0) return this;
         return new ComplexValue(
                 (this.real * b.real + this.imag * b.imag) / denom,
                 (this.imag * b.real - this.real * b.imag) / denom
         );
     }
-
+    public static ComplexValue fromPolar(double r, double deg) {
+        double rad = Math.toRadians(deg);
+        return new ComplexValue(r * Math.cos(rad), r * Math.sin(rad));
+    }
 
 
     public ComplexValue reciprocal() {
@@ -49,6 +53,6 @@ public class ComplexValue {
 
     @Override
     public String toString() {
-        return String.format("%.4f V ∠ %.2f° (%.4f + %.4fj)", abs(), phaseDegrees(), real, imag);
+        return String.format("%.4f V ∠ %.2f°", abs(), phaseDegrees());
     }
 }

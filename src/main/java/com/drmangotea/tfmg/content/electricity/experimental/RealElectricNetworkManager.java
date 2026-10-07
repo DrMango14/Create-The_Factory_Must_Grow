@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -35,7 +36,7 @@ public class RealElectricNetworkManager {
     }
 
     public static void handleNetworkUpdate(ServerTickEvent.Post event) {
-
+        /*
 
         networks.forEach((l, n) -> {
             if (n.updateInTicks >= 0) {
@@ -48,7 +49,7 @@ public class RealElectricNetworkManager {
         });
 
         if (!updateQueue.isEmpty()) {
-            try {
+           // try {
                 new HashMap<>(updateQueue).forEach((l, nd) -> {
                     LevelAccessor level = l;
                     NetworkCalculationData data = nd.getSecond();
@@ -120,6 +121,8 @@ public class RealElectricNetworkManager {
                                 data.pivot[maxRow] = tempP;
                             }
                             for (int i = j + 1; i < n; i++) {
+                                ///
+
                                 data.LU[i][j] = data.LU[i][j].div(data.LU[j][j]);
                                 for (int k = j + 1; k < n; k++) {
                                     data.LU[i][k] = data.LU[i][k].minus(data.LU[i][j].times(data.LU[j][k]));
@@ -242,12 +245,13 @@ public class RealElectricNetworkManager {
 
                     data.iterationsLeft--;
                 }
-                */
+
                 });
-            } catch (Exception e) {
-                TFMG.LOGGER.debug("Whoops");
-            }
+            //} catch (Exception e) {
+            //    TFMG.LOGGER.debug("Whoops "+ e.getMessage());
+            //}
         }
+        */
     }
 
     public static LevelAccessor getWorldFromNetwork(RealElectricalNetwork network) {

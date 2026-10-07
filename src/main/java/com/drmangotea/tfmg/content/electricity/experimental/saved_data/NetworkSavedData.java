@@ -6,17 +6,18 @@ import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwor
 import com.drmangotea.tfmg.content.electricity.experimental.WireConnection;
 import com.drmangotea.tfmg.content.electricity.experimental.content.DirectionalElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.ThreePhaseGeneratorProperties;
-import com.drmangotea.tfmg.content.electricity.experimental.content.devices.DebugResistorProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.ResistorProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.electric_motor.ElectricMotorProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.lights.LightProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.adapters.FourSlotAdapterProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.adapters.TwoSlotAdapterProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.CableProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.small.TransformerProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.ConnectorProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.ElectricalComponent;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.IdealVoltageSource;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.Resistance;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectableElectricalNode;
-import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectingElectricalNode;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ElectricalNode;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -200,11 +201,13 @@ public class NetworkSavedData extends SavedData {
         return switch (id) {
             case 1 -> new ThreePhaseGeneratorProperties(pos, direction);
             case 2 -> new ConnectorProperties(pos);
-            case 3 -> new DebugResistorProperties(pos, direction);
+            case 3 -> new ResistorProperties(pos, direction);
             case 4 -> new CableProperties(pos, List.of(Direction.values()));
             case 5 -> new FourSlotAdapterProperties(pos, direction);
             case 6 -> new TwoSlotAdapterProperties(pos,  direction);
             case 7 -> new LightProperties(pos);
+            case 8 -> new ElectricMotorProperties(pos,direction);
+            case 9 -> new TransformerProperties(pos,direction);
             default -> new ElectricalProperties(pos);
 
         };

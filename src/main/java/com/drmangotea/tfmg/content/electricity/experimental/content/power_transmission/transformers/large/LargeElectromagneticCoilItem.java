@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.electricity.network.transformer.large;
+package com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large;
 
 
 import com.drmangotea.tfmg.base.lang.TFMGLang;
@@ -6,7 +6,6 @@ import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Block;

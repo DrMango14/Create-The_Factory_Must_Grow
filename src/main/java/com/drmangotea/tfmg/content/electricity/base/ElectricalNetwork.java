@@ -1,9 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.base;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchBlockEntity;
-import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeTransformerBlockEntity;
-import com.drmangotea.tfmg.content.electricity.utilities.electric_motor.ElectricMotorBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
 import net.minecraft.core.BlockPos;
 
 import java.util.ArrayList;
@@ -132,9 +130,7 @@ public class ElectricalNetwork {
                 for (IElectric member : members) {
                     member.getData().notEnoughPower = true;
                     member.getData().tickUntilConnectFE = 20 * 2;
-                    if (member instanceof ElectricMotorBlockEntity be) {
-                        be.updateGeneratedRotation();
-                    }
+
                     if (member instanceof VoltageAlteringBlockEntity be)
                         be.updateInFront = true;
                     if (member instanceof LargeSwitchBlockEntity be)

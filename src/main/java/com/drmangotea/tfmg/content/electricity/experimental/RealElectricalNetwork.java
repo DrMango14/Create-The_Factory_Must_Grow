@@ -8,10 +8,7 @@ import net.createmod.catnip.data.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class RealElectricalNetwork {
 
@@ -25,9 +22,13 @@ public class RealElectricalNetwork {
     private final List<Inductance> inductors = new ArrayList<>();
     private List<IdealVoltageSource> sources = new ArrayList<>();
 
+    public List<Transformer> transformers = new ArrayList<>();
+
     public List<ElectricalNode> finalNodes = new ArrayList<>();
     public List<Resistance> finalResistors = new ArrayList<>();
     public List<IdealVoltageSource> finalSources = new ArrayList<>();
+
+    public List<Transformer> finalTransformers = new ArrayList<>();
 
     public int updateInTicks = -1;
 
@@ -68,27 +69,6 @@ public class RealElectricalNetwork {
         return parent[i] = find(parent, parent[i]);
     }
 
-    private void union(int[] parent, int i, int j) {
-        int rootI = find(parent, i);
-        int rootJ = find(parent, j);
-        if (rootI != rootJ) {
-            if (rootI < rootJ) parent[rootJ] = rootI;
-            else parent[rootI] = rootJ;
-        }
-    }
-
-    private void stampAdmittance(ComplexValue[][] A, int[] nodeToMatrixIndex, int nodeA, int nodeB, ComplexValue Y) {
-        int idxA = nodeToMatrixIndex[nodeA];
-        int idxB = nodeToMatrixIndex[nodeB];
-
-        if (idxA != -1) A[idxA][idxA] = A[idxA][idxA].plus(Y);
-        if (idxB != -1) A[idxB][idxB] = A[idxB][idxB].plus(Y);
-        if (idxA != -1 && idxB != -1) {
-            A[idxA][idxB] = A[idxA][idxB].minus(Y);
-            A[idxB][idxA] = A[idxB][idxA].minus(Y);
-        }
-    }
-
     public void setVoltageGen(IRealisticElectric be, int voltage) {
 
         ElectricalProperties properties = members.get(be.getPos());
@@ -127,9 +107,32 @@ public class RealElectricalNetwork {
         sources = new ArrayList<>();
         finalResistors = new ArrayList<>();
         finalSources = new ArrayList<>();
+
+
+        transformers = new ArrayList<>();
+
+
+        //ElectricalNode node5 = new ElectricalNode(0, 5);
+        //ElectricalNode node4 = new ElectricalNode(0, 4);
+        //ElectricalNode node3 = new ElectricalNode(0, 3);
+        //ElectricalNode node2 = new ElectricalNode(0, 2);
+        //ElectricalNode node1 = new ElectricalNode(0, 1);
+        //nodes.add(node1);
+        //nodes.add(node2);
+        //nodes.add(node3);
+        //nodes.add(node4);
+        //nodes.add(node5);
+////
+        //sources.add(new IdealVoltageSource(node5, node1, 230, 1000, 0, 1));
+//
+        //resistors.add(new Resistance(node2, node5, 1000, 67, 0));
+//
+        //resistors.add(new Resistance(node3, node4, 100, 67, 0));
+        //transformers.add(new Transformer(node1, node2, node3, node1, 1, 10, 0.999, 1));
+
+
         List<ElectricalComponent> components = new ArrayList<>();
         members.forEach((l, p) -> {
-
 
             nodes.addAll(p.nodes);
             components.addAll(p.components);
@@ -143,6 +146,7 @@ public class RealElectricalNetwork {
 
         }
 
+
         components.forEach(c -> {
             if (c instanceof Resistance r) {
                 resistors.add(r);
@@ -150,11 +154,16 @@ public class RealElectricalNetwork {
             if (c instanceof IdealVoltageSource v) {
                 sources.add(v);
             }
+            if (c instanceof Transformer t) {
+                transformers.add(t);
+            //    connections.add(new WireConnection((ConnectableElectricalNode) t.pB, (ConnectableElectricalNode) t.sB,1,false));
+            }
         });
         // totalNodes = 20;
 
 
     }
+
 
     public MergedNode getMergedNode(ElectricalNode node) {
 
@@ -225,6 +234,7 @@ public class RealElectricalNetwork {
         finalNodes = new ArrayList<>(nodes);
         finalResistors = new ArrayList<>();
         finalSources = new ArrayList<>();
+        finalTransformers = new ArrayList<>();
 
 
         //ElectricalNode n = finalNodes.getFirst();
@@ -236,7 +246,7 @@ public class RealElectricalNetwork {
             ElectricalNode node1 = connection.node1;
             ElectricalNode node2 = connection.node2;
 
-            //   TFMG.LOGGER.debug("Created Merged Node from "+node1.localId+" & "+node2.localId);
+            //   TFMG.LOGGER.debug("Created Merged ElectricalNode from "+node1.localId+" & "+node2.localId);
 
             boolean isNode1Merged = !finalNodes.contains(node1);
             boolean isNode2Merged = !finalNodes.contains(node2);
@@ -273,6 +283,31 @@ public class RealElectricalNetwork {
             }
             finalResistors.add(new Resistance(node1, node2, resistor.resistance, resistor.localId, resistor.pos));
         }
+        for (Transformer transformer : transformers) {
+            ElectricalNode node1 = transformer.pA;
+            ElectricalNode node2 = transformer.pB;
+
+            ElectricalNode snode1 = transformer.sA;
+            ElectricalNode snode2 = transformer.sB;
+
+            boolean isNode1Merged = !finalNodes.contains(node1);
+            boolean isNode2Merged = !finalNodes.contains(node2);
+            boolean isNodeS1Merged = !finalNodes.contains(snode1);
+            boolean isNodeS2Merged = !finalNodes.contains(snode2);
+            if (isNode1Merged) {
+                node1 = getMergedNode(node1);
+            }
+            if (isNode2Merged) {
+                node2 = getMergedNode(node2);
+            }
+            if (isNodeS1Merged) {
+                snode1 = getMergedNode(snode1);
+            }
+            if (isNodeS2Merged) {
+                snode2 = getMergedNode(snode2);
+            }
+            finalTransformers.add(new Transformer(node1, node2, snode1, snode2, transformer.L1, transformer.turnsRatio, transformer.k, transformer.id));
+        }
         for (IdealVoltageSource source : sources) {
             ElectricalNode node1 = source.localNodeA;
             ElectricalNode node2 = source.localNodeB;
@@ -293,6 +328,9 @@ public class RealElectricalNetwork {
         for (int i = 0; i < finalNodes.size(); i++) {
             finalNodes.get(i).networkId = i;
         }
+        for (int i = 0; i < finalTransformers.size(); i++) {
+            finalTransformers.get(i).id = i;
+        }
 
         if (!RealElectricNetworkManager.getWorldFromNetwork(this).isClientSide()) {
             TFMG.LOGGER.debug("node count " + finalNodes.size());
@@ -305,7 +343,7 @@ public class RealElectricalNetwork {
                         TFMG.LOGGER.debug("  " + i1 + " " + n.localId);
                     }
 
-                } else TFMG.LOGGER.debug("Node " + i + " local: " + finalNodes.get(i).localId);
+                } else TFMG.LOGGER.debug("ElectricalNode " + i + " local: " + finalNodes.get(i).localId);
             }
         }
 
@@ -325,7 +363,7 @@ public class RealElectricalNetwork {
     public Resistance getResistance(long pos, int id) {
 
         for (Resistance r : finalResistors) {
-            if(r.pos == pos && r.localId == id){
+            if (r.pos == pos && r.localId == id) {
                 return r;
             }
         }
@@ -341,11 +379,9 @@ public class RealElectricalNetwork {
         optimize();
 
 
-        try {
-            solve();
-        } catch (Exception e) {
-            TFMG.LOGGER.debug("something fucked up");
-        }
+
+        solve();
+
 
     }
 
@@ -367,6 +403,7 @@ public class RealElectricalNetwork {
         for (int i = n - 1; i >= 0; i--) {
             ComplexValue backwardSum = ComplexValue.ZERO;
             for (int j = i + 1; j < n; j++) backwardSum = backwardSum.plus(data.LU[i][j].times(x[j]));
+
             x[i] = (y[i].minus(backwardSum)).div(data.LU[i][i]);
         }
 
@@ -385,7 +422,7 @@ public class RealElectricalNetwork {
             int localGroundAnchor = find(data.parent, i);
             ComplexValue voltage = finalVoltages[i].minus(finalVoltages[localGroundAnchor]);
             nodeVoltages.put(i, voltage);
-            TFMG.LOGGER.debug("node " + finalVoltages[i].abs() + " " + finalNodes.get(i).localId);
+            //TFMG.LOGGER.debug("node " + finalVoltages[i].abs() + " " + finalNodes.get(i).localId);
 
         }
         for (int i = 0; i < finalSources.size(); i++) {
@@ -400,9 +437,17 @@ public class RealElectricalNetwork {
             if (voltage1 != null && voltage2 != null) {
                 voltage = voltage1.minus(voltage2).abs();
             }
-
-
             TFMG.LOGGER.debug("resistor " + i + " Network: " + r.nodeA.networkId + " " + r.nodeB.networkId + " Local: " + r.nodeA.localId + " " + r.nodeB.localId + " Voltage: " + voltage);
+        }
+        for (int i = 0; i < finalTransformers.size(); i++) {
+            Transformer t = finalTransformers.get(i);
+            ComplexValue voltage1 = nodeVoltages.get(t.nodeA.getNetworkId());
+            ComplexValue voltage2 = nodeVoltages.get(t.nodeB.getNetworkId());
+
+            ComplexValue voltage3 = nodeVoltages.get(t.sA.getNetworkId());
+            ComplexValue voltage4 = nodeVoltages.get(t.sB.getNetworkId());
+            TFMG.LOGGER.debug("transformer " + i + " Network: " + t.pA.networkId + " " + voltage1 + " " + t.pB.networkId + " " + voltage2 + " Local: " + t.nodeA.localId + " " + t.nodeB.localId + "Secondary " + voltage3 + " " + voltage4);
+
         }
 
         sendDataToMembers();
@@ -429,11 +474,96 @@ public class RealElectricalNetwork {
         });
     }
 
+    public void solve() {
 
+        List<ElectricalComponent> components = new ArrayList<>();
+
+        components.addAll(finalResistors);
+        components.addAll(finalTransformers);
+        components.addAll(finalSources);
+
+        ElectricalNode groundNode = finalNodes.getFirst();
+        Set<ElectricalNode> uniqueNodes = new LinkedHashSet<>();
+        uniqueNodes.add(groundNode);
+        for (ElectricalComponent c : components) uniqueNodes.addAll(c.getConnectedNodes());
+
+        List<ElectricalNode> activeNodeList = new ArrayList<>(uniqueNodes);
+        for (int i = 0; i < activeNodeList.size(); i++)
+            activeNodeList.get(i).networkId = i;
+
+       
+        int extraRowsCount = 0;
+        for (ElectricalComponent c : components) {
+            if (c instanceof IdealVoltageSource) {
+                ((IdealVoltageSource) c).setIndex(extraRowsCount);
+                extraRowsCount += c.getExtraRows();
+            } else if (c instanceof Transformer) {
+                ((Transformer) c).setIndex(extraRowsCount);
+                extraRowsCount += c.getExtraRows();
+            }
+        }
+
+        int size = activeNodeList.size() + extraRowsCount;
+        ComplexValue[][] G = new ComplexValue[size][size];
+        ComplexValue[] I = new ComplexValue[size];
+
+        for (int i = 0; i < size; i++) {
+            I[i] = new ComplexValue(0, 0);
+            for (int j = 0; j < size; j++) G[i][j] = new ComplexValue(0, 0);
+        }
+
+        for (ElectricalComponent c : components) c.stamp(G, I, activeNodeList.size());
+
+
+        for (int j = 0; j < size; j++) G[0][j] = new ComplexValue(0, 0);
+        G[0][0] = new ComplexValue(1.0, 0.0);
+        I[0] = new ComplexValue(0, 0);
+
+        ComplexValue[] V = solveMNA(G, I, size);
+
+        TFMG.LOGGER.debug("Circuit Values");
+        for (ElectricalNode n : activeNodeList) {
+            TFMG.LOGGER.debug("ElectricalNode '" + n.getLocalId() + "': " + V[n.networkId]);
+
+            nodeVoltages.put(n.networkId, V[n.networkId]);
+        }
+        TFMG.LOGGER.debug("TRANSFORMER DATA");
+        //for (ElectricalComponent c : components) {
+        //    if (c instanceof Transformer t)
+        //        t.reportPower(V, activeNodeList.size());
+        //}
+        for (int i = 0; i < finalSources.size(); i++) {
+            IdealVoltageSource source = finalSources.get(i);
+            TFMG.LOGGER.debug("source " + i + " Network: " + source.nodeA.networkId + " " + source.nodeB.networkId + " Local: " + source.nodeA.localId + " " + source.nodeB.localId + " voltage " + source.amplitude);
+        }
+        for (int i = 0; i < finalResistors.size(); i++) {
+            Resistance r = finalResistors.get(i);
+            ComplexValue voltage1 = nodeVoltages.get(r.nodeA.getNetworkId());
+            ComplexValue voltage2 = nodeVoltages.get(r.nodeB.getNetworkId());
+            ComplexValue voltage = ComplexValue.ZERO;
+            if (voltage1 != null && voltage2 != null) {
+                voltage = voltage1.minus(voltage2);
+            }
+            TFMG.LOGGER.debug("resistor " + i + " Network: " + r.nodeA.networkId + " " + r.nodeB.networkId + " Local: " + r.nodeA.localId + " " + r.nodeB.localId + " Voltage: " + voltage);
+        }
+        for (int i = 0; i < finalTransformers.size(); i++) {
+            Transformer t = finalTransformers.get(i);
+            ComplexValue voltage1 = nodeVoltages.get(t.pA.getNetworkId());
+            ComplexValue voltage2 = nodeVoltages.get(t.pB.getNetworkId());
+
+            ComplexValue voltage3 = nodeVoltages.get(t.sA.getNetworkId());
+            ComplexValue voltage4 = nodeVoltages.get(t.sB.getNetworkId());
+            TFMG.LOGGER.debug("transformer " + i + " Network: " + t.pA.networkId+ " " + t.pB.localId + " " + t.sA.networkId+ " " + t.sB.localId + " " + voltage1  + " " + voltage2 + " Secondary " + voltage3 + " " + voltage4);
+
+        }
+        sendDataToMembers();
+    }
+    /*
     public void solve() {
 
         if (totalNodes == 0)
             return;
+
 
         int[] parent = new int[totalNodes];
         for (int i = 0; i < totalNodes; i++) parent[i] = i;
@@ -458,7 +588,8 @@ public class RealElectricalNetwork {
             nodeToMatrixIndex[i] = isLocalGround[i] ? -1 : matrixNodeCount++;
         }
 
-        int matrixSize = matrixNodeCount + sources.size();
+        int matrixSize = matrixNodeCount + sources.size()
+                + (2 * finalTransformers.size());
         ComplexValue[][] A = new ComplexValue[matrixSize][matrixSize];
         ComplexValue[] z = new ComplexValue[matrixSize];
 
@@ -475,6 +606,10 @@ public class RealElectricalNetwork {
         //  for (Capacitance c : capacitors) stampAdmittance(A, nodeToMatrixIndex, c.nodeA, c.nodeB, c.getAdmittance());
         //  for (Inductance l : inductors) stampAdmittance(A, nodeToMatrixIndex, l.nodeA, l.nodeB, l.getAdmittance());
 
+
+        //for (Transformer t : finalTransformers) {
+        //    t.stamp(A, z, t.sB.networkId, finalSources.size());
+        //}
 
         for (int i = 0; i < finalSources.size(); i++) {
             IdealVoltageSource v = finalSources.get(i);
@@ -493,34 +628,45 @@ public class RealElectricalNetwork {
             z[matrixRow] = v.getPhasor();
         }
 
-        /*
-        ComplexValue[] x = luSolveComplex(A, z);
+
+        ComplexValue[] x = luSolveComplex2(A, z);
         ComplexValue[] finalVoltages = new ComplexValue[totalNodes];
         for (int i = 0; i < totalNodes; i++) {
             int matrixIdx = nodeToMatrixIndex[i];
             finalVoltages[i] = (matrixIdx == -1) ? ComplexValue.ZERO : x[matrixIdx];
-            TFMG.LOGGER.debug("node " + finalVoltages[i].abs() + " " + finalNodes.get(i).localId);
+            nodeVoltages.put(i, (matrixIdx == -1) ? ComplexValue.ZERO : x[matrixIdx]);
         }
 
         for (int i = 0; i < finalSources.size(); i++) {
             IdealVoltageSource source = finalSources.get(i);
-            TFMG.LOGGER.debug("source " + i + " Network: " + source.nodeA.networkId + " " + source.nodeB.networkId + " Local: " + source.nodeA.localId + " " + source.nodeB.localId + " Phase: " + source.phaseOffset + " Voltage: " + source.amplitude);
+            TFMG.LOGGER.debug("source " + i + " Network: " + source.nodeA.networkId + " " + source.nodeB.networkId + " Local: " + source.nodeA.localId + " " + source.nodeB.localId + " voltage " + source.amplitude);
         }
         for (int i = 0; i < finalResistors.size(); i++) {
             Resistance r = finalResistors.get(i);
-
             ComplexValue voltage1 = nodeVoltages.get(r.nodeA.getNetworkId());
             ComplexValue voltage2 = nodeVoltages.get(r.nodeB.getNetworkId());
             double voltage = 0;
             if (voltage1 != null && voltage2 != null) {
                 voltage = voltage1.minus(voltage2).abs();
             }
-
-
             TFMG.LOGGER.debug("resistor " + i + " Network: " + r.nodeA.networkId + " " + r.nodeB.networkId + " Local: " + r.nodeA.localId + " " + r.nodeB.localId + " Voltage: " + voltage);
         }
-        */
-        startSolving(parent, nodeToMatrixIndex, A, z);
+        for (int i = 0; i < finalTransformers.size(); i++) {
+            Transformer t = finalTransformers.get(i);
+            ComplexValue voltage1 = nodeVoltages.get(t.nodeA.getNetworkId());
+            ComplexValue voltage2 = nodeVoltages.get(t.nodeB.getNetworkId());
+
+            ComplexValue voltage3 = nodeVoltages.get(t.sA.getNetworkId());
+            ComplexValue voltage4 = nodeVoltages.get(t.sB.getNetworkId());
+            TFMG.LOGGER.debug("transformer " + i + " Network: " + t.pA.networkId + " " + voltage1 + " " + t.pB.networkId + " " + voltage2 + " Local: " + t.nodeA.localId + " " + t.nodeB.localId + "Secondary " + voltage3 + " " + voltage4);
+
+        }
+
+        nodeVoltages.forEach((i, v) -> {
+            TFMG.LOGGER.debug("node " + i + " is " + v.abs());
+        });
+
+        // startSolving(parent, nodeToMatrixIndex, A, z);
 
 
         //for (int i = 0; i < resistors.size(); i++) {
@@ -534,50 +680,47 @@ public class RealElectricalNetwork {
     }
 
 
-    /// /////////////////////////
-    private static ComplexValue[] luSolveComplex(ComplexValue[][] A, ComplexValue[] b) {
-        int n = b.length;
-        ComplexValue[][] LU = new ComplexValue[n][n];
-        for (int i = 0; i < n; i++) System.arraycopy(A[i], 0, LU[i], 0, n);
-        int[] pivot = new int[n];
-        for (int i = 0; i < n; i++) pivot[i] = i;
+     */
 
-        for (int j = 0; j < n; j++) {
-            int maxRow = j;
-            double maxVal = LU[j][j].abs();
-            for (int i = j + 1; i < n; i++) {
-                if (LU[i][j].abs() > maxVal) {
-                    maxVal = LU[i][j].abs();
+    /// /////////////////////////
+    private ComplexValue[] solveMNA(ComplexValue[][] A, ComplexValue[] b, int n) {
+        ComplexValue[][] M = new ComplexValue[n][n + 1];
+        for (int i = 0; i < n; i++) {
+            System.arraycopy(A[i], 0, M[i], 0, n);
+            M[i][n] = b[i];
+        }
+        for (int p = 0; p < n; p++) {
+            int maxRow = p;
+            double maxMag = M[p][p].abs();
+            for (int i = p + 1; i < n; i++) {
+                if (M[i][p].abs() > maxMag) {
+                    maxMag = M[i][p].abs();
                     maxRow = i;
                 }
             }
-            if (maxRow != j) {
-                ComplexValue[] tempRow = LU[j];
-                LU[j] = LU[maxRow];
-                LU[maxRow] = tempRow;
-                int tempP = pivot[j];
-                pivot[j] = pivot[maxRow];
-                pivot[maxRow] = tempP;
-            }
-            for (int i = j + 1; i < n; i++) {
-                LU[i][j] = LU[i][j].div(LU[j][j]);
-                for (int k = j + 1; k < n; k++) {
-                    LU[i][k] = LU[i][k].minus(LU[i][j].times(LU[j][k]));
+            ComplexValue[] temp = M[p];
+            M[p] = M[maxRow];
+            M[maxRow] = temp;
+            if (M[p][p].abs() < 1e-12) continue;
+            for (int i = p + 1; i < n; i++) {
+                ComplexValue alpha = M[i][p].div(M[p][p]);
+                M[i][n] = M[i][n].minus(alpha.times(M[p][n]));
+
+                for (int j = p; j < n; j++) {
+                    M[i][j] = M[i][j].minus(alpha.times(M[p][j]));
                 }
             }
         }
-        ComplexValue[] y = new ComplexValue[n];
-        for (int i = 0; i < n; i++) {
-            ComplexValue forwardSum = ComplexValue.ZERO;
-            for (int j = 0; j < i; j++) forwardSum = forwardSum.plus(LU[i][j].times(y[j]));
-            y[i] = b[pivot[i]].minus(forwardSum);
-        }
         ComplexValue[] x = new ComplexValue[n];
         for (int i = n - 1; i >= 0; i--) {
-            ComplexValue backwardSum = ComplexValue.ZERO;
-            for (int j = i + 1; j < n; j++) backwardSum = backwardSum.plus(LU[i][j].times(x[j]));
-            x[i] = (y[i].minus(backwardSum)).div(LU[i][i]);
+            ComplexValue sum = new ComplexValue(0, 0);
+            for (int j = i + 1; j < n; j++) sum = sum.plus(M[i][j].times(x[j]));
+            x[i] = (M[i][n].minus(sum)).div(M[i][i]);
         }
         return x;
     }
+
+
+
+
 }

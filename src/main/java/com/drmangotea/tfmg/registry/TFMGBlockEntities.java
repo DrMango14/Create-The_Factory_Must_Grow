@@ -40,12 +40,12 @@ import com.drmangotea.tfmg.content.electricity.network.electric_switch.ElectricS
 import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchBlockEntity;
 import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchRenderer;
 import com.drmangotea.tfmg.content.electricity.network.potentiometer.PotentiometerBlockEntity;
-import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeCoilBlockEntity;
-import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeTransformerBlockEntity;
-import com.drmangotea.tfmg.content.electricity.network.transformer.small.TransformerBlockEntity;
-import com.drmangotea.tfmg.content.electricity.network.transformer.small.TransformerRenderer;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeCoilBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.small.TransformerBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.small.TransformerRenderer;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlockEntity;
-import com.drmangotea.tfmg.content.electricity.utilities.electric_motor.ElectricMotorBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.electric_motor.ElectricMotorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_pump.ElectricPumpBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerBlockEntity;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerRenderer;
@@ -133,6 +133,17 @@ import static com.drmangotea.tfmg.TFMG.REGISTRATE;
 
 public class TFMGBlockEntities {
 
+    public static final BlockEntityEntry<TransformerBlockEntity> TRANSFORMER = REGISTRATE
+            .blockEntity("transformer", TransformerBlockEntity::new)
+            .validBlocks(TFMGBlocks.TRANSFORMER)
+            .renderer(() -> TransformerRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<VoltMeterBlockEntity> VOLTMETER = REGISTRATE
+            .blockEntity("cable", VoltMeterBlockEntity::new)
+            .validBlocks(TFMGBlocks.VOLTMETER)
+            .register();
+
     public static final BlockEntityEntry<CableBlockEntity> CABLE = REGISTRATE
             .blockEntity("cable", CableBlockEntity::new)
             .validBlocks(TFMGBlocks.DEBUG_CABLE)
@@ -168,6 +179,13 @@ public class TFMGBlockEntities {
             .blockEntity("three_phase_generator", ThreePhaseGeneratorBlockEntity::new)
             .visual(() -> OrientedRotatingVisual.of(AllPartialModels.SHAFT_HALF))
             .validBlocks(TFMGBlocks.THREE_PHASE_GENERATOR)
+            .renderer(() -> HalfShaftRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<ElectricMotorBlockEntity> ELECTRIC_MOTOR = REGISTRATE
+            .blockEntity("electric_motor", ElectricMotorBlockEntity::new)
+            .visual(() -> OrientedRotatingVisual.of(AllPartialModels.SHAFT_HALF))
+            .validBlocks(TFMGBlocks.ELECTRIC_MOTOR,TFMGBlocks.HEAVY_ELECTRIC_MOTOR)
             .renderer(() -> HalfShaftRenderer::new)
             .register();
 
@@ -444,11 +462,7 @@ public class TFMGBlockEntities {
             .validBlocks(TFMGBlocks.TRAFFIC_LIGHT)
             .renderer(() -> TrafficLightRenderer::new)
             .register();
-    public static final BlockEntityEntry<TransformerBlockEntity> TRANSFORMER = REGISTRATE
-            .blockEntity("transformer", TransformerBlockEntity::new)
-            .validBlocks(TFMGBlocks.TRANSFORMER)
-            .renderer(() -> TransformerRenderer::new)
-            .register();
+
     public static final BlockEntityEntry<SegmentedDisplayBlockEntity> SEGMENTED_DISPLAY = REGISTRATE
             .blockEntity("segmented_display", SegmentedDisplayBlockEntity::new)
             .validBlocks(TFMGBlocks.SEGMENTED_DISPLAY)
@@ -585,12 +599,7 @@ public class TFMGBlockEntities {
             .renderer(() -> HalfShaftRenderer::new)
             .register();
 
-    public static final BlockEntityEntry<ElectricMotorBlockEntity> ELECTRIC_MOTOR = REGISTRATE
-            .blockEntity("electric_motor", ElectricMotorBlockEntity::new)
-            .visual(() -> OrientedRotatingVisual.of(AllPartialModels.SHAFT_HALF))
-            .validBlocks(TFMGBlocks.ELECTRIC_MOTOR,TFMGBlocks.HEAVY_ELECTRIC_MOTOR)
-            .renderer(() -> HalfShaftRenderer::new)
-            .register();
+
 
     public static final BlockEntityEntry<AirIntakeBlockEntity> AIR_INTAKE = REGISTRATE
             .blockEntity("air_intake", AirIntakeBlockEntity::new)

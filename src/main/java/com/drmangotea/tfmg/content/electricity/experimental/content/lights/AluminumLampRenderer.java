@@ -1,6 +1,5 @@
-package com.drmangotea.tfmg.content.electricity.lights.variants;
+package com.drmangotea.tfmg.content.electricity.experimental.content.lights;
 
-import com.drmangotea.tfmg.content.electricity.experimental.content.lights.LightBulbRenderer;
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;

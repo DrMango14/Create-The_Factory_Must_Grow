@@ -49,15 +49,15 @@ import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchB
 import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchGenerator;
 import com.drmangotea.tfmg.content.electricity.network.potentiometer.EncasedPotentiometerBlock;
 import com.drmangotea.tfmg.content.electricity.network.potentiometer.PotentiometerBlock;
-import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeCoilBlock;
-import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeElectromagneticCoilItem;
-import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeTransformerBlock;
-import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeTransformerGenerator;
-import com.drmangotea.tfmg.content.electricity.network.transformer.small.TransformerBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeCoilBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeElectromagneticCoilItem;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeTransformerBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeTransformerGenerator;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.small.TransformerBlock;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlock;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorItem;
 import com.drmangotea.tfmg.content.electricity.storage.CapacitorCTBehavior;
-import com.drmangotea.tfmg.content.electricity.utilities.electric_motor.ElectricMotorBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.electric_motor.ElectricMotorBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_pump.ElectricPumpBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayBlock;
@@ -181,6 +181,16 @@ public class TFMGBlocks {
     static {
         REGISTRATE.setCreativeTab(TFMGCreativeTabs.TFMG_MAIN);
     }
+
+    public static final BlockEntry<VoltMeterBlock> VOLTMETER =
+            REGISTRATE.block("voltmeter", VoltMeterBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .transform(pickaxeOnly())
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
 
     public static final BlockEntry<ThreePhaseGeneratorBlock> THREE_PHASE_GENERATOR = REGISTRATE.block("three_phase_generator", ThreePhaseGeneratorBlock::new)
             .initialProperties(SharedProperties::softMetal)
@@ -1350,16 +1360,7 @@ public class TFMGBlocks {
                     .item()
                     .transform(customItemModel())
                     .register();
-    public static final BlockEntry<VoltMeterBlock> VOLTMETER =
-            REGISTRATE.block("voltmeter", VoltMeterBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
-                    .lang("Electric Gauge")
-                    .item()
-                    .transform(customItemModel())
-                    .register();
+
 
     public static final BlockEntry<VoltMeterBlock> ELECTRIC_MEASUREMENT_BLOCK =
             REGISTRATE.block("electric_measurement_block", VoltMeterBlock::new)

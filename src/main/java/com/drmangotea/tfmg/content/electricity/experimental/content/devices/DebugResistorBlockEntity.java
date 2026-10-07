@@ -17,60 +17,10 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
-public class DebugResistorBlockEntity extends SmartBlockEntity implements IRealisticElectric, IHaveGoggleInformation {
+public class DebugResistorBlockEntity extends ResistiveLoadBlockEntity {
 
-    DebugResistorProperties p;
-
-    public double resistance = 0;
 
     public DebugResistorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        p = new DebugResistorProperties(getPos(), state.getValue(TFMGDirectionalBlock.FACING));
-    }
-
-    @Override
-    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-
-    }
-
-
-    @Override
-    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-
-        DebugResistorProperties properties = (DebugResistorProperties) RealElectricNetworkManager.getNetwork(level).members.get(getPos());
-
-        if(properties == null){
-            return false;
-        }
-
-        Resistance resistor = ((Resistance) properties.components.get(0));
-
-        TFMGLang.text("Resistance: " + resistor.resistance).forGoggles(tooltip);
-        TFMGLang.text("Voltage: " + resistor.getVoltage(level)).forGoggles(tooltip);
-        TFMGLang.text("Power: " + Math.pow(resistor.getVoltage(level),2)/resistor.resistance).forGoggles(tooltip);
-
-
-        return true;
-    }
-
-    @Override
-    public void remove() {
-        super.remove();
-        this.removeBlock();
-    }
-
-    @Override
-    public ElectricalProperties getProperties() {
-        return p;
-    }
-
-    @Override
-    public long getPos() {
-        return getBlockPos().asLong();
-    }
-
-    @Override
-    public Level getWorld() {
-        return getLevel();
     }
 }
