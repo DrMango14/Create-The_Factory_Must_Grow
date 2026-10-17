@@ -7,6 +7,7 @@ import com.drmangotea.tfmg.content.electricity.experimental.simulation.Resistanc
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.Transformer;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectingElectricalNode;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ElectricalNode;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.NodeType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 
@@ -20,17 +21,17 @@ public class TransformerProperties extends DirectionalElectricalProperties {
         super(pos1, direction);
 
 
-        ElectricalNode A = new ConnectingElectricalNode(position, 0, getRotation(direction).get(0));
-        ElectricalNode B = new ConnectingElectricalNode(position, 1, getRotation(direction).get(1));
-        ElectricalNode a = new ConnectingElectricalNode(position, 2, getRotation(direction).get(2));
-        ElectricalNode b = new ConnectingElectricalNode(position, 3, getRotation(direction).get(3));
+        ElectricalNode A = new ConnectingElectricalNode(position, 0, getRotation(direction).get(0), NodeType.INPUT);
+        ElectricalNode B = new ConnectingElectricalNode(position, 1, getRotation(direction).get(1),NodeType.OUTPUT);
+        ElectricalNode a = new ConnectingElectricalNode(position, 2, getRotation(direction).get(2),NodeType.INPUT);
+        ElectricalNode b = new ConnectingElectricalNode(position, 3, getRotation(direction).get(3),NodeType.OUTPUT);
 
         nodes.add(A);
         nodes.add(B);
         nodes.add(a);
         nodes.add(b);
 
-        components.add(new Transformer(A,B,a,b,1,10,1,1));
+        components.add(new Transformer(A,B,a,b,1,10,1,0,position));
 
     }
 

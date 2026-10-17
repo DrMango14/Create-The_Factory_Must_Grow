@@ -1,6 +1,6 @@
 package com.drmangotea.tfmg.config;
 
-import com.drmangotea.tfmg.content.electricity.connection.cable_type.ResistivityValues;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.cable_type.ResistivityValues;
 import com.simibubi.create.api.stress.BlockStressValues;
 
 import net.createmod.catnip.config.ConfigBase;

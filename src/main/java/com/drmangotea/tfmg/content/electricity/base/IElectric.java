@@ -3,7 +3,7 @@ package com.drmangotea.tfmg.content.electricity.base;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnection;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;
-import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch.LargeSwitchBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
 import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.core.BlockPos;

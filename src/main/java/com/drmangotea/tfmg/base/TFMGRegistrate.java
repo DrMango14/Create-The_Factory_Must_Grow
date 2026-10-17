@@ -2,8 +2,8 @@ package com.drmangotea.tfmg.base;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.fluid.GasFluidType;
-import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableType;
-import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableTypeBuilder;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.cable_type.CableType;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.cable_type.CableTypeBuilder;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode.Electrode;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode.ElectrodeBuilder;
 import com.simibubi.create.content.fluids.VirtualFluid;

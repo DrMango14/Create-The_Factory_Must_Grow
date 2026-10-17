@@ -64,7 +64,10 @@ public class Resistance extends ElectricalComponent {
     }
 
     public double getVoltage(Level level) {
-        return getVoltagePhasor(level).abs();
+        return getVoltageComplex(level).abs();
+    }
+    public ComplexValue getVoltageComplex(Level level) {
+        return getVoltagePhasor(level);
     }
 
     public ComplexValue getAdmittance() {

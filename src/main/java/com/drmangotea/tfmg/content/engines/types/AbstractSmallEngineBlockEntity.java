@@ -112,7 +112,7 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
     @Override
     public int voltageGeneration() {
 
-        if (upgrade.isPresent() && upgrade.get().getItem() == TFMGBlocks.GENERATOR.asItem())
+        if (upgrade.isPresent() && upgrade.get().getItem() == TFMGBlocks.THREE_PHASE_GENERATOR.asItem())
             return (int) (20 * (rpm / 500));
 
         return 0;
@@ -120,7 +120,7 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
 
     @Override
     public float powerGeneration() {
-        if (upgrade.isPresent() && upgrade.get().getItem() == TFMGBlocks.GENERATOR.asItem())
+        if (upgrade.isPresent() && upgrade.get().getItem() == TFMGBlocks.THREE_PHASE_GENERATOR.asItem())
             return (int) rpm;
 
         return 0;

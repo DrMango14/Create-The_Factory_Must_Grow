@@ -37,6 +37,10 @@ public class ElectricalProperties {
         return false;
     };
 
+    public List<Direction> getConnectableDirections(){
+        return new ArrayList<>();
+    }
+
     public List<ElectricalComponent> createProperties(IRealisticElectric be) {
         return new ArrayList<>();
     }

@@ -26,12 +26,8 @@ public class TFMGWindingRecipeGen extends WindingRecipeGen {
                     .require(TFMGBlocks.LAMINATED_MAGNETIC_ALLOY_BLOCK)
                     .require(TFMGItems.COPPER_SPOOL)
                     .output(largeCoil100Turns())
-                    .duration(100)),
-            RESISTOR = create("resistor", b -> b
-                    .require(TFMGItems.UNFINISHED_RESISTOR)
-                    .require(TFMGItems.CONSTANTAN_SPOOL)
-                    .output(resistor10Ohms())
-                    .duration(50));
+                    .duration(100));
+
 
     public TFMGWindingRecipeGen(PackOutput generator, CompletableFuture<HolderLookup.Provider> registries) {
         super(generator, registries, TFMG.MOD_ID);

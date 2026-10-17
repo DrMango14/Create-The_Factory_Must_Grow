@@ -2,11 +2,11 @@ package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGRegistrate;
-import com.drmangotea.tfmg.content.electricity.display_link.*;
-import com.drmangotea.tfmg.content.electricity.display_link.network.NetConsumptionDisplaySource;
-import com.drmangotea.tfmg.content.electricity.display_link.network.NetGenerationDisplaySource;
-import com.drmangotea.tfmg.content.electricity.display_link.network.NetIdDisplaySource;
-import com.drmangotea.tfmg.content.electricity.display_link.network.NetResistanceDisplaySource;
+import com.drmangotea.tfmg.content.electricity.experimental.display_link.*;
+import com.drmangotea.tfmg.content.electricity.experimental.display_link.network.NetConsumptionDisplaySource;
+import com.drmangotea.tfmg.content.electricity.experimental.display_link.network.NetGenerationDisplaySource;
+import com.drmangotea.tfmg.content.electricity.experimental.display_link.network.NetIdDisplaySource;
+import com.drmangotea.tfmg.content.electricity.experimental.display_link.network.NetResistanceDisplaySource;
 import com.simibubi.create.api.behaviour.display.DisplaySource;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 

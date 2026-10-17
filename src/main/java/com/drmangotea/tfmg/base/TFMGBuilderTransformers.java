@@ -11,7 +11,7 @@ import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorBlock;
 import com.drmangotea.tfmg.content.decoration.kinetics.encased.TFMGEncasedCogwheelBlock;
 import com.drmangotea.tfmg.content.decoration.kinetics.encased.TFMGEncasedShaftBlock;
 import com.drmangotea.tfmg.content.decoration.kinetics.flywheels.TFMGFlywheelBlock;
-import com.drmangotea.tfmg.content.electricity.connection.copycat_cable.CopycatCableBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.copycat_cable.CopycatCableBlock;
 import com.drmangotea.tfmg.content.electricity.lights.neon_tube.NeonTubeBlock;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.AllBlocks;

@@ -24,42 +24,40 @@ import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlock;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankItem;
 import com.drmangotea.tfmg.content.electricity.connection.CableHubBlock;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorGenerator;
-import com.drmangotea.tfmg.content.electricity.connection.copycat_cable.CopycatCableBlock;
-import com.drmangotea.tfmg.content.electricity.connection.copycat_cable.CopycatCableBlockModel;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.copycat_cable.CopycatCableBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.copycat_cable.CopycatCableBlockModel;
 import com.drmangotea.tfmg.content.electricity.connection.diagonal.DiagonalCableBlock;
 import com.drmangotea.tfmg.content.electricity.connection.diagonal.DiagonalCableGenerator;
 import com.drmangotea.tfmg.content.electricity.connection.tube.CableTubeBlock;
-import com.drmangotea.tfmg.content.electricity.experimental.content.devices.DebugResistorBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.three_phase_generator.ThreePhaseGeneratorBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.resistor.DebugResistorBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.electric_motor.ElectricMotorBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.lights.ElectricLightBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.lights.LampGenerator;
+import com.drmangotea.tfmg.content.electricity.experimental.content.measuring_instruments.VoltMeterBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.adapters.ElectricAdapterBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.CableBlock;
-import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.RealConnectorBlock;
-import com.drmangotea.tfmg.content.electricity.experimental.content.ThreePhaseGeneratorBlock;
-import com.drmangotea.tfmg.content.electricity.generators.GeneratorBlock;
-import com.drmangotea.tfmg.content.electricity.generators.creative_generator.CreativeGeneratorBlock;
-import com.drmangotea.tfmg.content.electricity.generators.large_generator.RotorBlock;
-import com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorBlock;
-import com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorGenerator;
-import com.drmangotea.tfmg.content.electricity.lights.neon_tube.NeonTubeBlock;
-import com.drmangotea.tfmg.content.electricity.measurement.VoltMeterBlock;
-import com.drmangotea.tfmg.content.electricity.network.diode.ElectricDiodeBlock;
-import com.drmangotea.tfmg.content.electricity.network.diode.EncasedDiodeBlock;
-import com.drmangotea.tfmg.content.electricity.network.electric_switch.ElectricSwitchBlock;
-import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchBlock;
-import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchGenerator;
-import com.drmangotea.tfmg.content.electricity.network.potentiometer.EncasedPotentiometerBlock;
-import com.drmangotea.tfmg.content.electricity.network.potentiometer.PotentiometerBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeCoilBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeElectromagneticCoilItem;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeTransformerBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeTransformerGenerator;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.small.TransformerBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.RealConnectorBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.creative_generator.CreativeGeneratorBlock;
+import com.drmangotea.tfmg.content.electricity.generators.large_generator.RotorBlock;
+import com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorBlock;
+import com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorGenerator;
+import com.drmangotea.tfmg.content.electricity.lights.neon_tube.NeonTubeBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.electric_switch.ElectricSwitchBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch.LargeSwitchBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch.LargeSwitchGenerator;
+import com.drmangotea.tfmg.content.electricity.network.potentiometer.EncasedPotentiometerBlock;
+import com.drmangotea.tfmg.content.electricity.network.potentiometer.PotentiometerBlock;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlock;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorItem;
 import com.drmangotea.tfmg.content.electricity.storage.CapacitorCTBehavior;
-import com.drmangotea.tfmg.content.electricity.experimental.content.devices.electric_motor.ElectricMotorBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.electric_pump.ElectricPumpBlock;
-import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.polarizer.PolarizerBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayCTBehavior;
 import com.drmangotea.tfmg.content.electricity.utilities.traffic_light.TrafficLightBlock;
@@ -183,25 +181,47 @@ public class TFMGBlocks {
     }
 
     public static final BlockEntry<VoltMeterBlock> VOLTMETER =
-            REGISTRATE.block("voltmeter", VoltMeterBlock::new)
+            REGISTRATE.block("voltmeter", p->new VoltMeterBlock(p,true))
                     .initialProperties(SharedProperties::softMetal)
                     .transform(pickaxeOnly())
                     .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                    .blockstate(BlockStateGen.directionalBlockProvider(true))
                     .item()
                     .transform(customItemModel())
                     .register();
 
-    public static final BlockEntry<ThreePhaseGeneratorBlock> THREE_PHASE_GENERATOR = REGISTRATE.block("three_phase_generator", ThreePhaseGeneratorBlock::new)
-            .initialProperties(SharedProperties::softMetal)
-            .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-            .properties(BlockBehaviour.Properties::noOcclusion)
-            .blockstate(BlockStateGen.directionalBlockProvider(true))
-            .transform(TFMGStress.setImpact(50.0f))
-            .addLayer(() -> RenderType::cutoutMipped)
-            .item()
-            .transform(customItemModel())
-            .register();
+    public static final BlockEntry<VoltMeterBlock> AMMETER =
+            REGISTRATE.block("ammeter", p->new VoltMeterBlock(p,false))
+                    .initialProperties(SharedProperties::softMetal)
+                    .transform(pickaxeOnly())
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .blockstate(BlockStateGen.directionalBlockProvider(true))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<PolarizerBlock> POLARIZER =
+            REGISTRATE.block("polarizer", PolarizerBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .transform(pickaxeOnly())
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .blockstate(BlockStateGen.directionalBlockProvider(true))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<ThreePhaseGeneratorBlock> THREE_PHASE_GENERATOR =
+            REGISTRATE.block("three_phase_generator", ThreePhaseGeneratorBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .blockstate(BlockStateGen.directionalBlockProvider(true))
+                    .transform(TFMGStress.setImpact(50.0f))
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .item()
+                    .transform(customItemModel())
+                    .register();
 
     public static final BlockEntry<ElectricLightBlock> LIGHT_BULB =
             REGISTRATE.block("light_bulb", p -> new ElectricLightBlock(p, TFMGBlockEntities.ELECTRIC_LIGHT, TFMGShapes.LIGHT_BULB))
@@ -215,6 +235,43 @@ public class TFMGBlocks {
                     .transform(customItemModel())
                     .register();
 
+    public static final BlockEntry<ElectricLightBlock> CIRCULAR_LIGHT =
+            REGISTRATE.block("circular_light", p -> new ElectricLightBlock(p, TFMGBlockEntities.CIRCULAR_LIGHT, TFMGShapes.CIRCULAR_LIGHT))
+                    .initialProperties(SharedProperties::softMetal)
+                    .properties(p -> p.lightLevel(s -> s.getValue(LIGHT)))
+                    .transform(pickaxeOnly())
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .blockstate(new LampGenerator()::generate)
+                    .lang("Circular Lamp")
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+    public static final BlockEntry<ElectricLightBlock> MODERN_LIGHT =
+            REGISTRATE.block("modern_light", p -> new ElectricLightBlock(p, TFMGBlockEntities.MODERN_LIGHT, TFMGShapes.MODERN_LIGHT))
+                    .initialProperties(SharedProperties::softMetal)
+                    .properties(p -> p.lightLevel(s -> s.getValue(LIGHT)))
+                    .transform(pickaxeOnly())
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .blockstate(new LampGenerator()::generate)
+                    .lang("Light Panel")
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+    public static final BlockEntry<ElectricLightBlock> ALUMINUM_LAMP =
+            REGISTRATE.block("aluminum_lamp", p -> new ElectricLightBlock(p, TFMGBlockEntities.ALUMINUM_LAMP, TFMGShapes.ALUMINUM_LAMP))
+                    .initialProperties(SharedProperties::softMetal)
+                    .properties(p -> p.lightLevel(s -> s.getValue(LIGHT)))
+                    .transform(pickaxeOnly())
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .blockstate(new LampGenerator()::generate)
+                    .lang("Aluminum Lamp")
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
     public static final BlockEntry<RealConnectorBlock> CABLE_CONNECTOR = REGISTRATE.block("cable_connector", RealConnectorBlock::new)
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
@@ -222,9 +279,18 @@ public class TFMGBlocks {
             .blockstate(new CableConnectorGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
             .item()
-        //    .lang("Ceramic Insulator")
+            //    .lang("Ceramic Insulator")
             .transform(customItemModel())
             .register();
+
+    public static final BlockEntry<CopycatCableBlock> COPYCAT_CABLE_BLOCK =
+            REGISTRATE.block("copycat_cable_block", CopycatCableBlock::new)
+                    .transform(TFMGBuilderTransformers.copycatCable())
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .onRegister(CreateRegistrate.blockModel(() -> CopycatCableBlockModel::new))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
 
     public static final BlockEntry<RealConnectorBlock> GLASS_CABLE_CONNECTOR = REGISTRATE.block("glass_cable_connector", RealConnectorBlock::new)
             .initialProperties(SharedProperties::softMetal)
@@ -233,11 +299,11 @@ public class TFMGBlocks {
             .blockstate(new CableConnectorGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
             .item()
-          //  .lang("Glass Insulator")
+            //  .lang("Glass Insulator")
             .transform(customItemModel())
             .register();
 
-    public static final BlockEntry<ElectricAdapterBlock> TWO_SLOT_ADAPTER = REGISTRATE.block("two_slot_cable_adapter", p-> new ElectricAdapterBlock(p,2))
+    public static final BlockEntry<ElectricAdapterBlock> TWO_SLOT_ADAPTER = REGISTRATE.block("two_slot_cable_adapter", p -> new ElectricAdapterBlock(p, 2))
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .properties(BlockBehaviour.Properties::noOcclusion)
@@ -247,7 +313,7 @@ public class TFMGBlocks {
             .transform(customItemModel())
             .register();
 
-    public static final BlockEntry<ElectricAdapterBlock> FOUR_SLOT_ADAPTER = REGISTRATE.block("four_slot_cable_adapter", p-> new ElectricAdapterBlock(p,4))
+    public static final BlockEntry<ElectricAdapterBlock> FOUR_SLOT_ADAPTER = REGISTRATE.block("four_slot_cable_adapter", p -> new ElectricAdapterBlock(p, 4))
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .blockstate(BlockStateGen.directionalBlockProvider(true))
@@ -1026,16 +1092,16 @@ public class TFMGBlocks {
 
     //------------------ELECTRICITY------------------//
 
-    public static final BlockEntry<GeneratorBlock> GENERATOR =
-            REGISTRATE.block("generator", GeneratorBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .transform(TFMGStress.setImpact(50.0f))
-                    .blockstate(BlockStateGen.directionalBlockProvider(true))
-                    .item()
-                    .transform(customItemModel())
-                    .register();
+    //public static final BlockEntry<GeneratorBlock> GENERATOR =
+    //        REGISTRATE.block("generator", GeneratorBlock::new)
+    //                .initialProperties(SharedProperties::softMetal)
+    //                .transform(pickaxeOnly())
+    //                .properties(BlockBehaviour.Properties::noOcclusion)
+    //                .transform(TFMGStress.setImpact(50.0f))
+    //                .blockstate(BlockStateGen.directionalBlockProvider(true))
+    //                .item()
+    //                .transform(customItemModel())
+    //                .register();
 
     //public static final BlockEntry<CableConnectorBlock> CABLE_CONNECTOR =
     //        REGISTRATE.block("cable_connector", CableConnectorBlock::new)
@@ -1071,14 +1137,7 @@ public class TFMGBlocks {
     //                .item(ResistorBlockItem::new)
     //                .transform(customItemModel())
     //                .register();
-    public static final BlockEntry<CopycatCableBlock> COPYCAT_CABLE_BLOCK =
-            REGISTRATE.block("copycat_cable_block", CopycatCableBlock::new)
-                    .transform(TFMGBuilderTransformers.copycatCable())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .onRegister(CreateRegistrate.blockModel(() -> CopycatCableBlockModel::new))
-                    .item()
-                    .transform(customItemModel())
-                    .register();
+
 
     public static final BlockEntry<Block> COPYCAT_CABLE_BASE = REGISTRATE.block("copycat_cable_base", Block::new)
             .initialProperties(SharedProperties::softMetal)
@@ -1218,53 +1277,7 @@ public class TFMGBlocks {
                     .build()
                     .register();
     ;
-   // public static final BlockEntry<LightBulbBlock> LIGHT_BULB =
-   //         REGISTRATE.block("light_bulb", p -> new LightBulbBlock(p, TFMGBlockEntities.LIGHT_BULB, TFMGShapes.LIGHT_BULB))
-   //                 .initialProperties(SharedProperties::softMetal)
-   //                 .properties(p -> p.lightLevel(s -> s.getValue(LIGHT)))
-   //                 .transform(pickaxeOnly())
-   //                 .addLayer(() -> RenderType::cutoutMipped)
-   //                 .properties(BlockBehaviour.Properties::noOcclusion)
-   //                 .blockstate(BlockStateGen.directionalBlockProvider(true))
-   //                 .item()
-   //                 .transform(customItemModel())
-   //                 .register();
-    //public static final BlockEntry<LightBulbBlock> CIRCULAR_LIGHT =
-    //        REGISTRATE.block("circular_light", p -> new LightBulbBlock(p, TFMGBlockEntities.CIRCULAR_LIGHT, TFMGShapes.CIRCULAR_LIGHT))
-    //                .initialProperties(SharedProperties::softMetal)
-    //                .properties(p -> p.lightLevel(s -> s.getValue(LIGHT)))
-    //                .transform(pickaxeOnly())
-    //                .addLayer(() -> RenderType::cutoutMipped)
-    //                .properties(BlockBehaviour.Properties::noOcclusion)
-    //                .blockstate(new LampGenerator()::generate)
-    //                .lang("Circular Lamp")
-    //                .item()
-    //                .transform(customItemModel())
-    //                .register();
-    //public static final BlockEntry<LightBulbBlock> MODERN_LIGHT =
-    //        REGISTRATE.block("modern_light", p -> new LightBulbBlock(p, TFMGBlockEntities.MODERN_LIGHT, TFMGShapes.MODERN_LIGHT))
-    //                .initialProperties(SharedProperties::softMetal)
-    //                .properties(p -> p.lightLevel(s -> s.getValue(LIGHT)))
-    //                .transform(pickaxeOnly())
-    //                .addLayer(() -> RenderType::cutoutMipped)
-    //                .properties(BlockBehaviour.Properties::noOcclusion)
-    //                .blockstate(new LampGenerator()::generate)
-    //                .lang("Light Panel")
-    //                .item()
-    //                .transform(customItemModel())
-    //                .register();
-    //public static final BlockEntry<LightBulbBlock> ALUMINUM_LAMP =
-    //        REGISTRATE.block("aluminum_lamp", p -> new LightBulbBlock(p, TFMGBlockEntities.ALUMINUM_LAMP, TFMGShapes.ALUMINUM_LAMP))
-    //                .initialProperties(SharedProperties::softMetal)
-    //                .properties(p -> p.lightLevel(s -> s.getValue(LIGHT)))
-    //                .transform(pickaxeOnly())
-    //                .addLayer(() -> RenderType::cutoutMipped)
-    //                .properties(BlockBehaviour.Properties::noOcclusion)
-    //                .blockstate(new LampGenerator()::generate)
-    //                .lang("Aluminum Lamp")
-    //                .item()
-    //                .transform(customItemModel())
-    //                .register();
+
 
     public static final BlockEntry<NeonTubeBlock> NEON_TUBE =
             REGISTRATE.block("neon_tube", NeonTubeBlock::new)
@@ -1276,24 +1289,6 @@ public class TFMGBlocks {
                     .blockstate(TFMGBuilderTransformers::generateNeonTubeBlockState)
                     .item()
                     .transform(customItemModel())
-                    .register();
-
-    public static final BlockEntry<ElectricDiodeBlock> DIODE =
-            REGISTRATE.block("electric_diode", ElectricDiodeBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(new CreativeMotorGenerator()::generate)
-                    .lang("Diode")
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-    public static final BlockEntry<EncasedDiodeBlock> ENCASED_DIODE =
-            REGISTRATE.block("encased_diode", EncasedDiodeBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .transform(EncasingRegistry.addVariantTo(DIODE))
-                    .blockstate(BlockStateGen.directionalBlockProvider(false))
                     .register();
 
     public static final BlockEntry<PotentiometerBlock> POTENTIOMETER =
@@ -1362,27 +1357,9 @@ public class TFMGBlocks {
                     .register();
 
 
-    public static final BlockEntry<VoltMeterBlock> ELECTRIC_MEASUREMENT_BLOCK =
-            REGISTRATE.block("electric_measurement_block", VoltMeterBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .addLayer(() -> RenderType::cutoutMipped)
-                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
-                    .item()
-                    .transform(customItemModel())
-                    .register();
 
-    public static final BlockEntry<PolarizerBlock> POLARIZER =
-            REGISTRATE.block("polarizer", PolarizerBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .addLayer(() -> RenderType::cutoutMipped)
-                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
-                    .item()
-                    .transform(customItemModel())
-                    .register();
+
+
     public static final BlockEntry<RotorBlock> ROTOR =
             REGISTRATE.block("rotor", RotorBlock::new)
                     .initialProperties(SharedProperties::softMetal)

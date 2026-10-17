@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.experimental.content.lights;
 
 
+import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.experimental.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
@@ -37,7 +38,9 @@ public class ElectricLightBlockEntity extends SmartBlockEntity implements IReali
 
     LightProperties p;
 
-    public float current = 0;
+    public double resistance = 0;
+    public double voltage = 0;
+    public double current = 0;
 
     public ElectricLightBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -52,8 +55,10 @@ public class ElectricLightBlockEntity extends SmartBlockEntity implements IReali
     @Override
     public void tick() {
         super.tick();
-        if (!hasSignal) {
-            glow.chase(current * 102.5, 0.1, LerpedFloat.Chaser.EXP);
+
+
+        if (!hasSignal && current > 1E-3) {
+            glow.chase(current * 90, 0.1, LerpedFloat.Chaser.EXP);
             glow.tickChaser();
             //if (Math.min(current * 30, 15) != getBlockState().getValue(LIGHT))
             //    level.setBlock(getBlockPos(), getBlockState().setValue(LIGHT, (int) Math.min(current * 30, 15)), 2);
@@ -85,36 +90,27 @@ public class ElectricLightBlockEntity extends SmartBlockEntity implements IReali
 
     @Override
     public boolean makeMultimeterTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        IRealisticElectric.super.makeMultimeterTooltip(tooltip, isPlayerSneaking);
-        ElectricalProperties properties = RealElectricNetworkManager.getNetwork(level).members.get(getPos());
 
-        if (properties == null) {
-            return false;
-        }
+        TFMGLang.text("Resistance: " + TFMGUtils.formatUnits(resistance, "Ohm")).forGoggles(tooltip);
+        TFMGLang.text("Voltage: " + TFMGUtils.formatUnits(voltage, "V")).forGoggles(tooltip);
+        TFMGLang.text("Power: " + TFMGUtils.formatUnits(current * voltage, "W")).forGoggles(tooltip);
 
-
-        if (!properties.components.isEmpty() && properties.components.getFirst() instanceof Resistance resistor) {
-            TFMGLang.text("Resistance: " + resistor.resistance).forGoggles(tooltip);
-            TFMGLang.text("Voltage: " + resistor.getVoltage(level)).forGoggles(tooltip);
-            TFMGLang.text("Power: " + Math.pow(resistor.getVoltage(level), 2) / resistor.resistance).forGoggles(tooltip);
-        }
         return true;
     }
 
     @Override
     public void onUpdated() {
         RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
-        
-            Resistance resistor = network.getResistance(getPos(),0);
 
-            if(resistor != null){
+        Resistance resistor = network.getResistance(getPos(), 0);
 
-                double resistance = resistor.resistance;
-                double voltage = resistor.getVoltage(level);
-                current = (float) (voltage / resistance);
+        if (resistor != null) {
 
-            }
+            resistance = resistor.resistance;
+            voltage = resistor.getVoltage(level);
+            current = (float) (voltage / resistance);
 
+        }
     }
 
     @Override

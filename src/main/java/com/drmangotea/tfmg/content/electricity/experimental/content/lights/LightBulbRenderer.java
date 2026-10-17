@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.experimental.content.lights;
 
 
-
 import com.drmangotea.tfmg.base.blocks.WallMountBlock;
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -18,35 +17,33 @@ import net.minecraft.world.level.block.state.BlockState;
 public class LightBulbRenderer extends SafeBlockEntityRenderer<ElectricLightBlockEntity> {
 
 
-
     public LightBulbRenderer(BlockEntityRendererProvider.Context context) {
 
     }
 
     @Override
     protected void renderSafe(ElectricLightBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-        if(getLightModel() ==null)
+        if (getLightModel() == null)
             return;
         BlockState blockState = be.getBlockState();
         ms.pushPose();
         float glow = be.glow.getValue(partialTicks);
-        int color =  Math.min(100,(int) (glow/0.2f));
-        if(be.glow.getValue()!=0) {
+        int color = Math.min(100, (int) (glow / 0.2f));
+        if (be.glow.getValue() != 0) {
 
-                SuperByteBuffer lightModel =  CachedBuffers.partialFacing(getLightModel(), blockState, blockState.getValue(WallMountBlock.FACING))
-                        .light((int) glow * 3 + 40)
-                        .color(color, color, (int) (color * 0.8), 255)
-                        .disableDiffuse();
-                if(be.color == DyeColor.WHITE){
-                    lightModel.color(color, color, (int) (color * 0.8), 255);
-                }else   lightModel.color(be.color.getTextColor());
-
+            SuperByteBuffer lightModel = CachedBuffers.partialFacing(getLightModel(), blockState, blockState.getValue(WallMountBlock.FACING))
+                    .light((int) glow * 3 + 40)
+                    .color(color, color, (int) (color * 0.8), 255)
+                    .disableDiffuse();
+            if (be.color == DyeColor.WHITE) {
+                lightModel.color(color, color, (int) (color * 0.8), 255);
+            } else lightModel.color(be.color.getTextColor());
                 lightModel.renderInto(ms, buffer.getBuffer(RenderTypes.additive()));
         }
         ms.popPose();
     }
 
-    public PartialModel getLightModel(){
+    public PartialModel getLightModel() {
         return TFMGPartialModels.LIGHT_BULB;
     }
 }

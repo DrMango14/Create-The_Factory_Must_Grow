@@ -52,7 +52,7 @@ public class GeneratorEngineUpgrade extends EngineUpgrade {
 
     @Override
     public Item getItem() {
-        return TFMGBlocks.GENERATOR.asItem();
+        return TFMGBlocks.THREE_PHASE_GENERATOR.asItem();
     }
 
     @Override

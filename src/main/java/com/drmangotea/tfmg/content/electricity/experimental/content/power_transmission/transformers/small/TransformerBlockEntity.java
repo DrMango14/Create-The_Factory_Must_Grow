@@ -2,15 +2,15 @@ package com.drmangotea.tfmg.content.electricity.experimental.content.power_trans
 
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.experimental.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricNetworkManager;
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwork;
-import com.drmangotea.tfmg.content.electricity.experimental.simulation.Resistance;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.Transformer;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGItems;
-import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.createmod.catnip.animation.AnimationTickHolder;
@@ -23,6 +23,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -40,7 +41,6 @@ import java.util.Collection;
 import java.util.List;
 
 
-
 public class TransformerBlockEntity extends SmartBlockEntity implements IRealisticElectric {
     boolean updateInFront = false;
 
@@ -50,6 +50,10 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IRealist
     public float coilRatio = 0;
 
     ElectricalProperties p;
+
+    public double primaryVoltage = 0;
+
+    public double secondaryVoltage = 0;
 
     public float primaryCurrent = 0;
 
@@ -65,36 +69,33 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IRealist
 
     }
 
+    @Override
+    public boolean makeMultimeterTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+
+        TFMGLang.text("Voltage primary " + primaryVoltage).forGoggles(tooltip);
+        TFMGLang.text("Voltage secondary " + secondaryVoltage).forGoggles(tooltip);
+        TFMGLang.text("Ratio " + coilRatio).forGoggles(tooltip);
+
+        return true;
+    }
+
+    @Override
+    public void onPlace() {
+        IRealisticElectric.super.onPlace();
+
+        getNetwork().setTransformerRatio(this,0,coilRatio);
+    }
 
     @Override
     public void onUpdated() {
 
         RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
 
-        double primaryPower = 0;
-        double secondaryPower = 0;
 
-        Resistance secondaryResistance = network.getResistance(getPos(), 0);
-        if (secondaryResistance != null) {
-            double resistance = secondaryResistance.resistance;
-            double voltage = secondaryResistance.getVoltage(level);
-            secondaryCurrent = (float) (voltage / resistance);
-            secondaryPower = Math.pow(secondaryPower, 2) * resistance;
-        }
-        Resistance primaryResistance = network.getResistance(getPos(), 1);
-        if (primaryResistance != null) {
-            double resistance = primaryResistance.resistance;
-            double voltage = primaryResistance.getVoltage(level);
-            primaryCurrent = (float) (voltage / resistance);
-            primaryPower = Math.pow(primaryCurrent, 2) * resistance;
+        Transformer t = network.getTransformer(getPos(), 0);
 
-
-            
-        }
-
-
-
-
+        primaryVoltage = network.nodeVoltages.get(t.nodeA.networkId).minus(network.nodeVoltages.get(t.nodeB.networkId)).abs();
+        secondaryVoltage = network.nodeVoltages.get(t.sA.networkId).minus(network.nodeVoltages.get(t.sB.networkId)).abs();
 
     }
 
@@ -142,7 +143,7 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IRealist
     public void updateCoils() {
         if (primaryCoil.get(TFMGDataComponents.COIL_TURNS) == null || secondaryCoil.get(TFMGDataComponents.COIL_TURNS) == null) {
             coilRatio = 0;
-
+            getNetwork().setTransformerRatio(this, 0, coilRatio);
             return;
         }
         int primaryTurns = primaryCoil.get(TFMGDataComponents.COIL_TURNS);
@@ -151,11 +152,13 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IRealist
         if (primaryCoil.isEmpty() || secondaryCoil.isEmpty() || primaryTurns < 50 || secondaryTurns < 50) {
 
             coilRatio = 0;
-
+            getNetwork().setTransformerRatio(this, 0, coilRatio);
             return;
         }
 
-        coilRatio = (float) (float) secondaryTurns / (float) primaryTurns;
+        coilRatio = (float) secondaryTurns / (float) primaryTurns;
+
+        getNetwork().setTransformerRatio(this, 0, coilRatio);
 
 
     }
@@ -175,7 +178,7 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IRealist
         if (!secondaryCoil.isEmpty())
             compound.put("SecondaryCoil", secondaryCoil.save(registries));
 
-        compound.putFloat("CoilRation", coilRatio);
+        compound.putFloat("CoilRatio", coilRatio);
 
     }
 
@@ -197,7 +200,7 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IRealist
         }
         ;
 
-        coilRatio = compound.getFloat("CoilRation");
+        coilRatio = compound.getFloat("CoilRatio");
     }
 
     public static List<Direction> getCoilDirections(Level level, BlockPos pos, BlockHitResult result) {

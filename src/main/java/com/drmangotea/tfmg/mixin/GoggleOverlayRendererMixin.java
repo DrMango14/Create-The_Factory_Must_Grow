@@ -2,7 +2,7 @@ package com.drmangotea.tfmg.mixin;
 
 
 import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
-import com.drmangotea.tfmg.content.electricity.measurement.MultimeterItem;
+import com.drmangotea.tfmg.content.electricity.experimental.content.measuring_instruments.MultimeterItem;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.vertex.PoseStack;

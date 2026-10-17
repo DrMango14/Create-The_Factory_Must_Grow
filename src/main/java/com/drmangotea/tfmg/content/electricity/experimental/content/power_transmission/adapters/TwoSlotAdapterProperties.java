@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.content.electricity.experimental.content.power_trans
 import com.drmangotea.tfmg.content.electricity.connection.cables.CablePos;
 import com.drmangotea.tfmg.content.electricity.experimental.content.DirectionalElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectingElectricalNode;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.NodeType;
 import net.minecraft.core.Direction;
 
 import java.util.ArrayList;
@@ -15,10 +16,10 @@ public class TwoSlotAdapterProperties extends DirectionalElectricalProperties {
         super(pos, direction);
 
 
-        ConnectingElectricalNode N = new ConnectingElectricalNode(position, 0, getRotation(direction).get(0));
-        ConnectingElectricalNode L1 = new ConnectingElectricalNode(position, 1, getRotation(direction).get(1));
-        ConnectingElectricalNode L2 = new ConnectingElectricalNode(position, 2, getRotation(direction).get(2));
-        ConnectingElectricalNode L3 = new ConnectingElectricalNode(position, 3, getRotation(direction).get(3));
+        ConnectingElectricalNode N = new ConnectingElectricalNode( position, 0, getRotation(direction).get(0),NodeType.NEUTRAL);
+        ConnectingElectricalNode L1 = new ConnectingElectricalNode(position, 1, getRotation(direction).get(1),NodeType.PHASE_1);
+        ConnectingElectricalNode L2 = new ConnectingElectricalNode(position, 2, getRotation(direction).get(2),NodeType.PHASE_2);
+        ConnectingElectricalNode L3 = new ConnectingElectricalNode(position, 3, getRotation(direction).get(3), NodeType.PHASE_3);
         nodes.add(N);
         nodes.add(L1);
         nodes.add(L2);

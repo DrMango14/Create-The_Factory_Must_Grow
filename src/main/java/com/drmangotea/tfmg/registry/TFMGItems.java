@@ -8,9 +8,8 @@ import com.drmangotea.tfmg.content.decoration.kinetics.gearbox.SteelVerticalGear
 import com.drmangotea.tfmg.content.electricity.configuration_wrench.ElectriciansWrenchItem;
 import com.drmangotea.tfmg.base.debug.DebugCinderBlockItem;
 import com.drmangotea.tfmg.content.electricity.experimental.BetterSpoolItem;
-import com.drmangotea.tfmg.content.electricity.measurement.MultimeterItem;
-import com.drmangotea.tfmg.content.electricity.utilities.polarizer.MagnetItem;
-import com.drmangotea.tfmg.content.electricity.utilities.resistor.ResistorItem;
+import com.drmangotea.tfmg.content.electricity.experimental.content.measuring_instruments.MultimeterItem;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.polarizer.MagnetItem;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.small.ElectromagneticCoilItem;
 
 import com.drmangotea.tfmg.content.engines.CylinderItem;
@@ -184,13 +183,6 @@ public class TFMGItems {
     public static final ItemEntry<MagnetItem>
             MAGNET = REGISTRATE.item("magnet", MagnetItem::new).register();
 
-    public static final ItemEntry<ResistorItem>
-            UNFINISHED_RESISTOR = REGISTRATE.item("unfinished_resistor", ResistorItem::new).register();
-   //public static final ItemEntry<CylinderItem>
-   //        DIESEL_ENGINE_CYLINDER = REGISTRATE.item("diesel_engine_cylinder", CylinderItem::new).register(),
-   //        SIMPLE_ENGINE_CYLINDER = REGISTRATE.item("simple_engine_cylinder", CylinderItem::new).register(),
-   //        ENGINE_CYLINDER = REGISTRATE.item("engine_cylinder", CylinderItem::new).register(),
-   //        TURBINE_BLADE = REGISTRATE.item("turbine_blade", CylinderItem::new).register();
     public static final ItemEntry<SpoolItem>
             EMPTY_SPOOL = spoolItem("empty", 0x000000, TFMG.asResource("empty"))
             .recipe((c, p) -> p.stonecutting(DataIngredient.items(TFMGBlocks.HARDENED_PLANKS.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 1))

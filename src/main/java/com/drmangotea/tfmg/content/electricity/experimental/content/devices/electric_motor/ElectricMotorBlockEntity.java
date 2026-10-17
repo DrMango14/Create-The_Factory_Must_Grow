@@ -1,15 +1,11 @@
 package com.drmangotea.tfmg.content.electricity.experimental.content.devices.electric_motor;
 
-import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.config.TFMGConfigs;
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
-import com.drmangotea.tfmg.content.electricity.base.KineticElectricBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricNetworkManager;
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwork;
-import com.drmangotea.tfmg.content.electricity.experimental.content.ThreePhaseGeneratorProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.Resistance;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -17,7 +13,6 @@ import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
-import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;

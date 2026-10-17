@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.content.electricity.experimental.content.power_trans
 import com.drmangotea.tfmg.content.electricity.connection.cables.CablePos;
 import com.drmangotea.tfmg.content.electricity.experimental.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectingElectricalNode;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.NodeType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 
@@ -11,7 +12,7 @@ public class ConnectorProperties extends ElectricalProperties {
         super(pos1);
 
         BlockPos pos = BlockPos.of(position);
-        nodes.add(new ConnectingElectricalNode(position,0,new CablePos(0.5f,0.5f,0.5f)));
+        nodes.add(new ConnectingElectricalNode(position,0,new CablePos(0.5f,0.5f,0.5f), NodeType.CONNECTOR));
     }
     
 

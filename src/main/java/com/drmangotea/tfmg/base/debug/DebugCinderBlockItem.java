@@ -6,11 +6,9 @@ import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricNetworkManager;
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwork;
-import com.drmangotea.tfmg.content.electricity.experimental.content.ThreePhaseGeneratorBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.content.devices.DebugResistorBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.testing.DebugSolving;
-import com.drmangotea.tfmg.content.electricity.experimental.testing.Resistor;
-import com.drmangotea.tfmg.content.electricity.experimental.testing.VoltageSource;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.three_phase_generator.ThreePhaseGeneratorBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.resistor.DebugResistorBlockEntity;
+
 import com.simibubi.create.Create;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
@@ -18,9 +16,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-
-import java.util.ArrayList;
 
 
 public class DebugCinderBlockItem extends Item {
@@ -48,11 +43,11 @@ public class DebugCinderBlockItem extends Item {
 
             RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(be.getWorld());
 
-            network.setResistance(be, 0, Create.RANDOM.nextInt(700));
+            network.setResistance(be, 0, Create.RANDOM.nextInt(5));
 
             return InteractionResult.SUCCESS;
         }
-        if (level.getBlockEntity(pos) instanceof IRealisticElectric be) {
+        if (level.getBlockEntity(pos) instanceof IRealisticElectric be&&false) {
             //if (context.getPlayer() instanceof ServerPlayer serverPlayer) {
             //    NetworkLoadPacket packet = new NetworkLoadPacket(RealElectricNetworkManager.networks.values().stream().toList());
             //    CatnipServices.NETWORK.sendToClient(serverPlayer, packet);

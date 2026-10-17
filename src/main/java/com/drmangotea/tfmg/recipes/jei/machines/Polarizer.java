@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg.recipes.jei.machines;
 
 
-import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.polarizer.PolarizerBlock;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;

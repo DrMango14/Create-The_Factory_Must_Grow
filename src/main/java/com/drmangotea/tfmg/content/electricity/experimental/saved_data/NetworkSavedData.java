@@ -5,18 +5,21 @@ import com.drmangotea.tfmg.content.electricity.experimental.RealElectricNetworkM
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.experimental.WireConnection;
 import com.drmangotea.tfmg.content.electricity.experimental.content.DirectionalElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.experimental.content.ThreePhaseGeneratorProperties;
-import com.drmangotea.tfmg.content.electricity.experimental.content.devices.ResistorProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.base.ResistorProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.devices.electric_motor.ElectricMotorProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.creative_generator.CreativeGeneratorProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.three_phase_generator.ThreePhaseGeneratorProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.lights.LightProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.adapters.FourSlotAdapterProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.adapters.TwoSlotAdapterProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.CableProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.SwitchProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.small.TransformerProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.ConnectorProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.ElectricalComponent;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.IdealVoltageSource;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.Resistance;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.Transformer;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectableElectricalNode;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ElectricalNode;
 import net.minecraft.core.Direction;
@@ -66,7 +69,10 @@ public class NetworkSavedData extends SavedData {
                             member.putInt("Voltage " + source.id, (int) source.amplitude);
                         }
                         if (component instanceof Resistance resistance) {
-                            member.putInt("Resistance " + resistance.localId, (int) resistance.resistance);
+                            member.putDouble("Resistance " + resistance.localId, resistance.resistance);
+                        }
+                        if (component instanceof Transformer transformer) {
+                            member.putDouble("Transformer_Ratio " + transformer.localId, transformer.turnsRatio);
                         }
                     }
                     if (properties instanceof DirectionalElectricalProperties p)
@@ -95,7 +101,7 @@ public class NetworkSavedData extends SavedData {
                     WireConnection connection = network.connections.get(i);
 
                     connectionTag.putDouble("Resistance", connection.resistance);
-                    connectionTag.putBoolean("Should Render",connection.render);
+                    connectionTag.putBoolean("Should Render", connection.render);
 
                     CompoundTag node1 = new CompoundTag();
                     node1.putLong("position", connection.node1.pos);
@@ -146,10 +152,22 @@ public class NetworkSavedData extends SavedData {
                     if (member.contains("direction")) {
                         direction = Direction.from3DDataValue(member.getInt("direction"));
                     }
-                    ElectricalProperties properties = getElectricalProperties(member.getInt("Property Id"), direction,pos);
+                    ElectricalProperties properties = getElectricalProperties(member.getInt("Property Id"), direction, pos);
 
                     properties.position = pos;
                     network.members.put(pos, properties);
+                    for (ElectricalComponent component : properties.components) {
+                        if (component instanceof Resistance r) {
+                            network.setResistance(pos, r.localId, member.getDouble("Resistance " + r.localId));
+                        }
+                        if (component instanceof IdealVoltageSource v) {
+                            network.setVoltageGen(pos, member.getInt("Voltage " + v.localId));
+                        }
+                        if (component instanceof Transformer t) {
+                            network.setTransformerRatio(pos, t.localId, member.getDouble("Transformer_Ratio " + t.localId));
+                        }
+                    }
+
 
                 }
                 int connectionCount = networkTag.getInt("Connection Count");
@@ -183,8 +201,6 @@ public class NetworkSavedData extends SavedData {
 
                     if (node1 != null && node2 != null) {
 
-
-
                         network.connections.add(new WireConnection(node1, node2, resistance, shouldRender));
                     }
 
@@ -204,10 +220,12 @@ public class NetworkSavedData extends SavedData {
             case 3 -> new ResistorProperties(pos, direction);
             case 4 -> new CableProperties(pos, List.of(Direction.values()));
             case 5 -> new FourSlotAdapterProperties(pos, direction);
-            case 6 -> new TwoSlotAdapterProperties(pos,  direction);
+            case 6 -> new TwoSlotAdapterProperties(pos, direction);
             case 7 -> new LightProperties(pos);
-            case 8 -> new ElectricMotorProperties(pos,direction);
-            case 9 -> new TransformerProperties(pos,direction);
+            case 8 -> new ElectricMotorProperties(pos, direction);
+            case 9 -> new TransformerProperties(pos, direction);
+            case 10 -> new CreativeGeneratorProperties(pos);
+            case 11 -> new SwitchProperties(pos, direction);
             default -> new ElectricalProperties(pos);
 
         };

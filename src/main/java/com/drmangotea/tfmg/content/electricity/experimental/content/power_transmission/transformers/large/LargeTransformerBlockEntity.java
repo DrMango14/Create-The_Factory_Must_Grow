@@ -28,7 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
-import static com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchBlock.IS_MAIN_PART;
+import static com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch.LargeSwitchBlock.IS_MAIN_PART;
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.lubricationOil;
 import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING;
 

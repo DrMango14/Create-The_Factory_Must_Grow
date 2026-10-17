@@ -1,8 +1,8 @@
 package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.config.TFMGResistivity;
-import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableType;
-import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableTypeEntry;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.cable_type.CableType;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.cable_type.CableTypeEntry;
 
 import static com.drmangotea.tfmg.TFMG.REGISTRATE;
 

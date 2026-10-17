@@ -1,6 +1,6 @@
 package com.drmangotea.tfmg;
 
-import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableType;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.cable_type.CableType;
 import com.drmangotea.tfmg.content.items.weapons.flamethrover.FlamethrowerFuelType;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode.Electrode;
 import net.minecraft.core.Registry;

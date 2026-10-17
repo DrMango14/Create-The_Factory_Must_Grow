@@ -1,6 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large;
 
-import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch.LargeSwitchBlock;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.foundation.data.SpecialBlockStateGen;
 import com.tterrag.registrate.providers.DataGenContext;

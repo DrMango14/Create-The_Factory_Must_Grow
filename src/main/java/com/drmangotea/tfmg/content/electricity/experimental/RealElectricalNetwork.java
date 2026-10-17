@@ -68,29 +68,46 @@ public class RealElectricalNetwork {
         if (parent[i] == i) return i;
         return parent[i] = find(parent, parent[i]);
     }
-
-    public void setVoltageGen(IRealisticElectric be, int voltage) {
-
-        ElectricalProperties properties = members.get(be.getPos());
+    public void setVoltageGen(long pos, int voltage) {
+        ElectricalProperties properties = members.get(pos);
         if (properties == null)
             return;
-
         for (ElectricalComponent component : properties.components) {
             if (component instanceof IdealVoltageSource voltageSource) {
                 voltageSource.amplitude = voltage;
             }
 
         }
-
         update();
     }
-
-    public void setResistance(IRealisticElectric be, int id, int resistance) {
+    public void setVoltageGen(IRealisticElectric be, int voltage) {
+        this.setVoltageGen(be.getPos(),voltage);
+    }
+    public void setResistance(IRealisticElectric be, int id, double resistance) {
+        this.setResistance(be.getPos(),id,resistance);
+    }
+    public void setResistance(long pos, int id, double resistance) {
         members.forEach((m, p) -> {
-            if (m == be.getPos()) {
+            if (m == pos) {
                 for (ElectricalComponent component : p.components) {
                     if (component instanceof Resistance resistor && resistor.localId == id) {
                         resistor.resistance = resistance;
+                    }
+                }
+            }
+        });
+        update();
+    }
+
+    public void setTransformerRatio(IRealisticElectric be, int id, double ratio) {
+        this.setTransformerRatio(be.getPos(),id,ratio);
+    }
+    public void setTransformerRatio(long pos, int id, double ratio) {
+        members.forEach((m, p) -> {
+            if (m == pos) {
+                for (ElectricalComponent component : p.components) {
+                    if (component instanceof Transformer transformer && transformer.localId == id) {
+                        transformer.turnsRatio = ratio;
                     }
                 }
             }
@@ -306,7 +323,7 @@ public class RealElectricalNetwork {
             if (isNodeS2Merged) {
                 snode2 = getMergedNode(snode2);
             }
-            finalTransformers.add(new Transformer(node1, node2, snode1, snode2, transformer.L1, transformer.turnsRatio, transformer.k, transformer.id));
+            finalTransformers.add(new Transformer(node1, node2, snode1, snode2, transformer.L1, transformer.turnsRatio, transformer.k, transformer.id,transformer.pos));
         }
         for (IdealVoltageSource source : sources) {
             ElectricalNode node1 = source.localNodeA;
@@ -322,7 +339,7 @@ public class RealElectricalNetwork {
             }
 
 
-            finalSources.add(new IdealVoltageSource(node1, node2, source.amplitude, (int) source.power, source.phaseOffset, source.id));
+            finalSources.add(new IdealVoltageSource(node1, node2, source.amplitude, (int) source.power, source.phaseOffset, source.id,source.pos));
         }
 
         for (int i = 0; i < finalNodes.size(); i++) {
@@ -365,6 +382,28 @@ public class RealElectricalNetwork {
         for (Resistance r : finalResistors) {
             if (r.pos == pos && r.localId == id) {
                 return r;
+            }
+        }
+
+        return null;
+    }
+
+    public IdealVoltageSource getVoltageSource(long pos, int id) {
+
+        for (IdealVoltageSource s : finalSources) {
+            if (s.pos == pos && s.localId == id) {
+                return s;
+            }
+        }
+
+        return null;
+    }
+
+    public Transformer getTransformer(long pos, int id) {
+
+        for (Transformer t : finalTransformers) {
+            if (t.pos == pos && t.localId == id) {
+                return t;
             }
         }
 
@@ -527,11 +566,7 @@ public class RealElectricalNetwork {
 
             nodeVoltages.put(n.networkId, V[n.networkId]);
         }
-        TFMG.LOGGER.debug("TRANSFORMER DATA");
-        //for (ElectricalComponent c : components) {
-        //    if (c instanceof Transformer t)
-        //        t.reportPower(V, activeNodeList.size());
-        //}
+
         for (int i = 0; i < finalSources.size(); i++) {
             IdealVoltageSource source = finalSources.get(i);
             TFMG.LOGGER.debug("source " + i + " Network: " + source.nodeA.networkId + " " + source.nodeB.networkId + " Local: " + source.nodeA.localId + " " + source.nodeB.localId + " voltage " + source.amplitude);

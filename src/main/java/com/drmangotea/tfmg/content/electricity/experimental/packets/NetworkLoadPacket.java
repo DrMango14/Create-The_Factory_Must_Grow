@@ -7,9 +7,11 @@ import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwor
 import com.drmangotea.tfmg.content.electricity.experimental.WireConnection;
 import com.drmangotea.tfmg.content.electricity.experimental.content.DirectionalElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.saved_data.NetworkSavedData;
-import com.drmangotea.tfmg.content.electricity.experimental.simulation.*;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.ElectricalComponent;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.IdealVoltageSource;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.Resistance;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.Transformer;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectableElectricalNode;
-import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectingElectricalNode;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ElectricalNode;
 import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.content.trains.graph.DimensionPalette;
@@ -62,16 +64,16 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
 
                 int id = buffer.readInt();
                 Direction direction = Direction.from3DDataValue(buffer.readInt());
-               // Direction direction = Direction.NORTH;
+                // Direction direction = Direction.NORTH;
 
 
-                ElectricalProperties properties = NetworkSavedData.getElectricalProperties(id, direction,position);
+                ElectricalProperties properties = NetworkSavedData.getElectricalProperties(id, direction, position);
 
 
                 int resistorCount = buffer.readInt();
-                List<Integer> resistors = new ArrayList<>();
+                List<Double> resistors = new ArrayList<>();
                 for (int y = 0; y < resistorCount; y++) {
-                    resistors.add(buffer.readInt());
+                    resistors.add(buffer.readDouble());
                 }
 
                 int sourceCount = buffer.readInt();
@@ -79,8 +81,15 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
                 for (int y = 0; y < sourceCount; y++) {
                     sources.add(buffer.readInt());
                 }
+
+                int transformerCount = buffer.readInt();
+                List<Double> transformers = new ArrayList<>();
+                for (int y = 0; y < transformerCount; y++) {
+                    transformers.add(buffer.readDouble());
+                }
                 int rIndex = 0;
                 int sIndex = 0;
+                int tIndex = 0;
 
                 for (ElectricalComponent c : properties.components) {
 
@@ -92,6 +101,10 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
                     if (c instanceof IdealVoltageSource s && !sources.isEmpty()) {
                         s.amplitude = sources.get(sIndex);
                         sIndex++;
+                    }
+                    if (c instanceof Transformer t && !transformers.isEmpty()) {
+                        t.turnsRatio = transformers.get(tIndex);
+                        tIndex++;
                     }
                 }
                 network.members.put(position, properties);
@@ -130,7 +143,7 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
                 if (n1 != null && n2 != null) {
                     n1.pos = pos1;
                     n2.pos = pos2;
-                    network.connections.add(new WireConnection(n1, n2, resistance,shouldRender));
+                    network.connections.add(new WireConnection(n1, n2, resistance, shouldRender));
                 }
 
             }
@@ -175,6 +188,7 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
                 //
                 List<Resistance> resistors = new ArrayList<>();
                 List<IdealVoltageSource> sources = new ArrayList<>();
+                List<Transformer> transformers = new ArrayList<>();
                 for (ElectricalComponent component : property.components) {
                     if (component instanceof IdealVoltageSource source) {
                         sources.add(source);
@@ -182,15 +196,16 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
                     if (component instanceof Resistance resistance) {
                         resistors.add(resistance);
                     }
+                    if (component instanceof Transformer transformer) {
+                        transformers.add(transformer);
+                    }
                 }
                 buffer.writeInt(resistors.size());
-                resistors.forEach(r -> {
-                    buffer.writeInt((int) r.resistance);
-                });
+                resistors.forEach(r -> buffer.writeDouble(r.resistance));
                 buffer.writeInt(sources.size());
-                sources.forEach(r -> {
-                    buffer.writeInt((int) r.amplitude);
-                });
+                sources.forEach(r -> buffer.writeInt((int) r.amplitude));
+                buffer.writeInt(transformers.size());
+                transformers.forEach(t -> buffer.writeDouble(t.turnsRatio));
             }
             List<WireConnection> connections = network.connections;
             int connectionCount = connections.size();

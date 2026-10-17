@@ -5,7 +5,7 @@ import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.spark.ElectricSparkParticle;
 import com.drmangotea.tfmg.base.spark.Spark;
-import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableType;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.cable_type.CableType;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CablePos;
 import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectingElectricalNode;

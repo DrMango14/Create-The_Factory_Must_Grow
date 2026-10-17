@@ -38,7 +38,7 @@ public class TFMGSequencedAssemblyRecipeGen extends SequencedAssemblyRecipeGen {
 
     GENERATOR = create("generator", b -> b.require(shaft())
             .transitionTo(TFMGItems.UNFINISHED_GENERATOR.get())
-            .addOutput(TFMGBlocks.GENERATOR.get(), 120)
+            .addOutput(TFMGBlocks.THREE_PHASE_GENERATOR.get(), 120)
             .addOutput(TFMGBlocks.STEEL_CASING.get(), 8)
             .addOutput(TFMGBlocks.STEEL_COGWHEEL.get(), 8)
             .addOutput(TFMGItems.CAPACITOR.get(), 8)

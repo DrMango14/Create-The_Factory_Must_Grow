@@ -934,14 +934,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("NCN")
                     .pattern("AMA")),
 
-    ELECTRIC_MEASUREMENT_BLOCK = create(TFMGBlocks.ELECTRIC_MEASUREMENT_BLOCK)
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('M', heavyMachineryCasing())
-                    .define('V', TFMGBlocks.VOLTMETER)
-                    .pattern(" V ")
-                    .pattern(" M ")
-                    .pattern("   ")),
+
 
     DISTILLATION_CONTROLLER = create(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER)
             .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
@@ -1670,24 +1663,6 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("BAB")
                     .pattern("BAB")),
 
-    RESISTOR = create(TFMGItems.UNFINISHED_RESISTOR)
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('W', copperWire())
-                    .define('P', plasticSheet())
-                    .pattern(" W ")
-                    .pattern(" P ")
-                    .pattern(" W ")),
-
-    RESISTOR_FROM_SLIME = create(TFMGItems.UNFINISHED_RESISTOR).withSuffix("from_slime")
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('W', copperWire())
-                    .define('P', Items.SLIME_BALL)
-                    .pattern(" W ")
-                    .pattern(" P ")
-                    .pattern(" W ")),
-
     MIXER_BLADE = create(TFMGItems.MIXER_BLADE)
             .unlockedBy(TFMGItems.HEAVY_PLATE::get)
             .viaShaped(b -> b
@@ -1888,19 +1863,6 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("CBR")
                     .pattern("PBO")
                     .pattern("NBG")),
-
-    DIODE = create(TFMGBlocks.DIODE)
-            .unlockedBy(TFMGItems.SILICON_INGOT::get)
-            .viaShaped(b -> b
-                    .define('W', copperWire())
-                    .define('I', AllBlocks.INDUSTRIAL_IRON_BLOCK)
-                    .define('P', heavyMachineryCasing())
-                    .define('B', castIronSheet())
-                    .define('S', TFMGItems.P_SEMICONDUCTOR)
-                    .define('N', TFMGItems.N_SEMICONDUCTOR)
-                    .pattern("WBW")
-                    .pattern("SPN")
-                    .pattern("WIW")),
 
     BLAST_STOVE = create(TFMGBlocks.BLAST_STOVE).returns(2)
             .unlockedBy(TFMGItems.FIREPROOF_BRICK::get)

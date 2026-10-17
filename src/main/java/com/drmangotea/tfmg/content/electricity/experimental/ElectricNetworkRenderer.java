@@ -169,8 +169,17 @@ public class ElectricNetworkRenderer {
                     Vec3 corner1 = center.add(0.1f, 0.1f, 0.1f);
                     Vec3 corner2 = center.subtract(0.1f, 0.1f, 0.1f);
 
-                    TFMGUtils.createOutline(corner1, corner2, "connector_" + node.localId, Color.rainbowColor(AnimationTickHolder.getTicks() * 5));
+                    //TFMGUtils.createOutline(corner1, corner2, "connector_" + node.localId, Color.rainbowColor(AnimationTickHolder.getTicks() * 5));
 
+                    Color color = Color.rainbowColor(AnimationTickHolder.getTicks() * 5);
+                    switch (node.localId){
+                        case 0 -> color = new Color(0x30A8FF);
+                        case 1 -> color = new Color(0xC16B32);
+                        case 2 -> color = new Color(0x424242);
+                        case 3 -> color = new Color(0x7892A3);
+                    }
+
+                    TFMGUtils.createOutline(corner1, corner2, "connector_" + node.localId, node.type.getColor());
                 }
             }
         }

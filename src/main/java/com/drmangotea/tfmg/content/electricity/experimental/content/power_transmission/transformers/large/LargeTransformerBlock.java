@@ -2,7 +2,7 @@ package com.drmangotea.tfmg.content.electricity.experimental.content.power_trans
 
 import com.drmangotea.tfmg.base.TFMGShapes;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
-import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch.LargeSwitchBlock;
 
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;

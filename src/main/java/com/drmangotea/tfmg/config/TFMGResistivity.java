@@ -1,8 +1,8 @@
 package com.drmangotea.tfmg.config;
 
 import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableType;
-import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableTypeBuilder;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.cable_type.CableType;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.cable_type.CableTypeBuilder;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;

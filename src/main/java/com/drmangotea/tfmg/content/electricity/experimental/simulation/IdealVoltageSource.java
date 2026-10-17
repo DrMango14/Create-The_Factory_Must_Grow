@@ -8,15 +8,21 @@ public class IdealVoltageSource extends ElectricalComponent {
     public double amplitude;
     public double phaseOffset;
     public double power;
-    public int id;
-    public int networkId=0;
 
-    public IdealVoltageSource(ElectricalNode nodePos, ElectricalNode nodeNeg, double amplitude, int power, double phaseOffsetDeg, int id) {
+
+    public int id;
+
+    public int localId;
+    public final long pos;
+
+    public IdealVoltageSource(ElectricalNode nodePos, ElectricalNode nodeNeg, double amplitude, int power, double phaseOffsetDeg, int id, long pos) {
         super(nodePos, nodeNeg);
         this.amplitude = amplitude;
         this.power = power;
         this.phaseOffset = phaseOffsetDeg;
         this.id = id;
+        this.localId = id;
+        this.pos = pos;
     }
 
     @Override

@@ -31,7 +31,6 @@ public class UpdateVoltagePacket extends BlockEntityDataPacket<SmartBlockEntity>
 
     @Override
     protected void handlePacket(SmartBlockEntity blockEntity) {
-        int meow = 0;
         if (blockEntity instanceof IRealisticElectric be) {
             RealElectricNetworkManager.getNetwork(be.getWorld()).setVoltageGen(be, newVoltage);
         }
