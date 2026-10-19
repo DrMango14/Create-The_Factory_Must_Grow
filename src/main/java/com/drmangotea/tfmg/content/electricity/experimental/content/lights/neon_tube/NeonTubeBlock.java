@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.electricity.lights.neon_tube;
+package com.drmangotea.tfmg.content.electricity.experimental.content.lights.neon_tube;
 
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.connection.cables.SimplePos;

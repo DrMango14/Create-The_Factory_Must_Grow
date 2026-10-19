@@ -3,7 +3,7 @@ package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.content.electricity.base.*;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CablePlacePacket;
-import com.drmangotea.tfmg.content.electricity.configuration_wrench.ElectriciansWrenchPacket;
+import com.drmangotea.tfmg.content.electricity.experimental.configuration_wrench.ElectriciansWrenchPacket;
 import com.drmangotea.tfmg.content.electricity.experimental.packets.AddElectricalComponentPacket;
 import com.drmangotea.tfmg.content.electricity.experimental.packets.NetworkLoadPacket;
 import com.drmangotea.tfmg.content.electricity.experimental.packets.UpdateNetworkPacket;

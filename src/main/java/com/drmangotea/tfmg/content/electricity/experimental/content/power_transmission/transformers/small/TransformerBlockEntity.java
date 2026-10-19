@@ -152,7 +152,7 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IRealist
         if (primaryCoil.isEmpty() || secondaryCoil.isEmpty() || primaryTurns < 50 || secondaryTurns < 50) {
 
             coilRatio = 0;
-            getNetwork().setTransformerRatio(this, 0, coilRatio);
+
             return;
         }
 

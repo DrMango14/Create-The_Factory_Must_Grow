@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.electricity.utilities.voltage_observer;
+package com.drmangotea.tfmg.content.electricity.experimental.content.devices.voltage_observer;
 
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;

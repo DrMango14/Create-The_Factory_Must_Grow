@@ -5,13 +5,15 @@ import com.drmangotea.tfmg.base.TFMGCreativeTabs;
 import com.drmangotea.tfmg.base.TFMGRegistrate;
 import com.drmangotea.tfmg.base.TFMGTiers;
 import com.drmangotea.tfmg.content.decoration.kinetics.gearbox.SteelVerticalGearboxItem;
-import com.drmangotea.tfmg.content.electricity.configuration_wrench.ElectriciansWrenchItem;
+import com.drmangotea.tfmg.content.electricity.experimental.configuration_wrench.ElectriciansWrenchItem;
 import com.drmangotea.tfmg.base.debug.DebugCinderBlockItem;
 import com.drmangotea.tfmg.content.electricity.experimental.BetterSpoolItem;
 import com.drmangotea.tfmg.content.electricity.experimental.content.measuring_instruments.MultimeterItem;
 import com.drmangotea.tfmg.content.electricity.experimental.content.devices.polarizer.MagnetItem;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.cells.AccumulatorCellItem;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.small.ElectromagneticCoilItem;
 
+import com.drmangotea.tfmg.content.electricity.storage.AccumulatorItem;
 import com.drmangotea.tfmg.content.engines.CylinderItem;
 import com.drmangotea.tfmg.content.engines.FluidContainingItem;
 import com.drmangotea.tfmg.content.items.CoalCokeItem;
@@ -182,6 +184,13 @@ public class TFMGItems {
     //        .model((c, p) -> p.withExistingParent(c.getName(), TFMG.asResource("item/transmission_model"))).register();
     public static final ItemEntry<MagnetItem>
             MAGNET = REGISTRATE.item("magnet", MagnetItem::new).register();
+
+    public static final ItemEntry<AccumulatorCellItem>
+            LEAD_ACID_BATTERY = REGISTRATE.item("lead_acid_battery",p-> new AccumulatorCellItem(p.stacksTo(1),10000)).register(),
+            SINGLE_USE_BATTERY = REGISTRATE.item("single_use_battery",p-> new AccumulatorCellItem(p.stacksTo(1),10000)).register(),
+            SUPERCAPACITOR = REGISTRATE.item("supercapacitor",p-> new AccumulatorCellItem(p.stacksTo(1),10000)).register(),
+            LITHIUM_CELL = REGISTRATE.item("lithium_cell",p-> new AccumulatorCellItem(p.stacksTo(1),10000)).register();
+
 
     public static final ItemEntry<SpoolItem>
             EMPTY_SPOOL = spoolItem("empty", 0x000000, TFMG.asResource("empty"))

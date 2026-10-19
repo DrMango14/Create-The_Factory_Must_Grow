@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.electricity.configuration_wrench;
+package com.drmangotea.tfmg.content.electricity.experimental.configuration_wrench;
 
 
 import com.drmangotea.tfmg.registry.TFMGDataComponents;

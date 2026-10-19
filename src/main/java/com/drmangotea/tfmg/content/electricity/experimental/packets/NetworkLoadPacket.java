@@ -65,9 +65,13 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
                 int id = buffer.readInt();
                 Direction direction = Direction.from3DDataValue(buffer.readInt());
                 // Direction direction = Direction.NORTH;
+                List<Direction> directions = new ArrayList<>();
+                int directionCount = buffer.readInt();
+                for (int k = 0; k < directionCount; k++) {
+                    directions.add(Direction.from3DDataValue(buffer.readInt()));
+                }
 
-
-                ElectricalProperties properties = NetworkSavedData.getElectricalProperties(id, direction, position);
+                ElectricalProperties properties = NetworkSavedData.getElectricalProperties(id, direction,directions, position);
 
 
                 int resistorCount = buffer.readInt();
@@ -184,6 +188,11 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
                     direction = directionalProperties.direction;
                 }
                 buffer.writeInt(direction.get3DDataValue());
+
+                buffer.writeInt(property.getConnectableDirections().size());
+                for (Direction d : property.getConnectableDirections()) {
+                    buffer.writeInt(d.get3DDataValue());
+                }
 
                 //
                 List<Resistance> resistors = new ArrayList<>();

@@ -1,8 +1,9 @@
-package com.drmangotea.tfmg.content.electricity.utilities.voltage_observer;
+package com.drmangotea.tfmg.content.electricity.experimental.content.devices.voltage_observer;
 
 
 
 import com.drmangotea.tfmg.base.blocks.WallMountBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.base.DirectionalResistiveLoadBlock;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SpecialBlockStateGen;
 import com.tterrag.registrate.providers.DataGenContext;
@@ -18,7 +19,7 @@ public class VoltageObserverGenerator extends SpecialBlockStateGen {
 
     protected int getXRotation(BlockState state) {
         short value;
-        switch ((Direction)state.getValue(WallMountBlock.FACING)) {
+        switch ((Direction)state.getValue(DirectionalResistiveLoadBlock.FACING)) {
             case NORTH:
                 value = 90;
                 break;
@@ -46,7 +47,7 @@ public class VoltageObserverGenerator extends SpecialBlockStateGen {
 
     protected int getYRotation(BlockState state) {
         short value;
-        switch ((Direction)state.getValue(WallMountBlock.FACING)) {
+        switch ((Direction)state.getValue(DirectionalResistiveLoadBlock.FACING)) {
             case NORTH:
                 value = 0;
                 break;

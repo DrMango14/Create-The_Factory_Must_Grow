@@ -12,7 +12,7 @@ import com.drmangotea.tfmg.content.decoration.kinetics.encased.TFMGEncasedCogwhe
 import com.drmangotea.tfmg.content.decoration.kinetics.encased.TFMGEncasedShaftBlock;
 import com.drmangotea.tfmg.content.decoration.kinetics.flywheels.TFMGFlywheelBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.copycat_cable.CopycatCableBlock;
-import com.drmangotea.tfmg.content.electricity.lights.neon_tube.NeonTubeBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.lights.neon_tube.NeonTubeBlock;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;

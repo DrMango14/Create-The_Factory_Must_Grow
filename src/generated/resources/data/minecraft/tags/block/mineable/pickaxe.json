@@ -1,7 +1,9 @@
 {
   "values": [
     "tfmg:voltmeter",
+    "tfmg:voltage_observer",
     "tfmg:ammeter",
+    "tfmg:electric_pump",
     "tfmg:polarizer",
     "tfmg:light_bulb",
     "tfmg:circular_light",
@@ -85,8 +87,6 @@
     "tfmg:electrical_switch",
     "tfmg:large_switch",
     "tfmg:encased_potentiometer",
-    "tfmg:electric_pump",
-    "tfmg:voltage_observer",
     "tfmg:rotor",
     "tfmg:stator",
     "tfmg:traffic_light",

@@ -2,7 +2,7 @@ package com.drmangotea.tfmg.content.electricity.experimental.display_link;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
-import com.drmangotea.tfmg.content.electricity.utilities.voltage_observer.ObservedElectricBehaviour;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.voltage_observer.ObservedElectricBehaviour;
 import com.simibubi.create.content.redstone.displayLink.DisplayLinkContext;
 import com.simibubi.create.content.redstone.displayLink.source.SingleLineDisplaySource;
 import com.simibubi.create.content.redstone.displayLink.target.DisplayTargetStats;

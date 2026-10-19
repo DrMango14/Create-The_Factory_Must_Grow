@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.electricity.lights.neon_tube;
+package com.drmangotea.tfmg.content.electricity.experimental.content.lights.neon_tube;
 
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
 import net.createmod.catnip.animation.LerpedFloat;
@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import static com.drmangotea.tfmg.content.electricity.lights.neon_tube.NeonTubeBlock.LIGHT;
+import static com.drmangotea.tfmg.content.electricity.experimental.content.lights.neon_tube.NeonTubeBlock.LIGHT;
 
 
 public class NeonTubeBlockEntity extends ElectricBlockEntity {

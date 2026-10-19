@@ -47,7 +47,7 @@ import com.drmangotea.tfmg.content.electricity.experimental.content.devices.gene
 import com.drmangotea.tfmg.content.electricity.generators.large_generator.RotorBlock;
 import com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorBlock;
 import com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorGenerator;
-import com.drmangotea.tfmg.content.electricity.lights.neon_tube.NeonTubeBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.lights.neon_tube.NeonTubeBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.electric_switch.ElectricSwitchBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch.LargeSwitchBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch.LargeSwitchGenerator;
@@ -56,13 +56,13 @@ import com.drmangotea.tfmg.content.electricity.network.potentiometer.Potentiomet
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlock;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorItem;
 import com.drmangotea.tfmg.content.electricity.storage.CapacitorCTBehavior;
-import com.drmangotea.tfmg.content.electricity.utilities.electric_pump.ElectricPumpBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.electric_pump.ElectricPumpBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.devices.polarizer.PolarizerBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayCTBehavior;
 import com.drmangotea.tfmg.content.electricity.utilities.traffic_light.TrafficLightBlock;
-import com.drmangotea.tfmg.content.electricity.utilities.voltage_observer.VoltageObserverBlock;
-import com.drmangotea.tfmg.content.electricity.utilities.voltage_observer.VoltageObserverGenerator;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.voltage_observer.VoltageObserverBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.voltage_observer.VoltageObserverGenerator;
 import com.drmangotea.tfmg.content.engines.base.EngineCTBehavior;
 import com.drmangotea.tfmg.content.engines.base.EngineGenerator;
 import com.drmangotea.tfmg.content.engines.engine_gearbox.EngineGearboxBlock;
@@ -190,8 +190,39 @@ public class TFMGBlocks {
                     .transform(customItemModel())
                     .register();
 
+    public static final BlockEntry<VoltageObserverBlock> VOLTAGE_OBSERVER =
+            REGISTRATE.block("voltage_observer", VoltageObserverBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .transform(pickaxeOnly())
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .blockstate(new VoltageObserverGenerator()::generate)
+                    .transform(displaySource(TFMGDisplaySources.CURRENT))
+                    .transform(displaySource(TFMGDisplaySources.POWER_USAGE))
+                    .transform(displaySource(TFMGDisplaySources.RESISTANCE))
+                    .transform(displaySource(TFMGDisplaySources.VOLTAGE))
+                    .transform(displaySource(TFMGDisplaySources.POWER_GENERATION))
+                    .transform(displaySource(TFMGDisplaySources.VOLTAGE_GENERATION))
+                    .transform(displaySource(TFMGDisplaySources.NETWORK_CONSUMPTION))
+                    .transform(displaySource(TFMGDisplaySources.NETWORK_GENERATION))
+                    .transform(displaySource(TFMGDisplaySources.NETWORK_ID))
+                    .transform(displaySource(TFMGDisplaySources.NETWORK_RESISTANCE))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+
     public static final BlockEntry<VoltMeterBlock> AMMETER =
             REGISTRATE.block("ammeter", p->new VoltMeterBlock(p,false))
+                    .initialProperties(SharedProperties::softMetal)
+                    .transform(pickaxeOnly())
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .blockstate(BlockStateGen.directionalBlockProvider(true))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<ElectricPumpBlock> ELECTRIC_PUMP =
+            REGISTRATE.block("electric_pump", ElectricPumpBlock::new)
                     .initialProperties(SharedProperties::softMetal)
                     .transform(pickaxeOnly())
                     .properties(BlockBehaviour.Properties::noOcclusion)
@@ -1327,34 +1358,7 @@ public class TFMGBlocks {
                     .transform(EncasingRegistry.addVariantTo(POTENTIOMETER))
                     .blockstate(BlockStateGen.directionalBlockProvider(false))
                     .register();
-    public static final BlockEntry<ElectricPumpBlock> ELECTRIC_PUMP =
-            REGISTRATE.block("electric_pump", ElectricPumpBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(BlockStateGen.directionalBlockProvider(true))
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-    public static final BlockEntry<VoltageObserverBlock> VOLTAGE_OBSERVER =
-            REGISTRATE.block("voltage_observer", VoltageObserverBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(new VoltageObserverGenerator()::generate)
-                    .transform(displaySource(TFMGDisplaySources.CURRENT))
-                    .transform(displaySource(TFMGDisplaySources.POWER_USAGE))
-                    .transform(displaySource(TFMGDisplaySources.RESISTANCE))
-                    .transform(displaySource(TFMGDisplaySources.VOLTAGE))
-                    .transform(displaySource(TFMGDisplaySources.POWER_GENERATION))
-                    .transform(displaySource(TFMGDisplaySources.VOLTAGE_GENERATION))
-                    .transform(displaySource(TFMGDisplaySources.NETWORK_CONSUMPTION))
-                    .transform(displaySource(TFMGDisplaySources.NETWORK_GENERATION))
-                    .transform(displaySource(TFMGDisplaySources.NETWORK_ID))
-                    .transform(displaySource(TFMGDisplaySources.NETWORK_RESISTANCE))
-                    .item()
-                    .transform(customItemModel())
-                    .register();
+
 
 
 

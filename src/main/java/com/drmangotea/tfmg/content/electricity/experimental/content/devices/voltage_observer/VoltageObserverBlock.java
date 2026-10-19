@@ -1,8 +1,9 @@
-package com.drmangotea.tfmg.content.electricity.utilities.voltage_observer;
+package com.drmangotea.tfmg.content.electricity.experimental.content.devices.voltage_observer;
 
 
 import com.drmangotea.tfmg.base.blocks.WallMountBlock;
 import com.drmangotea.tfmg.content.electricity.base.ConnectNeightborsPacket;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.base.DirectionalResistiveLoadBlock;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.foundation.block.IBE;
 import net.createmod.catnip.platform.CatnipServices;
@@ -22,7 +23,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 import javax.annotation.Nullable;
 
-public class VoltageObserverBlock extends WallMountBlock implements IBE<VoltageObserverBlockEntity> {
+public class VoltageObserverBlock extends DirectionalResistiveLoadBlock implements IBE<VoltageObserverBlockEntity> {
 
     public static final BooleanProperty POWERED = BooleanProperty.create("powered");
 
@@ -30,18 +31,6 @@ public class VoltageObserverBlock extends WallMountBlock implements IBE<VoltageO
     public VoltageObserverBlock(Properties p_49795_) {
         super(p_49795_);
         this.registerDefaultState(this.stateDefinition.any().setValue(POWERED,false));
-    }
-    @Override
-    public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
-        if (level instanceof ServerLevel serverLevel)
-            CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(pos),new ConnectNeightborsPacket(pos));
-        withBlockEntityDo(level,pos, VoltageObserverBlockEntity::onPlaced);
-
-    }
-
-    @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-        IBE.onRemove(state, level, pos, newState);
     }
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

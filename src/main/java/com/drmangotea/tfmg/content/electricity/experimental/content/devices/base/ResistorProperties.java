@@ -53,6 +53,16 @@ public class ResistorProperties extends DirectionalElectricalProperties {
     }
 
     @Override
+    public List<Direction> getConnectableDirections() {
+        return List.of(Direction.values());
+    }
+
+    @Override
+    public boolean cableConnectable() {
+        return true;
+    }
+
+    @Override
     public boolean needsUpdateData() {
         return true;
     }

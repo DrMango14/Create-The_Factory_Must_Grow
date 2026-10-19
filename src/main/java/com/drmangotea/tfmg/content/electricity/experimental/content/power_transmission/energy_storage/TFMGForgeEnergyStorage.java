@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.electricity.storage;
+package com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage;
 
 
 import net.neoforged.neoforge.energy.EnergyStorage;
@@ -8,6 +8,16 @@ public abstract class TFMGForgeEnergyStorage extends EnergyStorage {
     public TFMGForgeEnergyStorage(int capacity, int maxTransfer) {
         super(capacity, maxTransfer);
 
+    }
+
+    @Override
+    public boolean canExtract() {
+        return true;
+    }
+
+    @Override
+    public boolean canReceive() {
+        return true;
     }
 
     @Override

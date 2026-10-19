@@ -94,59 +94,7 @@ public abstract class AbstractCableBlockEntity extends SmartBlockEntity implemen
             }
 
         }
-        if(true)
-            return false;
-        for (Direction facing : properties.getConnectableDirections()) {
-            BlockPos pos = BlockPos.of(be.getPos()).relative(facing);
-            if (level.getBlockEntity(pos) instanceof IRealisticElectric) {
-                ElectricalProperties neighborProperties = network.members.get(pos.asLong());
-                if (neighborProperties == null) {
-                    return true;
-                    // continue;
-                }
 
-                if (neighborProperties instanceof CableProperties cableProperties) {
-                    if (cableProperties.directions.contains(facing)) {
-
-                        for (int i = 0; i < 4; i++) {
-                            if (properties.nodes.get(i) instanceof DirectionalElectricalNode n1 && cableProperties.nodes.get(i) instanceof DirectionalElectricalNode n2) {
-
-                                WireConnection connection = new WireConnection(n1, n2, 10, false);
-                                if (!network.connections.contains(connection))
-                                    network.connections.add(connection);
-                            }
-                        }
-                    }
-                }
-                if (neighborProperties instanceof SwitchProperties switchProperties) {
-                    if (switchProperties.direction.getAxis() == facing.getAxis()) {
-
-                        for (ElectricalNode node : switchProperties.nodes) {
-                            int id = node.localId <= 3 ? node.localId : node.localId - 3;
-
-                            if (node instanceof DirectionalElectricalNode d && properties.nodes.get(id) instanceof DirectionalElectricalNode ld) {
-                                if (d.facing.contains(facing)) {
-
-                                    network.connections.add(new WireConnection(d, ld, 10, false));
-
-                                }
-                            }
-                        }
-                    }
-                }
-                if (neighborProperties.cableConnectable() && neighborProperties.hasElectricityPort(facing.getOpposite())) {
-                    for (int i = 0; i < 4; i++) {
-                        if (i < properties.nodes.size() && i < neighborProperties.nodes.size())
-                            if (properties.nodes.get(i) instanceof ConnectableElectricalNode n1 && neighborProperties.nodes.get(i) instanceof ConnectableElectricalNode n2) {
-
-                                WireConnection connection = new WireConnection(n1, n2, 10, false);
-                                if (!network.connections.contains(connection))
-                                    network.connections.add(connection);
-                            }
-                    }
-                }
-            }
-        }
         return false;
     }
 

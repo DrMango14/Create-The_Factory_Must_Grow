@@ -75,6 +75,15 @@ public class NetworkSavedData extends SavedData {
                             member.putDouble("Transformer_Ratio " + transformer.localId, transformer.turnsRatio);
                         }
                     }
+
+                    List<Integer> connectDirections = new ArrayList<>();
+
+                    for (Direction facing : properties.getConnectableDirections()) {
+                        connectDirections.add(facing.get3DDataValue());
+                    }
+                    member.putIntArray("Connect Direction",connectDirections);
+
+
                     if (properties instanceof DirectionalElectricalProperties p)
                         member.putInt("direction", p.direction.get3DDataValue());
 
@@ -152,7 +161,13 @@ public class NetworkSavedData extends SavedData {
                     if (member.contains("direction")) {
                         direction = Direction.from3DDataValue(member.getInt("direction"));
                     }
-                    ElectricalProperties properties = getElectricalProperties(member.getInt("Property Id"), direction, pos);
+                    int[] d = member.getIntArray("Connect Direction");
+                    List<Direction> directions = new ArrayList<>();
+                    for (int k : d) {
+                        directions.add(Direction.from3DDataValue(k));
+                    }
+
+                    ElectricalProperties properties = getElectricalProperties(member.getInt("Property Id"), direction,directions, pos);
 
                     properties.position = pos;
                     network.members.put(pos, properties);
@@ -211,14 +226,14 @@ public class NetworkSavedData extends SavedData {
         return sd;
     }
 
-    public static ElectricalProperties getElectricalProperties(int id, Direction direction, long pos) {
+    public static ElectricalProperties getElectricalProperties(int id, Direction direction,List<Direction> d, long pos) {
 
 
         return switch (id) {
             case 1 -> new ThreePhaseGeneratorProperties(pos, direction);
             case 2 -> new ConnectorProperties(pos);
             case 3 -> new ResistorProperties(pos, direction);
-            case 4 -> new CableProperties(pos, List.of(Direction.values()));
+            case 4 -> new CableProperties(pos, d);
             case 5 -> new FourSlotAdapterProperties(pos, direction);
             case 6 -> new TwoSlotAdapterProperties(pos, direction);
             case 7 -> new LightProperties(pos);

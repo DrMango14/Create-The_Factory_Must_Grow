@@ -1,6 +1,15 @@
-package com.drmangotea.tfmg.content.electricity.utilities.electric_pump;
+package com.drmangotea.tfmg.content.electricity.experimental.content.devices.electric_pump;
 
+import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.base.*;
+import com.drmangotea.tfmg.content.electricity.experimental.ElectricalProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
+import com.drmangotea.tfmg.content.electricity.experimental.RealElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.base.ResistorProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.Resistance;
 import com.simibubi.create.content.fluids.FluidPropagator;
 import com.simibubi.create.content.fluids.FluidTransportBehaviour;
 import com.simibubi.create.content.fluids.PipeConnection;
@@ -16,7 +25,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -28,15 +39,19 @@ import java.util.*;
 
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
 
-public class ElectricPumpBlockEntity extends PumpBlockEntity implements IElectric {
+public class ElectricPumpBlockEntity extends PumpBlockEntity implements IRealisticElectric {
 
-    public ElectricBlockValues data = new ElectricBlockValues(getPos());
+    ResistorProperties p;
+
+    public double resistance = 0;
+    public double voltage = 0;
+    public double current = 0;
 
 
     public ElectricPumpBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
         setLazyTickRate(10);
-        data.connectNextTick = true;
+        p = new ResistorProperties(getPos(), state.getValue(TFMGDirectionalBlock.FACING),resistance());
 
     }
     @Override
@@ -69,7 +84,7 @@ public class ElectricPumpBlockEntity extends PumpBlockEntity implements IElectri
 
             List<Pair<Integer, BlockPos>> frontier = new ArrayList<>();
             Set<BlockPos> visited = new HashSet<>();
-            int maxDistance = (int) (FluidPropagator.getPumpRange()*Math.min(6.7f,data.getVoltage()*0.02));
+            int maxDistance = (int) (FluidPropagator.getPumpRange()*Math.min(6.7f,voltage*0.02));
             frontier.add(Pair.of(1, start.getConnectedPos()));
 
             while (!frontier.isEmpty()) {
@@ -133,7 +148,10 @@ public class ElectricPumpBlockEntity extends PumpBlockEntity implements IElectri
         Map<Integer, Set<BlockFace>> validFaces = new HashMap<>();
         searchForEndpointRecursively(pipeGraph, targets, validFaces,
                 new BlockFace(start.getPos(), start.getOppositeFace()), pull);
-        float pressure = getPowerUsage() == 0 ? 0 : Math.min(1500,data.getVoltage()*2);
+
+        double power = current*voltage<1 ? 0 : current*voltage;
+
+        float pressure = power == 0 ? 0 : (float) Math.min(1500, voltage * 2);
         for (Set<BlockFace> set : validFaces.values()) {
             int parallelBranches = Math.max(1, set.size() - 1);
             for (BlockFace face : set) {
@@ -192,41 +210,49 @@ public class ElectricPumpBlockEntity extends PumpBlockEntity implements IElectri
         return isFront;
     }
 
-    //////////////////////
-
-
-
+    /// //////////////////////
 
     @Override
-    public LevelAccessor getLevelAccessor() {
-        return level;
+    public ElectricalProperties getProperties() {
+        return p;
     }
 
-
-
-    @Override
-    public void lazyTick() {
-        super.lazyTick();
-        lazyTickElectricity();
-    }
-
-    @Override
-    public ElectricBlockValues getData() {
-        return data;
+    public double resistance(){
+        return 1000;
     }
 
 
     @Override
-    public float resistance() {
-        return 100;
+    public boolean makeMultimeterTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+
+        TFMGLang.text("Resistance: " + TFMGUtils.formatUnits(resistance,"Ohm")).forGoggles(tooltip);
+        TFMGLang.text("Voltage: " + TFMGUtils.formatUnits(voltage,"V")).forGoggles(tooltip);
+        TFMGLang.text("Power: " + TFMGUtils.formatUnits(current*voltage,"W")).forGoggles(tooltip);
+
+        return true;
     }
-
-
 
     @Override
-    public void sendStuff() {
-        sendData();
+    public void onUpdated() {
+        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
+
+        Resistance resistor = network.getResistance(getPos(), 0);
+
+        if (resistor != null) {
+
+            resistance = resistor.resistance;
+            voltage = resistor.getVoltage(level);
+            current = (float) (voltage / resistance);
+
+        }
     }
+
+    @Override
+    public void remove() {
+        super.remove();
+        this.removeBlock();
+    }
+
 
 
     @Override
@@ -235,25 +261,11 @@ public class ElectricPumpBlockEntity extends PumpBlockEntity implements IElectri
     }
 
     @Override
-    public void remove() {
-        super.remove();
-        onRemoved();
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-        tickElectricity();
-
+    public Level getWorld() {
+        return getLevel();
     }
 
 
-
-    @Override
-    protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
-        super.read(compound,registries , clientPacket);
-        readElectricity(compound,clientPacket);
-    }
 
     /// ////////////////
     class ElectricPumpTransferBehavior extends FluidTransportBehaviour {
@@ -268,7 +280,8 @@ public class ElectricPumpBlockEntity extends PumpBlockEntity implements IElectri
             for (Map.Entry<Direction, PipeConnection> entry : interfaces.entrySet()) {
                 boolean pull = isPullingOnSide(isFront(entry.getKey()));
                 Couple<Float> pressure = entry.getValue().getPressure();
-                pressure.set(pull,getPowerUsage() == 0 ? 0 : Math.min(1500,data.getVoltage()*2f));
+                double power = current*voltage<1 ? 0 : current*voltage;
+                pressure.set(pull, power == 0 ? 0 : (float) Math.min(1500, voltage * 2f));
                 pressure.set(!pull, 0f);
             }
         }

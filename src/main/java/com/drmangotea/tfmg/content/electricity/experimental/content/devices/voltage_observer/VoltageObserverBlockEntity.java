@@ -1,21 +1,20 @@
-package com.drmangotea.tfmg.content.electricity.utilities.voltage_observer;
+package com.drmangotea.tfmg.content.electricity.experimental.content.devices.voltage_observer;
 
 
 import com.drmangotea.tfmg.base.blocks.WallMountBlock;
-import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.base.ResistiveLoadBlockEntity;
 import com.simibubi.create.foundation.blockEntity.ComparatorUtil;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
-import static com.drmangotea.tfmg.content.electricity.utilities.voltage_observer.VoltageObserverBlock.POWERED;
+import static com.drmangotea.tfmg.content.electricity.experimental.content.devices.voltage_observer.VoltageObserverBlock.POWERED;
 
 
-public class VoltageObserverBlockEntity extends ElectricBlockEntity {
+public class VoltageObserverBlockEntity extends ResistiveLoadBlockEntity {
 
     boolean update = false;
 
@@ -31,32 +30,32 @@ public class VoltageObserverBlockEntity extends ElectricBlockEntity {
     }
 
 
-    @Override
-    public void onNetworkChanged(int oldVoltage, float oldPower) {
-        super.onNetworkChanged(oldVoltage, oldPower);
-        update = true;
+    public int getComparatorOutput() {
+        return ComparatorUtil.fractionToRedstoneLevel(voltage / 250d);
     }
 
-    public int getComparatorOutput() {
-        return ComparatorUtil.fractionToRedstoneLevel((double) getData().getVoltage() /250);
+    @Override
+    public double resistance() {
+        return 1E9;
+    }
+
+    @Override
+    public void onUpdated() {
+        super.onUpdated();
+        update = true;
     }
 
     @Override
     public void tick() {
         super.tick();
-        if(update){
-            level.setBlock(getBlockPos(),getBlockState().setValue(POWERED,getData().getVoltage() != 0),2);
+        if (update) {
+            level.setBlock(getBlockPos(), getBlockState().setValue(POWERED, voltage != 0), 2);
             level.updateNeighborsAt(getBlockPos(), getBlockState().getBlock());
             update = false;
         }
         if (observedElectricBehaviour != null) {
             observedElectricBehaviour.setObservedPos(getConnectedPos());
         }
-    }
-
-    @Override
-    public boolean hasElectricitySlot(Direction direction) {
-        return direction == getBlockState().getValue(WallMountBlock.FACING);
     }
 
     private BlockPos getConnectedPos() {
