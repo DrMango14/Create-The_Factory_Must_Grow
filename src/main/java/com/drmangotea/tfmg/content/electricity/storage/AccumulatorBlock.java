@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.storage;
 
 import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
+import com.drmangotea.tfmg.content.electricity.base.IOldElectric;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
@@ -67,7 +67,7 @@ public class AccumulatorBlock extends TFMGDirectionalBlock implements IBE<Accumu
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState blockState1, boolean a) {
 
 
-        withBlockEntityDo(level,pos, IElectric::onPlaced);
+        withBlockEntityDo(level,pos, IOldElectric::onPlaced);
         withBlockEntityDo(level,pos,b->b.refreshNextTick =true);
 
         super.onPlace(state, level, pos, blockState1, a);

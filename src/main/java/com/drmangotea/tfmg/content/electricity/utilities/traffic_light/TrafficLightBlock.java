@@ -3,7 +3,7 @@ package com.drmangotea.tfmg.content.electricity.utilities.traffic_light;
 
 import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
 import com.drmangotea.tfmg.base.TFMGShapes;
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
+import com.drmangotea.tfmg.content.electricity.base.IOldElectric;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -20,7 +20,7 @@ public class TrafficLightBlock extends TFMGHorizontalDirectionalBlock implements
     }
     @Override
     public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
-        withBlockEntityDo(level,pos, IElectric::onPlaced);
+        withBlockEntityDo(level,pos, IOldElectric::onPlaced);
     }
 
     @Override

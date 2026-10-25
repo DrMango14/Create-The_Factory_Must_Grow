@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "tfmg:accumulator_control_unit"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "tfmg:blocks/encased_potentiometer"
+  "random_sequence": "tfmg:blocks/accumulator_control_unit"
 }

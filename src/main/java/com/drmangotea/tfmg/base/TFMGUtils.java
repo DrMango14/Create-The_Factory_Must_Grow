@@ -5,9 +5,10 @@ import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.spark.ElectricSparkParticle;
 import com.drmangotea.tfmg.base.spark.Spark;
-import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.cable_type.CableType;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CablePos;
 import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.cable_type.CableType;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectingElectricalNode;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode.Electrode;
 import com.drmangotea.tfmg.registry.TFMGEntityTypes;
@@ -70,6 +71,14 @@ public class TFMGUtils {
     }
 
     public static ConnectingElectricalNode closestNode(IRealisticElectric be, Vec3 clickPosition) {
+
+        if (be instanceof LargeTransformerBlockEntity t && !t.isMainPart) {
+            return closestNode(t.getControlledBlock(), clickPosition);
+        }
+
+        if (be == null)
+            return null;
+
         Map<Vec3, ConnectingElectricalNode> connectors = new HashMap<>();
 
         BlockPos pos = BlockPos.of(be.getPos());

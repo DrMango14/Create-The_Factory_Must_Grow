@@ -25,6 +25,9 @@ import com.drmangotea.tfmg.content.electricity.experimental.content.devices.resi
 import com.drmangotea.tfmg.content.electricity.experimental.content.lights.*;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.adapters.ElectricAdapterBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.CableBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_control_unit.AccumulatorControlUnitBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_rack.AccumulatorRackBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_rack.AccumulatorRackBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.RealConnectorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.three_phase_generator.ThreePhaseGeneratorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.creative_generator.CreativeGeneratorBlockEntity;
@@ -39,7 +42,6 @@ import com.drmangotea.tfmg.content.electricity.experimental.content.measuring_in
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.electric_switch.ElectricSwitchBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch.LargeSwitchBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch.LargeSwitchRenderer;
-import com.drmangotea.tfmg.content.electricity.network.potentiometer.PotentiometerBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeCoilBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.small.TransformerBlockEntity;
@@ -131,6 +133,16 @@ import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import static com.drmangotea.tfmg.TFMG.REGISTRATE;
 
 public class TFMGBlockEntities {
+
+    public static final BlockEntityEntry<AccumulatorControlUnitBlockEntity> ACCUMULATOR_CONTROL_UNIT = REGISTRATE
+            .blockEntity("accumulator_control_unit", AccumulatorControlUnitBlockEntity::new)
+            .validBlocks(TFMGBlocks.ACCUMULATOR_CONTROL_UNIT)
+            .register();
+
+    public static final BlockEntityEntry<AccumulatorRackBlockEntity> ACCUMULATOR_RACK = REGISTRATE
+            .blockEntity("accumulator_rack", AccumulatorRackBlockEntity::new)
+            .validBlocks(TFMGBlocks.ACCUMULATOR_RACK)
+            .register();
 
     public static final BlockEntityEntry<PolarizerBlockEntity> POLARIZER = REGISTRATE
             .blockEntity("polarizer", PolarizerBlockEntity::new)
@@ -368,10 +380,7 @@ public class TFMGBlockEntities {
             .validBlocks(TFMGBlocks.GAS_LAMP)
             .register();
 
-    public static final BlockEntityEntry<PotentiometerBlockEntity> POTENTIOMETER = REGISTRATE
-            .blockEntity("potentiometer", PotentiometerBlockEntity::new)
-            .validBlocks(TFMGBlocks.POTENTIOMETER, TFMGBlocks.ENCASED_POTENTIOMETER)
-            .register();
+
 
     public static final BlockEntityEntry<SlidingDoorBlockEntity> TFMG_SLIDING_DOOR =
             REGISTRATE.blockEntity("tfmg_sliding_door", SlidingDoorBlockEntity::new)

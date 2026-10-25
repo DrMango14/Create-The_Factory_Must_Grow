@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.experimental.display_link;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
+import com.drmangotea.tfmg.content.electricity.base.IOldElectric;
 import com.drmangotea.tfmg.content.electricity.experimental.content.devices.voltage_observer.ObservedElectricBehaviour;
 import com.simibubi.create.content.redstone.displayLink.DisplayLinkContext;
 import com.simibubi.create.content.redstone.displayLink.source.SingleLineDisplaySource;
@@ -17,13 +17,13 @@ public class ResistanceDisplaySource extends SingleLineDisplaySource {
         BlockEntity sourceBE = context.getSourceBlockEntity();
         if (!(sourceBE instanceof SmartBlockEntity smart))
             return EMPTY_LINE;
-        if (!(smart instanceof IElectric electric))
+        if (!(smart instanceof IOldElectric electric))
             return EMPTY_LINE;
 
         float resistance = electric.voltageGeneration() > 0 ? electric.getGeneratorResistance() : electric.resistance();
 
         if (smart.getBehaviour(ObservedElectricBehaviour.TYPE) != null) {
-            IElectric observed = smart.getBehaviour(ObservedElectricBehaviour.TYPE).getObservedElectric();
+            IOldElectric observed = smart.getBehaviour(ObservedElectricBehaviour.TYPE).getObservedElectric();
             if (observed != null) resistance = observed.voltageGeneration() > 0 ? observed.getGeneratorResistance() : observed.resistance();
         }
 

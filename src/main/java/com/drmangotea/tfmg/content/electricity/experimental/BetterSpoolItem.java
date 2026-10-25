@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.content.electricity.experimental;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.content.electricity.connection.cables.CablePos;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectingElectricalNode;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ElectricalNode;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
@@ -49,8 +50,14 @@ public class BetterSpoolItem extends Item {
                 BlockPos pos2 = BlockPos.of(stack.getOrDefault(TFMGDataComponents.POSITION, 0).longValue());
                 int id = stack.getOrDefault(TFMGDataComponents.CONNECTOR_ID, 0);
 
-                if (level.getBlockEntity(pos2) instanceof IRealisticElectric be2) {
+                if (level.getBlockEntity(pos2) instanceof IRealisticElectric b) {
+                    IRealisticElectric be2 = b;
+                    if(b instanceof LargeTransformerBlockEntity t &&!t.isMainPart){
+                        be2 = t.getControlledBlock();;
+                    }
+
                     List<ElectricalNode> nodes = be2.getProperties().nodes;
+
 
                     ElectricalNode savedNode = nodes.get(0);
 
@@ -62,11 +69,7 @@ public class BetterSpoolItem extends Item {
 
                     if (savedNode instanceof ConnectingElectricalNode node2) {
 
-
                         network.connections.add(new WireConnection(node1, node2, 10,true));
-
-
-
 
                         network.update();
                         TFMG.ELECTRICAL_NETWORK_DATA.markDirty();

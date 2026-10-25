@@ -1,7 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.electric_switch;
 
-import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.base.IVoltageChanger;
 import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
 import com.drmangotea.tfmg.content.electricity.experimental.content.devices.base.DirectionalResistiveLoadBlock;

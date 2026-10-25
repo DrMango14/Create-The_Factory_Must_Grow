@@ -25,7 +25,7 @@ import java.util.function.Consumer;
 /**
  * data and actions for electric blocks
  */
-public interface IElectric {
+public interface IOldElectric {
 
     /**
      * block's world position as a long
@@ -52,8 +52,8 @@ public interface IElectric {
      * @return block's network if valid, newly created network for this block otherwise
      */
     default ElectricalNetwork getOrCreateElectricNetwork() {
-        if (getLevelAccessor().getBlockEntity(BlockPos.of(getData().electricalNetworkId)) instanceof IElectric) {
-            return TFMG.NETWORK_MANAGER.getOrCreateNetworkFor((IElectric) getLevelAccessor().getBlockEntity(BlockPos.of(getData().electricalNetworkId)));
+        if (getLevelAccessor().getBlockEntity(BlockPos.of(getData().electricalNetworkId)) instanceof IOldElectric) {
+            return TFMG.NETWORK_MANAGER.getOrCreateNetworkFor((IOldElectric) getLevelAccessor().getBlockEntity(BlockPos.of(getData().electricalNetworkId)));
         } else {
             ElectricNetworkManager.networks.get(getLevelAccessor())
                     .remove(getData().electricalNetworkId);
@@ -101,7 +101,7 @@ public interface IElectric {
         this.getData().destroyed = true;
         for (Direction d : Direction.values()) {
             if (hasElectricitySlot(d))
-                if (getLevelAccessor().getBlockEntity(BlockPos.of(getPos()).relative(d)) instanceof IElectric be && be.hasElectricitySlot(d.getOpposite())) {
+                if (getLevelAccessor().getBlockEntity(BlockPos.of(getPos()).relative(d)) instanceof IOldElectric be && be.hasElectricitySlot(d.getOpposite())) {
                     ElectricNetworkManager.networks.get(getLevelAccessor())
                             .remove(be.getPos());
                     be.setNetwork(be.getPos());
@@ -286,7 +286,7 @@ public interface IElectric {
         }
         for (Direction d : Direction.values()) {
             if (hasElectricitySlot(d))
-                if (getLevelAccessor().getBlockEntity(pos.relative(d)) instanceof IElectric be) {
+                if (getLevelAccessor().getBlockEntity(pos.relative(d)) instanceof IOldElectric be) {
                     if (be.hasElectricitySlot(d.getOpposite())) {
                         if (!be.destroyed()) {
                             getOrCreateElectricNetwork().add(be);
@@ -339,7 +339,7 @@ public interface IElectric {
         }
 
         for (Direction direction : Direction.values()) {
-            if (getLevelAccessor().getBlockEntity(BlockPos.of(getPos()).relative(direction)) instanceof IElectric be && !alreadyChecked.contains(BlockPos.of(be.getPos()))) {
+            if (getLevelAccessor().getBlockEntity(BlockPos.of(getPos()).relative(direction)) instanceof IOldElectric be && !alreadyChecked.contains(BlockPos.of(be.getPos()))) {
                 be.updateUnpowered(alreadyChecked);
             }
         }
@@ -435,9 +435,9 @@ public interface IElectric {
         return  (getData().getVoltage() * getCurrent());
     }
 
-    default int getNetworkPowerUsage(IElectric blocked) {
+    default int getNetworkPowerUsage(IOldElectric blocked) {
         int power = 0;
-        for (IElectric member : getOrCreateElectricNetwork().members)
+        for (IOldElectric member : getOrCreateElectricNetwork().members)
             if (member.getPos() != blocked.getPos()) {
                 power += member.getPowerUsage();
             } else blocked.updateNextTick();
@@ -446,7 +446,7 @@ public interface IElectric {
 
     default float getNetworkPowerUsage() {
         float power = 0;
-        for (IElectric member : getOrCreateElectricNetwork().members)
+        for (IOldElectric member : getOrCreateElectricNetwork().members)
             power += member.getPowerUsage();
         return power;
     }
@@ -454,7 +454,7 @@ public interface IElectric {
 
     default int getNetworkPowerGeneration() {
         int power = 0;
-        for (IElectric member : getOrCreateElectricNetwork().members)
+        for (IOldElectric member : getOrCreateElectricNetwork().members)
 
             power += member.powerGeneration();
         return power;
@@ -486,7 +486,7 @@ public interface IElectric {
 
         int count = 0;
 
-        for (IElectric member : getOrCreateElectricNetwork().members) {
+        for (IOldElectric member : getOrCreateElectricNetwork().members) {
             if (member instanceof VoltageAlteringBlockEntity be && be.getControlledBlock() != null) {
                 if (be.getControlledBlock().getData().getId() == id)
                     count++;
@@ -495,10 +495,7 @@ public interface IElectric {
                 if (be.getControlledBlock().getData().getId() == id)
                     count++;
             }
-            if (member instanceof LargeTransformerBlockEntity be && be.getControlledBlock() != null) {
-                if (be.getControlledBlock().getData().getId() == id)
-                    count++;
-            }
+
 
         }
 
@@ -538,12 +535,12 @@ public interface IElectric {
     default void recalculateNetworkResistance() {
         float resistance = 0;
 
-        List<IElectric> members = getOrCreateElectricNetwork().members;
-        for (IElectric member : members) {
+        List<IOldElectric> members = getOrCreateElectricNetwork().members;
+        for (IOldElectric member : members) {
             if (member.resistance() != 0)
                 resistance += 1f / member.resistance();
         }
-        for (IElectric member : members) {
+        for (IOldElectric member : members) {
             if (resistance != 0)
                 member.setNetworkResistance(1f / resistance);
         }

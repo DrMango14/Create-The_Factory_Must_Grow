@@ -9,6 +9,7 @@ import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwor
 import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.three_phase_generator.ThreePhaseGeneratorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.devices.resistor.DebugResistorBlockEntity;
 
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_rack.AccumulatorRackBlockEntity;
 import com.simibubi.create.Create;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
@@ -33,7 +34,11 @@ public class DebugCinderBlockItem extends Item {
 
         BlockPos pos = context.getClickedPos();
         Level level = context.getLevel();
+        if (level.getBlockEntity(pos) instanceof AccumulatorRackBlockEntity be) {
+           be.updateStorage();
 
+
+        }
         if (level.getBlockEntity(pos) instanceof ThreePhaseGeneratorBlockEntity be) {
             RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(be.getLevel());
 

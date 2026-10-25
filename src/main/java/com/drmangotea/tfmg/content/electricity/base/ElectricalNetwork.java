@@ -19,7 +19,7 @@ public class ElectricalNetwork {
     }
 
     //blocks in the network
-    public List<IElectric> members = new ArrayList<>();
+    public List<IOldElectric> members = new ArrayList<>();
 
     //network's id
     public long id;
@@ -29,7 +29,7 @@ public class ElectricalNetwork {
     }
 
     //adds a new block to the network if it's not in it already
-    public void add(IElectric be) {
+    public void add(IOldElectric be) {
         List<Long> posList = new ArrayList<>();
 
         members.forEach(member -> posList.add(member.getData().getId()));
@@ -58,7 +58,7 @@ public class ElectricalNetwork {
          */
 
 
-        for (IElectric member : members) {
+        for (IOldElectric member : members) {
             member.getData().notEnoughPower = false;
 
             member.getData().highestCurrent = 0;
@@ -75,10 +75,10 @@ public class ElectricalNetwork {
          * 2) sets network's resistance
          * 3) informs blocks about their group's resistance
          */
-        List<IElectric> list = new ArrayList<>(members);
+        List<IOldElectric> list = new ArrayList<>(members);
         if (!members.isEmpty()) {
 
-            for (IElectric member : list) {
+            for (IOldElectric member : list) {
 
                 int oldVoltage = member.getData().getVoltage();
                 float oldPower = member.getPowerUsage();
@@ -99,7 +99,7 @@ public class ElectricalNetwork {
          * 1) sets the current of wires
          * 2) informs subnetworks
          */
-        for (IElectric member : members) {
+        for (IOldElectric member : members) {
 
             if (member.resistance() == 0) {
 
@@ -127,7 +127,7 @@ public class ElectricalNetwork {
     public void handleInsufficientPower() {
         if (!members.isEmpty())
             if (members.get(0).getNetworkPowerUsage() > members.get(0).getNetworkPowerGeneration()) {
-                for (IElectric member : members) {
+                for (IOldElectric member : members) {
                     member.getData().notEnoughPower = true;
                     member.getData().tickUntilConnectFE = 20 * 2;
 
@@ -141,12 +141,12 @@ public class ElectricalNetwork {
             }
     }
 
-    public static float getCableCurrent(IElectric be) {
+    public static float getCableCurrent(IOldElectric be) {
 
         float current = 0;
 
 
-        for (IElectric member : be.getOrCreateElectricNetwork().members) {
+        for (IOldElectric member : be.getOrCreateElectricNetwork().members) {
             current += member.getCurrent();
         }
 
@@ -187,7 +187,7 @@ public class ElectricalNetwork {
         });
     }
 
-    public List<IElectric> getMembers() {
+    public List<IOldElectric> getMembers() {
         return members;
     }
 }

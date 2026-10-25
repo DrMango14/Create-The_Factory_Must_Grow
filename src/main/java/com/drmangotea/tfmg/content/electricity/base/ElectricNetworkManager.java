@@ -15,7 +15,7 @@ public class ElectricNetworkManager {
     public void onUnloadWorld(LevelAccessor world) {
         networks.remove(world);
     }
-    public ElectricalNetwork getOrCreateNetworkFor(IElectric be) {
+    public ElectricalNetwork getOrCreateNetworkFor(IOldElectric be) {
         Long id = be.getData().getId();
         ElectricalNetwork network;
         Map<Long, ElectricalNetwork> map = networks.computeIfAbsent(be.getLevelAccessor(), $ -> new HashMap<>());
@@ -23,7 +23,7 @@ public class ElectricNetworkManager {
         if (!map.containsKey(id)) {
             network = new ElectricalNetwork(id);
 
-            if(be instanceof IElectric) {
+            if(be instanceof IOldElectric) {
                 network.add(be);
                 be.setNetwork(be.getData().getId());
             }

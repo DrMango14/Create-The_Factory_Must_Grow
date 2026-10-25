@@ -18,6 +18,7 @@ public enum TFMGGuiTextures implements ScreenElement {
     // SCREENS
     ELECTRICIANS_WRENCH("electricians_wrench", 0, 0, 188, 101),
     ENGINE_CONTROLLER("engine_controller", 0, 0, 179, 109),
+    ACCUMULATOR_RACK("accumulator_rack", 0, 32, 220, 97),
     // JEI
     DISTILLATION_TOWER_TOP("distillation_tower", 0, 0, 44, 12),
     DISTILLATION_TOWER_MIDDLE("distillation_tower", 0, 12, 44, 24),
@@ -63,6 +64,16 @@ public enum TFMGGuiTextures implements ScreenElement {
         this.height = height;
         this.startX = startX;
         this.startY = startY;
+    }
+
+
+    public int getWidth() {
+        return width;
+    }
+
+
+    public int getHeight() {
+        return height;
     }
 
     @OnlyIn(Dist.CLIENT)

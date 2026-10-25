@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage;
 
 
+import com.drmangotea.tfmg.TFMG;
 import net.neoforged.neoforge.energy.EnergyStorage;
 
 public abstract class TFMGForgeEnergyStorage extends EnergyStorage {
@@ -10,10 +11,15 @@ public abstract class TFMGForgeEnergyStorage extends EnergyStorage {
 
     }
 
+    public void setMaxEnergyStorage(int max){
+        this.capacity = max;
+    }
+
     @Override
     public boolean canExtract() {
         return true;
     }
+
 
     @Override
     public boolean canReceive() {
@@ -38,6 +44,9 @@ public abstract class TFMGForgeEnergyStorage extends EnergyStorage {
         if(receiveEnergy != 0) {
             onEnergyChanged(receiveEnergy,oldAmount);
         }
+
+        TFMG.LOGGER.debug("recieved "+receiveEnergy);
+
         return receiveEnergy;
     }
 

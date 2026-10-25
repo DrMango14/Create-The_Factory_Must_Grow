@@ -45,10 +45,7 @@ public class LargeTransformerGenerator extends SpecialBlockStateGen {
     @Override
     public <T extends Block> ModelFile getModel(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov,
                                                 BlockState state) {
-
-
-
-        return state.getValue(LargeTransformerBlock.UNFINISHED_MODEL) ? partialBaseModel(ctx, prov, "unfinished")
+        return !state.getValue(LargeTransformerBlock.IS_MAIN_PART) ? partialBaseModel(ctx, prov, "secondary")
                 : partialBaseModel(ctx, prov);
     }
 

@@ -2,7 +2,7 @@ package com.drmangotea.tfmg.content.electricity.connection.diagonal;
 
 
 import com.drmangotea.tfmg.base.TFMGShapes;
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
+import com.drmangotea.tfmg.content.electricity.base.IOldElectric;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -66,7 +66,7 @@ public class DiagonalCableBlock extends DirectionalBlock implements SimpleWaterl
     }
     @Override
     public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
-        withBlockEntityDo(level,pos, IElectric::onPlaced);
+        withBlockEntityDo(level,pos, IOldElectric::onPlaced);
     }
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
@@ -95,7 +95,7 @@ public class DiagonalCableBlock extends DirectionalBlock implements SimpleWaterl
 
         context.getLevel().setBlock(context.getClickedPos(),state.setValue(FACING_UP,!state.getValue(FACING_UP)),2);
 
-        withBlockEntityDo(context.getLevel(),context.getClickedPos(), IElectric::onPlaced);
+        withBlockEntityDo(context.getLevel(),context.getClickedPos(), IOldElectric::onPlaced);
         IWrenchable.playRotateSound(context.getLevel(), context.getClickedPos());
         return onWrenched;
     }

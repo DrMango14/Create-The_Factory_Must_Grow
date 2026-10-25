@@ -37,6 +37,8 @@ import com.drmangotea.tfmg.content.electricity.experimental.content.lights.LampG
 import com.drmangotea.tfmg.content.electricity.experimental.content.measuring_instruments.VoltMeterBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.adapters.ElectricAdapterBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.CableBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_control_unit.AccumulatorControlUnitBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_rack.AccumulatorRackBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeCoilBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeElectromagneticCoilItem;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeTransformerBlock;
@@ -51,8 +53,6 @@ import com.drmangotea.tfmg.content.electricity.experimental.content.lights.neon_
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.electric_switch.ElectricSwitchBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch.LargeSwitchBlock;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch.LargeSwitchGenerator;
-import com.drmangotea.tfmg.content.electricity.network.potentiometer.EncasedPotentiometerBlock;
-import com.drmangotea.tfmg.content.electricity.network.potentiometer.PotentiometerBlock;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlock;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorItem;
 import com.drmangotea.tfmg.content.electricity.storage.CapacitorCTBehavior;
@@ -180,12 +180,46 @@ public class TFMGBlocks {
         REGISTRATE.setCreativeTab(TFMGCreativeTabs.TFMG_MAIN);
     }
 
+    public static final BlockEntry<LargeTransformerBlock> LARGE_TRANSFORMER =
+            REGISTRATE.block("large_transformer", LargeTransformerBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .blockstate(new LargeTransformerGenerator()::generate)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .tag(AllTags.AllBlockTags.NON_MOVABLE.tag)
+                    .transform(pickaxeOnly())
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
     public static final BlockEntry<VoltMeterBlock> VOLTMETER =
             REGISTRATE.block("voltmeter", p->new VoltMeterBlock(p,true))
                     .initialProperties(SharedProperties::softMetal)
                     .transform(pickaxeOnly())
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .blockstate(BlockStateGen.directionalBlockProvider(true))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<AccumulatorControlUnitBlock> ACCUMULATOR_CONTROL_UNIT =
+            REGISTRATE.block("accumulator_control_unit", AccumulatorControlUnitBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .transform(pickaxeOnly())
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .item()
+                    .transform(customItemModel())
+                    .register();
+
+    public static final BlockEntry<AccumulatorRackBlock> ACCUMULATOR_RACK =
+            REGISTRATE.block("accumulator_rack", AccumulatorRackBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .transform(pickaxeOnly())
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .blockstate(BlockStateGen.directionalBlockProvider(true))
+                    .addLayer(() -> RenderType::cutoutMipped)
                     .item()
                     .transform(customItemModel())
                     .register();
@@ -1322,15 +1356,6 @@ public class TFMGBlocks {
                     .transform(customItemModel())
                     .register();
 
-    public static final BlockEntry<PotentiometerBlock> POTENTIOMETER =
-            REGISTRATE.block("potentiometer", PotentiometerBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(new CreativeMotorGenerator()::generate)
-                    .item()
-                    .transform(customItemModel())
-                    .register();
     public static final BlockEntry<ElectricSwitchBlock> ELECTRICAL_SWITCH =
             REGISTRATE.block("electrical_switch", ElectricSwitchBlock::new)
                     .initialProperties(SharedProperties::softMetal)
@@ -1351,14 +1376,6 @@ public class TFMGBlocks {
                     .item()
                     .transform(customItemModel())
                     .register();
-    public static final BlockEntry<EncasedPotentiometerBlock> ENCASED_POTENTIOMETER =
-            REGISTRATE.block("encased_potentiometer", EncasedPotentiometerBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .transform(EncasingRegistry.addVariantTo(POTENTIOMETER))
-                    .blockstate(BlockStateGen.directionalBlockProvider(false))
-                    .register();
-
 
 
 
@@ -1415,15 +1432,7 @@ public class TFMGBlocks {
                     .transform(customItemModel())
                     .register();
 
-    public static final BlockEntry<LargeTransformerBlock> LARGE_TRANSFORMER =
-            REGISTRATE.block("large_transformer", LargeTransformerBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .blockstate(new LargeTransformerGenerator()::generate)
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .tag(AllTags.AllBlockTags.NON_MOVABLE.tag)
-                    .transform(pickaxeOnly())
-                    .addLayer(() -> RenderType::cutoutMipped)
-                    .register();
+
 
 
     //public static final BlockEntry<ConverterBlock> CONVERTER =

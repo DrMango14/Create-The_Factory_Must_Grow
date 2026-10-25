@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.generators.large_generator;
 
 import com.drmangotea.tfmg.base.TFMGShapes;
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
+import com.drmangotea.tfmg.content.electricity.base.IOldElectric;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.foundation.block.IBE;
@@ -39,7 +39,7 @@ public class StatorBlock extends DirectionalBlock implements IBE<StatorBlockEnti
 
     @Override
     public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
-        withBlockEntityDo(level, pos, IElectric::onPlaced);
+        withBlockEntityDo(level, pos, IOldElectric::onPlaced);
     }
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {

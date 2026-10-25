@@ -6,6 +6,7 @@
 	"textures": {
 		"0": "tfmg:block/inverter",
 		"1": "tfmg:block/circuit_board",
+		"2": "tfmg:block/electronics_lid",
 		"particle": "tfmg:block/inverter"
 	},
 	"elements": [
@@ -13,7 +14,7 @@
 			"from": [0, 0, 0],
 			"to": [16, 8, 16],
 			"faces": {
-				"north": {"uv": [0, 4, 8, 8], "texture": "#0"},
+				"north": {"uv": [0, 12, 8, 16], "texture": "#0"},
 				"east": {"uv": [8, 4, 16, 8], "texture": "#0"},
 				"south": {"uv": [0, 4, 8, 8], "texture": "#0"},
 				"west": {"uv": [8, 4, 16, 8], "texture": "#0"},
@@ -30,7 +31,7 @@
 				"east": {"uv": [0, 0, 8, 0], "texture": "#missing"},
 				"south": {"uv": [0, 0, 8, 0], "texture": "#missing"},
 				"west": {"uv": [0, 0, 8, 0], "texture": "#missing"},
-				"up": {"uv": [0, 8, 8, 16], "texture": "#0"}
+				"up": {"uv": [0, 0, 16, 16], "texture": "#2"}
 			}
 		},
 		{
@@ -64,7 +65,7 @@
 			"to": [16, 16, 0],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
 			"faces": {
-				"north": {"uv": [0, 0, 8, 4], "texture": "#0"},
+				"north": {"uv": [0, 8, 8, 12], "texture": "#0"},
 				"east": {"uv": [1, 0, 1, 4], "texture": "#0"},
 				"south": {"uv": [8, 0, 16, 4], "texture": "#0"},
 				"west": {"uv": [0, 0, 0, 4], "texture": "#0"},

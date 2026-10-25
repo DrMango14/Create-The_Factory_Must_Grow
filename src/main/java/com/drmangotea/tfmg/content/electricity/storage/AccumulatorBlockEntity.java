@@ -1,11 +1,14 @@
 package com.drmangotea.tfmg.content.electricity.storage;
 
+import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.TFMGForgeEnergyStorage;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_rack.AccumulatorRackBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -22,7 +25,7 @@ import java.util.List;
 
 import static net.minecraft.world.level.block.DirectionalBlock.FACING;
 
-public class AccumulatorBlockEntity extends ElectricBlockEntity {
+public class AccumulatorBlockEntity extends ElectricBlockEntity implements IHaveGoggleInformation {
 
     public TFMGForgeEnergyStorage energy = createEnergyStorage(1);
     private IEnergyStorage energyCapability;
@@ -83,6 +86,18 @@ public class AccumulatorBlockEntity extends ElectricBlockEntity {
     public void onPlaced() {
         super.onPlaced();
         refreshController();
+    }
+    @Override
+    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+
+        TFMGLang.text("Length "+length).forGoggles(tooltip);
+        TFMGLang.text("is controller "+isController()).forGoggles(tooltip);
+        if(level.getBlockEntity(controller) instanceof AccumulatorBlockEntity be)
+            TFMGLang.text("Energy c "+be.energy.getEnergyStored()).forGoggles(tooltip);
+        TFMGLang.text("Energy "+energy.getEnergyStored()).forGoggles(tooltip);
+        TFMGLang.text("Max Energy "+energy.getMaxEnergyStored()).forGoggles(tooltip);
+
+        return true;
     }
 
     @Override

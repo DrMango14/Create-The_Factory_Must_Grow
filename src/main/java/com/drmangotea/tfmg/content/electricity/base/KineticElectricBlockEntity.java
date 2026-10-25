@@ -10,7 +10,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class KineticElectricBlockEntity extends GeneratingKineticBlockEntity implements IElectric, IHaveGoggleInformation, IHaveHoveringInformation {
+public class KineticElectricBlockEntity extends GeneratingKineticBlockEntity implements IOldElectric, IHaveGoggleInformation, IHaveHoveringInformation {
 
     public ElectricBlockValues data = new ElectricBlockValues(getPos());
 

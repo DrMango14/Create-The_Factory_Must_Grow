@@ -1,6 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.experimental.content.devices.voltage_observer;
 
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
+import com.drmangotea.tfmg.content.electricity.base.IOldElectric;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -38,13 +38,13 @@ public class ObservedElectricBehaviour extends BlockEntityBehaviour {
     public boolean isObservingElectric() {
         if (getObservedPos() == null) return false;
         BlockEntity be = getWorld().getBlockEntity(getObservedPos());
-        return be instanceof IElectric;
+        return be instanceof IOldElectric;
     }
 
-    public IElectric getObservedElectric() {
+    public IOldElectric getObservedElectric() {
         if (!isObservingElectric()) return null;
         BlockEntity be = getWorld().getBlockEntity(getObservedPos());
-        if (be instanceof IElectric electric) {
+        if (be instanceof IOldElectric electric) {
             return electric;
         } else {
             throw new IllegalStateException("Observed position does not contain an IElectric block entity: " + getObservedPos());

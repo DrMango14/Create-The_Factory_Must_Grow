@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfmg:block/accumulator_control_unit/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/accumulator_control_unit/block"
+    },
+    "facing=south": {
+      "model": "tfmg:block/accumulator_control_unit/block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfmg:block/accumulator_control_unit/block",
+      "y": 270
+    }
+  }
+}

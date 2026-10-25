@@ -114,7 +114,6 @@ public class TFMGPonderTags {
                 .add(TFMGBlocks.ACCUMULATOR)
                 .add(TFMGBlocks.TRANSFORMER)
                 .add(TFMGBlocks.ELECTRICAL_SWITCH)
-                .add(TFMGBlocks.POTENTIOMETER)
                 .add(TFMGBlocks.ELECTRIC_PUMP)
                 .add(TFMGBlocks.LIGHT_BULB)
                 .add(TFMGBlocks.BRASS_CABLE_HUB)

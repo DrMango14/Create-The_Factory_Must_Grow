@@ -113,15 +113,7 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IRealist
         }
     }
 
-    @Override
-    public ElectricalProperties getProperties() {
-        return p;
-    }
 
-    @Override
-    public long getPos() {
-        return getBlockPos().asLong();
-    }
 
     //@Override
     //public int getPowerUsage() {
@@ -162,7 +154,15 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IRealist
 
 
     }
+    @Override
+    public ElectricalProperties getProperties() {
+        return p;
+    }
 
+    @Override
+    public long getPos() {
+        return getBlockPos().asLong();
+    }
 
     @Override
     public Level getWorld() {

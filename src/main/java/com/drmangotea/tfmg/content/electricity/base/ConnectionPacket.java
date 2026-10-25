@@ -24,7 +24,7 @@ public class ConnectionPacket extends BlockEntityDataPacket<SmartBlockEntity> {
     @Override
     protected void handlePacket(SmartBlockEntity blockEntity) {
 
-        if(blockEntity instanceof IElectric be) {
+        if(blockEntity instanceof IOldElectric be) {
             be.onConnected();
         }
     }

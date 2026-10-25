@@ -2,8 +2,7 @@ package com.drmangotea.tfmg.content.electricity.utilities.converter;
 
 import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
 import com.drmangotea.tfmg.base.TFMGShapes;
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
-import com.drmangotea.tfmg.registry.TFMGBlockEntities;
+import com.drmangotea.tfmg.content.electricity.base.IOldElectric;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -29,7 +28,7 @@ public class ConverterBlock extends TFMGHorizontalDirectionalBlock implements IB
 
     @Override
     public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
-        withBlockEntityDo(level,pos, IElectric::onPlaced);
+        withBlockEntityDo(level,pos, IOldElectric::onPlaced);
     }
 
     @Override

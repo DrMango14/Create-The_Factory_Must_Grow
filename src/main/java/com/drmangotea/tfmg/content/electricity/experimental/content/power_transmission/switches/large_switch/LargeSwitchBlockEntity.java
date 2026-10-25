@@ -1,6 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch;
 
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
+import com.drmangotea.tfmg.content.electricity.base.IOldElectric;
 import com.drmangotea.tfmg.content.electricity.base.KineticElectricBlockEntity;
 import com.drmangotea.tfmg.content.electricity.base.UpdateInFrontPacket;
 import net.createmod.catnip.animation.LerpedFloat;
@@ -91,7 +91,7 @@ public class LargeSwitchBlockEntity extends KineticElectricBlockEntity {
                 be.onPlaced();
     }
 
-    public IElectric getControlledBlock() {
+    public IOldElectric getControlledBlock() {
         Direction facing = getBlockState().getValue(HORIZONTAL_FACING);
         if(level.getBlockEntity(getBlockPos().relative(facing))instanceof LargeSwitchBlockEntity be){
             return be;
@@ -106,7 +106,7 @@ public class LargeSwitchBlockEntity extends KineticElectricBlockEntity {
             return 0;
 
         Direction facing = getBlockState().getValue(HORIZONTAL_FACING);
-        if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be && be.getData().getId() != data.getId()) {
+        if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IOldElectric be && be.getData().getId() != data.getId()) {
             int count = getBlocksConnectedToNetworkCount(getControlledBlock().getData().getId());
 
             if(count!=0)
@@ -156,7 +156,7 @@ public class LargeSwitchBlockEntity extends KineticElectricBlockEntity {
         if (level instanceof ServerLevel serverLevel)
             CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(worldPosition), new UpdateInFrontPacket(BlockPos.of(getPos())));
         Direction facing = getBlockState().getValue(HORIZONTAL_FACING);
-        if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be && be.getData().getId() != data.getId()) {
+        if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IOldElectric be && be.getData().getId() != data.getId()) {
             be.updateNextTick();
 
         }

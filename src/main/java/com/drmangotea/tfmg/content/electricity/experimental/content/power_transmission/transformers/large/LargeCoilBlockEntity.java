@@ -59,14 +59,14 @@ public class LargeCoilBlockEntity extends SmartBlockEntity {
             float turnRatio = secondaryTurns/primaryTurns;
 
             if (!level.isClientSide) {
-                level.setBlock(otherCoilPos, TFMGBlocks.LARGE_TRANSFORMER.getDefaultState().setValue(LargeTransformerBlock.HORIZONTAL_FACING, otherCoilDirection).setValue(LargeTransformerBlock.IS_MAIN_PART, false), 3);
+                level.setBlock(otherCoilPos, TFMGBlocks.LARGE_TRANSFORMER.getDefaultState().setValue(LargeTransformerBlock.FACING, otherCoilDirection).setValue(LargeTransformerBlock.IS_MAIN_PART, false), 3);
 
             }
             if(level.getBlockEntity(otherCoilPos) instanceof LargeTransformerBlockEntity transformerBe)
                 transformerBe.turnRatio = turnRatio;
             if (!level.isClientSide) {
 
-                level.setBlock(getBlockPos(), TFMGBlocks.LARGE_TRANSFORMER.getDefaultState().setValue(LargeTransformerBlock.HORIZONTAL_FACING, otherCoilDirection), 3);
+                level.setBlock(getBlockPos(), TFMGBlocks.LARGE_TRANSFORMER.getDefaultState().setValue(LargeTransformerBlock.FACING, otherCoilDirection), 3);
             }
 
 

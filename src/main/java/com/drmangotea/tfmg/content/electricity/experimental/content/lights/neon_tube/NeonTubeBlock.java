@@ -1,6 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.experimental.content.lights.neon_tube;
 
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
+import com.drmangotea.tfmg.content.electricity.base.IOldElectric;
 import com.drmangotea.tfmg.content.electricity.connection.cables.SimplePos;
 import com.drmangotea.tfmg.content.electricity.experimental.content.lights.ElectricLightBlock;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
@@ -95,10 +95,10 @@ public class NeonTubeBlock extends PipeBlock implements IBE<NeonTubeBlockEntity>
             case SOUTH -> level.setBlockAndUpdate(pos, state.setValue(SOUTH,!state.getValue(SOUTH)));
         }
 
-        withBlockEntityDo(level,pos, IElectric::onPlaced);
+        withBlockEntityDo(level,pos, IOldElectric::onPlaced);
 
         for(Direction direction : Direction.values()){
-            if(level.getBlockEntity(pos.relative(direction)) instanceof IElectric be){
+            if(level.getBlockEntity(pos.relative(direction)) instanceof IOldElectric be){
              be.onPlaced();
             }
         }
@@ -138,7 +138,7 @@ protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Lev
                  level.setBlockAndUpdate(pos.relative(facing), neighbourState.setValue(PipeBlock.PROPERTY_BY_DIRECTION.get(facing.getOpposite()), true));
              }
         }
-        withBlockEntityDo(level,pos, IElectric::onPlaced);
+        withBlockEntityDo(level,pos, IOldElectric::onPlaced);
         super.onPlace(state, level, pos, p_60569_, p_60570_);
 
     }

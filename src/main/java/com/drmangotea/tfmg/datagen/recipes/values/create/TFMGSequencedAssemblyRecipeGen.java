@@ -24,17 +24,7 @@ import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
 
 public class TFMGSequencedAssemblyRecipeGen extends SequencedAssemblyRecipeGen {
 
-    GeneratedRecipe POTENTIOMETER = create("potentiometer", b -> b.require(TFMGBlocks.HEAVY_MACHINERY_CASING.get())
-            .transitionTo(TFMGItems.UNFINISHED_POTENTIOMETER.get())
-            .addOutput(TFMGBlocks.POTENTIOMETER.get(), 120)
-            .addOutput(TFMGBlocks.STEEL_CASING.get(), 8)
-            .addOutput(TFMGBlocks.STEEL_COGWHEEL.get(), 8)
-            .addOutput(TFMGBlocks.ELECTRIC_POST.get(), 8)
-            .loops(3)
-            .addStep(WindingRecipe::new, rb -> rb.require(TFMGItems.CONSTANTAN_SPOOL.get()).duration(100))
-            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGBlocks.STEEL_COGWHEEL))
-            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(copperWire()))
-            .addStep(FillingRecipe::new, rb -> rb.require(SizedFluidIngredient.of(lubricationOil(), 50)))),
+    GeneratedRecipe
 
     GENERATOR = create("generator", b -> b.require(shaft())
             .transitionTo(TFMGItems.UNFINISHED_GENERATOR.get())

@@ -23,7 +23,7 @@ public class ElectricalBlockFailPacket extends BlockEntityDataPacket<SmartBlockE
     @Override
     protected void handlePacket(SmartBlockEntity blockEntity) {
 
-        if (blockEntity instanceof IElectric be) {
+        if (blockEntity instanceof IOldElectric be) {
             be.blockFail();
         }
     }

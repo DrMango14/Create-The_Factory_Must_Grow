@@ -2,7 +2,6 @@ package com.drmangotea.tfmg.content.electricity.experimental.content.lights;
 
 
 import com.drmangotea.tfmg.base.blocks.WallMountBlock;
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
 import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
 import com.drmangotea.tfmg.content.electricity.experimental.packets.AddElectricalComponentPacket;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;

@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tfmg:potentiometer"
+          "name": "tfmg:accumulator_rack"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "tfmg:blocks/potentiometer"
+  "random_sequence": "tfmg:blocks/accumulator_rack"
 }
