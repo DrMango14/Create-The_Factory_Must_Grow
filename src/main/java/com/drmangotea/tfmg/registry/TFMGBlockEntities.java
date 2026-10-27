@@ -14,31 +14,33 @@ import com.drmangotea.tfmg.content.decoration.tanks.TFMGFluidTankBlockEntity;
 import com.drmangotea.tfmg.content.decoration.tanks.TFMGFluidTankRenderer;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelFluidTankRenderer;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
-import com.drmangotea.tfmg.content.electricity.connection.CableHubBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.electric_motor.ElectricMotorBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.electric_pump.ElectricPumpBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.creative_generator.CreativeGeneratorBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.large_generator.RotorBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.large_generator.RotorRenderer;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.large_generator.RotorVisual;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.large_generator.StatorBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.three_phase_generator.ThreePhaseGeneratorBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.polarizer.PolarizerBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.polarizer.PolarizerRenderer;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.resistor.DebugResistorBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.devices.voltage_observer.VoltageObserverBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.lights.ElectricLightBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.lights.LightBulbRenderer;
+import com.drmangotea.tfmg.content.electricity.experimental.content.lights.neon_tube.NeonTubeBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.lights.neon_tube.NeonTubeRenderer;
 import com.drmangotea.tfmg.content.electricity.experimental.content.lights.variants.AluminumLampRenderer;
 import com.drmangotea.tfmg.content.electricity.experimental.content.lights.variants.CircularLightRenderer;
 import com.drmangotea.tfmg.content.electricity.experimental.content.lights.variants.ModernLightRenderer;
-import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.copycat_cable.CopycatCableBlockEntity;
-import com.drmangotea.tfmg.content.electricity.connection.diagonal.DiagonalCableBlockEntity;
-import com.drmangotea.tfmg.content.electricity.connection.tube.CableTubeBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.content.devices.resistor.DebugResistorBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.content.lights.*;
-import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.adapters.ElectricAdapterBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.CableBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_control_unit.AccumulatorControlUnitBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_rack.AccumulatorRackBlock;
-import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_rack.AccumulatorRackBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.RealConnectorBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.three_phase_generator.ThreePhaseGeneratorBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.creative_generator.CreativeGeneratorBlockEntity;
-import com.drmangotea.tfmg.content.electricity.generators.large_generator.RotorBlockEntity;
-import com.drmangotea.tfmg.content.electricity.generators.large_generator.RotorRenderer;
-import com.drmangotea.tfmg.content.electricity.generators.large_generator.RotorVisual;
-import com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.content.lights.neon_tube.NeonTubeBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.content.lights.neon_tube.NeonTubeRenderer;
 import com.drmangotea.tfmg.content.electricity.experimental.content.measuring_instruments.VoltMeterBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.measuring_instruments.VoltMeterRenderer;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.adapters.ElectricAdapterBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.CableBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.cable_hubs.CableHubBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.copycat_cable.CopycatCableBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_control_unit.AccumulatorControlUnitBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_rack.AccumulatorRackBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.electric_switch.ElectricSwitchBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch.LargeSwitchBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch.LargeSwitchRenderer;
@@ -46,16 +48,7 @@ import com.drmangotea.tfmg.content.electricity.experimental.content.power_transm
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.small.TransformerBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.small.TransformerRenderer;
-import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.content.devices.electric_motor.ElectricMotorBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.content.devices.electric_pump.ElectricPumpBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.content.devices.polarizer.PolarizerBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.content.devices.polarizer.PolarizerRenderer;
-import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayBlockEntity;
-import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayRenderer;
-import com.drmangotea.tfmg.content.electricity.utilities.traffic_light.TrafficLightBlockEntity;
-import com.drmangotea.tfmg.content.electricity.utilities.traffic_light.TrafficLightRenderer;
-import com.drmangotea.tfmg.content.electricity.experimental.content.devices.voltage_observer.VoltageObserverBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.RealConnectorBlockEntity;
 import com.drmangotea.tfmg.content.engines.engine_gearbox.EngineGearboxBlockEntity;
 import com.drmangotea.tfmg.content.engines.types.large_engine.LargeEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.types.large_engine.LargeEngineRenderer;
@@ -158,7 +151,7 @@ public class TFMGBlockEntities {
 
     public static final BlockEntityEntry<VoltMeterBlockEntity> VOLTMETER = REGISTRATE
             .blockEntity("voltmeter", VoltMeterBlockEntity::new)
-            .validBlocks(TFMGBlocks.VOLTMETER,TFMGBlocks.AMMETER)
+            .validBlocks(TFMGBlocks.VOLTMETER, TFMGBlocks.AMMETER)
             .renderer(() -> VoltMeterRenderer::new)
             .register();
 
@@ -167,14 +160,20 @@ public class TFMGBlockEntities {
             .validBlocks(TFMGBlocks.DEBUG_CABLE)
             .register();
 
-    public static final BlockEntityEntry<com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.cable_hubs.CableHubBlockEntity> DEBUG_CABLE_HUB = REGISTRATE
-            .blockEntity("debug_cable_hub", com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.cable_hubs.CableHubBlockEntity::new)
-            .validBlocks(TFMGBlocks.CABLE_HUB)
+    public static final BlockEntityEntry<CableHubBlockEntity> DEBUG_CABLE_HUB = REGISTRATE
+            .blockEntity("debug_cable_hub",CableHubBlockEntity::new)
+            .validBlocks(
+                    TFMGBlocks.BRASS_CABLE_HUB,
+                    TFMGBlocks.COPPER_CABLE_HUB,
+                    TFMGBlocks.STEEL_CABLE_HUB,
+                    TFMGBlocks.ALUMINUM_CABLE_HUB,
+                    TFMGBlocks.HEAVY_CABLE_HUB,
+                    TFMGBlocks.STEEL_CASING_CABLE_HUB)
             .register();
 
     public static final BlockEntityEntry<ElectricAdapterBlockEntity> CABLE_ADAPTER = REGISTRATE
             .blockEntity("cable_adapter", ElectricAdapterBlockEntity::new)
-            .validBlocks(TFMGBlocks.TWO_SLOT_ADAPTER,TFMGBlocks.FOUR_SLOT_ADAPTER)
+            .validBlocks(TFMGBlocks.TWO_SLOT_ADAPTER, TFMGBlocks.FOUR_SLOT_ADAPTER)
             .register();
 
     public static final BlockEntityEntry<DebugResistorBlockEntity> DEBUG_RESISTOR = REGISTRATE
@@ -205,7 +204,7 @@ public class TFMGBlockEntities {
 
     public static final BlockEntityEntry<RealConnectorBlockEntity> DEBUG_CONNECTOR = REGISTRATE
             .blockEntity("debug_connector", RealConnectorBlockEntity::new)
-            .validBlocks(TFMGBlocks.CABLE_CONNECTOR,TFMGBlocks.GLASS_CABLE_CONNECTOR)
+            .validBlocks(TFMGBlocks.CABLE_CONNECTOR, TFMGBlocks.GLASS_CABLE_CONNECTOR)
             .register();
 
     public static final BlockEntityEntry<ThreePhaseGeneratorBlockEntity> THREE_PHASE_GENERATOR = REGISTRATE
@@ -218,7 +217,7 @@ public class TFMGBlockEntities {
     public static final BlockEntityEntry<ElectricMotorBlockEntity> ELECTRIC_MOTOR = REGISTRATE
             .blockEntity("electric_motor", ElectricMotorBlockEntity::new)
             .visual(() -> OrientedRotatingVisual.of(AllPartialModels.SHAFT_HALF))
-            .validBlocks(TFMGBlocks.ELECTRIC_MOTOR,TFMGBlocks.HEAVY_ELECTRIC_MOTOR)
+            .validBlocks(TFMGBlocks.ELECTRIC_MOTOR, TFMGBlocks.HEAVY_ELECTRIC_MOTOR)
             .renderer(() -> HalfShaftRenderer::new)
             .register();
 
@@ -261,16 +260,10 @@ public class TFMGBlockEntities {
             .renderer(() -> NeonTubeRenderer::new)
             .register();
 
-    public static final BlockEntityEntry<DiagonalCableBlockEntity> DIAGONAL_CABLE_BLOCK = REGISTRATE
-            .blockEntity("diagonal_cable_block", DiagonalCableBlockEntity::new)
-            .validBlocks(TFMGBlocks.DIAGONAL_CABLE_BLOCK)
-            .register();
-
-    public static final BlockEntityEntry<CableTubeBlockEntity> CABLE_TUBE = REGISTRATE
-            .blockEntity("cable_tube", CableTubeBlockEntity::new)
-            .validBlocks(TFMGBlocks.CABLE_TUBE, TFMGBlocks.ELECTRIC_POST,
-                    TFMGBlocks.CONCRETE_ENCASED_CABLE_TUBE, TFMGBlocks.CONCRETE_ENCASED_ELECTRIC_POST)
-            .register();
+    //public static final BlockEntityEntry<DiagonalCableBlockEntity> DIAGONAL_CABLE_BLOCK = REGISTRATE
+    //        .blockEntity("diagonal_cable_block", DiagonalCableBlockEntity::new)
+    //        .validBlocks(TFMGBlocks.DIAGONAL_CABLE_BLOCK)
+    //        .register();
 
     public static final BlockEntityEntry<RotorBlockEntity> ROTOR = REGISTRATE
             .blockEntity("rotor", RotorBlockEntity::new)
@@ -336,11 +329,6 @@ public class TFMGBlockEntities {
             .register();
 
 
-    public static final BlockEntityEntry<AccumulatorBlockEntity> ACCUMULATOR = REGISTRATE
-            .blockEntity("accumulator", AccumulatorBlockEntity::new)
-            .validBlocks(TFMGBlocks.ACCUMULATOR)
-            .register();
-
     public static final BlockEntityEntry<LargeCoilBlockEntity> LARGE_COIL = REGISTRATE
             .blockEntity("large_coil", LargeCoilBlockEntity::new)
             .validBlocks(TFMGBlocks.LARGE_COIL)
@@ -349,7 +337,7 @@ public class TFMGBlockEntities {
 
     public static final BlockEntityEntry<RegularEngineBlockEntity> REGULAR_ENGINE = REGISTRATE
             .blockEntity("regular_engine", RegularEngineBlockEntity::new)
-               .visual(() -> RegularEngineVisual::new, true)
+            .visual(() -> RegularEngineVisual::new, true)
             .renderer(() -> RegularEngineRenderer::new)
             .validBlocks(TFMGBlocks.REGULAR_ENGINE)
             .register();
@@ -367,7 +355,7 @@ public class TFMGBlockEntities {
             .renderer(() -> LargeEngineRenderer::new)
             .validBlocks(TFMGBlocks.LARGE_ENGINE, TFMGBlocks.SIMPLE_LARGE_ENGINE)
             .register();
-//
+    //
     public static final BlockEntityEntry<RadialEngineBlockEntity> RADIAL_ENGINE = REGISTRATE
             .blockEntity("radial_engine", RadialEngineBlockEntity::new)
             .visual(() -> RegularEngineVisual::new, true)
@@ -381,7 +369,6 @@ public class TFMGBlockEntities {
             .register();
 
 
-
     public static final BlockEntityEntry<SlidingDoorBlockEntity> TFMG_SLIDING_DOOR =
             REGISTRATE.blockEntity("tfmg_sliding_door", SlidingDoorBlockEntity::new)
                     .renderer(() -> TFMGSlidingDoorRenderer::new)
@@ -393,7 +380,7 @@ public class TFMGBlockEntities {
             .validBlocks(TFMGBlocks.ENGINE_GEARBOX)
             .renderer(() -> ShaftRenderer::new)
             .register();
-//
+    //
     //public static final BlockEntityEntry<EngineControllerBlockEntity> ENGINE_CONTROLLER = REGISTRATE
     //        .blockEntity("engine_controller", EngineControllerBlockEntity::new)
     //        .validBlocks(TFMGBlocks.ENGINE_CONTROLLER)
@@ -450,19 +437,19 @@ public class TFMGBlockEntities {
             .register();
 
 
-    public static final BlockEntityEntry<TrafficLightBlockEntity> TRAFFIC_LIGHT = REGISTRATE
-            .blockEntity("traffic_light", TrafficLightBlockEntity::new)
-            .validBlocks(TFMGBlocks.TRAFFIC_LIGHT)
-            .renderer(() -> TrafficLightRenderer::new)
-            .register();
-
-    public static final BlockEntityEntry<SegmentedDisplayBlockEntity> SEGMENTED_DISPLAY = REGISTRATE
-            .blockEntity("segmented_display", SegmentedDisplayBlockEntity::new)
-            .validBlocks(TFMGBlocks.SEGMENTED_DISPLAY)
-            .renderer(() -> SegmentedDisplayRenderer::new)
-            //.onRegister(assignDataBehaviourBE(new SegmentedDisplayTarget()))
-            //.onRegister(assignDataBehaviourBE(new SegmentedDisplaySource()))
-            .register();
+    // public static final BlockEntityEntry<TrafficLightBlockEntity> TRAFFIC_LIGHT = REGISTRATE
+    //         .blockEntity("traffic_light", TrafficLightBlockEntity::new)
+    //         .validBlocks(TFMGBlocks.TRAFFIC_LIGHT)
+    //         .renderer(() -> TrafficLightRenderer::new)
+    //         .register();
+//
+    // public static final BlockEntityEntry<SegmentedDisplayBlockEntity> SEGMENTED_DISPLAY = REGISTRATE
+    //         .blockEntity("segmented_display", SegmentedDisplayBlockEntity::new)
+    //         .validBlocks(TFMGBlocks.SEGMENTED_DISPLAY)
+    //         .renderer(() -> SegmentedDisplayRenderer::new)
+    //         //.onRegister(assignDataBehaviourBE(new SegmentedDisplayTarget()))
+    //         //.onRegister(assignDataBehaviourBE(new SegmentedDisplaySource()))
+    //         .register();
 
     public static final BlockEntityEntry<SmokestackBlockEntity> SMOKESTACK = REGISTRATE
             .blockEntity("smokestack", SmokestackBlockEntity::new)
@@ -566,19 +553,6 @@ public class TFMGBlockEntities {
             .register();
 
 
-    public static final BlockEntityEntry<CableHubBlockEntity> CABLE_HUB = REGISTRATE
-            .blockEntity("cable_hub", CableHubBlockEntity::new)
-            .validBlocks(TFMGBlocks.BRASS_CABLE_HUB,
-                    TFMGBlocks.COPPER_CABLE_HUB,
-                    TFMGBlocks.STEEL_CABLE_HUB,
-                    TFMGBlocks.ALUMINUM_CABLE_HUB,
-                    TFMGBlocks.HEAVY_CABLE_HUB,
-                    TFMGBlocks.STEEL_CASING_CABLE_HUB
-//
-            )
-            .register();
-
-
     public static final BlockEntityEntry<CokeOvenBlockEntity> COKE_OVEN = REGISTRATE
             .blockEntity("coke_oven", CokeOvenBlockEntity::new)
             .renderer(() -> CokeOvenRenderer::new)
@@ -591,7 +565,6 @@ public class TFMGBlockEntities {
     //        .validBlocks(TFMGBlocks.GENERATOR)
     //        .renderer(() -> HalfShaftRenderer::new)
     //        .register();
-
 
 
     public static final BlockEntityEntry<AirIntakeBlockEntity> AIR_INTAKE = REGISTRATE

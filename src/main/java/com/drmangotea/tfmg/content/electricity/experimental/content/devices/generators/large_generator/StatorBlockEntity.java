@@ -1,13 +1,15 @@
-package com.drmangotea.tfmg.content.electricity.generators.large_generator;
+package com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.large_generator;
 
 import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.cable_hubs.CableHubBlockEntity;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 
-public class StatorBlockEntity extends ElectricBlockEntity implements IHaveGoggleInformation {
+public class StatorBlockEntity extends CableHubBlockEntity implements IHaveGoggleInformation {
 
     public BlockPos rotor = null;
 
@@ -31,22 +33,8 @@ public class StatorBlockEntity extends ElectricBlockEntity implements IHaveGoggl
 
     }
 
-    @Override
-    public int getMaxVoltage() {
-        return 10000;
-    }
 
-    @Override
-    public void tick() {
-        super.tick();
 
-        if(timer>0){
-            if(timer == 1)
-                updateNextTick();
-
-            timer--;
-        }
-    }
 
     public void updateRotor(){
 
@@ -55,15 +43,16 @@ public class StatorBlockEntity extends ElectricBlockEntity implements IHaveGoggl
 
         for (BlockPos blockPos : blocksAround) {
             if(level.getBlockEntity(blockPos) instanceof RotorBlockEntity be) {
-                be.updateNextTick();
+               // be.updateNextTick();
                 timer = 11;
             }
         }
     }
 
+
     @Override
-    public void onPlaced() {
-        super.onPlaced();
+    public void onPlace() {
+        super.onPlace();
         updateRotor();
         if (rotor != null)
             if (level.getBlockEntity(rotor) instanceof RotorBlockEntity be) {
@@ -78,7 +67,7 @@ public class StatorBlockEntity extends ElectricBlockEntity implements IHaveGoggl
         updateRotor();
         if (rotor != null)
             if (level.getBlockEntity(rotor) instanceof RotorBlockEntity be) {
-                be.updateNextTick();
+              //  be.updateNextTick();
                 be.findNextTick = true;
             }
     }

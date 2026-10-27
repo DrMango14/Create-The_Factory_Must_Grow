@@ -7,9 +7,6 @@ import com.drmangotea.tfmg.content.electricity.experimental.ElectricalProperties
 import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricNetworkManager;
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwork;
-import com.drmangotea.tfmg.content.electricity.experimental.content.devices.base.ResistiveLoadBlockEntity;
-import com.drmangotea.tfmg.content.electricity.experimental.content.devices.base.ResistorProperties;
-import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.SwitchProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.Resistance;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;

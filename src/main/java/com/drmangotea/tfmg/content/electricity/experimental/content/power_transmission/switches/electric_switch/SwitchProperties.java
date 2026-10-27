@@ -1,7 +1,6 @@
-package com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches;
+package com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.electric_switch;
 
 import com.drmangotea.tfmg.content.electricity.connection.cables.CablePos;
-import com.drmangotea.tfmg.content.electricity.experimental.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.DirectionalElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.Resistance;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.DirectionalElectricalNode;
@@ -10,7 +9,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SwitchProperties extends DirectionalElectricalProperties {

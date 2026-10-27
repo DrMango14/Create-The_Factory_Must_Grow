@@ -33,7 +33,7 @@ public class AccumulatorControlUnitProperties extends DirectionalElectricalPrope
         nodes.add(Internal);
 
         components.add(new Resistance(IN,N,10,0,position));
-        components.add(new Resistance(OUT,Internal,1,1,position));
+        components.add(new Resistance(OUT,Internal,5,1,position));
         components.add(new IdealVoltageSource(Internal,N,100,9999999,0,0,position));
 
 

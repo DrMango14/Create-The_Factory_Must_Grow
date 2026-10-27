@@ -6,10 +6,11 @@ import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricNetworkManager;
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwork;
-import com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.three_phase_generator.ThreePhaseGeneratorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.devices.resistor.DebugResistorBlockEntity;
-
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.cable_hubs.CableHubBlock;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.cable_hubs.CableHubBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_rack.AccumulatorRackBlockEntity;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch.LargeSwitchBlockEntity;
 import com.simibubi.create.Create;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
@@ -17,6 +18,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+
+import static com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.AbstractCableBlockEntity.connectToNeighbors;
 
 
 public class DebugCinderBlockItem extends Item {
@@ -35,14 +38,12 @@ public class DebugCinderBlockItem extends Item {
         BlockPos pos = context.getClickedPos();
         Level level = context.getLevel();
         if (level.getBlockEntity(pos) instanceof AccumulatorRackBlockEntity be) {
-           be.updateStorage();
+            be.updateStorage();
 
 
         }
-        if (level.getBlockEntity(pos) instanceof ThreePhaseGeneratorBlockEntity be) {
-            RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(be.getLevel());
-
-
+        if (level.getBlockEntity(pos) instanceof CableHubBlockEntity be) {
+            connectToNeighbors(be.getLevel(), be);
         }
         if (level.getBlockEntity(pos) instanceof DebugResistorBlockEntity be) {
 
@@ -52,7 +53,7 @@ public class DebugCinderBlockItem extends Item {
 
             return InteractionResult.SUCCESS;
         }
-        if (level.getBlockEntity(pos) instanceof IRealisticElectric be&&false) {
+        if (level.getBlockEntity(pos) instanceof IRealisticElectric be && false) {
             //if (context.getPlayer() instanceof ServerPlayer serverPlayer) {
             //    NetworkLoadPacket packet = new NetworkLoadPacket(RealElectricNetworkManager.networks.values().stream().toList());
             //    CatnipServices.NETWORK.sendToClient(serverPlayer, packet);
@@ -76,16 +77,13 @@ public class DebugCinderBlockItem extends Item {
             //     TFMG.LOGGER.debug("Connection2  " + c.node2().getPosition().x() + c.node2().getPosition().y() + c.node2().getPosition().z());
             // });
 
-            if (context.getPlayer().isCrouching()) {
-                //  TFMG.ELECTRICAL_NETWORK_DATA.markDirty();
-                network.update();
-            }
+            // if (context.getPlayer().isCrouching()) {
+            //     //  TFMG.ELECTRICAL_NETWORK_DATA.markDirty();
+            //     network.update();
+            // }
 
 
         }
-
-
-
 
 
         if (level.getBlockEntity(pos) instanceof SteelTankBlockEntity be) {

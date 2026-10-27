@@ -4,9 +4,8 @@ import com.drmangotea.tfmg.content.electricity.experimental.ElectricalProperties
 import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.experimental.WireConnection;
-import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_control_unit.AccumulatorControlUnitBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_control_unit.AccumulatorControlUnitProperties;
-import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.SwitchProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.electric_switch.SwitchProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.*;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -54,6 +53,10 @@ public abstract class AbstractCableBlockEntity extends SmartBlockEntity implemen
         RealElectricalNetwork network = be.getNetwork(level);
         ElectricalProperties properties = network.members.get(be.getPos());
         network.removeConnections(be);
+
+        if(properties == null){
+            return false;
+        }
 
         for (Direction facing : properties.getConnectableDirections()) {
             BlockPos pos = BlockPos.of(be.getPos()).relative(facing);

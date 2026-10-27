@@ -2,18 +2,19 @@ package com.drmangotea.tfmg.content.electricity.experimental.content.power_trans
 
 import com.drmangotea.tfmg.base.TFMGShapes;
 import com.drmangotea.tfmg.content.electricity.base.IOldElectric;
+import com.drmangotea.tfmg.content.electricity.experimental.IRealisticElectric;
+import com.drmangotea.tfmg.content.electricity.experimental.packets.AddElectricalComponentPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
+import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -44,12 +45,17 @@ public class LargeSwitchBlock extends HorizontalKineticBlock implements IBE<Larg
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         super.setPlacedBy(level, pos, state, placer, stack);
+        BlockPos blockpos = pos.relative(state.getValue(HORIZONTAL_FACING));
         if (!level.isClientSide) {
-            BlockPos blockpos = pos.relative(state.getValue(HORIZONTAL_FACING));
+
             level.setBlock(blockpos, state.setValue(IS_MAIN_PART, false), 3);
+
             level.blockUpdated(pos, Blocks.AIR);
             state.updateNeighbourShapes(level, pos, 3);
         }
+
+
+
     }
 
     @Override
@@ -107,12 +113,21 @@ public class LargeSwitchBlock extends HorizontalKineticBlock implements IBE<Larg
 
 
     @Override
-    public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
-        withBlockEntityDo(level, pos, IOldElectric::onPlaced);
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        super.onPlace(state, level, pos, oldState, movedByPiston);
+        if(level.getBlockEntity(pos) instanceof IRealisticElectric be){
+            be.onPlace();
+            if (level instanceof ServerLevel serverLevel)
+                CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(pos), new AddElectricalComponentPacket(BlockPos.of(pos.asLong())));
+
+
+        }
     }
+
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         IBE.onRemove(state, level, pos, newState);
+        super.onRemove(state,level,pos,newState,isMoving);
     }
     @Override
     public Direction.Axis getRotationAxis(BlockState state) {

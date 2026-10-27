@@ -133,8 +133,6 @@ public class ElectricalNetwork {
 
                     if (member instanceof VoltageAlteringBlockEntity be)
                         be.updateInFront = true;
-                    if (member instanceof LargeSwitchBlockEntity be)
-                        be.updateInFront = true;
                     if (member instanceof LargeTransformerBlockEntity be)
                         be.updateInFront = true;
                 }

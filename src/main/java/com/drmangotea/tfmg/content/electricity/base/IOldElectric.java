@@ -491,10 +491,7 @@ public interface IOldElectric {
                 if (be.getControlledBlock().getData().getId() == id)
                     count++;
             }
-            if (member instanceof LargeSwitchBlockEntity be && be.getControlledBlock() != null) {
-                if (be.getControlledBlock().getData().getId() == id)
-                    count++;
-            }
+
 
 
         }

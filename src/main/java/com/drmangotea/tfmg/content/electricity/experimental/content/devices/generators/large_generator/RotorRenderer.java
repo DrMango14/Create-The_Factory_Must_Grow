@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.electricity.generators.large_generator;
+package com.drmangotea.tfmg.content.electricity.experimental.content.devices.generators.large_generator;
 
 
 import com.mojang.blaze3d.vertex.PoseStack;

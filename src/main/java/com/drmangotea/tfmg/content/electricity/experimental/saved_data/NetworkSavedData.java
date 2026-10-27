@@ -14,7 +14,8 @@ import com.drmangotea.tfmg.content.electricity.experimental.content.power_transm
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.adapters.TwoSlotAdapterProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.CableProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_control_unit.AccumulatorControlUnitProperties;
-import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.SwitchProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.electric_switch.SwitchProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.large_switch.LargeSwitchProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeTransformerProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.small.TransformerProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.ConnectorProperties;
@@ -245,6 +246,7 @@ public class NetworkSavedData extends SavedData {
             case 11 -> new SwitchProperties(pos, direction);
             case 12 -> new LargeTransformerProperties(pos, direction);
             case 13 -> new AccumulatorControlUnitProperties(pos, direction);
+            case 14 -> new LargeSwitchProperties(pos, direction);
             default -> new ElectricalProperties(pos);
 
         };
