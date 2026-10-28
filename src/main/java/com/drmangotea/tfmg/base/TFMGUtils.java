@@ -49,10 +49,7 @@ import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import org.apache.commons.lang3.StringUtils;
 import org.joml.Matrix4f;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -68,6 +65,16 @@ public class TFMGUtils {
             case WEST -> 90;
             case EAST -> 270F;
         };
+    }
+
+    public static List<Direction> invertDirections(List<Direction> directions){
+        List<Direction> inverted = new ArrayList<>();
+
+        for (Direction direction : directions) {
+            inverted.add(direction.getOpposite());
+        }
+
+        return inverted;
     }
 
     public static ConnectingElectricalNode closestNode(IRealisticElectric be, Vec3 clickPosition) {

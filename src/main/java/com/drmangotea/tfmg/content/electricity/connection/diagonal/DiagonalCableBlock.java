@@ -138,6 +138,7 @@ public class DiagonalCableBlock extends DirectionalBlock implements SimpleWaterl
 
     @Override
     public BlockEntityType<? extends DiagonalCableBlockEntity> getBlockEntityType() {
-        return TFMGBlockEntities.DIAGONAL_CABLE_BLOCK.get();
+       // return TFMGBlockEntities.DIAGONAL_CABLE_BLOCK.get();
+        return null;
     }
 }

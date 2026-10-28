@@ -19,6 +19,7 @@ import com.drmangotea.tfmg.content.electricity.experimental.content.power_transm
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.large.LargeTransformerProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.small.TransformerProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.ConnectorProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.UnwirableConnectorProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.ElectricalComponent;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.IdealVoltageSource;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.Resistance;
@@ -247,6 +248,7 @@ public class NetworkSavedData extends SavedData {
             case 12 -> new LargeTransformerProperties(pos, direction);
             case 13 -> new AccumulatorControlUnitProperties(pos, direction);
             case 14 -> new LargeSwitchProperties(pos, direction);
+            case 15 -> new UnwirableConnectorProperties(pos, d);
             default -> new ElectricalProperties(pos);
 
         };

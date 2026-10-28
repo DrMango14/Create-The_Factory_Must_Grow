@@ -13,7 +13,7 @@ import com.drmangotea.tfmg.content.electricity.experimental.content.devices.pola
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.cells.AccumulatorCellItem;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.transformers.small.ElectromagneticCoilItem;
 
-import com.drmangotea.tfmg.content.electricity.storage.AccumulatorItem;
+
 import com.drmangotea.tfmg.content.engines.CylinderItem;
 import com.drmangotea.tfmg.content.engines.FluidContainingItem;
 import com.drmangotea.tfmg.content.items.CoalCokeItem;

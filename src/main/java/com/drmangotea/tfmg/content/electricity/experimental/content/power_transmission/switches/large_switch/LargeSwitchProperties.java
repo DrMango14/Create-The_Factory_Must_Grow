@@ -25,8 +25,8 @@ public class LargeSwitchProperties extends DirectionalElectricalProperties {
         directions.add(direction);
         directions.add(direction.getOpposite());
 
-        DirectionalElectricalNode IN = new DirectionalElectricalNode(position, 0, direction, NodeType.NEUTRAL);
-        DirectionalElectricalNode OUT = new DirectionalElectricalNode(position, 1, direction.getOpposite(), NodeType.NEUTRAL);
+        DirectionalElectricalNode IN = new DirectionalElectricalNode(position, 0, direction, NodeType.CONNECTOR);
+        DirectionalElectricalNode OUT = new DirectionalElectricalNode(position, 1, direction.getOpposite(), NodeType.CONNECTOR);
 
 
         nodes.add(IN);

@@ -136,20 +136,20 @@ public interface IRealisticElectric {
 
     default void onPlace() {
         this.updateNetwork(BlockPos.of(getPos()));
-        if (this instanceof ElectricSwitchBlockEntity)
-            for (Direction facing : Direction.values()) {
-                if (getWorld().getBlockEntity(BlockPos.of(getPos()).relative(facing)) instanceof IRealisticElectric be) {
-                    connectToNeighbors(getWorld(), be);
-                }
+        //if (this instanceof ElectricSwitchBlockEntity)
+        //    for (Direction facing : Direction.values()) {
+        //        if (getWorld().getBlockEntity(BlockPos.of(getPos()).relative(facing)) instanceof IRealisticElectric be) {
+        //            connectToNeighbors(getWorld(), be);
+        //        }
+//
+        //    }
 
-            }
 
-
-        if (!(this instanceof CableBlockEntity) && getProperties().cableConnectable()) {
-            connectToNeighbors(getWorld(), this);
-            updateNetwork(BlockPos.of(getPos()));
-        }
-
+      //  if (!(this instanceof CableBlockEntity) && getProperties().cableConnectable()) {
+      //      connectToNeighbors(getWorld(), this);
+      //      updateNetwork(BlockPos.of(getPos()));
+      //  }
+        connectToNeighbors(getWorld(), this);
         this.updateNetwork(BlockPos.of(getPos()));
 
     }

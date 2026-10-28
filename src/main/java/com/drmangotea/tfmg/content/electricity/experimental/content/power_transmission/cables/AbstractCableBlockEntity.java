@@ -6,7 +6,10 @@ import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwor
 import com.drmangotea.tfmg.content.electricity.experimental.WireConnection;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_control_unit.AccumulatorControlUnitProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.electric_switch.SwitchProperties;
-import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.*;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ConnectableElectricalNode;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.DirectionalElectricalNode;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.ElectricalNode;
+import com.drmangotea.tfmg.content.electricity.experimental.simulation.nodes.NodeType;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
@@ -49,12 +52,12 @@ public abstract class AbstractCableBlockEntity extends SmartBlockEntity implemen
         return p;
     }
 
-    public static boolean connectToNeighbors(Level level, IRealisticElectric be) {
+    public static boolean connectToNeighbors2(Level level, IRealisticElectric be) {
         RealElectricalNetwork network = be.getNetwork(level);
         ElectricalProperties properties = network.members.get(be.getPos());
         network.removeConnections(be);
 
-        if(properties == null){
+        if (properties == null) {
             return false;
         }
 
@@ -66,9 +69,9 @@ public abstract class AbstractCableBlockEntity extends SmartBlockEntity implemen
                 if (neighborProperties == null) {
                     return true;
                 }
-                if(neighborProperties.getConnectableDirections().contains(facing.getOpposite())){
+                if (neighborProperties.getConnectableDirections().contains(facing.getOpposite())) {
 
-                    for (int i = 0; i < Math.min(4,Math.min(properties.nodes.size(),neighborProperties.nodes.size())); i++) {
+                    for (int i = 0; i < Math.min(4, Math.min(properties.nodes.size(), neighborProperties.nodes.size())); i++) {
                         if (properties.nodes.get(i) instanceof ConnectableElectricalNode n1 && neighborProperties.nodes.get(i) instanceof ConnectableElectricalNode n2) {
 
                             WireConnection connection = new WireConnection(n1, n2, 10, false);
@@ -119,6 +122,85 @@ public abstract class AbstractCableBlockEntity extends SmartBlockEntity implemen
         return false;
     }
 
+
+    public static boolean connectToNeighbors(Level level, IRealisticElectric be) {
+        RealElectricalNetwork network = be.getNetwork(level);
+        ElectricalProperties properties = network.members.get(be.getPos());
+        network.removeConnections(be);
+
+        if (properties == null) {
+            return false;
+        }
+
+        for (Direction facing : Direction.values()) {
+            BlockPos pos = BlockPos.of(be.getPos()).relative(facing);
+
+            if (level.getBlockEntity(pos) instanceof IRealisticElectric) {
+                ElectricalProperties neighborProperties = network.members.get(pos.asLong());
+                if (neighborProperties == null) {
+                    return true;
+                }
+                //    if (neighborProperties.getConnectableDirections().contains(facing.getOpposite())) {
+                for (ElectricalNode n1 : properties.nodes) {
+                    for (ElectricalNode n2 : neighborProperties.nodes) {
+                        if (n1 instanceof ConnectableElectricalNode node && n2 instanceof ConnectableElectricalNode neighborNode) {
+                            NodeType type = node.type;
+                            List<Direction> directions = node.facing;
+
+                            NodeType neighborType = neighborNode.type;
+                            List<Direction> neighborDirections = neighborNode.facing;
+
+                            if (type == neighborType && directions.contains(facing)&&neighborDirections.contains(facing.getOpposite())) {
+                                WireConnection connection = new WireConnection(node, neighborNode, 10, false);
+                                if (!network.connections.contains(connection))
+                                    network.connections.add(connection);
+                            }
+
+                        }
+                    }
+                    //  }
+
+                }
+                //if (neighborProperties instanceof AccumulatorControlUnitProperties accumulatorProperties) {
+                //    if (accumulatorProperties.direction.getAxis() == facing.getAxis()) {
+//
+                //        for (ElectricalNode node : accumulatorProperties.nodes) {
+                //            int id = node.localId <= 3 ? node.localId : node.localId - 3;
+//
+                //            if (node instanceof DirectionalElectricalNode d && properties.nodes.get(id) instanceof ConnectableElectricalNode ld) {
+                //                if (d.facing.contains(facing.getOpposite())) {
+//
+                //                    network.connections.add(new WireConnection(d, ld, 10, false));
+//
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
+                //if (neighborProperties instanceof SwitchProperties switchProperties) {
+                //    if (switchProperties.direction.getAxis() == facing.getAxis()) {
+//
+                //        for (ElectricalNode node : switchProperties.nodes) {
+                //            int id = node.localId <= 3 ? node.localId : node.localId - 3;
+//
+                //            if (node instanceof DirectionalElectricalNode d && properties.nodes.get(id) instanceof ConnectableElectricalNode ld) {
+                //                if (d.facing.contains(facing.getOpposite())) {
+//
+                //                    network.connections.add(new WireConnection(d, ld, 10, false));
+//
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
+
+
+            }
+
+        }
+
+        return false;
+    }
 
     @Override
     public void onPlace() {

@@ -8,7 +8,6 @@ import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricNetworkManager;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.accumulator_rack.AccumulatorRackBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.energy_storage.cells.AccumulatorCellItem;
-import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.experimental.content.devices.polarizer.PolarizerBlockEntity;
 import com.drmangotea.tfmg.content.engines.fuels.EngineFuelTypeManager;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
@@ -101,7 +100,6 @@ public class TFMGCommonEvents {
             CastingBasinBlockEntity.registerCapabilities(event);
             FireboxBlockEntity.registerCapabilities(event);
             DistillationControllerBlockEntity.registerCapabilities(event);
-            AccumulatorBlockEntity.registerCapabilities(event);
             SteelTankBlockEntity.registerCapabilities(event);
             TFMGFluidTankBlockEntity.registerCapabilities(event);
             VatBlockEntity.registerCapabilities(event);

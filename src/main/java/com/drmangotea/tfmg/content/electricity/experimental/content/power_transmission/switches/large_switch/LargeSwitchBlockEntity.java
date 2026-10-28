@@ -8,6 +8,8 @@ import com.drmangotea.tfmg.content.electricity.experimental.RealElectricNetworkM
 import com.drmangotea.tfmg.content.electricity.experimental.RealElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.cables.CableProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.switches.electric_switch.SwitchProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.ConnectorProperties;
+import com.drmangotea.tfmg.content.electricity.experimental.content.power_transmission.wires.UnwirableConnectorProperties;
 import com.drmangotea.tfmg.content.electricity.experimental.simulation.Resistance;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import net.createmod.catnip.animation.LerpedFloat;
@@ -55,7 +57,7 @@ public class LargeSwitchBlockEntity extends KineticBlockEntity implements IReali
         Direction direction = state.getValue(HORIZONTAL_FACING);
         directions.add(direction);
         directions.add(direction.getOpposite());
-        p = state.getValue(IS_MAIN_PART) ? new LargeSwitchProperties(getPos(), state.getValue(HORIZONTAL_FACING), 1E12) : new CableProperties(getPos(), Arrays.stream(Direction.values()).toList());
+        p = state.getValue(IS_MAIN_PART) ? new LargeSwitchProperties(getPos(), state.getValue(HORIZONTAL_FACING), 1E12) : new UnwirableConnectorProperties(getPos(), Arrays.stream(Direction.values()).toList());
         ;
      //  this.p = new CableProperties(getPos(), Arrays.stream(Direction.values()).toList());
 
@@ -106,14 +108,15 @@ public class LargeSwitchBlockEntity extends KineticBlockEntity implements IReali
         if(update){
             for(Direction facing : Arrays.stream(Direction.values()).toList()){
                 if(level.getBlockEntity(getBlockPos().relative(facing)) instanceof IRealisticElectric n){
-                    connectToNeighbors(level,n);
+                    //connectToNeighbors(level,n);
                 }
             }
         }
-        if (connectNextTick) {
-
-            connectNextTick = connectToNeighbors(level, this);
-        }
+       // if (connectNextTick) {
+//
+       //     connectNextTick = connectToNeighbors(level, this);
+       //
+       // }
 
         if (level.isClientSide) {
             visualAngle.chase(angle / 10d, 1d, LerpedFloat.Chaser.EXP);
@@ -186,7 +189,7 @@ public class LargeSwitchBlockEntity extends KineticBlockEntity implements IReali
     @Override
     public void onPlace() {
         IRealisticElectric.super.onPlace();
-        connectNextTick = connectToNeighbors(level, this);
+      //  connectNextTick = connectToNeighbors(level, this);
         updateNetwork(getBlockPos());
     }
     @Override

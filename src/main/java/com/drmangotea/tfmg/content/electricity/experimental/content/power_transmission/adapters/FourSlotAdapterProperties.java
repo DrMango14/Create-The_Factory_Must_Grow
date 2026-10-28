@@ -18,11 +18,13 @@ public class FourSlotAdapterProperties extends DirectionalElectricalProperties {
     public FourSlotAdapterProperties(long pos, Direction direction) {
         super(pos, direction);
 
+        List<Direction> directions = new ArrayList<>();
+        directions.add(direction.getOpposite());
 
-        HybridConnectedNode N = new HybridConnectedNode(position, 0 ,new ArrayList<>(Collections.singleton(direction)), getRotation(direction) .get(0),NodeType.NEUTRAL);
-        HybridConnectedNode L1 = new HybridConnectedNode(position, 1,new ArrayList<>(Collections.singleton(direction)), getRotation(direction).get(1),NodeType.PHASE_1);
-        HybridConnectedNode L2 = new HybridConnectedNode(position, 2,new ArrayList<>(Collections.singleton(direction)), getRotation(direction).get(2),NodeType.PHASE_2);
-        HybridConnectedNode L3 = new HybridConnectedNode(position, 3,new ArrayList<>(Collections.singleton(direction)), getRotation(direction).get(3), NodeType.PHASE_3);
+        HybridConnectedNode N = new HybridConnectedNode(position, 0 ,directions, getRotation(direction) .get(0),NodeType.NEUTRAL);
+        HybridConnectedNode L1 = new HybridConnectedNode(position, 1,directions, getRotation(direction).get(1),NodeType.PHASE_1);
+        HybridConnectedNode L2 = new HybridConnectedNode(position, 2,directions, getRotation(direction).get(2),NodeType.PHASE_2);
+        HybridConnectedNode L3 = new HybridConnectedNode(position, 3,directions, getRotation(direction).get(3), NodeType.PHASE_3);
 
         nodes.add(N);
         nodes.add(L1);

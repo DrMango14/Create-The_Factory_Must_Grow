@@ -568,37 +568,15 @@ public class RealElectricalNetwork {
 
         ComplexValue[] V = solveMNA(G, I, size);
 
-        TFMG.LOGGER.debug("Circuit Values");
+
         for (ElectricalNode n : activeNodeList) {
-            TFMG.LOGGER.debug("ElectricalNode '" + n.getLocalId() + "': " + V[n.networkId]);
+
 
             nodeVoltages.put(n.networkId, V[n.networkId]);
         }
 
-        for (int i = 0; i < finalSources.size(); i++) {
-            IdealVoltageSource source = finalSources.get(i);
-            TFMG.LOGGER.debug("source " + i + " Network: " + source.nodeA.networkId + " " + source.nodeB.networkId + " Local: " + source.nodeA.localId + " " + source.nodeB.localId + " voltage " + source.amplitude);
-        }
-        for (int i = 0; i < finalResistors.size(); i++) {
-            Resistance r = finalResistors.get(i);
-            ComplexValue voltage1 = nodeVoltages.get(r.nodeA.getNetworkId());
-            ComplexValue voltage2 = nodeVoltages.get(r.nodeB.getNetworkId());
-            ComplexValue voltage = ComplexValue.ZERO;
-            if (voltage1 != null && voltage2 != null) {
-                voltage = voltage1.minus(voltage2);
-            }
-            TFMG.LOGGER.debug("resistor " + i + " Network: " + r.nodeA.networkId + " " + r.nodeB.networkId + " Local: " + r.nodeA.localId + " " + r.nodeB.localId + " Voltage: " + voltage);
-        }
-        for (int i = 0; i < finalTransformers.size(); i++) {
-            Transformer t = finalTransformers.get(i);
-            ComplexValue voltage1 = nodeVoltages.get(t.pA.getNetworkId());
-            ComplexValue voltage2 = nodeVoltages.get(t.pB.getNetworkId());
 
-            ComplexValue voltage3 = nodeVoltages.get(t.sA.getNetworkId());
-            ComplexValue voltage4 = nodeVoltages.get(t.sB.getNetworkId());
-            TFMG.LOGGER.debug("transformer " + i + " Network: " + t.pA.networkId + " " + t.pB.localId + " " + t.sA.networkId + " " + t.sB.localId + " " + voltage1 + " " + voltage2 + " Secondary " + voltage3 + " " + voltage4);
 
-        }
         sendDataToMembers();
     }
     /*
