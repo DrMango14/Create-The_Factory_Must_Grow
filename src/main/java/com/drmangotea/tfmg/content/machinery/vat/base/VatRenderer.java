@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.content.machinery.vat.base;
 
 import com.drmangotea.tfmg.mixin.accessor.TankSegmentAccessor;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringRenderer;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import dev.engine_room.flywheel.lib.transform.TransformStack;
@@ -32,8 +33,8 @@ public class VatRenderer extends SafeBlockEntityRenderer<VatBlockEntity> {
 
     @Override
     protected void renderSafe(VatBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource bufferSource, int light, int overlay) {
-        if (!be.isController())
-            return;
+        if (!be.isController()) return;
+        FilteringRenderer.renderOnBlockEntity(be, partialTicks, ms, bufferSource, light, overlay);
 
         float fluidLevel = renderFluids(be, partialTicks, ms, bufferSource, light);
         renderItems(be, partialTicks, ms, bufferSource, light, overlay, fluidLevel);
