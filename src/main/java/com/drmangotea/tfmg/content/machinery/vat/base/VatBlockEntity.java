@@ -1475,9 +1475,13 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
     class VatValueBox extends ValueBoxTransform.Sided {
         @Override
         protected Vec3 getSouthLocation() {
-            //TODO get placement correct
-            // It needs to center on each face
-            return VecHelper.voxelSpace(4 * (width - 1), 12, 16.05);
+			Direction facing = getSide();
+			return VecHelper.voxelSpace(8, 12, 16.05)
+				.add(
+					0.5 * (facing.get2DDataValue() > 1 ? 1 - width : width - 1),
+					0,
+					facing.getAxisDirection() == Direction.AxisDirection.POSITIVE? width - 1 : 0
+				);
         }
 
         @Override
