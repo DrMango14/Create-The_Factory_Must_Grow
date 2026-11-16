@@ -1370,7 +1370,10 @@ public class TFMGBlocks {
                     .initialProperties(SharedProperties::softMetal)
                     .transform(pickaxeOnly())
                     .onRegister(connectedTextures(SegmentedDisplayCTBehavior::new))
-					.onRegister(casingConnectivity((b,cc) -> cc.makeCasing(b, TFMGSpriteShifts.HEAVY_MACHINERY_CASING)))
+					.onRegister(casingConnectivity((b,cc) -> cc.make(
+						b, TFMGSpriteShifts.HEAVY_MACHINERY_CASING,
+						(s, f) -> s.getValue(SegmentedDisplayBlock.FACING) != f
+					)))
                     .blockstate(BlockStateGen.horizontalBlockProvider(true))
 					.transform(displaySource(TFMGDisplaySources.SEGMENTED_DISPLAY))
 					.transform(displayTarget(TFMGDisplayTargets.SEGMENTED_DISPLAY))

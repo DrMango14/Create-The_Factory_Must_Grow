@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.connection.cable_type;
 
 import com.drmangotea.tfmg.TFMGRegistries;
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.builders.AbstractBuilder;
 import com.tterrag.registrate.builders.BuilderCallback;
@@ -12,6 +13,7 @@ import com.tterrag.registrate.util.nullness.NonnullType;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
+@NothingNullByDefault
 public class CableTypeBuilder<T extends CableType, P> extends AbstractBuilder<CableType, T, P, CableTypeBuilder<T, P>> {
 
     public static <T extends CableType, P> CableTypeBuilder<T, P> create(AbstractRegistrate<?> owner, P parent, String name, BuilderCallback callback, NonNullFunction<CableType.Properties, T> factory) {
@@ -60,7 +62,6 @@ public class CableTypeBuilder<T extends CableType, P> extends AbstractBuilder<Ca
 
     @Override
     public CableTypeEntry<T> register() {
-        //Registry.register(TFMGRegistries.CABLE_TYPE_REGISTRY, ResourceLocation.fromNamespaceAndPath(getOwner().getModid(), getName()), createEntry());
         return (CableTypeEntry<T>) super.register();
     }
 }

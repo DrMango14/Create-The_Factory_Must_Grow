@@ -100,6 +100,7 @@ public class CableType {
             this.id = id;
         }
 
+		@SuppressWarnings("removal")
         public void verify() throws IllegalStateException {
             if (this.spool == null) {
                 throw new IllegalStateException("Spool item for " + this.id + " is not set");
