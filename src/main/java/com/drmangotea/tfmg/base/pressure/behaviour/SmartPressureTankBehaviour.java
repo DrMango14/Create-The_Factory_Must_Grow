@@ -18,8 +18,8 @@ import java.util.function.Consumer;
 
 public class SmartPressureTankBehaviour extends BlockEntityBehaviour {
     public static final BehaviourType<SmartPressureTankBehaviour> TYPE = new BehaviourType<>(),
-            INPUT = new BehaviourType<>("Input"),
-            OUTPUT = new BehaviourType<>("Output");
+            INPUT = new BehaviourType<>("PressureInput"),
+            OUTPUT = new BehaviourType<>("PressureOutput");
 
     private static final int SYNC_RATE = 8;
 
