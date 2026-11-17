@@ -1,7 +1,9 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.cable_type;
 
 import com.drmangotea.tfmg.registry.TFMGItems;
+import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -10,6 +12,9 @@ public class CableType {
     private String descriptionId;
     private final ResourceLocation id;
     private final int color;
+
+    private final PartialModel model;
+
     private final ItemEntry<?> spool;
     private final ItemEntry<?> wire;
 
@@ -18,6 +23,7 @@ public class CableType {
         this.color = properties.color;
         this.spool = properties.spool;
         this.wire = properties.wire;
+        this.model = properties.model;
     }
 
     public int getColor() {
@@ -30,6 +36,10 @@ public class CableType {
 
     public ItemEntry<?> getWire() {
         return this.wire;
+    }
+
+    public PartialModel getModel(){
+        return model;
     }
 
     public String getOrCreateDescriptionId() {
@@ -55,6 +65,8 @@ public class CableType {
     public static class Properties {
         private ResourceLocation id;
 
+        PartialModel model = TFMGPartialModels.STEEL_REINFORCED_CABLE;
+
         int color = 0xffffff;
         ItemEntry<?> spool = TFMGItems.COPPER_SPOOL;
         ItemEntry<?> wire = TFMGItems.COPPER_WIRE;
@@ -71,6 +83,11 @@ public class CableType {
 
         public Properties wire(ItemEntry<?> wire) {
             this.wire = wire;
+            return this;
+        }
+
+        public Properties model(PartialModel model) {
+            this.model = model;
             return this;
         }
 

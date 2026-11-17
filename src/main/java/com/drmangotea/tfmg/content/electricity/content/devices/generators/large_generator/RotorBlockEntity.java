@@ -1,15 +1,13 @@
 package com.drmangotea.tfmg.content.electricity.content.devices.generators.large_generator;
 
 
-import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.IElectric;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.devices.generators.large_generator.StatorBlock.StatorState;
-import com.drmangotea.tfmg.content.electricity.content.devices.generators.three_phase_generator.ThreePhaseGeneratorProperties;
 import com.drmangotea.tfmg.content.electricity.packets.UpdateVoltagePacket;
 import com.drmangotea.tfmg.content.electricity.simulation.IdealVoltageSource;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
@@ -40,7 +38,7 @@ import static net.minecraft.core.Direction.*;
 import static net.minecraft.world.level.block.DirectionalBlock.FACING;
 
 
-public class RotorBlockEntity extends KineticBlockEntity implements IRealisticElectric, IHaveGoggleInformation {
+public class RotorBlockEntity extends KineticBlockEntity implements IElectric, IHaveGoggleInformation {
 
     ElectricalProperties properties;
 
@@ -59,7 +57,7 @@ public class RotorBlockEntity extends KineticBlockEntity implements IRealisticEl
 
     public RotorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        properties = new ThreePhaseGeneratorProperties(getPos(), Direction.NORTH);
+        properties = new LargeGeneratorProperties(getPos(), Direction.NORTH);
     }
 
     @Override
@@ -82,7 +80,7 @@ public class RotorBlockEntity extends KineticBlockEntity implements IRealisticEl
     public void onUpdated() {
 
 
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
 
         for (int i = 0; i < 3; i++) {
             Resistance r = network.getResistance(getPos(), i);
@@ -175,7 +173,7 @@ public class RotorBlockEntity extends KineticBlockEntity implements IRealisticEl
 
 
         if (statorCount != oldStatorCount) {
-    updateVoltage();
+            updateVoltage();
 
         }
     }
@@ -188,12 +186,15 @@ public class RotorBlockEntity extends KineticBlockEntity implements IRealisticEl
 
     public void updateVoltage() {
 
-        RealElectricalNetwork electricalNetwork = RealElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork electricalNetwork = ElectricNetworkManager.getNetwork(level);
 
         int voltage = (int) Math.abs(getSpeed()) * 10;
 
-        if(stators.size() !=8){
+        if (stators.size() != 8) {
             voltage = 0;
+            this.voltage[0] = 0;
+            this.voltage[1] = 0;
+            this.voltage[2] = 0;
         }
 
         electricalNetwork.setVoltageGen(this, voltage);
@@ -267,8 +268,6 @@ public class RotorBlockEntity extends KineticBlockEntity implements IRealisticEl
             TFMGTexts.Multimeter.phaseOffset(120 * i).forGoggles(tooltip, 1);
             TFMGTexts.Multimeter.maxPower(maxPower[i]).forGoggles(tooltip, 1);
             TFMGTexts.Multimeter.powerGenerated(power[i]).forGoggles(tooltip, 1);
-            TFMGLang.text("Voltage loss: " + internalVoltage[i]).forGoggles(tooltip);
-            TFMGLang.text("Current: " + power[i] / voltage[i]).forGoggles(tooltip);
         }
 
 

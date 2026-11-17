@@ -36,12 +36,18 @@ public class TFMGShapes {
                     .forHorizontal(SOUTH),
             LARGE_TRANSFORMER_UNFINISHED = shape(4, 0, 0, 12, 20, 12).add(0, 4, 0, 16, 16, 16)
                     .forHorizontal(SOUTH),
-            LARGE_TRANSFORMER = shape(-1, 2, 4, 17, 17, 16).add(2, 0, 5, 14, 19, 16).add(2, 3, 0, 14, 16, 16)
+            LARGE_TRANSFORMER = shape
+                    (5.5, 19, 5, 10.5, 26, 10)
+                    .add(5.5, 19, 13.5, 10.5, 26, 16)
+                    .add(-1, 2, 4, 17, 17, 16)
+                    .add(2, 3, 0, 14, 16, 4)
+                    .add(2, 0, 5, 14, 19, 16)
                     .forHorizontal(SOUTH),
-            TURBINE_ENGINE_MIDDLE = shape(11, 0, 2, 16, 5, 14)
-                    .add(1, 1, 0, 15, 15, 16)
-                    .add(0, 0, 2, 5, 5, 14)
-                    .forHorizontal(SOUTH),
+
+    TURBINE_ENGINE_MIDDLE = shape(11, 0, 2, 16, 5, 14)
+            .add(1, 1, 0, 15, 15, 16)
+            .add(0, 0, 2, 5, 5, 14)
+            .forHorizontal(SOUTH),
             TURBINE_ENGINE_BACK = shape(5.3, 0, 5, 11.3, 3, 14)
                     .add(3, 3, 2, 13, 13, 16)
                     .forHorizontal(SOUTH),
@@ -51,6 +57,18 @@ public class TFMGShapes {
                     .forHorizontal(SOUTH),
             ENGINE_FRONT = shape(0, 0, 1, 16, 7, 16).add(3, 7, 1, 13, 12, 16)
                     .forDirectional(SOUTH),
+            FOUR_SLOT_ADAPTER = shape(5, 0, 5, 11, 2, 11)
+                    .add(7, 3, 5, 9, 5, 7)
+                    .add(10, 3, 8, 12, 5, 10)
+                    .add(7, 3, 8, 9, 5, 10)
+                    .add(4, 3, 8, 6, 5, 10)
+                    .add(5, 2, 7, 11, 4, 9)
+                    .forDirectional(),
+            TWO_SLOT_ADAPTER = shape(5, 0, 5, 11, 2, 11)
+                    .add(10, 3, 7, 12, 5, 9)
+                    .add(4, 3, 7, 6, 5, 9)
+                    .add(5, 2, 7, 11, 4, 9)
+                    .forDirectional(),
             PUMPJACK_HAMMER_PART = shape(0, 2, 0, 16, 14, 16)
                     .forDirectional(),
             RADIAL_ENGINE_SINGLE = shape(1, 4, 1, 15, 12, 15)
@@ -100,7 +118,8 @@ public class TFMGShapes {
                     .forDirectional(),
             STATOR_VERTICAL = shape(5, 0, 1, 16, 5, 15).add(5, 5, 1, 10, 10, 15).add(0, 0, 1, 5, 16, 15)
                     .forDirectional(),
-            VOLTMETER = shape(0, 0, 2, 16, 3, 14)
+            VOLTMETER = shape(0, 2, 2, 16, 14, 14)
+                    .add(1, 0, 1, 15, 2, 15)
                     .forDirectional(),
             ELECTRIC_PUMP = shape(2, 6, 2, 14, 10, 14)
                     .add(4, 3, 4, 12, 11, 12)

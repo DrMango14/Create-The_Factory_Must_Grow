@@ -2,15 +2,15 @@ package com.drmangotea.tfmg.content.electricity;
 
 
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
+import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectableElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectingElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
-import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.render.CachedBuffers;
-import net.createmod.catnip.theme.Color;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -33,6 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.DoubleUnaryOperator;
 
+import static com.drmangotea.tfmg.base.TFMGUtils.closestNode;
+
 public class ElectricNetworkRenderer {
 
 
@@ -50,7 +52,7 @@ public class ElectricNetworkRenderer {
             return;
         if (player == null)
             return;
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(mc.level);
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(mc.level);
         LevelRenderer levelRenderer = event.getLevelRenderer();
         PoseStack ms = event.getPoseStack();
         MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
@@ -58,11 +60,15 @@ public class ElectricNetworkRenderer {
         Camera camera = event.getCamera();
         Vector3f playerPos = player.getEyePosition().toVector3f();
 
-        renderWire(TFMGPartialModels.CABLE, new CablePos(0, -56, 0), new CablePos(0, -56, 10), camera, ms, vc, player, true);
+
+
+
+
+        //renderWire(TFMGPartialModels.CABLE, new CablePos(0, -56, 0), new CablePos(0, -56, 10), camera, ms, vc, player, true);
 
         for (WireConnection connection : network.connections) {
             if (connection.render)
-                renderWire(TFMGPartialModels.CABLE, connection.node1.getPosition().add(BlockPos.of(connection.node1.pos)), connection.node2.getPosition().add(BlockPos.of(connection.node2.pos)), camera, ms, vc, player, false);
+                renderWire(connection.model.modelLocation().getPath().isBlank() ? TFMGPartialModels.STEEL_REINFORCED_CABLE : connection.model, connection.node1.getPosition().add(BlockPos.of(connection.node1.pos)), connection.node2.getPosition().add(BlockPos.of(connection.node2.pos)), camera, ms, vc, player, false);
         }
     }
 
@@ -135,13 +141,24 @@ public class ElectricNetworkRenderer {
         Player player = mc.player;
         //    ItemStack heldItem = player.getMainHandItem();
 
-        if (level.getBlockEntity(pos) instanceof IRealisticElectric be) {
+        if (level.getBlockEntity(pos) instanceof IElectric be) {
             List<ConnectingElectricalNode> connectors = new ArrayList<>();
             ElectricalProperties properties = be.getProperties();
 
+            if (be instanceof LargeTransformerBlockEntity t && !t.isMainPart) {
+                IElectric newBE = t.getControlledBlock();
+                if (newBE != null) {
+                    be = newBE;
+                    pos = BlockPos.of(newBE.getPos());
+                }
+            }
+            Vec3 lookPosition = Minecraft.getInstance().hitResult.getLocation();
+
+            ConnectableElectricalNode closestNode = closestNode(be, lookPosition);
+
             long position = pos.asLong();
 
-            RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
+            ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
 
             List<ElectricalNode> nodes = network.getNodes(position);
 
@@ -165,18 +182,13 @@ public class ElectricNetworkRenderer {
 
                     Vec3 center = new Vec3(cablePos.x(), cablePos.y(), cablePos.z());
 
-                    Vec3 corner1 = center.add(0.1f, 0.1f, 0.1f);
-                    Vec3 corner2 = center.subtract(0.1f, 0.1f, 0.1f);
+                    float size = node == closestNode ? 0.1f : 0.05f;
+
+                    Vec3 corner1 = center.add(size,size,size);
+                    Vec3 corner2 = center.subtract(size,size,size);
 
                     //TFMGUtils.createOutline(corner1, corner2, "connector_" + node.localId, Color.rainbowColor(AnimationTickHolder.getTicks() * 5));
 
-                    Color color = Color.rainbowColor(AnimationTickHolder.getTicks() * 5);
-                    switch (node.localId){
-                        case 0 -> color = new Color(0x30A8FF);
-                        case 1 -> color = new Color(0xC16B32);
-                        case 2 -> color = new Color(0x424242);
-                        case 3 -> color = new Color(0x7892A3);
-                    }
 
                     TFMGUtils.createOutline(corner1, corner2, "connector_" + node.localId, node.type.getColor());
                 }

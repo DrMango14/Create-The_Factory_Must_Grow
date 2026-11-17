@@ -2,8 +2,8 @@ package com.drmangotea.tfmg.content.electricity.content.devices.polarizer;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.config.TFMGConfigs;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.devices.base.ResistiveLoadBlockEntity;
 import com.drmangotea.tfmg.recipes.PolarizingRecipe;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
@@ -56,7 +56,7 @@ public class PolarizerBlockEntity extends ResistiveLoadBlockEntity {
         sendData();
         setChanged();
 
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
 
 
         if (inventory.isEmpty()) {

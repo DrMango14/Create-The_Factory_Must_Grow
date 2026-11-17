@@ -6,9 +6,9 @@ import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.spark.ElectricSparkParticle;
 import com.drmangotea.tfmg.base.spark.Spark;
 import com.drmangotea.tfmg.content.electricity.CablePos;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.IElectric;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.cable_type.CableType;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectingElectricalNode;
@@ -79,7 +79,7 @@ public class TFMGUtils {
         return inverted;
     }
 
-    public static ConnectingElectricalNode closestNode(IRealisticElectric be, Vec3 clickPosition) {
+    public static ConnectingElectricalNode closestNode(IElectric be, Vec3 clickPosition) {
 
         if (be instanceof LargeTransformerBlockEntity t && !t.isMainPart) {
             return closestNode(t.getControlledBlock(), clickPosition);
@@ -92,7 +92,7 @@ public class TFMGUtils {
 
         BlockPos pos = BlockPos.of(be.getPos());
 
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(be.getWorld());
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(be.getWorld());
 
         network.getNodes(be.getPos()).forEach(n -> {
             if (n instanceof ConnectingElectricalNode node) {

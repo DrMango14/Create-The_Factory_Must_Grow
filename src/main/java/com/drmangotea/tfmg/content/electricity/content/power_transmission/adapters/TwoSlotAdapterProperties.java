@@ -18,12 +18,10 @@ public class TwoSlotAdapterProperties extends DirectionalElectricalProperties {
 
         ConnectingElectricalNode N = new ConnectingElectricalNode( position, 0, getRotation(direction).get(0),NodeType.NEUTRAL);
         ConnectingElectricalNode L1 = new ConnectingElectricalNode(position, 1, getRotation(direction).get(1),NodeType.PHASE_1);
-        ConnectingElectricalNode L2 = new ConnectingElectricalNode(position, 2, getRotation(direction).get(2),NodeType.PHASE_2);
-        ConnectingElectricalNode L3 = new ConnectingElectricalNode(position, 3, getRotation(direction).get(3), NodeType.PHASE_3);
+
         nodes.add(N);
         nodes.add(L1);
-        nodes.add(L2);
-        nodes.add(L3);
+
 
 
     }
@@ -43,11 +41,31 @@ public class TwoSlotAdapterProperties extends DirectionalElectricalProperties {
         List<CablePos> positions = new ArrayList<>();
 
         switch (direction) {
-            case DOWN, UP, NORTH, SOUTH, WEST, EAST -> {
-                positions.add(new CablePos(0, 0, 0));
-                positions.add(new CablePos(1, 0, 0));
-                positions.add(new CablePos(0, 1, 0));
-                positions.add(new CablePos(0, 0, 1));
+            case DOWN -> {
+
+                positions.add(new CablePos(11 / 16f, 12 / 16f, 8 / 16f));
+
+                positions.add(new CablePos(5 / 16f, 12 / 16f, 8 / 16f));
+            }
+            case UP -> {
+                positions.add(new CablePos(5 / 16f, 4 / 16f, 8 / 16f));
+                positions.add(new CablePos(11 / 16f, 4 / 16f, 8 / 16f));
+            }
+            case NORTH -> {
+                positions.add(new CablePos(5 / 16f, 8 / 16f, 12 / 16f));
+                positions.add(new CablePos(11 / 16f, 8 / 16f, 12 / 16f));
+            }
+            case SOUTH -> {
+                positions.add(new CablePos(11 / 16f, 8 / 16f, 4 / 16f));
+                positions.add(new CablePos(5 / 16f, 8 / 16f, 4 / 16f));
+            }
+            case EAST -> {
+                positions.add(new CablePos(4 / 16f, 8 / 16f, 11 / 16f));
+                positions.add(new CablePos(4 / 16f, 8 / 16f, 5 / 16f));
+            }
+            case WEST -> {
+                positions.add(new CablePos(12 / 16f, 8 / 16f, 5 / 16f));
+                positions.add(new CablePos(12 / 16f, 8 / 16f, 11 / 16f));
             }
         }
 

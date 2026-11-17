@@ -2,8 +2,8 @@ package com.drmangotea.tfmg.content.electricity.packets;
 
 
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.WireConnection;
 import com.drmangotea.tfmg.content.electricity.content.DirectionalElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.saved_data.NetworkSavedData;
@@ -15,6 +15,7 @@ import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectableElect
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
 import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.content.trains.graph.DimensionPalette;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.data.Pair;
 import net.createmod.catnip.net.base.ClientboundPacketPayload;
 import net.minecraft.client.player.LocalPlayer;
@@ -22,6 +23,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 
@@ -34,9 +36,9 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
     public static final StreamCodec<FriendlyByteBuf, NetworkLoadPacket> STREAM_CODEC = StreamCodec.of((b, v) -> v.write(b), NetworkLoadPacket::new);
 
 
-    public List<Pair<ResourceKey<Level>, RealElectricalNetwork>> networks = new ArrayList<>();
+    public List<Pair<ResourceKey<Level>, ElectricalNetwork>> networks = new ArrayList<>();
 
-    public NetworkLoadPacket(List<RealElectricalNetwork> networks) {
+    public NetworkLoadPacket(List<ElectricalNetwork> networks) {
         networks.forEach(n -> {
             if (n.world instanceof ServerLevel level) {
                 this.networks.add(Pair.of((level).dimension(), n));
@@ -53,7 +55,7 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
         for (int i = 0; i < networkCount; i++) {
             ResourceKey<Level> dimension = dimensions.decode(i);
 
-            RealElectricalNetwork network = new RealElectricalNetwork(null);
+            ElectricalNetwork network = new ElectricalNetwork(null);
             network.id = buffer.readLong();
             network.totalNodes = buffer.readInt();
 
@@ -120,6 +122,8 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
 
             for (int j = 0; j < connectionCount; j++) {
                 boolean shouldRender = buffer.readBoolean();
+                String modelLocation = buffer.readUtf().replace('.',':');
+                PartialModel model = PartialModel.of(ResourceLocation.parse(modelLocation));
                 double resistance = buffer.readDouble();
 
                 long pos1 = buffer.readLong();
@@ -147,7 +151,7 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
                 if (n1 != null && n2 != null) {
                     n1.pos = pos1;
                     n2.pos = pos2;
-                    network.connections.add(new WireConnection(n1, n2, resistance, shouldRender));
+                    network.connections.add(new WireConnection(n1, n2, resistance, shouldRender,model));
                 }
 
             }
@@ -166,7 +170,7 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
 
         networks.forEach(a -> {
 
-            RealElectricalNetwork network = a.getSecond();
+            ElectricalNetwork network = a.getSecond();
 
             buffer.writeLong(network.id);
             buffer.writeInt(network.totalNodes);
@@ -222,6 +226,8 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
             for (int i = 0; i < connectionCount; i++) {
                 WireConnection connection = connections.get(i);
                 buffer.writeBoolean(connection.render);
+                String model = connection.model.modelLocation().toString().replace(':','.');
+                buffer.writeUtf(model);
                 buffer.writeDouble(connection.resistance);
                 buffer.writeLong(connection.node1.pos);
                 buffer.writeInt(connection.node1.getLocalId());
@@ -240,19 +246,19 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
 
         ResourceKey<Level> playerDimension = player.level().dimension();
 
-        RealElectricalNetwork network = null;
-        List<Pair<ResourceKey<Level>, RealElectricalNetwork>> networks = this.networks;
+        ElectricalNetwork network = null;
+        List<Pair<ResourceKey<Level>, ElectricalNetwork>> networks = this.networks;
         //
 
-        for (Pair<ResourceKey<Level>, RealElectricalNetwork> n : networks) {
+        for (Pair<ResourceKey<Level>, ElectricalNetwork> n : networks) {
             if (n.getFirst() == playerDimension) {
                 network = n.getSecond();
             }
         }
 
         if (network != null) {
-            RealElectricNetworkManager.getNetwork(player.level()).members.putAll(network.members);
-            RealElectricNetworkManager.getNetwork(player.level()).connections.addAll(network.connections);
+            ElectricNetworkManager.getNetwork(player.level()).members.putAll(network.members);
+            ElectricNetworkManager.getNetwork(player.level()).connections.addAll(network.connections);
         }
     }
 

@@ -3,9 +3,9 @@ package com.drmangotea.tfmg.content.electricity.content.power_transmission.switc
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.IElectric;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.UnwirableConnectorProperties;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
@@ -26,7 +26,7 @@ import java.util.List;
 import static com.drmangotea.tfmg.content.electricity.content.power_transmission.switches.large_switch.LargeSwitchBlock.IS_MAIN_PART;
 import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING;
 
-public class LargeSwitchBlockEntity extends KineticBlockEntity implements IRealisticElectric {
+public class LargeSwitchBlockEntity extends KineticBlockEntity implements IElectric {
 
 
     public boolean closed = false;
@@ -79,7 +79,7 @@ public class LargeSwitchBlockEntity extends KineticBlockEntity implements IReali
 
     @Override
     public void onUpdated() {
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
 
         Resistance resistor = network.getResistance(getPos(), 0);
 
@@ -103,7 +103,7 @@ public class LargeSwitchBlockEntity extends KineticBlockEntity implements IReali
         }
         if(update){
             for(Direction facing : Arrays.stream(Direction.values()).toList()){
-                if(level.getBlockEntity(getBlockPos().relative(facing)) instanceof IRealisticElectric n){
+                if(level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric n){
                     //connectToNeighbors(level,n);
                 }
             }
@@ -184,7 +184,7 @@ public class LargeSwitchBlockEntity extends KineticBlockEntity implements IReali
     }
     @Override
     public void onPlace() {
-        IRealisticElectric.super.onPlace();
+        IElectric.super.onPlace();
       //  connectNextTick = connectToNeighbors(level, this);
         updateNetwork(getBlockPos());
     }

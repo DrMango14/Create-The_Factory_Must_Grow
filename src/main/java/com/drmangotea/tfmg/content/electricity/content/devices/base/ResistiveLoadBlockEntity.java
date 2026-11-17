@@ -3,9 +3,9 @@ package com.drmangotea.tfmg.content.electricity.content.devices.base;
 import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.IElectric;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.NodeType;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
-public class ResistiveLoadBlockEntity extends SmartBlockEntity implements IRealisticElectric, IHaveGoggleInformation {
+public class ResistiveLoadBlockEntity extends SmartBlockEntity implements IElectric, IHaveGoggleInformation {
 
     public ResistorProperties p;
 
@@ -60,7 +60,7 @@ public class ResistiveLoadBlockEntity extends SmartBlockEntity implements IReali
 
     @Override
     public void onUpdated() {
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
 
         Resistance resistor = network.getResistance(getPos(), 0);
 

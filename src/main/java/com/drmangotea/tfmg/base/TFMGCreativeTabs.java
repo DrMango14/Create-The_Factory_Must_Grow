@@ -95,6 +95,7 @@ public class TFMGCreativeTabs {
         list.add(TFMGItems.ALUMINUM_SPOOL);
         list.add(TFMGItems.COPPER_SPOOL);
         list.add(TFMGItems.CONSTANTAN_SPOOL);
+        list.add(TFMGItems.STEEL_REINFORCED_CABLE);
 
 
         return list;
@@ -102,6 +103,10 @@ public class TFMGCreativeTabs {
 
     public static List<ItemStack> customAdditions() {
         List<ItemStack> list = new ArrayList<>();
+
+        ItemStack reinforcedSpool = TFMGItems.STEEL_REINFORCED_CABLE.asStack();
+        reinforcedSpool.set(TFMGDataComponents.SPOOL_AMOUNT, 1000);
+        list.add(reinforcedSpool);
 
         ItemStack copperSpool = TFMGItems.COPPER_SPOOL.asStack();
         copperSpool.set(TFMGDataComponents.SPOOL_AMOUNT, 1000);

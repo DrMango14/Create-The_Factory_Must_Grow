@@ -2,8 +2,8 @@ package com.drmangotea.tfmg.content.electricity.content.power_transmission.cable
 
 
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.IElectric;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.WireConnection;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.cables.CableProperties;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectableElectricalNode;
@@ -25,7 +25,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Arrays;
 import java.util.List;
 
-public class CopycatCableBlockEntity extends CopycatBlockEntity implements IRealisticElectric, IHaveHoveringInformation {
+public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElectric, IHaveHoveringInformation {
 
     public CableProperties p;
 
@@ -52,12 +52,12 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IReal
     }
 
     public void connectToNeighbors() {
-        RealElectricalNetwork network = getNetwork(level);
+        ElectricalNetwork network = getNetwork(level);
         CableProperties properties = (CableProperties) network.members.get(getPos());
         network.removeConnections(this);
         for (Direction facing : properties.directions) {
             BlockPos pos = getBlockPos().relative(facing);
-            if (level.getBlockEntity(pos) instanceof IRealisticElectric be) {
+            if (level.getBlockEntity(pos) instanceof IElectric be) {
                 ElectricalProperties neighborProperties = network.members.get(pos.asLong());
                 if (neighborProperties == null) {
                     connectNextTick = true;
@@ -96,7 +96,7 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IReal
 
     @Override
     public void onPlace() {
-        IRealisticElectric.super.onPlace();
+        IElectric.super.onPlace();
         connectToNeighbors();
         updateNetwork(getBlockPos());
     }

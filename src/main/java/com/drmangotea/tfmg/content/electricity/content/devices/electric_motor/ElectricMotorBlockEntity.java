@@ -1,11 +1,13 @@
 package com.drmangotea.tfmg.content.electricity.content.devices.electric_motor;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.IElectric;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -33,14 +35,18 @@ import java.util.List;
 
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
 
-public class ElectricMotorBlockEntity extends GeneratingKineticBlockEntity implements IRealisticElectric, IHaveGoggleInformation {
+public class ElectricMotorBlockEntity extends GeneratingKineticBlockEntity implements IElectric, IHaveGoggleInformation {
 
 
     ElectricalProperties properties;
 
-    public float current = 0;
+    public double[] voltage = new double[3];
+    public double[] power = new double[3];
+
 
     public boolean supplyTooUnbalanced = false;
+
+
 
 
     protected ScrollOptionBehaviour<WindmillBearingBlockEntity.RotationDirection> movementDirection;
@@ -52,55 +58,83 @@ public class ElectricMotorBlockEntity extends GeneratingKineticBlockEntity imple
     }
 
     @Override
+    public void onLoad() {
+        super.onLoad();
+        updateGeneratedRotation();
+    }
+
+    @Override
     public void remove() {
         super.remove();
         this.removeBlock();
     }
 
+    public double getPower() {
+        double power = 0;
+
+        for (int i = 0; i < 3; i++) {
+
+            double powerAddition = this.power[i];
+
+            power += powerAddition;
+        }
+
+        return power;
+    }
+
+    public double getVoltage() {
+
+        return (voltage[0] + voltage[1] + voltage[2]) / 3;
+    }
+
 
     @Override
     public void onUpdated() {
-
-        this.current = 0;
-
-        float current = 0;
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
         for (int i = 0; i < 3; i++) {
-            Resistance resistor = network.getResistance(getPos(), i);
+            Resistance r = network.getResistance(getPos(), i);
+            if (!(r == null)) {
 
-            if (resistor != null) {
-
-                double resistance = resistor.resistance;
-                double voltage = resistor.getVoltage(level);
-
-                float currentAddition = (float) (voltage / resistance);
-                if (i != 0) {
-                    float currentDifference = Math.abs((current/i) - currentAddition);
-
-                    float mismatchPercentage = (currentDifference / currentAddition) * 100;
+                double resistance = r.resistance;
+                double voltage = r.getVoltage(level);
+                double current = voltage / resistance;
+                double power = voltage * current;
 
 
-                    this.supplyTooUnbalanced = mismatchPercentage > 10;
-                }
-
-                current += currentAddition;
-
+                this.voltage[i] = voltage;
+                this.power[i] = power;
             }
         }
+        for (int i = 0; i < 3; i++) {
 
-        this.current = current;
+            if (i != 0) {
+                double avgPower = (power[0] + power[1] + power[2]) / 3;
+                double phasePower = power[i];
 
+                double mismatchPercentage = (avgPower / phasePower);
+                if (mismatchPercentage > 1)
+                    mismatchPercentage--;
+                mismatchPercentage *= 100;
+                this.supplyTooUnbalanced = mismatchPercentage > 10;
+
+            }
+
+
+        }
+
+        TFMG.LOGGER.debug("Power " + getPower());
         updateGeneratedRotation();
     }
 
     @Override
-    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+    public boolean makeMultimeterTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 
-
-        TFMGLang.text("Current " + current).forGoggles(tooltip);
+        TFMGTexts.Multimeter.power(getPower()).forGoggles(tooltip);
+        TFMGTexts.Multimeter.voltage(getVoltage()).forGoggles(tooltip);
 
         return true;
     }
+
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
@@ -113,7 +147,7 @@ public class ElectricMotorBlockEntity extends GeneratingKineticBlockEntity imple
     }
 
     private void onDirectionChanged() {
-
+        updateGeneratedRotation();
     }
 
 
@@ -124,26 +158,46 @@ public class ElectricMotorBlockEntity extends GeneratingKineticBlockEntity imple
     }
 
     @Override
+    public void onPlace() {
+        IElectric.super.onPlace();
+        updateGeneratedRotation();
+    }
+
+    @Override
     public float getGeneratedSpeed() {
 
 
-
-        if (current == 0 || supplyTooUnbalanced)
+        if (getPower() == 0)
             return 0;
 
+        double avgPower = (power[0] + power[1] + power[2]) / 3;
+        for (int i = 0; i < 3; i++) {
+
+            double phasePower = power[i];
+            if (phasePower == 0) {
+                return 0;
+            }
+            double ratio = Math.abs((avgPower / phasePower) - 1) * 100;
+
+           // if (ratio > 50) {
+           //     return 0;
+           // }
+
+
+        }
 
         int rotation = movementDirection.get() == WindmillBearingBlockEntity.RotationDirection.CLOCKWISE ? 1 : -1;
 
-        float speed = Math.min(255, current * 20) * rotation;
-        if(Float.isNaN(speed))
+        double speed = Math.min(255, (getPower()) );
+        if (Double.isNaN(speed))
             return 0;
-        return speed;
+        return (int) speed* rotation;
     }
 
     @Override
     public float calculateAddedStressCapacity() {
         float speedModifier = Math.abs(getSpeed() / 256);
-        if (current == 0 || supplyTooUnbalanced)
+        if (getPower() == 0 || supplyTooUnbalanced)
             return 0;
         if (getBlockState().is(TFMGBlocks.HEAVY_ELECTRIC_MOTOR)) {
             return super.calculateAddedStressCapacity();

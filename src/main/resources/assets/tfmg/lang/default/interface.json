@@ -175,6 +175,8 @@
   "tfmg.multimeter.network.generation": "Network Power Generation: %s",
   "tfmg.multimeter.network.consumption": "Network Power Consumption: %s",
   "tfmg.multimeter.transformer_ratio": "   Turn Ratio: ",
+  "tfmg.multimeter.transformer.primary_voltage": "   Primary Voltage: ",
+  "tfmg.multimeter.transformer.secondary_voltage": "   Secondary Voltage: ",
   "tfmg.multimeter.large_transformer.air_cooled": "   State: Air Cooled",
   "tfmg.multimeter.large_transformer.metal_cooled": "   State: Metal Heat Sink Cooled",
   "tfmg.multimeter.large_transformer.oil_cooled": "   State: Oil + Heat Sink Cooled",

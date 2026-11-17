@@ -1,6 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.display_link;
 
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
+import com.drmangotea.tfmg.content.electricity.IElectric;
 import com.simibubi.create.content.redstone.displayLink.DisplayLinkContext;
 import com.simibubi.create.content.redstone.displayLink.source.SingleLineDisplaySource;
 import com.simibubi.create.content.redstone.displayLink.target.DisplayTargetStats;
@@ -15,7 +15,7 @@ public class CurrentDisplaySource extends SingleLineDisplaySource {
         BlockEntity sourceBE = context.getSourceBlockEntity();
         if (!(sourceBE instanceof SmartBlockEntity smart))
             return EMPTY_LINE;
-        if (!(smart instanceof IRealisticElectric electric))
+        if (!(smart instanceof IElectric electric))
             return EMPTY_LINE;
 
         //float current = electric.getCurrent();

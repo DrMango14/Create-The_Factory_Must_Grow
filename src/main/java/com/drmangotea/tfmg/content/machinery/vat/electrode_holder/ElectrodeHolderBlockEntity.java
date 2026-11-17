@@ -54,6 +54,8 @@ public class ElectrodeHolderBlockEntity extends ResistiveLoadBlockEntity impleme
         return 20;
     }
 
+
+
     @Override
     public boolean makeMultimeterTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 
@@ -96,7 +98,7 @@ public class ElectrodeHolderBlockEntity extends ResistiveLoadBlockEntity impleme
 
     @Override
     public void remove() {
-
+        this.removeBlock();
         if (level.isClientSide || electrode.getItem()==null)
             return;
 

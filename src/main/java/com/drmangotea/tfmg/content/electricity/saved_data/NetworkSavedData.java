@@ -1,13 +1,15 @@
 package com.drmangotea.tfmg.content.electricity.saved_data;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.WireConnection;
 import com.drmangotea.tfmg.content.electricity.content.DirectionalElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.content.devices.base.ResistorProperties;
 import com.drmangotea.tfmg.content.electricity.content.devices.electric_motor.ElectricMotorProperties;
 import com.drmangotea.tfmg.content.electricity.content.devices.generators.creative_generator.CreativeGeneratorProperties;
+import com.drmangotea.tfmg.content.electricity.content.devices.generators.large_generator.LargeGeneratorProperties;
 import com.drmangotea.tfmg.content.electricity.content.devices.generators.three_phase_generator.ThreePhaseGeneratorProperties;
 import com.drmangotea.tfmg.content.electricity.content.lights.LightProperties;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.adapters.FourSlotAdapterProperties;
@@ -26,11 +28,14 @@ import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
 import com.drmangotea.tfmg.content.electricity.simulation.Transformer;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectableElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
 
 import java.util.ArrayList;
@@ -38,7 +43,7 @@ import java.util.List;
 
 public class NetworkSavedData extends SavedData {
 
-    private List<RealElectricalNetwork> list = new ArrayList<>();
+    private List<ElectricalNetwork> list = new ArrayList<>();
 
     public NetworkSavedData() {
     }
@@ -47,11 +52,11 @@ public class NetworkSavedData extends SavedData {
     public CompoundTag save(CompoundTag compound, HolderLookup.Provider provider) {
 
 
-        List<RealElectricalNetwork> list = RealElectricNetworkManager.networks.values().stream().toList();
+        List<ElectricalNetwork> list = ElectricNetworkManager.networks.values().stream().toList();
 
         compound = new CompoundTag();
 
-        for (RealElectricalNetwork network : list) {
+        for (ElectricalNetwork network : list) {
             CompoundTag networkNBT = new CompoundTag();
 
             if (network.world instanceof ServerLevel serverLevel) {
@@ -115,6 +120,7 @@ public class NetworkSavedData extends SavedData {
 
                     connectionTag.putDouble("Resistance", connection.resistance);
                     connectionTag.putBoolean("Should Render", connection.render);
+                    connectionTag.putString("Model", connection.model.modelLocation().toString());
 
                     CompoundTag node1 = new CompoundTag();
                     node1.putLong("position", connection.node1.pos);
@@ -142,7 +148,7 @@ public class NetworkSavedData extends SavedData {
         return compound;
     }
 
-    public List<RealElectricalNetwork> getNetworks() {
+    public List<ElectricalNetwork> getNetworks() {
         return list;
     }
 
@@ -150,8 +156,8 @@ public class NetworkSavedData extends SavedData {
     public static NetworkSavedData load(CompoundTag compound, HolderLookup.Provider registries) {
         NetworkSavedData sd = new NetworkSavedData();
 
-        List<RealElectricalNetwork> list = RealElectricNetworkManager.networks.values().stream().toList();
-        for (RealElectricalNetwork network : list) {
+        List<ElectricalNetwork> list = ElectricNetworkManager.networks.values().stream().toList();
+        for (ElectricalNetwork network : list) {
             if (network.world instanceof ServerLevel serverLevel) {
                 CompoundTag networkTag = compound.getCompound(serverLevel.dimension().location().toLanguageKey());
                 network.totalNodes = networkTag.getInt("Node Count");
@@ -194,6 +200,7 @@ public class NetworkSavedData extends SavedData {
                     CompoundTag connection = networkTag.getCompound("connections").getCompound("connection " + i);
                     double resistance = connection.getDouble("Resistance");
                     boolean shouldRender = connection.getBoolean("Should Render");
+                    PartialModel model = PartialModel.of(ResourceLocation.parse(connection.getString("Model")));
 
                     ConnectableElectricalNode node1 = null;
                     CompoundTag node1Tag = connection.getCompound("Node1");
@@ -220,11 +227,14 @@ public class NetworkSavedData extends SavedData {
 
                     if (node1 != null && node2 != null) {
 
-                        network.connections.add(new WireConnection(node1, node2, resistance, shouldRender));
+                        network.connections.add(new WireConnection(node1, node2, resistance, shouldRender,model));
                     }
 
                 }
             }
+
+                TFMG.LOGGER.debug("Test");
+
         }
 
         return sd;
@@ -235,12 +245,12 @@ public class NetworkSavedData extends SavedData {
 
         return switch (id) {
             case 1 -> new ThreePhaseGeneratorProperties(pos, direction);
-            case 2 -> new ConnectorProperties(pos);
+            case 2 -> new ConnectorProperties(pos,direction);
             case 3 -> new ResistorProperties(pos, direction);
             case 4 -> new CableProperties(pos, d);
             case 5 -> new FourSlotAdapterProperties(pos, direction);
             case 6 -> new TwoSlotAdapterProperties(pos, direction);
-            case 7 -> new LightProperties(pos);
+            case 7 -> new LightProperties(pos,direction);
             case 8 -> new ElectricMotorProperties(pos, direction);
             case 9 -> new TransformerProperties(pos, direction);
             case 10 -> new CreativeGeneratorProperties(pos);
@@ -249,6 +259,7 @@ public class NetworkSavedData extends SavedData {
             case 13 -> new AccumulatorControlUnitProperties(pos, direction);
             case 14 -> new LargeSwitchProperties(pos, direction);
             case 15 -> new UnwirableConnectorProperties(pos, d);
+            case 16 -> new LargeGeneratorProperties(pos, direction);
             default -> new ElectricalProperties(pos);
 
         };

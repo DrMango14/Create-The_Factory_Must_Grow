@@ -1,8 +1,8 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.cables;
 
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.IElectric;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.WireConnection;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.accumulator_control_unit.AccumulatorControlUnitProperties;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.switches.electric_switch.SwitchProperties;
@@ -14,13 +14,14 @@ import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
-public abstract class AbstractCableBlockEntity extends SmartBlockEntity implements IRealisticElectric {
+public abstract class AbstractCableBlockEntity extends SmartBlockEntity implements IElectric {
 
     public CableProperties p;
 
@@ -30,6 +31,11 @@ public abstract class AbstractCableBlockEntity extends SmartBlockEntity implemen
         super(type, pos, state);
 
 
+    }
+
+    @Override
+    public boolean makeMultimeterTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        return false;
     }
 
     @Override
@@ -52,8 +58,8 @@ public abstract class AbstractCableBlockEntity extends SmartBlockEntity implemen
         return p;
     }
 
-    public static boolean connectToNeighbors2(Level level, IRealisticElectric be) {
-        RealElectricalNetwork network = be.getNetwork(level);
+    public static boolean connectToNeighbors2(Level level, IElectric be) {
+        ElectricalNetwork network = be.getNetwork(level);
         ElectricalProperties properties = network.members.get(be.getPos());
         network.removeConnections(be);
 
@@ -64,7 +70,7 @@ public abstract class AbstractCableBlockEntity extends SmartBlockEntity implemen
         for (Direction facing : properties.getConnectableDirections()) {
             BlockPos pos = BlockPos.of(be.getPos()).relative(facing);
 
-            if (level.getBlockEntity(pos) instanceof IRealisticElectric) {
+            if (level.getBlockEntity(pos) instanceof IElectric) {
                 ElectricalProperties neighborProperties = network.members.get(pos.asLong());
                 if (neighborProperties == null) {
                     return true;
@@ -123,8 +129,8 @@ public abstract class AbstractCableBlockEntity extends SmartBlockEntity implemen
     }
 
 
-    public static boolean connectToNeighbors(Level level, IRealisticElectric be) {
-        RealElectricalNetwork network = be.getNetwork(level);
+    public static boolean connectToNeighbors(Level level, IElectric be) {
+        ElectricalNetwork network = be.getNetwork(level);
         ElectricalProperties properties = network.members.get(be.getPos());
         network.removeConnections(be);
 
@@ -135,7 +141,7 @@ public abstract class AbstractCableBlockEntity extends SmartBlockEntity implemen
         for (Direction facing : Direction.values()) {
             BlockPos pos = BlockPos.of(be.getPos()).relative(facing);
 
-            if (level.getBlockEntity(pos) instanceof IRealisticElectric) {
+            if (level.getBlockEntity(pos) instanceof IElectric) {
                 ElectricalProperties neighborProperties = network.members.get(pos.asLong());
                 if (neighborProperties == null) {
                     return true;
@@ -204,7 +210,7 @@ public abstract class AbstractCableBlockEntity extends SmartBlockEntity implemen
 
     @Override
     public void onPlace() {
-        IRealisticElectric.super.onPlace();
+        IElectric.super.onPlace();
         connectNextTick = connectToNeighbors(level, this);
         updateNetwork(getBlockPos());
     }

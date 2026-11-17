@@ -3,8 +3,8 @@ package com.drmangotea.tfmg.base.events;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGClient;
 import com.drmangotea.tfmg.content.electricity.ElectricNetworkRenderer;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.measuring_instruments.MultimeterOverlayRenderer;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.small.TransformerBlockEntity;
 import com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon.AdvancedPotatoCannonItemRenderer;
@@ -63,7 +63,7 @@ public class TFMGClientEvents {
 
     @SubscribeEvent
     public static void PlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(event.getEntity().level());
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(event.getEntity().level());
         network.update();
     }
 

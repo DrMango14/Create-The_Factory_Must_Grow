@@ -2,11 +2,11 @@ package com.drmangotea.tfmg.content.electricity.content.power_transmission.trans
 
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
-import com.drmangotea.tfmg.base.lang.TFMGLang;
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.IElectric;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.simulation.Transformer;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
@@ -41,7 +41,7 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class TransformerBlockEntity extends SmartBlockEntity implements IRealisticElectric {
+public class TransformerBlockEntity extends SmartBlockEntity implements IElectric {
     boolean updateInFront = false;
 
     public ItemStack primaryCoil = ItemStack.EMPTY;
@@ -72,31 +72,31 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IRealist
     @Override
     public boolean makeMultimeterTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 
-        TFMGLang.text("Voltage primary " + primaryVoltage).forGoggles(tooltip);
-        TFMGLang.text("Voltage secondary " + secondaryVoltage).forGoggles(tooltip);
-        TFMGLang.text("Ratio " + coilRatio).forGoggles(tooltip);
 
+        TFMGTexts.Multimeter.transformerPrimaryVoltage((float) primaryVoltage).forGoggles(tooltip, 1);
+        TFMGTexts.Multimeter.transformerSecondaryVoltage((float) secondaryVoltage).forGoggles(tooltip, 1);
+        TFMGTexts.Multimeter.transformerRatio(coilRatio).forGoggles(tooltip, 1);
         return true;
     }
 
     @Override
     public void onPlace() {
-        IRealisticElectric.super.onPlace();
+        IElectric.super.onPlace();
 
-        getNetwork().setTransformerRatio(this,0,coilRatio);
+        getNetwork().setTransformerRatio(this, 0, coilRatio);
     }
 
     @Override
     public void onUpdated() {
 
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
 
 
         Transformer t = network.getTransformer(getPos(), 0);
-
-        primaryVoltage = network.nodeVoltages.get(t.nodeA.networkId).minus(network.nodeVoltages.get(t.nodeB.networkId)).abs();
-        secondaryVoltage = network.nodeVoltages.get(t.sA.networkId).minus(network.nodeVoltages.get(t.sB.networkId)).abs();
-
+        if (coilRatio != 0) {
+            primaryVoltage = network.nodeVoltages.get(t.nodeA.networkId).minus(network.nodeVoltages.get(t.nodeB.networkId)).abs();
+            secondaryVoltage = network.nodeVoltages.get(t.sA.networkId).minus(network.nodeVoltages.get(t.sB.networkId)).abs();
+        }
     }
 
     @Override
@@ -112,7 +112,6 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IRealist
             level.addFreshEntity(item);
         }
     }
-
 
 
     //@Override
@@ -136,6 +135,7 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IRealist
         if (primaryCoil.get(TFMGDataComponents.COIL_TURNS) == null || secondaryCoil.get(TFMGDataComponents.COIL_TURNS) == null) {
             coilRatio = 0;
             getNetwork().setTransformerRatio(this, 0, coilRatio);
+
             return;
         }
         int primaryTurns = primaryCoil.get(TFMGDataComponents.COIL_TURNS);
@@ -153,7 +153,9 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IRealist
         getNetwork().setTransformerRatio(this, 0, coilRatio);
 
 
+
     }
+
     @Override
     public ElectricalProperties getProperties() {
         return p;

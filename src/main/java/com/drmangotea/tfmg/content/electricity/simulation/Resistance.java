@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.simulation;
 
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.MergedNode;
 import net.minecraft.world.level.Level;
@@ -24,7 +24,7 @@ public class Resistance extends ElectricalComponent {
     }
 
     public ComplexValue getVoltagePhasor(Level level) {
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
 
         ElectricalNode node1 = nodeA;
         ElectricalNode node2 = nodeB;

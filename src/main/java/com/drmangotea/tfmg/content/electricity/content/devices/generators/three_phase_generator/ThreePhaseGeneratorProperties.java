@@ -19,7 +19,7 @@ public class ThreePhaseGeneratorProperties extends DirectionalElectricalProperti
 
         BlockPos pos = BlockPos.of(position);
 
-        ElectricalNode N = new ConnectingElectricalNode(position, 0, getRotation(direction).get(0), NodeType.NEUTRAL);
+        ElectricalNode N = new  ConnectingElectricalNode(position, 0, getRotation(direction).get(0), NodeType.NEUTRAL);
         ElectricalNode L1 = new ConnectingElectricalNode(position, 1, getRotation(direction).get(1), NodeType.PHASE_1);
         ElectricalNode L2 = new ConnectingElectricalNode(position, 2, getRotation(direction).get(2), NodeType.PHASE_2);
         ElectricalNode L3 = new ConnectingElectricalNode(position, 3, getRotation(direction).get(3), NodeType.PHASE_3);

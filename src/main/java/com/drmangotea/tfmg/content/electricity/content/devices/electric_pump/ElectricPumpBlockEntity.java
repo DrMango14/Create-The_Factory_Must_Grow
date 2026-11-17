@@ -4,9 +4,9 @@ import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.IElectric;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.devices.base.ResistorProperties;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.NodeType;
@@ -37,7 +37,7 @@ import java.util.*;
 
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
 
-public class ElectricPumpBlockEntity extends PumpBlockEntity implements IRealisticElectric {
+public class ElectricPumpBlockEntity extends PumpBlockEntity implements IElectric {
 
     ResistorProperties p;
 
@@ -232,7 +232,7 @@ public class ElectricPumpBlockEntity extends PumpBlockEntity implements IRealist
 
     @Override
     public void onUpdated() {
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
 
         Resistance resistor = network.getResistance(getPos(), 0);
 

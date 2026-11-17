@@ -4,7 +4,7 @@ import com.drmangotea.tfmg.base.*;
 
 
 import com.drmangotea.tfmg.content.electricity.saved_data.NetworkDataManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
 import com.drmangotea.tfmg.content.engines.fuels.BaseFuelTypes;
 import com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades.fire.TFMGColoredFires;
 import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.base.OilDataManager;
@@ -38,7 +38,7 @@ public class TFMG {
 
     public static final String MOD_ID = "tfmg";
 
-    public static final RealElectricNetworkManager ELECTRIC_NETWORK_MANAGER = new RealElectricNetworkManager();
+    public static final ElectricNetworkManager ELECTRIC_NETWORK_MANAGER = new ElectricNetworkManager();
     public static final NetworkDataManager ELECTRICAL_NETWORK_DATA = new NetworkDataManager();
 
     public static final Logger LOGGER = LogUtils.getLogger();

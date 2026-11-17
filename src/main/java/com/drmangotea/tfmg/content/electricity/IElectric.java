@@ -17,18 +17,18 @@ import java.util.List;
 
 import static com.drmangotea.tfmg.content.electricity.content.power_transmission.cables.AbstractCableBlockEntity.connectToNeighbors;
 
-public interface IRealisticElectric {
+public interface IElectric {
 
 
     default ElectricalProperties getProperties() {
         return new ElectricalProperties(this.getPos());
     }
 
-    default RealElectricalNetwork getNetwork(Level level) {
-        return RealElectricNetworkManager.getNetwork(level);
+    default ElectricalNetwork getNetwork(Level level) {
+        return ElectricNetworkManager.getNetwork(level);
     }
 
-    default RealElectricalNetwork getNetwork() {
+    default ElectricalNetwork getNetwork() {
         return getNetwork(getWorld());
     }
 
@@ -39,7 +39,7 @@ public interface IRealisticElectric {
         if (this instanceof LargeTransformerBlockEntity t && !t.isMainPart)
             return;
 
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(getWorld());
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(getWorld());
         if (network == null)
             return;
         network.addMember(pos, getProperties());
@@ -49,7 +49,7 @@ public interface IRealisticElectric {
 
 
     default void removeBlock() {
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(getWorld());
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(getWorld());
         network.members.remove(this.getPos());
         network.removeConnections(this);
         if (this.getProperties() != null)
@@ -128,7 +128,7 @@ public interface IRealisticElectric {
         // }
 
 
-        return true;
+        return false;
     }
 
     default void onPlace() {

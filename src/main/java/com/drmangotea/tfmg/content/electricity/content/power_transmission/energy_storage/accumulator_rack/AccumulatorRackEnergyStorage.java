@@ -35,6 +35,7 @@ public abstract class AccumulatorRackEnergyStorage extends EnergyStorage {
 
     @Override
     public int extractEnergy(int maxExtract, boolean simulate) {
+        int oldEnergy = energy;
         int max = maxExtract;
         int extractedEnergy = 0;
 
@@ -47,15 +48,18 @@ public abstract class AccumulatorRackEnergyStorage extends EnergyStorage {
                 s.set(TFMGDataComponents.ACCUMULATOR_STORAGE, energy -toExtract);
             max -= toExtract;
             extractedEnergy += toExtract;
+
         }
 
 
         be.updateStorage();
+        onEnergyChanged(energy, oldEnergy);
         return extractedEnergy;
     }
 
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
+        int oldEnergy = energy;
         if(maxReceive == 0)
             return 0;
 
@@ -76,6 +80,7 @@ public abstract class AccumulatorRackEnergyStorage extends EnergyStorage {
 
 
         be.updateStorage();
+        onEnergyChanged(energy, oldEnergy);
         return receiveEnergy;
     }
 

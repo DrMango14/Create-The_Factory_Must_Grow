@@ -5,7 +5,7 @@ import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.content.decoration.tanks.TFMGFluidTankBlockEntity;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.accumulator_rack.AccumulatorRackBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.cells.AccumulatorCellItem;
 import com.drmangotea.tfmg.content.electricity.content.devices.polarizer.PolarizerBlockEntity;
@@ -29,8 +29,14 @@ import com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.c
 import com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.output.DistillationOutputBlockEntity;
 import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.base.PumpjackBaseBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.dimension.LevelStem;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
@@ -38,7 +44,11 @@ import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.neoforge.network.payload.SyncAttachmentsPayload;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 @EventBusSubscriber
@@ -54,33 +64,38 @@ public class TFMGCommonEvents {
         TFMG.ELECTRIC_NETWORK_MANAGER.onUnloadWorld(world);
     }
 
+
     @SubscribeEvent
     public static void onLoadWorld(LevelEvent.Load event) {
         LevelAccessor world = event.getLevel();
 
         TFMG.DEPOSITS.levelLoaded(world);
 
-        //
+
         TFMG.ELECTRIC_NETWORK_MANAGER.onLoadWorld(world);
 
         TFMG.ELECTRICAL_NETWORK_DATA.levelLoaded(world);
+
+
     }
+
+
 
     @SubscribeEvent
     public static void playerChangedDimension(PlayerEvent.PlayerLoggedInEvent event) {
         Player player = event.getEntity();
 
-        RealElectricNetworkManager.playerLogin(player);
+        ElectricNetworkManager.playerLogin(player);
     }
     @SubscribeEvent
     public static void playerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
         Player player = event.getEntity();
 
-        RealElectricNetworkManager.playerLogin(player);
+        ElectricNetworkManager.playerLogin(player);
     }
     @SubscribeEvent
     public static void onServerTick(ServerTickEvent.Post event) {
-        RealElectricNetworkManager.handleNetworkUpdate(event);
+        ElectricNetworkManager.handleNetworkUpdate(event);
     }
 
     @SubscribeEvent

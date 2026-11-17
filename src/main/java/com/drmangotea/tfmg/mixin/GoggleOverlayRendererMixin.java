@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg.mixin;
 
 
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
+import com.drmangotea.tfmg.content.electricity.IElectric;
 import com.drmangotea.tfmg.content.electricity.content.measuring_instruments.MultimeterItem;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.mojang.blaze3d.platform.Window;
@@ -104,14 +104,14 @@ public class GoggleOverlayRendererMixin {
 
                 boolean isShifting = mc.player.isShiftKeyDown();
 
-                boolean isElectricBlock = be instanceof IRealisticElectric;
+                boolean isElectricBlock = be instanceof IElectric;
 
 
                 if (isElectricBlock && !hasGoggles) {
                     ItemStack item = TFMGItems.MULTIMETER.asStack();
                     List<Component> tooltip = new ArrayList<>();
 
-                    ((IRealisticElectric) be).makeMultimeterTooltip(tooltip, isShifting);
+                    ((IElectric) be).makeMultimeterTooltip(tooltip, isShifting);
 
                     // break early if goggle or hover returned false when present
                     if ((!isElectricBlock) || !holdsMultimeter) {

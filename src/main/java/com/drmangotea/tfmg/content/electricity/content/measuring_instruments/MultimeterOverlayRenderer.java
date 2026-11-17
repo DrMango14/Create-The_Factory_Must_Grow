@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.content.measuring_instruments;
 
 import com.drmangotea.tfmg.base.lang.TFMGLang;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
+import com.drmangotea.tfmg.content.electricity.IElectric;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -85,7 +85,7 @@ public class MultimeterOverlayRenderer {
 
         boolean isShifting = mc.player.isShiftKeyDown();
 
-        boolean isElectricBlock = be instanceof IRealisticElectric;
+        boolean isElectricBlock = be instanceof IElectric;
         if (!isElectricBlock)
             return;
 
@@ -94,7 +94,7 @@ public class MultimeterOverlayRenderer {
         List<Component> tooltip = new ArrayList<>();
         tooltip.add(TFMGLang.number(1).component());
 
-        ((IRealisticElectric) be).makeMultimeterTooltip(tooltip, isShifting);
+        ((IElectric) be).makeMultimeterTooltip(tooltip, isShifting);
 
 
         PoseStack poseStack = graphics.pose();

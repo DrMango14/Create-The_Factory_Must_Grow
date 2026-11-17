@@ -5,6 +5,7 @@ import com.drmangotea.tfmg.content.electricity.CablePos;
 import com.drmangotea.tfmg.content.electricity.content.DirectionalElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectingElectricalNode;
+import com.drmangotea.tfmg.content.electricity.simulation.nodes.DirectionalElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.NodeType;
 import net.minecraft.core.BlockPos;
@@ -21,10 +22,10 @@ public class ElectricMotorProperties extends DirectionalElectricalProperties {
 
         BlockPos pos = BlockPos.of(position);
 
-        ElectricalNode N = new ConnectingElectricalNode(position, 0,   getRotation(direction).get(0), NodeType.NEUTRAL);
-        ElectricalNode L1 = new ConnectingElectricalNode(position, 1, getRotation(direction).get(1),  NodeType.PHASE_1);
-        ElectricalNode L2 = new ConnectingElectricalNode(position, 2, getRotation(direction).get(2),  NodeType.PHASE_2);
-        ElectricalNode L3 = new ConnectingElectricalNode(position, 3, getRotation(direction).get(3),  NodeType.PHASE_3);
+        ElectricalNode N = new DirectionalElectricalNode(position, 0,   direction.getOpposite(), NodeType.NEUTRAL);
+        ElectricalNode L1 =  new DirectionalElectricalNode(position, 1, direction.getOpposite(),  NodeType.PHASE_1);
+        ElectricalNode L2 =  new DirectionalElectricalNode(position, 2, direction.getOpposite(),  NodeType.PHASE_2);
+        ElectricalNode L3 =  new DirectionalElectricalNode(position, 3, direction.getOpposite(),  NodeType.PHASE_3);
 
         nodes.add(N);
         nodes.add(L1);

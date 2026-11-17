@@ -1,14 +1,15 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.accumulator_control_unit;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.IElectric;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.accumulator_rack.AccumulatorRackBlockEntity;
-import com.drmangotea.tfmg.content.electricity.packets.*;
+import com.drmangotea.tfmg.content.electricity.packets.UpdateAccumulatorPacket;
 import com.drmangotea.tfmg.content.electricity.simulation.IdealVoltageSource;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -32,7 +33,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implements IRealisticElectric {
+public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implements IElectric {
 
     AccumulatorControlUnitProperties p;
 
@@ -56,7 +57,7 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
 
     @Override
     public void onUpdated() {
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
 
         Resistance resistor = network.getResistance(getPos(), 0);
 
@@ -73,8 +74,8 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
             outputResistance = outputResistor.resistance;
             outputVoltage = source.amplitude;
             double current = outputResistor.getVoltage(level) / outputResistance;
-            outputPower = outputVoltage * current;
 
+            outputPower = outputVoltage * current;
         }
     }
 
@@ -82,11 +83,11 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
     public void onLoad() {
         super.onLoad();
         findAccumulatorRack();
-        AccumulatorControlUnitBlockEntity.updateVoltage(this,outputVoltageScroll.value);
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(this.getWorld());
+        AccumulatorControlUnitBlockEntity.updateVoltage(this, outputVoltageScroll.value);
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(this.getWorld());
 
         network.update();
-   //
+        //
     }
 
 
@@ -106,7 +107,7 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
 
     @Override
     public void onPlace() {
-        IRealisticElectric.super.onPlace();
+        IElectric.super.onPlace();
         findAccumulatorRack();
     }
 
@@ -119,8 +120,28 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
             rack.energy.receiveEnergy(Math.abs(energyObtained) < 1 ? 0 : (int) Math.abs(energyObtained), false);
 
             rack.energy.extractEnergy(Math.abs(outputPower) < 1 ? 0 : (int) Math.abs(outputPower), false);
+
+
+        } else if (outputVoltage > 0) {
+            getNetwork().setVoltageGen(this, 0);
         }
 
+
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (rack != null) {
+            if (outputVoltage > 0 && rack.energy.getEnergyStored() == 0) {
+                outputVoltage = 0;
+                getNetwork().setVoltageGen(this, 0);
+            }
+
+            if (outputVoltage == 0 && rack.energy.getEnergyStored() > 0) {
+                updateVoltage(this, outputVoltageScroll.getValue());
+            }
+        }
 
     }
 
@@ -141,7 +162,7 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
         super.write(tag, registries, clientPacket);
 
 
-       // tag.putInt("Value",outputVoltageScroll.value);
+        // tag.putInt("Value",outputVoltageScroll.value);
 
     }
 
@@ -149,9 +170,9 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
     protected void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
         super.read(tag, registries, clientPacket);
 
-       // outputVoltageScroll.setValue(tag.getInt("Value"));
+        // outputVoltageScroll.setValue(tag.getInt("Value"));
 //
-       // AccumulatorControlUnitBlockEntity.updateVoltage(this,outputVoltageScroll.value);
+        // AccumulatorControlUnitBlockEntity.updateVoltage(this,outputVoltageScroll.value);
     }
 
     @Override
@@ -187,8 +208,8 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
             }
         }
 
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
-
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+        TFMG.LOGGER.debug("Meow");
         network.setVoltageGen(be, voltage);
         network.setPhaseShift(be, phase * 120);
         if (level instanceof ServerLevel serverLevel) {
@@ -196,6 +217,7 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
             CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(be.worldPosition), new UpdateAccumulatorPacket(be.getBlockPos(), value));
 
         }
+        network.update();
     }
 
     @Override

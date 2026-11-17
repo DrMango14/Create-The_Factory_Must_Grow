@@ -41,14 +41,14 @@ public class ElectricalProperties {
         return new ArrayList<>();
     }
 
-    public List<ElectricalComponent> createProperties(IRealisticElectric be) {
+    public List<ElectricalComponent> createProperties(IElectric be) {
         return new ArrayList<>();
     }
 
 
 
     public static int getFreeId(Level level, int base) {
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
 
         if (network.nodes.isEmpty())
             return base;

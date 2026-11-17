@@ -19,12 +19,12 @@ public class LargeTransformerProperties extends DirectionalElectricalProperties 
 
         ElectricalNode N = new ConnectingElectricalNode(position, 0, getRotation(direction).get(0), NodeType.NEUTRAL);
         ElectricalNode U = new ConnectingElectricalNode(position, 1, getRotation(direction).get(1), NodeType.PHASE_1);
-        ElectricalNode V = new ConnectingElectricalNode(position, 2, getRotation(direction).get(2),NodeType.PHASE_2);
-        ElectricalNode W = new ConnectingElectricalNode(position, 3, getRotation(direction).get(3),NodeType.PHASE_3);
-        ElectricalNode u = new ConnectingElectricalNode(position, 4, getRotation(direction).get(4),NodeType.PHASE_1);
-        ElectricalNode v = new ConnectingElectricalNode(position, 5, getRotation(direction).get(5),NodeType.PHASE_2);
-        ElectricalNode w = new ConnectingElectricalNode(position, 6, getRotation(direction).get(6),NodeType.PHASE_3);
-        ElectricalNode n = new ConnectingElectricalNode(position, 7, getRotation(direction).get(7), NodeType.NEUTRAL);
+        ElectricalNode V = new ConnectingElectricalNode(position, 2, getRotation(direction).get(2), NodeType.PHASE_2);
+        ElectricalNode W = new ConnectingElectricalNode(position, 3, getRotation(direction).get(3), NodeType.PHASE_3);
+        ElectricalNode u = new ConnectingElectricalNode(position, 4, getRotation(direction).get(4), NodeType.PHASE_1);
+        ElectricalNode v = new ConnectingElectricalNode(position, 5, getRotation(direction).get(5), NodeType.PHASE_2);
+        ElectricalNode w = new ConnectingElectricalNode(position, 6, getRotation(direction).get(6), NodeType.PHASE_3);
+       // ElectricalNode n = new ConnectingElectricalNode(position, 7, getRotation(direction).get(7), NodeType.NEUTRAL);
 
 
         nodes.add(N);
@@ -34,11 +34,11 @@ public class LargeTransformerProperties extends DirectionalElectricalProperties 
         nodes.add(u);
         nodes.add(v);
         nodes.add(w);
-        nodes.add(n);
+       // nodes.add(n);
 
-        components.add(new Transformer(U,N,u,n,1,10,1,0,position));
-        components.add(new Transformer(V,N,v,n,1,10,1,1,position));
-        components.add(new Transformer(W,N,w,n,1,10,1,2,position));
+        components.add(new Transformer(U, N, u, N, 1, 10, 1, 0, position));
+        components.add(new Transformer(V, N, v, N, 1, 10, 1, 1, position));
+        components.add(new Transformer(W, N, w, N, 1, 10, 1, 2, position));
 
     }
 
@@ -57,16 +57,48 @@ public class LargeTransformerProperties extends DirectionalElectricalProperties 
         List<CablePos> positions = new ArrayList<>();
 
         switch (direction) {
-            case UP, DOWN, EAST, WEST, NORTH, SOUTH -> {
-                positions.add(new CablePos(1, 0 / 16f, 4 / 16f));
-                positions.add(new CablePos(1, 7 / 16f, 4 / 16f));
-                positions.add(new CablePos(1, 7 / 16f, 8 / 16f));
-                positions.add(new CablePos(1, 7 / 16f, 12 / 16f));
-                positions.add(new CablePos(0, 13 / 16f, 4 / 16f));
-                positions.add(new CablePos(0, 13 / 16f, 8 / 16f));
-                positions.add(new CablePos(0, 13 / 16f, 12 / 16f));
-                positions.add(new CablePos(1, 16 / 16f, 4 / 16f));
+            case SOUTH -> {
+                positions.add(new CablePos(0 / 16f, 14 / 16f, 4 / 16f));
+                positions.add(new CablePos(-3 / 16f, 18 / 16f, 9 / 16f));
+                positions.add(new CablePos(-3 / 16f, 18 / 16f, 16 / 16f));
+                positions.add(new CablePos(-3 / 16f, 18 / 16f, 23 / 16f));
+                positions.add(new CablePos(8 / 16f, 26 / 16f, 7.5 / 16f));
+                positions.add(new CablePos(8 / 16f, 26 / 16f, 16 / 16f));
+                positions.add(new CablePos(8 / 16f, 26 / 16f, 24.5 / 16f));
+                positions.add(new CablePos(16 / 16f, 14 / 16f, 4 / 16f));
+
             }
+            case NORTH -> {
+                positions.add(new CablePos(16 / 16f, 14 / 16f, 12 / 16f));
+                positions.add(new CablePos(19 / 16f, 18 / 16f, 7 / 16f));
+                positions.add(new CablePos(19 / 16f, 18 / 16f, 0 / 16f));
+                positions.add(new CablePos(19 / 16f, 18 / 16f, -7 / 16f));
+                positions.add(new CablePos(8 / 16f, 26 / 16f, 8.5 / 16f));
+                positions.add(new CablePos(8 / 16f, 26 / 16f, 0 / 16f));
+                positions.add(new CablePos(8 / 16f, 26 / 16f, -8.5 / 16f));
+                positions.add(new CablePos(0 / 16f, 14 / 16f, 12 / 16f));
+            }
+            case EAST -> {
+                positions.add(new CablePos(4 / 16f, 14 / 16f, 0 / 16f));
+                positions.add(new CablePos(9 / 16f, 18 / 16f,  19 / 16f));
+                positions.add(new CablePos(16 / 16f, 18 / 16f, 19 / 16f));
+                positions.add(new CablePos(23 / 16f, 18 / 16f, 19 / 16f));
+                positions.add(new CablePos(7.5 / 16f, 26 / 16f, 8 / 16f));
+                positions.add(new CablePos(16 / 16f, 26 / 16f, 8 / 16f));
+                positions.add(new CablePos(24.5 / 16f, 26 / 16f, 8 / 16f));
+                positions.add(new CablePos(4 / 16f, 14 / 16f, 16 / 16f));
+            }
+            default ->  {
+                positions.add(new CablePos(12 / 16f, 14 / 16f, 16/16f));
+                positions.add(new CablePos(7 / 16f , 18 / 16f, -3/16f));
+                positions.add(new CablePos(0 / 16f , 18 / 16f, -3/16f));
+                positions.add(new CablePos(-7 / 16f, 18 / 16f, -3/16f));
+                positions.add(new CablePos(8.5 / 16f , 26 / 16f, 8/16f ));
+                positions.add(new CablePos(0 / 16f , 26 / 16f, 8/16f ));
+                positions.add(new CablePos(-8.5 / 16f, 26 / 16f, 8/16f ));
+                positions.add(new CablePos(12 / 16f, 14 / 16f, 0/16f ));
+            }
+
         }
         ;
 

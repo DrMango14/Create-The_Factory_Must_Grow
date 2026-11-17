@@ -4,6 +4,7 @@ import com.drmangotea.tfmg.content.electricity.CablePos;
 import com.drmangotea.tfmg.content.electricity.content.DirectionalElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.simulation.Transformer;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectingElectricalNode;
+import com.drmangotea.tfmg.content.electricity.simulation.nodes.DirectionalElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.NodeType;
 import net.minecraft.core.Direction;
@@ -18,10 +19,10 @@ public class TransformerProperties extends DirectionalElectricalProperties {
         super(pos1, direction);
 
 
-        ElectricalNode A = new ConnectingElectricalNode(position, 0, getRotation(direction).get(0), NodeType.INPUT);
-        ElectricalNode B = new ConnectingElectricalNode(position, 1, getRotation(direction).get(1),NodeType.OUTPUT);
-        ElectricalNode a = new ConnectingElectricalNode(position, 2, getRotation(direction).get(2),NodeType.INPUT);
-        ElectricalNode b = new ConnectingElectricalNode(position, 3, getRotation(direction).get(3),NodeType.OUTPUT);
+        ElectricalNode A = new DirectionalElectricalNode(position, 0, direction.getCounterClockWise(), NodeType.PHASE_1);
+        ElectricalNode B = new DirectionalElectricalNode(position, 1, direction.getCounterClockWise(),NodeType.NEUTRAL);
+        ElectricalNode a = new DirectionalElectricalNode(position, 2, direction.getCounterClockWise().getOpposite(),NodeType.PHASE_1);
+        ElectricalNode b = new DirectionalElectricalNode(position, 3, direction.getCounterClockWise().getOpposite(),NodeType.NEUTRAL);
 
         nodes.add(A);
         nodes.add(B);
