@@ -10,10 +10,8 @@ import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -28,7 +26,6 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -128,7 +125,6 @@ public abstract class AbstractEngineBlockEntity extends GeneratingKineticBlockEn
         setChanged();
     }
 	
-
     protected void analogSignalChanged() {
         if (level == null) return;
         int newSignal = level.getBestNeighborSignal(getBlockPos());
@@ -157,7 +153,6 @@ public abstract class AbstractEngineBlockEntity extends GeneratingKineticBlockEn
             updateRotation();
         drainFuel = false;
     }
-
 
     public float getSpeedEfficiency() {
         if (rpm >= 6000)
@@ -191,14 +186,13 @@ public abstract class AbstractEngineBlockEntity extends GeneratingKineticBlockEn
 	
 	public Fluid exhaustFluid() {
 		//fallback to Co2 if no exhaust
-		if (level == null) return TFMGFluids.CARBON_DIOXIDE.get();
 		return getFuelType().map(EngineFuelType::exhaust)
-			.orElseGet(TFMGFluids.CARBON_DIOXIDE);
+			.orElseGet(TFMGFluids.CARBON_DIOXIDE::getSource);
 	}
 	
     public Optional<EngineFuelType> getFuelType() {
         if (this.level == null) return Optional.empty();
-        return EngineFuelType.getTypeForFluid(this.level.registryAccess(), fuelTank.getFluid().getFluid()).map(Holder.Reference::value);
+        return EngineFuelType.getTypeForFluid(this.level.registryAccess(), fuelTank.getFluid().getFluid());
     }
 
     public void refreshCapability() {

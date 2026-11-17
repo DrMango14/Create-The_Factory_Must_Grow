@@ -10,6 +10,7 @@ import com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon.QuadPotatoCa
 import com.drmangotea.tfmg.content.machinery.metallurgy.coke_oven.CokeOvenPacket;
 import com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.controller.DistillationTowerPacket;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatEvaluationPacket;
+import com.drmangotea.tfmg.integration.jei.util.EngineFuelsRecipe;
 import net.createmod.catnip.net.base.BasePacketPayload;
 import net.createmod.catnip.net.base.CatnipPacketRegistry;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -36,6 +37,8 @@ public enum TFMGPackets implements BasePacketPayload.PacketTypeProvider {
     UPDATE_VOLTAGE(UpdateVoltagePacket.class, UpdateVoltagePacket.STREAM_CODEC),
     UPDATE_NETWORK(UpdateNetworkPacket.class, UpdateNetworkPacket.STREAM_CODEC),
     UPDATE_ACCUMULATOR(UpdateAccumulatorPacket.class, UpdateAccumulatorPacket.STREAM_CODEC),
+    ENGINE_FUELS(EngineFuelsRecipe.SyncPacket.class, EngineFuelsRecipe.SyncPacket.STREAM_CODEC),
+
 
     // Client to Server
     ELECTRICIANS_WRENCH_PACKET(ElectriciansWrenchPacket.class, ElectriciansWrenchPacket.STREAM_CODEC),

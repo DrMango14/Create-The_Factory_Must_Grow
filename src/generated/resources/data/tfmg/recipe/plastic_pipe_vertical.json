@@ -10,9 +10,9 @@
     }
   },
   "pattern": [
-    "P",
-    "I",
-    "P"
+    " P ",
+    " I ",
+    " P "
   ],
   "result": {
     "count": 4,

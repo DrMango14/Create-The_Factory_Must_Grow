@@ -19,7 +19,9 @@ import net.minecraft.world.item.component.TooltipProvider;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public record CylinderFuels(List<ResourceKey<EngineFuelType>> validFuels) implements TooltipProvider {
@@ -48,6 +50,14 @@ public record CylinderFuels(List<ResourceKey<EngineFuelType>> validFuels) implem
                     .withStyle(ChatFormatting.AQUA);
             tooltip.accept(component);
         }
+    }
+
+    @SafeVarargs
+    public final CylinderFuels withAdditionalFuel(ResourceKey<EngineFuelType>... fuels) {
+        // A Set is used to prevent duplicate fuel types from being added
+        Set<ResourceKey<EngineFuelType>> merged = new LinkedHashSet<>(validFuels);
+        merged.addAll(List.of(fuels));
+        return new CylinderFuels(List.copyOf(merged));
     }
 
     public boolean isSame(CylinderFuels other) {

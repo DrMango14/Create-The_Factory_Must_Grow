@@ -9,12 +9,14 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.createmod.catnip.config.ConfigBase;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.common.ModConfigSpec;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.DoubleSupplier;
 
+@Deprecated(since = "1.3.4", forRemoval = true)
 public class TFMGResistivity extends ConfigBase {
     // bump this version to reset configured values.
     private static final int VERSION = 2;
@@ -24,6 +26,15 @@ public class TFMGResistivity extends ConfigBase {
     private static final Object2DoubleMap<ResourceLocation> DEFAULT_RESISTIVITIES = new Object2DoubleOpenHashMap<>();
 
     protected final Map<ResourceLocation, ModConfigSpec.ConfigValue<Double>> resistivities = new HashMap<>();
+
+    /**
+     * This is needed for {@link CableType} resistive legacy support
+     */
+    @ApiStatus.Internal
+    @Nullable
+    public static Double getDefaultResistivity(ResourceLocation id) {
+        return DEFAULT_RESISTIVITIES.containsKey(id) ? DEFAULT_RESISTIVITIES.getDouble(id) : null;
+    }
 
     @Override
     public void registerAll(ModConfigSpec.Builder builder) {

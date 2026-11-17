@@ -3,11 +3,9 @@
     {
       "elements": [
         {
-          "amount": 1,
           "id": "rutile:calcium"
         },
         {
-          "amount": 1,
           "id": "rutile:carbon"
         },
         {

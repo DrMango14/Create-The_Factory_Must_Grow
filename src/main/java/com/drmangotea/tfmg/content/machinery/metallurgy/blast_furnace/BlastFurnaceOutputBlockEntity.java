@@ -218,7 +218,7 @@ public class BlastFurnaceOutputBlockEntity extends SmartBlockEntity implements I
         if (primaryTank.isEmpty() || isSameFluidSameComponents(primaryTank.getFluid(), activeRecipe.getPrimaryResult()))
             primary = primaryTank.getSpace() >= activeRecipe.getPrimaryResult().getAmount();
         var secondary = true;
-        if ((activeRecipe.getFluidResults().size() > 1) && secondaryTank.isEmpty() || isSameFluidSameComponents(secondaryTank.getFluid(), activeRecipe.getSecondaryResult()))
+        if ((activeRecipe.getFluidResults().size() > 1) && (secondaryTank.isEmpty() || isSameFluidSameComponents(secondaryTank.getFluid(), activeRecipe.getSecondaryResult())))
             secondary = secondaryTank.getSpace() >= activeRecipe.getSecondaryResult().getAmount();
         return primary && secondary;
     }

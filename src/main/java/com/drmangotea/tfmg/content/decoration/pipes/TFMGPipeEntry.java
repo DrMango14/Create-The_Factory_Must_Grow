@@ -111,9 +111,9 @@ public class TFMGPipeEntry {
 						.unlockedBy("has_material", has)
 						.define('I', material.ingot)
 						.define('P', material.sheet)
-						.pattern("P")
-						.pattern("I")
-						.pattern("P")
+						.pattern(" P ")
+						.pattern(" I ")
+						.pattern(" P ")
 						.save(prov, TFMG.asResource(this.material.name + "_pipe_vertical"));
 				})
                 .register();

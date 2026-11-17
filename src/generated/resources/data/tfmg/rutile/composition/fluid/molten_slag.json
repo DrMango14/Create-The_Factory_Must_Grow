@@ -4,7 +4,6 @@
       "amount": 13,
       "elements": [
         {
-          "amount": 1,
           "id": "rutile:silicon"
         },
         {
@@ -17,11 +16,9 @@
       "amount": 20,
       "elements": [
         {
-          "amount": 1,
           "id": "rutile:iron"
         },
         {
-          "amount": 1,
           "id": "rutile:oxygen"
         }
       ]
@@ -30,11 +27,9 @@
       "amount": 40,
       "elements": [
         {
-          "amount": 1,
           "id": "rutile:calcium"
         },
         {
-          "amount": 1,
           "id": "rutile:oxygen"
         }
       ]

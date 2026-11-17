@@ -33,9 +33,12 @@ import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.ElectrodeHolderBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerBlockEntity;
 import com.drmangotea.tfmg.content.world.resevoir.FluidReservoir;
+import com.drmangotea.tfmg.integration.jei.util.EngineFuelsRecipe;
 import com.drmangotea.tfmg.mixin.accessor.ChunkMapAccessor;
 import com.drmangotea.tfmg.registry.TFMGDataAttachments;
 import com.drmangotea.tfmg.registry.TFMGMobEffects;
+import net.createmod.catnip.platform.CatnipServices;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ChunkHolder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -53,6 +56,9 @@ import net.neoforged.neoforge.event.level.LevelEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("unused")
 @EventBusSubscriber
@@ -97,6 +103,11 @@ public class TFMGCommonEvents {
     public static void dataReload(OnDatapackSyncEvent event) {
         FlamethrowerFuelType.typeCache.clear();
         EngineFuelType.typeCache.clear();
+        List<Holder<EngineFuelType>> fuels = new ArrayList<>();
+        for (var holder : event.getPlayerList().getServer().registryAccess().registryOrThrow(TFMGRegistries.ENGINE_FUEL_TYPE).asHolderIdMap()) {
+            fuels.add(holder);
+        }
+        CatnipServices.NETWORK.sendToClients(event.getRelevantPlayers().toList(), new EngineFuelsRecipe.SyncPacket(fuels));
     }
 
     @EventBusSubscriber

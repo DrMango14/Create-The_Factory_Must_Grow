@@ -10,7 +10,6 @@ import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
-import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
 import net.createmod.catnip.animation.LerpedFloat;
@@ -53,7 +52,7 @@ public class WindingMachineBlockEntity extends KineticBlockEntity implements IHa
     public int amountWinded = 0;
     public boolean update = false;
 
-    protected ScrollValueBehaviour turnPercentage;
+    protected SpoolScrollValueBehaviour turnsAmount;
 
     public WindingMachineBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
@@ -93,12 +92,10 @@ public class WindingMachineBlockEntity extends KineticBlockEntity implements IHa
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
-        int max = 100;
-        turnPercentage = new ScrollValueBehaviour(TFMGLang.translateDirect("winding_machine.turn_percentage"),
+        turnsAmount = new SpoolScrollValueBehaviour(TFMGLang.translateDirect("winding_machine.turn_count"),
                 this, new WindingMachineValueBox());
-        turnPercentage.between(1, max);
-        turnPercentage.value = 20;
-        behaviours.add(turnPercentage);
+        turnsAmount.setValue(200);
+        behaviours.add(turnsAmount);
     }
 
     public void onContentsChanged() {
@@ -285,7 +282,7 @@ public class WindingMachineBlockEntity extends KineticBlockEntity implements IHa
         
         if (specialRecipeSpool != null && getSpool().is(specialRecipeSpool)) {
             int amount = input.getOrDefault(specialRecipeComponent, 0);
-            if (amount >= turnPercentage.getValue() * 10) {
+            if (amount >= turnsAmount.getValue()) {
                 finishRecipe(input);
             } else {
                 input.set(specialRecipeComponent, amount + 1);

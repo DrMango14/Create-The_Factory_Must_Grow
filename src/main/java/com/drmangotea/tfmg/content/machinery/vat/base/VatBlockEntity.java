@@ -1444,5 +1444,6 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
     public void clearContent() {
         inputInventory.clearContent();
         outputInventory.clearContent();
+        pressure.setPressure(0);
     }
 }

@@ -2,12 +2,15 @@ package com.drmangotea.tfmg.integration.jei;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.integration.jei.category.*;
+import com.drmangotea.tfmg.integration.jei.util.ClientEngineFuels;
+import com.drmangotea.tfmg.integration.jei.util.EngineFuelsRecipe;
 import com.drmangotea.tfmg.recipes.*;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.foundation.item.ItemHelper;
+import dev.metallurgists.rutile.compat.jei.category.ElementCompositionCategory;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.recipe.category.IRecipeCategory;
@@ -131,12 +134,14 @@ public class TFMGJei implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         loadCategories();
         registration.addRecipeCategories(allCategories.toArray(IRecipeCategory[]::new));
+        registration.addRecipeCategories(new EngineFuelsCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         IIngredientManager ingredientManager = registration.getIngredientManager();
         allCategories.forEach(c -> c.registerRecipes(registration));
+        registration.addRecipes(EngineFuelsCategory.RECIPE_TYPE, EngineFuelsRecipe.fromClient(ClientEngineFuels.INSTANCE.getFuels()));
     }
 
     @Override

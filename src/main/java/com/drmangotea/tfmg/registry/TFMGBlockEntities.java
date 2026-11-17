@@ -441,19 +441,17 @@ public class TFMGBlockEntities {
             .register();
 
 
-    // public static final BlockEntityEntry<TrafficLightBlockEntity> TRAFFIC_LIGHT = REGISTRATE
-    //         .blockEntity("traffic_light", TrafficLightBlockEntity::new)
-    //         .validBlocks(TFMGBlocks.TRAFFIC_LIGHT)
-    //         .renderer(() -> TrafficLightRenderer::new)
-    //         .register();
-//
-    // public static final BlockEntityEntry<SegmentedDisplayBlockEntity> SEGMENTED_DISPLAY = REGISTRATE
-    //         .blockEntity("segmented_display", SegmentedDisplayBlockEntity::new)
-    //         .validBlocks(TFMGBlocks.SEGMENTED_DISPLAY)
-    //         .renderer(() -> SegmentedDisplayRenderer::new)
-    //         //.onRegister(assignDataBehaviourBE(new SegmentedDisplayTarget()))
-    //         //.onRegister(assignDataBehaviourBE(new SegmentedDisplaySource()))
-    //         .register();
+    /*public static final BlockEntityEntry<TrafficLightBlockEntity> TRAFFIC_LIGHT = REGISTRATE
+            .blockEntity("traffic_light", TrafficLightBlockEntity::new)
+            .validBlocks(TFMGBlocks.TRAFFIC_LIGHT)
+            .renderer(() -> TrafficLightRenderer::new)
+            .register();*/
+	
+    public static final BlockEntityEntry<SegmentedDisplayBlockEntity> SEGMENTED_DISPLAY = REGISTRATE
+            .blockEntity("segmented_display", SegmentedDisplayBlockEntity::new)
+            .validBlocks(TFMGBlocks.SEGMENTED_DISPLAY)
+            .renderer(() -> SegmentedDisplayRenderer::new)
+            .register();
 
     public static final BlockEntityEntry<SmokestackBlockEntity> SMOKESTACK = REGISTRATE
             .blockEntity("smokestack", SmokestackBlockEntity::new)

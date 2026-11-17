@@ -3,9 +3,11 @@ package com.drmangotea.tfmg.content.engines.types.large_engine;
 import com.drmangotea.tfmg.base.TFMGShapes;
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
+import com.drmangotea.tfmg.content.engines.fuels.EngineFuelType;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -21,6 +23,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -38,25 +41,41 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import javax.annotation.Nullable;
 import java.util.function.Predicate;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
 
 @NothingNullByDefault
 public class LargeEngineBlock extends TFMGDirectionalBlock implements IWrenchable, IBE<LargeEngineBlockEntity> {
-    public static final MapCodec<LargeEngineBlock> CODEC = simpleCodec(LargeEngineBlock::new);
+    public static final MapCodec<LargeEngineBlock> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
+		propertiesCodec(),
+		EngineFuelType.TAG_CODEC.fieldOf("fuelTag").forGetter(LargeEngineBlock::getFuelTypeTag)
+	).apply(i, LargeEngineBlock::new));
 
     private static final int placementHelperId = PlacementHelpers.register(new PlacementHelper());
 
-    public LargeEngineBlock(Properties properties) {
+	@Nullable
+	private final TagKey<EngineFuelType> fuelTag;
+	
+	/// This exists purely as legacy support. use {@link LargeEngineBlock#LargeEngineBlock(Properties, TagKey)}
+	@Deprecated(since = "1.4.0", forRemoval = true)
+	public LargeEngineBlock(Properties properties) {
+		this(properties, null);
+	}
+	
+    public LargeEngineBlock(Properties properties, @Nullable TagKey<EngineFuelType> fuelTag) {
         super(properties);
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
+		this.fuelTag = fuelTag;
     }
 
     @Override
     protected MapCodec<? extends TFMGDirectionalBlock> codec() {
         return CODEC;
     }
+	
+	public @Nullable TagKey<EngineFuelType> getFuelTypeTag() { return fuelTag; }
 
     @Override
     protected void createBlockStateDefinition(Builder<Block, BlockState> pBuilder) {

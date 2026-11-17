@@ -7,9 +7,8 @@
   ],
   "textures": {
     "1": "tfmg:block/digital_display",
-    "2": "tfmg:block/industrial_aluminum_casing",
-    "3": "tfmg:block/aluminum_inlet",
-    "particle": "tfmg:block/digital_display"
+    "2": "tfmg:block/heavy_machinery_casing",
+    "particle": "tfmg:block/heavy_machinery_casing"
   },
   "elements": [
     {
@@ -49,7 +48,7 @@
             16,
             16
           ],
-          "texture": "#3"
+          "texture": "#2"
         },
         "west": {
           "uv": [

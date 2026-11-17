@@ -7,6 +7,7 @@ import com.drmangotea.tfmg.content.electricity.display_link.network.NetConsumpti
 import com.drmangotea.tfmg.content.electricity.display_link.network.NetGenerationDisplaySource;
 import com.drmangotea.tfmg.content.electricity.display_link.network.NetIdDisplaySource;
 import com.drmangotea.tfmg.content.electricity.display_link.network.NetResistanceDisplaySource;
+import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplaySource;
 import com.simibubi.create.api.behaviour.display.DisplaySource;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 
@@ -27,6 +28,9 @@ public class TFMGDisplaySources {
     public static final RegistryEntry<DisplaySource, NetGenerationDisplaySource> NETWORK_GENERATION = simple("network_generation", NetGenerationDisplaySource::new);
     public static final RegistryEntry<DisplaySource, NetIdDisplaySource> NETWORK_ID = simple("network_id", NetIdDisplaySource::new);
     public static final RegistryEntry<DisplaySource, NetResistanceDisplaySource> NETWORK_RESISTANCE = simple("network_resistance", NetResistanceDisplaySource::new);
+	//not sure if this should exist ngl
+	public static final RegistryEntry<DisplaySource, SegmentedDisplaySource>
+		SEGMENTED_DISPLAY = simple("segmented_display", SegmentedDisplaySource::new);
 
 
     private static <T extends DisplaySource> RegistryEntry<DisplaySource, T> simple(String name, Supplier<T> supplier) {

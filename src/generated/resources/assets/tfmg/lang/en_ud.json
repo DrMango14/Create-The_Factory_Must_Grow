@@ -1006,6 +1006,11 @@
   "tfmg.goggles.voltmeter.range": "%1$s :ǝbuɐᴚ   ",
   "tfmg.goggles.winding_machine.turns": " :ʇɟǝꞀ suɹn⟘",
   "tfmg.goggles.zero": "pıןɐʌuI ǝuıɥɔɐW",
+  "tfmg.jei.engine_fuels.efficiency": "%1$s :ʎɔuǝıɔıɟɟƎ",
+  "tfmg.jei.engine_fuels.exhaust": " :ʇsnɐɥxƎ",
+  "tfmg.jei.engine_fuels.speed": "%1$s :pǝǝdS",
+  "tfmg.jei.engine_fuels.title": "sןǝnℲ ǝuıbuƎ",
+  "tfmg.jei.engine_fuels.torque": "%1$s :ǝnbɹo⟘",
   "tfmg.keyinfo.custom_button": "uoʇʇnᗺ ɯoʇsnƆ ɹǝןןoɹʇuoƆ ǝuıbuƎ",
   "tfmg.keyinfo.engine_start": "ǝuıbuƎ ʇɹɐʇS",
   "tfmg.keyinfo.transmission_shift_down": "uʍoᗡ ʇɟıɥS uoıssıɯsuɐɹ⟘",
@@ -1250,6 +1255,6 @@
   "tfmg.vat.header": "ʇɐΛ ןɐɔıɯǝɥƆ",
   "tfmg.voltage": "%1$s :ǝbɐʇןoΛ",
   "tfmg.winding_machine.header": "ǝuıɥɔɐW buıpuıM",
-  "tfmg.winding_machine.turn_percentage": ")000Ɩ ɯoɹℲ( ǝbɐʇuǝɔɹǝԀ uɹn⟘ pǝʍoןןⱯ",
+  "tfmg.winding_machine.turn_count": "suɹn⟘ ɟo ɹǝqɯnN",
   "tfmg.wires.removed_data": "pǝʌoɯǝᴚ ɐʇɐᗡ"
 }

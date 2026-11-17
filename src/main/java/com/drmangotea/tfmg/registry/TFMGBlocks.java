@@ -163,6 +163,7 @@ import static com.drmangotea.tfmg.base.TFMGBuilderTransformers.*;
 import static com.drmangotea.tfmg.content.electricity.content.lights.ElectricLightBlock.LIGHT;
 import static com.drmangotea.tfmg.registry.TFMGTags.Items;
 import static com.simibubi.create.api.behaviour.display.DisplaySource.displaySource;
+import static com.simibubi.create.api.behaviour.display.DisplayTarget.displayTarget;
 import static com.simibubi.create.api.behaviour.movement.MovementBehaviour.movementBehaviour;
 import static com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType.mountedFluidStorage;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
@@ -442,7 +443,7 @@ public class TFMGBlocks {
             .item()
             .transform(customItemModel())
             .register();
-    public static final BlockEntry<LargeEngineBlock> LARGE_ENGINE = REGISTRATE.block("large_engine", LargeEngineBlock::new)
+    public static final BlockEntry<LargeEngineBlock> LARGE_ENGINE = REGISTRATE.block("large_engine", p -> new LargeEngineBlock(p, TFMGTags.EngineFuel.LARGE_ENGINE.tag))
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
             .properties(BlockBehaviour.Properties::noOcclusion)
@@ -451,7 +452,7 @@ public class TFMGBlocks {
             .blockstate((c, p) -> p.directionalBlock(c.get(), AssetLookup.partialBaseModel(c, p)))
             .item().transform(customItemModel())
             .register();
-    public static final BlockEntry<LargeEngineBlock> SIMPLE_LARGE_ENGINE = REGISTRATE.block("simple_large_engine", LargeEngineBlock::new)
+    public static final BlockEntry<LargeEngineBlock> SIMPLE_LARGE_ENGINE = REGISTRATE.block("simple_large_engine", p -> new LargeEngineBlock(p, TFMGTags.EngineFuel.SIMPLE_LARGE_ENGINE.tag))
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
             .properties(BlockBehaviour.Properties::noOcclusion)
@@ -1373,25 +1374,30 @@ public class TFMGBlocks {
                     .item()
                     .transform(customItemModel())
                     .register();
-    //public static final BlockEntry<TrafficLightBlock> TRAFFIC_LIGHT =
-    //        REGISTRATE.block("traffic_light", TrafficLightBlock::new)
-    //                .initialProperties(SharedProperties::softMetal)
-    //                .transform(pickaxeOnly())
-    //                .properties(BlockBehaviour.Properties::noOcclusion)
-    //                .addLayer(() -> RenderType::cutoutMipped)
-    //                .blockstate(BlockStateGen.horizontalBlockProvider(true))
-    //                .item()
-    //                .transform(customItemModel())
-    //                .register();
-    //public static final BlockEntry<SegmentedDisplayBlock> SEGMENTED_DISPLAY =
-    //        REGISTRATE.block("segmented_display", SegmentedDisplayBlock::new)
-    //                .initialProperties(SharedProperties::softMetal)
-    //                .transform(pickaxeOnly())
-    //                .onRegister(connectedTextures(SegmentedDisplayCTBehavior::new))
-    //                .blockstate(BlockStateGen.horizontalBlockProvider(true))
-    //                .item()
-    //                .transform(customItemModel())
-    //                .register();
+    /*public static final BlockEntry<TrafficLightBlock> TRAFFIC_LIGHT =
+            REGISTRATE.block("traffic_light", TrafficLightBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .transform(pickaxeOnly())
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                    .item()
+                    .transform(customItemModel())
+                    .register();*/
+    public static final BlockEntry<SegmentedDisplayBlock> SEGMENTED_DISPLAY =
+            REGISTRATE.block("segmented_display", SegmentedDisplayBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .transform(pickaxeOnly())
+                    .onRegister(connectedTextures(SegmentedDisplayCTBehavior::new))
+					.onRegister(casingConnectivity((b,cc) -> cc.make(
+						b, TFMGSpriteShifts.HEAVY_MACHINERY_CASING,
+						(s, f) -> s.getValue(SegmentedDisplayBlock.FACING) != f
+					)))
+                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
+					.transform(displaySource(TFMGDisplaySources.SEGMENTED_DISPLAY))
+					.transform(displayTarget(TFMGDisplayTargets.SEGMENTED_DISPLAY))
+                    .item().transform(customItemModel())
+                    .register();
 
     public static final BlockEntry<TransformerBlock> TRANSFORMER =
             REGISTRATE.block("transformer", TransformerBlock::new)
@@ -1908,7 +1914,6 @@ public class TFMGBlocks {
                             .requires(Items.CAUTION_BLOCKS.tag)
                             .unlockedBy("has_caution_block", RegistrateRecipeProvider.has(Items.CAUTION_BLOCKS.tag))
 							.save(p.withConditions(conditions), TFMG.asResource("crafting/materials/" + c.getName() + "_from_other_caution_block"));
-                    //TFMGUtils.conditionalCrafting(p, , builder, conditions);
                 })
                 .item()
                 .tag(Items.CAUTION_BLOCKS.tag)

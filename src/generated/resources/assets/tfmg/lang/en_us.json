@@ -1006,6 +1006,11 @@
   "tfmg.goggles.voltmeter.range": "   Range: %1$s",
   "tfmg.goggles.winding_machine.turns": "Turns Left: ",
   "tfmg.goggles.zero": "Machine Invalid",
+  "tfmg.jei.engine_fuels.efficiency": "Efficiency: %1$s",
+  "tfmg.jei.engine_fuels.exhaust": "Exhaust: ",
+  "tfmg.jei.engine_fuels.speed": "Speed: %1$s",
+  "tfmg.jei.engine_fuels.title": "Engine Fuels",
+  "tfmg.jei.engine_fuels.torque": "Torque: %1$s",
   "tfmg.keyinfo.custom_button": "Engine Controller Custom Button",
   "tfmg.keyinfo.engine_start": "Start Engine",
   "tfmg.keyinfo.transmission_shift_down": "Transmission Shift Down",
@@ -1250,6 +1255,6 @@
   "tfmg.vat.header": "Chemical Vat",
   "tfmg.voltage": "Voltage: %1$s",
   "tfmg.winding_machine.header": "Winding Machine",
-  "tfmg.winding_machine.turn_percentage": "Allowed Turn Percentage (From 1000)",
+  "tfmg.winding_machine.turn_count": "Number of Turns",
   "tfmg.wires.removed_data": "Data Removed"
 }

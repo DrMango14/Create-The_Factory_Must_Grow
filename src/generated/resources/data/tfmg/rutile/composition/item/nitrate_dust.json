@@ -3,11 +3,9 @@
     {
       "elements": [
         {
-          "amount": 1,
           "id": "rutile:potassium"
         },
         {
-          "amount": 1,
           "id": "rutile:nitrogen"
         },
         {
