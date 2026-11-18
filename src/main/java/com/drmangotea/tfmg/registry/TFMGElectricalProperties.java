@@ -8,6 +8,7 @@ import com.drmangotea.tfmg.content.electricity.content.devices.electric_motor.El
 import com.drmangotea.tfmg.content.electricity.content.devices.generators.creative_generator.CreativeGeneratorProperties;
 import com.drmangotea.tfmg.content.electricity.content.devices.generators.large_generator.LargeGeneratorProperties;
 import com.drmangotea.tfmg.content.electricity.content.devices.generators.three_phase_generator.ThreePhaseGeneratorProperties;
+import com.drmangotea.tfmg.content.electricity.content.devices.segmented_display.SegmentedDisplayProperties;
 import com.drmangotea.tfmg.content.electricity.content.lights.LightProperties;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.adapters.FourSlotAdapterProperties;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.adapters.TwoSlotAdapterProperties;
@@ -35,7 +36,7 @@ public class TFMGElectricalProperties {
 			(pos, direction, d) -> new ThreePhaseGeneratorProperties(pos, direction));
 	
 	public final static DeferredHolder<ElectricalPropertiesType<?>, ElectricalPropertiesType<LargeGeneratorProperties>>
-		LARGE_GENERATOR = property("unwireable_connector",
+		LARGE_GENERATOR = property("large_generator",
 		(pos, direction, d) -> new LargeGeneratorProperties(pos, direction));
 	
 	public final static DeferredHolder<ElectricalPropertiesType<?>, ElectricalPropertiesType<ConnectorProperties>>
@@ -93,6 +94,10 @@ public class TFMGElectricalProperties {
 	public final static DeferredHolder<ElectricalPropertiesType<?>, ElectricalPropertiesType<UnwireableConnectorProperties>>
 		UNWIREABLE_CONNECTOR = property("unwireable_connector",
 			(pos, direction, d) -> new UnwireableConnectorProperties(pos, d));
+	
+	public final static DeferredHolder<ElectricalPropertiesType<?>, ElectricalPropertiesType<SegmentedDisplayProperties>>
+		DISPLAY = property("segmented_display",
+		(pos, direction, d) -> new SegmentedDisplayProperties(pos, direction));
 	
 	public static <T extends ElectricalProperties> DeferredHolder<ElectricalPropertiesType<?>, ElectricalPropertiesType<T>> property (
 		String name, ElectricalPropertiesType.PropertiesFactory<T> factory

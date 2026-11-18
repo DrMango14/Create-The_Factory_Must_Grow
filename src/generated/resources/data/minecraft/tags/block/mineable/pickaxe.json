@@ -93,6 +93,7 @@
     "tfmg:large_switch",
     "tfmg:rotor",
     "tfmg:stator",
+    "tfmg:segmented_display",
     "tfmg:transformer",
     "tfmg:large_coil",
     "tfmg:brick_smokestack",

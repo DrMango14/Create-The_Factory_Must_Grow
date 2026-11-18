@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.content.electricity;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
+import com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.cable_type.CableType;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectableElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectingElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
@@ -53,9 +54,10 @@ public class ElectricNetworkRenderer {
         Vec3 playerPos = player.getEyePosition();
 
         for (WireConnection connection : network.connections) {
-			if (connection.render())
+			CableType type = connection.cableType();
+			if (connection.render() && type != null)
 				renderWire(
-					connection.cableType().getModel(),
+					type.getModel(),
 					connection.node1().getPosition().add(Vec3.atLowerCornerOf(connection.node1().pos)),
 					connection.node2().getPosition().add(Vec3.atLowerCornerOf(connection.node2().pos)),
 					camera, ms, vc, playerPos

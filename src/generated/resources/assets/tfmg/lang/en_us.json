@@ -455,6 +455,7 @@
   "block.tfmg.rotor": "Rotor",
   "block.tfmg.rusted_blast_furnace_reinforcement": "Rusted Blast Furnace Reinforcement",
   "block.tfmg.rusted_blast_furnace_reinforcement_wall": "Rusted Blast Furnace Reinforcement Wall",
+  "block.tfmg.segmented_display": "Segmented Display",
   "block.tfmg.simple_large_engine": "Simple Large Engine",
   "block.tfmg.simple_large_engine.tooltip.behaviour1": "To function it requires air and fuel to be pumped in (Diesel, Kerosene, Naphtha, Furnace Gas) and co2 to be pumped out (needs an exhaust) to generate rotation (a shaft needs to be attached similar to a steam engine)",
   "block.tfmg.simple_large_engine.tooltip.summary": "Creates rotation (less effectively than its regular counterpart) from less refined fuels",

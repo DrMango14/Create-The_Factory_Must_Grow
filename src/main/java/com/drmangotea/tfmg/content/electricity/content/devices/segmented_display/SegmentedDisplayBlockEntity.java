@@ -1,14 +1,11 @@
 package com.drmangotea.tfmg.content.electricity.content.devices.segmented_display;
 
-import com.drmangotea.tfmg.content.electricity.IElectric;
+import com.drmangotea.tfmg.content.electricity.content.devices.base.ResistiveLoadBlockEntity;
 import com.simibubi.create.content.redstone.displayLink.DisplayLinkBlock;
-import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
-import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.utility.DynamicComponent;
 import net.createmod.catnip.data.Couple;
 import net.createmod.catnip.nbt.NBTHelper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -21,10 +18,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.List;
 import java.util.Optional;
 
-import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
-
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-public class SegmentedDisplayBlockEntity extends SmartBlockEntity implements IElectric {
+public class SegmentedDisplayBlockEntity extends ResistiveLoadBlockEntity {
     private Optional<DynamicComponent> customText;
     private Couple<String> displayedStrings;
     public Couple<List<Integer>> segmentsToRender = clearSegments();
@@ -32,17 +27,20 @@ public class SegmentedDisplayBlockEntity extends SmartBlockEntity implements IEl
     public DyeColor color;
 
     private int partIndex;
+	
+	//ElectricalProperties properties;
 
     public SegmentedDisplayBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         customText = Optional.empty();
         color = DyeColor.LIME;
+		//properties = new SegmentedDisplayProperties(getPos(), state.getValue(FACING));
     }
 	
-	@Override
-	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-	
-	}
+	/*@Override
+	public ElectricalProperties getProperties() {
+		return properties;
+	}*/
 
     public void setColor(DyeColor color) {
         if(color==DyeColor.BLACK||color == DyeColor.LIGHT_GRAY|| color == DyeColor.GRAY)
@@ -52,14 +50,14 @@ public class SegmentedDisplayBlockEntity extends SmartBlockEntity implements IEl
     }
 
     @Override
-    public float resistance() {
+    public double resistance() {
         return 100;
     }
 
     @Override
     public void lazyTick() {
         super.lazyTick();
-        if (getPowerUsage() < 5 || !canWork()) {
+        if (current*voltage < 5) {
             segmentsToRender = clearSegments();
         } else {
             segmentsToRender = getSegments();
@@ -108,11 +106,6 @@ public class SegmentedDisplayBlockEntity extends SmartBlockEntity implements IEl
         partIndex = partPositionInRow;
         DisplayLinkBlock.notifyGatherers(level, worldPosition);
         notifyUpdate();
-    }
-
-    @Override
-    public boolean hasElectricitySlot(Direction direction) {
-        return direction != getBlockState().getValue(FACING);
     }
 
     public void updateDisplayedStrings() {
