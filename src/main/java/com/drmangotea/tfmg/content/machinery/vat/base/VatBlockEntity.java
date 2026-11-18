@@ -24,6 +24,8 @@ import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
+import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
@@ -37,6 +39,7 @@ import joptsimple.internal.Strings;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.createmod.catnip.data.Couple;
 import net.createmod.catnip.lang.LangBuilder;
+import net.createmod.catnip.math.VecHelper;
 import net.createmod.catnip.platform.CatnipServices;
 import net.createmod.ponder.api.level.PonderLevel;
 import net.minecraft.ChatFormatting;
@@ -58,6 +61,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -92,6 +96,8 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
     protected IFluidHandler fluidCapability;
     protected IItemHandlerModifiable itemCapability;
     protected IPressureHandler pressureCapability;
+    // comment here
+    protected FilteringBehaviour filteringBehaviour;
     //rendering
     protected boolean forceFluidLevelUpdate;
     public LerpedFloat visualSpeed = LerpedFloat.linear();
@@ -172,9 +178,11 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         pressureTank = new SmartPressureTankBehaviour(SmartPressureTankBehaviour.INPUT, this, 1, MAX_PRESSURE)
                 .whenPressureUpdates(this::onInventoryChanged)
                 .forbidExtraction();
+        filteringBehaviour = new FilteringBehaviour(this, new VatValueBox()).forRecipes();
         behaviours.add(inputTank);
         behaviours.add(outputTank);
         behaviours.add(pressureTank);
+        behaviours.add(filteringBehaviour);
 
         pressureCapability = pressureTank.getCapability();
         fluidCapability = new CombinedTankWrapper(inputTank.getCapability(), outputTank.getCapability());
@@ -265,7 +273,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         revalidateMachines();
         updateTemperature();
         if (level != null && level.isClientSide && !(level instanceof PonderLevel)) {
-			updateFluidLevel();
+            updateFluidLevel();
 
             float targetSpeed = 0;
             for (BlockPos pos : machineMap.keySet()) {
@@ -281,14 +289,14 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
             visualSpeed.chase(Math.min(targetSpeed, 64f) * .09f, .2f, LerpedFloat.Chaser.EXP);
         }
     }
-	
-	public void updateFluidLevel () {
-		for (SmartFluidTankBehaviour tank : tanks) { tank.forEach(s -> {
-			SmartFluidTank ft = ((TankSegmentAccessor) s).tfmg$tank();
-			double percentage = (double) ft.getFluidAmount() / ft.getCapacity();
-			s.getFluidLevel().chase(percentage, .5f, LerpedFloat.Chaser.EXP);
-		}); }
-	}
+
+    public void updateFluidLevel () {
+        for (SmartFluidTankBehaviour tank : tanks) { tank.forEach(s -> {
+            SmartFluidTank ft = ((TankSegmentAccessor) s).tfmg$tank();
+            double percentage = (double) ft.getFluidAmount() / ft.getCapacity();
+            s.getFluidLevel().chase(percentage, .5f, LerpedFloat.Chaser.EXP);
+        }); }
+    }
 
     public void updateTemperature() {
         if (!isController())
@@ -379,8 +387,10 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
 
         for (RecipeHolder<? extends Recipe<?>> recipe1 : list) {
             VatMachineRecipe testedRecipe = (VatMachineRecipe) recipe1.value();
-            if (getTotalTankSize() < testedRecipe.minSize)
+            if (getTotalTankSize() < testedRecipe.minSize || !matchesFilter(testedRecipe)) {
                 continue;
+            }
+
             boolean doesntMatch = false;
 
             List<VatOperation> activeMachines = new ArrayList<>(machineMap.values());
@@ -456,6 +466,19 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         return null;
     }
 
+    private boolean matchesFilter(VatMachineRecipe recipe) {
+        if (filteringBehaviour == null || filteringBehaviour.getFilter().isEmpty())
+            return true;
+
+        for (ProcessingOutput output : recipe.getRollableResults()) {
+            if (filteringBehaviour.test(output.getStack())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     @Override
     public void tick() {
         super.tick();
@@ -509,7 +532,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         }
         if (updateConnectivity)
             updateConnectivity();
-		if (forceFluidLevelUpdate) updateFluidLevel();
+        if (forceFluidLevelUpdate) updateFluidLevel();
         visualSpeed.tickChaser();
 
     }
@@ -1214,7 +1237,7 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         addMachineTooltip(countedMachines, tooltip);
 
         TFMGUtils.createFluidTooltip(tooltip, fluidCapability);
-		TFMGUtils.createItemTooltip(tooltip, itemCapability);
+        TFMGUtils.createItemTooltip(tooltip, itemCapability);
         return true;
     }
 
@@ -1283,15 +1306,15 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
     }
 
     public float getFillState() {
-		int tVol = 0, tCap = 0;
-		for (SmartFluidTankBehaviour behaviour : tanks) {
-			for (SmartFluidTankBehaviour.TankSegment segment : behaviour.getTanks()) {
-				SmartFluidTank tank = ((TankSegmentAccessor) segment).tfmg$tank();
-				tVol += tank.getFluidAmount();
-				tCap += tank.getCapacity();
-			}
-		}
-		return (float) tVol / tCap;
+        int tVol = 0, tCap = 0;
+        for (SmartFluidTankBehaviour behaviour : tanks) {
+            for (SmartFluidTankBehaviour.TankSegment segment : behaviour.getTanks()) {
+                SmartFluidTank tank = ((TankSegmentAccessor) segment).tfmg$tank();
+                tVol += tank.getFluidAmount();
+                tCap += tank.getCapacity();
+            }
+        }
+        return (float) tVol / tCap;
     }
 
     @Override
@@ -1445,5 +1468,25 @@ public class VatBlockEntity extends SmartBlockEntity implements IHaveGoggleInfor
         inputInventory.clearContent();
         outputInventory.clearContent();
         pressure.setPressure(0);
+
+        filteringBehaviour.setFilter(ItemStack.EMPTY);
+    }
+
+    class VatValueBox extends ValueBoxTransform.Sided {
+        @Override
+        protected Vec3 getSouthLocation() {
+			Direction facing = getSide();
+			return VecHelper.voxelSpace(8, 12, 16.05)
+				.add(
+					0.5 * (facing.get2DDataValue() > 1 ? 1 - width : width - 1),
+					0,
+					facing.getAxisDirection() == Direction.AxisDirection.POSITIVE? width - 1 : 0
+				);
+        }
+
+        @Override
+        protected boolean isSideActive(BlockState state, Direction direction) {
+            return isController() && direction.getAxis().isHorizontal();
+        }
     }
 }
