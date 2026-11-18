@@ -14,7 +14,6 @@ import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectableElect
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
 import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.content.trains.graph.DimensionPalette;
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.data.Pair;
 import net.createmod.catnip.net.base.ClientboundPacketPayload;
 import net.minecraft.client.player.LocalPlayer;
@@ -117,9 +116,7 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
 
             for (int j = 0; j < connectionCount; j++) {
                 boolean shouldRender = buffer.readBoolean();
-                String modelLocation = buffer.readUtf().replace('.',':');
-                PartialModel model = PartialModel.of(ResourceLocation.parse(modelLocation));
-                double resistance = buffer.readDouble();
+                ResourceLocation cableType = ResourceLocation.parse(buffer.readUtf().replace('.',':'));
 
                 BlockPos pos1 = buffer.readBlockPos();
                 int id1 = buffer.readInt();
@@ -146,7 +143,7 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
                 if (n1 != null && n2 != null) {
                     n1.pos = pos1;
                     n2.pos = pos2;
-                    network.connections.add(new WireConnection(n1, n2, resistance, shouldRender,model));
+                    network.connections.add(new WireConnection(n1, n2, cableType, shouldRender));
                 }
 
             }
@@ -218,9 +215,7 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
             for (int i = 0; i < connectionCount; i++) {
                 WireConnection connection = connections.get(i);
 				buffer.writeBoolean(connection.render());
-				String model = connection.model().modelLocation().toString().replace(':','.');
-				buffer.writeUtf(model);
-				buffer.writeDouble(connection.resistance());
+				buffer.writeUtf(connection.cableTypeKey().toString().replace(':','.'));
                 buffer.writeBlockPos(connection.node1().pos);
                 buffer.writeInt(connection.node1().getLocalId());
                 buffer.writeBlockPos(connection.node2().pos);

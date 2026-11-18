@@ -201,8 +201,7 @@ public class TFMGItems {
 		EMPTY_SPOOL = spoolItem("empty", 0x000000)
             .recipe((c, p) -> p.stonecutting(DataIngredient.items(TFMGBlocks.HARDENED_PLANKS.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 1))
             .register(),
-		STEEL_REINFORCED_CABLE = spoolItem("steel_reinforced", 0x4D5457)
-			.register(),
+		STEEL_REINFORCED_CABLE = fullSpoolItem("steel_reinforced", 0x4D5457, CommonMetal.STEEL.nuggets),
 		COPPER_SPOOL = fullSpoolItem("copper", 0xD8735A, Items.WIRES_COPPER.tag),
 		ALUMINUM_SPOOL = fullSpoolItem("aluminum", 0xEDEFEF, Items.WIRES_ALUMINUM.tag),
 		CONSTANTAN_SPOOL = fullSpoolItem("constantan", 0xCFC2A8, Items.WIRES_CONSTANTAN.tag);

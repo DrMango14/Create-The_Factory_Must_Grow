@@ -16,7 +16,6 @@ import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.content.kinetics.deployer.DeployerFakePlayer;
-import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -124,11 +123,7 @@ public class SpoolItem extends Item {
 
 			for (ElectricalNode n : nodes) {
 				if (n.getLocalId() == id && n instanceof ConnectingElectricalNode node2) {
-					CableType type = TFMGUtils.getCableType(cableTypeKey);
-					if (type == null) return InteractionResult.PASS;
-					PartialModel model = type.getModel();
-					
-					network.connections.add(new WireConnection(node1, node2, 10, true,model));
+					network.connections.add(new WireConnection(node1, node2, cableTypeKey, true));
 					float distance = TFMGUtils.getDistance(node1.pos.getBottomCenter(),node2.pos.getBottomCenter())*4;
 					
 					stack.set(TFMGDataComponents.SPOOL_AMOUNT,(int)Math.max(0,stack.getOrDefault(TFMGDataComponents.SPOOL_AMOUNT,0)-distance));

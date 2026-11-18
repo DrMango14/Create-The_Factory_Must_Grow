@@ -2,14 +2,15 @@ package com.drmangotea.tfmg.content.electricity;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
+import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectableElectricalNode;
+import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
-
-import static com.drmangotea.tfmg.content.electricity.content.power_transmission.cables.AbstractCableBlockEntity.connectToNeighbors;
 
 public interface IElectric extends IHaveMultimeterInformation {
 	ElectricalProperties getProperties();
@@ -68,21 +69,48 @@ public interface IElectric extends IHaveMultimeterInformation {
 
     default void onPlace() {
         this.updateNetwork(getPos());
-        /*if (this instanceof ElectricSwitchBlockEntity)
-            for (Direction facing : Direction.values()) {
-                if (getWorld().getBlockEntity(getPos().relative(facing)) instanceof IRealisticElectric be) {
-                    connectToNeighbors(getWorld(), be);
-                }
-            }
-
-
-        if (!(this instanceof CableBlockEntity) && getProperties().cableConnectable()) {
-            connectToNeighbors(getWorld(), this);
-            updateNetwork(BlockPos.of(getPos()));
-        }*/
 		
 		connectToNeighbors(getWorld(), this);
         this.updateNetwork(getPos());
 
     }
+	
+	static boolean connectToNeighbors(Level level, IElectric be) {
+		ElectricalNetwork network = be.getNetwork(level);
+		ElectricalProperties properties = network.members.get(be.getPos());
+		network.removeConnections(be);
+		
+		if (properties == null) {
+			return false;
+		}
+		
+		for (Direction facing : Direction.values()) {
+			BlockPos pos = be.getPos().relative(facing);
+			
+			ElectricalProperties neighborProperties = network.members.get(pos);
+			if (neighborProperties == null) {
+				return true;
+			}
+			
+			for (ElectricalNode n1 : properties.nodes) {
+				if (!(n1 instanceof ConnectableElectricalNode node)) continue;
+				for (ElectricalNode n2 : neighborProperties.nodes) {
+					if (!(n2 instanceof ConnectableElectricalNode neighborNode)) continue;
+					
+					if (node.type != neighborNode.type) continue;
+					
+					if (node.facing.contains(facing) && neighborNode.facing.contains(facing.getOpposite())) {
+						WireConnection connection = invisibleConnection(node, neighborNode);
+						if (!network.connections.contains(connection))
+							network.connections.add(connection);
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	static WireConnection invisibleConnection(ConnectableElectricalNode A, ConnectableElectricalNode B) {
+		return new WireConnection(A, B, TFMG.asResource("universal"), false);
+	}
 }

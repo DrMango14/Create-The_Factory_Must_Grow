@@ -1,7 +1,5 @@
 package com.drmangotea.tfmg.config;
 
-import com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.cable_type.ResistivityValues;
-import com.drmangotea.tfmg.config.server.TFMGResistivity;
 import com.drmangotea.tfmg.config.server.TFMGStress;
 import com.simibubi.create.api.stress.BlockStressValues;
 
@@ -64,8 +62,6 @@ public class TFMGConfigs {
 		TFMGStress stress = TFMGConfigs.server().stressValues;
 		BlockStressValues.IMPACTS.registerProvider(stress::getImpact);
 		BlockStressValues.CAPACITIES.registerProvider(stress::getCapacity);
-		TFMGResistivity resistivity = server().resistivityValues;
-		ResistivityValues.RESISTIVITIES.registerProvider(resistivity::getResistivity);
 	}
 
 	@SubscribeEvent

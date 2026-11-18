@@ -7,9 +7,13 @@ import static com.drmangotea.tfmg.TFMG.REGISTRATE;
 
 public class TFMGCableTypes {
 
+	//fallback
     public static final CableTypeEntry<CableType> EMPTY = REGISTRATE.cableType("empty", CableType::new)
-            .properties((p) -> p.spool(TFMGItems.COPPER_SPOOL).wire(TFMGItems.COPPER_WIRE::asItem).color(0xffffff).resistance(Double.MAX_VALUE))
-            .register();
+            .properties((p) -> p.color(0xffffff).resistance(Double.MAX_VALUE)).register();
+	
+	//invisible base
+	public static final CableTypeEntry<CableType> UNIVERSAL = REGISTRATE.cableType("universal", CableType::new)
+		.properties((p) -> p.color(0x000000).resistance(10d)).register();
 
     public static final CableTypeEntry<CableType> STEEL_REINFORCED = REGISTRATE.cableType("steel_reinforced", CableType::new)
 		.properties((p) -> p.color(0x4D5457)

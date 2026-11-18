@@ -49,6 +49,7 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
     }
 
     public void connectToNeighbors() {
+		if (level == null) return;
         ElectricalNetwork network = getNetwork(level);
         CableProperties properties = (CableProperties) network.members.get(getPos());
         network.removeConnections(this);
@@ -63,11 +64,9 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
 
                 if (neighborProperties instanceof CableProperties cableProperties) {
                     if (cableProperties.directions.contains(facing)) {
-
                         for (int i = 0; i < 4; i++) {
                             if (properties.nodes.get(i) instanceof DirectionalElectricalNode n1 && cableProperties.nodes.get(i) instanceof DirectionalElectricalNode n2) {
-
-                                WireConnection connection = new WireConnection(n1, n2, 10, false);
+                                WireConnection connection = IElectric.invisibleConnection(n1, n2);
                                 if (!network.connections.contains(connection))
                                     network.connections.add(connection);
                             }
@@ -78,9 +77,7 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
                     for (int i = 0; i < 4; i++) {
                         if (i < properties.nodes.size() && i < neighborProperties.nodes.size())
                             if (properties.nodes.get(i) instanceof ConnectableElectricalNode n1 && neighborProperties.nodes.get(i) instanceof ConnectableElectricalNode n2) {
-
-
-                                WireConnection connection = new WireConnection(n1, n2, 10, false);
+                                WireConnection connection = IElectric.invisibleConnection(n1, n2);
                                 if (!network.connections.contains(connection))
                                     network.connections.add(connection);
                             }

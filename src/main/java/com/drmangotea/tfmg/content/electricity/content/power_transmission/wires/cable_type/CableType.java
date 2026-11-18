@@ -1,7 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.cable_type;
 
-import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.config.server.TFMGResistivity;
 import com.drmangotea.tfmg.content.machinery.misc.winding_machine.SpoolItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
@@ -21,7 +19,7 @@ public class CableType {
     private final Supplier<Item> wire;
 
     public CableType(Properties properties) {
-        properties.verify();
+        //properties.verify();
         this.id = properties.id;
         this.color = properties.color;
         this.spool = properties.spool;
@@ -70,7 +68,7 @@ public class CableType {
 
         PartialModel model = null;
 		
-		private double resistance = Double.NaN;
+		private double resistance = Double.MAX_VALUE;
 		private int color = 0xffffff;
         private Supplier<SpoolItem> spool = null;
         private Supplier<Item> wire = null;
@@ -114,7 +112,6 @@ public class CableType {
             this.id = id;
         }
 
-		@SuppressWarnings("removal")
         public void verify() throws IllegalStateException {
             if (this.spool == null) {
                 throw new IllegalStateException("Spool item for " + this.id + " is not set");
@@ -125,14 +122,7 @@ public class CableType {
             }
 
             if (Double.isNaN(this.resistance)) {
-                // legacy support
-                var legacyDouble = TFMGResistivity.getDefaultResistivity(this.id);
-                if (legacyDouble != null) {
-                    this.resistance = legacyDouble;
-                    TFMG.LOGGER.warn("[{}] Using deprecated TFMGResistivity value. Set 'resistance' directly instead.", this.id);
-                } else {
-                    throw new IllegalStateException("Resistance for " + this.id + " is not set");
-                }
+				throw new IllegalStateException("Resistance for " + this.id + " is not set");
             }
         }
     }

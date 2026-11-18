@@ -55,7 +55,7 @@ public class ElectricNetworkRenderer {
         for (WireConnection connection : network.connections) {
 			if (connection.render())
 				renderWire(
-					connection.model(),
+					connection.cableType().getModel(),
 					connection.node1().getPosition().add(Vec3.atLowerCornerOf(connection.node1().pos)),
 					connection.node2().getPosition().add(Vec3.atLowerCornerOf(connection.node2().pos)),
 					camera, ms, vc, playerPos
