@@ -2,7 +2,7 @@ package com.drmangotea.tfmg.content.electricity.content.power_transmission.switc
 
 import com.drmangotea.tfmg.base.TFMGShapes;
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
+import com.drmangotea.tfmg.content.electricity.IElectric;
 import com.drmangotea.tfmg.content.electricity.packets.AddElectricalComponentPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
@@ -115,7 +115,7 @@ public class LargeSwitchBlock extends HorizontalKineticBlock implements IBE<Larg
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
-        if(level.getBlockEntity(pos) instanceof IRealisticElectric be){
+        if(level.getBlockEntity(pos) instanceof IElectric be){
             be.onPlace();
             if (level instanceof ServerLevel serverLevel)
                 CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(pos), new AddElectricalComponentPacket(BlockPos.of(pos.asLong())));

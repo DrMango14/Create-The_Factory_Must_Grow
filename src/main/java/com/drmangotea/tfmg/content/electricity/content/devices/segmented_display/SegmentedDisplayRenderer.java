@@ -1,4 +1,4 @@
-package com.drmangotea.tfmg.content.electricity.utilities.segmented_display;
+package com.drmangotea.tfmg.content.electricity.content.devices.segmented_display;
 
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;

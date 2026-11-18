@@ -26,6 +26,8 @@ import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlock;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankItem;
 import com.drmangotea.tfmg.content.electricity.DiagonalCableBlock;
 import com.drmangotea.tfmg.content.electricity.DiagonalCableGenerator;
+import com.drmangotea.tfmg.content.electricity.content.devices.segmented_display.SegmentedDisplayBlock;
+import com.drmangotea.tfmg.content.electricity.content.devices.segmented_display.SegmentedDisplayCTBehavior;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.cables.cable_hubs.CableHubBlock;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.cables.copycat_cable.CopycatCableBlock;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.cables.copycat_cable.CopycatCableBlockModel;

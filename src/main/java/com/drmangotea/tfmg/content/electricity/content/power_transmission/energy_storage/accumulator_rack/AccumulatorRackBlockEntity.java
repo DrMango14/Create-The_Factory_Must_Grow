@@ -1,20 +1,15 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.accumulator_rack;
 
 import com.drmangotea.tfmg.base.lang.TFMGLang;
-import com.drmangotea.tfmg.content.electricity.content.devices.generators.creative_generator.CreativeGeneratorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.accumulator_control_unit.AccumulatorControlUnitBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.cells.AccumulatorCellItem;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 import com.simibubi.create.foundation.blockEntity.behaviour.animatedContainer.AnimatedContainerBehaviour;
-import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
 import com.simibubi.create.foundation.item.SmartInventory;
-import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -26,10 +21,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.energy.IEnergyStorage;
@@ -67,9 +60,11 @@ public class AccumulatorRackBlockEntity extends SmartBlockEntity implements Menu
         return new AccumulatorRackEnergyStorage(1000000, 2500000, this) {
             @Override
             public void onEnergyChanged(int amount, int oldAmount) {
-                if((amount == 0 && oldAmount!=0)||(amount != 0 && oldAmount==0)){
-                    informControlUnit();
-                }
+                //if((amount == 0 && oldAmount!=0)||(amount != 0 && oldAmount==0)){
+                //    informControlUnit();
+                //    RealElectricNetworkManager.getNetwork(level).update();
+//
+                //}
                 sendData();
 
             }
@@ -84,6 +79,10 @@ public class AccumulatorRackBlockEntity extends SmartBlockEntity implements Menu
                 for (Direction d : Direction.values()) {
                     if(level.getBlockEntity(pos.relative(d)) instanceof AccumulatorControlUnitBlockEntity be){
                         AccumulatorControlUnitBlockEntity.updateVoltage(be,be.outputVoltageScroll.value);
+
+
+
+
                     }
                 }
             }
@@ -129,6 +128,7 @@ public class AccumulatorRackBlockEntity extends SmartBlockEntity implements Menu
 
     public void onInventoryChanged(int count) {
         updateStorage();
+
     }
 
     @Override

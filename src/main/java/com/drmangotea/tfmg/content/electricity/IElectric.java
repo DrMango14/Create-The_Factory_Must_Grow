@@ -11,21 +11,23 @@ import java.util.List;
 
 import static com.drmangotea.tfmg.content.electricity.content.power_transmission.cables.AbstractCableBlockEntity.connectToNeighbors;
 
-public interface IRealisticElectric extends IHaveMultimeterInformation {
+public interface IElectric extends IHaveMultimeterInformation {
 	ElectricalProperties getProperties();
 
     BlockPos getPos();
 	
-    default RealElectricalNetwork getNetwork(Level level) {
-        return RealElectricNetworkManager.getNetwork(level);
+	Level getWorld();
+	
+    default ElectricalNetwork getNetwork(Level level) {
+        return ElectricNetworkManager.getNetwork(level);
     }
 
-    default RealElectricalNetwork getNetwork() {
+    default ElectricalNetwork getNetwork() {
         return getNetwork(getWorld());
     }
 
     default void updateNetwork(BlockPos pos) {
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(getWorld());
+		ElectricalNetwork network = getNetwork();
         if (network == null)
             return;
         network.addMember(pos, getProperties());
@@ -35,7 +37,7 @@ public interface IRealisticElectric extends IHaveMultimeterInformation {
 
 
     default void removeBlock() {
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(getWorld());
+        ElectricalNetwork network = getNetwork();
         network.members.remove(this.getPos());
         network.removeConnections(this);
         if (this.getProperties() != null)
@@ -61,7 +63,7 @@ public interface IRealisticElectric extends IHaveMultimeterInformation {
 		TFMGTexts.Multimeter.power(current*voltage).forGoggles(tooltip);
 		*/
 
-        return true;
+        return false;
     }
 
     default void onPlace() {
@@ -83,7 +85,4 @@ public interface IRealisticElectric extends IHaveMultimeterInformation {
         this.updateNetwork(getPos());
 
     }
-
-    Level getWorld();
-
 }

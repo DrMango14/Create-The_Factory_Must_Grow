@@ -1,10 +1,11 @@
 package com.drmangotea.tfmg.content.electricity.saved_data;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.WireConnection;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectingElectricalNode;
 import net.minecraft.core.BlockPos;
@@ -15,6 +16,7 @@ import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
 import com.drmangotea.tfmg.content.electricity.simulation.Transformer;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectableElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -30,17 +32,17 @@ import java.util.List;
 
 public class NetworkSavedData extends SavedData {
 
-    private List<RealElectricalNetwork> list = new ArrayList<>();
+    private List<ElectricalNetwork> list = new ArrayList<>();
 
     public NetworkSavedData() {}
 
     @Override @NothingNullByDefault
     public CompoundTag save(CompoundTag compound, HolderLookup.Provider provider) {
-        List<RealElectricalNetwork> list = RealElectricNetworkManager.networks.values().stream().toList();
+        List<ElectricalNetwork> list = ElectricNetworkManager.networks.values().stream().toList();
 
         compound = new CompoundTag();
 
-        for (RealElectricalNetwork network : list) {
+        for (ElectricalNetwork network : list) {
             CompoundTag networkNBT = new CompoundTag();
 
             if (network.world instanceof ServerLevel serverLevel) {
@@ -100,7 +102,7 @@ public class NetworkSavedData extends SavedData {
         return compound;
     }
 
-    public List<RealElectricalNetwork> getNetworks() {
+    public List<ElectricalNetwork> getNetworks() {
         return list;
     }
 
@@ -108,8 +110,8 @@ public class NetworkSavedData extends SavedData {
     public static NetworkSavedData load(CompoundTag compound, HolderLookup.Provider registries) {
         NetworkSavedData sd = new NetworkSavedData();
 
-        List<RealElectricalNetwork> list = RealElectricNetworkManager.networks.values().stream().toList();
-        for (RealElectricalNetwork network : list) {
+        List<ElectricalNetwork> list = ElectricNetworkManager.networks.values().stream().toList();
+        for (ElectricalNetwork network : list) {
             if (network.world instanceof ServerLevel serverLevel) {
                 CompoundTag networkTag = compound.getCompound(serverLevel.dimension().location().toLanguageKey());
                 network.totalNodes = networkTag.getInt("Node Count");
@@ -144,38 +146,22 @@ public class NetworkSavedData extends SavedData {
 
                 }
                 int connectionCount = networkTag.getInt("Connection Count");
+				CompoundTag connections = networkTag.getCompound("connections");
                 for (int i = 0; i < connectionCount; i++) {
-                    CompoundTag connection = networkTag.getCompound("connections").getCompound("connection " + i);
-                    double resistance = connection.getDouble("Resistance");
-					boolean shouldRender = connection.getBoolean("Should Render");
-					
-					ConnectableElectricalNode node1 = getNode(connection.getCompound("Node1"), network);
-					ConnectableElectricalNode node2 = getNode(connection.getCompound("Node2"), network);
-					
-                    if (node1 != null && node2 != null) {
-                        network.connections.add(new WireConnection(node1, node2, resistance, shouldRender));
+                    WireConnection connection = WireConnection.readTag(connections.getCompound("connection " + i), network);
+                    if (connection != null) {
+                        network.connections.add(connection);
                     }
 
                 }
             }
+
+                TFMG.LOGGER.debug("Test");
+
         }
 
         return sd;
     }
-	
-	private static ConnectingElectricalNode getNode(CompoundTag tag, RealElectricalNetwork network) {
-		ConnectingElectricalNode node = null;
-		BlockPos pos = NbtUtils.readBlockPos(tag, "position").orElse(null);
-		if (pos == null) return node;
-		int id1 = tag.getInt("local id");
-		for (ElectricalNode existingNode : network.getNodes(pos)) {
-			if (existingNode.localId == id1 && existingNode instanceof ConnectingElectricalNode connectingNode) {
-				node = connectingNode;
-				node.pos = pos;
-			}
-		}
-		return node;
-	}
 
     public static ElectricalProperties getElectricalProperties(ResourceLocation id, Direction direction, List<Direction> d, BlockPos pos) {
 		var entry = TFMGRegistries.ELECTRICAL_TYPE_REGISTRY.get(id);

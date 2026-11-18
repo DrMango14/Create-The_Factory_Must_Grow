@@ -2,9 +2,10 @@ package com.drmangotea.tfmg.content.electricity;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.config.TFMGConfigs;
+import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
+import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectableElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectingElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
-import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
@@ -27,6 +28,8 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import java.util.List;
 import java.util.function.DoubleUnaryOperator;
 
+import static com.drmangotea.tfmg.base.TFMGUtils.closestNode;
+
 @OnlyIn(Dist.CLIENT)
 public class ElectricNetworkRenderer {
 
@@ -42,7 +45,7 @@ public class ElectricNetworkRenderer {
             return;
         if (player == null)
             return;
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(mc.level);
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(mc.level);
         PoseStack ms = event.getPoseStack();
         MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
         VertexConsumer vc = buffer.getBuffer(RenderType.cutoutMipped());
@@ -52,7 +55,7 @@ public class ElectricNetworkRenderer {
         for (WireConnection connection : network.connections) {
 			if (connection.render())
 				renderWire(
-					TFMGPartialModels.CABLE,
+					connection.model(),
 					connection.node1().getPosition().add(Vec3.atLowerCornerOf(connection.node1().pos)),
 					connection.node2().getPosition().add(Vec3.atLowerCornerOf(connection.node2().pos)),
 					camera, ms, vc, playerPos
@@ -87,7 +90,7 @@ public class ElectricNetworkRenderer {
 		double reciprocal = 1 / (double) segmentCount;
 		DoubleUnaryOperator curveFunction   = x -> 0.2f * x * (x * reciprocal - 1);
 		DoubleUnaryOperator curveDerivative = x -> 0.2f * (2 * x * reciprocal - 1);
-			
+		
 		for (int i = 0; i < segmentCount; i++) {
 			float angle = (float) Math.toDegrees(Math.atan(curveDerivative.applyAsDouble(i)));
 			ms.pushPose();
@@ -113,23 +116,36 @@ public class ElectricNetworkRenderer {
             return;
 
         BlockPos pos = result.getBlockPos();
-        //    ItemStack heldItem = mc.player.getMainHandItem();
+		//ItemStack heldItem = mc.player.getMainHandItem();
+		
+		
+		if (!(mc.level.getBlockEntity(pos) instanceof IElectric be)) return;
+		
+		if (be instanceof LargeTransformerBlockEntity t && !t.isMainPart) {
+			IElectric newBE = t.getControlledBlock();
+			if (newBE != null) {
+				pos = newBE.getPos();
+			}
+		}
 
-        List<ElectricalNode> nodes = RealElectricNetworkManager.getNetwork(mc.level).getNodes(pos);
+		ElectricalNetwork network = ElectricNetworkManager.getNetwork(mc.level);
+		ConnectableElectricalNode closestNode = closestNode(network, pos, result.getLocation());
+		List<ElectricalNode> nodes = network.getNodes(pos);
 		if (nodes.isEmpty()) return;
 		
 		Vec3 basePos = Vec3.atLowerCornerOf(pos);
-		nodes.parallelStream()
-			.forEach(n -> {
-				if (!(n instanceof ConnectingElectricalNode node)) return;
-				
-				Vec3 cablePos = node.getPosition().add(basePos);
-
-                Vec3 corner1 = cablePos.add(0.1f, 0.1f, 0.1f);
-                Vec3 corner2 = cablePos.subtract(0.1f, 0.1f, 0.1f);
-				
-				TFMGUtils.createOutline(corner1, corner2, "connector_" + node.localId, node.type.getColor());
-            });
+		nodes.parallelStream().forEach(n -> {
+			if (!(n instanceof ConnectingElectricalNode node)) return;
+			
+			Vec3 cablePos = node.getPosition().add(basePos);
+			
+			float size = node == closestNode ? 0.1f : 0.05f;
+			
+			Vec3 corner1 = cablePos.add(size,size,size);
+			Vec3 corner2 = cablePos.subtract(size,size,size);
+			
+			TFMGUtils.createOutline(corner1, corner2, "connector_" + node.localId, node.type.getColor());
+		});
     }
 
 }

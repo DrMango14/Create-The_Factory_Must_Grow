@@ -4,7 +4,7 @@ import com.drmangotea.tfmg.base.TFMGShapes;
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.base.blocks.WallMountBlock;
 
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
+import com.drmangotea.tfmg.content.electricity.IElectric;
 import com.drmangotea.tfmg.content.electricity.packets.AddElectricalComponentPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.foundation.block.IBE;
@@ -51,7 +51,7 @@ public class RealConnectorBlock extends WallMountBlock implements IBE<RealConnec
             updateExtension(level, stateBelow, below);
 
 
-        if (level.getBlockEntity(pos) instanceof IRealisticElectric be) {
+        if (level.getBlockEntity(pos) instanceof IElectric be) {
             be.onPlace();
             if (level instanceof ServerLevel serverLevel)
                 CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(pos), new AddElectricalComponentPacket(BlockPos.of(pos.asLong())));

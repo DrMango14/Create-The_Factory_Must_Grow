@@ -2,7 +2,7 @@ package com.drmangotea.tfmg.content.electricity.content.devices.generators.large
 
 import com.drmangotea.tfmg.base.TFMGShapes;
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
+import com.drmangotea.tfmg.content.electricity.IElectric;
 import com.drmangotea.tfmg.content.electricity.packets.AddElectricalComponentPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.mojang.serialization.MapCodec;
@@ -25,7 +25,6 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-
 @NothingNullByDefault
 public class StatorBlock extends DirectionalBlock implements IBE<StatorBlockEntity> {
     public static final MapCodec<StatorBlock> CODEC = simpleCodec(StatorBlock::new);
@@ -46,7 +45,7 @@ public class StatorBlock extends DirectionalBlock implements IBE<StatorBlockEnti
     @Override
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
-        if(level.getBlockEntity(pos) instanceof IRealisticElectric be){
+        if(level.getBlockEntity(pos) instanceof IElectric be){
             be.onPlace();
             if (level instanceof ServerLevel serverLevel)
                 CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(pos), new AddElectricalComponentPacket(BlockPos.of(pos.asLong())));

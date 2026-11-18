@@ -4,6 +4,7 @@ import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.config.server.TFMGResistivity;
 import com.drmangotea.tfmg.content.machinery.misc.winding_machine.SpoolItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -15,7 +16,8 @@ public class CableType {
     private String descriptionId;
     private final ResourceLocation id;
     private final int color;
-    private final Supplier<SpoolItem> spool;
+	private final PartialModel model;
+	private final Supplier<SpoolItem> spool;
     private final Supplier<Item> wire;
 
     public CableType(Properties properties) {
@@ -24,6 +26,7 @@ public class CableType {
         this.color = properties.color;
         this.spool = properties.spool;
         this.wire = properties.wire;
+        this.model = properties.model;
     }
 
     public int getColor() {
@@ -36,6 +39,10 @@ public class CableType {
 
     public Supplier<Item> getWire() {
         return this.wire;
+    }
+
+    public PartialModel getModel(){
+        return model;
     }
 
     public String getOrCreateDescriptionId() {
@@ -61,8 +68,10 @@ public class CableType {
     public static class Properties {
         private final ResourceLocation id;
 
-        private double resistance = Double.NaN;
-        private int color = 0xffffff;
+        PartialModel model = null;
+		
+		private double resistance = Double.NaN;
+		private int color = 0xffffff;
         private Supplier<SpoolItem> spool = null;
         private Supplier<Item> wire = null;
 
@@ -93,6 +102,11 @@ public class CableType {
 
         public Properties resistance(double resistance) {
             this.resistance = resistance;
+            return this;
+        }
+
+        public Properties model(PartialModel model) {
+            this.model = model;
             return this;
         }
 

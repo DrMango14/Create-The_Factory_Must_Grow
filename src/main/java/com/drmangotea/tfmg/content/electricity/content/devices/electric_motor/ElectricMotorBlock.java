@@ -1,6 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.content.devices.electric_motor;
 
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
+import com.drmangotea.tfmg.content.electricity.IElectric;
 import com.drmangotea.tfmg.content.electricity.packets.AddElectricalComponentPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
@@ -43,7 +43,7 @@ public class ElectricMotorBlock extends DirectionalKineticBlock implements IBE<E
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
-        if(level.getBlockEntity(pos) instanceof IRealisticElectric be){
+        if(level.getBlockEntity(pos) instanceof IElectric be){
             be.onPlace();
             if (level instanceof ServerLevel serverLevel)
                 CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(pos), new AddElectricalComponentPacket(BlockPos.of(pos.asLong())));

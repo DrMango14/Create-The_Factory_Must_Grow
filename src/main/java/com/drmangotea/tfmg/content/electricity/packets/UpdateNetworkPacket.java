@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.packets;
 
 
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
+import com.drmangotea.tfmg.content.electricity.IElectric;
 import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.networking.BlockEntityDataPacket;
@@ -24,7 +24,7 @@ public class UpdateNetworkPacket extends BlockEntityDataPacket<SmartBlockEntity>
     @Override
     protected void handlePacket(SmartBlockEntity blockEntity) {
 
-        if (blockEntity instanceof IRealisticElectric be) {
+        if (blockEntity instanceof IElectric be) {
             be.getNetwork().update();
         }
     }

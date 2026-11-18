@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.wires;
 
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
+import com.drmangotea.tfmg.content.electricity.IElectric;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
@@ -11,12 +11,15 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
-public class RealConnectorBlockEntity extends SmartBlockEntity implements IRealisticElectric {
+import static com.drmangotea.tfmg.base.blocks.WallMountBlock.FACING;
 
-    ElectricalProperties properties = new ConnectorProperties(getPos());
+public class RealConnectorBlockEntity extends SmartBlockEntity implements IElectric {
+
+    ElectricalProperties properties;
 
     public RealConnectorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+        properties = new ConnectorProperties(getPos(),state.getValue(FACING));
     }
 	
     @Override

@@ -6,6 +6,7 @@ import com.drmangotea.tfmg.content.electricity.ElectricalPropertiesType;
 import com.drmangotea.tfmg.content.electricity.content.devices.base.ResistorProperties;
 import com.drmangotea.tfmg.content.electricity.content.devices.electric_motor.ElectricMotorProperties;
 import com.drmangotea.tfmg.content.electricity.content.devices.generators.creative_generator.CreativeGeneratorProperties;
+import com.drmangotea.tfmg.content.electricity.content.devices.generators.large_generator.LargeGeneratorProperties;
 import com.drmangotea.tfmg.content.electricity.content.devices.generators.three_phase_generator.ThreePhaseGeneratorProperties;
 import com.drmangotea.tfmg.content.electricity.content.lights.LightProperties;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.adapters.FourSlotAdapterProperties;
@@ -33,9 +34,13 @@ public class TFMGElectricalProperties {
 		THREE_PHASE_GENERATOR = property("three_phase_generator",
 			(pos, direction, d) -> new ThreePhaseGeneratorProperties(pos, direction));
 	
+	public final static DeferredHolder<ElectricalPropertiesType<?>, ElectricalPropertiesType<LargeGeneratorProperties>>
+		LARGE_GENERATOR = property("unwireable_connector",
+		(pos, direction, d) -> new LargeGeneratorProperties(pos, direction));
+	
 	public final static DeferredHolder<ElectricalPropertiesType<?>, ElectricalPropertiesType<ConnectorProperties>>
 		CONNECTOR = property("connector",
-			(pos, direction, d) -> new ConnectorProperties(pos));
+			(pos, direction, d) -> new ConnectorProperties(pos, direction));
 	
 	public final static DeferredHolder<ElectricalPropertiesType<?>, ElectricalPropertiesType<ResistorProperties>>
 		RESISTOR = property("resistor",
@@ -55,7 +60,7 @@ public class TFMGElectricalProperties {
 	
 	public final static DeferredHolder<ElectricalPropertiesType<?>, ElectricalPropertiesType<LightProperties>>
 		LIGHT = property("light",
-			(pos, direction, d) -> new LightProperties(pos));
+			(pos, direction, d) -> new LightProperties(pos, direction));
 	
 	public final static DeferredHolder<ElectricalPropertiesType<?>, ElectricalPropertiesType<ElectricMotorProperties>>
 		MOTOR = property("motor",

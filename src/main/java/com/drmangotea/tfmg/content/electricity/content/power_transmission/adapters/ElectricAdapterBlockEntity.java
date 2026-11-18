@@ -2,7 +2,7 @@ package com.drmangotea.tfmg.content.electricity.content.power_transmission.adapt
 
 import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
+import com.drmangotea.tfmg.content.electricity.IElectric;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
-public class ElectricAdapterBlockEntity extends SmartBlockEntity implements IRealisticElectric {
+public class ElectricAdapterBlockEntity extends SmartBlockEntity implements IElectric {
 
     ElectricalProperties p;
 

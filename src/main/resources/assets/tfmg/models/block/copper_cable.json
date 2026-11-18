@@ -1,0 +1,23 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "tfmg:block/wires",
+		"particle": "tfmg:block/wires"
+	},
+	"elements": [
+		{
+			"from": [7.45, 7.45, 5.95],
+			"to": [8.55, 8.55, 10.05],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 7, 7]},
+			"faces": {
+				"north": {"uv": [3, 8, 4, 9], "texture": "#0"},
+				"east": {"uv": [3, 8, 4, 12], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [3, 11, 4, 12], "texture": "#0"},
+				"west": {"uv": [3, 8, 4, 12], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [4, 12, 3, 8], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [3, 8, 4, 12], "texture": "#0"}
+			}
+		}
+	]
+}

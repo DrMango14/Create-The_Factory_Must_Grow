@@ -13,13 +13,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class RealElectricNetworkManager {
-    public static Map<LevelAccessor, RealElectricalNetwork> networks = new HashMap<>();
+public class ElectricNetworkManager {
+    public static Map<LevelAccessor, ElectricalNetwork> networks = new HashMap<>();
 
-    public static Map<LevelAccessor, Pair<RealElectricalNetwork, NetworkCalculationData>> updateQueue = new HashMap<>();
+    public static Map<LevelAccessor, Pair<ElectricalNetwork, NetworkCalculationData>> updateQueue = new HashMap<>();
 
     public void onLoadWorld(LevelAccessor world) {
-        networks.put(world, new RealElectricalNetwork(world));
+     
+
+            networks.put(world, new ElectricalNetwork(world));
 
     }
 
@@ -27,7 +29,7 @@ public class RealElectricNetworkManager {
         networks.remove(world);
     }
 
-    public static RealElectricalNetwork getNetwork(Level level) {
+    public static ElectricalNetwork getNetwork(Level level) {
         return networks.get(level);
     }
 
@@ -35,9 +37,9 @@ public class RealElectricNetworkManager {
 
     }
 
-    public static LevelAccessor getWorldFromNetwork(RealElectricalNetwork network) {
+    public static LevelAccessor getWorldFromNetwork(ElectricalNetwork network) {
 
-        for (Map.Entry<LevelAccessor, RealElectricalNetwork> entry : networks.entrySet()) {
+        for (Map.Entry<LevelAccessor, ElectricalNetwork> entry : networks.entrySet()) {
             if (Objects.equals(network, entry.getValue())) {
                 return entry.getKey();
             }
@@ -47,10 +49,10 @@ public class RealElectricNetworkManager {
 
     public static void playerLogin(Player player) {
         if (player instanceof ServerPlayer serverPlayer) {
-            NetworkLoadPacket packet = new NetworkLoadPacket(RealElectricNetworkManager.networks.values().stream().toList());
+            NetworkLoadPacket packet = new NetworkLoadPacket(ElectricNetworkManager.networks.values().stream().toList());
             CatnipServices.NETWORK.sendToClient(serverPlayer, packet);
 
-            RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(player.level());
+            ElectricalNetwork network = ElectricNetworkManager.getNetwork(player.level());
             network.update();
 
 

@@ -2,11 +2,22 @@ package com.drmangotea.tfmg.content.machinery.misc.winding_machine;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGRegistries;
+import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
+import com.drmangotea.tfmg.content.electricity.IElectric;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.WireConnection;
+import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
+import com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.cable_type.CableType;
+import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectingElectricalNode;
+import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.content.kinetics.deployer.DeployerFakePlayer;
+import com.drmangotea.tfmg.registry.TFMGPartialModels;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,13 +33,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.List;
 import java.util.Objects;
 
+import static com.drmangotea.tfmg.base.TFMGUtils.closestNode;
 import static com.drmangotea.tfmg.base.blocks.WallMountBlock.FACING;
 
 @NothingNullByDefault
@@ -42,6 +56,95 @@ public class SpoolItem extends Item {
         this.cableTypeKey = cableTypeKey;
     }
 
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        Level level = context.getLevel();
+        Vec3 clickPosition = context.getClickLocation();
+		BlockPos pos = context.getClickedPos();
+		Player player = context.getPlayer();
+		ItemStack stack = context.getItemInHand();
+		
+		BlockPos fallback = new BlockPos(0, level.getMaxBuildHeight() + 1, 0); // Impossible block position, better than 0,0,0
+		BlockPos posToConnect = stack.getOrDefault(TFMGDataComponents.POSITION, fallback);
+		
+		BlockState state = level.getBlockState(pos);
+		
+		Direction direction = state.hasProperty(FACING) ? state.getValue(FACING) : null;
+		
+		if (player == null)
+			return InteractionResult.PASS;
+		
+		BlockEntity blockEntity = level.getBlockEntity(pos);
+		
+		if (blockEntity instanceof WindingMachineBlockEntity be) {
+			if (player instanceof DeployerFakePlayer && stack.is(TFMGItems.EMPTY_SPOOL))
+				return InteractionResult.PASS;
+			
+			ItemStack oldSpool = ItemStack.EMPTY;
+			if (!be.getSpool().isEmpty()) {
+				oldSpool = be.getSpool();
+			}
+			be.setSpool(stack);
+			player.setItemInHand(context.getHand(), oldSpool);
+			be.sendData();
+			be.setChanged();
+			return InteractionResult.SUCCESS;
+		}
+		
+        if (!(blockEntity instanceof IElectric be))
+			return InteractionResult.PASS;
+		
+		ConnectingElectricalNode node1 = closestNode(be, clickPosition);
+
+		if (node1 == null) {
+			return InteractionResult.PASS;
+		}
+		
+		
+		BlockPos pos2 = stack.get(TFMGDataComponents.POSITION);
+		if (pos2 == null) {
+			stack.set(TFMGDataComponents.POSITION, pos);
+			stack.set(TFMGDataComponents.CONNECTOR_ID, node1.getLocalId());
+		} else {
+			ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+
+			int id = stack.getOrDefault(TFMGDataComponents.CONNECTOR_ID, 0);
+			
+			if (!(level.getBlockEntity(pos2) instanceof IElectric b))
+				return InteractionResult.PASS;
+			
+			IElectric be2;
+			if ((b instanceof LargeTransformerBlockEntity t &&!t.isMainPart)) {
+				be2 = t.getControlledBlock();
+			} else {
+				be2 = b;
+			}
+
+			List<ElectricalNode> nodes = network.getNodes(be2.getPos());
+
+			for (ElectricalNode n : nodes) {
+				if (n.getLocalId() == id && n instanceof ConnectingElectricalNode node2) {
+					CableType type = TFMGUtils.getCableType(cableTypeKey);
+					if (type == null) return InteractionResult.PASS;
+					PartialModel model = type.getModel();
+					
+					network.connections.add(new WireConnection(node1, node2, 10, true,model));
+					float distance = TFMGUtils.getDistance(node1.pos.getBottomCenter(),node2.pos.getBottomCenter())*4;
+					
+					stack.set(TFMGDataComponents.SPOOL_AMOUNT,(int)Math.max(0,stack.getOrDefault(TFMGDataComponents.SPOOL_AMOUNT,0)-distance));
+					
+					network.update();
+					TFMG.ELECTRICAL_NETWORK_DATA.markDirty();
+					stack.remove(TFMGDataComponents.CONNECTOR_ID);
+					stack.remove(TFMGDataComponents.POSITION);
+					
+					return InteractionResult.SUCCESS;
+				}
+			}
+		}
+		return InteractionResult.SUCCESS;
+	}
+	
     public static boolean isDifferent(ItemStack using, ItemStack inserted) {
         if (using.is(inserted.getItem())) {
             return !using.getOrDefault(TFMGDataComponents.SPOOL_AMOUNT, 0).equals(inserted.getOrDefault(TFMGDataComponents.SPOOL_AMOUNT, 0));
@@ -64,6 +167,7 @@ public class SpoolItem extends Item {
             if (pos == fallback)
                 return InteractionResultHolder.pass(stack);
             stack.remove(TFMGDataComponents.POSITION);
+            stack.remove(TFMGDataComponents.CONNECTOR_ID);
             if (level.isClientSide)
                 player.displayClientMessage(
 					TFMGLang.translateDirect("wires.removed_data").withStyle(ChatFormatting.YELLOW),
@@ -86,49 +190,6 @@ public class SpoolItem extends Item {
             tooltip.add(TFMGLang.text(pos.getX() + " " + pos.getY() + " " + pos.getZ()).component().withStyle(ChatFormatting.AQUA));
         super.appendHoverText(stack, context, tooltip, flag);
     }
-
-    @Override
-    public InteractionResult useOn(UseOnContext context) {
-        Level level = context.getLevel();
-        BlockPos pos = context.getClickedPos();
-        Player player = context.getPlayer();
-        ItemStack stack = context.getItemInHand();
-
-        BlockPos fallback = new BlockPos(0, level.getMaxBuildHeight() + 1, 0); // Impossible block position, better than 0,0,0
-        BlockPos posToConnect = stack.getOrDefault(TFMGDataComponents.POSITION, fallback);
-
-        BlockState state = level.getBlockState(pos);
-
-        Direction direction = state.hasProperty(FACING) ? state.getValue(FACING) : null;
-
-        if (player == null)
-            return InteractionResult.PASS;
-
-        if (level.getBlockEntity(pos) instanceof WindingMachineBlockEntity be) {
-            if (player instanceof DeployerFakePlayer && stack.is(TFMGItems.EMPTY_SPOOL))
-                return InteractionResult.PASS;
-
-            ItemStack oldSpool = ItemStack.EMPTY;
-            if (!be.getSpool().isEmpty()) {
-                oldSpool = be.getSpool();
-            }
-            be.setSpool(stack);
-            player.setItemInHand(context.getHand(), oldSpool);
-            be.sendData();
-            be.setChanged();
-            return InteractionResult.SUCCESS;
-        }
-        if (!stack.has(TFMGDataComponents.SPOOL_AMOUNT))
-            return InteractionResult.PASS;
-        if (level.isClientSide)
-            return InteractionResult.SUCCESS;
-
-        if (Objects.equals(cableTypeKey, TFMG.asResource("empty")))
-            return InteractionResult.PASS;
-
-        return InteractionResult.PASS;
-    }
-
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {

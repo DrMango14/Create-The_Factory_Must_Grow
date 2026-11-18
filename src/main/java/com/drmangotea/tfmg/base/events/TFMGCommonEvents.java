@@ -5,7 +5,7 @@ import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.decoration.tanks.TFMGFluidTankBlockEntity;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.accumulator_rack.AccumulatorRackBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.cells.AccumulatorCellItem;
 import com.drmangotea.tfmg.content.electricity.content.devices.polarizer.PolarizerBlockEntity;
@@ -43,8 +43,14 @@ import net.minecraft.server.level.ChunkHolder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -55,10 +61,14 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.neoforge.network.payload.SyncAttachmentsPayload;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @SuppressWarnings("unused")
 @EventBusSubscriber
@@ -75,7 +85,6 @@ public class TFMGCommonEvents {
     public static void onLoadWorld(LevelEvent.Load event) {
         LevelAccessor world = event.getLevel();
 
-        //
         TFMG.ELECTRIC_NETWORK_MANAGER.onLoadWorld(world);
 
         TFMG.ELECTRICAL_NETWORK_DATA.levelLoaded(world);
@@ -85,18 +94,18 @@ public class TFMGCommonEvents {
     public static void playerChangedDimension(PlayerEvent.PlayerLoggedInEvent event) {
         Player player = event.getEntity();
 
-        RealElectricNetworkManager.playerLogin(player);
+        ElectricNetworkManager.playerLogin(player);
     }
     @SubscribeEvent
     public static void playerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
         Player player = event.getEntity();
 
-        RealElectricNetworkManager.playerLogin(player);
+        ElectricNetworkManager.playerLogin(player);
     }
 
     @SubscribeEvent
     public static void onServerTick(ServerTickEvent.Post event) {
-        RealElectricNetworkManager.handleNetworkUpdate(event);
+        ElectricNetworkManager.handleNetworkUpdate(event);
     }
 
     @SubscribeEvent

@@ -3,7 +3,7 @@ package com.drmangotea.tfmg.content.electricity.content.power_transmission.trans
 import com.drmangotea.tfmg.content.electricity.ElectricalPropertiesType;
 import com.drmangotea.tfmg.content.electricity.content.DirectionalElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.simulation.Transformer;
-import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectingElectricalNode;
+import com.drmangotea.tfmg.content.electricity.simulation.nodes.DirectionalElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.NodeType;
 import com.drmangotea.tfmg.registry.TFMGElectricalProperties;
@@ -19,12 +19,12 @@ public class TransformerProperties extends DirectionalElectricalProperties {
 
     public TransformerProperties(BlockPos pos1, Direction direction) {
         super(pos1, direction);
-		List<Vec3> positions = getRotation(direction);
+		Direction dir = direction.getCounterClockWise();
 
-        ElectricalNode A = new ConnectingElectricalNode(position, 0, positions.get(0), NodeType.INPUT);
-        ElectricalNode B = new ConnectingElectricalNode(position, 1, positions.get(1), NodeType.OUTPUT);
-        ElectricalNode a = new ConnectingElectricalNode(position, 2, positions.get(2), NodeType.INPUT);
-        ElectricalNode b = new ConnectingElectricalNode(position, 3, positions.get(3), NodeType.OUTPUT);
+        ElectricalNode A = new DirectionalElectricalNode(position, 0, dir, NodeType.INPUT);
+        ElectricalNode B = new DirectionalElectricalNode(position, 1, dir, NodeType.OUTPUT);
+        ElectricalNode a = new DirectionalElectricalNode(position, 2, dir.getOpposite(), NodeType.INPUT);
+        ElectricalNode b = new DirectionalElectricalNode(position, 3, dir.getOpposite(), NodeType.OUTPUT);
 
         nodes.add(A);
         nodes.add(B);

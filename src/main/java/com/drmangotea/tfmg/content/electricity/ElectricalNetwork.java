@@ -8,7 +8,7 @@ import net.minecraft.world.level.LevelAccessor;
 
 import java.util.*;
 
-public class RealElectricalNetwork {
+public class ElectricalNetwork {
     public static final double FREQUENCY = 50.0;
     public static final double OMEGA = 2.0 * Math.PI * FREQUENCY;
 
@@ -35,7 +35,7 @@ public class RealElectricalNetwork {
 
     public LevelAccessor world;
 
-    public RealElectricalNetwork(LevelAccessor world) {
+    public ElectricalNetwork(LevelAccessor world) {
         this.world = world;
     }
 
@@ -71,7 +71,7 @@ public class RealElectricalNetwork {
         update();
     }
 
-    public void setVoltageGen(IRealisticElectric be, int voltage) {
+    public void setVoltageGen(IElectric be, int voltage) {
         this.setVoltageGen(be.getPos(), voltage);
     }
 
@@ -88,11 +88,11 @@ public class RealElectricalNetwork {
         update();
     }
 
-    public void setPhaseShift(IRealisticElectric be, int degrees) {
+    public void setPhaseShift(IElectric be, int degrees) {
         this.setPhaseShift(be.getPos(), degrees);
     }
 
-    public void setResistance(IRealisticElectric be, int id, double resistance) {
+    public void setResistance(IElectric be, int id, double resistance) {
         this.setResistance(be.getPos(), id, resistance);
     }
     
@@ -109,7 +109,7 @@ public class RealElectricalNetwork {
         update();
     }
 
-    public void setTransformerRatio(IRealisticElectric be, int id, double ratio) {
+    public void setTransformerRatio(IElectric be, int id, double ratio) {
         this.setTransformerRatio(be.getPos(), id, ratio);
     }
 	
@@ -188,7 +188,7 @@ public class RealElectricalNetwork {
 
                     sources.add(v);
             }
-            if (c instanceof Transformer t) {
+            if (c instanceof Transformer t&&t.turnsRatio!=0) {
                 transformers.add(t);
                 //    connections.add(new WireConnection((ConnectableElectricalNode) t.pB, (ConnectableElectricalNode) t.sB,1,false));
             }
@@ -343,7 +343,7 @@ public class RealElectricalNetwork {
 
     }
 
-    public void removeConnections(IRealisticElectric be) {
+    public void removeConnections(IElectric be) {
         List<WireConnection> connectionsCopy = new ArrayList<>(connections);
         for (WireConnection connection : connectionsCopy) {
             if (connection.node1().pos == be.getPos() || connection.node2().pos == be.getPos()) {
@@ -407,8 +407,8 @@ public class RealElectricalNetwork {
 
         new HashMap<>(members).forEach((pos, o) -> {
             if (o.needsUpdateData()) {
-                LevelAccessor level = RealElectricNetworkManager.getWorldFromNetwork(this);
-                if (level != null && level.getBlockEntity(pos) instanceof IRealisticElectric be) {
+                LevelAccessor level = ElectricNetworkManager.getWorldFromNetwork(this);
+                if (level != null && level.getBlockEntity(pos) instanceof IElectric be) {
 					be.onUpdated();
                 }
             }

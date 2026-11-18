@@ -1,8 +1,8 @@
-package com.drmangotea.tfmg.content.electricity.utilities.segmented_display;
+package com.drmangotea.tfmg.content.electricity.content.devices.segmented_display;
 
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
+import com.drmangotea.tfmg.content.electricity.IElectric;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.equipment.clipboard.ClipboardEntry;
@@ -35,7 +35,7 @@ public class SegmentedDisplayBlock extends TFMGHorizontalDirectionalBlock implem
 
     @Override
     public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
-        withBlockEntityDo(level,pos, IElectric::onPlaced);
+        withBlockEntityDo(level,pos, IElectric::onPlace);
     }
 
     @Override

@@ -142,6 +142,12 @@ public class TFMGTexts {
         public static LangBuilder transformerRatio(float ratio) {
             return TFMGLang.translate("multimeter.transformer_ratio").add(TFMGLang.number(ratio)).color(0xc6e82c);
         }
+        public static LangBuilder transformerPrimaryVoltage(float voltage) {
+            return TFMGLang.translate("multimeter.transformer.primary_voltage").add(voltage(voltage)).color(0x127799);
+        }
+        public static LangBuilder transformerSecondaryVoltage(float voltage) {
+            return TFMGLang.translate("multimeter.transformer.secondary_voltage").add(voltage(voltage)).color(0x127799);
+        }
         public static LangBuilder powerGenerated(double value) {
             return TFMGLang.translate("multimeter.power_generated", power(value)).color(POWER_DARK);
         }

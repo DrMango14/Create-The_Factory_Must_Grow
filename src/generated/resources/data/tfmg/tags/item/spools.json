@@ -1,6 +1,7 @@
 {
   "values": [
     "tfmg:empty_spool",
+    "tfmg:steel_reinforced_spool",
     "tfmg:copper_spool",
     "tfmg:aluminum_spool",
     "tfmg:constantan_spool"

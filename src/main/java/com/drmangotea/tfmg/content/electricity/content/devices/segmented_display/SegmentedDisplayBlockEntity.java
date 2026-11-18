@@ -1,7 +1,9 @@
-package com.drmangotea.tfmg.content.electricity.utilities.segmented_display;
+package com.drmangotea.tfmg.content.electricity.content.devices.segmented_display;
 
-import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
+import com.drmangotea.tfmg.content.electricity.IElectric;
 import com.simibubi.create.content.redstone.displayLink.DisplayLinkBlock;
+import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.utility.DynamicComponent;
 import net.createmod.catnip.data.Couple;
 import net.createmod.catnip.nbt.NBTHelper;
@@ -12,6 +14,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -21,7 +24,7 @@ import java.util.Optional;
 import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-public class SegmentedDisplayBlockEntity extends ElectricBlockEntity {
+public class SegmentedDisplayBlockEntity extends SmartBlockEntity implements IElectric {
     private Optional<DynamicComponent> customText;
     private Couple<String> displayedStrings;
     public Couple<List<Integer>> segmentsToRender = clearSegments();
@@ -35,6 +38,11 @@ public class SegmentedDisplayBlockEntity extends ElectricBlockEntity {
         customText = Optional.empty();
         color = DyeColor.LIME;
     }
+	
+	@Override
+	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+	
+	}
 
     public void setColor(DyeColor color) {
         if(color==DyeColor.BLACK||color == DyeColor.LIGHT_GRAY|| color == DyeColor.GRAY)
@@ -159,4 +167,14 @@ public class SegmentedDisplayBlockEntity extends ElectricBlockEntity {
     private String charOrEmpty(String string, int index) {
         return string.length() <= index ? " " : string.substring(index, index + 1);
     }
+	
+	@Override
+	public BlockPos getPos() {
+		return worldPosition;
+	}
+	
+	@Override
+	public Level getWorld() {
+		return level;
+	}
 }

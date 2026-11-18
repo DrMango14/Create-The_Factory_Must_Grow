@@ -2,9 +2,9 @@ package com.drmangotea.tfmg.content.electricity.content.lights;
 
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.IElectric;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -21,9 +21,10 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
+import static com.drmangotea.tfmg.base.blocks.WallMountBlock.FACING;
 import static com.drmangotea.tfmg.content.electricity.content.lights.ElectricLightBlock.LIGHT;
 
-public class ElectricLightBlockEntity extends SmartBlockEntity implements IRealisticElectric {
+public class ElectricLightBlockEntity extends SmartBlockEntity implements IElectric {
 
     public LerpedFloat glow = LerpedFloat.linear();
     boolean signalChanged;
@@ -37,7 +38,7 @@ public class ElectricLightBlockEntity extends SmartBlockEntity implements IReali
 
     public ElectricLightBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        p = new LightProperties(pos);
+        p = new LightProperties(pos, state.getValue(FACING).getOpposite());
     }
 
     @Override
@@ -93,7 +94,7 @@ public class ElectricLightBlockEntity extends SmartBlockEntity implements IReali
 
     @Override
     public void onUpdated() {
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
 
         Resistance resistor = network.getResistance(getPos(), 0);
 

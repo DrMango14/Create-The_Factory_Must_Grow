@@ -28,6 +28,8 @@ import com.drmangotea.tfmg.content.electricity.content.devices.generators.three_
 import com.drmangotea.tfmg.content.electricity.content.devices.polarizer.PolarizerBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.devices.polarizer.PolarizerRenderer;
 import com.drmangotea.tfmg.content.electricity.content.devices.resistor.DebugResistorBlockEntity;
+import com.drmangotea.tfmg.content.electricity.content.devices.segmented_display.SegmentedDisplayBlockEntity;
+import com.drmangotea.tfmg.content.electricity.content.devices.segmented_display.SegmentedDisplayRenderer;
 import com.drmangotea.tfmg.content.electricity.content.devices.voltage_observer.VoltageObserverBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.lights.ElectricLightBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.lights.LightBulbRenderer;

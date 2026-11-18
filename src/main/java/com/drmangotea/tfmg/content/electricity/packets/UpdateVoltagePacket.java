@@ -1,8 +1,8 @@
 package com.drmangotea.tfmg.content.electricity.packets;
 
 
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.IElectric;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
 import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.networking.BlockEntityDataPacket;
@@ -31,8 +31,8 @@ public class UpdateVoltagePacket extends BlockEntityDataPacket<SmartBlockEntity>
 
     @Override
     protected void handlePacket(SmartBlockEntity blockEntity) {
-        if (blockEntity instanceof IRealisticElectric be) {
-            RealElectricNetworkManager.getNetwork(be.getWorld()).setVoltageGen(be, newVoltage);
+        if (blockEntity instanceof IElectric be) {
+            ElectricNetworkManager.getNetwork(be.getWorld()).setVoltageGen(be, newVoltage);
         }
     }
 

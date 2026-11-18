@@ -4,9 +4,9 @@ import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.base.spark.Spark;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.IElectric;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.cable_type.CableType;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectingElectricalNode;
@@ -70,7 +70,7 @@ public class TFMGUtils {
         return inverted;
     }
 
-    public static ConnectingElectricalNode closestNode(IRealisticElectric be, Vec3 clickPosition) {
+    public static ConnectingElectricalNode closestNode(IElectric be, Vec3 clickPosition) {
 		if (be == null)
 			return null;
 		
@@ -79,18 +79,22 @@ public class TFMGUtils {
 		}
 		
 		BlockPos pos = be.getPos();
+		ElectricalNetwork network = ElectricNetworkManager.getNetwork(be.getWorld());
+		
+		return closestNode(network, pos, clickPosition);
+	}
+	
+	public static ConnectingElectricalNode closestNode(ElectricalNetwork network, BlockPos pos, Vec3 clickPosition) {
+		
 		AtomicReference<Float> closestDistance = new AtomicReference<>((float) 1000);
 		AtomicReference<ConnectingElectricalNode> closestConnector = new AtomicReference<>(null);
+		Vec3 basePos = Vec3.atLowerCornerOf(pos);
 		
-		RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(be.getWorld());
-		
-		network.getNodes(be.getPos()).forEach(n -> {
-            if (!(n instanceof ConnectingElectricalNode node))
-				return;
+		network.getNodes(pos).forEach(n -> {
+			if (!(n instanceof ConnectingElectricalNode node)) return;
 			
-			float distance = TFMGUtils.getDistance(clickPosition, node.getPosition().add(Vec3.atLowerCornerOf(pos)));
-			if (distance >= closestDistance.get())
-				return;
+			float distance = TFMGUtils.getDistance(clickPosition, node.getPosition().add(basePos));
+			if (distance >= closestDistance.get()) return;
 			
 			closestDistance.set(distance);
 			closestConnector.set(node);

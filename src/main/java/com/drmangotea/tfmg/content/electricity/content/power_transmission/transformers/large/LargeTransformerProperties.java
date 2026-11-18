@@ -28,7 +28,7 @@ public class LargeTransformerProperties extends DirectionalElectricalProperties 
         ElectricalNode u = new ConnectingElectricalNode(position, 4, positions.get(4), NodeType.PHASE_1);
         ElectricalNode v = new ConnectingElectricalNode(position, 5, positions.get(5), NodeType.PHASE_2);
         ElectricalNode w = new ConnectingElectricalNode(position, 6, positions.get(6), NodeType.PHASE_3);
-        ElectricalNode n = new ConnectingElectricalNode(position, 7, positions.get(7), NodeType.NEUTRAL);
+        //ElectricalNode n = new ConnectingElectricalNode(position, 7, positions.get(7), NodeType.NEUTRAL);
 
 
         nodes.add(N);
@@ -38,11 +38,11 @@ public class LargeTransformerProperties extends DirectionalElectricalProperties 
         nodes.add(u);
         nodes.add(v);
         nodes.add(w);
-        nodes.add(n);
+       // nodes.add(n);
 
-        components.add(new Transformer(U,N,u,n,1,10,1,0,position));
-        components.add(new Transformer(V,N,v,n,1,10,1,1,position));
-        components.add(new Transformer(W,N,w,n,1,10,1,2,position));
+        components.add(new Transformer(U, N, u, N, 1, 10, 1, 0, position));
+        components.add(new Transformer(V, N, v, N, 1, 10, 1, 1, position));
+        components.add(new Transformer(W, N, w, N, 1, 10, 1, 2, position));
 
     }
 
@@ -61,16 +61,48 @@ public class LargeTransformerProperties extends DirectionalElectricalProperties 
         List<Vec3> positions = new ArrayList<>();
 
         switch (direction) {
-            case UP, DOWN, EAST, WEST, NORTH, SOUTH -> {
-                positions.add(new Vec3(1, 0 / 16f, 4 / 16f));
-                positions.add(new Vec3(1, 7 / 16f, 4 / 16f));
-                positions.add(new Vec3(1, 7 / 16f, 8 / 16f));
-                positions.add(new Vec3(1, 7 / 16f, 12 / 16f));
-                positions.add(new Vec3(0, 13 / 16f, 4 / 16f));
-                positions.add(new Vec3(0, 13 / 16f, 8 / 16f));
-                positions.add(new Vec3(0, 13 / 16f, 12 / 16f));
-                positions.add(new Vec3(1, 16 / 16f, 4 / 16f));
+            case SOUTH -> {
+                positions.add(new Vec3(0 / 16f, 14 / 16f, 4 / 16f));
+                positions.add(new Vec3(-3 / 16f, 18 / 16f, 9 / 16f));
+                positions.add(new Vec3(-3 / 16f, 18 / 16f, 16 / 16f));
+                positions.add(new Vec3(-3 / 16f, 18 / 16f, 23 / 16f));
+                positions.add(new Vec3(8 / 16f, 26 / 16f, 7.5 / 16f));
+                positions.add(new Vec3(8 / 16f, 26 / 16f, 16 / 16f));
+                positions.add(new Vec3(8 / 16f, 26 / 16f, 24.5 / 16f));
+                positions.add(new Vec3(16 / 16f, 14 / 16f, 4 / 16f));
+
             }
+            case NORTH -> {
+                positions.add(new Vec3(16 / 16f, 14 / 16f, 12 / 16f));
+                positions.add(new Vec3(19 / 16f, 18 / 16f, 7 / 16f));
+                positions.add(new Vec3(19 / 16f, 18 / 16f, 0 / 16f));
+                positions.add(new Vec3(19 / 16f, 18 / 16f, -7 / 16f));
+                positions.add(new Vec3(8 / 16f, 26 / 16f, 8.5 / 16f));
+                positions.add(new Vec3(8 / 16f, 26 / 16f, 0 / 16f));
+                positions.add(new Vec3(8 / 16f, 26 / 16f, -8.5 / 16f));
+                positions.add(new Vec3(0 / 16f, 14 / 16f, 12 / 16f));
+            }
+            case EAST -> {
+                positions.add(new Vec3(4 / 16f, 14 / 16f, 0 / 16f));
+                positions.add(new Vec3(9 / 16f, 18 / 16f,  19 / 16f));
+                positions.add(new Vec3(16 / 16f, 18 / 16f, 19 / 16f));
+                positions.add(new Vec3(23 / 16f, 18 / 16f, 19 / 16f));
+                positions.add(new Vec3(7.5 / 16f, 26 / 16f, 8 / 16f));
+                positions.add(new Vec3(16 / 16f, 26 / 16f, 8 / 16f));
+                positions.add(new Vec3(24.5 / 16f, 26 / 16f, 8 / 16f));
+                positions.add(new Vec3(4 / 16f, 14 / 16f, 16 / 16f));
+            }
+            default ->  {
+                positions.add(new Vec3(12 / 16f, 14 / 16f, 16/16f));
+                positions.add(new Vec3(7 / 16f , 18 / 16f, -3/16f));
+                positions.add(new Vec3(0 / 16f , 18 / 16f, -3/16f));
+                positions.add(new Vec3(-7 / 16f, 18 / 16f, -3/16f));
+                positions.add(new Vec3(8.5 / 16f , 26 / 16f, 8/16f ));
+                positions.add(new Vec3(0 / 16f , 26 / 16f, 8/16f ));
+                positions.add(new Vec3(-8.5 / 16f, 26 / 16f, 8/16f ));
+                positions.add(new Vec3(12 / 16f, 14 / 16f, 0/16f ));
+            }
+
         }
 
         return positions;

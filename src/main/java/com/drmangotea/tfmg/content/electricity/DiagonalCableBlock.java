@@ -68,7 +68,7 @@ public class DiagonalCableBlock extends Block implements SimpleWaterloggedBlock,
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
-        if(level.getBlockEntity(pos) instanceof IRealisticElectric be){
+        if(level.getBlockEntity(pos) instanceof IElectric be){
             be.onPlace();
             if (level instanceof ServerLevel serverLevel)
                 CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(pos), new AddElectricalComponentPacket(BlockPos.of(pos.asLong())));

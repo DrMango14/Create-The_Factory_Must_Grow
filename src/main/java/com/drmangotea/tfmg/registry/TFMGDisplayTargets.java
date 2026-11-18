@@ -2,7 +2,7 @@ package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGRegistrate;
-import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayTarget;
+import com.drmangotea.tfmg.content.electricity.content.devices.segmented_display.SegmentedDisplayTarget;
 import com.simibubi.create.api.behaviour.display.DisplayTarget;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 

@@ -4,8 +4,7 @@ import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
-import com.drmangotea.tfmg.content.electricity.base.ElectricBlockValues;
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
+import com.drmangotea.tfmg.content.electricity.IElectric;
 import com.drmangotea.tfmg.content.engines.base.AbstractEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.base.EngineComponentsInventory;
 import com.drmangotea.tfmg.content.engines.base.EngineProperties;
@@ -33,7 +32,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -54,8 +53,6 @@ import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.H
 
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlockEntity implements Clearable, IElectric {
-	public ElectricBlockValues data = new ElectricBlockValues(getPos());
-	
     public Optional<? extends EngineUpgrade> upgrade = Optional.empty();
     private List<Component> cachedUpgradeLines = null;
     public int oil = 0;
@@ -74,7 +71,6 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
 
     public AbstractSmallEngineBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
-		data.connectNextTick = true;
         componentsInventory = new EngineComponentsInventory(this, EngineProperties.commonRegularComponents());
     }
 
@@ -107,17 +103,7 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
     }
 	
 	@Override
-	public ElectricBlockValues getData() {
-		return data;
-	}
-	
-	@Override
-	public void sendStuff() {
-		sendData();
-	}
-	
-	@Override
-	public LevelAccessor getLevelAccessor() {
+	public Level getWorld() {
 		return level;
 	}
 	
@@ -200,7 +186,6 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
     @Override
     public void lazyTick() {
         super.lazyTick();
-		lazyTickElectricity();
         upgrade.ifPresent(engineUpgrade -> engineUpgrade.lazyTickUpgrade(this));
 
         if (!canWork()) return;
@@ -270,7 +255,6 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
 			this.upgrade = EngineUpgrade.read(compound.get("Upgrade"));
         }
         super.read(compound, registries, clientPacket);
-		readElectricity(compound, clientPacket);
         controller = NbtUtils.readBlockPos(compound, "Controller").orElse(getBlockPos());
         invalidateUpgradeCache();
     }
@@ -587,7 +571,6 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
             }
         }
         super.tick();
-		tickElectricity();
     }
 
     public boolean canConnect(AbstractSmallEngineBlockEntity candidate) {
@@ -661,7 +644,6 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
     @Override
     public void remove() {
         super.remove();
-		onRemoved();
         updateOthers();
     }
 

@@ -1,6 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.simulation;
 
-import static com.drmangotea.tfmg.content.electricity.RealElectricalNetwork.OMEGA;
+import static com.drmangotea.tfmg.content.electricity.ElectricalNetwork.OMEGA;
 
 public class Inductance {
         public int nodeA;

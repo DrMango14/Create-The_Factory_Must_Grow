@@ -1,11 +1,12 @@
 package com.drmangotea.tfmg.content.electricity.content.devices.generators.three_phase_generator;
 
+import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.IRealisticElectric;
-import com.drmangotea.tfmg.content.electricity.RealElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.RealElectricalNetwork;
+import com.drmangotea.tfmg.content.electricity.IElectric;
+import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.packets.UpdateVoltagePacket;
 import com.drmangotea.tfmg.content.electricity.simulation.IdealVoltageSource;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
@@ -24,7 +25,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
-public class ThreePhaseGeneratorBlockEntity extends KineticBlockEntity implements IRealisticElectric, IHaveGoggleInformation {
+public class ThreePhaseGeneratorBlockEntity extends KineticBlockEntity implements IElectric, IHaveGoggleInformation {
 
     ElectricalProperties properties;
 
@@ -64,7 +65,7 @@ public class ThreePhaseGeneratorBlockEntity extends KineticBlockEntity implement
 
     public void updateVoltage() {
 
-        RealElectricalNetwork electricalNetwork = RealElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork electricalNetwork = ElectricNetworkManager.getNetwork(level);
 
 
         electricalNetwork.setVoltageGen(this, (int) Math.abs(getSpeed()) * 10);
@@ -97,7 +98,7 @@ public class ThreePhaseGeneratorBlockEntity extends KineticBlockEntity implement
     public void onUpdated() {
 
 
-        RealElectricalNetwork network = RealElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
 
         for (int i = 0; i < 3; i++) {
             Resistance r = network.getResistance(getPos(), i);
@@ -121,8 +122,8 @@ public class ThreePhaseGeneratorBlockEntity extends KineticBlockEntity implement
 
                 double overloadIntensity = 0;
 
-                //if (maxPower < power)
-                //    overloadIntensity = power / maxPower;
+                if (maxPower < power)
+                    overloadIntensity = power / maxPower;
 
                 if (overloadIntensity > 2) {
                     getLevel().destroyBlock(getPos(), false);

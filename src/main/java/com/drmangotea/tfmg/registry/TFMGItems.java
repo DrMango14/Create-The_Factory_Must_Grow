@@ -8,7 +8,6 @@ import com.drmangotea.tfmg.base.dyes.DyedItemList;
 import com.drmangotea.tfmg.content.decoration.kinetics.gearbox.SteelVerticalGearboxItem;
 import com.drmangotea.tfmg.content.electricity.configuration_wrench.ElectriciansWrenchItem;
 import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipes;
-import com.drmangotea.tfmg.content.electricity.BetterSpoolItem;
 import com.drmangotea.tfmg.content.electricity.content.measuring_instruments.MultimeterItem;
 import com.drmangotea.tfmg.content.electricity.content.devices.polarizer.MagnetItem;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.cells.AccumulatorCellItem;
@@ -193,7 +192,7 @@ public class TFMGItems {
 	
     public static final ItemEntry<AccumulatorCellItem>
             LEAD_ACID_BATTERY = REGISTRATE.item("lead_acid_battery",p-> new AccumulatorCellItem(p.stacksTo(1),1000000)).register(),
-            SINGLE_USE_BATTERY = REGISTRATE.item("single_use_battery",p-> new AccumulatorCellItem(p.stacksTo(1),2000000)).register(),
+            SINGLE_USE_BATTERY = REGISTRATE.item("single_use_battery",p-> new AccumulatorCellItem(p.stacksTo(1),10000)).register(),
             SUPERCAPACITOR = REGISTRATE.item("supercapacitor",p-> new AccumulatorCellItem(p.stacksTo(1),500000)).register(),
             LITHIUM_CELL = REGISTRATE.item("lithium_cell",p-> new AccumulatorCellItem(p.stacksTo(1),1500000)).register();
 
@@ -202,14 +201,13 @@ public class TFMGItems {
 		EMPTY_SPOOL = spoolItem("empty", 0x000000)
             .recipe((c, p) -> p.stonecutting(DataIngredient.items(TFMGBlocks.HARDENED_PLANKS.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 1))
             .register(),
+		STEEL_REINFORCED_CABLE = spoolItem("steel_reinforced", 0x4D5457)
+			.register(),
 		COPPER_SPOOL = fullSpoolItem("copper", 0xD8735A, Items.WIRES_COPPER.tag),
 		ALUMINUM_SPOOL = fullSpoolItem("aluminum", 0xEDEFEF, Items.WIRES_ALUMINUM.tag),
 		CONSTANTAN_SPOOL = fullSpoolItem("constantan", 0xCFC2A8, Items.WIRES_CONSTANTAN.tag);
 
-    public static final ItemEntry<BetterSpoolItem> DEBUG_SPOOL =
-            REGISTRATE.item("debug_spool", BetterSpoolItem::new)
-                    .properties(p -> p.stacksTo(1))
-                    .register();
+
 
     public static final ItemEntry<ElectromagneticCoilItem> ELECTROMAGNETIC_COIL =
             REGISTRATE.item("electromagnetic_coil", ElectromagneticCoilItem::new)
