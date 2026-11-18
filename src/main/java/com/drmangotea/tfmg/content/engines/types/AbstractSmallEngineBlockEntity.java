@@ -4,6 +4,7 @@ import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
+import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.IElectric;
 import com.drmangotea.tfmg.content.engines.base.AbstractEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.base.EngineComponentsInventory;
@@ -182,6 +183,12 @@ public abstract class AbstractSmallEngineBlockEntity extends AbstractEngineBlock
             return generator.getPowerGeneration(this);
         return 0;
     }
+
+	public ElectricalProperties getProperties() {
+		if (upgrade.isPresent() && upgrade.get() instanceof EngineGenerator generator)
+			return generator.getProperties(this);
+		return null;
+	}
 
     @Override
     public void lazyTick() {

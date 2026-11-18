@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.engines.upgrades;
 
+import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.types.regular_engine.RegularEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.upgrades.base.EngineGenerator;
@@ -59,4 +60,12 @@ public class GeneratorEngineUpgrade extends EngineUpgrade implements EngineGener
     public float getPowerGeneration(AbstractSmallEngineBlockEntity engine) {
         return engine.rpm;
     }
+	
+	@Override
+	public ElectricalProperties getProperties(AbstractSmallEngineBlockEntity engine) {
+		//TODO: Implement
+		// Maybe use ThreePhaseGeneratorProperties for this, since it's attached to the three phase generator.
+		// Maybe Rename this class.
+		return null;
+	}
 }
