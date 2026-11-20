@@ -33,7 +33,7 @@ public class SegmentedDisplayCTBehavior extends ConnectedTextureBehaviour.Base {
 	@Override
 	protected Direction getRightDirection(BlockAndTintGetter reader, BlockPos pos, BlockState state, Direction face) {
 		Direction facing = state.getValue(FACING);
-		if (face != facing) return super.getRightDirection(reader, pos, state, face);
+		if (face.getAxis().isVertical()) return facing.getCounterClockWise();
 		return facing == Direction.NORTH || facing == Direction.WEST ? facing.getCounterClockWise() : facing.getClockWise();
 	}
 
