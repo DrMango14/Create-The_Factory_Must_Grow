@@ -51,7 +51,7 @@ public record ToolSet (
 		
 		private void model (RegistrateItemModelProvider prov, String name) {
 			prov.withExistingParent(name, "minecraft:item/handheld")
-				.texture("layer0", "tfmg:item/" + name);
+				.texture("layer0", REGISTRATE.getModid() + ":item/" + name);
 		}
 		
 		private void recipe (

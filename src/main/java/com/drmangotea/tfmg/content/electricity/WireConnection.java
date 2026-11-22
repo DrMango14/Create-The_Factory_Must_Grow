@@ -2,17 +2,20 @@ package com.drmangotea.tfmg.content.electricity;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.cable_type.CableType;
-import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectableElectricalNode;
-import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectingElectricalNode;
-import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
+import com.drmangotea.tfmg.content.electricity.simulation.nodes.NodePos;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 
 public record WireConnection (
-	ConnectableElectricalNode node1,
-	ConnectableElectricalNode node2,
+	NodePos node1,
+	NodePos node2,
 	ResourceLocation cableTypeKey,
 	boolean render
 ) {
@@ -21,40 +24,32 @@ public record WireConnection (
 		return TFMGUtils.getCableType(cableTypeKey);
 	}
 	
-	public CompoundTag save () {
-		CompoundTag connectionTag = new CompoundTag();
-		
-		connectionTag.putString("Cable", cableTypeKey.toString());
-		connectionTag.putBoolean("Should Render", render);
-		connectionTag.put("Node1", node1.save());
-		connectionTag.put("Node2", node2.save());
-		
-		return connectionTag;
+	//just to prettify the codecs tbh
+	private WireConnection(NodePos n1, NodePos n2, String t, Boolean r) {
+		this(n1, n2, ResourceLocation.parse(t), r);
 	}
 	
-	public static WireConnection readTag (CompoundTag connection, ElectricalNetwork network) {
-		ResourceLocation type = ResourceLocation.parse(connection.getString("Cable"));
-		boolean shouldRender = connection.getBoolean("Should Render");
-		
-		ConnectableElectricalNode node1 = getNode(connection.getCompound("Node1"), network);
-		if (node1 == null) return null;
-		ConnectableElectricalNode node2 = getNode(connection.getCompound("Node2"), network);
-		if (node2 == null) return null;
-		
-		return new WireConnection(node1, node2, type, shouldRender);
+	public static StreamCodec<ByteBuf, WireConnection> STREAM_CODEC = StreamCodec.composite(
+		NodePos.STREAM_CODEC, WireConnection::node1,
+		NodePos.STREAM_CODEC, WireConnection::node2,
+		ByteBufCodecs.STRING_UTF8, c -> c.cableTypeKey.toString(),
+		ByteBufCodecs.BOOL, WireConnection::render,
+		WireConnection::new
+	);
+	
+	public static Codec<WireConnection> CODEC = RecordCodecBuilder.create(i -> i.group(
+		NodePos.CODEC.fieldOf("Node1").forGetter(WireConnection::node1),
+		NodePos.CODEC.fieldOf("Node2").forGetter(WireConnection::node2),
+		Codec.STRING.fieldOf("Cable").forGetter(c -> c.cableTypeKey.toString()),
+		Codec.BOOL.fieldOf("Should Render").forGetter(WireConnection::render)
+	).apply(i, WireConnection::new));
+	
+	public Tag save () {
+		return CODEC.encodeStart(NbtOps.INSTANCE, this).getOrThrow();
 	}
 	
-	private static ConnectingElectricalNode getNode(CompoundTag tag, ElectricalNetwork network) {
-		ConnectingElectricalNode node = null;
-		BlockPos pos = NbtUtils.readBlockPos(tag, "position").orElse(null);
-		if (pos == null) return node;
-		int id1 = tag.getInt("local id");
-		for (ElectricalNode existingNode : network.getNodes(pos)) {
-			if (existingNode.localId == id1 && existingNode instanceof ConnectingElectricalNode connectingNode) {
-				node = connectingNode;
-				node.pos = pos;
-			}
-		}
-		return node;
+	public static WireConnection fromTag(Tag connection) {
+		return CODEC.decode(NbtOps.INSTANCE, connection)
+			.mapOrElse(Pair::getFirst, e -> null);
 	}
 }

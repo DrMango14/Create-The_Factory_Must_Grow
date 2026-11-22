@@ -6,11 +6,13 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class ElectricalProperties {
 
-    public final List<ElectricalNode> nodes = new ArrayList<>();
+    public final Map<Integer, ElectricalNode> nodes = new HashMap<>();
     public final List<ElectricalComponent> components = new ArrayList<>();
     public BlockPos position;
 

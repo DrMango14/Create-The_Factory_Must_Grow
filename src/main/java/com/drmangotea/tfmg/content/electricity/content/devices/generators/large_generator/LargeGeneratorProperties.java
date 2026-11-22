@@ -32,13 +32,13 @@ public class LargeGeneratorProperties extends DirectionalElectricalProperties {
         ElectricalNode L3r = new ElectricalNode(position, 6);
 
 
-        nodes.add(N);
-        nodes.add(L1);
-        nodes.add(L2);
-        nodes.add(L3);
-        nodes.add(L1r);
-        nodes.add(L2r);
-        nodes.add(L3r);
+        nodes.put(0, N);
+        nodes.put(1, L1);
+        nodes.put(2, L2);
+        nodes.put(3, L3);
+        nodes.put(4, L1r);
+        nodes.put(5, L2r);
+        nodes.put(6, L3r);
         components.add(new IdealVoltageSource(L1r, N, 100, 12000, 0, 0, position));
         components.add(new IdealVoltageSource(L2r, N, 100, 12000, 120, 1, position));
         components.add(new IdealVoltageSource(L3r, N, 100, 12000, 240, 2, position));

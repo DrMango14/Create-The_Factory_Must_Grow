@@ -31,13 +31,13 @@ public class LargeTransformerProperties extends DirectionalElectricalProperties 
         //ElectricalNode n = new ConnectingElectricalNode(position, 7, positions.get(7), NodeType.NEUTRAL);
 
 
-        nodes.add(N);
-        nodes.add(U);
-        nodes.add(V);
-        nodes.add(W);
-        nodes.add(u);
-        nodes.add(v);
-        nodes.add(w);
+        nodes.put(0, N);
+        nodes.put(1, U);
+        nodes.put(2, V);
+        nodes.put(3, W);
+        nodes.put(4, u);
+        nodes.put(5, v);
+        nodes.put(6, w);
        // nodes.add(n);
 
         components.add(new Transformer(U, N, u, N, 1, 10, 1, 0, position));

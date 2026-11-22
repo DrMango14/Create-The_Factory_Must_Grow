@@ -23,8 +23,8 @@ public class ResistorProperties extends DirectionalElectricalProperties {
         super(pos, direction);
         ConnectingElectricalNode node1 = new ConnectingElectricalNode(position, 0, getRotation(this.direction).getFirst(), NodeType.NEUTRAL);
         ConnectingElectricalNode node2 = new ConnectingElectricalNode(position, 1, getRotation(this.direction).get(1), type);
-        nodes.add(node1);
-        nodes.add(node2);
+        nodes.put(0, node1);
+        nodes.put(1, node2);
         components.add(new Resistance(node1, node2, r, 0, position));
     }
 

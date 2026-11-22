@@ -2,12 +2,16 @@ package com.drmangotea.tfmg.content.electricity;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
+import com.drmangotea.tfmg.content.electricity.packets.AddElectricalComponentPacket;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectableElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
+import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
@@ -36,19 +40,16 @@ public interface IElectric extends IHaveMultimeterInformation {
         TFMG.ELECTRICAL_NETWORK_DATA.markDirty();
     }
 
-
     default void removeBlock() {
         ElectricalNetwork network = getNetwork();
         network.members.remove(this.getPos());
         network.removeConnections(this);
         if (this.getProperties() != null)
-            network.nodes.removeAll(this.getProperties().nodes);
+            network.nodes.removeAll(this.getProperties().nodes.values());
 
-
+		network.update();
         TFMG.ELECTRICAL_NETWORK_DATA.markDirty();
-        network.update();
     }
-
 
     default void onUpdated() {
     }
@@ -67,14 +68,26 @@ public interface IElectric extends IHaveMultimeterInformation {
         return false;
     }
 
+	/// This updates the network, calls {@link IElectric#whilePlacing}, then updates the network again.
+	/// Then it sends a packet, so keep that in mind if overriding.
     default void onPlace() {
         this.updateNetwork(getPos());
 		
-		connectToNeighbors(getWorld(), this);
+		whilePlacing();
         this.updateNetwork(getPos());
 
+		if (getWorld() instanceof ServerLevel serverLevel)
+			CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(getPos()), new AddElectricalComponentPacket(getPos()));
     }
 	
+	/// This gets called during placement logic, between network updates.
+	/// This allows for changing that behaviour without having to then call for additional network updates.
+	default void whilePlacing() {
+		connectToNeighbors(getWorld(), this);
+	}
+	
+	/// Creates invisible connections between neighbouring IElectrics
+	/// @return ???? I have no idea mango, I think it's about trying again
 	static boolean connectToNeighbors(Level level, IElectric be) {
 		ElectricalNetwork network = be.getNetwork(level);
 		ElectricalProperties properties = network.members.get(be.getPos());
@@ -84,17 +97,21 @@ public interface IElectric extends IHaveMultimeterInformation {
 			return false;
 		}
 		
+		boolean bool = false;
 		for (Direction facing : Direction.values()) {
 			BlockPos pos = be.getPos().relative(facing);
+			if (!(level.getBlockEntity(pos) instanceof IElectric)) continue;
+			//no reason to expect properties from this, so just move on.
 			
 			ElectricalProperties neighborProperties = network.members.get(pos);
 			if (neighborProperties == null) {
-				return true;
+				bool = true; //To not cut the search short
+				continue;
 			}
 			
-			for (ElectricalNode n1 : properties.nodes) {
+			for (ElectricalNode n1 : properties.nodes.values()) {
 				if (!(n1 instanceof ConnectableElectricalNode node)) continue;
-				for (ElectricalNode n2 : neighborProperties.nodes) {
+				for (ElectricalNode n2 : neighborProperties.nodes.values()) {
 					if (!(n2 instanceof ConnectableElectricalNode neighborNode)) continue;
 					
 					if (node.type != neighborNode.type) continue;
@@ -107,10 +124,10 @@ public interface IElectric extends IHaveMultimeterInformation {
 				}
 			}
 		}
-		return false;
+		return bool;
 	}
 	
 	static WireConnection invisibleConnection(ConnectableElectricalNode A, ConnectableElectricalNode B) {
-		return new WireConnection(A, B, TFMG.asResource("universal"), false);
+		return new WireConnection(A.pos, B.pos, TFMG.asResource("universal"), false);
 	}
 }

@@ -90,7 +90,7 @@ public class TFMGUtils {
 		AtomicReference<ConnectingElectricalNode> closestConnector = new AtomicReference<>(null);
 		Vec3 basePos = Vec3.atLowerCornerOf(pos);
 		
-		network.getNodes(pos).forEach(n -> {
+		network.getNodes(pos).values().forEach(n -> {
 			if (!(n instanceof ConnectingElectricalNode node)) return;
 			
 			float distance = TFMGUtils.getDistance(clickPosition, node.getPosition().add(basePos));

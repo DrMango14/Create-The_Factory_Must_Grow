@@ -10,16 +10,12 @@ import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.WireConnection;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
-import com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.cable_type.CableType;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectingElectricalNode;
-import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.content.kinetics.deployer.DeployerFakePlayer;
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -33,7 +29,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -42,7 +37,6 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.drmangotea.tfmg.base.TFMGUtils.closestNode;
-import static com.drmangotea.tfmg.base.blocks.WallMountBlock.FACING;
 
 @NothingNullByDefault
 public class SpoolItem extends Item {
@@ -62,13 +56,6 @@ public class SpoolItem extends Item {
 		BlockPos pos = context.getClickedPos();
 		Player player = context.getPlayer();
 		ItemStack stack = context.getItemInHand();
-		
-		BlockPos fallback = new BlockPos(0, level.getMaxBuildHeight() + 1, 0); // Impossible block position, better than 0,0,0
-		BlockPos posToConnect = stack.getOrDefault(TFMGDataComponents.POSITION, fallback);
-		
-		BlockState state = level.getBlockState(pos);
-		
-		Direction direction = state.hasProperty(FACING) ? state.getValue(FACING) : null;
 		
 		if (player == null)
 			return InteractionResult.PASS;
@@ -112,29 +99,20 @@ public class SpoolItem extends Item {
 			if (!(level.getBlockEntity(pos2) instanceof IElectric b))
 				return InteractionResult.PASS;
 			
-			IElectric be2;
 			if ((b instanceof LargeTransformerBlockEntity t &&!t.isMainPart)) {
-				be2 = t.getControlledBlock();
-			} else {
-				be2 = b;
+				pos2 = t.getControlledBlock().getPos();
 			}
-
-			List<ElectricalNode> nodes = network.getNodes(be2.getPos());
-
-			for (ElectricalNode n : nodes) {
-				if (n.getLocalId() == id && n instanceof ConnectingElectricalNode node2) {
-					network.connections.add(new WireConnection(node1, node2, cableTypeKey, true));
-					float distance = TFMGUtils.getDistance(node1.pos.getBottomCenter(),node2.pos.getBottomCenter())*4;
-					
-					stack.set(TFMGDataComponents.SPOOL_AMOUNT,(int)Math.max(0,stack.getOrDefault(TFMGDataComponents.SPOOL_AMOUNT,0)-distance));
-					
-					network.update();
-					TFMG.ELECTRICAL_NETWORK_DATA.markDirty();
-					stack.remove(TFMGDataComponents.CONNECTOR_ID);
-					stack.remove(TFMGDataComponents.POSITION);
-					
-					return InteractionResult.SUCCESS;
-				}
+			
+			if (network.getNodes(pos2).get(id) instanceof ConnectingElectricalNode node2) {
+				network.connections.add(new WireConnection(node1.pos, node2.pos, cableTypeKey, true));
+				float distance = TFMGUtils.getDistance(node1.pos.getFullPos(),node2.pos.getFullPos())*4;
+				
+				stack.set(TFMGDataComponents.SPOOL_AMOUNT,(int)Math.max(0,stack.getOrDefault(TFMGDataComponents.SPOOL_AMOUNT,0)-distance));
+				
+				network.update();
+				TFMG.ELECTRICAL_NETWORK_DATA.markDirty();
+				stack.remove(TFMGDataComponents.CONNECTOR_ID);
+				stack.remove(TFMGDataComponents.POSITION);
 			}
 		}
 		return InteractionResult.SUCCESS;

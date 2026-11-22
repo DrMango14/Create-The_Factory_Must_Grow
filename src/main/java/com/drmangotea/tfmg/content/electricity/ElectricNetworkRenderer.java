@@ -26,7 +26,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.function.DoubleUnaryOperator;
 
 import static com.drmangotea.tfmg.base.TFMGUtils.closestNode;
@@ -58,8 +58,8 @@ public class ElectricNetworkRenderer {
 			if (connection.render() && type != null)
 				renderWire(
 					type.getModel(),
-					connection.node1().getPosition().add(Vec3.atLowerCornerOf(connection.node1().pos)),
-					connection.node2().getPosition().add(Vec3.atLowerCornerOf(connection.node2().pos)),
+					connection.node1().getFullPos(),
+					connection.node2().getFullPos(),
 					camera, ms, vc, playerPos
 				);
         }
@@ -132,7 +132,7 @@ public class ElectricNetworkRenderer {
 
 		ElectricalNetwork network = ElectricNetworkManager.getNetwork(mc.level);
 		ConnectableElectricalNode closestNode = closestNode(network, pos, result.getLocation());
-		List<ElectricalNode> nodes = network.getNodes(pos);
+		Collection<ElectricalNode> nodes = network.getNodes(pos).values();
 		if (nodes.isEmpty()) return;
 		
 		Vec3 basePos = Vec3.atLowerCornerOf(pos);
@@ -146,7 +146,7 @@ public class ElectricNetworkRenderer {
 			Vec3 corner1 = cablePos.add(size,size,size);
 			Vec3 corner2 = cablePos.subtract(size,size,size);
 			
-			TFMGUtils.createOutline(corner1, corner2, "connector_" + node.localId, node.type.getColor());
+			TFMGUtils.createOutline(corner1, corner2, "connector_" + node.getLocalId(), node.type.getColor());
 		});
     }
 

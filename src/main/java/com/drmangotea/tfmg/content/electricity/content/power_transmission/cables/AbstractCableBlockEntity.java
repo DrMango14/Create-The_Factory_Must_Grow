@@ -48,10 +48,8 @@ public abstract class AbstractCableBlockEntity extends SmartBlockEntity implemen
     }
 
     @Override
-    public void onPlace() {
-        IElectric.super.onPlace();
+    public void whilePlacing() {
         connectNextTick = IElectric.connectToNeighbors(level, this);
-        updateNetwork(getBlockPos());
     }
 
     @Override

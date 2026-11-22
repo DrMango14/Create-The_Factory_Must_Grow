@@ -10,8 +10,6 @@ import com.drmangotea.tfmg.content.electricity.simulation.ElectricalComponent;
 import com.drmangotea.tfmg.content.electricity.simulation.IdealVoltageSource;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
 import com.drmangotea.tfmg.content.electricity.simulation.Transformer;
-import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectableElectricalNode;
-import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
 import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.content.trains.graph.DimensionPalette;
 import net.createmod.catnip.data.Pair;
@@ -113,39 +111,8 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
             }
 
             int connectionCount = buffer.readInt();
-
             for (int j = 0; j < connectionCount; j++) {
-                boolean shouldRender = buffer.readBoolean();
-                ResourceLocation cableType = ResourceLocation.parse(buffer.readUtf().replace('.',':'));
-
-                BlockPos pos1 = buffer.readBlockPos();
-                int id1 = buffer.readInt();
-                BlockPos pos2 = buffer.readBlockPos();
-                int id2 = buffer.readInt();
-
-                List<ElectricalNode> nodes1 = network.getNodes(pos1);
-                List<ElectricalNode> nodes2 = network.getNodes(pos2);
-
-                ConnectableElectricalNode n1 = null;
-                ConnectableElectricalNode n2 = null;
-
-                for (ElectricalNode electricalNode : nodes1) {
-                    if (electricalNode instanceof ConnectableElectricalNode node && node.localId == id1) {
-                        n1 = node;
-                    }
-                }
-                for (ElectricalNode electricalNode : nodes2) {
-                    if (electricalNode instanceof ConnectableElectricalNode node && node.localId == id2) {
-                        n2 = node;
-                    }
-                }
-
-                if (n1 != null && n2 != null) {
-                    n1.pos = pos1;
-                    n2.pos = pos2;
-                    network.connections.add(new WireConnection(n1, n2, cableType, shouldRender));
-                }
-
+				network.connections.add(WireConnection.STREAM_CODEC.decode(buffer));
             }
             networks.add(Pair.of(dimension, network));
         }
@@ -213,15 +180,7 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
             int connectionCount = connections.size();
             buffer.writeInt(connectionCount);
             for (int i = 0; i < connectionCount; i++) {
-                WireConnection connection = connections.get(i);
-				buffer.writeBoolean(connection.render());
-				buffer.writeUtf(connection.cableTypeKey().toString().replace(':','.'));
-                buffer.writeBlockPos(connection.node1().pos);
-                buffer.writeInt(connection.node1().getLocalId());
-                buffer.writeBlockPos(connection.node2().pos);
-                buffer.writeInt(connection.node2().getLocalId());
-
-
+                WireConnection.STREAM_CODEC.encode(buffer, connections.get(i));
             }
         });
     }

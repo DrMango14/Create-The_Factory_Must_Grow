@@ -20,17 +20,16 @@ public class ElectricMotorProperties extends DirectionalElectricalProperties {
 
     public ElectricMotorProperties(BlockPos pos1, Direction direction) {
         super(pos1, direction);
-		List<Vec3> positions = getRotation(direction);
 
         ElectricalNode N  = new DirectionalElectricalNode(position, 0, direction.getOpposite(), NodeType.NEUTRAL);
         ElectricalNode L1 = new DirectionalElectricalNode(position, 1, direction.getOpposite(), NodeType.PHASE_1);
         ElectricalNode L2 = new DirectionalElectricalNode(position, 2, direction.getOpposite(), NodeType.PHASE_2);
         ElectricalNode L3 = new DirectionalElectricalNode(position, 3, direction.getOpposite(), NodeType.PHASE_3);
 
-        nodes.add(N);
-        nodes.add(L1);
-        nodes.add(L2);
-        nodes.add(L3);
+        nodes.put(0, N);
+        nodes.put(1, L1);
+        nodes.put(2, L2);
+        nodes.put(3, L3);
 
         components.add(new Resistance(L1, N, TFMGConfigs.common().machines.electricMotorInternalResistance.getF(), 0, position));
         components.add(new Resistance(L2, N, TFMGConfigs.common().machines.electricMotorInternalResistance.getF(), 1, position));

@@ -35,13 +35,13 @@ public class SwitchProperties extends DirectionalElectricalProperties {
         DirectionalElectricalNode L3B = new DirectionalElectricalNode(position, 6, direction.getOpposite(), NodeType.PHASE_3);
 
 
-        nodes.add(N);
-        nodes.add(L1A);
-        nodes.add(L2A);
-        nodes.add(L3A);
-        nodes.add(L1B);
-        nodes.add(L2B);
-        nodes.add(L3B);
+        nodes.put(0, N);
+        nodes.put(1,L1A);
+        nodes.put(2, L2A);
+        nodes.put(3, L3A);
+        nodes.put(4, L1B);
+        nodes.put(5, L2B);
+        nodes.put(6, L3B);
 
 
         components.add(new Resistance(L1A, L1B, r, 0, position));

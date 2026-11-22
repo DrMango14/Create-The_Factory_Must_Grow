@@ -16,15 +16,10 @@ public class TwoSlotAdapterProperties extends DirectionalElectricalProperties {
 
     public TwoSlotAdapterProperties(BlockPos pos, Direction direction) {
         super(pos, direction);
-
-
-        ConnectingElectricalNode N = new ConnectingElectricalNode( position, 0, getRotation(direction).get(0),NodeType.NEUTRAL);
-        ConnectingElectricalNode L1 = new ConnectingElectricalNode(position, 1, getRotation(direction).get(1),NodeType.PHASE_1);
-
-        nodes.add(N);
-        nodes.add(L1);
-
-
+		var positions = getRotation(direction);
+		
+        nodes.put(0, new ConnectingElectricalNode(position, 0, positions.get(0), NodeType.NEUTRAL));
+        nodes.put(1, new ConnectingElectricalNode(position, 1, positions.get(1), NodeType.PHASE_1));
 
     }
 

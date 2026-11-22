@@ -1,7 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.saved_data;
 
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
@@ -10,16 +8,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.dimension.LevelStem;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class NetworkDataManager {
-        public List<ElectricalNetwork> list;
         private NetworkSavedData savedData;
 
         public NetworkDataManager() {
-            list = new ArrayList<>();
-            list.addAll(ElectricNetworkManager.networks.values());
         }
 
         public void levelLoaded(LevelAccessor level) {
@@ -37,7 +29,6 @@ public class NetworkDataManager {
                 return;
             }
             savedData = NetworkSavedData.load(server);
-            list = savedData.getNetworks();
         }
 		
         public void markDirty() {

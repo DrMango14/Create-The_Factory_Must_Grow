@@ -22,16 +22,12 @@ public class LargeSwitchProperties extends DirectionalElectricalProperties {
     public LargeSwitchProperties(BlockPos pos, Direction direction, double r) {
         super(pos, direction);
 
-        List<Direction> directions = new ArrayList<>();
-        directions.add(direction);
-        directions.add(direction.getOpposite());
-
         DirectionalElectricalNode IN = new DirectionalElectricalNode(position, 0, direction, NodeType.CONNECTOR);
         DirectionalElectricalNode OUT = new DirectionalElectricalNode(position, 1, direction.getOpposite(), NodeType.CONNECTOR);
 
 
-        nodes.add(IN);
-        nodes.add(OUT);
+        nodes.put(0, IN);
+        nodes.put(1, OUT);
 
         components.add(new Resistance(IN, OUT, r, 0, position));
     }

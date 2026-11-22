@@ -2,31 +2,27 @@ package com.drmangotea.tfmg.content.electricity.simulation.nodes;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
+import net.minecraft.world.phys.Vec3;
 
 public class ElectricalNode {
     public int networkId;
-    public int localId;
-    public BlockPos pos;
+    public NodePos pos;
 
 	public ElectricalNode(BlockPos pos, int localId) {
         this.networkId = 0;
-        this.localId = localId;
-        this.pos = pos;
+        this.pos = new NodePos(pos, localId);
     }
+	
+	protected ElectricalNode(BlockPos pos, Vec3 offset, int localId) {
+		this.networkId = 0;
+		this.pos = new NodePos(pos, offset, localId);
+	}
 
     public int getNetworkId() {
         return networkId;
     }
 
     public int getLocalId() {
-        return localId;
+        return pos.localId();
     }
-	
-	public CompoundTag save() {
-		CompoundTag tag = new CompoundTag();
-		tag.put("position", NbtUtils.writeBlockPos(this.pos));
-		tag.putInt("local id", this.getLocalId());
-		return tag;
-	}
 }

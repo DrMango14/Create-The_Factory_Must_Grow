@@ -13,7 +13,7 @@ import java.util.List;
 public class UnwireableConnectorProperties extends ElectricalProperties {
 	public UnwireableConnectorProperties(BlockPos pos, List<Direction> directions) {
 		super(pos);
-        nodes.add(new DirectionalElectricalNode(position,0,directions, NodeType.CONNECTOR));
+        nodes.put(0, new DirectionalElectricalNode(position,0,directions, NodeType.CONNECTOR));
     }
 
 

@@ -27,20 +27,12 @@ public class SegmentedDisplayBlockEntity extends ResistiveLoadBlockEntity {
     public DyeColor color;
 
     private int partIndex;
-	
-	//ElectricalProperties properties;
 
     public SegmentedDisplayBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         customText = Optional.empty();
         color = DyeColor.LIME;
-		//properties = new SegmentedDisplayProperties(getPos(), state.getValue(FACING));
     }
-	
-	/*@Override
-	public ElectricalProperties getProperties() {
-		return properties;
-	}*/
 
     public void setColor(DyeColor color) {
         if(color==DyeColor.BLACK||color == DyeColor.LIGHT_GRAY|| color == DyeColor.GRAY)

@@ -28,12 +28,12 @@ public class AccumulatorControlUnitProperties extends DirectionalElectricalPrope
         DirectionalElectricalNode IN = new DirectionalElectricalNode(position, 1, direction, NodeType.PHASE_1);
         DirectionalElectricalNode OUT = new DirectionalElectricalNode(position, 4, direction.getOpposite(), NodeType.PHASE_1);
         ElectricalNode Internal = new ElectricalNode(position, 5);
-
-
-        nodes.add(N);
-        nodes.add(IN);
-        nodes.add(OUT);
-        nodes.add(Internal);
+		
+		//TODO: These node ids don't seem right...
+        nodes.put(0, N);
+        nodes.put(1, IN);
+        nodes.put(4, OUT);
+        nodes.put(5, Internal);
 
         components.add(new Resistance(IN,N,10,0,position));
         components.add(new Resistance(OUT,Internal,5,1,position));

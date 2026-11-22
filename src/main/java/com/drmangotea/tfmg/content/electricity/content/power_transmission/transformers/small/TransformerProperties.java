@@ -26,10 +26,10 @@ public class TransformerProperties extends DirectionalElectricalProperties {
         ElectricalNode a = new DirectionalElectricalNode(position, 2, dir.getOpposite(), NodeType.INPUT);
         ElectricalNode b = new DirectionalElectricalNode(position, 3, dir.getOpposite(), NodeType.OUTPUT);
 
-        nodes.add(A);
-        nodes.add(B);
-        nodes.add(a);
-        nodes.add(b);
+        nodes.put(0, A);
+        nodes.put(1, B);
+        nodes.put(2, a);
+        nodes.put(3, b);
 
         components.add(new Transformer(A,B,a,b,1,10,1,0, position));
     }

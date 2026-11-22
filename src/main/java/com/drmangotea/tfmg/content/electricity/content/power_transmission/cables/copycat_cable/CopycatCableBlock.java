@@ -2,14 +2,12 @@ package com.drmangotea.tfmg.content.electricity.content.power_transmission.cable
 
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.packets.AddElectricalComponentPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
-import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.core.BlockPos;
@@ -248,11 +246,7 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
     @Override
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
-        if(level.getBlockEntity(pos) instanceof IElectric be){
-            be.onPlace();
-            if (level instanceof ServerLevel serverLevel)
-                CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(pos), new AddElectricalComponentPacket(BlockPos.of(pos.asLong())));
-        }
+		withBlockEntityDo(level, pos, IElectric::onPlace);
     }
 
     @Override

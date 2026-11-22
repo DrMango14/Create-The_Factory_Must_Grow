@@ -23,11 +23,10 @@ public class CableProperties extends ElectricalProperties {
         DirectionalElectricalNode L1 = new DirectionalElectricalNode(position, 1, directions,NodeType.PHASE_1);
         DirectionalElectricalNode L2 = new DirectionalElectricalNode(position, 2, directions,NodeType.PHASE_2);
         DirectionalElectricalNode L3 = new DirectionalElectricalNode(position, 3, directions, NodeType.PHASE_3);
-        nodes.add(N);
-        nodes.add(L1);
-        nodes.add(L2);
-        nodes.add(L3);
-
+        nodes.put(0, N);
+        nodes.put(1, L1);
+        nodes.put(2, L2);
+        nodes.put(3, L3);
 
     }
 

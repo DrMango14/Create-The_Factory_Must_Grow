@@ -19,7 +19,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,16 +48,10 @@ public class LargeSwitchBlockEntity extends KineticBlockEntity implements IElect
         super(type, pos, state);
         isMainPart = state.getValue(IS_MAIN_PART);
         visualAngle.setValue(90);
-        List<Direction> directions = new ArrayList<>();
         Direction direction = state.getValue(HORIZONTAL_FACING);
-        directions.add(direction);
-        directions.add(direction.getOpposite());
-        p = state.getValue(IS_MAIN_PART) ? new LargeSwitchProperties(getPos(), state.getValue(HORIZONTAL_FACING), 1E12) : new UnwireableConnectorProperties(getPos(), Arrays.stream(Direction.values()).toList());
-     //  this.p = new CableProperties(getPos(), Arrays.stream(Direction.values()).toList());
-
-
-
-        int i = 0;
+        p = isMainPart
+			? new LargeSwitchProperties(getPos(), direction, 1E12)
+			: new UnwireableConnectorProperties(getPos(), List.of(Direction.values()));
     }
 
 
@@ -183,10 +176,10 @@ public class LargeSwitchBlockEntity extends KineticBlockEntity implements IElect
         return p;
     }
     @Override
-    public void onPlace() {
+    public void onPlace() { //TODO: Is this override even needed?
         IElectric.super.onPlace();
-      //  connectNextTick = connectToNeighbors(level, this);
-        updateNetwork(getBlockPos());
+		//connectNextTick = connectToNeighbors(level, this);
+		//updateNetwork(getBlockPos());
     }
     @Override
     public void remove() {

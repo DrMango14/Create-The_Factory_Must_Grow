@@ -88,11 +88,10 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
     }
 
 
-    @Override
-    public void onPlace() {
-        IElectric.super.onPlace();
+	@Override //TODO: Review this - this is prolly unnecessary
+	public void whilePlacing() {
+        IElectric.super.whilePlacing();
         connectToNeighbors();
-        updateNetwork(getBlockPos());
     }
 
     @Override

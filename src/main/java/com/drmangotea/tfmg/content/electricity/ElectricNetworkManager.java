@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.content.electricity;
 
 import com.drmangotea.tfmg.content.electricity.packets.NetworkLoadPacket;
-import net.createmod.catnip.data.Pair;
 import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -16,13 +15,8 @@ import java.util.Objects;
 public class ElectricNetworkManager {
     public static Map<LevelAccessor, ElectricalNetwork> networks = new HashMap<>();
 
-    public static Map<LevelAccessor, Pair<ElectricalNetwork, NetworkCalculationData>> updateQueue = new HashMap<>();
-
     public void onLoadWorld(LevelAccessor world) {
-     
-
-            networks.put(world, new ElectricalNetwork(world));
-
+		networks.put(world, new ElectricalNetwork(world));
     }
 
     public void onUnloadWorld(LevelAccessor world) {

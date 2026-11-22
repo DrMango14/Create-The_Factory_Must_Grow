@@ -23,10 +23,10 @@ public class CreativeGeneratorProperties extends ElectricalProperties {
         ElectricalNode L3 = new HybridConnectedNode(position, 3, List.of(Direction.values()),getRotation(3),NodeType.PHASE_3);
 
 
-        nodes.add(N);
-        nodes.add(L1);
-        nodes.add(L2);
-        nodes.add(L3);
+        nodes.put(0, N);
+        nodes.put(1, L1);
+        nodes.put(2, L2);
+        nodes.put(3, L3);
         components.add(new IdealVoltageSource(L1, N, 100, 99999, 0, 0, position));
         components.add(new IdealVoltageSource(L2, N, 100, 99999, 120, 1, position));
         components.add(new IdealVoltageSource(L3, N, 100, 99999, 240, 2, position));

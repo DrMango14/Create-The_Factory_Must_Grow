@@ -76,9 +76,8 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IElectri
     }
 
     @Override
-    public void onPlace() {
-        IElectric.super.onPlace();
-
+    public void whilePlacing() {
+        IElectric.super.whilePlacing();
         getNetwork().setTransformerRatio(this, 0, coilRatio);
     }
 

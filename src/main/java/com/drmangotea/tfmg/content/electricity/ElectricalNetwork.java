@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.content.electricity;
 import com.drmangotea.tfmg.content.electricity.simulation.*;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.MergedNode;
+import com.drmangotea.tfmg.content.electricity.simulation.nodes.NodePos;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 
@@ -42,11 +43,15 @@ public class ElectricalNetwork {
 
     public Map<Integer, ComplexValue> nodeVoltages = new HashMap<>();
 
-    public List<ElectricalNode> getNodes(BlockPos pos) {
+    public Map<Integer, ElectricalNode> getNodes(BlockPos pos) {
 		if (members.get(pos) instanceof ElectricalProperties member)
 			return member.nodes;
-		return List.of();
-    }
+		return Map.of();
+	}
+	
+	public Optional<ElectricalNode> getNode(NodePos pos) {
+		return Optional.ofNullable(getNodes(pos.position()).get(pos.localId()));
+	}
 
 
     public void addMember(BlockPos pos, ElectricalProperties properties) {
@@ -97,15 +102,12 @@ public class ElectricalNetwork {
     }
     
 	public void setResistance(BlockPos pos, int id, double resistance) {
-        members.forEach((m, p) -> {
-            if (m == pos) {
-                for (ElectricalComponent component : p.components) {
-                    if (component instanceof Resistance resistor && resistor.localId == id) {
-                        resistor.resistance = resistance;
-                    }
-                }
-            }
-        });
+        ElectricalProperties p = members.get(pos);
+		for (ElectricalComponent component : p.components) {
+			if (component instanceof Resistance resistor && resistor.localId == id) {
+				resistor.resistance = resistance;
+			}
+		}
         update();
     }
 
@@ -114,66 +116,37 @@ public class ElectricalNetwork {
     }
 	
     public void setTransformerRatio(BlockPos pos, int id, double ratio) {
-        members.forEach((m, p) -> {
-            if (m == pos) {
-                for (ElectricalComponent component : p.components) {
-                    if (component instanceof Transformer transformer && transformer.localId == id) {
-                        transformer.turnsRatio = ratio;
-                    }
-                }
-            }
-        });
+		ElectricalProperties p = members.get(pos);
+		for (ElectricalComponent component : p.components) {
+			if (component instanceof Transformer transformer && transformer.localId == id) {
+				transformer.turnsRatio = ratio;
+			}
+		}
         update();
     }
 
 
     public void addComponents() {
-
-
         nodes = new ArrayList<>();
         resistors = new ArrayList<>();
         sources = new ArrayList<>();
         finalResistors = new ArrayList<>();
         finalSources = new ArrayList<>();
-
-
         transformers = new ArrayList<>();
-
-
-        //ElectricalNode node5 = new ElectricalNode(0, 5);
-        //ElectricalNode node4 = new ElectricalNode(0, 4);
-        //ElectricalNode node3 = new ElectricalNode(0, 3);
-        //ElectricalNode node2 = new ElectricalNode(0, 2);
-        //ElectricalNode node1 = new ElectricalNode(0, 1);
-        //nodes.add(node1);
-        //nodes.add(node2);
-        //nodes.add(node3);
-        //nodes.add(node4);
-        //nodes.add(node5);
-////
-        //sources.add(new IdealVoltageSource(node5, node1, 230, 1000, 0, 1));
-//
-        //resistors.add(new Resistance(node2, node5, 1000, 67, 0));
-//
-        //resistors.add(new Resistance(node3, node4, 100, 67, 0));
-        //transformers.add(new Transformer(node1, node2, node3, node1, 1, 10, 0.999, 1));
-
 
         List<ElectricalComponent> components = new ArrayList<>();
         members.forEach((l, p) -> {
 
             if (p == null) return;
 			
-			nodes.addAll(p.nodes);
+			nodes.addAll(p.nodes.values());
             components.addAll(p.components);
 
         });
 
         for (int i = 0; i < nodes.size(); i++) {
             ElectricalNode node = nodes.get(i);
-
             node.networkId = i;
-
         }
 
 
@@ -193,9 +166,6 @@ public class ElectricalNetwork {
                 //    connections.add(new WireConnection((ConnectableElectricalNode) t.pB, (ConnectableElectricalNode) t.sB,1,false));
             }
         });
-        // totalNodes = 20;
-
-
     }
 
 
@@ -211,7 +181,7 @@ public class ElectricalNetwork {
     }
 
     public MergedNode mergeNodes(ElectricalNode node1, ElectricalNode node2, int count) {
-        MergedNode mergedNode = new MergedNode(node1.pos, -1 + count);
+        MergedNode mergedNode = new MergedNode(node1.pos.position(), -1 + count);
 
         if (node1 instanceof MergedNode m1) {
             for (ElectricalNode node : m1.mergedNodes) {
@@ -251,10 +221,10 @@ public class ElectricalNetwork {
 
         int count = 0;
         for (WireConnection connection : connections) {
-            ElectricalNode node1 = connection.node1();
-            ElectricalNode node2 = connection.node2();
-
-
+            ElectricalNode node1 = getNode(connection.node1()).orElse(null);
+            ElectricalNode node2 = getNode(connection.node2()).orElse(null);
+			
+			if (node1 == null || node2 == null) return;
 
             boolean isNode1Merged = !finalNodes.contains(node1);
             boolean isNode2Merged = !finalNodes.contains(node2);
@@ -278,8 +248,8 @@ public class ElectricalNetwork {
         }
 
         for (Resistance resistor : resistors) {
-            ElectricalNode node1 = resistor.localNodeA;
-            ElectricalNode node2 = resistor.localNodeB;
+            ElectricalNode node1 = resistor.nodeA;
+            ElectricalNode node2 = resistor.nodeB;
 
             boolean isNode1Merged = !finalNodes.contains(node1);
             boolean isNode2Merged = !finalNodes.contains(node2);
@@ -317,8 +287,8 @@ public class ElectricalNetwork {
             finalTransformers.add(new Transformer(node1, node2, snode1, snode2, transformer.L1, transformer.turnsRatio, transformer.k, transformer.id, transformer.pos));
         }
         for (IdealVoltageSource source : sources) {
-            ElectricalNode node1 = source.localNodeA;
-            ElectricalNode node2 = source.localNodeB;
+            ElectricalNode node1 = source.nodeA;
+            ElectricalNode node2 = source.nodeB;
 
             boolean isNode1Merged = !finalNodes.contains(node1);
             boolean isNode2Merged = !finalNodes.contains(node2);
@@ -346,7 +316,7 @@ public class ElectricalNetwork {
     public void removeConnections(IElectric be) {
         List<WireConnection> connectionsCopy = new ArrayList<>(connections);
         for (WireConnection connection : connectionsCopy) {
-            if (connection.node1().pos == be.getPos() || connection.node2().pos == be.getPos()) {
+            if (connection.node1().position() == be.getPos() || connection.node2().position() == be.getPos()) {
                 connections.remove(connection);
             }
         }
@@ -404,11 +374,11 @@ public class ElectricalNetwork {
     }
 
     public void sendDataToMembers() {
-
+		LevelAccessor level = ElectricNetworkManager.getWorldFromNetwork(this);
+		if (level == null) return;
         new HashMap<>(members).forEach((pos, o) -> {
             if (o.needsUpdateData()) {
-                LevelAccessor level = ElectricNetworkManager.getWorldFromNetwork(this);
-                if (level != null && level.getBlockEntity(pos) instanceof IElectric be) {
+                if (level.getBlockEntity(pos) instanceof IElectric be) {
 					be.onUpdated();
                 }
             }
