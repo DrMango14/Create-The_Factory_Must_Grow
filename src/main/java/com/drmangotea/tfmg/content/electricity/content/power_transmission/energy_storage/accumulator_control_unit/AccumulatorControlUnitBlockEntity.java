@@ -6,7 +6,7 @@ import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.accumulator_rack.AccumulatorRackBlockEntity;
 import com.drmangotea.tfmg.content.electricity.packets.UpdateAccumulatorPacket;
@@ -57,7 +57,7 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
 
     @Override
     public void onUpdated() {
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
 
         Resistance resistor = network.getResistance(getPos(), 0);
 
@@ -84,7 +84,7 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
         super.onLoad();
         findAccumulatorRack();
         AccumulatorControlUnitBlockEntity.updateVoltage(this, outputVoltageScroll.value);
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(this.getWorld());
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(this.getWorld());
 
         network.update();
         //
@@ -207,7 +207,7 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
             }
         }
 
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
         TFMG.LOGGER.debug("Meow");
         network.setVoltageGen(be, voltage);
         network.setPhaseShift(be, phase * 120);

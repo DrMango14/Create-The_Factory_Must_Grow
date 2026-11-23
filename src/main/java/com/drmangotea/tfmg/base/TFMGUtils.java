@@ -5,7 +5,7 @@ import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.base.spark.Spark;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.cable_type.CableType;
@@ -79,7 +79,7 @@ public class TFMGUtils {
 		}
 		
 		BlockPos pos = be.getPos();
-		ElectricalNetwork network = ElectricNetworkManager.getNetwork(be.getWorld());
+		ElectricalNetwork network = ElectricalNetworkManager.getNetwork(be.getWorld());
 		
 		return closestNode(network, pos, clickPosition);
 	}

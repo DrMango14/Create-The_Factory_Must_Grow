@@ -59,12 +59,12 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
         return onBlockEntityUse(context.getLevel(), context.getClickedPos(), block -> {
             ItemStack consumedItem = block.getConsumedItem();
-            if (!block.hasCustomMaterial())
-                return InteractionResult.PASS;
+            if (!block.hasCustomMaterial()) return InteractionResult.PASS;
+			
             Player player = context.getPlayer();
+			if (player == null) return InteractionResult.PASS;
             if (!player.isCreative())
-                player.getInventory()
-                        .placeItemBackInInventory(consumedItem);
+                player.getInventory().placeItemBackInInventory(consumedItem);
             context.getLevel()
                     .levelEvent(2001, context.getClickedPos(), Block.getId(block.getBlockState()));
             block.setMaterial(AllBlocks.COPYCAT_BASE.getDefaultState());
@@ -79,8 +79,7 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
         BlockState materialIn = getAcceptedBlockState(level, pos, stack, face);
 
         if (materialIn != null)
-            materialIn = prepareMaterial(
-                    level, pos, state, player, hand, hitResult, materialIn);
+            materialIn = prepareMaterial(level, pos, state, player, hand, hitResult, materialIn);
 
         if (materialIn == null)
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;

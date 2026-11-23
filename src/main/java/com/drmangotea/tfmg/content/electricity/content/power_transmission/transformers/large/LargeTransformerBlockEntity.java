@@ -3,10 +3,9 @@ package com.drmangotea.tfmg.content.electricity.content.power_transmission.trans
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
-import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.simulation.Transformer;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
@@ -134,7 +133,7 @@ public class LargeTransformerBlockEntity extends SmartBlockEntity implements IEl
     public void onUpdated() {
         if (!isMainPart)
             return;
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
 
 
         for (int i = 0; i < 3; i++) {

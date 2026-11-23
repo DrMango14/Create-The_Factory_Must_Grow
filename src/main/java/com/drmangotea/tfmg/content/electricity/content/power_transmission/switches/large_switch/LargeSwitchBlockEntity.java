@@ -4,7 +4,7 @@ import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.UnwireableConnectorProperties;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
@@ -19,7 +19,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.drmangotea.tfmg.content.electricity.content.power_transmission.switches.large_switch.LargeSwitchBlock.IS_MAIN_PART;
@@ -40,8 +39,7 @@ public class LargeSwitchBlockEntity extends KineticBlockEntity implements IElect
     public double resistance = 0;
     public double voltage = 0;
     public double current = 0;
-
-    public boolean connectNextTick = false;
+	
     ElectricalProperties p;
 
     public LargeSwitchBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -71,7 +69,7 @@ public class LargeSwitchBlockEntity extends KineticBlockEntity implements IElect
 
     @Override
     public void onUpdated() {
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
 
         Resistance resistor = network.getResistance(getPos(), 0);
 
@@ -94,18 +92,6 @@ public class LargeSwitchBlockEntity extends KineticBlockEntity implements IElect
             onPlace();
             update = false;
         }
-        if(update){
-            for(Direction facing : Arrays.stream(Direction.values()).toList()){
-                if(level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric n){
-                    //connectToNeighbors(level,n);
-                }
-            }
-        }
-       // if (connectNextTick) {
-//
-       //     connectNextTick = connectToNeighbors(level, this);
-       //
-       // }
 
         if (level.isClientSide) {
             visualAngle.chase(angle / 10d, 1d, LerpedFloat.Chaser.EXP);
@@ -151,36 +137,19 @@ public class LargeSwitchBlockEntity extends KineticBlockEntity implements IElect
 
     protected void stateChanged() {
 
-        double resistance = 0;
-
+        double resistance;
         if (closed) {
             resistance = 0.001;
         } else resistance = 1E12;
 
-        //if(newSignal!=0){
-        //    resistance =1f / (newSignal * 1000);
-        //} else resistance = 1E12;
-
-        //if (newSignal == 15) {
-        //    resistance = 0.001;
-        //}
-
         getNetwork().setResistance(this, 0, resistance);
-
-
-
     }
 
     @Override
     public ElectricalProperties getProperties() {
         return p;
     }
-    @Override
-    public void onPlace() { //TODO: Is this override even needed?
-        IElectric.super.onPlace();
-		//connectNextTick = connectToNeighbors(level, this);
-		//updateNetwork(getBlockPos());
-    }
+	
     @Override
     public void remove() {
         super.remove();

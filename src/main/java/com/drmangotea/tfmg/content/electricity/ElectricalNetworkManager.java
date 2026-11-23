@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class ElectricNetworkManager {
+public class ElectricalNetworkManager {
     public static Map<LevelAccessor, ElectricalNetwork> networks = new HashMap<>();
 
     public void onLoadWorld(LevelAccessor world) {
@@ -43,10 +43,10 @@ public class ElectricNetworkManager {
 
     public static void playerLogin(Player player) {
         if (player instanceof ServerPlayer serverPlayer) {
-            NetworkLoadPacket packet = new NetworkLoadPacket(ElectricNetworkManager.networks.values().stream().toList());
+            NetworkLoadPacket packet = new NetworkLoadPacket(ElectricalNetworkManager.networks.values().stream().toList());
             CatnipServices.NETWORK.sendToClient(serverPlayer, packet);
 
-            ElectricalNetwork network = ElectricNetworkManager.getNetwork(player.level());
+            ElectricalNetwork network = ElectricalNetworkManager.getNetwork(player.level());
             network.update();
 
 

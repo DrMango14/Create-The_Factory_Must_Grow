@@ -46,7 +46,7 @@ public class ElectricNetworkRenderer {
             return;
         if (player == null)
             return;
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(mc.level);
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(mc.level);
         PoseStack ms = event.getPoseStack();
         MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
         VertexConsumer vc = buffer.getBuffer(RenderType.cutoutMipped());
@@ -130,7 +130,7 @@ public class ElectricNetworkRenderer {
 			}
 		}
 
-		ElectricalNetwork network = ElectricNetworkManager.getNetwork(mc.level);
+		ElectricalNetwork network = ElectricalNetworkManager.getNetwork(mc.level);
 		ConnectableElectricalNode closestNode = closestNode(network, pos, result.getLocation());
 		Collection<ElectricalNode> nodes = network.getNodes(pos).values();
 		if (nodes.isEmpty()) return;

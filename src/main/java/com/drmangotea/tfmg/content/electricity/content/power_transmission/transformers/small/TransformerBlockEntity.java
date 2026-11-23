@@ -5,7 +5,7 @@ import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.simulation.Transformer;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
@@ -84,7 +84,7 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IElectri
     @Override
     public void onUpdated() {
 
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
 
 
         Transformer t = network.getTransformer(getPos(), 0);

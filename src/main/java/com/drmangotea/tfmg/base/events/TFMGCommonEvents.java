@@ -5,7 +5,7 @@ import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.decoration.tanks.TFMGFluidTankBlockEntity;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.accumulator_rack.AccumulatorRackBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.cells.AccumulatorCellItem;
 import com.drmangotea.tfmg.content.electricity.content.devices.polarizer.PolarizerBlockEntity;
@@ -85,18 +85,18 @@ public class TFMGCommonEvents {
     public static void playerChangedDimension(PlayerEvent.PlayerLoggedInEvent event) {
         Player player = event.getEntity();
 
-        ElectricNetworkManager.playerLogin(player);
+        ElectricalNetworkManager.playerLogin(player);
     }
     @SubscribeEvent
     public static void playerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
         Player player = event.getEntity();
 
-        ElectricNetworkManager.playerLogin(player);
+        ElectricalNetworkManager.playerLogin(player);
     }
 
     @SubscribeEvent
     public static void onServerTick(ServerTickEvent.Post event) {
-        ElectricNetworkManager.handleNetworkUpdate(event);
+        ElectricalNetworkManager.handleNetworkUpdate(event);
     }
 
     @SubscribeEvent

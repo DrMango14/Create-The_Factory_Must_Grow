@@ -3,7 +3,7 @@ package com.drmangotea.tfmg.content.electricity.saved_data;
 import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.WireConnection;
 import net.minecraft.core.BlockPos;
@@ -31,7 +31,7 @@ public class NetworkSavedData extends SavedData {
 
     @Override @NothingNullByDefault
     public CompoundTag save(CompoundTag compound, HolderLookup.Provider provider) {
-        List<ElectricalNetwork> list = ElectricNetworkManager.networks.values().stream().toList();
+        List<ElectricalNetwork> list = ElectricalNetworkManager.networks.values().stream().toList();
 
         compound = new CompoundTag();
 
@@ -94,7 +94,7 @@ public class NetworkSavedData extends SavedData {
     public static NetworkSavedData load(CompoundTag compound, HolderLookup.Provider registries) {
         NetworkSavedData sd = new NetworkSavedData();
 
-        List<ElectricalNetwork> list = ElectricNetworkManager.networks.values().stream().toList();
+        List<ElectricalNetwork> list = ElectricalNetworkManager.networks.values().stream().toList();
         for (ElectricalNetwork network : list) {
 			if (!(network.world instanceof ServerLevel serverLevel)) continue;
 			

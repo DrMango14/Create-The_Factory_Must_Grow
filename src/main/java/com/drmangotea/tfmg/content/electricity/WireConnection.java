@@ -7,6 +7,7 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -22,6 +23,10 @@ public record WireConnection (
 	
 	public CableType cableType () {
 		return TFMGUtils.getCableType(cableTypeKey);
+	}
+	
+	public boolean connectedTo(BlockPos pos) {
+		return node1.position() == pos || node2.position() == pos;
 	}
 	
 	//just to prettify the codecs tbh

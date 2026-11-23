@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.simulation.nodes;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.phys.Vec3;
 
 public class ElectricalNode {

@@ -6,7 +6,7 @@ import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.WireConnection;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
@@ -92,7 +92,7 @@ public class SpoolItem extends Item {
 			stack.set(TFMGDataComponents.POSITION, pos);
 			stack.set(TFMGDataComponents.CONNECTOR_ID, node1.getLocalId());
 		} else {
-			ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+			ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
 
 			int id = stack.getOrDefault(TFMGDataComponents.CONNECTOR_ID, 0);
 			

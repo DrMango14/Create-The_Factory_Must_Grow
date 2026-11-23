@@ -23,7 +23,7 @@ public abstract class ElectricalProperties {
 
     public abstract ElectricalPropertiesType<?> getType();
 
-    public boolean hasElectricityPort(Direction facing){
+    public boolean hasElectricityPort(Direction facing) {
         return true;
     }
 

@@ -24,7 +24,7 @@ public interface IElectric extends IHaveMultimeterInformation {
 	Level getWorld();
 	
     default ElectricalNetwork getNetwork(Level level) {
-        return ElectricNetworkManager.getNetwork(level);
+        return ElectricalNetworkManager.getNetwork(level);
     }
 
     default ElectricalNetwork getNetwork() {

@@ -5,7 +5,7 @@ import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.devices.generators.large_generator.StatorBlock.StatorState;
 import com.drmangotea.tfmg.content.electricity.packets.UpdateVoltagePacket;
@@ -80,7 +80,7 @@ public class RotorBlockEntity extends KineticBlockEntity implements IElectric, I
     public void onUpdated() {
 
 
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
 
         for (int i = 0; i < 3; i++) {
             Resistance r = network.getResistance(getPos(), i);
@@ -186,7 +186,7 @@ public class RotorBlockEntity extends KineticBlockEntity implements IElectric, I
 
     public void updateVoltage() {
 
-        ElectricalNetwork electricalNetwork = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork electricalNetwork = ElectricalNetworkManager.getNetwork(level);
 
         int voltage = (int) Math.abs(getSpeed()) * 10;
 

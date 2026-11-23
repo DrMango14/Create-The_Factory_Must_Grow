@@ -189,7 +189,6 @@ public class ElectricalNetwork {
                     mergedNode.mergedNodes.add(node);
                 }
             }
-
         } else mergedNode.mergedNodes.add(node1);
 
         if (node2 instanceof MergedNode m2) {
@@ -199,9 +198,9 @@ public class ElectricalNetwork {
                 }
             }
         } else mergedNode.mergedNodes.add(node2);
+		
         finalNodes.remove(node1);
         finalNodes.remove(node2);
-
 
         return mergedNode;
     }
@@ -214,11 +213,6 @@ public class ElectricalNetwork {
         finalSources = new ArrayList<>();
         finalTransformers = new ArrayList<>();
 
-
-        //ElectricalNode n = finalNodes.getFirst();
-        //finalNodes.set(0, new MergedNode(n.pos,n.localId, n));
-        //finalNodes.remove(finalNodes.getLast());
-
         int count = 0;
         for (WireConnection connection : connections) {
             ElectricalNode node1 = getNode(connection.node1()).orElse(null);
@@ -229,15 +223,12 @@ public class ElectricalNetwork {
             boolean isNode1Merged = !finalNodes.contains(node1);
             boolean isNode2Merged = !finalNodes.contains(node2);
             if (isNode1Merged) {
-                if (getMergedNode(node1) != null) {
-                    node1 = getMergedNode(node1);
-                }
+				ElectricalNode merge = getMergedNode(node1);
+				if (merge != null) node1 = merge;
             }
             if (isNode2Merged) {
-                if (getMergedNode(node2) != null) {
-                    node2 = getMergedNode(node2);
-                }
-
+				ElectricalNode merge = getMergedNode(node1);
+				if (merge != null) node2 = merge;
             }
 
             MergedNode mergedNode = mergeNodes(node1, node2, count);
@@ -314,13 +305,10 @@ public class ElectricalNetwork {
     }
 
     public void removeConnections(IElectric be) {
-        List<WireConnection> connectionsCopy = new ArrayList<>(connections);
-        for (WireConnection connection : connectionsCopy) {
-            if (connection.node1().position() == be.getPos() || connection.node2().position() == be.getPos()) {
-                connections.remove(connection);
-            }
-        }
-
+		BlockPos pos = be.getPos();
+		connections = connections.stream().filter(
+			c -> !c.connectedTo(pos)
+		).toList();
     }
 
 
@@ -374,7 +362,7 @@ public class ElectricalNetwork {
     }
 
     public void sendDataToMembers() {
-		LevelAccessor level = ElectricNetworkManager.getWorldFromNetwork(this);
+		LevelAccessor level = ElectricalNetworkManager.getWorldFromNetwork(this);
 		if (level == null) return;
         new HashMap<>(members).forEach((pos, o) -> {
             if (o.needsUpdateData()) {

@@ -1,11 +1,9 @@
 package com.drmangotea.tfmg.integration.jei;
 
-import com.drmangotea.tfmg.TFMGRegistries;
-import com.drmangotea.tfmg.integration.jei.util.EngineFuelsRecipe;
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.registry.TFMGTags;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
-import dev.metallurgists.rutile.compat.jei.category.ElementCompositionWrapper;
 import mezz.jei.api.gui.drawable.IDrawable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -87,6 +85,7 @@ public class TFMGJeiConstants {
         return engineTurbines;
     }
 
+	@NothingNullByDefault
     public static IDrawable asDrawable(AllGuiTextures texture) {
         return new IDrawable() {
             @Override

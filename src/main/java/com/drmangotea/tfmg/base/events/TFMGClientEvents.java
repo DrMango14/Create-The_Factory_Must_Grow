@@ -3,7 +3,7 @@ package com.drmangotea.tfmg.base.events;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGClient;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.measuring_instruments.MultimeterOverlayRenderer;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.small.TransformerBlockEntity;
@@ -85,7 +85,7 @@ public class TFMGClientEvents {
 
     @SubscribeEvent
     public static void PlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(event.getEntity().level());
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(event.getEntity().level());
         network.update();
     }
 

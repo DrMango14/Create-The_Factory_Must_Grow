@@ -1,9 +1,9 @@
 package com.drmangotea.tfmg.content.electricity.content.devices.segmented_display;
 
-
 import com.drmangotea.tfmg.base.TFMGSpriteShifts;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
-import com.simibubi.create.content.decoration.encasing.EncasedBlock;
+import com.simibubi.create.CreateClient;
+import com.simibubi.create.content.decoration.encasing.CasingConnectivity;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
 import com.simibubi.create.foundation.block.connected.ConnectedTextureBehaviour;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -27,14 +27,18 @@ public class SegmentedDisplayCTBehavior extends ConnectedTextureBehaviour.Base {
 
 	@Override
 	protected Direction getUpDirection(BlockAndTintGetter reader, BlockPos pos, BlockState state, Direction face) {
-		return Direction.UP;
+		return face.getAxis().isHorizontal() ? Direction.UP : state.getValue(FACING);
 	}
 	
 	@Override
 	protected Direction getRightDirection(BlockAndTintGetter reader, BlockPos pos, BlockState state, Direction face) {
 		Direction facing = state.getValue(FACING);
+		if (face == facing)
+			return facing == Direction.NORTH || facing == Direction.WEST ? facing.getCounterClockWise() : facing.getClockWise();
+		
 		if (face.getAxis().isVertical()) return facing.getCounterClockWise();
-		return facing == Direction.NORTH || facing == Direction.WEST ? facing.getCounterClockWise() : facing.getClockWise();
+		
+		return super.getRightDirection(reader, pos, state, face);
 	}
 
 	@Override
@@ -42,14 +46,23 @@ public class SegmentedDisplayCTBehavior extends ConnectedTextureBehaviour.Base {
 		BlockState state, BlockState other, BlockAndTintGetter reader,
 		BlockPos pos, BlockPos otherPos, Direction face
 	) {
-		if (other.is(TFMGBlocks.SEGMENTED_DISPLAY.get()) && other.getValue(FACING)==state.getValue(FACING))
-			return super.connectsTo(state,other,reader,pos,otherPos,face);
-		if (face != state.getValue(FACING)) {
-			if (other.is(TFMGBlocks.HEAVY_MACHINERY_CASING.get())) return true;
-			return other.getBlock() instanceof EncasedBlock block && block.getCasing() ==  TFMGBlocks.HEAVY_MACHINERY_CASING.get();
-		}
+		if (isBeingBlocked(state, reader, pos, otherPos, face))
+			return false;
 		
-		return false;
+		Direction facing = state.getValue(FACING);
+		if (face == facing)
+			return other.is(TFMGBlocks.SEGMENTED_DISPLAY.get()) && other.getValue(FACING) == facing;
+		
+		//EncasedCTBehaviour Logic
+		CasingConnectivity cc = CreateClient.CASING_CONNECTIVITY;
+		CasingConnectivity.Entry entry = cc.get(state);
+		CasingConnectivity.Entry otherEntry = cc.get(other);
+		if (entry == null || otherEntry == null)
+			return false;
+		if (!entry.isSideValid(state, face) || !otherEntry.isSideValid(other, face))
+			return false;
+		
+		return entry.getCasing() == otherEntry.getCasing();
 	}
 
 }

@@ -2,7 +2,7 @@ package com.drmangotea.tfmg.content.electricity.configuration_wrench;
 
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.devices.base.ResistiveLoadBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.devices.base.ResistorProperties;
@@ -52,7 +52,7 @@ public class ElectriciansWrenchItem extends Item {
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
         if (!(level.getBlockEntity(pos) instanceof ResistiveLoadBlockEntity be))
 			return InteractionResult.PASS;
 		

@@ -5,7 +5,7 @@ import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlock;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.devices.electric_motor.ElectricMotorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.devices.generators.three_phase_generator.ThreePhaseGeneratorBlockEntity;
@@ -47,12 +47,12 @@ public class DebugCinderBlockItem extends Item {
             be.updateGeneratedRotation();
         }
         if (blockEntity instanceof ThreePhaseGeneratorBlockEntity be) {
-            ElectricalNetwork network = ElectricNetworkManager.getNetwork(be.getWorld());
+            ElectricalNetwork network = ElectricalNetworkManager.getNetwork(be.getWorld());
             network.setVoltageGen(be,100);
 
         }
         if (blockEntity instanceof AccumulatorControlUnitBlockEntity be) {
-            ElectricalNetwork network = ElectricNetworkManager.getNetwork(be.getWorld());
+            ElectricalNetwork network = ElectricalNetworkManager.getNetwork(be.getWorld());
 
             network.update();
 
@@ -62,14 +62,14 @@ public class DebugCinderBlockItem extends Item {
         }
         if (blockEntity instanceof DebugResistorBlockEntity be) {
 
-            ElectricalNetwork network = ElectricNetworkManager.getNetwork(be.getWorld());
+            ElectricalNetwork network = ElectricalNetworkManager.getNetwork(be.getWorld());
 
             network.setResistance(be, 0, TFMG.RANDOM.nextInt(5));
 
             return InteractionResult.SUCCESS;
         }
         if (blockEntity instanceof IElectric be) {
-            ElectricalNetwork network = ElectricNetworkManager.getNetwork(be.getWorld());
+            ElectricalNetwork network = ElectricalNetworkManager.getNetwork(be.getWorld());
 
 			TFMG.LOGGER.debug("Member count: {}", network.members.size());
 			TFMG.LOGGER.debug("Node Count: {}", network.nodes.size());

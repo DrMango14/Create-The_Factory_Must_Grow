@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.packets;
 
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.WireConnection;
 import com.drmangotea.tfmg.content.electricity.content.DirectionalElectricalProperties;
@@ -201,8 +201,8 @@ public class NetworkLoadPacket implements ClientboundPacketPayload {
         }
 
         if (network != null) {
-            ElectricNetworkManager.getNetwork(player.level()).members.putAll(network.members);
-            ElectricNetworkManager.getNetwork(player.level()).connections.addAll(network.connections);
+            ElectricalNetworkManager.getNetwork(player.level()).members.putAll(network.members);
+            ElectricalNetworkManager.getNetwork(player.level()).connections.addAll(network.connections);
         }
     }
 

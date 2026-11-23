@@ -11,7 +11,6 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.api.equipment.goggles.IHaveHoveringInformation;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatBlockEntity;
-import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -104,9 +103,6 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
         super.remove();
         this.removeBlock();
     }
-    @Override
-    public void addBehaviours(List<BlockEntityBehaviour> list) {
-    }
 
     @Override
     public BlockPos getPos() {
@@ -119,8 +115,6 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
         // Validate Material
         if (getMaterial() != null && !clientPacket) {
             BlockState blockState = getBlockState();
-            if (blockState == null)
-                return;
             if (!(blockState.getBlock() instanceof CopycatBlock cb))
                 return;
             BlockState acceptedBlockState = cb.getAcceptedBlockState(level, worldPosition, ItemStack.EMPTY, null);

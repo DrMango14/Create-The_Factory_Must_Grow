@@ -48,7 +48,7 @@ public class LargeTransformerBlock extends TFMGHorizontalDirectionalBlock implem
         builder.add(IS_MAIN_PART);
     }
 
-    @Override
+    @Override @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();

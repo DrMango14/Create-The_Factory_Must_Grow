@@ -3,7 +3,7 @@ package com.drmangotea.tfmg.content.electricity.content.lights;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
@@ -94,7 +94,7 @@ public class ElectricLightBlockEntity extends SmartBlockEntity implements IElect
 
     @Override
     public void onUpdated() {
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
 
         Resistance resistor = network.getResistance(getPos(), 0);
 
