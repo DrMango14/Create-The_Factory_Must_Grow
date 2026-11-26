@@ -8,4 +8,4 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
-rootProject.name = "TFMG Community Edition"
+rootProject.name = "Create: TFMG"
