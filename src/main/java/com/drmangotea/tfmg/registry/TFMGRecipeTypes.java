@@ -1,12 +1,10 @@
 package com.drmangotea.tfmg.registry;
 
-
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.recipes.*;
 import com.mojang.serialization.Codec;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -20,24 +18,26 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public enum TFMGRecipeTypes implements IRecipeTypeInfo, StringRepresentable {
-
     CASTING(CastingRecipe::new),
-    INDUSTRIAL_BLASTING(IndustrialBlastingRecipe::new),
+    INDUSTRIAL_BLASTING(() -> new IndustrialBlastingRecipe.Serializer<>(IndustrialBlastingRecipe::new)),
     COKING(CokingRecipe::new),
     DISTILLATION(DistillationRecipe::new),
     WINDING(WindingRecipe::new),
     HOT_BLAST(HotBlastRecipe::new),
-    VAT_MACHINE_RECIPE(VatMachineRecipe::new),
-    POLARIZING(PolarizingRecipe::new),
+    VAT(() -> new VatMachineRecipe.Serializer<>(VatMachineRecipe::new)),
+	POLARIZING(() -> new PolarizingRecipe.Serializer<>(PolarizingRecipe::new)),
 
-    ;
+    /**
+     * Use {@link #VAT} instead
+     */
+    @Deprecated(since = "1.3.2a", forRemoval = true)
+    VAT_MACHINE_RECIPE(() -> new VatMachineRecipe.Serializer<>(VatMachineRecipe::new));
 
 
     public static final Predicate<RecipeHolder<?>> CAN_BE_AUTOMATED = r -> !r.id()
@@ -47,37 +47,21 @@ public enum TFMGRecipeTypes implements IRecipeTypeInfo, StringRepresentable {
     public final ResourceLocation id;
     public final Supplier<RecipeSerializer<?>> serializerSupplier;
     private final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<?>> serializerObject;
-    @Nullable
-    private final DeferredHolder<RecipeType<?>, RecipeType<?>> typeObject;
     private final Supplier<RecipeType<?>> type;
-
-    private boolean isProcessingRecipe;
 
     public static final Codec<TFMGRecipeTypes> CODEC = StringRepresentable.fromEnum(TFMGRecipeTypes::values);
 
 
-    TFMGRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
+	TFMGRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
         String name = TFMGLang.asId(name());
         id = TFMG.asResource(name);
         this.serializerSupplier = serializerSupplier;
         serializerObject = Registers.SERIALIZER_REGISTER.register(name, serializerSupplier);
-        typeObject = Registers.TYPE_REGISTER.register(name, () -> RecipeType.simple(id));
-        type = typeObject;
-        isProcessingRecipe = false;
+        type = Registers.TYPE_REGISTER.register(name, () -> RecipeType.simple(id));
     }
 
     TFMGRecipeTypes(StandardProcessingRecipe.Factory<?> processingFactory) {
         this(() -> new StandardProcessingRecipe.Serializer<>(processingFactory));
-        isProcessingRecipe = true;
-    }
-
-    TFMGRecipeTypes(ProcessingRecipe.Factory<IndustrialBlastingRecipeParams, ? extends IndustrialBlastingRecipe> industrialBlastingFactory) {
-        this(() -> new IndustrialBlastingRecipe.Serializer<>(industrialBlastingFactory));
-        isProcessingRecipe = true;
-    }
-    TFMGRecipeTypes(ProcessingRecipe.Factory<VatRecipeParams, ? extends VatMachineRecipe> vatRecipeFactory, byte... i) {
-        this(() -> new VatMachineRecipe.Serializer<>(vatRecipeFactory));
-        isProcessingRecipe = true;
     }
 
     @ApiStatus.Internal
@@ -111,7 +95,7 @@ public enum TFMGRecipeTypes implements IRecipeTypeInfo, StringRepresentable {
 
     public static boolean shouldIgnoreInAutomation(RecipeHolder<?> recipe) {
         RecipeSerializer<?> serializer = recipe.value().getSerializer();
-        if (serializer != null && AllTags.AllRecipeSerializerTags.AUTOMATION_IGNORE.matches(serializer))
+        if (AllTags.AllRecipeSerializerTags.AUTOMATION_IGNORE.matches(serializer))
             return true;
         return !CAN_BE_AUTOMATED.test(recipe);
     }

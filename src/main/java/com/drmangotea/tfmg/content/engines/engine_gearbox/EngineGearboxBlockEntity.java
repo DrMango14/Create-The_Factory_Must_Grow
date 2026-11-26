@@ -9,6 +9,4 @@ public class EngineGearboxBlockEntity extends KineticBlockEntity {
     public EngineGearboxBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
     }
-
-
 }

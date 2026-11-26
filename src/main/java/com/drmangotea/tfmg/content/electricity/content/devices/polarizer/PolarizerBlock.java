@@ -2,6 +2,8 @@ package com.drmangotea.tfmg.content.electricity.content.devices.polarizer;
 
 import com.drmangotea.tfmg.content.electricity.content.devices.base.DirectionalResistiveLoadBlock;
 import com.drmangotea.tfmg.content.machinery.misc.winding_machine.SpoolItem;
+import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -14,6 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
+@NothingNullByDefault
 public class PolarizerBlock extends DirectionalResistiveLoadBlock implements IBE<PolarizerBlockEntity> {
     public PolarizerBlock(Properties p_54120_) {
         super(p_54120_);
@@ -21,26 +24,43 @@ public class PolarizerBlock extends DirectionalResistiveLoadBlock implements IBE
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (level.getBlockEntity(pos) instanceof PolarizerBlockEntity be) {
+        if (!(level.getBlockEntity(pos) instanceof PolarizerBlockEntity be)) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+		if (player.getItemInHand(hand).getItem() instanceof SpoolItem)
+			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
-            if (player.getItemInHand(hand).getItem() instanceof SpoolItem)
-                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-
-            if (player.getItemInHand(hand).isEmpty()) {
-                if (!be.inventory.isEmpty()) {
-                    player.setItemInHand(hand, be.inventory.getStackInSlot(0));
-                    be.inventory.setItem(0, ItemStack.EMPTY);
-                    return ItemInteractionResult.SUCCESS;
+        ItemStack output = be.outputInventory.getStackInSlot(0);
+        if (!output.isEmpty()) {
+            if (!level.isClientSide) {
+                ItemStack extracted = output.copy();
+                be.outputInventory.setStackInSlot(0, ItemStack.EMPTY);
+                if (!player.getInventory().add(extracted)) {
+                    player.drop(extracted, false);
                 }
-            } else {
-                if (be.inventory.isEmpty() && !stack.isEmpty()) {
-                    ItemStack stack1 = player.getItemInHand(hand).copy();
-                    stack1.setCount(1);
-                    be.inventory.setItem(0, stack1);
-                    player.getItemInHand(hand).shrink(1);
-                    return ItemInteractionResult.SUCCESS;
-                }
+                be.sendData();
+                be.setChanged();
             }
+            return ItemInteractionResult.SUCCESS;
+        }
+
+        if (be.capacitorPercentage > 0 || TFMGUtils.returnItemToInventory(be.inventory, 0, player, hand)) {
+            return ItemInteractionResult.SUCCESS;
+        }
+
+        if (be.inventory.isEmpty()
+                && !stack.isEmpty()
+                && be.outputInventory.getStackInSlot(0).isEmpty()
+                && PolarizerCommons.getRecipe(level, stack).isPresent()) {
+            if (!level.isClientSide) {
+                ItemStack held = player.getItemInHand(hand);
+                ItemStack toInsert = held.copyWithCount(1);
+                be.inventory.insertItem(0, toInsert, false);
+                held.shrink(1);
+                be.sendData();
+                be.setChanged();
+            }
+            return ItemInteractionResult.SUCCESS;
         }
 
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;

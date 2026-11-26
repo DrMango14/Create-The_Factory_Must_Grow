@@ -1,0 +1,41 @@
+{
+  "compositions": [
+    {
+      "amount": 13,
+      "elements": [
+        {
+          "id": "rutile:silicon"
+        },
+        {
+          "amount": 2,
+          "id": "rutile:oxygen"
+        }
+      ]
+    },
+    {
+      "amount": 20,
+      "elements": [
+        {
+          "id": "rutile:iron"
+        },
+        {
+          "id": "rutile:oxygen"
+        }
+      ]
+    },
+    {
+      "amount": 40,
+      "elements": [
+        {
+          "id": "rutile:calcium"
+        },
+        {
+          "id": "rutile:oxygen"
+        }
+      ]
+    }
+  ],
+  "contents": [
+    "tfmg:molten_slag"
+  ]
+}

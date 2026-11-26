@@ -2,9 +2,9 @@ package com.drmangotea.tfmg.content.machinery.metallurgy.coke_oven;
 
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.render.CachedBuffers;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -13,8 +13,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 
-import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 import static com.drmangotea.tfmg.content.machinery.metallurgy.coke_oven.CokeOvenBlock.CONTROLLER_TYPE;
+import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 
 public class CokeOvenRenderer extends SafeBlockEntityRenderer<CokeOvenBlockEntity> {
     public CokeOvenRenderer(BlockEntityRendererProvider.Context context) {}

@@ -134,6 +134,10 @@ public class TFMGShapes {
                     .add(3, 11, 3, 13, 16, 13)
                     .add(4, 4, 5, 12, 11, 12)
                     .forDirectional(),
+			DIAGONAL_CABLE_BLOCK_HORIZONTAL = shape(0, 3, 3, 5, 13, 13)
+					.add(3, 11, 3, 13, 16, 13)
+					.add(4, 4, 5, 12, 11, 12)
+					.forDirectional(),
             CASTING_BASIN = shape(0, 0, 0, 16, 8, 16)
                     .add(4, 8, 14, 12, 13, 16)
                     .forHorizontal(NORTH),

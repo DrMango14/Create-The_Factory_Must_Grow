@@ -2,22 +2,22 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "tfmg:nitrate_dust"
+      "tag": "c:dusts/saltpeter"
     },
     {
-      "item": "tfmg:nitrate_dust"
+      "tag": "c:dusts/saltpeter"
     },
     {
-      "item": "tfmg:nitrate_dust"
-    },
-    {
-      "item": "minecraft:charcoal"
+      "tag": "c:dusts/saltpeter"
     },
     {
       "item": "minecraft:charcoal"
     },
     {
-      "item": "tfmg:sulfur_dust"
+      "item": "minecraft:charcoal"
+    },
+    {
+      "tag": "c:dusts/sulfur"
     }
   ],
   "results": [

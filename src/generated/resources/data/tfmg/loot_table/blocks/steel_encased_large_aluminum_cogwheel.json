@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "create:large_cogwheel"
+          "name": "tfmg:large_aluminum_cogwheel"
         }
       ],
       "rolls": 1.0

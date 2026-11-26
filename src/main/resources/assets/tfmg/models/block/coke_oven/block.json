@@ -1,7 +1,6 @@
 {
-	"credit": "Made with Blockbench",
-	"parent": "tfmg:block/coke_oven/controller",
-	"textures": {
-		"front": "tfmg:block/coke_oven/casual"
-	}
+  "parent": "tfmg:block/coke_oven/controller",
+  "textures": {
+    "front": "tfmg:block/coke_oven/casual"
+  }
 }

@@ -1,6 +1,6 @@
 package com.drmangotea.tfmg.content.decoration.kinetics.gearbox;
 
-
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import net.createmod.catnip.data.Iterate;
@@ -16,8 +16,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
+import javax.annotation.Nullable;
 import java.util.Map;
 
+@NothingNullByDefault
 public class SteelVerticalGearboxItem extends BlockItem {
 
     public SteelVerticalGearboxItem(Properties builder) {
@@ -34,13 +36,12 @@ public class SteelVerticalGearboxItem extends BlockItem {
     }
 
     @Override
-    protected boolean updateCustomBlockEntityTag(BlockPos pos, Level world, Player player, ItemStack stack, BlockState state) {
+    protected boolean updateCustomBlockEntityTag(BlockPos pos, Level world, @Nullable Player player, ItemStack stack, BlockState state) {
         Axis prefferedAxis = null;
         for (Direction side : Iterate.horizontalDirections) {
             BlockState blockState = world.getBlockState(pos.relative(side));
-            if (blockState.getBlock() instanceof IRotate) {
-                if (((IRotate) blockState.getBlock()).hasShaftTowards(world, pos.relative(side), blockState,
-                        side.getOpposite()))
+            if (blockState.getBlock() instanceof IRotate rb) {
+                if (rb.hasShaftTowards(world, pos.relative(side), blockState, side.getOpposite()))
                     if (prefferedAxis != null && prefferedAxis != side.getAxis()) {
                         prefferedAxis = null;
                         break;
@@ -49,6 +50,7 @@ public class SteelVerticalGearboxItem extends BlockItem {
                     }
             }
         }
+		if (prefferedAxis == null && player == null) return false;
 
         Axis axis = prefferedAxis == null ? player.getDirection()
                 .getClockWise()

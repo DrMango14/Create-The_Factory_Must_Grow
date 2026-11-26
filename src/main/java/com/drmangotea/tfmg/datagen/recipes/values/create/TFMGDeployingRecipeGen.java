@@ -11,6 +11,7 @@ import java.util.concurrent.CompletableFuture;
 
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.goldSheet;
 
+@SuppressWarnings("unused")
 public class TFMGDeployingRecipeGen extends DeployingRecipeGen {
 
     GeneratedRecipe

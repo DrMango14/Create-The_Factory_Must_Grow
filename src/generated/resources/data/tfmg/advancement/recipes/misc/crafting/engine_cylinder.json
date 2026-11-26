@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cylinder": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tfmg:diesel_engine_cylinder"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tfmg:crafting/engine_cylinder"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cylinder"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tfmg:crafting/engine_cylinder"
+    ]
+  }
+}

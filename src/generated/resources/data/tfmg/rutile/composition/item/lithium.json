@@ -1,0 +1,19 @@
+{
+  "compositions": [
+    {
+      "elements": [
+        {
+          "id": "rutile:lithium"
+        }
+      ]
+    }
+  ],
+  "contents": [
+    "tfmg:raw_lithium_block",
+    "tfmg:lithium_block",
+    "tfmg:raw_lithium",
+    "tfmg:lithium_ingot",
+    "tfmg:lithium_nugget",
+    "tfmg:crushed_raw_lithium"
+  ]
+}

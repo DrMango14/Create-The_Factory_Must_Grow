@@ -2,9 +2,9 @@
   "type": "tfmg:casting",
   "ingredients": [
     {
-      "type": "neoforge:single",
-      "amount": 144,
-      "fluid": "tfmg:molten_steel"
+      "type": "neoforge:tag",
+      "amount": 90,
+      "tag": "c:molten_steel"
     }
   ],
   "processing_time": 200,

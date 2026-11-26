@@ -1,12 +1,14 @@
 package com.drmangotea.tfmg.content.machinery.vat.base;
 
+import com.drmangotea.tfmg.content.machinery.vat.base.registry.operations.VatOperation;
+
+import java.util.List;
+
 public interface IVatMachine {
-
-
     /**
      * id of an operation this machine provides
      */
-    String getOperationId();
+    VatOperation getOperationId();
 
     /**
      * checks if this machine can operate
@@ -16,8 +18,8 @@ public interface IVatMachine {
     /**
      * operations that cant mix with this machine
      */
-    default String[] doesntWorkWith() {
-        return new String[0];
+    default List<VatOperation> doesntWorkWith() {
+        return List.of();
     }
 
     /**
@@ -41,10 +43,7 @@ public interface IVatMachine {
         TOP,
         ANY_CENTER,
         BOTTOM_CENTER,
-        TOP_CENTER
-        ;
-
-
+        TOP_CENTER;
     }
 
 }

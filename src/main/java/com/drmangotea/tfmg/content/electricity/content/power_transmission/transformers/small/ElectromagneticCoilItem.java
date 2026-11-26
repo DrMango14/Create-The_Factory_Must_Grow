@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.small;
 
-
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import net.minecraft.ChatFormatting;
@@ -12,8 +11,10 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+@ParametersAreNonnullByDefault
 public class ElectromagneticCoilItem extends Item {
     public ElectromagneticCoilItem(Properties p_41383_) {
         super(p_41383_);

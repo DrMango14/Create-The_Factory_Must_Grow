@@ -1,0 +1,7 @@
+{
+  "priority": 1001,
+  "properties": {
+    "sable:mass": 2.0
+  },
+  "selector": "tfmg:large_engine"
+}

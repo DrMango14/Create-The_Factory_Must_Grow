@@ -1,7 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.content.devices.voltage_observer;
 
 
-
 import com.drmangotea.tfmg.content.electricity.content.devices.base.DirectionalResistiveLoadBlock;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.foundation.block.IBE;
@@ -10,7 +9,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,7 +16,9 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
+@ParametersAreNonnullByDefault
 public class VoltageObserverBlock extends DirectionalResistiveLoadBlock implements IBE<VoltageObserverBlockEntity> {
 
     public static final BooleanProperty POWERED = BooleanProperty.create("powered");
@@ -69,8 +69,6 @@ public class VoltageObserverBlock extends DirectionalResistiveLoadBlock implemen
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext p_58126_) {
         BlockState blockstate = this.defaultBlockState();
-        LevelReader levelreader = p_58126_.getLevel();
-        BlockPos blockpos = p_58126_.getClickedPos();
         Direction[] adirection = p_58126_.getNearestLookingDirections();
 
         for(Direction direction : adirection) {

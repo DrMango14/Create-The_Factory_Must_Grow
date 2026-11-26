@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createbigcannons"
+    }
+  ],
+  "type": "createbigcannons:melting",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "tag": "c:nuggets/steel"
+    }
+  ],
+  "processing_time": 20,
+  "results": [
+    {
+      "amount": 10,
+      "id": "tfmg:molten_steel"
+    }
+  ]
+}

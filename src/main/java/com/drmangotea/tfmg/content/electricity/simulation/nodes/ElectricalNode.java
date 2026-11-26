@@ -1,22 +1,27 @@
 package com.drmangotea.tfmg.content.electricity.simulation.nodes;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
+
 public class ElectricalNode {
     public int networkId;
-    public int localId;
+    public NodePos pos;
 
-    public long pos;
-
-    public ElectricalNode(long pos, int localId) {
+	public ElectricalNode(BlockPos pos, int localId) {
         this.networkId = 0;
-        this.localId = localId;
-        this.pos = pos;
+        this.pos = new NodePos(pos, localId);
     }
+	
+	protected ElectricalNode(BlockPos pos, Vec3 offset, int localId) {
+		this.networkId = 0;
+		this.pos = new NodePos(pos, offset, localId);
+	}
 
     public int getNetworkId() {
         return networkId;
     }
 
     public int getLocalId() {
-        return localId;
+        return pos.localId();
     }
 }

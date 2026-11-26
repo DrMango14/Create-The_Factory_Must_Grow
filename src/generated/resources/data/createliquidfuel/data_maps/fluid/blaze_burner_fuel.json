@@ -1,0 +1,23 @@
+{
+  "values": {
+    "#c:diesel": {
+      "burnTime": 30
+    },
+    "#c:gasoline": {
+      "burnTime": 20
+    },
+    "#c:heavy_oil": {
+      "burnTime": 10
+    },
+    "#c:kerosene": {
+      "burnTime": 25
+    },
+    "#c:naphtha": {
+      "burnTime": 35
+    },
+    "tfmg:napalm": {
+      "burnTime": 30,
+      "superHeat": true
+    }
+  }
+}

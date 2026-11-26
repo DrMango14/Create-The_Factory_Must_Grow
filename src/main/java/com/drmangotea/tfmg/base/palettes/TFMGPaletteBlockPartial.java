@@ -5,7 +5,6 @@ import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGCreativeTabs;
 import com.drmangotea.tfmg.registry.TFMGPaletteStoneTypes;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-
 import com.simibubi.create.foundation.utility.CreateLang;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
@@ -31,23 +30,14 @@ import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 
-
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Supplier;
-
 
 import static com.drmangotea.tfmg.TFMG.REGISTRATE;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 
 public abstract class TFMGPaletteBlockPartial<B extends Block> {
-
-    public static final TFMGPaletteBlockPartial<StairBlock> STAIR = new Stairs();
-    public static final TFMGPaletteBlockPartial<SlabBlock> SLAB = new Slab(false);
-    public static final TFMGPaletteBlockPartial<SlabBlock> UNIQUE_SLAB = new Slab(true);
-    public static final TFMGPaletteBlockPartial<WallBlock> WALL = new Wall();
-    public static final TFMGPaletteBlockPartial<?>[] ALL_PARTIALS = { STAIR, SLAB, WALL };
-    public static final TFMGPaletteBlockPartial<?>[] FOR_POLISHED = { STAIR, UNIQUE_SLAB, WALL };
-    private String name;
+    private final String name;
 
     protected TFMGPaletteBlockPartial(String name) {
         this.name = name;
@@ -100,7 +90,7 @@ public abstract class TFMGPaletteBlockPartial<B extends Block> {
     protected abstract void createRecipes(TFMGPaletteStoneTypes type, BlockEntry<? extends Block> patternBlock,
                                           DataGenContext<Block, ? extends Block> c, RegistrateRecipeProvider p);
     protected abstract void generateBlockState(DataGenContext<Block, B> ctx, RegistrateBlockstateProvider prov, String variantName, TFMGPaletteBlockPattern pattern, Supplier<? extends Block> block);
-    private static class Stairs extends TFMGPaletteBlockPartial<StairBlock> {
+    static class Stairs extends TFMGPaletteBlockPartial<StairBlock> {
         public Stairs() {
             super("stairs");
         }
@@ -118,25 +108,25 @@ public abstract class TFMGPaletteBlockPartial<B extends Block> {
         }
         @Override
         protected Iterable<TagKey<Block>> getBlockTags() {
-            return Arrays.asList(BlockTags.STAIRS);
+            return List.of(BlockTags.STAIRS);
         }
 
         @Override
         protected Iterable<TagKey<Item>> getItemTags() {
-            return Arrays.asList(ItemTags.STAIRS);
+            return List.of(ItemTags.STAIRS);
         }
 
         @Override
         protected void createRecipes(TFMGPaletteStoneTypes type, BlockEntry<? extends Block> patternBlock,
                                      DataGenContext<Block, ? extends Block> c, RegistrateRecipeProvider p) {
             RecipeCategory category = RecipeCategory.BUILDING_BLOCKS;
-            p.stairs(DataIngredient.items(patternBlock.get()), category, c::get, c.getName(), false);
-            p.stonecutting(DataIngredient.tag(type.materialTag), category, c::get, 1);
+            p.stairs(DataIngredient.items(patternBlock.get()), category, c, c.getName(), false);
+            p.stonecutting(DataIngredient.tag(type.materialTag), category, c, 1);
         }
     }
-    private static class Slab extends TFMGPaletteBlockPartial<SlabBlock> {
+    static class Slab extends TFMGPaletteBlockPartial<SlabBlock> {
 
-        private boolean customSide;
+        private final boolean customSide;
 
         public Slab(boolean customSide) {
             super("slab");
@@ -179,20 +169,20 @@ public abstract class TFMGPaletteBlockPartial<B extends Block> {
 
         @Override
         protected Iterable<TagKey<Block>> getBlockTags() {
-            return Arrays.asList(BlockTags.SLABS);
+            return List.of(BlockTags.SLABS);
         }
 
         @Override
         protected Iterable<TagKey<Item>> getItemTags() {
-            return Arrays.asList(ItemTags.SLABS);
+            return List.of(ItemTags.SLABS);
         }
 
         @Override
         protected void createRecipes(TFMGPaletteStoneTypes type, BlockEntry<? extends Block> patternBlock,
                                      DataGenContext<Block, ? extends Block> c, RegistrateRecipeProvider p) {
             RecipeCategory category = RecipeCategory.BUILDING_BLOCKS;
-            p.slab(DataIngredient.items(patternBlock.get()), category, c::get, c.getName(), false);
-            p.stonecutting(DataIngredient.tag(type.materialTag), category, c::get, 2);
+            p.slab(DataIngredient.items(patternBlock.get()), category, c, c.getName(), false);
+            p.stonecutting(DataIngredient.tag(type.materialTag), category, c, 2);
             DataIngredient ingredient = DataIngredient.items(c.get());
             ShapelessRecipeBuilder.shapeless(category, patternBlock.get())
                     .requires(ingredient.toVanilla())
@@ -211,7 +201,6 @@ public abstract class TFMGPaletteBlockPartial<B extends Block> {
     }
 
     public static class Wall extends TFMGPaletteBlockPartial<WallBlock> {
-
         public Wall() {
             super("wall");
         }
@@ -237,19 +226,19 @@ public abstract class TFMGPaletteBlockPartial<B extends Block> {
 
         @Override
         protected Iterable<TagKey<Block>> getBlockTags() {
-            return Arrays.asList(BlockTags.WALLS);
+            return List.of(BlockTags.WALLS);
         }
 
         @Override
         protected Iterable<TagKey<Item>> getItemTags() {
-            return Arrays.asList(ItemTags.WALLS);
+            return List.of(ItemTags.WALLS);
         }
 
         @Override
         protected void createRecipes(TFMGPaletteStoneTypes type, BlockEntry<? extends Block> patternBlock,
                                      DataGenContext<Block, ? extends Block> c, RegistrateRecipeProvider p) {
             RecipeCategory category = RecipeCategory.BUILDING_BLOCKS;
-            p.stonecutting(DataIngredient.tag(type.materialTag), category, c::get, 1);
+            p.stonecutting(DataIngredient.tag(type.materialTag), category, c, 1);
             DataIngredient ingredient = DataIngredient.items(patternBlock.get());
             ShapedRecipeBuilder.shaped(category, c.get(), 6)
                     .pattern("XXX")

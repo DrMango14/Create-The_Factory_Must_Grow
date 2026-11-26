@@ -1,10 +1,9 @@
 package com.drmangotea.tfmg.content.electricity.content.lights;
 
-
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
@@ -25,17 +24,12 @@ import java.util.List;
 import static com.drmangotea.tfmg.base.blocks.WallMountBlock.FACING;
 import static com.drmangotea.tfmg.content.electricity.content.lights.ElectricLightBlock.LIGHT;
 
-
 public class ElectricLightBlockEntity extends SmartBlockEntity implements IElectric {
 
     public LerpedFloat glow = LerpedFloat.linear();
-
     boolean signalChanged;
-
     boolean hasSignal;
-
     public DyeColor color = DyeColor.WHITE;
-
     LightProperties p;
 
     public double resistance = 0;
@@ -44,7 +38,7 @@ public class ElectricLightBlockEntity extends SmartBlockEntity implements IElect
 
     public ElectricLightBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        p = new LightProperties(pos.asLong(),state.getValue(FACING).getOpposite());
+        p = new LightProperties(pos, state.getValue(FACING).getOpposite());
     }
 
     @Override
@@ -55,8 +49,7 @@ public class ElectricLightBlockEntity extends SmartBlockEntity implements IElect
     @Override
     public void tick() {
         super.tick();
-
-
+		if (level == null) return;
         if (!hasSignal && current > 1E-3) {
             glow.chase(current * 90, 0.1, LerpedFloat.Chaser.EXP);
             glow.tickChaser();
@@ -101,7 +94,7 @@ public class ElectricLightBlockEntity extends SmartBlockEntity implements IElect
 
     @Override
     public void onUpdated() {
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
 
         Resistance resistor = network.getResistance(getPos(), 0);
 
@@ -121,7 +114,7 @@ public class ElectricLightBlockEntity extends SmartBlockEntity implements IElect
     }
 
     public void neighbourChanged() {
-        if (!hasLevel())
+        if (level == null)
             return;
         boolean powered = level.getBestNeighborSignal(worldPosition) > 0;
         if (powered != hasSignal)
@@ -132,7 +125,6 @@ public class ElectricLightBlockEntity extends SmartBlockEntity implements IElect
     public void lazyTick() {
         super.lazyTick();
         neighbourChanged();
-
     }
 
     @Override
@@ -154,8 +146,8 @@ public class ElectricLightBlockEntity extends SmartBlockEntity implements IElect
 
 
     @Override
-    public long getPos() {
-        return getBlockPos().asLong();
+    public BlockPos getPos() {
+        return getBlockPos();
     }
 
     @Override

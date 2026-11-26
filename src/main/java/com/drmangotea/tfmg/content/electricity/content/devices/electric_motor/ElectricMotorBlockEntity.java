@@ -1,12 +1,11 @@
 package com.drmangotea.tfmg.content.electricity.content.devices.electric_motor;
 
 import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
@@ -36,8 +35,6 @@ import java.util.List;
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
 
 public class ElectricMotorBlockEntity extends GeneratingKineticBlockEntity implements IElectric, IHaveGoggleInformation {
-
-
     ElectricalProperties properties;
 
     public double[] voltage = new double[3];
@@ -45,8 +42,6 @@ public class ElectricMotorBlockEntity extends GeneratingKineticBlockEntity imple
 
 
     public boolean supplyTooUnbalanced = false;
-
-
 
 
     protected ScrollOptionBehaviour<WindmillBearingBlockEntity.RotationDirection> movementDirection;
@@ -70,16 +65,7 @@ public class ElectricMotorBlockEntity extends GeneratingKineticBlockEntity imple
     }
 
     public double getPower() {
-        double power = 0;
-
-        for (int i = 0; i < 3; i++) {
-
-            double powerAddition = this.power[i];
-
-            power += powerAddition;
-        }
-
-        return power;
+        return this.power[0] + power[1] + power[2];
     }
 
     public double getVoltage() {
@@ -90,7 +76,7 @@ public class ElectricMotorBlockEntity extends GeneratingKineticBlockEntity imple
 
     @Override
     public void onUpdated() {
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
         for (int i = 0; i < 3; i++) {
             Resistance r = network.getResistance(getPos(), i);
             if (!(r == null)) {
@@ -135,13 +121,11 @@ public class ElectricMotorBlockEntity extends GeneratingKineticBlockEntity imple
         return true;
     }
 
-
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
         movementDirection = new ScrollOptionBehaviour<>(WindmillBearingBlockEntity.RotationDirection.class,
                 CreateLang.translateDirect("contraptions.windmill.rotation_direction"), this, new MotorValueBox());
-
         movementDirection.withCallback($ -> onDirectionChanged());
         behaviours.add(movementDirection);
     }
@@ -165,8 +149,6 @@ public class ElectricMotorBlockEntity extends GeneratingKineticBlockEntity imple
 
     @Override
     public float getGeneratedSpeed() {
-
-
         if (getPower() == 0)
             return 0;
 
@@ -221,8 +203,8 @@ public class ElectricMotorBlockEntity extends GeneratingKineticBlockEntity imple
     }
 
     @Override
-    public long getPos() {
-        return getBlockPos().asLong();
+    public BlockPos getPos() {
+        return getBlockPos();
     }
 
     @Override

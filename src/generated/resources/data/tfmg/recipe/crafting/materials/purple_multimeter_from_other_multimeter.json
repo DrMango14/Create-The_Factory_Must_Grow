@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "tag": "c:dyes/purple"
+    },
+    {
+      "tag": "tfmg:multimeters"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:purple_multimeter"
+  }
+}

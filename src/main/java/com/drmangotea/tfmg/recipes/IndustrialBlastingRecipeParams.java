@@ -11,16 +11,16 @@ import net.minecraft.network.codec.StreamCodec;
 import java.util.function.Function;
 
 public class IndustrialBlastingRecipeParams extends ProcessingRecipeParams {
-    public static MapCodec<IndustrialBlastingRecipeParams> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+    public static final MapCodec<IndustrialBlastingRecipeParams> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             codec(IndustrialBlastingRecipeParams::new).forGetter(Function.identity()),
             Codec.INT.optionalFieldOf("hot_air_usage", 0).forGetter(IndustrialBlastingRecipeParams::hotAirUsage)
-    ).apply(instance, (params, keepHeldItem) -> {
-        params.hotAirUsage = keepHeldItem;
+    ).apply(instance, (params, hotAirUsage) -> {
+        params.hotAirUsage = hotAirUsage;
         return params;
     }));
-    public static StreamCodec<RegistryFriendlyByteBuf, IndustrialBlastingRecipeParams> STREAM_CODEC = streamCodec(IndustrialBlastingRecipeParams::new);
+    public static final StreamCodec<RegistryFriendlyByteBuf, IndustrialBlastingRecipeParams> STREAM_CODEC = streamCodec(IndustrialBlastingRecipeParams::new);
 
-    protected int hotAirUsage;
+    protected int hotAirUsage = 0;
 
     protected final int hotAirUsage() {
         return hotAirUsage;

@@ -1,0 +1,8 @@
+{
+  "priority": 1001,
+  "properties": {
+    "sable:mass": 2.0,
+    "sable:volume": 0.4990234375
+  },
+  "selector": "tfmg:simple_large_engine"
+}

@@ -9,10 +9,9 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(SlidingDoorBlockEntity.class)
 public interface SlidingDoorBlockEntityAccessor {
-
     @Accessor("animation")
-    LerpedFloat i_architecture$getAnimation();
+    LerpedFloat tfmg$getAnimation();
 
     @Invoker("shouldRenderSpecial")
-    boolean i_architecture$shouldRenderSpecial(BlockState state);
+    boolean tfmg$shouldRenderSpecial(BlockState state);
 }

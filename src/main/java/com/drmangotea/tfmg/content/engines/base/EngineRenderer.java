@@ -15,20 +15,16 @@ import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.H
 
 public class EngineRenderer extends KineticBlockEntityRenderer<AbstractSmallEngineBlockEntity> {
     public EngineRenderer(BlockEntityRendererProvider.Context context) {
-
         super(context);
     }
 
     @Override
     protected void renderSafe(AbstractSmallEngineBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-
-
-        if(be.hasUpgrade()){
-            be.upgrade.get().render(be, partialTicks, ms, buffer,light);
+        if (be.hasUpgrade()){
+            be.upgrade.get().render(be, partialTicks, ms, buffer, light);
         }
 
-
-        if(be.getBlockState().getValue(ENGINE_STATE) == EngineBlock.EngineState.SHAFT)
+        if (be.getBlockState().getValue(ENGINE_STATE) == EngineBlock.EngineState.SHAFT)
             super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
     }
 

@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg.content.decoration.concrete;
 
-import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
 import com.drmangotea.tfmg.base.TFMGShapes;
+import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

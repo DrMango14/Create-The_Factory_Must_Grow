@@ -1,0 +1,14 @@
+{
+  "compositions": [
+    {
+      "elements": [
+        {
+          "id": "rutile:iron"
+        }
+      ]
+    }
+  ],
+  "contents": [
+    "tfmg:molten_steel"
+  ]
+}

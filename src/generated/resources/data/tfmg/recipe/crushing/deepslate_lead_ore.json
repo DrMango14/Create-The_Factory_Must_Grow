@@ -1,0 +1,26 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "tfmg:deepslate_lead_ore"
+    }
+  ],
+  "results": [
+    {
+      "count": 2,
+      "id": "create:crushed_raw_lead"
+    },
+    {
+      "chance": 0.25,
+      "id": "create:crushed_raw_lead"
+    },
+    {
+      "chance": 0.75,
+      "id": "create:experience_nugget"
+    },
+    {
+      "chance": 0.12,
+      "id": "minecraft:cobbled_deepslate"
+    }
+  ]
+}

@@ -1,13 +1,16 @@
 package com.drmangotea.tfmg.worldgen;
 
 import com.drmangotea.tfmg.TFMG;
-import com.simibubi.create.infrastructure.worldgen.ConfigPlacementFilter;
+import com.drmangotea.tfmg.content.world.placement_modifier.BooleanConfigPlacementModifier;
+import com.drmangotea.tfmg.content.world.placement_modifier.WorldBottomModifier;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 
@@ -22,8 +25,12 @@ public class TFMGPlacedFeatures {
             LEAD_ORE = key("lead_ore"),
             NICKEL_ORE = key("nickel_ore"),
             LITHIUM_ORE = key("lithium_ore"),
-            TFMG_STRIATED_ORES_OVERWORLD = key("tfmg_striated_ores_overworld"),
-            TFMG_STRIATED_ORES_NETHER = key("tfmg_striated_ores_nether");
+            BAUXITE = key("bauxite"),
+            GALENA = key("galena"),
+            LIGNITE = key("lignite"),
+            FIRECLAY = key("fireclay"),
+            SULFUR = key("sulfur"),
+            NETHER_FIRECLAY = key("nether_fireclay");
 
     private static ResourceKey<PlacedFeature> key(String name) {
         return ResourceKey.create(Registries.PLACED_FEATURE, TFMG.asResource(name));
@@ -38,34 +45,47 @@ public class TFMGPlacedFeatures {
         Holder<ConfiguredFeature<?, ?>> leadOre = featureLookup.getOrThrow(TFMGConfiguredFeatures.LEAD_ORE);
         Holder<ConfiguredFeature<?, ?>> nickelOre = featureLookup.getOrThrow(TFMGConfiguredFeatures.NICKEL_ORE);
         Holder<ConfiguredFeature<?, ?>> lithiumOre = featureLookup.getOrThrow(TFMGConfiguredFeatures.LITHIUM_ORE);
-        Holder<ConfiguredFeature<?, ?>> striatedOresOverworld = featureLookup.getOrThrow(TFMGConfiguredFeatures.TFMG_STRIATED_ORES_OVERWORLD);
-        Holder<ConfiguredFeature<?, ?>> striatedOresNether = featureLookup.getOrThrow(TFMGConfiguredFeatures.TFMG_STRIATED_ORES_NETHER);
 
-        register(ctx, OIL_DEPOSIT,oilDeposit,oilPlacement(RarityFilter.onAverageOnceEvery(4)));
+        Holder<ConfiguredFeature<?, ?>> bauxite = featureLookup.getOrThrow(TFMGConfiguredFeatures.BAUXITE);
+        Holder<ConfiguredFeature<?, ?>> galena = featureLookup.getOrThrow(TFMGConfiguredFeatures.GALENA);
+        Holder<ConfiguredFeature<?, ?>> lignite = featureLookup.getOrThrow(TFMGConfiguredFeatures.LIGNITE);
+        Holder<ConfiguredFeature<?, ?>> fireclay = featureLookup.getOrThrow(TFMGConfiguredFeatures.FIRECLAY);
 
-        register(ctx, OIL_WELL,oilWell,oilPlacement(RarityFilter.onAverageOnceEvery(500)));
+        Holder<ConfiguredFeature<?, ?>> sulfur = featureLookup.getOrThrow(TFMGConfiguredFeatures.SULFUR);
+        Holder<ConfiguredFeature<?, ?>> netherFireclay = featureLookup.getOrThrow(TFMGConfiguredFeatures.NETHER_FIRECLAY);
 
-        register(ctx, LEAD_ORE, leadOre, placement(CountPlacement.of(5), -15, 80));
-        register(ctx, NICKEL_ORE, nickelOre, placement(CountPlacement.of(5), -63, 20));
-        register(ctx, LITHIUM_ORE, lithiumOre, placement(CountPlacement.of(3), -63, -5));
-        register(ctx, TFMG_STRIATED_ORES_OVERWORLD, striatedOresOverworld, placement(RarityFilter.onAverageOnceEvery(18), -30, 70));
-        register(ctx, TFMG_STRIATED_ORES_NETHER, striatedOresNether, placement(RarityFilter.onAverageOnceEvery(18), 40, 90));
+        register(ctx, OIL_DEPOSIT, oilDeposit, oilPlacement(RarityFilter.onAverageOnceEvery(4), new BooleanConfigPlacementModifier(TFMG.asResource("oil_deposits"), true)));
+
+        register(ctx, OIL_WELL, oilWell, oilPlacement(RarityFilter.onAverageOnceEvery(500), new BooleanConfigPlacementModifier(TFMG.asResource("oil_wells"), true)));
+
+        register(ctx, LEAD_ORE, leadOre, placement(CountPlacement.of(5), -15, 80, new BooleanConfigPlacementModifier(TFMG.asResource("lead_ore"), true)));
+        register(ctx, NICKEL_ORE, nickelOre, placement(CountPlacement.of(5), -63, 20, new BooleanConfigPlacementModifier(TFMG.asResource("nickel_ore"), true)));
+        register(ctx, LITHIUM_ORE, lithiumOre, placement(CountPlacement.of(3), -63, -5, new BooleanConfigPlacementModifier(TFMG.asResource("lithium_ore"), true)));
+
+        register(ctx, BAUXITE, bauxite, placement(RarityFilter.onAverageOnceEvery(18), -30, 70, new BooleanConfigPlacementModifier(TFMG.asResource("bauxite"), true)));
+        register(ctx, GALENA, galena, placement(RarityFilter.onAverageOnceEvery(18), -30, 70, new BooleanConfigPlacementModifier(TFMG.asResource("galena"), true)));
+        register(ctx, LIGNITE, lignite, placement(RarityFilter.onAverageOnceEvery(18), -30, 70, new BooleanConfigPlacementModifier(TFMG.asResource("lignite"), true)));
+        register(ctx, FIRECLAY, fireclay, placement(RarityFilter.onAverageOnceEvery(18), -30, 70, new BooleanConfigPlacementModifier(TFMG.asResource("fireclay"), true)));
+
+        register(ctx, SULFUR, sulfur, placement(RarityFilter.onAverageOnceEvery(18), 40, 90, new BooleanConfigPlacementModifier(TFMG.asResource("sulfur"), true)));
+        register(ctx, NETHER_FIRECLAY, netherFireclay, placement(RarityFilter.onAverageOnceEvery(18), 40, 90, new BooleanConfigPlacementModifier(TFMG.asResource("nether_fireclay"), true)));
     }
 
-    private static List<PlacementModifier> placement(PlacementModifier frequency, int minHeight, int maxHeight) {
+    private static List<PlacementModifier> placement(PlacementModifier frequency, int minHeight, int maxHeight, BooleanConfigPlacementModifier configPlacementModifier) {
         return List.of(
                 frequency,
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(minHeight), VerticalAnchor.absolute(maxHeight)),
-                ConfigPlacementFilter.INSTANCE
+                configPlacementModifier
         );
     }
-    private static List<PlacementModifier> oilPlacement(PlacementModifier frequency) {
+    private static List<PlacementModifier> oilPlacement(PlacementModifier frequency, BooleanConfigPlacementModifier configPlacementModifier) {
         return List.of(
                 frequency,
                 InSquarePlacement.spread(),
-                HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(-64)),
-                ConfigPlacementFilter.INSTANCE
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.BEDROCK)),
+                new WorldBottomModifier(),
+                configPlacementModifier
         );
     }
 }

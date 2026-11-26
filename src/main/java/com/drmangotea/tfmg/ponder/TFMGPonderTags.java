@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.ponder;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGItems;
+import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.createmod.catnip.registry.RegisteredObjectsHelper;
 import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
@@ -10,22 +11,18 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 
 public class TFMGPonderTags {
-
     public static final ResourceLocation
-
             OIL_PROCESSING = loc("oil_processing"),
             ENGINES = loc("engines"),
             METALLURGY = loc("metallurgy"),
             ELECTRIC_MACHINERY = loc("electric_machinery"),
-            CHEMICAL_VAT = loc("chemical_vat")
-                    ;
+            CHEMICAL_VAT = loc("chemical_vat");
 
     private static ResourceLocation loc(String id) {
         return TFMG.asResource(id);
     }
 
     public static void register(PonderTagRegistrationHelper<ResourceLocation> helper) {
-
         PonderTagRegistrationHelper<RegistryEntry<?,?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
 
         PonderTagRegistrationHelper<ItemLike> itemHelper = helper.withKeyFunction(
@@ -37,12 +34,12 @@ public class TFMGPonderTags {
                 .title("Oil Processing Machinery")
                 .description("Block used for refining and mining oil")
                 .register();
-      //  helper.registerTag(ENGINES)
-      //          .addToIndex()
-      //          .item(TFMGBlocks.TURBINE_ENGINE, true, false)
-      //          .title("Engines")
-      //          .description("Engines and equipment related to them")
-      //          .register();
+        helper.registerTag(ENGINES)
+                .addToIndex()
+                .item(TFMGBlocks.TURBINE_ENGINE, true, false)
+                .title("Engines")
+                .description("Engines and equipment related to them")
+                .register();
         helper.registerTag(METALLURGY)
                 .addToIndex()
                 .item(TFMGBlocks.BLAST_FURNACE_OUTPUT, true, false)
@@ -62,6 +59,10 @@ public class TFMGPonderTags {
                 .description("Chemical vat and machines that expand it")
                 .register();
 
+        HELPER.addToTag(AllCreatePonderTags.ARM_TARGETS)
+                .add(TFMGBlocks.WINDING_MACHINE)
+                .add(TFMGBlocks.POLARIZER)
+                .add(TFMGBlocks.CASTING_BASIN);
 
         HELPER.addToTag(OIL_PROCESSING)
                 .add(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER)
@@ -76,22 +77,20 @@ public class TFMGPonderTags {
                 .add(TFMGBlocks.PUMPJACK_HAMMER_PART)
                 .add(TFMGBlocks.LARGE_PUMPJACK_HAMMER_CONNECTOR)
                 .add(TFMGBlocks.LARGE_PUMPJACK_HAMMER_HEAD)
-                .add(TFMGBlocks.LARGE_PUMPJACK_HAMMER_PART)
-    ;
+                .add(TFMGBlocks.LARGE_PUMPJACK_HAMMER_PART);
 
-        //HELPER.addToTag(ENGINES)
-        //        .add(TFMGBlocks.REGULAR_ENGINE)
-        //        .add(TFMGBlocks.TURBINE_ENGINE)
-        //        .add(TFMGBlocks.RADIAL_ENGINE)
-        //        .add(TFMGBlocks.LARGE_ENGINE)
-        //        .add(TFMGBlocks.SIMPLE_LARGE_ENGINE)
-        //        .add(TFMGBlocks.ENGINE_CONTROLLER)
-        //        .add(TFMGBlocks.ENGINE_GEARBOX)
-        //        .add(TFMGBlocks.EXHAUST)
-        //        .add(TFMGBlocks.AIR_INTAKE)
-        //        .add(TFMGItems.OIL_CAN)
-        //        .add(TFMGItems.COOLING_FLUID_BOTTLE)
-        //        .add(TFMGItems.TURBO);
+        HELPER.addToTag(ENGINES)
+                .add(TFMGBlocks.REGULAR_ENGINE)
+                .add(TFMGBlocks.TURBINE_ENGINE)
+                .add(TFMGBlocks.RADIAL_ENGINE)
+                .add(TFMGBlocks.LARGE_ENGINE)
+                .add(TFMGBlocks.SIMPLE_LARGE_ENGINE)
+                .add(TFMGBlocks.ENGINE_GEARBOX)
+                .add(TFMGBlocks.EXHAUST)
+                .add(TFMGBlocks.AIR_INTAKE)
+                .add(TFMGItems.OIL_CAN)
+                .add(TFMGItems.COOLING_FLUID_BOTTLE)
+                .add(TFMGItems.TURBO);
 
         HELPER.addToTag(METALLURGY)
                 .add(TFMGBlocks.BLAST_FURNACE_OUTPUT)
@@ -112,6 +111,7 @@ public class TFMGPonderTags {
                 .add(TFMGBlocks.GLASS_CABLE_CONNECTOR)
                 .add(TFMGBlocks.POLARIZER)
                 .add(TFMGBlocks.TRANSFORMER)
+                .add(TFMGBlocks.LARGE_COIL)
                 .add(TFMGBlocks.ELECTRICAL_SWITCH)
                 .add(TFMGBlocks.ELECTRIC_PUMP)
                 .add(TFMGBlocks.LIGHT_BULB)
@@ -119,6 +119,8 @@ public class TFMGPonderTags {
               //  .add(TFMGBlocks.CONVERTER)
                 .add(TFMGItems.COPPER_SPOOL)
                 .add(TFMGItems.ALUMINUM_SPOOL)
+                .add(TFMGItems.CONSTANTAN_SPOOL)
+                .add(TFMGBlocks.WINDING_MACHINE)
         ;
         HELPER.addToTag(CHEMICAL_VAT)
                 .add(TFMGBlocks.STEEL_CHEMICAL_VAT)
@@ -130,10 +132,6 @@ public class TFMGPonderTags {
                 .add(TFMGItems.ZINC_ELECTRODE)
                 .add(TFMGItems.GRAPHITE_ELECTRODE)
                 .add(TFMGItems.MIXER_BLADE)
-                .add(TFMGItems.CENTRIFUGE)
-        ;
-
-
+                .add(TFMGItems.CENTRIFUGE);
     }
-
 }

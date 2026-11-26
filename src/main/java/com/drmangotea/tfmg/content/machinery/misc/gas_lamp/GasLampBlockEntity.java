@@ -23,25 +23,26 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import java.util.List;
 
 public class GasLampBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
-
-
+    protected IFluidHandler fluidCapability;
     public FluidTank tankInventory;
-
     public int lightTimer = 0;
 
+    protected boolean updateCapability;
 
     public GasLampBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         tankInventory = createInventory();
-
+        fluidCapability = tankInventory;
+        updateCapability = false;
+        refreshCapability();
     }
 
     protected SmartFluidTank createInventory() {
         return new SmartFluidTank(4000, this::onFluidStackChanged) {
             @Override
             public boolean isFluidValid(FluidStack stack) {
-                return stack.getFluid().is(TFMGTags.TFMGFluidTags.FLAMMABLE.tag)||
-                        stack.getFluid().is(TFMGTags.TFMGFluidTags.FUEL.tag);
+                return stack.getFluid().is(TFMGTags.Fluids.FLAMMABLE.tag)||
+                        stack.getFluid().is(TFMGTags.Fluids.FUEL.tag);
             }
         };
     }
@@ -50,7 +51,7 @@ public class GasLampBlockEntity extends SmartBlockEntity implements IHaveGoggleI
         event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK,
                 TFMGBlockEntities.GAS_LAMP.get(),
-                (be, context) -> be.tankInventory
+                (be, context) -> be.fluidCapability
         );
     }
     @Override
@@ -66,14 +67,19 @@ public class GasLampBlockEntity extends SmartBlockEntity implements IHaveGoggleI
     }
 
     @Override
-    @SuppressWarnings("removal")
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        return TFMGUtils.createFluidTooltip(this, tooltip);
+        return TFMGUtils.createFluidTooltip(tooltip, fluidCapability);
     }
 
     @Override
     public void tick() {
         super.tick();
+        if (level == null) return;
+
+        if (updateCapability) {
+            updateCapability = false;
+            refreshCapability();
+        }
 
         if (tankInventory.isEmpty() || !tankInventory.isFluidValid(tankInventory.getFluid())) {
             level.setBlock(getBlockPos(), this.getBlockState()
@@ -98,21 +104,22 @@ public class GasLampBlockEntity extends SmartBlockEntity implements IHaveGoggleI
     @Override
     protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.read(compound,registries , clientPacket);
-
         tankInventory.readFromNBT(registries,compound.getCompound("TankContent"));
+        updateCapability = true;
     }
 
     @Override
     public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.write(compound,registries , clientPacket);
         compound.put("TankContent", tankInventory.writeToNBT(registries,new CompoundTag()));
-
-
-
     }
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
     }
 
+    public void refreshCapability() {
+        fluidCapability = tankInventory;
+        invalidateCapabilities();
+    }
 }

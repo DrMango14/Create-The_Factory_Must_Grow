@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "tfmg:rebar_concrete"
+    },
+    "D": {
+      "tag": "c:dyes/pink"
+    }
+  },
+  "pattern": [
+    "###",
+    "#D#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "id": "tfmg:pink_rebar_concrete"
+  }
+}

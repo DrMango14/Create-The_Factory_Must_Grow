@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.items.weapons.explosives.thermite_grenades;
 
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.registry.TFMGEntityTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -11,38 +12,36 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+@NothingNullByDefault
 public class ThermiteGrenadeItem extends Item {
-
     public final ThermiteGrenade.ChemicalColor flameColor;
 
-    public ThermiteGrenadeItem(Properties p_41383_, ThermiteGrenade.ChemicalColor color) {
-        super(p_41383_);
+    public ThermiteGrenadeItem(Properties p, ThermiteGrenade.ChemicalColor color) {
+        super(p);
         this.flameColor = color;
     }
 
-    public InteractionResultHolder<ItemStack> use(Level p_43142_, Player p_43143_, InteractionHand p_43144_) {
-        ItemStack itemstack = p_43143_.getItemInHand(p_43144_);
-        p_43143_.getCooldowns().addCooldown(this, 60);
-        p_43142_.playSound((Player)null, p_43143_.getX(), p_43143_.getY(), p_43143_.getZ(), SoundEvents.EGG_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (p_43142_.getRandom().nextFloat() * 0.4F + 0.8F));
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
+        player.getCooldowns().addCooldown(this, 60);
+		
+		if (level.isClientSide) return InteractionResultHolder.consume(itemstack);
+        level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EGG_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
+		
+		ThermiteGrenade grenade = new ThermiteGrenade(level, player, flameColor, switch (flameColor) {
+			case GREEN -> TFMGEntityTypes.ZINC_GRENADE.get();
+			case BLUE  -> TFMGEntityTypes.COPPER_GRENADE.get();
+			case BASE  -> TFMGEntityTypes.THERMITE_GRENADE.get();
+		});
+		grenade.setItem(itemstack);
+		grenade.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 0.5F, 1.0F);
+		level.addFreshEntity(grenade);
 
-            ThermiteGrenade grenade;
-            if(flameColor== ThermiteGrenade.ChemicalColor.GREEN) {
-                grenade = new ThermiteGrenade(p_43142_, p_43143_, flameColor, TFMGEntityTypes.ZINC_GRENADE.get());
-            }else if(flameColor== ThermiteGrenade.ChemicalColor.BLUE) {
-                grenade = new ThermiteGrenade(p_43142_, p_43143_, flameColor, TFMGEntityTypes.COPPER_GRENADE.get());
-            }else {
-                grenade = new ThermiteGrenade(p_43142_, p_43143_, flameColor, TFMGEntityTypes.THERMITE_GRENADE.get());
-            }
-            grenade.setItem(itemstack);
-            grenade.shootFromRotation(p_43143_, p_43143_.getXRot(), p_43143_.getYRot(), 0.0F, 0.5F, 1.0F);
-            p_43142_.addFreshEntity(grenade);
-
-
-        p_43143_.awardStat(Stats.ITEM_USED.get(this));
-        if (!p_43143_.getAbilities().instabuild) {
+        player.awardStat(Stats.ITEM_USED.get(this));
+        if (!player.isCreative()) {
             itemstack.shrink(1);
         }
 
-        return InteractionResultHolder.sidedSuccess(itemstack, p_43142_.isClientSide());
+        return InteractionResultHolder.success(itemstack);
     }
 }

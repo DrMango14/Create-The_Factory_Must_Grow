@@ -37,8 +37,7 @@ public class EngineCTBehavior extends ConnectedTextureBehaviour.Base {
 
     @Override
     public boolean connectsTo(BlockState state, BlockState other, BlockAndTintGetter reader, BlockPos pos, BlockPos otherPos, Direction face) {
-        return reader.getBlockEntity(pos) instanceof AbstractEngineBlockEntity be && reader.getBlockEntity(otherPos) instanceof AbstractEngineBlockEntity be2;
-
+        return reader.getBlockEntity(pos) instanceof AbstractEngineBlockEntity && reader.getBlockEntity(otherPos) instanceof AbstractEngineBlockEntity;
     }
 
     @Override

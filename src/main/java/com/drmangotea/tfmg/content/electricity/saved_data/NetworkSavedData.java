@@ -1,268 +1,153 @@
 package com.drmangotea.tfmg.content.electricity.saved_data;
 
-import com.drmangotea.tfmg.TFMG;
+import com.drmangotea.tfmg.TFMGRegistries;
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.WireConnection;
+import net.minecraft.core.BlockPos;
 import com.drmangotea.tfmg.content.electricity.content.DirectionalElectricalProperties;
-import com.drmangotea.tfmg.content.electricity.content.devices.base.ResistorProperties;
-import com.drmangotea.tfmg.content.electricity.content.devices.electric_motor.ElectricMotorProperties;
-import com.drmangotea.tfmg.content.electricity.content.devices.generators.creative_generator.CreativeGeneratorProperties;
-import com.drmangotea.tfmg.content.electricity.content.devices.generators.large_generator.LargeGeneratorProperties;
-import com.drmangotea.tfmg.content.electricity.content.devices.generators.three_phase_generator.ThreePhaseGeneratorProperties;
-import com.drmangotea.tfmg.content.electricity.content.lights.LightProperties;
-import com.drmangotea.tfmg.content.electricity.content.power_transmission.adapters.FourSlotAdapterProperties;
-import com.drmangotea.tfmg.content.electricity.content.power_transmission.adapters.TwoSlotAdapterProperties;
-import com.drmangotea.tfmg.content.electricity.content.power_transmission.cables.CableProperties;
-import com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.accumulator_control_unit.AccumulatorControlUnitProperties;
-import com.drmangotea.tfmg.content.electricity.content.power_transmission.switches.electric_switch.SwitchProperties;
-import com.drmangotea.tfmg.content.electricity.content.power_transmission.switches.large_switch.LargeSwitchProperties;
-import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.large.LargeTransformerProperties;
-import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.small.TransformerProperties;
-import com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.ConnectorProperties;
-import com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.UnwirableConnectorProperties;
 import com.drmangotea.tfmg.content.electricity.simulation.ElectricalComponent;
 import com.drmangotea.tfmg.content.electricity.simulation.IdealVoltageSource;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
 import com.drmangotea.tfmg.content.electricity.simulation.Transformer;
-import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectableElectricalNode;
-import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class NetworkSavedData extends SavedData {
 
-    private List<ElectricalNetwork> list = new ArrayList<>();
+    public NetworkSavedData() {}
 
-    public NetworkSavedData() {
-    }
-
-    @Override
+    @Override @NothingNullByDefault
     public CompoundTag save(CompoundTag compound, HolderLookup.Provider provider) {
-
-
-        List<ElectricalNetwork> list = ElectricNetworkManager.networks.values().stream().toList();
+        List<ElectricalNetwork> list = ElectricalNetworkManager.networks.values().stream().toList();
 
         compound = new CompoundTag();
 
         for (ElectricalNetwork network : list) {
-            CompoundTag networkNBT = new CompoundTag();
-
-            if (network.world instanceof ServerLevel serverLevel) {
-
-                networkNBT.putString("Dimension", serverLevel.dimension().location().toString());
-
-                CompoundTag members = new CompoundTag();
-                networkNBT.putInt("Member Count", network.members.size());
-                networkNBT.putInt("Node Count", network.totalNodes);
-                for (int i = 0; i < network.members.size(); i++) {
-                    CompoundTag member = new CompoundTag();
-                    ElectricalProperties properties = network.members.values().stream().toList().get(i);
-                    long pos = network.members.keySet().stream().toList().get(i);
-
-                    member.putLong("Position", pos);
-                    member.putInt("Property Id", properties.getId());
-                    for (ElectricalComponent component : properties.components) {
-                        if (component instanceof IdealVoltageSource source) {
-                            member.putInt("Voltage " + source.id, (int) source.amplitude);
-                        }
-                        if (component instanceof Resistance resistance) {
-                            member.putDouble("Resistance " + resistance.localId, resistance.resistance);
-                        }
-                        if (component instanceof Transformer transformer) {
-                            member.putDouble("Transformer_Ratio " + transformer.localId, transformer.turnsRatio);
-                        }
-                    }
-
-                    List<Integer> connectDirections = new ArrayList<>();
-
-                    for (Direction facing : properties.getConnectableDirections()) {
-                        connectDirections.add(facing.get3DDataValue());
-                    }
-                    member.putIntArray("Connect Direction",connectDirections);
-
-
-                    if (properties instanceof DirectionalElectricalProperties p)
-                        member.putInt("direction", p.direction.get3DDataValue());
-
-                    // for (ElectricalNode node : properties.nodes) {
-                    //     if (node instanceof ConnectingElectricalNode connectingNode) {
-                    //         CompoundTag nodeTag = new CompoundTag();
-                    //         nodeTag.putDouble("X", connectingNode.getPosition().x());
-                    //         nodeTag.putDouble("Y", connectingNode.getPosition().y());
-                    //         nodeTag.putDouble("Z", connectingNode.getPosition().z());
-                    //         member.put("node " + connectingNode.localId, nodeTag);
-                    //     }
-                    // }
-
-
-                    members.put("member " + i, member);
-                }
-                networkNBT.put("blocks", members);
-                ///
-                CompoundTag connections = new CompoundTag();
-                networkNBT.putInt("Connection Count", network.connections.size());
-                for (int i = 0; i < network.connections.size(); i++) {
-                    CompoundTag connectionTag = new CompoundTag();
-
-                    WireConnection connection = network.connections.get(i);
-
-                    connectionTag.putDouble("Resistance", connection.resistance);
-                    connectionTag.putBoolean("Should Render", connection.render);
-                    connectionTag.putString("Model", connection.model.modelLocation().toString());
-
-                    CompoundTag node1 = new CompoundTag();
-                    node1.putLong("position", connection.node1.pos);
-                    node1.putInt("local id", connection.node1.getLocalId());
-                    connectionTag.put("Node1", node1);
-
-                    CompoundTag node2 = new CompoundTag();
-                    node2.putLong("position", connection.node2.pos);
-                    node2.putInt("local id", connection.node2.getLocalId());
-                    connectionTag.put("Node2", node2);
-
-
-                    connections.put("connection " + i, connectionTag);
-
-                }
-
-                networkNBT.put("connections", connections);
-
-                compound.put(serverLevel.dimension().location().toLanguageKey(), networkNBT);
-
-            }
-            ;
+			if (!(network.world instanceof ServerLevel serverLevel)) continue;
+			
+			CompoundTag networkNBT = new CompoundTag();
+			
+            List<Map.Entry<BlockPos, ElectricalProperties>> memberList = network.members.entrySet().stream().toList();
+			
+			networkNBT.putString("Dimension", serverLevel.dimension().location().toString());
+ 		
+			CompoundTag members = new CompoundTag();
+			networkNBT.putInt("Member Count", network.members.size());
+			networkNBT.putInt("Node Count", network.totalNodes);
+			for (int i = 0; i < network.members.size(); i++) {
+				CompoundTag member = new CompoundTag();
+				ElectricalProperties properties = memberList.get(i).getValue();
+				BlockPos pos = memberList.get(i).getKey();
+				
+				member.put("Position", NbtUtils.writeBlockPos(pos));
+				member.putString("Property Type", properties.getType().id().toString());
+				for (ElectricalComponent component : properties.components) {
+					if (component instanceof IdealVoltageSource source) {
+						member.putInt("Voltage " + source.id, (int) source.amplitude);
+					}
+					if (component instanceof Resistance resistance) {
+						member.putDouble("Resistance " + resistance.localId, resistance.resistance);
+					}
+					if (component instanceof Transformer transformer) {
+						member.putDouble("Transformer_Ratio " + transformer.localId, transformer.turnsRatio);
+					}
+				}
+				
+				member.putIntArray("Connect Direction", properties.getConnectableDirections().stream()
+					.map(Direction::get3DDataValue).toList()
+				);
+				
+				if (properties instanceof DirectionalElectricalProperties p)
+					member.putInt("direction", p.direction.get3DDataValue());
+				
+				members.put("member " + i, member);
+			}
+			networkNBT.put("blocks", members);
+			///
+			CompoundTag connections = new CompoundTag();
+			networkNBT.putInt("Connection Count", network.connections.size());
+			for (int i = 0; i < network.connections.size(); i++) {
+				connections.put("connection " + i, network.connections.get(i).save());
+			}
+			
+			networkNBT.put("connections", connections);
+			
+			compound.put(serverLevel.dimension().location().toLanguageKey(), networkNBT);
         }
 
         return compound;
     }
 
-    public List<ElectricalNetwork> getNetworks() {
-        return list;
-    }
-
-
     public static NetworkSavedData load(CompoundTag compound, HolderLookup.Provider registries) {
         NetworkSavedData sd = new NetworkSavedData();
 
-        List<ElectricalNetwork> list = ElectricNetworkManager.networks.values().stream().toList();
+        List<ElectricalNetwork> list = ElectricalNetworkManager.networks.values().stream().toList();
         for (ElectricalNetwork network : list) {
-            if (network.world instanceof ServerLevel serverLevel) {
-                CompoundTag networkTag = compound.getCompound(serverLevel.dimension().location().toLanguageKey());
-                network.totalNodes = networkTag.getInt("Node Count");
-                int memberCount = networkTag.getInt("Member Count");
-                for (int i = 0; i < memberCount; i++) {
-                    CompoundTag member = networkTag.getCompound("blocks").getCompound("member " + i);
-                    long pos = member.getLong("Position");
-
-                    Direction direction = Direction.NORTH;
-
-                    if (member.contains("direction")) {
-                        direction = Direction.from3DDataValue(member.getInt("direction"));
-                    }
-                    int[] d = member.getIntArray("Connect Direction");
-                    List<Direction> directions = new ArrayList<>();
-                    for (int k : d) {
-                        directions.add(Direction.from3DDataValue(k));
-                    }
-
-                    ElectricalProperties properties = getElectricalProperties(member.getInt("Property Id"), direction,directions, pos);
-
-                    properties.position = pos;
-                    network.members.put(pos, properties);
-                    for (ElectricalComponent component : properties.components) {
-                        if (component instanceof Resistance r) {
-                            network.setResistance(pos, r.localId, member.getDouble("Resistance " + r.localId));
-                        }
-                        if (component instanceof IdealVoltageSource v) {
-                            network.setVoltageGen(pos, member.getInt("Voltage " + v.localId));
-                        }
-                        if (component instanceof Transformer t) {
-                            network.setTransformerRatio(pos, t.localId, member.getDouble("Transformer_Ratio " + t.localId));
-                        }
-                    }
-
-
-                }
-                int connectionCount = networkTag.getInt("Connection Count");
-                for (int i = 0; i < connectionCount; i++) {
-                    CompoundTag connection = networkTag.getCompound("connections").getCompound("connection " + i);
-                    double resistance = connection.getDouble("Resistance");
-                    boolean shouldRender = connection.getBoolean("Should Render");
-                    PartialModel model = PartialModel.of(ResourceLocation.parse(connection.getString("Model")));
-
-                    ConnectableElectricalNode node1 = null;
-                    CompoundTag node1Tag = connection.getCompound("Node1");
-                    long pos1 = node1Tag.getLong("position");
-                    int id1 = node1Tag.getInt("local id");
-                    for (ElectricalNode node : network.getNodes(pos1)) {
-                        if (node.localId == id1 && node instanceof ConnectableElectricalNode connectingNode) {
-                            node1 = connectingNode;
-                            node1.pos = pos1;
-                        }
-                    }
-
-
-                    ConnectableElectricalNode node2 = null;
-                    CompoundTag node2Tag = connection.getCompound("Node2");
-                    long pos2 = node2Tag.getLong("position");
-                    int id2 = node2Tag.getInt("local id");
-                    for (ElectricalNode node : network.getNodes(pos2)) {
-                        if (node.localId == id2 && node instanceof ConnectableElectricalNode connectingNode) {
-                            node2 = connectingNode;
-                            node2.pos = pos2;
-                        }
-                    }
-
-                    if (node1 != null && node2 != null) {
-
-                        network.connections.add(new WireConnection(node1, node2, resistance, shouldRender,model));
-                    }
-
-                }
-            }
-
-                TFMG.LOGGER.debug("Test");
-
+			if (!(network.world instanceof ServerLevel serverLevel)) continue;
+			
+			CompoundTag networkTag = compound.getCompound(serverLevel.dimension().location().toLanguageKey());
+			network.totalNodes = networkTag.getInt("Node Count");
+			int memberCount = networkTag.getInt("Member Count");
+			CompoundTag blocks = networkTag.getCompound("blocks");
+			
+			for (int i = 0; i < memberCount; i++) {
+				CompoundTag member = blocks.getCompound("member " + i);
+				BlockPos pos = NbtUtils.readBlockPos(member, "Position").orElse(null);
+				if (pos == null) continue;
+				
+				Direction direction = Direction.NORTH;
+				
+				if (member.contains("direction")) {
+					direction = Direction.from3DDataValue(member.getInt("direction"));
+				}
+				List<Direction> directions = Arrays.stream(member.getIntArray("Connect Direction")).mapToObj(Direction::from3DDataValue).toList();
+				
+				ElectricalProperties properties = getElectricalProperties(ResourceLocation.parse(member.getString("Property Type")), direction, directions, pos);
+				if (properties == null) continue;
+				
+				network.members.put(pos, properties);
+				for (ElectricalComponent component : properties.components) {
+					if (component instanceof Resistance r) {
+						network.setResistance(pos, r.localId, member.getDouble("Resistance " + r.localId));
+					}
+					if (component instanceof IdealVoltageSource v) {
+						network.setVoltageGen(pos, member.getInt("Voltage " + v.localId));
+					}
+					if (component instanceof Transformer t) {
+						network.setTransformerRatio(pos, t.localId, member.getDouble("Transformer_Ratio " + t.localId));
+					}
+				}
+			}
+			int connectionCount = networkTag.getInt("Connection Count");
+			CompoundTag connections = networkTag.getCompound("connections");
+			for (int i = 0; i < connectionCount; i++) {
+				WireConnection connection = WireConnection.fromTag(connections.getCompound("connection " + i));
+				if (connection != null) {
+					network.connections.add(connection);
+				}
+			}
         }
 
         return sd;
     }
 
-    public static ElectricalProperties getElectricalProperties(int id, Direction direction,List<Direction> d, long pos) {
-
-
-        return switch (id) {
-            case 1 -> new ThreePhaseGeneratorProperties(pos, direction);
-            case 2 -> new ConnectorProperties(pos,direction);
-            case 3 -> new ResistorProperties(pos, direction);
-            case 4 -> new CableProperties(pos, d);
-            case 5 -> new FourSlotAdapterProperties(pos, direction);
-            case 6 -> new TwoSlotAdapterProperties(pos, direction);
-            case 7 -> new LightProperties(pos,direction);
-            case 8 -> new ElectricMotorProperties(pos, direction);
-            case 9 -> new TransformerProperties(pos, direction);
-            case 10 -> new CreativeGeneratorProperties(pos);
-            case 11 -> new SwitchProperties(pos, direction);
-            case 12 -> new LargeTransformerProperties(pos, direction);
-            case 13 -> new AccumulatorControlUnitProperties(pos, direction);
-            case 14 -> new LargeSwitchProperties(pos, direction);
-            case 15 -> new UnwirableConnectorProperties(pos, d);
-            case 16 -> new LargeGeneratorProperties(pos, direction);
-            default -> new ElectricalProperties(pos);
-
-        };
+    public static ElectricalProperties getElectricalProperties(ResourceLocation id, Direction direction, List<Direction> d, BlockPos pos) {
+		var entry = TFMGRegistries.ELECTRICAL_TYPE_REGISTRY.get(id);
+		if (entry == null) return null;
+		return entry.create(pos, direction, d);
     }
 
     public static Factory<NetworkSavedData> factory() {

@@ -1,9 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.saved_data;
 
-import com.drmangotea.tfmg.TFMG;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
-import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
-import com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.base.FluidReservoir;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
@@ -12,49 +8,20 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.dimension.LevelStem;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class NetworkDataManager {
-
-        public List<ElectricalNetwork> list;
-
         private NetworkSavedData savedData;
 
         public NetworkDataManager() {
-            list = new ArrayList<>();
-            list.addAll(ElectricNetworkManager.networks.values());
         }
-
-
-
-
-        public void removeMember(long pos) {
-            for (FluidReservoir reservoir : TFMG.DEPOSITS.list) {
-                if (reservoir.deposits.contains(pos)) {
-                    reservoir.deposits.remove(pos);
-                    if (reservoir.deposits.isEmpty())
-                        TFMG.DEPOSITS.list.remove(reservoir);
-                    return;
-                }
-            }
-        }
-
-
-
-
 
         public void levelLoaded(LevelAccessor level) {
-
             MinecraftServer server = level.getServer();
             if (server == null)
                 return;
-           // list = new ArrayList<>();
             savedData = null;
             loadNetworkData(server);
-
-
         }
+		
         private void loadNetworkData(MinecraftServer server) {
             if (savedData != null)
                 return;
@@ -62,8 +29,8 @@ public class NetworkDataManager {
                 return;
             }
             savedData = NetworkSavedData.load(server);
-            list = savedData.getNetworks();
         }
+		
         public void markDirty() {
             if (savedData != null)
                 savedData.setDirty();

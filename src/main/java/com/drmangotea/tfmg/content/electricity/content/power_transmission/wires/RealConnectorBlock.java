@@ -1,17 +1,13 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.wires;
 
 import com.drmangotea.tfmg.base.TFMGShapes;
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.base.blocks.WallMountBlock;
-
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.packets.AddElectricalComponentPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.foundation.block.IBE;
-import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -22,6 +18,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+@NothingNullByDefault
 public class RealConnectorBlock extends WallMountBlock implements IBE<RealConnectorBlockEntity> {
 
     public static final BooleanProperty EXTENSION = BooleanProperty.create("extension");
@@ -48,14 +45,7 @@ public class RealConnectorBlock extends WallMountBlock implements IBE<RealConnec
         if (stateBelow.getBlock() instanceof RealConnectorBlock)
             updateExtension(level, stateBelow, below);
 
-
-        if (level.getBlockEntity(pos) instanceof IElectric be) {
-            be.onPlace();
-            if (level instanceof ServerLevel serverLevel)
-                CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(pos), new AddElectricalComponentPacket(BlockPos.of(pos.asLong())));
-
-
-        }
+		withBlockEntityDo(level, pos, IElectric::onPlace);
     }
 
     @Override

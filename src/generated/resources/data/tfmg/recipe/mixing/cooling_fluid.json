@@ -7,9 +7,9 @@
       "fluid": "minecraft:water"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 1000,
-      "fluid": "tfmg:ethylene"
+      "tag": "c:ethylene"
     }
   ],
   "results": [

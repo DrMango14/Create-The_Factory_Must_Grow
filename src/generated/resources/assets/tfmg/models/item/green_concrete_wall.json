@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/wall_inventory",
   "textures": {
-    "wall": "tfmg:block/green_concrete"
+    "wall": "tfmg:block/concrete/green"
   }
 }

@@ -21,12 +21,14 @@ public class RealConnectorBlockEntity extends SmartBlockEntity implements IElect
         super(type, pos, state);
         properties = new ConnectorProperties(getPos(),state.getValue(FACING));
     }
+	
     @Override
     public void remove() {
         super.remove();
         this.removeBlock();
 
     }
+	
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
 
@@ -38,8 +40,8 @@ public class RealConnectorBlockEntity extends SmartBlockEntity implements IElect
     }
 
     @Override
-    public long getPos() {
-        return getBlockPos().asLong();
+    public BlockPos getPos() {
+        return getBlockPos();
     }
 
     @Override

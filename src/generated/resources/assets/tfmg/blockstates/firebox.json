@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "blaze=fading": {
+      "model": "tfmg:block/firebox/block_lit"
+    },
+    "blaze=kindled": {
+      "model": "tfmg:block/firebox/block_lit"
+    },
+    "blaze=none": {
       "model": "tfmg:block/firebox/block"
+    },
+    "blaze=seething": {
+      "model": "tfmg:block/firebox/block_lit"
+    },
+    "blaze=smouldering": {
+      "model": "tfmg:block/firebox/block_lit"
     }
   }
 }

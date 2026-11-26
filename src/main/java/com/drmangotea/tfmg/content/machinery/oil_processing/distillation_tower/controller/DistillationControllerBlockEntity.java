@@ -7,6 +7,7 @@ import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
 import com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.output.DistillationOutputBlockEntity;
 import com.drmangotea.tfmg.mixin.accessor.FluidTankBlockEntityAccessor;
 import com.drmangotea.tfmg.recipes.DistillationRecipe;
+import com.drmangotea.tfmg.recipes.input.DistillationRecipeInput;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.drmangotea.tfmg.registry.TFMGTags;
@@ -14,19 +15,17 @@ import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
-import com.simibubi.create.foundation.recipe.RecipeConditions;
-import com.simibubi.create.foundation.recipe.RecipeFinder;
-
 import net.createmod.catnip.animation.LerpedFloat;
 import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -35,8 +34,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
-
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,19 +43,29 @@ import static com.drmangotea.tfmg.content.machinery.oil_processing.distillation_
 
 public class DistillationControllerBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
-    private static final Object DistillationRecipesKey = new Object();
-
-    public DistillationRecipe recipe;
-
     LerpedFloat angle = LerpedFloat.angular();
 
     protected IFluidHandler fluidCapability;
+    public final SmartFluidTank tank;
 
-    public final FluidTank tank = new SmartFluidTank(8000, this::onFluidStackChanged);
+    protected boolean updateCapability;
+
+    private final RecipeManager.CachedCheck<DistillationRecipeInput, DistillationRecipe> quickCheck;
+    protected int recipeDuration;
+    int timer = 0;
+    public DistillationRecipe currentRecipe;
+
+    public boolean refreshOutputs;
+    public List<BlockPos> outputs = new ArrayList<>();
 
     public DistillationControllerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        fluidCapability = tank;
+        this.tank = new SmartFluidTank(8000, this::onFluidStackChanged);
+        this.fluidCapability = tank;
+        this.quickCheck = RecipeManager.createCheck(TFMGRecipeTypes.DISTILLATION.getType());
+        refreshOutputs = true;
+        updateCapability = false;
+        refreshCapability();
     }
 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
@@ -71,105 +79,151 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
     @Override
     public void remove() {
         super.remove();
+        if (level == null)
+            return;
         SteelTankBlock.updateTowerState(level, getBlockPos().relative(getFacing(getBlockState()).getOpposite()),false,false);
-
     }
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
     }
 
+    @Override
+    public void invalidate() {
+        super.invalidate();
+        invalidateCapabilities();
+    }
+
+    public void refreshCapability() {
+        fluidCapability = tank;
+        invalidateCapabilities();
+    }
+
     public void manageDialRendering(){
-        if (level.isClientSide) {
+        if (level != null && level.isClientSide) {
             angle.chase(180 * ((float) tank.getFluidAmount() / tank.getCapacity()), 0.2f, LerpedFloat.Chaser.EXP);
             angle.tickChaser();
         }
     }
+	
+	@Override
+	public void onLoad() {
+		super.onLoad();
+		SteelTankBlock.updateTowerState(level, getBlockPos().relative(getFacing(getBlockState()).getOpposite()),true,false);
+		if (level instanceof ServerLevel serverLevel)
+			CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(getBlockPos()),new DistillationTowerPacket(getBlockPos(),getBlockPos().relative(getFacing(getBlockState()).getOpposite()),true));
+	}
 
-    public void findRecipe(ArrayList<DistillationOutputBlockEntity> outputs){
-        if (recipe == null || !recipe.matches(tank, outputs.toArray().length)) {
-            DistillationRecipe recipe = getMatchingRecipes();
-
-            if (recipe != null) {
-                this.recipe = recipe;
-                sendData();
-            }
+    public @Nullable DistillationRecipe findRecipe() {
+        if (level == null)
+            return null;
+        RecipeHolder<DistillationRecipe> recipeholder;
+        if (!tank.isEmpty()) {
+            recipeholder = quickCheck.getRecipeFor(new DistillationRecipeInput(tank.getFluidInTank(0), outputs.size()), level).orElse(null);
+        } else {
+            return null;
         }
+        if(recipeholder == null) {
+            return null;
+        }
+        recipeDuration = recipeholder.value().getProcessingDuration();
+        return recipeholder.value();
     }
 
-    @Override
-    public void onLoad() {
-        super.onLoad();
-        SteelTankBlock.updateTowerState(level, getBlockPos().relative(getFacing(getBlockState()).getOpposite()),true,false);
-        if (level instanceof ServerLevel serverLevel)
-            CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(getBlockPos()),new DistillationTowerPacket(getBlockPos(),getBlockPos().relative(getFacing(getBlockState()).getOpposite()),true));
-
-    }
-
-    public void manageRecipe(){
-        ArrayList<DistillationOutputBlockEntity> outputs = getOutputs();
-        BlockEntity beBehind = level.getBlockEntity(getBlockPos().relative(getFacing(getBlockState()).getOpposite()));
-        if (!(beBehind instanceof SteelTankBlockEntity be))
+    public void manageRecipe(SteelTankBlockEntity controllerBe) {
+        if (level == null || currentRecipe == null || level.isClientSide && !isVirtual())
+            return;
+        if (outputs.isEmpty() || controllerBe.activeHeat == 0)
             return;
 
+        if (timer >= currentRecipe.getProcessingDuration()) {
+            DistillationRecipe activeRecipe = currentRecipe;
 
-        if (outputs.isEmpty() || be.activeHeat == 0)
-            return;
-
-        findRecipe(outputs);
-
-        if (recipe == null)
-            return;
-
-        ///
-        float speedModifier = (float) be.activeHeat / 2;
-        if (recipe.getInputFluid().amount() * speedModifier > tank.getFluidAmount())
-            return;
-
-        if (recipe.getFluidResults().toArray().length != getOutputs().toArray().length)
-            return;
-        if (be.isController()) {
-            if (be.getHeight() < outputs.toArray().length * 2 || (((FluidTankBlockEntityAccessor)be).tfmg$getWidth() < 2 && outputs.toArray().length > 3))
+            int toDrain = activeRecipe.getInputFluid().amount();
+            int maxOutput = tank.drain(toDrain, IFluidHandler.FluidAction.SIMULATE).getAmount();
+            if (maxOutput < toDrain)
                 return;
-        }  else {
-            if (be.getControllerBE() != null)
-                if (be.getControllerBE().getHeight() < outputs.toArray().length * 2 || ((FluidTankBlockEntityAccessor)be.getControllerBE()).tfmg$getWidth() < 2)
+
+            if (activeRecipe.getFluidResults().toArray().length != outputs.size())
+                return;
+
+            if (controllerBe.isController()) {
+                if (controllerBe.getHeight() < outputs.size() * 2 || (((FluidTankBlockEntityAccessor) controllerBe).tfmg$getWidth() < 2 && outputs.size() > 3))
                     return;
-        }
+            }  else {
+                if (controllerBe.getControllerBE() != null)
+                    if (controllerBe.getControllerBE().getHeight() < outputs.size() * 2 || ((FluidTankBlockEntityAccessor) controllerBe.getControllerBE()).tfmg$getWidth() < 2)
+                        return;
+            }
 
-        for (DistillationOutputBlockEntity be1 : outputs) {
-            if (be1.tank.getSpace() == 0&&be1.mode.get() == DistillationOutputBlockEntity.DistillationOutputMode.KEEP_FLUID)
-                return;
-        }
-        int numero = 0;
-        for (DistillationOutputBlockEntity output : outputs) {
-            FluidStack fluidStack = recipe.getFluidResults().get(numero);
-            if (fluidStack.isEmpty())
-                break;
-            if (output.tank.fill(new FluidStack(fluidStack.getFluidHolder(), (int) (fluidStack.getAmount() * speedModifier)), IFluidHandler.FluidAction.SIMULATE) > output.tank.getCapacity()&&output.mode.get() == DistillationOutputBlockEntity.DistillationOutputMode.KEEP_FLUID)
-                break;
+            for (DistillationOutputBlockEntity output : outputs.stream().map(this::getOutput).toList()) {
+                if (output == null)
+                    continue;
+                if (output.tank.getSpace() == 0 && output.mode.get() == DistillationOutputBlockEntity.DistillationOutputMode.KEEP_FLUID)
+                    return;
+            }
 
-            output.tank.fill(new FluidStack(fluidStack.getFluidHolder(), (int) (fluidStack.getAmount() * speedModifier)), IFluidHandler.FluidAction.EXECUTE);
-            int consumption = (recipe.getInputFluid().amount() / 6);
-
-            tank.drain((int) (consumption * speedModifier), IFluidHandler.FluidAction.EXECUTE);
-            numero++;
+            int numero = 0;
+            for (DistillationOutputBlockEntity output : outputs.stream().map(this::getOutput).toList()) {
+                if (output == null)
+                    continue;
+                FluidStack fluidStack = activeRecipe.getFluidResults().get(numero);
+                FluidStack result = new FluidStack(fluidStack.getFluidHolder(), fluidStack.getAmount());
+                if (fluidStack.isEmpty())
+                    break;
+                if (output.tank.forceFill(result, IFluidHandler.FluidAction.SIMULATE) > output.tank.getCapacity() && output.mode.get() == DistillationOutputBlockEntity.DistillationOutputMode.KEEP_FLUID)
+                    break;
+                output.tank.forceFill(result, IFluidHandler.FluidAction.EXECUTE);
+                numero++;
+            }
+            tank.drain(toDrain, IFluidHandler.FluidAction.EXECUTE);
+            currentRecipe = null;
+            timer = 0;
+            recipeDuration = -1;
+        } else {
+            timer+= controllerBe.activeHeat;
+            sendData();
         }
     }
+
     @Override
     public void tick() {
         super.tick();
+        if (level == null) return;
+
+        BlockEntity beBehind = level.getBlockEntity(getBlockPos().relative(getFacing(getBlockState()).getOpposite()));
+        if (beBehind instanceof SteelTankBlockEntity be) {
+            SteelTankBlockEntity controllerBe = be.getControllerBE() == null ? be : be.getControllerBE();
+            manageRecipe(controllerBe);
+        }
+
+        if (updateCapability) {
+            updateCapability = false;
+            refreshCapability();
+        }
+
+        if (refreshOutputs) {
+            refreshOutputs();
+            refreshOutputs = false;
+        }
 
         manageDialRendering();
-        manageRecipe();
+    }
 
+    @Override
+    public void lazyTick() {
+        super.lazyTick();
+        if (currentRecipe == null) {
+            currentRecipe = findRecipe();
+        }
+        refreshOutputs = true;
     }
 
     protected void onFluidStackChanged(FluidStack newFluidStack) {
         if (!hasLevel())
             return;
 
-        if (!level.isClientSide) {
+        if (level != null && !level.isClientSide) {
             setChanged();
             sendData();
         }
@@ -177,70 +231,76 @@ public class DistillationControllerBlockEntity extends SmartBlockEntity implemen
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-
+        if (level == null)
+            return false;
         BlockEntity beBehind = level.getBlockEntity(getBlockPos().relative(getFacing(getBlockState()).getOpposite()));
         if (beBehind instanceof SteelTankBlockEntity be) {
+            SteelTankBlockEntity controllerBe = be.getControllerBE() == null ? be : be.getControllerBE();
+
             TFMGTexts.header("distillation_tower").style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
-            TFMGTexts.Distillation.level(be.getControllerBE().activeHeat).forGoggles(tooltip, 1);
-            TFMGTexts.Distillation.outputs(getOutputs().toArray().length).forGoggles(tooltip, 1);
+            TFMGTexts.progress(timer, recipeDuration).forGoggles(tooltip, 1);
+            TFMGTexts.Distillation.level(controllerBe.activeHeat).forGoggles(tooltip, 1);
+            TFMGTexts.Distillation.outputs(outputs.size()).forGoggles(tooltip, 1);
         } else
             TFMGTexts.Distillation.tankNotFound().forGoggles(tooltip, 1);
 
-        TFMGUtils.createFluidTooltip(this,tooltip);
+        TFMGUtils.createFluidTooltip(tooltip, fluidCapability);
 
         return true;
     }
 
-    protected DistillationRecipe getMatchingRecipes() {
-        List<RecipeHolder<? extends Recipe<?>>> list = RecipeFinder.get(getRecipeCacheKey(), level, RecipeConditions.isOfType(TFMGRecipeTypes.DISTILLATION.getType()));
-        for (int i = 0; i < list.toArray().length; i++) {
-            DistillationRecipe recipe = (DistillationRecipe) list.get(i).value();
-            if (recipe.getFluidResults().toArray().length == getOutputs().toArray().length)
-                for (int y = 0; y < recipe.getFluidIngredients().getFirst().getFluids().length; y++)
-                    if (tank.getFluid().getFluid() == recipe.getFluidIngredients().getFirst().getFluids()[y].getFluid())
-                        if (tank.getFluidAmount() >= recipe.getFluidIngredients().getFirst().amount())
-                            return recipe;
+    public DistillationOutputBlockEntity getOutput(BlockPos pos) {
+        if (level == null) return null;
+        if (level.getBlockEntity(pos) instanceof DistillationOutputBlockEntity be) {
+            return be;
+        } else {
+            refreshOutputs = true;
         }
         return null;
     }
 
-    protected Object getRecipeCacheKey() {
-        return DistillationRecipesKey;
-    }
-
-    //@Nonnull
-    //@Override
-    //public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-    //    if (cap == ForgeCapabilities.FLUID_HANDLER)
-    //        return fluidCapability.cast();
-    //    return super.getCapability(cap, side);
-    //}
-
-    public ArrayList<DistillationOutputBlockEntity> getOutputs() {
-        ArrayList<DistillationOutputBlockEntity> outputs = new ArrayList<>();
+    public void refreshOutputs() {
+        ArrayList<BlockPos> outputs = new ArrayList<>();
+        if (level == null) return;
         BlockPos checkedPos = this.getBlockPos().above();
         for (int i = 0; i < 11; i++) {
-            if (i == 0 || i == 2 || i == 4 || i == 6 || i == 8 || i == 10) {
-                if (level.getBlockEntity(checkedPos) instanceof DistillationOutputBlockEntity be) {
-                    outputs.add(be);
+            if ((i % 2) == 0) {
+                if (level.getBlockEntity(checkedPos) instanceof DistillationOutputBlockEntity) {
+                    outputs.add(checkedPos);
                 } else break;
             } else {
-                if (!(level.getBlockState(checkedPos).is(TFMGTags.TFMGBlockTags.INDUSTRIAL_PIPE.tag)))
+                if (!(level.getBlockState(checkedPos).is(TFMGTags.Blocks.INDUSTRIAL_PIPE.tag)))
                     break;
             }
             checkedPos = checkedPos.above();
         }
-        return outputs;
+        this.outputs = outputs;
+        this.sendData();
+        this.setChanged();
     }
 
     @Override
     protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.read(compound,registries , clientPacket);
         tank.readFromNBT(registries,compound.getCompound("TankContent"));
+        outputs = new ArrayList<>();
+        for (int i = 0; i < compound.getInt("OutputCount"); i++) {
+            NbtUtils.readBlockPos(compound, "Output" + i).ifPresent(output -> outputs.add(output));
+        }
+        timer = compound.getInt("Timer");
+        recipeDuration = compound.getInt("RecipeDuration");
+        updateCapability = true;
     }
 
     @Override
     public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         compound.put("TankContent", tank.writeToNBT(registries,new CompoundTag()));
+        compound.putInt("OutputCount", outputs.size());
+        for (int i = 0; i < outputs.size(); i++) {
+            BlockPos output = outputs.get(i);
+            compound.put("Output" + i, NbtUtils.writeBlockPos(output));
+        }
+        compound.putInt("Timer", timer);
+        compound.putInt("RecipeDuration", recipeDuration);
     }
 }

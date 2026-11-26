@@ -19,7 +19,7 @@ public class ElectricAdapterBlockEntity extends SmartBlockEntity implements IEle
     public ElectricAdapterBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         if(state.getBlock() instanceof ElectricAdapterBlock block){
-            p = block.slotCount == 2 ? new TwoSlotAdapterProperties(pos.asLong(),state.getValue(TFMGDirectionalBlock.FACING)) : new FourSlotAdapterProperties(pos.asLong(),state.getValue(TFMGDirectionalBlock.FACING));
+            p = block.slotCount == 2 ? new TwoSlotAdapterProperties(pos,state.getValue(TFMGDirectionalBlock.FACING)) : new FourSlotAdapterProperties(pos,state.getValue(TFMGDirectionalBlock.FACING));
         }
 
     }
@@ -38,8 +38,8 @@ public class ElectricAdapterBlockEntity extends SmartBlockEntity implements IEle
     }
 
     @Override
-    public long getPos() {
-        return getBlockPos().asLong();
+    public BlockPos getPos() {
+        return getBlockPos();
     }
 
     @Override

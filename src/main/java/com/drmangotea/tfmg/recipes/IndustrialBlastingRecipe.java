@@ -1,19 +1,18 @@
 package com.drmangotea.tfmg.recipes;
 
+import com.drmangotea.tfmg.recipes.input.IndustrialBlastingRecipeInput;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.mojang.serialization.MapCodec;
-import com.simibubi.create.content.processing.recipe.*;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-
-
 import net.neoforged.neoforge.fluids.FluidStack;
 
-public class IndustrialBlastingRecipe extends ProcessingRecipe<RecipeInput, IndustrialBlastingRecipeParams> {
+public class IndustrialBlastingRecipe extends ProcessingRecipe<IndustrialBlastingRecipeInput, IndustrialBlastingRecipeParams> {
 
     public int hotAirUsage;
 
@@ -82,11 +81,12 @@ public class IndustrialBlastingRecipe extends ProcessingRecipe<RecipeInput, Indu
 
 
     @Override
-    public boolean matches(RecipeInput inv, Level worldIn) {
+    public boolean matches(IndustrialBlastingRecipeInput inv, Level worldIn) {
         if (inv.isEmpty())
             return false;
-        return ingredients.get(0)
-                .test(inv.getItem(0));
+        if (!ingredients.getFirst().test(inv.input))
+            return false;
+        return ingredients.size() < 2 || ingredients.get(1).test(inv.flux);
     }
 
     public static class Serializer<R extends IndustrialBlastingRecipe> implements RecipeSerializer<R> {

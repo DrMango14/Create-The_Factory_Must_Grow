@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.machinery.misc.concrete_hose;
 
+import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.content.contraptions.pulley.AbstractPulleyRenderer;
@@ -14,15 +15,15 @@ import net.minecraft.core.Direction.Axis;
 public class ConcreteHoseRenderer extends AbstractPulleyRenderer<ConcreteHoseBlockEntity> {
 
 	public ConcreteHoseRenderer(BlockEntityRendererProvider.Context context) {
-		super(context, AllPartialModels.HOSE_HALF, AllPartialModels.HOSE_HALF_MAGNET);
+		super(context, AllPartialModels.HOSE_HALF, TFMGPartialModels.HOSE_HALF_MAGNET);
 	}
 
 	@Override
 	protected Axis getShaftAxis(ConcreteHoseBlockEntity be) {
 		return be.getBlockState()
-			.getValue(ConcreteHoseBlock.HORIZONTAL_FACING)
-			.getClockWise()
-			.getAxis();
+				.getValue(ConcreteHoseBlock.HORIZONTAL_FACING)
+				.getClockWise()
+				.getAxis();
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class ConcreteHoseRenderer extends AbstractPulleyRenderer<ConcreteHoseBlo
 
 	@Override
 	protected SuperByteBuffer renderMagnet(ConcreteHoseBlockEntity be) {
-		return CachedBuffers.partial(AllPartialModels.HOSE_MAGNET, be.getBlockState());
+		return CachedBuffers.partial(TFMGPartialModels.HOSE_MAGNET, be.getBlockState());
 	}
 
 	@Override

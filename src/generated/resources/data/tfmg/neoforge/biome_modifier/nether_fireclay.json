@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_nether",
+  "features": "tfmg:nether_fireclay",
+  "step": "underground_ores"
+}

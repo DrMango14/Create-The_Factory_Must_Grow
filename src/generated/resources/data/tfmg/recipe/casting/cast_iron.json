@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createbigcannons"
+    }
+  ],
+  "type": "tfmg:casting",
+  "ingredients": [
+    {
+      "type": "neoforge:tag",
+      "amount": 90,
+      "tag": "c:molten_cast_iron"
+    }
+  ],
+  "processing_time": 200,
+  "results": [
+    {
+      "id": "tfmg:cast_iron_ingot"
+    }
+  ]
+}

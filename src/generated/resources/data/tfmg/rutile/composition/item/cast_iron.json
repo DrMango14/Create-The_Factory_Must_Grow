@@ -1,0 +1,17 @@
+{
+  "compositions": [
+    {
+      "elements": [
+        {
+          "id": "rutile:iron"
+        }
+      ]
+    }
+  ],
+  "contents": [
+    "tfmg:cast_iron_block",
+    "tfmg:cast_iron_ingot",
+    "tfmg:cast_iron_nugget",
+    "tfmg:cast_iron_sheet"
+  ]
+}

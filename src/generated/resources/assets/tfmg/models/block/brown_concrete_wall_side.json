@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_wall_side",
   "textures": {
-    "wall": "tfmg:block/brown_concrete"
+    "wall": "tfmg:block/concrete/brown"
   }
 }

@@ -1,0 +1,7 @@
+{
+  "priority": 1001,
+  "properties": {
+    "sable:volume": 0.25
+  },
+  "selector": "tfmg:industrial_pipe"
+}

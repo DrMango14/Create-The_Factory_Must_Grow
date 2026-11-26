@@ -19,7 +19,6 @@ import org.joml.Quaternionf;
 import java.util.function.Consumer;
 
 public class RotorVisual extends KineticBlockEntityVisual<RotorBlockEntity> implements SimpleDynamicVisual {
-
 	protected final RotatingInstance shaft;
 	protected final TransformedInstance wheel;
 	protected float lastAngle = Float.NaN;

@@ -1,0 +1,9 @@
+{
+  "parent": "tfmg:block/encased_cogwheel/item_steel",
+  "textures": {
+    "1": "tfmg:block/industrial_aluminum_casing",
+    "casing": "tfmg:block/industrial_aluminum_casing",
+    "particle": "tfmg:block/industrial_aluminum_casing",
+    "side": "tfmg:block/industrial_encased_cogwheel_side"
+  }
+}

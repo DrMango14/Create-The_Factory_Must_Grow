@@ -29,19 +29,19 @@ public class TFMGEncasedCogVisual extends KineticBlockEntityVisual<KineticBlockE
     protected final RotatingInstance rotatingBottomShaft;
 
     public static TFMGEncasedCogVisual steelSmall(VisualizationContext modelManager, KineticBlockEntity blockEntity, float partialTick) {
-        return new TFMGEncasedCogVisual(modelManager, blockEntity, false, partialTick, Models.partial(TFMGPartialModels.SHAFTLESS_STEEL_COGHWEEL));
+        return new TFMGEncasedCogVisual(modelManager, blockEntity, false, partialTick, Models.partial(TFMGPartialModels.SHAFTLESS_STEEL_COGWHEEL));
     }
 
     public static TFMGEncasedCogVisual steelLarge(VisualizationContext modelManager, KineticBlockEntity blockEntity, float partialTick) {
-        return new TFMGEncasedCogVisual(modelManager, blockEntity, true, partialTick, Models.partial(TFMGPartialModels.SHAFTLESS_LARGE_STEEL_COGHWEEL));
+        return new TFMGEncasedCogVisual(modelManager, blockEntity, true, partialTick, Models.partial(TFMGPartialModels.SHAFTLESS_LARGE_STEEL_COGWHEEL));
     }
 
     public static TFMGEncasedCogVisual aluminumSmall(VisualizationContext modelManager, KineticBlockEntity blockEntity, float partialTick) {
-        return new TFMGEncasedCogVisual(modelManager, blockEntity, false, partialTick, Models.partial(TFMGPartialModels.SHAFTLESS_ALUMINUM_COGHWEEL));
+        return new TFMGEncasedCogVisual(modelManager, blockEntity, false, partialTick, Models.partial(TFMGPartialModels.SHAFTLESS_ALUMINUM_COGWHEEL));
     }
 
     public static TFMGEncasedCogVisual aluminumLarge(VisualizationContext modelManager, KineticBlockEntity blockEntity, float partialTick) {
-        return new TFMGEncasedCogVisual(modelManager, blockEntity, true, partialTick, Models.partial(TFMGPartialModels.SHAFTLESS_LARGE_ALUMINUM_COGHWEEL));
+        return new TFMGEncasedCogVisual(modelManager, blockEntity, true, partialTick, Models.partial(TFMGPartialModels.SHAFTLESS_LARGE_ALUMINUM_COGWHEEL));
     }
 
     public TFMGEncasedCogVisual(VisualizationContext modelManager, KineticBlockEntity blockEntity, boolean large, float partialTick, Model model) {

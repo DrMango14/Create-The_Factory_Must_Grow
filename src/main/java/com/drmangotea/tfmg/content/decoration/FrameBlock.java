@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.decoration;
 
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.ProperWaterloggedBlock;
 import net.minecraft.core.BlockPos;
@@ -11,18 +12,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.FluidState;
 
+@NothingNullByDefault
 public class FrameBlock extends Block implements ProperWaterloggedBlock, IWrenchable {
-
-
-
-    public FrameBlock(Properties p_55926_) {
-        super(p_55926_);
+	
+    public FrameBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, false));
     }
 
-
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_55933_) {
-        p_55933_.add(WATERLOGGED);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(WATERLOGGED);
     }
 
     @Override

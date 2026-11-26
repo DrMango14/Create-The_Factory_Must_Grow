@@ -1,13 +1,13 @@
 package com.drmangotea.tfmg.recipes;
 
+import com.drmangotea.tfmg.recipes.input.CastingRecipeInput;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
-import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
-public class CastingRecipe extends StandardProcessingRecipe<RecipeInput> {
+public class CastingRecipe extends StandardProcessingRecipe<CastingRecipeInput> {
 
     public CastingRecipe(ProcessingRecipeParams params) {
         super(TFMGRecipeTypes.CASTING, params);
@@ -16,10 +16,12 @@ public class CastingRecipe extends StandardProcessingRecipe<RecipeInput> {
     protected boolean canSpecifyDuration() {
         return true;
     }
+
     @Override
     protected int getMaxFluidInputCount() {
         return 1;
     }
+
     public SizedFluidIngredient getIngrenient(){
         return fluidIngredients.get(0);
     }
@@ -35,7 +37,7 @@ public class CastingRecipe extends StandardProcessingRecipe<RecipeInput> {
     }
 
     @Override
-    public boolean matches(RecipeInput p_44002_, Level p_44003_) {
-        return false;
+    public boolean matches(CastingRecipeInput input, Level level) {
+        return this.getIngrenient().test(input.getFluid());
     }
 }

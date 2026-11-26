@@ -34,8 +34,7 @@ import java.util.List;
 import static com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.hammer.PumpjackBlock.WIDE;
 import static net.minecraft.world.level.block.DirectionalBlock.FACING;
 
-public class PumpjackBlockEntity extends GeneratingKineticBlockEntity
-        implements IBearingBlockEntity, IDisplayAssemblyExceptions {
+public class PumpjackBlockEntity extends GeneratingKineticBlockEntity implements IBearingBlockEntity, IDisplayAssemblyExceptions {
     protected ControlledContraptionEntity movedContraption;
     protected float angle;
     protected boolean running;
@@ -181,7 +180,7 @@ public class PumpjackBlockEntity extends GeneratingKineticBlockEntity
         float speed = convertToAngular(getSpeed());
         if (getSpeed() == 0)
             speed = 0;
-        if (level.isClientSide) {
+        if (level != null && level.isClientSide) {
             speed *= ServerSpeedProvider.get();
             speed += clientAngleDiff / 3f;
         }
@@ -223,7 +222,7 @@ public class PumpjackBlockEntity extends GeneratingKineticBlockEntity
         boolean foundConnector = false;
         BlockPos headLocalPos = headPosition.subtract(getBlockPos().above());
         for (StructureTemplate.StructureBlockInfo block : contraption.getBlocks().values()) {
-            if (block.state().is(TFMGTags.TFMGBlockTags.PUMPJACK_HEAD.tag)) {
+            if (block.state().is(TFMGTags.Blocks.PUMPJACK_HEAD.tag)) {
                 foundHead = true;
                 if (block.pos().getX() != headLocalPos.getX() ||
                         block.pos().getY() != q * headLocalPos.getY() ||
@@ -234,7 +233,7 @@ public class PumpjackBlockEntity extends GeneratingKineticBlockEntity
         }
         BlockPos connectorLocalPos = connectorPosition.subtract(getBlockPos().above());
         for (StructureTemplate.StructureBlockInfo block : contraption.getBlocks().values()) {
-            if (block.state().is(TFMGTags.TFMGBlockTags.PUMPJACK_CONNECTOR.tag)) {
+            if (block.state().is(TFMGTags.Blocks.PUMPJACK_CONNECTOR.tag)) {
                 foundConnector = true;
                 if (block.pos().getX() != connectorLocalPos.getX() ||
                         block.pos().getY() != q * connectorLocalPos.getY() ||
@@ -262,15 +261,15 @@ public class PumpjackBlockEntity extends GeneratingKineticBlockEntity
     }
 
     public boolean isHead(BlockPos pos) {
-        return level.getBlockState(pos).is(TFMGTags.TFMGBlockTags.PUMPJACK_HEAD.tag);
+        return level.getBlockState(pos).is(TFMGTags.Blocks.PUMPJACK_HEAD.tag);
     }
 
     public boolean isPart(BlockPos pos) {
-        return level.getBlockState(pos).is(TFMGTags.TFMGBlockTags.PUMPJACK_PART.tag);
+        return level.getBlockState(pos).is(TFMGTags.Blocks.PUMPJACK_PART.tag);
     }
 
     public boolean isConnector(BlockPos pos) {
-        return level.getBlockState(pos).is(TFMGTags.TFMGBlockTags.PUMPJACK_CONNECTOR.tag);
+        return level.getBlockState(pos).is(TFMGTags.Blocks.PUMPJACK_CONNECTOR.tag);
     }
 
     private boolean findHeadAndConnector() {
@@ -366,14 +365,15 @@ public class PumpjackBlockEntity extends GeneratingKineticBlockEntity
         sendData();
     }
 
+    private int incompleteTimer = 0;
+
     @Override
     public void tick() {
         super.tick();
+        if (level == null) return;
         if (!isRunning())
             findHeadAndConnector();
-        if (!isRunning() && isComplete()
-                && !level.isClientSide
-        ) {
+        if (!isRunning() && isComplete() && !level.isClientSide) {
             assemble();
         }
         if (base != null)
@@ -381,7 +381,13 @@ public class PumpjackBlockEntity extends GeneratingKineticBlockEntity
                 if (isRunning())
                     base.setControllerHammer(this);
             }
-        if (!isComplete())
+        boolean actuallyComplete = isComplete();
+        if (actuallyComplete) {
+            incompleteTimer = 0;
+        } else {
+            incompleteTimer++;
+        }
+        if (incompleteTimer > 40)
             if (!level.isClientSide)
                 disassemble();
 
@@ -452,10 +458,10 @@ public class PumpjackBlockEntity extends GeneratingKineticBlockEntity
             return;
 
 
-        if (!level.getBlockState(getBlockPos().above()).is(TFMGTags.TFMGBlockTags.PUMPJACK_SMALL_PART.tag) && !getBlockState().getValue(WIDE))
+        if (!level.getBlockState(getBlockPos().above()).is(TFMGTags.Blocks.PUMPJACK_SMALL_PART.tag) && !getBlockState().getValue(WIDE))
             level.setBlock(getBlockPos(), getBlockState().setValue(WIDE, true), 2);
 
-        if (level.getBlockState(getBlockPos().above()).is(TFMGTags.TFMGBlockTags.PUMPJACK_SMALL_PART.tag) && getBlockState().getValue(WIDE))
+        if (level.getBlockState(getBlockPos().above()).is(TFMGTags.Blocks.PUMPJACK_SMALL_PART.tag) && getBlockState().getValue(WIDE))
             level.setBlock(getBlockPos(), getBlockState().setValue(WIDE, false), 2);
     }
 
@@ -490,7 +496,7 @@ public class PumpjackBlockEntity extends GeneratingKineticBlockEntity
     @Override
     public void lazyTick() {
         super.lazyTick();
-        if (movedContraption != null && !level.isClientSide)
+        if (movedContraption != null && level != null && !level.isClientSide)
             sendData();
     }
 
@@ -499,9 +505,13 @@ public class PumpjackBlockEntity extends GeneratingKineticBlockEntity
             return;
         movedContraption.setAngle(angle);
         BlockState blockState = getBlockState();
-        if (blockState.hasProperty(BlockStateProperties.FACING))
-            movedContraption.setRotationAxis(blockState.getValue(BlockStateProperties.FACING).getClockWise()
-                    .getAxis());
+        if (blockState.hasProperty(BlockStateProperties.FACING)) {
+            Direction facing = blockState.getValue(BlockStateProperties.FACING);
+            Direction.Axis axis = facing.getAxis() == Direction.Axis.Y
+                    ? Direction.Axis.X
+                    : facing.getClockWise().getAxis();
+            movedContraption.setRotationAxis(axis);
+        }
     }
 
     @Override
@@ -515,7 +525,7 @@ public class PumpjackBlockEntity extends GeneratingKineticBlockEntity
         setChanged();
         BlockPos anchor = worldPosition.above();
         movedContraption.setPos(anchor.getX(), anchor.getY(), anchor.getZ());
-        if (!level.isClientSide) {
+        if (level != null && !level.isClientSide) {
             this.running = true;
             sendData();
         }
@@ -523,7 +533,7 @@ public class PumpjackBlockEntity extends GeneratingKineticBlockEntity
 
     @Override
     public void onStall() {
-        if (!level.isClientSide)
+        if (level != null && !level.isClientSide)
             sendData();
     }
 

@@ -22,8 +22,12 @@ public class TFMGBiomeModifiers {
             LEAD_ORE = key("lead_ore"),
             NICKEL_ORE = key("nickel_ore"),
             LITHIUM_ORE = key("lithium_ore"),
-            TFMG_STRIATED_ORES_OVERWORLD = key("tfmg_striated_ores_overworld"),
-            TFMG_STRIATED_ORES_NETHER = key("tfmg_striated_ores_nether");
+            BAUXITE = key("bauxite"),
+            GALENA = key("galena"),
+            LIGNITE = key("lignite"),
+            FIRECLAY = key("fireclay"),
+            SULFUR = key("sulfur"),
+            NETHER_FIRECLAY = key("nether_fireclay");
 
     private static ResourceKey<BiomeModifier> key(String name) {
         return ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, TFMG.asResource(name));
@@ -44,25 +48,33 @@ public class TFMGBiomeModifiers {
         Holder<PlacedFeature> leadOre = featureLookup.getOrThrow(TFMGPlacedFeatures.LEAD_ORE);
         Holder<PlacedFeature> nickelOre = featureLookup.getOrThrow(TFMGPlacedFeatures.NICKEL_ORE);
         Holder<PlacedFeature> lithiumOre = featureLookup.getOrThrow(TFMGPlacedFeatures.LITHIUM_ORE);
-        Holder<PlacedFeature> striatedOresOverworld = featureLookup.getOrThrow(TFMGPlacedFeatures.TFMG_STRIATED_ORES_OVERWORLD);
-        Holder<PlacedFeature> striatedOresNether = featureLookup.getOrThrow(TFMGPlacedFeatures.TFMG_STRIATED_ORES_NETHER);
+        Holder<PlacedFeature> bauxite = featureLookup.getOrThrow(TFMGPlacedFeatures.BAUXITE);
+        Holder<PlacedFeature> galena = featureLookup.getOrThrow(TFMGPlacedFeatures.GALENA);
+        Holder<PlacedFeature> lignite = featureLookup.getOrThrow(TFMGPlacedFeatures.LIGNITE);
+        Holder<PlacedFeature> fireclay = featureLookup.getOrThrow(TFMGPlacedFeatures.FIRECLAY);
+        Holder<PlacedFeature> sulfur = featureLookup.getOrThrow(TFMGPlacedFeatures.SULFUR);
+        Holder<PlacedFeature> netherFireclay = featureLookup.getOrThrow(TFMGPlacedFeatures.NETHER_FIRECLAY);
 
 
-        ctx.register(OIL_DEPOSIT,addOre(isOverworld,oilDeposit));
-
-        ctx.register(OIL_WELL,addOilWell(isDesert,oilWell));
+        ctx.register(OIL_DEPOSIT,addOre(isOverworld, oilDeposit));
+        ctx.register(OIL_WELL,addOilWell(isDesert, oilWell));
 
         ctx.register(LEAD_ORE, addOre(isOverworld, leadOre));
         ctx.register(NICKEL_ORE, addOre(isOverworld, nickelOre));
         ctx.register(LITHIUM_ORE, addOre(isOverworld, lithiumOre));
-        ctx.register(TFMG_STRIATED_ORES_OVERWORLD, addOre(isOverworld, striatedOresOverworld));
-        ctx.register(TFMG_STRIATED_ORES_NETHER, addOre(isNether, striatedOresNether));
+
+        ctx.register(BAUXITE, addOre(isOverworld, bauxite));
+        ctx.register(GALENA, addOre(isOverworld, galena));
+        ctx.register(LIGNITE, addOre(isOverworld, lignite));
+        ctx.register(FIRECLAY, addOre(isOverworld, fireclay));
+
+        ctx.register(SULFUR, addOre(isNether, sulfur));
+        ctx.register(NETHER_FIRECLAY, addOre(isNether, netherFireclay));
     }
 
     private static BiomeModifiers.AddFeaturesBiomeModifier addOre(HolderSet<Biome> biomes, Holder<PlacedFeature> feature) {
         return new BiomeModifiers.AddFeaturesBiomeModifier(biomes, HolderSet.direct(feature), GenerationStep.Decoration.UNDERGROUND_ORES);
     }
-
 
     private static BiomeModifiers.AddFeaturesBiomeModifier addOilWell(HolderSet<Biome> biomes, Holder<PlacedFeature> feature) {
         return new BiomeModifiers.AddFeaturesBiomeModifier(biomes, HolderSet.direct(feature), GenerationStep.Decoration.FLUID_SPRINGS);

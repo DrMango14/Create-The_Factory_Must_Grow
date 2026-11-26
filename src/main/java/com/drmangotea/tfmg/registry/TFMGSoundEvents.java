@@ -36,7 +36,7 @@ public class TFMGSoundEvents {
     public static final Map<ResourceLocation, SoundEntry> ALL = new HashMap<>();
 
     public static final SoundEntry
-            ENGINE = create("engine")
+    ENGINE = create("engine")
             .subtitle("Engine Sounds")
             .category(SoundSource.BLOCKS)
             .attenuationDistance(10)
@@ -45,6 +45,24 @@ public class TFMGSoundEvents {
     DIESEL_ENGINE = create("diesel_engine")
             .subtitle("Diesel Engine Sounds")
             .category(SoundSource.BLOCKS)
+            .attenuationDistance(10)
+            .build(),
+
+    FIRE_EXTINGUISHER_START = create("fire_extinguisher_start")
+            .subtitle("Fire Extinguisher Starts")
+            .category(SoundSource.PLAYERS)
+            .attenuationDistance(12)
+            .build(),
+
+    FIRE_EXTINGUISHER_FADE = create("fire_extinguisher_fade")
+            .subtitle("Fire Extinguisher Fades")
+            .category(SoundSource.PLAYERS)
+            .attenuationDistance(8)
+            .build(),
+
+    FIRE_EXTINGUISHER = create("fire_extinguisher")
+            .subtitle("Fire Extinguisher Foams")
+            .category(SoundSource.PLAYERS)
             .attenuationDistance(10)
             .build();
 

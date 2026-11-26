@@ -1,38 +1,31 @@
 {
   "creative_tab.tfmg_main": "Create: The Factory Must Grow",
   "creative_tab.tfmg_decoration": "Create: TFMG Building Blocks",
-
+  "item.tfmg.coal_coke.fools": "Coal Cake",
   "tfmg.goggles.fluid_storage": "Fluid Storage:",
   "create.goggles.item_storage": "Item Storage:",
   "tfmg.goggles.item_storage_empty": "*Empty*",
-
   "tfmg.surface_scanner.header": "Surface Scanner",
   "tfmg.goggles.surface_scanner.no_deposit": "No Deposits Found",
-  "tfmg.goggles.surface_scanner.no_rotation": "Not Enough Rotation (Needs 64rpm)",
   "tfmg.goggles.surface_scanner.deposits_found": "%s Chunks With Oil Deposits Found",
-
   "tfmg.distillation_tower.header": "Distillation Tower Info:",
   "tfmg.goggles.distillation_tower.tank_not_found": "Steel Fluid Tank Not Found",
   "tfmg.goggles.distillation_tower.level": "Heat Level: %1$s",
   "tfmg.goggles.distillation_tower.found_outputs": "Output Count: %1$s",
   "tfmg.goggles.distillation_tower.no_outputs": "No Output Blocks Found",
-
   "tfmg.goggles.blast_furnace.stats": "Blast Furnace: %s",
   "tfmg.goggles.blast_furnace.fuel_amount": "  Fuel : %1$s",
   "tfmg.goggles.blast_furnace.height": "  Height: %1$s",
   "tfmg.goggles.blast_furnace.reinforced": "Reinforced",
   "tfmg.goggles.blast_furnace.timer": "Time Left: %1$s",
   "tfmg.goggles.blast_furnace.modifier": "Production Time: %1$s",
-
   "tfmg.blast_stove.header": "Blast Stove: ",
   "tfmg.goggles.blast_stove.tank1": "Input Tank: ",
   "tfmg.goggles.blast_stove.tank2": "Fuel Tank: ",
   "tfmg.goggles.blast_stove.tank3": "Output Tank 1: ",
   "tfmg.goggles.blast_stove.tank4": "Output Tank 2: ",
-
+  "tfmg.large_engine.header": "Large Engine:",
   "tfmg.coke_oven.header": "Coke Oven:",
-  "tfmg.goggles.coke_oven.progress": "Progress: %1$s",
-
   "tfmg.pumpjack.header": "Pumpjack Info:",
   "tfmg.goggles.pumpjack.reserves": "Deposit Reserves: ",
   "tfmg.goggles.pumpjack.part_missing": "Hammer or Crank Missing",
@@ -43,37 +36,31 @@
   "tfmg.goggles.pumpjack.deposit_info": "Deposit Info:",
   "tfmg.pumpjack_deposit_amount": "%1$s Buckets",
   "tfmg.goggles.zero": "Machine Invalid",
-
   "tfmg.goggles.progress": "Progress: %1$s",
+  "tfmg.goggles.idle": "Idle",
   "tfmg.goggles.invalid_machine": "Machine Invalid",
-
   "tfmg.voltage": "Voltage: %1$s",
   "tfmg.fe": "FE: %1$s",
   "tfmg.network": "Network: %1$s",
-
   "tfmg.goggles.machine_input.info": "Machine Input Info",
   "tfmg.goggles.machine_input.no_rot": "No Rotation Provided!",
   "tfmg.goggles.machine_input.power_level": "Power Level: ",
-
   "tfmg.winding_machine.header": "Winding Machine",
   "tfmg.goggles.winding_machine.turns": "Turns Left: ",
-  "tfmg.goggles.winding_machine.progress": "Progress: ",
-
   "tfmg.polarizer.header": "Polarizer",
-  "tfmg.goggles.polarizer.charge": "Charge: ",
-  "tfmg.goggles.polarizer.insufficient_power": "Not Enough Power (Needs 2000W)",
-
   "tfmg.goggles.electric_machine.no_power": "No Power",
   "tfmg.goggles.electricity.insufficient_voltage": "Insufficient Voltage",
-
-  "tfmg.goggles.compressor.non_operational": "State: Non Operational(Needs at least 120 RPM)",
-  "tfmg.goggles.compressor.pressurizing": "State: Pressurizing",
-  "tfmg.goggles.compressor.depressurizing": "State: Depressurizing",
-
+  "tfmg.goggles.machine_state": "State: %s",
+  "tfmg.goggles.operational": "Operational",
+  "tfmg.goggles.not_operational": "Not Operational",
+  "tfmg.goggles.minimum_rpm": "Needs at least %sRPM",
+  "tfmg.goggles.compressor.non_operational": "State: Non Operational",
+  "tfmg.goggles.compressor.non_operational.rpm": "Needs at least 120 RPM",
+  "tfmg.goggles.pressurizing": "Pressurizing",
+  "tfmg.goggles.depressurizing": "Depressurizing",
   "tfmg.goggles.voltmeter": "Voltmeter:",
   "tfmg.goggles.gauge.value": "   Measured Voltage:",
   "tfmg.goggles.voltmeter.range": "   Range: %1$s",
-
   "tfmg.engine.header": "Engine Info",
   "tfmg.goggles.engine.type": "Type: %s",
   "tfmg.goggles.engine.rpm": "Speed: %s RPM",
@@ -86,9 +73,6 @@
   "tfmg.goggles.engine.next_component": "   Next Component: %s",
   "tfmg.goggles.engine.pistons_missing": "Pistons Missing",
   "tfmg.goggles.engine.turbines_missing": "Turbines Missing",
-
-  "tfmg.goggles.electrode_holder.min_amps": "Not Enough Current (Needs ",
-
   "tfmg.vat.header": "Chemical Vat",
   "tfmg.goggles.vat.attachments": "Attachments:",
   "tfmg.goggles.vat.contents": "Vat Contents:",
@@ -96,62 +80,70 @@
   "tfmg.goggles.no_heat": "No Heat",
   "tfmg.goggles.heated": "Heated",
   "tfmg.goggles.superheated": "Superheated",
-  "tfmg.goggles.vat.not_operational": "Not Operational",
-  "tfmg.goggles.vat.tfmg.graphite_electrode": "   Graphite Electrode",
-  "tfmg.goggles.vat.tfmg.electrode": "   Electrode",
-  "tfmg.goggles.vat.tfmg.mixing": "   Mixer",
-  "tfmg.goggles.vat.tfmg.centrifuge": "   Centrifuge",
+  "tfmg.goggles.vat.tfmg.graphite_electrode": "Graphite Electrode",
+  "tfmg.goggles.vat.tfmg.electrode": "Electrode",
+  "tfmg.goggles.vat.tfmg.mixer": "Mixer",
+  "tfmg.goggles.vat.tfmg.centrifuge": "Centrifuge",
+  "tfmg.goggles.vat.tfmg.compressor": "Compressor",
+  "tfmg.goggles.vat.tfmg.decompressor": "Decompressor",
+  "tfmg.goggles.vat.tfmg.freezer": "Freezer",
   "create.vat.pressure_dots": "... ",
   "create.vat.pressure": "Pressure",
   "create.vat.heat_dots": "................ ",
   "create.vat.heat": "Heat",
-
-
+  "tfmg.goggles.fluid_production": "Production: %1$s/t",
+  "tfmg.goggles.fluid_production.named": "%1$s Production: %2$s/t",
   "tfmg.goggles.ammeter": "Ammeter:",
   "tfmg.goggles.ammeter.amps": "   Measured Amps: %1$s V",
-
   "tfmg.goggles.motor.usage": "Energy Usage: %1$s fe/t",
   "tfmg.goggles.generator.production": "Energy Production: %1$s fe/t",
-
   "tfmg.resistor.allowed_voltage": "Percentage of Voltage Allowed",
-  "tfmg.winding_machine.turn_percentage": "Allowed Turn Percentage (From 1000)",
+  "tfmg.winding_machine.turn_count": "Number of Turns",
   "tfmg.creative_generator.voltage_generation": "Voltage Generation",
-
   "tfmg.distillation_output.when_tank_is_full": "When Internal Tank is Full",
   "tfmg.distillation_output.mode.keep_fluid": "Stop Distillation Process",
   "tfmg.distillation_output.mode.void_when_full": "Void Excess Fluid",
-
   "death.attack.tfmg.concrete": "%1$s tried to eat Concrete",
   "death.attack.tfmg.concrete.player": "%1$s tried to eat Concrete",
-
   "death.attack.tfmg.acid": "%1$s took an acid bath",
   "death.attack.tfmg.acid.player": "%1$s took an acid bath",
-
   "death.attack.tfmg.blast_furnace": "%1$s was turned in carbon steel",
   "death.attack.tfmg.blast_furnace.player": "%1$s was thrown into a blast furnace",
-
   "tfmg.tooltip.fuse": "Rating: %1$s",
   "tfmg.tooltip.resistor": "Resistance: %1$s",
   "tfmg.tooltip.coils": "Turns: ",
+  "tfmg.tooltip.engine_upgrade": "Engine Upgrade",
   "tfmg.tooltip.cylinder": "Supported Fuels:",
   "tfmg.tooltip.fluid_item": "Fluid Amount: %1$s",
-
-  "create.recipe.assembly.winding": "Wind a Spool",
-  "create.recipe.distillation": "Distillation",
-  "create.recipe.advanced_distillation": "Advanced Distillation",
-  "create.recipe.industrial_blasting": "Industrial Blasting",
-  "create.recipe.casting": "Casting",
-  "create.recipe.coking": "Coking",
-  "create.recipe.polarizing": "Polarizing",
-  "create.recipe.chemical_vat": "Chemical Vat",
-  "create.recipe.hot_blast": "Air Blasting",
-  "create.recipe.winding": "Winding",
-
+  "tfmg.jei.engine_fuels.title": "Engine Fuels",
+  "tfmg.jei.engine_fuels.speed": "Speed: %1$s",
+  "tfmg.jei.engine_fuels.efficiency": "Efficiency: %1$s",
+  "tfmg.jei.engine_fuels.torque": "Torque: %1$s",
+  "tfmg.jei.engine_fuels.exhaust": "Exhaust: ",
+  "tfmg.recipe.assembly.winding": "Wind a Spool",
+  "tfmg.recipe.distillation": "Distillation",
+  "tfmg.recipe.advanced_distillation": "Advanced Distillation",
+  "tfmg.recipe.industrial_blasting": "Industrial Blasting",
+  "tfmg.recipe.casting": "Casting",
+  "tfmg.recipe.coking": "Coking",
+  "tfmg.recipe.polarizing": "Polarizing",
+  "tfmg.recipe.chemical_vat": "Chemical Vat",
+  "tfmg.recipe.hot_blast": "Air Blasting",
+  "tfmg.recipe.winding": "Winding",
+  "tfmg.recipe.assembly.winding.count": "Wind %s",
+  "tfmg.recipe.vat.minsize": "Min. Size: %s",
+  "tfmg.recipe.vat.pressure": "Pressure Level: %s",
+  "tfmg.recipe.vat.pressure.none": "No Pressure Required",
+  "tfmg.recipe.vat.heat": "Heat Level: %s",
+  "tfmg.recipe.vat.mixing": "Requires Mixer Blade",
+  "tfmg.recipe.vat.centrifuge": "Requires Centrifuge",
+  "tfmg.recipe.vat.electrode": "Requires Electrodes",
+  "tfmg.recipe.vat.graphite_electrode": "Requires Graphite Electrodes",
+  "tfmg.recipe.over_time": "Over %1$s",
   "tfmg.keyinfo.custom_button": "Engine Controller Custom Button",
   "tfmg.keyinfo.engine_start": "Start Engine",
   "tfmg.keyinfo.transmission_shift_up": "Transmission Shift Up",
   "tfmg.keyinfo.transmission_shift_down": "Transmission Shift Down",
-
   "tfmg.multimeter.header": "Multimeter Data:",
   "tfmg.multimeter.separator": "----------------------------",
   "tfmg.multimeter.insufficient_power": "Not Enough Power",
@@ -177,17 +169,14 @@
   "tfmg.multimeter.transformer_ratio": "   Turn Ratio: ",
   "tfmg.multimeter.transformer.primary_voltage": "   Primary Voltage: ",
   "tfmg.multimeter.transformer.secondary_voltage": "   Secondary Voltage: ",
-  "tfmg.multimeter.large_transformer.air_cooled": "   State: Air Cooled",
-  "tfmg.multimeter.large_transformer.metal_cooled": "   State: Metal Heat Sink Cooled",
-  "tfmg.multimeter.large_transformer.oil_cooled": "   State: Oil + Heat Sink Cooled",
+  "tfmg.multimeter.large_transformer.air_cooled": "Air Cooled",
+  "tfmg.multimeter.large_transformer.metal_cooled": "Metal Heat Sink Cooled",
+  "tfmg.multimeter.large_transformer.oil_cooled": "Oil + Heat Sink Cooled",
   "tfmg.multimeter.fe_output": "   Sending ",
   "tfmg.multimeter.fe_input": "   Taking ",
-
-
   "tfmg.electricity.capacity": "Capacity: %s",
   "tfmg.electricity.charging_rate": "Charging Rate: %s",
   "tfmg.electricity.max_capacity": "Max Capacity: %s",
-
   "tfmg.engine_controller.header": "Engine Controller",
   "tfmg.engine.shift": "Shift: %s",
   "tfmg.engine.speed_efficiency": "Speed Efficiency: %s",
@@ -198,7 +187,6 @@
   "tfmg.engine.torque": "Torque: %s",
   "tfmg.engine.injection_rate": "Injection Rate: %s",
   "tfmg.engine.signal": "Signal: %s",
-
   "tfmg.engine.upgrade.transmission.reverse": "Reverse",
   "tfmg.engine.upgrade.transmission.neutral": "Neutral",
   "tfmg.engine.upgrade.transmission.shift_1": "1st Gear",
@@ -207,7 +195,6 @@
   "tfmg.engine.upgrade.transmission.shift_4": "4th Gear",
   "tfmg.engine.upgrade.transmission.shift_5": "5th Gear",
   "tfmg.engine.upgrade.transmission.shift_6": "6th Gear",
-
   "tfmg.engine.type.engine_i": "I",
   "tfmg.engine.type.engine_v": "V",
   "tfmg.engine.type.engine_w": "W",
@@ -215,7 +202,6 @@
   "tfmg.engine.type.engine_boxer": "Boxer",
   "tfmg.engine.type.radial": "Radial",
   "tfmg.engine.type.turbine": "Turbine",
-
   "tfmg.goggles.voltmeter.mode.voltage": "Voltage",
   "tfmg.goggles.voltmeter.mode.high_voltage": "Voltage (High)",
   "tfmg.goggles.voltmeter.mode.current": "Current",
@@ -225,9 +211,6 @@
   "tfmg.goggles.voltmeter.mode.network_power_generation": "Network Power Generation",
   "tfmg.goggles.voltmeter.mode.capacity": "Capacity",
   "tfmg.goggles.voltmeter.mode.fallback": "Fallback",
-
-
-
   "tfmg.display_source.electricity.power_usage": "Power Usage",
   "tfmg.display_source.electricity.network_resistance": "Network Resistance",
   "tfmg.display_source.electricity.voltage": "Voltage",
@@ -238,29 +221,38 @@
   "tfmg.display_source.electricity.network_generation": "Network Power Generation",
   "tfmg.display_source.electricity.power_generation": "Power Generation",
   "tfmg.display_source.electricity.voltage_generation": "Voltage Generation",
-
   "item.minecraft.potion.effect.hellfire_potion": "Potion of Hellfire",
   "item.minecraft.splash_potion.effect.hellfire_potion": "Splash Potion of Hellfire",
   "item.minecraft.lingering_potion.effect.hellfire_potion": "Lingering Potion of Hellfire",
   "item.minecraft.tipped_arrow.effect.hellfire_potion": "Arrow of Hellfire",
-
   "effect.tfmg.hellfire": "Hellfire",
-
   "tfmg.wires.removed_data": "Data Removed",
-
   "tfmg.oil_hammer.reserves": "Oil Reserves: %1$s",
-
-
-
   "tfmg.subtitle.engine_sounds": "Engine Sounds",
   "tfmg.subtitle.diesel_engine_sounds": "Diesel Engine Sounds",
-
+  "tfmg.subtitle.fire_extinguisher": "Fire Extinguisher Foams",
+  "tfmg.subtitle.fire_extinguisher_start": "Fire Extinguisher Starts",
+  "tfmg.subtitle.fire_extinguisher_fade": "Fire Extinguisher Fades",
   "tfmg.flamethrower.fuel.spread": "%s Projectile Spread",
   "tfmg.flamethrower.fuel.speed": "%s Projectile Speed",
   "tfmg.flamethrower.fuel.amount": "%s Projectile Amount",
   "tfmg.flamethrower.fuel.cold": "Cold Flame",
   "tfmg.flamethrower.fuel.hellfire": "Scorching Flame",
-  "tfmg.flamethrower.fuel.capacity": "Fuel Capacity: %s"
-
-
+  "tfmg.flamethrower.fuel.capacity": "Fuel Capacity: %s",
+  "engine_fuel.tfmg.fallback": "[Missing]",
+  "engine_fuel.tfmg.gasoline": "Gasoline",
+  "engine_fuel.tfmg.diesel": "Diesel",
+  "engine_fuel.tfmg.lpg": "LPG",
+  "engine_fuel.tfmg.kerosene": "Kerosene",
+  "engine_fuel.tfmg.naphtha": "Naphtha",
+  "engine_fuel.tfmg.creosote": "Creosote",
+  "engine_fuel.tfmg.furnace_gas": "Furnace Gas",
+  "flamethrower_fuel.tfmg.fallback": "[Missing]",
+  "flamethrower_fuel.tfmg.gasoline": "Gasoline",
+  "flamethrower_fuel.tfmg.diesel": "Diesel",
+  "flamethrower_fuel.tfmg.kerosene": "Kerosene",
+  "flamethrower_fuel.tfmg.naphtha": "Naphtha",
+  "flamethrower_fuel.tfmg.lpg": "LPG",
+  "flamethrower_fuel.tfmg.napalm": "Napalm",
+  "flamethrower_fuel.tfmg.molten_slag": "Molten Slag"
 }

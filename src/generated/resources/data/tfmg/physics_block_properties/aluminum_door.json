@@ -1,0 +1,8 @@
+{
+  "priority": 1001,
+  "properties": {
+    "sable:mass": 0.1,
+    "sable:volume": 0.1875
+  },
+  "selector": "tfmg:aluminum_door"
+}

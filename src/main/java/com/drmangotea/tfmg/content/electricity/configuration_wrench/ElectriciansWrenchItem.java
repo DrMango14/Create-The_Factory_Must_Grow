@@ -1,7 +1,8 @@
 package com.drmangotea.tfmg.content.electricity.configuration_wrench;
 
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.devices.base.ResistiveLoadBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.devices.base.ResistorProperties;
@@ -22,7 +23,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-
+@NothingNullByDefault
 public class ElectriciansWrenchItem extends Item {
     public ElectriciansWrenchItem(Properties p_41383_) {
         super(p_41383_);
@@ -35,9 +36,7 @@ public class ElectriciansWrenchItem extends Item {
 
         if (player.isShiftKeyDown()) {
             if (level.isClientSide) {
-                CatnipServices.PLATFORM.executeOnClientOnly(() -> () -> {
-                    openWandGUI(itemStack, hand);
-                });
+                CatnipServices.PLATFORM.executeOnClientOnly(() -> () -> openWandGUI(itemStack, hand));
                 player.getCooldowns()
                         .addCooldown(this, 5);
             }
@@ -53,36 +52,29 @@ public class ElectriciansWrenchItem extends Item {
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
-        if(level.getBlockEntity(pos) instanceof ResistiveLoadBlockEntity be){
-            for (ElectricalNode node : network.getNodes(pos.asLong())) {
-                if(node instanceof ConnectableElectricalNode c && c.type.isPhase()){
-                    network.members.remove(be.getPos());
-                    NodeType phase = c.type;
-                    if(phase == NodeType.PHASE_1){
-                        phase = NodeType.PHASE_2;
-                    } else
-                    if(phase == NodeType.PHASE_2){
-                        phase = NodeType.PHASE_3;
-                    } else
-                    if(phase == NodeType.PHASE_3){
-                        phase = NodeType.PHASE_1;
-                    }
-
-                    be.p = new ResistorProperties(be.getPos(),level.getBlockState(pos).getValue(TFMGDirectionalBlock.FACING),be.resistance(),phase);
-                    network.addMember(pos,be.p);
-                    network.update();
-
-
-                    return InteractionResult.SUCCESS;
-             }
-            }
-
-
-
-        }
-
-        return InteractionResult.PASS;
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
+        if (!(level.getBlockEntity(pos) instanceof ResistiveLoadBlockEntity be))
+			return InteractionResult.PASS;
+		
+		for (ElectricalNode node : network.getNodes(pos).values()) {
+			if (!(node instanceof ConnectableElectricalNode c && c.type.isPhase()))
+				continue;
+			
+			network.members.remove(be.getPos());
+			NodeType phase = switch(c.type) {
+				case NodeType.PHASE_1 -> NodeType.PHASE_2;
+				case NodeType.PHASE_2 -> NodeType.PHASE_3;
+				case NodeType.PHASE_3 -> NodeType.PHASE_1;
+				default -> throw new IllegalStateException("Attempted to switch phase of a non-phase node");
+			};
+			
+			be.p = new ResistorProperties(be.getPos(),level.getBlockState(pos).getValue(TFMGDirectionalBlock.FACING),be.resistance(),phase);
+			network.addMember(pos,be.p);
+			network.update();
+			
+			return InteractionResult.SUCCESS;
+		}
+		return InteractionResult.PASS;
     }
 
     @OnlyIn(Dist.CLIENT)

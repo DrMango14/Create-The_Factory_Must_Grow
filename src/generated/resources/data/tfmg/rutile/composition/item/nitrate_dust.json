@@ -1,0 +1,21 @@
+{
+  "compositions": [
+    {
+      "elements": [
+        {
+          "id": "rutile:potassium"
+        },
+        {
+          "id": "rutile:nitrogen"
+        },
+        {
+          "amount": 3,
+          "id": "rutile:oxygen"
+        }
+      ]
+    }
+  ],
+  "contents": [
+    "tfmg:nitrate_dust"
+  ]
+}

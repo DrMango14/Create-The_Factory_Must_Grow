@@ -1,71 +1,49 @@
 package com.drmangotea.tfmg.content.items.weapons.flamethrover;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGClient;
 import com.drmangotea.tfmg.TFMGRegistries;
-import com.drmangotea.tfmg.base.lang.TFMGLang;
+import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
+import com.drmangotea.tfmg.base.spark.DryIceFlake;
+import com.drmangotea.tfmg.base.spark.LithiumSpark;
 import com.drmangotea.tfmg.base.spark.Spark;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGEntityTypes;
 import com.drmangotea.tfmg.registry.TFMGFlamethrowerFuelTypes;
+import com.drmangotea.tfmg.registry.TFMGTags;
 import com.simibubi.create.foundation.item.CustomArmPoseItem;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.chat.CommonComponents;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
+@NothingNullByDefault
 public class FlamethrowerItem extends Item implements CustomArmPoseItem {
-
-
     public static final int FUEL_CAPACITY = 4000;
-
 
     public FlamethrowerItem(Properties pProperties) {
         super(pProperties);
-    }
-
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        super.inventoryTick(stack, level, entity, slotId, isSelected);
-        if (remapOldComponents(stack, level.registryAccess())) {
-            TFMG.LOGGER.info("[TFMG Remapper] Remapped old Flamethrower components");
-        } else {
-            if(!stack.has(TFMGDataComponents.FLAMETHROWER)) {
-                stack.set(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY);
-            }
-        }
     }
 
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int time) {
@@ -80,22 +58,44 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
             return;
         }
 
-        level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.FIRE_EXTINGUISH, SoundSource.NEUTRAL, 0.1F, 0.04F);
+        Registry<FlamethrowerFuelType> registry = level.registryAccess().registryOrThrow(TFMGRegistries.FLAMETHROWER_FUEL_TYPE);
 
         FlamethrowerFuel fuel = stack.getOrDefault(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY);
         FlamethrowerFuelType fuelType = getFuel(level.registryAccess(), stack);
 
-        Vec3 barrelPos = getGunBarrelVec(entity, entity.getUsedItemHand() == InteractionHand.MAIN_HAND,
+        Vec3 barrelPos = TFMGUtils.getGunBarrelVec(entity, entity.getUsedItemHand() == InteractionHand.MAIN_HAND,
                     new Vec3(.75f, -0.65f, 1.5f));
 
-        if (fuel.fuelType() != TFMGFlamethrowerFuelTypes.FALLBACK && fuel.amount() > 0) {
+        boolean isCold = fuel.fuelType() != null && registry.getHolder(fuel.fuelType().location()).filter((holder) -> holder.is(TFMGTags.FlamethrowerFuel.COLD.tag)).isPresent();
+        boolean isHellfire = fuel.fuelType() != null && registry.getHolder(fuel.fuelType().location()).filter((holder) -> holder.is(TFMGTags.FlamethrowerFuel.HELLFIRE.tag)).isPresent();
+
+        SoundEvent sound = isCold ? SoundEvents.SNOW_BREAK : SoundEvents.FIRE_EXTINGUISH;
+        level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), sound, SoundSource.PLAYERS, 0.1F, 0.04F);
+
+        if (fuelType != null && fuel.fuelType() != TFMGFlamethrowerFuelTypes.FALLBACK && fuel.amount() > 0) {
             int amountToFire = Math.min(fuelType.amount(), fuel.amount());
             for(int i =0; i < amountToFire; i++) {
-                Spark spark = TFMGEntityTypes.SPARK.create(level);
-                if (spark != null) {
-                    spark.setPos(barrelPos.x, barrelPos.y, barrelPos.z);
-                    spark.shoot(entity.getLookAngle().x, entity.getLookAngle().y, entity.getLookAngle().z, fuelType.speed(), fuelType.spread());
-                    level.addFreshEntity(spark);
+                if (isCold) {
+                    DryIceFlake flake = TFMGEntityTypes.DRY_ICE_FLAKE.create(level);
+                    if (flake != null) {
+                        flake.setPos(barrelPos.x, barrelPos.y, barrelPos.z);
+                        flake.shoot(entity.getLookAngle().x, entity.getLookAngle().y, entity.getLookAngle().z, fuelType.speed(), fuelType.spread());
+                        level.addFreshEntity(flake);
+                    }
+                } else if (isHellfire) {
+                    LithiumSpark spark = TFMGEntityTypes.LITHIUM_SPARK.create(level);
+                    if (spark != null) {
+                        spark.setPos(barrelPos.x, barrelPos.y, barrelPos.z);
+                        spark.shoot(entity.getLookAngle().x, entity.getLookAngle().y, entity.getLookAngle().z, fuelType.speed(), fuelType.spread());
+                        level.addFreshEntity(spark);
+                    }
+                } else {
+                    Spark spark = TFMGEntityTypes.SPARK.create(level);
+                    if (spark != null) {
+                        spark.setPos(barrelPos.x, barrelPos.y, barrelPos.z);
+                        spark.shoot(entity.getLookAngle().x, entity.getLookAngle().y, entity.getLookAngle().z, fuelType.speed(), fuelType.spread());
+                        level.addFreshEntity(spark);
+                    }
                 }
             }
             int fuelConsumed = level.random.nextIntBetweenInclusive(amountToFire / 2, amountToFire);
@@ -104,18 +104,6 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
             stack.set(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY);
             entity.stopUsingItem();
         }
-    }
-
-    public static Vec3 getGunBarrelVec(LivingEntity entity, boolean mainHand, Vec3 rightHandForward) {
-        Vec3 start = entity.position()
-                .add(0, entity.getEyeHeight(), 0);
-        float yaw = (float) ((entity.getYRot()) / -180 * Math.PI);
-        float pitch = (float) ((entity.getXRot()) / -180 * Math.PI);
-        int flip = mainHand == (entity.getMainArm() == HumanoidArm.RIGHT) ? -1 : 1;
-        Vec3 barrelPosNoTransform = new Vec3(flip * rightHandForward.x, rightHandForward.y, rightHandForward.z);
-        Vec3 barrelPos = start.add(barrelPosNoTransform.xRot(pitch)
-                .yRot(yaw));
-        return barrelPos;
     }
 
     @Override
@@ -155,7 +143,6 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
         return InteractionResultHolder.pass(player.getItemInHand(hand));
     }
 
-
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return 1000;
@@ -182,27 +169,25 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
         if (blockEntity != null) {
             IFluidHandler capability = level.getCapability(Capabilities.FluidHandler.BLOCK, blockEntity.getBlockPos(), context.getClickedFace());
             if (capability != null) {
-                if (!foundFluid) {
-                    for (int i = 0; i < capability.getTanks(); i++) {
-                        if (capability.getFluidInTank(i).isEmpty()) continue;
-                        FluidStack fluidStack = capability.getFluidInTank(i);
-                        int toDrain = Math.min(FUEL_CAPACITY - containedFuel, fluidStack.getAmount());
-                        FluidStack stackToDrain = fluidStack.copyWithAmount(toDrain);
-                        FlamethrowerFuel fuel = FlamethrowerFuel.createForType(level.registryAccess(), fluidStack.getFluid(), toDrain);
-                        if (fuel == FlamethrowerFuel.EMPTY) continue;
-                        if (fuelType != TFMGFlamethrowerFuelTypes.FALLBACK) {
-                            if (fuelType.equals(fuel.fuelType())) {
-                                stack.set(TFMGDataComponents.FLAMETHROWER, existingFuel.increment(toDrain, FUEL_CAPACITY));
-                                capability.drain(stackToDrain, IFluidHandler.FluidAction.EXECUTE);
-                                context.getPlayer().getCooldowns().addCooldown(stack.getItem(), 20);
-                                foundFluid = true;
-                            }
-                        } else {
-                            stack.set(TFMGDataComponents.FLAMETHROWER, fuel);
-                            capability.drain(stackToDrain, IFluidHandler.FluidAction.EXECUTE);
+                for (int i = 0; i < capability.getTanks(); i++) {
+                    if (capability.getFluidInTank(i).isEmpty()) continue;
+                    FluidStack fluidStack = capability.getFluidInTank(i);
+                    int toDrain = Math.min(FUEL_CAPACITY - containedFuel, fluidStack.getAmount());
+                    FluidStack stackToDrain = fluidStack.copyWithAmount(toDrain);
+                    FlamethrowerFuel fuel = FlamethrowerFuel.createForType(level.registryAccess(), fluidStack.getFluid(), toDrain);
+                    if (fuel == FlamethrowerFuel.EMPTY) continue;
+                    if (fuelType != TFMGFlamethrowerFuelTypes.FALLBACK) {
+                        if (fuelType.equals(fuel.fuelType())) {
+                            FluidStack actuallyDrained = capability.drain(stackToDrain, IFluidHandler.FluidAction.EXECUTE);
+                            stack.set(TFMGDataComponents.FLAMETHROWER, existingFuel.increment(actuallyDrained.getAmount(), FUEL_CAPACITY));
                             context.getPlayer().getCooldowns().addCooldown(stack.getItem(), 20);
                             foundFluid = true;
                         }
+                    } else {
+                        stack.set(TFMGDataComponents.FLAMETHROWER, fuel);
+                        capability.drain(stackToDrain, IFluidHandler.FluidAction.EXECUTE);
+                        context.getPlayer().getCooldowns().addCooldown(stack.getItem(), 20);
+                        foundFluid = true;
                     }
                 }
             }
@@ -215,98 +200,6 @@ public class FlamethrowerItem extends Item implements CustomArmPoseItem {
     public static FlamethrowerFuelType getFuel(RegistryAccess registryAccess, ItemStack heldStack) {
         var type = heldStack.getOrDefault(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY).getFuelType(registryAccess);
         return type.orElse(registryAccess.registryOrThrow(TFMGRegistries.FLAMETHROWER_FUEL_TYPE).get(TFMGFlamethrowerFuelTypes.FALLBACK));
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        if (!stack.has(TFMGDataComponents.FLAMETHROWER) || stack.get(TFMGDataComponents.FLAMETHROWER) == FlamethrowerFuel.EMPTY) {
-            super.appendHoverText(stack, context, tooltip, flag);
-            return;
-        }
-        LocalPlayer player = Minecraft.getInstance().player;
-        if (player == null) {
-            super.appendHoverText(stack, context, tooltip, flag);
-            return;
-        }
-        FlamethrowerFuelType fallback = player.registryAccess().registryOrThrow(TFMGRegistries.FLAMETHROWER_FUEL_TYPE).get(TFMGFlamethrowerFuelTypes.FALLBACK);
-        FlamethrowerFuelType fuelType = getFuel(player.registryAccess(), stack);
-        FlamethrowerFuel fuel = stack.getOrDefault(TFMGDataComponents.FLAMETHROWER, FlamethrowerFuel.EMPTY);
-
-        if (fuelType == fallback || !fuel.hasFuel()) {
-            super.appendHoverText(stack, context, tooltip, flag);
-            return;
-        }
-
-        FluidStack fuelFluid = new FluidStack(fuelType.fluids().get(0).value(), 1);
-
-        String _spread = "flamethrower.fuel.spread";
-        String _speed = "flamethrower.fuel.speed";
-        String _amount = "flamethrower.fuel.amount";
-        String _cold = "flamethrower.fuel.cold";
-        String _hellfire = "flamethrower.fuel.hellfire";
-
-        String _capacity = "flamethrower.fuel.capacity";
-
-        tooltip.add(CommonComponents.EMPTY);
-        tooltip.add(Component.translatable(fuelFluid.getDescriptionId()).append(Component.literal(":")).withStyle(ChatFormatting.GRAY));
-        MutableComponent spacing = CommonComponents.space();
-        ChatFormatting green = ChatFormatting.GREEN;
-        ChatFormatting darkGreen = ChatFormatting.DARK_GREEN;
-        ChatFormatting red = ChatFormatting.RED;
-
-        int spreadF = fuelType.spread();
-        float speedF = fuelType.speed();
-        int amountF = fuelType.amount();
-        boolean coldF = fuelType.isCold();
-        boolean hellfireF = fuelType.hellfire();
-
-        MutableComponent spread = Component.literal("" + spreadF);
-        MutableComponent speed = Component.literal(speedF == Mth.floor(speedF) ? "" + Mth.floor(speedF) : "" + speedF);
-        MutableComponent amount = Component.literal("" + amountF);
-
-        MutableComponent fuelCapacity = Component.literal(fuel.amount() + " / " + FUEL_CAPACITY + " mB");
-
-        spread = spread.withStyle(spreadF > 20 ? green : darkGreen);
-        speed = speed.withStyle(speedF > 1 ? green : darkGreen);
-        amount = amount.withStyle(amountF > 10 ? green : darkGreen);
-        fuelCapacity = fuelCapacity.withStyle(stack.get(TFMGDataComponents.FLAMETHROWER).amount() == 0 ? red : green);
-
-        tooltip.add(spacing.plainCopy()
-                .append(TFMGLang.translateDirect(_capacity, fuelCapacity)
-                        .withStyle(darkGreen)));
-
-        tooltip.add(spacing.plainCopy()
-                .append(TFMGLang.translateDirect(_spread, spread)
-                        .withStyle(darkGreen)));
-        tooltip.add(spacing.plainCopy()
-                .append(TFMGLang.translateDirect(_speed, speed)
-                        .withStyle(darkGreen)));
-        tooltip.add(spacing.plainCopy()
-                .append(TFMGLang.translateDirect(_amount, amount)
-                        .withStyle(darkGreen)));
-        if (coldF) {
-            tooltip.add(spacing.plainCopy()
-                    .append(TFMGLang.translateDirect(_cold)
-                            .withStyle(darkGreen)));
-        } else if (hellfireF) {
-            tooltip.add(spacing.plainCopy()
-                    .append(TFMGLang.translateDirect(_hellfire)
-                            .withStyle(darkGreen)));
-        }
-    }
-
-    private boolean remapOldComponents(ItemStack stack, RegistryAccess registryAccess) {
-        if (stack.has(TFMGDataComponents.FLAMETHROWER_FUEL) && stack.has(TFMGDataComponents.AMOUNT)) {
-            int fuelAmount = stack.getOrDefault(TFMGDataComponents.AMOUNT, 0);
-            String fuelType = stack.getOrDefault(TFMGDataComponents.FLAMETHROWER_FUEL, "fallback");
-            if (fuelType.isEmpty()) fuelType = "fallback";
-            FlamethrowerFuel fuel = FlamethrowerFuel.createForLegacy(registryAccess, fuelType, fuelAmount);
-            stack.set(TFMGDataComponents.FLAMETHROWER, fuel);
-            stack.remove(TFMGDataComponents.FLAMETHROWER_FUEL); stack.remove(TFMGDataComponents.AMOUNT);
-            return true;
-        }
-        return false;
     }
 
     @Override

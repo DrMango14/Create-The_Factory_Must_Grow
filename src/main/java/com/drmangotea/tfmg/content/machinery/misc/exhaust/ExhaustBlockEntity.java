@@ -1,53 +1,50 @@
 package com.drmangotea.tfmg.content.machinery.misc.exhaust;
 
-
-
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.fluid.ForceableFluidTank;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
-import com.drmangotea.tfmg.registry.TFMGFluids;
-import com.simibubi.create.Create;
+import com.drmangotea.tfmg.registry.TFMGTags;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.fluid.SmartFluidTank;
-
-
+import dev.ryanhcode.sable.companion.SableCompanion;
+import dev.ryanhcode.sable.companion.SubLevelAccess;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
-
 
 import java.util.List;
-import java.util.Random;
 
-@SuppressWarnings("removal")
 public class ExhaustBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
-
     protected IFluidHandler fluidCapability;
-    public FluidTank tankInventory;
+    public final ForceableFluidTank tankInventory;
 
-    public boolean spawnsSmoke=false;
-    public int smokeTimer=0;
+    public boolean spawnsSmoke = false;
+    public int smokeTimer = 0;
 
-
+    protected boolean updateCapability;
 
     public ExhaustBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        tankInventory = createInventory();
+        tankInventory = new ForceableFluidTank(4000, this::onFluidStackChanged)
+			.allowInsertion().blockExtraction()
+			.withValidator((stack) -> stack.is(TFMGTags.Fluids.EXHAUSTABLE.tag));
         fluidCapability = tankInventory;
-
+        updateCapability = false;
+        refreshCapability();
     }
+
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK,
@@ -58,21 +55,8 @@ public class ExhaustBlockEntity extends SmartBlockEntity implements IHaveGoggleI
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-
-        return TFMGUtils.createFluidTooltip(this, tooltip);
-
+        return TFMGUtils.createFluidTooltip(tooltip, fluidCapability);
     }
-
-
-    protected SmartFluidTank createInventory() {
-        return new SmartFluidTank(1000, this::onFluidStackChanged) {
-            @Override
-            public boolean isFluidValid(FluidStack stack) {
-                return stack.getFluid().isSame(TFMGFluids.CARBON_DIOXIDE.getSource());
-            }
-        };
-    }
-
 
     protected void onFluidStackChanged(FluidStack newFluidStack) {
         sendData();
@@ -82,110 +66,83 @@ public class ExhaustBlockEntity extends SmartBlockEntity implements IHaveGoggleI
     @Override
     public void tick() {
         super.tick();
+        if (level == null) return;
+
         Direction direction = this.getBlockState().getValue(ExhaustBlock.FACING);
 
-        if(smokeTimer!=0) {
+        if(smokeTimer != 0) {
             spawnsSmoke = true;
             smokeTimer--;
-        }else spawnsSmoke = false;
-        if (direction == Direction.UP)
-            if(spawnsSmoke)
-                makeParticles(level, this.getBlockPos(), 0);
-        if (direction == Direction.DOWN)
-            if(spawnsSmoke)
-                makeParticles(level, this.getBlockPos(), 1);
-        if (direction == Direction.NORTH)
-            if(spawnsSmoke)
-                makeParticles(level, this.getBlockPos(), 2);
-        if (direction == Direction.SOUTH)
-            if(spawnsSmoke)
-                makeParticles(level, this.getBlockPos(), 3);
-        if (direction == Direction.EAST)
-            if(spawnsSmoke)
-                makeParticles(level, this.getBlockPos(), 4);
-        if (direction == Direction.WEST)
-            if(spawnsSmoke)
-                makeParticles(level, this.getBlockPos(), 5);
-        if(tankInventory.getFluidAmount()>0) {
+        } else spawnsSmoke = false;
 
+        if (spawnsSmoke) { makeParticles(level, this.getBlockPos(), direction); }
+
+        if (tankInventory.getFluidAmount() > 0) {
             smokeTimer = 100;
             spawnsSmoke = true;
+            tankInventory.forceDrain(500, IFluidHandler.FluidAction.EXECUTE);
         }
-            if(tankInventory.getSpace()>700) {
-                tankInventory.drain(100, IFluidHandler.FluidAction.EXECUTE);
-            }else tankInventory.drain(10, IFluidHandler.FluidAction.EXECUTE);
 
-
-
-
-
-
+        if (updateCapability) {
+            updateCapability = false;
+            refreshCapability();
+        }
     }
-
-
 
     @Override
     protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.read(compound,registries , clientPacket);
-
         tankInventory.readFromNBT(registries,compound.getCompound("TankContent"));
+        smokeTimer = compound.getInt("Timer");
+
+        updateCapability = true;
     }
-
-
-
-
 
     @Override
     public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
-
         super.write(compound,registries , clientPacket);
-
         compound.put("TankContent", tankInventory.writeToNBT(registries,new CompoundTag()));
-
-        compound.putBoolean("Active", smokeTimer>0);
+        compound.putInt("Timer", smokeTimer);
     }
 
-    public static void makeParticles(Level level, BlockPos pos, int particleRotation) {
-        Random random = Create.RANDOM;
-        int shouldSpawnSmoke = random.nextInt(7);
-        if(shouldSpawnSmoke==0) {
+    public void makeParticles(Level level, BlockPos pos, Direction direction) {
+        SubLevelAccess subLevel = SableCompanion.INSTANCE.getContaining(this);
+        Vec3 center = pos.getCenter();
 
-
-            if(particleRotation==0)
-                level.addParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, pos.getX()  +random.nextFloat(1), pos.getY() + 1, pos.getZ()  +random.nextFloat(1), 0.0D, 0.08D, 0.0D);
-            if(particleRotation==1)
-                level.addParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, pos.getX()  +random.nextFloat(1), pos.getY(), pos.getZ()  +random.nextFloat(1), 0.0D, 0.08D, 0.0D);
-
-            if(particleRotation==2)
-                level.addParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, pos.getX()  +random.nextFloat(1), pos.getY()  +random.nextFloat(1), pos.getZ(), 0.0D, 0.08D, 0.0D);
-            if(particleRotation==3)
-                level.addParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, pos.getX()  +random.nextFloat(1), pos.getY()  +random.nextFloat(1), pos.getZ() + 1, 0.0D, 0.08D, 0.0D);
-            if(particleRotation==4)
-                level.addParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, pos.getX() + 1, pos.getY()  +random.nextFloat(1), pos.getZ()  +random.nextFloat(1), 0.0D, 0.08D, 0.0D);
-            if(particleRotation==5)
-                level.addParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, pos.getX(), pos.getY()  +random.nextFloat(1), pos.getZ()  +random.nextFloat(1), 0.0D, 0.08D, 0.0D);
-
-
-
+        if (subLevel != null) {
+            center = subLevel.logicalPose().transformPosition(center);
         }
 
+        RandomSource random = level.getRandom();
+        if (random.nextInt(7) != 0) return;
+
+        double offX = 0, offY = 0, offZ = 0;
+        switch (direction) {
+            case UP    -> { offX = random.nextFloat() * 0.3f; offY = 1;                    offZ = random.nextFloat() * 0.3f; }
+            case DOWN  -> { offX = random.nextFloat();        offY = 0;                    offZ = random.nextFloat();        }
+            case NORTH -> { offX = random.nextFloat();        offY = random.nextFloat();   offZ = 0;                        }
+            case SOUTH -> { offX = random.nextFloat();        offY = random.nextFloat();   offZ = 1;                        }
+            case WEST  -> { offX = 1;                         offY = random.nextFloat();   offZ = random.nextFloat();        }
+            case EAST  -> { offX = 0;                         offY = random.nextFloat();   offZ = random.nextFloat();        }
+        }
+
+        TFMGUtils.spawnSmokeParticles(level,
+			center.x + offX, center.y + offY, center.z + offZ
+		);
     }
-
-    //@Nonnull
-    //@Override
-    //public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-//
-    //    if (cap == ForgeCapabilities.FLUID_HANDLER)
-    //        return fluidCapability.cast();
-    //    return super.getCapability(cap, side);
-    //}
-
-
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {}
 
+    @Override
+    public void invalidate() {
+        super.invalidate();
+        invalidateCapabilities();
+    }
 
-
+    public void refreshCapability() {
+        fluidCapability = tankInventory;
+        invalidateCapabilities();
+    }
 }
 

@@ -2,11 +2,12 @@
   "type": "tfmg:distillation",
   "ingredients": [
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 200,
-      "fluid": "tfmg:heavy_oil"
+      "tag": "c:heavy_oil"
     }
   ],
+  "processing_time": 600,
   "results": [
     {
       "amount": 100,

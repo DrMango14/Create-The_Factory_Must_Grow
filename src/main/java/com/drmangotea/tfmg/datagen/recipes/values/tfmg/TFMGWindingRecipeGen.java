@@ -12,6 +12,7 @@ import java.util.concurrent.CompletableFuture;
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
 
 
+@SuppressWarnings("unused")
 public class TFMGWindingRecipeGen extends WindingRecipeGen {
 
     GeneratedRecipe

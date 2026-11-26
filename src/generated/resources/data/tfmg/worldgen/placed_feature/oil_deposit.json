@@ -9,19 +9,19 @@
       "type": "minecraft:in_square"
     },
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "minecraft:uniform",
-        "max_inclusive": {
-          "absolute": -64
-        },
-        "min_inclusive": {
-          "absolute": -64
-        }
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:bedrock"
       }
     },
     {
-      "type": "create:config_filter"
+      "type": "tfmg:world_bottom"
+    },
+    {
+      "type": "tfmg:config_boolean",
+      "enabled_when": true,
+      "option": "tfmg:oil_deposits"
     }
   ]
 }

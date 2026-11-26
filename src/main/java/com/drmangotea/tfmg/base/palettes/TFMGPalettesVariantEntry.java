@@ -33,7 +33,8 @@ public class TFMGPalettesVariantEntry {
         REGISTRATE.setCreativeTab(TFMGCreativeTabs.TFMG_DECORATION);
     }
 
-    @SuppressWarnings("'onRegister(com.tterrag.registrate.util.nullness.NonNullConsumer<? super capture<? extends net.minecraft.world.level.block.Block>>)' in 'com.tterrag.registrate.builders.Builder' cannot be applied to '(com.tterrag.registrate.util.nullness.NonNullConsumer<capture<? super capture<? extends net.minecraft.world.level.block.Block>>>)'")
+    //Crazy suppression list omg
+    @SuppressWarnings({"'onRegister(com.tterrag.registrate.util.nullness.NonNullConsumer<? super capture<? extends net.minecraft.world.level.block.Block>>)' in 'com.tterrag.registrate.builders.Builder' cannot be applied to '(com.tterrag.registrate.util.nullness.NonNullConsumer<capture<? super capture<? extends net.minecraft.world.level.block.Block>>>)'", "removal"})
     public TFMGPalettesVariantEntry(String name, TFMGPaletteStoneTypes paletteStoneVariants) {
         ImmutableList.Builder<BlockEntry<? extends Block>> registeredBlocks = ImmutableList.builder();
         ImmutableList.Builder<BlockEntry<? extends Block>> registeredPartials = ImmutableList.builder();

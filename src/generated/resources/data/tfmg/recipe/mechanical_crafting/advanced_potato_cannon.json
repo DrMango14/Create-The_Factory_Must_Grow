@@ -10,7 +10,7 @@
       "item": "tfmg:steel_mechanism"
     },
     "O": {
-      "item": "tfmg:rebar"
+      "tag": "c:rods/steel"
     },
     "P": {
       "item": "tfmg:steel_pipe"

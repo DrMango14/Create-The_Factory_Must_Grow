@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "tag": "c:dyes/magenta"
+    },
+    {
+      "tag": "tfmg:multimeters"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:magenta_multimeter"
+  }
+}

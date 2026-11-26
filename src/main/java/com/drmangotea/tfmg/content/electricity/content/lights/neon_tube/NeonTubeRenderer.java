@@ -15,16 +15,12 @@ import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class NeonTubeRenderer extends SafeBlockEntityRenderer<NeonTubeBlockEntity> {
-
-
     public NeonTubeRenderer(BlockEntityRendererProvider.Context context) {
 
     }
 
     @Override
     protected void renderSafe(NeonTubeBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-
-
         BlockState blockState = be.getBlockState();
         ms.pushPose();
         float glow = be.glow.getValue(partialTicks);

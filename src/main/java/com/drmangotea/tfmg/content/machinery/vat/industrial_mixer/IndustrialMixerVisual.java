@@ -13,8 +13,7 @@ import net.minecraft.core.Direction;
 import java.util.function.Consumer;
 
 public class IndustrialMixerVisual extends KineticBlockEntityVisual<IndustrialMixerBlockEntity> {
-
-    protected final RotatingInstance shaft;
+	protected final RotatingInstance shaft;
 
     public IndustrialMixerVisual(VisualizationContext context, IndustrialMixerBlockEntity blockEntity, float partialTick) {
 		super(context, blockEntity, partialTick);
@@ -38,7 +37,6 @@ public class IndustrialMixerVisual extends KineticBlockEntityVisual<IndustrialMi
     public void updateLight(float partialTick) {
         BlockPos behind = pos.relative(Direction.UP);
         relight(behind, shaft);
-
     }
 
     @Override

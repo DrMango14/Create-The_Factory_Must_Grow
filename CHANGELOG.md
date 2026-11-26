@@ -1,0 +1,337 @@
+# Create: TFMG 1.4.0
+## Rant:
+
+//{ERROR} RANT NOT FOUND
+
+## Contributors:
+### Developers:
+- @DrMango14
+- @ShallowAssumption
+- @wolfieboy09
+- @pouffy
+- @Skr1pee
+- @cakeGit
+- @Magi1053
+- @Garoot1111
+- @The0x539
+- @Tape-Dispenser
+
+### Artists:
+- @pepagg
+- @Nerf-Ashton
+- @ImmanisVir
+- @YYY000YYY
+- @DragonVenom360
+- @SylvanSerenity
+
+### Translators:
+- @OlziYT
+- @nuomicici
+
+
+## Changelog:
+### Bug Fixes:
+- Blast Furnace:
+  - Blast Stove now has the correct max size and the connectivity no-longer shows invisible blocks.
+  - Fixed Blast Furnace not being able to finish recipes.
+  - Blast Stoves now allow fluid extraction.
+  - Fixed recipe duration on Blast Stoves being unreliable and improved recipe checking.
+  - Blast Furnace Outputs no-longer reset item components.
+  - Blast Furnaces no-longer crash with index out of bounds error when trying to process a recipe with one result.
+- Chemical Vats:
+  - Re-implemented the Vat Evaluation packet so vats should now evaluate properly on clients.
+  - Updated `doesntWorkWith` in IndustrialMixerBlockEntity to use VatOperations.
+  - Industrial Mixers no-longer void the Mixer Blade/Centrifuge item.
+  - Electrode Holders no-longer void the Electrode item.
+  - Fixed bug where recipe would get set to null causing recipes to take longer.
+  - Pressure, Item, and Fluid capabilities point to the controller tank contents.
+- General:
+  - Fixed some bugs and crashes related to null checks and number formatting.
+  - Fixed Hellfire not always working on entities.
+  - Fixed an issue where an Advanced Potato Cannon would drain all valid ammo from the player every tick whilst in survival.
+  - Oil Deposits no longer override the strength setting of Bedrock which resulted in them being technically mineable.
+  - All TFMG packets are now properly registered under `tfmg` instead of `create`.
+  - Configuration Wrench now only returns a successful interact if the player is crouching.
+  - Fixed Flarestack violently flashing during low input speed.
+  - Fixed Blue Sparks not creating fire on hit.
+  - Air Intake can now fill up to their capacity when production is high.
+  - Coke Ovens facing each-other no longer freeze.
+  - Polarizer charge percentage now resets regardless of power usage.
+  - Pumpjack disassembly now has a small delay to stop them disassembling on a quick chunk reload.
+  - Various Item containers now properly drop their inventories when destroyed.
+  - Steel Tanks now passively update their boiler state.
+  - Fixed two instances of components being retrieved unsafely in the Winding Machine.
+  - Lightning strikes now properly perform polarizing recipes.
+  - Cleared up TFMG's JEI plugin and removed Create's copied over implementation.
+  - Engines of different types no longer connect.
+  - Steel, Aluminium & Heavy Casings can now encase blocks properly.
+  - Segmented Displays now safely decode their display contents.
+  - Various fluid handlers now properly invalidate their capabilities.
+  - Fixed Distillation Controller not detecting heat properly.
+  - Fixed a duplication bug related to Sable.
+  - Engines no longer fully assemble on a right-click with any item unless you are in Creative.
+  - TFMGTiers now uses proper mineable tags.
+  - Cooling Fluid Bottles and Oil Cans no-longer void their contents instantly.
+  - Fixed tick duration formatting in Industrial Blasting & Coking categories.
+  - Coke Ovens once again process faster the bigger they are.
+  - Concrete-logged Electric Posts no longer dry into Concrete-encased cables.
+  - Engines and fireboxes no-longer exhaust `flowing_carbon_dioxide` instead of `carbon_dioxide`.
+  - Fixed a crash related to thermite grenades.
+  - Glass Pipes of different materials now have the correct clone item stack.
+  - 1-block engines now have proper fuel consumption.
+- Mixins:
+  - Removed aggressive overrides from FluidPipeBlockMixin.
+  - TFMG fluid tank logic has been migrated out of the mixin.
+- Assets:
+  - Fixed invalid rotation values in the Large Transformer model.
+  - Lead Blocks no-longer connect to Nickel and Lithium Blocks.
+  - Material variants for Mechanical Pumps now use item-accurate cog models.
+  - Fixed Radial Engines creating permanent Half-Shaft visuals.
+  - Fixed fluids not rendering in Steel Fluid Tanks.
+  - Fixed some typos in item tooltips.
+  - Sequenced Assembly Winding now has a proper step translation.
+  - Traffic Lights can now be green.
+  - Encased cogwheel item models now show the correct cogwheel type.
+  - Fixed typos in some cogwheel texture names.
+  - Fixed names of the Layered Galena textures.
+  - Concrete Hoses now render correctly.
+  - Fixed a bug where Bits n Bobs dyed pipes wouldn't render properly.
+- Data:
+  - TFMG tools now have the appropriate tags.
+  - Added `non_diagonal_walls` tag to blast furnace reinforcement wall.
+  - Removed Oil Deposit from the pickaxe mineable tag.
+  - Added Oil Deposit to the `blocks_wind_charge_explosions` & `geode_invalid_blocks` tag.
+  - Engines are now mineable.
+  - Rebar recipe now produces 2 per ingot instead of 4 to prevent duping.
+  - Fixed an issue where double slabs only dropped one slab.
+
+### Changes:
+- Blast Furnace:
+  - Multiblock logic has been separated into a new class.
+  - Tuyere & Top Hatch positions and multiblock size are now saved to the block entity nbt.
+  - Multiblock evaluation happens every lazyTick instead of once on placement.
+  - Added `lazyTick` to Blast Stoves to update connectivity.
+  - Top Hatch now directly inserts items instead of dropping them.
+  - Top hatch now properly saves its inventory.
+  - Blast Furnace Hatches now limit certain inventories based on their place in the multiblock.
+  - Blast Stove capacity now scales with volume.
+  - Blast Stove maximum height changed to 5.
+  - A modified Blast Stove will no-longer stop allowing pipe flow in some contexts.
+  - In cases where the fuel time for Coal Coke is lower than the recipe duration, the JEI category will now show an amount of dusts needed instead of 1.
+  - `steel_from_dust` recipe now only loads if Iron Dust exists.
+  - Tanks now use `ForceableFluidTank` and block insertion.
+  - Now uses the same timer system as all our other recipe machines.
+  - Tweaked recipe durations.
+  - Smoke particles are no-longer created if a top hatch is present.
+- Chemical Vats:
+  - Vat Machines now display personal goggle/multimeter info if they are operational or not.
+  - Vat goggle information now shows recipe progress.
+  - Vat Operations are now a registry.
+  - Vats can now be multi-placed.
+  - Vat pressure and heat level do not display floats any more.
+  - Vat recipe `allowed_vat_types` now uses a list of `VatType`.
+  - Vat types now use `ResourceLocation` in place of `String`.
+  - `VatRecipeGen` no longer uses generics.
+  - Vat pressure is limited to between -9 and 9 (inclusive).
+  - Industrial Mixers now have an item handler.
+  - Electrode Holders now have an item handler.
+  - Added `tfmg:mixer_mode` registry.
+  - Added `tfmg:mixer_mode` data component.
+  - `IndustrialMixerBlock` now handles item insertion and extraction better.
+  - Mixer rendering is now handled through the registered mode.
+  - Industrial Mixers now also update the vat during a speed change or when their item handler is changed.
+  - The Vat's item inventory now notifies the vat when it is updated.
+  - Multiple vat attachments of the same type are now grouped in the tooltip.
+  - Compressors now have operation ids: `tfmg:compressor` and `tfmg:decompressor`.
+  - Freezers now have an operation id: `tfmg:freezer`.
+  - Compressors now notify the vat when their speed changes.
+  - Freezers now notify the vat when their electricity network changes.
+  - Recipes now have durations to prevent instant making of stuff, and some modified.
+  - `ChemicalVatCategory` now uses a dynamic barometer needle to display pressure.
+  - Items now render inside vats.
+    - Also spins with mixing and the centrifuge in the direction of rotation.
+  - Fluids no longer z-fight with the top of the vat.
+- Engines & Engine Adjacent:
+  - Improved Air Intake goggle tooltip.
+  - Engine types are now a registry.
+  - Engines now use a fluid predicate to determine valid fuels instead of a list of tags.
+  - Block positions in engines are now properly saved as a BlockPos instead of a long.
+  - Engine Cylinders are now components using the new registry.
+  - Added `tfmg:engine_cylinder` data component.
+  - Removed `tfmg:fuel_tags` component as it isn't needed for remapping.
+  - Correct cylinders are now tag-based.
+    - Regular Engine denies `tfmg:engine/turbine`.
+    - Turbine Engine denies `tfmg:engine/cylinder`.
+    - Both cases require the input to have the `tfmg:engine_cylinder` component to be valid.
+  - Engine types are safely remapped from their legacy values when reading from engine nbt.
+  - Added JEI search aliases for Turbine Blades (turbine) & Engine Cylinders (piston).
+  - Added JEI Category for Engine Fuel stats.
+  - Exhausts & Smokestacks now accept any fluid with the new tag `tfmg:exhaustable`.
+  - Added ponders for the following:
+    - Regular Engine Assembly.
+    - Radial Engine Assembly.
+    - Large Engines.
+  - Small Engines now have goggle info on applied upgrades for all connected engines.
+  - Exhaust capacity changed: 1000mB → 4000mB.
+  - Smokestack capacity changed: 8000mB → 16000mB.
+  - Exhaust drain rate: 100mB/t → 500mB/t.
+  - Flarestack drain rate: 25mB/t → 100mB/t.
+  - Smokestack drain rate: 150mB/t → 1000mB/t.
+  - Smokestack smoke timer: 40t → 500t.
+  - The Engine Piping upgrade can now pull from any adjacent fluid handler instead of just Create's fluid tanks.
+  - Engines now drop all components and upgrades when destroyed.
+  - Golden Turbo's speed and angle rendering now matches the Turbo's.
+  - Added `tfmg:engine_upgrade` data component.
+  - Added the `engine_upgrade` component to all default upgrade items.
+  - Slightly tweaked engine fuel testing to hopefully avoid crashing on a broken tag.
+  - All engines now have registered item handlers.
+  - Engine Fuels can now specify custom exhaust fluids (CO2 remains the default).
+- Surface Scanners:
+  - Surface Scanner grid now accurately based on chunk grid.
+  - Surface Scanners on Sub-Levels now re-scan when moved into a new chunk.
+  - Scans 7x7 area rather than 5x5.
+  - Now can be picked up with shift and right-click of the wrench.
+  - Better visuals for rotating on Sub-Levels.
+  - Scanners now give off a redstone signal like navigation tables from Aeronautics.
+- Winding Machine:
+  - Change spool to `SpoolInventory`.
+  - Support legacy Spool NBT and migrate to new system.
+  - Create an inventory for output.
+  - Shift-right click now takes out the spool instead of the item.
+    - Normal right click now takes out the item and resulting item.
+  - Wire stops rendering when a recipe has been completed.
+  - Fixed spool not being saved/loaded correctly (read() parsed spool but never assigned it)
+  - Deployers can insert spools and items into the winding machine:
+    - Deployers can also take out empty spools.
+    - Prevent deployers from taking out non-empty spools.
+  - Empty spool can be emptied from the spool side.
+  - Prevent items from being inserted when output is full.
+  - Added ponder for the Winding Machine.
+- Distillation:
+  - The amount drained now matches recipe input amount.
+  - The amount filled now matches the recipe result amount.
+  - Distillation Controller uses recipe-specific durations.
+  - Timer progression is based on the heat level of the tower.
+  - Progress percentage now displays in the goggle tooltip.
+  - Tweaked durations for all distillation recipes (200 ticks per output).
+- Oil Deposits:
+  - Oil Reserves now drain over time.
+  - Oil Reserves are now stored in a chunk attachment rather than level data.
+  - Oil Reserves are now created on deposit generation instead of on pumpjack assembly.
+  - Oil Deposit features now have a minimum height of 10 blocks.
+  - Fossilstone now starts at half the height instead of 4.
+  - Fossilstone is now only placed where a stone-type block would be.
+  - Empty Oil Reserves now convert all contained deposits into Bedrock.
+  - Oil Branches no-longer replace air.
+  - Oil Deposits now properly generate at the very bottom of the world.
+  - Oil Deposits will not place if the origin point isn't bedrock.
+- Polarizer:
+  - Displays tooltip through the multimeter, not goggles.
+  - Tooltip rounds item charge (This helps prevent flickering).
+  - Mechanical arms can now insert and extract items.
+  - Particles now show when a recipe is completed.
+  - Energy defaults to 2000 (2kW).
+  - Polarizing recipes now have `energy` as a field to specify required amount.
+  - Datagen can now specify amount of energy.
+  - Polarizers now have an output inventory.
+  - `PolarizerBlockEntity#getItemChargingRate` now uses recipe charge rate.
+- Items:
+  - Lithium Blades are now one item.
+  - Screwdrivers now indicate the lock state of the pipe you are looking at.
+  - Added a bunch of fire extinguisher sounds.
+  - Flakes created by fire extinguishers now spawn at a position that matches the barrel.
+  - Added autogas cylinder item for LPG.
+  - Flamethrower tooltip is now handled through the component.
+  - Multimeters are no longer incompatible with Goggles.
+- Blocks:
+  - Deployers now decrement the timer of held Lithium Blades.
+  - Added TFMG Encased wooden cogwheels.
+  - Added Industrial Aluminium encased blocks.
+  - Cleaned up Neon Tube.
+  - Liquid Concrete now has it's dedicated colours for each dye type.
+  - Pipe Locking now uses the `tfmg:locked_pipe` data attachment.
+  - Firebox's fuel tank can now be extracted from.
+- General:
+  - Added an `updateJSONURL` to the `neoforge.mods.toml` so you will be notified of new versions!
+  - Any simple Fluid Pipe can now be locked with a Screwdriver.
+  - Added credits to `neoforge.mods.toml`.
+  - Coke Oven progress is now displayed as a percentage.
+  - Licence, Agents & Contributing are now compiled with the mod.
+- Mixins:
+  - Cleaned up a bunch of unnecessary mixins.
+  - Removed PipeAttachmentModelMixin.
+- Integration:
+  - JEI:
+    - Added Barometer to Vat category for pressure and heat indicator icons.
+    - Added hover-tooltips to Vat category on various icons to improve context.
+    - JEI rendering for Vat Operations, Vat Operation Tooltips & Vat Types is now handled through the VatCategoryEvent client event.
+    - Vat recipes in JEI now cycle all valid vat types.
+    - JEI recipe categories now show TFMG instead of Create.
+    - Industrial Blasting category has been improved.
+  - Added support for Create: Liquid Fuels Reburned.
+  - Added Rutile chemical composition files for relevant items/fluids.
+  - Create: Big Cannons:
+    - Removed mixer alloying recipes.
+    - Removed compacting-casting recipes.
+    - Added Melting recipes for TFMG metals.
+    - Added Casting Basin recipes for CBC metals.
+    - Added Vat recipe for Nethersteel.
+- Assets:
+  - Added French translation.
+  - Added Chinese translation.
+  - A load of textures have been reworked.
+- Data:
+  - Flamethrower fuels are now cached to improve performance. The cache is cleared on data reload.
+  - Removed hardcoded furnace fuel times and generated new datamap values.
+  - Added Engine Fuel Type datapack registry at `fuel_type/engine`.
+  - Flamethrower fuel types are now registered at `fuel_type/flamethrower`.
+  - `tfmg:striated_ores_overworld` has been removed.
+  - `tfmg:striated_ores_nether` has been removed.
+  - Split striated ore features into individual features.
+  - All features now have a config-toggle for enabling/disabling.
+  - Added `tfmg:config_boolean` placement modifier.
+  - TFMG now uses the standard 90mB ⇒ 1 ingot fluid units in recipes.
+  - All recipes now use the `tfmg` namespace instead of some using `create`.
+  - Added proper crushing recipes for Lead & Nickel ores.
+  - Removed Create's crushing recipes for Lead & Nickel ores.
+  - Added ore smelting recipes for Lead, Lithium & Nickel ores.
+  - Added `tfmg:tag_filled` condition.
+  - Recipe inputs now use tags where applicable.
+  - Multimeters are now valid in the `belt` Curio slot.
+  - Oil Wells & Deposits now have proper feature configs.
+  - All fluids are now properly tagged.
+- Added some new configs:
+  - Compressor minimum RPM.
+  - Industrial Mixer minimum RPM.
+  - Surface Scanner minimum RPM.
+  - Freezer minimum current.
+  - Polarizer minimum power.
+
+### API Changes:
+- Added Sable Companion as an embedded api.
+- Updated mixin compatibility level. (JAVA 8 → JAVA 21)
+- JEI integration has been moved to a new folder. (`recipes` → `inregration.jei`)
+- Engine types are now blacklisted from the schematic cycle via the `tfmg:schematic_cycle_blacklist` tag.
+- Engine Upgrades now use the `tfmg:upgrades_on_side` engine tag for rendering.
+- Large Engine fuels are now determined through the `tfmg:large_engine`/`tfmg:simple_large_engine` engine fuel type tag, respectively.
+- Removed `RegularEngineBlockEntity.EngineType` enum.
+- Internal tag enums in TFMGTags have been renamed (`TFMGTags.TFMGItemTags` → `TFMGTags.Items`).
+- Added `formatFluid` in TFMGUtils for fluid units.
+- Added `fluidProduction` in TFMGTexts for fluid production.
+- Added `count` in TFMGTexts.Vat for Vat Attachment counts.
+- Renamed & remapped `heavy_casing_encased_` blocks to `heavy_encased_`.
+- Added Decimal Formats to TFMGTexts for properly formatting numbers.
+- Re-introduced Micron unit just in case.
+- Added `returnItemToInventory` method to TFMGUtils.
+- Removed `IndustrialMixerBlockEntity.MixerMode` enum.
+- Removed `TFMGLang.temporaryText`.
+- Flamethrower Fuels now use the `tfmg:hellfire` tag instead of the `hellfire` boolean.
+- Flamethrower Fuels now use the `tfmg:cold` tag instead of the `is_cold` boolean.
+- Removed `hellfire` and `is_cold` from FlamethrowerFuelType in favour of tags.
+- Added `rotateQuat` method to TFMGUtils.
+- Item component remapping is now handled via `ComponentRemapper` instead of the item class.
+- Moved TFMGRemapper from `base` → `remap`.
+- VatMachineRecipe$Builder now has `pressure(int)` and `heatLevel(int)`.
+- VatMachineRecipe now uses correct builders.
+- VatRecipeParams now have default values (datagen kept throwing NPE).
+- Added an optional `showIfEmpty` argument to `TFMGUtils.createFluidTooltip`, to reduce flashing on rapidly updating tanks.

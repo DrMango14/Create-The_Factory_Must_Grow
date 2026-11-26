@@ -1,65 +1,57 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.switches.large_switch;
 
-import com.drmangotea.tfmg.content.electricity.CablePos;
+import com.drmangotea.tfmg.content.electricity.ElectricalPropertiesType;
 import com.drmangotea.tfmg.content.electricity.content.DirectionalElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.DirectionalElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.NodeType;
+import com.drmangotea.tfmg.registry.TFMGElectricalProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LargeSwitchProperties extends DirectionalElectricalProperties {
 
-    public LargeSwitchProperties(long pos, Direction direction) {
+    public LargeSwitchProperties(BlockPos pos, Direction direction) {
         this(pos, direction, 1000);
     }
 
-    public LargeSwitchProperties(long pos, Direction direction, double r) {
+    public LargeSwitchProperties(BlockPos pos, Direction direction, double r) {
         super(pos, direction);
-        BlockPos pos1 = BlockPos.of(position);
-
-        List<Direction> directions = new ArrayList<>();
-        directions.add(direction);
-        directions.add(direction.getOpposite());
 
         DirectionalElectricalNode IN = new DirectionalElectricalNode(position, 0, direction, NodeType.CONNECTOR);
         DirectionalElectricalNode OUT = new DirectionalElectricalNode(position, 1, direction.getOpposite(), NodeType.CONNECTOR);
 
 
-        nodes.add(IN);
-        nodes.add(OUT);
-
-
+        nodes.put(0, IN);
+        nodes.put(1, OUT);
 
         components.add(new Resistance(IN, OUT, r, 0, position));
-
-
     }
 
-    public List<CablePos> getRotation(Direction direction) {
+    public List<Vec3> getRotation(Direction direction) {
 
-        List<CablePos> positions = new ArrayList<>();
+        List<Vec3> positions = new ArrayList<>();
 
         switch (direction) {
             case DOWN, UP -> {
-                positions.add(new CablePos(0.5f, 1, 0.5f));
-                positions.add(new CablePos(0.5f, 0, 0.5f));
+                positions.add(new Vec3(0.5f, 1, 0.5f));
+                positions.add(new Vec3(0.5f, 0, 0.5f));
             }
             case WEST, EAST -> {
-                positions.add(new CablePos(0.5f, 0.5f, 1));
-                positions.add(new CablePos(0.5f, 0.5f, 0));
+                positions.add(new Vec3(0.5f, 0.5f, 1));
+                positions.add(new Vec3(0.5f, 0.5f, 0));
             }
             case NORTH, SOUTH -> {
-                positions.add(new CablePos(1, 0.5f, 0.5f));
-                positions.add(new CablePos(0, 0.5f, 0.5f));
+                positions.add(new Vec3(1, 0.5f, 0.5f));
+                positions.add(new Vec3(0, 0.5f, 0.5f));
             }
 
 
         }
-        ;
 
         return positions;
     }
@@ -69,7 +61,7 @@ public class LargeSwitchProperties extends DirectionalElectricalProperties {
     }
 
     @Override
-    public int getId() {
-        return 14;
+    public ElectricalPropertiesType<?> getType() {
+        return TFMGElectricalProperties.LARGE_SWITCH.get();
     }
 }

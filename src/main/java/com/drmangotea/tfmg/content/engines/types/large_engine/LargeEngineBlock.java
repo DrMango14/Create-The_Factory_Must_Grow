@@ -1,10 +1,13 @@
 package com.drmangotea.tfmg.content.engines.types.large_engine;
 
-
 import com.drmangotea.tfmg.base.TFMGShapes;
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
+import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
+import com.drmangotea.tfmg.content.engines.fuels.EngineFuelType;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -13,7 +16,6 @@ import com.simibubi.create.content.kinetics.simpleRelays.ShaftBlock;
 import com.simibubi.create.content.kinetics.steamEngine.PoweredShaftBlock;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.utility.BlockHelper;
-import net.createmod.catnip.data.Couple;
 import net.createmod.catnip.placement.IPlacementHelper;
 import net.createmod.catnip.placement.PlacementHelpers;
 import net.createmod.catnip.placement.PlacementOffset;
@@ -21,23 +23,19 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
-import net.minecraft.world.level.block.state.properties.AttachFace;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -48,69 +46,41 @@ import java.util.function.Predicate;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
 
-public class LargeEngineBlock extends HorizontalDirectionalBlock
-        implements IWrenchable, IBE<LargeEngineBlockEntity> {
-    public static final EnumProperty<AttachFace> FACE = BlockStateProperties.ATTACH_FACE;
-
-    public static final MapCodec<LargeEngineBlock> CODEC = simpleCodec(LargeEngineBlock::new);
+@NothingNullByDefault
+public class LargeEngineBlock extends TFMGDirectionalBlock implements IWrenchable, IBE<LargeEngineBlockEntity> {
+    public static final MapCodec<LargeEngineBlock> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
+		propertiesCodec(),
+		EngineFuelType.TAG_CODEC.fieldOf("fuelTag").forGetter(LargeEngineBlock::getFuelTypeTag)
+	).apply(i, LargeEngineBlock::new));
 
     private static final int placementHelperId = PlacementHelpers.register(new PlacementHelper());
 
-    public LargeEngineBlock(Properties properties) {
+	@Nullable
+	private final TagKey<EngineFuelType> fuelTag;
+	
+	/// This exists purely as legacy support. use {@link LargeEngineBlock#LargeEngineBlock(Properties, TagKey)}
+	@Deprecated(since = "1.4.0", forRemoval = true)
+	public LargeEngineBlock(Properties properties) {
+		this(properties, null);
+	}
+	
+    public LargeEngineBlock(Properties properties, @Nullable TagKey<EngineFuelType> fuelTag) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(FACE, AttachFace.FLOOR).setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
+        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
+		this.fuelTag = fuelTag;
     }
 
     @Override
-    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+    protected MapCodec<? extends TFMGDirectionalBlock> codec() {
         return CODEC;
     }
-
-    public static Direction getConnectedDirection(BlockState p_53201_) {
-        switch ((AttachFace) p_53201_.getValue(FACE)) {
-            case CEILING:
-                return Direction.DOWN;
-            case FLOOR:
-                return Direction.UP;
-            default:
-                return p_53201_.getValue(FACING);
-        }
-    }
+	
+	public @Nullable TagKey<EngineFuelType> getFuelTypeTag() { return fuelTag; }
 
     @Override
     protected void createBlockStateDefinition(Builder<Block, BlockState> pBuilder) {
-        super.createBlockStateDefinition(pBuilder.add(FACE, FACING, WATERLOGGED));
+        super.createBlockStateDefinition(pBuilder.add(WATERLOGGED));
     }
-/*
-    @Override
-    public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
-        super.setPlacedBy(pLevel, pPos, pState, pPlacer, pStack);
-        AdvancementBehaviour.setPlacedBy(pLevel, pPos, pPlacer);
-    }
-
-*/
-
-
-    @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext p_53184_) {
-        for (Direction direction : p_53184_.getNearestLookingDirections()) {
-            BlockState blockstate;
-            if (direction.getAxis() == Axis.Y) {
-                blockstate = this.defaultBlockState().setValue(FACE, direction == Direction.UP ? AttachFace.CEILING : AttachFace.FLOOR).setValue(FACING, p_53184_.getHorizontalDirection());
-            } else {
-                blockstate = this.defaultBlockState().setValue(FACE, AttachFace.WALL).setValue(FACING, direction.getOpposite());
-            }
-
-            if (blockstate.canSurvive(p_53184_.getLevel(), p_53184_.getClickedPos())) {
-                return blockstate;
-            }
-        }
-
-        return null;
-    }
-
-
-
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
@@ -133,7 +103,6 @@ public class LargeEngineBlock extends HorizontalDirectionalBlock
 
     @Override
     public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pIsMoving) {
-        // FluidTankBlock.updateBoilerState(pState, pLevel, pPos.relative(getFacing(pState).getOpposite()));
         BlockPos shaftPos = getShaftPos(pState, pPos);
         BlockState shaftState = pLevel.getBlockState(shaftPos);
         if (isShaftValid(pState, shaftState))
@@ -153,16 +122,15 @@ public class LargeEngineBlock extends HorizontalDirectionalBlock
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-
         if (TFMGBlocks.LARGE_ENGINE.has(state))
             return TFMGShapes.FULL;
 
-
-        AttachFace face = state.getValue(FACE);
         Direction direction = state.getValue(FACING);
-        return face == AttachFace.CEILING ? AllShapes.STEAM_ENGINE_CEILING.get(direction.getAxis())
-                : face == AttachFace.FLOOR ? AllShapes.STEAM_ENGINE.get(direction.getAxis())
-                : AllShapes.STEAM_ENGINE_WALL.get(direction);
+		return switch (direction) {
+			case UP -> AllShapes.STEAM_ENGINE_CEILING.get(Direction.Axis.X);
+			case DOWN -> AllShapes.STEAM_ENGINE.get(Direction.Axis.X);
+			default -> AllShapes.STEAM_ENGINE_WALL.get(direction);
+		};
     }
 
 
@@ -171,12 +139,12 @@ public class LargeEngineBlock extends HorizontalDirectionalBlock
         return false;
     }
 
-    public static Direction getFacing(BlockState sideState) {
-        return getConnectedDirection(sideState);
+    public static Direction getFacing(BlockState state) {
+        return state.getValue(FACING);
     }
 
     public static BlockPos getShaftPos(BlockState sideState, BlockPos pos) {
-        return pos.relative(getConnectedDirection(sideState), 2);
+        return pos.relative(getFacing(sideState), 2);
     }
 
     public static boolean isShaftValid(BlockState state, BlockState shaft) {
@@ -207,8 +175,9 @@ public class LargeEngineBlock extends HorizontalDirectionalBlock
         }
 
         @Override
-        public PlacementOffset getOffset(Player player, Level world, BlockState state, BlockPos pos,
-                                         BlockHitResult ray) {
+        public PlacementOffset getOffset(
+			Player player, Level world, BlockState state, BlockPos pos, BlockHitResult ray
+		) {
             BlockPos shaftPos = LargeEngineBlock.getShaftPos(state, pos);
             BlockState shaft = AllBlocks.SHAFT.getDefaultState();
             for (Direction direction : Direction.orderedByNearest(player)) {
@@ -227,9 +196,4 @@ public class LargeEngineBlock extends HorizontalDirectionalBlock
                             .setValue(PoweredShaftBlock.AXIS, axis));
         }
     }
-
-    public static Couple<Integer> getSpeedRange() {
-        return Couple.create(16, 128);
-    }
-
 }

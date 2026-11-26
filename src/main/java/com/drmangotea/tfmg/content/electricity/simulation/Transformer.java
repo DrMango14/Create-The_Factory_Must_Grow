@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.simulation;
 
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
+import net.minecraft.core.BlockPos;
 
 import java.util.List;
 
@@ -11,10 +12,10 @@ public class Transformer extends ElectricalComponent {
 
     public final int localId;
 
-    public final long pos;
+    public final BlockPos pos;
 
 
-    public Transformer(ElectricalNode pA, ElectricalNode pB, ElectricalNode sA, ElectricalNode sB, double L1, double turnsRatio, double k, int idx,long pos) {
+    public Transformer(ElectricalNode pA, ElectricalNode pB, ElectricalNode sA, ElectricalNode sB, double L1, double turnsRatio, double k, int idx, BlockPos pos) {
         super(pA, pB);
         this.pA = pA;
         this.pB = pB;

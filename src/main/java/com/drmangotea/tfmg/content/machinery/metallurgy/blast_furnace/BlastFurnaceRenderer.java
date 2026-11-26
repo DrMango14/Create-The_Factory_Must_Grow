@@ -31,7 +31,7 @@ public class BlastFurnaceRenderer extends SafeBlockEntityRenderer<BlastFurnaceOu
         VertexConsumer vb = buffer.getBuffer(RenderType.solid());
         Direction facing = blockState.getValue(FACING);
         if (coalCokeLevel > 0)
-            if (be.getSize() >= 3) {
+            if (be.multiblock.getSize() >= 3) {
 
                 CachedBuffers.partial(TFMGPartialModels.COAL_COKE_DUST_LAYER, blockState)
                         .light(LevelRenderer.getLightColor(be.getLevel(), be.getBlockPos().above().relative(facing.getOpposite())))

@@ -34,13 +34,13 @@ public class TFMGEntityTypes {
                     MobCategory.MISC, 4, 20, true, true, NapalmPotato::build).register();
 
     public static final EntityEntry<ThermiteGrenade> THERMITE_GRENADE =
-            register("thermite_grenade", ThermiteGrenade::new, () -> ThermiteGrenadeRenderer::regular,
+            register("thermite_grenade", (t, l) -> new ThermiteGrenade(t, l, ThermiteGrenade.ChemicalColor.BASE), () -> ThermiteGrenadeRenderer::regular,
                     MobCategory.MISC, 4, 20, true, true, ThermiteGrenade::build).register();
     public static final EntityEntry<ThermiteGrenade> ZINC_GRENADE =
-            register("zinc_grenade", ThermiteGrenade::new, () -> ThermiteGrenadeRenderer::green,
+            register("zinc_grenade", (t, l) -> new ThermiteGrenade(t, l, ThermiteGrenade.ChemicalColor.GREEN), () -> ThermiteGrenadeRenderer::green,
                     MobCategory.MISC, 4, 20, true, true, ThermiteGrenade::build).register();
     public static final EntityEntry<ThermiteGrenade> COPPER_GRENADE =
-            register("copper_grenade", ThermiteGrenade::new, () -> ThermiteGrenadeRenderer::blue,
+            register("copper_grenade", (t, l) -> new ThermiteGrenade(t, l, ThermiteGrenade.ChemicalColor.BLUE), () -> ThermiteGrenadeRenderer::blue,
                     MobCategory.MISC, 4, 20, true, true, ThermiteGrenade::build).register();
     public static final EntityEntry<NapalmBombEntity> NAPALM_BOMB =
             register("napalm_bomb_entity", NapalmBombEntity::new, () -> NapalmBombRenderer::new,
@@ -66,10 +66,12 @@ public class TFMGEntityTypes {
                     MobCategory.MISC, 4, 20, true, true, Spark::build).register();
 
 
-    private static <T extends Entity> CreateEntityBuilder<T, ?> register(String name, EntityType.EntityFactory<T> factory,
-                                                                         NonNullSupplier<NonNullFunction<EntityRendererProvider.Context, EntityRenderer<? super T>>> renderer,
-                                                                         MobCategory group, int range, int updateFrequency, boolean sendVelocity, boolean immuneToFire,
-                                                                         NonNullConsumer<EntityType.Builder<T>> propertyBuilder) {
+    private static <T extends Entity> CreateEntityBuilder<T, ?> register(
+		String name, EntityType.EntityFactory<T> factory,
+		NonNullSupplier<NonNullFunction<EntityRendererProvider.Context, EntityRenderer<? super T>>> renderer,
+		MobCategory group, int range, int updateFrequency, boolean sendVelocity, boolean immuneToFire,
+		NonNullConsumer<EntityType.Builder<T>> propertyBuilder
+	) {
         String id = TFMGLang.asId(name);
         return (CreateEntityBuilder<T, ?>) TFMG.REGISTRATE
                 .entity(id, factory, group)

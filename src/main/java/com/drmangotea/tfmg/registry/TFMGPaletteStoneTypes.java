@@ -57,13 +57,12 @@ public enum TFMGPaletteStoneTypes {
         return variants;
     }
 
+    @SuppressWarnings({"removal", "UnstableApiUsage"})
     public static void register(CreateRegistrate registrate) {
         for (TFMGPaletteStoneTypes paletteStoneVariants : values()) {
-            NonNullSupplier<Block> baseBlock = paletteStoneVariants.factory.apply(registrate);
-            paletteStoneVariants.baseBlock = baseBlock;
+            paletteStoneVariants.baseBlock = paletteStoneVariants.factory.apply(registrate);
             String id = TFMGLang.asId(paletteStoneVariants.name());
-            paletteStoneVariants.materialTag =
-                    AllTags.optionalTag(BuiltInRegistries.ITEM, TFMG.asResource("stone_types/" + id));
+            paletteStoneVariants.materialTag = AllTags.optionalTag(BuiltInRegistries.ITEM, TFMG.asResource("stone_types/" + id));
             paletteStoneVariants.variants = new TFMGPalettesVariantEntry(id, paletteStoneVariants);
         }
     }

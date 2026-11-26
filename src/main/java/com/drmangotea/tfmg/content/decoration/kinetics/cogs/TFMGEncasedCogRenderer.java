@@ -22,8 +22,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class TFMGEncasedCogRenderer extends KineticBlockEntityRenderer<SimpleKineticBlockEntity> {
 
-    private boolean large;
-    private boolean steel;
+    private final boolean large;
+    private final boolean steel;
 
     public static TFMGEncasedCogRenderer steelSmall(BlockEntityRendererProvider.Context context) {
         return new TFMGEncasedCogRenderer(context, false,true);
@@ -75,7 +75,7 @@ public class TFMGEncasedCogRenderer extends KineticBlockEntityRenderer<SimpleKin
     @Override
     protected SuperByteBuffer getRotatedModel(SimpleKineticBlockEntity be, BlockState state) {
         return CachedBuffers.partialFacingVertical(
-                large ? steel? TFMGPartialModels.SHAFTLESS_LARGE_STEEL_COGHWEEL :TFMGPartialModels.SHAFTLESS_LARGE_ALUMINUM_COGHWEEL : steel ? TFMGPartialModels.SHAFTLESS_STEEL_COGHWEEL : TFMGPartialModels.SHAFTLESS_ALUMINUM_COGHWEEL, state,
+                large ? steel? TFMGPartialModels.SHAFTLESS_LARGE_STEEL_COGWHEEL :TFMGPartialModels.SHAFTLESS_LARGE_ALUMINUM_COGWHEEL : steel ? TFMGPartialModels.SHAFTLESS_STEEL_COGWHEEL : TFMGPartialModels.SHAFTLESS_ALUMINUM_COGWHEEL, state,
                 Direction.fromAxisAndDirection(state.getValue(EncasedCogwheelBlock.AXIS), Direction.AxisDirection.POSITIVE));
     }
 

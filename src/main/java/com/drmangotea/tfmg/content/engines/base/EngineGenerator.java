@@ -1,7 +1,5 @@
 package com.drmangotea.tfmg.content.engines.base;
 
-
-
 import com.drmangotea.tfmg.TFMG;
 import com.simibubi.create.foundation.data.SpecialBlockStateGen;
 import com.tterrag.registrate.providers.DataGenContext;
@@ -12,7 +10,6 @@ import net.neoforged.neoforge.client.model.generators.ModelFile;
 
 import static com.drmangotea.tfmg.content.engines.base.EngineBlock.ENGINE_STATE;
 import static com.drmangotea.tfmg.content.engines.types.regular_engine.RegularEngineBlock.EXTENDED;
-
 
 public class EngineGenerator extends SpecialBlockStateGen {
     @Override

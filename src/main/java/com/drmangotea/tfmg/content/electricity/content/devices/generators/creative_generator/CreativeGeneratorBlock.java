@@ -1,18 +1,17 @@
 package com.drmangotea.tfmg.content.electricity.content.devices.generators.creative_generator;
 
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.packets.AddElectricalComponentPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.foundation.block.IBE;
-import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
 public class CreativeGeneratorBlock extends Block implements IBE<CreativeGeneratorBlockEntity> {
     public CreativeGeneratorBlock(Properties p_49795_) {
         super(p_49795_);
@@ -21,13 +20,7 @@ public class CreativeGeneratorBlock extends Block implements IBE<CreativeGenerat
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
-        if(level.getBlockEntity(pos) instanceof IElectric be){
-            be.onPlace();
-            if (level instanceof ServerLevel serverLevel)
-                CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(pos), new AddElectricalComponentPacket(BlockPos.of(pos.asLong())));
-
-
-        }
+		withBlockEntityDo(level, pos, IElectric::onPlace);
     }
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {

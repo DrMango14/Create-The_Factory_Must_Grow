@@ -1,4 +1,3 @@
 {
-	"credit": "Made with Blockbench",
-	"parent": "block/block"
+  "parent": "block/block"
 }

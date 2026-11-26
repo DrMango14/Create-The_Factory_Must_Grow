@@ -1,0 +1,16 @@
+{
+  "compositions": [
+    {
+      "elements": [
+        {
+          "id": "rutile:carbon"
+        }
+      ]
+    }
+  ],
+  "contents": [
+    "tfmg:coal_coke_block",
+    "tfmg:coal_coke",
+    "tfmg:coal_coke_dust"
+  ]
+}

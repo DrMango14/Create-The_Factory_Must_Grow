@@ -1,15 +1,13 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.switches.large_switch;
 
 import com.drmangotea.tfmg.base.TFMGShapes;
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.packets.AddElectricalComponentPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
-import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -28,8 +26,8 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+@NothingNullByDefault
 public class LargeSwitchBlock extends HorizontalKineticBlock implements IBE<LargeSwitchBlockEntity> {
-
     public static final BooleanProperty IS_MAIN_PART = BooleanProperty.create("is_main_part");
 
     public LargeSwitchBlock(Properties properties) {
@@ -67,7 +65,7 @@ public class LargeSwitchBlock extends HorizontalKineticBlock implements IBE<Larg
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
 
@@ -114,13 +112,7 @@ public class LargeSwitchBlock extends HorizontalKineticBlock implements IBE<Larg
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
-        if(level.getBlockEntity(pos) instanceof IElectric be){
-            be.onPlace();
-            if (level instanceof ServerLevel serverLevel)
-                CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(pos), new AddElectricalComponentPacket(BlockPos.of(pos.asLong())));
-
-
-        }
+		withBlockEntityDo(level, pos, IElectric::onPlace);
     }
 
     @Override
@@ -128,6 +120,7 @@ public class LargeSwitchBlock extends HorizontalKineticBlock implements IBE<Larg
         IBE.onRemove(state, level, pos, newState);
         super.onRemove(state,level,pos,newState,isMoving);
     }
+
     @Override
     public Direction.Axis getRotationAxis(BlockState state) {
         return state.getValue(HORIZONTAL_FACING).getClockWise().getAxis();

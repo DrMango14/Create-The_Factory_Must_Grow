@@ -23,7 +23,6 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import java.util.List;
 
 public class ConcreteHoseBlockEntity extends KineticBlockEntity {
-
     LerpedFloat offset;
     boolean isMoving;
 
@@ -32,6 +31,7 @@ public class ConcreteHoseBlockEntity extends KineticBlockEntity {
     public ConcreteFillingBehavior filler;
     public ConcreteHoseFluidHandler handler;
     public boolean infinite;
+    protected boolean updateCapability;
 
     public ConcreteHoseBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
@@ -42,6 +42,8 @@ public class ConcreteHoseBlockEntity extends KineticBlockEntity {
         handler = new ConcreteHoseFluidHandler(internalTank, filler,
                 () -> worldPosition.below((int) Math.ceil(offset.getValue())), () -> !this.isMoving);
         capability = handler;
+        updateCapability = false;
+        refreshCapability();
     }
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
@@ -67,9 +69,11 @@ public class ConcreteHoseBlockEntity extends KineticBlockEntity {
             TooltipHelper.addHint(tooltip, "hint.hose_pulley");
         return addToGoggleTooltip;
     }
+
     public float getInterpolatedOffset(float pt) {
-        return offset.getValue(pt);
+        return Math.max(offset.getValue(pt), 3 / 16f);
     }
+
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         filler = new ConcreteFillingBehavior(this);
@@ -112,6 +116,7 @@ public class ConcreteHoseBlockEntity extends KineticBlockEntity {
     @Override
     public void tick() {
         super.tick();
+        if (level == null) return;
         float newOffset = offset.getValue() + getMovementSpeed();
         if (newOffset < 0) {
             newOffset = 0;
@@ -127,14 +132,17 @@ public class ConcreteHoseBlockEntity extends KineticBlockEntity {
 
         offset.setValue(newOffset);
         invalidateRenderBoundingBox();
+
+        if (updateCapability) {
+            updateCapability = false;
+            refreshCapability();
+        }
     }
 
     @Override
     public void lazyTick() {
         super.lazyTick();
-        if (level.isClientSide)
-            return;
-        if (isMoving)
+        if (isMoving || level == null || level.isClientSide)
             return;
 
         int ceil = (int) Math.ceil(offset.getValue() + getMovementSpeed());
@@ -166,6 +174,8 @@ public class ConcreteHoseBlockEntity extends KineticBlockEntity {
         super.read(compound,registries , clientPacket);
         if (clientPacket)
             infinite = compound.getBoolean("Infinite");
+
+        updateCapability = true;
     }
 
     @Override
@@ -174,17 +184,15 @@ public class ConcreteHoseBlockEntity extends KineticBlockEntity {
         invalidateCapabilities();
     }
 
+    public void refreshCapability() {
+        capability = internalTank;
+        invalidateCapabilities();
+    }
+
     public float getMovementSpeed() {
         float movementSpeed = convertToLinear(getSpeed());
-        if (level.isClientSide)
+        if (level != null && level.isClientSide)
             movementSpeed *= ServerSpeedProvider.get();
         return movementSpeed;
     }
-   //@Override
-   //public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-   //    if (isFluidHandlerCap(cap)
-   //            && (side == null || HosePulleyBlock.hasPipeTowards(level, worldPosition, getBlockState(), side)))
-   //        return this.capability.cast();
-   //    return super.getCapability(cap, side);
-   //}
 }

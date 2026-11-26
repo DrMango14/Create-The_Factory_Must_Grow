@@ -1,8 +1,7 @@
 {
-	"credit": "Made with Blockbench",
-	"parent": "tfmg:item/unfinished_insulator",
-	"textures": {
-		"0": "minecraft:block/clay",
-		"particle": "minecraft:block/clay"
-	}
+  "parent": "tfmg:item/unfinished_insulator",
+  "textures": {
+    "0": "minecraft:block/clay",
+    "particle": "minecraft:block/clay"
+  }
 }

@@ -1,0 +1,10 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:false"
+    }
+  ],
+  "type": "createbigcannons:melting",
+  "ingredients": [],
+  "results": []
+}

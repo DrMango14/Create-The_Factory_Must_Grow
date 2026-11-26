@@ -5,12 +5,13 @@ import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.simulation.Transformer;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGItems;
+
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.createmod.catnip.animation.AnimationTickHolder;
@@ -18,14 +19,12 @@ import net.createmod.catnip.math.VecHelper;
 import net.createmod.catnip.placement.IPlacementHelper;
 import net.createmod.catnip.theme.Color;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -40,10 +39,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-
 public class TransformerBlockEntity extends SmartBlockEntity implements IElectric {
-    boolean updateInFront = false;
-
     public ItemStack primaryCoil = ItemStack.EMPTY;
     public ItemStack secondaryCoil = ItemStack.EMPTY;
 
@@ -80,16 +76,15 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IElectri
     }
 
     @Override
-    public void onPlace() {
-        IElectric.super.onPlace();
-
+    public void whilePlacing() {
+        IElectric.super.whilePlacing();
         getNetwork().setTransformerRatio(this, 0, coilRatio);
     }
 
     @Override
     public void onUpdated() {
 
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
 
 
         Transformer t = network.getTransformer(getPos(), 0);
@@ -101,6 +96,7 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IElectri
 
     @Override
     public void destroy() {
+        if (level == null) return;
         super.destroy();
         BlockPos pos = this.getBlockPos();
         if (!primaryCoil.isEmpty()) {
@@ -114,44 +110,21 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IElectri
     }
 
 
-    //@Override
-    //public int getPowerUsage() {
-    //    Direction facing = getDirection();
-//
-    //    if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof IElectric be && be.getData().getId() != data.getId()) {
-    //        if (be.hasElectricitySlot(facing.getOpposite())) {
-//
-    //                return Math.max(be.getNetworkPowerUsage(this), 0);
-//
-//
-    //        }
-    //    }
-//
-    //    return 0;
-    //}
-
+    @Override
+    public BlockPos getPos() {
+        return getBlockPos();
+    }
 
     public void updateCoils() {
-        if (primaryCoil.get(TFMGDataComponents.COIL_TURNS) == null || secondaryCoil.get(TFMGDataComponents.COIL_TURNS) == null) {
+		float primaryTurns = (float) primaryCoil.getOrDefault(TFMGDataComponents.COIL_TURNS, 0);
+		float secondaryTurns = (float) secondaryCoil.getOrDefault(TFMGDataComponents.COIL_TURNS, 0);
+		
+        if(primaryTurns < 50 || secondaryTurns < 50) {
             coilRatio = 0;
-            getNetwork().setTransformerRatio(this, 0, coilRatio);
-
-            return;
-        }
-        int primaryTurns = primaryCoil.get(TFMGDataComponents.COIL_TURNS);
-        int secondaryTurns = secondaryCoil.get(TFMGDataComponents.COIL_TURNS);
-
-        if (primaryCoil.isEmpty() || secondaryCoil.isEmpty() || primaryTurns < 50 || secondaryTurns < 50) {
-
-            coilRatio = 0;
-
-            return;
-        }
-
-        coilRatio = (float) secondaryTurns / (float) primaryTurns;
-
-        getNetwork().setTransformerRatio(this, 0, coilRatio);
-
+        } else {
+			coilRatio = secondaryTurns / primaryTurns;
+		}
+		getNetwork().setTransformerRatio(this, 0, coilRatio);
 
 
     }
@@ -162,21 +135,15 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IElectri
     }
 
     @Override
-    public long getPos() {
-        return getBlockPos().asLong();
-    }
-
-    @Override
     public Level getWorld() {
         return level;
     }
-
 
     @Override
     protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.write(compound, registries, clientPacket);
         if (!primaryCoil.isEmpty())
-            compound.put("PrimaryCoil", primaryCoil.saveOptional(registries));
+            compound.put("PrimaryCoil", primaryCoil.save(registries));
         if (!secondaryCoil.isEmpty())
             compound.put("SecondaryCoil", secondaryCoil.save(registries));
 
@@ -200,7 +167,6 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IElectri
         if (compound.contains("SecondaryCoil")) {
             ItemStack.parse(registries, compound.getCompound("SecondaryCoil")).ifPresent(i -> secondaryCoil = i);
         }
-        ;
 
         coilRatio = compound.getFloat("CoilRatio");
     }
@@ -222,22 +188,18 @@ public class TransformerBlockEntity extends SmartBlockEntity implements IElectri
         if (mc.player == null || mc.level == null || !(mc.hitResult instanceof BlockHitResult result))
             return;
 
-        ClientLevel level = mc.level;
         BlockPos pos = result.getBlockPos();
-        Player player = mc.player;
-        ItemStack heldItem = player.getMainHandItem();
 
-
-        if (!TFMGBlocks.TRANSFORMER.has(level.getBlockState(pos)))
+        if (!TFMGBlocks.TRANSFORMER.has(mc.level.getBlockState(pos)))
             return;
 
+		ItemStack heldItem = mc.player.getMainHandItem();
         if (!(TFMGItems.ELECTROMAGNETIC_COIL.isIn(heldItem) || heldItem.is(Items.AIR)))
             return;
 
-        Direction direction = level.getBlockState(pos).getValue(TFMGHorizontalDirectionalBlock.FACING);
+        Direction direction = mc.level.getBlockState(pos).getValue(TFMGHorizontalDirectionalBlock.FACING);
 
-
-        Direction coilDirection = getCoilDirections(level, pos, result).get(0);
+        Direction coilDirection = getCoilDirections(mc.level, pos, result).getFirst();
         /////////
 
         Vec3 center = VecHelper.getCenterOf(pos);

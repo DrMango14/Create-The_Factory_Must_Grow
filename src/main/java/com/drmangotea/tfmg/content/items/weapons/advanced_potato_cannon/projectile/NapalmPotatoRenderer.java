@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon.projectile;
 
-
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -15,11 +14,9 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-
 @OnlyIn(Dist.CLIENT)
 public class NapalmPotatoRenderer extends EntityRenderer<NapalmPotato> {
     private final ItemRenderer itemRenderer;
-
 
     public NapalmPotatoRenderer(EntityRendererProvider.Context p_174114_) {
         super(p_174114_);

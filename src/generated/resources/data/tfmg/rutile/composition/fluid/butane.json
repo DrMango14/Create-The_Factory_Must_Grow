@@ -1,0 +1,19 @@
+{
+  "compositions": [
+    {
+      "elements": [
+        {
+          "amount": 4,
+          "id": "rutile:carbon"
+        },
+        {
+          "amount": 10,
+          "id": "rutile:hydrogen"
+        }
+      ]
+    }
+  ],
+  "contents": [
+    "tfmg:butane"
+  ]
+}

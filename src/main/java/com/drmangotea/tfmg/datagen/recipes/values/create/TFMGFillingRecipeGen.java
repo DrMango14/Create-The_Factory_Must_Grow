@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.*;
 import static com.drmangotea.tfmg.registry.TFMGDataComponents.AMOUNT;
 
-
+@SuppressWarnings("unused")
 public class TFMGFillingRecipeGen extends FillingRecipeGen {
 
     GeneratedRecipe

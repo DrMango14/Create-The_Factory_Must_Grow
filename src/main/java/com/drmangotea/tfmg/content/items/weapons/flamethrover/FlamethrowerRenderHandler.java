@@ -9,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
 public class FlamethrowerRenderHandler extends ShootableGadgetRenderHandler {
-
 	private float nextPitch;
 
 	@Override

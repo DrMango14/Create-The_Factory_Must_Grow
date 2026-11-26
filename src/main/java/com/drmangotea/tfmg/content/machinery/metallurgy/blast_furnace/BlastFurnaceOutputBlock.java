@@ -5,6 +5,7 @@ import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -26,5 +27,15 @@ public class BlastFurnaceOutputBlock extends TFMGHorizontalDirectionalBlock impl
     @Override
     public BlockEntityType<? extends BlastFurnaceOutputBlockEntity> getBlockEntityType() {
         return TFMGBlockEntities.BLAST_FURNACE_OUTPUT.get();
+    }
+
+    @Override
+    public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean moved) {
+        withBlockEntityDo(world, pos, (output) -> output.multiblock.evaluate());
+    }
+
+    @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+        withBlockEntityDo(level, pos, (output) -> output.multiblock.evaluate());
     }
 }

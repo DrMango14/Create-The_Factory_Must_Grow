@@ -12,7 +12,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,15 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LargeCoilBlockEntity extends SmartBlockEntity {
-
     int turns = 0;
 
     public LargeCoilBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
-    public ItemInteractionResult createTransformer(Player player, Direction lookingDirection) {
-        BlockPos otherCoilPos = null;
+    public ItemInteractionResult createTransformer(Direction lookingDirection) {
+        BlockPos otherCoilPos;
         Direction otherCoilDirection;
         List<Direction> coilDirections = new ArrayList<>();
         for (Direction direction : Direction.values()) {
@@ -45,11 +43,11 @@ public class LargeCoilBlockEntity extends SmartBlockEntity {
 
 
         if (coilDirections.size() == 1) {
-            otherCoilDirection = coilDirections.get(0);
+            otherCoilDirection = coilDirections.getFirst();
         } else {
             if (coilDirections.contains(lookingDirection)) {
                 otherCoilDirection = lookingDirection;
-            } else otherCoilDirection = coilDirections.get(0);
+            } else otherCoilDirection = coilDirections.getFirst();
         }
         otherCoilPos = getBlockPos().relative(otherCoilDirection);
         if (level.getBlockEntity(otherCoilPos) instanceof LargeCoilBlockEntity be) {

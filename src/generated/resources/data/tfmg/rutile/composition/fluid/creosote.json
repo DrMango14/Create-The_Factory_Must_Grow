@@ -1,0 +1,25 @@
+{
+  "compositions": [
+    {
+      "amount": 2,
+      "elements": [
+        {
+          "id": "rutile:carbon"
+        },
+        {
+          "id": "rutile:hydrogen"
+        }
+      ]
+    },
+    {
+      "elements": [
+        {
+          "id": "rutile:oxygen"
+        }
+      ]
+    }
+  ],
+  "contents": [
+    "tfmg:creosote"
+  ]
+}

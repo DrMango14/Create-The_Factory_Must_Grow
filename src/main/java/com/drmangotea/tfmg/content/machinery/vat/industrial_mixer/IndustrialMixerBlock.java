@@ -1,7 +1,11 @@
 package com.drmangotea.tfmg.content.machinery.vat.industrial_mixer;
 
+import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlock;
+import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.mode.MixerMode;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
+import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -16,12 +20,10 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
-import static com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerBlockEntity.MixerMode;
+import java.util.concurrent.atomic.AtomicBoolean;
 
+@NothingNullByDefault
 public class IndustrialMixerBlock extends KineticBlock implements IBE<IndustrialMixerBlockEntity> {
-
-
-
     public IndustrialMixerBlock(Properties properties) {
         super(properties);
     }
@@ -40,25 +42,47 @@ public class IndustrialMixerBlock extends KineticBlock implements IBE<Industrial
     public void onRemove(BlockState state, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         VatBlock.updateVatState(state, pLevel, pPos.relative(Direction.DOWN));
         super.onRemove(state, pLevel, pPos, pNewState, pIsMoving);
-
     }
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-     if(hand == InteractionHand.OFF_HAND)
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        if(level.getBlockEntity(pos) instanceof IndustrialMixerBlockEntity be){
-            MixerMode mixerMode = be.mixerMode;
-            ItemStack stackInside = mixerMode.item;
-            if(stack.is(stackInside.getItem()))
-                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-
-            if(be.setMixerMode(stack, true)) {
-
-                player.setItemInHand(hand, mixerMode.item);
-                be.setMixerMode(stack, false);
+        if (stack.isEmpty()) {
+            AtomicBoolean success = new AtomicBoolean(false);
+            withBlockEntityDo(level, pos, (mixer) -> {
+                if (!mixer.inventory.isEmpty()) {
+                    TFMGUtils.returnItemToInventory(mixer.inventory, 0, player, hand);
+                    mixer.onInventoryChanged(0);
+                    success.set(true);
+                }
+            });
+            if (success.get()) {
                 return ItemInteractionResult.SUCCESS;
             }
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+        AtomicBoolean success = new AtomicBoolean(false);
+        withBlockEntityDo(level, pos, (mixer) -> {
+            var mode = stack.getOrDefault(TFMGDataComponents.MIXER_MODE, MixerMode.Stored.NONE).mode().value();
+            if (mode.isValid()) {
+                boolean doInsert = true;
+                if (!mixer.inventory.isEmpty()) {
+                    if (ItemStack.isSameItemSameComponents(stack, mixer.inventory.getStackInSlot(0))) {
+                        doInsert = false;
+                    } else {
+                        TFMGUtils.returnItemToInventory(mixer.inventory, 0, player, hand);
+                        mixer.onInventoryChanged(0);
+                    }
+                }
+                if (doInsert) {
+                    mixer.inventory.insertItem(0, stack.copyWithCount(1), false);
+                    mixer.onInventoryChanged(0);
+                    stack.shrink(1);
+                    success.set(true);
+                }
+            }
+        });
+        if (success.get()) {
+            return ItemInteractionResult.SUCCESS;
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
@@ -67,7 +91,6 @@ public class IndustrialMixerBlock extends KineticBlock implements IBE<Industrial
     public void onPlace(BlockState state, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pIsMoving) {
         VatBlock.updateVatState(state, pLevel, pPos.relative(Direction.DOWN));
         super.onPlace(state, pLevel, pPos, pOldState, pIsMoving);
-
     }
 
     @Override

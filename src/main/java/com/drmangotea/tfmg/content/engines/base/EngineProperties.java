@@ -99,9 +99,8 @@ public class EngineProperties {
         List<Ingredient> components = new ArrayList<>();
 
         components.add(Ingredient.of(TFMGItems.CRANKSHAFT.asStack()));
-
-       components.add(Ingredient.of(TFMGBlocks.STEEL_COGWHEEL.asStack()));
-       components.add(Ingredient.of(TFMGBlocks.LARGE_STEEL_COGWHEEL.asStack()));
+        components.add(Ingredient.of(TFMGBlocks.STEEL_COGWHEEL.asStack()));
+        components.add(Ingredient.of(TFMGBlocks.LARGE_STEEL_COGWHEEL.asStack()));
         components.add(Ingredient.of(AllItems.BELT_CONNECTOR.asStack()));
         components.add(Ingredient.of(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPipe().asStack()));
         components.add(Ingredient.of(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPipe().asStack()));

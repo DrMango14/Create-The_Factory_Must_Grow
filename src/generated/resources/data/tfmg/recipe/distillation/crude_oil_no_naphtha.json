@@ -2,11 +2,12 @@
   "type": "tfmg:distillation",
   "ingredients": [
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 330,
-      "fluid": "tfmg:crude_oil"
+      "tag": "c:crude_oil"
     }
   ],
+  "processing_time": 1000,
   "results": [
     {
       "amount": 120,

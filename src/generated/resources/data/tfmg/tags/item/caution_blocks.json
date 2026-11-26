@@ -1,0 +1,20 @@
+{
+  "values": [
+    "tfmg:white_caution_block",
+    "tfmg:orange_caution_block",
+    "tfmg:magenta_caution_block",
+    "tfmg:light_blue_caution_block",
+    "tfmg:yellow_caution_block",
+    "tfmg:lime_caution_block",
+    "tfmg:pink_caution_block",
+    "tfmg:gray_caution_block",
+    "tfmg:light_gray_caution_block",
+    "tfmg:cyan_caution_block",
+    "tfmg:purple_caution_block",
+    "tfmg:blue_caution_block",
+    "tfmg:brown_caution_block",
+    "tfmg:green_caution_block",
+    "tfmg:red_caution_block",
+    "tfmg:black_caution_block"
+  ]
+}

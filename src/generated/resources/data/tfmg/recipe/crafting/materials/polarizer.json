@@ -6,7 +6,7 @@
       "tag": "c:plates/brass"
     },
     "C": {
-      "item": "tfmg:capacitor_item"
+      "item": "tfmg:capacitor"
     },
     "R": {
       "item": "tfmg:resistor"

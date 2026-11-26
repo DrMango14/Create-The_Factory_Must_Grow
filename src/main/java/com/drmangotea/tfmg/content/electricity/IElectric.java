@@ -2,44 +2,37 @@ package com.drmangotea.tfmg.content.electricity;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
-import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
-import com.drmangotea.tfmg.content.electricity.simulation.ElectricalComponent;
-import com.drmangotea.tfmg.content.electricity.simulation.IdealVoltageSource;
-import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
-import net.createmod.catnip.data.Pair;
+import com.drmangotea.tfmg.content.electricity.packets.AddElectricalComponentPacket;
+import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectableElectricalNode;
+import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
+import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.drmangotea.tfmg.content.electricity.content.power_transmission.cables.AbstractCableBlockEntity.connectToNeighbors;
+public interface IElectric extends IHaveMultimeterInformation {
+	ElectricalProperties getProperties();
 
-public interface IElectric {
-
-
-    default ElectricalProperties getProperties() {
-        return new ElectricalProperties(this.getPos());
-    }
-
+    BlockPos getPos();
+	
+	Level getWorld();
+	
     default ElectricalNetwork getNetwork(Level level) {
-        return ElectricNetworkManager.getNetwork(level);
+        return ElectricalNetworkManager.getNetwork(level);
     }
 
     default ElectricalNetwork getNetwork() {
         return getNetwork(getWorld());
     }
 
-    long getPos();
-
-
     default void updateNetwork(BlockPos pos) {
-        if (this instanceof LargeTransformerBlockEntity t && !t.isMainPart)
-            return;
-
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(getWorld());
+		ElectricalNetwork network = getNetwork();
         if (network == null)
             return;
         network.addMember(pos, getProperties());
@@ -47,51 +40,15 @@ public interface IElectric {
         TFMG.ELECTRICAL_NETWORK_DATA.markDirty();
     }
 
-
     default void removeBlock() {
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(getWorld());
+        ElectricalNetwork network = getNetwork();
         network.members.remove(this.getPos());
         network.removeConnections(this);
         if (this.getProperties() != null)
-            network.nodes.removeAll(this.getProperties().nodes);
+            network.nodes.removeAll(this.getProperties().nodes.values());
 
-
+		network.update();
         TFMG.ELECTRICAL_NETWORK_DATA.markDirty();
-        network.update();
-    }
-
-
-    default List<Pair<Pair<Integer, Integer>, Pair<Float, Float>>> getVoltageGeneration() {
-        List<Pair<Pair<Integer, Integer>, Pair<Float, Float>>> list = new ArrayList<>();
-
-        ElectricalProperties properties = getNetwork().members.get(getPos());
-        if (properties != null) {
-            List<Integer> voltageList = new ArrayList<>();
-            List<Integer> phaseOffsetList = new ArrayList<>();
-            List<Float> maxPowerList = new ArrayList<>();
-            List<Float> currentList = new ArrayList<>();
-
-            for (int i = 0; i < properties.components.size(); i++) {
-                ElectricalComponent component = properties.components.get(i);
-
-                if (component instanceof IdealVoltageSource source) {
-                    voltageList.add((int) source.amplitude);
-                    phaseOffsetList.add((int) source.phaseOffset);
-                    maxPowerList.add((float) source.power);
-                }
-                if (component instanceof Resistance resistor) {
-                    currentList.add((float) (resistor.getVoltage(getWorld()) / resistor.resistance));
-                }
-            }
-            for (int i = 0; i < voltageList.size(); i++) {
-                int voltage = voltageList.get(i);
-                int phaseOffset = phaseOffsetList.get(i);
-                float maxPower = maxPowerList.get(i);
-                float current = currentList.get(i);
-                list.add(Pair.of(Pair.of(voltage, phaseOffset), Pair.of(maxPower, current)));
-            }
-        }
-        return list;
     }
 
     default void onUpdated() {
@@ -101,56 +58,76 @@ public interface IElectric {
         TFMGTexts.header("multimeter").style(ChatFormatting.WHITE)
                 .forGoggles(tooltip);
 
-
-        // if (getVoltageGeneration().is) {
-        //     TFMGTexts.Multimeter.powerGenerated(powerGeneration()).forGoggles(tooltip, 1);
-        //     TFMGTexts.Multimeter.voltageGenerated(voltageGeneration()).forGoggles(tooltip, 1);
-        //     TFMGTexts.Multimeter.separator().forGoggles(tooltip);
-        // }
-        // if (resistance() != 0 && !(this instanceof CableConnectorBlockEntity) && !(this instanceof CableHubBlockEntity))
-        //     TFMGTexts.Multimeter.resistance(voltageGeneration() > 0 ? getGeneratorResistance() : resistance()).forGoggles(tooltip, 1);
-        // TFMGTexts.Multimeter.voltage(getData().getVoltage()).forGoggles(tooltip, 1);
-        // TFMGTexts.Multimeter.current(resistance() == 0 ? getData().highestCurrent : getCurrent()).forGoggles(tooltip, 1);
-        // if (resistance() != 0)
-        //     TFMGTexts.Multimeter.power(getPowerUsage()).forGoggles(tooltip, 1);
-//
-        // if (getData().energyGiven > 0) {
-        //     TFMGTexts.Multimeter.sendingFE(getData().energyGiven).forGoggles(tooltip, 1);
-        // }
-        // if (getData().energyTakenPerTick > 0) {
-        //     TFMGTexts.Multimeter.takingFE(getData().energyTakenPerTick).forGoggles(tooltip, 1);
-        // }
-//
-        // if (isPlayerSneaking) {
-        //     TFMGTexts.Multimeter.separator().forGoggles(tooltip);
-        //     TFMGTexts.Multimeter.networkGeneration(getNetworkPowerGeneration()).forGoggles(tooltip, 1);
-        //     TFMGTexts.Multimeter.networkConsumption(getNetworkPowerUsage()).forGoggles(tooltip, 1);
-        // }
-
+		/* TODO: Add getters or something like that
+		TFMGTexts.Multimeter.resistance(resistance).forGoggles(tooltip);
+		TFMGTexts.Multimeter.voltage(voltage).forGoggles(tooltip);
+		TFMGTexts.Multimeter.current(current).forGoggles(tooltip);
+		TFMGTexts.Multimeter.power(current*voltage).forGoggles(tooltip);
+		*/
 
         return false;
     }
 
+	/// This updates the network, calls {@link IElectric#whilePlacing}, then updates the network again.
+	/// Then it sends a packet, so keep that in mind if overriding.
     default void onPlace() {
-        this.updateNetwork(BlockPos.of(getPos()));
-        //if (this instanceof ElectricSwitchBlockEntity)
-        //    for (Direction facing : Direction.values()) {
-        //        if (getWorld().getBlockEntity(BlockPos.of(getPos()).relative(facing)) instanceof IRealisticElectric be) {
-        //            connectToNeighbors(getWorld(), be);
-        //        }
-//
-        //    }
+        this.updateNetwork(getPos());
+		
+		whilePlacing();
+        this.updateNetwork(getPos());
 
-
-      //  if (!(this instanceof CableBlockEntity) && getProperties().cableConnectable()) {
-      //      connectToNeighbors(getWorld(), this);
-      //      updateNetwork(BlockPos.of(getPos()));
-      //  }
-        connectToNeighbors(getWorld(), this);
-        this.updateNetwork(BlockPos.of(getPos()));
-
+		if (getWorld() instanceof ServerLevel serverLevel)
+			CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(getPos()), new AddElectricalComponentPacket(getPos()));
     }
-
-    Level getWorld();
-
+	
+	/// This gets called during placement logic, between network updates.
+	/// This allows for changing that behaviour without having to then call for additional network updates.
+	default void whilePlacing() {
+		connectToNeighbors(getWorld(), this);
+	}
+	
+	/// Creates invisible connections between neighbouring IElectrics
+	/// @return ???? I have no idea mango, I think it's about trying again
+	static boolean connectToNeighbors(Level level, IElectric be) {
+		ElectricalNetwork network = be.getNetwork(level);
+		ElectricalProperties properties = network.members.get(be.getPos());
+		network.removeConnections(be);
+		
+		if (properties == null) {
+			return false;
+		}
+		
+		boolean bool = false;
+		for (Direction facing : Direction.values()) {
+			BlockPos pos = be.getPos().relative(facing);
+			if (!(level.getBlockEntity(pos) instanceof IElectric)) continue;
+			//no reason to expect properties from this, so just move on.
+			
+			ElectricalProperties neighborProperties = network.members.get(pos);
+			if (neighborProperties == null) {
+				bool = true; //To not cut the search short
+				continue;
+			}
+			
+			for (ElectricalNode n1 : properties.nodes.values()) {
+				if (!(n1 instanceof ConnectableElectricalNode node)) continue;
+				for (ElectricalNode n2 : neighborProperties.nodes.values()) {
+					if (!(n2 instanceof ConnectableElectricalNode neighborNode)) continue;
+					
+					if (node.type != neighborNode.type) continue;
+					
+					if (node.facing.contains(facing) && neighborNode.facing.contains(facing.getOpposite())) {
+						WireConnection connection = invisibleConnection(node, neighborNode);
+						if (!network.connections.contains(connection))
+							network.connections.add(connection);
+					}
+				}
+			}
+		}
+		return bool;
+	}
+	
+	static WireConnection invisibleConnection(ConnectableElectricalNode A, ConnectableElectricalNode B) {
+		return new WireConnection(A.pos, B.pos, TFMG.asResource("universal"), false);
+	}
 }

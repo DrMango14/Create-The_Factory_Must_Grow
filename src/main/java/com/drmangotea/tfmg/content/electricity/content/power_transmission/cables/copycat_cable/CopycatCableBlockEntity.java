@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.cables.copycat_cable;
 
-
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.IElectric;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
@@ -12,7 +11,6 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.api.equipment.goggles.IHaveHoveringInformation;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatBlockEntity;
-import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -22,7 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElectric, IHaveHoveringInformation {
@@ -33,8 +30,7 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
 
     public CopycatCableBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        this.p = new CableProperties(getPos(), Arrays.stream(Direction.values()).toList());
-
+        this.p = new CableProperties(getPos(), List.of(Direction.values()));
     }
 
     @Override
@@ -52,13 +48,14 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
     }
 
     public void connectToNeighbors() {
+		if (level == null) return;
         ElectricalNetwork network = getNetwork(level);
         CableProperties properties = (CableProperties) network.members.get(getPos());
         network.removeConnections(this);
         for (Direction facing : properties.directions) {
             BlockPos pos = getBlockPos().relative(facing);
-            if (level.getBlockEntity(pos) instanceof IElectric be) {
-                ElectricalProperties neighborProperties = network.members.get(pos.asLong());
+            if (level.getBlockEntity(pos) instanceof IElectric) {
+                ElectricalProperties neighborProperties = network.members.get(pos);
                 if (neighborProperties == null) {
                     connectNextTick = true;
                     continue;
@@ -66,11 +63,9 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
 
                 if (neighborProperties instanceof CableProperties cableProperties) {
                     if (cableProperties.directions.contains(facing)) {
-
                         for (int i = 0; i < 4; i++) {
                             if (properties.nodes.get(i) instanceof DirectionalElectricalNode n1 && cableProperties.nodes.get(i) instanceof DirectionalElectricalNode n2) {
-
-                                WireConnection connection = new WireConnection(n1, n2, 10, false);
+                                WireConnection connection = IElectric.invisibleConnection(n1, n2);
                                 if (!network.connections.contains(connection))
                                     network.connections.add(connection);
                             }
@@ -81,9 +76,7 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
                     for (int i = 0; i < 4; i++) {
                         if (i < properties.nodes.size() && i < neighborProperties.nodes.size())
                             if (properties.nodes.get(i) instanceof ConnectableElectricalNode n1 && neighborProperties.nodes.get(i) instanceof ConnectableElectricalNode n2) {
-
-
-                                WireConnection connection = new WireConnection(n1, n2, 10, false);
+                                WireConnection connection = IElectric.invisibleConnection(n1, n2);
                                 if (!network.connections.contains(connection))
                                     network.connections.add(connection);
                             }
@@ -94,11 +87,10 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
     }
 
 
-    @Override
-    public void onPlace() {
-        IElectric.super.onPlace();
+	@Override //TODO: Review this - this is prolly unnecessary
+	public void whilePlacing() {
+        IElectric.super.whilePlacing();
         connectToNeighbors();
-        updateNetwork(getBlockPos());
     }
 
     @Override
@@ -111,15 +103,11 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
         super.remove();
         this.removeBlock();
     }
-    @Override
-    public void addBehaviours(List<BlockEntityBehaviour> list) {
-    }
 
     @Override
-    public long getPos() {
-        return getBlockPos().asLong();
+    public BlockPos getPos() {
+        return getBlockPos();
     }
-
 
     @Override
     protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
@@ -127,8 +115,6 @@ public class CopycatCableBlockEntity extends CopycatBlockEntity implements IElec
         // Validate Material
         if (getMaterial() != null && !clientPacket) {
             BlockState blockState = getBlockState();
-            if (blockState == null)
-                return;
             if (!(blockState.getBlock() instanceof CopycatBlock cb))
                 return;
             BlockState acceptedBlockState = cb.getAcceptedBlockState(level, worldPosition, ItemStack.EMPTY, null);

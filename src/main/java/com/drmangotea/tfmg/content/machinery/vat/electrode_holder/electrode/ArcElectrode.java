@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode;
 
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
+import com.drmangotea.tfmg.registry.TFMGVatOperations;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -10,7 +11,7 @@ import net.minecraft.world.level.Level;
 
 public class ArcElectrode extends Electrode {
     public ArcElectrode(Properties properties) {
-        super(properties.operationId("tfmg:graphite_electrode"));
+        super(properties.operationId(TFMGVatOperations.GRAPHITE_ELECTRODE));
     }
 
     @Override

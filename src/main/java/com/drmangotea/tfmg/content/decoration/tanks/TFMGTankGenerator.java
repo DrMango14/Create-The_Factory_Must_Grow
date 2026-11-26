@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.decoration.tanks;
 
-import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlock;
 import com.simibubi.create.content.fluids.tank.FluidTankBlock;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SpecialBlockStateGen;
@@ -33,11 +32,10 @@ public class TFMGTankGenerator extends SpecialBlockStateGen {
     }
 
     @Override
-    public <T extends Block> ModelFile getModel(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov,
-                                                BlockState state) {
-        Boolean top = state.getValue(SteelTankBlock.TOP);
-        Boolean bottom = state.getValue(SteelTankBlock.BOTTOM);
-        FluidTankBlock.Shape shape = state.getValue(SteelTankBlock.SHAPE);
+    public <T extends Block> ModelFile getModel(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov, BlockState state) {
+        Boolean top = state.getValue(FluidTankBlock.TOP);
+        Boolean bottom = state.getValue(FluidTankBlock.BOTTOM);
+        FluidTankBlock.Shape shape = state.getValue(FluidTankBlock.SHAPE);
 
         String shapeName = "middle";
         if (top && bottom)
@@ -61,5 +59,4 @@ public class TFMGTankGenerator extends SpecialBlockStateGen {
 
         return AssetLookup.partialBaseModel(ctx, prov, modelName);
     }
-
 }

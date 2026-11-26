@@ -1,0 +1,19 @@
+{
+  "compositions": [
+    {
+      "elements": [
+        {
+          "amount": 5,
+          "id": "rutile:carbon"
+        },
+        {
+          "amount": 12,
+          "id": "rutile:hydrogen"
+        }
+      ]
+    }
+  ],
+  "contents": [
+    "tfmg:lpg"
+  ]
+}

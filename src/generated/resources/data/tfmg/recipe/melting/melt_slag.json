@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createbigcannons"
+    }
+  ],
+  "type": "createbigcannons:melting",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "item": "tfmg:slag_block"
+    }
+  ],
+  "processing_time": 40,
+  "results": [
+    {
+      "amount": 20,
+      "id": "tfmg:molten_slag"
+    }
+  ]
+}

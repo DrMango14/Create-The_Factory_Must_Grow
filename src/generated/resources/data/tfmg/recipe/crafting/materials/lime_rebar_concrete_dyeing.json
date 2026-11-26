@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "tfmg:rebar_concrete"
+    },
+    "D": {
+      "tag": "c:dyes/lime"
+    }
+  },
+  "pattern": [
+    "###",
+    "#D#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "id": "tfmg:lime_rebar_concrete"
+  }
+}

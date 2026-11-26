@@ -1,0 +1,7 @@
+{
+  "efficiency": 0.8,
+  "exhaust": "tfmg:carbon_dioxide",
+  "fluids": "#c:diesel",
+  "speed": 0.8,
+  "torque": 1.4
+}

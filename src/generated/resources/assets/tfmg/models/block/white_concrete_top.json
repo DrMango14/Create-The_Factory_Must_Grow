@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/slab_top",
   "textures": {
-    "bottom": "tfmg:block/white_concrete",
-    "side": "tfmg:block/white_concrete",
-    "top": "tfmg:block/white_concrete"
+    "bottom": "tfmg:block/concrete/white",
+    "side": "tfmg:block/concrete/white",
+    "top": "tfmg:block/concrete/white"
   }
 }

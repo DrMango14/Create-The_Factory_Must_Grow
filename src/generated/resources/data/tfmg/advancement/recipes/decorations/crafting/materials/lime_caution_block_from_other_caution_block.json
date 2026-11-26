@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_caution_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#tfmg:caution_blocks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tfmg:crafting/materials/lime_caution_block_from_other_caution_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_caution_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tfmg:crafting/materials/lime_caution_block_from_other_caution_block"
+    ]
+  }
+}

@@ -64,8 +64,7 @@ public enum TFMGParticleTypes {
 
 		@OnlyIn(Dist.CLIENT)
 		public void registerFactory(RegisterParticleProvidersEvent event) {
-			typeFactory.get()
-				.register(object.get(), event);
+			typeFactory.get().register(object.get(), event);
 		}
 
 	}

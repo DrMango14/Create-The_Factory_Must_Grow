@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:dyes/black"
+    },
+    {
+      "tag": "tfmg:caution_blocks"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:black_caution_block"
+  }
+}

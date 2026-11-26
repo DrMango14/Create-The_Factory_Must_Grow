@@ -1,0 +1,7 @@
+{
+  "efficiency": 0.7,
+  "exhaust": "tfmg:carbon_dioxide",
+  "fluids": "#c:lpg",
+  "speed": 1.2,
+  "torque": 0.7
+}

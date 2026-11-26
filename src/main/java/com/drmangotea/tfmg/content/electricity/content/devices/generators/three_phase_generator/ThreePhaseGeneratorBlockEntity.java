@@ -1,11 +1,10 @@
 package com.drmangotea.tfmg.content.electricity.content.devices.generators.three_phase_generator;
 
-import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.packets.UpdateVoltagePacket;
 import com.drmangotea.tfmg.content.electricity.simulation.IdealVoltageSource;
@@ -65,7 +64,7 @@ public class ThreePhaseGeneratorBlockEntity extends KineticBlockEntity implement
 
     public void updateVoltage() {
 
-        ElectricalNetwork electricalNetwork = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork electricalNetwork = ElectricalNetworkManager.getNetwork(level);
 
 
         electricalNetwork.setVoltageGen(this, (int) Math.abs(getSpeed()) * 10);
@@ -98,7 +97,7 @@ public class ThreePhaseGeneratorBlockEntity extends KineticBlockEntity implement
     public void onUpdated() {
 
 
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
 
         for (int i = 0; i < 3; i++) {
             Resistance r = network.getResistance(getPos(), i);
@@ -126,17 +125,17 @@ public class ThreePhaseGeneratorBlockEntity extends KineticBlockEntity implement
                     overloadIntensity = power / maxPower;
 
                 if (overloadIntensity > 2) {
-                    getLevel().destroyBlock(BlockPos.of(getPos()), false);
+                    getLevel().destroyBlock(getPos(), false);
                     level.setBlock(getBlockPos(), Blocks.FIRE.defaultBlockState(), 3);
                     return;
 
                 }
                 if (overloadIntensity > 1.5) {
-                    getLevel().destroyBlock(BlockPos.of(getPos()), false);
+                    getLevel().destroyBlock(getPos(), false);
                     return;
                 }
                 if (overloadIntensity > 1.1) {
-                    getLevel().destroyBlock(BlockPos.of(getPos()), true);
+                    getLevel().destroyBlock(getPos(), true);
 
                 }
             }
@@ -180,8 +179,8 @@ public class ThreePhaseGeneratorBlockEntity extends KineticBlockEntity implement
 
 
     @Override
-    public long getPos() {
-        return getBlockPos().asLong();
+    public BlockPos getPos() {
+        return getBlockPos();
     }
 
     @Override

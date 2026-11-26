@@ -36,7 +36,7 @@ public class FlarestackBlock extends Block implements IBE<FlarestackBlockEntity>
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext p_51240_) {
 
-        return this.defaultBlockState().setValue(LIT, Boolean.valueOf(false));
+        return this.defaultBlockState().setValue(LIT, false);
     }
 
 

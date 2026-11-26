@@ -1,0 +1,14 @@
+{
+  "compositions": [
+    {
+      "elements": [
+        {
+          "id": "rutile:hydrogen"
+        }
+      ]
+    }
+  ],
+  "contents": [
+    "tfmg:hydrogen"
+  ]
+}

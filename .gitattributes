@@ -1,0 +1,6 @@
+* text=auto
+*.java text eol=lf
+*.json text eol=lf
+*.mcmeta text eol=lf
+*.toml text eol=lf
+*.properties text eol=lf

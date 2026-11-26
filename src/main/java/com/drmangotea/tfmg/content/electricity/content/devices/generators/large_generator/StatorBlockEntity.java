@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.content.devices.generators.large_generator;
 
-
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.cables.cable_hubs.CableHubBlockEntity;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import net.minecraft.core.BlockPos;
@@ -25,22 +24,17 @@ public class StatorBlockEntity extends CableHubBlockEntity implements IHaveGoggl
     @Override
     public void lazyTick() {
         super.lazyTick();
-        if (rotor != null)
-            if (!(level.getBlockEntity(rotor) instanceof RotorBlockEntity))
-                rotor = null;
-
-
+        if (level == null || rotor != null && !(level.getBlockEntity(rotor) instanceof RotorBlockEntity))
+			rotor = null;
     }
 
 
 
 
     public void updateRotor(){
+		if (level == null) return;
 
-
-        Iterable<BlockPos> blocksAround = BlockPos.betweenClosed(getBlockPos().below().north().west(),getBlockPos().above().east().east());
-
-        for (BlockPos blockPos : blocksAround) {
+        for (BlockPos blockPos : BlockPos.betweenClosed(getBlockPos().offset(-1,-1,-1),getBlockPos().offset(1,1,1))) {
             if(level.getBlockEntity(blockPos) instanceof RotorBlockEntity be) {
                // be.updateNextTick();
                 timer = 11;
@@ -53,21 +47,19 @@ public class StatorBlockEntity extends CableHubBlockEntity implements IHaveGoggl
     public void onPlace() {
         super.onPlace();
         updateRotor();
-        if (rotor != null)
-            if (level.getBlockEntity(rotor) instanceof RotorBlockEntity be) {
-                timer =11;
-                be.findNextTick = true;
-            }
+        if (rotor != null && level != null && level.getBlockEntity(rotor) instanceof RotorBlockEntity be) {
+			timer =11;
+			be.findNextTick = true;
+		}
     }
 
     @Override
     public void destroy() {
         super.destroy();
         updateRotor();
-        if (rotor != null)
-            if (level.getBlockEntity(rotor) instanceof RotorBlockEntity be) {
-              //  be.updateNextTick();
-                be.findNextTick = true;
-            }
+        if (rotor != null && level != null && level.getBlockEntity(rotor) instanceof RotorBlockEntity be) {
+			//be.updateNextTick();
+			be.findNextTick = true;
+		}
     }
 }

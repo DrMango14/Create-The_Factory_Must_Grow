@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.accumulator_rack;
 
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
+@NothingNullByDefault
 public class AccumulatorRackBlock extends TFMGDirectionalBlock implements IBE<AccumulatorRackBlockEntity> {
     public AccumulatorRackBlock(Properties p_54120_) {
         super(p_54120_);

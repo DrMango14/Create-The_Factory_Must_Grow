@@ -3,20 +3,20 @@
   "hot_air_usage": 40,
   "ingredients": [
     {
-      "item": "minecraft:raw_iron"
+      "tag": "c:raw_materials/iron"
     },
     {
       "tag": "tfmg:flux"
     }
   ],
-  "processing_time": 40,
+  "processing_time": 800,
   "results": [
     {
-      "amount": 288,
+      "amount": 180,
       "id": "tfmg:molten_steel"
     },
     {
-      "amount": 288,
+      "amount": 160,
       "id": "tfmg:molten_slag"
     },
     {

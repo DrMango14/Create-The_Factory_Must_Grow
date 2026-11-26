@@ -14,7 +14,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class RotorRenderer extends KineticBlockEntityRenderer<RotorBlockEntity> {
-
 	public RotorRenderer(BlockEntityRendererProvider.Context context) {
 		super(context);
 	}

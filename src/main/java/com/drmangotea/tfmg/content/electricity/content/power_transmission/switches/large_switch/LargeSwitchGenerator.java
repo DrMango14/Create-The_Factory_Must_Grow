@@ -11,8 +11,6 @@ import net.neoforged.neoforge.client.model.generators.ModelFile;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
 
 public class LargeSwitchGenerator extends SpecialBlockStateGen {
-
-
     @Override
     protected int getXRotation(BlockState state) {
         return 0;
@@ -24,10 +22,8 @@ public class LargeSwitchGenerator extends SpecialBlockStateGen {
         return switch (state.getValue(HorizontalKineticBlock.HORIZONTAL_FACING)) {
             case NORTH -> 180;
             case SOUTH -> 0;
-            case WEST -> 90;
+            case WEST, UP, DOWN -> 90;
             case EAST -> 270;
-            case DOWN -> 90;
-            case UP -> 90;
         };
     }
 

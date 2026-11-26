@@ -9,18 +9,20 @@ import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.concurrent.CompletableFuture;
 
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.*;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.carbonDioxide;
+import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.hotAir;
 
+@SuppressWarnings("unused")
 public class TFMGHotBlastRecipeGen extends HotBlastRecipeGen {
 
 	GeneratedRecipe
 
 
 	HOT_AIR = create(TFMG.asResource("hot_air"), b ->b
-			.require(SizedFluidIngredient.of(air(),25))
-			.require(TFMGTags.TFMGFluidTags.BLAST_STOVE_FUEL.tag,5)
-			.output(hotAir(), 25)
-			.output(carbonDioxide(), 25)
+			.require(SizedFluidIngredient.of(TFMGTags.Fluids.AIR.tag,50))
+			.require(TFMGTags.Fluids.BLAST_STOVE_FUEL.tag,10)
+			.output(hotAir(), 50)
+			.output(carbonDioxide(), 50)
 			.duration(200));
 	public TFMGHotBlastRecipeGen(PackOutput generator, CompletableFuture<HolderLookup.Provider> registries) {
 		super(generator, registries,TFMG.MOD_ID);

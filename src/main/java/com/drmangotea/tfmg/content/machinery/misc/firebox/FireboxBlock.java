@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
-public class FireboxBlock  extends Block implements IWrenchable, IBE<FireboxBlockEntity> {
+public class FireboxBlock extends Block implements IWrenchable, IBE<FireboxBlockEntity> {
 
     public static final EnumProperty<BlazeBurnerBlock.HeatLevel> HEAT_LEVEL = BlazeBurnerBlock.HEAT_LEVEL;
     public FireboxBlock(Properties p_49795_) {
@@ -40,9 +40,26 @@ public class FireboxBlock  extends Block implements IWrenchable, IBE<FireboxBloc
         builder.add(HEAT_LEVEL);
     }
 
+    public static int getLight(BlockState state) {
+        BlazeBurnerBlock.HeatLevel level = state.getValue(HEAT_LEVEL);
+        return switch (level) {
+            case FADING -> 10;
+            default -> 0;
+        };
+    }
+
+    public static BlazeBurnerBlock.HeatLevel getHeatLevelOf(BlockState blockState) {
+        return blockState.hasProperty(BlazeBurnerBlock.HEAT_LEVEL) ? blockState.getValue(BlazeBurnerBlock.HEAT_LEVEL)
+                : BlazeBurnerBlock.HeatLevel.NONE;
+    }
+
     @Override
     public int getLightEmission(BlockState state, BlockGetter world, BlockPos pos) {
-        return 0;
+        BlazeBurnerBlock.HeatLevel level = state.getValue(HEAT_LEVEL);
+        return switch (level) {
+            case FADING -> 10;
+            default -> 0;
+        };
     }
     @Override
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {

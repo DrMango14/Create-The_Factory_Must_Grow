@@ -60,9 +60,9 @@ public class TFMGArmorMaterials  {
     ) {
         EnumMap<ArmorItem.Type, Integer> enummap = new EnumMap<>(ArmorItem.Type.class);
 
-       // for (ArmorItem.Type armoritem$type : ArmorItem.Type.values()) {
-       //     enummap.put(armoritem$type, defense[armoritem$type.ordinal()]);
-       // }
+        for (ArmorItem.Type armoritem$type : ArmorItem.Type.values()) {
+            enummap.put(armoritem$type, defense[armoritem$type.ordinal()]);
+        }
 
         return ARMOR_MATERIALS.register(name,
                 () -> new ArmorMaterial(enummap, enchantmentValue, equipSound, repairIngridient, layers, toughness, knockbackResistance)

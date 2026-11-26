@@ -12,11 +12,11 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+@ParametersAreNonnullByDefault
 public class LargeElectromagneticCoilItem extends BlockItem {
-
-
     public LargeElectromagneticCoilItem(Block block, Properties properties) {
         super(block, properties);
     }

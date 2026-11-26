@@ -1,0 +1,16 @@
+{
+  "values": {
+    "tfmg:coal_coke": {
+      "burn_time": 3200
+    },
+    "tfmg:coal_coke_block": {
+      "burn_time": 28800
+    },
+    "tfmg:coal_coke_dust": {
+      "burn_time": 3200
+    },
+    "tfmg:fossilstone": {
+      "burn_time": 4000
+    }
+  }
+}

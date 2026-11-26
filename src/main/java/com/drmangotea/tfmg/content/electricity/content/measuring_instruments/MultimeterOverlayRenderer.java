@@ -1,18 +1,19 @@
 package com.drmangotea.tfmg.content.electricity.content.measuring_instruments;
 
-import com.drmangotea.tfmg.base.lang.TFMGLang;
-import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.registry.TFMGItems;
+import com.drmangotea.tfmg.content.electricity.IHaveMultimeterInformation;
+import com.drmangotea.tfmg.integration.curios.MultimeterCurios;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.api.equipment.goggles.IProxyHoveringInformation;
 import com.simibubi.create.compat.Mods;
+import com.simibubi.create.content.equipment.goggles.GoggleOverlayRenderer;
 import com.simibubi.create.content.equipment.goggles.GogglesItem;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBox;
 import com.simibubi.create.foundation.gui.RemovedGuiUtils;
 import com.simibubi.create.foundation.mixin.accessor.MouseHandlerAccessor;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CClient;
+import net.createmod.catnip.gui.element.BoxElement;
 import net.createmod.catnip.gui.element.GuiGameElement;
 import net.createmod.catnip.outliner.Outline;
 import net.createmod.catnip.outliner.Outliner;
@@ -28,14 +29,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +41,6 @@ import java.util.Map;
 public class MultimeterOverlayRenderer {
 
     public static final LayeredDraw.Layer OVERLAY = MultimeterOverlayRenderer::renderOverlay;
-
     private static final Map<Object, OutlineEntry> outlines = Outliner.getInstance().getOutlines();
 
     public static int hoverTicks = 0;
@@ -54,10 +50,13 @@ public class MultimeterOverlayRenderer {
         Minecraft mc = Minecraft.getInstance();
         int width = graphics.guiWidth();
         int height = graphics.guiHeight();
-        if (mc.options.hideGui || mc.gameMode.getPlayerMode() == GameType.SPECTATOR)
+
+        // If the player is a spectator, or he hides the GUI, do not render the overlay.
+        if (mc.options.hideGui || mc.gameMode.getPlayerMode() == GameType.SPECTATOR) {
             return;
-        HitResult objectMouseOver = mc.hitResult;
-        if (!(objectMouseOver instanceof BlockHitResult result)) {
+        }
+
+        if (!(mc.hitResult instanceof BlockHitResult result)) {
             lastHovered = null;
             hoverTicks = 0;
             return;
@@ -67,35 +66,35 @@ public class MultimeterOverlayRenderer {
             if (!entry.isAlive())
                 continue;
             Outline outline = entry.getOutline();
-            if (outline instanceof ValueBox && !((ValueBox) outline).isPassive)
+            if (outline instanceof ValueBox box && !box.isPassive)
                 return;
         }
 
         ClientLevel world = mc.level;
         BlockPos pos = result.getBlockPos();
 
-        int prevHoverTicks = hoverTicks;
+        if (world == null || mc.player == null ||
+			!(MultimeterCurios.getHeldByPlayer(mc.player) instanceof MultimeterItem multimeterItem)
+		) {
+            lastHovered = null;
+            hoverTicks = 0;
+            return;
+        }
+
+        boolean wearingGoggles = GogglesItem.isWearingGoggles(mc.player);
+
         hoverTicks++;
         lastHovered = pos;
 
         pos = proxiedOverlayPosition(world, pos);
 
-        BlockEntity be = world.getBlockEntity(pos);
-        boolean holdsMultimeter = MultimeterItem.isHeldByPlayer(mc.player);
-
-        boolean isShifting = mc.player.isShiftKeyDown();
-
-        boolean isElectricBlock = be instanceof IElectric;
-        if (!isElectricBlock)
+        if(!(world.getBlockEntity(pos) instanceof IHaveMultimeterInformation info))
             return;
 
-
-        ItemStack item = TFMGItems.MULTIMETER.asStack();
         List<Component> tooltip = new ArrayList<>();
-        tooltip.add(TFMGLang.number(1).component());
 
-        ((IElectric) be).makeMultimeterTooltip(tooltip, isShifting);
-
+        // The block entity is responsible for making it's own Tooltip.
+		info.makeMultimeterTooltip(tooltip, mc.player.isCrouching());
 
         PoseStack poseStack = graphics.pose();
         poseStack.pushPose();
@@ -112,13 +111,6 @@ public class MultimeterOverlayRenderer {
             tooltipHeight += 2; // gap between title lines and next lines
             tooltipHeight += (tooltip.size() - 1) * 10;
         }
-        for (ItemStack armorSlot : mc.player.getArmorSlots()) {
-
-            if(armorSlot.getItem() instanceof GogglesItem)
-                return;
-
-        }
-
 
         CClient cfg = AllConfigs.client();
         int posX = width / 2 + cfg.overlayOffsetX.get();
@@ -127,39 +119,37 @@ public class MultimeterOverlayRenderer {
         posX = Math.min(posX, width - tooltipTextWidth - 20);
         posY = Math.min(posY, height - tooltipHeight - 20);
 
-        float fade = Mth.clamp((hoverTicks + deltaTracker.getGameTimeDeltaPartialTick(false)) / 24f, 0, 1);
+        int animationTicks = wearingGoggles ? GoggleOverlayRenderer.hoverTicks : hoverTicks;
+        float fade = Mth.clamp((animationTicks + deltaTracker.getGameTimeDeltaPartialTick(false)) / 24f, 0, 1);
         Boolean useCustom = cfg.overlayCustomColor.get();
-        //Color colorBackground = useCustom ? new Color(cfg.overlayBackgroundColor.get())
-        //        : BoxElement.COLOR_VANILLA_BACKGROUND.scaleAlpha(.75f);
-
-        ItemStack inMainHand = mc.player.getItemInHand(InteractionHand.MAIN_HAND);
-        ItemStack inOffHand = mc.player.getItemInHand(InteractionHand.OFF_HAND);
-
-        if(!(inMainHand.getItem() instanceof MultimeterItem || inOffHand.getItem() instanceof MultimeterItem))
-            return;
-
-        ItemStack multimeter = inMainHand.getItem() instanceof MultimeterItem ? inMainHand : inOffHand;
-        Color colorBackground = new Color(((MultimeterItem)multimeter.getItem()).color).setAlpha(100);
-
-        Color colorBorderTop = new Color(((MultimeterItem)multimeter.getItem()).color).setAlpha(100);
-        Color colorBorderBot = new Color(((MultimeterItem)multimeter.getItem()).color).setAlpha(100);
+        Color colorBackground = useCustom ? new Color(cfg.overlayBackgroundColor.get())
+                : BoxElement.COLOR_VANILLA_BACKGROUND.scaleAlpha(.75f);
+        Color colorBorder = new Color(multimeterItem.color).setAlpha(100);
 
         if (fade < 1) {
             poseStack.translate(Math.pow(1 - fade, 3) * Math.signum(cfg.overlayOffsetX.get() + .5f) * 8, 0, 0);
 
             colorBackground.scaleAlpha(fade);
-            colorBorderTop.scaleAlpha(fade);
-            colorBorderBot.scaleAlpha(fade);
+			colorBorder.scaleAlpha(fade);
         }
 
-        GuiGameElement.of(multimeter)
-                .at(posX + 10, posY - 16, 450)
+        // Add a multimeter to indicate both items are being utilised
+        if (wearingGoggles) {
+            GuiGameElement.of(multimeterItem)
+                    .at(posX + 10, posY, 450)
+                    .render(graphics);
+            poseStack.popPose();
+            return;
+        }
+
+        GuiGameElement.of(multimeterItem)
+                .at(posX + 10, posY - 15, 450)
                 .render(graphics);
 
         if (!Mods.MODERNUI.isLoaded()) {
             // default tooltip rendering when modernUI is not loaded
             RemovedGuiUtils.drawHoveringText(graphics, tooltip, posX, posY, width, height, -1, colorBackground.getRGB(),
-                    colorBorderTop.getRGB(), colorBorderBot.getRGB(), mc.font);
+				colorBorder.getRGB(), colorBorder.getRGB(), mc.font);
 
             poseStack.popPose();
 
@@ -175,13 +165,12 @@ public class MultimeterOverlayRenderer {
         ((MouseHandlerAccessor) mouseHandler).create$setYPos(Math.round(cursorY / guiScale) * guiScale);
 
         RemovedGuiUtils.drawHoveringText(graphics, tooltip, posX, posY, width, height, -1, colorBackground.getRGB(),
-                colorBorderTop.getRGB(), colorBorderBot.getRGB(), mc.font);
+			colorBorder.getRGB(), colorBorder.getRGB(), mc.font);
 
         ((MouseHandlerAccessor) mouseHandler).create$setXPos(cursorX);
         ((MouseHandlerAccessor) mouseHandler).create$setYPos(cursorY);
 
         poseStack.popPose();
-
     }
 
     public static BlockPos proxiedOverlayPosition(Level level, BlockPos pos) {

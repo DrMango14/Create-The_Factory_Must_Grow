@@ -1,20 +1,18 @@
 package com.drmangotea.tfmg.content.electricity;
 
-
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.config.TFMGConfigs;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.large.LargeTransformerBlockEntity;
+import com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.cable_type.CableType;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectableElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ConnectingElectricalNode;
 import com.drmangotea.tfmg.content.electricity.simulation.nodes.ElectricalNode;
-import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.render.CachedBuffers;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
@@ -27,174 +25,129 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
-import org.joml.Vector3f;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.function.DoubleUnaryOperator;
 
 import static com.drmangotea.tfmg.base.TFMGUtils.closestNode;
 
+@OnlyIn(Dist.CLIENT)
 public class ElectricNetworkRenderer {
 
-
-    @OnlyIn(Dist.CLIENT)
-    public static void tickRender(RenderLevelStageEvent event) {
+    public void tickRender(RenderLevelStageEvent event) {
         tickOutlines();
         renderWires(event);
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public static void renderWires(RenderLevelStageEvent event) {
+    public void renderWires(RenderLevelStageEvent event) {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
         if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_PARTICLES)
             return;
         if (player == null)
             return;
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(mc.level);
-        LevelRenderer levelRenderer = event.getLevelRenderer();
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(mc.level);
         PoseStack ms = event.getPoseStack();
         MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
         VertexConsumer vc = buffer.getBuffer(RenderType.cutoutMipped());
         Camera camera = event.getCamera();
-        Vector3f playerPos = player.getEyePosition().toVector3f();
-
-
-
-
-
-        //renderWire(TFMGPartialModels.CABLE, new CablePos(0, -56, 0), new CablePos(0, -56, 10), camera, ms, vc, player, true);
+        Vec3 playerPos = player.getEyePosition();
 
         for (WireConnection connection : network.connections) {
-            if (connection.render)
-                renderWire(connection.model.modelLocation().getPath().isBlank() ? TFMGPartialModels.STEEL_REINFORCED_CABLE : connection.model, connection.node1.getPosition().add(BlockPos.of(connection.node1.pos)), connection.node2.getPosition().add(BlockPos.of(connection.node2.pos)), camera, ms, vc, player, false);
+			CableType type = connection.cableType();
+			if (connection.render() && type != null)
+				renderWire(
+					type.getModel(),
+					connection.node1().getFullPos(),
+					connection.node2().getFullPos(),
+					camera, ms, vc, playerPos
+				);
         }
     }
 
-    public static void renderWire(PartialModel model, CablePos pos1, CablePos pos2, Camera camera, PoseStack ms, VertexConsumer vc, Player player, boolean debug) {
+    public void renderWire(PartialModel model, Vec3 pos1, Vec3 pos2, Camera camera, PoseStack ms, VertexConsumer vc, Vec3 playerPos) {
+		Vec3 cameraInverse = Vec3.ZERO.subtract(camera.getPosition());
 
-        double cameraX = camera.getPosition().x;
-        double cameraY = camera.getPosition().y;
-        double cameraZ = camera.getPosition().z;
-
-        int cableRenderDistance = 64;
+        int cableRenderDistance = TFMGConfigs.client().render.cableRenderDistance.get();
 
         BlockState air = Blocks.AIR.defaultBlockState();
 
 
-        Vec3 vec1 = new Vec3(pos1.x() - 0.5f, pos1.y() - 0.5f, pos1.z() - 0.5f);
-        Vec3 v = new Vec3(pos2.x() - 0.5f, pos2.y() - 0.5f, pos2.z() - 0.5f);
-        //pos2 = player.getEyePosition().subtract(0.5,1,0.5);
-        Vec3 vec2 = v.subtract(vec1);
-
-        float yaw = (float) Math.atan2(vec2.x, vec2.z);
-        float c = (float) Math.sqrt(vec2.x * vec2.x + vec2.z * vec2.z);
-        float pitch = (float) Math.atan2(vec2.y, c);
-        float length = (float) vec2.length();
+		pos1.subtract(0.5d,0.5d,0.5d);
+        Vec3 posA = pos1.subtract(0.5d,0.5d,0.5d);
+        Vec3 posB = pos2.subtract(0.5d,0.5d,0.5d);
+        Vec3 AtoB = posB.subtract(posA);
+		
+		if ((posA.distanceTo(playerPos) > cableRenderDistance) && (posB.distanceTo(playerPos) > cableRenderDistance))
+			return;
+		
+        float yaw = (float) Math.atan2(AtoB.x, AtoB.z);
+        float flat_length = (float) Math.sqrt(AtoB.x * AtoB.x + AtoB.z * AtoB.z);
+        float pitch = (float) Math.atan2(AtoB.y, flat_length);
+        float length = (float) AtoB.length();
         //
 
         //
         int segmentCount = (int) ((length * 16) / 4) + 1;
-
-        if (!(vec1.distanceTo(player.getEyePosition()) > cableRenderDistance) || !(v.distanceTo(player.getEyePosition()) > cableRenderDistance))
-            for (int i = 0; i < segmentCount; i++) {
-
-                float count = segmentCount / 5f;
-                float middle = count / 2f;
-                DoubleUnaryOperator curveFunction = x -> (float) (Math.pow((x * 0.2f) - middle, 2) * (1f / count) - (0.25f * count));
-                float angle = (float) Math.toDegrees(Math.atan(derive(curveFunction, 1e-5).applyAsDouble(i)));
-                ms.pushPose();
-
-
-                // CachedBuffers.partial(i % 2 == 0 ? model : TFMGPartialModels.CABLE_FUNNY, air)
-
-                CachedBuffers.partial(model, air)
-                        .translate(-cameraX, -cameraY, -cameraZ)
-                        .translate(vec1)
-                        .light(600)
-                        .translate(0.5f, 0.5f, 0.5f)
-                        .rotate(yaw, Direction.Axis.Y)
-                        .rotate(-pitch, Direction.Axis.X)
-                        .translateY((float) curveFunction.applyAsDouble(i) * 0.25f)
-                        .translate(0, 0, i * (4 / 16f))
-                        .rotateDegrees(-angle, Direction.Axis.X)
-                        .translate(-0.5f, -0.5f, -0.5f)
-                        .renderInto(ms, vc);
-
-            }
+		double reciprocal = 1 / (double) segmentCount;
+		DoubleUnaryOperator curveFunction   = x -> 0.2f * x * (x * reciprocal - 1);
+		DoubleUnaryOperator curveDerivative = x -> 0.2f * (2 * x * reciprocal - 1);
+		
+		for (int i = 0; i < segmentCount; i++) {
+			float angle = (float) Math.toDegrees(Math.atan(curveDerivative.applyAsDouble(i)));
+			ms.pushPose();
+			
+			CachedBuffers.partial(model, air)
+				.translate(cameraInverse)
+				.translate(posA)
+				.light(600)
+				.translate(0.5f, 0.5f, 0.5f)
+				.rotate(yaw, Direction.Axis.Y)
+				.rotate(-pitch, Direction.Axis.X)
+				.translateY((float) curveFunction.applyAsDouble(i) * 0.25f)
+				.translate(0, 0, i * (4 / 16f))
+				.rotateDegrees(-angle, Direction.Axis.X)
+				.translate(-0.5f, -0.5f, -0.5f)
+				.renderInto(ms, vc);
+		}
     }
 
-    public static DoubleUnaryOperator derive(DoubleUnaryOperator f, double h) {
-        return x -> (f.applyAsDouble(x + h) - f.applyAsDouble(x - h)) / (2 * h);
-    }
-
-
-    @OnlyIn(Dist.CLIENT)
     public static void tickOutlines() {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || mc.level == null || !(mc.hitResult instanceof BlockHitResult result))
             return;
 
-        ClientLevel level = mc.level;
         BlockPos pos = result.getBlockPos();
-        Player player = mc.player;
-        //    ItemStack heldItem = player.getMainHandItem();
+		//ItemStack heldItem = mc.player.getMainHandItem();
+		
+		
+		if (!(mc.level.getBlockEntity(pos) instanceof IElectric be)) return;
+		
+		if (be instanceof LargeTransformerBlockEntity t && !t.isMainPart) {
+			IElectric newBE = t.getControlledBlock();
+			if (newBE != null) {
+				pos = newBE.getPos();
+			}
+		}
 
-        if (level.getBlockEntity(pos) instanceof IElectric be) {
-            List<ConnectingElectricalNode> connectors = new ArrayList<>();
-            ElectricalProperties properties = be.getProperties();
-
-            if (be instanceof LargeTransformerBlockEntity t && !t.isMainPart) {
-                IElectric newBE = t.getControlledBlock();
-                if (newBE != null) {
-                    be = newBE;
-                    pos = BlockPos.of(newBE.getPos());
-                }
-            }
-            Vec3 lookPosition = Minecraft.getInstance().hitResult.getLocation();
-
-            ConnectableElectricalNode closestNode = closestNode(be, lookPosition);
-
-            long position = pos.asLong();
-
-            ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
-
-            List<ElectricalNode> nodes = network.getNodes(position);
-
-
-            for (ElectricalNode node : nodes) {
-                if (node instanceof ConnectingElectricalNode connector)
-                    connectors.add(connector);
-            }
-
-
-            for (ConnectingElectricalNode node : connectors) {
-
-                if (node != null) {
-
-                    CablePos cablePos = node.getPosition().add(BlockPos.of(be.getPos()));
-
-
-                    //layer.displayClientMessage(TFMGLang.translateDirect("wires.removed_data")
-                    //        .withStyle(ChatFormatting.YELLOW), true);
-
-
-                    Vec3 center = new Vec3(cablePos.x(), cablePos.y(), cablePos.z());
-
-                    float size = node == closestNode ? 0.1f : 0.05f;
-
-                    Vec3 corner1 = center.add(size,size,size);
-                    Vec3 corner2 = center.subtract(size,size,size);
-
-                    //TFMGUtils.createOutline(corner1, corner2, "connector_" + node.localId, Color.rainbowColor(AnimationTickHolder.getTicks() * 5));
-
-
-                    TFMGUtils.createOutline(corner1, corner2, "connector_" + node.localId, node.type.getColor());
-                }
-            }
-        }
-
+		ElectricalNetwork network = ElectricalNetworkManager.getNetwork(mc.level);
+		ConnectableElectricalNode closestNode = closestNode(network, pos, result.getLocation());
+		Collection<ElectricalNode> nodes = network.getNodes(pos).values();
+		if (nodes.isEmpty()) return;
+		
+		Vec3 basePos = Vec3.atLowerCornerOf(pos);
+		nodes.parallelStream().forEach(n -> {
+			if (!(n instanceof ConnectingElectricalNode node)) return;
+			
+			Vec3 cablePos = node.getPosition().add(basePos);
+			
+			float size = node == closestNode ? 0.1f : 0.05f;
+			
+			Vec3 corner1 = cablePos.add(size,size,size);
+			Vec3 corner2 = cablePos.subtract(size,size,size);
+			
+			TFMGUtils.createOutline(corner1, corner2, "connector_" + node.getLocalId(), node.type.getColor());
+		});
     }
 
 }

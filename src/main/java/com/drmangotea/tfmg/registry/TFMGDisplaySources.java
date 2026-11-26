@@ -2,6 +2,7 @@ package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGRegistrate;
+import com.drmangotea.tfmg.content.electricity.content.devices.segmented_display.SegmentedDisplaySource;
 import com.drmangotea.tfmg.content.electricity.display_link.*;
 import com.drmangotea.tfmg.content.electricity.display_link.network.NetConsumptionDisplaySource;
 import com.drmangotea.tfmg.content.electricity.display_link.network.NetGenerationDisplaySource;
@@ -27,6 +28,9 @@ public class TFMGDisplaySources {
     public static final RegistryEntry<DisplaySource, NetGenerationDisplaySource> NETWORK_GENERATION = simple("network_generation", NetGenerationDisplaySource::new);
     public static final RegistryEntry<DisplaySource, NetIdDisplaySource> NETWORK_ID = simple("network_id", NetIdDisplaySource::new);
     public static final RegistryEntry<DisplaySource, NetResistanceDisplaySource> NETWORK_RESISTANCE = simple("network_resistance", NetResistanceDisplaySource::new);
+	//not sure if this should exist ngl
+	public static final RegistryEntry<DisplaySource, SegmentedDisplaySource>
+		SEGMENTED_DISPLAY = simple("segmented_display", SegmentedDisplaySource::new);
 
 
     private static <T extends DisplaySource> RegistryEntry<DisplaySource, T> simple(String name, Supplier<T> supplier) {

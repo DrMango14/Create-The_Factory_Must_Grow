@@ -2,26 +2,26 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.drmangotea.tfmg.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_21",
   "refmap": "tfmg.refmap.json",
   "mixins": [
-    "BuiltInRegistriesMixin",
+    "DeployerBlockEntityMixin",
+    "FluidPipeBlockEntityMixin",
     "FluidPipeBlockMixin",
-    "FluidPropagatorMixin",
-    "FluidTankBlockEntityMixin",
-    "GoggleOverlayRendererMixin",
-    "PipeAttachmentModelMixin",
-    "RecipeProviderMixin",
+    "ItemMixin",
+    "ItemStackMixin",
+    "MobEffectInstanceMixin",
+    "ModelBuilderMixin",
     "UtilMixin",
+    "accessor.ChunkMapAccessor",
     "accessor.FluidTankBlockEntityAccessor",
     "accessor.FlywheelBlockEntityMixin",
-    "accessor.ProcessingRecipeAccessor",
-    "accessor.SequencedAssemblyRecipeAccessor",
+    "accessor.ShapedRecipeBuilderAccessor",
+    "accessor.ShapelessRecipeBuilderAccessor",
     "accessor.SlidingDoorBlockEntityAccessor",
     "accessor.TankSegmentAccessor"
   ],
-  "client": [
-  ],
+  "client": [],
   "injectors": {
     "defaultRequire": 1
   }

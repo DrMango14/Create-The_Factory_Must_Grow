@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tfmg:engine_cylinder"
+    },
+    "P": {
+      "item": "tfmg:brass_pipe"
+    }
+  },
+  "pattern": [
+    "   ",
+    " C ",
+    " P "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:autogas_engine_cylinder"
+  }
+}

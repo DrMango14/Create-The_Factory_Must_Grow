@@ -1,0 +1,8 @@
+{
+  "priority": 1001,
+  "properties": {
+    "sable:mass": 2.0,
+    "sable:volume": 0.69921875
+  },
+  "selector": "tfmg:engine_gearbox"
+}

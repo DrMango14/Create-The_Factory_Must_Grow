@@ -6,13 +6,13 @@
       "item": "tfmg:industrial_aluminum_casing"
     },
     "Q": {
-      "item": "tfmg:capacitor_item"
+      "item": "tfmg:capacitor"
     },
     "R": {
       "tag": "c:dusts/redstone"
     },
     "T": {
-      "item": "tfmg:transistor_item"
+      "item": "tfmg:transistor"
     },
     "W": {
       "tag": "c:wires/copper"

@@ -13,6 +13,7 @@ import java.util.function.Supplier;
 
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
 
+@SuppressWarnings("unused")
 public class TFMGItemApplicationRecipeGen extends ItemApplicationRecipeGen {
 
     GeneratedRecipe STEEL = casing("steel", () -> Ingredient.of(steelIngot()), TFMGBlocks.STEEL_CASING::get, TFMGBlocks.HARDENED_PLANKS::get);

@@ -3,13 +3,12 @@ package com.drmangotea.tfmg.recipes;
 import com.drmangotea.tfmg.registry.TFMGRecipeTypes;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 
 
-public class CokingRecipe extends StandardProcessingRecipe<RecipeInput> {
+public class CokingRecipe extends StandardProcessingRecipe<RecipeWrapper> {
 
 	public CokingRecipe(ProcessingRecipeParams params) {
 		super(TFMGRecipeTypes.COKING, params);
@@ -33,17 +32,17 @@ public class CokingRecipe extends StandardProcessingRecipe<RecipeInput> {
 	}
 
 	public FluidStack getPrimaryResult(){
-		return getFluidResults().get(0);
+		return getFluidResults().getFirst();
 	}
 	public FluidStack getSecondaryResult(){
 		return getFluidResults().get(1);
 	}
+
 	@Override
-	public boolean matches(RecipeInput inv, Level worldIn) {
+	public boolean matches(RecipeWrapper inv, Level worldIn) {
 		if (inv.isEmpty())
 			return false;
-		return ((Ingredient)ingredients.get(0))
-				.test(inv.getItem(0));
+		return ingredients.getFirst().test(inv.getItem(0));
 	}
 
 }

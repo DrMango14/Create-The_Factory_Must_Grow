@@ -1,13 +1,13 @@
 {
   "type": "create:sequenced_assembly",
   "ingredient": {
-    "item": "tfmg:plastic_sheet"
+    "tag": "c:ingots/plastic"
   },
   "results": [
     {
       "chance": 120.0,
       "count": 4,
-      "id": "tfmg:transistor_item"
+      "id": "tfmg:transistor"
     },
     {
       "chance": 8.0,

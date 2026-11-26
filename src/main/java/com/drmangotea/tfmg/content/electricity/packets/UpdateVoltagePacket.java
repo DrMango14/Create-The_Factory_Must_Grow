@@ -2,7 +2,7 @@ package com.drmangotea.tfmg.content.electricity.packets;
 
 
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.registry.TFMGPackets;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.networking.BlockEntityDataPacket;
@@ -32,7 +32,7 @@ public class UpdateVoltagePacket extends BlockEntityDataPacket<SmartBlockEntity>
     @Override
     protected void handlePacket(SmartBlockEntity blockEntity) {
         if (blockEntity instanceof IElectric be) {
-            ElectricNetworkManager.getNetwork(be.getWorld()).setVoltageGen(be, newVoltage);
+            ElectricalNetworkManager.getNetwork(be.getWorld()).setVoltageGen(be, newVoltage);
         }
     }
 

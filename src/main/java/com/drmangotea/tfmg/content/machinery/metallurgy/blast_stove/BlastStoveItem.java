@@ -38,8 +38,7 @@ public class BlastStoveItem extends BlockItem {
     }
 
     @Override
-    protected boolean updateCustomBlockEntityTag(BlockPos blockPos, Level level, Player player,
-                                                 ItemStack itemStack, BlockState blockState) {
+    protected boolean updateCustomBlockEntityTag(BlockPos blockPos, Level level, Player player, ItemStack itemStack, BlockState blockState) {
         MinecraftServer minecraftserver = level.getServer();
         if (minecraftserver == null)
             return false;
@@ -63,8 +62,8 @@ public class BlastStoveItem extends BlockItem {
         }
         return super.updateCustomBlockEntityTag(blockPos, level, player, itemStack, blockState);
     }
-    private void tryMultiPlace(BlockPlaceContext ctx) {
 
+    private void tryMultiPlace(BlockPlaceContext ctx) {
         Player player = ctx.getPlayer();
         if (player == null)
             return;

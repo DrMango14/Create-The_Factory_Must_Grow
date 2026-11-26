@@ -19,7 +19,7 @@
     },
     {
       "chance": 8.0,
-      "id": "tfmg:capacitor_item"
+      "id": "tfmg:capacitor"
     }
   ],
   "sequence": [
@@ -30,7 +30,7 @@
           "item": "tfmg:unfinished_generator"
         },
         {
-          "item": "tfmg:capacitor_item"
+          "item": "tfmg:capacitor"
         }
       ],
       "results": [

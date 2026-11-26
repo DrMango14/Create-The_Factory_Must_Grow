@@ -3,9 +3,9 @@
   "heat_requirement": "heated",
   "ingredients": [
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 1000,
-      "fluid": "tfmg:heavy_oil"
+      "tag": "c:heavy_oil"
     }
   ],
   "results": [

@@ -1,0 +1,14 @@
+{
+  "compositions": [
+    {
+      "elements": [
+        {
+          "id": "rutile:carbon"
+        }
+      ]
+    }
+  ],
+  "contents": [
+    "tfmg:graphite_electrode"
+  ]
+}

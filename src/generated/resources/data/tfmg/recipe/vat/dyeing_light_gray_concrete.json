@@ -1,0 +1,24 @@
+{
+  "type": "tfmg:vat",
+  "ingredients": [
+    {
+      "tag": "c:dyes/light_gray"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 8000,
+      "fluid": "tfmg:liquid_concrete"
+    }
+  ],
+  "machines": [
+    "tfmg:mixer"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "results": [
+    {
+      "amount": 8000,
+      "id": "tfmg:liquid_light_gray_concrete"
+    }
+  ]
+}

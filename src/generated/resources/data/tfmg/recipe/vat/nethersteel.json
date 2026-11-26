@@ -1,0 +1,35 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createbigcannons"
+    }
+  ],
+  "type": "tfmg:vat",
+  "allowed_vat_types": [
+    "tfmg:fireproof"
+  ],
+  "heat_level": 2,
+  "ingredients": [
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 360,
+      "tag": "c:molten_steel"
+    }
+  ],
+  "machines": [
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode"
+  ],
+  "min_size": 1,
+  "results": [
+    {
+      "amount": 360,
+      "id": "createbigcannons:molten_nethersteel"
+    }
+  ]
+}

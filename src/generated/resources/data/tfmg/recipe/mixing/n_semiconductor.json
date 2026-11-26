@@ -2,10 +2,10 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "tfmg:sulfur_dust"
+      "tag": "c:dusts/sulfur"
     },
     {
-      "item": "tfmg:silicon_ingot"
+      "tag": "c:ingots/silicon"
     }
   ],
   "results": [

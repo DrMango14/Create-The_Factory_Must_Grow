@@ -1,0 +1,21 @@
+{
+  "type": "tfmg:vat",
+  "ingredients": [
+    {
+      "type": "neoforge:tag",
+      "amount": 1000,
+      "tag": "c:air"
+    }
+  ],
+  "machines": [
+    "tfmg:centrifuge"
+  ],
+  "min_size": 1,
+  "processing_time": 10,
+  "results": [
+    {
+      "amount": 1,
+      "id": "tfmg:neon"
+    }
+  ]
+}

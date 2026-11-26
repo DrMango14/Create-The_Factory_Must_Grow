@@ -7,10 +7,12 @@ import com.simibubi.create.api.data.recipe.PressingRecipeGen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 
+import javax.annotation.Nonnull;
 import java.util.concurrent.CompletableFuture;
 
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
 
+@SuppressWarnings("unused")
 public class TFMGPressingRecipeGen extends PressingRecipeGen {
 
     GeneratedRecipe
@@ -38,7 +40,7 @@ public class TFMGPressingRecipeGen extends PressingRecipeGen {
         super(generator, registries,TFMG.MOD_ID);
     }
 
-    @Override
+    @Override @Nonnull
     protected AllRecipeTypes getRecipeType() {
         return AllRecipeTypes.PRESSING;
     }

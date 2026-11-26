@@ -10,6 +10,8 @@ import com.drmangotea.tfmg.content.decoration.kinetics.flywheels.TFMGFlywheelRen
 import com.drmangotea.tfmg.content.decoration.kinetics.flywheels.TFMGFlywheelVisual;
 import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipeBlockEntity;
 import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipes;
+import com.drmangotea.tfmg.content.decoration.pipes.rendering.TFMGMechanicalPumpRenderer;
+import com.drmangotea.tfmg.content.decoration.pipes.rendering.TFMGMechanicalPumpVisual;
 import com.drmangotea.tfmg.content.decoration.tanks.TFMGFluidTankBlockEntity;
 import com.drmangotea.tfmg.content.decoration.tanks.TFMGFluidTankRenderer;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelFluidTankRenderer;
@@ -26,6 +28,8 @@ import com.drmangotea.tfmg.content.electricity.content.devices.generators.three_
 import com.drmangotea.tfmg.content.electricity.content.devices.polarizer.PolarizerBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.devices.polarizer.PolarizerRenderer;
 import com.drmangotea.tfmg.content.electricity.content.devices.resistor.DebugResistorBlockEntity;
+import com.drmangotea.tfmg.content.electricity.content.devices.segmented_display.SegmentedDisplayBlockEntity;
+import com.drmangotea.tfmg.content.electricity.content.devices.segmented_display.SegmentedDisplayRenderer;
 import com.drmangotea.tfmg.content.electricity.content.devices.voltage_observer.VoltageObserverBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.lights.ElectricLightBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.lights.LightBulbRenderer;
@@ -50,6 +54,7 @@ import com.drmangotea.tfmg.content.electricity.content.power_transmission.transf
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.small.TransformerBlockEntity;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.small.TransformerRenderer;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.RealConnectorBlockEntity;
+import com.drmangotea.tfmg.content.electricity.content.power_transmission.switches.large_switch.LargeSwitchVisual;
 import com.drmangotea.tfmg.content.engines.engine_gearbox.EngineGearboxBlockEntity;
 import com.drmangotea.tfmg.content.engines.types.large_engine.LargeEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.types.large_engine.LargeEngineRenderer;
@@ -70,6 +75,7 @@ import com.drmangotea.tfmg.content.machinery.misc.air_intake.AirIntakeBlockEntit
 import com.drmangotea.tfmg.content.machinery.misc.air_intake.AirIntakeRenderer;
 import com.drmangotea.tfmg.content.machinery.misc.concrete_hose.ConcreteHoseBlockEntity;
 import com.drmangotea.tfmg.content.machinery.misc.concrete_hose.ConcreteHoseRenderer;
+import com.drmangotea.tfmg.content.machinery.misc.concrete_hose.ConcreteHoseVisual;
 import com.drmangotea.tfmg.content.machinery.misc.exhaust.ExhaustBlockEntity;
 import com.drmangotea.tfmg.content.machinery.misc.firebox.FireboxBlockEntity;
 import com.drmangotea.tfmg.content.machinery.misc.flarestack.FlarestackBlockEntity;
@@ -100,6 +106,7 @@ import com.drmangotea.tfmg.content.machinery.vat.freezer.FreezerBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerRenderer;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixerVisual;
+import com.drmangotea.tfmg.content.world.resevoir.OilDepositBlockEntity;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlockEntity;
 import com.simibubi.create.content.fluids.pipes.FluidPipeBlockEntity;
@@ -110,7 +117,6 @@ import com.simibubi.create.content.fluids.pipes.valve.FluidValveBlockEntity;
 import com.simibubi.create.content.fluids.pipes.valve.FluidValveRenderer;
 import com.simibubi.create.content.fluids.pipes.valve.FluidValveVisual;
 import com.simibubi.create.content.fluids.pump.PumpBlockEntity;
-import com.simibubi.create.content.fluids.pump.PumpRenderer;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.OrientedRotatingVisual;
 import com.simibubi.create.content.kinetics.base.ShaftRenderer;
@@ -121,6 +127,8 @@ import com.simibubi.create.content.kinetics.gearbox.GearboxRenderer;
 import com.simibubi.create.content.kinetics.gearbox.GearboxVisual;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntity;
 import com.simibubi.create.content.kinetics.simpleRelays.SimpleKineticBlockEntity;
+import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogRenderer;
+import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogVisual;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
@@ -237,7 +245,7 @@ public class TFMGBlockEntities {
             .register();
     public static final BlockEntityEntry<LargeSwitchBlockEntity> LARGE_SWITCH = REGISTRATE
             .blockEntity("large_switch", LargeSwitchBlockEntity::new)
-            //.visual(() -> LargeSwitchVisual::new)
+            .visual(() -> LargeSwitchVisual::new)
             .validBlocks(TFMGBlocks.LARGE_SWITCH)
             .renderer(() -> LargeSwitchRenderer::new)
             .register();
@@ -274,7 +282,7 @@ public class TFMGBlockEntities {
             .register();
     public static final BlockEntityEntry<ConcreteHoseBlockEntity> CONCRETE_HOSE = REGISTRATE
             .blockEntity("concrete_hose", ConcreteHoseBlockEntity::new)
-            //.instance(() -> ConcreteHoseInstance::new)
+            .visual(() -> ConcreteHoseVisual::new)
             .validBlocks(TFMGBlocks.CONCRETE_HOSE)
             .renderer(() -> ConcreteHoseRenderer::new)
             .register();
@@ -294,10 +302,7 @@ public class TFMGBlockEntities {
             .blockEntity("pumpjack_base", PumpjackBaseBlockEntity::new)
             .validBlocks(TFMGBlocks.PUMPJACK_BASE)
             .register();
-    //public static final BlockEntityEntry<ConverterBlockEntity> CONVERTER = REGISTRATE
-    //        .blockEntity("converter", ConverterBlockEntity::new)
-    //        .validBlocks(TFMGBlocks.CONVERTER)
-    //        .register();
+
     public static final BlockEntityEntry<CastingBasinBlockEntity> CASTING_BASIN = REGISTRATE
             .blockEntity("casting_basin", CastingBasinBlockEntity::new)
             .validBlocks(TFMGBlocks.CASTING_BASIN)
@@ -438,19 +443,17 @@ public class TFMGBlockEntities {
             .register();
 
 
-    // public static final BlockEntityEntry<TrafficLightBlockEntity> TRAFFIC_LIGHT = REGISTRATE
-    //         .blockEntity("traffic_light", TrafficLightBlockEntity::new)
-    //         .validBlocks(TFMGBlocks.TRAFFIC_LIGHT)
-    //         .renderer(() -> TrafficLightRenderer::new)
-    //         .register();
-//
-    // public static final BlockEntityEntry<SegmentedDisplayBlockEntity> SEGMENTED_DISPLAY = REGISTRATE
-    //         .blockEntity("segmented_display", SegmentedDisplayBlockEntity::new)
-    //         .validBlocks(TFMGBlocks.SEGMENTED_DISPLAY)
-    //         .renderer(() -> SegmentedDisplayRenderer::new)
-    //         //.onRegister(assignDataBehaviourBE(new SegmentedDisplayTarget()))
-    //         //.onRegister(assignDataBehaviourBE(new SegmentedDisplaySource()))
-    //         .register();
+    /*public static final BlockEntityEntry<TrafficLightBlockEntity> TRAFFIC_LIGHT = REGISTRATE
+            .blockEntity("traffic_light", TrafficLightBlockEntity::new)
+            .validBlocks(TFMGBlocks.TRAFFIC_LIGHT)
+            .renderer(() -> TrafficLightRenderer::new)
+            .register();*/
+	
+    public static final BlockEntityEntry<SegmentedDisplayBlockEntity> SEGMENTED_DISPLAY = REGISTRATE
+            .blockEntity("segmented_display", SegmentedDisplayBlockEntity::new)
+            .validBlocks(TFMGBlocks.SEGMENTED_DISPLAY)
+            .renderer(() -> SegmentedDisplayRenderer::new)
+            .register();
 
     public static final BlockEntityEntry<SmokestackBlockEntity> SMOKESTACK = REGISTRATE
             .blockEntity("smokestack", SmokestackBlockEntity::new)
@@ -479,7 +482,8 @@ public class TFMGBlockEntities {
             .visual(() -> TFMGEncasedCogVisual::steelSmall, false)
             .validBlocks(
                     TFMGEncasedBlocks.STEEL_ENCASED_STEEL_COGWHEEL,
-                    TFMGEncasedBlocks.HEAVY_CASING_ENCASED_STEEL_COGWHEEL
+                    TFMGEncasedBlocks.HEAVY_ENCASED_STEEL_COGWHEEL,
+                    TFMGEncasedBlocks.INDUSTRIAL_ENCASED_STEEL_COGWHEEL
             )
             .renderer(() -> TFMGEncasedCogRenderer::steelSmall)
             .register();
@@ -489,7 +493,8 @@ public class TFMGBlockEntities {
             .visual(() -> TFMGEncasedCogVisual::steelLarge, false)
             .validBlocks(
                     TFMGEncasedBlocks.STEEL_ENCASED_LARGE_STEEL_COGWHEEL,
-                    TFMGEncasedBlocks.HEAVY_CASING_ENCASED_LARGE_STEEL_COGWHEEL
+                    TFMGEncasedBlocks.HEAVY_ENCASED_LARGE_STEEL_COGWHEEL,
+                    TFMGEncasedBlocks.INDUSTRIAL_ENCASED_LARGE_STEEL_COGWHEEL
             )
             .renderer(() -> TFMGEncasedCogRenderer::steellarge)
             .register();
@@ -498,7 +503,8 @@ public class TFMGBlockEntities {
             .visual(() -> TFMGEncasedCogVisual::aluminumSmall, false)
             .validBlocks(
                     TFMGEncasedBlocks.STEEL_ENCASED_ALUMINUM_COGWHEEL,
-                    TFMGEncasedBlocks.HEAVY_CASING_ENCASED_ALUMINUM_COGWHEEL
+                    TFMGEncasedBlocks.HEAVY_ENCASED_ALUMINUM_COGWHEEL,
+                    TFMGEncasedBlocks.INDUSTRIAL_ENCASED_ALUMINUM_COGWHEEL
 
             )
             .renderer(() -> TFMGEncasedCogRenderer::aluminumSmall)
@@ -509,7 +515,8 @@ public class TFMGBlockEntities {
             .visual(() -> TFMGEncasedCogVisual::aluminumLarge, false)
             .validBlocks(
                     TFMGEncasedBlocks.STEEL_ENCASED_LARGE_ALUMINUM_COGWHEEL,
-                    TFMGEncasedBlocks.HEAVY_CASING_ENCASED_LARGE_ALUMINUM_COGWHEEL
+                    TFMGEncasedBlocks.HEAVY_ENCASED_LARGE_ALUMINUM_COGWHEEL,
+                    TFMGEncasedBlocks.INDUSTRIAL_ENCASED_LARGE_ALUMINUM_COGWHEEL
             )
             .renderer(() -> TFMGEncasedCogRenderer::aluminumlarge)
             .register();
@@ -517,8 +524,34 @@ public class TFMGBlockEntities {
     public static final BlockEntityEntry<KineticBlockEntity> TFMG_ENCASED_SHAFT = REGISTRATE
             .blockEntity("tfmg_encased_shaft", KineticBlockEntity::new)
             .visual(() -> SingleAxisRotatingVisual::shaft, false)
-            .validBlocks(TFMGEncasedBlocks.STEEL_ENCASED_SHAFT, TFMGEncasedBlocks.HEAVY_CASING_ENCASED_SHAFT)
+            .validBlocks(
+                    TFMGEncasedBlocks.STEEL_ENCASED_SHAFT,
+                    TFMGEncasedBlocks.HEAVY_ENCASED_SHAFT,
+                    TFMGEncasedBlocks.INDUSTRIAL_ENCASED_SHAFT
+            )
             .renderer(() -> ShaftRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<SimpleKineticBlockEntity> TFMG_ENCASED_COGWHEEL = REGISTRATE
+            .blockEntity("tfmg_encased_cogwheel", SimpleKineticBlockEntity::new)
+            .visual(() -> EncasedCogVisual::small, false)
+            .validBlocks(
+                    TFMGEncasedBlocks.STEEL_ENCASED_COGWHEEL,
+                    TFMGEncasedBlocks.HEAVY_ENCASED_COGWHEEL,
+                    TFMGEncasedBlocks.INDUSTRIAL_ENCASED_COGWHEEL
+            )
+            .renderer(() -> EncasedCogRenderer::small)
+            .register();
+
+    public static final BlockEntityEntry<SimpleKineticBlockEntity> TFMG_ENCASED_LARGE_COGWHEEL = REGISTRATE
+            .blockEntity("tfmg_encased_large_cogwheel", SimpleKineticBlockEntity::new)
+            .visual(() -> EncasedCogVisual::large, false)
+            .validBlocks(
+                    TFMGEncasedBlocks.STEEL_ENCASED_LARGE_COGWHEEL,
+                    TFMGEncasedBlocks.HEAVY_ENCASED_LARGE_COGWHEEL,
+                    TFMGEncasedBlocks.INDUSTRIAL_ENCASED_LARGE_COGWHEEL
+            )
+            .renderer(() -> EncasedCogRenderer::large)
             .register();
 
     public static final BlockEntityEntry<GearboxBlockEntity> STEEL_GEARBOX = REGISTRATE
@@ -627,7 +660,7 @@ public class TFMGBlockEntities {
 
     public static final BlockEntityEntry<PumpBlockEntity> TFMG_MECHANICAL_PUMP = REGISTRATE
             .blockEntity("mechanical_pump", PumpBlockEntity::new)
-            .visual(() -> SingleAxisRotatingVisual.ofZ(AllPartialModels.MECHANICAL_PUMP_COG))
+            .visual(() -> TFMGMechanicalPumpVisual::new)
             .validBlocks(
                     TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.BRASS).getPump(),
                     TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPump(),
@@ -635,7 +668,7 @@ public class TFMGBlockEntities {
                     TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).getPump(),
                     TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).getPump()
             )
-            .renderer(() -> PumpRenderer::new)
+            .renderer(() -> TFMGMechanicalPumpRenderer::new)
             .register();
 
     public static final BlockEntityEntry<SmartFluidPipeBlockEntity> TFMG_SMART_FLUID_PIPE = REGISTRATE
@@ -663,8 +696,10 @@ public class TFMGBlockEntities {
             .renderer(() -> FluidValveRenderer::new)
             .register();
 
-    public static void init() {
+    public static final BlockEntityEntry<OilDepositBlockEntity> OIL_DEPOSIT = REGISTRATE
+            .blockEntity("oil_deposit", OilDepositBlockEntity::new)
+            .validBlocks(TFMGBlocks.OIL_DEPOSIT)
+            .register();
 
-    }
-
+    public static void init() { }
 }

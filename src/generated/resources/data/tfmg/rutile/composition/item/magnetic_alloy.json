@@ -1,0 +1,25 @@
+{
+  "compositions": [
+    {
+      "elements": [
+        {
+          "amount": 2,
+          "id": "rutile:nickel"
+        },
+        {
+          "id": "rutile:silicon"
+        },
+        {
+          "amount": 2,
+          "id": "rutile:iron"
+        }
+      ]
+    }
+  ],
+  "contents": [
+    "tfmg:laminated_magnetic_alloy_block",
+    "tfmg:magnetic_alloy_ingot",
+    "tfmg:magnetic_alloy_sheet",
+    "tfmg:magnet"
+  ]
+}

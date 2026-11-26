@@ -14,14 +14,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
-public class CokeOvenBlock extends TFMGHorizontalDirectionalBlock implements IBE<CokeOvenBlockEntity>, IWrenchable {
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
+@ParametersAreNonnullByDefault
+public class CokeOvenBlock extends TFMGHorizontalDirectionalBlock implements IBE<CokeOvenBlockEntity>, IWrenchable {
     public static final EnumProperty<ControllerType> CONTROLLER_TYPE = EnumProperty.create("controller_type", ControllerType.class);
-    public CokeOvenBlock(Properties p_54120_) {
-        super(p_54120_);
+	
+    public CokeOvenBlock(Properties p) {
+        super(p);
         registerDefaultState(defaultBlockState().setValue(CONTROLLER_TYPE, ControllerType.CASUAL));
     }
-
 
     @Override
     public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
@@ -32,7 +35,6 @@ public class CokeOvenBlock extends TFMGHorizontalDirectionalBlock implements IBE
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         IBE.onRemove(state, level, pos, newState);
     }
-
 
     @Override
     public Class<CokeOvenBlockEntity> getBlockEntityClass() {
@@ -49,8 +51,8 @@ public class CokeOvenBlock extends TFMGHorizontalDirectionalBlock implements IBE
     public BlockEntityType<? extends CokeOvenBlockEntity> getBlockEntityType() {
         return TFMGBlockEntities.COKE_OVEN.get();
     }
+	
     public enum ControllerType implements StringRepresentable {
-
         CASUAL("casual"),
         TOP_ON("top_on"),
         MIDDLE_ON("middle_on"),
@@ -62,8 +64,7 @@ public class CokeOvenBlock extends TFMGHorizontalDirectionalBlock implements IBE
             this.name = name;
         }
 
-
-        @Override
+        @Override @Nonnull
         public String getSerializedName() {
             return this.name;
         }

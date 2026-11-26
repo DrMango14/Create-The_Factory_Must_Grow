@@ -1,11 +1,11 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.large;
 
+import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
-import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.simulation.Transformer;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
@@ -32,10 +32,7 @@ import static com.drmangotea.tfmg.content.electricity.content.power_transmission
 
 public class LargeTransformerBlockEntity extends SmartBlockEntity implements IElectric {
     public boolean updateInFront = false;
-
-
     public float turnRatio = 0;
-
     ElectricalProperties p;
 
     public double[] primaryVoltage = new double[3];
@@ -74,6 +71,7 @@ public class LargeTransformerBlockEntity extends SmartBlockEntity implements IEl
         super.remove();
         this.removeBlock();
     }
+	
     @Override
     public void onPlace() {
         if (!isMainPart)
@@ -84,6 +82,13 @@ public class LargeTransformerBlockEntity extends SmartBlockEntity implements IEl
         getNetwork().setTransformerRatio(this, 1, turnRatio);
         getNetwork().setTransformerRatio(this, 2, turnRatio);
     }
+	
+	@Override
+	public void updateNetwork(BlockPos pos) {
+		if (!isMainPart) return;
+		IElectric.super.updateNetwork(pos);
+	}
+
     @Override
     public void destroy() {
         super.destroy();
@@ -97,6 +102,7 @@ public class LargeTransformerBlockEntity extends SmartBlockEntity implements IEl
             level.addFreshEntity(item);
         }
     }
+	
     public void updateCoils() {
         if (primaryCoil.get(TFMGDataComponents.COIL_TURNS) == null || secondaryCoil.get(TFMGDataComponents.COIL_TURNS) == null) {
             turnRatio = 0;
@@ -127,7 +133,7 @@ public class LargeTransformerBlockEntity extends SmartBlockEntity implements IEl
     public void onUpdated() {
         if (!isMainPart)
             return;
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
 
 
         for (int i = 0; i < 3; i++) {
@@ -178,8 +184,8 @@ public class LargeTransformerBlockEntity extends SmartBlockEntity implements IEl
     }
 
     @Override
-    public long getPos() {
-        return getBlockPos().asLong();
+    public BlockPos getPos() {
+        return getBlockPos();
     }
 
     @Override
@@ -205,6 +211,7 @@ public class LargeTransformerBlockEntity extends SmartBlockEntity implements IEl
 
         TFMGTexts.Multimeter.transformerRatio(turnRatio).forGoggles(tooltip, 1);
 
+        //IRealisticElectric.super.makeMultimeterTooltip(tooltip, isPlayerSneaking);
         return true;
     }
 

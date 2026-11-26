@@ -13,7 +13,6 @@ import net.neoforged.neoforge.client.model.generators.ModelFile;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
 
 public class LithiumTorchGenerator extends SpecialBlockStateGen {
-
     @Override
     protected int getXRotation(BlockState state) {
         return state.getValue(LithiumTorchBlock.FACING)== Direction.DOWN ? 180 : 0;
@@ -25,19 +24,13 @@ public class LithiumTorchGenerator extends SpecialBlockStateGen {
             case NORTH -> 270;
             case SOUTH -> 90;
             case WEST -> 180;
-            case EAST -> 0;
-            case DOWN -> 0;
-            case UP -> 0;
+            case EAST, DOWN, UP -> 0;
         };
     }
 
     @Override
-    public <T extends Block> ModelFile getModel(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov,
-                                                BlockState state) {
-
-
+    public <T extends Block> ModelFile getModel(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov, BlockState state) {
         return state.getValue(WallMountBlock.FACING).getAxis().isHorizontal() ? partialBaseModel(ctx, prov, "wall")
                 : partialBaseModel(ctx, prov);
     }
-
 }

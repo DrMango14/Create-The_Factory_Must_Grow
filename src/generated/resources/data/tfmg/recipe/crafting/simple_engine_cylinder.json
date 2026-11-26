@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "P": {
+      "tag": "c:plates/iron"
+    }
+  },
+  "pattern": [
+    " F ",
+    "P P",
+    "P P"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:simple_engine_cylinder"
+  }
+}

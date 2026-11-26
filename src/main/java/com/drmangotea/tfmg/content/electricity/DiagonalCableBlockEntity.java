@@ -12,17 +12,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.drmangotea.tfmg.content.electricity.DiagonalCableBlock.FACING_UP;
-import static net.minecraft.world.level.block.DirectionalBlock.FACING;
+import static com.drmangotea.tfmg.content.electricity.DiagonalCableBlock.FACING_PRIMARY;
+import static com.drmangotea.tfmg.content.electricity.DiagonalCableBlock.FACING_SECONDARY;
 
 public class DiagonalCableBlockEntity extends AbstractCableBlockEntity {
     public DiagonalCableBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        Direction verticalFacing = state.getValue(FACING_UP) ? Direction.UP : Direction.DOWN;
-        Direction horizontalFacing = state.getValue(FACING);
         List<Direction> directions = new ArrayList<>();
-        directions.add(verticalFacing);
-        directions.add(horizontalFacing);
+        directions.add(state.getValue(FACING_PRIMARY));
+        directions.add(state.getValue(FACING_SECONDARY));
         p = new CableProperties(getPos(), directions);
     }
 

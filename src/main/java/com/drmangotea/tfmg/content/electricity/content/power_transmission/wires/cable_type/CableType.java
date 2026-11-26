@@ -1,24 +1,25 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.wires.cable_type;
 
-import com.drmangotea.tfmg.registry.TFMGItems;
-import com.drmangotea.tfmg.registry.TFMGPartialModels;
+import com.drmangotea.tfmg.content.machinery.misc.winding_machine.SpoolItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+
+import java.util.function.Supplier;
 
 public class CableType {
     private String descriptionId;
     private final ResourceLocation id;
     private final int color;
-
-    private final PartialModel model;
-
-    private final ItemEntry<?> spool;
-    private final ItemEntry<?> wire;
+	private final PartialModel model;
+	private final Supplier<SpoolItem> spool;
+    private final Supplier<Item> wire;
 
     public CableType(Properties properties) {
+        //properties.verify();
         this.id = properties.id;
         this.color = properties.color;
         this.spool = properties.spool;
@@ -30,11 +31,11 @@ public class CableType {
         return this.color;
     }
 
-    public ItemEntry<?> getSpool() {
+    public Supplier<SpoolItem> getSpool() {
         return this.spool;
     }
 
-    public ItemEntry<?> getWire() {
+    public Supplier<Item> getWire() {
         return this.wire;
     }
 
@@ -63,26 +64,42 @@ public class CableType {
     }
 
     public static class Properties {
-        private ResourceLocation id;
+        private final ResourceLocation id;
 
-        PartialModel model = TFMGPartialModels.STEEL_REINFORCED_CABLE;
-
-        int color = 0xffffff;
-        ItemEntry<?> spool = TFMGItems.COPPER_SPOOL;
-        ItemEntry<?> wire = TFMGItems.COPPER_WIRE;
+        PartialModel model = null;
+		
+		private double resistance = Double.MAX_VALUE;
+		private int color = 0xffffff;
+        private Supplier<SpoolItem> spool = null;
+        private Supplier<Item> wire = null;
 
         public Properties color(int color) {
             this.color = color;
             return this;
         }
 
-        public Properties spool(ItemEntry<?> spool) {
+        public Properties spool(Supplier<SpoolItem> spool) {
+            this.spool = spool;
+            return this;
+        }
+
+        public Properties wire(Supplier<Item> wire) {
+            this.wire = wire;
+            return this;
+        }
+
+        public Properties spool(ItemEntry<SpoolItem> spool) {
             this.spool = spool;
             return this;
         }
 
         public Properties wire(ItemEntry<?> wire) {
-            this.wire = wire;
+            this.wire = wire::asItem;
+            return this;
+        }
+
+        public Properties resistance(double resistance) {
+            this.resistance = resistance;
             return this;
         }
 
@@ -93,6 +110,20 @@ public class CableType {
 
         public Properties(ResourceLocation id) {
             this.id = id;
+        }
+
+        public void verify() throws IllegalStateException {
+            if (this.spool == null) {
+                throw new IllegalStateException("Spool item for " + this.id + " is not set");
+            }
+
+            if (this.wire == null) {
+                throw new IllegalStateException("Wire item for " + this.id + " is not set");
+            }
+
+            if (Double.isNaN(this.resistance)) {
+				throw new IllegalStateException("Resistance for " + this.id + " is not set");
+            }
         }
     }
 }

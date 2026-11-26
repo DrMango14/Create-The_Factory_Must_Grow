@@ -41,7 +41,7 @@ public class WindingMachineRenderer extends KineticBlockEntityRenderer<WindingMa
             be.angle += be.spoolSpeed.getValue(partialTicks) * 3 / 10f;
             be.angle %= 360;
         }
-        if (!be.spool.isEmpty()) {
+        if (!be.getSpool().isEmpty()) {
             CachedBuffers.partial(TFMGPartialModels.SPOOL, blockState)
                     .light(light)
                     .center()
@@ -52,36 +52,35 @@ public class WindingMachineRenderer extends KineticBlockEntityRenderer<WindingMa
                     .uncenter()
                     .renderInto(ms, vb);
 
-            if (!be.spool.isEmpty()) {
-                if (!be.spool.is(TFMGItems.EMPTY_SPOOL)) {
+            if (!be.getSpool().isEmpty()) {
+                if (!be.getSpool().is(TFMGItems.EMPTY_SPOOL)) {
                     CachedBuffers.partial(TFMGPartialModels.SPOOL_WIRE, blockState)
                             .light(light)
                             .center()
                             .rotateYDegrees(blockState.getValue(HORIZONTAL_FACING).getAxis() == Direction.Axis.Z ? Math.abs(blockState.getValue(FACING).toYRot() - 180) : blockState.getValue(FACING).toYRot())
                             .translateZ(-0.4f)
                             .translateY(0.4f)
-                            .color(be.spool.getBarColor())
+                            .color(be.getSpool().getBarColor())
                             .rotateXDegrees(be.angle)
                             .uncenter()
                             .renderInto(ms, vb);
                     if (!be.inventory.isEmpty()) {
-                        CachedBuffers.partial(be.getSpeed() != 0 ? TFMGPartialModels.CONNNECTING_WIRE_ANIMATED : TFMGPartialModels.CONNNECTING_WIRE, blockState)
+                        CachedBuffers.partial(be.getSpeed() != 0 ? TFMGPartialModels.CONNECTING_WIRE_ANIMATED : TFMGPartialModels.CONNECTING_WIRE, blockState)
                                 .light(light)
                                 .center()
                                 .rotateYDegrees(blockState.getValue(HORIZONTAL_FACING).getAxis() == Direction.Axis.Z ? Math.abs(blockState.getValue(FACING).toYRot() - 180) : blockState.getValue(FACING).toYRot())
                                 .translateY(0.4f)
                                 .translateZ(0.1f)
-                                .color(be.spool.getBarColor())
+                                .color(be.getSpool().getBarColor())
                                 .rotateXDegrees(12)
                                 .uncenter()
                                 .renderInto(ms, vb);
                     }
                 }
-
             }
         }
-        if (!be.inventory.isEmpty()) {
-            ItemStack item = be.inventory.getItem(0);
+        if (!be.inventory.isEmpty() || !be.outputInventory.isEmpty()) {
+            ItemStack item = be.inventory.getItem(0) != ItemStack.EMPTY ? be.inventory.getItem(0) : be.outputInventory.getItem(0);
             BakedModel bakedModel = itemRenderer.getModel(item, null, null, 0);
             boolean blockItem = bakedModel.isGui3d();
 
@@ -91,7 +90,7 @@ public class WindingMachineRenderer extends KineticBlockEntityRenderer<WindingMa
                     .rotateYDegrees(blockState.getValue(HORIZONTAL_FACING).getAxis() == Direction.Axis.Z ? Math.abs(blockState.getValue(FACING).toYRot() - 180) : blockState.getValue(FACING).toYRot())
                     .translateZ(0.4f)
                     .translateY(0.33f)
-                    .rotateXDegrees(be.angle)
+                    .rotateXDegrees(be.inventory.isEmpty() ? 0 : be.angle)
                     .rotateZDegrees(item.is(Tags.Items.RODS) ? 45 : 0)
                     .rotateZDegrees(blockItem ? 90 : 0)
                     .scale(blockItem ? .5f : .375f);
@@ -107,6 +106,4 @@ public class WindingMachineRenderer extends KineticBlockEntityRenderer<WindingMa
         return CachedBuffers.partialFacing(AllPartialModels.SHAFT_HALF, state, state
                 .getValue(FACING).getCounterClockWise());
     }
-
-
 }

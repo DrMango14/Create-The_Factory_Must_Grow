@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.content.machinery.oil_processing.distillation_tower.output;
 
 import com.drmangotea.tfmg.base.TFMGIcons;
+import com.drmangotea.tfmg.base.fluid.ForceableFluidTank;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
@@ -9,7 +10,6 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.INamedIconOptions;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;
-import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.gui.AllIcons;
 
 import net.createmod.catnip.math.VecHelper;
@@ -25,7 +25,6 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 import java.util.List;
 /**
@@ -35,13 +34,17 @@ public class DistillationOutputBlockEntity extends SmartBlockEntity implements I
 
 
     protected IFluidHandler fluidCapability;
-
     public ScrollOptionBehaviour<DistillationOutputMode> mode;
+    public final ForceableFluidTank tank;
 
-    public final FluidTank tank = new SmartFluidTank(8000,this::onFluidStackChanged);
+    protected boolean updateCapability;
+
     public DistillationOutputBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+        tank = new ForceableFluidTank(8000, this::onFluidStackChanged).blockInsertion();
         fluidCapability = tank;
+        updateCapability = false;
+        refreshCapability();
     }
 
     @Override
@@ -52,13 +55,19 @@ public class DistillationOutputBlockEntity extends SmartBlockEntity implements I
     }
 
     protected void onFluidStackChanged(FluidStack newFluidStack) {
-        if (!hasLevel())
-            return;
-        if (!level.isClientSide) {
-            setChanged();
-            sendData();
+        setChanged();
+        sendData();
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (updateCapability) {
+            updateCapability = false;
+            refreshCapability();
         }
     }
+
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK,
@@ -69,20 +78,30 @@ public class DistillationOutputBlockEntity extends SmartBlockEntity implements I
     @Override
     protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.read(compound,registries , clientPacket);
-
         tank.readFromNBT(registries,compound.getCompound("TankContent"));
-
+        updateCapability = true;
     }
 
     @Override
     public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.write(compound,registries,clientPacket);
         compound.put("TankContent", tank.writeToNBT(registries,new CompoundTag()));
-
     }
+
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         return containedFluidTooltip(tooltip, isPlayerSneaking, fluidCapability);
+    }
+
+    @Override
+    public void invalidate() {
+        super.invalidate();
+        invalidateCapabilities();
+    }
+
+    public void refreshCapability() {
+        fluidCapability = tank;
+        invalidateCapabilities();
     }
 
     public static class DistillationOutputValueBox extends ValueBoxTransform.Sided {

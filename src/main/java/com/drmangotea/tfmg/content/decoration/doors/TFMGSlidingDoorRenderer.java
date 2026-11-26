@@ -34,10 +34,9 @@ public class TFMGSlidingDoorRenderer extends SafeBlockEntityRenderer<SlidingDoor
     public TFMGSlidingDoorRenderer(Context context) {}
 
     @Override
-    protected void renderSafe(SlidingDoorBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
-                              int light, int overlay) {
+    protected void renderSafe(SlidingDoorBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         BlockState blockState = be.getBlockState();
-        if (!((SlidingDoorBlockEntityAccessor)be).i_architecture$shouldRenderSpecial(blockState))
+        if (!((SlidingDoorBlockEntityAccessor)be).tfmg$shouldRenderSpecial(blockState))
             return;
 
         Direction facing = blockState.getValue(DoorBlock.FACING);
@@ -46,7 +45,7 @@ public class TFMGSlidingDoorRenderer extends SafeBlockEntityRenderer<SlidingDoor
         if (blockState.getValue(DoorBlock.HINGE) == DoorHingeSide.LEFT)
             movementDirection = movementDirection.getOpposite();
 
-        float value = ((SlidingDoorBlockEntityAccessor)be).i_architecture$getAnimation().getValue(partialTicks);
+        float value = ((SlidingDoorBlockEntityAccessor)be).tfmg$getAnimation().getValue(partialTicks);
         float value2 = Mth.clamp(value * 10, 0, 1);
 
         VertexConsumer vb = buffer.getBuffer(RenderType.cutoutMipped());

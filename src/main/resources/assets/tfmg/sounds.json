@@ -1,5 +1,4 @@
 {
-
   "engine": {
     "sounds": [
       {
@@ -19,5 +18,62 @@
       }
     ],
     "subtitle": "tfmg.subtitle.diesel_engine_sounds"
+  },
+  "fire_extinguisher": {
+    "sounds": [
+      {
+        "name": "tfmg:fire_extinguisher/0"
+      },
+      {
+        "name": "tfmg:fire_extinguisher/1"
+      },
+      {
+        "name": "tfmg:fire_extinguisher/2"
+      },
+      {
+        "name": "tfmg:fire_extinguisher/3"
+      },
+      {
+        "name": "tfmg:fire_extinguisher/4"
+      },
+      {
+        "name": "tfmg:fire_extinguisher/5"
+      },
+      {
+        "name": "tfmg:fire_extinguisher/6"
+      },
+      {
+        "name": "tfmg:fire_extinguisher/7"
+      },
+      {
+        "name": "tfmg:fire_extinguisher/8"
+      },
+      {
+        "name": "tfmg:fire_extinguisher/9"
+      }
+    ],
+    "subtitle": "tfmg.subtitle.fire_extinguisher"
+  },
+  "fire_extinguisher_start": {
+    "sounds": [
+      {
+        "name": "tfmg:fire_extinguisher/start_0"
+      },
+      {
+        "name": "tfmg:fire_extinguisher/start_1"
+      }
+    ],
+    "subtitle": "tfmg.subtitle.fire_extinguisher_start"
+  },
+  "fire_extinguisher_fade": {
+    "sounds": [
+      {
+        "name": "tfmg:fire_extinguisher/fade_0"
+      },
+      {
+        "name": "tfmg:fire_extinguisher/fade_1"
+      }
+    ],
+    "subtitle": "tfmg.subtitle.fire_extinguisher_fade"
   }
 }

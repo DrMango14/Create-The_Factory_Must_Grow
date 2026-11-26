@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
-      "model": "tfmg:block/pumpjack_base/block"
+    "facing=east": {
+      "model": "tfmg:block/pumpjack_base",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfmg:block/pumpjack_base"
+    },
+    "facing=south": {
+      "model": "tfmg:block/pumpjack_base",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfmg:block/pumpjack_base",
+      "y": 270
     }
   }
 }

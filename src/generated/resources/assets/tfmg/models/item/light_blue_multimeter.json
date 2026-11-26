@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "tfmg:item/light_blue_multimeter"
+    "layer0": "tfmg:item/multimeter/light_blue"
   }
 }

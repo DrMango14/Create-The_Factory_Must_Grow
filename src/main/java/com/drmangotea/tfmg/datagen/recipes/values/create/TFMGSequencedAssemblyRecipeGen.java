@@ -1,27 +1,25 @@
 package com.drmangotea.tfmg.datagen.recipes.values.create;
 
-
 import com.drmangotea.tfmg.TFMG;
-
 import com.drmangotea.tfmg.recipes.WindingRecipe;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGItems;
+import com.drmangotea.tfmg.registry.TFMGTags;
 import com.simibubi.create.api.data.recipe.SequencedAssemblyRecipeGen;
-import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
+import com.simibubi.create.foundation.data.recipe.CommonMetal;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
+import javax.annotation.Nonnull;
 import java.util.concurrent.CompletableFuture;
 
-import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.F.lubricationOil;
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
 
-
+@SuppressWarnings("unused")
 public class TFMGSequencedAssemblyRecipeGen extends SequencedAssemblyRecipeGen {
 
     GeneratedRecipe
@@ -70,9 +68,9 @@ public class TFMGSequencedAssemblyRecipeGen extends SequencedAssemblyRecipeGen {
             .addOutput(TFMGItems.STEEL_INGOT, 4)
             .loops(2)
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGBlocks.STEEL_COGWHEEL))
-            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.NICKEL_SHEET))
+            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(CommonMetal.NICKEL.plates))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGBlocks.LARGE_STEEL_COGWHEEL))
-            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.LEAD_SHEET))
+            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(CommonMetal.LEAD.plates))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.SCREW))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.SCREWDRIVER))
 
@@ -102,7 +100,7 @@ public class TFMGSequencedAssemblyRecipeGen extends SequencedAssemblyRecipeGen {
                     .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.SCREWDRIVER))
             ),
 
-    TRANSISTOR_PLASTIC = create("transistor", b -> b.require(plasticSheet())
+    TRANSISTOR_PLASTIC = create("transistor", b -> b.require(TFMGTags.Items.INGOTS_PLASTIC.tag)
             .transitionTo(TFMGItems.UNFINISHED_TRANSISTOR.get())
             .addOutput(new ItemStack(TFMGItems.TRANSISTOR.get(), 4), 120)
             .addOutput(TFMGItems.SILICON_INGOT.get(), 8)
@@ -125,7 +123,10 @@ public class TFMGSequencedAssemblyRecipeGen extends SequencedAssemblyRecipeGen {
         super(generator, registries,TFMG.MOD_ID);
     }
 
-
+    @Override @Nonnull
+    public String getName() {
+        return "TFMG'S Sequenced Assembly Recipes";
+    }
 
 
 }

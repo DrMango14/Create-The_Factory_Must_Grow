@@ -19,6 +19,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Direction.AxisDirection;
+import net.minecraft.util.Mth;
+
+import static com.simibubi.create.content.kinetics.base.KineticBlockEntityVisual.rotationOffset;
 
 public class TFMGCogwheelRenderer extends KineticBlockEntityRenderer<SimpleKineticBlockEntity> {
 
@@ -40,7 +43,7 @@ public class TFMGCogwheelRenderer extends KineticBlockEntityRenderer<SimpleKinet
 
 		Axis axis = getRotationAxisOf(be);
 		Direction facing = Direction.fromAxisAndDirection(axis, AxisDirection.POSITIVE);
-		PartialModel model = be.getBlockState().is(TFMGBlocks.LARGE_ALUMINUM_COGWHEEL.get()) ? TFMGPartialModels.LARGE_ALUMINUM_COGHWEEL : TFMGPartialModels.LARGE_STEEL_COGHWEEL;
+		PartialModel model = be.getBlockState().is(TFMGBlocks.LARGE_ALUMINUM_COGWHEEL.get()) ? TFMGPartialModels.LARGE_ALUMINUM_COGWHEEL : TFMGPartialModels.LARGE_STEEL_COGWHEEL;
 		renderRotatingBuffer(be,
 			CachedBuffers.partialFacingVertical(model, be.getBlockState(), facing),
 			ms, buffer.getBuffer(RenderType.cutoutMipped()), light);
@@ -54,18 +57,8 @@ public class TFMGCogwheelRenderer extends KineticBlockEntityRenderer<SimpleKinet
 
 	public static float getAngleForLargeCogShaft(SimpleKineticBlockEntity be, Axis axis) {
 		BlockPos pos = be.getBlockPos();
-		float offset = getShaftAngleOffset(axis, pos);
+		float offset = rotationOffset(be.getBlockState(), axis, pos);
 		float time = AnimationTickHolder.getRenderTime(be.getLevel());
-		float angle = ((time * be.getSpeed() * 3f / 10 + offset) % 360) / 180 * (float) Math.PI;
-		return angle;
-	}
-
-	public static float getShaftAngleOffset(Axis axis, BlockPos pos) {
-		float offset = 0;
-		double d = (((axis == Axis.X) ? 0 : pos.getX()) + ((axis == Axis.Y) ? 0 : pos.getY())
-			+ ((axis == Axis.Z) ? 0 : pos.getZ())) % 2;
-		if (d == 0)
-			offset = 22.5f;
-		return offset;
+        return ((time * be.getSpeed() * .3f + offset) % 360) * Mth.DEG_TO_RAD;
 	}
 }

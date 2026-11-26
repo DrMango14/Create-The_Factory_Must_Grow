@@ -14,7 +14,6 @@ import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.H
 import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 
 public class TransformerRenderer extends SafeBlockEntityRenderer<TransformerBlockEntity> {
-
     public TransformerRenderer(BlockEntityRendererProvider.Context context) {
     }
 

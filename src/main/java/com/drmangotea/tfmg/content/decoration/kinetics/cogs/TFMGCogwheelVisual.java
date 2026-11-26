@@ -31,9 +31,9 @@ public class TFMGCogwheelVisual {
 
 
 			if (TFMGBlocks.STEEL_COGWHEEL.is(blockEntity.getBlockState().getBlock())) {
-				model = Models.partial(TFMGPartialModels.STEEL_COGHWEEL);
+				model = Models.partial(TFMGPartialModels.STEEL_COGWHEEL);
 			} else {
-				model = Models.partial(TFMGPartialModels.ALUMINUM_COGHWEEL);
+				model = Models.partial(TFMGPartialModels.ALUMINUM_COGWHEEL);
 			}
 			return new SingleAxisRotatingVisual<>(context, blockEntity, partialTick, model);
 		}
@@ -66,9 +66,9 @@ public class TFMGCogwheelVisual {
 		public static Model getLargeModel(BracketedKineticBlockEntity blockEntity){
 
 			if (TFMGBlocks.LARGE_STEEL_COGWHEEL.is(blockEntity.getBlockState().getBlock())) {
-				return Models.partial(TFMGPartialModels.LARGE_STEEL_COGHWEEL);
+				return Models.partial(TFMGPartialModels.LARGE_STEEL_COGWHEEL);
 			} else {
-				return Models.partial(TFMGPartialModels.LARGE_ALUMINUM_COGHWEEL);
+				return Models.partial(TFMGPartialModels.LARGE_ALUMINUM_COGWHEEL);
 			}
 		}
 

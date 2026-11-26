@@ -1,13 +1,10 @@
 package com.drmangotea.tfmg.ponder;
 
-
-import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import net.createmod.ponder.api.scene.SceneBuilder;
 import net.minecraft.core.BlockPos;
 
 public class TFMGSceneBuilder extends CreateSceneBuilder {
-
     private final TFMGWorldInstructions tfmgInstructions;
 
     public TFMGSceneBuilder(SceneBuilder baseSceneBuilder) {
@@ -15,11 +12,9 @@ public class TFMGSceneBuilder extends CreateSceneBuilder {
         tfmgInstructions = new TFMGWorldInstructions();
     }
 
-
     public TFMGWorldInstructions tfmgInstructions(){
         return tfmgInstructions;
     }
-
 
     public class TFMGWorldInstructions extends WorldInstructions {
 
@@ -37,6 +32,5 @@ public class TFMGSceneBuilder extends CreateSceneBuilder {
           //  modifyBlockEntity(pos, RegularEngineBlockEntity.class, be ->
           //  be.getLevel().setBlock(be.getBlockPos(),be.getBlockState().setValue(EngineBlock.ENGINE_STATE,EngineBlock.EngineState.SHAFT),2));
         }
-
     }
 }

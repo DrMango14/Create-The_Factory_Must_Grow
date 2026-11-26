@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.accumulator_rack;
 
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.registry.TFMGMenuTypes;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.animatedContainer.AnimatedContainerBehaviour;
@@ -14,12 +15,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
+import javax.annotation.Nullable;
+
+@NothingNullByDefault
 public class AccumulatorRackMenu extends MenuBase<AccumulatorRackBlockEntity> {
 
-	public AccumulatorRackMenu(MenuType<?> type, int id, Inventory inv, RegistryFriendlyByteBuf extraData) {
+	public AccumulatorRackMenu(MenuType<?> type, int id, Inventory inv, @Nullable RegistryFriendlyByteBuf extraData) {
 		super(type, id, inv, extraData);
 	}
 
@@ -33,12 +36,11 @@ public class AccumulatorRackMenu extends MenuBase<AccumulatorRackBlockEntity> {
 		return new AccumulatorRackMenu(TFMGMenuTypes.ACCUMULATOR_RACK.get(), id, inv, be);
 	}
 
-	@Override
+	@Override @Nullable
 	protected AccumulatorRackBlockEntity createOnClient(RegistryFriendlyByteBuf extraData) {
 		BlockPos readBlockPos = extraData.readBlockPos();
 		ClientLevel world = Minecraft.getInstance().level;
-		BlockEntity blockEntity = world.getBlockEntity(readBlockPos);
-		if (blockEntity instanceof AccumulatorRackBlockEntity ppbe)
+		if (world != null && world.getBlockEntity(readBlockPos) instanceof AccumulatorRackBlockEntity ppbe)
 			return ppbe;
 		return null;
 	}

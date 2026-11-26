@@ -18,7 +18,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
 public class RegularEngineBlock extends EngineBlock implements IBE<RegularEngineBlockEntity> {
 
     public static final BooleanProperty EXTENDED = BooleanProperty.create("extended");
@@ -35,7 +39,7 @@ public class RegularEngineBlock extends EngineBlock implements IBE<RegularEngine
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         ItemStack itemStack = player.getItemInHand(hand);
 
         if (level.getBlockEntity(pos) instanceof RegularEngineBlockEntity be && !be.isController() && level.getBlockEntity(be.controller) instanceof AbstractSmallEngineBlockEntity controller) {
@@ -50,7 +54,7 @@ public class RegularEngineBlock extends EngineBlock implements IBE<RegularEngine
                     return ItemInteractionResult.SUCCESS;
                 }
 
-            if(controller instanceof RegularEngineBlockEntity be1&&!be1.pistonInventory.isEmpty()&&!((RegularEngineBlockEntity) controller).pistonInventory.isEmpty())
+            if(controller instanceof RegularEngineBlockEntity be1&&!be1.pistonInventory.isEmpty()&&!be1.pistonInventory.isEmpty())
                 return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
 
             if (itemStack.is(TFMGItems.SCREWDRIVER.get())&&be.pistonInventory.isEmpty()) {
@@ -72,11 +76,7 @@ public class RegularEngineBlock extends EngineBlock implements IBE<RegularEngine
 
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
-
-    @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-        IBE.onRemove(state, level, pos, newState);
-    }
+	
     @Override
     public Class<RegularEngineBlockEntity> getBlockEntityClass() {
         return RegularEngineBlockEntity.class;

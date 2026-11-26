@@ -47,6 +47,8 @@ public class VoltageObserverBlockEntity extends ResistiveLoadBlockEntity {
 
     @Override
     public void tick() {
+        if (level == null) return;
+
         super.tick();
         if (update) {
             level.setBlock(getBlockPos(), getBlockState().setValue(POWERED, voltage != 0), 2);

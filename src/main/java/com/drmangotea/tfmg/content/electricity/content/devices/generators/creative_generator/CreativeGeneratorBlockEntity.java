@@ -3,7 +3,7 @@ package com.drmangotea.tfmg.content.electricity.content.devices.generators.creat
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.packets.UpdateVoltagePacket;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -64,7 +64,7 @@ public class CreativeGeneratorBlockEntity extends SmartBlockEntity implements IE
 
         Level level = be.level;
 
-        ElectricalNetwork electricalNetwork = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork electricalNetwork = ElectricalNetworkManager.getNetwork(level);
 
 
 
@@ -79,8 +79,8 @@ public class CreativeGeneratorBlockEntity extends SmartBlockEntity implements IE
     }
 
     @Override
-    public long getPos() {
-        return getBlockPos().asLong();
+    public BlockPos getPos() {
+        return getBlockPos();
     }
 
     @Override
@@ -88,7 +88,7 @@ public class CreativeGeneratorBlockEntity extends SmartBlockEntity implements IE
         return level;
     }
 
-    class CreativeGeneratorValueBox extends ValueBoxTransform.Sided {
+    static class CreativeGeneratorValueBox extends ValueBoxTransform.Sided {
 
         @Override
         protected Vec3 getSouthLocation() {

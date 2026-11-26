@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "tfmg:item/autogas_engine_cylinder"
+  }
+}

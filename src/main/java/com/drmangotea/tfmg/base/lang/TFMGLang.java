@@ -16,8 +16,6 @@ import java.util.List;
 public class TFMGLang extends Lang {
     /**
      * legacy-ish. Use TFMGLang.translate and other builder methods where possible
-     *
-
      */
     public static MutableComponent translateDirect(String key, Object... args) {
         Object[] args1 = LangBuilder.resolveBuilders(args);
@@ -61,11 +59,6 @@ public class TFMGLang extends Lang {
     }
 
     public static LangBuilder text(String text) {
-        return builder().text(text);
-    }
-
-    @Deprecated // Use while implementing and replace all references with Lang.translate
-    public static LangBuilder temporaryText(String text) {
         return builder().text(text);
     }
 }

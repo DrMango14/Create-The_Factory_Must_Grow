@@ -6,11 +6,13 @@ import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipes;
 import com.drmangotea.tfmg.datagen.recipes.values.create.*;
 import com.drmangotea.tfmg.datagen.recipes.values.tfmg.*;
 import com.drmangotea.tfmg.registry.*;
-import com.simibubi.create.*;
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllFluids;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.api.data.recipe.ProcessingRecipeGen;
 import com.simibubi.create.content.decoration.palettes.AllPaletteBlocks;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
-import com.simibubi.create.foundation.data.recipe.*;
+import com.simibubi.create.foundation.data.recipe.CommonMetal;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
@@ -18,7 +20,6 @@ import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -80,9 +81,24 @@ public class TFMGRecipeProvider extends RecipeProvider {
 
             @Override
             public @NotNull CompletableFuture<?> run(CachedOutput dc) {
-                return CompletableFuture.allOf(GENERATORS.stream()
-                        .map(gen -> gen.run(dc))
-                        .toArray(CompletableFuture[]::new));
+                List<CompletableFuture<?>> futures = new ArrayList<>();
+
+                for (ProcessingRecipeGen<?, ?, ?> generator : GENERATORS) {
+                    String generatorName = generator.getClass().getSimpleName();
+                    try {
+                        CompletableFuture<?> future = generator.run(dc);
+                        future = future.exceptionally(ex -> {
+                            TFMG.LOGGER.error("Processing recipe gen '{}' failed to write recipes", generatorName, ex);
+                            throw new RuntimeException("Failed in generator: " + generatorName, ex);
+                        });
+                        futures.add(future);
+                    } catch (Throwable t) {
+                        TFMG.LOGGER.error("Processing recipe gen '{}' threw synchronously", generatorName, t);
+                        throw new RuntimeException("Failed in generator: " + generatorName, t);
+                    }
+                }
+
+                return CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
             }
         });
     }
@@ -139,16 +155,16 @@ public class TFMGRecipeProvider extends RecipeProvider {
         public static TagKey<Item> aluminumBlock() { return CommonMetal.ALUMINUM.storageBlocks.items(); }
         public static TagKey<Item> aluminumSheet() { return CommonMetal.ALUMINUM.plates; }
         public static TagKey<Item> castIronIngot() {
-            return TFMGTags.TFMGItemTags.INGOTS_CAST_IRON.tag;
+            return TFMGTags.Items.INGOTS_CAST_IRON.tag;
         }
         public static TagKey<Item> castIronNugget() {
-            return TFMGTags.TFMGItemTags.NUGGETS_CAST_IRON.tag;
+            return TFMGTags.Items.NUGGETS_CAST_IRON.tag;
         }
         public static TagKey<Item> castIronBlock() {
-            return TFMGTags.TFMGItemTags.STORAGE_BLOCKS_CAST_IRON.tag;
+            return TFMGTags.Items.STORAGE_BLOCKS_CAST_IRON.tag;
         }
         public static TagKey<Item> castIronSheet() {
-            return TFMGTags.TFMGItemTags.PLATES_CAST_IRON.tag;
+            return TFMGTags.Items.PLATES_CAST_IRON.tag;
         }
         public static TagKey<Item> leadIngot() {
             return CommonMetal.LEAD.ingots;
@@ -175,13 +191,13 @@ public class TFMGRecipeProvider extends RecipeProvider {
             return CommonMetal.NICKEL.plates;
         }
         public static TagKey<Item> lithiumIngot() {
-            return TFMGTags.TFMGItemTags.INGOTS_LITHIUM.tag;
+            return TFMGTags.Items.INGOTS_LITHIUM.tag;
         }
         public static TagKey<Item> lithiumNugget() {
-            return TFMGTags.TFMGItemTags.NUGGETS_LITHIUM.tag;
+            return TFMGTags.Items.NUGGETS_LITHIUM.tag;
         }
         public static TagKey<Item> lithiumBlock() {
-            return TFMGTags.TFMGItemTags.STORAGE_BLOCKS_LITHIUM.tag;
+            return TFMGTags.Items.STORAGE_BLOCKS_LITHIUM.tag;
         }
         public static TagKey<Item> constantanIngot() {
             return CommonMetal.CONSTANTAN.ingots;
@@ -193,20 +209,14 @@ public class TFMGRecipeProvider extends RecipeProvider {
             return CommonMetal.CONSTANTAN.storageBlocks.items();
         }
         public static TagKey<Item> copperWire() {
-            return TFMGTags.TFMGItemTags.WIRES_COPPER.tag;
+            return TFMGTags.Items.WIRES_COPPER.tag;
         }
         public static TagKey<Item> constantanWire() {
-            return TFMGTags.TFMGItemTags.WIRES_CONSTANTAN.tag;
+            return TFMGTags.Items.WIRES_CONSTANTAN.tag;
         }
         public static TagKey<Item> aluminumWire() {
-            return TFMGTags.TFMGItemTags.WIRES_ALUMINUM.tag;
+            return TFMGTags.Items.WIRES_ALUMINUM.tag;
         }
-
-        //
-
-
-
-        //
 
         public static ItemLike bitumen() {
             return TFMGItems.BITUMEN.get();
@@ -489,7 +499,7 @@ public class TFMGRecipeProvider extends RecipeProvider {
         }
 
         public static TagKey<Item> ironDust() {
-            return TFMGTags.TFMGItemTags.DUSTS_IRON.tag;
+            return TFMGTags.Items.DUSTS_IRON.tag;
         }
 
         public static TagKey<Item> zincIngot() {
@@ -538,30 +548,15 @@ public class TFMGRecipeProvider extends RecipeProvider {
 
         public static ItemStack coil100Turns(){
             ItemStack stack = TFMGItems.ELECTROMAGNETIC_COIL.asStack();
-            stack.set(TFMGDataComponents.COIL_TURNS,100);
+            stack.set(TFMGDataComponents.COIL_TURNS, 100);
             return stack;
         }
+
         public static ItemStack largeCoil100Turns(){
             ItemStack stack = TFMGBlocks.LARGE_COIL.asStack();
-            stack.set(TFMGDataComponents.COIL_TURNS,100);
+            stack.set(TFMGDataComponents.COIL_TURNS, 100);
             return stack;
         }
-
-        //public static ItemStack turbineBlade(){
-        //    ItemStack stack = TFMGItems.TURBINE_BLADE.asStack();
-//
-        //    CompoundTag keroseneTag = new CompoundTag();
-        //    keroseneTag.putString("kerosene", "forge:kerosene");
-        //    CompoundTag keroseneTagName = new CompoundTag();
-        //    keroseneTagName.putString("kerosene", "Kerosene");
-//
-        //    stack.set(TFMGDataComponents.FUEL_TAGS, keroseneTag);
-        //    stack.set(TFMGDataComponents.FUELS, keroseneTagName);
-//
-        //    return stack;
-        //}
-
-
     }
 
     public static class F {

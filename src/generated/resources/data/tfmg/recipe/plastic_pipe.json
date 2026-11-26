@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/plastic"
+    },
+    "P": {
+      "tag": "c:plates/plastic"
+    }
+  },
+  "pattern": [
+    "   ",
+    "PIP",
+    "   "
+  ],
+  "result": {
+    "count": 4,
+    "id": "tfmg:plastic_pipe"
+  }
+}

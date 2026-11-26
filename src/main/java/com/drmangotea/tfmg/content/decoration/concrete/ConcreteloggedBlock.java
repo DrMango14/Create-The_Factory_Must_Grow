@@ -20,23 +20,19 @@ import net.minecraft.world.level.material.Fluids;
 public interface ConcreteloggedBlock {
     BooleanProperty CONCRETELOGGED = BooleanProperty.create("concretelogged");
 
-
-
     default FluidState fluidState(BlockState state) {
-      //  return state.getValue(CONCRETELOGGED) ? TFMGFluids.LIQUID_CONCRETE.getSource().getSource(false) : Fluids.EMPTY.defaultFluidState();
         return state.getValue(CONCRETELOGGED) ? TFMGFluids.LIQUID_CONCRETE.get().getSource(false) : Fluids.EMPTY.defaultFluidState();
     }
 
     default void updateConcrete(LevelAccessor level, BlockState state, BlockPos pos) {
         if (state.getValue(CONCRETELOGGED))
-            //level.scheduleTick(pos, TFMGFluids.LIQUID_CONCRETE.get(), TFMGFluids.LIQUID_CONCRETE.get().getTickDelay(level));
             level.scheduleTick(pos, TFMGFluids.LIQUID_CONCRETE.get(), TFMGFluids.LIQUID_CONCRETE.get().getTickDelay(level));
     }
-    default ItemInteractionResult onClicked(Level level, BlockPos pos, BlockState state, Player player, InteractionHand hand){
+    default ItemInteractionResult onClicked(Level level, BlockPos pos, BlockState state, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if(state.getValue(CONCRETELOGGED)){
-            if(stack.is(Items.BUCKET)){
+        if(state.getValue(CONCRETELOGGED)) {
+            if(stack.is(Items.BUCKET)) {
                 level.setBlock(pos, state.setValue(CONCRETELOGGED, false),3);
                 if(!player.isCreative())
                     player.setItemInHand(hand, TFMGFluids.LIQUID_CONCRETE.getBucket().get().getDefaultInstance());
@@ -45,7 +41,7 @@ public interface ConcreteloggedBlock {
             }
 
         }else {
-            if(stack.is(TFMGFluids.LIQUID_CONCRETE.getBucket().get())){
+            if(stack.is(TFMGFluids.LIQUID_CONCRETE.getBucket().get())) {
                 level.setBlock(pos, state.setValue(CONCRETELOGGED, true),3);
                 if(!player.isCreative())
                     player.setItemInHand(hand, Items.BUCKET.getDefaultInstance());
@@ -56,12 +52,11 @@ public interface ConcreteloggedBlock {
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
-    default void tickDrying(Level level,BlockState state,BlockState newStack, BlockPos pos, RandomSource random){
+    default void tickDrying(Level level,BlockState state,BlockState newStack, BlockPos pos, RandomSource random) {
         if(!state.getValue(CONCRETELOGGED))
             return;
 
-        int randomInt = random.nextInt(7) ;
-        if(randomInt==2) {
+        if(random.nextInt(7) == 2) {
             level.setBlock(pos, newStack, 3);
         }
     }
@@ -78,6 +73,4 @@ public interface ConcreteloggedBlock {
             return ifluidstate.getType() == TFMGFluids.LIQUID_CONCRETE.getSource() ? ifluidstate.createLegacyBlock() : placementState;
         return placementState.setValue(CONCRETELOGGED, ifluidstate.getType() == TFMGFluids.LIQUID_CONCRETE.getSource());
     }
-
-
 }

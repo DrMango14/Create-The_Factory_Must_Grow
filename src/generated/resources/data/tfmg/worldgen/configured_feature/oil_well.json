@@ -1,4 +1,39 @@
 {
   "type": "tfmg:oil_well",
-  "config": {}
+  "config": {
+    "deposit": {
+      "Name": "tfmg:oil_deposit"
+    },
+    "discard_chance": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 7,
+      "min_inclusive": 0
+    },
+    "exposed_height": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 12,
+      "min_inclusive": 0
+    },
+    "fluid": "tfmg:crude_oil",
+    "side_stone": {
+      "state": {
+        "Name": "tfmg:fossilstone"
+      },
+      "target": {
+        "predicate_type": "minecraft:tag_match",
+        "tag": "minecraft:base_stone_overworld"
+      }
+    },
+    "spillage_chance": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 10,
+      "min_inclusive": 0
+    },
+    "spillage_replaces": [
+      {
+        "predicate_type": "minecraft:tag_match",
+        "tag": "c:sands"
+      }
+    ]
+  }
 }

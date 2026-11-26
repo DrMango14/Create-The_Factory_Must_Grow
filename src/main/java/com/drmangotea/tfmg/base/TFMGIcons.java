@@ -21,15 +21,12 @@ import org.joml.Matrix4f;
 import java.awt.*;
 
 public class TFMGIcons extends AllIcons {
-
-
     public static final ResourceLocation ICON_ATLAS = TFMG.asResource("textures/gui/icons.png");
     public static final int ICON_ATLAS_SIZE = 256;
 
     private static int x = 0, y = -1;
-    private int iconX;
-    private int iconY;
-
+    private final int iconX;
+    private final int iconY;
 
     public static final TFMGIcons
             DISTILLATION_OUTPUT_ICON_DO_NOT_VOID = newRow(),

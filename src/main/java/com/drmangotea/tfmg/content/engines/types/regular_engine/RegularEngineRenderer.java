@@ -3,7 +3,6 @@ package com.drmangotea.tfmg.content.engines.types.regular_engine;
 import com.drmangotea.tfmg.content.engines.base.EngineRenderer;
 import com.drmangotea.tfmg.content.engines.types.AbstractSmallEngineBlockEntity;
 import com.drmangotea.tfmg.content.engines.types.turbine_engine.TurbineEngineBlockEntity;
-import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
@@ -53,12 +52,6 @@ public class RegularEngineRenderer extends EngineRenderer {
     }
 
     private PartialModel getCylinderModel(RegularEngineBlockEntity be){
-
-        return switch (be.type){
-            case I, U, BOXER, TURBINE -> TFMGPartialModels.SMALL_CYLINDER;
-            case V, W -> TFMGPartialModels.CYLINDER;
-            case RADIAL -> TFMGPartialModels.RADIAL_ENGINE_CYLINDER;
-        };
-
+        return be.type.cylinderModel;
     }
 }

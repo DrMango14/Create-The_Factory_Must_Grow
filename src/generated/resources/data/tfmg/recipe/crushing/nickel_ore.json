@@ -1,0 +1,25 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "tfmg:nickel_ore"
+    }
+  ],
+  "results": [
+    {
+      "id": "create:crushed_raw_nickel"
+    },
+    {
+      "chance": 0.25,
+      "id": "create:crushed_raw_nickel"
+    },
+    {
+      "chance": 0.75,
+      "id": "create:experience_nugget"
+    },
+    {
+      "chance": 0.12,
+      "id": "minecraft:cobblestone"
+    }
+  ]
+}

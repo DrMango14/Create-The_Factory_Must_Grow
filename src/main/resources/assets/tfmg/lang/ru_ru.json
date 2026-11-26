@@ -1,8 +1,6 @@
 {
   "_": "->------------------------]  Game Elements  [------------------------<-",
-
   "OwO": "UwU",
-
   "block.tfmg.accumulator": "Накопитель",
   "block.tfmg.accumulator.tooltip.summary": "Вмещает большое количество энергии (вставляется снизу), которая может медленно отдаваться сверху",
   "block.tfmg.air_intake": "Воздухозаборник",
@@ -519,7 +517,6 @@
   "block.tfmg.yellow_rebar_concrete_wall": "Ограда из жёлтого армированного бетона",
   "block.tfmg.zinc_frame": "Цинковый каркас",
   "block.tfmg.zinc_truss": "Цинковые балки",
-
   "create.goggles.item_storage": "Хранилище предметов:",
   "create.recipe.advanced_distillation": "Расширенная дистилляция",
   "create.recipe.assembly.winding": "Намотка катушки",
@@ -531,19 +528,15 @@
   "create.recipe.industrial_blasting": "Промышленная плавка",
   "create.recipe.polarizing": "Поляризация",
   "create.recipe.winding": "Намотка",
-
   "creative_tab.tfmg_decoration": "Create: TFMG Строительные блоки",
   "creative_tab.tfmg_main": "Create: The Factory Must Grow",
-
   "death.attack.tfmg.acid": "%1$s принял кислотную ванну",
   "death.attack.tfmg.acid.player": "%1$s принял кислотную ванну",
   "death.attack.tfmg.blast_furnace": "%1$s был превращён в углеродистую сталь",
   "death.attack.tfmg.blast_furnace.player": "%1$s был брошен в доменную печь",
   "death.attack.tfmg.concrete": "%1$s попытался съесть бетон",
   "death.attack.tfmg.concrete.player": "%1$s попытался съесть бетон",
-
   "effect.tfmg.hellfire": "Адский огонь",
-
   "entity.tfmg.blue_spark": "Голубая искра",
   "entity.tfmg.copper_grenade": "Медная граната",
   "entity.tfmg.dry_ice_flake": "Хлопья сухого льда",
@@ -555,7 +548,6 @@
   "entity.tfmg.spark": "Искра",
   "entity.tfmg.thermite_grenade": "Термитная граната",
   "entity.tfmg.zinc_grenade": "Цинковая граната",
-
   "fluid.tfmg.air": "Воздух",
   "fluid.tfmg.butane": "Бутан",
   "fluid.tfmg.carbon_dioxide": "Углекислый газ",
@@ -584,12 +576,10 @@
   "fluid.tfmg.propane": "Пропан",
   "fluid.tfmg.propylene": "Пропилен",
   "fluid.tfmg.sulfuric_acid": "Серная кислота",
-
   "item.minecraft.lingering_potion.effect.hellfire_potion": "Туманное зелье адского огня",
   "item.minecraft.potion.effect.hellfire_potion": "Зелье адского огня",
   "item.minecraft.splash_potion.effect.hellfire_potion": "Взрывное зелье адского огня",
   "item.minecraft.tipped_arrow.effect.hellfire_potion": "Стрела адского огня",
-
   "item.tfmg.advanced_potato_cannon": "Продвинутая картофельная пушка",
   "item.tfmg.advanced_potato_cannon.tooltip.behaviour1": "_Стреляет_ _напалмовой картофелиной_ из вашего _инвентаря_.",
   "item.tfmg.advanced_potato_cannon.tooltip.behaviour2": "_Прочность_ не тратится. Вместо этого расходуется _давление воздуха_ из баллона",
@@ -880,7 +870,6 @@
   "item.tfmg.yellow_multimeter.tooltip.summary": "Показывает данные об электрическом блоке и его сети",
   "item.tfmg.zinc_electrode": "Цинковый электрод",
   "item.tfmg.zinc_grenade": "Цинковая граната",
-
   "tfmg.blast_stove.header": "Воздухонагреватель: ",
   "tfmg.coke_oven.header": "Коксовая печь:",
   "tfmg.creative_generator.voltage_generation": "Генерация напряжения",

@@ -34,31 +34,34 @@ public enum TFMGGuiTextures implements ScreenElement {
     GRAPHITE_ELECTRODE("chemical_vat", 176, 0, 8, 29),
     FIREPROOF_BRICK_OVERLAY("chemical_vat", 0, 84, 96, 72),
     CAST_IRON_VAT_OVERLAY("chemical_vat", 0, 156, 110, 84),
-    VAT_HEATER("chemical_vat", 112, 44, 20, 14),
-    VAT_SUPERHEATER("chemical_vat", 112, 58, 20, 14),
-
+    STEEL_VAT_OVERLAY("chemical_vat", 0, 0, 110, 84),
+    VAT_FREEZER("chemical_vat",112,80,9,9),
+    VAT_HEATER("chemical_vat", 112, 89, 9, 9),
+    VAT_SUPERHEATER("chemical_vat", 112, 98, 9, 9),
+    VAT_BAROMETER("chemical_vat",211,3,42,42),
+    SHORTISH_ARROW("jei/widgets", 19, 20, 35, 9),
+    DOWN_RIGHT_ARROW("jei/widgets", 0, 0, 16, 16)
     ;
 
-
-
-
     public final ResourceLocation location;
-    public int width, height;
-    public int startX, startY;
+    public final int width;
+    public final int height;
+    public final int startX;
+    public final int startY;
 
-    private TFMGGuiTextures(String location, int width, int height) {
+    TFMGGuiTextures(String location, int width, int height) {
         this(location, 0, 0, width, height);
     }
 
-    private TFMGGuiTextures(int startX, int startY) {
+    TFMGGuiTextures(int startX, int startY) {
         this("icons", startX * 16, startY * 16, 16, 16);
     }
 
-    private TFMGGuiTextures(String location, int startX, int startY, int width, int height) {
+    TFMGGuiTextures(String location, int startX, int startY, int width, int height) {
         this(TFMG.MOD_ID, location, startX, startY, width, height);
     }
 
-    private TFMGGuiTextures(String namespace, String location, int startX, int startY, int width, int height) {
+    TFMGGuiTextures(String namespace, String location, int startX, int startY, int width, int height) {
         this.location = ResourceLocation.fromNamespaceAndPath(namespace, "textures/gui/" + location + ".png");
         this.width = width;
         this.height = height;
@@ -84,6 +87,11 @@ public enum TFMGGuiTextures implements ScreenElement {
     @OnlyIn(Dist.CLIENT)
     public void render(GuiGraphics graphics, int x, int y) {
         graphics.blit(location, x, y, startX, startY, width, height);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void render(GuiGraphics graphics, int x, int y, int u, int v, int width, int height) {
+        graphics.blit(this.location, x, y, u, v, width, height, this.width, this.height);
     }
 
     @OnlyIn(Dist.CLIENT)

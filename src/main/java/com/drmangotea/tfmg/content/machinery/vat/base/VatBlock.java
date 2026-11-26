@@ -1,8 +1,12 @@
 package com.drmangotea.tfmg.content.machinery.vat.base;
 
+import com.drmangotea.tfmg.base.TFMGBlockConnectivityHandler;
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
+import com.drmangotea.tfmg.content.machinery.vat.base.registry.types.VatType;
+import com.drmangotea.tfmg.content.machinery.vat.base.registry.types.VatTypeEntry;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
-import com.simibubi.create.api.connectivity.ConnectivityHandler;
+import com.drmangotea.tfmg.registry.TFMGVatTypes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 
@@ -30,36 +34,42 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.util.DeferredSoundType;
 
-public class VatBlock extends Block implements IWrenchable, IBE<VatBlockEntity> {
+import javax.annotation.Nullable;
 
-    public final String vatType;
+@NothingNullByDefault
+public class VatBlock extends Block implements IWrenchable, IBE<VatBlockEntity> {
+    public final VatTypeEntry vatType;
 
     public static final BooleanProperty TOP = BooleanProperty.create("top");
     public static final BooleanProperty BOTTOM = BooleanProperty.create("bottom");
     public static final EnumProperty<Shape> SHAPE = EnumProperty.create("shape", Shape.class);
 
-
-
     public static VatBlock steel(Properties properties){
-        return new VatBlock(properties,"tfmg:steel_vat");
+        return new VatBlock(properties, TFMGVatTypes.STEEL);
     }
-    public static VatBlock cast_iron(Properties properties){
-        return new VatBlock(properties,"tfmg:cast_iron_vat");
+    public static VatBlock castIron(Properties properties){
+        return new VatBlock(properties, TFMGVatTypes.CAST_IRON);
     }
     public static VatBlock fireproof(Properties properties){
-        return new VatBlock(properties,"tfmg:firebrick_lined_vat");
+        return new VatBlock(properties, TFMGVatTypes.FIREPROOF);
     }
 
-    public VatBlock(Properties properties, String vatType) {
+    public VatBlock(Properties properties, VatTypeEntry vatType) {
         super(properties);
         registerDefaultState(defaultBlockState().setValue(TOP, true)
                 .setValue(BOTTOM, true)
                 .setValue(SHAPE, Shape.PLAIN));
         this.vatType = vatType;
     }
+
+    public VatType getVatType() {
+        return vatType.get();
+    }
+
     public static boolean isVat(BlockState state) {
         return state.getBlock() instanceof VatBlock;
     }
+
     public static void updateVatState(BlockState pState, Level pLevel, BlockPos tankPos) {
         BlockState tankState = pLevel.getBlockState(tankPos);
 
@@ -73,9 +83,7 @@ public class VatBlock extends Block implements IWrenchable, IBE<VatBlockEntity> 
     }
     @Override
     public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean moved) {
-        if (oldState.getBlock() == state.getBlock())
-            return;
-        if (moved)
+        if (oldState.getBlock() == state.getBlock() || moved)
             return;
 
         withBlockEntityDo(world, pos, VatBlockEntity::updateConnectivity);
@@ -87,10 +95,10 @@ public class VatBlock extends Block implements IWrenchable, IBE<VatBlockEntity> 
 
     @Override
     public int getLightEmission(BlockState state, BlockGetter world, BlockPos pos) {
-        VatBlockEntity vatAt = ConnectivityHandler.partAt(getBlockEntityType(), world, pos);
+        VatBlockEntity vatAt = TFMGBlockConnectivityHandler.partAt(getBlockEntityType(), world, pos);
         if (vatAt == null)
             return 0;
-        VatBlockEntity controllerTE = (VatBlockEntity) vatAt.getControllerBE();
+        VatBlockEntity controllerTE = vatAt.getControllerBE();
         if (controllerTE == null || !controllerTE.window)
             return 0;
         return vatAt.luminosity;
@@ -116,16 +124,16 @@ public class VatBlock extends Block implements IWrenchable, IBE<VatBlockEntity> 
     }
 
     @Override
-    public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.hasBlockEntity() && (state.getBlock() != newState.getBlock() || !newState.hasBlockEntity())) {
-            BlockEntity be = world.getBlockEntity(pos);
-            if (!(be instanceof VatBlockEntity))
+            BlockEntity be = level.getBlockEntity(pos);
+            if (!(be instanceof VatBlockEntity tankBE))
                 return;
-            VatBlockEntity tankBE = (VatBlockEntity) be;
-            world.removeBlockEntity(pos);
-            ConnectivityHandler.splitMulti(tankBE);
+            IBE.onRemove(state, level, pos, newState);
+			TFMGBlockConnectivityHandler.splitMulti(tankBE);
         }
     }
+	
     @Override
     public Class<VatBlockEntity> getBlockEntityClass() {
         return VatBlockEntity.class;
@@ -141,18 +149,13 @@ public class VatBlock extends Block implements IWrenchable, IBE<VatBlockEntity> 
         if (mirror == Mirror.NONE)
             return state;
         boolean x = mirror == Mirror.FRONT_BACK;
-        switch (state.getValue(SHAPE)) {
-            case WINDOW_NE:
-                return state.setValue(SHAPE, x ? Shape.WINDOW_NW : Shape.WINDOW_SE);
-            case WINDOW_NW:
-                return state.setValue(SHAPE, x ? Shape.WINDOW_NE : Shape.WINDOW_SW);
-            case WINDOW_SE:
-                return state.setValue(SHAPE, x ? Shape.WINDOW_SW : Shape.WINDOW_NE);
-            case WINDOW_SW:
-                return state.setValue(SHAPE, x ? Shape.WINDOW_SE : Shape.WINDOW_NW);
-            default:
-                return state;
-        }
+        return switch (state.getValue(SHAPE)) {
+            case WINDOW_NE -> state.setValue(SHAPE, x ? Shape.WINDOW_NW : Shape.WINDOW_SE);
+            case WINDOW_NW -> state.setValue(SHAPE, x ? Shape.WINDOW_NE : Shape.WINDOW_SW);
+            case WINDOW_SE -> state.setValue(SHAPE, x ? Shape.WINDOW_SW : Shape.WINDOW_NE);
+            case WINDOW_SW -> state.setValue(SHAPE, x ? Shape.WINDOW_SE : Shape.WINDOW_NW);
+            default -> state;
+        };
     }
 
     @Override
@@ -163,18 +166,13 @@ public class VatBlock extends Block implements IWrenchable, IBE<VatBlockEntity> 
     }
 
     private BlockState rotateOnce(BlockState state) {
-        switch (state.getValue(SHAPE)) {
-            case WINDOW_NE:
-                return state.setValue(SHAPE, Shape.WINDOW_SE);
-            case WINDOW_NW:
-                return state.setValue(SHAPE, Shape.WINDOW_NE);
-            case WINDOW_SE:
-                return state.setValue(SHAPE, Shape.WINDOW_SW);
-            case WINDOW_SW:
-                return state.setValue(SHAPE, Shape.WINDOW_NW);
-            default:
-                return state;
-        }
+        return switch (state.getValue(SHAPE)) {
+            case WINDOW_NE -> state.setValue(SHAPE, Shape.WINDOW_SE);
+            case WINDOW_NW -> state.setValue(SHAPE, Shape.WINDOW_NE);
+            case WINDOW_SE -> state.setValue(SHAPE, Shape.WINDOW_SW);
+            case WINDOW_SW -> state.setValue(SHAPE, Shape.WINDOW_NW);
+            default -> state;
+        };
     }
 
     public enum Shape implements StringRepresentable {
@@ -192,25 +190,11 @@ public class VatBlock extends Block implements IWrenchable, IBE<VatBlockEntity> 
                     () -> SoundEvents.METAL_PLACE, () -> SoundEvents.METAL_HIT, () -> SoundEvents.METAL_FALL);
 
     @Override
-    public SoundType getSoundType(BlockState state, LevelReader world, BlockPos pos, Entity entity) {
+    public SoundType getSoundType(BlockState state, LevelReader world, BlockPos pos, @Nullable Entity entity) {
         SoundType soundType = super.getSoundType(state, world, pos, entity);
         if (entity != null && entity.getPersistentData()
                 .contains("SilenceTankSound"))
             return SILENCED_METAL;
         return soundType;
     }
-
-    //@Override
-    //public boolean hasAnalogOutputSignal(BlockState state) {
-    //    return true;
-    //}
-//
-    //@Override
-    //public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
-    //    return getBlockEntityOptional(worldIn, pos).map(SteelTankBlockEntity::getControllerBE)
-    //            .map(te -> ComparatorUtil.fractionToRedstoneLevel(te.getFillState()))
-    //            .orElse(0);
-    //}
-
-
 }

@@ -15,17 +15,10 @@ public class TFMGBoilerHeaters {
     public static BoilerHeater FIREBOX = TFMGBoilerHeaters::blazeBurner;
 
     public static int blazeBurner(Level level, BlockPos pos, BlockState state) {
-        BlazeBurnerBlock.HeatLevel value = state.getValue(BlazeBurnerBlock.HEAT_LEVEL);
-        if (value == BlazeBurnerBlock.HeatLevel.NONE) {
-            return -1;
-        }
-        if (value == BlazeBurnerBlock.HeatLevel.SEETHING) {
-            return 3;
-        }
-        if (value.isAtLeast(BlazeBurnerBlock.HeatLevel.FADING)) {
-            return 2;
-        }
-        return -1;
-
+        return switch (state.getValue(BlazeBurnerBlock.HEAT_LEVEL)) {
+            case FADING -> 2;
+            case SEETHING -> 3;
+            default -> -1; // NONE is also -1
+        };
     }
 }

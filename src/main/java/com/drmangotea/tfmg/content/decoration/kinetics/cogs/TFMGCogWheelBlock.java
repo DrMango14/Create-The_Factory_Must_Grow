@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.decoration.kinetics.cogs;
 
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllShapes;
@@ -11,7 +12,6 @@ import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
 import com.simibubi.create.content.kinetics.speedController.SpeedControllerBlock;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
 import net.createmod.catnip.data.Iterate;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -32,12 +32,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import static net.minecraft.core.Direction.Axis;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+@NothingNullByDefault
 public class TFMGCogWheelBlock extends AbstractSimpleShaftBlock implements ICogWheel, EncasableBlock {
 
     boolean isLarge;

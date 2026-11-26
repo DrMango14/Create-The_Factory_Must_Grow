@@ -26,8 +26,8 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static com.drmangotea.tfmg.base.palettes.TFMGPaletteBlockPartial.ALL_PARTIALS;
-import static com.drmangotea.tfmg.base.palettes.TFMGPaletteBlockPartial.FOR_POLISHED;
+import static com.drmangotea.tfmg.base.palettes.TFMGPaletteBlockPartials.ALL_PARTIALS;
+import static com.drmangotea.tfmg.base.palettes.TFMGPaletteBlockPartials.FOR_POLISHED;
 import static com.drmangotea.tfmg.base.palettes.TFMGPaletteBlockPattern.PatternNameType.*;
 
 
@@ -47,10 +47,7 @@ public class TFMGPaletteBlockPattern {
     PILLAR = create("pillar", SUFFIX).blockStateFactory(p -> p::pillar)
             .block(ConnectedPillarBlock::new)
             .textures("pillar", "cap")
-            .connectedTextures(v -> new RotatedPillarCTBehaviour(ct(v, CTs.PILLAR), ct(v, CTs.CAP)))
-            ;
-
-    public static final TFMGPaletteBlockPattern[] VANILLA_RANGE = { CUT, POLISHED, BRICKS, SMALL_BRICKS, LAYERED, PILLAR };
+            .connectedTextures(v -> new RotatedPillarCTBehaviour(ct(v, CTs.PILLAR), ct(v, CTs.CAP)));
 
     public static final TFMGPaletteBlockPattern[] STANDARD_RANGE = { CUT, POLISHED, BRICKS, SMALL_BRICKS, LAYERED, PILLAR };
 
@@ -219,12 +216,12 @@ public class TFMGPaletteBlockPattern {
     }
 
     @FunctionalInterface
-    static interface IPatternBlockStateGenerator
+    public interface IPatternBlockStateGenerator
             extends Function<TFMGPaletteBlockPattern, Function<String, IBlockStateProvider>> {
     }
 
     @FunctionalInterface
-    static interface IBlockStateProvider
+    public interface IBlockStateProvider
             extends NonNullBiConsumer<DataGenContext<Block, ? extends Block>, RegistrateBlockstateProvider> {
     }
 
@@ -238,20 +235,18 @@ public class TFMGPaletteBlockPattern {
 
         PILLAR(AllCTTypes.RECTANGLE, s -> toLocation(s, "pillar")),
         CAP(AllCTTypes.OMNIDIRECTIONAL, s -> toLocation(s, "cap")),
-        LAYERED(AllCTTypes.HORIZONTAL_KRYPPERS, s -> toLocation(s, "layered"))
+        LAYERED(AllCTTypes.HORIZONTAL_KRYPPERS, s -> toLocation(s, "layered"));
 
-        ;
+        public final CTType type;
+        private final Function<String, ResourceLocation> srcFactory;
+        private final Function<String, ResourceLocation> targetFactory;
 
-        public CTType type;
-        private Function<String, ResourceLocation> srcFactory;
-        private Function<String, ResourceLocation> targetFactory;
-
-        private CTs(CTType type, Function<String, ResourceLocation> factory) {
+        CTs(CTType type, Function<String, ResourceLocation> factory) {
             this(type, factory, factory);
         }
 
-        private CTs(CTType type, Function<String, ResourceLocation> srcFactory,
-                    Function<String, ResourceLocation> targetFactory) {
+        CTs(CTType type, Function<String, ResourceLocation> srcFactory,
+            Function<String, ResourceLocation> targetFactory) {
             this.type = type;
             this.srcFactory = srcFactory;
             this.targetFactory = targetFactory;

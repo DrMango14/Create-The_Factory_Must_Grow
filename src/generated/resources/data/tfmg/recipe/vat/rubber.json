@@ -1,0 +1,24 @@
+{
+  "type": "tfmg:vat",
+  "heat_level": 2,
+  "ingredients": [
+    {
+      "tag": "c:dusts/sulfur"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 250,
+      "tag": "c:heavy_oil"
+    }
+  ],
+  "machines": [
+    "tfmg:mixer"
+  ],
+  "min_size": 1,
+  "processing_time": 40,
+  "results": [
+    {
+      "id": "tfmg:rubber_sheet"
+    }
+  ]
+}

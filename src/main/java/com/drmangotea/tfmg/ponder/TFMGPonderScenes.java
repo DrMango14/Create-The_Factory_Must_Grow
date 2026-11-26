@@ -1,8 +1,7 @@
 package com.drmangotea.tfmg.ponder;
 
 import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipes;
-import com.drmangotea.tfmg.ponder.scenes.MetallurgyScenes;
-import com.drmangotea.tfmg.ponder.scenes.MiscTFMGScenes;
+import com.drmangotea.tfmg.ponder.scenes.*;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.Create;
 import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
@@ -14,30 +13,55 @@ import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
 import net.minecraft.resources.ResourceLocation;
 
 public class TFMGPonderScenes {
-
-
     public static void register(PonderSceneRegistrationHelper<ResourceLocation> helper) {
         PonderSceneRegistrationHelper<ItemProviderEntry<?,?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
 
-        HELPER.forComponents(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER, TFMGBlocks.STEEL_DISTILLATION_OUTPUT)
-                .addStoryBoard("distillation_tower", MiscTFMGScenes::distillation_tower, TFMGPonderTags.OIL_PROCESSING);
-        HELPER.forComponents(TFMGBlocks.BLAST_FURNACE_OUTPUT, TFMGBlocks.BLAST_FURNACE_HATCH)
-                .addStoryBoard("blast_furnace", MetallurgyScenes::blast_furnace, TFMGPonderTags.METALLURGY);
+        // Chemistry
         HELPER.forComponents(TFMGBlocks.STEEL_CHEMICAL_VAT,
                 TFMGBlocks.CAST_IRON_CHEMICAL_VAT,
                 TFMGBlocks.FIREPROOF_CHEMICAL_VAT,
                 TFMGBlocks.INDUSTRIAL_MIXER,
                 TFMGBlocks.ELECTRODE_HOLDER
-        ).addStoryBoard("chemical_vat", MiscTFMGScenes::chemical_vat, TFMGPonderTags.CHEMICAL_VAT);
-        HELPER.forComponents(TFMGBlocks.COKE_OVEN)
-                .addStoryBoard("coke_oven", MetallurgyScenes::coke_oven, TFMGPonderTags.METALLURGY);
-        HELPER.forComponents(TFMGBlocks.PUMPJACK_BASE,TFMGBlocks.PUMPJACK_CRANK,TFMGBlocks.PUMPJACK_HAMMER)
-                .addStoryBoard("pumpjack", MiscTFMGScenes::pumpjack, TFMGPonderTags.OIL_PROCESSING);
-       // HELPER.forComponents(TFMGBlocks.REGULAR_ENGINE, TFMGBlocks.TURBINE_ENGINE, TFMGBlocks.RADIAL_ENGINE)
-       //         .addStoryBoard("engines", MiscTFMGScenes::engines, TFMGPonderTags.ENGINES);
+        ).addStoryBoard("chemical_vat", ChemistryScenes::chemicalVat, TFMGPonderTags.CHEMICAL_VAT);
+
+        // Electricity
         HELPER.forComponents(TFMGBlocks.THREE_PHASE_GENERATOR, TFMGBlocks.ROTOR, TFMGBlocks.STATOR, TFMGBlocks.ELECTRIC_MOTOR)
-                .addStoryBoard("electricity", MiscTFMGScenes::electricity, TFMGPonderTags.ELECTRIC_MACHINERY)
-                .addStoryBoard("electricity_two", MiscTFMGScenes::electricy_two, TFMGPonderTags.ELECTRIC_MACHINERY);
+                .addStoryBoard("electricity", ElectricityScenes::electricity, TFMGPonderTags.ELECTRIC_MACHINERY)
+                .addStoryBoard("electric_subnetworks", ElectricityScenes::electricSubnetworks, TFMGPonderTags.ELECTRIC_MACHINERY);
+        HELPER.forComponents(TFMGBlocks.LARGE_COIL)
+                .addStoryBoard("large_transformer", ElectricityScenes::largeTransformer, TFMGPonderTags.ELECTRIC_MACHINERY);
+        HELPER.forComponents(TFMGBlocks.WINDING_MACHINE)
+                .addStoryBoard("winding_machine", ElectricityScenes::windingMachine, TFMGPonderTags.ELECTRIC_MACHINERY)
+                .addStoryBoard("winding_machine", ElectricityScenes::windingMachineAutomation, TFMGPonderTags.ELECTRIC_MACHINERY);
+
+        // Engines
+        HELPER.forComponents(TFMGBlocks.REGULAR_ENGINE)
+                 .addStoryBoard("regular_engine", EngineScenes::regularEngineAssembly, TFMGPonderTags.ENGINES)
+                .addStoryBoard("regular_engine", EngineScenes::regularEngineOperation, TFMGPonderTags.ENGINES);
+        HELPER.forComponents(TFMGBlocks.TURBINE_ENGINE)
+                 .addStoryBoard("turbine_engine", EngineScenes::turbineEngineAssembly, TFMGPonderTags.ENGINES)
+                .addStoryBoard("turbine_engine", EngineScenes::turbineEngineOperation, TFMGPonderTags.ENGINES);
+        HELPER.forComponents(TFMGBlocks.RADIAL_ENGINE)
+                 .addStoryBoard("radial_engine", EngineScenes::radialEngineAssembly, TFMGPonderTags.ENGINES)
+                .addStoryBoard("radial_engine", EngineScenes::radialEngineOperation, TFMGPonderTags.ENGINES);
+        HELPER.forComponents(TFMGBlocks.LARGE_ENGINE)
+                 .addStoryBoard("large_engine", EngineScenes::largeEngine, TFMGPonderTags.ENGINES);
+        HELPER.forComponents(TFMGBlocks.SIMPLE_LARGE_ENGINE)
+                 .addStoryBoard("simple_large_engine", EngineScenes::simpleLargeEngine, TFMGPonderTags.ENGINES);
+
+        // Metallurgy
+        HELPER.forComponents(TFMGBlocks.BLAST_FURNACE_OUTPUT, TFMGBlocks.BLAST_FURNACE_HATCH)
+                .addStoryBoard("blast_furnace", MetallurgyScenes::blastFurnace, TFMGPonderTags.METALLURGY);
+        HELPER.forComponents(TFMGBlocks.BLAST_STOVE)
+                .addStoryBoard("blast_stove", MetallurgyScenes::blastStove, TFMGPonderTags.METALLURGY);
+        HELPER.forComponents(TFMGBlocks.COKE_OVEN)
+                .addStoryBoard("coke_oven", MetallurgyScenes::cokeOven, TFMGPonderTags.METALLURGY);
+
+        // Oil
+        HELPER.forComponents(TFMGBlocks.PUMPJACK_BASE,TFMGBlocks.PUMPJACK_CRANK,TFMGBlocks.PUMPJACK_HAMMER)
+                .addStoryBoard("pumpjack", OilScenes::pumpjack, TFMGPonderTags.OIL_PROCESSING);
+        HELPER.forComponents(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER, TFMGBlocks.STEEL_DISTILLATION_OUTPUT)
+                .addStoryBoard("distillation_tower", OilScenes::distillationTower, TFMGPonderTags.OIL_PROCESSING);
 
         // Add our fluid manipulators to Create's ponder scenes
         HELPER.forComponents(

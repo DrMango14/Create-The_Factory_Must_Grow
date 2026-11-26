@@ -1,4 +1,10 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "tfmg:tag_filled",
+      "tag": "c:dusts/iron"
+    }
+  ],
   "type": "tfmg:industrial_blasting",
   "hot_air_usage": 20,
   "ingredients": [
@@ -9,14 +15,14 @@
       "tag": "tfmg:flux"
     }
   ],
-  "processing_time": 20,
+  "processing_time": 400,
   "results": [
     {
-      "amount": 144,
+      "amount": 90,
       "id": "tfmg:molten_steel"
     },
     {
-      "amount": 144,
+      "amount": 80,
       "id": "tfmg:molten_slag"
     },
     {

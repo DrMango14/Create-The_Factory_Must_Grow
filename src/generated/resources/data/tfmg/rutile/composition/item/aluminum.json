@@ -1,0 +1,17 @@
+{
+  "compositions": [
+    {
+      "elements": [
+        {
+          "id": "rutile:aluminum"
+        }
+      ]
+    }
+  ],
+  "contents": [
+    "tfmg:aluminum_block",
+    "tfmg:aluminum_ingot",
+    "tfmg:aluminum_nugget",
+    "tfmg:aluminum_sheet"
+  ]
+}

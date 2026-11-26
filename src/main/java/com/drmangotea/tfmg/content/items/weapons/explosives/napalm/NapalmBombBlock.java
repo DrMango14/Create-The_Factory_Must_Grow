@@ -1,6 +1,8 @@
 package com.drmangotea.tfmg.content.items.weapons.explosives.napalm;
 
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -26,112 +28,94 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
 
+@NothingNullByDefault
 public class NapalmBombBlock extends Block {
     public static final BooleanProperty UNSTABLE = BlockStateProperties.UNSTABLE;
 
-    public NapalmBombBlock(Properties p_57422_) {
-        super(p_57422_);
-        this.registerDefaultState(this.defaultBlockState().setValue(UNSTABLE, Boolean.valueOf(false)));
+    public NapalmBombBlock(Properties properties) {
+        super(properties);
+        this.registerDefaultState(this.defaultBlockState().setValue(UNSTABLE, false));
     }
 
-    public void onCaughtFire(BlockState state, Level world, BlockPos pos, @Nullable net.minecraft.core.Direction face, @Nullable LivingEntity igniter) {
-        explode(world, pos, igniter);
+    public void onCaughtFire(BlockState state, Level level, BlockPos pos, @Nullable Direction face, @Nullable LivingEntity igniter) {
+        if (!level.isClientSide) {
+            NapalmBombEntity napalmBomb = new NapalmBombEntity(level, (double)pos.getX() + 0.5D, pos.getY(), (double)pos.getZ() + 0.5D, igniter);
+            level.addFreshEntity(napalmBomb);
+            level.playSound(null, napalmBomb.getX(), napalmBomb.getY(), napalmBomb.getZ(), SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 1.0F, 1.0F);
+            level.gameEvent(igniter, GameEvent.PRIME_FUSE, pos);
+        }
     }
 
-    public void onPlace(BlockState p_57466_, Level p_57467_, BlockPos p_57468_, BlockState p_57469_, boolean p_57470_) {
-        if (!p_57469_.is(p_57466_.getBlock())) {
-            if (p_57467_.hasNeighborSignal(p_57468_)) {
-                onCaughtFire(p_57466_, p_57467_, p_57468_, null, null);
-                p_57467_.removeBlock(p_57468_, false);
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        if (!oldState.is(state.getBlock())) {
+            if (level.hasNeighborSignal(pos)) {
+                onCaughtFire(state, level, pos, null, null);
+                level.removeBlock(pos, false);
             }
 
         }
     }
 
-    public void neighborChanged(BlockState p_57457_, Level p_57458_, BlockPos p_57459_, Block p_57460_, BlockPos p_57461_, boolean p_57462_) {
-        if (p_57458_.hasNeighborSignal(p_57459_)) {
-            onCaughtFire(p_57457_, p_57458_, p_57459_, null, null);
-            p_57458_.removeBlock(p_57459_, false);
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos neighbor, boolean movedByPiston) {
+        if (level.hasNeighborSignal(pos)) {
+            onCaughtFire(state, level, pos, null, null);
+            level.removeBlock(pos, false);
         }
-
     }
 
-    public BlockState playerWillDestroy(Level p_57445_, BlockPos p_57446_, BlockState p_57447_, Player p_57448_) {
-        if (!p_57445_.isClientSide() && !p_57448_.isCreative() && p_57447_.getValue(UNSTABLE)) {
-            onCaughtFire(p_57447_, p_57445_, p_57446_, null, null);
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide() && !player.isCreative() && state.getValue(UNSTABLE)) {
+            onCaughtFire(state, level, pos, null, null);
         }
 
-        super.playerWillDestroy(p_57445_, p_57446_, p_57447_, p_57448_);
-        return p_57447_;
+        super.playerWillDestroy(level, pos, state, player);
+        return state;
     }
 
 
-
-    public void wasExploded(Level p_57441_, BlockPos p_57442_, Explosion sourceMob) {
-        if (!p_57441_.isClientSide) {
-            NapalmBombEntity napalmBomb = new NapalmBombEntity(p_57441_, (double)p_57442_.getX() + 0.5D, (double)p_57442_.getY(), (double)p_57442_.getZ() + 0.5D, sourceMob.getIndirectSourceEntity());
+    public void wasExploded(Level level, BlockPos pos, Explosion explosion) {
+        if (!level.isClientSide) {
+            NapalmBombEntity napalmBomb = new NapalmBombEntity(level, (double)pos.getX() + 0.5D, pos.getY(), (double)pos.getZ() + 0.5D, explosion.getIndirectSourceEntity());
             int i = napalmBomb.getFuse();
-            napalmBomb.setFuse((short)(p_57441_.random.nextInt(i / 4) + i / 8));
-            p_57441_.addFreshEntity(napalmBomb);
-        }
-    }
-
-    @Deprecated //Forge: Prefer using IForgeBlock#catchFire
-    public static void explode(Level p_57434_, BlockPos p_57435_) {
-        explode(p_57434_, p_57435_, (LivingEntity)null);
-    }
-
-    @Deprecated //Forge: Prefer using IForgeBlock#catchFire
-    private static void explode(Level p_57437_, BlockPos p_57438_, @Nullable LivingEntity p_57439_) {
-        if (!p_57437_.isClientSide) {
-            NapalmBombEntity napalmBomb = new NapalmBombEntity(p_57437_, (double)p_57438_.getX() + 0.5D, (double)p_57438_.getY(), (double)p_57438_.getZ() + 0.5D, p_57439_);
-            p_57437_.addFreshEntity(napalmBomb);
-            p_57437_.playSound((Player)null, napalmBomb.getX(), napalmBomb.getY(), napalmBomb.getZ(), SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 1.0F, 1.0F);
-            p_57437_.gameEvent(p_57439_, GameEvent.PRIME_FUSE, p_57438_);
+            napalmBomb.setFuse((short)(level.random.nextInt(i / 4) + i / 8));
+            level.addFreshEntity(napalmBomb);
         }
     }
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-
-        ItemStack itemstack = player.getItemInHand(hand);
-        if (!itemstack.is(Items.FLINT_AND_STEEL) && !itemstack.is(Items.FIRE_CHARGE)) {
+        if (!stack.is(Items.FLINT_AND_STEEL) && !stack.is(Items.FIRE_CHARGE)) {
             return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
         } else {
-            onCaughtFire(state, level, pos, hitResult.getDirection(), player);
+            this.onCaughtFire(state, level, pos, hitResult.getDirection(), player);
             level.setBlock(pos, Blocks.AIR.defaultBlockState(), 11);
-            Item item = itemstack.getItem();
-            if (!player.isCreative()) {
-                if (itemstack.is(Items.FLINT_AND_STEEL)) {
-                    itemstack.hurtAndBreak(1, player,
-                        LivingEntity.getSlotForHand(hand));
-                } else {
-                    itemstack.shrink(1);
-                }
+            Item item = stack.getItem();
+            if (stack.is(Items.FLINT_AND_STEEL)) {
+                stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+            } else {
+                stack.consume(1, player);
             }
-
             player.awardStat(Stats.ITEM_USED.get(item));
-            return ItemInteractionResult.SUCCESS;
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
     }
 
-    public void onProjectileHit(Level p_57429_, BlockState p_57430_, BlockHitResult p_57431_, Projectile p_57432_) {
-        if (!p_57429_.isClientSide) {
-            BlockPos blockpos = p_57431_.getBlockPos();
-            Entity entity = p_57432_.getOwner();
-            if (p_57432_.isOnFire() && p_57432_.mayInteract(p_57429_, blockpos)) {
-                onCaughtFire(p_57430_, p_57429_, blockpos, null, entity instanceof LivingEntity ? (LivingEntity)entity : null);
-                p_57429_.removeBlock(blockpos, false);
+    public void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
+        if (!level.isClientSide) {
+            BlockPos blockpos = hit.getBlockPos();
+            Entity entity = projectile.getOwner();
+            if (projectile.isOnFire() && projectile.mayInteract(level, blockpos)) {
+                this.onCaughtFire(state, level, blockpos, null, entity instanceof LivingEntity ? (LivingEntity)entity : null);
+                level.removeBlock(blockpos, false);
             }
         }
-
     }
 
-    public boolean dropFromExplosion(Explosion p_57427_) {
+    public boolean dropFromExplosion(Explosion explosion) {
         return false;
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_57464_) {
-        p_57464_.add(UNSTABLE);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(UNSTABLE);
     }
 }

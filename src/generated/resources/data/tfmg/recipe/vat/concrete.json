@@ -1,0 +1,29 @@
+{
+  "type": "tfmg:vat",
+  "ingredients": [
+    {
+      "tag": "c:sands/colorless"
+    },
+    {
+      "item": "minecraft:gravel"
+    },
+    {
+      "item": "tfmg:limesand"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "machines": [
+    "tfmg:mixer"
+  ],
+  "min_size": 1,
+  "results": [
+    {
+      "amount": 32000,
+      "id": "tfmg:liquid_concrete"
+    }
+  ]
+}

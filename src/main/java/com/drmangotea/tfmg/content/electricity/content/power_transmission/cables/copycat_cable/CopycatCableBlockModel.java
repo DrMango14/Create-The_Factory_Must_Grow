@@ -19,7 +19,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.model.data.ModelData;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,17 +33,14 @@ public class CopycatCableBlockModel extends com.simibubi.create.content.decorati
 
     @Override
     protected ModelData.Builder gatherModelData(ModelData.Builder builder, BlockAndTintGetter world, BlockPos pos, BlockState state, ModelData blockEntityData) {
-        BlockState material = getMaterial(blockEntityData);
-        if (material == null)
-            return builder;
-
         return super.gatherModelData(builder, world, pos, state, blockEntityData);
     }
-    @Nullable
+
     public static BlockState getMaterial(ModelData data) {
         BlockState material = data == null ? null : data.get(MATERIAL_PROPERTY);
         return material == null ? TFMGBlocks.COPYCAT_CABLE_BASE.getDefaultState() : material;
     }
+
     @Override
     protected List<BakedQuad> getCroppedQuads(BlockState state, Direction side, RandomSource rand, BlockState material,
                                               ModelData wrappedData, RenderType renderType) {

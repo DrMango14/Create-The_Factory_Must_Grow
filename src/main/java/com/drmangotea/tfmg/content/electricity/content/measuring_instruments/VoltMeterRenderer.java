@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.electricity.content.measuring_instruments;
 
-
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -19,7 +18,6 @@ import static net.minecraft.world.level.block.DirectionalBlock.FACING;
 
 
 public class VoltMeterRenderer extends SafeBlockEntityRenderer<VoltMeterBlockEntity> {
-
     public VoltMeterRenderer(BlockEntityRendererProvider.Context context) {
     }
 
@@ -51,9 +49,6 @@ public class VoltMeterRenderer extends SafeBlockEntityRenderer<VoltMeterBlockEnt
                 .light(light);
 
         dial.renderInto(ms, vb);
-
-
         ms.popPose();
-
     }
 }

@@ -1,7 +1,8 @@
 package com.drmangotea.tfmg.content.machinery.metallurgy.blast_furnace.reinforcement;
 
-import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
 import com.drmangotea.tfmg.base.TFMGShapes;
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
+import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+@NothingNullByDefault
 public class BlastFurnaceReinforcementWallBlock extends TFMGHorizontalDirectionalBlock {
     public BlastFurnaceReinforcementWallBlock(Properties p_54120_) {
         super(p_54120_);
@@ -41,7 +43,7 @@ public class BlastFurnaceReinforcementWallBlock extends TFMGHorizontalDirectiona
         BlockState stateBehind = level.getBlockState(pos.relative(state.getValue(FACING).getOpposite()));
 
         if(stateBehind.is(TFMGBlocks.FIREPROOF_BRICKS.get()))
-            changeFireproofBricks((Level) level, pos, state.getValue(FACING).getOpposite(), true);
+            changeFireproofBricks(level, pos, state.getValue(FACING).getOpposite(), true);
 
 
         super.neighborChanged(state, level, pos, block, neighbor, b);

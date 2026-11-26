@@ -1,0 +1,8 @@
+{
+  "values": [
+    "tfmg:diesel_engine_cylinder",
+    "tfmg:simple_engine_cylinder",
+    "tfmg:engine_cylinder",
+    "tfmg:autogas_engine_cylinder"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tfmg:diesel_engine_cylinder"
+    },
+    "S": {
+      "item": "tfmg:spark_plug"
+    }
+  },
+  "pattern": [
+    "   ",
+    " S ",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:engine_cylinder"
+  }
+}

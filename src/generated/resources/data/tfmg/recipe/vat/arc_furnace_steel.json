@@ -1,0 +1,38 @@
+{
+  "type": "tfmg:vat",
+  "allowed_vat_types": [
+    "tfmg:fireproof"
+  ],
+  "ingredients": [
+    {
+      "item": "create:crushed_raw_iron"
+    },
+    {
+      "tag": "tfmg:flux"
+    },
+    {
+      "tag": "c:dusts/coal_coke"
+    }
+  ],
+  "machines": [
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode"
+  ],
+  "min_size": 9,
+  "processing_time": 20,
+  "results": [
+    {
+      "chance": 0.9,
+      "id": "tfmg:coal_coke_dust"
+    },
+    {
+      "amount": 90,
+      "id": "tfmg:molten_steel"
+    },
+    {
+      "amount": 160,
+      "id": "tfmg:molten_slag"
+    }
+  ]
+}

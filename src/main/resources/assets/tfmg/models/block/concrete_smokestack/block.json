@@ -1,8 +1,7 @@
 {
-	"parent": "tfmg:block/smokestack/smokestack",
-	"textures": {
-		"0": "tfmg:block/concrete_smokestack",
-		"particle": "tfmg:block/concrete_smokestack"
-	}
-
+  "parent": "tfmg:block/smokestack/smokestack",
+  "textures": {
+    "0": "tfmg:block/concrete_smokestack",
+    "particle": "tfmg:block/concrete_smokestack"
+  }
 }

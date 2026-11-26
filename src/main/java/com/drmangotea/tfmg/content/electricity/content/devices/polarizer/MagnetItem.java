@@ -6,6 +6,4 @@ public class MagnetItem extends Item {
     public MagnetItem(Properties p_41383_) {
         super(p_41383_.fireResistant());
     }
-
-
 }

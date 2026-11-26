@@ -6,7 +6,7 @@ import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.energy_storage.accumulator_rack.AccumulatorRackBlockEntity;
 import com.drmangotea.tfmg.content.electricity.packets.UpdateAccumulatorPacket;
@@ -51,13 +51,13 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
 
     public AccumulatorControlUnitBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        p = new AccumulatorControlUnitProperties(pos.asLong(), state.getValue(TFMGHorizontalDirectionalBlock.FACING));
+        p = new AccumulatorControlUnitProperties(pos, state.getValue(TFMGHorizontalDirectionalBlock.FACING));
         setLazyTickRate(20);
     }
 
     @Override
     public void onUpdated() {
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
 
         Resistance resistor = network.getResistance(getPos(), 0);
 
@@ -84,7 +84,7 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
         super.onLoad();
         findAccumulatorRack();
         AccumulatorControlUnitBlockEntity.updateVoltage(this, outputVoltageScroll.value);
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(this.getWorld());
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(this.getWorld());
 
         network.update();
         //
@@ -92,15 +92,14 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
 
 
     public void findAccumulatorRack() {
+		if (level == null) return;
         for (Direction facing : Direction.values()) {
-            if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof AccumulatorRackBlockEntity be) {
-                if (level.getBlockEntity(be.controller) instanceof AccumulatorRackBlockEntity controller) {
-                    this.rack = controller;
-                    sendData();
-                    return;
-                }
-
-
+            if (level.getBlockEntity(getBlockPos().relative(facing)) instanceof AccumulatorRackBlockEntity be &&
+				level.getBlockEntity(be.controller) instanceof AccumulatorRackBlockEntity controller
+			) {
+				this.rack = controller;
+				sendData();
+				return;
             }
         }
     }
@@ -208,7 +207,7 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
             }
         }
 
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
+        ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
         TFMG.LOGGER.debug("Meow");
         network.setVoltageGen(be, voltage);
         network.setPhaseShift(be, phase * 120);
@@ -221,8 +220,8 @@ public class AccumulatorControlUnitBlockEntity extends SmartBlockEntity implemen
     }
 
     @Override
-    public long getPos() {
-        return getBlockPos().asLong();
+    public BlockPos getPos() {
+        return getBlockPos();
     }
 
     @Override

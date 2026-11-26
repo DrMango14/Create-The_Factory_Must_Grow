@@ -1,11 +1,13 @@
 package com.drmangotea.tfmg.ponder;
 
 import com.drmangotea.tfmg.TFMG;
-import net.createmod.ponder.api.registration.*;
+import net.createmod.ponder.api.registration.PonderPlugin;
+import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
+import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
+import net.createmod.ponder.api.registration.SharedTextRegistrationHelper;
 import net.minecraft.resources.ResourceLocation;
 
 public class TFMGPonderPlugin implements PonderPlugin {
-
 	@Override
 	public String getModId() {
 		return TFMG.MOD_ID;

@@ -5,7 +5,7 @@ import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.content.electricity.ElectricalProperties;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.ElectricNetworkManager;
+import com.drmangotea.tfmg.content.electricity.ElectricalNetworkManager;
 import com.drmangotea.tfmg.content.electricity.ElectricalNetwork;
 import com.drmangotea.tfmg.content.electricity.content.devices.base.ResistorProperties;
 import com.drmangotea.tfmg.content.electricity.simulation.Resistance;
@@ -45,24 +45,21 @@ public class ElectricPumpBlockEntity extends PumpBlockEntity implements IElectri
     public double voltage = 0;
     public double current = 0;
 
-
     public ElectricPumpBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
         setLazyTickRate(10);
         p = new ResistorProperties(getPos(), state.getValue(TFMGDirectionalBlock.FACING),resistance(), NodeType.PHASE_1);
 
     }
+	
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-
         behaviours.add(new ElectricPumpTransferBehavior(this));
         registerAwardables(behaviours, FluidPropagator.getSharedTriggers());
         registerAwardables(behaviours, AllAdvancements.PUMP);
     }
 
     protected void distributePressureTo(Direction side) {
-
-
         BlockFace start = new BlockFace(worldPosition, side);
         boolean pull = isPullingOnSide(isFront(side));
         Set<BlockFace> targets = new HashSet<>();
@@ -86,7 +83,7 @@ public class ElectricPumpBlockEntity extends PumpBlockEntity implements IElectri
             frontier.add(Pair.of(1, start.getConnectedPos()));
 
             while (!frontier.isEmpty()) {
-                Pair<Integer, BlockPos> entry = frontier.remove(0);
+                Pair<Integer, BlockPos> entry = frontier.removeFirst();
                 int distance = entry.getFirst();
                 BlockPos currentPos = entry.getSecond();
 
@@ -179,8 +176,7 @@ public class ElectricPumpBlockEntity extends PumpBlockEntity implements IElectri
 
         // facing a pump
         if (PumpBlock.isPump(connectedState) && connectedState.getValue(FACING)
-                .getAxis() == face.getAxis() && blockEntity instanceof ElectricPumpBlockEntity) {
-            ElectricPumpBlockEntity pumpBE = (ElectricPumpBlockEntity) blockEntity;
+                .getAxis() == face.getAxis() && blockEntity instanceof ElectricPumpBlockEntity pumpBE) {
             return pumpBE.isPullingOnSide(pumpBE.isFront(blockFace.getOppositeFace())) != pull;
         }
 
@@ -204,8 +200,7 @@ public class ElectricPumpBlockEntity extends PumpBlockEntity implements IElectri
         if (!(blockState.getBlock() instanceof PumpBlock))
             return false;
         Direction front = blockState.getValue(FACING);
-        boolean isFront = side == front;
-        return isFront;
+        return side == front;
     }
 
     /// //////////////////////
@@ -232,18 +227,18 @@ public class ElectricPumpBlockEntity extends PumpBlockEntity implements IElectri
 
     @Override
     public void onUpdated() {
-        ElectricalNetwork network = ElectricNetworkManager.getNetwork(level);
-
-        Resistance resistor = network.getResistance(getPos(), 0);
-
-        if (resistor != null) {
-
-            resistance = resistor.resistance;
-            voltage = resistor.getVoltage(level);
-            current = (float) (voltage / resistance);
-
-        }
-    }
+		ElectricalNetwork network = ElectricalNetworkManager.getNetwork(level);
+		
+		Resistance resistor = network.getResistance(getPos(), 0);
+		
+		if (resistor != null) {
+			
+			resistance = resistor.resistance;
+			voltage = resistor.getVoltage(level);
+			current = (float) (voltage / resistance);
+			
+		}
+	}
 
     @Override
     public void remove() {
@@ -251,12 +246,10 @@ public class ElectricPumpBlockEntity extends PumpBlockEntity implements IElectri
         this.removeBlock();
     }
 
-
-
     @Override
-    public long getPos() {
-        return getBlockPos().asLong();
-    }
+	public BlockPos getPos() {
+		return getBlockPos();
+	}
 
     @Override
     public Level getWorld() {

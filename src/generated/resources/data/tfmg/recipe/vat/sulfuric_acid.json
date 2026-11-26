@@ -1,0 +1,33 @@
+{
+  "type": "tfmg:vat",
+  "ingredients": [
+    {
+      "tag": "c:dusts/sulfur"
+    },
+    {
+      "tag": "c:dusts/sulfur"
+    },
+    {
+      "tag": "c:dusts/sulfur"
+    },
+    {
+      "tag": "c:dusts/saltpeter"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "machines": [
+    "tfmg:mixer"
+  ],
+  "min_size": 1,
+  "processing_time": 5,
+  "results": [
+    {
+      "amount": 500,
+      "id": "tfmg:sulfuric_acid"
+    }
+  ]
+}

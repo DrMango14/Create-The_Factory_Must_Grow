@@ -2,12 +2,13 @@ package com.drmangotea.tfmg.datagen.recipes.values;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGRegistrate;
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipes;
-import com.drmangotea.tfmg.content.machinery.misc.winding_machine.SpoolItem;
 import com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.drmangotea.tfmg.registry.TFMGItems;
+import com.drmangotea.tfmg.registry.TFMGTags;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
@@ -23,7 +24,6 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.createmod.catnip.registry.RegisteredObjectsHelper;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -51,9 +51,7 @@ import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.conditions.NotCondition;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -63,32 +61,9 @@ import java.util.function.UnaryOperator;
 
 import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
 
-
+@SuppressWarnings("unused")
 public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
     private Marker MATERIALS = enterFolder("materials");
-    public static final Map<String, ItemLike> DYES_FROM_COLOR = new HashMap<>();
-
-
-    static {
-        DYES_FROM_COLOR.put("white", Items.WHITE_DYE);
-        DYES_FROM_COLOR.put("blue", Items.BLUE_DYE);
-        DYES_FROM_COLOR.put("light_blue", Items.LIGHT_BLUE_DYE);
-        DYES_FROM_COLOR.put("red", Items.RED_DYE);
-        DYES_FROM_COLOR.put("green", Items.GREEN_DYE);
-        DYES_FROM_COLOR.put("lime", Items.LIME_DYE);
-        DYES_FROM_COLOR.put("pink", Items.PINK_DYE);
-        DYES_FROM_COLOR.put("magenta", Items.MAGENTA_DYE);
-        DYES_FROM_COLOR.put("yellow", Items.YELLOW_DYE);
-        DYES_FROM_COLOR.put("gray", Items.GRAY_DYE);
-        DYES_FROM_COLOR.put("light_gray", Items.LIGHT_GRAY_DYE);
-        DYES_FROM_COLOR.put("brown", Items.BROWN_DYE);
-        DYES_FROM_COLOR.put("cyan", Items.CYAN_DYE);
-        DYES_FROM_COLOR.put("purple", Items.PURPLE_DYE);
-        DYES_FROM_COLOR.put("orange", Items.ORANGE_DYE);
-        DYES_FROM_COLOR.put("black", Items.BLACK_DYE);
-
-
-    }
 
     GeneratedRecipe
             STEEL_COMPACTING =
@@ -113,266 +88,9 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     metalCompacting(ImmutableList.of(TFMGItems.CONSTANTAN_NUGGET, TFMGItems.CONSTANTAN_INGOT, TFMGBlocks.CONSTANTAN_BLOCK),
                             ImmutableList.of(I::constantanNugget, I::constantanIngot, I::constantanBlock)),
 
+	
 
-    //
-    LEAD_FLYWHEEL = create(TFMGBlocks.LEAD_FLYWHEEL)
-            .unlockedBy(TFMGItems.LEAD_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', leadIngot())
-                    .define('S', shaft())
-                    .pattern("CCC")
-                    .pattern("CSC")
-                    .pattern("CCC")),
-
-    STEEL_FLYWHEEL = create(TFMGBlocks.STEEL_FLYWHEEL)
-            .unlockedBy(TFMGItems.STEEL_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', tfmgSteelIngot())
-                    .define('S', shaft())
-                    .pattern("CCC")
-                    .pattern("CSC")
-                    .pattern("CCC")),
-
-    CAST_IRON_FLYWHEEL = create(TFMGBlocks.CAST_IRON_FLYWHEEL)
-            .unlockedBy(TFMGItems.CAST_IRON_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', castIronIngot())
-                    .define('S', shaft())
-                    .pattern("CCC")
-                    .pattern("CSC")
-                    .pattern("CCC")),
-
-    NICKEL_FLYWHEEL = create(TFMGBlocks.NICKEL_FLYWHEEL)
-            .unlockedBy(TFMGItems.NICKEL_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', nickelIngot())
-                    .define('S', shaft())
-                    .pattern("CCC")
-                    .pattern("CSC")
-                    .pattern("CCC")),
-
-    ALUMINUM_FLYWHEEL = create(TFMGBlocks.ALUMINUM_FLYWHEEL)
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', aluminumIngot())
-                    .define('S', shaft())
-                    .pattern("CCC")
-                    .pattern("CSC")
-                    .pattern("CCC")),
-
-    ELECTRIC_PUMP = create(TFMGBlocks.ELECTRIC_PUMP)
-            .unlockedBy(TFMGItems.CIRCUIT_BOARD::get)
-            .viaShaped(b -> b
-                    .define('C', circuitBoard())
-                    .define('P', TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPump())
-                    .define('W', copperWire())
-                    .define('Q', capacitor())
-                    .define('K', TFMGItems.ELECTROMAGNETIC_COIL)
-                    .define('M', magnet())
-                    .pattern("MQK")
-                    .pattern("CPW")
-                    .pattern("MQK")),
-
-    LAMINATED_MAGNETIC_ALLOY_BLOCK = create(TFMGBlocks.LAMINATED_MAGNETIC_ALLOY_BLOCK)
-           .unlockedBy(TFMGItems.MAGNETIC_ALLOY_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', TFMGItems.MAGNETIC_ALLOY_SHEET.get())
-                    .pattern("CCC")
-                    .pattern("CCC")
-                    .pattern("CCC")),
-
-    //STEEL_HELMET = create(TFMGItems.STEEL_HELMET)
-    //        .unlockedBy(TFMGItems.STEEL_INGOT::get)
-    //        .viaShaped(b -> b
-    //                .define('C', steelIngot())
-    //                .pattern("CCC")
-    //                .pattern("C C")
-    //                .pattern("   ")),
-//
-   // STEEL_CHESTPLATE = create(TFMGItems.STEEL_CHESTPLATE)
-   //         .unlockedBy(TFMGItems.STEEL_INGOT::get)
-   //         .viaShaped(b -> b
-   //                 .define('C', steelIngot())
-   //                 .pattern("C C")
-   //                 .pattern("CCC")
-   //                 .pattern("CCC")),
-//
-   // STEEL_LEGGINGS = create(TFMGItems.STEEL_LEGGINGS)
-   //         .unlockedBy(TFMGItems.STEEL_INGOT::get)
-   //         .viaShaped(b -> b
-   //                 .define('C', steelIngot())
-   //                 .pattern("CCC")
-   //                 .pattern("C C")
-   //                 .pattern("C C")),
-//
-   // STEEL_BOOTS = create(TFMGItems.STEEL_BOOTS)
-   //         .unlockedBy(TFMGItems.STEEL_INGOT::get)
-   //         .viaShaped(b -> b
-   //                 .define('C', steelIngot())
-   //                 .pattern("C C")
-   //                 .pattern("C C")
-   //                 .pattern("   ")),
-
-    STEEL_SWORD = create(TFMGItems.STEEL_TOOLS.get(0))
-            .unlockedBy(TFMGItems.STEEL_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', steelIngot())
-                    .define('S', Items.STICK)
-                    .pattern("C  ")
-                    .pattern("C  ")
-                    .pattern("S  ")),
-
-    STEEL_PICKAXE = create(TFMGItems.STEEL_TOOLS.get(1))
-            .unlockedBy(TFMGItems.STEEL_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', steelIngot())
-                    .define('S', Items.STICK)
-                    .pattern("CCC")
-                    .pattern(" S ")
-                    .pattern(" S ")),
-
-    STEEL_AXE = create(TFMGItems.STEEL_TOOLS.get(2))
-            .unlockedBy(TFMGItems.STEEL_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', steelIngot())
-                    .define('S', Items.STICK)
-                    .pattern(" CC")
-                    .pattern(" SC")
-                    .pattern(" S ")),
-
-    STEEL_SHOVEL = create(TFMGItems.STEEL_TOOLS.get(3))
-            .unlockedBy(TFMGItems.STEEL_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', steelIngot())
-                    .define('S', Items.STICK)
-                    .pattern("C  ")
-                    .pattern("S  ")
-                    .pattern("S  ")),
-
-    STEEL_HOE = create(TFMGItems.STEEL_TOOLS.get(4))
-            .unlockedBy(TFMGItems.STEEL_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', steelIngot())
-                    .define('S', Items.STICK)
-                    .pattern("CC ")
-                    .pattern("S  ")
-                    .pattern("S  ")),
-
-    ALUMINUM_SWORD = create(TFMGItems.ALUMINUM_TOOLS.get(0))
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', aluminumIngot())
-                    .define('S', Items.STICK)
-                    .pattern("C  ")
-                    .pattern("C  ")
-                    .pattern("S  ")),
-
-    ALUMINUM_PICKAXE = create(TFMGItems.ALUMINUM_TOOLS.get(1))
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', aluminumIngot())
-                    .define('S', Items.STICK)
-                    .pattern("CCC")
-                    .pattern(" S ")
-                    .pattern(" S ")),
-
-    ALUMINUM_AXE = create(TFMGItems.ALUMINUM_TOOLS.get(2))
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', aluminumIngot())
-                    .define('S', Items.STICK)
-                    .pattern(" CC")
-                    .pattern(" SC")
-                    .pattern(" S ")),
-
-    ALUMINUM_SHOVEL = create(TFMGItems.ALUMINUM_TOOLS.get(3))
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', aluminumIngot())
-                    .define('S', Items.STICK)
-                    .pattern("C  ")
-                    .pattern("S  ")
-                    .pattern("S  ")),
-
-    ALUMINUM_HOE = create(TFMGItems.ALUMINUM_TOOLS.get(4))
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', aluminumIngot())
-                    .define('S', Items.STICK)
-                    .pattern("CC ")
-                    .pattern("S  ")
-                    .pattern("S  ")),
-
-    LEAD_SWORD = create(TFMGItems.LEAD_TOOLS.get(0))
-            .unlockedBy(TFMGItems.LEAD_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', leadIngot())
-                    .define('S', Items.STICK)
-                    .pattern("C  ")
-                    .pattern("C  ")
-                    .pattern("S  ")),
-
-    LEAD_PICKAXE = create(TFMGItems.LEAD_TOOLS.get(1))
-            .unlockedBy(TFMGItems.LEAD_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', leadIngot())
-                    .define('S', Items.STICK)
-                    .pattern("CCC")
-                    .pattern(" S ")
-                    .pattern(" S ")),
-
-    LEAD_AXE = create(TFMGItems.LEAD_TOOLS.get(2))
-            .unlockedBy(TFMGItems.LEAD_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', leadIngot())
-                    .define('S', Items.STICK)
-                    .pattern(" CC")
-                    .pattern(" SC")
-                    .pattern(" S ")),
-
-    LEAD_SHOVEL = create(TFMGItems.LEAD_TOOLS.get(3))
-            .unlockedBy(TFMGItems.LEAD_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', leadIngot())
-                    .define('S', Items.STICK)
-                    .pattern("C  ")
-                    .pattern("S  ")
-                    .pattern("S  ")),
-
-    LEAD_HOE = create(TFMGItems.LEAD_TOOLS.get(4))
-            .unlockedBy(TFMGItems.LEAD_INGOT::get)
-            .viaShaped(b -> b
-                    .define('C', leadIngot())
-                    .define('S', Items.STICK)
-                    .pattern("CC ")
-                    .pattern("S  ")
-                    .pattern("S  ")),
-
-    /// ////////////
-    STEEL_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPipe()).returns(4)
-            .unlockedBy(TFMGItems.STEEL_INGOT::get)
-            .viaShaped(b -> b
-                    .define('I', steelIngot())
-                    .define('P', steelSheet())
-                    .pattern("   ")
-                    .pattern("PIP")
-                    .pattern("   ")),
-
-    STEEL_PIPE_VERTICAL = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPipe()).withSuffix("_vertical").returns(4)
-            .unlockedBy(TFMGItems.STEEL_INGOT::get)
-            .viaShaped(b -> b
-                    .define('I', steelIngot())
-                    .define('P', steelSheet())
-                    .pattern("P")
-                    .pattern("I")
-                    .pattern("P")),
-
-    STEEL_MECHANICAL_PUMP = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPump())
-            .unlockedBy(TFMGItems.STEEL_INGOT::get)
-            .viaShapeless(b -> b
-                    .requires(cog())
-                    .requires(steelPipe())),
-
+    /// I'm not gonna bother trying to streamline datagenning this atm
     STEEL_SMART_FLUID_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getSmart())
             .unlockedBy(TFMGItems.STEEL_INGOT::get)
             .viaShaped(b -> b
@@ -382,36 +100,6 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("I")
                     .pattern("S")
                     .pattern("P")),
-
-    STEEL_FLUID_VALVE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getValve())
-            .unlockedBy(TFMGItems.STEEL_INGOT::get)
-            .viaShapeless(b -> b
-                    .requires(ironSheet())
-                    .requires(steelPipe())),
-    /// ////////////
-    ALUMINUM_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).getPipe()).returns(4)
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('I', aluminumIngot())
-                    .define('P', aluminumSheet())
-                    .pattern("   ")
-                    .pattern("PIP")
-                    .pattern("   ")),
-
-    ALUMINUM_PIPE_VERTICAL = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).getPipe()).withSuffix("_vertical").returns(4)
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('I', aluminumIngot())
-                    .define('P', aluminumSheet())
-                    .pattern("P")
-                    .pattern("I")
-                    .pattern("P")),
-
-    ALUMINUM_MECHANICAL_PUMP = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).getPump())
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShapeless(b -> b
-                    .requires(cog())
-                    .requires(aluminumPipe())),
 
     ALUMINUM_SMART_FLUID_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).getSmart())
             .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
@@ -423,34 +111,6 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("S")
                     .pattern("P")),
 
-    ALUMINUM_FLUID_VALVE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.ALUMINUM).getValve())
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShapeless(b -> b
-                    .requires(ironSheet())
-                    .requires(aluminumPipe())),
-    /// ////////////
-    PLASTIC_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).getPipe()).returns(4)
-            .unlockedBy(TFMGItems.PLASTIC_SHEET::get)
-            .viaShaped(b -> b
-                    .define('I', plasticSheet())
-                    .pattern("   ")
-                    .pattern("III")
-                    .pattern("   ")),
-
-    PLASTIC_PIPE_VERTICAL = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).getPipe()).withSuffix("_vertical").returns(4)
-            .unlockedBy(TFMGItems.PLASTIC_SHEET::get)
-            .viaShaped(b -> b
-                    .define('I', plasticSheet())
-                    .pattern("I")
-                    .pattern("I")
-                    .pattern("I")),
-
-    PLASTIC_MECHANICAL_PUMP = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).getPump())
-            .unlockedBy(TFMGItems.PLASTIC_SHEET::get)
-            .viaShapeless(b -> b
-                    .requires(cog())
-                    .requires(plasticPipe())),
-
     PLASTIC_SMART_FLUID_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).getSmart())
             .unlockedBy(TFMGItems.PLASTIC_SHEET::get)
             .viaShaped(b -> b
@@ -460,36 +120,6 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("I")
                     .pattern("S")
                     .pattern("P")),
-
-    PLASTIC_FLUID_VALVE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.PLASTIC).getValve())
-            .unlockedBy(TFMGItems.PLASTIC_SHEET::get)
-            .viaShapeless(b -> b
-                    .requires(ironSheet())
-                    .requires(plasticPipe())),
-    /// ////////////
-    BRASS_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.BRASS).getPipe()).returns(4)
-            .unlockedBy(AllItems.BRASS_INGOT::get)
-            .viaShaped(b -> b
-                    .define('I', brassIngot())
-                    .define('P', brassSheet())
-                    .pattern("   ")
-                    .pattern("PIP")
-                    .pattern("   ")),
-
-    BRASS_PIPE_VERTICAL = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.BRASS).getPipe()).withSuffix("_vertical").returns(4)
-            .unlockedBy(AllItems.BRASS_INGOT::get)
-            .viaShaped(b -> b
-                    .define('I', brassIngot())
-                    .define('P', brassSheet())
-                    .pattern("P")
-                    .pattern("I")
-                    .pattern("P")),
-
-    BRASS_MECHANICAL_PUMP = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.BRASS).getPump())
-            .unlockedBy(AllItems.BRASS_INGOT::get)
-            .viaShapeless(b -> b
-                    .requires(cog())
-                    .requires(brassPipe())),
 
     BRASS_SMART_FLUID_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.BRASS).getSmart())
             .unlockedBy(AllItems.BRASS_INGOT::get)
@@ -501,36 +131,6 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("S")
                     .pattern("P")),
 
-    BRASS_FLUID_VALVE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.BRASS).getValve())
-            .unlockedBy(AllItems.BRASS_INGOT::get)
-            .viaShapeless(b -> b
-                    .requires(ironSheet())
-                    .requires(brassPipe())),
-    /// ////////////
-    CAST_IRON_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).getPipe()).returns(4)
-            .unlockedBy(TFMGItems.CAST_IRON_INGOT::get)
-            .viaShaped(b -> b
-                    .define('I', castIronIngot())
-                    .define('P', castIronSheet())
-                    .pattern("   ")
-                    .pattern("PIP")
-                    .pattern("   ")),
-
-    CAST_IRON_PIPE_VERTICAL = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).getPipe()).withSuffix("_vertical").returns(4)
-            .unlockedBy(TFMGItems.CAST_IRON_INGOT::get)
-            .viaShaped(b -> b
-                    .define('I', castIronIngot())
-                    .define('P', castIronSheet())
-                    .pattern("P")
-                    .pattern("I")
-                    .pattern("P")),
-
-    CAST_IRON_MECHANICAL_PUMP = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).getPump())
-            .unlockedBy(TFMGItems.CAST_IRON_INGOT::get)
-            .viaShapeless(b -> b
-                    .requires(cog())
-                    .requires(castIronPipe())),
-
     CAST_IRON_SMART_FLUID_PIPE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).getSmart())
             .unlockedBy(TFMGItems.CAST_IRON_INGOT::get)
             .viaShaped(b -> b
@@ -540,16 +140,10 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("I")
                     .pattern("S")
                     .pattern("P")),
-
-    CAST_IRON_FLUID_VALVE = create(TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.CAST_IRON).getValve())
-            .unlockedBy(TFMGItems.CAST_IRON_INGOT::get)
-            .viaShapeless(b -> b
-                    .requires(ironSheet())
-                    .requires(castIronPipe())),
     /// ////////////
 
 
-    STEEL_COGWHEEL = create(TFMGBlocks.STEEL_COGWHEEL).returns(4)
+    /*STEEL_COGWHEEL = create(TFMGBlocks.STEEL_COGWHEEL).returns(4)
             .unlockedBy(() -> TFMGItems.STEEL_INGOT)
             .viaShapeless(b -> b
                     .requires(Ingredient.of(tfmgSteelIngot()))
@@ -573,7 +167,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
             .viaShapeless(b -> b
                     .requires(Ingredient.of(aluminumIngot()))
                     .requires(Ingredient.of(aluminumIngot()))
-                    .requires(Ingredient.of(AllBlocks.SHAFT))),
+                    .requires(Ingredient.of(AllBlocks.SHAFT))),*/
 
     FIREPROOF_BRICKS = create(TFMGBlocks.FIREPROOF_BRICKS)
             .unlockedBy(TFMGItems.FIRECLAY_BALL::get)
@@ -1011,35 +605,6 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("HMH")
                     .pattern("RCR")),
 
-
-
-   // COPPER_SPOOL = create(TFMGItems.COPPER_SPOOL)
-   //         .unlockedBy(TFMGItems.EMPTY_SPOOL::get)
-   //         .viaShaped(b -> b
-   //                 .define('S', TFMGItems.EMPTY_SPOOL)
-   //                 .define('W', copperWire())
-   //                 .pattern("WWW")
-   //                 .pattern("WSW")
-   //                 .pattern("WWW")),
-//
-   // ALUMINUM_SPOOL = create(TFMGItems.ALUMINUM_SPOOL)
-   //         .unlockedBy(TFMGItems.EMPTY_SPOOL::get)
-   //         .viaShaped(b -> b
-   //                 .define('S', TFMGItems.EMPTY_SPOOL)
-   //                 .define('W', aluminumWire())
-   //                 .pattern("WWW")
-   //                 .pattern("WSW")
-   //                 .pattern("WWW")),
-//
-   // CONSTANTAN_SPOOL = create(TFMGItems.CONSTANTAN_SPOOL)
-   //         .unlockedBy(TFMGItems.EMPTY_SPOOL::get)
-   //         .viaShaped(b -> b
-   //                 .define('S', TFMGItems.EMPTY_SPOOL)
-   //                 .define('W', constantanWire())
-   //                 .pattern("WWW")
-   //                 .pattern("WSW")
-   //                 .pattern("WWW")),
-
     REGULAR_ENGINE = create(TFMGBlocks.REGULAR_ENGINE).returns(2)
             .unlockedBy(TFMGBlocks.HEAVY_MACHINERY_CASING::asItem)
             .viaShaped(b -> b
@@ -1091,7 +656,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("OCA")
                     .pattern(" R ")),
 
-   OIL_CAN = create(TFMGItems.OIL_CAN)
+	OIL_CAN = create(TFMGItems.OIL_CAN)
            .unlockedBy(TFMGItems.STEEL_NUGGET::get)
            .viaShaped(b -> b
                    .define('O', steelNugget())
@@ -1277,7 +842,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
     ALUMINUM_CABLE_HUB = create(TFMGBlocks.ALUMINUM_CABLE_HUB).returns(2)
             .unlockedBy(TFMGItems.MAGNET::get)
             .viaShaped(b -> b
-                    .define('M', aluminumIngot())
+                    .define('M', aluminumCasing())
                     .define('W', copperWire())
                     .pattern("WWW")
                     .pattern("MMM")
@@ -1318,28 +883,52 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
             .viaCooking(() -> TFMGItems.UNFIRED_INSULATOR)
             .inFurnace(),
 
-    RAW_LEAD = create(TFMGItems.LEAD_INGOT::get)
+    LEAD = create(TFMGItems.LEAD_INGOT::get).withSuffix("_from_raw")
             .viaCooking(() -> TFMGItems.RAW_LEAD)
             .inFurnace(),
 
-    NICKEL = create(TFMGItems.NICKEL_INGOT::get)
+    LEAD_ORE = create(TFMGItems.LEAD_INGOT::get).withSuffix("_from_ore")
+            .viaCookingTag(() -> TFMGTags.Items.ORES_LEAD.tag)
+            .inFurnace(),
+
+    NICKEL = create(TFMGItems.NICKEL_INGOT::get).withSuffix("_from_raw")
             .viaCooking(() -> TFMGItems.RAW_NICKEL)
             .inFurnace(),
 
-    LITHIUM = create(TFMGItems.LITHIUM_INGOT::get)
+    NICKEL_ORE = create(TFMGItems.NICKEL_INGOT::get).withSuffix("_from_ore")
+            .viaCookingTag(() -> TFMGTags.Items.ORES_NICKEL.tag)
+            .inFurnace(),
+
+    LITHIUM = create(TFMGItems.LITHIUM_INGOT::get).withSuffix("_from_raw")
             .viaCooking(() -> TFMGItems.RAW_LITHIUM)
             .inFurnace(),
 
-    RAW_LEAD_BLASTING = create(TFMGItems.LEAD_INGOT::get).withSuffix("_blasting")
+    LITHIUM_ORE = create(TFMGItems.LITHIUM_INGOT::get).withSuffix("_from_ore")
+            .viaCookingTag(() -> TFMGTags.Items.ORES_LITHIUM.tag)
+            .inFurnace(),
+
+    RAW_LEAD_BLASTING = create(TFMGItems.LEAD_INGOT::get).withSuffix("_from_raw_blasting")
             .viaCooking(() -> TFMGItems.RAW_LEAD)
             .inBlastFurnace(),
 
-    NICKEL_LEAD_BLASTING = create(TFMGItems.NICKEL_INGOT::get).withSuffix("_blasting")
+    LEAD_ORE_BLASTING = create(TFMGItems.LEAD_INGOT::get).withSuffix("_from_ore_blasting")
+            .viaCookingTag(() -> TFMGTags.Items.ORES_LEAD.tag)
+            .inBlastFurnace(),
+
+    RAW_NICKEL_BLASTING = create(TFMGItems.NICKEL_INGOT::get).withSuffix("_from_raw_blasting")
             .viaCooking(() -> TFMGItems.RAW_NICKEL)
             .inBlastFurnace(),
 
-    LITHIUM_BLASTING = create(TFMGItems.LITHIUM_INGOT::get).withSuffix("_blasting")
+    NICKEL_ORE_BLASTING = create(TFMGItems.NICKEL_INGOT::get).withSuffix("_from_ore_blasting")
+            .viaCookingTag(() -> TFMGTags.Items.ORES_NICKEL.tag)
+            .inBlastFurnace(),
+
+    RAW_LITHIUM_BLASTING = create(TFMGItems.LITHIUM_INGOT::get).withSuffix("_from_raw_blasting")
             .viaCooking(() -> TFMGItems.RAW_LITHIUM)
+            .inBlastFurnace(),
+
+    LITHIUM_ORE_BLASTING = create(TFMGItems.LITHIUM_INGOT::get).withSuffix("_from_ore_blasting")
+            .viaCookingTag(() -> TFMGTags.Items.ORES_LITHIUM.tag)
             .inBlastFurnace(),
     //
 
@@ -1387,7 +976,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
             .unlockedBy(TFMGItems.LITHIUM_INGOT::get)
             .viaShaped(b -> b
                     .define('P', heavyPlate())
-                    .define('M', TFMGItems.STEEL_TOOLS.get(0))
+                    .define('M', TFMGItems.STEEL_TOOLS.sword())
                     .define('C', circuitBoard())
                     .define('W', copperWire())
                     .define('A', aluminumSheet())
@@ -1897,427 +1486,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
             .unlockedBy(() -> TFMGItems.STEEL_INGOT)
             .viaShapeless(b -> b
                     .requires(heavyMachineryCasing())
-                    .requires(ItemTags.WOODEN_DOORS)),
-
-
-    ////////
-
-    WHITE_MULTIMETER = create(TFMGItems.MULTIMETERS.get("white")::get)
-            .unlockedBy(() -> TFMGItems.MULTIMETER)
-            .viaShapeless(b -> b
-                    .requires(TFMGItems.MULTIMETER)
-                    .requires(DYES_FROM_COLOR.get("white"))),
-
-    YELLOW_MULTIMETER = create(TFMGItems.MULTIMETERS.get("yellow")::get)
-            .unlockedBy(() -> TFMGItems.MULTIMETER)
-            .viaShapeless(b -> b
-                    .requires(TFMGItems.MULTIMETER)
-                    .requires(DYES_FROM_COLOR.get("yellow"))),
-
-    BROWN_MULTIMETER = create(TFMGItems.MULTIMETERS.get("brown")::get)
-            .unlockedBy(() -> TFMGItems.MULTIMETER)
-            .viaShapeless(b -> b
-                    .requires(TFMGItems.MULTIMETER)
-                    .requires(DYES_FROM_COLOR.get("brown"))),
-
-    ORANGE_MULTIMETER = create(TFMGItems.MULTIMETERS.get("orange")::get)
-            .unlockedBy(() -> TFMGItems.MULTIMETER)
-            .viaShapeless(b -> b
-                    .requires(TFMGItems.MULTIMETER)
-                    .requires(DYES_FROM_COLOR.get("orange"))),
-
-    BLACK_MULTIMETER = create(TFMGItems.MULTIMETERS.get("black")::get)
-            .unlockedBy(() -> TFMGItems.MULTIMETER)
-            .viaShapeless(b -> b
-                    .requires(TFMGItems.MULTIMETER)
-                    .requires(DYES_FROM_COLOR.get("black"))),
-
-    CYAN_MULTIMETER = create(TFMGItems.MULTIMETERS.get("cyan")::get)
-            .unlockedBy(() -> TFMGItems.MULTIMETER)
-            .viaShapeless(b -> b
-                    .requires(TFMGItems.MULTIMETER)
-                    .requires(DYES_FROM_COLOR.get("cyan"))),
-
-    BLUE_MULTIMETER = create(TFMGItems.MULTIMETERS.get("blue")::get)
-            .unlockedBy(() -> TFMGItems.MULTIMETER)
-            .viaShapeless(b -> b
-                    .requires(TFMGItems.MULTIMETER)
-                    .requires(DYES_FROM_COLOR.get("blue"))),
-
-    LIGHT_BLUE_MULTIMETER = create(TFMGItems.MULTIMETERS.get("light_blue")::get)
-            .unlockedBy(() -> TFMGItems.MULTIMETER)
-            .viaShapeless(b -> b
-                    .requires(TFMGItems.MULTIMETER)
-                    .requires(DYES_FROM_COLOR.get("light_blue"))),
-
-    GRAY_MULTIMETER = create(TFMGItems.MULTIMETERS.get("gray")::get)
-            .unlockedBy(() -> TFMGItems.MULTIMETER)
-            .viaShapeless(b -> b
-                    .requires(TFMGItems.MULTIMETER)
-                    .requires(DYES_FROM_COLOR.get("gray"))),
-
-    LIGHT_GRAY_MULTIMETER = create(TFMGItems.MULTIMETERS.get("light_gray")::get)
-            .unlockedBy(() -> TFMGItems.MULTIMETER)
-            .viaShapeless(b -> b
-                    .requires(TFMGItems.MULTIMETER)
-                    .requires(DYES_FROM_COLOR.get("light_gray"))),
-
-    GREEN_MULTIMETER = create(TFMGItems.MULTIMETERS.get("green")::get)
-            .unlockedBy(() -> TFMGItems.MULTIMETER)
-            .viaShapeless(b -> b
-                    .requires(TFMGItems.MULTIMETER)
-                    .requires(DYES_FROM_COLOR.get("green"))),
-
-    LIME_MULTIMETER = create(TFMGItems.MULTIMETERS.get("lime")::get)
-            .unlockedBy(() -> TFMGItems.MULTIMETER)
-            .viaShapeless(b -> b
-                    .requires(TFMGItems.MULTIMETER)
-                    .requires(DYES_FROM_COLOR.get("lime"))),
-
-    PINK_MULTIMETER = create(TFMGItems.MULTIMETERS.get("pink")::get)
-            .unlockedBy(() -> TFMGItems.MULTIMETER)
-            .viaShapeless(b -> b
-                    .requires(TFMGItems.MULTIMETER)
-                    .requires(DYES_FROM_COLOR.get("pink"))),
-
-    PURPLE_MULTIMETER = create(TFMGItems.MULTIMETERS.get("purple")::get)
-            .unlockedBy(() -> TFMGItems.MULTIMETER)
-            .viaShapeless(b -> b
-                    .requires(TFMGItems.MULTIMETER)
-                    .requires(DYES_FROM_COLOR.get("purple"))),
-
-    MAGENTA_MULTIMETER = create(TFMGItems.MULTIMETERS.get("magenta")::get)
-            .unlockedBy(() -> TFMGItems.MULTIMETER)
-            .viaShapeless(b -> b
-                    .requires(TFMGItems.MULTIMETER)
-                    .requires(DYES_FROM_COLOR.get("magenta"))),
-
-    RED_MULTIMETER = create(TFMGItems.MULTIMETERS.get("red")::get)
-            .unlockedBy(() -> TFMGItems.MULTIMETER)
-            .viaShapeless(b -> b
-                    .requires(TFMGItems.MULTIMETER)
-                    .requires(DYES_FROM_COLOR.get("red"))),
-
-
-
-    ////////
-
-
- WHITE_CONCRETE = create(TFMGBlocks.COLORED_CONCRETE.get("white").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("white"))
-                 .define('C', TFMGBlocks.CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- BLACK_CONCRETE = create(TFMGBlocks.COLORED_CONCRETE.get("black").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("black"))
-                 .define('C', TFMGBlocks.CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
- ORANGE_CONCRETE = create(TFMGBlocks.COLORED_CONCRETE.get("orange").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("orange"))
-                 .define('C', TFMGBlocks.CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- RED_CONCRETE = create(TFMGBlocks.COLORED_CONCRETE.get("red").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("red"))
-                 .define('C', TFMGBlocks.CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- GRAY_CONCRETE = create(TFMGBlocks.COLORED_CONCRETE.get("gray").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("gray"))
-                 .define('C', TFMGBlocks.CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- LIGHT_GRAY_CONCRETE = create(TFMGBlocks.COLORED_CONCRETE.get("light_gray").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("light_gray"))
-                 .define('C', TFMGBlocks.CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- BLUE_CONCRETE = create(TFMGBlocks.COLORED_CONCRETE.get("blue").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("blue"))
-                 .define('C', TFMGBlocks.CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- LIGHT_BLUE_CONCRETE = create(TFMGBlocks.COLORED_CONCRETE.get("light_blue").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("light_blue"))
-                 .define('C', TFMGBlocks.CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- CYAN_CONCRETE = create(TFMGBlocks.COLORED_CONCRETE.get("cyan").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("cyan"))
-                 .define('C', TFMGBlocks.CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- GREEN_CONCRETE = create(TFMGBlocks.COLORED_CONCRETE.get("green").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("green"))
-                 .define('C', TFMGBlocks.CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- LIME_CONCRETE = create(TFMGBlocks.COLORED_CONCRETE.get("lime").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("lime"))
-                 .define('C', TFMGBlocks.CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- PINK_CONCRETE = create(TFMGBlocks.COLORED_CONCRETE.get("pink").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("pink"))
-                 .define('C', TFMGBlocks.CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- PURPLE_CONCRETE = create(TFMGBlocks.COLORED_CONCRETE.get("purple").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("purple"))
-                 .define('C', TFMGBlocks.CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- MAGENTA_CONCRETE = create(TFMGBlocks.COLORED_CONCRETE.get("magenta").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("magenta"))
-                 .define('C', TFMGBlocks.CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- BROWN_CONCRETE = create(TFMGBlocks.COLORED_CONCRETE.get("brown").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("brown"))
-                 .define('C', TFMGBlocks.CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- YELLOW_CONCRETE = create(TFMGBlocks.COLORED_CONCRETE.get("yellow").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("yellow"))
-                 .define('C', TFMGBlocks.CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
- ///  ////////////////////////////////////////
- WHITE_REBAR_CONCRETE = create(TFMGBlocks.COLORED_REBAR_CONCRETE.get("white").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("white"))
-                 .define('C', TFMGBlocks.REBAR_CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- BLACK_REBAR_CONCRETE = create(TFMGBlocks.COLORED_REBAR_CONCRETE.get("black").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("black"))
-                 .define('C', TFMGBlocks.REBAR_CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
- ORANGE_REBAR_CONCRETE = create(TFMGBlocks.COLORED_REBAR_CONCRETE.get("orange").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("orange"))
-                 .define('C', TFMGBlocks.REBAR_CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- RED_REBAR_CONCRETE = create(TFMGBlocks.COLORED_REBAR_CONCRETE.get("red").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("red"))
-                 .define('C', TFMGBlocks.REBAR_CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- GRAY_REBAR_CONCRETE = create(TFMGBlocks.COLORED_REBAR_CONCRETE.get("gray").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("gray"))
-                 .define('C', TFMGBlocks.REBAR_CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- LIGHT_REBAR_GRAY_CONCRETE = create(TFMGBlocks.COLORED_REBAR_CONCRETE.get("light_gray").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("light_gray"))
-                 .define('C', TFMGBlocks.REBAR_CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- BLUE_REBAR_CONCRETE = create(TFMGBlocks.COLORED_REBAR_CONCRETE.get("blue").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("blue"))
-                 .define('C', TFMGBlocks.REBAR_CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- LIGHT_BLUE_REBAR_CONCRETE = create(TFMGBlocks.COLORED_REBAR_CONCRETE.get("light_blue").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("light_blue"))
-                 .define('C', TFMGBlocks.REBAR_CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- CYAN_REBAR_CONCRETE = create(TFMGBlocks.COLORED_REBAR_CONCRETE.get("cyan").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("cyan"))
-                 .define('C', TFMGBlocks.REBAR_CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- GREEN_REBAR_CONCRETE = create(TFMGBlocks.COLORED_REBAR_CONCRETE.get("green").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("green"))
-                 .define('C', TFMGBlocks.REBAR_CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- LIME_REBAR_CONCRETE = create(TFMGBlocks.COLORED_REBAR_CONCRETE.get("lime").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("lime"))
-                 .define('C', TFMGBlocks.REBAR_CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- PINK_REBAR_CONCRETE = create(TFMGBlocks.COLORED_REBAR_CONCRETE.get("pink").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("pink"))
-                 .define('C', TFMGBlocks.REBAR_CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- PURPLE_REBAR_CONCRETE = create(TFMGBlocks.COLORED_REBAR_CONCRETE.get("purple").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("purple"))
-                 .define('C', TFMGBlocks.REBAR_CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- MAGENTA_REBAR_CONCRETE = create(TFMGBlocks.COLORED_REBAR_CONCRETE.get("magenta").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("magenta"))
-                 .define('C', TFMGBlocks.REBAR_CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- BROWN_REBAR_CONCRETE = create(TFMGBlocks.COLORED_REBAR_CONCRETE.get("brown").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("brown"))
-                 .define('C', TFMGBlocks.REBAR_CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC")),
-
-
- YELLOW_REBAR_CONCRETE = create(TFMGBlocks.COLORED_REBAR_CONCRETE.get("yellow").block).returns(8)
-         .unlockedBy(TFMGBlocks.CONCRETE.block::get)
-         .viaShaped(b -> b
-                 .define('D', DYES_FROM_COLOR.get("yellow"))
-                 .define('C', TFMGBlocks.REBAR_CONCRETE.block)
-                 .pattern("CCC")
-                 .pattern("CDC")
-                 .pattern("CCC"));
+                    .requires(ItemTags.WOODEN_DOORS));
 
     /// ////////////////////
 
@@ -2342,8 +1511,10 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
         return create(result::get);
     }
 
-    TFMGRecipeProvider.GeneratedRecipe createSpecial(Function<CraftingBookCategory, Recipe<?>> builder, String recipeType,
-                                                       String path) {
+    TFMGRecipeProvider.GeneratedRecipe createSpecial (
+		Function<CraftingBookCategory, Recipe<?>> builder,
+		String recipeType, String path
+	) {
         ResourceLocation location = TFMG.asResource(recipeType + "/" + currentFolder + "/" + path);
         return register(consumer -> {
             SpecialRecipeBuilder b = SpecialRecipeBuilder.special(builder);
@@ -2387,9 +1558,11 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                 .forDuration(50)
                 .inFurnace();
     }
-
-    TFMGRecipeProvider.GeneratedRecipe metalCompacting(List<ItemProviderEntry<? extends ItemLike, ? extends ItemLike>> variants,
-                                                         List<Supplier<TagKey<Item>>> ingredients) {
+	
+	TFMGRecipeProvider.GeneratedRecipe metalCompacting (
+		List<ItemProviderEntry<? extends ItemLike, ? extends ItemLike>> variants,
+		List<Supplier<TagKey<Item>>> ingredients
+	) {
         TFMGRecipeProvider.GeneratedRecipe result = null;
         for (int i = 0; i + 1 < variants.size(); i++) {
             ItemProviderEntry<? extends ItemLike, ? extends ItemLike> currentEntry = variants.get(i);
@@ -2634,8 +1807,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
         super(output, registries);
     }
 
-    @ParametersAreNonnullByDefault
-    @MethodsReturnNonnullByDefault
+    @NothingNullByDefault
     private static class ModdedCookingRecipeOutputShim implements Recipe<RecipeInput> {
 
         private static final Map<RecipeType<?>, ModdedCookingRecipeOutputShim.Serializer> serializers = new ConcurrentHashMap<>();
@@ -2734,8 +1906,7 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
         }
     }
 
-    @ParametersAreNonnullByDefault
-    @MethodsReturnNonnullByDefault
+    @NothingNullByDefault
     private record ModdedCookingRecipeOutput(RecipeOutput wrapped, ResourceLocation outputOverride) implements RecipeOutput {
 
         @Override
@@ -2747,5 +1918,10 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
         public void accept(ResourceLocation id, Recipe<?> recipe, @Nullable AdvancementHolder advancement, ICondition... conditions) {
             wrapped.accept(id, new ModdedCookingRecipeOutputShim(recipe, outputOverride), advancement, conditions);
         }
+    }
+
+    @Override @NothingNullByDefault
+    public String getName() {
+        return "TFMG'S Standard Recipes";
     }
 }

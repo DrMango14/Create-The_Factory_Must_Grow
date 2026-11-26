@@ -1,4 +1,38 @@
 {
   "type": "tfmg:oil_deposit",
-  "config": {}
+  "config": {
+    "cluster_size": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 6,
+      "min_inclusive": 0
+    },
+    "deposit": {
+      "Name": "tfmg:oil_deposit"
+    },
+    "discard_chance": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 20,
+      "min_inclusive": 0
+    },
+    "distancing": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 40,
+      "min_inclusive": 0
+    },
+    "fluid": "tfmg:crude_oil",
+    "height": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 25,
+      "min_inclusive": 10
+    },
+    "side_stone": {
+      "state": {
+        "Name": "tfmg:fossilstone"
+      },
+      "target": {
+        "predicate_type": "minecraft:tag_match",
+        "tag": "minecraft:base_stone_overworld"
+      }
+    }
+  }
 }

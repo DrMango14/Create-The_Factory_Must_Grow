@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "M": {
-      "tag": "c:ingots/aluminum"
+      "item": "tfmg:industrial_aluminum_casing"
     },
     "W": {
       "tag": "c:wires/copper"

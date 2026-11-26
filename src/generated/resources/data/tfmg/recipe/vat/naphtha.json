@@ -1,0 +1,26 @@
+{
+  "type": "tfmg:vat",
+  "heat_level": 2,
+  "ingredients": [
+    {
+      "type": "neoforge:tag",
+      "amount": 500,
+      "tag": "c:naphtha"
+    }
+  ],
+  "machines": [
+    "tfmg:mixer"
+  ],
+  "min_size": 1,
+  "processing_time": 20,
+  "results": [
+    {
+      "amount": 250,
+      "id": "tfmg:ethylene"
+    },
+    {
+      "amount": 250,
+      "id": "tfmg:propylene"
+    }
+  ]
+}

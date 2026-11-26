@@ -1,15 +1,30 @@
 {
-  "credit": "Made with Blockbench",
   "textures": {
     "0": "tfmg:block/encased_steel_pipe_side",
     "particle": "tfmg:block/encased_steel_pipe_side"
   },
   "elements": [
     {
-      "from": [0, 0, 15],
-      "to": [16, 16, 16],
+      "from": [
+        0,
+        0,
+        15
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
       "faces": {
-        "south": {"uv": [0, 0, 16, 16], "texture": "#0"}
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#0"
+        }
       }
     }
   ]

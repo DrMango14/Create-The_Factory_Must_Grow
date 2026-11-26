@@ -1,16 +1,13 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.cables.copycat_cable;
 
-
-
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.packets.AddElectricalComponentPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
-import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.core.BlockPos;
@@ -42,9 +39,11 @@ import net.neoforged.neoforge.client.model.data.ModelData;
 
 
 import javax.annotation.Nullable;
+import java.util.function.Function;
 
+@NothingNullByDefault
+@SuppressWarnings({"unused", "deprecation"})
 public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEntity>, IWrenchable {
-
     public CopycatCableBlock(Properties pProperties) {
         super(pProperties);
 
@@ -58,26 +57,91 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
 
     @Override
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
-        return onBlockEntityUse(context.getLevel(), context.getClickedPos(), ufte -> {
-            ItemStack consumedItem = ufte.getConsumedItem();
-            if (!ufte.hasCustomMaterial())
-                return InteractionResult.PASS;
+        return onBlockEntityUse(context.getLevel(), context.getClickedPos(), block -> {
+            ItemStack consumedItem = block.getConsumedItem();
+            if (!block.hasCustomMaterial()) return InteractionResult.PASS;
+			
             Player player = context.getPlayer();
+			if (player == null) return InteractionResult.PASS;
             if (!player.isCreative())
-                player.getInventory()
-                        .placeItemBackInInventory(consumedItem);
+                player.getInventory().placeItemBackInInventory(consumedItem);
             context.getLevel()
-                    .levelEvent(2001, context.getClickedPos(), Block.getId(ufte.getBlockState()));
-            ufte.setMaterial(AllBlocks.COPYCAT_BASE.getDefaultState());
-            ufte.setConsumedItem(ItemStack.EMPTY);
+                    .levelEvent(2001, context.getClickedPos(), Block.getId(block.getBlockState()));
+            block.setMaterial(AllBlocks.COPYCAT_BASE.getDefaultState());
+            block.setConsumedItem(ItemStack.EMPTY);
             return InteractionResult.SUCCESS;
         });
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        Direction face = hitResult.getDirection();
+        BlockState materialIn = getAcceptedBlockState(level, pos, stack, face);
+
+        if (materialIn != null)
+            materialIn = prepareMaterial(level, pos, state, player, hand, hitResult, materialIn);
+
+        if (materialIn == null)
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
+        BlockState material = materialIn;
+
+        return onBlockEntityItemUse(level, pos, block -> {
+            if (block.getLevel() == null) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            if (block.getMaterial().is(material.getBlock())) {
+                if (!block.cycleMaterial())
+                    return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
+                block.getLevel().playSound(
+                        null,
+                        block.getBlockPos(),
+                        SoundEvents.ITEM_FRAME_ADD_ITEM,
+                        SoundSource.BLOCKS,
+                        .75f,
+                        .95f
+                );
+
+                return ItemInteractionResult.SUCCESS;
+            }
+
+            if (block.hasCustomMaterial())
+                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
+            if (level.isClientSide())
+                return ItemInteractionResult.SUCCESS;
+
+            block.setMaterial(material);
+            block.setConsumedItem(stack);
+
+            block.getLevel().playSound(
+                    null,
+                    block.getBlockPos(),
+                    material.getSoundType().getPlaceSound(),
+                    SoundSource.BLOCKS,
+                    1,
+                    .75f
+            );
+
+            if (player.isCreative())
+                return ItemInteractionResult.SUCCESS;
+
+            stack.shrink(1);
+			if (stack.isEmpty())
+				player.setItemInHand(hand, ItemStack.EMPTY);
+            return ItemInteractionResult.SUCCESS;
+        });
+    }
+
+    private ItemInteractionResult onBlockEntityItemUse(BlockGetter level, BlockPos pos, Function<CopycatCableBlockEntity, ItemInteractionResult> action) {
+        return getBlockEntityOptional(level, pos)
+                .map(action)
+                .orElse(ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION);
     }
 
 
 
     @Override
-    public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
+    public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
         if (pPlacer == null)
             return;
         ItemStack offhandItem = pPlacer.getItemInHand(InteractionHand.OFF_HAND);
@@ -86,12 +150,12 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
 
         if (appliedState == null)
             return;
-        withBlockEntityDo(pLevel, pPos, ufte -> {
-            if (ufte.hasCustomMaterial())
+        withBlockEntityDo(pLevel, pPos, block -> {
+            if (block.hasCustomMaterial())
                 return;
 
-            ufte.setMaterial(appliedState);
-            ufte.setConsumedItem(offhandItem);
+            block.setMaterial(appliedState);
+            block.setConsumedItem(offhandItem);
 
             if (pPlacer instanceof Player player && player.isCreative())
                 return;
@@ -102,7 +166,7 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
     }
 
     @Nullable
-    public BlockState getAcceptedBlockState(Level pLevel, BlockPos pPos, ItemStack item, Direction face) {
+    public BlockState getAcceptedBlockState(@Nullable Level pLevel, BlockPos pPos, ItemStack item,@Nullable Direction face) {
         if (!(item.getItem() instanceof BlockItem bi))
             return null;
 
@@ -159,7 +223,6 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
         return material;
     }
 
-
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         IBE.onRemove(state, level, pos, newState);
@@ -167,7 +230,7 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
         if (!state.hasBlockEntity() || state.getBlock() == newState.getBlock())
             return;
         if (!isMoving)
-            withBlockEntityDo(level, pos, ufte -> Block.popResource(level, pos, ufte.getConsumedItem()));
+            withBlockEntityDo(level, pos, block -> Block.popResource(level, pos, block.getConsumedItem()));
         level.removeBlockEntity(pos);
     }
 
@@ -175,64 +238,14 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
     public BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
         super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
         if (pPlayer.isCreative())
-            withBlockEntityDo(pLevel, pPos, ufte -> ufte.setConsumedItem(ItemStack.EMPTY));
+            withBlockEntityDo(pLevel, pPos, block -> block.setConsumedItem(ItemStack.EMPTY));
         return pState;
     }
+	
     @Override
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
-        if(level.getBlockEntity(pos) instanceof IElectric be){
-            be.onPlace();
-            if (level instanceof ServerLevel serverLevel)
-                CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(pos), new AddElectricalComponentPacket(BlockPos.of(pos.asLong())));
-
-
-        }
-    }
-
-    @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (player == null)
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-
-        Direction face = hitResult.getDirection();
-        BlockState materialIn = getAcceptedBlockState(level, pos, stack, face);
-
-        if (materialIn != null)
-            materialIn = prepareMaterial(level, pos, state, player, hand, hitResult, materialIn);
-        if (materialIn == null)
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-
-        BlockState material = materialIn;
-        return onBlockEntityUseItemOn(level, pos, ufte -> {
-            if (ufte.getMaterial()
-                    .is(material.getBlock())) {
-                if (!ufte.cycleMaterial())
-                    return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-                ufte.getLevel()
-                        .playSound(null, ufte.getBlockPos(), SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, .75f,
-                                .95f);
-                return ItemInteractionResult.SUCCESS;
-            }
-            if (ufte.hasCustomMaterial())
-                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-            if (level.isClientSide())
-                return ItemInteractionResult.SUCCESS;
-
-            ufte.setMaterial(material);
-            ufte.setConsumedItem(stack);
-            ufte.getLevel()
-                    .playSound(null, ufte.getBlockPos(), material.getSoundType()
-                            .getPlaceSound(), SoundSource.BLOCKS, 1, .75f);
-
-            if (player.isCreative())
-                return ItemInteractionResult.SUCCESS;
-
-            stack.shrink(1);
-            if (stack.isEmpty())
-                player.setItemInHand(hand, ItemStack.EMPTY);
-            return ItemInteractionResult.SUCCESS;
-        });
+		withBlockEntityDo(level, pos, IElectric::onPlace);
     }
 
     @Override
@@ -248,8 +261,7 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public BlockState getAppearance(BlockState state, BlockAndTintGetter level, BlockPos pos, Direction side,
-                                    BlockState queryState, BlockPos queryPos) {
+    public BlockState getAppearance(BlockState state, BlockAndTintGetter level, BlockPos pos, Direction side,@Nullable BlockState queryState,@Nullable BlockPos queryPos) {
         if (isIgnoredConnectivitySide(level, state, side, pos, queryPos))
             return state;
 
@@ -259,8 +271,7 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
         return CopycatCableBlockModel.getMaterial(modelData);
     }
 
-    public boolean isIgnoredConnectivitySide(BlockAndTintGetter reader, BlockState state, Direction face,
-                                             BlockPos fromPos, BlockPos toPos) {
+    public boolean isIgnoredConnectivitySide(BlockAndTintGetter reader, BlockState state, Direction face, BlockPos fromPos,@Nullable BlockPos toPos) {
         return false;
     }
 
@@ -274,12 +285,12 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
     // Wrapped properties
 
     @Override
-    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, Entity entity) {
+    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos,@Nullable Entity entity) {
         return getMaterial(level, pos).getSoundType();
     }
 
     @Override
-    public float getFriction(BlockState state, LevelReader level, BlockPos pos, Entity entity) {
+    public float getFriction(BlockState state, LevelReader level, BlockPos pos,@Nullable Entity entity) {
         return getMaterial(level, pos).getFriction(level, pos, entity);
     }
 
@@ -299,10 +310,9 @@ public class CopycatCableBlock extends Block implements IBE<CopycatCableBlockEnt
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos,
-                                       Player player) {
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
         BlockState material = getMaterial(level, pos);
-        if (TFMGBlocks.COPYCAT_CABLE_BASE.has(material) || player != null && player.isShiftKeyDown())
+        if (TFMGBlocks.COPYCAT_CABLE_BASE.has(material) || player.isShiftKeyDown())
             return new ItemStack(this);
         return material.getCloneItemStack(target, level, pos, player);
     }

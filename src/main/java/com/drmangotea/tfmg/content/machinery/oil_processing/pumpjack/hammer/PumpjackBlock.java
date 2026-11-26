@@ -1,6 +1,5 @@
 package com.drmangotea.tfmg.content.machinery.oil_processing.pumpjack.hammer;
 
-
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.content.contraptions.bearing.BearingBlock;
@@ -12,9 +11,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
+//TODO: This shouldn't just blindly extend BearingBlock
+//Bearings can face in any direction, while this is meant to be vertical.
+//It facing upwards also breaks PumpjackBlockEntity.applyRotation
 public class PumpjackBlock extends BearingBlock implements IBE<PumpjackBlockEntity> {
-
-
 	public static final BooleanProperty WIDE = BooleanProperty.create("wide");
 
 	public PumpjackBlock(Properties properties) {

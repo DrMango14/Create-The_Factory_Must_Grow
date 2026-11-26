@@ -24,6 +24,7 @@ public class CompressorBlock extends HorizontalKineticBlock implements IBE<Compr
     public Direction.Axis getRotationAxis(BlockState state) {
         return state.getValue(HORIZONTAL_FACING).getAxis();
     }
+
     @Override
     public Class<CompressorBlockEntity> getBlockEntityClass() {
         return CompressorBlockEntity.class;
@@ -33,6 +34,4 @@ public class CompressorBlock extends HorizontalKineticBlock implements IBE<Compr
     public BlockEntityType<? extends CompressorBlockEntity> getBlockEntityType() {
         return TFMGBlockEntities.COMPRESSOR.get();
     }
-
-
 }

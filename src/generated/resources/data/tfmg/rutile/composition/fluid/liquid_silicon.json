@@ -1,0 +1,14 @@
+{
+  "compositions": [
+    {
+      "elements": [
+        {
+          "id": "rutile:silicon"
+        }
+      ]
+    }
+  ],
+  "contents": [
+    "tfmg:liquid_silicon"
+  ]
+}

@@ -17,9 +17,7 @@ import static com.drmangotea.tfmg.content.electricity.content.lights.neon_tube.N
 
 
 public class NeonTubeBlockEntity extends SmartBlockEntity {
-
-    public DyeColor color= DyeColor.WHITE;
-
+    public DyeColor color = DyeColor.WHITE;
     public LerpedFloat glow = LerpedFloat.linear();
 
     public NeonTubeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -31,18 +29,16 @@ public class NeonTubeBlockEntity extends SmartBlockEntity {
 
     }
 
-
     @Override
     public void tick() {
         super.tick();
-
-
-            glow.chase(0*1.5, 0.4, LerpedFloat.Chaser.EXP);
-            glow.tickChaser();
-            if (Math.min(0 / 10, 15) != getBlockState().getValue(LIGHT))
-                level.setBlock(getBlockPos(), getBlockState().setValue(LIGHT, (int) Math.min(0 / 10, 15)), 2);
-
+		glow.chase(0, 0.4, LerpedFloat.Chaser.EXP);
+		glow.tickChaser();
+		int light = 0;//Math.min(getData().getVoltage() / 10, 15);
+		if (light != getBlockState().getValue(LIGHT) && level != null)
+			level.setBlock(getBlockPos(), getBlockState().setValue(LIGHT, light), 2);
     }
+	
     @Override
     protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.write(compound,registries , clientPacket);

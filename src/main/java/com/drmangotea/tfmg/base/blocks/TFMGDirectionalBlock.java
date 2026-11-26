@@ -7,13 +7,16 @@ import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 
-public class TFMGDirectionalBlock extends DirectionalBlock {
+import javax.annotation.Nonnull;
 
-    public TFMGDirectionalBlock(Properties p_54120_) {
-        super(p_54120_);
+public class TFMGDirectionalBlock extends DirectionalBlock {
+    public TFMGDirectionalBlock(Properties p) {
+        super(p);
     }
+
     public static final MapCodec<TFMGDirectionalBlock> CODEC = simpleCodec(TFMGDirectionalBlock::new);
-    @Override
+
+    @Override @Nonnull
     protected MapCodec<? extends DirectionalBlock> codec() {
         return CODEC;
     }
@@ -23,8 +26,8 @@ public class TFMGDirectionalBlock extends DirectionalBlock {
         builder.add(FACING);
         super.createBlockStateDefinition(builder);
     }
+	
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         return this.defaultBlockState().setValue(FACING, pContext.getNearestLookingDirection().getOpposite());
     }
-
 }

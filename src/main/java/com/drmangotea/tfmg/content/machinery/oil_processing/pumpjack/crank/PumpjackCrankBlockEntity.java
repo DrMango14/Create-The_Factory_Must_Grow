@@ -33,24 +33,19 @@ public class PumpjackCrankBlockEntity extends KineticBlockEntity {
     }
 
     public float getMachineInputSpeed() {
-
-        if (level.getBlockEntity(getBlockPos().below()) instanceof MachineInputBlockEntity)
-            return ((MachineInputBlockEntity) level.getBlockEntity(getBlockPos().below())).getSpeed();
+        if (level != null && level.getBlockEntity(getBlockPos().below()) instanceof MachineInputBlockEntity be)
+            return be.getSpeed();
         return 0;
     }
 
     private void setAngle() {
-        if (level.getBlockEntity(getBlockPos().below()) instanceof MachineInputBlockEntity) {
+        if (level != null && level.getBlockEntity(getBlockPos().below()) instanceof MachineInputBlockEntity) {
             float time;
             if (level.isClientSide) {
                 time = AnimationTickHolder.getRenderTime(getLevel());
             } else time = level.getBlockTicks().hashCode();
-            float speed_amogus = Math.min(getMachineInputSpeed() / 6, (float) 10);
-            if (speed_amogus != 0) {
-                angle = (time * speed_amogus * 3 / 10f) % 360;
-                angle = angle / 180f * (float) Math.PI;
-                angle = (float) Math.toDegrees(angle);
-            } else angle = 180;
+            float speed = Math.min(getMachineInputSpeed() / 20f, 3f);
+            angle = (speed == 0) ? 180f : (time * speed) % 360;
         }
     }
 

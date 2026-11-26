@@ -1,0 +1,7 @@
+{
+  "priority": 1001,
+  "properties": {
+    "sable:mass": 1.5
+  },
+  "selector": "tfmg:turbine_engine"
+}

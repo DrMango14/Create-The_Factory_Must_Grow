@@ -1,0 +1,7 @@
+{
+  "priority": 1001,
+  "properties": {
+    "sable:mass": 0.5
+  },
+  "selector": "tfmg:aluminum_block"
+}

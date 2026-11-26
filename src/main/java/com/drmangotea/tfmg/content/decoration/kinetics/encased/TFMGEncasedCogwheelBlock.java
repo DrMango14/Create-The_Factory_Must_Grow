@@ -3,6 +3,7 @@ package com.drmangotea.tfmg.content.decoration.kinetics.encased;
 
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.api.contraption.transformable.TransformableBlock;
 import com.simibubi.create.api.schematic.requirement.SpecialBlockItemRequirement;
 import com.simibubi.create.content.contraptions.StructureTransform;
@@ -43,8 +44,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.function.Supplier;
 
-public class TFMGEncasedCogwheelBlock extends RotatedPillarKineticBlock
-        implements ICogWheel, IBE<SimpleKineticBlockEntity>, SpecialBlockItemRequirement, TransformableBlock, EncasedBlock {
+public class TFMGEncasedCogwheelBlock extends RotatedPillarKineticBlock implements ICogWheel, IBE<SimpleKineticBlockEntity>, SpecialBlockItemRequirement, TransformableBlock, EncasedBlock {
     public static final BooleanProperty TOP_SHAFT = EncasedCogwheelBlock.TOP_SHAFT;
     public static final BooleanProperty BOTTOM_SHAFT = EncasedCogwheelBlock.BOTTOM_SHAFT;
     protected final boolean isLarge;
@@ -54,8 +54,11 @@ public class TFMGEncasedCogwheelBlock extends RotatedPillarKineticBlock
     private final BlockEntityEntry<SimpleKineticBlockEntity> beSmall;
     private final BlockEntityEntry<SimpleKineticBlockEntity> beLarge;
 
-    public static TFMGEncasedCogwheelBlock steel(Properties properties, boolean large, Supplier<Block> casing) {
+    public static TFMGEncasedCogwheelBlock wood(Properties properties, boolean large, Supplier<Block> casing) {
+        return new TFMGEncasedCogwheelBlock(properties, large, casing, AllBlocks.COGWHEEL, AllBlocks.LARGE_COGWHEEL, TFMGBlockEntities.TFMG_ENCASED_COGWHEEL, TFMGBlockEntities.TFMG_ENCASED_LARGE_COGWHEEL);
+    }
 
+    public static TFMGEncasedCogwheelBlock steel(Properties properties, boolean large, Supplier<Block> casing) {
         return new TFMGEncasedCogwheelBlock(properties, large, casing, TFMGBlocks.STEEL_COGWHEEL, TFMGBlocks.LARGE_STEEL_COGWHEEL, TFMGBlockEntities.ENCASED_STEEL_COGWHEEL, TFMGBlockEntities.ENCASED_LARGE_STEEL_COGWHEEL);
     }
 

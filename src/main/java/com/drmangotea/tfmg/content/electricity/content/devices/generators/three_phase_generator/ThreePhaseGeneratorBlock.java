@@ -1,18 +1,15 @@
 package com.drmangotea.tfmg.content.electricity.content.devices.generators.three_phase_generator;
 
 import com.drmangotea.tfmg.base.TFMGShapes;
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.content.electricity.IElectric;
-import com.drmangotea.tfmg.content.electricity.packets.AddElectricalComponentPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
-import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -20,6 +17,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import javax.annotation.Nullable;
+
+@NothingNullByDefault
 public class ThreePhaseGeneratorBlock extends DirectionalKineticBlock implements IBE<ThreePhaseGeneratorBlockEntity>{
     public ThreePhaseGeneratorBlock(Properties properties) {
         super(properties);
@@ -28,13 +28,7 @@ public class ThreePhaseGeneratorBlock extends DirectionalKineticBlock implements
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
-        if(level.getBlockEntity(pos) instanceof IElectric be){
-            be.onPlace();
-            if (level instanceof ServerLevel serverLevel)
-                CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(pos), new AddElectricalComponentPacket(BlockPos.of(pos.asLong())));
-
-
-        }
+		withBlockEntityDo(level, pos, IElectric::onPlace);
     }
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
@@ -58,14 +52,13 @@ public class ThreePhaseGeneratorBlock extends DirectionalKineticBlock implements
         return face == state.getValue(FACING);
 
     }
+	
+	@Nullable
     public Direction getPreferredFacing(BlockPlaceContext context) {
-
-        if(super.getPreferredFacing(context)==null)
-            return null;
-
-        return super.getPreferredFacing(context).getOpposite();
+		Direction dir = super.getPreferredFacing(context);
+        if (dir == null) return null;
+        return dir.getOpposite();
     }
-
 
     @Override
     public Class<ThreePhaseGeneratorBlockEntity> getBlockEntityClass() {

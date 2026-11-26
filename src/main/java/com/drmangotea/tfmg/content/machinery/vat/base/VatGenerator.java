@@ -9,8 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 
 public class VatGenerator extends SpecialBlockStateGen {
-
-    private String prefix;
+    private final String prefix;
 
     public VatGenerator() {
         this("");

@@ -21,7 +21,9 @@
       }
     },
     {
-      "type": "create:config_filter"
+      "type": "tfmg:config_boolean",
+      "enabled_when": true,
+      "option": "tfmg:nickel_ore"
     }
   ]
 }

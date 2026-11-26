@@ -1,17 +1,15 @@
 package com.drmangotea.tfmg.content.electricity.content.power_transmission.transformers.large;
 
 import com.drmangotea.tfmg.base.TFMGShapes;
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
 import com.drmangotea.tfmg.content.electricity.IElectric;
 import com.drmangotea.tfmg.content.electricity.content.power_transmission.switches.large_switch.LargeSwitchBlock;
-import com.drmangotea.tfmg.content.electricity.packets.AddElectricalComponentPacket;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.foundation.block.IBE;
-import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,7 +17,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -37,10 +34,9 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+@NothingNullByDefault
 public class LargeTransformerBlock extends TFMGHorizontalDirectionalBlock implements IBE<LargeTransformerBlockEntity> {
-
     public static final BooleanProperty IS_MAIN_PART = LargeSwitchBlock.IS_MAIN_PART;
-
 
     public LargeTransformerBlock(Properties properties) {
         super(properties);
@@ -52,7 +48,7 @@ public class LargeTransformerBlock extends TFMGHorizontalDirectionalBlock implem
         builder.add(IS_MAIN_PART);
     }
 
-    @Override
+    @Override @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
@@ -78,8 +74,8 @@ public class LargeTransformerBlock extends TFMGHorizontalDirectionalBlock implem
                     be = controller;
                 } else return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
-            Direction facing = state.getValue(FACING);
-            Direction lookingDirection = LargeTransformerBlockEntity.getCoilDirections(level, pos, hitResult).get(0);
+			
+            Direction lookingDirection = LargeTransformerBlockEntity.getCoilDirections(level, pos, hitResult).getFirst();
             boolean primary = lookingDirection == Direction.DOWN;
             ItemStack coil = primary ? be.primaryCoil : be.secondaryCoil;
 
@@ -170,13 +166,7 @@ public class LargeTransformerBlock extends TFMGHorizontalDirectionalBlock implem
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
-        if (level.getBlockEntity(pos) instanceof IElectric be && state.getValue(IS_MAIN_PART)) {
-            be.onPlace();
-            if (level instanceof ServerLevel serverLevel)
-                CatnipServices.NETWORK.sendToClientsTrackingChunk(serverLevel, new ChunkPos(pos), new AddElectricalComponentPacket(BlockPos.of(pos.asLong())));
-
-
-        }
+        if (state.getValue(IS_MAIN_PART)) withBlockEntityDo(level, pos, IElectric::onPlace);
     }
 
     @Override

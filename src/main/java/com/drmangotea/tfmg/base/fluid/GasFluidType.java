@@ -1,6 +1,7 @@
 package com.drmangotea.tfmg.base.fluid;
 
 
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -14,18 +15,16 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
-import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
 import java.util.function.Consumer;
 
 import static com.drmangotea.tfmg.registry.TFMGFluids.getGasTexture;
 
+@NothingNullByDefault
 public class GasFluidType extends TFMGFluids.SolidRenderedPlaceableFluidType {
 
     final int color;
-
-
 
     public GasFluidType(Properties properties, ResourceLocation stillTexture, ResourceLocation flowingTexture, int color) {
         super(properties, stillTexture, flowingTexture);
@@ -33,11 +32,9 @@ public class GasFluidType extends TFMGFluids.SolidRenderedPlaceableFluidType {
     }
 
     public static FluidBuilder.FluidTypeFactory  create(int color) {
-        return (p, s, f) -> {
-            GasFluidType fluidType = new GasFluidType(p,s,f,color);
-            return fluidType;
-        };
+        return (p, s, f) -> new GasFluidType(p, s, f, color);
     }
+
     @Override
     public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
         consumer.accept(new IClientFluidTypeExtensions() {
@@ -63,15 +60,13 @@ public class GasFluidType extends TFMGFluids.SolidRenderedPlaceableFluidType {
             }
 
             @Override
-            public @NotNull Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level,
-                                                    int renderDistance, float darkenWorldAmount, Vector3f fluidFogColor) {
+            public Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level, int renderDistance, float darkenWorldAmount, Vector3f fluidFogColor) {
                 Vector3f customFogColor = GasFluidType.this.getCustomFogColor();
                 return customFogColor == null ? fluidFogColor : customFogColor;
             }
 
             @Override
-            public void modifyFogRender(Camera camera, FogRenderer.FogMode mode, float renderDistance, float partialTick,
-                                        float nearDistance, float farDistance, FogShape shape) {
+            public void modifyFogRender(Camera camera, FogRenderer.FogMode mode, float renderDistance, float partialTick, float nearDistance, float farDistance, FogShape shape) {
                 float modifier = GasFluidType.this.getFogDistanceModifier();
                 float baseWaterFog = 96.0f;
                 if (modifier != 1f) {
@@ -80,10 +75,8 @@ public class GasFluidType extends TFMGFluids.SolidRenderedPlaceableFluidType {
                     RenderSystem.setShaderFogEnd(baseWaterFog * modifier);
                 }
             }
-
         });
     }
-
 
     @Override
     public int getDensity() {

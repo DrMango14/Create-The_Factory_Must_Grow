@@ -34,6 +34,7 @@ public class AdvancedPotatoCannonRenderHandler extends ShootableGadgetRenderHand
 			return;
 
 		ClientLevel world = Minecraft.getInstance().level;
+		if (world == null) return;
 		for (int i = 0; i < 2; i++) {
 			Vec3 m = VecHelper.offsetRandomly(motion.scale(0.1f), world.random, .025f);
 			world.addParticle(new ItemParticleOption(ParticleTypes.ITEM, stack), location.x, location.y, location.z, m.x,

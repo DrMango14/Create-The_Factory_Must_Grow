@@ -1,0 +1,7 @@
+{
+  "parent": "create:block/encased_shaft/item",
+  "textures": {
+    "casing": "tfmg:block/industrial_aluminum_casing",
+    "opening": "tfmg:block/industrial_gearbox"
+  }
+}

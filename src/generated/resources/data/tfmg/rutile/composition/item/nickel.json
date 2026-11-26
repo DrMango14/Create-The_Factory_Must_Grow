@@ -1,0 +1,20 @@
+{
+  "compositions": [
+    {
+      "elements": [
+        {
+          "id": "rutile:nickel"
+        }
+      ]
+    }
+  ],
+  "contents": [
+    "tfmg:raw_nickel_block",
+    "tfmg:nickel_block",
+    "tfmg:raw_nickel",
+    "tfmg:nickel_ingot",
+    "tfmg:nickel_nugget",
+    "tfmg:nickel_sheet",
+    "create:crushed_raw_nickel"
+  ]
+}

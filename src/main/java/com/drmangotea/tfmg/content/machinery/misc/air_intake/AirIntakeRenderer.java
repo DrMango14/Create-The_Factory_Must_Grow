@@ -149,8 +149,7 @@ public class AirIntakeRenderer  extends KineticBlockEntityRenderer<AirIntakeBloc
                 speed = Mth.clamp(speed, 80, 64 * 20);
             if (speed < 0)
                 speed = Mth.clamp(speed, -64 * 20, -80);
-            float angle = (time * speed * 3 / 10f) % 360;
-            angle = angle / 180f * (float) Math.PI;
+			float angle = (time * speed * 0.3f * Mth.DEG_TO_RAD) % Mth.TWO_PI;
 
             standardKineticRotationTransform(shaftHalf, be, lightBehind).renderInto(ms, vb);
             if(!be.isUsedByController)

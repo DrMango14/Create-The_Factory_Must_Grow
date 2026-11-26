@@ -1,19 +1,43 @@
 package com.drmangotea.tfmg.base.lang;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
+import com.drmangotea.tfmg.content.engines.types.EngineType;
+import com.drmangotea.tfmg.content.machinery.vat.base.registry.operations.VatOperation;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import net.createmod.catnip.lang.LangBuilder;
 import net.createmod.catnip.theme.Color;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluid;
+
+import java.text.DecimalFormat;
 
 /**
  * Utility class for storing translations and texts that could occur more than once.
  * Easier than copying the lang.translate() method everywhere.
  */
+@SuppressWarnings("unused")
 public class TFMGTexts {
+	public static final int //common colours
+		COOLING = 0x51bdb9,
+		//engine
+		ENGINE_UNFINISHED = 0xde5050,
+		ENGINE_INFO_BRIGHT = 0xfff240,
+		ENGINE_INFO = 0xfcad03,
+		ENGINE_INFO_DARK = 0xa36f00,
+		//electric
+		RESISTANCE = 0xc98969,
+		VOLTAGE = 0x4bbbcc,
+		VOLTAGE_DARK = 0x127799,
+		CURRENT = 0x22a146,
+		POWER = 0xcc4b74,
+		POWER_DARK = 0x852e4a;
+	
+    public static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("##.##");
+    public static DecimalFormat PERCENT_FORMAT = new DecimalFormat("##.##%");
+
     public static String percent(double value) {
-        return String.valueOf(value) + "%";
+        return PERCENT_FORMAT.format(value / 100);
     }
     // Electricity info
     public static String power(double value) {
@@ -35,13 +59,13 @@ public class TFMGTexts {
         return TFMGUtils.formatUnits(value, "FE");
     }
     public static LangBuilder electricalCapacity(double value) {
-        return TFMGLang.translate("electricity.capacity", forgeEnergy(value)).color(0x127799);
+        return TFMGLang.translate("electricity.capacity", forgeEnergy(value)).color(VOLTAGE_DARK);
     }
     public static LangBuilder electricalMaxCapacity(double value) {
-        return TFMGLang.translate("electricity.max_capacity", TFMGLang.number(value)).color(0x127799);
+        return TFMGLang.translate("electricity.max_capacity", TFMGLang.number(value)).color(VOLTAGE_DARK);
     }
     public static LangBuilder chargingRate(double value) {
-        return TFMGLang.translate("electricity.charging_rate", TFMGLang.number(value)).color(0x127799);
+        return TFMGLang.translate("electricity.charging_rate", TFMGLang.number(value)).color(VOLTAGE_DARK);
     }
     public static LangBuilder progress(double value) {
         return TFMGLang.translate("goggles.progress", value);
@@ -51,6 +75,18 @@ public class TFMGTexts {
     }
     public static LangBuilder turnsLeft(int turns) {
         return TFMGLang.translate("goggles.winding_machine.turns").add(TFMGLang.text(String.valueOf(turns)));
+    }
+
+    public static String rpm(int value) {
+        return TFMGUtils.formatUnits(value, "RPM");
+    }
+
+    public static LangBuilder fluidProduction(int amount) {
+        return TFMGLang.translate("goggles.fluid_production", TFMGUtils.formatFluid(amount));
+    }
+
+    public static LangBuilder fluidProduction(int amount, Fluid fluid) {
+        return TFMGLang.translate("goggles.fluid_production.named", fluid.getFluidType().getDescription(), TFMGUtils.formatFluid(amount));
     }
 
     public static LangBuilder invalidMachine() {
@@ -65,6 +101,22 @@ public class TFMGTexts {
         return TFMGLang.translate("goggles.heat_status")
                 .add(TFMGLang.translate(heatCondition == HeatCondition.NONE ? "goggles.no_heat" : heatCondition == HeatCondition.HEATED ? "goggles.heated" : "goggles.superheated"))
                 .color(heatCondition == HeatCondition.NONE ? 0x7a7a77 : heatCondition == HeatCondition.HEATED ? 0xdea216 : 0x16c7de);
+    }
+
+    public static LangBuilder progress(int timer, int duration) {
+        int percent = duration <= 0 ? -1 : Math.min(100, (int) (100f * timer / duration));
+        if (percent == -1) return TFMGLang.translate("goggles.idle").style(ChatFormatting.GRAY);
+        return TFMGLang.translate("goggles.progress", TFMGLang.text(percent + "%").style(ChatFormatting.GOLD)).style(ChatFormatting.GRAY);
+    }
+
+    public static class CommonMachines {
+        public static LangBuilder state(String state) {
+            return TFMGLang.translate("goggles.machine_state", TFMGLang.translateDirect(state));
+        }
+
+        public static LangBuilder minRPM(int rpm) {
+            return TFMGLang.translate("goggles.minimum_rpm", rpm);
+        }
     }
 
     // Multimeter Tooltips
@@ -97,10 +149,10 @@ public class TFMGTexts {
             return TFMGLang.translate("multimeter.transformer.secondary_voltage").add(voltage(voltage)).color(0x127799);
         }
         public static LangBuilder powerGenerated(double value) {
-            return TFMGLang.translate("multimeter.power_generated", power(value)).color(0x852e4a);
+            return TFMGLang.translate("multimeter.power_generated", power(value)).color(POWER_DARK);
         }
         public static LangBuilder voltageGenerated(double value) {
-            return TFMGLang.translate("multimeter.voltage_generated", voltage(value)).color(0x127799);
+            return TFMGLang.translate("multimeter.voltage_generated", voltage(value)).color(VOLTAGE_DARK);
         }
         public static LangBuilder maxPower(double value) {
             return TFMGLang.translate("multimeter.max_power", power(value)).color(0x9B3784);
@@ -109,29 +161,29 @@ public class TFMGTexts {
             return TFMGLang.translate("multimeter.phase_offset", degrees(value)).color(0xEFB500);
         }
         public static LangBuilder networkGeneration(double value) {
-            return TFMGLang.translate("multimeter.network.generation", power(value)).color(0xcc4b74);
+            return TFMGLang.translate("multimeter.network.generation", power(value)).color(POWER);
         }
 
         public static LangBuilder networkConsumption(double value) {
-            return TFMGLang.translate("multimeter.network.consumption", power(value)).color(0xcc4b74);
+            return TFMGLang.translate("multimeter.network.consumption", power(value)).color(POWER);
         }
         public static LangBuilder voltageLoss(double value) {
             return TFMGLang.translate("multimeter.voltage_loss", voltage(value)).color(0xcc4b74);
         }
         public static LangBuilder resistance(double value) {
-            return TFMGLang.text("   R = " +  TFMGTexts.resistance(value)).color(0xc98969);
+            return TFMGLang.text("   R = " +  TFMGTexts.resistance(value)).color(RESISTANCE);
         }
         public static LangBuilder voltage(double value) {
-            return TFMGLang.text("   U = " + TFMGTexts.voltage(value)).color(0x4bbbcc);
+            return TFMGLang.text("   U = " + TFMGTexts.voltage(value)).color(VOLTAGE);
         }
         public static LangBuilder degrees(double value) {
             return TFMGLang.text("         φ = " + TFMGTexts.degrees(value)).color(0xEA9570);
         }
         public static LangBuilder current(double value) {
-            return TFMGLang.text("   I = " + TFMGTexts.current(value)).color(0x22a146);
+            return TFMGLang.text("   I = " + TFMGTexts.current(value)).color(CURRENT);
         }
         public static LangBuilder power(double value) {
-            return TFMGLang.text("   P = " + TFMGTexts.power(value)).color(0xcc4b74);
+            return TFMGLang.text("   P = " + TFMGTexts.power(value)).color(POWER);
         }
         public static LangBuilder sendingFE(double value) {
             return TFMGLang.translate("multimeter.fe_output").add(TFMGLang.text(TFMGUtils.formatUnits(value,"FE/tick")).color(0x4BCC4B));
@@ -159,13 +211,13 @@ public class TFMGTexts {
     public static class Engine {
         public static LangBuilder unfinished() {
             return TFMGLang.translate("goggles.engine.unfinished")
-                    .color(0xde5050);
+                    .color(ENGINE_UNFINISHED);
         }
         public static LangBuilder nextComponent(ItemStack item) {
-            return TFMGLang.translate("goggles.engine.next_component", item.getHoverName()).color(0xfff240);
+            return TFMGLang.translate("goggles.engine.next_component", item.getHoverName()).color(ENGINE_INFO_BRIGHT);
         }
         public static LangBuilder lastRequirement(String type) {
-            return TFMGLang.translate("goggles.engine."+type+"_missing").color(0xde5050);
+            return TFMGLang.translate("goggles.engine."+type+"_missing").color(ENGINE_UNFINISHED);
         }
         public static LangBuilder shift(String langKey) {
             return TFMGLang.translate("engine.shift", TFMGLang.translate(langKey));
@@ -177,29 +229,29 @@ public class TFMGTexts {
             return TFMGLang.translate("engine.efficiency", TFMGLang.number(efficiency));
         }
         public static LangBuilder fuelConsumption(float consumption) {
-            return TFMGLang.translate("goggles.engine.fuel_consumption", TFMGLang.number(consumption)).color(0xfcad03);
+            return TFMGLang.translate("goggles.engine.fuel_consumption", TFMGLang.number(consumption)).color(ENGINE_INFO);
         }
         public static LangBuilder rpm(float rpm) {
-            return TFMGLang.translate("goggles.engine.rpm", TFMGLang.number(rpm)).color(0xa36f00);
+            return TFMGLang.translate("goggles.engine.rpm", TFMGLang.number(rpm)).color(ENGINE_INFO_DARK);
         }
 
         public static LangBuilder length(int length) {
             return TFMGLang.translate("engine.length", TFMGLang.number(length));
         }
         public static LangBuilder torque(float torque) {
-            return TFMGLang.translate("goggles.engine.torque", TFMGLang.number(torque)).color(0xa36f00);
+            return TFMGLang.translate("goggles.engine.torque", TFMGLang.number(torque)).color(ENGINE_INFO_DARK);
         }
         public static LangBuilder signal(int signal) {
-            return TFMGLang.translate("goggles.engine.signal", TFMGLang.number(signal)).color(0xfcad03);
+            return TFMGLang.translate("goggles.engine.signal", TFMGLang.number(signal)).color(ENGINE_INFO);
         }
-        public static LangBuilder type(String langKey) {
-            return TFMGLang.translate("goggles.engine.type", TFMGLang.translate(langKey)).color(0xfcad03);
+        public static LangBuilder type(EngineType engineType) {
+            return TFMGLang.translate("goggles.engine.type", engineType.getDisplayName()).color(ENGINE_INFO);
         }
         public static LangBuilder oil(int oil) {
-            return TFMGLang.translate("goggles.engine.oil", TFMGLang.number(oil)).color(0xf5dd42);
+            return TFMGLang.translate("goggles.engine.oil", TFMGLang.number(oil)).color(ENGINE_INFO_BRIGHT);
         }
         public static LangBuilder coolingFluid(int fluid) {
-            return TFMGLang.translate("goggles.engine.cooling_fluid", TFMGLang.number(fluid)).color(0x51bdb9);
+            return TFMGLang.translate("goggles.engine.cooling_fluid", TFMGLang.number(fluid)).color(COOLING);
         }
     }
 
@@ -245,24 +297,28 @@ public class TFMGTexts {
         public static LangBuilder noDeposit() {
             return TFMGLang.translate("goggles.surface_scanner.no_deposit").style(ChatFormatting.RED);
         }
-        public static LangBuilder noRotation() {
-            return TFMGLang.translate("goggles.surface_scanner.no_rotation").style(ChatFormatting.DARK_RED);
-        }
     }
 
     // Vat Tooltips
     public static class Vat {
-        public static LangBuilder operation(String operationId) {
-            return TFMGLang.translate("goggles.vat." + operationId.replace(":","."));
+        public static LangBuilder operation(VatOperation operationId) {
+            return TFMGLang.builder().space().space().space().translate("goggles.vat." + operationId.id().getNamespace() + "." + operationId.id().getPath());
         }
         public static LangBuilder notOperational() {
-            return TFMGLang.text(" - ").add(TFMGLang.translate("goggles.vat.not_operational").style(ChatFormatting.RED));
+            return TFMGLang.text(" - ").add(TFMGLang.translate("goggles.not_operational").style(ChatFormatting.RED));
+        }
+        public static LangBuilder operational() {
+            return TFMGLang.text(" - ").add(TFMGLang.translate("goggles.operational").style(ChatFormatting.GREEN));
         }
         public static LangBuilder contents() {
             return TFMGLang.translate("goggles.vat.contents");
         }
         public static LangBuilder attachments() {
             return TFMGLang.translate("goggles.vat.attachments");
+        }
+
+        public static LangBuilder count(int total, int operational) {
+            return TFMGLang.text("[%s/%s]".formatted(operational, total));
         }
     }
 }

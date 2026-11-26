@@ -1,0 +1,7 @@
+{
+  "efficiency": 0.3,
+  "exhaust": "tfmg:carbon_dioxide",
+  "fluids": "#c:furnace_gas",
+  "speed": 0.5,
+  "torque": 0.3
+}

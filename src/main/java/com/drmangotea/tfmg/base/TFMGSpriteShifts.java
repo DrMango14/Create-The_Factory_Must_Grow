@@ -10,13 +10,25 @@ import net.createmod.catnip.render.SpriteShifter;
 
 public class TFMGSpriteShifts {
 
-    public static final CTSpriteShiftEntry CAST_IRON_BLOCK = omni("cast_iron_block"), LEAD_BLOCK = omni("lead_block"), STEEL_BLOCK = omni("steel_block");
+    public static final CTSpriteShiftEntry
+            CAST_IRON_BLOCK = omni("cast_iron_block"),
+            LEAD_BLOCK = omni("lead_block"),
+            NICKEL_BLOCK = omni("nickel_block"),
+            STEEL_BLOCK = omni("steel_block");
     public static final CTSpriteShiftEntry HEAVY_MACHINERY_CASING = omni("heavy_machinery_casing"), INDUSTRIAL_ALUMINUM_CASING = omni("industrial_aluminum_casing"),STEEL_CASING = omni("steel_casing");
+    public static final CTSpriteShiftEntry HEAVY_MACHINERY_CASING_CABLE_HUB = omni("heavy_cable_hub"), ALUMINUM_CASING_CABLE_HUB = omni("aluminum_cable_hub"), STEEL_CASING_CABLE_HUB = omni("steel_casing_cable_hub");
     public static final CTSpriteShiftEntry ACCUMULATOR = getCT(AllCTTypes.RECTANGLE, "accumulator_side");
-    public static final CTSpriteShiftEntry STEEL_SCAFFOLD = horizontal("scaffold/steel_scaffold"), ALUMINUM_SCAFFOLD = horizontal("scaffold/aluminum_scaffold");
+    public static final CTSpriteShiftEntry STEEL_SCAFFOLD = horizontalKryppers("scaffold/steel_scaffold"), ALUMINUM_SCAFFOLD = horizontalKryppers("scaffold/aluminum_scaffold");
     public static final CTSpriteShiftEntry ALUMINUM_SCAFFOLD_TOP = omni("aluminum_casing");
-    public static final CTSpriteShiftEntry STEEL_SCAFFOLD_INSIDE = horizontal("scaffold/steel_scaffold_inside"), ALUMINUM_SCAFFOLD_INSIDE = horizontal("scaffold/aluminum_scaffold_inside");
-    public static final CTSpriteShiftEntry STEEL_ENCASED_COGWHEEL_SIDE = vertical("steel_encased_cogwheel_side"), STEEL_ENCASED_COGWHEEL_OTHERSIDE = horizontal("steel_encased_cogwheel_side"), HEAVY_CASING_ENCASED_COGWHEEL_SIDE = vertical("heavy_machinery_encased_cogwheel_side"), HEAVY_CASING_ENCASED_COGWHEEL_OTHERSIDE = horizontal("heavy_machinery_encased_cogwheel_side");
+    public static final CTSpriteShiftEntry STEEL_SCAFFOLD_INSIDE = horizontalKryppers("scaffold/steel_scaffold_inside"), ALUMINUM_SCAFFOLD_INSIDE = horizontalKryppers("scaffold/aluminum_scaffold_inside");
+
+    public static final CTSpriteShiftEntry
+            STEEL_ENCASED_COGWHEEL_SIDE = vertical("steel_encased_cogwheel_side"),
+            STEEL_ENCASED_COGWHEEL_OTHERSIDE = horizontal("steel_encased_cogwheel_side"),
+            HEAVY_CASING_ENCASED_COGWHEEL_SIDE = vertical("heavy_machinery_encased_cogwheel_side"),
+            HEAVY_CASING_ENCASED_COGWHEEL_OTHERSIDE = horizontal("heavy_machinery_encased_cogwheel_side"),
+            INDUSTRIAL_CASING_ENCASED_COGWHEEL_SIDE = vertical("industrial_encased_cogwheel_side"),
+            INDUSTRIAL_CASING_ENCASED_COGWHEEL_OTHERSIDE = horizontal("industrial_encased_cogwheel_side");
     public static final CTSpriteShiftEntry COKE_OVEN_TOP = getCT(AllCTTypes.RECTANGLE, "coke_oven/top"), COKE_OVEN_BOTTOM = getCT(AllCTTypes.RECTANGLE, "coke_oven/bottom"), COKE_OVEN_BACK = getCT(AllCTTypes.RECTANGLE, "coke_oven/side"), COKE_OVEN_SIDE = getCT(AllCTTypes.RECTANGLE, "coke_oven/side");
 
     // Fluid Encasing
@@ -38,30 +50,31 @@ public class TFMGSpriteShifts {
 
     public static final CTSpriteShiftEntry BLAST_FURNACE_REINFORCEMENT = vertical("blast_furnace_reinforcement");
     public static final CTSpriteShiftEntry RUSTED_BLAST_FURNACE_REINFORCEMENT = vertical("rusted_blast_furnace_reinforcement");
-    public static final CTSpriteShiftEntry SEGMENTED_DISPLAY_SCREEN = horizontal("segmented_display_screen");
+    public static final CTSpriteShiftEntry SEGMENTED_DISPLAY_SCREEN = horizontalKryppers("segmented_display_screen");
 
     public static final CTSpriteShiftEntry BLAST_STOVE_SIDE = getCT(AllCTTypes.RECTANGLE, "blast_stove_side"), BLAST_STOVE_TOP = getCT(AllCTTypes.RECTANGLE, "blast_stove_top");
     public static final CTSpriteShiftEntry
             REGULAR_ENGINE_TOP = vertical("engines/engine_top"),
             REGULAR_ENGINE_BOTTOM = vertical("engines/engine_bottom"),
-            REGULAR_ENGINE_SIDE = horizontal("engines/engine_side");
+            REGULAR_ENGINE_SIDE = horizontalKryppers("engines/engine_side");
 
 
-
-    ///////////////////////
+    //CT Helper Methods
     public static CTSpriteShiftEntry omni(String name) {
         return getCT(AllCTTypes.OMNIDIRECTIONAL, name);
     }
 
-    public static CTSpriteShiftEntry horizontal(String name) {
+    public static CTSpriteShiftEntry horizontalKryppers(String name) {
         return getCT(AllCTTypes.HORIZONTAL_KRYPPERS, name);
+    }
+
+    public static CTSpriteShiftEntry horizontal(String name) {
+        return getCT(AllCTTypes.HORIZONTAL, name);
     }
 
     private static CTSpriteShiftEntry vertical(String name) {
         return getCT(AllCTTypes.VERTICAL, name);
     }
-
-    /////
 
     private static CTSpriteShiftEntry getCT(CTType type, String blockTextureName, String connectedTextureName) {
         return CTSpriteShifter.getCT(type, TFMG.asResource("block/" + blockTextureName), TFMG.asResource("block/" + connectedTextureName + "_connected"));

@@ -1,9 +1,5 @@
 package com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon;
 
-
-
-
-
 import com.drmangotea.tfmg.TFMGClient;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.simibubi.create.AllEnchantments;
@@ -78,11 +74,8 @@ public class QuadPotatoCannonItem extends ProjectileWeaponItem implements Custom
         }
 
         Optional<Holder.Reference<PotatoCannonProjectileType>> optionalType = PotatoCannonProjectileType.getTypeForItem(player.level().registryAccess(), ammoStack.getItem());
-        if (optionalType.isEmpty()) {
-            return null;
-        }
+        return optionalType.map(potatoCannonProjectileTypeReference -> new PotatoCannonItem.Ammo(ammoStack, potatoCannonProjectileTypeReference.value())).orElse(null);
 
-        return new PotatoCannonItem.Ammo(ammoStack, optionalType.get().value());
     }
 
     @Override
@@ -304,6 +297,7 @@ public class QuadPotatoCannonItem extends ProjectileWeaponItem implements Custom
         return null;
     }
 
+    @SuppressWarnings("removal")
     @Override
     @OnlyIn(Dist.CLIENT)
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
